@@ -38,14 +38,8 @@ interface SubscriptionContracts {
    * Gets the entity state (Etag) version of the apimanagement subscription specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("Subscription_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      SubscriptionContract,
-      BaseParameters<SubscriptionContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<SubscriptionContract>;
 
   /**
    * Creates or updates the subscription of specified user to the specified product.
@@ -85,7 +79,7 @@ interface SubscriptionContracts {
   @operationId("Subscription_Update")
   update is ArmCustomPatchSync<
     SubscriptionContract,
-    SubscriptionUpdateParameters,
+    PatchModel = SubscriptionUpdateParameters,
     Parameters = {
       /**
        * Notify change in Subscription State.
@@ -113,7 +107,6 @@ interface SubscriptionContracts {
    * Deletes the specified subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Subscription_Delete")
   delete is ArmResourceDeleteSync<
     SubscriptionContract,
@@ -152,8 +145,7 @@ interface SubscriptionContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = SubscriptionListResult
+    }
   >;
 
   /**
@@ -161,8 +153,9 @@ interface SubscriptionContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Subscription_RegeneratePrimaryKey")
-  regeneratePrimaryKey is ArmResourceActionNoContentSync<
+  regeneratePrimaryKey is ArmResourceActionSync<
     SubscriptionContract,
+    void,
     void
   >;
 
@@ -171,8 +164,9 @@ interface SubscriptionContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Subscription_RegenerateSecondaryKey")
-  regenerateSecondaryKey is ArmResourceActionNoContentSync<
+  regenerateSecondaryKey is ArmResourceActionSync<
     SubscriptionContract,
+    void,
     void
   >;
 
@@ -184,7 +178,7 @@ interface SubscriptionContracts {
   listSecrets is ArmResourceActionSync<
     SubscriptionContract,
     void,
-    SubscriptionKeysContract
+    ArmResponse<SubscriptionKeysContract>
   >;
 }
 

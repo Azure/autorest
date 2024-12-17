@@ -38,25 +38,21 @@ interface PortalRevisionContracts {
    * Gets the developer portal revision specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("PortalRevision_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      PortalRevisionContract,
-      BaseParameters<PortalRevisionContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<PortalRevisionContract>;
 
   /**
    * Creates a new developer portal's revision by running the portal's publishing. The `isCurrent` property indicates if the revision is publicly accessible.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("PortalRevision_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PortalRevisionContract,
-    Response = ArmResourceCreatedResponse<PortalRevisionContract> | ArmResourceUpdatedResponse<PortalRevisionContract> | ArmAcceptedLroResponse
+    Response = ArmResourceCreatedResponse<
+      PortalRevisionContract,
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
   >;
 
   /**
@@ -67,7 +63,7 @@ interface PortalRevisionContracts {
   @operationId("PortalRevision_Update")
   update is ArmCustomPatchAsync<
     PortalRevisionContract,
-    PortalRevisionContract,
+    PatchModel = PortalRevisionContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -109,8 +105,7 @@ interface PortalRevisionContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = PortalRevisionListResult
+    }
   >;
 }
 

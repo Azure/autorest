@@ -39,34 +39,39 @@ interface DiskEncryptionSets {
    * Creates or updates a disk encryption set
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DiskEncryptionSet,
-    Response = ArmResourceCreatedResponse<DiskEncryptionSet> | ArmResourceUpdatedResponse<DiskEncryptionSet> | (ArmAcceptedLroResponse & {
-      @bodyRoot _: DiskEncryptionSet;
-    })
+    Response = ArmResourceUpdatedResponse<DiskEncryptionSet> | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      body: DiskEncryptionSet;
+    }),
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Updates (patches) a disk encryption set.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<DiskEncryptionSet, DiskEncryptionSetUpdate>;
+  update is ArmCustomPatchAsync<
+    DiskEncryptionSet,
+    PatchModel = DiskEncryptionSetUpdate
+  >;
 
   /**
    * Deletes a disk encryption set.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<DiskEncryptionSet>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    DiskEncryptionSet,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Lists all the disk encryption sets under a resource group.
    */
   listByResourceGroup is ArmResourceListByParent<
     DiskEncryptionSet,
-    Response = DiskEncryptionSetList
+    Response = ArmResponse<DiskEncryptionSetList>
   >;
 
   /**
@@ -74,17 +79,18 @@ interface DiskEncryptionSets {
    */
   list is ArmListBySubscription<
     DiskEncryptionSet,
-    Response = DiskEncryptionSetList
+    Response = ArmResponse<DiskEncryptionSetList>
   >;
 
   /**
    * Lists all resources that are encrypted with this disk encryption set.
    */
   @get
+  @action("associatedResources")
   listAssociatedResources is ArmResourceActionSync<
     DiskEncryptionSet,
     void,
-    ResourceUriList
+    ArmResponse<ResourceUriList>
   >;
 }
 

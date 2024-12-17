@@ -45,22 +45,26 @@ interface Registries {
    * Update tags
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<Registry, PartialRegistryPartialTrackedResource>;
+  update is ArmCustomPatchSync<
+    Registry,
+    PatchModel = PartialRegistryPartialTrackedResource
+  >;
 
   /**
    * Delete registry
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<Registry>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Registry,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List registries
    */
   list is ArmResourceListByParent<
     Registry,
-    Response = RegistryTrackedResourceArmPaginatedResult
+    Response = ArmResponse<RegistryTrackedResourceArmPaginatedResult>
   >;
 
   /**
@@ -68,13 +72,17 @@ interface Registries {
    */
   listBySubscription is ArmListBySubscription<
     Registry,
-    Response = RegistryTrackedResourceArmPaginatedResult
+    Response = ArmResponse<RegistryTrackedResourceArmPaginatedResult>
   >;
 
   /**
    * Remove regions from registry
    */
-  removeRegions is ArmResourceActionAsync<Registry, Registry, Registry>;
+  removeRegions is ArmResourceActionAsync<
+    Registry,
+    Registry,
+    ArmResponse<Registry>
+  >;
 }
 
 @@doc(Registry.name,

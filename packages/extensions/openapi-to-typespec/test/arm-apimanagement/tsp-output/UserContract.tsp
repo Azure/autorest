@@ -38,11 +38,8 @@ interface UserContracts {
    * Gets the entity state (Etag) version of the user specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("User_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<UserContract, BaseParameters<UserContract>>,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<UserContract>;
 
   /**
    * Creates or Updates a user.
@@ -74,7 +71,7 @@ interface UserContracts {
   @operationId("User_Update")
   update is ArmCustomPatchSync<
     UserContract,
-    UserUpdateParameters,
+    PatchModel = UserUpdateParameters,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -88,7 +85,6 @@ interface UserContracts {
    * Deletes specific user.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("User_Delete")
   delete is ArmResourceDeleteSync<
     UserContract,
@@ -151,8 +147,7 @@ interface UserContracts {
        */
       @query("expandGroups")
       expandGroups?: boolean;
-    },
-    Response = UserListResult
+    }
   >;
 
   /**
@@ -163,18 +158,19 @@ interface UserContracts {
   generateSsoUrl is ArmResourceActionSync<
     UserContract,
     void,
-    GenerateSsoUrlResult
+    ArmResponse<GenerateSsoUrlResult>
   >;
 
   /**
    * Gets the Shared Access Authorization Token for the User.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("token")
   @operationId("User_GetSharedAccessToken")
   getSharedAccessToken is ArmResourceActionSync<
     UserContract,
     UserTokenParameters,
-    UserTokenResult
+    ArmResponse<UserTokenResult>
   >;
 
   /**
@@ -182,11 +178,12 @@ interface UserContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("groups")
   @operationId("UserGroup_List")
   list is ArmResourceActionSync<
     UserContract,
     void,
-    GroupListResult,
+    ResourceListResult<GroupContract>,
     Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|------------------------|-----------------------------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -214,11 +211,12 @@ interface UserContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("identities")
   @operationId("UserIdentities_List")
   userIdentitiesList is ArmResourceActionSync<
     UserContract,
     void,
-    UserIdentityListResult
+    ArmResponse<UserIdentityListResult>
   >;
 
   /**
@@ -226,8 +224,9 @@ interface UserContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("UserConfirmationPassword_Send")
-  send is ArmResourceActionNoContentSync<
+  send is ArmResourceActionSync<
     UserContract,
+    void,
     void,
     Parameters = {
       /**

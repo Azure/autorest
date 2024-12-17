@@ -45,11 +45,12 @@ interface DataVersionBaseResources {
    * Delete version.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("RegistryDataVersions_Delete")
-  delete is ArmResourceDeleteAsync<DataVersionBaseResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    DataVersionBaseResource,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List data versions in the data container
@@ -90,18 +91,19 @@ interface DataVersionBaseResources {
       @query("listViewType")
       listViewType?: ListViewType;
     },
-    Response = DataVersionBaseResourceArmPaginatedResult
+    Response = ArmResponse<DataVersionBaseResourceArmPaginatedResult>
   >;
 
   /**
    * Generate a storage location and credential for the client to upload a data asset to.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("startPendingUpload")
   @operationId("RegistryDataVersions_CreateOrGetStartPendingUpload")
   createOrGetStartPendingUpload is ArmResourceActionSync<
     DataVersionBaseResource,
     PendingUploadRequestDto,
-    PendingUploadResponseDto
+    ArmResponse<PendingUploadResponseDto>
   >;
 }
 

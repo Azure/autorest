@@ -19,62 +19,125 @@ using Azure.ResourceManager.MachineLearning;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PrivateLinkResource.properties);
 
-@@clientName(ComputeResources.update,
-  "ComputeResources.update::parameters.properties",
+@@clientName(ComputeResources.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(ComputeResources.updateCustomServices,
-  "ComputeResources.updateCustomServices::parameters.body",
+@@clientName(ComputeResources.update::parameters.properties, "parameters");
+@@clientName(ComputeResources.updateCustomServices::parameters.body,
   "customServices"
 );
-@@clientName(ComputeResources.updateIdleShutdownSetting,
-  "ComputeResources.updateIdleShutdownSetting::parameters.body",
+@@clientName(ComputeResources.updateIdleShutdownSetting::parameters.body,
   "parameters"
 );
 
-@@clientName(BatchEndpointTrackedResources.update,
-  "BatchEndpointTrackedResources.update::parameters.properties",
+@@clientName(CodeContainerResources.createOrUpdate::parameters.resource,
   "body"
 );
 
-@@clientName(BatchDeploymentTrackedResources.update,
-  "BatchDeploymentTrackedResources.update::parameters.properties",
+@@clientName(CodeVersionResources.createOrUpdate::parameters.resource, "body");
+
+@@clientName(ComponentContainerResources.createOrUpdate::parameters.resource,
   "body"
 );
 
-@@clientName(JobBaseResources.update,
-  "JobBaseResources.update::parameters.properties",
+@@clientName(ComponentVersionResources.createOrUpdate::parameters.resource,
   "body"
 );
 
-@@clientName(OnlineEndpointTrackedResources.update,
-  "OnlineEndpointTrackedResources.update::parameters.properties",
+@@clientName(DataContainerResources.createOrUpdate::parameters.resource,
   "body"
 );
 
-@@clientName(OnlineDeploymentTrackedResources.update,
-  "OnlineDeploymentTrackedResources.update::parameters.properties",
+@@clientName(DataVersionBaseResources.createOrUpdate::parameters.resource,
   "body"
 );
 
-@@clientName(Registries.update,
-  "Registries.update::parameters.properties",
+@@clientName(EnvironmentContainerResources.createOrUpdate::parameters.resource,
   "body"
 );
+
+@@clientName(EnvironmentVersionResources.createOrUpdate::parameters.resource,
+  "body"
+);
+
+@@clientName(ModelContainerResources.createOrUpdate::parameters.resource,
+  "body"
+);
+
+@@clientName(ModelVersionResources.createOrUpdate::parameters.resource, "body");
+
+@@clientName(BatchEndpointTrackedResources.createOrUpdate::parameters.resource,
+  "body"
+);
+@@clientName(BatchEndpointTrackedResources.update::parameters.properties,
+  "body"
+);
+
+@@clientName(BatchDeploymentTrackedResources.createOrUpdate::parameters.resource,
+  "body"
+);
+@@clientName(BatchDeploymentTrackedResources.update::parameters.properties,
+  "body"
+);
+
+@@clientName(DatastoreResources.createOrUpdate::parameters.resource, "body");
+
+@@clientName(FeaturesetContainers.createOrUpdate::parameters.resource, "body");
+
+@@clientName(FeaturesetVersions.createOrUpdate::parameters.resource, "body");
+
+@@clientName(FeaturestoreEntityContainers.createOrUpdate::parameters.resource,
+  "body"
+);
+
+@@clientName(FeaturestoreEntityVersions.createOrUpdate::parameters.resource,
+  "body"
+);
+
+@@clientName(JobBaseResources.createOrUpdate::parameters.resource, "body");
+@@clientName(JobBaseResources.update::parameters.properties, "body");
+
+@@clientName(LabelingJobs.createOrUpdate::parameters.resource, "body");
+
+@@clientName(OnlineEndpointTrackedResources.createOrUpdate::parameters.resource,
+  "body"
+);
+@@clientName(OnlineEndpointTrackedResources.update::parameters.properties,
+  "body"
+);
+
+@@clientName(OnlineDeploymentTrackedResources.createOrUpdate::parameters.resource,
+  "body"
+);
+@@clientName(OnlineDeploymentTrackedResources.update::parameters.properties,
+  "body"
+);
+
+@@clientName(Schedules.createOrUpdate::parameters.resource, "body");
+
+@@clientName(Registries.createOrUpdate::parameters.resource, "body");
+@@clientName(Registries.update::parameters.properties, "body");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Registry.properties);
 
-@@clientName(Workspaces.update,
-  "Workspaces.update::parameters.properties",
-  "body"
-);
+@@clientName(Workspaces.createOrUpdate::parameters.resource, "body");
+@@clientName(Workspaces.update::parameters.properties, "body");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Workspace.properties);
 
+@@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+  "body"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PrivateEndpointConnection.properties);
 
-@@clientName(WorkspaceConnectionPropertiesV2BasicResources.update,
-  "WorkspaceConnectionPropertiesV2BasicResources.update::parameters.properties",
+@@clientName(WorkspaceConnectionPropertiesV2BasicResources.create::parameters.resource,
+  "body"
+);
+@@clientName(WorkspaceConnectionPropertiesV2BasicResources.update::parameters.properties,
+  "body"
+);
+
+@@clientName(OutboundRuleBasicResources.createOrUpdate::parameters.resource,
   "body"
 );

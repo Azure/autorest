@@ -48,14 +48,8 @@ interface PolicyContracts {
    * Gets the entity state (Etag) version of the API operation policy specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("ApiOperationPolicy_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      PolicyContract,
-      BaseParameters<PolicyContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<PolicyContract>;
 
   /**
    * Creates or updates policy configuration for the API Operation level.
@@ -77,7 +71,6 @@ interface PolicyContracts {
    * Deletes the policy configuration at the Api Operation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiOperationPolicy_Delete")
   delete is ArmResourceDeleteSync<
     PolicyContract,
@@ -95,10 +88,7 @@ interface PolicyContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiOperationPolicy_ListByOperation")
-  listByOperation is ArmResourceListByParent<
-    PolicyContract,
-    Response = PolicyListResult
-  >;
+  listByOperation is ArmResourceListByParent<PolicyContract>;
 }
 
 @@doc(PolicyContract.name, "The identifier of the Policy.");

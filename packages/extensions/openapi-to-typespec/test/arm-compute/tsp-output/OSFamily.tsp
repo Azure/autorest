@@ -51,7 +51,7 @@ interface OSFamilies {
   @operationId("CloudServiceOperatingSystems_GetOSFamily")
   getOSFamily is ArmResourceRead<
     OSFamily,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
   /**
@@ -61,8 +61,7 @@ interface OSFamilies {
   @operationId("CloudServiceOperatingSystems_ListOSFamilies")
   listOSFamilies is ArmResourceListByParent<
     OSFamily,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = OSFamilyListResult
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 }
 

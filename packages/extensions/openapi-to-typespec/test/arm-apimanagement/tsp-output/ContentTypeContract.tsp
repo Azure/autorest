@@ -34,6 +34,7 @@ interface ContentTypeContracts {
   @operationId("ContentType_Get")
   get is ArmResourceRead<ContentTypeContract>;
 
+  // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
    * Creates or updates the developer portal's content type. Content types describe content items' properties, validation rules, and constraints. Custom content types' identifiers need to start with the `c-` prefix. Built-in content types can't be modified.
    */
@@ -54,7 +55,6 @@ interface ContentTypeContracts {
    * Removes the specified developer portal's content type. Content types describe content items' properties, validation rules, and constraints. Built-in content types (with identifiers starting with the `c-` prefix) can't be removed.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ContentType_Delete")
   delete is ArmResourceDeleteSync<
     ContentTypeContract,
@@ -72,10 +72,7 @@ interface ContentTypeContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContentType_ListByService")
-  listByService is ArmResourceListByParent<
-    ContentTypeContract,
-    Response = ContentTypeListResult
-  >;
+  listByService is ArmResourceListByParent<ContentTypeContract>;
 }
 
 @@maxLength(ContentTypeContract.name, 80);

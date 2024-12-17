@@ -41,12 +41,11 @@ interface BlobContainers {
    * Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn't already exist.
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<BlobContainer, BlobContainer>;
+  update is ArmCustomPatchSync<BlobContainer, PatchModel = BlobContainer>;
 
   /**
    * Deletes specified container under its account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<BlobContainer>;
 
   /**
@@ -73,18 +72,26 @@ interface BlobContainers {
       @query("$include")
       $include?: ListContainersInclude;
     },
-    Response = ListContainerItems
+    Response = ArmResponse<ListContainerItems>
   >;
 
   /**
    * Sets legal hold tags. Setting the same tag results in an idempotent operation. SetLegalHold follows an append pattern and does not clear out the existing tags that are not specified in the request.
    */
-  setLegalHold is ArmResourceActionSync<BlobContainer, LegalHold, LegalHold>;
+  setLegalHold is ArmResourceActionSync<
+    BlobContainer,
+    LegalHold,
+    ArmResponse<LegalHold>
+  >;
 
   /**
    * Clears legal hold tags. Clearing the same or non-existent tag results in an idempotent operation. ClearLegalHold clears out only the specified tags in the request.
    */
-  clearLegalHold is ArmResourceActionSync<BlobContainer, LegalHold, LegalHold>;
+  clearLegalHold is ArmResourceActionSync<
+    BlobContainer,
+    LegalHold,
+    ArmResponse<LegalHold>
+  >;
 
   /**
    * The Lease Container operation establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
@@ -92,12 +99,13 @@ interface BlobContainers {
   lease is ArmResourceActionSync<
     BlobContainer,
     LeaseContainerRequest,
-    LeaseContainerResponse
+    ArmResponse<LeaseContainerResponse>
   >;
 
   /**
    * This operation migrates a blob container from container level WORM to object level immutability enabled container. Prerequisites require a container level immutability policy either in locked or unlocked state, Account level versioning must be enabled and there should be no Legal hold on the container.
    */
+  @action("migrate")
   objectLevelWorm is ArmResourceActionAsync<BlobContainer, void, void>;
 }
 

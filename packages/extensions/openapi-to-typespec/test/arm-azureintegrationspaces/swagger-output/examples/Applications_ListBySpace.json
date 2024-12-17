@@ -1,0 +1,39 @@
+{
+  "operationId": "Applications_ListBySpace",
+  "parameters": {
+    "api-version": "2023-11-14-preview",
+    "resourceGroupName": "testrg",
+    "spaceName": "Space1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "ListApplicationsBySpace",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Application1",
+            "type": "Microsoft.IntegrationSpaces/spaces/applications",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.IntegrationSpaces/spaces/Space1/applications/Application1",
+            "location": "CentralUS",
+            "properties": {
+              "description": "This is the user provided description of the application.",
+              "provisioningState": "Succeeded",
+              "trackingDataStores": {
+                "dataStoreName1": {
+                  "dataStoreIngestionUri": "https://ingest-someClusterName.someRegionName.kusto.windows.net",
+                  "dataStoreResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Kusto/Clusters/cluster1",
+                  "dataStoreUri": "https://someClusterName.someRegionName.kusto.windows.net",
+                  "databaseName": "testDatabase1"
+                }
+              }
+            },
+            "tags": {
+              "key1": "Value1"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

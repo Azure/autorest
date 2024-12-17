@@ -39,14 +39,8 @@ interface EmailTemplateContracts {
    * Gets the entity state (Etag) version of the email template specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("EmailTemplate_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      EmailTemplateContract,
-      BaseParameters<EmailTemplateContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<EmailTemplateContract>;
 
   /**
    * Updates an Email Template.
@@ -72,7 +66,7 @@ interface EmailTemplateContracts {
   @operationId("EmailTemplate_Update")
   update is ArmCustomPatchSync<
     EmailTemplateContract,
-    EmailTemplateUpdateParameters,
+    PatchModel = EmailTemplateUpdateParameters,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -86,7 +80,6 @@ interface EmailTemplateContracts {
    * Reset the Email Template to default template provided by the API Management service instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("EmailTemplate_Delete")
   delete is ArmResourceDeleteSync<
     EmailTemplateContract,
@@ -125,8 +118,7 @@ interface EmailTemplateContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = EmailTemplateListResult
+    }
   >;
 }
 

@@ -55,18 +55,19 @@ interface OnlineEndpointTrackedResources {
   @operationId("OnlineEndpoints_Update")
   update is ArmCustomPatchAsync<
     OnlineEndpointTrackedResource,
-    PartialMinimalTrackedResourceWithIdentity
+    PatchModel = PartialMinimalTrackedResourceWithIdentity
   >;
 
   /**
    * Delete Online Endpoint (asynchronous).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("OnlineEndpoints_Delete")
-  delete is ArmResourceDeleteAsync<OnlineEndpointTrackedResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    OnlineEndpointTrackedResource,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List Online Endpoints.
@@ -118,7 +119,7 @@ interface OnlineEndpointTrackedResources {
       @query("orderBy")
       orderBy?: OrderString;
     },
-    Response = OnlineEndpointTrackedResourceArmPaginatedResult
+    Response = ArmResponse<OnlineEndpointTrackedResourceArmPaginatedResult>
   >;
 
   /**
@@ -129,7 +130,7 @@ interface OnlineEndpointTrackedResources {
   listKeys is ArmResourceActionSync<
     OnlineEndpointTrackedResource,
     void,
-    EndpointAuthKeys
+    ArmResponse<EndpointAuthKeys>
   >;
 
   /**
@@ -147,11 +148,12 @@ interface OnlineEndpointTrackedResources {
    * Retrieve a valid AML token for an Endpoint using AMLToken-based authentication.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("token")
   @operationId("OnlineEndpoints_GetToken")
   getToken is ArmResourceActionSync<
     OnlineEndpointTrackedResource,
     void,
-    EndpointAuthToken
+    ArmResponse<EndpointAuthToken>
   >;
 }
 

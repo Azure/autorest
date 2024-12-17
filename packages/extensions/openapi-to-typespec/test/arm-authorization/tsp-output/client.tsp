@@ -51,9 +51,13 @@ using Azure.ResourceManager.Authorization;
   "ProviderOperationsMetadata"
 );
 
+@@clientName(RoleAssignments.create::parameters.resource, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleAssignment.properties);
 
+@@clientName(RoleDefinitions.createOrUpdate::parameters.resource,
+  "roleDefinition"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleDefinition.properties);
 
@@ -63,8 +67,10 @@ using Azure.ResourceManager.Authorization;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleAssignmentScheduleInstance.properties);
 
-@@clientName(RoleAssignmentScheduleRequests.validate,
-  "RoleAssignmentScheduleRequests.validate::parameters.body",
+@@clientName(RoleAssignmentScheduleRequests.create::parameters.resource,
+  "parameters"
+);
+@@clientName(RoleAssignmentScheduleRequests.validate::parameters.body,
   "parameters"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
@@ -76,19 +82,23 @@ using Azure.ResourceManager.Authorization;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleEligibilityScheduleInstance.properties);
 
-@@clientName(RoleEligibilityScheduleRequests.validate,
-  "RoleEligibilityScheduleRequests.validate::parameters.body",
+@@clientName(RoleEligibilityScheduleRequests.create::parameters.resource,
+  "parameters"
+);
+@@clientName(RoleEligibilityScheduleRequests.validate::parameters.body,
   "parameters"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleEligibilityScheduleRequest.properties);
 
-@@clientName(RoleManagementPolicies.update,
-  "RoleManagementPolicies.update::parameters.properties",
+@@clientName(RoleManagementPolicies.update::parameters.properties,
   "parameters"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleManagementPolicy.properties);
 
+@@clientName(RoleManagementPolicyAssignments.create::parameters.resource,
+  "parameters"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleManagementPolicyAssignment.properties);

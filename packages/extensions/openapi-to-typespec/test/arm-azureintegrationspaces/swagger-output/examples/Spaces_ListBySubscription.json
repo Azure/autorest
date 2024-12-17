@@ -1,0 +1,30 @@
+{
+  "operationId": "Spaces_ListBySubscription",
+  "parameters": {
+    "api-version": "2023-11-14-preview",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "ListSpacesBySubscription",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Space1",
+            "type": "Microsoft.IntegrationSpaces/spaces",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.IntegrationSpaces/spaces/Space1",
+            "location": "CentralUS",
+            "properties": {
+              "description": "This is the user provided description of the space resource.",
+              "provisioningState": "Succeeded"
+            },
+            "tags": {
+              "key1": "Value1"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

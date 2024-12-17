@@ -45,11 +45,12 @@ interface ComponentContainerResources {
    * Delete container.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("RegistryComponentContainers_Delete")
-  delete is ArmResourceDeleteAsync<ComponentContainerResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ComponentContainerResource,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List containers.
@@ -65,7 +66,7 @@ interface ComponentContainerResources {
       @query("$skip")
       $skip?: string;
     },
-    Response = ComponentContainerResourceArmPaginatedResult
+    Response = ArmResponse<ComponentContainerResourceArmPaginatedResult>
   >;
 }
 

@@ -22,7 +22,7 @@ interface SkusOperations {
   @operationId("Skus_List")
   @get
   @action("skus")
-  list is ArmProviderActionAsync<
+  list is ArmProviderActionSync<
     Response = StorageSkuListResult,
     Scope = SubscriptionActionScope,
     Parameters = {}
@@ -37,7 +37,7 @@ interface StorageAccountsOperations {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StorageAccounts_CheckNameAvailability")
   @post
-  checkNameAvailability is ArmProviderActionAsync<
+  checkNameAvailability is ArmProviderActionSync<
     Response = CheckNameAvailabilityResult,
     Scope = SubscriptionActionScope,
     Parameters = {},
@@ -54,8 +54,8 @@ interface DeletedAccountsOperations {
   @operationId("DeletedAccounts_List")
   @get
   @action("deletedAccounts")
-  list is ArmProviderActionAsync<
-    Response = DeletedAccountListResult,
+  list is ArmProviderActionSync<
+    Response = ResourceListResult<DeletedAccount>,
     Scope = SubscriptionActionScope,
     Parameters = {}
   >;
@@ -70,7 +70,7 @@ interface UsagesOperations {
   @operationId("Usages_ListByLocation")
   @get
   @action("usages")
-  listByLocation is ArmProviderActionAsync<
+  listByLocation is ArmProviderActionSync<
     Response = UsageListResult,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter

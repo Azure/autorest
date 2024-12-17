@@ -44,7 +44,10 @@ interface VirtualMachineRunCommands {
   /**
    * The operation to create or update the run command.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualMachineRunCommand>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    VirtualMachineRunCommand,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * The operation to update the run command.
@@ -52,16 +55,18 @@ interface VirtualMachineRunCommands {
   @parameterVisibility
   update is ArmCustomPatchAsync<
     VirtualMachineRunCommand,
-    VirtualMachineRunCommandUpdate
+    PatchModel = VirtualMachineRunCommandUpdate,
+    Response = ArmResponse<VirtualMachineRunCommand>
   >;
 
   /**
    * The operation to delete the run command.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<VirtualMachineRunCommand>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    VirtualMachineRunCommand,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * The operation to get all run commands of a Virtual Machine.
@@ -74,8 +79,7 @@ interface VirtualMachineRunCommands {
        */
       @query("$expand")
       $expand?: string;
-    },
-    Response = VirtualMachineRunCommandsListResult
+    }
   >;
 }
 

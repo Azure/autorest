@@ -39,49 +39,55 @@ interface DiskAccesses {
    * Creates or updates a disk access resource
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DiskAccess,
-    Response = ArmResourceCreatedResponse<DiskAccess> | ArmResourceUpdatedResponse<DiskAccess> | (ArmAcceptedLroResponse & {
-      @bodyRoot _: DiskAccess;
-    })
+    Response = ArmResourceUpdatedResponse<DiskAccess> | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      body: DiskAccess;
+    }),
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Updates (patches) a disk access resource.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<DiskAccess, DiskAccessUpdate>;
+  update is ArmCustomPatchAsync<DiskAccess, PatchModel = DiskAccessUpdate>;
 
   /**
    * Deletes a disk access resource.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<DiskAccess>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    DiskAccess,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Lists all the disk access resources under a resource group.
    */
   listByResourceGroup is ArmResourceListByParent<
     DiskAccess,
-    Response = DiskAccessList
+    Response = ArmResponse<DiskAccessList>
   >;
 
   /**
    * Lists all the disk access resources under a subscription.
    */
-  list is ArmListBySubscription<DiskAccess, Response = DiskAccessList>;
+  list is ArmListBySubscription<
+    DiskAccess,
+    Response = ArmResponse<DiskAccessList>
+  >;
 
   /**
    * Gets the private link resources possible under disk access resource
    */
   @get
+  @action("privateLinkResources")
   getPrivateLinkResources is ArmResourceActionSync<
     DiskAccess,
     void,
-    PrivateLinkResourceListResult
+    ArmResponse<PrivateLinkResourceListResult>
   >;
 }
 

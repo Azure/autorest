@@ -38,27 +38,30 @@ interface AvailabilitySets {
   /**
    * Create or update an availability set.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<AvailabilitySet>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    AvailabilitySet,
+    Response = ArmResourceUpdatedResponse<AvailabilitySet>
+  >;
 
   /**
    * Update an availability set.
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<AvailabilitySet, AvailabilitySetUpdate>;
+  update is ArmCustomPatchSync<
+    AvailabilitySet,
+    PatchModel = AvailabilitySetUpdate
+  >;
 
   /**
    * Delete an availability set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<AvailabilitySet>;
 
   /**
    * Lists all availability sets in a resource group.
    */
-  list is ArmResourceListByParent<
-    AvailabilitySet,
-    Response = AvailabilitySetListResult
-  >;
+  list is ArmResourceListByParent<AvailabilitySet>;
 
   /**
    * Lists all availability sets in a subscription.
@@ -71,18 +74,18 @@ interface AvailabilitySets {
        */
       @query("$expand")
       $expand?: string;
-    },
-    Response = AvailabilitySetListResult
+    }
   >;
 
   /**
    * Lists all available virtual machine sizes that can be used to create a new virtual machine in an existing availability set.
    */
   @get
+  @action("vmSizes")
   listAvailableSizes is ArmResourceActionSync<
     AvailabilitySet,
     void,
-    VirtualMachineSizeListResult
+    ArmResponse<VirtualMachineSizeListResult>
   >;
 }
 

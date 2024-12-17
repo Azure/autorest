@@ -30,7 +30,7 @@ interface Alerts {
    */
   getById is ArmResourceRead<
     Alert,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
   /**
@@ -38,7 +38,7 @@ interface Alerts {
    */
   getAll is ArmResourceListByParent<
     Alert,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {
       /**
        * Filter by target resource( which is full ARM ID) Default value is select all.
@@ -142,17 +142,20 @@ interface Alerts {
       @query("customTimeRange")
       customTimeRange?: string;
     },
-    Response = AlertsList
+    Response = ArmResponse<AlertsList>
   >;
 
   /**
    * Change the state of an alert.
    */
+  @action("changestate")
   changeState is ArmResourceActionSync<
     Alert,
-    string,
-    Alert,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    {
+      @bodyRoot body: string;
+    },
+    ArmResponse<Alert>,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {
       /**
        * New state of the alert.
@@ -166,11 +169,12 @@ interface Alerts {
    * Get the history of an alert, which captures any monitor condition changes (Fired/Resolved) and alert state changes (New/Acknowledged/Closed).
    */
   @get
+  @action("history")
   getHistory is ArmResourceActionSync<
     Alert,
     void,
-    AlertModification,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    ArmResponse<AlertModification>,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 }
 

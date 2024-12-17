@@ -1175,16 +1175,6 @@ enum AsyncOperationStatus {
 }
 
 /**
- * Paged API list representation.
- */
-model ApiListResult is Azure.Core.Page<ApiContract> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
-}
-
-/**
  * API Entity Properties
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
@@ -1677,16 +1667,6 @@ model ApiRevisionContract {
 }
 
 /**
- * Paged ApiRelease list representation.
- */
-model ApiReleaseListResult is Azure.Core.Page<ApiReleaseContract> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
-}
-
-/**
  * API Release details
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -1976,26 +1956,6 @@ model OperationUpdateContractProperties extends OperationEntityBaseContract {
 }
 
 /**
- * The response of the list policy operation.
- */
-model PolicyListResult {
-  /**
-   * Policy Contract value.
-   */
-  value?: PolicyContract[];
-
-  /**
-   * Total record count number.
-   */
-  count?: int64;
-
-  /**
-   * Next page link if any.
-   */
-  nextLink?: string;
-}
-
-/**
  * Policy contract Properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -2012,16 +1972,6 @@ model PolicyContractProperties {
 }
 
 /**
- * Paged Tag list representation.
- */
-model TagListResult is Azure.Core.Page<TagContract> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
-}
-
-/**
  * Tag contract Properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -2032,16 +1982,6 @@ model TagContractProperties {
   @maxLength(160)
   @minLength(1)
   displayName: string;
-}
-
-/**
- * Paged Products list representation.
- */
-model ProductListResult is Azure.Core.Page<ProductContract> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
 }
 
 /**
@@ -2097,16 +2037,6 @@ model ProductEntityBaseParameters {
 }
 
 /**
- * The response of the list schema operation.
- */
-model SchemaListResult is Azure.Core.Page<SchemaContract> {
-  /**
-   * Total record count number.
-   */
-  count?: int64;
-}
-
-/**
  * API Schema create or update contract Properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -2142,16 +2072,6 @@ model SchemaDocumentProperties {
    * Types definitions. Used for Swagger/OpenAPI v2/v3 schemas only, null otherwise.
    */
   components?: Record<unknown>;
-}
-
-/**
- * Paged Diagnostic list representation.
- */
-model DiagnosticListResult is Azure.Core.Page<DiagnosticContract> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
 }
 
 /**
@@ -2301,16 +2221,6 @@ model DataMaskingEntity {
 }
 
 /**
- * Paged Issue list representation.
- */
-model IssueListResult is Azure.Core.Page<IssueContract> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
-}
-
-/**
  * Issue contract Properties.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
@@ -2387,16 +2297,6 @@ model IssueUpdateContractProperties extends IssueContractBaseProperties {
 }
 
 /**
- * Paged Issue Comment list representation.
- */
-model IssueCommentListResult is Azure.Core.Page<IssueCommentContract> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
-}
-
-/**
  * Issue Comment contract Properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -2419,16 +2319,6 @@ model IssueCommentContractProperties {
 }
 
 /**
- * Paged Issue Attachment list representation.
- */
-model IssueAttachmentListResult is Azure.Core.Page<IssueAttachmentContract> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
-}
-
-/**
  * Issue Attachment contract Properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -2447,16 +2337,6 @@ model IssueAttachmentContractProperties {
    * An HTTP link or Base64-encoded binary data.
    */
   content: string;
-}
-
-/**
- * Paged TagDescription list representation.
- */
-model TagDescriptionListResult is Azure.Core.Page<TagDescriptionContract> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
 }
 
 /**
@@ -2703,16 +2583,6 @@ model ApiExportResultValue {
 }
 
 /**
- * Paged API Version Set list representation.
- */
-model ApiVersionSetListResult is Azure.Core.Page<ApiVersionSetContract> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
-}
-
-/**
  * Properties of an API Version Set.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
@@ -2783,17 +2653,6 @@ model ApiVersionSetUpdateParametersProperties extends ApiVersionSetEntityBase {
    * An value that determines where the API Version identifier will be located in a HTTP request.
    */
   versioningScheme?: VersioningScheme;
-}
-
-/**
- * Paged OAuth2 Authorization Servers list representation.
- */
-model AuthorizationServerListResult
-  is Azure.Core.Page<AuthorizationServerContract> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
 }
 
 /**
@@ -2979,16 +2838,6 @@ model AuthorizationServerSecretsContract {
    * Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner password.
    */
   resourceOwnerPassword?: string;
-}
-
-/**
- * Paged Backend list representation.
- */
-model BackendListResult is Azure.Core.Page<BackendContract> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
 }
 
 /**
@@ -3259,16 +3108,6 @@ model BackendReconnectProperties {
 }
 
 /**
- * Paged Caches list representation.
- */
-model CacheListResult is Azure.Core.Page<CacheContract> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
-}
-
-/**
  * Properties of the Cache contract.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -3339,16 +3178,6 @@ model CacheUpdateProperties {
   @maxLength(2000)
   @encodedName("application/json", "resourceId")
   resourceUri?: string;
-}
-
-/**
- * Paged Certificates list representation.
- */
-model CertificateListResult is Azure.Core.Page<CertificateContract> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
 }
 
 /**
@@ -3685,11 +3514,6 @@ model ConnectivityIssue {
   context?: Record<string>[];
 }
 
-/**
- * Paged list of content types.
- */
-model ContentTypeListResult is Azure.Core.Page<ContentTypeContract>;
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model ContentTypeContractProperties {
@@ -3718,16 +3542,6 @@ model ContentTypeContractProperties {
    */
   version?: string;
 }
-
-/**
- * Paged list of content items.
- */
-model ContentItemListResult is Azure.Core.Page<ContentItemContract>;
-
-/**
- * Paged deleted API Management Services List Representation.
- */
-model DeletedServicesListResult is Azure.Core.Page<DeletedServiceContract>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -4438,12 +4252,6 @@ model ApiManagementServiceUpdateProperties
 }
 
 /**
- * The response of the List API Management services operation.
- */
-model ApiManagementServiceListResult
-  is Azure.Core.Page<ApiManagementServiceResource>;
-
-/**
  * The response of the GetSsoToken operation.
  */
 model ApiManagementServiceGetSsoTokenResult {
@@ -4504,16 +4312,6 @@ model ApiManagementServiceApplyNetworkConfigurationParameters {
    * Location of the Api Management service to update for a multi-region service. For a service deployed in a single region, this parameter is not required.
    */
   location?: string;
-}
-
-/**
- * Paged email template list representation.
- */
-model EmailTemplateListResult is Azure.Core.Page<EmailTemplateContract> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
 }
 
 /**
@@ -4632,16 +4430,6 @@ model EmailTemplateUpdateParameterProperties {
 }
 
 /**
- * Paged Gateway list representation.
- */
-model GatewayListResult is Azure.Core.Page<GatewayContract> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
-}
-
-/**
  * Properties of the Gateway contract.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -4740,12 +4528,6 @@ model GatewayTokenContract {
 }
 
 /**
- * Paged Gateway hostname configuration list representation.
- */
-model GatewayHostnameConfigurationListResult
-  is Azure.Core.Page<GatewayHostnameConfigurationContract>;
-
-/**
  * Gateway hostname configuration details.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -4781,16 +4563,6 @@ model GatewayHostnameConfigurationContractProperties {
   http2Enabled?: boolean;
 }
 
-/**
- * Paged API list representation.
- */
-model ApiManagementGatewayApiListResult is Azure.Core.Page<GatewayApiData> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
-}
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model GatewayApiData extends ApiContract {}
@@ -4819,12 +4591,6 @@ model AssociationContractProperties {
 }
 
 /**
- * Paged Gateway certificate authority list representation.
- */
-model GatewayCertificateAuthorityListResult
-  is Azure.Core.Page<GatewayCertificateAuthorityContract>;
-
-/**
  * Gateway certificate authority details.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -4833,16 +4599,6 @@ model GatewayCertificateAuthorityContractProperties {
    * Determines whether certificate authority is trusted.
    */
   isTrusted?: boolean;
-}
-
-/**
- * Paged Group list representation.
- */
-model GroupListResult is Azure.Core.Page<GroupContract> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
 }
 
 /**
@@ -4956,17 +4712,6 @@ model GroupUpdateParametersProperties {
    * Identifier of the external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory `aad://<tenant>.onmicrosoft.com/groups/<group object id>`; otherwise the value is null.
    */
   externalId?: string;
-}
-
-/**
- * Paged Group Users list representation.
- */
-model ApiManagementGroupUserListResult
-  is Azure.Core.Page<ApiManagementGroupUserData> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -5200,16 +4945,6 @@ model ClientSecretContract {
 }
 
 /**
- * Paged Logger list representation.
- */
-model LoggerListResult is Azure.Core.Page<LoggerContract> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
-}
-
-/**
  * The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure Event Hubs.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -5279,16 +5014,6 @@ model LoggerUpdateParameters {
    * Whether records are buffered in the logger before publishing. Default is assumed to be true.
    */
   isBuffered?: boolean;
-}
-
-/**
- * Paged NamedValue list representation.
- */
-model NamedValueListResult is Azure.Core.Page<NamedValueContract> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
 }
 
 /**
@@ -5501,16 +5226,6 @@ model ConnectivityStatusContract {
 }
 
 /**
- * Paged Notification list representation.
- */
-model NotificationListResult is Azure.Core.Page<NotificationContract> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
-}
-
-/**
  * Notification Contract properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -5549,26 +5264,6 @@ model RecipientsContractProperties {
 }
 
 /**
- * Paged Recipient User list representation.
- */
-model RecipientUserListResult {
-  /**
-   * Page values.
-   */
-  value?: RecipientUserContract[];
-
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
-
-  /**
-   * Next page link if any.
-   */
-  nextLink?: string;
-}
-
-/**
  * Recipient User details.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
@@ -5592,26 +5287,6 @@ model RecipientUsersContractProperties {
 }
 
 /**
- * Paged Recipient User list representation.
- */
-model RecipientEmailListResult {
-  /**
-   * Page values.
-   */
-  value?: RecipientEmailContract[];
-
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
-
-  /**
-   * Next page link if any.
-   */
-  nextLink?: string;
-}
-
-/**
  * Recipient Email details.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
@@ -5632,17 +5307,6 @@ model RecipientEmailContractProperties {
    * User Email subscribed to notification.
    */
   email?: string;
-}
-
-/**
- * Paged OpenIdProviders list representation.
- */
-model OpenIdConnectProviderListResult
-  is Azure.Core.Page<OpenidConnectProviderContract> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
 }
 
 /**
@@ -5830,11 +5494,6 @@ model PolicyDescriptionContractProperties {
   @visibility("read")
   scope?: int64;
 }
-
-/**
- * Paged list of portal revisions.
- */
-model PortalRevisionListResult is Azure.Core.Page<PortalRevisionContract>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -6173,43 +5832,13 @@ model ProductUpdateProperties extends ProductEntityBaseParameters {
   displayName?: string;
 }
 
-/**
- * Paged API list representation.
- */
-model ApiManagementProductApiListResult is Azure.Core.Page<ProductApiData> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
-}
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ProductApiData extends ApiContract {}
 
-/**
- * Paged Group list representation.
- */
-model ApiManagementProductGroupListResult is Azure.Core.Page<ProductGroupData> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
-}
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ProductGroupData extends GroupContract {}
-
-/**
- * Paged Subscriptions list representation.
- */
-model SubscriptionListResult is Azure.Core.Page<SubscriptionContract> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
-}
 
 /**
  * Subscription details.
@@ -6682,16 +6311,6 @@ model RequestReportRecordContract {
 }
 
 /**
- * The response of the list schema operation.
- */
-model GlobalSchemaListResult is Azure.Core.Page<GlobalSchemaContract> {
-  /**
-   * Total record count number.
-   */
-  count?: int64;
-}
-
-/**
  * Schema create or update contract Properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -6718,11 +6337,6 @@ model GlobalSchemaContractProperties {
   @Azure.ResourceManager.Private.conditionalClientFlatten
   document?: Record<unknown>;
 }
-
-/**
- * Paged AccessInformation list representation.
- */
-model TenantSettingsListResult is Azure.Core.Page<TenantSettingsContract>;
 
 /**
  * Tenant access information contract of the API Management service.
@@ -7138,17 +6752,6 @@ model TagCreateUpdateParameters {
 }
 
 /**
- * Paged AccessInformation list representation.
- */
-model AccessInformationListResult
-  is Azure.Core.Page<AccessInformationContract> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
-}
-
-/**
  * Tenant access information contract of the API Management service.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -7451,16 +7054,6 @@ model TenantConfigurationSyncStateContractProperties {
    * Most recent tenant configuration operation identifier
    */
   lastOperationId?: string;
-}
-
-/**
- * Paged Users list representation.
- */
-model UserListResult is Azure.Core.Page<UserContract> {
-  /**
-   * Total record count number across all pages.
-   */
-  count?: int64;
 }
 
 /**

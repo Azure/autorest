@@ -38,14 +38,8 @@ interface CertificateContracts {
    * Gets the entity state (Etag) version of the certificate specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("Certificate_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      CertificateContract,
-      BaseParameters<CertificateContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<CertificateContract>;
 
   /**
    * Creates or updates the certificate being used for authentication with the backend.
@@ -67,7 +61,6 @@ interface CertificateContracts {
    * Deletes specific certificate.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Certificate_Delete")
   delete is ArmResourceDeleteSync<
     CertificateContract,
@@ -112,8 +105,7 @@ interface CertificateContracts {
        */
       @query("isKeyVaultRefreshFailed")
       isKeyVaultRefreshFailed?: boolean;
-    },
-    Response = CertificateListResult
+    }
   >;
 
   /**
@@ -124,7 +116,7 @@ interface CertificateContracts {
   refreshSecret is ArmResourceActionSync<
     CertificateContract,
     void,
-    CertificateContract
+    ArmResponse<CertificateContract>
   >;
 }
 

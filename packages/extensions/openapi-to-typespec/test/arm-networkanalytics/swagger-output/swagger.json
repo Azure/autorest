@@ -102,7 +102,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DataProductListResult"
             }
@@ -144,7 +144,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DataProductsCatalogListResult"
             }
@@ -189,7 +189,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DataProductListResult"
             }
@@ -579,7 +579,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DataTypeListResult"
             }
@@ -981,6 +981,9 @@
               }
             }
           },
+          "204": {
+            "description": "Azure operation completed successfully."
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1235,7 +1238,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Action completed successfully."
+            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1293,7 +1296,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Action completed successfully."
+            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1332,7 +1335,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DataProductsCatalogListResult"
             }

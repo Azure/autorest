@@ -38,12 +38,11 @@ interface Spaces {
    * Update a Space
    */
   @parameterVisibility
-  patch is ArmCustomPatchSync<Space, SpaceUpdate>;
+  patch is ArmCustomPatchSync<Space, PatchModel = SpaceUpdate>;
 
   /**
    * Delete a Space
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<Space>;
 
   /**
@@ -79,31 +78,30 @@ interface Spaces {
       /**
        * Select the specified fields to be included in the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "select", explode: true })
       select?: string[];
 
       /**
        * Expand the indicated resources into the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "expand", explode: true })
       expand?: string[];
 
       /**
        * Expressions that specify the order of returned results.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "orderby", explode: true })
       orderby?: string[];
-    },
-    Response = SpaceListResult
+    }
   >;
 
   /**
    * List Space resources by subscription ID
    */
-  listBySubscription is ArmListBySubscription<
-    Space,
-    Response = SpaceListResult
-  >;
+  listBySubscription is ArmListBySubscription<Space>;
 }
 
 @@doc(Space.name, "The name of the space");

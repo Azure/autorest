@@ -66,6 +66,10 @@ const typespecTypes = new Map<string, string>([
   [SchemaType.AnyObject, "object"],
 ]);
 
+export function isTypespecType(typeName: string): boolean {
+  return typespecTypes.has(typeName);
+}
+
 export function transformObject(schema: ObjectSchema, codeModel: CodeModel): TypespecObject {
   const { isFullCompatible } = getOptions();
   const typespecTypes = getDataTypes(codeModel);

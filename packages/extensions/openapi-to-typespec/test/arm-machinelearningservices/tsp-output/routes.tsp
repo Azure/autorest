@@ -22,7 +22,7 @@ interface UsagesOperations {
   @operationId("Usages_List")
   @get
   @action("usages")
-  list is ArmProviderActionAsync<
+  list is ArmProviderActionSync<
     Response = ListUsagesResult,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
@@ -38,7 +38,7 @@ interface VirtualMachineSizesOperations {
   @operationId("VirtualMachineSizes_List")
   @get
   @action("vmSizes")
-  list is ArmProviderActionAsync<
+  list is ArmProviderActionSync<
     Response = VirtualMachineSizeListResult,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
@@ -54,7 +54,7 @@ interface QuotasOperations {
   @operationId("Quotas_Update")
   @post
   @action("updateQuotas")
-  update is ArmProviderActionAsync<
+  update is ArmProviderActionSync<
     Response = UpdateWorkspaceQuotasResult,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter,
@@ -67,7 +67,7 @@ interface QuotasOperations {
   @operationId("Quotas_List")
   @get
   @action("quotas")
-  list is ArmProviderActionAsync<
+  list is ArmProviderActionSync<
     Response = ListWorkspaceQuotas,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter

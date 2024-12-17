@@ -60,7 +60,10 @@ interface VirtualMachineScaleSetVMExtensions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetVMExtensions_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualMachineScaleSetVMExtension>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    VirtualMachineScaleSetVMExtension,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * The operation to update the VMSS VM extension.
@@ -70,18 +73,20 @@ interface VirtualMachineScaleSetVMExtensions {
   @operationId("VirtualMachineScaleSetVMExtensions_Update")
   update is ArmCustomPatchAsync<
     VirtualMachineScaleSetVMExtension,
-    VirtualMachineScaleSetVMExtensionUpdate
+    PatchModel = VirtualMachineScaleSetVMExtensionUpdate,
+    Response = ArmResponse<VirtualMachineScaleSetVMExtension>
   >;
 
   /**
    * The operation to delete the VMSS VM extension.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("VirtualMachineScaleSetVMExtensions_Delete")
-  delete is ArmResourceDeleteAsync<VirtualMachineScaleSetVMExtension>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    VirtualMachineScaleSetVMExtension,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * The operation to get all extensions of an instance in Virtual Machine Scaleset.
@@ -97,7 +102,7 @@ interface VirtualMachineScaleSetVMExtensions {
       @query("$expand")
       $expand?: string;
     },
-    Response = VirtualMachineScaleSetVMExtensionsListResult
+    Response = ArmResponse<VirtualMachineScaleSetVMExtensionsListResult>
   >;
 }
 

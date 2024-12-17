@@ -8,7 +8,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Azure.ResourceManager.AgFoodPlatform;
+namespace Microsoft.AgFoodPlatform;
 
 /**
  * Enum for different types of AuthCredentials supported.

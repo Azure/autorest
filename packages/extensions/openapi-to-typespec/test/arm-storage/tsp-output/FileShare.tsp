@@ -64,12 +64,11 @@ interface FileShares {
    * Updates share properties as specified in request body. Properties not mentioned in the request will not be changed. Update fails if the specified share does not already exist.
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<FileShare, FileShare>;
+  update is ArmCustomPatchSync<FileShare, PatchModel = FileShare>;
 
   /**
    * Deletes specified share under its account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<
     FileShare,
     Parameters = {
@@ -111,7 +110,7 @@ interface FileShares {
       @query("$expand")
       $expand?: string;
     },
-    Response = FileShareItems
+    Response = ArmResponse<FileShareItems>
   >;
 
   /**
@@ -125,7 +124,7 @@ interface FileShares {
   lease is ArmResourceActionSync<
     FileShare,
     LeaseShareRequest,
-    LeaseShareResponse,
+    ArmResponse<LeaseShareResponse>,
     Parameters = {
       /**
        * Optional. Specify the snapshot time to lease a snapshot.

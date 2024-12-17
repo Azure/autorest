@@ -39,19 +39,14 @@ interface PortalSignupSettingsOperationGroup {
    * Gets the entity state (Etag) version of the SignUpSettings.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("SignUpSettings_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      PortalSignupSettings,
-      BaseParameters<PortalSignupSettings>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<PortalSignupSettings>;
 
   /**
    * Create or Update Sign-Up settings.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("SignUpSettings_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PortalSignupSettings,
@@ -61,7 +56,8 @@ interface PortalSignupSettingsOperationGroup {
        */
       @header
       `If-Match`?: string;
-    }
+    },
+    Response = ArmResourceUpdatedResponse<PortalSignupSettings>
   >;
 
   /**
@@ -72,14 +68,15 @@ interface PortalSignupSettingsOperationGroup {
   @operationId("SignUpSettings_Update")
   update is ArmCustomPatchSync<
     PortalSignupSettings,
-    PortalSignupSettings,
+    PatchModel = PortalSignupSettings,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
       @header
       `If-Match`: string;
-    }
+    },
+    Response = ArmNoContentResponse
   >;
 }
 

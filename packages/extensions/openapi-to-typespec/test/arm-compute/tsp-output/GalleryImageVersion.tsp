@@ -45,11 +45,14 @@ interface GalleryImageVersions {
    * Create or update a gallery image version.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     GalleryImageVersion,
-    Response = ArmResourceCreatedResponse<GalleryImageVersion> | ArmResourceUpdatedResponse<GalleryImageVersion> | (ArmAcceptedLroResponse & {
-      @bodyRoot _: GalleryImageVersion;
+    Response = ArmResourceUpdatedResponse<GalleryImageVersion> | ArmResourceCreatedResponse<
+      GalleryImageVersion,
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    > | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      body: GalleryImageVersion;
     })
   >;
 
@@ -57,22 +60,27 @@ interface GalleryImageVersions {
    * Update a gallery image version.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<GalleryImageVersion, GalleryImageVersionUpdate>;
+  update is ArmCustomPatchAsync<
+    GalleryImageVersion,
+    PatchModel = GalleryImageVersionUpdate,
+    Response = ArmResponse<GalleryImageVersion>
+  >;
 
   /**
    * Delete a gallery image version.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<GalleryImageVersion>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    GalleryImageVersion,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List gallery image versions in a gallery image definition.
    */
   listByGalleryImage is ArmResourceListByParent<
     GalleryImageVersion,
-    Response = GalleryImageVersionList
+    Response = ArmResponse<GalleryImageVersionList>
   >;
 }
 

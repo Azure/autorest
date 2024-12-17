@@ -38,14 +38,8 @@ interface GatewayContracts {
    * Gets the entity state (Etag) version of the Gateway specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("Gateway_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      GatewayContract,
-      BaseParameters<GatewayContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<GatewayContract>;
 
   /**
    * Creates or updates a Gateway to be used in Api Management instance.
@@ -71,7 +65,7 @@ interface GatewayContracts {
   @operationId("Gateway_Update")
   update is ArmCustomPatchSync<
     GatewayContract,
-    GatewayContract,
+    PatchModel = GatewayContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -85,7 +79,6 @@ interface GatewayContracts {
    * Deletes specific Gateway.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Gateway_Delete")
   delete is ArmResourceDeleteSync<
     GatewayContract,
@@ -124,8 +117,7 @@ interface GatewayContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = GatewayListResult
+    }
   >;
 
   /**
@@ -133,16 +125,21 @@ interface GatewayContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Gateway_ListKeys")
-  listKeys is ArmResourceActionSync<GatewayContract, void, GatewayKeysContract>;
+  listKeys is ArmResourceActionSync<
+    GatewayContract,
+    void,
+    ArmResponse<GatewayKeysContract>
+  >;
 
   /**
    * Regenerates specified gateway key invalidating any tokens created with it.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Gateway_RegenerateKey")
-  regenerateKey is ArmResourceActionNoContentSync<
+  regenerateKey is ArmResourceActionSync<
     GatewayContract,
-    GatewayKeyRegenerationRequestContract
+    GatewayKeyRegenerationRequestContract,
+    void
   >;
 
   /**
@@ -153,7 +150,7 @@ interface GatewayContracts {
   generateToken is ArmResourceActionSync<
     GatewayContract,
     GatewayTokenRequestContract,
-    GatewayTokenContract
+    ArmResponse<GatewayTokenContract>
   >;
 
   /**
@@ -161,11 +158,12 @@ interface GatewayContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("apis")
   @operationId("GatewayApi_ListByService")
   gatewayApiListByService is ArmResourceActionSync<
     GatewayContract,
     void,
-    ApiManagementGatewayApiListResult,
+    ResourceListResult<GatewayApiData>,
     Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -193,6 +191,7 @@ interface GatewayContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
+  @action("{apiId}")
   @operationId("GatewayApi_GetEntityTag")
   gatewayApiGetEntityTag is ArmResourceActionSync<
     GatewayContract,
@@ -214,11 +213,12 @@ interface GatewayContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @put
+  @action("{apiId}")
   @operationId("GatewayApi_CreateOrUpdate")
   gatewayApiCreateOrUpdate is ArmResourceActionSync<
     GatewayContract,
     AssociationContract,
-    GatewayApiData,
+    ArmResponse<GatewayApiData>,
     Parameters = {
       /**
        * API identifier. Must be unique in the current API Management service instance.
@@ -235,6 +235,7 @@ interface GatewayContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @delete
+  @action("{apiId}")
   @operationId("GatewayApi_Delete")
   gatewayApiDelete is ArmResourceActionSync<
     GatewayContract,

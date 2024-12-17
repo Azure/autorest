@@ -55,18 +55,19 @@ interface OnlineDeploymentTrackedResources {
   @operationId("OnlineDeployments_Update")
   update is ArmCustomPatchAsync<
     OnlineDeploymentTrackedResource,
-    PartialMinimalTrackedResourceWithSku
+    PatchModel = PartialMinimalTrackedResourceWithSku
   >;
 
   /**
    * Delete Inference Endpoint Deployment (asynchronous).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("OnlineDeployments_Delete")
-  delete is ArmResourceDeleteAsync<OnlineDeploymentTrackedResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    OnlineDeploymentTrackedResource,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List Inference Endpoint Deployments.
@@ -94,7 +95,7 @@ interface OnlineDeploymentTrackedResources {
       @query("$skip")
       $skip?: string;
     },
-    Response = OnlineDeploymentTrackedResourceArmPaginatedResult
+    Response = ArmResponse<OnlineDeploymentTrackedResourceArmPaginatedResult>
   >;
 
   /**
@@ -105,7 +106,7 @@ interface OnlineDeploymentTrackedResources {
   getLogs is ArmResourceActionSync<
     OnlineDeploymentTrackedResource,
     DeploymentLogsRequest,
-    DeploymentLogs
+    ArmResponse<DeploymentLogs>
   >;
 
   /**
@@ -113,11 +114,12 @@ interface OnlineDeploymentTrackedResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("skus")
   @operationId("OnlineDeployments_ListSkus")
   listSkus is ArmResourceActionSync<
     OnlineDeploymentTrackedResource,
     void,
-    SkuResourceArmPaginatedResult,
+    ArmResponse<SkuResourceArmPaginatedResult>,
     Parameters = {
       /**
        * Number of Skus to be retrieved in a page of results.

@@ -38,12 +38,15 @@ interface PrivateEndpointConnections {
    * Called by end-users to approve or reject a PE connection.
    * This method must validate and forward the call to NRP.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<PrivateEndpointConnection>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    PrivateEndpointConnection,
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection>
+  >;
 
   /**
    * Called by end-users to delete a PE connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<PrivateEndpointConnection>;
 
   /**
@@ -51,7 +54,7 @@ interface PrivateEndpointConnections {
    */
   list is ArmResourceListByParent<
     PrivateEndpointConnection,
-    Response = PrivateEndpointConnectionListResult
+    Response = ArmResponse<PrivateEndpointConnectionListResult>
   >;
 }
 

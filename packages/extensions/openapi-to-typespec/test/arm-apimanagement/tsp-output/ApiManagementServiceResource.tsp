@@ -54,11 +54,13 @@ interface ApiManagementServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("ApiManagementService_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ApiManagementServiceResource,
-    Response = ArmResourceCreatedResponse<ApiManagementServiceResource> | ArmResourceUpdatedResponse<ApiManagementServiceResource> | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<ApiManagementServiceResource> | ArmResourceCreatedResponse<
+      ApiManagementServiceResource,
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
   >;
 
   /**
@@ -69,49 +71,48 @@ interface ApiManagementServiceResources {
   @operationId("ApiManagementService_Update")
   update is ArmCustomPatchAsync<
     ApiManagementServiceResource,
-    ApiManagementServiceUpdateParameters
+    PatchModel = ApiManagementServiceUpdateParameters
   >;
 
   /**
    * Deletes an existing API Management service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiManagementService_Delete")
-  delete is ArmResourceDeleteAsync<ApiManagementServiceResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ApiManagementServiceResource,
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      @bodyRoot
+      body: ApiManagementServiceResource;
+    }) | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List all API Management services within a resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiManagementService_ListByResourceGroup")
-  listByResourceGroup is ArmResourceListByParent<
-    ApiManagementServiceResource,
-    Response = ApiManagementServiceListResult
-  >;
+  listByResourceGroup is ArmResourceListByParent<ApiManagementServiceResource>;
 
   /**
    * Lists all API Management services within an Azure subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiManagementService_List")
-  list is ArmListBySubscription<
-    ApiManagementServiceResource,
-    Response = ApiManagementServiceListResult
-  >;
+  list is ArmListBySubscription<ApiManagementServiceResource>;
 
   /**
    * Lists a collection of apis associated with tags.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("apisByTags")
   @operationId("Api_ListByTags")
   listByTags is ArmResourceActionSync<
     ApiManagementServiceResource,
     void,
-    TagResourceListResult,
+    ArmResponse<TagResourceListResult>,
     Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| apiRevision | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| path | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| serviceUrl | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| isCurrent | filter | eq |     |</br>
@@ -144,11 +145,12 @@ interface ApiManagementServiceResources {
    * Performs a connectivity check between the API Management service and a given destination, and returns metrics for the connection, as well as errors encountered while trying to establish it.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("connectivityCheck")
   @operationId("PerformConnectivityCheckAsync")
   performConnectivityCheckAsync is ArmResourceActionAsync<
     ApiManagementServiceResource,
     ConnectivityCheckRequest,
-    ConnectivityCheckResponse
+    ArmResponse<ConnectivityCheckResponse>
   >;
 
   /**
@@ -156,11 +158,12 @@ interface ApiManagementServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("skus")
   @operationId("ApiManagementServiceSkus_ListAvailableServiceSkus")
   listAvailableServiceSkus is ArmResourceActionSync<
     ApiManagementServiceResource,
     void,
-    ResourceSkuResults
+    ArmResponse<ResourceSkuResults>
   >;
 
   /**
@@ -171,7 +174,7 @@ interface ApiManagementServiceResources {
   restore is ArmResourceActionAsync<
     ApiManagementServiceResource,
     ApiManagementServiceBackupRestoreParameters,
-    ApiManagementServiceResource
+    ArmResponse<ApiManagementServiceResource>
   >;
 
   /**
@@ -182,29 +185,31 @@ interface ApiManagementServiceResources {
   backup is ArmResourceActionAsync<
     ApiManagementServiceResource,
     ApiManagementServiceBackupRestoreParameters,
-    ApiManagementServiceResource
+    ArmResponse<ApiManagementServiceResource>
   >;
 
   /**
    * Gets the Single-Sign-On token for the API Management Service which is valid for 5 Minutes.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("getssotoken")
   @operationId("ApiManagementService_GetSsoToken")
   getSsoToken is ArmResourceActionSync<
     ApiManagementServiceResource,
     void,
-    ApiManagementServiceGetSsoTokenResult
+    ArmResponse<ApiManagementServiceGetSsoTokenResult>
   >;
 
   /**
    * Updates the Microsoft.ApiManagement resource running in the Virtual network to pick the updated DNS changes.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("applynetworkconfigurationupdates")
   @operationId("ApiManagementService_ApplyNetworkConfigurationUpdates")
   applyNetworkConfigurationUpdates is ArmResourceActionAsync<
     ApiManagementServiceResource,
     ApiManagementServiceApplyNetworkConfigurationParameters,
-    ApiManagementServiceResource
+    ArmResponse<ApiManagementServiceResource>
   >;
 
   /**
@@ -212,6 +217,7 @@ interface ApiManagementServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("networkstatus")
   @operationId("NetworkStatus_ListByService")
   listByService is ArmResourceActionSync<
     ApiManagementServiceResource,
@@ -224,11 +230,12 @@ interface ApiManagementServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("networkstatus")
   @operationId("NetworkStatus_ListByLocation")
   listByLocation is ArmResourceActionSync<
     ApiManagementServiceResource,
     void,
-    NetworkStatusContract,
+    ArmResponse<NetworkStatusContract>,
     Parameters = {
       /**
        * Location in which the API Management service is deployed. This is one of the Azure Regions like West US, East US, South Central US.
@@ -244,11 +251,12 @@ interface ApiManagementServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("outboundNetworkDependenciesEndpoints")
   @operationId("OutboundNetworkDependenciesEndpoints_ListByService")
   outboundNetworkDependenciesEndpointsListByService is ArmResourceActionSync<
     ApiManagementServiceResource,
     void,
-    OutboundEnvironmentEndpointList
+    ArmResponse<OutboundEnvironmentEndpointList>
   >;
 
   /**
@@ -256,11 +264,12 @@ interface ApiManagementServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("policyDescriptions")
   @operationId("PolicyDescription_ListByService")
   policyDescriptionListByService is ArmResourceActionSync<
     ApiManagementServiceResource,
     void,
-    PolicyDescriptionListResult,
+    ArmResponse<PolicyDescriptionListResult>,
     Parameters = {
       /**
        * Policy scope.
@@ -275,11 +284,12 @@ interface ApiManagementServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("portalsettings")
   @operationId("PortalSettings_ListByService")
   portalSettingsListByService is ArmResourceActionSync<
     ApiManagementServiceResource,
     void,
-    PortalSettingsListResult
+    ArmResponse<PortalSettingsListResult>
   >;
 
   /**
@@ -287,11 +297,12 @@ interface ApiManagementServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("productsByTags")
   @operationId("Product_ListByTags")
   productListByTags is ArmResourceActionSync<
     ApiManagementServiceResource,
     void,
-    TagResourceListResult,
+    ArmResponse<TagResourceListResult>,
     Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| terms | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq | substringof, contains, startswith, endswith |</br>
@@ -325,11 +336,12 @@ interface ApiManagementServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("{quotaCounterKey}")
   @operationId("QuotaByCounterKeys_ListByService")
   quotaByCounterKeysListByService is ArmResourceActionSync<
     ApiManagementServiceResource,
     void,
-    QuotaCounterListResult,
+    ArmResponse<QuotaCounterListResult>,
     Parameters = {
       @doc("Quota counter key identifier.This is the result of expression defined in counter-key attribute of the quota-by-key policy.For Example, if you specify counter-key=\"boo\" in the policy, then it’s accessible by \"boo\" counter key. But if it’s defined as counter-key=\"@(\"b\"+\"a\")\" then it will be accessible by \"ba\" key")
       @path
@@ -342,11 +354,12 @@ interface ApiManagementServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch
+  @action("{quotaCounterKey}")
   @operationId("QuotaByCounterKeys_Update")
   quotaByCounterKeysUpdate is ArmResourceActionSync<
     ApiManagementServiceResource,
     QuotaCounterValueUpdateContract,
-    QuotaCounterListResult,
+    ArmResponse<QuotaCounterListResult>,
     Parameters = {
       @doc("Quota counter key identifier.This is the result of expression defined in counter-key attribute of the quota-by-key policy.For Example, if you specify counter-key=\"boo\" in the policy, then it’s accessible by \"boo\" counter key. But if it’s defined as counter-key=\"@(\"b\"+\"a\")\" then it will be accessible by \"ba\" key")
       @path
@@ -359,11 +372,12 @@ interface ApiManagementServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("{quotaPeriodKey}")
   @operationId("QuotaByPeriodKeys_Get")
   quotaByPeriodKeysGet is ArmResourceActionSync<
     ApiManagementServiceResource,
     void,
-    QuotaCounterContract,
+    ArmResponse<QuotaCounterContract>,
     Parameters = {
       @doc("Quota counter key identifier.This is the result of expression defined in counter-key attribute of the quota-by-key policy.For Example, if you specify counter-key=\"boo\" in the policy, then it’s accessible by \"boo\" counter key. But if it’s defined as counter-key=\"@(\"b\"+\"a\")\" then it will be accessible by \"ba\" key")
       @path
@@ -382,11 +396,12 @@ interface ApiManagementServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch
+  @action("{quotaPeriodKey}")
   @operationId("QuotaByPeriodKeys_Update")
   quotaByPeriodKeysUpdate is ArmResourceActionSync<
     ApiManagementServiceResource,
     QuotaCounterValueUpdateContract,
-    QuotaCounterContract,
+    ArmResponse<QuotaCounterContract>,
     Parameters = {
       @doc("Quota counter key identifier.This is the result of expression defined in counter-key attribute of the quota-by-key policy.For Example, if you specify counter-key=\"boo\" in the policy, then it’s accessible by \"boo\" counter key. But if it’s defined as counter-key=\"@(\"b\"+\"a\")\" then it will be accessible by \"ba\" key")
       @path
@@ -405,11 +420,12 @@ interface ApiManagementServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("regions")
   @operationId("Region_ListByService")
   regionListByService is ArmResourceActionSync<
     ApiManagementServiceResource,
     void,
-    RegionListResult
+    ArmResponse<RegionListResult>
   >;
 
   /**
@@ -417,11 +433,12 @@ interface ApiManagementServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("byApi")
   @operationId("Reports_ListByApi")
   listByApi is ArmResourceActionSync<
     ApiManagementServiceResource,
     void,
-    ReportListResult,
+    ArmResponse<ReportListResult>,
     Parameters = {
       /**
        * The filter to apply on the operation.
@@ -455,11 +472,12 @@ interface ApiManagementServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("byUser")
   @operationId("Reports_ListByUser")
   listByUser is ArmResourceActionSync<
     ApiManagementServiceResource,
     void,
-    ReportListResult,
+    ArmResponse<ReportListResult>,
     Parameters = {
       /**
        * |   Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| timestamp | filter | ge, le |     | </br>| displayName | select, orderBy |     |     | </br>| userId | select, filter | eq |     | </br>| apiRegion | filter | eq |     | </br>| productId | filter | eq |     | </br>| subscriptionId | filter | eq |     | </br>| apiId | filter | eq |     | </br>| operationId | filter | eq |     | </br>| callCountSuccess | select, orderBy |     |     | </br>| callCountBlocked | select, orderBy |     |     | </br>| callCountFailed | select, orderBy |     |     | </br>| callCountOther | select, orderBy |     |     | </br>| callCountTotal | select, orderBy |     |     | </br>| bandwidth | select, orderBy |     |     | </br>| cacheHitsCount | select |     |     | </br>| cacheMissCount | select |     |     | </br>| apiTimeAvg | select, orderBy |     |     | </br>| apiTimeMin | select |     |     | </br>| apiTimeMax | select |     |     | </br>| serviceTimeAvg | select |     |     | </br>| serviceTimeMin | select |     |     | </br>| serviceTimeMax | select |     |     | </br>
@@ -493,11 +511,12 @@ interface ApiManagementServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("byOperation")
   @operationId("Reports_ListByOperation")
   listByOperation is ArmResourceActionSync<
     ApiManagementServiceResource,
     void,
-    ReportListResult,
+    ArmResponse<ReportListResult>,
     Parameters = {
       /**
        * |   Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| timestamp | filter | ge, le |     | </br>| displayName | select, orderBy |     |     | </br>| apiRegion | filter | eq |     | </br>| userId | filter | eq |     | </br>| productId | filter | eq |     | </br>| subscriptionId | filter | eq |     | </br>| apiId | filter | eq |     | </br>| operationId | select, filter | eq |     | </br>| callCountSuccess | select, orderBy |     |     | </br>| callCountBlocked | select, orderBy |     |     | </br>| callCountFailed | select, orderBy |     |     | </br>| callCountOther | select, orderBy |     |     | </br>| callCountTotal | select, orderBy |     |     | </br>| bandwidth | select, orderBy |     |     | </br>| cacheHitsCount | select |     |     | </br>| cacheMissCount | select |     |     | </br>| apiTimeAvg | select, orderBy |     |     | </br>| apiTimeMin | select |     |     | </br>| apiTimeMax | select |     |     | </br>| serviceTimeAvg | select |     |     | </br>| serviceTimeMin | select |     |     | </br>| serviceTimeMax | select |     |     | </br>
@@ -531,11 +550,12 @@ interface ApiManagementServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("byProduct")
   @operationId("Reports_ListByProduct")
   listByProduct is ArmResourceActionSync<
     ApiManagementServiceResource,
     void,
-    ReportListResult,
+    ArmResponse<ReportListResult>,
     Parameters = {
       /**
        * |   Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| timestamp | filter | ge, le |     | </br>| displayName | select, orderBy |     |     | </br>| apiRegion | filter | eq |     | </br>| userId | filter | eq |     | </br>| productId | select, filter | eq |     | </br>| subscriptionId | filter | eq |     | </br>| callCountSuccess | select, orderBy |     |     | </br>| callCountBlocked | select, orderBy |     |     | </br>| callCountFailed | select, orderBy |     |     | </br>| callCountOther | select, orderBy |     |     | </br>| callCountTotal | select, orderBy |     |     | </br>| bandwidth | select, orderBy |     |     | </br>| cacheHitsCount | select |     |     | </br>| cacheMissCount | select |     |     | </br>| apiTimeAvg | select, orderBy |     |     | </br>| apiTimeMin | select |     |     | </br>| apiTimeMax | select |     |     | </br>| serviceTimeAvg | select |     |     | </br>| serviceTimeMin | select |     |     | </br>| serviceTimeMax | select |     |     | </br>
@@ -569,11 +589,12 @@ interface ApiManagementServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("byGeo")
   @operationId("Reports_ListByGeo")
   listByGeo is ArmResourceActionSync<
     ApiManagementServiceResource,
     void,
-    ReportListResult,
+    ArmResponse<ReportListResult>,
     Parameters = {
       /**
        * |   Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| timestamp | filter | ge, le |     | </br>| country | select |     |     | </br>| region | select |     |     | </br>| zip | select |     |     | </br>| apiRegion | filter | eq |     | </br>| userId | filter | eq |     | </br>| productId | filter | eq |     | </br>| subscriptionId | filter | eq |     | </br>| apiId | filter | eq |     | </br>| operationId | filter | eq |     | </br>| callCountSuccess | select |     |     | </br>| callCountBlocked | select |     |     | </br>| callCountFailed | select |     |     | </br>| callCountOther | select |     |     | </br>| bandwidth | select, orderBy |     |     | </br>| cacheHitsCount | select |     |     | </br>| cacheMissCount | select |     |     | </br>| apiTimeAvg | select |     |     | </br>| apiTimeMin | select |     |     | </br>| apiTimeMax | select |     |     | </br>| serviceTimeAvg | select |     |     | </br>| serviceTimeMin | select |     |     | </br>| serviceTimeMax | select |     |     | </br>
@@ -601,11 +622,12 @@ interface ApiManagementServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("bySubscription")
   @operationId("Reports_ListBySubscription")
   listBySubscription is ArmResourceActionSync<
     ApiManagementServiceResource,
     void,
-    ReportListResult,
+    ArmResponse<ReportListResult>,
     Parameters = {
       /**
        * |   Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| timestamp | filter | ge, le |     | </br>| displayName | select, orderBy |     |     | </br>| apiRegion | filter | eq |     | </br>| userId | select, filter | eq |     | </br>| productId | select, filter | eq |     | </br>| subscriptionId | select, filter | eq |     | </br>| callCountSuccess | select, orderBy |     |     | </br>| callCountBlocked | select, orderBy |     |     | </br>| callCountFailed | select, orderBy |     |     | </br>| callCountOther | select, orderBy |     |     | </br>| callCountTotal | select, orderBy |     |     | </br>| bandwidth | select, orderBy |     |     | </br>| cacheHitsCount | select |     |     | </br>| cacheMissCount | select |     |     | </br>| apiTimeAvg | select, orderBy |     |     | </br>| apiTimeMin | select |     |     | </br>| apiTimeMax | select |     |     | </br>| serviceTimeAvg | select |     |     | </br>| serviceTimeMin | select |     |     | </br>| serviceTimeMax | select |     |     | </br>
@@ -639,11 +661,12 @@ interface ApiManagementServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("byTime")
   @operationId("Reports_ListByTime")
   listByTime is ArmResourceActionSync<
     ApiManagementServiceResource,
     void,
-    ReportListResult,
+    ArmResponse<ReportListResult>,
     Parameters = {
       /**
        * |   Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| timestamp | filter, select | ge, le |     | </br>| interval | select |     |     | </br>| apiRegion | filter | eq |     | </br>| userId | filter | eq |     | </br>| productId | filter | eq |     | </br>| subscriptionId | filter | eq |     | </br>| apiId | filter | eq |     | </br>| operationId | filter | eq |     | </br>| callCountSuccess | select |     |     | </br>| callCountBlocked | select |     |     | </br>| callCountFailed | select |     |     | </br>| callCountOther | select |     |     | </br>| bandwidth | select, orderBy |     |     | </br>| cacheHitsCount | select |     |     | </br>| cacheMissCount | select |     |     | </br>| apiTimeAvg | select |     |     | </br>| apiTimeMin | select |     |     | </br>| apiTimeMax | select |     |     | </br>| serviceTimeAvg | select |     |     | </br>| serviceTimeMin | select |     |     | </br>| serviceTimeMax | select |     |     | </br>
@@ -683,11 +706,12 @@ interface ApiManagementServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("byRequest")
   @operationId("Reports_ListByRequest")
   listByRequest is ArmResourceActionSync<
     ApiManagementServiceResource,
     void,
-    RequestReportListResult,
+    ArmResponse<RequestReportListResult>,
     Parameters = {
       /**
        * |   Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| timestamp | filter | ge, le |     | </br>| apiId | filter | eq |     | </br>| operationId | filter | eq |     | </br>| productId | filter | eq |     | </br>| userId | filter | eq |     | </br>| apiRegion | filter | eq |     | </br>| subscriptionId | filter | eq |     | </br>
@@ -715,11 +739,12 @@ interface ApiManagementServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("tagResources")
   @operationId("TagResource_ListByService")
   tagResourceListByService is ArmResourceActionSync<
     ApiManagementServiceResource,
     void,
-    TagResourceListResult,
+    ArmResponse<TagResourceListResult>,
     Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| aid | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| apiName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| apiRevision | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| path | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| serviceUrl | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| method | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| urlTemplate | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| terms | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq |     |</br>| isCurrent | filter | eq |     |</br>

@@ -41,6 +41,12 @@ export async function generateTypespec(repoRoot: string, folder: string, debug =
 const whiteList = [
   "anomalyDetector",
   "arm-agrifood",
+  "arm-alertsmanagement",
+  "arm-analysisservices",
+  // "arm-apimanagement", // Still at common type v2, which doesn't have systemData in Resource
+  // "arm-authorization", // Still at common type v2, which doesn't have systemData in Resource
+  "arm-azureintegrationspaces",
+  // "arm-machinelearningservices", // Two models with same discriminator value
   "arm-networkanalytics",
   "arm-playwrighttesting",
   "arm-servicenetworking",

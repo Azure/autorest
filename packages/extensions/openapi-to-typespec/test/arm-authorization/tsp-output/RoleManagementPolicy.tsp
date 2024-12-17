@@ -30,7 +30,7 @@ interface RoleManagementPolicies {
    */
   get is ArmResourceRead<
     RoleManagementPolicy,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 
   /**
@@ -39,8 +39,8 @@ interface RoleManagementPolicies {
   @parameterVisibility
   update is ArmCustomPatchSync<
     RoleManagementPolicy,
-    RoleManagementPolicy,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    PatchModel = RoleManagementPolicy,
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 
   /**
@@ -48,8 +48,7 @@ interface RoleManagementPolicies {
    */
   listForScope is ArmResourceListByParent<
     RoleManagementPolicy,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Response = RoleManagementPolicyListResult
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 }
 

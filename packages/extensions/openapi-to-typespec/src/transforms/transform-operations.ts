@@ -33,6 +33,7 @@ import { getLanguageMetadata } from "../utils/metadata";
 import { isArraySchema, isConstantSchema, isResponseSchema } from "../utils/schemas";
 import { isResourceListResult } from "../utils/type-mapping";
 import { getDefaultValue } from "../utils/values";
+import { getSuppresssionWithCode } from "../utils/suppressions";
 
 export function transformOperationGroup(
   { language, operations }: OperationGroup,
@@ -166,8 +167,9 @@ export function transformRequest(
     if (route.startsWith("/subscriptions/{subscriptionId}/providers/") || route.startsWith("/providers/")) {
       const action = getActionForPrviderTemplate(route);
       if (action !== undefined) {
+        const isLongRunning = operation.extensions?.["x-ms-long-running-operation"] ?? false;
         return {
-          kind: "ArmProviderActionAsync",
+          kind: isLongRunning ? "ArmProviderActionAsync" : "ArmProviderActionSync",
           doc,
           summary,
           name,
@@ -270,6 +272,7 @@ function filterOperationParameters(parameter: Parameter, visitedParameters: Set<
 }
 
 export function transformParameter(parameter: Parameter, codeModel: CodeModel): TypespecParameter {
+  const { isFullCompatible } = getOptions();
   // Body parameter doesn't have a serializedName, in that case we get the name
   const name = parameter.language.default.name;
   const doc = parameter.language.default.description;
@@ -287,6 +290,10 @@ export function transformParameter(parameter: Parameter, codeModel: CodeModel): 
     decorators: getPropertyDecorators(parameter),
     serializedName: parameter.language.default.serializedName ?? parameter.language.default.name,
     defaultValue: getDefaultValue(visited.name, parameter.schema),
+    suppressions:
+      !doc && isFullCompatible
+        ? [getSuppresssionWithCode("@azure-tools/typespec-azure-core/documentation-required")]
+        : undefined,
   };
 }
 

@@ -50,7 +50,7 @@ interface ProviderOperationsMetadataOperationGroup {
   @operationId("ProviderOperationsMetadata_Get")
   get is ArmResourceRead<
     ProviderOperationsMetadata,
-    Azure.ResourceManager.Foundations.TenantBaseParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
       /**
        * Specifies whether to expand the values.
@@ -67,15 +67,14 @@ interface ProviderOperationsMetadataOperationGroup {
   @operationId("ProviderOperationsMetadata_List")
   list is ArmResourceListByParent<
     ProviderOperationsMetadata,
-    Azure.ResourceManager.Foundations.TenantBaseParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
       /**
        * Specifies whether to expand the values.
        */
       @query("$expand")
       $expand?: string = "resourceTypes";
-    },
-    Response = ProviderOperationsMetadataListResult
+    }
   >;
 }
 

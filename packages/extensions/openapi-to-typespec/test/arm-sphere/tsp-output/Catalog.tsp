@@ -38,33 +38,34 @@ interface Catalogs {
    * Update a Catalog
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<Catalog, CatalogUpdate>;
+  update is ArmCustomPatchSync<Catalog, PatchModel = CatalogUpdate>;
 
   /**
    * Delete a Catalog
    */
-  delete is ArmResourceDeleteAsync<Catalog>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Catalog,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List Catalog resources by resource group
    */
-  listByResourceGroup is ArmResourceListByParent<
-    Catalog,
-    Response = CatalogListResult
-  >;
+  listByResourceGroup is ArmResourceListByParent<Catalog>;
 
   /**
    * List Catalog resources by subscription ID
    */
-  listBySubscription is ArmListBySubscription<
-    Catalog,
-    Response = CatalogListResult
-  >;
+  listBySubscription is ArmListBySubscription<Catalog>;
 
   /**
    * Counts devices in catalog.
    */
-  countDevices is ArmResourceActionSync<Catalog, void, CountDeviceResponse>;
+  countDevices is ArmResourceActionSync<
+    Catalog,
+    void,
+    ArmResponse<CountDeviceResponse>
+  >;
 
   /**
    * Lists deployments for catalog.
@@ -72,7 +73,7 @@ interface Catalogs {
   listDeployments is ArmResourceActionSync<
     Catalog,
     void,
-    DeploymentListResult,
+    ResourceListResult<Deployment>,
     Parameters = {
       /**
        * Filter the result list using the given expression
@@ -106,7 +107,7 @@ interface Catalogs {
   listDeviceGroups is ArmResourceActionSync<
     Catalog,
     ListDeviceGroupsRequest,
-    DeviceGroupListResult,
+    ResourceListResult<DeviceGroup>,
     Parameters = {
       /**
        * Filter the result list using the given expression
@@ -140,7 +141,7 @@ interface Catalogs {
   listDeviceInsights is ArmResourceActionSync<
     Catalog,
     void,
-    PagedDeviceInsight,
+    ArmResponse<PagedDeviceInsight>,
     Parameters = {
       /**
        * Filter the result list using the given expression
@@ -174,7 +175,7 @@ interface Catalogs {
   listDevices is ArmResourceActionSync<
     Catalog,
     void,
-    DeviceListResult,
+    ResourceListResult<Device>,
     Parameters = {
       /**
        * Filter the result list using the given expression

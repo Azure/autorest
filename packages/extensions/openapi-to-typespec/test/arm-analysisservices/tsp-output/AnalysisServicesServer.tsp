@@ -37,12 +37,15 @@ interface AnalysisServicesServersOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("Servers_Create")
   create is ArmResourceCreateOrReplaceAsync<
     AnalysisServicesServer,
-    Response = ArmResourceCreatedResponse<AnalysisServicesServer> | ArmResourceUpdatedResponse<AnalysisServicesServer> | (ArmAcceptedLroResponse & {
-      @bodyRoot _: AnalysisServicesServer;
+    Response = ArmResourceUpdatedResponse<AnalysisServicesServer> | ArmResourceCreatedResponse<
+      AnalysisServicesServer,
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    > | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      body: AnalysisServicesServer;
     })
   >;
 
@@ -54,18 +57,19 @@ interface AnalysisServicesServersOperationGroup {
   @operationId("Servers_Update")
   update is ArmCustomPatchAsync<
     AnalysisServicesServer,
-    AnalysisServicesServerUpdateParameters
+    PatchModel = AnalysisServicesServerUpdateParameters
   >;
 
   /**
    * Deletes the specified Analysis Services server.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Servers_Delete")
-  delete is ArmResourceDeleteAsync<AnalysisServicesServer>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    AnalysisServicesServer,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Gets all the Analysis Services servers for the given resource group.
@@ -74,7 +78,7 @@ interface AnalysisServicesServersOperationGroup {
   @operationId("Servers_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     AnalysisServicesServer,
-    Response = AnalysisServicesServers
+    Response = ArmResponse<AnalysisServicesServers>
   >;
 
   /**
@@ -84,7 +88,7 @@ interface AnalysisServicesServersOperationGroup {
   @operationId("Servers_List")
   list is ArmListBySubscription<
     AnalysisServicesServer,
-    Response = AnalysisServicesServers
+    Response = ArmResponse<AnalysisServicesServers>
   >;
 
   /**
@@ -106,11 +110,12 @@ interface AnalysisServicesServersOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("skus")
   @operationId("Servers_ListSkusForExisting")
   listSkusForExisting is ArmResourceActionSync<
     AnalysisServicesServer,
     void,
-    SkuEnumerationForExistingResourceResult
+    ArmResponse<SkuEnumerationForExistingResourceResult>
   >;
 
   /**
@@ -121,7 +126,7 @@ interface AnalysisServicesServersOperationGroup {
   listGatewayStatus is ArmResourceActionSync<
     AnalysisServicesServer,
     void,
-    GatewayListStatusLive
+    ArmResponse<GatewayListStatusLive>
   >;
 
   /**

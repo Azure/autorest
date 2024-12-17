@@ -36,11 +36,14 @@ interface GalleryApplications {
    * Create or update a gallery Application Definition.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     GalleryApplication,
-    Response = ArmResourceCreatedResponse<GalleryApplication> | ArmResourceUpdatedResponse<GalleryApplication> | (ArmAcceptedLroResponse & {
-      @bodyRoot _: GalleryApplication;
+    Response = ArmResourceUpdatedResponse<GalleryApplication> | ArmResourceCreatedResponse<
+      GalleryApplication,
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    > | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      body: GalleryApplication;
     })
   >;
 
@@ -48,22 +51,27 @@ interface GalleryApplications {
    * Update a gallery Application Definition.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<GalleryApplication, GalleryApplicationUpdate>;
+  update is ArmCustomPatchAsync<
+    GalleryApplication,
+    PatchModel = GalleryApplicationUpdate,
+    Response = ArmResponse<GalleryApplication>
+  >;
 
   /**
    * Delete a gallery Application.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<GalleryApplication>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    GalleryApplication,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List gallery Application Definitions in a gallery.
    */
   listByGallery is ArmResourceListByParent<
     GalleryApplication,
-    Response = GalleryApplicationList
+    Response = ArmResponse<GalleryApplicationList>
   >;
 }
 

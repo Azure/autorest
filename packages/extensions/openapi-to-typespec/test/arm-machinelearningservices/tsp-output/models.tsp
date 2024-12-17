@@ -4052,7 +4052,7 @@ model AmlComputeNodesInformation {
    * The continuation token.
    */
   @visibility("read")
-  @Azure.Core.nextLink
+  @nextLink
   nextLink?: string;
 }
 
@@ -6820,11 +6820,6 @@ model AmlOperation {
 }
 
 /**
- * The result of a request to list machine learning workspaces.
- */
-model WorkspaceListResult is Azure.Core.Page<Workspace>;
-
-/**
  * The properties of a machine learning workspace.
  */
 model WorkspaceProperties {
@@ -7730,11 +7725,6 @@ model FqdnEndpointDetail {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   port?: int32;
 }
-
-/**
- * List of outbound rules for the managed network of a machine learning workspace.
- */
-model OutboundRuleListResult is Azure.Core.Page<OutboundRuleBasicResource>;
 
 /**
  * List of private endpoint connection associated with the specified workspace

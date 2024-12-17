@@ -45,11 +45,12 @@ interface EnvironmentContainerResources {
    * Delete container.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("RegistryEnvironmentContainers_Delete")
-  delete is ArmResourceDeleteAsync<EnvironmentContainerResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    EnvironmentContainerResource,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List environment containers.
@@ -71,7 +72,7 @@ interface EnvironmentContainerResources {
       @query("listViewType")
       listViewType?: ListViewType;
     },
-    Response = EnvironmentContainerResourceArmPaginatedResult
+    Response = ArmResponse<EnvironmentContainerResourceArmPaginatedResult>
   >;
 }
 

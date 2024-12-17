@@ -43,10 +43,11 @@ interface FeaturestoreEntityContainers {
   /**
    * Delete container.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<FeaturestoreEntityContainer>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    FeaturestoreEntityContainer,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List featurestore entity containers.
@@ -90,7 +91,7 @@ interface FeaturestoreEntityContainers {
       @query("createdBy")
       createdBy?: string;
     },
-    Response = FeaturestoreEntityContainerResourceArmPaginatedResult
+    Response = ArmResponse<FeaturestoreEntityContainerResourceArmPaginatedResult>
   >;
 }
 

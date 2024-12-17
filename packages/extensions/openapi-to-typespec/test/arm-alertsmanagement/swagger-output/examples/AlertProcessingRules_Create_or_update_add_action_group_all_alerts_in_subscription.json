@@ -1,0 +1,95 @@
+{
+  "parameters": {
+    "alertProcessingRule": {
+      "location": "Global",
+      "properties": {
+        "description": "Add ActionGroup1 to all alerts in the subscription",
+        "actions": [
+          {
+            "actionGroupIds": [
+              "/subscriptions/subId1/resourcegroups/RGId1/providers/microsoft.insights/actiongroups/ActionGroup1"
+            ],
+            "actionType": "AddActionGroups"
+          }
+        ],
+        "enabled": true,
+        "scopes": [
+          "/subscriptions/subId1"
+        ]
+      },
+      "tags": {}
+    },
+    "alertProcessingRuleName": "AddActionGroupToSubscription",
+    "api-version": "2021-08-08",
+    "resourceGroupName": "alertscorrelationrg",
+    "subscriptionId": "subId1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "AddActionGroupToSubscription",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/AddActionGroupToSubscription",
+        "location": "Global",
+        "properties": {
+          "description": "Add ActionGroup1 to all alerts in the subscription",
+          "actions": [
+            {
+              "actionGroupIds": [
+                "/subscriptions/subId1/resourcegroups/RGId1/providers/microsoft.insights/actiongroups/ActionGroup1"
+              ],
+              "actionType": "AddActionGroups"
+            }
+          ],
+          "enabled": true,
+          "scopes": [
+            "/subscriptions/subId1"
+          ]
+        },
+        "systemData": {
+          "createdAt": "2021-02-12T22:05:09Z",
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-02-13T16:15:34Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      }
+    },
+    "201": {
+      "body": {
+        "name": "AddActionGroupToSubscription",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/AddActionGroupToSubscription",
+        "location": "Global",
+        "properties": {
+          "description": "Add ActionGroup1 to all alerts in the subscription",
+          "actions": [
+            {
+              "actionGroupIds": [
+                "/subscriptions/subId1/resourcegroups/RGId1/providers/microsoft.insights/actiongroups/ActionGroup1"
+              ],
+              "actionType": "AddActionGroups"
+            }
+          ],
+          "enabled": true,
+          "scopes": [
+            "/subscriptions/subId1"
+          ]
+        },
+        "systemData": {
+          "createdAt": "2021-02-12T22:05:09Z",
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-02-13T16:15:34Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      }
+    }
+  },
+  "operationId": "AlertProcessingRules_CreateOrUpdate",
+  "title": "Create or update a rule that adds an action group to all alerts in a subscription"
+}

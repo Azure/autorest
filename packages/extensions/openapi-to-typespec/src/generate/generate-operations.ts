@@ -173,15 +173,14 @@ export function generateOperationGroup(operationGroup: TypespecOperationGroup) {
 
   statements.push(`${doc}`);
   const hasInterface = Boolean(name);
-  const hasProvider =
-    operations.find((o) => (o as TspArmProviderActionOperation).kind === "ArmProviderActionAsync") !== undefined;
+  const hasProvider = operations.find((o) => (o as TspArmProviderActionOperation).kind !== undefined) !== undefined;
   if (hasProvider && hasInterface) {
     statements.push(`@armResourceOperations`);
   }
   hasInterface && statements.push(`interface ${name} {`);
 
   for (const operation of operations) {
-    if ((operation as TspArmProviderActionOperation).kind === "ArmProviderActionAsync") {
+    if ((operation as TspArmProviderActionOperation).kind !== undefined) {
       statements.push(generateProviderAction(operation as TspArmProviderActionOperation));
     } else {
       statements.push(generateOperation(operation as TypespecOperation, operationGroup));

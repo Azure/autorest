@@ -38,14 +38,8 @@ interface GatewayHostnameConfigurationContracts {
    * Checks that hostname configuration entity specified by identifier exists for specified Gateway entity.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("GatewayHostnameConfiguration_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      GatewayHostnameConfigurationContract,
-      BaseParameters<GatewayHostnameConfigurationContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<GatewayHostnameConfigurationContract>;
 
   /**
    * Creates of updates hostname configuration for a Gateway.
@@ -67,7 +61,6 @@ interface GatewayHostnameConfigurationContracts {
    * Deletes the specified hostname configuration from the specified Gateway.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("GatewayHostnameConfiguration_Delete")
   delete is ArmResourceDeleteSync<
     GatewayHostnameConfigurationContract,
@@ -106,8 +99,7 @@ interface GatewayHostnameConfigurationContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = GatewayHostnameConfigurationListResult
+    }
   >;
 }
 

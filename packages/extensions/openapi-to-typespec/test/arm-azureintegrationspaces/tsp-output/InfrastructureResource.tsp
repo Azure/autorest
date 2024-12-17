@@ -43,13 +43,12 @@ interface InfrastructureResources {
   @parameterVisibility
   patch is ArmCustomPatchSync<
     InfrastructureResource,
-    InfrastructureResourceUpdate
+    PatchModel = InfrastructureResourceUpdate
   >;
 
   /**
    * Delete a InfrastructureResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<InfrastructureResource>;
 
   /**
@@ -85,22 +84,24 @@ interface InfrastructureResources {
       /**
        * Select the specified fields to be included in the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "select", explode: true })
       select?: string[];
 
       /**
        * Expand the indicated resources into the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "expand", explode: true })
       expand?: string[];
 
       /**
        * Expressions that specify the order of returned results.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "orderby", explode: true })
       orderby?: string[];
-    },
-    Response = InfrastructureResourceListResult
+    }
   >;
 }
 

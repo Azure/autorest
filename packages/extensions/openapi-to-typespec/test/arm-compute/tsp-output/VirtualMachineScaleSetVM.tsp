@@ -82,24 +82,23 @@ interface VirtualMachineScaleSetVMS {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("VirtualMachineScaleSetVMs_Update")
   update is ArmResourceCreateOrReplaceAsync<
     VirtualMachineScaleSetVM,
-    Response = ArmResourceCreatedResponse<VirtualMachineScaleSetVM> | ArmResourceUpdatedResponse<VirtualMachineScaleSetVM> | (ArmAcceptedLroResponse & {
-      @bodyRoot _: VirtualMachineScaleSetVM;
-    })
+    Response = ArmResourceUpdatedResponse<VirtualMachineScaleSetVM> | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      body: VirtualMachineScaleSetVM;
+    }),
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Deletes a virtual machine from a VM scale set.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("VirtualMachineScaleSetVMs_Delete")
-  delete is ArmResourceDeleteAsync<
+  delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachineScaleSetVM,
     Parameters = {
       /**
@@ -107,7 +106,8 @@ interface VirtualMachineScaleSetVMS {
        */
       @query("forceDeletion")
       forceDeletion?: boolean;
-    }
+    },
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -141,8 +141,7 @@ interface VirtualMachineScaleSetVMS {
        */
       @query("$expand")
       $expand?: string;
-    },
-    Response = VirtualMachineScaleSetVMListResult
+    }
   >;
 
   /**
@@ -160,6 +159,7 @@ interface VirtualMachineScaleSetVMS {
    * Allows you to re-image all the disks ( including data disks ) in the a VM scale set instance. This operation is only supported for managed disks.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("reimageall")
   @operationId("VirtualMachineScaleSetVMs_ReimageAll")
   reimageAll is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
 
@@ -175,17 +175,19 @@ interface VirtualMachineScaleSetVMS {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("instanceView")
   @operationId("VirtualMachineScaleSetVMs_GetInstanceView")
   getInstanceView is ArmResourceActionSync<
     VirtualMachineScaleSetVM,
     void,
-    VirtualMachineScaleSetVMInstanceView
+    ArmResponse<VirtualMachineScaleSetVMInstanceView>
   >;
 
   /**
    * Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("poweroff")
   @operationId("VirtualMachineScaleSetVMs_PowerOff")
   powerOff is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
@@ -229,7 +231,7 @@ interface VirtualMachineScaleSetVMS {
   retrieveBootDiagnosticsData is ArmResourceActionSync<
     VirtualMachineScaleSetVM,
     void,
-    RetrieveBootDiagnosticsDataResult,
+    ArmResponse<RetrieveBootDiagnosticsDataResult>,
     Parameters = {
       /**
        * Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. **Note:** If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes.
@@ -255,8 +257,9 @@ interface VirtualMachineScaleSetVMS {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetVMs_SimulateEviction")
-  simulateEviction is ArmResourceActionNoContentSync<
+  simulateEviction is ArmResourceActionSync<
     VirtualMachineScaleSetVM,
+    void,
     void
   >;
 
@@ -268,7 +271,7 @@ interface VirtualMachineScaleSetVMS {
   runCommand is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
     RunCommandInput,
-    RunCommandResult
+    ArmResponse<RunCommandResult>
   >;
 }
 

@@ -2,6 +2,7 @@ import { Property } from "@autorest/codemodel";
 import { WithSuppressDirective } from "../interfaces";
 import { isDictionarySchema } from "./schemas";
 
+// TO-DO: remove it
 export function generateSuppressionForDocumentRequired(): string {
   return `#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"`;
 }
@@ -20,6 +21,13 @@ export function generateSuppressions(suppressions: WithSuppressDirective[]): str
     definitions.push(`#suppress "${suppression.suppressionCode}" "${suppression.suppressionMessage}"`);
   }
   return definitions;
+}
+
+export function getSuppresssionWithCode(suppressionCode: string): WithSuppressDirective {
+  return {
+    suppressionCode,
+    suppressionMessage: "For backward compatibility",
+  };
 }
 
 export function getSuppressionsForArmResourceDeleteAsync(): WithSuppressDirective[] {

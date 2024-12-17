@@ -38,18 +38,14 @@ interface ApiContracts {
    * Gets the entity state (Etag) version of the API specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("Api_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<ApiContract, BaseParameters<ApiContract>>,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<ApiContract>;
 
   /**
    * Creates new or updates existing specified API of the API Management service instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("Api_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ApiContract,
@@ -60,7 +56,10 @@ interface ApiContracts {
       @header
       `If-Match`?: string;
     },
-    Response = ArmResourceCreatedResponse<ApiContract> | ArmResourceUpdatedResponse<ApiContract> | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<ApiContract> | ArmResourceCreatedResponse<
+      ApiContract,
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
   >;
 
   /**
@@ -71,7 +70,7 @@ interface ApiContracts {
   @operationId("Api_Update")
   update is ArmCustomPatchSync<
     ApiContract,
-    ApiUpdateContract,
+    PatchModel = ApiUpdateContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -85,7 +84,6 @@ interface ApiContracts {
    * Deletes the specified API of the API Management service instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Api_Delete")
   delete is ArmResourceDeleteSync<
     ApiContract,
@@ -142,8 +140,7 @@ interface ApiContracts {
        */
       @query("expandApiVersionSet")
       expandApiVersionSet?: boolean;
-    },
-    Response = ApiListResult
+    }
   >;
 
   /**
@@ -151,11 +148,12 @@ interface ApiContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("revisions")
   @operationId("ApiRevision_ListByService")
   apiRevisionListByService is ArmResourceActionSync<
     ApiContract,
     void,
-    ApiRevisionListResult,
+    ArmResponse<ApiRevisionListResult>,
     Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| apiRevision | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -183,11 +181,12 @@ interface ApiContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("products")
   @operationId("ApiProduct_ListByApis")
   listByApis is ArmResourceActionSync<
     ApiContract,
     void,
-    ProductListResult,
+    ResourceListResult<ProductContract>,
     Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -215,11 +214,12 @@ interface ApiContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("operationsByTags")
   @operationId("Operation_ListByTags")
   listByTags is ArmResourceActionSync<
     ApiContract,
     void,
-    TagResourceListResult,
+    ArmResponse<TagResourceListResult>,
     Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| apiName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| method | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| urlTemplate | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>

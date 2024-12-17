@@ -22,7 +22,7 @@ interface ServersOperations {
   @operationId("Servers_ListSkusForNew")
   @get
   @action("skus")
-  listSkusForNew is ArmProviderActionAsync<
+  listSkusForNew is ArmProviderActionSync<
     Response = SkuEnumerationForNewResourceResult,
     Scope = SubscriptionActionScope,
     Parameters = {}
@@ -33,7 +33,7 @@ interface ServersOperations {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Servers_CheckNameAvailability")
   @post
-  checkNameAvailability is ArmProviderActionAsync<
+  checkNameAvailability is ArmProviderActionSync<
     Response = CheckServerNameAvailabilityResult,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter,

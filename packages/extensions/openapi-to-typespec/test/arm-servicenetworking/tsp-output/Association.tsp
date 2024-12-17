@@ -41,20 +41,20 @@ interface Associations {
    * Update a Association
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<Association, AssociationUpdate>;
+  update is ArmCustomPatchSync<Association, PatchModel = AssociationUpdate>;
 
   /**
    * Delete a Association
    */
-  delete is ArmResourceDeleteAsync<Association>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Association,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List Association resources by TrafficController
    */
-  listByTrafficController is ArmResourceListByParent<
-    Association,
-    Response = AssociationListResult
-  >;
+  listByTrafficController is ArmResourceListByParent<Association>;
 }
 
 @@doc(Association.name, "Name of Association");

@@ -43,10 +43,11 @@ interface FeaturestoreEntityVersions {
   /**
    * Delete version.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<FeaturestoreEntityVersion>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    FeaturestoreEntityVersion,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List versions.
@@ -102,7 +103,7 @@ interface FeaturestoreEntityVersions {
       @query("stage")
       stage?: string;
     },
-    Response = FeaturestoreEntityVersionResourceArmPaginatedResult
+    Response = ArmResponse<FeaturestoreEntityVersionResourceArmPaginatedResult>
   >;
 }
 

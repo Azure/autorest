@@ -45,11 +45,12 @@ interface ComponentVersionResources {
    * Delete version.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("RegistryComponentVersions_Delete")
-  delete is ArmResourceDeleteAsync<ComponentVersionResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ComponentVersionResource,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List versions.
@@ -83,7 +84,7 @@ interface ComponentVersionResources {
       @query("stage")
       stage?: string;
     },
-    Response = ComponentVersionResourceArmPaginatedResult
+    Response = ArmResponse<ComponentVersionResourceArmPaginatedResult>
   >;
 }
 

@@ -38,21 +38,14 @@ interface NamedValueContracts {
    * Gets the entity state (Etag) version of the named value specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("NamedValue_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      NamedValueContract,
-      BaseParameters<NamedValueContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<NamedValueContract>;
 
   /**
    * Creates or updates named value.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("NamedValue_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     NamedValueContract,
@@ -63,7 +56,10 @@ interface NamedValueContracts {
       @header
       `If-Match`?: string;
     },
-    Response = ArmResourceCreatedResponse<NamedValueContract> | ArmResourceUpdatedResponse<NamedValueContract> | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<NamedValueContract> | ArmResourceCreatedResponse<
+      NamedValueContract,
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
   >;
 
   /**
@@ -74,7 +70,7 @@ interface NamedValueContracts {
   @operationId("NamedValue_Update")
   update is ArmCustomPatchAsync<
     NamedValueContract,
-    NamedValueUpdateParameters,
+    PatchModel = NamedValueUpdateParameters,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -88,7 +84,6 @@ interface NamedValueContracts {
    * Deletes specific named value from the API Management service instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("NamedValue_Delete")
   delete is ArmResourceDeleteSync<
     NamedValueContract,
@@ -133,8 +128,7 @@ interface NamedValueContracts {
        */
       @query("isKeyVaultRefreshFailed")
       isKeyVaultRefreshFailed?: boolean;
-    },
-    Response = NamedValueListResult
+    }
   >;
 
   /**
@@ -145,7 +139,7 @@ interface NamedValueContracts {
   listValue is ArmResourceActionSync<
     NamedValueContract,
     void,
-    NamedValueSecretContract
+    ArmResponse<NamedValueSecretContract>
   >;
 
   /**
@@ -156,7 +150,7 @@ interface NamedValueContracts {
   refreshSecret is ArmResourceActionAsync<
     NamedValueContract,
     void,
-    NamedValueContract
+    ArmResponse<NamedValueContract>
   >;
 }
 

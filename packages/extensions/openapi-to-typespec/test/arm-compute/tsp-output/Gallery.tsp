@@ -48,11 +48,14 @@ interface Galleries {
    * Create or update a Shared Image Gallery.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Gallery,
-    Response = ArmResourceCreatedResponse<Gallery> | ArmResourceUpdatedResponse<Gallery> | (ArmAcceptedLroResponse & {
-      @bodyRoot _: Gallery;
+    Response = ArmResourceUpdatedResponse<Gallery> | ArmResourceCreatedResponse<
+      Gallery,
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    > | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      body: Gallery;
     })
   >;
 
@@ -60,38 +63,44 @@ interface Galleries {
    * Update a Shared Image Gallery.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<Gallery, GalleryUpdate>;
+  update is ArmCustomPatchAsync<
+    Gallery,
+    PatchModel = GalleryUpdate,
+    Response = ArmResponse<Gallery>
+  >;
 
   /**
    * Delete a Shared Image Gallery.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<Gallery>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Gallery,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List galleries under a resource group.
    */
   listByResourceGroup is ArmResourceListByParent<
     Gallery,
-    Response = GalleryList
+    Response = ArmResponse<GalleryList>
   >;
 
   /**
    * List galleries under a subscription.
    */
-  list is ArmListBySubscription<Gallery, Response = GalleryList>;
+  list is ArmListBySubscription<Gallery, Response = ArmResponse<GalleryList>>;
 
   /**
    * Update sharing profile of a gallery.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("share")
   @operationId("GallerySharingProfile_Update")
   gallerySharingProfileUpdate is ArmResourceActionAsync<
     Gallery,
     SharingUpdate,
-    SharingUpdate
+    ArmResponse<SharingUpdate>
   >;
 }
 

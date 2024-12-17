@@ -51,34 +51,33 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("DiskAccesses_UpdateAPrivateEndpointConnection")
   updateAPrivateEndpointConnection is ArmResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
-    Response = ArmResourceCreatedResponse<PrivateEndpointConnection> | ArmResourceUpdatedResponse<PrivateEndpointConnection> | (ArmAcceptedLroResponse & {
-      @bodyRoot _: PrivateEndpointConnection;
-    })
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      body: PrivateEndpointConnection;
+    }),
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Deletes a private endpoint connection under a disk access resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("DiskAccesses_DeleteAPrivateEndpointConnection")
-  deleteAPrivateEndpointConnection is ArmResourceDeleteAsync<PrivateEndpointConnection>;
+  deleteAPrivateEndpointConnection is ArmResourceDeleteWithoutOkAsync<
+    PrivateEndpointConnection,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List information about private endpoint connections under a disk access resource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DiskAccesses_ListPrivateEndpointConnections")
-  listPrivateEndpointConnections is ArmResourceListByParent<
-    PrivateEndpointConnection,
-    Response = PrivateEndpointConnectionListResult
-  >;
+  listPrivateEndpointConnections is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 
 @@doc(PrivateEndpointConnection.name,

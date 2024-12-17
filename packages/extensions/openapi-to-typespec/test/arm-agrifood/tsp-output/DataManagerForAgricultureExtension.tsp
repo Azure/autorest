@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Azure.ResourceManager.AgFoodPlatform;
+namespace Microsoft.AgFoodPlatform;
 /**
  * DataManagerForAgriculture extension resource.
  */
@@ -31,7 +31,7 @@ interface DataManagerForAgricultureExtensions {
    */
   get is ArmResourceRead<
     DataManagerForAgricultureExtension,
-    Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
   >;
 
   /**
@@ -39,29 +39,33 @@ interface DataManagerForAgricultureExtensions {
    */
   list is ArmResourceListByParent<
     DataManagerForAgricultureExtension,
-    Azure.ResourceManager.Foundations.TenantBaseParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
       /**
        * DataManagerForAgricultureExtension ids.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "farmBeatsExtensionIds", explode: true })
       farmBeatsExtensionIds?: string[];
 
       /**
        * DataManagerForAgriculture extension names.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "farmBeatsExtensionNames", explode: true })
       farmBeatsExtensionNames?: string[];
 
       /**
        * Extension categories.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "extensionCategories", explode: true })
       extensionCategories?: string[];
 
       /**
        * Publisher ids.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "publisherIds", explode: true })
       publisherIds?: string[];
 
@@ -74,7 +78,7 @@ interface DataManagerForAgricultureExtensions {
       @query("$maxPageSize")
       $maxPageSize?: int32 = 50;
     },
-    Response = DataManagerForAgricultureExtensionListResponse
+    Response = ArmResponse<DataManagerForAgricultureExtensionListResponse>
   >;
 }
 

@@ -55,7 +55,7 @@ interface Features {
       @query("description")
       description?: string;
     },
-    Response = FeatureResourceArmPaginatedResult
+    Response = ArmResponse<FeatureResourceArmPaginatedResult>
   >;
 }
 

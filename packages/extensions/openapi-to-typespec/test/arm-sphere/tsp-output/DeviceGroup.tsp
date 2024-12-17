@@ -41,12 +41,15 @@ interface DeviceGroups {
    * Update a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<DeviceGroup, DeviceGroupUpdate>;
+  update is ArmCustomPatchAsync<DeviceGroup, PatchModel = DeviceGroupUpdate>;
 
   /**
    * Delete a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
    */
-  delete is ArmResourceDeleteAsync<DeviceGroup>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    DeviceGroup,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List DeviceGroup resources by Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
@@ -77,22 +80,26 @@ interface DeviceGroups {
        */
       @query("$maxpagesize")
       maxpagesize?: int32;
-    },
-    Response = DeviceGroupListResult
+    }
   >;
 
   /**
    * Bulk claims the devices. Use '.unassigned' or '.default' for the device group and product names when bulk claiming devices to a catalog only.
    */
-  claimDevices is ArmResourceActionNoResponseContentAsync<
+  claimDevices is ArmResourceActionAsync<
     DeviceGroup,
-    ClaimDevicesRequest
+    ClaimDevicesRequest,
+    void
   >;
 
   /**
    * Counts devices in device group. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
    */
-  countDevices is ArmResourceActionSync<DeviceGroup, void, CountDeviceResponse>;
+  countDevices is ArmResourceActionSync<
+    DeviceGroup,
+    void,
+    ArmResponse<CountDeviceResponse>
+  >;
 }
 
 @@doc(DeviceGroup.name, "Name of device group.");

@@ -30,15 +30,17 @@ interface RoleManagementPolicyAssignments {
    */
   get is ArmResourceRead<
     RoleManagementPolicyAssignment,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 
   /**
    * Create a role management policy assignment
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is ArmResourceCreateOrReplaceSync<
     RoleManagementPolicyAssignment,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Response = ArmResourceCreatedSyncResponse<RoleManagementPolicyAssignment>
   >;
 
   /**
@@ -46,8 +48,7 @@ interface RoleManagementPolicyAssignments {
    */
   listForScope is ArmResourceListByParent<
     RoleManagementPolicyAssignment,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Response = RoleManagementPolicyAssignmentListResult
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 }
 

@@ -51,7 +51,7 @@ interface OSVersions {
   @operationId("CloudServiceOperatingSystems_GetOSVersion")
   getOSVersion is ArmResourceRead<
     OSVersion,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
   /**
@@ -61,8 +61,7 @@ interface OSVersions {
   @operationId("CloudServiceOperatingSystems_ListOSVersions")
   listOSVersions is ArmResourceListByParent<
     OSVersion,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = OSVersionListResult
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 }
 

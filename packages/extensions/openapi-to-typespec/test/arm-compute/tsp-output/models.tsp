@@ -2203,12 +2203,6 @@ model VirtualMachineSize {
 }
 
 /**
- * The List Virtual Machine operation response.
- */
-model VirtualMachineScaleSetListResult
-  is Azure.Core.Page<VirtualMachineScaleSet>;
-
-/**
  * Describes a virtual machine scale set sku. NOTE: If the new VM SKU is not supported on the hardware the scale set is currently on, you need to deallocate the VMs in the scale set before you modify the SKU name.
  */
 model Sku {
@@ -4637,12 +4631,6 @@ model VirtualMachineScaleSetExtensionUpdate extends SubResourceReadOnly {
 }
 
 /**
- * The List VM scale set extension operation response.
- */
-model VirtualMachineScaleSetExtensionListResult
-  is Azure.Core.Page<VirtualMachineScaleSetExtension>;
-
-/**
  * The List Virtual Machine operation response.
  */
 model VirtualMachineScaleSetListWithLinkResult
@@ -6065,12 +6053,6 @@ model VirtualMachineIdentity {
 }
 
 /**
- * The List Virtual Machine Scale Set VMs operation response.
- */
-model VirtualMachineScaleSetVMListResult
-  is Azure.Core.Page<VirtualMachineScaleSetVM>;
-
-/**
  * The SAS URIs of the console screenshot and serial log blobs.
  */
 model RetrieveBootDiagnosticsDataResult {
@@ -6109,11 +6091,6 @@ model VirtualMachineExtensionsListResult {
    */
   value?: VirtualMachineExtension[];
 }
-
-/**
- * The List Virtual Machine operation response.
- */
-model VirtualMachineListResult is Azure.Core.Page<VirtualMachine>;
 
 /**
  * Describes the properties of a Virtual Machine.
@@ -7199,11 +7176,6 @@ model AvailabilitySetUpdate extends UpdateResource {
 }
 
 /**
- * The List Availability Set operation response.
- */
-model AvailabilitySetListResult is Azure.Core.Page<AvailabilitySet>;
-
-/**
  * Describes the properties of a Proximity Placement Group.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -7266,12 +7238,6 @@ model ProximityPlacementGroupPropertiesIntent {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ProximityPlacementGroupUpdate extends UpdateResource {}
-
-/**
- * The List Proximity Placement Group operation response.
- */
-model ProximityPlacementGroupListResult
-  is Azure.Core.Page<ProximityPlacementGroup>;
 
 /**
  * Dedicated Host Group Properties.
@@ -7405,11 +7371,6 @@ model DedicatedHostGroupUpdate extends UpdateResource {
 }
 
 /**
- * The List Dedicated Host Group with resource group response.
- */
-model DedicatedHostGroupListResult is Azure.Core.Page<DedicatedHostGroup>;
-
-/**
  * Properties of the dedicated host.
  */
 model DedicatedHostProperties {
@@ -7487,11 +7448,6 @@ model DedicatedHostUpdate extends UpdateResource {
 }
 
 /**
- * The list dedicated host operation response.
- */
-model DedicatedHostListResult is Azure.Core.Page<DedicatedHost>;
-
-/**
  * The List Dedicated Host sizes operation response.
  */
 @pagedResult
@@ -7503,11 +7459,6 @@ model DedicatedHostSizeListResult {
   @OpenAPI.extension("x-ms-identifiers", ["name"])
   value?: string[];
 }
-
-/**
- * The list SSH public keys operation response.
- */
-model SshPublicKeysGroupListResult is Azure.Core.Page<SshPublicKeyResource>;
 
 /**
  * Properties of the SSH public key.
@@ -7680,11 +7631,6 @@ model ImageUpdate extends UpdateResource {
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ImageProperties;
 }
-
-/**
- * The List Image operation response.
- */
-model ImageListResult is Azure.Core.Page<Image>;
 
 /**
  * The restore point collection properties.
@@ -8066,12 +8012,6 @@ model RestorePointCollectionUpdate extends UpdateResource {
 }
 
 /**
- * The List restore point collection operation response.
- */
-model RestorePointCollectionListResult
-  is Azure.Core.Page<RestorePointCollection>;
-
-/**
  * capacity reservation group Properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -8165,12 +8105,6 @@ model CapacityReservationGroupUpdate extends UpdateResource {
 }
 
 /**
- * The List capacity reservation group with resource group response.
- */
-model CapacityReservationGroupListResult
-  is Azure.Core.Page<CapacityReservationGroup>;
-
-/**
  * Properties of the Capacity reservation.
  */
 model CapacityReservationProperties {
@@ -8237,11 +8171,6 @@ model CapacityReservationUpdate extends UpdateResource {
    */
   sku?: Sku;
 }
-
-/**
- * The list capacity reservation operation response.
- */
-model CapacityReservationListResult is Azure.Core.Page<CapacityReservation>;
 
 /**
  * Api request input for LogAnalytics getRequestRateByInterval Api.
@@ -8632,12 +8561,6 @@ model VirtualMachineRunCommandUpdate extends UpdateResource {
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineRunCommandProperties;
 }
-
-/**
- * The List run command operation response
- */
-model VirtualMachineRunCommandsListResult
-  is Azure.Core.Page<VirtualMachineRunCommand>;
 
 /**
  * The disks sku name. Can be Standard_LRS, Premium_LRS, StandardSSD_LRS, UltraSSD_LRS, Premium_ZRS, StandardSSD_ZRS, or PremiumV2_LRS.
@@ -9429,12 +9352,6 @@ model PrivateLinkResourceProperties {
    */
   requiredZoneNames?: string[];
 }
-
-/**
- * A list of private link resources
- */
-model PrivateEndpointConnectionListResult
-  is Azure.Core.Page<PrivateEndpointConnection>;
 
 /**
  * The managed identity for the disk encryption set. It should be given permission on the key vault before it can be used to encrypt disks.
@@ -11807,11 +11724,6 @@ model ResourceInstanceViewStatus {
 }
 
 /**
- * The list operation result.
- */
-model RoleInstanceListResult is Azure.Core.Page<RoleInstance>;
-
-/**
  * Describes the cloud service role sku.
  */
 model CloudServiceRoleSku {
@@ -11842,11 +11754,6 @@ model CloudServiceRoleProperties {
   @visibility("read")
   uniqueId?: string;
 }
-
-/**
- * The list operation result.
- */
-model CloudServiceRoleListResult is Azure.Core.Page<CloudServiceRole>;
 
 /**
  * Cloud service properties
@@ -12320,11 +12227,6 @@ model OSVersionProperties {
 }
 
 /**
- * The list operation result.
- */
-model OSVersionListResult is Azure.Core.Page<OSVersion>;
-
-/**
  * OS family properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -12377,11 +12279,6 @@ model OSVersionPropertiesBase {
   @visibility("read")
   isActive?: boolean;
 }
-
-/**
- * The list operation result.
- */
-model OSFamilyListResult is Azure.Core.Page<OSFamily>;
 
 /**
  * The source image from which the Image Version is going to be created.

@@ -50,7 +50,10 @@ interface VirtualMachineScaleSetExtensions {
   /**
    * The operation to create or update an extension.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualMachineScaleSetExtension>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    VirtualMachineScaleSetExtension,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * The operation to update an extension.
@@ -58,24 +61,23 @@ interface VirtualMachineScaleSetExtensions {
   @parameterVisibility
   update is ArmCustomPatchAsync<
     VirtualMachineScaleSetExtension,
-    VirtualMachineScaleSetExtensionUpdate
+    PatchModel = VirtualMachineScaleSetExtensionUpdate,
+    Response = ArmResponse<VirtualMachineScaleSetExtension> | ArmResourceCreatedResponse<VirtualMachineScaleSetExtension>
   >;
 
   /**
    * The operation to delete the extension.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<VirtualMachineScaleSetExtension>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    VirtualMachineScaleSetExtension,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Gets a list of all extensions in a VM scale set.
    */
-  list is ArmResourceListByParent<
-    VirtualMachineScaleSetExtension,
-    Response = VirtualMachineScaleSetExtensionListResult
-  >;
+  list is ArmResourceListByParent<VirtualMachineScaleSetExtension>;
 }
 
 @@doc(VirtualMachineScaleSetExtension.name,

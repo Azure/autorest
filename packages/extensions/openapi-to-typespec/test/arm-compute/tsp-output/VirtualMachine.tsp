@@ -68,21 +68,26 @@ interface VirtualMachines {
   /**
    * The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualMachine>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    VirtualMachine,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * The operation to update a virtual machine.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<VirtualMachine, VirtualMachineUpdate>;
+  update is ArmCustomPatchAsync<
+    VirtualMachine,
+    PatchModel = VirtualMachineUpdate,
+    Response = ArmResponse<VirtualMachine>
+  >;
 
   /**
    * The operation to delete a virtual machine.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<
+  delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachine,
     Parameters = {
       /**
@@ -90,7 +95,8 @@ interface VirtualMachines {
        */
       @query("forceDeletion")
       forceDeletion?: boolean;
-    }
+    },
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -110,8 +116,7 @@ interface VirtualMachines {
        */
       @query("$expand")
       $expand?: ExpandTypeForListVMs;
-    },
-    Response = VirtualMachineListResult
+    }
   >;
 
   /**
@@ -137,8 +142,7 @@ interface VirtualMachines {
        */
       @query("$expand")
       $expand?: ExpandTypesForListVMs;
-    },
-    Response = VirtualMachineListResult
+    }
   >;
 
   /**
@@ -147,7 +151,7 @@ interface VirtualMachines {
   capture is ArmResourceActionAsync<
     VirtualMachine,
     VirtualMachineCaptureParameters,
-    VirtualMachineCaptureResult
+    ArmResponse<VirtualMachineCaptureResult>
   >;
 
   /**
@@ -157,7 +161,7 @@ interface VirtualMachines {
   instanceView is ArmResourceActionSync<
     VirtualMachine,
     void,
-    VirtualMachineInstanceView
+    ArmResponse<VirtualMachineInstanceView>
   >;
 
   /**
@@ -190,10 +194,11 @@ interface VirtualMachines {
    * Lists all available virtual machine sizes to which the specified virtual machine can be resized.
    */
   @get
+  @action("vmSizes")
   listAvailableSizes is ArmResourceActionSync<
     VirtualMachine,
     void,
-    VirtualMachineSizeListResult
+    ArmResponse<VirtualMachineSizeListResult>
   >;
 
   /**
@@ -247,7 +252,7 @@ interface VirtualMachines {
   retrieveBootDiagnosticsData is ArmResourceActionSync<
     VirtualMachine,
     void,
-    RetrieveBootDiagnosticsDataResult,
+    ArmResponse<RetrieveBootDiagnosticsDataResult>,
     Parameters = {
       /**
        * Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. **Note:** If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes.
@@ -265,7 +270,7 @@ interface VirtualMachines {
   /**
    * The operation to simulate the eviction of spot virtual machine.
    */
-  simulateEviction is ArmResourceActionNoContentSync<VirtualMachine, void>;
+  simulateEviction is ArmResourceActionSync<VirtualMachine, void, void>;
 
   /**
    * Assess patches on the VM.
@@ -273,7 +278,7 @@ interface VirtualMachines {
   assessPatches is ArmResourceActionAsync<
     VirtualMachine,
     void,
-    VirtualMachineAssessPatchesResult
+    ArmResponse<VirtualMachineAssessPatchesResult>
   >;
 
   /**
@@ -282,7 +287,7 @@ interface VirtualMachines {
   installPatches is ArmResourceActionAsync<
     VirtualMachine,
     VirtualMachineInstallPatchesParameters,
-    VirtualMachineInstallPatchesResult
+    ArmResponse<VirtualMachineInstallPatchesResult>
   >;
 
   /**
@@ -291,7 +296,7 @@ interface VirtualMachines {
   runCommand is ArmResourceActionAsync<
     VirtualMachine,
     RunCommandInput,
-    RunCommandResult
+    ArmResponse<RunCommandResult>
   >;
 }
 

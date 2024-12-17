@@ -30,7 +30,7 @@ interface DenyAssignments {
    */
   get is ArmResourceRead<
     DenyAssignment,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 
   /**
@@ -38,7 +38,7 @@ interface DenyAssignments {
    */
   listForResource is ArmResourceListByParent<
     DenyAssignment,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
       ...SubscriptionIdParameter;
       ...ResourceGroupParameter;
@@ -72,8 +72,7 @@ interface DenyAssignments {
        */
       @query("$filter")
       $filter?: string;
-    },
-    Response = DenyAssignmentListResult
+    }
   >;
 }
 

@@ -48,8 +48,7 @@ interface TenantSettingsContracts {
        */
       @query("$filter")
       $filter?: string;
-    },
-    Response = TenantSettingsListResult
+    }
   >;
 }
 

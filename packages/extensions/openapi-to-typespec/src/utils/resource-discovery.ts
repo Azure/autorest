@@ -29,6 +29,7 @@ export interface Metadata {
 export interface ArmResource {
   Name: string;
   GetOperations: _ArmResourceOperation[];
+  ExistOperation: _ArmResourceOperation | undefined;
   CreateOperations: _ArmResourceOperation[];
   UpdateOperations: _ArmResourceOperation[];
   DeleteOperations: _ArmResourceOperation[];
@@ -62,6 +63,7 @@ export function getResourceOperations(resource: ArmResource): Record<string, Ope
   const codeModel = getSession().model;
 
   const allOperations = resource.GetOperations.concat(resource.CreateOperations)
+    .concat(resource.ExistOperation ? [resource.ExistOperation] : [])
     .concat(resource.UpdateOperations)
     .concat(resource.DeleteOperations)
     .concat(resource.ListOperations)

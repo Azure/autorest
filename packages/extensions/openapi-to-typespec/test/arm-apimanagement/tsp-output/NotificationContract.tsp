@@ -35,10 +35,12 @@ interface NotificationContracts {
   @operationId("Notification_Get")
   get is ArmResourceRead<NotificationContract>;
 
+  // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
    * Create or Update API Management publisher notification.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("Notification_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     NotificationContract,
@@ -48,7 +50,8 @@ interface NotificationContracts {
        */
       @header
       `If-Match`?: string;
-    }
+    },
+    Response = ArmResourceUpdatedResponse<NotificationContract>
   >;
 
   /**
@@ -71,8 +74,7 @@ interface NotificationContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = NotificationListResult
+    }
   >;
 
   /**
@@ -80,11 +82,12 @@ interface NotificationContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("recipientUsers")
   @operationId("NotificationRecipientUser_ListByNotification")
   listByNotification is ArmResourceActionSync<
     NotificationContract,
     void,
-    RecipientUserListResult
+    ResourceListResult<RecipientUserContract>
   >;
 
   /**
@@ -92,9 +95,11 @@ interface NotificationContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
+  @action("{userId}")
   @operationId("NotificationRecipientUser_CheckEntityExists")
-  checkEntityExists is ArmResourceActionNoContentSync<
+  checkEntityExists is ArmResourceActionSync<
     NotificationContract,
+    void,
     void,
     Parameters = {
       /**
@@ -112,11 +117,12 @@ interface NotificationContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @put
+  @action("{userId}")
   @operationId("NotificationRecipientUser_CreateOrUpdate")
   notificationRecipientUserCreateOrUpdate is ArmResourceActionSync<
     NotificationContract,
     void,
-    RecipientUserContract,
+    ArmResponse<RecipientUserContract>,
     Parameters = {
       /**
        * User identifier. Must be unique in the current API Management service instance.
@@ -133,6 +139,7 @@ interface NotificationContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @delete
+  @action("{userId}")
   @operationId("NotificationRecipientUser_Delete")
   delete is ArmResourceActionSync<
     NotificationContract,
@@ -154,11 +161,12 @@ interface NotificationContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("recipientEmails")
   @operationId("NotificationRecipientEmail_ListByNotification")
   notificationRecipientEmailListByNotification is ArmResourceActionSync<
     NotificationContract,
     void,
-    RecipientEmailListResult
+    ResourceListResult<RecipientEmailContract>
   >;
 
   /**
@@ -166,9 +174,11 @@ interface NotificationContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
+  @action("{email}")
   @operationId("NotificationRecipientEmail_CheckEntityExists")
-  notificationRecipientEmailCheckEntityExists is ArmResourceActionNoContentSync<
+  notificationRecipientEmailCheckEntityExists is ArmResourceActionSync<
     NotificationContract,
+    void,
     void,
     Parameters = {
       /**
@@ -184,11 +194,12 @@ interface NotificationContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @put
+  @action("{email}")
   @operationId("NotificationRecipientEmail_CreateOrUpdate")
   notificationRecipientEmailCreateOrUpdate is ArmResourceActionSync<
     NotificationContract,
     void,
-    RecipientEmailContract,
+    ArmResponse<RecipientEmailContract>,
     Parameters = {
       /**
        * Email identifier.
@@ -203,6 +214,7 @@ interface NotificationContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @delete
+  @action("{email}")
   @operationId("NotificationRecipientEmail_Delete")
   notificationRecipientEmailDelete is ArmResourceActionSync<
     NotificationContract,

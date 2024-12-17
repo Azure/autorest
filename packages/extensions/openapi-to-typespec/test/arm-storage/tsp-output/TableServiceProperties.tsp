@@ -39,8 +39,12 @@ interface TableServicePropertiesOperationGroup {
    * Sets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("TableServices_SetServiceProperties")
-  setServiceProperties is ArmResourceCreateOrReplaceSync<TableServiceProperties>;
+  setServiceProperties is ArmResourceCreateOrReplaceSync<
+    TableServiceProperties,
+    Response = ArmResourceUpdatedResponse<TableServiceProperties>
+  >;
 
   /**
    * List all table services for the storage account.
@@ -49,7 +53,7 @@ interface TableServicePropertiesOperationGroup {
   @operationId("TableServices_List")
   list is ArmResourceListByParent<
     TableServiceProperties,
-    Response = ListTableServices
+    Response = ArmResponse<ListTableServices>
   >;
 }
 

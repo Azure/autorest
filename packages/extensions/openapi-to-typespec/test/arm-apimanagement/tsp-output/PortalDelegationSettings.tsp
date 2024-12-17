@@ -39,19 +39,14 @@ interface PortalDelegationSettingsOperationGroup {
    * Gets the entity state (Etag) version of the DelegationSettings.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("DelegationSettings_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      PortalDelegationSettings,
-      BaseParameters<PortalDelegationSettings>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<PortalDelegationSettings>;
 
   /**
    * Create or Update Delegation settings.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("DelegationSettings_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PortalDelegationSettings,
@@ -61,7 +56,8 @@ interface PortalDelegationSettingsOperationGroup {
        */
       @header
       `If-Match`?: string;
-    }
+    },
+    Response = ArmResourceUpdatedResponse<PortalDelegationSettings>
   >;
 
   /**
@@ -72,14 +68,15 @@ interface PortalDelegationSettingsOperationGroup {
   @operationId("DelegationSettings_Update")
   update is ArmCustomPatchSync<
     PortalDelegationSettings,
-    PortalDelegationSettings,
+    PatchModel = PortalDelegationSettings,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
       @header
       `If-Match`: string;
-    }
+    },
+    Response = ArmNoContentResponse
   >;
 
   /**
@@ -90,7 +87,7 @@ interface PortalDelegationSettingsOperationGroup {
   listSecrets is ArmResourceActionSync<
     PortalDelegationSettings,
     void,
-    PortalSettingValidationKeyContract
+    ArmResponse<PortalSettingValidationKeyContract>
   >;
 }
 

@@ -38,14 +38,8 @@ interface ApiReleaseContracts {
    * Returns the etag of an API release.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("ApiRelease_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      ApiReleaseContract,
-      BaseParameters<ApiReleaseContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<ApiReleaseContract>;
 
   /**
    * Creates a new Release for the API.
@@ -71,7 +65,7 @@ interface ApiReleaseContracts {
   @operationId("ApiRelease_Update")
   update is ArmCustomPatchSync<
     ApiReleaseContract,
-    ApiReleaseContract,
+    PatchModel = ApiReleaseContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -85,7 +79,6 @@ interface ApiReleaseContracts {
    * Deletes the specified release in the API.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiRelease_Delete")
   delete is ArmResourceDeleteSync<
     ApiReleaseContract,
@@ -124,8 +117,7 @@ interface ApiReleaseContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = ApiReleaseListResult
+    }
   >;
 }
 

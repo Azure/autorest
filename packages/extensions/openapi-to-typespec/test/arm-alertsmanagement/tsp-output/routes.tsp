@@ -22,7 +22,7 @@ interface AlertsOperations {
   @operationId("Alerts_MetaData")
   @get
   @action("alertsMetaData")
-  metaData is ArmProviderActionAsync<
+  metaData is ArmProviderActionSync<
     Response = AlertsMetaData,
     Scope = TenantActionScope,
     Parameters = {
@@ -40,7 +40,7 @@ interface AlertsOperations {
   @operationId("Alerts_GetSummary")
   @get
   @action("alertsSummary")
-  getSummary is ArmProviderActionAsync<
+  getSummary is ArmProviderActionSync<
     Response = AlertsSummary,
     Scope = SubscriptionActionScope,
     Parameters = {

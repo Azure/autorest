@@ -38,14 +38,17 @@ interface ObjectReplicationPoliciesOperationGroup {
    * Create or update the object replication policy of the storage account.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("ObjectReplicationPolicies_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<ObjectReplicationPolicy>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    ObjectReplicationPolicy,
+    Response = ArmResourceUpdatedResponse<ObjectReplicationPolicy>
+  >;
 
   /**
    * Deletes the object replication policy associated with the specified storage account.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ObjectReplicationPolicies_Delete")
   delete is ArmResourceDeleteSync<ObjectReplicationPolicy>;
 
@@ -56,7 +59,7 @@ interface ObjectReplicationPoliciesOperationGroup {
   @operationId("ObjectReplicationPolicies_List")
   list is ArmResourceListByParent<
     ObjectReplicationPolicy,
-    Response = ObjectReplicationPolicies
+    Response = ArmResponse<ObjectReplicationPolicies>
   >;
 }
 

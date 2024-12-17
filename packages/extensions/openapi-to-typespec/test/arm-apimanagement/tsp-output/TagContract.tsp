@@ -38,12 +38,10 @@ interface TagContracts {
    * Gets the entity state version of the tag specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("Tag_GetEntityStateByOperation")
-  getEntityStateByOperation(
-    ...ResourceInstanceParameters<TagContract, BaseParameters<TagContract>>,
-  ): OkResponse | ErrorResponse;
+  getEntityStateByOperation is ArmResourceCheckExistence<TagContract>;
 
+  // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
    * Assign tag to the Operation.
    */
@@ -55,7 +53,6 @@ interface TagContracts {
    * Detach the tag from the Operation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Tag_DetachFromOperation")
   detachFromOperation is ArmResourceDeleteSync<TagContract>;
 
@@ -85,8 +82,7 @@ interface TagContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = TagListResult
+    }
   >;
 }
 

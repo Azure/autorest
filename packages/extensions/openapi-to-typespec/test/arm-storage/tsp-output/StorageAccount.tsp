@@ -57,39 +57,35 @@ interface StorageAccounts {
    * Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   create is ArmResourceCreateOrReplaceAsync<
     StorageAccount,
-    Response = ArmResourceCreatedResponse<StorageAccount> | ArmResourceUpdatedResponse<StorageAccount> | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<StorageAccount> | ArmAcceptedLroResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * The update operation can be used to update the SKU, encryption, access tier, or tags for a storage account. It can also be used to map the account to a custom domain. Only one custom domain is supported per storage account; the replacement/change of custom domain is not supported. In order to replace an old custom domain, the old value must be cleared/unregistered before a new value can be set. The update of multiple properties is supported. This call does not change the storage keys for the account. If you want to change the storage account keys, use the regenerate keys operation. The location and name of the storage account cannot be changed after creation.
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<StorageAccount, StorageAccountUpdateParameters>;
+  update is ArmCustomPatchSync<
+    StorageAccount,
+    PatchModel = StorageAccountUpdateParameters
+  >;
 
   /**
    * Deletes a storage account in Microsoft Azure.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<StorageAccount>;
 
   /**
    * Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this.
    */
-  listByResourceGroup is ArmResourceListByParent<
-    StorageAccount,
-    Response = StorageAccountListResult
-  >;
+  listByResourceGroup is ArmResourceListByParent<StorageAccount>;
 
   /**
    * Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.
    */
-  list is ArmListBySubscription<
-    StorageAccount,
-    Response = StorageAccountListResult
-  >;
+  list is ArmListBySubscription<StorageAccount>;
 
   /**
    * Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account.
@@ -97,7 +93,7 @@ interface StorageAccounts {
   listKeys is ArmResourceActionSync<
     StorageAccount,
     void,
-    StorageAccountListKeysResult,
+    ArmResponse<StorageAccountListKeysResult>,
     Parameters = {
       /**
        * Specifies type of the key to be listed. Possible value is kerb.
@@ -113,29 +109,31 @@ interface StorageAccounts {
   regenerateKey is ArmResourceActionSync<
     StorageAccount,
     StorageAccountRegenerateKeyParameters,
-    StorageAccountListKeysResult
+    ArmResponse<StorageAccountListKeysResult>
   >;
 
   /**
    * List SAS credentials of a storage account.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("ListAccountSas")
   @operationId("StorageAccounts_ListAccountSAS")
   listAccountSAS is ArmResourceActionSync<
     StorageAccount,
     AccountSasParameters,
-    ListAccountSasResponse
+    ArmResponse<ListAccountSasResponse>
   >;
 
   /**
    * List service SAS credentials of a specific resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("ListServiceSas")
   @operationId("StorageAccounts_ListServiceSAS")
   listServiceSAS is ArmResourceActionSync<
     StorageAccount,
     ServiceSasParameters,
-    ListServiceSasResponse
+    ArmResponse<ListServiceSasResponse>
   >;
 
   /**
@@ -157,6 +155,7 @@ interface StorageAccounts {
   /**
    * Live Migration of storage account to enable Hns
    */
+  @action("hnsonmigration")
   hierarchicalNamespaceMigration is ArmResourceActionAsync<
     StorageAccount,
     void,
@@ -173,6 +172,7 @@ interface StorageAccounts {
   /**
    * Abort live Migration of storage account to enable Hns
    */
+  @action("aborthnsonmigration")
   abortHierarchicalNamespaceMigration is ArmResourceActionAsync<
     StorageAccount,
     void,
@@ -185,7 +185,7 @@ interface StorageAccounts {
   restoreBlobRanges is ArmResourceActionAsync<
     StorageAccount,
     BlobRestoreParameters,
-    BlobRestoreStatus
+    ArmResponse<BlobRestoreStatus>
   >;
 
   /**
@@ -198,11 +198,12 @@ interface StorageAccounts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("privateLinkResources")
   @operationId("PrivateLinkResources_ListByStorageAccount")
   listByStorageAccount is ArmResourceActionSync<
     StorageAccount,
     void,
-    PrivateLinkResourceListResult
+    ArmResponse<PrivateLinkResourceListResult>
   >;
 }
 

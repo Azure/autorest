@@ -38,14 +38,8 @@ interface ProductContracts {
    * Gets the entity state (Etag) version of the product specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("Product_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      ProductContract,
-      BaseParameters<ProductContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<ProductContract>;
 
   /**
    * Creates or Updates a product.
@@ -71,7 +65,7 @@ interface ProductContracts {
   @operationId("Product_Update")
   update is ArmCustomPatchSync<
     ProductContract,
-    ProductUpdateParameters,
+    PatchModel = ProductUpdateParameters,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -85,7 +79,6 @@ interface ProductContracts {
    * Delete product.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Product_Delete")
   delete is ArmResourceDeleteSync<
     ProductContract,
@@ -142,8 +135,7 @@ interface ProductContracts {
        */
       @query("tags")
       tags?: string;
-    },
-    Response = ProductListResult
+    }
   >;
 
   /**
@@ -151,11 +143,12 @@ interface ProductContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("apis")
   @operationId("ProductApi_ListByProduct")
   listByProduct is ArmResourceActionSync<
     ProductContract,
     void,
-    ApiManagementProductApiListResult,
+    ResourceListResult<ProductApiData>,
     Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| serviceUrl | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| path | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -183,9 +176,11 @@ interface ProductContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
+  @action("{apiId}")
   @operationId("ProductApi_CheckEntityExists")
-  checkEntityExists is ArmResourceActionNoContentSync<
+  checkEntityExists is ArmResourceActionSync<
     ProductContract,
+    void,
     void,
     Parameters = {
       /**
@@ -204,11 +199,12 @@ interface ProductContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @put
+  @action("{apiId}")
   @operationId("ProductApi_CreateOrUpdate")
   productApiCreateOrUpdate is ArmResourceActionSync<
     ProductContract,
     void,
-    ProductApiData,
+    ArmResponse<ProductApiData>,
     Parameters = {
       /**
        * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
@@ -226,6 +222,7 @@ interface ProductContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @delete
+  @action("{apiId}")
   @operationId("ProductApi_Delete")
   productApiDelete is ArmResourceActionSync<
     ProductContract,
@@ -248,11 +245,12 @@ interface ProductContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("groups")
   @operationId("ProductGroup_ListByProduct")
   productGroupListByProduct is ArmResourceActionSync<
     ProductContract,
     void,
-    ApiManagementProductGroupListResult,
+    ResourceListResult<ProductGroupData>,
     Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt |     |</br>| displayName | filter | eq, ne |     |</br>| description | filter | eq, ne |     |</br>
@@ -280,9 +278,11 @@ interface ProductContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
+  @action("{groupId}")
   @operationId("ProductGroup_CheckEntityExists")
-  productGroupCheckEntityExists is ArmResourceActionNoContentSync<
+  productGroupCheckEntityExists is ArmResourceActionSync<
     ProductContract,
+    void,
     void,
     Parameters = {
       /**
@@ -300,11 +300,12 @@ interface ProductContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @put
+  @action("{groupId}")
   @operationId("ProductGroup_CreateOrUpdate")
   productGroupCreateOrUpdate is ArmResourceActionSync<
     ProductContract,
     void,
-    ProductGroupData,
+    ArmResponse<ProductGroupData>,
     Parameters = {
       /**
        * Group identifier. Must be unique in the current API Management service instance.
@@ -321,6 +322,7 @@ interface ProductContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @delete
+  @action("{groupId}")
   @operationId("ProductGroup_Delete")
   productGroupDelete is ArmResourceActionSync<
     ProductContract,
@@ -342,11 +344,12 @@ interface ProductContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("subscriptions")
   @operationId("ProductSubscriptions_List")
   list is ArmResourceActionSync<
     ProductContract,
     void,
-    SubscriptionListResult,
+    ResourceListResult<SubscriptionContract>,
     Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| stateComment | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| ownerId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| scope | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| userId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| productId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq |     |</br>| user | expand |     |     |</br>

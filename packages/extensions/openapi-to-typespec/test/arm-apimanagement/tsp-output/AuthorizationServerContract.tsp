@@ -38,14 +38,8 @@ interface AuthorizationServerContracts {
    * Gets the entity state (Etag) version of the authorizationServer specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("AuthorizationServer_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      AuthorizationServerContract,
-      BaseParameters<AuthorizationServerContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<AuthorizationServerContract>;
 
   /**
    * Creates new authorization server or updates an existing authorization server.
@@ -71,7 +65,7 @@ interface AuthorizationServerContracts {
   @operationId("AuthorizationServer_Update")
   update is ArmCustomPatchSync<
     AuthorizationServerContract,
-    AuthorizationServerUpdateContract,
+    PatchModel = AuthorizationServerUpdateContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -85,7 +79,6 @@ interface AuthorizationServerContracts {
    * Deletes specific authorization server instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("AuthorizationServer_Delete")
   delete is ArmResourceDeleteSync<
     AuthorizationServerContract,
@@ -124,8 +117,7 @@ interface AuthorizationServerContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = AuthorizationServerListResult
+    }
   >;
 
   /**
@@ -136,7 +128,7 @@ interface AuthorizationServerContracts {
   listSecrets is ArmResourceActionSync<
     AuthorizationServerContract,
     void,
-    AuthorizationServerSecretsContract
+    ArmResponse<AuthorizationServerSecretsContract>
   >;
 }
 

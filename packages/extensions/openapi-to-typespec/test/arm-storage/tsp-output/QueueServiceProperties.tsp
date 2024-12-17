@@ -39,8 +39,12 @@ interface QueueServicePropertiesOperationGroup {
    * Sets the properties of a storage account’s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("QueueServices_SetServiceProperties")
-  setServiceProperties is ArmResourceCreateOrReplaceSync<QueueServiceProperties>;
+  setServiceProperties is ArmResourceCreateOrReplaceSync<
+    QueueServiceProperties,
+    Response = ArmResourceUpdatedResponse<QueueServiceProperties>
+  >;
 
   /**
    * List all queue services for the storage account
@@ -49,7 +53,7 @@ interface QueueServicePropertiesOperationGroup {
   @operationId("QueueServices_List")
   list is ArmResourceListByParent<
     QueueServiceProperties,
-    Response = ListQueueServices
+    Response = ArmResponse<ListQueueServices>
   >;
 }
 

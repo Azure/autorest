@@ -1,5 +1,6 @@
 import {
   ArraySchema,
+  HttpMethod,
   ObjectSchema,
   Operation,
   Parameter,
@@ -12,7 +13,6 @@ import _ from "lodash";
 import pluralize, { singular } from "pluralize";
 import { getArmCommonTypeVersion, getSession } from "../autorest-session";
 import { getDataTypes } from "../data-types";
-import { generateParameter } from "../generate/generate-parameter";
 import {
   ArmResourceKind,
   TypespecDecorator,
@@ -22,6 +22,13 @@ import {
   TspArmResource,
   TspArmResourceOperation,
   isFirstLevelResource,
+  TypespecTemplateModel,
+  TspArmOperationType,
+  TspArmResourceActionOperation,
+  TspArmResourceOperationBase,
+  TypespecVoidType,
+  TspArmResourceLifeCycleOperation,
+  TspArmResourceListOperation,
 } from "../interfaces";
 import { getOptions, updateOptions } from "../options";
 import { createClientNameDecorator, createCSharpNameDecorator } from "../pretransforms/rename-pretransform";
@@ -40,10 +47,19 @@ import {
   getSuppressionsForArmResourceCreateOrReplaceAsync,
   getSuppressionsForArmResourceDeleteAsync,
   getSuppressionsForArmResourceDeleteSync,
+  getSuppresssionWithCode,
 } from "../utils/suppressions";
-import { getFullyQualifiedName, isResourceListResult } from "../utils/type-mapping";
-import { getTypespecType, transformObjectProperty } from "./transform-object";
+import {
+  getFullyQualifiedName,
+  getTemplateResponses,
+  isResourceListResult,
+  NamesOfResponseTemplate,
+} from "../utils/type-mapping";
+import { getTypespecType, isTypespecType, transformObjectProperty } from "./transform-object";
 import { transformParameter, transformRequest } from "./transform-operations";
+import { getLogger } from "../utils/logger";
+
+const logger = () => getLogger("parse-metadata");
 
 const armResourceCache: Map<ArmResourceSchema, TspArmResource> = new Map<ArmResourceSchema, TspArmResource>();
 export function transformTspArmResource(schema: ArmResourceSchema): TspArmResource {
@@ -89,7 +105,7 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
     propertiesModelName = "{}";
   }
 
-  const operations = getTspOperations(schema);
+  const armResourceOperations = getTspOperations(schema);
 
   let baseModelName = undefined;
   if (!getArmCommonTypeVersion()) {
@@ -105,10 +121,7 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
     decorators.push({ name: "extensionResource" });
   }
 
-  const armResourceOperations = operations[0];
-  const otherOperations = operations[1];
-
-  const clientDecorators = buildResourceClientDecorators(schema, armResourceOperations, otherOperations);
+  const clientDecorators = buildResourceClientDecorators(schema);
   const keyProperty = buildKeyProperty(schema);
   const properties = [...getOtherProperties(schema, !getArmCommonTypeVersion())];
   let keyExpression, augmentDecorators;
@@ -153,13 +166,552 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
     clientDecorators,
     augmentDecorators,
     resourceOperations: armResourceOperations,
-    normalOperations: otherOperations,
+    normalOperations: [],
     optionalStandardProperties: getArmCommonTypeVersion() ? getResourceOptionalStandardProperties(schema) : [],
     baseModelName,
     locationParent: getLocationParent(schema),
   };
   armResourceCache.set(schema, tspResource);
   return tspResource;
+}
+
+function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation[] {
+  const resourceMetadata = armSchema.resourceMetadata;
+  const operations = getResourceOperations(resourceMetadata);
+  const tspOperations: TspArmResourceOperation[] = [];
+
+  // TODO: handle operations under resource group / management group / tenant
+
+  // read operation
+  tspOperations.push(...convertResourceReadOperation(resourceMetadata, operations));
+
+  // exist operation
+  tspOperations.push(...convertResourceExistsOperation(resourceMetadata, operations));
+
+  // create operation
+  tspOperations.push(...convertResourceCreateOrReplaceOperation(resourceMetadata, operations));
+
+  // patch update operation could either be patch for resource/tag or custom patch
+  tspOperations.push(...convertResourceUpdateOperation(resourceMetadata, operations));
+
+  // delete operation
+  tspOperations.push(...convertResourceDeleteOperation(resourceMetadata, operations));
+
+  // list operation
+  tspOperations.push(...convertResourceListOperations(resourceMetadata, operations));
+
+  // action operation
+  tspOperations.push(...convertResourceActionOperations(resourceMetadata, operations));
+
+  return tspOperations;
+}
+
+function convertResourceReadOperation(
+  resourceMetadata: ArmResource,
+  operations: Record<string, Operation>,
+): TspArmResourceOperation[] {
+  // every resource should have a get operation
+  const operation = resourceMetadata.GetOperations[0];
+  const swaggerOperation = operations[operation.OperationID];
+  return [
+    buildNewArmOperation(
+      resourceMetadata,
+      operation,
+      swaggerOperation,
+      "ArmResourceRead",
+    ) as TspArmResourceLifeCycleOperation,
+  ];
+}
+
+function convertResourceExistsOperation(
+  resourceMetadata: ArmResource,
+  operations: Record<string, Operation>,
+): TspArmResourceOperation[] {
+  const operation = resourceMetadata.ExistOperation;
+  if (operation) {
+    const swaggerOperation = operations[operation.OperationID];
+    const armOperation = buildNewArmOperation(
+      resourceMetadata,
+      operation,
+      swaggerOperation,
+      "ArmResourceCheckExistence",
+    );
+    if (!swaggerOperation.operationId) armOperation.name = "exists";
+    return [armOperation as TspArmResourceLifeCycleOperation];
+  }
+  return [];
+}
+
+function convertResourceCreateOrReplaceOperation(
+  resourceMetadata: ArmResource,
+  operations: Record<string, Operation>,
+): TspArmResourceOperation[] {
+  const { isFullCompatible } = getOptions();
+  if (resourceMetadata.CreateOperations.length) {
+    const operation = resourceMetadata.CreateOperations[0];
+    const swaggerOperation = operations[operation.OperationID];
+    const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
+    const armOperation = buildNewArmOperation(
+      resourceMetadata,
+      operation,
+      swaggerOperation,
+      isLongRunning ? "ArmResourceCreateOrReplaceAsync" : "ArmResourceCreateOrReplaceSync",
+    );
+
+    const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
+    if (!bodyParam) {
+      armOperation.fixMe = [
+        "// FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.",
+      ];
+    }
+
+    const finalStateVia =
+      swaggerOperation.extensions?.["x-ms-long-running-operation-options"]?.["final-state-via"] ?? "location";
+    armOperation.lroHeaders = isLongRunning && finalStateVia === "location" ? "Location" : undefined;
+
+    const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
+    const [augmentedDecorators, clientDecorators] = getBodyDecorators(
+      bodyParam,
+      tspOperationGroupName,
+      armOperation.name,
+      "resource",
+      "Resource create parameters.",
+    );
+    armOperation.augmentedDecorators = armOperation.augmentedDecorators
+      ? armOperation.augmentedDecorators.concat(augmentedDecorators)
+      : augmentedDecorators;
+    armOperation.clientDecorators = armOperation.clientDecorators
+      ? armOperation.clientDecorators.concat(clientDecorators)
+      : clientDecorators;
+
+    const asyncNames: NamesOfResponseTemplate = {
+      _200Name: "ArmResourceUpdatedResponse",
+      _200NameNoBody: "OkResponse",
+      _201Name: "ArmResourceCreatedResponse",
+      _201NameNoBody: "ArmCreatedResponse",
+      _202Name: "ArmAcceptedLroResponse",
+      _202NameNoBody: "ArmAcceptedLroResponse",
+      _204Name: "ArmNoContentResponse",
+    };
+    const syncNames: NamesOfResponseTemplate = {
+      _200Name: "ArmResourceUpdatedResponse",
+      _200NameNoBody: "OkResponse",
+      _201Name: "ArmResourceCreatedSyncResponse",
+      _201NameNoBody: "ArmCreatedResponse",
+      _202Name: "ArmAcceptedResponse",
+      _202NameNoBody: "ArmAcceptedResponse",
+      _204Name: "ArmNoContentResponse",
+    };
+    let responses = isLongRunning
+      ? getTemplateResponses(swaggerOperation, asyncNames)
+      : getTemplateResponses(swaggerOperation, syncNames);
+    if (
+      isLongRunning &&
+      responses.length === 2 &&
+      responses.find(
+        (r) =>
+          r.name === asyncNames._200Name &&
+          r.arguments?.length === 1 &&
+          r.arguments[0].name === resourceMetadata.SwaggerModelName,
+      ) &&
+      responses.find(
+        (r) =>
+          r.name === asyncNames._201Name &&
+          r.arguments?.length === 1 &&
+          r.arguments[0].name === resourceMetadata.SwaggerModelName,
+      )
+    )
+      responses = [];
+    if (
+      !isLongRunning &&
+      responses.length === 2 &&
+      responses.find(
+        (r) =>
+          r.name === syncNames._200Name &&
+          r.arguments?.length === 1 &&
+          r.arguments[0].name === resourceMetadata.SwaggerModelName,
+      ) &&
+      responses.find(
+        (r) =>
+          r.name === syncNames._200Name &&
+          r.arguments?.length === 1 &&
+          r.arguments[0].name === resourceMetadata.SwaggerModelName,
+      )
+    )
+      responses = [];
+    if (responses.length > 0) armOperation.response = responses;
+    if (armOperation.lroHeaders && responses) {
+      const _201Response = responses.find(
+        (r) => r.name === asyncNames._201NameNoBody || r.name === asyncNames._201Name,
+      );
+      if (_201Response) {
+        _201Response.arguments?.push({
+          kind: "&",
+          name: "ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader",
+        }); //TO-DO: do it in a better way
+        armOperation.lroHeaders = undefined;
+      }
+    }
+
+    if (armOperation.response && isFullCompatible) {
+      armOperation.suppressions = armOperation.suppressions ?? [];
+      armOperation.suppressions.push(
+        getSuppresssionWithCode("@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes"),
+      );
+    }
+
+    return [armOperation as TspArmResourceLifeCycleOperation];
+  }
+  return [];
+}
+
+function convertResourceUpdateOperation(
+  resourceMetadata: ArmResource,
+  operations: Record<string, Operation>,
+): TspArmResourceOperation[] {
+  if (resourceMetadata.UpdateOperations.length) {
+    const operation = resourceMetadata.UpdateOperations[0];
+    if (
+      !resourceMetadata.CreateOperations.length ||
+      resourceMetadata.CreateOperations[0].OperationID !== operation.OperationID
+    ) {
+      const swaggerOperation = operations[operation.OperationID];
+      const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
+      const armOperation = buildNewArmOperation(
+        resourceMetadata,
+        operation,
+        swaggerOperation,
+        isLongRunning ? "ArmCustomPatchAsync" : "ArmCustomPatchSync",
+      );
+
+      const finalStateVia =
+        swaggerOperation.extensions?.["x-ms-long-running-operation-options"]?.["final-state-via"] ?? "location";
+      armOperation.lroHeaders =
+        isLongRunning && finalStateVia === "azure-async-operation" ? "Azure-AsyncOperation" : undefined;
+
+      const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
+      if (!bodyParam) {
+        armOperation.fixMe = [
+          "// FIXME: (ArmResourcePatch): ArmResourcePatchSync/ArmResourcePatchAsync should have a body parameter with either properties property or tag property",
+        ];
+        armOperation.patchModel = "{}";
+      } else {
+        armOperation.patchModel = bodyParam.schema.language.default.name;
+      }
+
+      const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
+      const [augmentedDecorators, clientDecorators] = getBodyDecorators(
+        bodyParam,
+        tspOperationGroupName,
+        armOperation.name,
+        "properties",
+        "The resource properties to be updated.",
+      );
+      armOperation.augmentedDecorators = armOperation.augmentedDecorators
+        ? armOperation.augmentedDecorators.concat(augmentedDecorators)
+        : augmentedDecorators;
+      armOperation.clientDecorators = armOperation.clientDecorators
+        ? armOperation.clientDecorators.concat(clientDecorators)
+        : clientDecorators;
+
+      const asyncNames: NamesOfResponseTemplate = {
+        _200Name: "ArmResponse",
+        _200NameNoBody: "OkResponse",
+        _201Name: "ArmResourceCreatedResponse",
+        _201NameNoBody: "ArmCreatedResponse",
+        _202Name: "ArmAcceptedLroResponse",
+        _202NameNoBody: "ArmAcceptedLroResponse",
+        _204Name: "ArmNoContentResponse",
+      };
+      const syncNames: NamesOfResponseTemplate = {
+        _200Name: "ArmResponse",
+        _200NameNoBody: "OkResponse",
+        _201Name: "ArmResourceCreatedSyncResponse",
+        _201NameNoBody: "ArmCreatedResponse",
+        _202Name: "ArmAcceptedResponse",
+        _202NameNoBody: "ArmAcceptedResponse",
+        _204Name: "ArmNoContentResponse",
+      };
+      let responses = isLongRunning
+        ? getTemplateResponses(swaggerOperation, asyncNames)
+        : getTemplateResponses(swaggerOperation, syncNames);
+      if (
+        isLongRunning &&
+        responses.length === 2 &&
+        responses.find(
+          (r) =>
+            r.name === asyncNames._200Name &&
+            r.arguments?.length === 1 &&
+            r.arguments[0].name === resourceMetadata.SwaggerModelName,
+        ) &&
+        responses.find((r) => r.name === asyncNames._202NameNoBody && !r.arguments)
+      )
+        responses = [];
+      if (
+        !isLongRunning &&
+        responses.length === 1 &&
+        responses.find(
+          (r) =>
+            r.name === syncNames._200Name &&
+            r.arguments?.length === 1 &&
+            r.arguments[0].name === resourceMetadata.SwaggerModelName,
+        )
+      )
+        responses = [];
+      if (responses.length > 0) armOperation.response = responses;
+      if (armOperation.lroHeaders && responses) {
+        const _202response = responses.find(
+          (r) => r.name === asyncNames._202NameNoBody || r.name === asyncNames._202Name,
+        );
+        if (_202response) {
+          _202response.arguments = [
+            { kind: "&", name: "ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader" },
+          ]; //TO-DO: do it in a better way
+          armOperation.lroHeaders = undefined;
+        }
+      }
+
+      armOperation.decorators = [{ name: "parameterVisibility", arguments: [] }];
+      return [armOperation as TspArmResourceLifeCycleOperation];
+    }
+  }
+  return [];
+}
+
+function convertResourceDeleteOperation(
+  resourceMetadata: ArmResource,
+  operations: Record<string, Operation>,
+): TspArmResourceOperation[] {
+  const { isFullCompatible } = getOptions();
+
+  if (resourceMetadata.DeleteOperations.length) {
+    const operation = resourceMetadata.DeleteOperations[0];
+    const swaggerOperation = operations[operation.OperationID];
+    const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
+    const armOperation = buildNewArmOperation(
+      resourceMetadata,
+      operation,
+      swaggerOperation,
+      isLongRunning ? "ArmResourceDeleteWithoutOkAsync" : "ArmResourceDeleteSync",
+    );
+
+    const finalStateVia =
+      swaggerOperation.extensions?.["x-ms-long-running-operation-options"]?.["final-state-via"] ?? "location";
+    armOperation.lroHeaders =
+      isLongRunning && finalStateVia === "azure-async-operation" ? "Azure-AsyncOperation" : undefined;
+
+    if (armOperation.lroHeaders && isFullCompatible) {
+      armOperation.suppressions = armOperation.suppressions ?? [];
+      armOperation.suppressions.push(
+        getSuppresssionWithCode("@azure-tools/typespec-azure-resource-manager/lro-location-header"),
+      );
+    }
+
+    const asyncNames: NamesOfResponseTemplate = {
+      _200Name: "ArmResponse",
+      _200NameNoBody: "ArmDeletedResponse",
+      _201Name: "ArmResourceCreatedResponse",
+      _201NameNoBody: "ArmCreatedResponse",
+      _202Name: "ArmDeleteAcceptedLroResponse",
+      _202NameNoBody: "ArmDeleteAcceptedLroResponse",
+      _204Name: "ArmDeletedNoContentResponse",
+    };
+    const syncNames: NamesOfResponseTemplate = {
+      _200Name: "ArmResponse",
+      _200NameNoBody: "ArmDeletedResponse",
+      _201Name: "ArmResourceCreatedSyncResponse",
+      _201NameNoBody: "ArmCreatedResponse",
+      _202Name: "ArmAcceptedResponse",
+      _202NameNoBody: "ArmAcceptedResponse",
+      _204Name: "ArmDeletedNoContentResponse",
+    };
+    let responses = isLongRunning
+      ? getTemplateResponses(swaggerOperation, asyncNames)
+      : getTemplateResponses(swaggerOperation, syncNames);
+    if (
+      isLongRunning &&
+      responses.length === 2 &&
+      responses.find((r) => r.name === asyncNames._202NameNoBody && !r.arguments) &&
+      responses.find((r) => r.name === asyncNames._204Name && !r.arguments)
+    )
+      responses = [];
+    if (
+      !isLongRunning &&
+      responses.length === 2 &&
+      responses.find((r) => r.name === syncNames._200NameNoBody && !r.arguments) &&
+      responses.find((r) => r.name === asyncNames._204Name && !r.arguments)
+    )
+      responses = [];
+    if (armOperation.lroHeaders && responses) {
+      const _202response = responses.find(
+        (r) => r.name === asyncNames._202NameNoBody || r.name === asyncNames._202Name,
+      );
+      if (_202response) {
+        _202response.arguments = [
+          { kind: "&", name: "ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader" },
+        ]; //TO-DO: do it in a better way
+        armOperation.lroHeaders = undefined;
+      }
+    }
+    if (responses.length > 0) armOperation.response = responses;
+
+    if (armOperation.response && isFullCompatible) {
+      armOperation.suppressions = armOperation.suppressions ?? [];
+      armOperation.suppressions.push(
+        getSuppresssionWithCode("@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"),
+      );
+    }
+
+    return [armOperation as TspArmResourceLifeCycleOperation];
+  }
+  return [];
+}
+
+function convertResourceListOperations(
+  resourceMetadata: ArmResource,
+  operations: Record<string, Operation>,
+): TspArmResourceOperation[] {
+  const converted: TspArmResourceOperation[] = [];
+
+  // list by parent operation
+  if (resourceMetadata.ListOperations.length) {
+    // TODO: TParentName, TParentFriendlyName
+    const operation = resourceMetadata.ListOperations[0];
+    const swaggerOperation = operations[operation.OperationID];
+    const armOperation = buildNewArmOperation(resourceMetadata, operation, swaggerOperation, "ArmResourceListByParent");
+
+    const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
+    const responseSchemaName = getSchemaResponseSchemaName(okResponse);
+    if (responseSchemaName && !isResourceListResult(okResponse as SchemaResponse)) {
+      armOperation.response = [
+        { kind: "template", name: "ArmResponse", arguments: [{ kind: "object", name: responseSchemaName }] },
+      ];
+    }
+
+    converted.push(armOperation as TspArmResourceListOperation);
+  }
+
+  // list operation under subscription
+  if (resourceMetadata.OperationsFromSubscriptionExtension.length) {
+    for (const operation of resourceMetadata.OperationsFromSubscriptionExtension) {
+      if (operation.PagingMetadata) {
+        const swaggerOperation = operations[operation.OperationID];
+        const armOperation = buildNewArmOperation(
+          resourceMetadata,
+          operation,
+          swaggerOperation,
+          "ArmResourceListAtScope",
+        );
+
+        const okResponse = swaggerOperation?.responses?.filter(
+          (o) => o.protocol.http?.statusCodes.includes("200"),
+        )?.[0];
+        const responseSchemaName = getSchemaResponseSchemaName(okResponse);
+        if (responseSchemaName && !isResourceListResult(okResponse as SchemaResponse)) {
+          armOperation.response = [
+            { kind: "template", name: "ArmResponse", arguments: [{ kind: "object", name: responseSchemaName }] },
+          ];
+        }
+
+        // either list in location or list in subscription
+        if (operation.Path.includes("/locations/")) {
+          armOperation.baseParameters = [getFullyQualifiedName("LocationBaseParameters")];
+        } else {
+          armOperation.kind = "ArmListBySubscription";
+        }
+        converted.push(armOperation as TspArmResourceListOperation);
+      }
+    }
+  }
+
+  return converted;
+}
+
+function convertResourceActionOperations(
+  resourceMetadata: ArmResource,
+  operations: Record<string, Operation>,
+): TspArmResourceActionOperation[] {
+  const codeModel = getSession().model;
+  const dataTypes = getDataTypes(codeModel);
+
+  const converted: TspArmResourceActionOperation[] = [];
+
+  if (resourceMetadata.OtherOperations.length) {
+    for (const operation of resourceMetadata.OtherOperations) {
+      const swaggerOperation = operations[operation.OperationID];
+      const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
+      const armOperation = buildNewArmOperation(
+        resourceMetadata,
+        operation,
+        swaggerOperation,
+        isLongRunning ? "ArmResourceActionAsync" : "ArmResourceActionSync",
+      );
+
+      const finalStateVia =
+        swaggerOperation.extensions?.["x-ms-long-running-operation-options"]?.["final-state-via"] ?? "location";
+      armOperation.lroHeaders =
+        isLongRunning && finalStateVia === "azure-async-operation" ? "Azure-AsyncOperation" : undefined;
+
+      const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
+      let request = bodyParam ? getTypespecType(bodyParam.schema, getSession().model) : "void";
+
+      const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
+      const [augmentedDecorators, clientDecorators] = getBodyDecorators(
+        bodyParam,
+        tspOperationGroupName,
+        armOperation.name,
+        "body",
+        "The content of the action request",
+      );
+      armOperation.augmentedDecorators = armOperation.augmentedDecorators
+        ? armOperation.augmentedDecorators.concat(augmentedDecorators)
+        : augmentedDecorators;
+      armOperation.clientDecorators = armOperation.clientDecorators
+        ? armOperation.clientDecorators.concat(clientDecorators)
+        : clientDecorators;
+
+      armOperation.decorators = armOperation.decorators ?? [];
+      if (operation.Method !== "POST") {
+        armOperation.decorators.push({ name: operation.Method.toLocaleLowerCase() });
+      }
+      const segments = operation.Path.split("/");
+      if (segments[segments.length - 1] !== armOperation.name) {
+        armOperation.decorators.push({ name: "action", arguments: [segments[segments.length - 1]] });
+      }
+
+      let response: TypespecTemplateModel[] | TypespecVoidType = { kind: "void", name: "_" };
+      const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
+      if (okResponse && isResponseSchema(okResponse)) {
+        if (!okResponse.schema.language.default.name.includes("·")) {
+          const operationResponseName = okResponse.schema.language.default.name;
+          if (isResourceListResult(okResponse)) {
+            const valueSchema = ((okResponse as SchemaResponse).schema as ObjectSchema).properties?.find(
+              (p) => p.language.default.name === "value",
+            );
+            const responseName = dataTypes.get((valueSchema!.schema as ArraySchema).elementType)?.name;
+            response = [
+              {
+                kind: "template",
+                name: "ResourceListResult",
+                arguments: [{ kind: "object", name: responseName ?? "void" }],
+              },
+            ];
+          } else {
+            response = [
+              { kind: "template", name: "ArmResponse", arguments: [{ kind: "object", name: operationResponseName }] },
+            ];
+          }
+        }
+      }
+
+      if (isTypespecType(request)) {
+        request = `{@bodyRoot body: ${request};}`;
+      }
+      converted.push(buildArmResourceActionOperation(armOperation, request, response));
+    }
+  }
+
+  return converted;
 }
 
 function getOtherProperties(schema: ArmResourceSchema, noCommonTypes: boolean): TypespecObjectProperty[] {
@@ -211,58 +763,6 @@ function getResourceOptionalStandardProperties(schema: ArmResourceSchema): strin
   return optionalStandardProperties;
 }
 
-function convertResourceReadOperation(
-  resourceMetadata: ArmResource,
-  operations: Record<string, Operation>,
-): TspArmResourceOperation[] {
-  // every resource should have a get operation
-  const operation = resourceMetadata.GetOperations[0];
-  const swaggerOperation = operations[operation.OperationID];
-  const parameters = buildOperationParameters(swaggerOperation, resourceMetadata);
-  const templateParameters = [resourceMetadata.SwaggerModelName];
-  if (parameters.baseParameters) {
-    templateParameters.push(parameters.baseParameters);
-  }
-  if (parameters.parameters) {
-    templateParameters.push(`Parameters = ${parameters.parameters}`);
-  }
-  return [
-    {
-      doc: resourceMetadata.GetOperations[0].Description, // TODO: resource have duplicated CRUD operations
-      kind: "ArmResourceRead",
-      name: getOperationName(resourceMetadata.Name, operation.OperationID),
-      operationId: operation.OperationID,
-      clientDecorators: getOperationClientDecorators(swaggerOperation),
-      templateParameters,
-      examples: swaggerOperation.extensions?.["x-ms-examples"],
-    },
-  ];
-}
-
-function convertResourceExistsOperation(resourceMetadata: ArmResource): TspArmResourceOperation[] {
-  const swaggerOperation = getResourceExistsOperation(resourceMetadata);
-  if (swaggerOperation) {
-    return [
-      {
-        doc: swaggerOperation.language.default.description,
-        kind: "ArmResourceExists",
-        name: swaggerOperation.operationId
-          ? getOperationName(resourceMetadata.Name, swaggerOperation.operationId)
-          : "exists",
-        clientDecorators: getOperationClientDecorators(swaggerOperation),
-        operationId: swaggerOperation.operationId,
-        parameters: [
-          `...ResourceInstanceParameters<${resourceMetadata.SwaggerModelName}, BaseParameters<${resourceMetadata.SwaggerModelName}>>`,
-        ],
-        responses: ["OkResponse", "ErrorResponse"],
-        decorators: [{ name: "head" }],
-        examples: swaggerOperation.extensions?.["x-ms-examples"],
-      },
-    ];
-  }
-  return [];
-}
-
 export function getTSPOperationGroupName(resourceName: string): string {
   const codeModel = getSession().model;
   const operationGroupName = pluralize(resourceName);
@@ -276,65 +776,7 @@ export function getTSPOperationGroupName(resourceName: string): string {
   }
 }
 
-function convertResourceCreateOrReplaceOperation(
-  resourceMetadata: ArmResource,
-  operations: Record<string, Operation>,
-): TspArmResourceOperation[] {
-  const { isFullCompatible } = getOptions();
-  if (resourceMetadata.CreateOperations.length) {
-    const operation = resourceMetadata.CreateOperations[0];
-    const swaggerOperation = operations[operation.OperationID];
-    const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
-    const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
-    const parameters = buildOperationParameters(swaggerOperation, resourceMetadata);
-    const templateParameters = [resourceMetadata.SwaggerModelName];
-    if (parameters.baseParameters) {
-      templateParameters.push(parameters.baseParameters);
-    }
-    if (parameters.parameters) {
-      templateParameters.push(`Parameters = ${parameters.parameters}`);
-    }
-    const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
-    const operationName = getOperationName(resourceMetadata.Name, operation.OperationID);
-    const [customizations, clientDecorators] = getCustomizations(
-      bodyParam,
-      tspOperationGroupName,
-      operationName,
-      "resource",
-      "Resource create parameters.",
-    );
-
-    let suppressions = undefined;
-    if (isFullCompatible) {
-      const acceptedResponse = swaggerOperation.responses?.find((r) => r.protocol.http?.statusCodes[0] === "202");
-      if (acceptedResponse) {
-        let responseParameter = `ArmResourceCreatedResponse<${resourceMetadata.SwaggerModelName}> | ArmResourceUpdatedResponse<${resourceMetadata.SwaggerModelName}>`;
-        if (isResponseSchema(acceptedResponse) && acceptedResponse.schema) {
-          responseParameter += `| (ArmAcceptedLroResponse & {@bodyRoot _: ${resourceMetadata.SwaggerModelName};})`;
-        } else responseParameter += `| ArmAcceptedLroResponse`;
-        templateParameters.push(`Response = ${responseParameter}`);
-        suppressions = getSuppressionsForArmResourceCreateOrReplaceAsync();
-      }
-    }
-
-    return [
-      {
-        doc: operation.Description,
-        kind: isLongRunning ? "ArmResourceCreateOrReplaceAsync" : "ArmResourceCreateOrReplaceSync",
-        name: operationName,
-        clientDecorators: getOperationClientDecorators(swaggerOperation),
-        operationId: operation.OperationID,
-        templateParameters: templateParameters,
-        examples: swaggerOperation.extensions?.["x-ms-examples"],
-        customizations,
-        suppressions,
-      },
-    ];
-  }
-  return [];
-}
-
-function getCustomizations(
+function getBodyDecorators(
   bodyParam: Parameter | undefined,
   tspOperationGroupName: string,
   operationName: string,
@@ -363,381 +805,48 @@ function getCustomizations(
   return [augmentedDecorators, clientDecorators];
 }
 
-function convertResourceUpdateOperation(
+function buildNewArmOperation(
   resourceMetadata: ArmResource,
-  operations: Record<string, Operation>,
-): TspArmResourceOperation[] {
-  if (resourceMetadata.UpdateOperations.length) {
-    const operation = resourceMetadata.UpdateOperations[0];
-    if (
-      !resourceMetadata.CreateOperations.length ||
-      resourceMetadata.CreateOperations[0].OperationID !== operation.OperationID
-    ) {
-      const swaggerOperation = operations[operation.OperationID];
-      const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
-      const parameters = buildOperationParameters(swaggerOperation, resourceMetadata);
-      const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
-      const fixMe: string[] = [];
-      if (!bodyParam) {
-        fixMe.push(
-          "// FIXME: (ArmResourcePatch): ArmResourcePatchSync/ArmResourcePatchAsync should have a body parameter with either properties property or tag property",
-        );
-      }
-
-      const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
-      const operationName = getOperationName(resourceMetadata.Name, operation.OperationID);
-      const customizations = getCustomizations(
-        bodyParam,
-        tspOperationGroupName,
-        operationName,
-        "properties",
-        "The resource properties to be updated.",
-      );
-
-      let kind;
-      const templateParameters = [resourceMetadata.SwaggerModelName];
-      if (bodyParam) {
-        kind = isLongRunning ? "ArmCustomPatchAsync" : "ArmCustomPatchSync";
-        templateParameters.push(bodyParam.schema.language.default.name);
-      } else {
-        kind = isLongRunning ? "ArmCustomPatchAsync" : "ArmCustomPatchSync";
-        templateParameters.push("{}");
-      }
-      if (parameters.baseParameters) {
-        templateParameters.push(parameters.baseParameters);
-      }
-      if (parameters.parameters) {
-        templateParameters.push(`Parameters = ${parameters.parameters}`);
-      }
-      return [
-        {
-          fixMe,
-          doc: operation.Description,
-          kind: kind as any,
-          name: operationName,
-          clientDecorators: getOperationClientDecorators(swaggerOperation).concat(customizations[1]),
-          operationId: operation.OperationID,
-          templateParameters,
-          examples: swaggerOperation.extensions?.["x-ms-examples"],
-          customizations: customizations[0],
-          // To resolve auto-generate update model with proper visibility
-          decorators: [{ name: "parameterVisibility", arguments: [] }],
-        },
-      ];
-    }
-  }
-  return [];
+  operation: _ArmResourceOperation,
+  swaggerOperation: Operation,
+  kind: TspArmOperationType,
+): TspArmResourceOperationBase {
+  const { baseParameters, parameters } = buildOperationParameters(swaggerOperation, resourceMetadata);
+  return {
+    doc: operation.Description,
+    kind,
+    name: getOperationName(resourceMetadata.Name, operation.OperationID),
+    resource: resourceMetadata.SwaggerModelName,
+    baseParameters: baseParameters.length > 0 ? baseParameters : undefined,
+    parameters: parameters.length > 0 ? parameters : undefined,
+    operationId: operation.OperationID,
+    examples: swaggerOperation.extensions?.["x-ms-examples"],
+    clientDecorators: getOperationClientDecorators(swaggerOperation),
+  };
 }
 
-function convertResourceDeleteOperation(
-  resourceMetadata: ArmResource,
-  operations: Record<string, Operation>,
-): TspArmResourceOperation[] {
-  if (resourceMetadata.DeleteOperations.length) {
-    const operation = resourceMetadata.DeleteOperations[0];
-    const swaggerOperation = operations[operation.OperationID];
-    const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
-    const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
-    const parameters = buildOperationParameters(swaggerOperation, resourceMetadata);
-    const templateParameters = [resourceMetadata.SwaggerModelName];
-    const kind = isLongRunning
-      ? okResponse
-        ? "ArmResourceDeleteAsync"
-        : "ArmResourceDeleteWithoutOkAsync"
-      : "ArmResourceDeleteSync";
-    const suppressions =
-      kind === "ArmResourceDeleteAsync"
-        ? getSuppressionsForArmResourceDeleteAsync()
-        : kind === "ArmResourceDeleteSync"
-          ? getSuppressionsForArmResourceDeleteSync()
-          : undefined;
-    if (parameters.baseParameters) {
-      templateParameters.push(parameters.baseParameters);
-    }
-    if (parameters.parameters) {
-      templateParameters.push(`Parameters = ${parameters.parameters}`);
-    }
-    return [
-      {
-        doc: operation.Description,
-        kind: kind,
-        name: getOperationName(resourceMetadata.Name, operation.OperationID),
-        clientDecorators: getOperationClientDecorators(swaggerOperation),
-        operationId: operation.OperationID,
-        templateParameters,
-        examples: swaggerOperation.extensions?.["x-ms-examples"],
-        suppressions: suppressions,
-      },
-    ];
-  }
-  return [];
-}
-
-function convertResourceListOperations(
-  resourceMetadata: ArmResource,
-  operations: Record<string, Operation>,
-): TspArmResourceOperation[] {
-  const converted: TspArmResourceOperation[] = [];
-
-  // list by parent operation
-  if (resourceMetadata.ListOperations.length) {
-    // TODO: TParentName, TParentFriendlyName
-    const operation = resourceMetadata.ListOperations[0];
-    const swaggerOperation = operations[operation.OperationID];
-    const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
-    const templateParameters = [resourceMetadata.SwaggerModelName];
-    const parameters = buildOperationParameters(swaggerOperation, resourceMetadata);
-    if (parameters.baseParameters) {
-      templateParameters.push(parameters.baseParameters);
-    }
-    if (parameters.parameters) {
-      templateParameters.push(`Parameters = ${parameters.parameters}`);
-    }
-    const responseSchemaName = getSchemaResponseSchemaName(okResponse);
-    if (responseSchemaName && !isResourceListResult(okResponse as SchemaResponse)) {
-      templateParameters.push(`Response = ${responseSchemaName}`);
-    }
-
-    converted.push({
-      doc: operation.Description,
-      kind: "ArmResourceListByParent",
-      name: getOperationName(resourceMetadata.Name, operation.OperationID),
-      clientDecorators: getOperationClientDecorators(swaggerOperation),
-      operationId: operation.OperationID,
-      templateParameters: templateParameters,
-      examples: swaggerOperation.extensions?.["x-ms-examples"],
-    });
+function buildArmResourceActionOperation(
+  base: TspArmResourceOperationBase,
+  request: string,
+  response: TypespecTemplateModel[] | TypespecVoidType,
+): TspArmResourceActionOperation {
+  if (base.kind !== "ArmResourceActionSync" && base.kind !== "ArmResourceActionAsync") {
+    throw new Error("Invalid operation kind for ArmResourceActionOperation");
   }
 
-  // list operation under subscription
-  if (resourceMetadata.OperationsFromSubscriptionExtension.length) {
-    for (const operation of resourceMetadata.OperationsFromSubscriptionExtension) {
-      if (operation.PagingMetadata) {
-        const swaggerOperation = operations[operation.OperationID];
-        const okResponse = swaggerOperation?.responses?.filter(
-          (o) => o.protocol.http?.statusCodes.includes("200"),
-        )?.[0];
-        const responseSchemaName = getSchemaResponseSchemaName(okResponse);
-        const parameters = buildOperationParameters(swaggerOperation, resourceMetadata);
-
-        // either list in location or list in subscription
-        if (operation.Path.includes("/locations/")) {
-          const templateParameters = [
-            resourceMetadata.SwaggerModelName,
-            `LocationScope<${resourceMetadata.SwaggerModelName}>`,
-          ];
-          if (parameters.baseParameters) {
-            templateParameters.push(parameters.baseParameters);
-          }
-          if (parameters.parameters) {
-            templateParameters.push(`Parameters = ${parameters.parameters}`);
-          }
-          if (!responseSchemaName || !isResourceListResult(okResponse as SchemaResponse)) {
-            templateParameters.push(`Response = ${responseSchemaName}`);
-          }
-          converted.push({
-            doc: operation.Description,
-            kind: "ArmResourceListAtScope",
-            name: getOperationName(resourceMetadata.Name, operation.OperationID),
-            clientDecorators: getOperationClientDecorators(swaggerOperation),
-            operationId: operation.OperationID,
-            templateParameters,
-            examples: swaggerOperation.extensions?.["x-ms-examples"],
-          });
-        } else {
-          const templateParameters = [resourceMetadata.SwaggerModelName];
-          if (parameters.parameters) {
-            templateParameters.push(`Parameters = ${parameters.parameters}`);
-          }
-          if (!responseSchemaName || !isResourceListResult(okResponse as SchemaResponse)) {
-            templateParameters.push(`Response = ${responseSchemaName}`);
-          }
-          converted.push({
-            doc: operation.Description,
-            kind: "ArmListBySubscription",
-            name: getOperationName(resourceMetadata.Name, operation.OperationID),
-            clientDecorators: getOperationClientDecorators(swaggerOperation),
-            operationId: operation.OperationID,
-            templateParameters,
-            examples: swaggerOperation.extensions?.["x-ms-examples"],
-          });
-        }
-      }
-    }
-  }
-
-  return converted;
-}
-
-function convertResourceActionOperations(
-  resourceMetadata: ArmResource,
-  operations: Record<string, Operation>,
-): TspArmResourceOperation[] {
-  const codeModel = getSession().model;
-  const dataTypes = getDataTypes(codeModel);
-
-  const converted: TspArmResourceOperation[] = [];
-
-  if (resourceMetadata.OtherOperations.length) {
-    for (const operation of resourceMetadata.OtherOperations) {
-      const swaggerOperation = operations[operation.OperationID];
-      const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
-      const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
-      const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
-      // TODO: deal with non-schema response for action
-      let operationResponseName;
-      if (okResponse && isResponseSchema(okResponse)) {
-        if (!okResponse.schema.language.default.name.includes("·")) {
-          operationResponseName = okResponse.schema.language.default.name;
-          if (isResourceListResult(okResponse)) {
-            const valueSchema = ((okResponse as SchemaResponse).schema as ObjectSchema).properties?.find(
-              (p) => p.language.default.name === "value",
-            );
-            const responseName = dataTypes.get((valueSchema!.schema as ArraySchema).elementType)?.name;
-            operationResponseName = `ResourceListResult<${responseName ?? "void"}>`;
-          }
-        }
-      }
-
-      const request = bodyParam ? getTypespecType(bodyParam.schema, getSession().model) : "void";
-      const parameters = buildOperationParameters(swaggerOperation, resourceMetadata);
-      let kind;
-      if (!okResponse) {
-        // TODO: Sync operation should have a 204 response
-        kind = isLongRunning ? "ArmResourceActionNoResponseContentAsync" : "ArmResourceActionNoContentSync";
-      } else {
-        kind = isLongRunning ? "ArmResourceActionAsync" : "ArmResourceActionSync";
-      }
-      const templateParameters = [resourceMetadata.SwaggerModelName, request];
-      if (okResponse) {
-        templateParameters.push(operationResponseName ?? "void");
-      }
-      if (parameters.baseParameters) {
-        templateParameters.push(parameters.baseParameters);
-      }
-      if (parameters.parameters) {
-        templateParameters.push(`Parameters = ${parameters.parameters}`);
-      }
-
-      const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
-      const operationName = getOperationName(resourceMetadata.Name, operation.OperationID);
-      const customizations = getCustomizations(
-        bodyParam,
-        tspOperationGroupName,
-        operationName,
-        "body",
-        "The content of the action request",
-      );
-
-      const verbDecorator: TypespecDecorator | undefined =
-        operation.Method !== "POST"
-          ? {
-              name: operation.Method.toLocaleLowerCase(),
-            }
-          : undefined;
-
-      converted.push({
-        doc: operation.Description,
-        kind: kind as any,
-        name: operationName,
-        clientDecorators: getOperationClientDecorators(swaggerOperation).concat(customizations[1]),
-        operationId: operation.OperationID,
-        templateParameters,
-        examples: swaggerOperation.extensions?.["x-ms-examples"],
-        customizations: customizations[0],
-        decorators: verbDecorator !== undefined ? [verbDecorator] : undefined,
-      });
-    }
-  }
-
-  return converted;
-}
-
-function convertCheckNameAvailabilityOperations(
-  resourceMetadata: ArmResource,
-  operations: Record<string, Operation>,
-): TspArmResourceOperation[] {
-  const converted: TspArmResourceOperation[] = [];
-
-  // check name availability operation under subscription
-  if (resourceMetadata.OperationsFromSubscriptionExtension.length) {
-    for (const operation of resourceMetadata.OperationsFromSubscriptionExtension) {
-      if (operation.Path.includes("/checkNameAvailability")) {
-        const swaggerOperation = operations[operation.OperationID];
-        const response =
-          (
-            swaggerOperation?.responses?.filter(
-              (o) => o.protocol.http?.statusCodes.includes("200"),
-            )?.[0] as SchemaResponse
-          ).schema?.language.default.name ?? "CheckNameAvailabilityResponse";
-        const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
-        const request = bodyParam ? bodyParam.schema.language.default.name : "CheckNameAvailabilityRequest";
-        if (operation.Path.includes("/locations/")) {
-          converted.push({
-            doc: operation.Description,
-            kind: "checkLocalNameAvailability",
-            name: getOperationName(resourceMetadata.Name, operation.OperationID),
-            clientDecorators: getOperationClientDecorators(swaggerOperation),
-            operationId: operation.OperationID,
-            examples: swaggerOperation.extensions?.["x-ms-examples"],
-            templateParameters: [request, response],
-          });
-        } else {
-          converted.push({
-            doc: operation.Description,
-            kind: "checkGlobalNameAvailability",
-            name: getOperationName(resourceMetadata.Name, operation.OperationID),
-            clientDecorators: getOperationClientDecorators(swaggerOperation),
-            operationId: operation.OperationID,
-            examples: swaggerOperation.extensions?.["x-ms-examples"],
-            templateParameters: [request, response],
-          });
-        }
-      }
-    }
-  }
-
-  return converted;
-}
-
-function getTspOperations(armSchema: ArmResourceSchema): [TspArmResourceOperation[], TypespecOperation[]] {
-  const resourceMetadata = armSchema.resourceMetadata;
-  const operations = getResourceOperations(resourceMetadata);
-  const tspOperations: TspArmResourceOperation[] = [];
-  const normalOperations: TypespecOperation[] = [];
-
-  // TODO: handle operations under resource group / management group / tenant
-
-  // read operation
-  tspOperations.push(...convertResourceReadOperation(resourceMetadata, operations));
-
-  // exist operation
-  tspOperations.push(...convertResourceExistsOperation(resourceMetadata));
-
-  // create operation
-  tspOperations.push(...convertResourceCreateOrReplaceOperation(resourceMetadata, operations));
-
-  // patch update operation could either be patch for resource/tag or custom patch
-  tspOperations.push(...convertResourceUpdateOperation(resourceMetadata, operations));
-
-  // delete operation
-  tspOperations.push(...convertResourceDeleteOperation(resourceMetadata, operations));
-
-  // list operation
-  tspOperations.push(...convertResourceListOperations(resourceMetadata, operations));
-
-  // action operation
-  tspOperations.push(...convertResourceActionOperations(resourceMetadata, operations));
-
-  // check name availability operation
-  tspOperations.push(...convertCheckNameAvailabilityOperations(resourceMetadata, operations));
-
-  return [tspOperations, normalOperations];
+  return {
+    ...base,
+    kind: base.kind,
+    request,
+    response,
+  };
 }
 
 const existingNames: { [resourceName: string]: Set<string> } = {};
 // TO-DO: Figure out a way to create a new name if the name exists
 function getOperationName(resourceName: string, operationId: string): string {
+  if (!operationId) return "";
+
   let operationName = _.lowerFirst(_.last(operationId.split("_")));
   if (resourceName in existingNames) {
     if (existingNames[resourceName].has(operationName)) {
@@ -763,10 +872,20 @@ function getOperationGroupName(name: string | undefined): string {
   }
 }
 
+function buildOperationResponses(operation: Operation) {
+  for (const response of operation.responses ?? []) {
+    for (const code of response.protocol.http?.statusCodes) {
+    }
+    if (isResponseSchema(response)) {
+      return response.schema.language.default.name;
+    }
+  }
+}
+
 function buildOperationParameters(
   operation: Operation,
   resource: ArmResource,
-): Record<"baseParameters" | "parameters", string | undefined> {
+): { baseParameters: string[]; parameters: TypespecParameter[] } {
   const codeModel = getSession().model;
   const otherParameters: TypespecParameter[] = [];
   const pathParameters = [];
@@ -789,22 +908,18 @@ function buildOperationParameters(
   }
 
   // By default we don't need any base parameters.
-  let parameterTemplate = undefined;
+  let parameterTemplate: string[] = [];
   if (resource.IsExtensionResource) {
-    parameterTemplate = `${getFullyQualifiedName("ExtensionBaseParameters")}`;
+    parameterTemplate.push(getFullyQualifiedName("ExtensionBaseParameters"));
   } else if (resource.IsTenantResource) {
-    parameterTemplate = `${getFullyQualifiedName("TenantBaseParameters")}`;
+    parameterTemplate.push(getFullyQualifiedName("TenantBaseParameters"));
   } else if (resource.IsSubscriptionResource) {
-    parameterTemplate = `${getFullyQualifiedName("SubscriptionBaseParameters")}`;
+    parameterTemplate.push(getFullyQualifiedName("SubscriptionBaseParameters"));
   }
 
   return {
     baseParameters: parameterTemplate,
-    parameters: otherParameters.length
-      ? `{
-    ${otherParameters.map((p) => generateParameter(p)).join(";\n")}
-    }`
-      : undefined,
+    parameters: otherParameters,
   };
 }
 
@@ -982,11 +1097,7 @@ function buildResourceDecorators(schema: ArmResourceSchema): TypespecDecorator[]
   return resourceModelDecorators;
 }
 
-function buildResourceClientDecorators(
-  schema: ArmResourceSchema,
-  armResourceOperations: TspArmResourceOperation[],
-  normalOperations: TypespecOperation[],
-): TypespecDecorator[] {
+function buildResourceClientDecorators(schema: ArmResourceSchema): TypespecDecorator[] {
   const clientDecorator: TypespecDecorator[] = [];
   if (schema.language.csharp?.name) {
     clientDecorator.push(createCSharpNameDecorator(schema));

@@ -40,10 +40,11 @@ interface FeaturesetVersions {
   /**
    * Delete version.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<FeaturesetVersion>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    FeaturesetVersion,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List versions.
@@ -99,7 +100,7 @@ interface FeaturesetVersions {
       @query("stage")
       stage?: string;
     },
-    Response = FeaturesetVersionResourceArmPaginatedResult
+    Response = ArmResponse<FeaturesetVersionResourceArmPaginatedResult>
   >;
 
   /**
@@ -108,7 +109,7 @@ interface FeaturesetVersions {
   backfill is ArmResourceActionAsync<
     FeaturesetVersion,
     FeaturesetVersionBackfillRequest,
-    FeaturesetJob
+    ArmResponse<FeaturesetJob>
   >;
 
   /**
@@ -117,7 +118,7 @@ interface FeaturesetVersions {
   listMaterializationJobs is ArmResourceActionSync<
     FeaturesetVersion,
     void,
-    FeaturesetJobArmPaginatedResult,
+    ArmResponse<FeaturesetJobArmPaginatedResult>,
     Parameters = {
       /**
        * Continuation token for pagination.

@@ -2,7 +2,7 @@ import { TypespecParameter } from "../interfaces";
 import { getOptions } from "../options";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
-import { generateSuppressionForDocumentRequired } from "../utils/suppressions";
+import { generateSuppressionForDocumentRequired, generateSuppressions } from "../utils/suppressions";
 
 const _ARM_PARAM_REPLACEMENTS: { [key: string]: string } = {
   subscriptionId: "...SubscriptionIdParameter",
@@ -11,15 +11,15 @@ const _ARM_PARAM_REPLACEMENTS: { [key: string]: string } = {
 };
 
 export function generateParameter(parameter: TypespecParameter): string {
-  const { isArm, isFullCompatible } = getOptions();
+  const { isArm } = getOptions();
   if (isArm && _ARM_PARAM_REPLACEMENTS[parameter.name] !== undefined) {
     return _ARM_PARAM_REPLACEMENTS[parameter.name];
   }
   const definitions: string[] = [];
   const doc = generateDocs(parameter);
-  if (doc === "" && isFullCompatible) definitions.push(generateSuppressionForDocumentRequired());
   definitions.push(doc);
 
+  parameter.suppressions && definitions.push(...generateSuppressions(parameter.suppressions));
   const decorators = generateDecorators(parameter.decorators);
   decorators && definitions.push(decorators);
   let defaultValue = "";

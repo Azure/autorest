@@ -32,7 +32,7 @@ interface VirtualMachineExtensionImages {
    */
   get is ArmResourceRead<
     VirtualMachineExtensionImage,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
   /**
@@ -40,7 +40,7 @@ interface VirtualMachineExtensionImages {
    */
   listTypes is ArmResourceListByParent<
     VirtualMachineExtensionImage,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 }
 

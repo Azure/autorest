@@ -37,7 +37,7 @@ interface CommunityGalleryImageVersions {
    */
   list is ArmResourceListByParent<
     CommunityGalleryImageVersion,
-    Response = CommunityGalleryImageVersionList
+    Response = ArmResponse<CommunityGalleryImageVersionList>
   >;
 }
 
