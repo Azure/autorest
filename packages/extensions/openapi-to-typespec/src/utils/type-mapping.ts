@@ -1,7 +1,7 @@
 import { isObjectSchema, Operation, Response } from "@autorest/codemodel";
-import { isArraySchema, isResponseSchema, isStringSchema, isUriSchema } from "./schemas";
 import { TypespecTemplateModel } from "../interfaces";
 import { isResource } from "../resource/resource-equivalent";
+import { isArraySchema, isResponseSchema, isStringSchema, isUriSchema } from "./schemas";
 
 export function getFullyQualifiedName(type: string, namespace: string | undefined = undefined): string {
   switch (type) {

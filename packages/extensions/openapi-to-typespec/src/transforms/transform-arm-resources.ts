@@ -1,6 +1,5 @@
 import {
   ArraySchema,
-  HttpMethod,
   ObjectSchema,
   Operation,
   Parameter,
@@ -17,7 +16,6 @@ import {
   ArmResourceKind,
   TypespecDecorator,
   TypespecObjectProperty,
-  TypespecOperation,
   TypespecParameter,
   TspArmResource,
   TspArmResourceOperation,
@@ -34,21 +32,16 @@ import { getOptions, updateOptions } from "../options";
 import { createClientNameDecorator, createCSharpNameDecorator } from "../pretransforms/rename-pretransform";
 import { getOperationClientDecorators } from "../utils/decorators";
 import { generateDocsContent } from "../utils/docs";
+import { getLogger } from "../utils/logger";
 import {
   ArmResource,
   ArmResourceSchema,
   _ArmResourceOperation,
-  getResourceExistOperation as getResourceExistsOperation,
   getResourceOperations,
   isResourceSchema,
 } from "../utils/resource-discovery";
 import { isArraySchema, isResponseSchema } from "../utils/schemas";
-import {
-  getSuppressionsForArmResourceCreateOrReplaceAsync,
-  getSuppressionsForArmResourceDeleteAsync,
-  getSuppressionsForArmResourceDeleteSync,
-  getSuppresssionWithCode,
-} from "../utils/suppressions";
+import { getSuppresssionWithCode } from "../utils/suppressions";
 import {
   getFullyQualifiedName,
   getTemplateResponses,
@@ -56,8 +49,7 @@ import {
   NamesOfResponseTemplate,
 } from "../utils/type-mapping";
 import { getTypespecType, isTypespecType, transformObjectProperty } from "./transform-object";
-import { transformParameter, transformRequest } from "./transform-operations";
-import { getLogger } from "../utils/logger";
+import { transformParameter } from "./transform-operations";
 
 const logger = () => getLogger("parse-metadata");
 
@@ -872,16 +864,6 @@ function getOperationGroupName(name: string | undefined): string {
   }
 }
 
-function buildOperationResponses(operation: Operation) {
-  for (const response of operation.responses ?? []) {
-    for (const code of response.protocol.http?.statusCodes) {
-    }
-    if (isResponseSchema(response)) {
-      return response.schema.language.default.name;
-    }
-  }
-}
-
 function buildOperationParameters(
   operation: Operation,
   resource: ArmResource,
@@ -908,7 +890,7 @@ function buildOperationParameters(
   }
 
   // By default we don't need any base parameters.
-  let parameterTemplate: string[] = [];
+  const parameterTemplate: string[] = [];
   if (resource.IsExtensionResource) {
     parameterTemplate.push(getFullyQualifiedName("ExtensionBaseParameters"));
   } else if (resource.IsTenantResource) {

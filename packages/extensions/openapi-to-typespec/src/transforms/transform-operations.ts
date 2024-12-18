@@ -31,9 +31,9 @@ import { createOperationIdDecorator, getOperationClientDecorators, getPropertyDe
 import { getLogger } from "../utils/logger";
 import { getLanguageMetadata } from "../utils/metadata";
 import { isArraySchema, isConstantSchema, isResponseSchema } from "../utils/schemas";
+import { getSuppresssionWithCode } from "../utils/suppressions";
 import { isResourceListResult } from "../utils/type-mapping";
 import { getDefaultValue } from "../utils/values";
-import { getSuppresssionWithCode } from "../utils/suppressions";
 
 export function transformOperationGroup(
   { language, operations }: OperationGroup,

@@ -1,15 +1,14 @@
 import { Case } from "change-case-all";
+import _ from "lodash";
+import pluralize from "pluralize";
 import {
   TypespecOperation,
   TspArmResource,
-  TypespecProgram,
   isArmResourceActionOperation,
   TypespecTemplateModel,
   TypespecVoidType,
   TspLroHeaders,
 } from "../interfaces";
-import _ from "lodash";
-import pluralize from "pluralize";
 import { getOptions } from "../options";
 import { getTSPOperationGroupName } from "../transforms/transform-arm-resources";
 import { generateAugmentedDecorators, generateDecorators } from "../utils/decorators";
