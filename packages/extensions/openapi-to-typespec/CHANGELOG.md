@@ -1,6 +1,14 @@
 # Change Log - @autorest/openapi-to-typespec
 
-This log was last generated on Fri, 29 Nov 2024 09:20:01 GMT and should not be manually modified.
+This log was last generated on Thu, 19 Dec 2024 10:44:01 GMT and should not be manually modified.
+
+## 0.10.5
+Thu, 19 Dec 2024 10:44:01 GMT
+
+### Patches
+
+- Fix sample path issue
+- Refactor resource operation template to accept customzations
 
 ## 0.10.4
 Fri, 29 Nov 2024 09:20:01 GMT

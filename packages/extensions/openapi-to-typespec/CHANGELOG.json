@@ -2,6 +2,21 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.10.5",
+      "tag": "@autorest/openapi-to-typespec_v0.10.5",
+      "date": "Thu, 19 Dec 2024 10:44:01 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix sample path issue"
+          },
+          {
+            "comment": "Refactor resource operation template to accept customzations"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.10.4",
       "tag": "@autorest/openapi-to-typespec_v0.10.4",
       "date": "Fri, 29 Nov 2024 09:20:01 GMT",
