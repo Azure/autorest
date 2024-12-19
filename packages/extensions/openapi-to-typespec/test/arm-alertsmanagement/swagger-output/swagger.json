@@ -635,9 +635,10 @@
             }
           },
           {
-            "name": "body",
+            "name": "comment",
             "in": "body",
-            "required": true,
+            "description": "reason of change alert state",
+            "required": false,
             "schema": {
               "type": "string"
             }

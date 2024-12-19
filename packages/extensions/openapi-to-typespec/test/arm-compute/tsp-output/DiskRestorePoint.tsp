@@ -62,7 +62,7 @@ interface DiskRestorePoints {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("endGetAccess")
   @operationId("DiskRestorePoint_RevokeAccess")
-  revokeAccess is ArmResourceActionAsync<DiskRestorePoint, void, void>;
+  revokeAccess is ArmResourceActionAsync<DiskRestorePoint, void, OkResponse>;
 }
 
 @@doc(DiskRestorePoint.name, "The name of the disk restore point created.");

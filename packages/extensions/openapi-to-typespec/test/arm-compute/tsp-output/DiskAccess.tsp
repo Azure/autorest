@@ -39,11 +39,12 @@ interface DiskAccesses {
    * Creates or updates a disk access resource
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DiskAccess,
     Response = ArmResourceUpdatedResponse<DiskAccess> | (ArmAcceptedLroResponse & {
       @bodyRoot
-      body: DiskAccess;
+      _: DiskAccess;
     }),
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;

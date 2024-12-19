@@ -102,7 +102,7 @@ interface ComputeResources {
   updateCustomServices is ArmResourceActionSync<
     ComputeResource,
     CustomService[],
-    void
+    OkResponse
   >;
 
   /**
@@ -156,7 +156,7 @@ interface ComputeResources {
   updateIdleShutdownSetting is ArmResourceActionSync<
     ComputeResource,
     IdleShutdownSetting,
-    void
+    OkResponse
   >;
 }
 

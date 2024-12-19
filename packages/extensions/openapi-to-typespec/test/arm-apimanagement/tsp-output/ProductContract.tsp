@@ -148,7 +148,7 @@ interface ProductContracts {
   listByProduct is ArmResourceActionSync<
     ProductContract,
     void,
-    ResourceListResult<ProductApiData>,
+    ArmResponse<ResourceListResult<ProductApiData>>,
     Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| serviceUrl | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| path | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -181,7 +181,7 @@ interface ProductContracts {
   checkEntityExists is ArmResourceActionSync<
     ProductContract,
     void,
-    void,
+    NoContentResponse,
     Parameters = {
       /**
        * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
@@ -204,7 +204,7 @@ interface ProductContracts {
   productApiCreateOrUpdate is ArmResourceActionSync<
     ProductContract,
     void,
-    ArmResponse<ProductApiData>,
+    ArmResponse<ProductApiData> | ArmResourceCreatedSyncResponse<ProductApiData>,
     Parameters = {
       /**
        * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
@@ -227,7 +227,7 @@ interface ProductContracts {
   productApiDelete is ArmResourceActionSync<
     ProductContract,
     void,
-    void,
+    OkResponse | NoContentResponse,
     Parameters = {
       /**
        * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
@@ -250,7 +250,7 @@ interface ProductContracts {
   productGroupListByProduct is ArmResourceActionSync<
     ProductContract,
     void,
-    ResourceListResult<ProductGroupData>,
+    ArmResponse<ResourceListResult<ProductGroupData>>,
     Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt |     |</br>| displayName | filter | eq, ne |     |</br>| description | filter | eq, ne |     |</br>
@@ -283,7 +283,7 @@ interface ProductContracts {
   productGroupCheckEntityExists is ArmResourceActionSync<
     ProductContract,
     void,
-    void,
+    NoContentResponse,
     Parameters = {
       /**
        * Group identifier. Must be unique in the current API Management service instance.
@@ -305,7 +305,7 @@ interface ProductContracts {
   productGroupCreateOrUpdate is ArmResourceActionSync<
     ProductContract,
     void,
-    ArmResponse<ProductGroupData>,
+    ArmResponse<ProductGroupData> | ArmResourceCreatedSyncResponse<ProductGroupData>,
     Parameters = {
       /**
        * Group identifier. Must be unique in the current API Management service instance.
@@ -327,7 +327,7 @@ interface ProductContracts {
   productGroupDelete is ArmResourceActionSync<
     ProductContract,
     void,
-    void,
+    OkResponse | NoContentResponse,
     Parameters = {
       /**
        * Group identifier. Must be unique in the current API Management service instance.
@@ -349,7 +349,7 @@ interface ProductContracts {
   list is ArmResourceActionSync<
     ProductContract,
     void,
-    ResourceListResult<SubscriptionContract>,
+    ArmResponse<ResourceListResult<SubscriptionContract>>,
     Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| stateComment | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| ownerId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| scope | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| userId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| productId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq |     |</br>| user | expand |     |     |</br>

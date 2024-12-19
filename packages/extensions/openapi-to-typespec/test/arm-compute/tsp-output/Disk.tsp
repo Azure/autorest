@@ -60,11 +60,12 @@ interface Disks {
    * Creates or updates a disk.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Disk,
     Response = ArmResourceUpdatedResponse<Disk> | (ArmAcceptedLroResponse & {
       @bodyRoot
-      body: Disk;
+      _: Disk;
     }),
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -111,7 +112,7 @@ interface Disks {
    * Revokes access to a disk.
    */
   @action("endGetAccess")
-  revokeAccess is ArmResourceActionAsync<Disk, void, void>;
+  revokeAccess is ArmResourceActionAsync<Disk, void, OkResponse>;
 }
 
 @@doc(Disk.name,

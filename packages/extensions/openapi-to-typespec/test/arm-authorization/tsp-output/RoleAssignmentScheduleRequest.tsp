@@ -64,7 +64,7 @@ interface RoleAssignmentScheduleRequests {
   cancel is ArmResourceActionSync<
     RoleAssignmentScheduleRequest,
     void,
-    void,
+    OkResponse,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 

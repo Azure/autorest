@@ -1,5 +1,8 @@
-import { isObjectSchema, Operation, Response } from "@autorest/codemodel";
-import { TypespecTemplateModel } from "../interfaces";
+import { ArraySchema, isObjectSchema, ObjectSchema, Operation, Response, SchemaResponse } from "@autorest/codemodel";
+import { getSession } from "../autorest-session";
+import { getDataTypes } from "../data-types";
+import { generateTemplateModel } from "../generate/generate-arm-resource";
+import { TypespecDataType, TypespecTemplateModel } from "../interfaces";
 import { isResource } from "../resource/resource-equivalent";
 import { isArraySchema, isResponseSchema, isStringSchema, isUriSchema } from "./schemas";
 
@@ -48,13 +51,13 @@ export function getSkipList(): Set<string> {
 }
 
 export interface NamesOfResponseTemplate {
-  _200Name?: string;
-  _200NameNoBody?: string;
-  _201Name?: string;
-  _201NameNoBody?: string;
-  _202Name?: string;
-  _202NameNoBody?: string;
-  _204Name?: string;
+  _200Name: string;
+  _200NameNoBody: string;
+  _201Name: string;
+  _201NameNoBody: string;
+  _202Name: string;
+  _202NameNoBody: string;
+  _204Name: string;
 }
 
 export function getTemplateResponses(
@@ -65,57 +68,88 @@ export function getTemplateResponses(
 
   const _200Response = operation.responses?.find((r) => r.protocol.http?.statusCodes[0] === "200");
   if (_200Response) {
-    if (isResponseSchema(_200Response) && namesOfResponseTemplate._200Name) {
-      responses.push({
-        kind: "template",
-        name: namesOfResponseTemplate._200Name,
-        arguments: [{ kind: "object", name: _200Response.schema.language.default.name }],
-      });
-    } else if (!isResponseSchema(_200Response) && namesOfResponseTemplate._200NameNoBody) {
-      responses.push({ kind: "template", name: namesOfResponseTemplate._200NameNoBody });
-    }
+    responses.push(
+      generateResponseWithBody(_200Response, namesOfResponseTemplate._200Name, namesOfResponseTemplate._200NameNoBody),
+    );
   }
 
   const _201Response = operation.responses?.find((r) => r.protocol.http?.statusCodes[0] === "201");
   if (_201Response) {
-    if (isResponseSchema(_201Response) && namesOfResponseTemplate._201Name) {
-      responses.push({
-        kind: "template",
-        name: namesOfResponseTemplate._201Name,
-        arguments: [{ kind: "object", name: _201Response.schema.language.default.name }],
-      });
-    } else if (!isResponseSchema(_201Response) && namesOfResponseTemplate._201NameNoBody) {
-      responses.push({ kind: "template", name: namesOfResponseTemplate._201NameNoBody });
-    }
+    responses.push(
+      generateResponseWithBody(_201Response, namesOfResponseTemplate._201Name, namesOfResponseTemplate._201NameNoBody),
+    );
   }
 
   const _202Response = operation.responses?.find((r) => r.protocol.http?.statusCodes[0] === "202");
   if (_202Response) {
-    if (isResponseSchema(_202Response) && namesOfResponseTemplate._202Name) {
+    if (isResponseSchema(_202Response)) {
+      const equivalentResponse = getEquivalentResponse(_202Response as SchemaResponse);
       responses.push({
         kind: "template",
         name: namesOfResponseTemplate._202Name,
         additionalProperties: [
           {
             kind: "parameter",
-            name: "body",
+            name: "_",
             isOptional: false,
-            type: _202Response.schema.language.default.name,
+            type:
+              equivalentResponse.kind === "template"
+                ? generateTemplateModel(equivalentResponse as TypespecTemplateModel)
+                : _202Response.schema.language.default.name,
             location: "body",
-            serializedName: "body",
+            serializedName: "_",
             decorators: [{ name: "bodyRoot" }],
           },
         ],
       });
-    } else if (!isResponseSchema(_202Response) && namesOfResponseTemplate._202NameNoBody) {
+    } else if (!isResponseSchema(_202Response)) {
       responses.push({ kind: "template", name: namesOfResponseTemplate._202NameNoBody });
     }
   }
 
   const _204Response = operation.responses?.find((r) => r.protocol.http?.statusCodes[0] === "204");
-  if (_204Response && namesOfResponseTemplate._204Name) {
+  if (_204Response) {
     responses.push({ kind: "template", name: namesOfResponseTemplate._204Name });
   }
 
   return responses;
+}
+
+function generateResponseWithBody(
+  response: Response,
+  templateName: string,
+  templateNameNoBody: string,
+): TypespecTemplateModel {
+  const responseSchemaName = getSchemaResponseSchemaName(response);
+  if (responseSchemaName === undefined) return { kind: "template", name: templateNameNoBody };
+
+  const equivalentResponse = getEquivalentResponse(response as SchemaResponse);
+  return { kind: "template", name: templateName, arguments: [equivalentResponse] };
+}
+
+function getEquivalentResponse(response: SchemaResponse): TypespecTemplateModel | TypespecDataType {
+  const codeModel = getSession().model;
+  const dataTypes = getDataTypes(codeModel);
+
+  if (isResourceListResult(response as SchemaResponse)) {
+    const valueSchema = ((response as SchemaResponse).schema as ObjectSchema).properties?.find(
+      (p) => p.language.default.name === "value",
+    );
+    const valueName = dataTypes.get((valueSchema!.schema as ArraySchema).elementType)?.name ?? "void";
+    return {
+      kind: "template",
+      name: "ResourceListResult",
+      arguments: [{ kind: "object", name: valueName }],
+    };
+  }
+
+  return { kind: "object", name: response.schema.language.default.name };
+}
+
+function getSchemaResponseSchemaName(response: Response): string | undefined {
+  if (!isResponseSchema(response) || isArraySchema(response.schema)) {
+    return undefined;
+  }
+
+  return (response as SchemaResponse).schema.language.default.name;
 }

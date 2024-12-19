@@ -115,34 +115,74 @@ interface CloudServices {
   /**
    * Starts the cloud service.
    */
-  start is ArmResourceActionAsync<CloudService, void, void>;
+  start is ArmResourceActionAsync<CloudService, void, OkResponse>;
 
   /**
    * Power off the cloud service. Note that resources are still attached and you are getting charged for the resources.
    */
   @action("poweroff")
-  powerOff is ArmResourceActionAsync<CloudService, void, void>;
+  powerOff is ArmResourceActionAsync<CloudService, void, OkResponse>;
 
   /**
    * Restarts one or more role instances in a cloud service.
    */
-  restart is ArmResourceActionAsync<CloudService, RoleInstances, void>;
+  restart is ArmResourceActionAsync<
+    CloudService,
+    {
+      /**
+       * List of cloud service role instance names.
+       */
+      @bodyRoot
+      parameters?: RoleInstances;
+    },
+    OkResponse
+  >;
 
   /**
    * Reimage asynchronous operation reinstalls the operating system on instances of web roles or worker roles.
    */
-  reimage is ArmResourceActionAsync<CloudService, RoleInstances, void>;
+  reimage is ArmResourceActionAsync<
+    CloudService,
+    {
+      /**
+       * List of cloud service role instance names.
+       */
+      @bodyRoot
+      parameters?: RoleInstances;
+    },
+    OkResponse
+  >;
 
   /**
    * Rebuild Role Instances reinstalls the operating system on instances of web roles or worker roles and initializes the storage resources that are used by them. If you do not want to initialize storage resources, you can use Reimage Role Instances.
    */
-  rebuild is ArmResourceActionAsync<CloudService, RoleInstances, void>;
+  rebuild is ArmResourceActionAsync<
+    CloudService,
+    {
+      /**
+       * List of cloud service role instance names.
+       */
+      @bodyRoot
+      parameters?: RoleInstances;
+    },
+    OkResponse
+  >;
 
   /**
    * Deletes role instances in a cloud service.
    */
   @action("delete")
-  deleteInstances is ArmResourceActionAsync<CloudService, RoleInstances, void>;
+  deleteInstances is ArmResourceActionAsync<
+    CloudService,
+    {
+      /**
+       * List of cloud service role instance names.
+       */
+      @bodyRoot
+      parameters?: RoleInstances;
+    },
+    OkResponse
+  >;
 
   /**
    * Updates the role instances in the specified update domain.
@@ -153,8 +193,14 @@ interface CloudServices {
   @operationId("CloudServicesUpdateDomain_WalkUpdateDomain")
   walkUpdateDomain is ArmResourceActionAsync<
     CloudService,
-    UpdateDomain,
-    void,
+    {
+      /**
+       * The update domain object.
+       */
+      @bodyRoot
+      parameters?: UpdateDomain;
+    },
+    OkResponse,
     Parameters = {
       /**
        * Specifies an integer value that identifies the update domain. Update domains are identified with a zero-based index: the first update domain has an ID of 0, the second has an ID of 1, and so on.
@@ -204,18 +250,3 @@ interface CloudServices {
   "The cloud service object."
 );
 @@doc(CloudServices.update::parameters.properties, "The cloud service object.");
-@@doc(CloudServices.restart::parameters.body,
-  "List of cloud service role instance names."
-);
-@@doc(CloudServices.reimage::parameters.body,
-  "List of cloud service role instance names."
-);
-@@doc(CloudServices.rebuild::parameters.body,
-  "List of cloud service role instance names."
-);
-@@doc(CloudServices.deleteInstances::parameters.body,
-  "List of cloud service role instance names."
-);
-@@doc(CloudServices.walkUpdateDomain::parameters.body,
-  "The update domain object."
-);

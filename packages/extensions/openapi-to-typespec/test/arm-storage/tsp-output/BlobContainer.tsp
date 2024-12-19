@@ -98,7 +98,13 @@ interface BlobContainers {
    */
   lease is ArmResourceActionSync<
     BlobContainer,
-    LeaseContainerRequest,
+    {
+      /**
+       * Lease Container request body.
+       */
+      @bodyRoot
+      parameters?: LeaseContainerRequest;
+    },
     ArmResponse<LeaseContainerResponse>
   >;
 
@@ -106,7 +112,7 @@ interface BlobContainers {
    * This operation migrates a blob container from container level WORM to object level immutability enabled container. Prerequisites require a container level immutability policy either in locked or unlocked state, Account level versioning must be enabled and there should be no Legal hold on the container.
    */
   @action("migrate")
-  objectLevelWorm is ArmResourceActionAsync<BlobContainer, void, void>;
+  objectLevelWorm is ArmResourceActionAsync<BlobContainer, void, OkResponse>;
 }
 
 @@maxLength(BlobContainer.name, 63);
@@ -127,4 +133,3 @@ interface BlobContainers {
 @@doc(BlobContainers.clearLegalHold::parameters.body,
   "The LegalHold property that will be clear from a blob container."
 );
-@@doc(BlobContainers.lease::parameters.body, "Lease Container request body.");

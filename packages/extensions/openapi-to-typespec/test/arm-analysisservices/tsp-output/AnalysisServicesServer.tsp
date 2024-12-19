@@ -37,6 +37,7 @@ interface AnalysisServicesServersOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("Servers_Create")
   create is ArmResourceCreateOrReplaceAsync<
     AnalysisServicesServer,
@@ -45,7 +46,7 @@ interface AnalysisServicesServersOperationGroup {
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
     > | (ArmAcceptedLroResponse & {
       @bodyRoot
-      body: AnalysisServicesServer;
+      _: AnalysisServicesServer;
     })
   >;
 
@@ -96,14 +97,14 @@ interface AnalysisServicesServersOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Servers_Suspend")
-  suspend is ArmResourceActionAsync<AnalysisServicesServer, void, void>;
+  suspend is ArmResourceActionAsync<AnalysisServicesServer, void, OkResponse>;
 
   /**
    * Resumes operation of the specified Analysis Services server instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Servers_Resume")
-  resume is ArmResourceActionAsync<AnalysisServicesServer, void, void>;
+  resume is ArmResourceActionAsync<AnalysisServicesServer, void, OkResponse>;
 
   /**
    * Lists eligible SKUs for an Analysis Services resource.
@@ -137,7 +138,7 @@ interface AnalysisServicesServersOperationGroup {
   dissociateGateway is ArmResourceActionSync<
     AnalysisServicesServer,
     void,
-    void
+    OkResponse
   >;
 }
 

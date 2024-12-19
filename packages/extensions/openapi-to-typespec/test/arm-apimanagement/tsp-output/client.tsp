@@ -225,7 +225,6 @@ using Azure.ResourceManager.ApiManagement;
   "parameters"
 );
 @@clientName(BackendContracts.update::parameters.properties, "parameters");
-@@clientName(BackendContracts.reconnect::parameters.body, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(BackendContract.properties);
 
@@ -264,9 +263,6 @@ using Azure.ResourceManager.ApiManagement;
 @@clientName(ApiManagementServiceResources.backup::parameters.body,
   "parameters"
 );
-@@clientName(ApiManagementServiceResources.applyNetworkConfigurationUpdates::parameters.body,
-  "parameters"
-);
 @@clientName(ApiManagementServiceResources.quotaByCounterKeysUpdate::parameters.body,
   "parameters"
 );
@@ -291,9 +287,6 @@ using Azure.ResourceManager.ApiManagement;
 @@clientName(GatewayContracts.update::parameters.properties, "parameters");
 @@clientName(GatewayContracts.regenerateKey::parameters.body, "parameters");
 @@clientName(GatewayContracts.generateToken::parameters.body, "parameters");
-@@clientName(GatewayContracts.gatewayApiCreateOrUpdate::parameters.body,
-  "parameters"
-);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(GatewayContract.properties);
 

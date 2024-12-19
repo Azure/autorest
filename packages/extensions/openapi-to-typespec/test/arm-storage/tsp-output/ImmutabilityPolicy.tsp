@@ -107,7 +107,13 @@ interface ImmutabilityPolicies {
   @operationId("BlobContainers_ExtendImmutabilityPolicy")
   extendImmutabilityPolicy is ArmResourceActionSync<
     ImmutabilityPolicy,
-    ImmutabilityPolicy,
+    {
+      /**
+       * The ImmutabilityPolicy Properties that will be extended for a blob container.
+       */
+      @bodyRoot
+      parameters?: ImmutabilityPolicy;
+    },
     ArmResponse<ImmutabilityPolicy>,
     Parameters = {
       /**
@@ -125,7 +131,4 @@ interface ImmutabilityPolicies {
 );
 @@doc(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
   "The ImmutabilityPolicy Properties that will be created or updated to a blob container."
-);
-@@doc(ImmutabilityPolicies.extendImmutabilityPolicy::parameters.body,
-  "The ImmutabilityPolicy Properties that will be extended for a blob container."
 );

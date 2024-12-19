@@ -102,7 +102,7 @@ interface AccessInformationContracts {
   regeneratePrimaryKey is ArmResourceActionSync<
     AccessInformationContract,
     void,
-    void
+    NoContentResponse
   >;
 
   /**
@@ -113,7 +113,7 @@ interface AccessInformationContracts {
   regenerateSecondaryKey is ArmResourceActionSync<
     AccessInformationContract,
     void,
-    void
+    NoContentResponse
   >;
 
   /**
@@ -136,7 +136,7 @@ interface AccessInformationContracts {
   tenantAccessGitRegeneratePrimaryKey is ArmResourceActionSync<
     AccessInformationContract,
     void,
-    void
+    NoContentResponse
   >;
 
   /**
@@ -148,7 +148,7 @@ interface AccessInformationContracts {
   tenantAccessGitRegenerateSecondaryKey is ArmResourceActionSync<
     AccessInformationContract,
     void,
-    void
+    NoContentResponse
   >;
 
   /**

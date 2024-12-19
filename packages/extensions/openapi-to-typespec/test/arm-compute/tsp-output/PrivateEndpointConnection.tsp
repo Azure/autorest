@@ -51,12 +51,13 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("DiskAccesses_UpdateAPrivateEndpointConnection")
   updateAPrivateEndpointConnection is ArmResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
     Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | (ArmAcceptedLroResponse & {
       @bodyRoot
-      body: PrivateEndpointConnection;
+      _: PrivateEndpointConnection;
     }),
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;

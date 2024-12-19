@@ -39,11 +39,12 @@ interface DiskEncryptionSets {
    * Creates or updates a disk encryption set
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DiskEncryptionSet,
     Response = ArmResourceUpdatedResponse<DiskEncryptionSet> | (ArmAcceptedLroResponse & {
       @bodyRoot
-      body: DiskEncryptionSet;
+      _: DiskEncryptionSet;
     }),
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;

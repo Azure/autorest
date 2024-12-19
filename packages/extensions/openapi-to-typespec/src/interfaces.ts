@@ -117,10 +117,13 @@ export interface TypespecVoidType extends TypespecDataType {
   name: "_";
 }
 
+export type TypespecModel = TypespecTemplateModel | TypespecDataType;
+
 export interface TypespecTemplateModel extends TypespecDataType {
   kind: "template";
-  arguments?: TypespecDataType[];
-  additionalProperties?: TypespecParameter[];
+  arguments?: TypespecModel[];
+  additionalProperties?: TypespecParameter[]; // Currently for body purpose
+  additionalTemplateModel?: string; // Currently for LRO header purpose
 }
 
 export interface TypespecWildcardType extends TypespecDataType {
@@ -252,15 +255,19 @@ export interface TspArmResourceOperationBase
 }
 
 export interface TspArmResourceActionOperation extends TspArmResourceOperationBase {
-  kind: "ArmResourceActionSync" | "ArmResourceActionAsync";
-  request: string;
+  kind: "ArmResourceActionSync" | "ArmResourceActionAsync" | "ArmResourceActionAsyncBase";
+  request: TypespecParameter | TypespecVoidType | TypespecDataType;
   response: TypespecTemplateModel[] | TypespecVoidType;
 }
 
 export function isArmResourceActionOperation(
-  operation: TspArmResourceOperation,
+  operation: TspArmResourceOperationBase,
 ): operation is TspArmResourceActionOperation {
-  return operation.kind === "ArmResourceActionSync" || operation.kind === "ArmResourceActionAsync";
+  return (
+    operation.kind === "ArmResourceActionSync" ||
+    operation.kind === "ArmResourceActionAsync" ||
+    operation.kind === "ArmResourceActionAsyncBase"
+  );
 }
 
 export interface TspArmResourceLifeCycleOperation extends TspArmResourceOperationBase {
@@ -299,6 +306,7 @@ export type TspArmOperationType =
   | "ArmResourceDeleteWithoutOkAsync"
   | "ArmResourceActionSync"
   | "ArmResourceActionAsync"
+  | "ArmResourceActionAsyncBase"
   | "checkGlobalNameAvailability"
   | "checkLocalNameAvailability"
   | "checkNameAvailability"

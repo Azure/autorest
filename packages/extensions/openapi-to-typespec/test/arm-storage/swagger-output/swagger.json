@@ -735,6 +735,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -748,9 +751,6 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
-          },
-          "204": {
-            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1583,10 +1583,10 @@
             "x-ms-client-name": "If-Match"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "description": "The ImmutabilityPolicy Properties that will be extended for a blob container.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/ImmutabilityPolicy"
             }
@@ -1714,10 +1714,10 @@
             "maxLength": 63
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "description": "Lease Container request body.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/LeaseContainerRequest"
             }
@@ -1784,6 +1784,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -1797,9 +1800,6 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
-          },
-          "204": {
-            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2221,6 +2221,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -2234,9 +2237,6 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
-          },
-          "204": {
-            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2830,10 +2830,10 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "description": "Lease Share request body.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/LeaseShareRequest"
             }
@@ -2909,8 +2909,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Azure operation completed successfully."
+          "200": {
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2961,6 +2961,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -2974,9 +2977,6 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
-          },
-          "204": {
-            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -5124,8 +5124,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Azure operation completed successfully."
+          "200": {
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -10740,6 +10740,10 @@
           "readOnly": true
         }
       }
+    },
+    "TypeSpec.Http.OkResponse": {
+      "type": "object",
+      "description": "The request has succeeded."
     },
     "UpdateHistoryProperty": {
       "type": "object",

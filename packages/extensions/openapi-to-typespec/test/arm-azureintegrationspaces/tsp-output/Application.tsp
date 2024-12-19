@@ -107,7 +107,7 @@ interface Applications {
   deleteBusinessProcessDevelopmentArtifact is ArmResourceActionSync<
     Application,
     GetOrDeleteBusinessProcessDevelopmentArtifactRequest,
-    void
+    OkResponse
   >;
 
   /**
@@ -143,7 +143,7 @@ interface Applications {
   validateBusinessProcessDevelopmentArtifact is ArmResourceActionSync<
     Application,
     SaveOrValidateBusinessProcessDevelopmentArtifactRequest,
-    void
+    OkResponse
   >;
 }
 

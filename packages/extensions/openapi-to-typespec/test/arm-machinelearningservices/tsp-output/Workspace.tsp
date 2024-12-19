@@ -38,6 +38,7 @@ interface Workspaces {
    * Creates or updates a workspace with the specified parameters.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Workspace,
     Response = ArmResourceUpdatedResponse<Workspace> | ArmAcceptedLroResponse,
@@ -127,7 +128,13 @@ interface Workspaces {
    */
   diagnose is ArmResourceActionAsync<
     Workspace,
-    DiagnoseWorkspaceParameters,
+    {
+      /**
+       * The parameter of diagnosing workspace health
+       */
+      @bodyRoot
+      body?: DiagnoseWorkspaceParameters;
+    },
     ArmResponse<DiagnoseResponseResult>
   >;
 
@@ -190,7 +197,7 @@ interface Workspaces {
   /**
    * Resync all the keys associated with this workspace.This includes keys for the storage account, app insights and password for container registry
    */
-  resyncKeys is ArmResourceActionAsync<Workspace, void, void>;
+  resyncKeys is ArmResourceActionAsync<Workspace, void, OkResponse>;
 
   /**
    * Called by Client (Portal, CLI, etc) to get available "private link resources" for the workspace.
@@ -216,7 +223,13 @@ interface Workspaces {
   @operationId("ManagedNetworkProvisions_ProvisionManagedNetwork")
   provisionManagedNetwork is ArmResourceActionAsync<
     Workspace,
-    ManagedNetworkProvisionOptions,
+    {
+      /**
+       * Managed Network Provisioning Options for a machine learning workspace.
+       */
+      @bodyRoot
+      body?: ManagedNetworkProvisionOptions;
+    },
     ArmResponse<ManagedNetworkProvisionStatus>
   >;
 }
@@ -228,10 +241,4 @@ interface Workspaces {
 );
 @@doc(Workspaces.update::parameters.properties,
   "The parameters for updating a machine learning workspace."
-);
-@@doc(Workspaces.diagnose::parameters.body,
-  "The parameter of diagnosing workspace health"
-);
-@@doc(Workspaces.provisionManagedNetwork::parameters.body,
-  "Managed Network Provisioning Options for a machine learning workspace."
 );

@@ -57,6 +57,7 @@ interface StorageAccounts {
    * Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   create is ArmResourceCreateOrReplaceAsync<
     StorageAccount,
     Response = ArmResourceUpdatedResponse<StorageAccount> | ArmAcceptedLroResponse,
@@ -142,7 +143,7 @@ interface StorageAccounts {
   failover is ArmResourceActionAsync<
     StorageAccount,
     void,
-    void,
+    OkResponse,
     Parameters = {
       /**
        * The parameter is set to 'Planned' to indicate whether a Planned failover is requested.
@@ -159,7 +160,7 @@ interface StorageAccounts {
   hierarchicalNamespaceMigration is ArmResourceActionAsync<
     StorageAccount,
     void,
-    void,
+    OkResponse,
     Parameters = {
       /**
        * Required. Hierarchical namespace migration type can either be a hierarchical namespace validation request 'HnsOnValidationRequest' or a hydration request 'HnsOnHydrationRequest'. The validation request will validate the migration whereas the hydration request will migrate the account.
@@ -176,7 +177,7 @@ interface StorageAccounts {
   abortHierarchicalNamespaceMigration is ArmResourceActionAsync<
     StorageAccount,
     void,
-    void
+    OkResponse
   >;
 
   /**
@@ -191,7 +192,11 @@ interface StorageAccounts {
   /**
    * Revoke user delegation keys.
    */
-  revokeUserDelegationKeys is ArmResourceActionSync<StorageAccount, void, void>;
+  revokeUserDelegationKeys is ArmResourceActionSync<
+    StorageAccount,
+    void,
+    OkResponse
+  >;
 
   /**
    * Gets the private link resources that need to be created for a storage account.

@@ -40,7 +40,8 @@ interface VirtualMachineExtensionImages {
    */
   listTypes is ArmResourceListByParent<
     VirtualMachineExtensionImage,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Response = OkResponse
   >;
 }
 

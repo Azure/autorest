@@ -73,7 +73,7 @@ interface Catalogs {
   listDeployments is ArmResourceActionSync<
     Catalog,
     void,
-    ResourceListResult<Deployment>,
+    ArmResponse<ResourceListResult<Deployment>>,
     Parameters = {
       /**
        * Filter the result list using the given expression
@@ -107,7 +107,7 @@ interface Catalogs {
   listDeviceGroups is ArmResourceActionSync<
     Catalog,
     ListDeviceGroupsRequest,
-    ResourceListResult<DeviceGroup>,
+    ArmResponse<ResourceListResult<DeviceGroup>>,
     Parameters = {
       /**
        * Filter the result list using the given expression
@@ -175,7 +175,7 @@ interface Catalogs {
   listDevices is ArmResourceActionSync<
     Catalog,
     void,
-    ResourceListResult<Device>,
+    ArmResponse<ResourceListResult<Device>>,
     Parameters = {
       /**
        * Filter the result list using the given expression

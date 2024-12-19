@@ -90,13 +90,17 @@ interface DataProducts {
   removeUserRole is ArmResourceActionSync<
     DataProduct,
     RoleAssignmentDetail,
-    void
+    NoContentResponse
   >;
 
   /**
    * Initiate key rotation on Data Product.
    */
-  rotateKey is ArmResourceActionSync<DataProduct, KeyVaultInfo, void>;
+  rotateKey is ArmResourceActionSync<
+    DataProduct,
+    KeyVaultInfo,
+    NoContentResponse
+  >;
 }
 
 @@maxLength(DataProduct.name, 63);

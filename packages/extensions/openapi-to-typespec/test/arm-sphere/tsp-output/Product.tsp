@@ -70,7 +70,7 @@ interface Products {
   generateDefaultDeviceGroups is ArmResourceActionSync<
     Product,
     void,
-    ResourceListResult<DeviceGroup>
+    ArmResponse<ResourceListResult<DeviceGroup>>
   >;
 }
 

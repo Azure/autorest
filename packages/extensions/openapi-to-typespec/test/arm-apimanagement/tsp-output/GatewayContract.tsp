@@ -139,7 +139,7 @@ interface GatewayContracts {
   regenerateKey is ArmResourceActionSync<
     GatewayContract,
     GatewayKeyRegenerationRequestContract,
-    void
+    NoContentResponse
   >;
 
   /**
@@ -163,7 +163,7 @@ interface GatewayContracts {
   gatewayApiListByService is ArmResourceActionSync<
     GatewayContract,
     void,
-    ResourceListResult<GatewayApiData>,
+    ArmResponse<ResourceListResult<GatewayApiData>>,
     Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -196,7 +196,7 @@ interface GatewayContracts {
   gatewayApiGetEntityTag is ArmResourceActionSync<
     GatewayContract,
     void,
-    void,
+    OkResponse,
     Parameters = {
       /**
        * API identifier. Must be unique in the current API Management service instance.
@@ -217,8 +217,11 @@ interface GatewayContracts {
   @operationId("GatewayApi_CreateOrUpdate")
   gatewayApiCreateOrUpdate is ArmResourceActionSync<
     GatewayContract,
-    AssociationContract,
-    ArmResponse<GatewayApiData>,
+    {
+      @bodyRoot
+      parameters?: AssociationContract;
+    },
+    ArmResponse<GatewayApiData> | ArmResourceCreatedSyncResponse<GatewayApiData>,
     Parameters = {
       /**
        * API identifier. Must be unique in the current API Management service instance.
@@ -240,7 +243,7 @@ interface GatewayContracts {
   gatewayApiDelete is ArmResourceActionSync<
     GatewayContract,
     void,
-    void,
+    OkResponse | NoContentResponse,
     Parameters = {
       /**
        * API identifier. Must be unique in the current API Management service instance.
@@ -263,4 +266,3 @@ interface GatewayContracts {
 @@doc(GatewayContracts.update::parameters.properties, "");
 @@doc(GatewayContracts.regenerateKey::parameters.body, "");
 @@doc(GatewayContracts.generateToken::parameters.body, "");
-@@doc(GatewayContracts.gatewayApiCreateOrUpdate::parameters.body, "");

@@ -156,7 +156,7 @@ interface SubscriptionContracts {
   regeneratePrimaryKey is ArmResourceActionSync<
     SubscriptionContract,
     void,
-    void
+    NoContentResponse
   >;
 
   /**
@@ -167,7 +167,7 @@ interface SubscriptionContracts {
   regenerateSecondaryKey is ArmResourceActionSync<
     SubscriptionContract,
     void,
-    void
+    NoContentResponse
   >;
 
   /**

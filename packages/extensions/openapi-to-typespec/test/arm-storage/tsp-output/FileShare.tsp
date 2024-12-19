@@ -116,14 +116,20 @@ interface FileShares {
   /**
    * Restore a file share within a valid retention days if share soft delete is enabled
    */
-  restore is ArmResourceActionSync<FileShare, DeletedShare, void>;
+  restore is ArmResourceActionSync<FileShare, DeletedShare, OkResponse>;
 
   /**
    * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
    */
   lease is ArmResourceActionSync<
     FileShare,
-    LeaseShareRequest,
+    {
+      /**
+       * Lease Share request body.
+       */
+      @bodyRoot
+      parameters?: LeaseShareRequest;
+    },
     ArmResponse<LeaseShareResponse>,
     Parameters = {
       /**
@@ -148,4 +154,3 @@ interface FileShares {
   "Properties to update for the file share."
 );
 @@doc(FileShares.restore::parameters.body, "");
-@@doc(FileShares.lease::parameters.body, "Lease Share request body.");

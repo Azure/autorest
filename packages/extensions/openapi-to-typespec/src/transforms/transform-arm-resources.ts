@@ -27,6 +27,8 @@ import {
   TypespecVoidType,
   TspArmResourceLifeCycleOperation,
   TspArmResourceListOperation,
+  isArmResourceActionOperation,
+  TypespecDataType,
 } from "../interfaces";
 import { getOptions, updateOptions } from "../options";
 import { createClientNameDecorator, createCSharpNameDecorator } from "../pretransforms/rename-pretransform";
@@ -261,26 +263,13 @@ function convertResourceCreateOrReplaceOperation(
       swaggerOperation.extensions?.["x-ms-long-running-operation-options"]?.["final-state-via"] ?? "location";
     armOperation.lroHeaders = isLongRunning && finalStateVia === "location" ? "Location" : undefined;
 
-    const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
-    const [augmentedDecorators, clientDecorators] = getBodyDecorators(
-      bodyParam,
-      tspOperationGroupName,
-      armOperation.name,
-      "resource",
-      "Resource create parameters.",
-    );
-    armOperation.augmentedDecorators = armOperation.augmentedDecorators
-      ? armOperation.augmentedDecorators.concat(augmentedDecorators)
-      : augmentedDecorators;
-    armOperation.clientDecorators = armOperation.clientDecorators
-      ? armOperation.clientDecorators.concat(clientDecorators)
-      : clientDecorators;
+    buildBodyDecorator(bodyParam, armOperation, resourceMetadata, "resource", "Resource create parameters.");
 
     const asyncNames: NamesOfResponseTemplate = {
       _200Name: "ArmResourceUpdatedResponse",
       _200NameNoBody: "OkResponse",
       _201Name: "ArmResourceCreatedResponse",
-      _201NameNoBody: "ArmCreatedResponse",
+      _201NameNoBody: "CreatedResponse",
       _202Name: "ArmAcceptedLroResponse",
       _202NameNoBody: "ArmAcceptedLroResponse",
       _204Name: "ArmNoContentResponse",
@@ -289,12 +278,12 @@ function convertResourceCreateOrReplaceOperation(
       _200Name: "ArmResourceUpdatedResponse",
       _200NameNoBody: "OkResponse",
       _201Name: "ArmResourceCreatedSyncResponse",
-      _201NameNoBody: "ArmCreatedResponse",
-      _202Name: "ArmAcceptedResponse",
-      _202NameNoBody: "ArmAcceptedResponse",
+      _201NameNoBody: "CreatedResponse",
+      _202Name: "AcceptedResponse",
+      _202NameNoBody: "AcceptedResponse",
       _204Name: "ArmNoContentResponse",
     };
-    let responses = isLongRunning
+    let responses: TypespecTemplateModel[] = isLongRunning
       ? getTemplateResponses(swaggerOperation, asyncNames)
       : getTemplateResponses(swaggerOperation, syncNames);
     if (
@@ -333,23 +322,38 @@ function convertResourceCreateOrReplaceOperation(
       responses = [];
     if (responses.length > 0) armOperation.response = responses;
     if (armOperation.lroHeaders && responses) {
-      const _201Response = responses.find(
-        (r) => r.name === asyncNames._201NameNoBody || r.name === asyncNames._201Name,
-      );
+      let _201Response = responses.find((r) => r.name === asyncNames._201Name);
       if (_201Response) {
-        _201Response.arguments?.push({
+        _201Response.arguments!.push({
           kind: "&",
           name: "ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader",
         }); //TO-DO: do it in a better way
         armOperation.lroHeaders = undefined;
       }
+
+      _201Response = responses.find((r) => r.name === syncNames._201NameNoBody);
+      if (_201Response) {
+        _201Response.additionalTemplateModel = "ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader";
+      }
     }
 
-    if (armOperation.response && isFullCompatible) {
-      armOperation.suppressions = armOperation.suppressions ?? [];
-      armOperation.suppressions.push(
-        getSuppresssionWithCode("@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes"),
-      );
+    if (isFullCompatible) {
+      if (armOperation.response) {
+        armOperation.suppressions = armOperation.suppressions ?? [];
+        armOperation.suppressions.push(
+          getSuppresssionWithCode("@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes"),
+        );
+
+        if (
+          (armOperation.response as TypespecTemplateModel[]).find(
+            (r) => r.name === asyncNames._202Name && (!r.arguments || r.arguments.length === 0),
+          )
+        ) {
+          armOperation.suppressions.push(
+            getSuppresssionWithCode("@azure-tools/typespec-azure-resource-manager/no-response-body"),
+          );
+        }
+      }
     }
 
     return [armOperation as TspArmResourceLifeCycleOperation];
@@ -391,26 +395,19 @@ function convertResourceUpdateOperation(
         armOperation.patchModel = bodyParam.schema.language.default.name;
       }
 
-      const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
-      const [augmentedDecorators, clientDecorators] = getBodyDecorators(
+      buildBodyDecorator(
         bodyParam,
-        tspOperationGroupName,
-        armOperation.name,
+        armOperation,
+        resourceMetadata,
         "properties",
         "The resource properties to be updated.",
       );
-      armOperation.augmentedDecorators = armOperation.augmentedDecorators
-        ? armOperation.augmentedDecorators.concat(augmentedDecorators)
-        : augmentedDecorators;
-      armOperation.clientDecorators = armOperation.clientDecorators
-        ? armOperation.clientDecorators.concat(clientDecorators)
-        : clientDecorators;
 
       const asyncNames: NamesOfResponseTemplate = {
         _200Name: "ArmResponse",
         _200NameNoBody: "OkResponse",
         _201Name: "ArmResourceCreatedResponse",
-        _201NameNoBody: "ArmCreatedResponse",
+        _201NameNoBody: "CreatedResponse",
         _202Name: "ArmAcceptedLroResponse",
         _202NameNoBody: "ArmAcceptedLroResponse",
         _204Name: "ArmNoContentResponse",
@@ -419,9 +416,9 @@ function convertResourceUpdateOperation(
         _200Name: "ArmResponse",
         _200NameNoBody: "OkResponse",
         _201Name: "ArmResourceCreatedSyncResponse",
-        _201NameNoBody: "ArmCreatedResponse",
-        _202Name: "ArmAcceptedResponse",
-        _202NameNoBody: "ArmAcceptedResponse",
+        _201NameNoBody: "CreatedResponse",
+        _202Name: "AcceptedResponse",
+        _202NameNoBody: "AcceptedResponse",
         _204Name: "ArmNoContentResponse",
       };
       let responses = isLongRunning
@@ -503,7 +500,7 @@ function convertResourceDeleteOperation(
       _200Name: "ArmResponse",
       _200NameNoBody: "ArmDeletedResponse",
       _201Name: "ArmResourceCreatedResponse",
-      _201NameNoBody: "ArmCreatedResponse",
+      _201NameNoBody: "CreatedResponse",
       _202Name: "ArmDeleteAcceptedLroResponse",
       _202NameNoBody: "ArmDeleteAcceptedLroResponse",
       _204Name: "ArmDeletedNoContentResponse",
@@ -512,9 +509,9 @@ function convertResourceDeleteOperation(
       _200Name: "ArmResponse",
       _200NameNoBody: "ArmDeletedResponse",
       _201Name: "ArmResourceCreatedSyncResponse",
-      _201NameNoBody: "ArmCreatedResponse",
-      _202Name: "ArmAcceptedResponse",
-      _202NameNoBody: "ArmAcceptedResponse",
+      _201NameNoBody: "CreatedResponse",
+      _202Name: "AcceptedResponse",
+      _202NameNoBody: "AcceptedResponse",
       _204Name: "ArmDeletedNoContentResponse",
     };
     let responses = isLongRunning
@@ -572,13 +569,23 @@ function convertResourceListOperations(
     const swaggerOperation = operations[operation.OperationID];
     const armOperation = buildNewArmOperation(resourceMetadata, operation, swaggerOperation, "ArmResourceListByParent");
 
-    const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
-    const responseSchemaName = getSchemaResponseSchemaName(okResponse);
-    if (responseSchemaName && !isResourceListResult(okResponse as SchemaResponse)) {
-      armOperation.response = [
-        { kind: "template", name: "ArmResponse", arguments: [{ kind: "object", name: responseSchemaName }] },
-      ];
-    }
+    const syncNames: NamesOfResponseTemplate = {
+      _200Name: "ArmResponse",
+      _200NameNoBody: "OkResponse",
+      _201Name: "ArmResourceCreatedSyncResponse",
+      _201NameNoBody: "CreatedResponse",
+      _202Name: "AcceptedResponse",
+      _202NameNoBody: "AcceptedResponse",
+      _204Name: "NoContentResponse",
+    };
+    let responses = getTemplateResponses(swaggerOperation, syncNames);
+    if (
+      responses.length === 1 &&
+      responses[0].name === syncNames._200Name &&
+      responses[0].arguments?.[0].name === "ResourceListResult"
+    )
+      responses = [];
+    if (responses.length > 0) armOperation.response = responses;
 
     converted.push(armOperation as TspArmResourceListOperation);
   }
@@ -595,15 +602,23 @@ function convertResourceListOperations(
           "ArmResourceListAtScope",
         );
 
-        const okResponse = swaggerOperation?.responses?.filter(
-          (o) => o.protocol.http?.statusCodes.includes("200"),
-        )?.[0];
-        const responseSchemaName = getSchemaResponseSchemaName(okResponse);
-        if (responseSchemaName && !isResourceListResult(okResponse as SchemaResponse)) {
-          armOperation.response = [
-            { kind: "template", name: "ArmResponse", arguments: [{ kind: "object", name: responseSchemaName }] },
-          ];
-        }
+        const syncNames: NamesOfResponseTemplate = {
+          _200Name: "ArmResponse",
+          _200NameNoBody: "OkResponse",
+          _201Name: "ArmResourceCreatedSyncResponse",
+          _201NameNoBody: "CreatedResponse",
+          _202Name: "AcceptedResponse",
+          _202NameNoBody: "AcceptedResponse",
+          _204Name: "NoContentResponse",
+        };
+        let responses = getTemplateResponses(swaggerOperation, syncNames);
+        if (
+          responses.length === 1 &&
+          responses[0].name === syncNames._200Name &&
+          responses[0].arguments?.[0].name === "ResourceListResult"
+        )
+          responses = [];
+        if (responses.length > 0) armOperation.response = responses;
 
         // either list in location or list in subscription
         if (operation.Path.includes("/locations/")) {
@@ -644,23 +659,14 @@ function convertResourceActionOperations(
       armOperation.lroHeaders =
         isLongRunning && finalStateVia === "azure-async-operation" ? "Azure-AsyncOperation" : undefined;
 
-      const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
-      let request = bodyParam ? getTypespecType(bodyParam.schema, getSession().model) : "void";
-
-      const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
-      const [augmentedDecorators, clientDecorators] = getBodyDecorators(
-        bodyParam,
-        tspOperationGroupName,
-        armOperation.name,
+      buildRequestForAction(
+        armOperation,
+        swaggerOperation,
+        resourceMetadata,
+        true,
         "body",
         "The content of the action request",
       );
-      armOperation.augmentedDecorators = armOperation.augmentedDecorators
-        ? armOperation.augmentedDecorators.concat(augmentedDecorators)
-        : augmentedDecorators;
-      armOperation.clientDecorators = armOperation.clientDecorators
-        ? armOperation.clientDecorators.concat(clientDecorators)
-        : clientDecorators;
 
       armOperation.decorators = armOperation.decorators ?? [];
       if (operation.Method !== "POST") {
@@ -671,39 +677,116 @@ function convertResourceActionOperations(
         armOperation.decorators.push({ name: "action", arguments: [segments[segments.length - 1]] });
       }
 
-      let response: TypespecTemplateModel[] | TypespecVoidType = { kind: "void", name: "_" };
-      const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
-      if (okResponse && isResponseSchema(okResponse)) {
-        if (!okResponse.schema.language.default.name.includes("·")) {
-          const operationResponseName = okResponse.schema.language.default.name;
-          if (isResourceListResult(okResponse)) {
-            const valueSchema = ((okResponse as SchemaResponse).schema as ObjectSchema).properties?.find(
-              (p) => p.language.default.name === "value",
-            );
-            const responseName = dataTypes.get((valueSchema!.schema as ArraySchema).elementType)?.name;
-            response = [
-              {
-                kind: "template",
-                name: "ResourceListResult",
-                arguments: [{ kind: "object", name: responseName ?? "void" }],
-              },
-            ];
-          } else {
-            response = [
-              { kind: "template", name: "ArmResponse", arguments: [{ kind: "object", name: operationResponseName }] },
-            ];
+      const asyncNames: NamesOfResponseTemplate = {
+        _200Name: "ArmResponse",
+        _200NameNoBody: "OkResponse",
+        _201Name: "ArmResourceCreatedResponse",
+        _201NameNoBody: "CreatedResponse",
+        _202Name: "ArmAcceptedLroResponse",
+        _202NameNoBody: "ArmAcceptedLroResponse",
+        _204Name: "NoContentResponse",
+      };
+      const syncNames: NamesOfResponseTemplate = {
+        _200Name: "ArmResponse",
+        _200NameNoBody: "OkResponse",
+        _201Name: "ArmResourceCreatedSyncResponse",
+        _201NameNoBody: "CreatedResponse",
+        _202Name: "AcceptedResponse",
+        _202NameNoBody: "AcceptedResponse",
+        _204Name: "NoContentResponse",
+      };
+      let responses: TypespecTemplateModel[] | TypespecVoidType = isLongRunning
+        ? getTemplateResponses(swaggerOperation, asyncNames)
+        : getTemplateResponses(swaggerOperation, syncNames);
+
+      if (isLongRunning) {
+        const _202NoBodyResponseIndex = responses.findIndex(
+          (r) => r.name === asyncNames._202NameNoBody && !r.arguments,
+        );
+        if (_202NoBodyResponseIndex >= 0) {
+          responses.splice(_202NoBodyResponseIndex, 1);
+        } else {
+          armOperation.kind = "ArmResourceActionAsyncBase";
+          armOperation.baseParameters = armOperation.baseParameters ?? [
+            `${getFullyQualifiedName("DefaultBaseParameters")}<${armOperation.resource}>`,
+          ];
+          const _202Response = responses.find((r) => r.name === asyncNames._202Name);
+          if (_202Response && armOperation.lroHeaders === "Azure-AsyncOperation") {
+            _202Response.arguments!.push({
+              kind: "&",
+              name: "ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader",
+            });
           }
         }
       }
+      if (responses.length === 0) responses = { kind: "void", name: "_" };
+      armOperation.response = responses;
 
-      if (isTypespecType(request)) {
-        request = `{@bodyRoot body: ${request};}`;
-      }
-      converted.push(buildArmResourceActionOperation(armOperation, request, response));
+      converted.push(armOperation as TspArmResourceActionOperation);
     }
   }
 
   return converted;
+}
+
+function buildRequestForAction(
+  armOperation: TspArmResourceOperationBase,
+  operation: Operation,
+  resourceMetadata: ArmResource,
+  templateRequired: boolean,
+  templateName: string,
+  templateDoc: string,
+): void {
+  if (!isArmResourceActionOperation(armOperation)) {
+    throw new Error(`Operation ${operation.operationId} is not an action operation.`);
+  }
+
+  const bodyParam = operation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
+  if (bodyParam === undefined) {
+    armOperation.request = { kind: "void", name: "_" };
+    return;
+  }
+
+  const bodyType = getTypespecType(bodyParam.schema, getSession().model);
+  if (bodyParam.required !== templateRequired || isTypespecType(bodyType)) {
+    armOperation.request = {
+      kind: "parameter",
+      type: bodyType,
+      name: bodyParam.language.default.name,
+      isOptional: !bodyParam.required,
+      location: "body",
+      serializedName: "_",
+      decorators: [{ name: "bodyRoot" }],
+      doc: bodyParam.language.default.description,
+    };
+    return;
+  }
+
+  armOperation.request = { kind: "object", name: bodyType };
+  buildBodyDecorator(bodyParam, armOperation, resourceMetadata, templateName, templateDoc);
+}
+
+function buildBodyDecorator(
+  bodyParam: Parameter | undefined,
+  armOperation: TspArmResourceOperationBase,
+  resourceMetadata: ArmResource,
+  templateName: string,
+  templateDoc: string,
+): void {
+  const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
+  const [augmentedDecorators, clientDecorators] = getBodyDecorators(
+    bodyParam,
+    tspOperationGroupName,
+    armOperation.name,
+    templateName,
+    templateDoc,
+  );
+  armOperation.augmentedDecorators = armOperation.augmentedDecorators
+    ? armOperation.augmentedDecorators.concat(augmentedDecorators)
+    : augmentedDecorators;
+  armOperation.clientDecorators = armOperation.clientDecorators
+    ? armOperation.clientDecorators.concat(clientDecorators)
+    : clientDecorators;
 }
 
 function getOtherProperties(schema: ArmResourceSchema, noCommonTypes: boolean): TypespecObjectProperty[] {
@@ -814,23 +897,6 @@ function buildNewArmOperation(
     operationId: operation.OperationID,
     examples: swaggerOperation.extensions?.["x-ms-examples"],
     clientDecorators: getOperationClientDecorators(swaggerOperation),
-  };
-}
-
-function buildArmResourceActionOperation(
-  base: TspArmResourceOperationBase,
-  request: string,
-  response: TypespecTemplateModel[] | TypespecVoidType,
-): TspArmResourceActionOperation {
-  if (base.kind !== "ArmResourceActionSync" && base.kind !== "ArmResourceActionAsync") {
-    throw new Error("Invalid operation kind for ArmResourceActionOperation");
-  }
-
-  return {
-    ...base,
-    kind: base.kind,
-    request,
-    response,
   };
 }
 
@@ -958,14 +1024,6 @@ function getResourceKind(schema: ArmResourceSchema): ArmResourceKind {
   }
 
   return "ProxyResource";
-}
-
-function getSchemaResponseSchemaName(response: Response | undefined): string | undefined {
-  if (!response || !isResponseSchema(response) || isArraySchema(response.schema)) {
-    return undefined;
-  }
-
-  return (response as SchemaResponse).schema.language.default.name;
 }
 
 function buildKeyExpression(schema: ArmResourceSchema, keyProperty: TypespecObjectProperty): string {

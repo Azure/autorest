@@ -183,7 +183,7 @@ interface UserContracts {
   list is ArmResourceActionSync<
     UserContract,
     void,
-    ResourceListResult<GroupContract>,
+    ArmResponse<ResourceListResult<GroupContract>>,
     Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|------------------------|-----------------------------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -227,7 +227,7 @@ interface UserContracts {
   send is ArmResourceActionSync<
     UserContract,
     void,
-    void,
+    NoContentResponse,
     Parameters = {
       /**
        * Determines the type of application which send the create user request. Default is legacy publisher portal.

@@ -132,30 +132,10 @@ using Microsoft.Compute;
 @@clientName(VirtualMachineScaleSets.update::parameters.properties,
   "parameters"
 );
-@@clientName(VirtualMachineScaleSets.deallocate::parameters.body,
-  "vmInstanceIDs"
-);
 @@clientName(VirtualMachineScaleSets.deleteInstances::parameters.body,
   "vmInstanceIDs"
 );
-@@clientName(VirtualMachineScaleSets.powerOff::parameters.body,
-  "vmInstanceIDs"
-);
-@@clientName(VirtualMachineScaleSets.restart::parameters.body, "vmInstanceIDs");
-@@clientName(VirtualMachineScaleSets.start::parameters.body, "vmInstanceIDs");
-@@clientName(VirtualMachineScaleSets.redeploy::parameters.body,
-  "vmInstanceIDs"
-);
-@@clientName(VirtualMachineScaleSets.performMaintenance::parameters.body,
-  "vmInstanceIDs"
-);
 @@clientName(VirtualMachineScaleSets.updateInstances::parameters.body,
-  "vmInstanceIDs"
-);
-@@clientName(VirtualMachineScaleSets.reimage::parameters.body,
-  "vmScaleSetReimageInput"
-);
-@@clientName(VirtualMachineScaleSets.reimageAll::parameters.body,
   "vmInstanceIDs"
 );
 @@clientName(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
@@ -200,9 +180,6 @@ using Microsoft.Compute;
 @@clientName(VirtualMachineScaleSetVMS.update::parameters.resource,
   "parameters"
 );
-@@clientName(VirtualMachineScaleSetVMS.reimage::parameters.body,
-  "vmScaleSetVMReimageInput"
-);
 @@clientName(VirtualMachineScaleSetVMS.runCommand::parameters.body,
   "parameters"
 );
@@ -212,7 +189,6 @@ using Microsoft.Compute;
 @@clientName(VirtualMachines.createOrUpdate::parameters.resource, "parameters");
 @@clientName(VirtualMachines.update::parameters.properties, "parameters");
 @@clientName(VirtualMachines.capture::parameters.body, "parameters");
-@@clientName(VirtualMachines.reimage::parameters.body, "parameters");
 @@clientName(VirtualMachines.installPatches::parameters.body,
   "installPatchesInput"
 );
@@ -395,11 +371,6 @@ using Microsoft.Compute;
 
 @@clientName(CloudServices.createOrUpdate::parameters.resource, "parameters");
 @@clientName(CloudServices.update::parameters.properties, "parameters");
-@@clientName(CloudServices.restart::parameters.body, "parameters");
-@@clientName(CloudServices.reimage::parameters.body, "parameters");
-@@clientName(CloudServices.rebuild::parameters.body, "parameters");
-@@clientName(CloudServices.deleteInstances::parameters.body, "parameters");
-@@clientName(CloudServices.walkUpdateDomain::parameters.body, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(CloudService.properties);
 

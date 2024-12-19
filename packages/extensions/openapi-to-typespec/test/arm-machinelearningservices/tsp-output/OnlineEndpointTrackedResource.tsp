@@ -141,7 +141,7 @@ interface OnlineEndpointTrackedResources {
   regenerateKeys is ArmResourceActionAsync<
     OnlineEndpointTrackedResource,
     RegenerateEndpointKeysRequest,
-    void
+    OkResponse
   >;
 
   /**

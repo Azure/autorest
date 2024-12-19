@@ -14,7 +14,5 @@ using Azure.ResourceManager.AlertsManagement;
   "alertProcessingRulePatch"
 );
 
-@@clientName(Alerts.changeState::parameters.body, "comment");
-
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(SmartGroup.properties);

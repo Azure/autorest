@@ -64,7 +64,7 @@ interface RoleEligibilityScheduleRequests {
   cancel is ArmResourceActionSync<
     RoleEligibilityScheduleRequest,
     void,
-    void,
+    OkResponse,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 

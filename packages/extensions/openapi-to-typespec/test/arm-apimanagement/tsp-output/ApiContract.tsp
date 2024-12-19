@@ -46,6 +46,7 @@ interface ApiContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("Api_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ApiContract,
@@ -186,7 +187,7 @@ interface ApiContracts {
   listByApis is ArmResourceActionSync<
     ApiContract,
     void,
-    ResourceListResult<ProductContract>,
+    ArmResponse<ResourceListResult<ProductContract>>,
     Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>

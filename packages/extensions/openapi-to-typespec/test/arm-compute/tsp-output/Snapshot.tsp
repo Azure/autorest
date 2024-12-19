@@ -49,11 +49,12 @@ interface Snapshots {
    * Creates or updates a snapshot.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Snapshot,
     Response = ArmResourceUpdatedResponse<Snapshot> | (ArmAcceptedLroResponse & {
       @bodyRoot
-      body: Snapshot;
+      _: Snapshot;
     }),
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -100,7 +101,7 @@ interface Snapshots {
    * Revokes access to a snapshot.
    */
   @action("endGetAccess")
-  revokeAccess is ArmResourceActionAsync<Snapshot, void, void>;
+  revokeAccess is ArmResourceActionAsync<Snapshot, void, OkResponse>;
 }
 
 @@doc(Snapshot.name,

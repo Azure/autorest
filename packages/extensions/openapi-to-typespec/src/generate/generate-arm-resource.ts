@@ -8,6 +8,8 @@ import {
   TypespecTemplateModel,
   TypespecVoidType,
   TspLroHeaders,
+  TypespecParameter,
+  TypespecDataType,
 } from "../interfaces";
 import { getOptions } from "../options";
 import { getTSPOperationGroupName } from "../transforms/transform-arm-resources";
@@ -113,13 +115,23 @@ function generateArmResourceOperation(resource: TspArmResource): string {
       definitions.push(...generateSuppressions(operation.suppressions));
     }
 
-    if (isArmResourceActionOperation(operation)) {
+    if (operation.kind === "ArmResourceActionSync" || operation.kind === "ArmResourceActionAsync") {
       definitions.push(
-        `${operation.name} is ${operation.kind}<${operation.resource}, ${operation.request}, ${generateArmResponse(
-          operation.response,
-        )}${operation.baseParameters ? `, BaseParameters = ${operation.baseParameters[0]}` : ""}${
+        `${operation.name} is ${operation.kind}<${operation.resource}, ${generateArmRequest(
+          operation.request,
+        )}, ${generateArmResponse(operation.response)}${
+          operation.baseParameters ? `, BaseParameters = ${operation.baseParameters[0]}` : ""
+        }${operation.parameters ? `, Parameters = { ${generateParameters(operation.parameters)} }` : ""}${
+          operation.lroHeaders ? `, LroHeaders = ${generateLroHeaders(operation.lroHeaders)}` : ""
+        }>`,
+      );
+    } else if (operation.kind === "ArmResourceActionAsyncBase") {
+      definitions.push(
+        `${operation.name} is ${operation.kind}<${operation.resource}, ${generateArmRequest(
+          operation.request,
+        )}, ${generateArmResponse(operation.response)}${operation.baseParameters![0]}${
           operation.parameters ? `, Parameters = { ${generateParameters(operation.parameters)} }` : ""
-        }${operation.lroHeaders ? `, LroHeaders = ${generateLroHeaders(operation.lroHeaders)}` : ""}>`,
+        }>`,
       );
     } else {
       definitions.push(
@@ -152,6 +164,18 @@ function generateArmResourceOperation(resource: TspArmResource): string {
   return definitions.join("\n");
 }
 
+function generateArmRequest(request: TypespecParameter | TypespecVoidType | TypespecDataType): string {
+  if (request.kind === "void") {
+    return "void";
+  }
+
+  if (request.kind === "parameter") {
+    return `{${generateParameter(request as TypespecParameter)}}`;
+  }
+
+  return request.name;
+}
+
 function generateLroHeaders(lroHeaders: TspLroHeaders): string {
   if (lroHeaders === "Azure-AsyncOperation") {
     return "ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader";
@@ -169,14 +193,18 @@ function generateArmResponse(responses: TypespecTemplateModel[] | TypespecVoidTy
   return responses.map((r) => generateTemplateModel(r)).join(" | ");
 }
 
-function generateTemplateModel(templateModel: TypespecTemplateModel): string {
+export function generateTemplateModel(templateModel: TypespecTemplateModel): string {
   return `${templateModel.name}${
-    templateModel.arguments ? `<${templateModel.arguments.map((a) => a.name).join(",")}>` : ""
+    templateModel.arguments
+      ? `<${templateModel.arguments
+          .map((a) => (a.kind === "template" ? generateTemplateModel(a as TypespecTemplateModel) : a.name))
+          .join(",")}>`
+      : ""
   }${
     templateModel.additionalProperties
       ? ` & { ${templateModel.additionalProperties.map((p) => generateParameter(p)).join(";")} }`
       : ""
-  }`;
+  }${templateModel.additionalTemplateModel ? templateModel.additionalTemplateModel : ""}`;
 }
 
 export function generateArmResourceExamples(resource: TspArmResource): Record<string, string> {

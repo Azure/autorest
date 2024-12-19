@@ -118,21 +118,21 @@ interface RoleInstancesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CloudServiceRoleInstances_Restart")
-  restart is ArmResourceActionAsync<RoleInstance, void, void>;
+  restart is ArmResourceActionAsync<RoleInstance, void, OkResponse>;
 
   /**
    * The Reimage Role Instance asynchronous operation reinstalls the operating system on instances of web roles or worker roles.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CloudServiceRoleInstances_Reimage")
-  reimage is ArmResourceActionAsync<RoleInstance, void, void>;
+  reimage is ArmResourceActionAsync<RoleInstance, void, OkResponse>;
 
   /**
    * The Rebuild Role Instance asynchronous operation reinstalls the operating system on instances of web roles or worker roles and initializes the storage resources that are used by them. If you do not want to initialize storage resources, you can use Reimage Role Instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CloudServiceRoleInstances_Rebuild")
-  rebuild is ArmResourceActionAsync<RoleInstance, void, void>;
+  rebuild is ArmResourceActionAsync<RoleInstance, void, OkResponse>;
 
   /**
    * Gets a remote desktop file for a role instance in a cloud service.
@@ -141,7 +141,7 @@ interface RoleInstancesOperationGroup {
   @get
   @action("remoteDesktopFile")
   @operationId("CloudServiceRoleInstances_GetRemoteDesktopFile")
-  getRemoteDesktopFile is ArmResourceActionSync<RoleInstance, void, void>;
+  getRemoteDesktopFile is ArmResourceActionSync<RoleInstance, void, OkResponse>;
 }
 
 @@doc(RoleInstance.name, "Name of the role instance.");

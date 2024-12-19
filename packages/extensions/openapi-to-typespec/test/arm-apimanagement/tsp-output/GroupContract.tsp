@@ -130,7 +130,7 @@ interface GroupContracts {
   list is ArmResourceActionSync<
     GroupContract,
     void,
-    ResourceListResult<ApiManagementGroupUserData>,
+    ArmResponse<ResourceListResult<ApiManagementGroupUserData>>,
     Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| firstName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| lastName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| email | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| registrationDate | filter | ge, le, eq, ne, gt, lt |     |</br>| note | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -163,7 +163,7 @@ interface GroupContracts {
   checkEntityExists is ArmResourceActionSync<
     GroupContract,
     void,
-    void,
+    NoContentResponse,
     Parameters = {
       /**
        * User identifier. Must be unique in the current API Management service instance.
@@ -185,7 +185,7 @@ interface GroupContracts {
   create is ArmResourceActionSync<
     GroupContract,
     void,
-    ArmResponse<ApiManagementGroupUserData>,
+    ArmResponse<ApiManagementGroupUserData> | ArmResourceCreatedSyncResponse<ApiManagementGroupUserData>,
     Parameters = {
       /**
        * User identifier. Must be unique in the current API Management service instance.
@@ -207,7 +207,7 @@ interface GroupContracts {
   groupUserDelete is ArmResourceActionSync<
     GroupContract,
     void,
-    void,
+    OkResponse | NoContentResponse,
     Parameters = {
       /**
        * User identifier. Must be unique in the current API Management service instance.

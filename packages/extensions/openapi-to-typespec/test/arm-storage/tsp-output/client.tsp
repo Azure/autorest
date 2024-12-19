@@ -81,14 +81,10 @@ using Microsoft.Storage;
 @@clientName(BlobContainers.update::parameters.properties, "blobContainer");
 @@clientName(BlobContainers.setLegalHold::parameters.body, "LegalHold");
 @@clientName(BlobContainers.clearLegalHold::parameters.body, "LegalHold");
-@@clientName(BlobContainers.lease::parameters.body, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(BlobContainer.properties);
 
 @@clientName(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
-  "parameters"
-);
-@@clientName(ImmutabilityPolicies.extendImmutabilityPolicy::parameters.body,
   "parameters"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
@@ -104,7 +100,6 @@ using Microsoft.Storage;
 @@clientName(FileShares.create::parameters.resource, "fileShare");
 @@clientName(FileShares.update::parameters.properties, "fileShare");
 @@clientName(FileShares.restore::parameters.body, "deletedShare");
-@@clientName(FileShares.lease::parameters.body, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(FileShare.properties);
 

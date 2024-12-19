@@ -87,7 +87,7 @@ interface NotificationContracts {
   listByNotification is ArmResourceActionSync<
     NotificationContract,
     void,
-    ResourceListResult<RecipientUserContract>
+    ArmResponse<ResourceListResult<RecipientUserContract>>
   >;
 
   /**
@@ -100,7 +100,7 @@ interface NotificationContracts {
   checkEntityExists is ArmResourceActionSync<
     NotificationContract,
     void,
-    void,
+    NoContentResponse,
     Parameters = {
       /**
        * User identifier. Must be unique in the current API Management service instance.
@@ -122,7 +122,7 @@ interface NotificationContracts {
   notificationRecipientUserCreateOrUpdate is ArmResourceActionSync<
     NotificationContract,
     void,
-    ArmResponse<RecipientUserContract>,
+    ArmResponse<RecipientUserContract> | ArmResourceCreatedSyncResponse<RecipientUserContract>,
     Parameters = {
       /**
        * User identifier. Must be unique in the current API Management service instance.
@@ -144,7 +144,7 @@ interface NotificationContracts {
   delete is ArmResourceActionSync<
     NotificationContract,
     void,
-    void,
+    OkResponse | NoContentResponse,
     Parameters = {
       /**
        * User identifier. Must be unique in the current API Management service instance.
@@ -166,7 +166,7 @@ interface NotificationContracts {
   notificationRecipientEmailListByNotification is ArmResourceActionSync<
     NotificationContract,
     void,
-    ResourceListResult<RecipientEmailContract>
+    ArmResponse<ResourceListResult<RecipientEmailContract>>
   >;
 
   /**
@@ -179,7 +179,7 @@ interface NotificationContracts {
   notificationRecipientEmailCheckEntityExists is ArmResourceActionSync<
     NotificationContract,
     void,
-    void,
+    NoContentResponse,
     Parameters = {
       /**
        * Email identifier.
@@ -199,7 +199,7 @@ interface NotificationContracts {
   notificationRecipientEmailCreateOrUpdate is ArmResourceActionSync<
     NotificationContract,
     void,
-    ArmResponse<RecipientEmailContract>,
+    ArmResponse<RecipientEmailContract> | ArmResourceCreatedSyncResponse<RecipientEmailContract>,
     Parameters = {
       /**
        * Email identifier.
@@ -219,7 +219,7 @@ interface NotificationContracts {
   notificationRecipientEmailDelete is ArmResourceActionSync<
     NotificationContract,
     void,
-    void,
+    OkResponse | NoContentResponse,
     Parameters = {
       /**
        * Email identifier.
