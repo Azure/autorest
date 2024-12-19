@@ -45,11 +45,12 @@ interface CodeVersionResources {
    * Delete version.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("RegistryCodeVersions_Delete")
-  delete is ArmResourceDeleteAsync<CodeVersionResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    CodeVersionResource,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List versions.
@@ -77,18 +78,19 @@ interface CodeVersionResources {
       @query("$skip")
       $skip?: string;
     },
-    Response = CodeVersionResourceArmPaginatedResult
+    Response = ArmResponse<CodeVersionResourceArmPaginatedResult>
   >;
 
   /**
    * Generate a storage location and credential for the client to upload a code asset to.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("startPendingUpload")
   @operationId("RegistryCodeVersions_CreateOrGetStartPendingUpload")
   createOrGetStartPendingUpload is ArmResourceActionSync<
     CodeVersionResource,
     PendingUploadRequestDto,
-    PendingUploadResponseDto
+    ArmResponse<PendingUploadResponseDto>
   >;
 }
 

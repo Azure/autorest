@@ -52,47 +52,56 @@ interface Snapshots {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Snapshot,
-    Response = ArmResourceCreatedResponse<Snapshot> | ArmResourceUpdatedResponse<Snapshot> | (ArmAcceptedLroResponse & {
-      @bodyRoot _: Snapshot;
-    })
+    Response = ArmResourceUpdatedResponse<Snapshot> | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: Snapshot;
+    }),
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Updates (patches) a snapshot.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<Snapshot, SnapshotUpdate>;
+  update is ArmCustomPatchAsync<Snapshot, PatchModel = SnapshotUpdate>;
 
   /**
    * Deletes a snapshot.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<Snapshot>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Snapshot,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Lists snapshots under a resource group.
    */
   listByResourceGroup is ArmResourceListByParent<
     Snapshot,
-    Response = SnapshotList
+    Response = ArmResponse<SnapshotList>
   >;
 
   /**
    * Lists snapshots under a subscription.
    */
-  list is ArmListBySubscription<Snapshot, Response = SnapshotList>;
+  list is ArmListBySubscription<Snapshot, Response = ArmResponse<SnapshotList>>;
 
   /**
    * Grants access to a snapshot.
    */
-  grantAccess is ArmResourceActionAsync<Snapshot, GrantAccessData, AccessUri>;
+  @action("beginGetAccess")
+  grantAccess is ArmResourceActionAsync<
+    Snapshot,
+    GrantAccessData,
+    ArmResponse<AccessUri>
+  >;
 
   /**
    * Revokes access to a snapshot.
    */
-  revokeAccess is ArmResourceActionAsync<Snapshot, void, void>;
+  @action("endGetAccess")
+  revokeAccess is ArmResourceActionAsync<Snapshot, void, OkResponse>;
 }
 
 @@doc(Snapshot.name,

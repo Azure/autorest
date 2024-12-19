@@ -35,8 +35,12 @@ interface StorageQueues {
    * Creates a new queue with the specified queue name, under the specified account.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("Queue_Create")
-  create is ArmResourceCreateOrReplaceSync<StorageQueue>;
+  create is ArmResourceCreateOrReplaceSync<
+    StorageQueue,
+    Response = ArmResourceUpdatedResponse<StorageQueue>
+  >;
 
   /**
    * Creates a new queue with the specified queue name, under the specified account.
@@ -44,15 +48,18 @@ interface StorageQueues {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("Queue_Update")
-  update is ArmCustomPatchSync<StorageQueue, StorageQueue>;
+  update is ArmCustomPatchSync<StorageQueue, PatchModel = StorageQueue>;
 
   /**
    * Deletes the queue with the specified queue name, under the specified account if it exists.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("Queue_Delete")
-  delete is ArmResourceDeleteSync<StorageQueue>;
+  delete is ArmResourceDeleteSync<
+    StorageQueue,
+    Response = ArmDeletedNoContentResponse
+  >;
 
   /**
    * Gets a list of all the queues under the specified storage account
@@ -74,7 +81,7 @@ interface StorageQueues {
       @query("$filter")
       $filter?: string;
     },
-    Response = ListQueueResource
+    Response = ArmResponse<ListQueueResource>
   >;
 }
 

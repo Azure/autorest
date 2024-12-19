@@ -1,0 +1,14 @@
+{
+  "operationId": "Spaces_Delete",
+  "parameters": {
+    "api-version": "2023-11-14-preview",
+    "resourceGroupName": "testrg",
+    "spaceName": "Space1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "DeleteSpace",
+  "responses": {
+    "200": {},
+    "204": {}
+  }
+}

@@ -37,14 +37,17 @@ interface LocalUsersOperationGroup {
    * Create or update the properties of a local user associated with the storage account
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("LocalUsers_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<LocalUser>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    LocalUser,
+    Response = ArmResourceUpdatedResponse<LocalUser>
+  >;
 
   /**
    * Deletes the local user associated with the specified storage account.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("LocalUsers_Delete")
   delete is ArmResourceDeleteSync<LocalUser>;
 
@@ -53,14 +56,21 @@ interface LocalUsersOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LocalUsers_List")
-  list is ArmResourceListByParent<LocalUser, Response = LocalUsers>;
+  list is ArmResourceListByParent<
+    LocalUser,
+    Response = ArmResponse<LocalUsers>
+  >;
 
   /**
    * List SSH authorized keys and shared key of the local user.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LocalUsers_ListKeys")
-  listKeys is ArmResourceActionSync<LocalUser, void, LocalUserKeys>;
+  listKeys is ArmResourceActionSync<
+    LocalUser,
+    void,
+    ArmResponse<LocalUserKeys>
+  >;
 
   /**
    * Regenerate the local user SSH password.
@@ -70,7 +80,7 @@ interface LocalUsersOperationGroup {
   regeneratePassword is ArmResourceActionSync<
     LocalUser,
     void,
-    LocalUserRegeneratePasswordResult
+    ArmResponse<LocalUserRegeneratePasswordResult>
   >;
 }
 

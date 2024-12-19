@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
-namespace Azure.ResourceManager.AgFoodPlatform;
+namespace Microsoft.AgFoodPlatform;
 
 @armResourceOperations
 interface CheckNameAvailabilityOperations {
@@ -21,7 +21,7 @@ interface CheckNameAvailabilityOperations {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CheckNameAvailability_CheckNameAvailability")
   @post
-  checkNameAvailability is ArmProviderActionAsync<
+  checkNameAvailability is ArmProviderActionSync<
     Response = CheckNameAvailabilityResponse,
     Scope = SubscriptionActionScope,
     Parameters = {},

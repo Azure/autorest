@@ -43,28 +43,27 @@ interface OutboundRuleBasicResources {
   @operationId("ManagedNetworkSettingsRule_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     OutboundRuleBasicResource,
-    Response = ArmResourceCreatedResponse<OutboundRuleBasicResource> | ArmResourceUpdatedResponse<OutboundRuleBasicResource> | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<OutboundRuleBasicResource> | ArmAcceptedLroResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Deletes an outbound rule from the managed network of a machine learning workspace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ManagedNetworkSettingsRule_Delete")
-  delete is ArmResourceDeleteAsync<OutboundRuleBasicResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    OutboundRuleBasicResource,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Lists the managed network outbound rules for a machine learning workspace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagedNetworkSettingsRule_List")
-  list is ArmResourceListByParent<
-    OutboundRuleBasicResource,
-    Response = OutboundRuleListResult
-  >;
+  list is ArmResourceListByParent<OutboundRuleBasicResource>;
 }
 
 @@doc(OutboundRuleBasicResource.name,

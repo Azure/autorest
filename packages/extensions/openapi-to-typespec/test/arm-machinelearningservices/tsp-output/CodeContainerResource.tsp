@@ -45,11 +45,12 @@ interface CodeContainerResources {
    * Delete Code container.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("RegistryCodeContainers_Delete")
-  delete is ArmResourceDeleteAsync<CodeContainerResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    CodeContainerResource,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List containers.
@@ -65,7 +66,7 @@ interface CodeContainerResources {
       @query("$skip")
       $skip?: string;
     },
-    Response = CodeContainerResourceArmPaginatedResult
+    Response = ArmResponse<CodeContainerResourceArmPaginatedResult>
   >;
 }
 

@@ -1,6 +1,6 @@
 ```yaml
 library-name: AgFoodPlatform
-namespace: Azure.ResourceManager.AgFoodPlatform
+namespace: Microsoft.AgFoodPlatform
 isAzureSpec: true
 isArm: true
 require: https://github.com/Azure/azure-rest-api-specs/tree/7cc7728e5be252a7c6e559ea380411c8cceffa89/specification/agrifood/resource-manager/readme.md

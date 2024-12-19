@@ -22,8 +22,8 @@ interface ClassicAdministratorsOperations {
   @operationId("ClassicAdministrators_List")
   @get
   @action("classicAdministrators")
-  list is ArmProviderActionAsync<
-    Response = ClassicAdministratorListResult,
+  list is ArmProviderActionSync<
+    Response = ResourceListResult<ClassicAdministrator>,
     Scope = SubscriptionActionScope,
     Parameters = {}
   >;
@@ -37,7 +37,7 @@ interface GlobalAdministratorOperations {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GlobalAdministrator_ElevateAccess")
   @post
-  elevateAccess is ArmProviderActionAsync<Scope = TenantActionScope>;
+  elevateAccess is ArmProviderActionSync<Scope = TenantActionScope>;
 }
 
 interface AzurePermissionsForResourceGroupOperations {
@@ -117,5 +117,5 @@ interface EligibleChildResourcesOperations {
      */
     @query("$filter")
     $filter?: string,
-  ): ArmResponse<EligibleChildResourcesListResult> | ErrorResponse;
+  ): ArmResponse<ResourceListResult<EligibleChildResource>> | ErrorResponse;
 }

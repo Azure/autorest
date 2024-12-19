@@ -67,21 +67,29 @@ interface CloudServices {
   /**
    * Create or update a cloud service. Please note some properties can be set only during cloud service creation.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<CloudService>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    CloudService,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Update a cloud service.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<CloudService, CloudServiceUpdate>;
+  update is ArmCustomPatchAsync<
+    CloudService,
+    PatchModel = CloudServiceUpdate,
+    Response = ArmResponse<CloudService>
+  >;
 
   /**
    * Deletes a cloud service.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<CloudService>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    CloudService,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Gets a list of all cloud services under a resource group. Use nextLink property in the response to get the next page of Cloud Services. Do this till nextLink is null to fetch all the Cloud Services.
@@ -97,52 +105,102 @@ interface CloudServices {
    * Gets the status of a cloud service.
    */
   @get
+  @action("instanceView")
   getInstanceView is ArmResourceActionSync<
     CloudService,
     void,
-    CloudServiceInstanceView
+    ArmResponse<CloudServiceInstanceView>
   >;
 
   /**
    * Starts the cloud service.
    */
-  start is ArmResourceActionAsync<CloudService, void, void>;
+  start is ArmResourceActionAsync<CloudService, void, OkResponse>;
 
   /**
    * Power off the cloud service. Note that resources are still attached and you are getting charged for the resources.
    */
-  powerOff is ArmResourceActionAsync<CloudService, void, void>;
+  @action("poweroff")
+  powerOff is ArmResourceActionAsync<CloudService, void, OkResponse>;
 
   /**
    * Restarts one or more role instances in a cloud service.
    */
-  restart is ArmResourceActionAsync<CloudService, RoleInstances, void>;
+  restart is ArmResourceActionAsync<
+    CloudService,
+    {
+      /**
+       * List of cloud service role instance names.
+       */
+      @bodyRoot
+      parameters?: RoleInstances;
+    },
+    OkResponse
+  >;
 
   /**
    * Reimage asynchronous operation reinstalls the operating system on instances of web roles or worker roles.
    */
-  reimage is ArmResourceActionAsync<CloudService, RoleInstances, void>;
+  reimage is ArmResourceActionAsync<
+    CloudService,
+    {
+      /**
+       * List of cloud service role instance names.
+       */
+      @bodyRoot
+      parameters?: RoleInstances;
+    },
+    OkResponse
+  >;
 
   /**
    * Rebuild Role Instances reinstalls the operating system on instances of web roles or worker roles and initializes the storage resources that are used by them. If you do not want to initialize storage resources, you can use Reimage Role Instances.
    */
-  rebuild is ArmResourceActionAsync<CloudService, RoleInstances, void>;
+  rebuild is ArmResourceActionAsync<
+    CloudService,
+    {
+      /**
+       * List of cloud service role instance names.
+       */
+      @bodyRoot
+      parameters?: RoleInstances;
+    },
+    OkResponse
+  >;
 
   /**
    * Deletes role instances in a cloud service.
    */
-  deleteInstances is ArmResourceActionAsync<CloudService, RoleInstances, void>;
+  @action("delete")
+  deleteInstances is ArmResourceActionAsync<
+    CloudService,
+    {
+      /**
+       * List of cloud service role instance names.
+       */
+      @bodyRoot
+      parameters?: RoleInstances;
+    },
+    OkResponse
+  >;
 
   /**
    * Updates the role instances in the specified update domain.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @put
+  @action("{updateDomain}")
   @operationId("CloudServicesUpdateDomain_WalkUpdateDomain")
   walkUpdateDomain is ArmResourceActionAsync<
     CloudService,
-    UpdateDomain,
-    void,
+    {
+      /**
+       * The update domain object.
+       */
+      @bodyRoot
+      parameters?: UpdateDomain;
+    },
+    OkResponse,
     Parameters = {
       /**
        * Specifies an integer value that identifies the update domain. Update domains are identified with a zero-based index: the first update domain has an ID of 0, the second has an ID of 1, and so on.
@@ -157,11 +215,12 @@ interface CloudServices {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("{updateDomain}")
   @operationId("CloudServicesUpdateDomain_GetUpdateDomain")
   getUpdateDomain is ArmResourceActionSync<
     CloudService,
     void,
-    UpdateDomain,
+    ArmResponse<UpdateDomain>,
     Parameters = {
       /**
        * Specifies an integer value that identifies the update domain. Update domains are identified with a zero-based index: the first update domain has an ID of 0, the second has an ID of 1, and so on.
@@ -176,11 +235,12 @@ interface CloudServices {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("updateDomains")
   @operationId("CloudServicesUpdateDomain_ListUpdateDomains")
   listUpdateDomains is ArmResourceActionSync<
     CloudService,
     void,
-    UpdateDomainListResult
+    ArmResponse<UpdateDomainListResult>
   >;
 }
 
@@ -190,18 +250,3 @@ interface CloudServices {
   "The cloud service object."
 );
 @@doc(CloudServices.update::parameters.properties, "The cloud service object.");
-@@doc(CloudServices.restart::parameters.body,
-  "List of cloud service role instance names."
-);
-@@doc(CloudServices.reimage::parameters.body,
-  "List of cloud service role instance names."
-);
-@@doc(CloudServices.rebuild::parameters.body,
-  "List of cloud service role instance names."
-);
-@@doc(CloudServices.deleteInstances::parameters.body,
-  "List of cloud service role instance names."
-);
-@@doc(CloudServices.walkUpdateDomain::parameters.body,
-  "The update domain object."
-);

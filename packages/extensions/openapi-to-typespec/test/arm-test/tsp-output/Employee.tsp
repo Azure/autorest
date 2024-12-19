@@ -38,7 +38,7 @@ interface Employees {
    * Update a Employee
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<Employee, EmployeeUpdate>;
+  update is ArmCustomPatchSync<Employee, PatchModel = EmployeeUpdate>;
 
   /**
    * Delete a Employee
@@ -48,18 +48,12 @@ interface Employees {
   /**
    * List Employee resources by resource group
    */
-  listByResourceGroup is ArmResourceListByParent<
-    Employee,
-    Response = EmployeeListResult
-  >;
+  listByResourceGroup is ArmResourceListByParent<Employee>;
 
   /**
    * List Employee resources by subscription ID
    */
-  listBySubscription is ArmListBySubscription<
-    Employee,
-    Response = EmployeeListResult
-  >;
+  listBySubscription is ArmListBySubscription<Employee>;
 }
 
 @@doc(Employee.name, "Name of employee");

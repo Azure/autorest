@@ -36,12 +36,15 @@ interface ManagementPolicies {
   /**
    * Sets the managementpolicy to the specified storage account.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<ManagementPolicy>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    ManagementPolicy,
+    Response = ArmResourceUpdatedResponse<ManagementPolicy>
+  >;
 
   /**
    * Deletes the managementpolicy associated with the specified storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<ManagementPolicy>;
 }
 

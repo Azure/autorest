@@ -40,20 +40,20 @@ interface Devices {
    * Update a Device. Use '.unassigned' or '.default' for the device group and product names to move a device to the catalog level.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<Device, DeviceUpdate>;
+  update is ArmCustomPatchAsync<Device, PatchModel = DeviceUpdate>;
 
   /**
    * Delete a Device
    */
-  delete is ArmResourceDeleteAsync<Device>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Device,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List Device resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
    */
-  listByDeviceGroup is ArmResourceListByParent<
-    Device,
-    Response = DeviceListResult
-  >;
+  listByDeviceGroup is ArmResourceListByParent<Device>;
 
   /**
    * Generates the capability image for the device. Use '.unassigned' or '.default' for the device group and product names to generate the image for a device that does not belong to a specific device group and product.
@@ -61,7 +61,7 @@ interface Devices {
   generateCapabilityImage is ArmResourceActionAsync<
     Device,
     GenerateCapabilityImageRequest,
-    SignedCapabilityImageResponse
+    ArmResponse<SignedCapabilityImageResponse>
   >;
 }
 

@@ -36,12 +36,15 @@ interface BlobInventoryPolicies {
   /**
    * Sets the blob inventory policy to the specified storage account.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<BlobInventoryPolicy>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    BlobInventoryPolicy,
+    Response = ArmResourceUpdatedResponse<BlobInventoryPolicy>
+  >;
 
   /**
    * Deletes the blob inventory policy associated with the specified storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<BlobInventoryPolicy>;
 
   /**
@@ -49,7 +52,7 @@ interface BlobInventoryPolicies {
    */
   list is ArmResourceListByParent<
     BlobInventoryPolicy,
-    Response = ListBlobInventoryPolicy
+    Response = ArmResponse<ListBlobInventoryPolicy>
   >;
 }
 

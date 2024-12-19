@@ -30,24 +30,27 @@ interface RoleDefinitions {
    */
   get is ArmResourceRead<
     RoleDefinition,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 
   /**
    * Creates or updates a role definition.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     RoleDefinition,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Response = ArmResourceCreatedSyncResponse<RoleDefinition>
   >;
 
   /**
    * Deletes a role definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteSync<
     RoleDefinition,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Response = ArmResponse<RoleDefinition> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -55,15 +58,14 @@ interface RoleDefinitions {
    */
   list is ArmResourceListByParent<
     RoleDefinition,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
       /**
        * The filter to apply on the operation. Use atScopeAndBelow filter to search below the given scope as well.
        */
       @query("$filter")
       $filter?: string;
-    },
-    Response = RoleDefinitionListResult
+    }
   >;
 }
 

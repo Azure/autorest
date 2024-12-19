@@ -41,12 +41,14 @@ interface ApplicationResources {
    * Update a ApplicationResource
    */
   @parameterVisibility
-  patch is ArmCustomPatchSync<ApplicationResource, ApplicationResourceUpdate>;
+  patch is ArmCustomPatchSync<
+    ApplicationResource,
+    PatchModel = ApplicationResourceUpdate
+  >;
 
   /**
    * Delete a ApplicationResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<ApplicationResource>;
 
   /**
@@ -82,22 +84,24 @@ interface ApplicationResources {
       /**
        * Select the specified fields to be included in the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "select", explode: true })
       select?: string[];
 
       /**
        * Expand the indicated resources into the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "expand", explode: true })
       expand?: string[];
 
       /**
        * Expressions that specify the order of returned results.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "orderby", explode: true })
       orderby?: string[];
-    },
-    Response = ApplicationResourceListResult
+    }
   >;
 }
 

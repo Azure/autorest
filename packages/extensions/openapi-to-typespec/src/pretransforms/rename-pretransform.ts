@@ -42,7 +42,8 @@ export function createClientNameDecorator(target: string, value: string): Typesp
     name: "clientName",
     module: "@azure-tools/typespec-client-generator-core",
     namespace: "Azure.ClientGenerator.Core",
-    arguments: [target, value],
+    target,
+    arguments: [value],
   };
 }
 

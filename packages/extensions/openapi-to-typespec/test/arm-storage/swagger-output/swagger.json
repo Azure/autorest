@@ -170,31 +170,13 @@
               "$ref": "#/definitions/CheckNameAvailabilityResult"
             }
           },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts": {
@@ -217,20 +199,6 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DeletedAccountListResult"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
             }
           },
           "default": {
@@ -318,20 +286,6 @@
               "$ref": "#/definitions/UsageListResult"
             }
           },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -363,20 +317,6 @@
               "$ref": "#/definitions/StorageSkuListResult"
             }
           },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -403,7 +343,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/StorageAccountListResult"
             }
@@ -445,7 +385,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/StorageAccountListResult"
             }
@@ -580,19 +520,6 @@
               "$ref": "#/definitions/StorageAccount"
             }
           },
-          "201": {
-            "description": "Resource 'StorageAccount' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/StorageAccount"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -651,7 +578,11 @@
           "StorageAccountCreateWithImmutabilityPolicy": {
             "$ref": "./examples/StorageAccountCreateWithImmutabilityPolicy.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "StorageAccounts_Update",
@@ -776,7 +707,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/abortHierarchicalNamespaceMigration": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/aborthnsonmigration": {
       "post": {
         "operationId": "StorageAccounts_AbortHierarchicalNamespaceMigration",
         "tags": [
@@ -804,6 +735,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -817,9 +751,6 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
-          },
-          "204": {
-            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -868,7 +799,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/BlobServiceItems"
             }
@@ -976,12 +907,6 @@
               "$ref": "#/definitions/BlobServiceProperties"
             }
           },
-          "201": {
-            "description": "Resource 'BlobServiceProperties' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/BlobServiceProperties"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1065,7 +990,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ListContainerItems"
             }
@@ -1534,12 +1459,6 @@
               "$ref": "#/definitions/ImmutabilityPolicy"
             }
           },
-          "201": {
-            "description": "Resource 'ImmutabilityPolicy' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/ImmutabilityPolicy"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1601,10 +1520,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ImmutabilityPolicy"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1620,7 +1539,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/default/extendImmutabilityPolicy": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/default/extend": {
       "post": {
         "operationId": "BlobContainers_ExtendImmutabilityPolicy",
         "tags": [
@@ -1664,10 +1583,10 @@
             "x-ms-client-name": "If-Match"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "description": "The ImmutabilityPolicy Properties that will be extended for a blob container.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/ImmutabilityPolicy"
             }
@@ -1694,7 +1613,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/default/lockImmutabilityPolicy": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/default/lock": {
       "post": {
         "operationId": "BlobContainers_LockImmutabilityPolicy",
         "tags": [
@@ -1795,10 +1714,10 @@
             "maxLength": 63
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "description": "Lease Container request body.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/LeaseContainerRequest"
             }
@@ -1828,7 +1747,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/objectLevelWorm": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/migrate": {
       "post": {
         "operationId": "BlobContainers_ObjectLevelWorm",
         "tags": [
@@ -1865,6 +1784,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -1878,9 +1800,6 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
-          },
-          "204": {
-            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2045,7 +1964,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EncryptionScopeListResult"
             }
@@ -2302,6 +2221,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -2315,9 +2237,6 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
-          },
-          "204": {
-            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2369,7 +2288,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/FileServiceItems"
             }
@@ -2477,12 +2396,6 @@
               "$ref": "#/definitions/FileServiceProperties"
             }
           },
-          "201": {
-            "description": "Resource 'FileServiceProperties' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/FileServiceProperties"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -2553,7 +2466,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/FileShareItems"
             }
@@ -2917,10 +2830,10 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "description": "Lease Share request body.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/LeaseShareRequest"
             }
@@ -2996,8 +2909,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Azure operation completed successfully."
+          "200": {
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -3013,7 +2926,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/hierarchicalNamespaceMigration": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/hnsonmigration": {
       "post": {
         "operationId": "StorageAccounts_HierarchicalNamespaceMigration",
         "tags": [
@@ -3048,6 +2961,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -3061,9 +2977,6 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
-          },
-          "204": {
-            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -3112,7 +3025,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ListBlobInventoryPolicy"
             }
@@ -3260,12 +3173,6 @@
               "$ref": "#/definitions/BlobInventoryPolicy"
             }
           },
-          "201": {
-            "description": "Resource 'BlobInventoryPolicy' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/BlobInventoryPolicy"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -3352,7 +3259,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listAccountSAS": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listAccountSas": {
       "post": {
         "operationId": "StorageAccounts_ListAccountSAS",
         "tags": [
@@ -3405,54 +3312,6 @@
         "x-ms-examples": {
           "StorageAccountListAccountSAS": {
             "$ref": "./examples/StorageAccountListAccountSAS.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listByStorageAccount": {
-      "get": {
-        "operationId": "PrivateLinkResources_ListByStorageAccount",
-        "tags": [
-          "StorageAccounts"
-        ],
-        "description": "Gets the private link resources that need to be created for a storage account.",
-        "parameters": [
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 24
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "StorageAccountListPrivateLinkResources": {
-            "$ref": "./examples/StorageAccountListPrivateLinkResources.json"
           }
         }
       }
@@ -3518,7 +3377,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listServiceSAS": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listServiceSas": {
       "post": {
         "operationId": "StorageAccounts_ListServiceSAS",
         "tags": [
@@ -3604,7 +3463,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/LocalUsers"
             }
@@ -3726,12 +3585,6 @@
         "responses": {
           "200": {
             "description": "Resource 'LocalUser' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/LocalUser"
-            }
-          },
-          "201": {
-            "description": "Resource 'LocalUser' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/LocalUser"
             }
@@ -4051,12 +3904,6 @@
               "$ref": "#/definitions/ManagementPolicy"
             }
           },
-          "201": {
-            "description": "Resource 'ManagementPolicy' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/ManagementPolicy"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -4187,7 +4034,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ObjectReplicationPolicies"
             }
@@ -4311,12 +4158,6 @@
               "$ref": "#/definitions/ObjectReplicationPolicy"
             }
           },
-          "201": {
-            "description": "Resource 'ObjectReplicationPolicy' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/ObjectReplicationPolicy"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -4423,7 +4264,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
@@ -4545,12 +4386,6 @@
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
-          "201": {
-            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -4618,6 +4453,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateLinkResources": {
+      "get": {
+        "operationId": "PrivateLinkResources_ListByStorageAccount",
+        "tags": [
+          "StorageAccounts"
+        ],
+        "description": "Gets the private link resources that need to be created for a storage account.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageAccountListPrivateLinkResources": {
+            "$ref": "./examples/StorageAccountListPrivateLinkResources.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/queueServices": {
       "get": {
         "operationId": "QueueServices_List",
@@ -4647,7 +4530,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ListQueueServices"
             }
@@ -4755,12 +4638,6 @@
               "$ref": "#/definitions/QueueServiceProperties"
             }
           },
-          "201": {
-            "description": "Resource 'QueueServiceProperties' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/QueueServiceProperties"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -4818,7 +4695,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ListQueueResource"
             }
@@ -4949,12 +4826,6 @@
               "$ref": "#/definitions/StorageQueue"
             }
           },
-          "201": {
-            "description": "Resource 'StorageQueue' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/StorageQueue"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -5073,9 +4944,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "204": {
             "description": "Resource does not exist."
           },
@@ -5256,8 +5124,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Azure operation completed successfully."
+          "200": {
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -5302,7 +5170,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ListTableServices"
             }
@@ -5410,12 +5278,6 @@
               "$ref": "#/definitions/TableServiceProperties"
             }
           },
-          "201": {
-            "description": "Resource 'TableServiceProperties' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/TableServiceProperties"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -5459,7 +5321,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ListTableResource"
             }
@@ -5590,12 +5452,6 @@
               "$ref": "#/definitions/Table"
             }
           },
-          "201": {
-            "description": "Resource 'Table' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Table"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -5714,9 +5570,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "204": {
             "description": "Resource does not exist."
           },
@@ -6017,6 +5870,19 @@
           }
         ]
       }
+    },
+    "Azure.ResourceManager.ArmResponse<BlobRestoreStatus>": {
+      "type": "object",
+      "description": "Azure operation completed successfully.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/BlobRestoreStatus",
+          "description": "The body type of the operation request or response."
+        }
+      },
+      "required": [
+        "body"
+      ]
     },
     "AzureEntityResource": {
       "type": "object",
@@ -6741,7 +6607,7 @@
     },
     "DeletedAccountListResult": {
       "type": "object",
-      "description": "The response from the List Deleted Accounts operation.",
+      "description": "The response of a DeletedAccount list operation.",
       "properties": {
         "value": {
           "type": "array",
@@ -6989,7 +6855,7 @@
     },
     "EncryptionScopeListResult": {
       "type": "object",
-      "description": "List of encryption scopes requested, and if paging is required, a URL to the next page of encryption scopes.",
+      "description": "The response of a EncryptionScope list operation.",
       "properties": {
         "value": {
           "type": "array",
@@ -10279,7 +10145,7 @@
     },
     "StorageAccountListResult": {
       "type": "object",
-      "description": "The response from the List Storage Accounts operation.",
+      "description": "The response of a StorageAccount list operation.",
       "properties": {
         "value": {
           "type": "array",
@@ -10874,6 +10740,10 @@
           "readOnly": true
         }
       }
+    },
+    "TypeSpec.Http.OkResponse": {
+      "type": "object",
+      "description": "The request has succeeded."
     },
     "UpdateHistoryProperty": {
       "type": "object",

@@ -30,7 +30,7 @@ interface RoleAssignments {
    */
   get is ArmResourceRead<
     RoleAssignment,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
       /**
        * Tenant ID for cross-tenant request
@@ -45,23 +45,24 @@ interface RoleAssignments {
    */
   create is ArmResourceCreateOrReplaceSync<
     RoleAssignment,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 
   /**
    * Delete a role assignment by scope and name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteSync<
     RoleAssignment,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
       /**
        * Tenant ID for cross-tenant request
        */
       @query("tenantId")
       tenantId?: string;
-    }
+    },
+    Response = ArmResponse<RoleAssignment> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -69,7 +70,7 @@ interface RoleAssignments {
    */
   listForScope is ArmResourceListByParent<
     RoleAssignment,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
       /**
        * The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal.
@@ -88,8 +89,7 @@ interface RoleAssignments {
        */
       @query("$skipToken")
       $skipToken?: string;
-    },
-    Response = RoleAssignmentListResult
+    }
   >;
 }
 

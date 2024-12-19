@@ -38,14 +38,8 @@ interface SchemaContracts {
    * Gets the entity state (Etag) version of the schema specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("ApiSchema_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      SchemaContract,
-      BaseParameters<SchemaContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<SchemaContract>;
 
   /**
    * Creates or updates schema configuration for the API.
@@ -63,14 +57,16 @@ interface SchemaContracts {
       @header
       `If-Match`?: string;
     },
-    Response = ArmResourceCreatedResponse<SchemaContract> | ArmResourceUpdatedResponse<SchemaContract> | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<SchemaContract> | ArmResourceCreatedResponse<
+      SchemaContract,
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
   >;
 
   /**
    * Deletes the schema configuration at the Api.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiSchema_Delete")
   delete is ArmResourceDeleteSync<
     SchemaContract,
@@ -115,8 +111,7 @@ interface SchemaContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = SchemaListResult
+    }
   >;
 }
 

@@ -42,7 +42,7 @@ model ProductResult {
   @items
   values?: Product[];
 
-  @Azure.Core.nextLink
+  @nextLink
   nextLink?: string;
 }
 
@@ -51,7 +51,7 @@ model OdataProductResult {
   @items
   values?: Product[];
 
-  @Azure.Core.nextLink
+  @nextLink
   @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
@@ -62,7 +62,7 @@ model ProductResultValueWithXMSClientName {
   @encodedName("application/json", "values")
   indexes?: Product[];
 
-  @Azure.Core.nextLink
+  @nextLink
   nextLink?: string;
 }
 

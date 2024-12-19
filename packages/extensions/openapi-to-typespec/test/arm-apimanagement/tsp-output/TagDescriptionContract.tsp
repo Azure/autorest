@@ -38,14 +38,8 @@ interface TagDescriptionContracts {
    * Gets the entity state version of the tag specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("ApiTagDescription_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      TagDescriptionContract,
-      BaseParameters<TagDescriptionContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<TagDescriptionContract>;
 
   /**
    * Create/Update tag description in scope of the Api.
@@ -67,7 +61,6 @@ interface TagDescriptionContracts {
    * Delete tag description for the Api.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiTagDescription_Delete")
   delete is ArmResourceDeleteSync<
     TagDescriptionContract,
@@ -106,8 +99,7 @@ interface TagDescriptionContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = TagDescriptionListResult
+    }
   >;
 }
 

@@ -10,7 +10,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Azure.ResourceManager.AgFoodPlatform;
+namespace Microsoft.AgFoodPlatform;
 /**
  * A private link resource.
  */
@@ -37,7 +37,7 @@ interface PrivateLinkResources {
    */
   listByResource is ArmResourceListByParent<
     PrivateLinkResource,
-    Response = PrivateLinkResourceListResult
+    Response = ArmResponse<PrivateLinkResourceListResult>
   >;
 }
 

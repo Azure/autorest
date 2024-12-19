@@ -86,20 +86,20 @@ interface VirtualMachineScaleSetVMS {
   @operationId("VirtualMachineScaleSetVMs_Update")
   update is ArmResourceCreateOrReplaceAsync<
     VirtualMachineScaleSetVM,
-    Response = ArmResourceCreatedResponse<VirtualMachineScaleSetVM> | ArmResourceUpdatedResponse<VirtualMachineScaleSetVM> | (ArmAcceptedLroResponse & {
-      @bodyRoot _: VirtualMachineScaleSetVM;
-    })
+    Response = ArmResourceUpdatedResponse<VirtualMachineScaleSetVM> | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: VirtualMachineScaleSetVM;
+    }),
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Deletes a virtual machine from a VM scale set.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("VirtualMachineScaleSetVMs_Delete")
-  delete is ArmResourceDeleteAsync<
+  delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachineScaleSetVM,
     Parameters = {
       /**
@@ -107,7 +107,8 @@ interface VirtualMachineScaleSetVMS {
        */
       @query("forceDeletion")
       forceDeletion?: boolean;
-    }
+    },
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -141,8 +142,7 @@ interface VirtualMachineScaleSetVMS {
        */
       @query("$expand")
       $expand?: string;
-    },
-    Response = VirtualMachineScaleSetVMListResult
+    }
   >;
 
   /**
@@ -152,45 +152,62 @@ interface VirtualMachineScaleSetVMS {
   @operationId("VirtualMachineScaleSetVMs_Reimage")
   reimage is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
-    VirtualMachineScaleSetVMReimageParameters,
-    void
+    {
+      /**
+       * Parameters for the Reimaging Virtual machine in ScaleSet.
+       */
+      @bodyRoot
+      vmScaleSetVMReimageInput?: VirtualMachineScaleSetVMReimageParameters;
+    },
+    OkResponse
   >;
 
   /**
    * Allows you to re-image all the disks ( including data disks ) in the a VM scale set instance. This operation is only supported for managed disks.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("reimageall")
   @operationId("VirtualMachineScaleSetVMs_ReimageAll")
-  reimageAll is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
+  reimageAll is ArmResourceActionAsync<
+    VirtualMachineScaleSetVM,
+    void,
+    OkResponse
+  >;
 
   /**
    * Deallocates a specific virtual machine in a VM scale set. Shuts down the virtual machine and releases the compute resources it uses. You are not billed for the compute resources of this virtual machine once it is deallocated.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetVMs_Deallocate")
-  deallocate is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
+  deallocate is ArmResourceActionAsync<
+    VirtualMachineScaleSetVM,
+    void,
+    OkResponse
+  >;
 
   /**
    * Gets the status of a virtual machine from a VM scale set.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("instanceView")
   @operationId("VirtualMachineScaleSetVMs_GetInstanceView")
   getInstanceView is ArmResourceActionSync<
     VirtualMachineScaleSetVM,
     void,
-    VirtualMachineScaleSetVMInstanceView
+    ArmResponse<VirtualMachineScaleSetVMInstanceView>
   >;
 
   /**
    * Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("poweroff")
   @operationId("VirtualMachineScaleSetVMs_PowerOff")
   powerOff is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
-    void,
+    OkResponse,
     Parameters = {
       /**
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
@@ -205,21 +222,25 @@ interface VirtualMachineScaleSetVMS {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetVMs_Restart")
-  restart is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
+  restart is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, OkResponse>;
 
   /**
    * Starts a virtual machine in a VM scale set.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetVMs_Start")
-  start is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
+  start is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, OkResponse>;
 
   /**
    * Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetVMs_Redeploy")
-  redeploy is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
+  redeploy is ArmResourceActionAsync<
+    VirtualMachineScaleSetVM,
+    void,
+    OkResponse
+  >;
 
   /**
    * The operation to retrieve SAS URIs of boot diagnostic logs for a virtual machine in a VM scale set.
@@ -229,7 +250,7 @@ interface VirtualMachineScaleSetVMS {
   retrieveBootDiagnosticsData is ArmResourceActionSync<
     VirtualMachineScaleSetVM,
     void,
-    RetrieveBootDiagnosticsDataResult,
+    ArmResponse<RetrieveBootDiagnosticsDataResult>,
     Parameters = {
       /**
        * Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. **Note:** If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes.
@@ -247,7 +268,7 @@ interface VirtualMachineScaleSetVMS {
   performMaintenance is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
-    void
+    OkResponse
   >;
 
   /**
@@ -255,9 +276,10 @@ interface VirtualMachineScaleSetVMS {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetVMs_SimulateEviction")
-  simulateEviction is ArmResourceActionNoContentSync<
+  simulateEviction is ArmResourceActionSync<
     VirtualMachineScaleSetVM,
-    void
+    void,
+    NoContentResponse
   >;
 
   /**
@@ -268,7 +290,7 @@ interface VirtualMachineScaleSetVMS {
   runCommand is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
     RunCommandInput,
-    RunCommandResult
+    ArmResponse<RunCommandResult>
   >;
 }
 
@@ -278,9 +300,6 @@ interface VirtualMachineScaleSetVMS {
 );
 @@doc(VirtualMachineScaleSetVMS.update::parameters.resource,
   "Parameters supplied to the Update Virtual Machine Scale Sets VM operation."
-);
-@@doc(VirtualMachineScaleSetVMS.reimage::parameters.body,
-  "Parameters for the Reimaging Virtual machine in ScaleSet."
 );
 @@doc(VirtualMachineScaleSetVMS.runCommand::parameters.body,
   "Parameters supplied to the Run command operation."

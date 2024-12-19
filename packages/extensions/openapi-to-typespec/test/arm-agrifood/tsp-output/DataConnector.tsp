@@ -10,7 +10,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Azure.ResourceManager.AgFoodPlatform;
+namespace Microsoft.AgFoodPlatform;
 /**
  * DataConnector Model.
  */
@@ -41,7 +41,6 @@ interface DataConnectors {
   /**
    * Delete a Data Connectors with given dataConnector name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<DataConnector>;
 
   /**
@@ -65,7 +64,7 @@ interface DataConnectors {
       @query("$skipToken")
       $skipToken?: string;
     },
-    Response = DataConnectorListResponse
+    Response = ArmResponse<DataConnectorListResponse>
   >;
 }
 

@@ -55,30 +55,27 @@ interface ProximityPlacementGroups {
   @parameterVisibility
   update is ArmCustomPatchSync<
     ProximityPlacementGroup,
-    ProximityPlacementGroupUpdate
+    PatchModel = ProximityPlacementGroupUpdate
   >;
 
   /**
    * Delete a proximity placement group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteSync<ProximityPlacementGroup>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  delete is ArmResourceDeleteSync<
+    ProximityPlacementGroup,
+    Response = ArmDeletedResponse
+  >;
 
   /**
    * Lists all proximity placement groups in a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<
-    ProximityPlacementGroup,
-    Response = ProximityPlacementGroupListResult
-  >;
+  listByResourceGroup is ArmResourceListByParent<ProximityPlacementGroup>;
 
   /**
    * Lists all proximity placement groups in a subscription.
    */
-  listBySubscription is ArmListBySubscription<
-    ProximityPlacementGroup,
-    Response = ProximityPlacementGroupListResult
-  >;
+  listBySubscription is ArmListBySubscription<ProximityPlacementGroup>;
 }
 
 @@doc(ProximityPlacementGroup.name,

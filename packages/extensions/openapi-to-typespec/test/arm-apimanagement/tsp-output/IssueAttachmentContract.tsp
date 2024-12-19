@@ -38,14 +38,8 @@ interface IssueAttachmentContracts {
    * Gets the entity state (Etag) version of the issue Attachment for an API specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("ApiIssueAttachment_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      IssueAttachmentContract,
-      BaseParameters<IssueAttachmentContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<IssueAttachmentContract>;
 
   /**
    * Creates a new Attachment for the Issue in an API or updates an existing one.
@@ -67,7 +61,6 @@ interface IssueAttachmentContracts {
    * Deletes the specified comment from an Issue.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiIssueAttachment_Delete")
   delete is ArmResourceDeleteSync<
     IssueAttachmentContract,
@@ -106,8 +99,7 @@ interface IssueAttachmentContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = IssueAttachmentListResult
+    }
   >;
 }
 

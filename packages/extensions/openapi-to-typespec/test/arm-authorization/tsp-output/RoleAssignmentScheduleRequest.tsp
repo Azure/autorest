@@ -30,15 +30,17 @@ interface RoleAssignmentScheduleRequests {
    */
   get is ArmResourceRead<
     RoleAssignmentScheduleRequest,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 
   /**
    * Creates a role assignment schedule request.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is ArmResourceCreateOrReplaceSync<
     RoleAssignmentScheduleRequest,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Response = ArmResourceCreatedSyncResponse<RoleAssignmentScheduleRequest>
   >;
 
   /**
@@ -46,15 +48,14 @@ interface RoleAssignmentScheduleRequests {
    */
   listForScope is ArmResourceListByParent<
     RoleAssignmentScheduleRequest,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
       /**
        * The filter to apply on the operation. Use $filter=atScope() to return all role assignment schedule requests at or above the scope. Use $filter=principalId eq {id} to return all role assignment schedule requests at, above or below the scope for the specified principal. Use $filter=asRequestor() to return all role assignment schedule requests requested by the current user. Use $filter=asTarget() to return all role assignment schedule requests created for the current user. Use $filter=asApprover() to return all role assignment schedule requests where the current user is an approver.
        */
       @query("$filter")
       $filter?: string;
-    },
-    Response = RoleAssignmentScheduleRequestListResult
+    }
   >;
 
   /**
@@ -63,8 +64,8 @@ interface RoleAssignmentScheduleRequests {
   cancel is ArmResourceActionSync<
     RoleAssignmentScheduleRequest,
     void,
-    void,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    OkResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 
   /**
@@ -73,8 +74,8 @@ interface RoleAssignmentScheduleRequests {
   validate is ArmResourceActionSync<
     RoleAssignmentScheduleRequest,
     RoleAssignmentScheduleRequest,
-    RoleAssignmentScheduleRequest,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    ArmResponse<RoleAssignmentScheduleRequest>,
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 }
 

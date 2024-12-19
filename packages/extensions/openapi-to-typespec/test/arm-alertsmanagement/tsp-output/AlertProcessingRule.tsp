@@ -39,12 +39,11 @@ interface AlertProcessingRules {
    * Enable, disable, or update tags for an alert processing rule.
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<AlertProcessingRule, PatchObject>;
+  update is ArmCustomPatchSync<AlertProcessingRule, PatchModel = PatchObject>;
 
   /**
    * Delete an alert processing rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<AlertProcessingRule>;
 
   /**
@@ -52,7 +51,7 @@ interface AlertProcessingRules {
    */
   listByResourceGroup is ArmResourceListByParent<
     AlertProcessingRule,
-    Response = AlertProcessingRulesList
+    Response = ArmResponse<AlertProcessingRulesList>
   >;
 
   /**
@@ -60,7 +59,7 @@ interface AlertProcessingRules {
    */
   listBySubscription is ArmListBySubscription<
     AlertProcessingRule,
-    Response = AlertProcessingRulesList
+    Response = ArmResponse<AlertProcessingRulesList>
   >;
 }
 

@@ -94,6 +94,7 @@ export function parseMetadata(codeModel: CodeModel, configuration: Record<string
       resources[resourceSchemaName + "FixMe"] = {
         Name: resourceSchemaName + "FixMe",
         GetOperations: [],
+        ExistOperation: undefined,
         CreateOperations: [],
         UpdateOperations: [],
         DeleteOperations: [],
@@ -143,6 +144,7 @@ function buildResource(
   const updateOperation =
     buildLifeCycleOperation(set, HttpMethod.Patch, "Update") ?? buildLifeCycleOperation(set, HttpMethod.Put, "Update");
   const deleteOperation = buildLifeCycleOperation(set, HttpMethod.Delete, "Delete");
+  const existOperation = buildLifeCycleOperation(set, HttpMethod.Head, "CheckExistence");
   const listOperation = buildListOperation(set);
   const otherOperation = buildOtherOperation(set);
 
@@ -182,6 +184,7 @@ function buildResource(
   return {
     Name: lastWordToSingular(resourceSchemaName),
     GetOperations: getOperation ? [getOperation] : [],
+    ExistOperation: existOperation,
     CreateOperations: createOperation ? [createOperation] : [],
     UpdateOperations: updateOperation ? [updateOperation] : [],
     DeleteOperations: deleteOperation ? [deleteOperation] : [],

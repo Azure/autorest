@@ -38,14 +38,8 @@ interface GatewayCertificateAuthorityContracts {
    * Checks if Certificate entity is assigned to Gateway entity as Certificate Authority.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("GatewayCertificateAuthority_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      GatewayCertificateAuthorityContract,
-      BaseParameters<GatewayCertificateAuthorityContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<GatewayCertificateAuthorityContract>;
 
   /**
    * Assign Certificate entity to Gateway entity as Certificate Authority.
@@ -67,7 +61,6 @@ interface GatewayCertificateAuthorityContracts {
    * Remove relationship between Certificate Authority and Gateway entity.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("GatewayCertificateAuthority_Delete")
   delete is ArmResourceDeleteSync<
     GatewayCertificateAuthorityContract,
@@ -106,8 +99,7 @@ interface GatewayCertificateAuthorityContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = GatewayCertificateAuthorityListResult
+    }
   >;
 }
 

@@ -40,10 +40,11 @@ interface FeaturesetContainers {
   /**
    * Delete container.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<FeaturesetContainer>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    FeaturesetContainer,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List featurestore entity containers.
@@ -87,7 +88,7 @@ interface FeaturesetContainers {
       @query("createdBy")
       createdBy?: string;
     },
-    Response = FeaturesetContainerResourceArmPaginatedResult
+    Response = ArmResponse<FeaturesetContainerResourceArmPaginatedResult>
   >;
 }
 

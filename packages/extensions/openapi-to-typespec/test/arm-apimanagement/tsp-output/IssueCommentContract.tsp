@@ -38,14 +38,8 @@ interface IssueCommentContracts {
    * Gets the entity state (Etag) version of the issue Comment for an API specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("ApiIssueComment_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      IssueCommentContract,
-      BaseParameters<IssueCommentContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<IssueCommentContract>;
 
   /**
    * Creates a new Comment for the Issue in an API or updates an existing one.
@@ -67,7 +61,6 @@ interface IssueCommentContracts {
    * Deletes the specified comment from an Issue.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiIssueComment_Delete")
   delete is ArmResourceDeleteSync<
     IssueCommentContract,
@@ -106,8 +99,7 @@ interface IssueCommentContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = IssueCommentListResult
+    }
   >;
 }
 

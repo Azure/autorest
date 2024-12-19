@@ -39,8 +39,12 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
    * Create or update machine learning workspaces connections under the specified workspace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("WorkspaceConnections_Create")
-  create is ArmResourceCreateOrReplaceSync<WorkspaceConnectionPropertiesV2BasicResource>;
+  create is ArmResourceCreateOrReplaceSync<
+    WorkspaceConnectionPropertiesV2BasicResource,
+    Response = ArmResourceUpdatedResponse<WorkspaceConnectionPropertiesV2BasicResource>
+  >;
 
   /**
    * Update machine learning workspaces connections under the specified workspace.
@@ -50,14 +54,13 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   @operationId("WorkspaceConnections_Update")
   update is ArmCustomPatchSync<
     WorkspaceConnectionPropertiesV2BasicResource,
-    WorkspaceConnectionUpdateParameter
+    PatchModel = WorkspaceConnectionUpdateParameter
   >;
 
   /**
    * Delete machine learning workspaces connections by name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("WorkspaceConnections_Delete")
   delete is ArmResourceDeleteSync<WorkspaceConnectionPropertiesV2BasicResource>;
 
@@ -81,18 +84,19 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
       @query("category")
       category?: string;
     },
-    Response = WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult
+    Response = ArmResponse<WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult>
   >;
 
   /**
    * List all the secrets of a machine learning workspaces connections.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("listsecrets")
   @operationId("WorkspaceConnections_ListSecrets")
   listSecrets is ArmResourceActionSync<
     WorkspaceConnectionPropertiesV2BasicResource,
     void,
-    WorkspaceConnectionPropertiesV2BasicResource
+    ArmResponse<WorkspaceConnectionPropertiesV2BasicResource>
   >;
 }
 

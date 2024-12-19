@@ -41,22 +41,24 @@ interface Workspaces {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Workspace,
-    Response = ArmResourceCreatedResponse<Workspace> | ArmResourceUpdatedResponse<Workspace> | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<Workspace> | ArmAcceptedLroResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Updates a machine learning workspace with the specified parameters.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<Workspace, WorkspaceUpdateParameters>;
+  update is ArmCustomPatchAsync<
+    Workspace,
+    PatchModel = WorkspaceUpdateParameters
+  >;
 
   /**
    * Deletes a machine learning workspace.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<
+  delete is ArmResourceDeleteWithoutOkAsync<
     Workspace,
     Parameters = {
       /**
@@ -64,7 +66,8 @@ interface Workspaces {
        */
       @query("forceToPurge")
       forceToPurge?: boolean;
-    }
+    },
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -84,8 +87,7 @@ interface Workspaces {
        */
       @query("kind")
       kind?: string;
-    },
-    Response = WorkspaceListResult
+    }
   >;
 
   /**
@@ -105,8 +107,7 @@ interface Workspaces {
        */
       @query("kind")
       kind?: string;
-    },
-    Response = WorkspaceListResult
+    }
   >;
 
   /**
@@ -114,22 +115,37 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("features")
   @operationId("WorkspaceFeatures_List")
-  list is ArmResourceActionSync<Workspace, void, ListAmlUserFeatureResult>;
+  list is ArmResourceActionSync<
+    Workspace,
+    void,
+    ArmResponse<ListAmlUserFeatureResult>
+  >;
 
   /**
    * Diagnose workspace setup issue.
    */
   diagnose is ArmResourceActionAsync<
     Workspace,
-    DiagnoseWorkspaceParameters,
-    DiagnoseResponseResult
+    {
+      /**
+       * The parameter of diagnosing workspace health
+       */
+      @bodyRoot
+      body?: DiagnoseWorkspaceParameters;
+    },
+    ArmResponse<DiagnoseResponseResult>
   >;
 
   /**
    * Lists all the keys associated with this workspace. This includes keys for the storage account, app insights and password for container registry.
    */
-  listKeys is ArmResourceActionSync<Workspace, void, ListWorkspaceKeysResult>;
+  listKeys is ArmResourceActionSync<
+    Workspace,
+    void,
+    ArmResponse<ListWorkspaceKeysResult>
+  >;
 
   /**
    * Get Azure Machine Learning Workspace notebook access token
@@ -137,7 +153,7 @@ interface Workspaces {
   listNotebookAccessToken is ArmResourceActionSync<
     Workspace,
     void,
-    NotebookAccessTokenResult
+    ArmResponse<NotebookAccessTokenResult>
   >;
 
   /**
@@ -146,7 +162,7 @@ interface Workspaces {
   listNotebookKeys is ArmResourceActionSync<
     Workspace,
     void,
-    ListNotebookKeysResult
+    ArmResponse<ListNotebookKeysResult>
   >;
 
   /**
@@ -155,17 +171,18 @@ interface Workspaces {
   listStorageAccountKeys is ArmResourceActionSync<
     Workspace,
     void,
-    ListStorageAccountKeysResult
+    ArmResponse<ListStorageAccountKeysResult>
   >;
 
   /**
    * Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically.
    */
   @get
+  @action("outboundNetworkDependenciesEndpoints")
   listOutboundNetworkDependenciesEndpoints is ArmResourceActionSync<
     Workspace,
     void,
-    ExternalFqdnResponse
+    ArmResponse<ExternalFqdnResponse>
   >;
 
   /**
@@ -174,13 +191,13 @@ interface Workspaces {
   prepareNotebook is ArmResourceActionAsync<
     Workspace,
     void,
-    NotebookResourceInfo
+    ArmResponse<NotebookResourceInfo>
   >;
 
   /**
    * Resync all the keys associated with this workspace.This includes keys for the storage account, app insights and password for container registry
    */
-  resyncKeys is ArmResourceActionAsync<Workspace, void, void>;
+  resyncKeys is ArmResourceActionAsync<Workspace, void, OkResponse>;
 
   /**
    * Called by Client (Portal, CLI, etc) to get available "private link resources" for the workspace.
@@ -191,11 +208,12 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("privateLinkResources")
   @operationId("PrivateLinkResources_List")
   privateLinkResourcesList is ArmResourceActionSync<
     Workspace,
     void,
-    PrivateLinkResourceListResult
+    ArmResponse<PrivateLinkResourceListResult>
   >;
 
   /**
@@ -205,8 +223,14 @@ interface Workspaces {
   @operationId("ManagedNetworkProvisions_ProvisionManagedNetwork")
   provisionManagedNetwork is ArmResourceActionAsync<
     Workspace,
-    ManagedNetworkProvisionOptions,
-    ManagedNetworkProvisionStatus
+    {
+      /**
+       * Managed Network Provisioning Options for a machine learning workspace.
+       */
+      @bodyRoot
+      body?: ManagedNetworkProvisionOptions;
+    },
+    ArmResponse<ManagedNetworkProvisionStatus>
   >;
 }
 
@@ -217,10 +241,4 @@ interface Workspaces {
 );
 @@doc(Workspaces.update::parameters.properties,
   "The parameters for updating a machine learning workspace."
-);
-@@doc(Workspaces.diagnose::parameters.body,
-  "The parameter of diagnosing workspace health"
-);
-@@doc(Workspaces.provisionManagedNetwork::parameters.body,
-  "Managed Network Provisioning Options for a machine learning workspace."
 );

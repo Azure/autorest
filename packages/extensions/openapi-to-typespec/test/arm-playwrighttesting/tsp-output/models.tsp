@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
@@ -86,11 +85,6 @@ union QuotaNames {
 }
 
 /**
- * The response of a Account list operation.
- */
-model AccountListResult is Azure.Core.Page<Account>;
-
-/**
  * Account properties
  */
 model AccountProperties {
@@ -150,11 +144,6 @@ model Resource {
   @visibility("read")
   systemData?: SystemData;
 }
-
-/**
- * The response of a Quota list operation.
- */
-model QuotaListResult is Azure.Core.Page<Quota>;
 
 /**
  * Quota properties

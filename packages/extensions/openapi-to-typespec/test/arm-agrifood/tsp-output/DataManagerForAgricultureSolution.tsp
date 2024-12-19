@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Azure.ResourceManager.AgFoodPlatform;
+namespace Microsoft.AgFoodPlatform;
 /**
  * DataManagerForAgriculture solution resource.
  */
@@ -33,7 +33,7 @@ interface DataManagerForAgricultureSolutions {
   @operationId("SolutionsDiscoverability_Get")
   get is ArmResourceRead<
     DataManagerForAgricultureSolution,
-    Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
   >;
 
   /**
@@ -43,17 +43,19 @@ interface DataManagerForAgricultureSolutions {
   @operationId("SolutionsDiscoverability_List")
   list is ArmResourceListByParent<
     DataManagerForAgricultureSolution,
-    Azure.ResourceManager.Foundations.TenantBaseParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
       /**
        * Ids of Data Manager For Agriculture Solutions which the customer requests to fetch.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "farmBeatsSolutionIds", explode: true })
       farmBeatsSolutionIds?: string[];
 
       /**
        * Names of Data Manager For Agriculture Solutions which the customer requests to fetch.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "farmBeatsSolutionNames", explode: true })
       farmBeatsSolutionNames?: string[];
 
@@ -66,7 +68,7 @@ interface DataManagerForAgricultureSolutions {
       @query("$maxPageSize")
       $maxPageSize?: int32 = 50;
     },
-    Response = DataManagerForAgricultureSolutionListResponse
+    Response = ArmResponse<DataManagerForAgricultureSolutionListResponse>
   >;
 }
 

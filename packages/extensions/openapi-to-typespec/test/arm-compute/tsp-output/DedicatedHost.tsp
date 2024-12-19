@@ -49,43 +49,53 @@ interface DedicatedHosts {
   /**
    * Create or update a dedicated host .
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<DedicatedHost>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    DedicatedHost,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Update a dedicated host .
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<DedicatedHost, DedicatedHostUpdate>;
+  update is ArmCustomPatchAsync<
+    DedicatedHost,
+    PatchModel = DedicatedHostUpdate,
+    Response = ArmResponse<DedicatedHost>
+  >;
 
   /**
    * Delete a dedicated host.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<DedicatedHost>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    DedicatedHost,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Lists all of the dedicated hosts in the specified dedicated host group. Use the nextLink property in the response to get the next page of dedicated hosts.
    */
-  listByHostGroup is ArmResourceListByParent<
-    DedicatedHost,
-    Response = DedicatedHostListResult
-  >;
+  listByHostGroup is ArmResourceListByParent<DedicatedHost>;
 
   /**
    * Restart the dedicated host. The operation will complete successfully once the dedicated host has restarted and is running. To determine the health of VMs deployed on the dedicated host after the restart check the Resource Health Center in the Azure Portal. Please refer to https://docs.microsoft.com/azure/service-health/resource-health-overview for more details.
    */
-  restart is ArmResourceActionAsync<DedicatedHost, void, void>;
+  restart is ArmResourceActionAsyncBase<
+    DedicatedHost,
+    void,
+    OkResponseDefaultBaseParameters<DedicatedHost>
+  >;
 
   /**
    * Lists all available dedicated host sizes to which the specified dedicated host can be resized. NOTE: The dedicated host sizes provided can be used to only scale up the existing dedicated host.
    */
   @get
+  @action("hostSizes")
   listAvailableSizes is ArmResourceActionSync<
     DedicatedHost,
     void,
-    DedicatedHostSizeListResult
+    ArmResponse<DedicatedHostSizeListResult>
   >;
 }
 

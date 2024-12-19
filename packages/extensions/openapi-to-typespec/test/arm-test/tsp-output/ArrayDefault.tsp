@@ -35,10 +35,7 @@ interface ArrayDefaults {
   /**
    * List resources by resource group
    */
-  listByResourceGroup is ArmResourceListByParent<
-    ArrayDefault,
-    Response = ArrayDefaultListResult
-  >;
+  listByResourceGroup is ArmResourceListByParent<ArrayDefault>;
 }
 
 @@doc(ArrayDefault.name, "Name of resource");

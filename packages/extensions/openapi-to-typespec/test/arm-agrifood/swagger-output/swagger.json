@@ -41,6 +41,9 @@
   },
   "tags": [
     {
+      "name": "Operations"
+    },
+    {
       "name": "DataConnectors"
     },
     {
@@ -69,7 +72,7 @@
     }
   ],
   "paths": {
-    "/providers/Azure.ResourceManager.AgFoodPlatform/farmBeatsExtensionDefinitions": {
+    "/providers/Microsoft.AgFoodPlatform/farmBeatsExtensionDefinitions": {
       "get": {
         "operationId": "DataManagerForAgricultureExtensions_List",
         "tags": [
@@ -138,7 +141,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DataManagerForAgricultureExtensionListResponse"
             }
@@ -160,7 +163,7 @@
         }
       }
     },
-    "/providers/Azure.ResourceManager.AgFoodPlatform/farmBeatsExtensionDefinitions/{dataManagerForAgricultureExtensionId}": {
+    "/providers/Microsoft.AgFoodPlatform/farmBeatsExtensionDefinitions/{dataManagerForAgricultureExtensionId}": {
       "get": {
         "operationId": "DataManagerForAgricultureExtensions_Get",
         "tags": [
@@ -201,7 +204,7 @@
         }
       }
     },
-    "/providers/Azure.ResourceManager.AgFoodPlatform/farmBeatsSolutionDefinitions": {
+    "/providers/Microsoft.AgFoodPlatform/farmBeatsSolutionDefinitions": {
       "get": {
         "operationId": "SolutionsDiscoverability_List",
         "tags": [
@@ -248,7 +251,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DataManagerForAgricultureSolutionListResponse"
             }
@@ -270,7 +273,7 @@
         }
       }
     },
-    "/providers/Azure.ResourceManager.AgFoodPlatform/farmBeatsSolutionDefinitions/{dataManagerForAgricultureSolutionId}": {
+    "/providers/Microsoft.AgFoodPlatform/farmBeatsSolutionDefinitions/{dataManagerForAgricultureSolutionId}": {
       "get": {
         "operationId": "SolutionsDiscoverability_Get",
         "tags": [
@@ -311,7 +314,38 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.AgFoodPlatform/checkNameAvailability": {
+    "/providers/Microsoft.AgFoodPlatform/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/checkNameAvailability": {
       "post": {
         "operationId": "CheckNameAvailability_CheckNameAvailability",
         "tags": [
@@ -342,34 +376,16 @@
               "$ref": "#/definitions/CheckNameAvailabilityResponse"
             }
           },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/farmBeats": {
       "get": {
         "operationId": "DataManagerForAgricultureResources_ListBySubscription",
         "tags": [
@@ -404,7 +420,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DataManagerForAgricultureListResponse"
             }
@@ -468,7 +484,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats": {
       "get": {
         "operationId": "DataManagerForAgricultureResources_ListByResourceGroup",
         "tags": [
@@ -506,7 +522,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DataManagerForAgricultureListResponse"
             }
@@ -528,7 +544,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}": {
       "get": {
         "operationId": "DataManagerForAgricultureResources_Get",
         "tags": [
@@ -760,7 +776,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/dataConnectors": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/dataConnectors": {
       "get": {
         "operationId": "DataConnectors_List",
         "tags": [
@@ -808,7 +824,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DataConnectorListResponse"
             }
@@ -830,7 +846,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/dataConnectors/{dataConnectorName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/dataConnectors/{dataConnectorName}": {
       "get": {
         "operationId": "DataConnectors_Get",
         "tags": [
@@ -1015,7 +1031,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/extensions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/extensions": {
       "get": {
         "operationId": "Extensions_ListByDataManagerForAgriculture",
         "tags": [
@@ -1085,7 +1101,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ExtensionListResponse"
             }
@@ -1107,7 +1123,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/extensions/{extensionId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/extensions/{extensionId}": {
       "get": {
         "operationId": "Extensions_Get",
         "tags": [
@@ -1206,12 +1222,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource 'Extension' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Extension"
-            }
-          },
           "201": {
             "description": "Resource 'Extension' create operation succeeded",
             "schema": {
@@ -1286,7 +1296,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections": {
       "get": {
         "operationId": "PrivateEndpointConnections_ListByResource",
         "tags": [
@@ -1316,7 +1326,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
@@ -1335,7 +1345,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "operationId": "PrivateEndpointConnections_Get",
         "tags": [
@@ -1440,12 +1450,6 @@
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
-          "201": {
-            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1500,9 +1504,9 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to the status monitor"
               },
               "Retry-After": {
                 "type": "integer",
@@ -1527,12 +1531,12 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateLinkResources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateLinkResources": {
       "get": {
         "operationId": "PrivateLinkResources_ListByResource",
         "tags": [
@@ -1562,7 +1566,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
@@ -1581,7 +1585,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateLinkResources/{subResourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateLinkResources/{subResourceName}": {
       "get": {
         "operationId": "PrivateLinkResources_Get",
         "tags": [
@@ -1637,7 +1641,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/solutions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/solutions": {
       "get": {
         "operationId": "Solutions_List",
         "tags": [
@@ -1772,7 +1776,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SolutionListResponse"
             }
@@ -1794,7 +1798,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/solutions/{solutionId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/solutions/{solutionId}": {
       "get": {
         "operationId": "Solutions_Get",
         "tags": [

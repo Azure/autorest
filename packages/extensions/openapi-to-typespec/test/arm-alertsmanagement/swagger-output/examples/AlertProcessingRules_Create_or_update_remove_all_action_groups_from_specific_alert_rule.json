@@ -1,0 +1,113 @@
+{
+  "parameters": {
+    "alertProcessingRule": {
+      "location": "Global",
+      "properties": {
+        "description": "Removes all ActionGroups from all Alerts that fire on above AlertRule",
+        "actions": [
+          {
+            "actionType": "RemoveAllActionGroups"
+          }
+        ],
+        "conditions": [
+          {
+            "field": "AlertRuleId",
+            "operator": "Equals",
+            "values": [
+              "/subscriptions/suubId1/resourceGroups/Rgid2/providers/microsoft.insights/activityLogAlerts/RuleName"
+            ]
+          }
+        ],
+        "enabled": true,
+        "scopes": [
+          "/subscriptions/subId1"
+        ]
+      },
+      "tags": {}
+    },
+    "alertProcessingRuleName": "RemoveActionGroupsSpecificAlertRule",
+    "api-version": "2021-08-08",
+    "resourceGroupName": "alertscorrelationrg",
+    "subscriptionId": "subId1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "RemoveActionGroupsSpecificAlertRule",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/RemoveActionGroupsSpecificAlertRule",
+        "location": "Global",
+        "properties": {
+          "description": "Removes all ActionGroups from all Alerts that fire on above AlertRule",
+          "actions": [
+            {
+              "actionType": "RemoveAllActionGroups"
+            }
+          ],
+          "conditions": [
+            {
+              "field": "AlertRuleId",
+              "operator": "Equals",
+              "values": [
+                "/subscriptions/suubId1/resourceGroups/Rgid2/providers/microsoft.insights/activityLogAlerts/RuleName"
+              ]
+            }
+          ],
+          "enabled": true,
+          "scopes": [
+            "/subscriptions/subId1"
+          ]
+        },
+        "systemData": {
+          "createdAt": "2018-06-11T22:05:09Z",
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2018-06-12T22:05:09Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      }
+    },
+    "201": {
+      "body": {
+        "name": "RemoveActionGroupsSpecificAlertRule",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/RemoveActionGroupsSpecificAlertRule",
+        "location": "Global",
+        "properties": {
+          "description": "Removes all ActionGroups from all Alerts that fire on above AlertRule",
+          "actions": [
+            {
+              "actionType": "RemoveAllActionGroups"
+            }
+          ],
+          "conditions": [
+            {
+              "field": "AlertRuleId",
+              "operator": "Equals",
+              "values": [
+                "/subscriptions/suubId1/resourceGroups/Rgid2/providers/microsoft.insights/activityLogAlerts/RuleName"
+              ]
+            }
+          ],
+          "enabled": true,
+          "scopes": [
+            "/subscriptions/subId1"
+          ]
+        },
+        "systemData": {
+          "createdAt": "2018-06-11T22:05:09Z",
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2018-06-12T22:05:09Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      }
+    }
+  },
+  "operationId": "AlertProcessingRules_CreateOrUpdate",
+  "title": "Create or update a rule that removes all action groups from all alerts in a subscription coming from a specific alert rule"
+}

@@ -1,7 +1,16 @@
 import { Case } from "change-case-all";
-import { TypespecOperation, TspArmResource, TypespecProgram } from "interfaces";
 import _ from "lodash";
 import pluralize from "pluralize";
+import {
+  TypespecOperation,
+  TspArmResource,
+  isArmResourceActionOperation,
+  TypespecTemplateModel,
+  TypespecVoidType,
+  TspLroHeaders,
+  TypespecParameter,
+  TypespecDataType,
+} from "../interfaces";
 import { getOptions } from "../options";
 import { getTSPOperationGroupName } from "../transforms/transform-arm-resources";
 import { generateAugmentedDecorators, generateDecorators } from "../utils/decorators";
@@ -9,7 +18,8 @@ import { generateDocs } from "../utils/docs";
 import { getLogger } from "../utils/logger";
 import { getModelPropertiesDeclarations } from "../utils/model-generation";
 import { generateSuppressions } from "../utils/suppressions";
-import { generateOperation } from "./generate-operations";
+import { generateOperation, generateParameters } from "./generate-operations";
+import { generateParameter } from "./generate-parameter";
 
 const logger = () => getLogger("generate-arm-resource");
 
@@ -29,7 +39,7 @@ export function generateArmResource(resource: TspArmResource): string {
   }
 
   for (const o of resource.resourceOperations) {
-    for (const d of o.customizations ?? []) {
+    for (const d of o.augmentedDecorators ?? []) {
       definitions.push(`${d}`);
     }
   }
@@ -104,14 +114,37 @@ function generateArmResourceOperation(resource: TspArmResource): string {
     if (isFullCompatible && operation.suppressions) {
       definitions.push(...generateSuppressions(operation.suppressions));
     }
-    if (operation.kind === "ArmResourceExists") {
-      definitions.push(`op ${operation.name}(${operation.parameters.join(",")}): ${operation.responses.join("|")}`);
-    } else if (operation.templateParameters?.length) {
-      definitions.push(`${operation.name} is ${operation.kind}<${(operation.templateParameters ?? []).join(",")}>`);
+
+    if (operation.kind === "ArmResourceActionSync" || operation.kind === "ArmResourceActionAsync") {
+      definitions.push(
+        `${operation.name} is ${operation.kind}<${operation.resource}, ${generateArmRequest(
+          operation.request,
+        )}, ${generateArmResponse(operation.response)}${
+          operation.baseParameters ? `, BaseParameters = ${operation.baseParameters[0]}` : ""
+        }${operation.parameters ? `, Parameters = { ${generateParameters(operation.parameters)} }` : ""}${
+          operation.lroHeaders ? `, LroHeaders = ${generateLroHeaders(operation.lroHeaders)}` : ""
+        }>`,
+      );
+    } else if (operation.kind === "ArmResourceActionAsyncBase") {
+      definitions.push(
+        `${operation.name} is ${operation.kind}<${operation.resource}, ${generateArmRequest(
+          operation.request,
+        )}, ${generateArmResponse(operation.response)}${operation.baseParameters![0]}${
+          operation.parameters ? `, Parameters = { ${generateParameters(operation.parameters)} }` : ""
+        }>`,
+      );
     } else {
-      definitions.push(`${operation.name} is ${operation.kind}`);
+      definitions.push(
+        `${operation.name} is ${operation.kind}<${operation.resource}${
+          operation.patchModel ? `, PatchModel = ${operation.patchModel}` : ""
+        }${operation.baseParameters ? `, BaseParameters = ${operation.baseParameters[0]}` : ""}${
+          operation.parameters ? `, Parameters = { ${generateParameters(operation.parameters)} }` : ""
+        }${operation.response ? `, Response = ${generateArmResponse(operation.response)}` : ""}${
+          operation.lroHeaders ? `, LroHeaders = ${generateLroHeaders(operation.lroHeaders)}` : ""
+        }>`,
+      );
     }
-    definitions.push("");
+    definitions.push("\n");
   }
   for (const operation of resource.normalOperations) {
     if (
@@ -129,6 +162,49 @@ function generateArmResourceOperation(resource: TspArmResource): string {
   definitions.push("}\n");
 
   return definitions.join("\n");
+}
+
+function generateArmRequest(request: TypespecParameter | TypespecVoidType | TypespecDataType): string {
+  if (request.kind === "void") {
+    return "void";
+  }
+
+  if (request.kind === "parameter") {
+    return `{${generateParameter(request as TypespecParameter)}}`;
+  }
+
+  return request.name;
+}
+
+function generateLroHeaders(lroHeaders: TspLroHeaders): string {
+  if (lroHeaders === "Azure-AsyncOperation") {
+    return "ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader";
+  } else if (lroHeaders === "Location") {
+    return "ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader";
+  }
+  throw new Error(`Unknown LRO header: ${lroHeaders}`);
+}
+
+function generateArmResponse(responses: TypespecTemplateModel[] | TypespecVoidType): string {
+  if (!Array.isArray(responses)) {
+    return "void";
+  }
+
+  return responses.map((r) => generateTemplateModel(r)).join(" | ");
+}
+
+export function generateTemplateModel(templateModel: TypespecTemplateModel): string {
+  return `${templateModel.name}${
+    templateModel.arguments
+      ? `<${templateModel.arguments
+          .map((a) => (a.kind === "template" ? generateTemplateModel(a as TypespecTemplateModel) : a.name))
+          .join(",")}>`
+      : ""
+  }${
+    templateModel.additionalProperties
+      ? ` & { ${templateModel.additionalProperties.map((p) => generateParameter(p)).join(";")} }`
+      : ""
+  }${templateModel.additionalTemplateModel ? templateModel.additionalTemplateModel : ""}`;
 }
 
 export function generateArmResourceExamples(resource: TspArmResource): Record<string, string> {

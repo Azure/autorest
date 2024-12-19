@@ -40,8 +40,12 @@ interface BlobServicePropertiesOperationGroup {
    * Sets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("BlobServices_SetServiceProperties")
-  setServiceProperties is ArmResourceCreateOrReplaceSync<BlobServiceProperties>;
+  setServiceProperties is ArmResourceCreateOrReplaceSync<
+    BlobServiceProperties,
+    Response = ArmResourceUpdatedResponse<BlobServiceProperties>
+  >;
 
   /**
    * List blob services of storage account. It returns a collection of one object named default.
@@ -50,7 +54,7 @@ interface BlobServicePropertiesOperationGroup {
   @operationId("BlobServices_List")
   list is ArmResourceListByParent<
     BlobServiceProperties,
-    Response = BlobServiceItems
+    Response = ArmResponse<BlobServiceItems>
   >;
 }
 

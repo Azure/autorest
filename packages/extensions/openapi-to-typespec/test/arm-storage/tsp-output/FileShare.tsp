@@ -64,12 +64,11 @@ interface FileShares {
    * Updates share properties as specified in request body. Properties not mentioned in the request will not be changed. Update fails if the specified share does not already exist.
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<FileShare, FileShare>;
+  update is ArmCustomPatchSync<FileShare, PatchModel = FileShare>;
 
   /**
    * Deletes specified share under its account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<
     FileShare,
     Parameters = {
@@ -111,21 +110,27 @@ interface FileShares {
       @query("$expand")
       $expand?: string;
     },
-    Response = FileShareItems
+    Response = ArmResponse<FileShareItems>
   >;
 
   /**
    * Restore a file share within a valid retention days if share soft delete is enabled
    */
-  restore is ArmResourceActionSync<FileShare, DeletedShare, void>;
+  restore is ArmResourceActionSync<FileShare, DeletedShare, OkResponse>;
 
   /**
    * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
    */
   lease is ArmResourceActionSync<
     FileShare,
-    LeaseShareRequest,
-    LeaseShareResponse,
+    {
+      /**
+       * Lease Share request body.
+       */
+      @bodyRoot
+      parameters?: LeaseShareRequest;
+    },
+    ArmResponse<LeaseShareResponse>,
     Parameters = {
       /**
        * Optional. Specify the snapshot time to lease a snapshot.
@@ -149,4 +154,3 @@ interface FileShares {
   "Properties to update for the file share."
 );
 @@doc(FileShares.restore::parameters.body, "");
-@@doc(FileShares.lease::parameters.body, "Lease Share request body.");

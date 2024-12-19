@@ -46,17 +46,21 @@ interface JobBaseResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("Jobs_Update")
-  update is ArmCustomPatchSync<JobBaseResource, PartialJobBasePartialResource>;
+  update is ArmCustomPatchSync<
+    JobBaseResource,
+    PatchModel = PartialJobBasePartialResource
+  >;
 
   /**
    * Deletes a Job (asynchronous).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Jobs_Delete")
-  delete is ArmResourceDeleteAsync<JobBaseResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    JobBaseResource,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Lists Jobs in the workspace.
@@ -108,7 +112,7 @@ interface JobBaseResources {
       @query("scheduleId")
       scheduleId?: string;
     },
-    Response = JobBaseResourceArmPaginatedResult
+    Response = ArmResponse<JobBaseResourceArmPaginatedResult>
   >;
 
   /**
@@ -116,7 +120,7 @@ interface JobBaseResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Jobs_Cancel")
-  cancel is ArmResourceActionAsync<JobBaseResource, void, void>;
+  cancel is ArmResourceActionAsync<JobBaseResource, void, OkResponse>;
 }
 
 @@doc(JobBaseResource.name,

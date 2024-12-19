@@ -63,44 +63,56 @@ interface Disks {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Disk,
-    Response = ArmResourceCreatedResponse<Disk> | ArmResourceUpdatedResponse<Disk> | (ArmAcceptedLroResponse & {
-      @bodyRoot _: Disk;
-    })
+    Response = ArmResourceUpdatedResponse<Disk> | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: Disk;
+    }),
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Updates (patches) a disk.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<Disk, DiskUpdate>;
+  update is ArmCustomPatchAsync<Disk, PatchModel = DiskUpdate>;
 
   /**
    * Deletes a disk.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<Disk>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Disk,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Lists all the disks under a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<Disk, Response = DiskList>;
+  listByResourceGroup is ArmResourceListByParent<
+    Disk,
+    Response = ArmResponse<DiskList>
+  >;
 
   /**
    * Lists all the disks under a subscription.
    */
-  list is ArmListBySubscription<Disk, Response = DiskList>;
+  list is ArmListBySubscription<Disk, Response = ArmResponse<DiskList>>;
 
   /**
    * Grants access to a disk.
    */
-  grantAccess is ArmResourceActionAsync<Disk, GrantAccessData, AccessUri>;
+  @action("beginGetAccess")
+  grantAccess is ArmResourceActionAsync<
+    Disk,
+    GrantAccessData,
+    ArmResponse<AccessUri>
+  >;
 
   /**
    * Revokes access to a disk.
    */
-  revokeAccess is ArmResourceActionAsync<Disk, void, void>;
+  @action("endGetAccess")
+  revokeAccess is ArmResourceActionAsync<Disk, void, OkResponse>;
 }
 
 @@doc(Disk.name,

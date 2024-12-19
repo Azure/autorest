@@ -22,7 +22,7 @@ interface UsageOperations {
   @operationId("Usage_List")
   @get
   @action("usages")
-  list is ArmProviderActionAsync<
+  list is ArmProviderActionSync<
     Response = ListUsagesResult,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
@@ -38,7 +38,7 @@ interface VirtualMachineSizesOperations {
   @operationId("VirtualMachineSizes_List")
   @get
   @action("vmSizes")
-  list is ArmProviderActionAsync<
+  list is ArmProviderActionSync<
     Response = VirtualMachineSizeListResult,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
@@ -54,8 +54,8 @@ interface VirtualMachineScaleSetsOperations {
   @operationId("VirtualMachineScaleSets_ListByLocation")
   @get
   @action("virtualMachineScaleSets")
-  listByLocation is ArmProviderActionAsync<
-    Response = VirtualMachineScaleSetListResult,
+  listByLocation is ArmProviderActionSync<
+    Response = ResourceListResult<VirtualMachineScaleSet>,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
   >;
@@ -70,8 +70,8 @@ interface VirtualMachinesOperations {
   @operationId("VirtualMachines_ListByLocation")
   @get
   @action("virtualMachines")
-  listByLocation is ArmProviderActionAsync<
-    Response = VirtualMachineListResult,
+  listByLocation is ArmProviderActionSync<
+    Response = ResourceListResult<VirtualMachine>,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
   >;
@@ -124,7 +124,7 @@ interface VirtualMachineImagesOperations {
   @operationId("VirtualMachineImages_List")
   @get
   @action("versions")
-  list is ArmProviderActionAsync<
+  list is ArmProviderActionSync<
     Response = {
       @bodyRoot _: VirtualMachineImageResource[];
     },
@@ -175,7 +175,7 @@ interface VirtualMachineImagesOperations {
   @operationId("VirtualMachineImages_ListOffers")
   @get
   @action("artifacttypes/vmimage/offers")
-  listOffers is ArmProviderActionAsync<
+  listOffers is ArmProviderActionSync<
     Response = {
       @bodyRoot _: VirtualMachineImageResource[];
     },
@@ -198,7 +198,7 @@ interface VirtualMachineImagesOperations {
   @operationId("VirtualMachineImages_ListPublishers")
   @get
   @action("publishers")
-  listPublishers is ArmProviderActionAsync<
+  listPublishers is ArmProviderActionSync<
     Response = {
       @bodyRoot _: VirtualMachineImageResource[];
     },
@@ -212,7 +212,7 @@ interface VirtualMachineImagesOperations {
   @operationId("VirtualMachineImages_ListSkus")
   @get
   @action("skus")
-  listSkus is ArmProviderActionAsync<
+  listSkus is ArmProviderActionSync<
     Response = {
       @bodyRoot _: VirtualMachineImageResource[];
     },
@@ -242,7 +242,7 @@ interface VirtualMachineImagesOperations {
   @operationId("VirtualMachineImages_ListByEdgeZone")
   @get
   @action("vmimages")
-  listByEdgeZone is ArmProviderActionAsync<
+  listByEdgeZone is ArmProviderActionSync<
     Response = VmImagesInEdgeZoneListResult,
     Scope = SubscriptionActionScope,
     Parameters = {
@@ -311,7 +311,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @operationId("VirtualMachineImagesEdgeZone_List")
   @get
   @action("versions")
-  list is ArmProviderActionAsync<
+  list is ArmProviderActionSync<
     Response = {
       @bodyRoot _: VirtualMachineImageResource[];
     },
@@ -373,7 +373,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @operationId("VirtualMachineImagesEdgeZone_ListOffers")
   @get
   @action("artifacttypes/vmimage/offers")
-  listOffers is ArmProviderActionAsync<
+  listOffers is ArmProviderActionSync<
     Response = {
       @bodyRoot _: VirtualMachineImageResource[];
     },
@@ -403,7 +403,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @operationId("VirtualMachineImagesEdgeZone_ListPublishers")
   @get
   @action("publishers")
-  listPublishers is ArmProviderActionAsync<
+  listPublishers is ArmProviderActionSync<
     Response = {
       @bodyRoot _: VirtualMachineImageResource[];
     },
@@ -426,7 +426,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @operationId("VirtualMachineImagesEdgeZone_ListSkus")
   @get
   @action("skus")
-  listSkus is ArmProviderActionAsync<
+  listSkus is ArmProviderActionSync<
     Response = {
       @bodyRoot _: VirtualMachineImageResource[];
     },
@@ -497,7 +497,7 @@ interface VirtualMachineRunCommandsOperations {
   @operationId("VirtualMachineRunCommands_List")
   @get
   @action("runCommands")
-  list is ArmProviderActionAsync<
+  list is ArmProviderActionSync<
     Response = RunCommandListResult,
     Scope = SubscriptionActionScope,
     Parameters = {
@@ -744,7 +744,7 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
      */
     @header
     accept: "application/json, text/json",
-  ): ArmResponse<VirtualMachineRunCommandsListResult> | ErrorResponse;
+  ): ArmResponse<ResourceListResult<VirtualMachineRunCommand>> | ErrorResponse;
 }
 
 @armResourceOperations
@@ -756,7 +756,7 @@ interface ResourceSkusOperations {
   @operationId("ResourceSkus_List")
   @get
   @action("skus")
-  list is ArmProviderActionAsync<
+  list is ArmProviderActionSync<
     Response = ResourceSkusResult,
     Scope = SubscriptionActionScope,
     Parameters = {

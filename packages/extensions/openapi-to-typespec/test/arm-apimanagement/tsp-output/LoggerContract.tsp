@@ -38,14 +38,8 @@ interface LoggerContracts {
    * Gets the entity state (Etag) version of the logger specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("Logger_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      LoggerContract,
-      BaseParameters<LoggerContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<LoggerContract>;
 
   /**
    * Creates or Updates a logger.
@@ -71,7 +65,7 @@ interface LoggerContracts {
   @operationId("Logger_Update")
   update is ArmCustomPatchSync<
     LoggerContract,
-    LoggerUpdateContract,
+    PatchModel = LoggerUpdateContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -85,7 +79,6 @@ interface LoggerContracts {
    * Deletes the specified logger.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Logger_Delete")
   delete is ArmResourceDeleteSync<
     LoggerContract,
@@ -124,8 +117,7 @@ interface LoggerContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = LoggerListResult
+    }
   >;
 }
 

@@ -40,20 +40,20 @@ interface Frontends {
    * Update a Frontend
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<Frontend, FrontendUpdate>;
+  update is ArmCustomPatchSync<Frontend, PatchModel = FrontendUpdate>;
 
   /**
    * Delete a Frontend
    */
-  delete is ArmResourceDeleteAsync<Frontend>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Frontend,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List Frontend resources by TrafficController
    */
-  listByTrafficController is ArmResourceListByParent<
-    Frontend,
-    Response = FrontendListResult
-  >;
+  listByTrafficController is ArmResourceListByParent<Frontend>;
 }
 
 @@doc(Frontend.name, "Frontends");

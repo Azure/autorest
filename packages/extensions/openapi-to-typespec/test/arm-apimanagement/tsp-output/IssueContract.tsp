@@ -47,11 +47,8 @@ interface IssueContracts {
    * Gets the entity state (Etag) version of the Issue for an API specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("ApiIssue_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<IssueContract, BaseParameters<IssueContract>>,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<IssueContract>;
 
   /**
    * Creates a new Issue for an API or updates an existing one.
@@ -77,7 +74,7 @@ interface IssueContracts {
   @operationId("ApiIssue_Update")
   update is ArmCustomPatchSync<
     IssueContract,
-    IssueUpdateContract,
+    PatchModel = IssueUpdateContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -91,7 +88,6 @@ interface IssueContracts {
    * Deletes the specified Issue from an API.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiIssue_Delete")
   delete is ArmResourceDeleteSync<
     IssueContract,
@@ -136,8 +132,7 @@ interface IssueContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = IssueListResult
+    }
   >;
 }
 

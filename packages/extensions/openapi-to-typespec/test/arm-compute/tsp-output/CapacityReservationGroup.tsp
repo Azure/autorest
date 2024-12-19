@@ -55,13 +55,12 @@ interface CapacityReservationGroups {
   @parameterVisibility
   update is ArmCustomPatchSync<
     CapacityReservationGroup,
-    CapacityReservationGroupUpdate
+    PatchModel = CapacityReservationGroupUpdate
   >;
 
   /**
    * The operation to delete a capacity reservation group. This operation is allowed only if all the associated resources are disassociated from the reservation group and all capacity reservations under the reservation group have also been deleted. Please refer to https://aka.ms/CapacityReservation for more details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<CapacityReservationGroup>;
 
   /**
@@ -75,8 +74,7 @@ interface CapacityReservationGroups {
        */
       @query("$expand")
       $expand?: ExpandTypesForGetCapacityReservationGroups;
-    },
-    Response = CapacityReservationGroupListResult
+    }
   >;
 
   /**
@@ -90,8 +88,7 @@ interface CapacityReservationGroups {
        */
       @query("$expand")
       $expand?: ExpandTypesForGetCapacityReservationGroups;
-    },
-    Response = CapacityReservationGroupListResult
+    }
   >;
 }
 

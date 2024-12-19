@@ -7,8 +7,10 @@ using Azure.ResourceManager.Analysis;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(AnalysisServicesServerUpdateParameters.properties);
 
-@@clientName(AnalysisServicesServers.update,
-  "AnalysisServicesServersOperationGroup.update::parameters.properties",
+@@clientName(AnalysisServicesServersOperationGroup.create::parameters.resource,
+  "serverParameters"
+);
+@@clientName(AnalysisServicesServersOperationGroup.update::parameters.properties,
   "serverUpdateParameters"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."

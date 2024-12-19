@@ -55,7 +55,6 @@ interface LabelingJobs {
   /**
    * Delete a labeling job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<LabelingJob>;
 
   /**
@@ -76,7 +75,7 @@ interface LabelingJobs {
       @query("$top")
       $top?: int32;
     },
-    Response = LabelingJobResourceArmPaginatedResult
+    Response = ArmResponse<LabelingJobResourceArmPaginatedResult>
   >;
 
   /**
@@ -85,18 +84,18 @@ interface LabelingJobs {
   exportLabels is ArmResourceActionAsync<
     LabelingJob,
     ExportSummary,
-    ExportSummary
+    ArmResponse<ExportSummary>
   >;
 
   /**
    * Pause a labeling job.
    */
-  pause is ArmResourceActionSync<LabelingJob, void, void>;
+  pause is ArmResourceActionSync<LabelingJob, void, OkResponse>;
 
   /**
    * Resume a labeling job (asynchronous).
    */
-  resume is ArmResourceActionAsync<LabelingJob, void, void>;
+  resume is ArmResourceActionAsync<LabelingJob, void, OkResponse>;
 }
 
 @@doc(LabelingJob.name, "The name and identifier for the LabelingJob.");

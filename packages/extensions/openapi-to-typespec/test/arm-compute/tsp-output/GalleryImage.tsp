@@ -39,8 +39,12 @@ interface GalleryImages {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     GalleryImage,
-    Response = ArmResourceCreatedResponse<GalleryImage> | ArmResourceUpdatedResponse<GalleryImage> | (ArmAcceptedLroResponse & {
-      @bodyRoot _: GalleryImage;
+    Response = ArmResourceUpdatedResponse<GalleryImage> | ArmResourceCreatedResponse<
+      GalleryImage,
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    > | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: GalleryImage;
     })
   >;
 
@@ -48,22 +52,27 @@ interface GalleryImages {
    * Update a gallery image definition.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<GalleryImage, GalleryImageUpdate>;
+  update is ArmCustomPatchAsync<
+    GalleryImage,
+    PatchModel = GalleryImageUpdate,
+    Response = ArmResponse<GalleryImage>
+  >;
 
   /**
    * Delete a gallery image.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<GalleryImage>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    GalleryImage,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List gallery image definitions in a gallery.
    */
   listByGallery is ArmResourceListByParent<
     GalleryImage,
-    Response = GalleryImageList
+    Response = ArmResponse<GalleryImageList>
   >;
 }
 

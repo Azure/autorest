@@ -2309,11 +2309,6 @@ model StorageAccountPropertiesUpdateParameters {
 }
 
 /**
- * The response from the List Deleted Accounts operation.
- */
-model DeletedAccountListResult is Azure.Core.Page<DeletedAccount>;
-
-/**
  * Attributes of a deleted storage account.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -2365,11 +2360,6 @@ model ErrorResponseBody {
    */
   message?: string;
 }
-
-/**
- * The response from the List Storage Accounts operation.
- */
-model StorageAccountListResult is Azure.Core.Page<StorageAccount>;
 
 /**
  * The response from the ListKeys operation.
@@ -3438,11 +3428,6 @@ model EncryptionScopeKeyVaultProperties {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastKeyRotationTimestamp?: utcDateTime;
 }
-
-/**
- * List of encryption scopes requested, and if paging is required, a URL to the next page of encryption scopes.
- */
-model EncryptionScopeListResult is Azure.Core.Page<EncryptionScope>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @pagedResult

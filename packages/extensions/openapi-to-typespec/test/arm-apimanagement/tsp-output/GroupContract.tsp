@@ -38,11 +38,8 @@ interface GroupContracts {
    * Gets the entity state (Etag) version of the group specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("Group_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<GroupContract, BaseParameters<GroupContract>>,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<GroupContract>;
 
   /**
    * Creates or Updates a group.
@@ -68,7 +65,7 @@ interface GroupContracts {
   @operationId("Group_Update")
   update is ArmCustomPatchSync<
     GroupContract,
-    GroupUpdateParameters,
+    PatchModel = GroupUpdateParameters,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -82,7 +79,6 @@ interface GroupContracts {
    * Deletes specific group of the API Management service instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Group_Delete")
   delete is ArmResourceDeleteSync<
     GroupContract,
@@ -121,8 +117,7 @@ interface GroupContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = GroupListResult
+    }
   >;
 
   /**
@@ -130,11 +125,12 @@ interface GroupContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @action("users")
   @operationId("GroupUser_List")
   list is ArmResourceActionSync<
     GroupContract,
     void,
-    ApiManagementGroupUserListResult,
+    ArmResponse<ResourceListResult<ApiManagementGroupUserData>>,
     Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| firstName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| lastName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| email | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| registrationDate | filter | ge, le, eq, ne, gt, lt |     |</br>| note | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -162,10 +158,12 @@ interface GroupContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
+  @action("{userId}")
   @operationId("GroupUser_CheckEntityExists")
-  checkEntityExists is ArmResourceActionNoContentSync<
+  checkEntityExists is ArmResourceActionSync<
     GroupContract,
     void,
+    NoContentResponse,
     Parameters = {
       /**
        * User identifier. Must be unique in the current API Management service instance.
@@ -182,11 +180,12 @@ interface GroupContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @put
+  @action("{userId}")
   @operationId("GroupUser_Create")
   create is ArmResourceActionSync<
     GroupContract,
     void,
-    ApiManagementGroupUserData,
+    ArmResponse<ApiManagementGroupUserData> | ArmResourceCreatedSyncResponse<ApiManagementGroupUserData>,
     Parameters = {
       /**
        * User identifier. Must be unique in the current API Management service instance.
@@ -203,11 +202,12 @@ interface GroupContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @delete
+  @action("{userId}")
   @operationId("GroupUser_Delete")
   groupUserDelete is ArmResourceActionSync<
     GroupContract,
     void,
-    void,
+    OkResponse | NoContentResponse,
     Parameters = {
       /**
        * User identifier. Must be unique in the current API Management service instance.

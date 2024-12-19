@@ -38,28 +38,25 @@ interface Accounts {
    * Update a Account
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<Account, AccountUpdate>;
+  update is ArmCustomPatchSync<Account, PatchModel = AccountUpdate>;
 
   /**
    * Delete a Account
    */
-  delete is ArmResourceDeleteAsync<Account>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Account,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List Account resources by resource group
    */
-  listByResourceGroup is ArmResourceListByParent<
-    Account,
-    Response = AccountListResult
-  >;
+  listByResourceGroup is ArmResourceListByParent<Account>;
 
   /**
    * List Account resources by subscription ID
    */
-  listBySubscription is ArmListBySubscription<
-    Account,
-    Response = AccountListResult
-  >;
+  listBySubscription is ArmListBySubscription<Account>;
 }
 
 @@maxLength(Account.name, 64);

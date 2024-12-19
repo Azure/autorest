@@ -13,6 +13,15 @@
           "Description": "Gets the details of the API specified by its identifier."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}",
+        "Method": "HEAD",
+        "OperationID": "Api_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the API specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -133,6 +142,15 @@
           "Description": "Returns the details of an API release."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/releases/{releaseId}",
+        "Method": "HEAD",
+        "OperationID": "ApiRelease_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Returns the etag of an API release."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -213,6 +231,15 @@
           "Description": "Gets the details of the API Operation specified by its identifier."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operations/{operationId}",
+        "Method": "HEAD",
+        "OperationID": "ApiOperation_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the API operation specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -317,6 +344,15 @@
           "Description": "Get the policy configuration at the API Operation level."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operations/{operationId}/policies/{policyId}",
+        "Method": "HEAD",
+        "OperationID": "ApiOperationPolicy_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the API operation policy specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -421,6 +457,15 @@
           "Description": "Get tag associated with the Operation."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operations/{operationId}/tags/{tagId}",
+        "Method": "HEAD",
+        "OperationID": "Tag_GetEntityStateByOperation",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state version of the tag specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -501,6 +546,15 @@
           "Description": "Get the schema configuration at the API level."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/schemas/{schemaId}",
+        "Method": "HEAD",
+        "OperationID": "ApiSchema_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the schema specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -605,6 +659,15 @@
           "Description": "Gets the details of the Diagnostic for an API specified by its identifier."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/diagnostics/{diagnosticId}",
+        "Method": "HEAD",
+        "OperationID": "ApiDiagnostic_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the Diagnostic for an API specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -709,6 +772,15 @@
           "Description": "Gets the details of the Issue for an API specified by its identifier."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/issues/{issueId}",
+        "Method": "HEAD",
+        "OperationID": "ApiIssue_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the Issue for an API specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -789,6 +861,15 @@
           "Description": "Gets the details of the issue Comment for an API specified by its identifier."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/issues/{issueId}/comments/{commentId}",
+        "Method": "HEAD",
+        "OperationID": "ApiIssueComment_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the issue Comment for an API specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -869,6 +950,15 @@
           "Description": "Gets the details of the issue Attachment for an API specified by its identifier."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/issues/{issueId}/attachments/{attachmentId}",
+        "Method": "HEAD",
+        "OperationID": "ApiIssueAttachment_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the issue Attachment for an API specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -949,6 +1039,15 @@
           "Description": "Get Tag description in scope of API"
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/tagDescriptions/{tagDescriptionId}",
+        "Method": "HEAD",
+        "OperationID": "ApiTagDescription_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state version of the tag specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -1029,6 +1128,15 @@
           "Description": "Gets the details of the Api Version Set specified by its identifier."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apiVersionSets/{versionSetId}",
+        "Method": "HEAD",
+        "OperationID": "ApiVersionSet_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the Api Version Set specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -1109,6 +1217,15 @@
           "Description": "Gets the details of the authorization server specified by its identifier."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationServers/{authsid}",
+        "Method": "HEAD",
+        "OperationID": "AuthorizationServer_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the authorizationServer specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -1199,6 +1316,15 @@
           "Description": "Gets the details of the backend specified by its identifier."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends/{backendId}",
+        "Method": "HEAD",
+        "OperationID": "Backend_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the backend specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -1289,6 +1415,15 @@
           "Description": "Gets the details of the Cache specified by its identifier."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/caches/{cacheId}",
+        "Method": "HEAD",
+        "OperationID": "Cache_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the Cache specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -1369,6 +1504,15 @@
           "Description": "Gets the details of the certificate specified by its identifier."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/certificates/{certificateId}",
+        "Method": "HEAD",
+        "OperationID": "Certificate_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the certificate specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -1539,6 +1683,15 @@
           "Description": "Returns the developer portal's content item specified by its identifier."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}/contentItems/{contentItemId}",
+        "Method": "HEAD",
+        "OperationID": "ContentItem_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Returns the entity state (ETag) version of the developer portal's content item specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -2079,6 +2232,15 @@
           "Description": "Gets the details of the email template specified by its identifier."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/templates/{templateName}",
+        "Method": "HEAD",
+        "OperationID": "EmailTemplate_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the email template specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -2159,6 +2321,15 @@
           "Description": "Gets the details of the Gateway specified by its identifier."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}",
+        "Method": "HEAD",
+        "OperationID": "Gateway_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the Gateway specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -2307,6 +2478,15 @@
           "Description": "Get details of a hostname configuration"
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/hostnameConfigurations/{hcId}",
+        "Method": "HEAD",
+        "OperationID": "GatewayHostnameConfiguration_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Checks that hostname configuration entity specified by identifier exists for specified Gateway entity."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -2387,6 +2567,15 @@
           "Description": "Get assigned Gateway Certificate Authority details."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/certificateAuthorities/{certificateId}",
+        "Method": "HEAD",
+        "OperationID": "GatewayCertificateAuthority_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Checks if Certificate entity is assigned to Gateway entity as Certificate Authority."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -2467,6 +2656,15 @@
           "Description": "Gets the details of the group specified by its identifier."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}",
+        "Method": "HEAD",
+        "OperationID": "Group_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the group specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -2588,6 +2786,15 @@
           "Description": "Gets the configuration details of the identity Provider configured in specified service instance."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/identityProviders/{identityProviderName}",
+        "Method": "HEAD",
+        "OperationID": "IdentityProvider_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the identityProvider specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -2678,6 +2885,15 @@
           "Description": "Gets the details of the logger specified by its identifier."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/loggers/{loggerId}",
+        "Method": "HEAD",
+        "OperationID": "Logger_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the logger specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -2758,6 +2974,15 @@
           "Description": "Gets the details of the named value specified by its identifier."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/namedValues/{namedValueId}",
+        "Method": "HEAD",
+        "OperationID": "NamedValue_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the named value specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -3008,6 +3233,15 @@
           "Description": "Gets specific OpenID Connect Provider without secrets."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{opid}",
+        "Method": "HEAD",
+        "OperationID": "OpenIdConnectProvider_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the openIdConnectProvider specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -3098,6 +3332,15 @@
           "Description": "Gets the developer portal's revision specified by its identifier."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/portalRevisions/{portalRevisionId}",
+        "Method": "HEAD",
+        "OperationID": "PortalRevision_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the developer portal revision specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -3168,6 +3411,15 @@
           "Description": "Get Sign In Settings for the Portal"
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/portalsettings/signin",
+        "Method": "HEAD",
+        "OperationID": "SignInSettings_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the SignInSettings."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -3224,6 +3476,15 @@
           "Description": "Get Sign Up Settings for the Portal"
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/portalsettings/signup",
+        "Method": "HEAD",
+        "OperationID": "SignUpSettings_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the SignUpSettings."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -3280,6 +3541,15 @@
           "Description": "Get Delegation Settings for the Portal."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/portalsettings/delegation",
+        "Method": "HEAD",
+        "OperationID": "DelegationSettings_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the DelegationSettings."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -3476,6 +3746,15 @@
           "Description": "Gets the details of the product specified by its identifier."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}",
+        "Method": "HEAD",
+        "OperationID": "Product_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the product specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -3650,6 +3929,15 @@
           "Description": "Gets the details of the Schema specified by its identifier."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/schemas/{schemaId}",
+        "Method": "HEAD",
+        "OperationID": "GlobalSchema_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the Schema specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -3804,6 +4092,15 @@
           "Description": "Gets the specified Subscription entity."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/subscriptions/{sid}",
+        "Method": "HEAD",
+        "OperationID": "Subscription_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the apimanagement subscription specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -3912,6 +4209,15 @@
           "Description": "Get tenant access information details without secrets."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{accessName}",
+        "Method": "HEAD",
+        "OperationID": "TenantAccess_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Tenant access metadata"
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
@@ -4064,6 +4370,15 @@
           "Description": "Gets the details of the user specified by its identifier."
         }
       ],
+      "ExistOperation": {
+        "Name": "CheckExistence",
+        "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}",
+        "Method": "HEAD",
+        "OperationID": "User_GetEntityTag",
+        "IsLongRunning": false,
+        "PagingMetadata": null,
+        "Description": "Gets the entity state (Etag) version of the user specified by its identifier."
+      },
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",

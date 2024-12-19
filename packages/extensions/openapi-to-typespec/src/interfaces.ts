@@ -28,6 +28,11 @@ export interface WithSummary {
   summary?: string;
 }
 
+export interface WithDecorators {
+  decorators?: TypespecDecorator[];
+  clientDecorators?: TypespecDecorator[];
+}
+
 export interface TypespecOperationGroup extends WithDoc {
   name: string;
   operations: (TypespecOperation | TspArmProviderActionOperation)[];
@@ -105,6 +110,20 @@ export interface EndpointParameter extends WithDoc {
 export interface TypespecDataType extends WithDoc, WithFixMe, WithSuppressDirectives {
   kind: string;
   name: string;
+}
+
+export interface TypespecVoidType extends TypespecDataType {
+  kind: "void";
+  name: "_";
+}
+
+export type TypespecModel = TypespecTemplateModel | TypespecDataType;
+
+export interface TypespecTemplateModel extends TypespecDataType {
+  kind: "template";
+  arguments?: TypespecModel[];
+  additionalProperties?: TypespecParameter[]; // Currently for body purpose
+  additionalTemplateModel?: string; // Currently for LRO header purpose
 }
 
 export interface TypespecWildcardType extends TypespecDataType {
@@ -211,38 +230,50 @@ export function isFirstLevelResource(value: string): value is FirstLevelResource
   return FIRST_LEVEL_RESOURCE.includes(value as FirstLevelResource);
 }
 
-export interface TspArmResourceOperationBase extends WithDoc, WithFixMe, WithSuppressDirectives {
-  kind: string;
-  name: string;
-  templateParameters?: string[];
-  decorators?: TypespecDecorator[];
-  clientDecorators?: TypespecDecorator[];
-  operationId?: string;
-  examples?: Record<string, Record<string, unknown>>;
-  customizations?: string[];
-}
-
-// TO-DO: consolidate with other templates
-export interface TspArmProviderActionOperation extends WithDoc, WithSummary {
-  kind: "ArmProviderActionAsync";
-  name: string;
-  action?: string;
-  responses?: string[];
-  verb: string;
-  scope?: "TenantActionScope" | "SubscriptionActionScope";
-  parameters: TypespecParameter[];
-  request?: TypespecParameter;
-  decorators?: TypespecDecorator[];
-}
-
 export type TspArmResourceOperation =
+  | TspArmResourceActionOperation
   | TspArmResourceListOperation
-  | TspArmResourceNonListOperation
-  | TspArmResourceExistsOperation;
+  | TspArmResourceLifeCycleOperation;
 
-export interface TspArmResourceNonListOperation extends TspArmResourceOperationBase {
+export interface TspArmResourceOperationBase
+  extends WithDoc,
+    WithSummary,
+    WithDecorators,
+    WithFixMe,
+    WithSuppressDirectives {
+  kind: TspArmOperationType;
+  name: string;
+  resource: string;
+  baseParameters?: string[];
+  parameters?: TypespecParameter[];
+  response?: TypespecTemplateModel[] | TypespecVoidType;
+  operationId?: string;
+  lroHeaders?: TspLroHeaders;
+  examples?: Record<string, Record<string, unknown>>;
+  augmentedDecorators?: string[];
+  patchModel?: string;
+}
+
+export interface TspArmResourceActionOperation extends TspArmResourceOperationBase {
+  kind: "ArmResourceActionSync" | "ArmResourceActionAsync" | "ArmResourceActionAsyncBase";
+  request: TypespecParameter | TypespecVoidType | TypespecDataType;
+  response: TypespecTemplateModel[] | TypespecVoidType;
+}
+
+export function isArmResourceActionOperation(
+  operation: TspArmResourceOperationBase,
+): operation is TspArmResourceActionOperation {
+  return (
+    operation.kind === "ArmResourceActionSync" ||
+    operation.kind === "ArmResourceActionAsync" ||
+    operation.kind === "ArmResourceActionAsyncBase"
+  );
+}
+
+export interface TspArmResourceLifeCycleOperation extends TspArmResourceOperationBase {
   kind:
     | "ArmResourceRead"
+    | "ArmResourceCheckExistence"
     | "ArmResourceCreateOrReplaceSync"
     | "ArmResourceCreateOrReplaceAsync"
     | "ArmResourcePatchSync"
@@ -252,25 +283,48 @@ export interface TspArmResourceNonListOperation extends TspArmResourceOperationB
     | "ArmCustomPatchSync"
     | "ArmCustomPatchAsync"
     | "ArmResourceDeleteSync"
-    | "ArmResourceDeleteAsync"
-    | "ArmResourceDeleteWithoutOkAsync"
-    | "ArmResourceActionSync"
-    | "ArmResourceActionNoContentSync"
-    | "ArmResourceActionAsync"
-    | "ArmResourceActionNoResponseContentAsync"
-    | "checkGlobalNameAvailability"
-    | "checkLocalNameAvailability"
-    | "checkNameAvailability";
+    | "ArmResourceDeleteWithoutOkAsync";
 }
 
 export interface TspArmResourceListOperation extends TspArmResourceOperationBase {
   kind: "ArmResourceListByParent" | "ArmListBySubscription" | "ArmResourceListAtScope";
 }
 
-export interface TspArmResourceExistsOperation extends TspArmResourceOperationBase {
-  kind: "ArmResourceExists";
-  parameters: string[];
-  responses: string[];
+export type TspLroHeaders = "Azure-AsyncOperation" | "Location";
+export type TspArmOperationType =
+  | "ArmResourceRead"
+  | "ArmResourceCheckExistence"
+  | "ArmResourceCreateOrReplaceSync"
+  | "ArmResourceCreateOrReplaceAsync"
+  | "ArmResourcePatchSync"
+  | "ArmResourcePatchAsync"
+  | "ArmTagsPatchSync"
+  | "ArmTagsPatchAsync"
+  | "ArmCustomPatchSync"
+  | "ArmCustomPatchAsync"
+  | "ArmResourceDeleteSync"
+  | "ArmResourceDeleteWithoutOkAsync"
+  | "ArmResourceActionSync"
+  | "ArmResourceActionAsync"
+  | "ArmResourceActionAsyncBase"
+  | "checkGlobalNameAvailability"
+  | "checkLocalNameAvailability"
+  | "checkNameAvailability"
+  | "ArmResourceListByParent"
+  | "ArmListBySubscription"
+  | "ArmResourceListAtScope";
+
+// TO-DO: consolidate with other templates
+export interface TspArmProviderActionOperation extends WithDoc, WithSummary {
+  kind: "ArmProviderActionAsync" | "ArmProviderActionSync";
+  name: string;
+  action?: string;
+  responses?: string[];
+  verb: string;
+  scope?: "TenantActionScope" | "SubscriptionActionScope";
+  parameters: TypespecParameter[];
+  request?: TypespecParameter;
+  decorators?: TypespecDecorator[];
 }
 
 export interface TspArmResource extends TypespecObject {
@@ -282,6 +336,7 @@ export interface TspArmResource extends TypespecObject {
   propertiesPropertyClientDecorator: TypespecDecorator[];
   resourceParent?: TspArmResource;
   resourceOperations: TspArmResourceOperation[];
+  // TO-DO: delete
   normalOperations: TypespecOperation[];
   optionalStandardProperties: string[];
   baseModelName?: string;

@@ -38,14 +38,8 @@ interface DiagnosticContracts {
    * Gets the entity state (Etag) version of the Diagnostic for an API specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("ApiDiagnostic_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      DiagnosticContract,
-      BaseParameters<DiagnosticContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<DiagnosticContract>;
 
   /**
    * Creates a new Diagnostic for an API or updates an existing one.
@@ -71,7 +65,7 @@ interface DiagnosticContracts {
   @operationId("ApiDiagnostic_Update")
   update is ArmCustomPatchSync<
     DiagnosticContract,
-    DiagnosticContract,
+    PatchModel = DiagnosticContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -85,7 +79,6 @@ interface DiagnosticContracts {
    * Deletes the specified Diagnostic from an API.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiDiagnostic_Delete")
   delete is ArmResourceDeleteSync<
     DiagnosticContract,
@@ -124,8 +117,7 @@ interface DiagnosticContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = DiagnosticListResult
+    }
   >;
 }
 

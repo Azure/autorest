@@ -40,8 +40,12 @@ interface FileServicePropertiesOperationGroup {
    * Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("FileServices_SetServiceProperties")
-  setServiceProperties is ArmResourceCreateOrReplaceSync<FileServiceProperties>;
+  setServiceProperties is ArmResourceCreateOrReplaceSync<
+    FileServiceProperties,
+    Response = ArmResourceUpdatedResponse<FileServiceProperties>
+  >;
 
   /**
    * List all file services in storage accounts
@@ -50,7 +54,7 @@ interface FileServicePropertiesOperationGroup {
   @operationId("FileServices_List")
   list is ArmResourceListByParent<
     FileServiceProperties,
-    Response = FileServiceItems
+    Response = ArmResponse<FileServiceItems>
   >;
 }
 
