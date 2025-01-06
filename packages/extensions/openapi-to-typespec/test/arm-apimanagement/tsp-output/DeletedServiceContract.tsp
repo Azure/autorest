@@ -23,6 +23,12 @@ model DeletedServiceContract
     SegmentName = "deletedservices",
     NamePattern = "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
   >;
+
+  /**
+   * API Management Service Master Location.
+   */
+  @visibility("read")
+  location?: string;
 }
 
 @armResourceOperations

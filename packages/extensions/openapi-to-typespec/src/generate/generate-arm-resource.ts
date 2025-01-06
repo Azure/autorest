@@ -4,7 +4,6 @@ import pluralize from "pluralize";
 import {
   TypespecOperation,
   TspArmResource,
-  isArmResourceActionOperation,
   TypespecTemplateModel,
   TypespecVoidType,
   TspLroHeaders,
@@ -129,7 +128,7 @@ function generateArmResourceOperation(resource: TspArmResource): string {
       definitions.push(
         `${operation.name} is ${operation.kind}<${operation.resource}, ${generateArmRequest(
           operation.request,
-        )}, ${generateArmResponse(operation.response)}${operation.baseParameters![0]}${
+        )}, ${generateArmResponse(operation.response)}, BaseParameters = ${operation.baseParameters![0]}${
           operation.parameters ? `, Parameters = { ${generateParameters(operation.parameters)} }` : ""
         }>`,
       );

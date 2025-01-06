@@ -23,18 +23,6 @@ model PrivateEndpointConnection
     SegmentName = "privateEndpointConnections",
     NamePattern = ""
   >;
-
-  /**
-   * private endpoint connection Id
-   */
-  @visibility("read")
-  id?: string;
-
-  /**
-   * private endpoint connection type
-   */
-  @visibility("read")
-  type?: string;
 }
 
 @armResourceOperations

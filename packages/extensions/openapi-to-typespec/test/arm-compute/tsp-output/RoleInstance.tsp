@@ -25,31 +25,6 @@ model RoleInstance
   >;
 
   /**
-   * Resource Id
-   */
-  @visibility("read")
-  id?: string;
-
-  /**
-   * Resource Type.
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
-   * Resource Location.
-   */
-  @visibility("read")
-  location?: string;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read")
-  tags?: Record<string>;
-
-  /**
    * The role instance SKU.
    */
   sku?: InstanceSku;
