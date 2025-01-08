@@ -1,6 +1,13 @@
 # Change Log - @autorest/openapi-to-typespec
 
-This log was last generated on Thu, 19 Dec 2024 10:44:01 GMT and should not be manually modified.
+This log was last generated on Wed, 08 Jan 2025 06:06:48 GMT and should not be manually modified.
+
+## 0.10.6
+Wed, 08 Jan 2025 06:06:48 GMT
+
+### Patches
+
+- Fix the ResourceListResult issue in data plane.
 
 ## 0.10.5
 Thu, 19 Dec 2024 10:44:01 GMT
