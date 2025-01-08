@@ -1,6 +1,6 @@
 import { CodeModel, isObjectSchema, Operation } from "@autorest/codemodel";
-import { isResponseSchema } from "./schemas";
 import { TspLroHeaders } from "../interfaces";
+import { isResponseSchema } from "./schemas";
 
 export function markLRO(codeModel: CodeModel) {
   for (const operationGroup of codeModel.operationGroups) {

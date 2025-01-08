@@ -1,4 +1,3 @@
-import { generateSuppressions } from "../utils/suppressions";
 import {
   TspArmProviderActionOperation,
   TypespecOperation,
@@ -8,8 +7,9 @@ import {
 import { getOptions } from "../options";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs, generateSummary } from "../utils/docs";
-import { generateParameter } from "./generate-parameter";
 import { generateLroHeaders } from "../utils/lro";
+import { generateSuppressions } from "../utils/suppressions";
+import { generateParameter } from "./generate-parameter";
 
 export function generateOperation(operation: TypespecOperation, operationGroup?: TypespecOperationGroup) {
   const { isArm } = getOptions();

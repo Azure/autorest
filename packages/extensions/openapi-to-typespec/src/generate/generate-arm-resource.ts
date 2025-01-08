@@ -15,11 +15,11 @@ import { getTSPOperationGroupName } from "../transforms/transform-arm-resources"
 import { generateAugmentedDecorators, generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
 import { getLogger } from "../utils/logger";
+import { generateLroHeaders } from "../utils/lro";
 import { getModelPropertiesDeclarations } from "../utils/model-generation";
 import { generateSuppressions } from "../utils/suppressions";
 import { generateOperation, generateParameters } from "./generate-operations";
 import { generateParameter } from "./generate-parameter";
-import { generateLroHeaders } from "../utils/lro";
 
 const logger = () => getLogger("generate-arm-resource");
 
