@@ -19,6 +19,7 @@ import { getModelPropertiesDeclarations } from "../utils/model-generation";
 import { generateSuppressions } from "../utils/suppressions";
 import { generateOperation, generateParameters } from "./generate-operations";
 import { generateParameter } from "./generate-parameter";
+import { generateLroHeaders } from "../utils/lro";
 
 const logger = () => getLogger("generate-arm-resource");
 
@@ -173,15 +174,6 @@ function generateArmRequest(request: TypespecParameter | TypespecVoidType | Type
   }
 
   return request.name;
-}
-
-function generateLroHeaders(lroHeaders: TspLroHeaders): string {
-  if (lroHeaders === "Azure-AsyncOperation") {
-    return "ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader";
-  } else if (lroHeaders === "Location") {
-    return "ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader";
-  }
-  throw new Error(`Unknown LRO header: ${lroHeaders}`);
 }
 
 function generateArmResponse(responses: TypespecTemplateModel[] | TypespecVoidType): string {

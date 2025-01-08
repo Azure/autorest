@@ -13,18 +13,18 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.AlertsManagement;
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface AlertsOperations {
   /**
    * List alerts meta data information based on value of identifier parameter.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Alerts_MetaData")
+  @autoRoute
   @get
   @action("alertsMetaData")
   metaData is ArmProviderActionSync<
     Response = AlertsMetaData,
-    Scope = TenantActionScope,
     Parameters = {
       /**
        * Identification of the information to be retrieved by API call.
@@ -38,6 +38,7 @@ interface AlertsOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Alerts_GetSummary")
+  @autoRoute
   @get
   @action("alertsSummary")
   getSummary is ArmProviderActionSync<

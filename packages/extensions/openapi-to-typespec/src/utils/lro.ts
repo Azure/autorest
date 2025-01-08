@@ -1,5 +1,6 @@
 import { CodeModel, isObjectSchema, Operation } from "@autorest/codemodel";
 import { isResponseSchema } from "./schemas";
+import { TspLroHeaders } from "../interfaces";
 
 export function markLRO(codeModel: CodeModel) {
   for (const operationGroup of codeModel.operationGroups) {
@@ -34,4 +35,13 @@ export function hasLROExtension(operation: Operation) {
     operation.extensions?.["x-ms-long-running-operation"] ||
     operation.extensions?.["x-ms-long-running-operation-options"]
   );
+}
+
+export function generateLroHeaders(lroHeaders: TspLroHeaders): string {
+  if (lroHeaders === "Azure-AsyncOperation") {
+    return "ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader";
+  } else if (lroHeaders === "Location") {
+    return "ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader";
+  }
+  throw new Error(`Unknown LRO header: ${lroHeaders}`);
 }

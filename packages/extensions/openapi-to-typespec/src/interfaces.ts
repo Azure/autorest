@@ -33,7 +33,7 @@ export interface WithDecorators {
   clientDecorators?: TypespecDecorator[];
 }
 
-export interface TypespecOperationGroup extends WithDoc {
+export interface TypespecOperationGroup extends WithDoc, WithSuppressDirectives {
   name: string;
   operations: (TypespecOperation | TspArmProviderActionOperation)[];
 }
@@ -315,16 +315,17 @@ export type TspArmOperationType =
   | "ArmResourceListAtScope";
 
 // TO-DO: consolidate with other templates
-export interface TspArmProviderActionOperation extends WithDoc, WithSummary {
+export interface TspArmProviderActionOperation extends WithDoc, WithSummary, WithSuppressDirectives {
   kind: "ArmProviderActionAsync" | "ArmProviderActionSync";
   name: string;
   action?: string;
-  responses?: string[];
-  verb: string;
+  response?: string;
+  verb?: string;
   scope?: "TenantActionScope" | "SubscriptionActionScope";
   parameters: TypespecParameter[];
   request?: TypespecParameter;
   decorators?: TypespecDecorator[];
+  lroHeaders?: TspLroHeaders;
 }
 
 export interface TspArmResource extends TypespecObject {

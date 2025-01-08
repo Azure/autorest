@@ -47,18 +47,12 @@
     },
     {
       "name": "SmartGroups"
-    },
-    {
-      "name": "AlertsOperations"
     }
   ],
   "paths": {
     "/providers/Azure.ResourceManager.AlertsManagement/alertsMetaData": {
       "get": {
         "operationId": "Alerts_MetaData",
-        "tags": [
-          "AlertsOperations"
-        ],
         "description": "List alerts meta data information based on value of identifier parameter.",
         "parameters": [
           {
@@ -701,9 +695,6 @@
     "/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.AlertsManagement/alertsSummary": {
       "get": {
         "operationId": "Alerts_GetSummary",
-        "tags": [
-          "AlertsOperations"
-        ],
         "description": "Get a summarized count of your alerts grouped by various parameters (e.g. grouping by 'Severity' returns the count of alerts for each severity).",
         "parameters": [
           {

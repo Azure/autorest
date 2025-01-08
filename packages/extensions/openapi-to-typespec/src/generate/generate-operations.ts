@@ -1,3 +1,4 @@
+import { generateSuppressions } from "../utils/suppressions";
 import {
   TspArmProviderActionOperation,
   TypespecOperation,
@@ -8,6 +9,7 @@ import { getOptions } from "../options";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs, generateSummary } from "../utils/docs";
 import { generateParameter } from "./generate-parameter";
+import { generateLroHeaders } from "../utils/lro";
 
 export function generateOperation(operation: TypespecOperation, operationGroup?: TypespecOperationGroup) {
   const { isArm } = getOptions();
@@ -78,14 +80,22 @@ export function generateProviderAction(operation: TspArmProviderActionOperation)
   summary && statements.push(summary);
   statements.push(doc);
   const templateParameters = [];
-  const responses = [...new Set(operation.responses)];
-  // Workaround for array response, refactor later.
-  const response =
-    responses.length === 1 && responses[0].endsWith("[]") ? `{@bodyRoot _: ${responses[0]}}` : responses.join("|");
-  if (response !== "void") {
-    templateParameters.push(`Response = ${response}`);
+
+  if (operation.request) {
+    templateParameters.push(`Request = ${operation.request.type}`);
   }
-  templateParameters.push(`Scope = ${operation.scope}`);
+
+  if (operation.response) {
+    if (operation.response.endsWith("[]")) {
+      templateParameters.push(`Response = {@bodyRoot _: ${operation.response}}`);
+    } else {
+      templateParameters.push(`Response = ${operation.response}`);
+    }
+  }
+
+  if (operation.scope) {
+    templateParameters.push(`Scope = ${operation.scope}`);
+  }
 
   if (operation.parameters.length > 0) {
     const params: string[] = [];
@@ -104,14 +114,19 @@ export function generateProviderAction(operation: TspArmProviderActionOperation)
       templateParameters.push(`Parameters = {${params}}`);
     }
   }
-  if (operation.request) {
-    templateParameters.push(`Request = ${operation.request.type}`);
-  }
 
+  if (operation.lroHeaders) {
+    templateParameters.push(`LroHeaders = ${generateLroHeaders(operation.lroHeaders)}`);
+  }
+  if (operation.suppressions) {
+    statements.push(generateSuppressions(operation.suppressions).join("\n"));
+  }
   if (operation.decorators) {
     statements.push(generateDecorators(operation.decorators));
   }
-  statements.push(`@${operation.verb}`);
+  if (operation.verb) {
+    statements.push(`@${operation.verb}`);
+  }
   if (operation.action) {
     statements.push(`@action("${operation.action}")`);
   }
@@ -172,11 +187,8 @@ export function generateOperationGroup(operationGroup: TypespecOperationGroup) {
   const { name, operations } = operationGroup;
 
   statements.push(`${doc}`);
+  operationGroup.suppressions && statements.push(generateSuppressions(operationGroup.suppressions).join("\n"));
   const hasInterface = Boolean(name);
-  const hasProvider = operations.find((o) => (o as TspArmProviderActionOperation).kind !== undefined) !== undefined;
-  if (hasProvider && hasInterface) {
-    statements.push(`@armResourceOperations`);
-  }
   hasInterface && statements.push(`interface ${name} {`);
 
   for (const operation of operations) {
