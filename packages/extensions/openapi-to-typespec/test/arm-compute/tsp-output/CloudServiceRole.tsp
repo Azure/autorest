@@ -25,18 +25,6 @@ model CloudServiceRole
   >;
 
   /**
-   * Resource id
-   */
-  @visibility("read")
-  id?: string;
-
-  /**
-   * Resource type
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
    * Resource location
    */
   @visibility("read")

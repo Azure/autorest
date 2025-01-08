@@ -84,7 +84,8 @@ interface DedicatedHosts {
   restart is ArmResourceActionAsyncBase<
     DedicatedHost,
     void,
-    OkResponseDefaultBaseParameters<DedicatedHost>
+    OkResponse,
+    BaseParameters = DefaultBaseParameters<DedicatedHost>
   >;
 
   /**

@@ -61,6 +61,7 @@ function transformVerb(protocol?: Protocols) {
 }
 
 function transformResponse(response: Response): [string, string] {
+  const { isArm } = getOptions();
   const statusCode = response.protocol.http?.statusCodes[0] as string;
   const codeModel = getSession().model;
   const dataTypes = getDataTypes(codeModel);
@@ -68,7 +69,7 @@ function transformResponse(response: Response): [string, string] {
     return [statusCode, "void"];
   }
 
-  if (isResourceListResult(response)) {
+  if (isResourceListResult(response) && isArm) {
     const valueSchema = ((response as SchemaResponse).schema as ObjectSchema).properties?.find(
       (p) => p.language.default.name === "value",
     );

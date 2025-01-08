@@ -2311,7 +2311,7 @@ interface RoleAssignmentsOperations {
       @query("$filter")
       $filter?: string;
     },
-    ResourceListResult<RoleAssignment>
+    RoleAssignmentListResult
   >;
 }
 

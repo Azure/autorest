@@ -28,7 +28,6 @@ import {
   TspArmResourceLifeCycleOperation,
   TspArmResourceListOperation,
   isArmResourceActionOperation,
-  TypespecDataType,
 } from "../interfaces";
 import { getOptions, updateOptions } from "../options";
 import { createClientNameDecorator, createCSharpNameDecorator } from "../pretransforms/rename-pretransform";
@@ -42,14 +41,8 @@ import {
   getResourceOperations,
   isResourceSchema,
 } from "../utils/resource-discovery";
-import { isArraySchema, isResponseSchema } from "../utils/schemas";
 import { getSuppresssionWithCode } from "../utils/suppressions";
-import {
-  getFullyQualifiedName,
-  getTemplateResponses,
-  isResourceListResult,
-  NamesOfResponseTemplate,
-} from "../utils/type-mapping";
+import { getFullyQualifiedName, getTemplateResponses, NamesOfResponseTemplate } from "../utils/type-mapping";
 import { getTypespecType, isTypespecType, transformObjectProperty } from "./transform-object";
 import { transformParameter } from "./transform-operations";
 
@@ -790,9 +783,13 @@ function buildBodyDecorator(
 }
 
 function getOtherProperties(schema: ArmResourceSchema, noCommonTypes: boolean): TypespecObjectProperty[] {
-  const knownProperties = ["properties", "name"];
+  const knownProperties = ["properties", "name", "id", "type", "systemData"];
+  const resourceKind = getResourceKind(schema);
+  if (resourceKind === "TrackedResource") {
+    knownProperties.push(...["location", "tags"]);
+  }
   if (!noCommonTypes) {
-    knownProperties.push(...["id", "type", "systemData", "location", "tags", "identity", "sku", "eTag", "plan"]);
+    knownProperties.push(...["identity", "sku", "eTag", "plan"]);
   }
   const otherProperties: TypespecObjectProperty[] = [];
   for (const property of schema.properties ?? []) {

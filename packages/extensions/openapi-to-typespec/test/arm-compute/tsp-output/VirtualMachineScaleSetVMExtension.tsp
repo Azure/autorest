@@ -25,12 +25,6 @@ model VirtualMachineScaleSetVMExtension
   >;
 
   /**
-   * Resource type
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
    * The location of the extension.
    */
   @visibility("read", "create")

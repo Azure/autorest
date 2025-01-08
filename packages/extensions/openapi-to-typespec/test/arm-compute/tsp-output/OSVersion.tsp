@@ -24,18 +24,6 @@ model OSVersion is Azure.ResourceManager.ProxyResource<OSVersionProperties> {
   >;
 
   /**
-   * Resource Id.
-   */
-  @visibility("read")
-  id?: string;
-
-  /**
-   * Resource type.
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
    * Resource location.
    */
   @visibility("read")

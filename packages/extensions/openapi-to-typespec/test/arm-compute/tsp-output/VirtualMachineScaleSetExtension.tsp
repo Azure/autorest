@@ -23,12 +23,6 @@ model VirtualMachineScaleSetExtension
     SegmentName = "extensions",
     NamePattern = ""
   >;
-
-  /**
-   * Resource type
-   */
-  @visibility("read")
-  type?: string;
 }
 
 @armResourceOperations

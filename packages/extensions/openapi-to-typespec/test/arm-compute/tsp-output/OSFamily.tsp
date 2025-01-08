@@ -24,18 +24,6 @@ model OSFamily is Azure.ResourceManager.ProxyResource<OSFamilyProperties> {
   >;
 
   /**
-   * Resource Id.
-   */
-  @visibility("read")
-  id?: string;
-
-  /**
-   * Resource type.
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
    * Resource location.
    */
   @visibility("read")
