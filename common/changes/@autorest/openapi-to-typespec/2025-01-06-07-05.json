@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@autorest/openapi-to-typespec",
-      "comment": "Properties in TrackedResource/ProxyResource should not be in resource model. ResourceListResult should be only replaced in arm.",
+      "comment": "Fix the ResourceListResult issue in data plane.",
       "type": "patch"
     }
   ],
