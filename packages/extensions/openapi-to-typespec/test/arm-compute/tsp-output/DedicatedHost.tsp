@@ -85,7 +85,7 @@ interface DedicatedHosts {
     DedicatedHost,
     void,
     OkResponse,
-    BaseParameters = DefaultBaseParameters<DedicatedHost>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<DedicatedHost>
   >;
 
   /**

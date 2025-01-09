@@ -15,6 +15,7 @@ import { getTSPOperationGroupName } from "../transforms/transform-arm-resources"
 import { generateAugmentedDecorators, generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
 import { getLogger } from "../utils/logger";
+import { generateLroHeaders } from "../utils/lro";
 import { getModelPropertiesDeclarations } from "../utils/model-generation";
 import { generateSuppressions } from "../utils/suppressions";
 import { generateOperation, generateParameters } from "./generate-operations";
@@ -173,15 +174,6 @@ function generateArmRequest(request: TypespecParameter | TypespecVoidType | Type
   }
 
   return request.name;
-}
-
-function generateLroHeaders(lroHeaders: TspLroHeaders): string {
-  if (lroHeaders === "Azure-AsyncOperation") {
-    return "ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader";
-  } else if (lroHeaders === "Location") {
-    return "ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader";
-  }
-  throw new Error(`Unknown LRO header: ${lroHeaders}`);
 }
 
 function generateArmResponse(responses: TypespecTemplateModel[] | TypespecVoidType): string {

@@ -42,18 +42,12 @@
   "tags": [
     {
       "name": "AnalysisServicesServersOperationGroup"
-    },
-    {
-      "name": "ServersOperations"
     }
   ],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.Analysis/locations/{location}/checkNameAvailability": {
       "post": {
         "operationId": "Servers_CheckNameAvailability",
-        "tags": [
-          "ServersOperations"
-        ],
         "description": "Check the name availability in the target location.",
         "parameters": [
           {
@@ -130,9 +124,6 @@
     "/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.Analysis/skus": {
       "get": {
         "operationId": "Servers_ListSkusForNew",
-        "tags": [
-          "ServersOperations"
-        ],
         "description": "Lists eligible SKUs for Analysis Services resource provider.",
         "parameters": [
           {

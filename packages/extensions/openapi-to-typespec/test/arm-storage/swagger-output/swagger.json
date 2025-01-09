@@ -93,18 +93,6 @@
     },
     {
       "name": "Tables"
-    },
-    {
-      "name": "SkusOperations"
-    },
-    {
-      "name": "StorageAccountsOperations"
-    },
-    {
-      "name": "DeletedAccountsOperations"
-    },
-    {
-      "name": "UsagesOperations"
     }
   ],
   "paths": {
@@ -142,9 +130,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability": {
       "post": {
         "operationId": "StorageAccounts_CheckNameAvailability",
-        "tags": [
-          "StorageAccountsOperations"
-        ],
         "description": "Checks that the storage account name is valid and is not already in use.",
         "parameters": [
           {
@@ -182,9 +167,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts": {
       "get": {
         "operationId": "DeletedAccounts_List",
-        "tags": [
-          "DeletedAccountsOperations"
-        ],
         "description": "Lists deleted accounts under the subscription.",
         "parameters": [
           {
@@ -264,9 +246,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/usages": {
       "get": {
         "operationId": "Usages_ListByLocation",
-        "tags": [
-          "UsagesOperations"
-        ],
         "description": "Gets the current usage count and the limit for the resources of the location under the subscription.",
         "parameters": [
           {
@@ -298,9 +277,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus": {
       "get": {
         "operationId": "Skus_List",
-        "tags": [
-          "SkusOperations"
-        ],
         "description": "Lists the available SKUs supported by Microsoft.Storage for given subscription.",
         "parameters": [
           {

@@ -24,6 +24,7 @@ import {
   TypespecParameterLocation,
   Extension,
   TspArmProviderActionOperation,
+  TypespecDecorator,
 } from "../interfaces";
 import { transformDataType } from "../model";
 import { getOptions } from "../options";
@@ -45,10 +46,20 @@ export function transformOperationGroup(
     acc = [...acc, ...transformOperation(op, codeModel, name)];
     return acc;
   }, []);
+  const { isArm, isFullCompatible } = getOptions();
+  const suppressions =
+    isArm && isFullCompatible
+      ? [
+          getSuppresssionWithCode(
+            "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator",
+          ),
+        ]
+      : undefined;
   return {
     name,
     doc,
     operations: ops,
+    suppressions,
   };
 }
 
@@ -149,7 +160,7 @@ export function transformRequest(
   }
 
   const resource = operation.language.default.resource;
-  let decorators = undefined;
+  let decorators: TypespecDecorator[] | undefined = undefined;
   if (
     groupName &&
     operation.operationId &&
@@ -169,15 +180,35 @@ export function transformRequest(
       const action = getActionForPrviderTemplate(route);
       if (action !== undefined) {
         const isLongRunning = operation.extensions?.["x-ms-long-running-operation"] ?? false;
+        decorators ??= [];
+        decorators.push({
+          name: "autoRoute",
+          module: "@typespec/rest",
+          namespace: "TypeSpec.Rest",
+        });
+
+        const verb = transformVerb(requests?.[0].protocol);
+
+        // For Async, there should be a 202 response without body and might be a 200 response with body
+        // For Sync, there might be a 200 response with body
+        const response = transformedResponses.find((r) => r[0] === "200")?.[1] ?? undefined;
+        const finalStateVia =
+          operation.extensions?.["x-ms-long-running-operation-options"]?.["final-state-via"] ?? "location";
+        const lroHeaders =
+          isLongRunning && finalStateVia === "azure-async-operation" ? "Azure-AsyncOperation" : undefined;
+        const suppressions =
+          isFullCompatible && lroHeaders
+            ? [getSuppresssionWithCode("@azure-tools/typespec-azure-resource-manager/lro-location-header")]
+            : undefined;
         return {
           kind: isLongRunning ? "ArmProviderActionAsync" : "ArmProviderActionSync",
           doc,
           summary,
           name,
-          verb: transformVerb(requests?.[0].protocol),
+          verb: verb === "post" ? undefined : verb,
           action: action === name ? undefined : action,
-          scope: route.startsWith("/providers/") ? "TenantActionScope" : "SubscriptionActionScope",
-          responses: transformedResponses.map((r) => r[1]),
+          scope: route.startsWith("/providers/") ? undefined : "SubscriptionActionScope",
+          response,
           parameters: parameters
             .filter((p) => p.location !== "body")
             .map((p) => {
@@ -193,6 +224,8 @@ export function transformRequest(
             }),
           request: parameters.find((p) => p.location === "body"),
           decorators,
+          lroHeaders,
+          suppressions,
         };
       }
     }

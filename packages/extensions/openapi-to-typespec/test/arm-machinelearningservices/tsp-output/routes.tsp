@@ -13,13 +13,14 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface UsagesOperations {
   /**
    * Gets the current usage information as well as limits for AML resources for given subscription and location.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Usages_List")
+  @autoRoute
   @get
   @action("usages")
   list is ArmProviderActionSync<
@@ -29,13 +30,14 @@ interface UsagesOperations {
   >;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface VirtualMachineSizesOperations {
   /**
    * Returns supported VM Sizes in a location
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineSizes_List")
+  @autoRoute
   @get
   @action("vmSizes")
   list is ArmProviderActionSync<
@@ -45,26 +47,27 @@ interface VirtualMachineSizesOperations {
   >;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface QuotasOperations {
   /**
    * Update quota for each VM family in workspace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Quotas_Update")
-  @post
+  @autoRoute
   @action("updateQuotas")
   update is ArmProviderActionSync<
+    Request = QuotaUpdateParameters,
     Response = UpdateWorkspaceQuotasResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
-    Request = QuotaUpdateParameters
+    Parameters = LocationParameter
   >;
   /**
    * Gets the currently assigned Workspace Quotas based on VMFamily.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Quotas_List")
+  @autoRoute
   @get
   @action("quotas")
   list is ArmProviderActionSync<
@@ -74,6 +77,7 @@ interface QuotasOperations {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface CodeContainersOperations {
   /**
    * List containers.
@@ -191,6 +195,7 @@ interface CodeContainersOperations {
   ): ArmResponse<CodeContainerResource> | ErrorResponse;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface CodeVersionsOperations {
   /**
    * List versions.
@@ -395,6 +400,7 @@ interface CodeVersionsOperations {
   ): ArmResponse<PendingUploadResponseDto> | ErrorResponse;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface ComponentContainersOperations {
   /**
    * List component containers.
@@ -518,6 +524,7 @@ interface ComponentContainersOperations {
   ): ArmResponse<ComponentContainerResource> | ErrorResponse;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface ComponentVersionsOperations {
   /**
    * List component versions.
@@ -683,6 +690,7 @@ interface ComponentVersionsOperations {
   ): ArmResponse<ComponentVersionResource> | ErrorResponse;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface DataContainersOperations {
   /**
    * List data containers.
@@ -806,6 +814,7 @@ interface DataContainersOperations {
   ): ArmResponse<DataContainerResource> | ErrorResponse;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface DataVersionsOperations {
   /**
    * List data versions in the data container
@@ -978,6 +987,7 @@ interface DataVersionsOperations {
   ): ArmResponse<DataVersionBaseResource> | ErrorResponse;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface EnvironmentContainersOperations {
   /**
    * List environment containers.
@@ -1101,6 +1111,7 @@ interface EnvironmentContainersOperations {
   ): ArmResponse<EnvironmentContainerResource> | ErrorResponse;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface EnvironmentVersionsOperations {
   /**
    * List versions.
@@ -1266,6 +1277,7 @@ interface EnvironmentVersionsOperations {
   ): ArmResponse<EnvironmentVersionResource> | ErrorResponse;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface ModelContainersOperations {
   /**
    * List model containers.
@@ -1395,6 +1407,7 @@ interface ModelContainersOperations {
   ): ArmResponse<ModelContainerResource> | ErrorResponse;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface ModelVersionsOperations {
   /**
    * List model versions.

@@ -14,6 +14,7 @@ export function getFullyQualifiedName(type: string, namespace: string | undefine
     case "SubscriptionBaseParameters":
     case "ExtensionBaseParameters":
     case "LocationBaseParameters":
+    case "DefaultBaseParameters":
       return `${namespace ?? "Azure.ResourceManager.Foundations"}.${type}`;
     default:
       return type;

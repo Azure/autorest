@@ -13,13 +13,14 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface UsageOperations {
   /**
    * Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Usage_List")
+  @autoRoute
   @get
   @action("usages")
   list is ArmProviderActionSync<
@@ -29,13 +30,14 @@ interface UsageOperations {
   >;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface VirtualMachineSizesOperations {
   /**
    * This API is deprecated. Use [Resources Skus](https://docs.microsoft.com/rest/api/compute/resourceskus/list)
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineSizes_List")
+  @autoRoute
   @get
   @action("vmSizes")
   list is ArmProviderActionSync<
@@ -45,13 +47,14 @@ interface VirtualMachineSizesOperations {
   >;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface VirtualMachineScaleSetsOperations {
   /**
    * Gets all the VM scale sets under the specified subscription for the specified location.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSets_ListByLocation")
+  @autoRoute
   @get
   @action("virtualMachineScaleSets")
   listByLocation is ArmProviderActionSync<
@@ -61,13 +64,14 @@ interface VirtualMachineScaleSetsOperations {
   >;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface VirtualMachinesOperations {
   /**
    * Gets all the virtual machines under the specified subscription for the specified location.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachines_ListByLocation")
+  @autoRoute
   @get
   @action("virtualMachines")
   listByLocation is ArmProviderActionSync<
@@ -77,7 +81,7 @@ interface VirtualMachinesOperations {
   >;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface VirtualMachineImagesOperations {
   /**
    * Gets a virtual machine image.
@@ -122,6 +126,7 @@ interface VirtualMachineImagesOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImages_List")
+  @autoRoute
   @get
   @action("versions")
   list is ArmProviderActionSync<
@@ -173,6 +178,7 @@ interface VirtualMachineImagesOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImages_ListOffers")
+  @autoRoute
   @get
   @action("artifacttypes/vmimage/offers")
   listOffers is ArmProviderActionSync<
@@ -196,6 +202,7 @@ interface VirtualMachineImagesOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImages_ListPublishers")
+  @autoRoute
   @get
   @action("publishers")
   listPublishers is ArmProviderActionSync<
@@ -210,6 +217,7 @@ interface VirtualMachineImagesOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImages_ListSkus")
+  @autoRoute
   @get
   @action("skus")
   listSkus is ArmProviderActionSync<
@@ -240,6 +248,7 @@ interface VirtualMachineImagesOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImages_ListByEdgeZone")
+  @autoRoute
   @get
   @action("vmimages")
   listByEdgeZone is ArmProviderActionSync<
@@ -258,7 +267,7 @@ interface VirtualMachineImagesOperations {
   >;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface VirtualMachineImagesEdgeZoneOperations {
   /**
    * Gets a virtual machine image in an edge zone.
@@ -309,6 +318,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImagesEdgeZone_List")
+  @autoRoute
   @get
   @action("versions")
   list is ArmProviderActionSync<
@@ -371,6 +381,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImagesEdgeZone_ListOffers")
+  @autoRoute
   @get
   @action("artifacttypes/vmimage/offers")
   listOffers is ArmProviderActionSync<
@@ -401,6 +412,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImagesEdgeZone_ListPublishers")
+  @autoRoute
   @get
   @action("publishers")
   listPublishers is ArmProviderActionSync<
@@ -424,6 +436,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImagesEdgeZone_ListSkus")
+  @autoRoute
   @get
   @action("skus")
   listSkus is ArmProviderActionSync<
@@ -458,43 +471,50 @@ interface VirtualMachineImagesEdgeZoneOperations {
   >;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface LogAnalyticsOperations {
   /**
    * Export logs that show Api requests made by this subscription in the given time window to show throttling activities.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LogAnalytics_ExportRequestRateByInterval")
-  @post
+  @autoRoute
   @action("logAnalytics/apiAccess/getRequestRateByInterval")
   exportRequestRateByInterval is ArmProviderActionAsync<
-    Response = LogAnalyticsOperationResult | void,
+    Request = RequestRateByIntervalInput,
+    Response = LogAnalyticsOperationResult,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter,
-    Request = RequestRateByIntervalInput
+    LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
   /**
    * Export logs that show total throttled Api requests for this subscription in the given time window.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LogAnalytics_ExportThrottledRequests")
-  @post
+  @autoRoute
   @action("logAnalytics/apiAccess/getThrottledRequests")
   exportThrottledRequests is ArmProviderActionAsync<
-    Response = LogAnalyticsOperationResult | void,
+    Request = ThrottledRequestsInput,
+    Response = LogAnalyticsOperationResult,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter,
-    Request = ThrottledRequestsInput
+    LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface VirtualMachineRunCommandsOperations {
   /**
    * Lists all available run commands for a subscription in a location.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineRunCommands_List")
+  @autoRoute
   @get
   @action("runCommands")
   list is ArmProviderActionSync<
@@ -537,6 +557,7 @@ interface VirtualMachineRunCommandsOperations {
   ): ArmResponse<RunCommandDocument> | ErrorResponse;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface VirtualMachineScaleSetVMRunCommandsOperations {
   /**
    * The operation to create or update the VMSS VM run command.
@@ -747,13 +768,14 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
   ): ArmResponse<ResourceListResult<VirtualMachineRunCommand>> | ErrorResponse;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface ResourceSkusOperations {
   /**
    * Gets the list of Microsoft.Compute SKUs available for your Subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ResourceSkus_List")
+  @autoRoute
   @get
   @action("skus")
   list is ArmProviderActionSync<

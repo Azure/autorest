@@ -13,6 +13,7 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface TagOperations {
   /**
    * Lists all Tags associated with the API.
@@ -678,6 +679,7 @@ interface TagOperations {
   ): OkResponse | ErrorResponse;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface ApiPolicyOperations {
   /**
    * Get the policy configuration at the API level.
@@ -894,6 +896,7 @@ interface ApiPolicyOperations {
   ): OkResponse | ErrorResponse;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface ApiExportOperations {
   /**
    * Gets the details of the API specified by its identifier in the format specified to the Storage Blob with SAS Key valid for 5 minutes.
@@ -940,13 +943,14 @@ interface ApiExportOperations {
   ): ArmResponse<ApiExportResult> | ErrorResponse;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface DeletedServicesOperations {
   /**
    * Lists all soft-deleted services available for undelete for the given subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DeletedServices_ListBySubscription")
+  @autoRoute
   @get
   @action("deletedservices")
   listBySubscription is ArmProviderActionSync<
@@ -956,26 +960,26 @@ interface DeletedServicesOperations {
   >;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface ApiManagementServiceOperations {
   /**
    * Checks availability and correctness of a name for an API Management service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiManagementService_CheckNameAvailability")
-  @post
+  @autoRoute
   checkNameAvailability is ArmProviderActionSync<
+    Request = ApiManagementServiceCheckNameAvailabilityParameters,
     Response = ApiManagementServiceNameAvailabilityResult,
     Scope = SubscriptionActionScope,
-    Parameters = {},
-    Request = ApiManagementServiceCheckNameAvailabilityParameters
+    Parameters = {}
   >;
   /**
    * Get the custom domain ownership identifier for an API Management service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiManagementService_GetDomainOwnershipIdentifier")
-  @post
+  @autoRoute
   getDomainOwnershipIdentifier is ArmProviderActionSync<
     Response = ApiManagementServiceGetDomainOwnershipIdentifierResult,
     Scope = SubscriptionActionScope,
@@ -983,6 +987,7 @@ interface ApiManagementServiceOperations {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface DiagnosticOperations {
   /**
    * Lists all diagnostics of the API Management service instance.
@@ -1217,6 +1222,7 @@ interface DiagnosticOperations {
   ): OkResponse | ErrorResponse;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface IssueOperations {
   /**
    * Lists a collection of issues in the specified service instance.
@@ -1293,6 +1299,7 @@ interface IssueOperations {
   ): ArmResponse<IssueContract> | ErrorResponse;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface PolicyOperations {
   /**
    * Lists all the Global Policy definitions of the Api Management service.
@@ -1458,6 +1465,7 @@ interface PolicyOperations {
   ): OkResponse | ErrorResponse;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface ProductPolicyOperations {
   /**
    * Get the policy configuration at the Product level.
@@ -1663,13 +1671,14 @@ interface ProductPolicyOperations {
   ): OkResponse | ErrorResponse;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface ApiManagementSkusOperations {
   /**
    * Gets the list of Microsoft.ApiManagement SKUs available for your Subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiManagementSkus_List")
+  @autoRoute
   @get
   @action("skus")
   list is ArmProviderActionSync<
@@ -1679,6 +1688,7 @@ interface ApiManagementSkusOperations {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface UserSubscriptionOperations {
   /**
    * Lists the collection of subscriptions of the specified user.

@@ -66,9 +66,6 @@
     },
     {
       "name": "DataManagerForAgricultureSolutions"
-    },
-    {
-      "name": "CheckNameAvailabilityOperations"
     }
   ],
   "paths": {
@@ -348,9 +345,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/checkNameAvailability": {
       "post": {
         "operationId": "CheckNameAvailability_CheckNameAvailability",
-        "tags": [
-          "CheckNameAvailabilityOperations"
-        ],
         "description": "Checks the name availability of the resource with requested resource name.",
         "parameters": [
           {
