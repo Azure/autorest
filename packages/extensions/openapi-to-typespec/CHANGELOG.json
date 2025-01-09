@@ -2,6 +2,18 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.10.6",
+      "tag": "@autorest/openapi-to-typespec_v0.10.6",
+      "date": "Wed, 08 Jan 2025 06:06:48 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix the ResourceListResult issue in data plane."
+          }
+        ]
+      }
+    },
+    {
       "version": "0.10.5",
       "tag": "@autorest/openapi-to-typespec_v0.10.5",
       "date": "Thu, 19 Dec 2024 10:44:01 GMT",
