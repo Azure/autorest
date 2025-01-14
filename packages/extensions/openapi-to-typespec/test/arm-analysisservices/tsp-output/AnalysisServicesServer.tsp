@@ -24,21 +24,17 @@ model AnalysisServicesServer
 }
 
 @armResourceOperations
-interface AnalysisServicesServersOperationGroup {
+interface Servers {
   /**
    * Gets details about the specified Analysis Services server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Servers_GetDetails")
   getDetails is ArmResourceRead<AnalysisServicesServer>;
 
   /**
    * Provisions the specified Analysis Services server based on the configuration specified in the request.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  @operationId("Servers_Create")
   create is ArmResourceCreateOrReplaceAsync<
     AnalysisServicesServer,
     Response = ArmResourceUpdatedResponse<AnalysisServicesServer> | ArmResourceCreatedResponse<
@@ -53,9 +49,7 @@ interface AnalysisServicesServersOperationGroup {
   /**
    * Updates the current state of the specified Analysis Services server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
-  @operationId("Servers_Update")
   update is ArmCustomPatchAsync<
     AnalysisServicesServer,
     PatchModel = AnalysisServicesServerUpdateParameters
@@ -64,9 +58,7 @@ interface AnalysisServicesServersOperationGroup {
   /**
    * Deletes the specified Analysis Services server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("Servers_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     AnalysisServicesServer,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -75,8 +67,6 @@ interface AnalysisServicesServersOperationGroup {
   /**
    * Gets all the Analysis Services servers for the given resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Servers_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     AnalysisServicesServer,
     Response = ArmResponse<AnalysisServicesServers>
@@ -85,8 +75,6 @@ interface AnalysisServicesServersOperationGroup {
   /**
    * Lists all the Analysis Services servers for the given subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Servers_List")
   list is ArmListBySubscription<
     AnalysisServicesServer,
     Response = ArmResponse<AnalysisServicesServers>
@@ -95,24 +83,18 @@ interface AnalysisServicesServersOperationGroup {
   /**
    * Suspends operation of the specified Analysis Services server instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Servers_Suspend")
   suspend is ArmResourceActionAsync<AnalysisServicesServer, void, OkResponse>;
 
   /**
    * Resumes operation of the specified Analysis Services server instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Servers_Resume")
   resume is ArmResourceActionAsync<AnalysisServicesServer, void, OkResponse>;
 
   /**
    * Lists eligible SKUs for an Analysis Services resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("skus")
-  @operationId("Servers_ListSkusForExisting")
   listSkusForExisting is ArmResourceActionSync<
     AnalysisServicesServer,
     void,
@@ -122,8 +104,6 @@ interface AnalysisServicesServersOperationGroup {
   /**
    * Return the gateway status of the specified Analysis Services server instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Servers_ListGatewayStatus")
   listGatewayStatus is ArmResourceActionSync<
     AnalysisServicesServer,
     void,
@@ -133,8 +113,6 @@ interface AnalysisServicesServersOperationGroup {
   /**
    * Dissociates a Unified Gateway associated with the server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Servers_DissociateGateway")
   dissociateGateway is ArmResourceActionSync<
     AnalysisServicesServer,
     void,
@@ -150,9 +128,9 @@ interface AnalysisServicesServersOperationGroup {
 @@doc(AnalysisServicesServer.properties,
   "Properties of the provision operation request."
 );
-@@doc(AnalysisServicesServersOperationGroup.create::parameters.resource,
+@@doc(Servers.create::parameters.resource,
   "Contains the information used to provision the Analysis Services server."
 );
-@@doc(AnalysisServicesServersOperationGroup.update::parameters.properties,
+@@doc(Servers.update::parameters.properties,
   "Request object that contains the updated information for the server."
 );

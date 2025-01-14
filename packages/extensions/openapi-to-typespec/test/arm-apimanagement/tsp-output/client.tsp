@@ -156,9 +156,18 @@ using Azure.ResourceManager.ApiManagement;
 @@flattenProperty(OperationContract.properties);
 
 @@clientName(PolicyContracts.createOrUpdate::parameters.resource, "parameters");
+@@clientName(ApiPolicy.createOrUpdate::parameters.resource, "parameters");
+@@clientName(Policy.createOrUpdate::parameters.resource, "parameters");
+@@clientName(ProductPolicy.createOrUpdate::parameters.resource, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PolicyContract.properties);
 
+@@clientName(TagContractOperationGroup.createOrUpdate::parameters.resource,
+  "parameters"
+);
+@@clientName(TagContractOperationGroup.update::parameters.properties,
+  "parameters"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(TagContract.properties);
 
@@ -177,6 +186,8 @@ using Azure.ResourceManager.ApiManagement;
   "parameters"
 );
 @@clientName(DiagnosticContracts.update::parameters.properties, "parameters");
+@@clientName(Diagnostic.createOrUpdate::parameters.resource, "parameters");
+@@clientName(Diagnostic.update::parameters.properties, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(DiagnosticContract.properties);
 
@@ -356,34 +367,24 @@ using Azure.ResourceManager.ApiManagement;
 @@flattenProperty(PortalRevisionContract.properties);
 
 @@clientName(PortalSigninSettingsOperationGroup, "PortalSigninSettings");
-@@clientName(PortalSigninSettingsOperationGroup.createOrUpdate::parameters.resource,
-  "parameters"
-);
-@@clientName(PortalSigninSettingsOperationGroup.update::parameters.properties,
-  "parameters"
-);
+@@clientName(SignInSettings.createOrUpdate::parameters.resource, "parameters");
+@@clientName(SignInSettings.update::parameters.properties, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PortalSigninSettings.properties);
 
 @@clientName(PortalSignupSettingsOperationGroup, "PortalSignupSettings");
-@@clientName(PortalSignupSettingsOperationGroup.createOrUpdate::parameters.resource,
-  "parameters"
-);
-@@clientName(PortalSignupSettingsOperationGroup.update::parameters.properties,
-  "parameters"
-);
+@@clientName(SignUpSettings.createOrUpdate::parameters.resource, "parameters");
+@@clientName(SignUpSettings.update::parameters.properties, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PortalSignupSettings.properties);
 
 @@clientName(PortalDelegationSettingsOperationGroup,
   "PortalDelegationSettings"
 );
-@@clientName(PortalDelegationSettingsOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(DelegationSettings.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(PortalDelegationSettingsOperationGroup.update::parameters.properties,
-  "parameters"
-);
+@@clientName(DelegationSettings.update::parameters.properties, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PortalDelegationSettings.properties);
 

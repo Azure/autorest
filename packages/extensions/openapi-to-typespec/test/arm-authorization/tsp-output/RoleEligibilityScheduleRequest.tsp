@@ -30,7 +30,20 @@ interface RoleEligibilityScheduleRequests {
    */
   get is ArmResourceRead<
     RoleEligibilityScheduleRequest,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
+      /**
+       * The scope of the role eligibility schedule request.
+       */
+      @path
+      scope: string;
+
+      /**
+       * The name (guid) of the role eligibility schedule request to get.
+       */
+      @path
+      roleEligibilityScheduleRequestName: string;
+    }
   >;
 
   /**
@@ -40,6 +53,19 @@ interface RoleEligibilityScheduleRequests {
   create is ArmResourceCreateOrReplaceSync<
     RoleEligibilityScheduleRequest,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
+      /**
+       * The scope of the role eligibility schedule request to create. The scope can be any REST resource instance. For example, use '/subscriptions/{subscription-id}/' for a subscription, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for a resource group, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider}/{resource-type}/{resource-name}' for a resource.
+       */
+      @path
+      scope: string;
+
+      /**
+       * The name of the role eligibility to create. It can be any valid GUID.
+       */
+      @path
+      roleEligibilityScheduleRequestName: string;
+    },
     Response = ArmResourceCreatedSyncResponse<RoleEligibilityScheduleRequest>
   >;
 
@@ -50,6 +76,12 @@ interface RoleEligibilityScheduleRequests {
     RoleEligibilityScheduleRequest,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
+      /**
+       * The scope of the role eligibility schedule requests.
+       */
+      @path
+      scope: string;
+
       /**
        * The filter to apply on the operation. Use $filter=atScope() to return all role eligibility schedule requests at or above the scope. Use $filter=principalId eq {id} to return all role eligibility schedule requests at, above or below the scope for the specified principal. Use $filter=asRequestor() to return all role eligibility schedule requests requested by the current user. Use $filter=asTarget() to return all role eligibility schedule requests created for the current user. Use $filter=asApprover() to return all role eligibility schedule requests where the current user is an approver.
        */
@@ -65,7 +97,20 @@ interface RoleEligibilityScheduleRequests {
     RoleEligibilityScheduleRequest,
     void,
     OkResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
+      /**
+       * The scope of the role eligibility request to cancel.
+       */
+      @path
+      scope: string;
+
+      /**
+       * The name of the role eligibility request to cancel.
+       */
+      @path
+      roleEligibilityScheduleRequestName: string;
+    }
   >;
 
   /**
@@ -75,7 +120,20 @@ interface RoleEligibilityScheduleRequests {
     RoleEligibilityScheduleRequest,
     RoleEligibilityScheduleRequest,
     ArmResponse<RoleEligibilityScheduleRequest>,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
+      /**
+       * The scope of the role eligibility request to validate.
+       */
+      @path
+      scope: string;
+
+      /**
+       * The name of the role eligibility request to validate.
+       */
+      @path
+      roleEligibilityScheduleRequestName: string;
+    }
   >;
 }
 

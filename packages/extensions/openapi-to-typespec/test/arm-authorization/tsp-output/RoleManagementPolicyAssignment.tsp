@@ -30,7 +30,20 @@ interface RoleManagementPolicyAssignments {
    */
   get is ArmResourceRead<
     RoleManagementPolicyAssignment,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
+      /**
+       * The scope of the role management policy.
+       */
+      @path
+      scope: string;
+
+      /**
+       * The name of format {guid_guid} the role management policy assignment to get.
+       */
+      @path
+      roleManagementPolicyAssignmentName: string;
+    }
   >;
 
   /**
@@ -40,6 +53,19 @@ interface RoleManagementPolicyAssignments {
   create is ArmResourceCreateOrReplaceSync<
     RoleManagementPolicyAssignment,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
+      /**
+       * The scope of the role management policy assignment to upsert.
+       */
+      @path
+      scope: string;
+
+      /**
+       * The name of format {guid_guid} the role management policy assignment to upsert.
+       */
+      @path
+      roleManagementPolicyAssignmentName: string;
+    },
     Response = ArmResourceCreatedSyncResponse<RoleManagementPolicyAssignment>
   >;
 
@@ -48,7 +74,14 @@ interface RoleManagementPolicyAssignments {
    */
   listForScope is ArmResourceListByParent<
     RoleManagementPolicyAssignment,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
+      /**
+       * The scope of the role management policy.
+       */
+      @path
+      scope: string;
+    }
   >;
 }
 

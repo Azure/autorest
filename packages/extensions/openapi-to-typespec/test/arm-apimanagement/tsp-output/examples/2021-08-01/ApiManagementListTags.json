@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 2,
+        "nextLink": "",
+        "value": [
+          {
+            "name": "5600b59375ff190048020001",
+            "type": "Microsoft.ApiManagement/service/tags",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tags/5600b59375ff190048020001",
+            "properties": {
+              "displayName": "tag1"
+            }
+          },
+          {
+            "name": "5600b59375ff190048020002",
+            "type": "Microsoft.ApiManagement/service/tags",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tags/5600b59375ff190048020002",
+            "properties": {
+              "displayName": "tag2"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Tag_ListByService",
+  "title": "ApiManagementListTags"
+}

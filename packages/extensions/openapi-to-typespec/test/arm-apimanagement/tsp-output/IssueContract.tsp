@@ -26,13 +26,42 @@ model IssueContract
 }
 
 @armResourceOperations
+interface IssueContractOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...KeysOf<ResourceNameParameter<
+          Resource = ApiManagementServiceResource,
+          KeyName = "serviceName",
+          SegmentName = "service",
+          NamePattern = "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+        >>,
+        ...KeysOf<ResourceNameParameter<
+          Resource = ApiContract,
+          KeyName = "apiId",
+          SegmentName = "apis",
+          NamePattern = ""
+        >>,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = IssueContract,
+        KeyName = "issueId",
+        SegmentName = "issues",
+        NamePattern = "^[^*#&+:<>?]+$"
+      >>
+    > {}
+
+@armResourceOperations
 interface IssueContracts {
   /**
    * Gets the details of the Issue for an API specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiIssue_Get")
-  get is ArmResourceRead<
+  get is IssueContractOps.Read<
     IssueContract,
     Parameters = {
       /**
@@ -48,14 +77,14 @@ interface IssueContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiIssue_GetEntityTag")
-  getEntityTag is ArmResourceCheckExistence<IssueContract>;
+  getEntityTag is IssueContractOps.CheckExistence<IssueContract>;
 
   /**
    * Creates a new Issue for an API or updates an existing one.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiIssue_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is IssueContractOps.CreateOrUpdateSync<
     IssueContract,
     Parameters = {
       /**
@@ -72,7 +101,7 @@ interface IssueContracts {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("ApiIssue_Update")
-  update is ArmCustomPatchSync<
+  update is IssueContractOps.CustomPatchSync<
     IssueContract,
     PatchModel = IssueUpdateContract,
     Parameters = {
@@ -89,7 +118,7 @@ interface IssueContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiIssue_Delete")
-  delete is ArmResourceDeleteSync<
+  delete is IssueContractOps.DeleteSync<
     IssueContract,
     Parameters = {
       /**
@@ -105,7 +134,7 @@ interface IssueContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiIssue_ListByService")
-  listByService is ArmResourceListByParent<
+  listByService is IssueContractOps.List<
     IssueContract,
     Parameters = {
       /**
@@ -119,6 +148,63 @@ interface IssueContracts {
        */
       @query("expandCommentsAttachments")
       expandCommentsAttachments?: boolean;
+
+      /**
+       * Number of records to return.
+       */
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
+
+      /**
+       * Number of records to skip.
+       */
+      @query("$skip")
+      $skip?: int32;
+    }
+  >;
+}
+@armResourceOperations
+interface IssueOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...KeysOf<ResourceNameParameter<
+          Resource = ApiManagementServiceResource,
+          KeyName = "serviceName",
+          SegmentName = "service",
+          NamePattern = "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+        >>,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = IssueContract,
+        KeyName = "issueId",
+        SegmentName = "issues",
+        NamePattern = "^[^*#&+:<>?]+$"
+      >>
+    > {}
+
+@armResourceOperations
+interface Issue {
+  /**
+   * Gets API Management issue details
+   */
+  get is IssueOps.Read<IssueContract>;
+
+  /**
+   * Lists a collection of issues in the specified service instance.
+   */
+  listByService is IssueOps.List<
+    IssueContract,
+    Parameters = {
+      /**
+       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| apiId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| title | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| authorName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq |     |</br>
+       */
+      @query("$filter")
+      $filter?: string;
 
       /**
        * Number of records to return.

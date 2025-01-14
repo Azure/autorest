@@ -20,10 +20,13 @@ import {
 } from "./operation-set";
 import { getPagingItemType, isTrackedResource } from "./resource-equivalent";
 import { getResourceKey, getResourceKeySegment, getResourceType, isScopedPath, isSingleton } from "./utils";
+import { getOptions } from "../options";
 
 const logger = () => getLogger("parse-metadata");
 
 export function parseMetadata(codeModel: CodeModel, configuration: Record<string, any>): Metadata {
+  const { isFullCompatible } = getOptions();
+
   const operationSets: { [path: string]: OperationSet } = {};
   const operations = codeModel.operationGroups.flatMap((og) => og.operations);
   for (const operation of operations) {
@@ -82,47 +85,55 @@ export function parseMetadata(codeModel: CodeModel, configuration: Record<string
     }
   }
 
-  const resources: { [name: string]: ArmResource } = {};
+  const resources: { [name: string]: ArmResource[] } = {};
   for (const resourceSchemaName in operationSetsByResourceDataSchemaName) {
     const operationSets = operationSetsByResourceDataSchemaName[resourceSchemaName];
-    if (operationSets.length > 1) {
-      logger().info(
-        `We cannot support multi path with same model. Some operations will be lost. \nResource schema name: ${resourceSchemaName}.\nPath:\n${operationSets
-          .map((o) => o.RequestPath)
-          .join("\n")}`,
+
+    for (let index = 0; index < operationSets.length; index++) {
+      if (index >= 1 && !isFullCompatible) {
+        logger().info(
+          `Multi-path operations applied on the same resource. Some operations will be lost. \nResource schema name: ${resourceSchemaName}.\nPath:\n${operationSets
+            .map((o) => o.RequestPath)
+            .join("\n")}\nTurn on isFullCompatible to keep all operations, or adjust your TypeSpec.`,
+        );
+        resources[resourceSchemaName + "FixMe"] = [
+          {
+            Name: resourceSchemaName + "FixMe",
+            GetOperations: [],
+            ExistOperation: undefined,
+            CreateOperations: [],
+            UpdateOperations: [],
+            DeleteOperations: [],
+            ListOperations: [],
+            OperationsFromResourceGroupExtension: [],
+            OperationsFromSubscriptionExtension: [],
+            OperationsFromManagementGroupExtension: [],
+            OperationsFromTenantExtension: [],
+            OtherOperations: [],
+            Parents: [],
+            SwaggerModelName: "",
+            ResourceType: "",
+            ResourceKey: "",
+            ResourceKeySegment: "",
+            IsTrackedResource: false,
+            IsTenantResource: false,
+            IsSubscriptionResource: false,
+            IsManagementGroupResource: false,
+            IsExtensionResource: false,
+            IsSingletonResource: false,
+          },
+        ];
+        break;
+      }
+      (resources[resourceSchemaName] ??= []).push(
+        buildResource(
+          resourceSchemaName,
+          operationSets[index],
+          Object.values(operationSetsByResourceDataSchemaName).flat(),
+          codeModel,
+        ),
       );
-      resources[resourceSchemaName + "FixMe"] = {
-        Name: resourceSchemaName + "FixMe",
-        GetOperations: [],
-        ExistOperation: undefined,
-        CreateOperations: [],
-        UpdateOperations: [],
-        DeleteOperations: [],
-        ListOperations: [],
-        OperationsFromResourceGroupExtension: [],
-        OperationsFromSubscriptionExtension: [],
-        OperationsFromManagementGroupExtension: [],
-        OperationsFromTenantExtension: [],
-        OtherOperations: [],
-        Parents: [],
-        SwaggerModelName: "",
-        ResourceType: "",
-        ResourceKey: "",
-        ResourceKeySegment: "",
-        IsTrackedResource: false,
-        IsTenantResource: false,
-        IsSubscriptionResource: false,
-        IsManagementGroupResource: false,
-        IsExtensionResource: false,
-        IsSingletonResource: false,
-      };
     }
-    resources[resourceSchemaName] = buildResource(
-      resourceSchemaName,
-      operationSets[0],
-      Object.values(operationSetsByResourceDataSchemaName).flat(),
-      codeModel,
-    );
   }
 
   return {

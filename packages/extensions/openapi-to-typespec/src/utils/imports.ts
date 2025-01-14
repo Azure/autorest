@@ -71,10 +71,7 @@ export function getClientImports(program: TypespecProgram) {
     for (const property of resource.properties) {
       addImports(property.clientDecorators);
     }
-    for (const op of resource.resourceOperations) {
-      addImports(op.clientDecorators);
-    }
-    for (const op of resource.normalOperations) {
+    for (const op of resource.resourceOperationGroups.flatMap((g) => g.resourceOperations)) {
       addImports(op.clientDecorators);
     }
     addImports(resource.propertiesPropertyClientDecorator);

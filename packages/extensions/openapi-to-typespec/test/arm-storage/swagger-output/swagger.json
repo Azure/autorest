@@ -59,16 +59,16 @@
       "name": "PrivateEndpointConnections"
     },
     {
-      "name": "ObjectReplicationPoliciesOperationGroup"
+      "name": "ObjectReplicationPolicyOperationGroup"
     },
     {
-      "name": "LocalUsersOperationGroup"
+      "name": "LocalUserOperationGroup"
     },
     {
       "name": "EncryptionScopes"
     },
     {
-      "name": "BlobServicePropertiesOperationGroup"
+      "name": "BlobServices"
     },
     {
       "name": "BlobContainers"
@@ -77,19 +77,19 @@
       "name": "ImmutabilityPolicies"
     },
     {
-      "name": "FileServicePropertiesOperationGroup"
+      "name": "FileServices"
     },
     {
       "name": "FileShares"
     },
     {
-      "name": "QueueServicePropertiesOperationGroup"
+      "name": "QueueServices"
     },
     {
       "name": "StorageQueues"
     },
     {
-      "name": "TableServicePropertiesOperationGroup"
+      "name": "TableServices"
     },
     {
       "name": "Tables"
@@ -750,7 +750,7 @@
       "get": {
         "operationId": "BlobServices_List",
         "tags": [
-          "BlobServicePropertiesOperationGroup"
+          "BlobServices"
         ],
         "description": "List blob services of storage account. It returns a collection of one object named default.",
         "parameters": [
@@ -798,7 +798,7 @@
       "get": {
         "operationId": "BlobServices_GetServiceProperties",
         "tags": [
-          "BlobServicePropertiesOperationGroup"
+          "BlobServices"
         ],
         "description": "Gets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
         "parameters": [
@@ -844,7 +844,7 @@
       "put": {
         "operationId": "BlobServices_SetServiceProperties",
         "tags": [
-          "BlobServicePropertiesOperationGroup"
+          "BlobServices"
         ],
         "description": "Sets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
         "parameters": [
@@ -2239,7 +2239,7 @@
       "get": {
         "operationId": "FileServices_List",
         "tags": [
-          "FileServicePropertiesOperationGroup"
+          "FileServices"
         ],
         "description": "List all file services in storage accounts",
         "parameters": [
@@ -2287,7 +2287,7 @@
       "get": {
         "operationId": "FileServices_GetServiceProperties",
         "tags": [
-          "FileServicePropertiesOperationGroup"
+          "FileServices"
         ],
         "description": "Gets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules.",
         "parameters": [
@@ -2333,7 +2333,7 @@
       "put": {
         "operationId": "FileServices_SetServiceProperties",
         "tags": [
-          "FileServicePropertiesOperationGroup"
+          "FileServices"
         ],
         "description": "Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules.",
         "parameters": [
@@ -3414,7 +3414,7 @@
       "get": {
         "operationId": "LocalUsers_List",
         "tags": [
-          "LocalUsersOperationGroup"
+          "LocalUserOperationGroup"
         ],
         "description": "List the local users associated with the storage account.",
         "parameters": [
@@ -3462,7 +3462,7 @@
       "get": {
         "operationId": "LocalUsers_Get",
         "tags": [
-          "LocalUsersOperationGroup"
+          "LocalUserOperationGroup"
         ],
         "description": "Get the local user of the storage account by username.",
         "parameters": [
@@ -3517,7 +3517,7 @@
       "put": {
         "operationId": "LocalUsers_CreateOrUpdate",
         "tags": [
-          "LocalUsersOperationGroup"
+          "LocalUserOperationGroup"
         ],
         "description": "Create or update the properties of a local user associated with the storage account",
         "parameters": [
@@ -3584,7 +3584,7 @@
       "delete": {
         "operationId": "LocalUsers_Delete",
         "tags": [
-          "LocalUsersOperationGroup"
+          "LocalUserOperationGroup"
         ],
         "description": "Deletes the local user associated with the specified storage account.",
         "parameters": [
@@ -3641,7 +3641,7 @@
       "post": {
         "operationId": "LocalUsers_ListKeys",
         "tags": [
-          "LocalUsersOperationGroup"
+          "LocalUserOperationGroup"
         ],
         "description": "List SSH authorized keys and shared key of the local user.",
         "parameters": [
@@ -3698,7 +3698,7 @@
       "post": {
         "operationId": "LocalUsers_RegeneratePassword",
         "tags": [
-          "LocalUsersOperationGroup"
+          "LocalUserOperationGroup"
         ],
         "description": "Regenerate the local user SSH password.",
         "parameters": [
@@ -3985,7 +3985,7 @@
       "get": {
         "operationId": "ObjectReplicationPolicies_List",
         "tags": [
-          "ObjectReplicationPoliciesOperationGroup"
+          "ObjectReplicationPolicyOperationGroup"
         ],
         "description": "List the object replication policies associated with the storage account.",
         "parameters": [
@@ -4033,7 +4033,7 @@
       "get": {
         "operationId": "ObjectReplicationPolicies_Get",
         "tags": [
-          "ObjectReplicationPoliciesOperationGroup"
+          "ObjectReplicationPolicyOperationGroup"
         ],
         "description": "Get the object replication policy of the storage account by policy ID.",
         "parameters": [
@@ -4087,7 +4087,7 @@
       "put": {
         "operationId": "ObjectReplicationPolicies_CreateOrUpdate",
         "tags": [
-          "ObjectReplicationPoliciesOperationGroup"
+          "ObjectReplicationPolicyOperationGroup"
         ],
         "description": "Create or update the object replication policy of the storage account.",
         "parameters": [
@@ -4159,7 +4159,7 @@
       "delete": {
         "operationId": "ObjectReplicationPolicies_Delete",
         "tags": [
-          "ObjectReplicationPoliciesOperationGroup"
+          "ObjectReplicationPolicyOperationGroup"
         ],
         "description": "Deletes the object replication policy associated with the specified storage account.",
         "parameters": [
@@ -4481,7 +4481,7 @@
       "get": {
         "operationId": "QueueServices_List",
         "tags": [
-          "QueueServicePropertiesOperationGroup"
+          "QueueServices"
         ],
         "description": "List all queue services for the storage account",
         "parameters": [
@@ -4529,7 +4529,7 @@
       "get": {
         "operationId": "QueueServices_GetServiceProperties",
         "tags": [
-          "QueueServicePropertiesOperationGroup"
+          "QueueServices"
         ],
         "description": "Gets the properties of a storage account’s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
         "parameters": [
@@ -4575,7 +4575,7 @@
       "put": {
         "operationId": "QueueServices_SetServiceProperties",
         "tags": [
-          "QueueServicePropertiesOperationGroup"
+          "QueueServices"
         ],
         "description": "Sets the properties of a storage account’s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
         "parameters": [
@@ -5121,7 +5121,7 @@
       "get": {
         "operationId": "TableServices_List",
         "tags": [
-          "TableServicePropertiesOperationGroup"
+          "TableServices"
         ],
         "description": "List all table services for the storage account.",
         "parameters": [
@@ -5169,7 +5169,7 @@
       "get": {
         "operationId": "TableServices_GetServiceProperties",
         "tags": [
-          "TableServicePropertiesOperationGroup"
+          "TableServices"
         ],
         "description": "Gets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
         "parameters": [
@@ -5215,7 +5215,7 @@
       "put": {
         "operationId": "TableServices_SetServiceProperties",
         "tags": [
-          "TableServicePropertiesOperationGroup"
+          "TableServices"
         ],
         "description": "Sets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
         "parameters": [

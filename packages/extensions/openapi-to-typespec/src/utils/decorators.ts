@@ -15,8 +15,8 @@ import { TypespecDecorator, DecoratorArgument, WithSuppressDirective } from "../
 import { getOptions } from "../options";
 import { createCSharpNameDecorator } from "../pretransforms/rename-pretransform";
 import { getOwnDiscriminator } from "./discriminator";
-import { isSealedChoiceSchema, isStringSchema } from "./schemas";
-import { getSuppresssionWithCode } from "./suppressions";
+import { escapeRegex } from "./strings";
+import { isStringSchema } from "./schemas";
 
 export function getModelDecorators(model: ObjectSchema): TypespecDecorator[] {
   const decorators: TypespecDecorator[] = [];
@@ -283,10 +283,6 @@ function getStringSchemaDecorators(schema: Schema, decorators: TypespecDecorator
   if (schema.pattern) {
     decorators.push({ name: "pattern", arguments: [escapeRegex(schema.pattern)] });
   }
-}
-
-function escapeRegex(str: string) {
-  return str.replace(/\\/g, "\\\\");
 }
 
 export function getEnumClientDecorators(enumeration: SealedChoiceSchema | ChoiceSchema): TypespecDecorator[] {

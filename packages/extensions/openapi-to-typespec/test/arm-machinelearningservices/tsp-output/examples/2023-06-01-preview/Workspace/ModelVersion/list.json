@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "name": "string",
+    "description": "string",
+    "$orderBy": "string",
+    "$skipToken": "string",
+    "$top": 1,
+    "api-version": "2023-06-01-preview",
+    "offset": 1,
+    "properties": "string",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "tags": "string",
+    "version": "string",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "string",
+        "value": [
+          {
+            "name": "string",
+            "type": "string",
+            "id": "string",
+            "properties": {
+              "description": "string",
+              "flavors": {
+                "string": {
+                  "data": {
+                    "string": "string"
+                  }
+                }
+              },
+              "isAnonymous": false,
+              "modelType": "CustomModel",
+              "modelUri": "string",
+              "properties": {
+                "string": "string"
+              },
+              "tags": {
+                "string": "string"
+              }
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T12:34:56.999Z",
+              "createdBy": "string",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ModelVersions_List",
+  "title": "List Workspace Model Version."
+}

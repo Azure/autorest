@@ -25,7 +25,7 @@ model LocalUser is Azure.ResourceManager.ProxyResource<LocalUserProperties> {
 }
 
 @armResourceOperations
-interface LocalUsersOperationGroup {
+interface LocalUserOperationGroup {
   /**
    * Get the local user of the storage account by username.
    */
@@ -90,6 +90,6 @@ interface LocalUsersOperationGroup {
   "The name of local user. The username must contain lowercase letters and numbers only. It must be unique only within the storage account."
 );
 @@doc(LocalUser.properties, "Storage account local user properties.");
-@@doc(LocalUsersOperationGroup.createOrUpdate::parameters.resource,
+@@doc(LocalUserOperationGroup.createOrUpdate::parameters.resource,
   "The local user associated with a storage account."
 );

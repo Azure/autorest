@@ -30,7 +30,20 @@ interface RoleDefinitions {
    */
   get is ArmResourceRead<
     RoleDefinition,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
+      /**
+       * The scope of the role definition.
+       */
+      @path
+      scope: string;
+
+      /**
+       * The ID of the role definition.
+       */
+      @path
+      roleDefinitionId: string;
+    }
   >;
 
   /**
@@ -40,6 +53,19 @@ interface RoleDefinitions {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     RoleDefinition,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
+      /**
+       * The scope of the role definition.
+       */
+      @path
+      scope: string;
+
+      /**
+       * The ID of the role definition.
+       */
+      @path
+      roleDefinitionId: string;
+    },
     Response = ArmResourceCreatedSyncResponse<RoleDefinition>
   >;
 
@@ -50,6 +76,19 @@ interface RoleDefinitions {
   delete is ArmResourceDeleteSync<
     RoleDefinition,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
+      /**
+       * The scope of the role definition.
+       */
+      @path
+      scope: string;
+
+      /**
+       * The ID of the role definition to delete.
+       */
+      @path
+      roleDefinitionId: string;
+    },
     Response = ArmResponse<RoleDefinition> | ArmDeletedNoContentResponse
   >;
 
@@ -60,6 +99,12 @@ interface RoleDefinitions {
     RoleDefinition,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
+      /**
+       * The scope of the role definition.
+       */
+      @path
+      scope: string;
+
       /**
        * The filter to apply on the operation. Use atScopeAndBelow filter to search below the given scope as well.
        */
