@@ -3,50 +3,42 @@
     "VirtualMachineScaleSet": [
       {
         "Name": "VirtualMachineScaleSet",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}",
-            "Method": "GET",
-            "OperationID": "VirtualMachineScaleSets_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Display information about a virtual machine scale set."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}",
-            "Method": "PUT",
-            "OperationID": "VirtualMachineScaleSets_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create or update a VM scale set."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}",
-            "Method": "PATCH",
-            "OperationID": "VirtualMachineScaleSets_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Update a VM scale set."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}",
-            "Method": "DELETE",
-            "OperationID": "VirtualMachineScaleSets_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Deletes a VM scale set."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}",
+          "Method": "GET",
+          "OperationID": "VirtualMachineScaleSets_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Display information about a virtual machine scale set."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}",
+          "Method": "PUT",
+          "OperationID": "VirtualMachineScaleSets_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create or update a VM scale set."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}",
+          "Method": "PATCH",
+          "OperationID": "VirtualMachineScaleSets_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Update a VM scale set."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}",
+          "Method": "DELETE",
+          "OperationID": "VirtualMachineScaleSets_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a VM scale set."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -288,50 +280,42 @@
     "VirtualMachineScaleSetExtension": [
       {
         "Name": "VirtualMachineScaleSetExtension",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}",
-            "Method": "GET",
-            "OperationID": "VirtualMachineScaleSetExtensions_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "The operation to get the extension."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}",
-            "Method": "PUT",
-            "OperationID": "VirtualMachineScaleSetExtensions_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to create or update an extension."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}",
-            "Method": "PATCH",
-            "OperationID": "VirtualMachineScaleSetExtensions_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to update an extension."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}",
-            "Method": "DELETE",
-            "OperationID": "VirtualMachineScaleSetExtensions_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to delete the extension."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}",
+          "Method": "GET",
+          "OperationID": "VirtualMachineScaleSetExtensions_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "The operation to get the extension."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}",
+          "Method": "PUT",
+          "OperationID": "VirtualMachineScaleSetExtensions_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to create or update an extension."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}",
+          "Method": "PATCH",
+          "OperationID": "VirtualMachineScaleSetExtensions_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to update an extension."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}",
+          "Method": "DELETE",
+          "OperationID": "VirtualMachineScaleSetExtensions_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to delete the extension."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -370,20 +354,15 @@
     "RollingUpgradeStatusInfo": [
       {
         "Name": "RollingUpgradeStatusInfo",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/latest",
-            "Method": "GET",
-            "OperationID": "VirtualMachineScaleSetRollingUpgrades_GetLatest",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Gets the status of the latest virtual machine scale set rolling upgrade."
-          }
-        ],
-        "CreateOperations": [],
-        "UpdateOperations": [],
-        "DeleteOperations": [],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/latest",
+          "Method": "GET",
+          "OperationID": "VirtualMachineScaleSetRollingUpgrades_GetLatest",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets the status of the latest virtual machine scale set rolling upgrade."
+        },
         "ListOperations": [],
         "OperationsFromResourceGroupExtension": [],
         "OperationsFromSubscriptionExtension": [],
@@ -408,50 +387,42 @@
     "VirtualMachineScaleSetVMExtension": [
       {
         "Name": "VirtualMachineScaleSetVMExtension",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}",
-            "Method": "GET",
-            "OperationID": "VirtualMachineScaleSetVMExtensions_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "The operation to get the VMSS VM extension."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}",
-            "Method": "PUT",
-            "OperationID": "VirtualMachineScaleSetVMExtensions_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to create or update the VMSS VM extension."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}",
-            "Method": "PATCH",
-            "OperationID": "VirtualMachineScaleSetVMExtensions_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to update the VMSS VM extension."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}",
-            "Method": "DELETE",
-            "OperationID": "VirtualMachineScaleSetVMExtensions_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to delete the VMSS VM extension."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}",
+          "Method": "GET",
+          "OperationID": "VirtualMachineScaleSetVMExtensions_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "The operation to get the VMSS VM extension."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}",
+          "Method": "PUT",
+          "OperationID": "VirtualMachineScaleSetVMExtensions_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to create or update the VMSS VM extension."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}",
+          "Method": "PATCH",
+          "OperationID": "VirtualMachineScaleSetVMExtensions_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to update the VMSS VM extension."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}",
+          "Method": "DELETE",
+          "OperationID": "VirtualMachineScaleSetVMExtensions_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to delete the VMSS VM extension."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -490,50 +461,42 @@
     "VirtualMachineScaleSetVM": [
       {
         "Name": "VirtualMachineScaleSetVM",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}",
-            "Method": "GET",
-            "OperationID": "VirtualMachineScaleSetVMs_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Gets a virtual machine from a VM scale set."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}",
-            "Method": "PUT",
-            "OperationID": "VirtualMachineScaleSetVMs_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Updates a virtual machine of a VM scale set."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}",
-            "Method": "PUT",
-            "OperationID": "VirtualMachineScaleSetVMs_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Updates a virtual machine of a VM scale set."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}",
-            "Method": "DELETE",
-            "OperationID": "VirtualMachineScaleSetVMs_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Deletes a virtual machine from a VM scale set."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}",
+          "Method": "GET",
+          "OperationID": "VirtualMachineScaleSetVMs_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a virtual machine from a VM scale set."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}",
+          "Method": "PUT",
+          "OperationID": "VirtualMachineScaleSetVMs_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Updates a virtual machine of a VM scale set."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}",
+          "Method": "PUT",
+          "OperationID": "VirtualMachineScaleSetVMs_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Updates a virtual machine of a VM scale set."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}",
+          "Method": "DELETE",
+          "OperationID": "VirtualMachineScaleSetVMs_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a virtual machine from a VM scale set."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -685,50 +648,42 @@
     "VirtualMachineExtension": [
       {
         "Name": "VirtualMachineExtension",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}",
-            "Method": "GET",
-            "OperationID": "VirtualMachineExtensions_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "The operation to get the extension."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}",
-            "Method": "PUT",
-            "OperationID": "VirtualMachineExtensions_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to create or update the extension."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}",
-            "Method": "PATCH",
-            "OperationID": "VirtualMachineExtensions_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to update the extension."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}",
-            "Method": "DELETE",
-            "OperationID": "VirtualMachineExtensions_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to delete the extension."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}",
+          "Method": "GET",
+          "OperationID": "VirtualMachineExtensions_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "The operation to get the extension."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}",
+          "Method": "PUT",
+          "OperationID": "VirtualMachineExtensions_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to create or update the extension."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}",
+          "Method": "PATCH",
+          "OperationID": "VirtualMachineExtensions_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to update the extension."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}",
+          "Method": "DELETE",
+          "OperationID": "VirtualMachineExtensions_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to delete the extension."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -767,50 +722,42 @@
     "VirtualMachine": [
       {
         "Name": "VirtualMachine",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}",
-            "Method": "GET",
-            "OperationID": "VirtualMachines_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Retrieves information about the model view or the instance view of a virtual machine."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}",
-            "Method": "PUT",
-            "OperationID": "VirtualMachines_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}",
-            "Method": "PATCH",
-            "OperationID": "VirtualMachines_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to update a virtual machine."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}",
-            "Method": "DELETE",
-            "OperationID": "VirtualMachines_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to delete a virtual machine."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}",
+          "Method": "GET",
+          "OperationID": "VirtualMachines_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Retrieves information about the model view or the instance view of a virtual machine."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}",
+          "Method": "PUT",
+          "OperationID": "VirtualMachines_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}",
+          "Method": "PATCH",
+          "OperationID": "VirtualMachines_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to update a virtual machine."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}",
+          "Method": "DELETE",
+          "OperationID": "VirtualMachines_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to delete a virtual machine."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -1034,20 +981,15 @@
     "VirtualMachineExtensionImage": [
       {
         "Name": "VirtualMachineExtensionImage",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}",
-            "Method": "GET",
-            "OperationID": "VirtualMachineExtensionImages_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Gets a virtual machine extension image."
-          }
-        ],
-        "CreateOperations": [],
-        "UpdateOperations": [],
-        "DeleteOperations": [],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}",
+          "Method": "GET",
+          "OperationID": "VirtualMachineExtensionImages_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a virtual machine extension image."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -1099,50 +1041,42 @@
     "AvailabilitySet": [
       {
         "Name": "AvailabilitySet",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}",
-            "Method": "GET",
-            "OperationID": "AvailabilitySets_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Retrieves information about an availability set."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}",
-            "Method": "PUT",
-            "OperationID": "AvailabilitySets_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create or update an availability set."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}",
-            "Method": "PATCH",
-            "OperationID": "AvailabilitySets_Update",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Update an availability set."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}",
-            "Method": "DELETE",
-            "OperationID": "AvailabilitySets_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete an availability set."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}",
+          "Method": "GET",
+          "OperationID": "AvailabilitySets_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Retrieves information about an availability set."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}",
+          "Method": "PUT",
+          "OperationID": "AvailabilitySets_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create or update an availability set."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}",
+          "Method": "PATCH",
+          "OperationID": "AvailabilitySets_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Update an availability set."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}",
+          "Method": "DELETE",
+          "OperationID": "AvailabilitySets_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete an availability set."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -1209,50 +1143,42 @@
     "ProximityPlacementGroup": [
       {
         "Name": "ProximityPlacementGroup",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}",
-            "Method": "GET",
-            "OperationID": "ProximityPlacementGroups_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Retrieves information about a proximity placement group ."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}",
-            "Method": "PUT",
-            "OperationID": "ProximityPlacementGroups_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create or update a proximity placement group."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}",
-            "Method": "PATCH",
-            "OperationID": "ProximityPlacementGroups_Update",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Update a proximity placement group."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}",
-            "Method": "DELETE",
-            "OperationID": "ProximityPlacementGroups_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete a proximity placement group."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}",
+          "Method": "GET",
+          "OperationID": "ProximityPlacementGroups_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Retrieves information about a proximity placement group ."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}",
+          "Method": "PUT",
+          "OperationID": "ProximityPlacementGroups_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create or update a proximity placement group."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}",
+          "Method": "PATCH",
+          "OperationID": "ProximityPlacementGroups_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Update a proximity placement group."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}",
+          "Method": "DELETE",
+          "OperationID": "ProximityPlacementGroups_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a proximity placement group."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -1305,50 +1231,42 @@
     "DedicatedHostGroup": [
       {
         "Name": "DedicatedHostGroup",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}",
-            "Method": "GET",
-            "OperationID": "DedicatedHostGroups_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Retrieves information about a dedicated host group."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}",
-            "Method": "PUT",
-            "OperationID": "DedicatedHostGroups_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596)"
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}",
-            "Method": "PATCH",
-            "OperationID": "DedicatedHostGroups_Update",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Update an dedicated host group."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}",
-            "Method": "DELETE",
-            "OperationID": "DedicatedHostGroups_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete a dedicated host group."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}",
+          "Method": "GET",
+          "OperationID": "DedicatedHostGroups_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Retrieves information about a dedicated host group."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}",
+          "Method": "PUT",
+          "OperationID": "DedicatedHostGroups_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596)"
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}",
+          "Method": "PATCH",
+          "OperationID": "DedicatedHostGroups_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Update an dedicated host group."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}",
+          "Method": "DELETE",
+          "OperationID": "DedicatedHostGroups_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a dedicated host group."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -1401,50 +1319,42 @@
     "DedicatedHost": [
       {
         "Name": "DedicatedHost",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}",
-            "Method": "GET",
-            "OperationID": "DedicatedHosts_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Retrieves information about a dedicated host."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}",
-            "Method": "PUT",
-            "OperationID": "DedicatedHosts_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create or update a dedicated host ."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}",
-            "Method": "PATCH",
-            "OperationID": "DedicatedHosts_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Update a dedicated host ."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}",
-            "Method": "DELETE",
-            "OperationID": "DedicatedHosts_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete a dedicated host."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}",
+          "Method": "GET",
+          "OperationID": "DedicatedHosts_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Retrieves information about a dedicated host."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}",
+          "Method": "PUT",
+          "OperationID": "DedicatedHosts_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create or update a dedicated host ."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}",
+          "Method": "PATCH",
+          "OperationID": "DedicatedHosts_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Update a dedicated host ."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}",
+          "Method": "DELETE",
+          "OperationID": "DedicatedHosts_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a dedicated host."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -1506,50 +1416,42 @@
     "SshPublicKeyResource": [
       {
         "Name": "SshPublicKeyResource",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}",
-            "Method": "GET",
-            "OperationID": "SshPublicKeys_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Retrieves information about an SSH public key."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}",
-            "Method": "PUT",
-            "OperationID": "SshPublicKeys_Create",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Creates a new SSH public key resource."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}",
-            "Method": "PATCH",
-            "OperationID": "SshPublicKeys_Update",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Updates a new SSH public key resource."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}",
-            "Method": "DELETE",
-            "OperationID": "SshPublicKeys_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete an SSH public key."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}",
+          "Method": "GET",
+          "OperationID": "SshPublicKeys_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Retrieves information about an SSH public key."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}",
+          "Method": "PUT",
+          "OperationID": "SshPublicKeys_Create",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates a new SSH public key resource."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}",
+          "Method": "PATCH",
+          "OperationID": "SshPublicKeys_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Updates a new SSH public key resource."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}",
+          "Method": "DELETE",
+          "OperationID": "SshPublicKeys_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete an SSH public key."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -1612,50 +1514,42 @@
     "Image": [
       {
         "Name": "Image",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images/{imageName}",
-            "Method": "GET",
-            "OperationID": "Images_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Gets an image."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images/{imageName}",
-            "Method": "PUT",
-            "OperationID": "Images_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create or update an image."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images/{imageName}",
-            "Method": "PATCH",
-            "OperationID": "Images_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Update an image."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images/{imageName}",
-            "Method": "DELETE",
-            "OperationID": "Images_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Deletes an Image."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images/{imageName}",
+          "Method": "GET",
+          "OperationID": "Images_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets an image."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images/{imageName}",
+          "Method": "PUT",
+          "OperationID": "Images_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create or update an image."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images/{imageName}",
+          "Method": "PATCH",
+          "OperationID": "Images_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Update an image."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images/{imageName}",
+          "Method": "DELETE",
+          "OperationID": "Images_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes an Image."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -1708,50 +1602,42 @@
     "RestorePointCollection": [
       {
         "Name": "RestorePointCollection",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}",
-            "Method": "GET",
-            "OperationID": "RestorePointCollections_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "The operation to get the restore point collection."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}",
-            "Method": "PUT",
-            "OperationID": "RestorePointCollections_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to create or update the restore point collection. Please refer to https://aka.ms/RestorePoints for more details. When updating a restore point collection, only tags may be modified."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}",
-            "Method": "PATCH",
-            "OperationID": "RestorePointCollections_Update",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "The operation to update the restore point collection."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}",
-            "Method": "DELETE",
-            "OperationID": "RestorePointCollections_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to delete the restore point collection. This operation will also delete all the contained restore points."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}",
+          "Method": "GET",
+          "OperationID": "RestorePointCollections_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "The operation to get the restore point collection."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}",
+          "Method": "PUT",
+          "OperationID": "RestorePointCollections_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to create or update the restore point collection. Please refer to https://aka.ms/RestorePoints for more details. When updating a restore point collection, only tags may be modified."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}",
+          "Method": "PATCH",
+          "OperationID": "RestorePointCollections_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "The operation to update the restore point collection."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}",
+          "Method": "DELETE",
+          "OperationID": "RestorePointCollections_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to delete the restore point collection. This operation will also delete all the contained restore points."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -1804,50 +1690,42 @@
     "RestorePoint": [
       {
         "Name": "RestorePoint",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{restorePointName}",
-            "Method": "GET",
-            "OperationID": "RestorePoints_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "The operation to get the restore point."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{restorePointName}",
-            "Method": "PUT",
-            "OperationID": "RestorePoints_Create",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to create the restore point. Updating properties of an existing restore point is not allowed"
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{restorePointName}",
-            "Method": "PUT",
-            "OperationID": "RestorePoints_Create",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to create the restore point. Updating properties of an existing restore point is not allowed"
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{restorePointName}",
-            "Method": "DELETE",
-            "OperationID": "RestorePoints_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to delete the restore point."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{restorePointName}",
+          "Method": "GET",
+          "OperationID": "RestorePoints_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "The operation to get the restore point."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{restorePointName}",
+          "Method": "PUT",
+          "OperationID": "RestorePoints_Create",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to create the restore point. Updating properties of an existing restore point is not allowed"
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{restorePointName}",
+          "Method": "PUT",
+          "OperationID": "RestorePoints_Create",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to create the restore point. Updating properties of an existing restore point is not allowed"
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{restorePointName}",
+          "Method": "DELETE",
+          "OperationID": "RestorePoints_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to delete the restore point."
+        },
         "ListOperations": [],
         "OperationsFromResourceGroupExtension": [],
         "OperationsFromSubscriptionExtension": [],
@@ -1872,50 +1750,42 @@
     "CapacityReservationGroup": [
       {
         "Name": "CapacityReservationGroup",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}",
-            "Method": "GET",
-            "OperationID": "CapacityReservationGroups_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "The operation that retrieves information about a capacity reservation group."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}",
-            "Method": "PUT",
-            "OperationID": "CapacityReservationGroups_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to create or update a capacity reservation group. When updating a capacity reservation group, only tags may be modified. Please refer to https://aka.ms/CapacityReservation for more details."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}",
-            "Method": "PATCH",
-            "OperationID": "CapacityReservationGroups_Update",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "The operation to update a capacity reservation group. When updating a capacity reservation group, only tags may be modified."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}",
-            "Method": "DELETE",
-            "OperationID": "CapacityReservationGroups_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to delete a capacity reservation group. This operation is allowed only if all the associated resources are disassociated from the reservation group and all capacity reservations under the reservation group have also been deleted. Please refer to https://aka.ms/CapacityReservation for more details."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}",
+          "Method": "GET",
+          "OperationID": "CapacityReservationGroups_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "The operation that retrieves information about a capacity reservation group."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}",
+          "Method": "PUT",
+          "OperationID": "CapacityReservationGroups_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to create or update a capacity reservation group. When updating a capacity reservation group, only tags may be modified. Please refer to https://aka.ms/CapacityReservation for more details."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}",
+          "Method": "PATCH",
+          "OperationID": "CapacityReservationGroups_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "The operation to update a capacity reservation group. When updating a capacity reservation group, only tags may be modified."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}",
+          "Method": "DELETE",
+          "OperationID": "CapacityReservationGroups_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to delete a capacity reservation group. This operation is allowed only if all the associated resources are disassociated from the reservation group and all capacity reservations under the reservation group have also been deleted. Please refer to https://aka.ms/CapacityReservation for more details."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -1968,50 +1838,42 @@
     "CapacityReservation": [
       {
         "Name": "CapacityReservation",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/capacityReservations/{capacityReservationName}",
-            "Method": "GET",
-            "OperationID": "CapacityReservations_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "The operation that retrieves information about the capacity reservation."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/capacityReservations/{capacityReservationName}",
-            "Method": "PUT",
-            "OperationID": "CapacityReservations_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to create or update a capacity reservation. Please note some properties can be set only during capacity reservation creation. Please refer to https://aka.ms/CapacityReservation for more details."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/capacityReservations/{capacityReservationName}",
-            "Method": "PATCH",
-            "OperationID": "CapacityReservations_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to update a capacity reservation."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/capacityReservations/{capacityReservationName}",
-            "Method": "DELETE",
-            "OperationID": "CapacityReservations_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to delete a capacity reservation. This operation is allowed only when all the associated resources are disassociated from the capacity reservation. Please refer to https://aka.ms/CapacityReservation for more details."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/capacityReservations/{capacityReservationName}",
+          "Method": "GET",
+          "OperationID": "CapacityReservations_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "The operation that retrieves information about the capacity reservation."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/capacityReservations/{capacityReservationName}",
+          "Method": "PUT",
+          "OperationID": "CapacityReservations_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to create or update a capacity reservation. Please note some properties can be set only during capacity reservation creation. Please refer to https://aka.ms/CapacityReservation for more details."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/capacityReservations/{capacityReservationName}",
+          "Method": "PATCH",
+          "OperationID": "CapacityReservations_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to update a capacity reservation."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/capacityReservations/{capacityReservationName}",
+          "Method": "DELETE",
+          "OperationID": "CapacityReservations_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to delete a capacity reservation. This operation is allowed only when all the associated resources are disassociated from the capacity reservation. Please refer to https://aka.ms/CapacityReservation for more details."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -2050,50 +1912,42 @@
     "VirtualMachineRunCommand": [
       {
         "Name": "VirtualMachineRunCommand",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/runCommands/{runCommandName}",
-            "Method": "GET",
-            "OperationID": "VirtualMachineRunCommands_GetByVirtualMachine",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "The operation to get the run command."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/runCommands/{runCommandName}",
-            "Method": "PUT",
-            "OperationID": "VirtualMachineRunCommands_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to create or update the run command."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/runCommands/{runCommandName}",
-            "Method": "PATCH",
-            "OperationID": "VirtualMachineRunCommands_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to update the run command."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/runCommands/{runCommandName}",
-            "Method": "DELETE",
-            "OperationID": "VirtualMachineRunCommands_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to delete the run command."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/runCommands/{runCommandName}",
+          "Method": "GET",
+          "OperationID": "VirtualMachineRunCommands_GetByVirtualMachine",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "The operation to get the run command."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/runCommands/{runCommandName}",
+          "Method": "PUT",
+          "OperationID": "VirtualMachineRunCommands_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to create or update the run command."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/runCommands/{runCommandName}",
+          "Method": "PATCH",
+          "OperationID": "VirtualMachineRunCommands_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to update the run command."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/runCommands/{runCommandName}",
+          "Method": "DELETE",
+          "OperationID": "VirtualMachineRunCommands_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to delete the run command."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -2130,50 +1984,42 @@
       },
       {
         "Name": "VirtualMachineRunCommand",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}",
-            "Method": "GET",
-            "OperationID": "VirtualMachineScaleSetVMRunCommands_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "The operation to get the VMSS VM run command."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}",
-            "Method": "PUT",
-            "OperationID": "VirtualMachineScaleSetVMRunCommands_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to create or update the VMSS VM run command."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}",
-            "Method": "PATCH",
-            "OperationID": "VirtualMachineScaleSetVMRunCommands_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to update the VMSS VM run command."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}",
-            "Method": "DELETE",
-            "OperationID": "VirtualMachineScaleSetVMRunCommands_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "The operation to delete the VMSS VM run command."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}",
+          "Method": "GET",
+          "OperationID": "VirtualMachineScaleSetVMRunCommands_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "The operation to get the VMSS VM run command."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}",
+          "Method": "PUT",
+          "OperationID": "VirtualMachineScaleSetVMRunCommands_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to create or update the VMSS VM run command."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}",
+          "Method": "PATCH",
+          "OperationID": "VirtualMachineScaleSetVMRunCommands_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to update the VMSS VM run command."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}",
+          "Method": "DELETE",
+          "OperationID": "VirtualMachineScaleSetVMRunCommands_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "The operation to delete the VMSS VM run command."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -2212,50 +2058,42 @@
     "Disk": [
       {
         "Name": "Disk",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}",
-            "Method": "GET",
-            "OperationID": "Disks_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Gets information about a disk."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}",
-            "Method": "PUT",
-            "OperationID": "Disks_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Creates or updates a disk."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}",
-            "Method": "PATCH",
-            "OperationID": "Disks_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Updates (patches) a disk."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}",
-            "Method": "DELETE",
-            "OperationID": "Disks_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Deletes a disk."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}",
+          "Method": "GET",
+          "OperationID": "Disks_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets information about a disk."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}",
+          "Method": "PUT",
+          "OperationID": "Disks_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a disk."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}",
+          "Method": "PATCH",
+          "OperationID": "Disks_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Updates (patches) a disk."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}",
+          "Method": "DELETE",
+          "OperationID": "Disks_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a disk."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -2327,50 +2165,42 @@
     "DiskAccess": [
       {
         "Name": "DiskAccess",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}",
-            "Method": "GET",
-            "OperationID": "DiskAccesses_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Gets information about a disk access resource."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}",
-            "Method": "PUT",
-            "OperationID": "DiskAccesses_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Creates or updates a disk access resource"
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}",
-            "Method": "PATCH",
-            "OperationID": "DiskAccesses_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Updates (patches) a disk access resource."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}",
-            "Method": "DELETE",
-            "OperationID": "DiskAccesses_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Deletes a disk access resource."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}",
+          "Method": "GET",
+          "OperationID": "DiskAccesses_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets information about a disk access resource."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}",
+          "Method": "PUT",
+          "OperationID": "DiskAccesses_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a disk access resource"
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}",
+          "Method": "PATCH",
+          "OperationID": "DiskAccesses_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Updates (patches) a disk access resource."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}",
+          "Method": "DELETE",
+          "OperationID": "DiskAccesses_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a disk access resource."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -2437,50 +2267,42 @@
     "PrivateEndpointConnection": [
       {
         "Name": "PrivateEndpointConnection",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}/privateEndpointConnections/{privateEndpointConnectionName}",
-            "Method": "GET",
-            "OperationID": "DiskAccesses_GetAPrivateEndpointConnection",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Gets information about a private endpoint connection under a disk access resource."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}/privateEndpointConnections/{privateEndpointConnectionName}",
-            "Method": "PUT",
-            "OperationID": "DiskAccesses_UpdateAPrivateEndpointConnection",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Approve or reject a private endpoint connection under disk access resource, this can't be used to create a new private endpoint connection."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}/privateEndpointConnections/{privateEndpointConnectionName}",
-            "Method": "PUT",
-            "OperationID": "DiskAccesses_UpdateAPrivateEndpointConnection",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Approve or reject a private endpoint connection under disk access resource, this can't be used to create a new private endpoint connection."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}/privateEndpointConnections/{privateEndpointConnectionName}",
-            "Method": "DELETE",
-            "OperationID": "DiskAccesses_DeleteAPrivateEndpointConnection",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Deletes a private endpoint connection under a disk access resource."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}/privateEndpointConnections/{privateEndpointConnectionName}",
+          "Method": "GET",
+          "OperationID": "DiskAccesses_GetAPrivateEndpointConnection",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets information about a private endpoint connection under a disk access resource."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}/privateEndpointConnections/{privateEndpointConnectionName}",
+          "Method": "PUT",
+          "OperationID": "DiskAccesses_UpdateAPrivateEndpointConnection",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Approve or reject a private endpoint connection under disk access resource, this can't be used to create a new private endpoint connection."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}/privateEndpointConnections/{privateEndpointConnectionName}",
+          "Method": "PUT",
+          "OperationID": "DiskAccesses_UpdateAPrivateEndpointConnection",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Approve or reject a private endpoint connection under disk access resource, this can't be used to create a new private endpoint connection."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}/privateEndpointConnections/{privateEndpointConnectionName}",
+          "Method": "DELETE",
+          "OperationID": "DiskAccesses_DeleteAPrivateEndpointConnection",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a private endpoint connection under a disk access resource."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -2519,50 +2341,42 @@
     "DiskEncryptionSet": [
       {
         "Name": "DiskEncryptionSet",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}",
-            "Method": "GET",
-            "OperationID": "DiskEncryptionSets_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Gets information about a disk encryption set."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}",
-            "Method": "PUT",
-            "OperationID": "DiskEncryptionSets_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Creates or updates a disk encryption set"
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}",
-            "Method": "PATCH",
-            "OperationID": "DiskEncryptionSets_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Updates (patches) a disk encryption set."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}",
-            "Method": "DELETE",
-            "OperationID": "DiskEncryptionSets_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Deletes a disk encryption set."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}",
+          "Method": "GET",
+          "OperationID": "DiskEncryptionSets_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets information about a disk encryption set."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}",
+          "Method": "PUT",
+          "OperationID": "DiskEncryptionSets_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a disk encryption set"
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}",
+          "Method": "PATCH",
+          "OperationID": "DiskEncryptionSets_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Updates (patches) a disk encryption set."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}",
+          "Method": "DELETE",
+          "OperationID": "DiskEncryptionSets_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a disk encryption set."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -2629,20 +2443,15 @@
     "DiskRestorePoint": [
       {
         "Name": "DiskRestorePoint",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{vmRestorePointName}/diskRestorePoints/{diskRestorePointName}",
-            "Method": "GET",
-            "OperationID": "DiskRestorePoint_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get disk restorePoint resource"
-          }
-        ],
-        "CreateOperations": [],
-        "UpdateOperations": [],
-        "DeleteOperations": [],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{vmRestorePointName}/diskRestorePoints/{diskRestorePointName}",
+          "Method": "GET",
+          "OperationID": "DiskRestorePoint_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get disk restorePoint resource"
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -2700,50 +2509,42 @@
     "Snapshot": [
       {
         "Name": "Snapshot",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}",
-            "Method": "GET",
-            "OperationID": "Snapshots_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Gets information about a snapshot."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}",
-            "Method": "PUT",
-            "OperationID": "Snapshots_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Creates or updates a snapshot."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}",
-            "Method": "PATCH",
-            "OperationID": "Snapshots_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Updates (patches) a snapshot."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}",
-            "Method": "DELETE",
-            "OperationID": "Snapshots_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Deletes a snapshot."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}",
+          "Method": "GET",
+          "OperationID": "Snapshots_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets information about a snapshot."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}",
+          "Method": "PUT",
+          "OperationID": "Snapshots_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a snapshot."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}",
+          "Method": "PATCH",
+          "OperationID": "Snapshots_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Updates (patches) a snapshot."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}",
+          "Method": "DELETE",
+          "OperationID": "Snapshots_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a snapshot."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -2815,50 +2616,42 @@
     "Gallery": [
       {
         "Name": "Gallery",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}",
-            "Method": "GET",
-            "OperationID": "Galleries_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Retrieves information about a Shared Image Gallery."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}",
-            "Method": "PUT",
-            "OperationID": "Galleries_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create or update a Shared Image Gallery."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}",
-            "Method": "PATCH",
-            "OperationID": "Galleries_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Update a Shared Image Gallery."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}",
-            "Method": "DELETE",
-            "OperationID": "Galleries_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete a Shared Image Gallery."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}",
+          "Method": "GET",
+          "OperationID": "Galleries_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Retrieves information about a Shared Image Gallery."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}",
+          "Method": "PUT",
+          "OperationID": "Galleries_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create or update a Shared Image Gallery."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}",
+          "Method": "PATCH",
+          "OperationID": "Galleries_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Update a Shared Image Gallery."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}",
+          "Method": "DELETE",
+          "OperationID": "Galleries_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a Shared Image Gallery."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -2921,50 +2714,42 @@
     "GalleryImage": [
       {
         "Name": "GalleryImage",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}",
-            "Method": "GET",
-            "OperationID": "GalleryImages_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Retrieves information about a gallery image definition."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}",
-            "Method": "PUT",
-            "OperationID": "GalleryImages_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create or update a gallery image definition."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}",
-            "Method": "PATCH",
-            "OperationID": "GalleryImages_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Update a gallery image definition."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}",
-            "Method": "DELETE",
-            "OperationID": "GalleryImages_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete a gallery image."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}",
+          "Method": "GET",
+          "OperationID": "GalleryImages_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Retrieves information about a gallery image definition."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}",
+          "Method": "PUT",
+          "OperationID": "GalleryImages_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create or update a gallery image definition."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}",
+          "Method": "PATCH",
+          "OperationID": "GalleryImages_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Update a gallery image definition."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}",
+          "Method": "DELETE",
+          "OperationID": "GalleryImages_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a gallery image."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -3003,50 +2788,42 @@
     "GalleryImageVersion": [
       {
         "Name": "GalleryImageVersion",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}/versions/{galleryImageVersionName}",
-            "Method": "GET",
-            "OperationID": "GalleryImageVersions_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Retrieves information about a gallery image version."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}/versions/{galleryImageVersionName}",
-            "Method": "PUT",
-            "OperationID": "GalleryImageVersions_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create or update a gallery image version."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}/versions/{galleryImageVersionName}",
-            "Method": "PATCH",
-            "OperationID": "GalleryImageVersions_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Update a gallery image version."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}/versions/{galleryImageVersionName}",
-            "Method": "DELETE",
-            "OperationID": "GalleryImageVersions_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete a gallery image version."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}/versions/{galleryImageVersionName}",
+          "Method": "GET",
+          "OperationID": "GalleryImageVersions_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Retrieves information about a gallery image version."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}/versions/{galleryImageVersionName}",
+          "Method": "PUT",
+          "OperationID": "GalleryImageVersions_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create or update a gallery image version."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}/versions/{galleryImageVersionName}",
+          "Method": "PATCH",
+          "OperationID": "GalleryImageVersions_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Update a gallery image version."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}/versions/{galleryImageVersionName}",
+          "Method": "DELETE",
+          "OperationID": "GalleryImageVersions_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a gallery image version."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -3085,50 +2862,42 @@
     "GalleryApplication": [
       {
         "Name": "GalleryApplication",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{galleryApplicationName}",
-            "Method": "GET",
-            "OperationID": "GalleryApplications_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Retrieves information about a gallery Application Definition."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{galleryApplicationName}",
-            "Method": "PUT",
-            "OperationID": "GalleryApplications_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create or update a gallery Application Definition."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{galleryApplicationName}",
-            "Method": "PATCH",
-            "OperationID": "GalleryApplications_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Update a gallery Application Definition."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{galleryApplicationName}",
-            "Method": "DELETE",
-            "OperationID": "GalleryApplications_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete a gallery Application."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{galleryApplicationName}",
+          "Method": "GET",
+          "OperationID": "GalleryApplications_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Retrieves information about a gallery Application Definition."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{galleryApplicationName}",
+          "Method": "PUT",
+          "OperationID": "GalleryApplications_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create or update a gallery Application Definition."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{galleryApplicationName}",
+          "Method": "PATCH",
+          "OperationID": "GalleryApplications_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Update a gallery Application Definition."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{galleryApplicationName}",
+          "Method": "DELETE",
+          "OperationID": "GalleryApplications_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a gallery Application."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -3167,50 +2936,42 @@
     "GalleryApplicationVersion": [
       {
         "Name": "GalleryApplicationVersion",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{galleryApplicationName}/versions/{galleryApplicationVersionName}",
-            "Method": "GET",
-            "OperationID": "GalleryApplicationVersions_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Retrieves information about a gallery Application Version."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{galleryApplicationName}/versions/{galleryApplicationVersionName}",
-            "Method": "PUT",
-            "OperationID": "GalleryApplicationVersions_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create or update a gallery Application Version."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{galleryApplicationName}/versions/{galleryApplicationVersionName}",
-            "Method": "PATCH",
-            "OperationID": "GalleryApplicationVersions_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Update a gallery Application Version."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{galleryApplicationName}/versions/{galleryApplicationVersionName}",
-            "Method": "DELETE",
-            "OperationID": "GalleryApplicationVersions_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete a gallery Application Version."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{galleryApplicationName}/versions/{galleryApplicationVersionName}",
+          "Method": "GET",
+          "OperationID": "GalleryApplicationVersions_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Retrieves information about a gallery Application Version."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{galleryApplicationName}/versions/{galleryApplicationVersionName}",
+          "Method": "PUT",
+          "OperationID": "GalleryApplicationVersions_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create or update a gallery Application Version."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{galleryApplicationName}/versions/{galleryApplicationVersionName}",
+          "Method": "PATCH",
+          "OperationID": "GalleryApplicationVersions_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Update a gallery Application Version."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{galleryApplicationName}/versions/{galleryApplicationVersionName}",
+          "Method": "DELETE",
+          "OperationID": "GalleryApplicationVersions_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a gallery Application Version."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -3249,20 +3010,15 @@
     "SharedGallery": [
       {
         "Name": "SharedGallery",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}",
-            "Method": "GET",
-            "OperationID": "SharedGalleries_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get a shared gallery by subscription id or tenant id."
-          }
-        ],
-        "CreateOperations": [],
-        "UpdateOperations": [],
-        "DeleteOperations": [],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}",
+          "Method": "GET",
+          "OperationID": "SharedGalleries_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a shared gallery by subscription id or tenant id."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -3301,20 +3057,15 @@
     "SharedGalleryImage": [
       {
         "Name": "SharedGalleryImage",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}",
-            "Method": "GET",
-            "OperationID": "SharedGalleryImages_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get a shared gallery image by subscription id or tenant id."
-          }
-        ],
-        "CreateOperations": [],
-        "UpdateOperations": [],
-        "DeleteOperations": [],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}",
+          "Method": "GET",
+          "OperationID": "SharedGalleryImages_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a shared gallery image by subscription id or tenant id."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -3353,20 +3104,15 @@
     "SharedGalleryImageVersion": [
       {
         "Name": "SharedGalleryImageVersion",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}/versions/{galleryImageVersionName}",
-            "Method": "GET",
-            "OperationID": "SharedGalleryImageVersions_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get a shared gallery image version by subscription id or tenant id."
-          }
-        ],
-        "CreateOperations": [],
-        "UpdateOperations": [],
-        "DeleteOperations": [],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}/versions/{galleryImageVersionName}",
+          "Method": "GET",
+          "OperationID": "SharedGalleryImageVersions_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a shared gallery image version by subscription id or tenant id."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -3405,20 +3151,15 @@
     "CommunityGallery": [
       {
         "Name": "CommunityGallery",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}",
-            "Method": "GET",
-            "OperationID": "CommunityGalleries_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get a community gallery by gallery public name."
-          }
-        ],
-        "CreateOperations": [],
-        "UpdateOperations": [],
-        "DeleteOperations": [],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}",
+          "Method": "GET",
+          "OperationID": "CommunityGalleries_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a community gallery by gallery public name."
+        },
         "ListOperations": [],
         "OperationsFromResourceGroupExtension": [],
         "OperationsFromSubscriptionExtension": [],
@@ -3443,20 +3184,15 @@
     "CommunityGalleryImage": [
       {
         "Name": "CommunityGalleryImage",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images/{galleryImageName}",
-            "Method": "GET",
-            "OperationID": "CommunityGalleryImages_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get a community gallery image."
-          }
-        ],
-        "CreateOperations": [],
-        "UpdateOperations": [],
-        "DeleteOperations": [],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images/{galleryImageName}",
+          "Method": "GET",
+          "OperationID": "CommunityGalleryImages_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a community gallery image."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -3495,20 +3231,15 @@
     "CommunityGalleryImageVersion": [
       {
         "Name": "CommunityGalleryImageVersion",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images/{galleryImageName}/versions/{galleryImageVersionName}",
-            "Method": "GET",
-            "OperationID": "CommunityGalleryImageVersions_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get a community gallery image version."
-          }
-        ],
-        "CreateOperations": [],
-        "UpdateOperations": [],
-        "DeleteOperations": [],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images/{galleryImageName}/versions/{galleryImageVersionName}",
+          "Method": "GET",
+          "OperationID": "CommunityGalleryImageVersions_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a community gallery image version."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -3547,30 +3278,24 @@
     "RoleInstance": [
       {
         "Name": "RoleInstance",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}",
-            "Method": "GET",
-            "OperationID": "CloudServiceRoleInstances_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Gets a role instance from a cloud service."
-          }
-        ],
-        "CreateOperations": [],
-        "UpdateOperations": [],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}",
-            "Method": "DELETE",
-            "OperationID": "CloudServiceRoleInstances_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Deletes a role instance from a cloud service."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}",
+          "Method": "GET",
+          "OperationID": "CloudServiceRoleInstances_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a role instance from a cloud service."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}",
+          "Method": "DELETE",
+          "OperationID": "CloudServiceRoleInstances_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a role instance from a cloud service."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -3655,20 +3380,15 @@
     "CloudServiceRole": [
       {
         "Name": "CloudServiceRole",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roles/{roleName}",
-            "Method": "GET",
-            "OperationID": "CloudServiceRoles_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Gets a role from a cloud service."
-          }
-        ],
-        "CreateOperations": [],
-        "UpdateOperations": [],
-        "DeleteOperations": [],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roles/{roleName}",
+          "Method": "GET",
+          "OperationID": "CloudServiceRoles_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a role from a cloud service."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -3707,50 +3427,42 @@
     "CloudService": [
       {
         "Name": "CloudService",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}",
-            "Method": "GET",
-            "OperationID": "CloudServices_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Display information about a cloud service."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}",
-            "Method": "PUT",
-            "OperationID": "CloudServices_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create or update a cloud service. Please note some properties can be set only during cloud service creation."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}",
-            "Method": "PATCH",
-            "OperationID": "CloudServices_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Update a cloud service."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}",
-            "Method": "DELETE",
-            "OperationID": "CloudServices_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Deletes a cloud service."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}",
+          "Method": "GET",
+          "OperationID": "CloudServices_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Display information about a cloud service."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}",
+          "Method": "PUT",
+          "OperationID": "CloudServices_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create or update a cloud service. Please note some properties can be set only during cloud service creation."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}",
+          "Method": "PATCH",
+          "OperationID": "CloudServices_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Update a cloud service."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}",
+          "Method": "DELETE",
+          "OperationID": "CloudServices_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a cloud service."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -3898,20 +3610,15 @@
     "OSVersion": [
       {
         "Name": "OSVersion",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/cloudServiceOsVersions/{osVersionName}",
-            "Method": "GET",
-            "OperationID": "CloudServiceOperatingSystems_GetOSVersion",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Gets properties of a guest operating system version that can be specified in the XML service configuration (.cscfg) for a cloud service."
-          }
-        ],
-        "CreateOperations": [],
-        "UpdateOperations": [],
-        "DeleteOperations": [],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/cloudServiceOsVersions/{osVersionName}",
+          "Method": "GET",
+          "OperationID": "CloudServiceOperatingSystems_GetOSVersion",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets properties of a guest operating system version that can be specified in the XML service configuration (.cscfg) for a cloud service."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -3950,20 +3657,15 @@
     "OSFamily": [
       {
         "Name": "OSFamily",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/cloudServiceOsFamilies/{osFamilyName}",
-            "Method": "GET",
-            "OperationID": "CloudServiceOperatingSystems_GetOSFamily",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Gets properties of a guest operating system family that can be specified in the XML service configuration (.cscfg) for a cloud service."
-          }
-        ],
-        "CreateOperations": [],
-        "UpdateOperations": [],
-        "DeleteOperations": [],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/cloudServiceOsFamilies/{osFamilyName}",
+          "Method": "GET",
+          "OperationID": "CloudServiceOperatingSystems_GetOSFamily",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets properties of a guest operating system family that can be specified in the XML service configuration (.cscfg) for a cloud service."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",

@@ -3,50 +3,42 @@
     "DataProduct": [
       {
         "Name": "DataProduct",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}",
-            "Method": "GET",
-            "OperationID": "DataProducts_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Retrieve data product resource."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}",
-            "Method": "PUT",
-            "OperationID": "DataProducts_Create",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create data product resource."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}",
-            "Method": "PATCH",
-            "OperationID": "DataProducts_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Update data product resource."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}",
-            "Method": "DELETE",
-            "OperationID": "DataProducts_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete data product resource."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}",
+          "Method": "GET",
+          "OperationID": "DataProducts_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Retrieve data product resource."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}",
+          "Method": "PUT",
+          "OperationID": "DataProducts_Create",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create data product resource."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}",
+          "Method": "PATCH",
+          "OperationID": "DataProducts_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Update data product resource."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}",
+          "Method": "DELETE",
+          "OperationID": "DataProducts_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete data product resource."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -145,20 +137,15 @@
     "DataProductsCatalog": [
       {
         "Name": "DataProductsCatalog",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProductsCatalogs/default",
-            "Method": "GET",
-            "OperationID": "DataProductsCatalogs_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Retrieve data type resource."
-          }
-        ],
-        "CreateOperations": [],
-        "UpdateOperations": [],
-        "DeleteOperations": [],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProductsCatalogs/default",
+          "Method": "GET",
+          "OperationID": "DataProductsCatalogs_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Retrieve data type resource."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -211,50 +198,42 @@
     "DataType": [
       {
         "Name": "DataType",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/dataTypes/{dataTypeName}",
-            "Method": "GET",
-            "OperationID": "DataTypes_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Retrieve data type resource."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/dataTypes/{dataTypeName}",
-            "Method": "PUT",
-            "OperationID": "DataTypes_Create",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create data type resource."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/dataTypes/{dataTypeName}",
-            "Method": "PATCH",
-            "OperationID": "DataTypes_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Update data type resource."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/dataTypes/{dataTypeName}",
-            "Method": "DELETE",
-            "OperationID": "DataTypes_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete data type resource."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/dataTypes/{dataTypeName}",
+          "Method": "GET",
+          "OperationID": "DataTypes_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Retrieve data type resource."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/dataTypes/{dataTypeName}",
+          "Method": "PUT",
+          "OperationID": "DataTypes_Create",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create data type resource."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/dataTypes/{dataTypeName}",
+          "Method": "PATCH",
+          "OperationID": "DataTypes_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Update data type resource."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/dataTypes/{dataTypeName}",
+          "Method": "DELETE",
+          "OperationID": "DataTypes_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete data type resource."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",

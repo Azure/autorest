@@ -3,50 +3,42 @@
     "Employee": [
       {
         "Name": "Employee",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}",
-            "Method": "GET",
-            "OperationID": "Employees_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get a Employee"
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}",
-            "Method": "PUT",
-            "OperationID": "Employees_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create a Employee"
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}",
-            "Method": "PATCH",
-            "OperationID": "Employees_Update",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Update a Employee"
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}",
-            "Method": "DELETE",
-            "OperationID": "Employees_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete a Employee"
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}",
+          "Method": "GET",
+          "OperationID": "Employees_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a Employee"
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}",
+          "Method": "PUT",
+          "OperationID": "Employees_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create a Employee"
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}",
+          "Method": "PATCH",
+          "OperationID": "Employees_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Update a Employee"
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}",
+          "Method": "DELETE",
+          "OperationID": "Employees_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a Employee"
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -99,20 +91,15 @@
     "Enroll": [
       {
         "Name": "Enroll",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}/enrolls/default",
-            "Method": "GET",
-            "OperationID": "Enrolls_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get a Enroll."
-          }
-        ],
-        "CreateOperations": [],
-        "UpdateOperations": [],
-        "DeleteOperations": [],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}/enrolls/default",
+          "Method": "GET",
+          "OperationID": "Enrolls_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a Enroll."
+        },
         "ListOperations": [],
         "OperationsFromResourceGroupExtension": [],
         "OperationsFromSubscriptionExtension": [],
@@ -137,20 +124,15 @@
     "DictProperty": [
       {
         "Name": "DictProperty",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}/dictproperties/{name}",
-            "Method": "GET",
-            "OperationID": "DictProperties_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get a Resource."
-          }
-        ],
-        "CreateOperations": [],
-        "UpdateOperations": [],
-        "DeleteOperations": [],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}/dictproperties/{name}",
+          "Method": "GET",
+          "OperationID": "DictProperties_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a Resource."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -189,20 +171,15 @@
     "ArrayDefault": [
       {
         "Name": "ArrayDefault",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}/arraydefaults/{name}",
-            "Method": "GET",
-            "OperationID": "ArrayDefault_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get a Resource."
-          }
-        ],
-        "CreateOperations": [],
-        "UpdateOperations": [],
-        "DeleteOperations": [],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}/arraydefaults/{name}",
+          "Method": "GET",
+          "OperationID": "ArrayDefault_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a Resource."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",

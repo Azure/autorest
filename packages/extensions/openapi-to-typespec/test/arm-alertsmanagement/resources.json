@@ -3,50 +3,42 @@
     "AlertProcessingRule": [
       {
         "Name": "AlertProcessingRule",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{alertProcessingRuleName}",
-            "Method": "GET",
-            "OperationID": "AlertProcessingRules_GetByName",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get an alert processing rule by name."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{alertProcessingRuleName}",
-            "Method": "PUT",
-            "OperationID": "AlertProcessingRules_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create or update an alert processing rule."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{alertProcessingRuleName}",
-            "Method": "PATCH",
-            "OperationID": "AlertProcessingRules_Update",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Enable, disable, or update tags for an alert processing rule."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{alertProcessingRuleName}",
-            "Method": "DELETE",
-            "OperationID": "AlertProcessingRules_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete an alert processing rule."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{alertProcessingRuleName}",
+          "Method": "GET",
+          "OperationID": "AlertProcessingRules_GetByName",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get an alert processing rule by name."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{alertProcessingRuleName}",
+          "Method": "PUT",
+          "OperationID": "AlertProcessingRules_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create or update an alert processing rule."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{alertProcessingRuleName}",
+          "Method": "PATCH",
+          "OperationID": "AlertProcessingRules_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Enable, disable, or update tags for an alert processing rule."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{alertProcessingRuleName}",
+          "Method": "DELETE",
+          "OperationID": "AlertProcessingRules_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete an alert processing rule."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -99,20 +91,15 @@
     "Alert": [
       {
         "Name": "Alert",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts/{alertId}",
-            "Method": "GET",
-            "OperationID": "Alerts_GetById",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get information related to a specific alert"
-          }
-        ],
-        "CreateOperations": [],
-        "UpdateOperations": [],
-        "DeleteOperations": [],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts/{alertId}",
+          "Method": "GET",
+          "OperationID": "Alerts_GetById",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get information related to a specific alert"
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -170,20 +157,15 @@
     "SmartGroup": [
       {
         "Name": "SmartGroup",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}",
-            "Method": "GET",
-            "OperationID": "SmartGroups_GetById",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get information related to a specific Smart Group."
-          }
-        ],
-        "CreateOperations": [],
-        "UpdateOperations": [],
-        "DeleteOperations": [],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}",
+          "Method": "GET",
+          "OperationID": "SmartGroups_GetById",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get information related to a specific Smart Group."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",

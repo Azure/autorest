@@ -3,50 +3,42 @@
     "AnalysisServicesServer": [
       {
         "Name": "AnalysisServicesServer",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}",
-            "Method": "GET",
-            "OperationID": "Servers_GetDetails",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Gets details about the specified Analysis Services server."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}",
-            "Method": "PUT",
-            "OperationID": "Servers_Create",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Provisions the specified Analysis Services server based on the configuration specified in the request."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}",
-            "Method": "PATCH",
-            "OperationID": "Servers_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Updates the current state of the specified Analysis Services server."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}",
-            "Method": "DELETE",
-            "OperationID": "Servers_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Deletes the specified Analysis Services server."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}",
+          "Method": "GET",
+          "OperationID": "Servers_GetDetails",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets details about the specified Analysis Services server."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}",
+          "Method": "PUT",
+          "OperationID": "Servers_Create",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Provisions the specified Analysis Services server based on the configuration specified in the request."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}",
+          "Method": "PATCH",
+          "OperationID": "Servers_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Updates the current state of the specified Analysis Services server."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}",
+          "Method": "DELETE",
+          "OperationID": "Servers_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes the specified Analysis Services server."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",

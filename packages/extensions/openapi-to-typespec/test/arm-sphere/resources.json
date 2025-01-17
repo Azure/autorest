@@ -3,50 +3,42 @@
     "Catalog": [
       {
         "Name": "Catalog",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}",
-            "Method": "GET",
-            "OperationID": "Catalogs_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get a Catalog"
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}",
-            "Method": "PUT",
-            "OperationID": "Catalogs_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create a Catalog"
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}",
-            "Method": "PATCH",
-            "OperationID": "Catalogs_Update",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Update a Catalog"
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}",
-            "Method": "DELETE",
-            "OperationID": "Catalogs_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete a Catalog"
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}",
+          "Method": "GET",
+          "OperationID": "Catalogs_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a Catalog"
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}",
+          "Method": "PUT",
+          "OperationID": "Catalogs_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create a Catalog"
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}",
+          "Method": "PATCH",
+          "OperationID": "Catalogs_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Update a Catalog"
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}",
+          "Method": "DELETE",
+          "OperationID": "Catalogs_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a Catalog"
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -161,20 +153,15 @@
     "Certificate": [
       {
         "Name": "Certificate",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/certificates/{serialNumber}",
-            "Method": "GET",
-            "OperationID": "Certificates_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get a Certificate"
-          }
-        ],
-        "CreateOperations": [],
-        "UpdateOperations": [],
-        "DeleteOperations": [],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/certificates/{serialNumber}",
+          "Method": "GET",
+          "OperationID": "Certificates_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a Certificate"
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -232,50 +219,42 @@
     "Image": [
       {
         "Name": "Image",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images/{imageName}",
-            "Method": "GET",
-            "OperationID": "Images_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get a Image"
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images/{imageName}",
-            "Method": "PUT",
-            "OperationID": "Images_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create a Image"
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images/{imageName}",
-            "Method": "PUT",
-            "OperationID": "Images_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create a Image"
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images/{imageName}",
-            "Method": "DELETE",
-            "OperationID": "Images_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete a Image"
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images/{imageName}",
+          "Method": "GET",
+          "OperationID": "Images_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a Image"
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images/{imageName}",
+          "Method": "PUT",
+          "OperationID": "Images_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create a Image"
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images/{imageName}",
+          "Method": "PUT",
+          "OperationID": "Images_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create a Image"
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images/{imageName}",
+          "Method": "DELETE",
+          "OperationID": "Images_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a Image"
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -314,50 +293,42 @@
     "Product": [
       {
         "Name": "Product",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}",
-            "Method": "GET",
-            "OperationID": "Products_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}",
-            "Method": "PUT",
-            "OperationID": "Products_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}",
-            "Method": "PATCH",
-            "OperationID": "Products_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Update a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}",
-            "Method": "DELETE",
-            "OperationID": "Products_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name'"
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}",
+          "Method": "GET",
+          "OperationID": "Products_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}",
+          "Method": "PUT",
+          "OperationID": "Products_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}",
+          "Method": "PATCH",
+          "OperationID": "Products_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Update a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}",
+          "Method": "DELETE",
+          "OperationID": "Products_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name'"
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -419,50 +390,42 @@
     "DeviceGroup": [
       {
         "Name": "DeviceGroup",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}",
-            "Method": "GET",
-            "OperationID": "DeviceGroups_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}",
-            "Method": "PUT",
-            "OperationID": "DeviceGroups_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}",
-            "Method": "PATCH",
-            "OperationID": "DeviceGroups_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Update a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}",
-            "Method": "DELETE",
-            "OperationID": "DeviceGroups_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}",
+          "Method": "GET",
+          "OperationID": "DeviceGroups_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}",
+          "Method": "PUT",
+          "OperationID": "DeviceGroups_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}",
+          "Method": "PATCH",
+          "OperationID": "DeviceGroups_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Update a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}",
+          "Method": "DELETE",
+          "OperationID": "DeviceGroups_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -520,50 +483,42 @@
     "Deployment": [
       {
         "Name": "Deployment",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/deployments/{deploymentName}",
-            "Method": "GET",
-            "OperationID": "Deployments_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/deployments/{deploymentName}",
-            "Method": "PUT",
-            "OperationID": "Deployments_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/deployments/{deploymentName}",
-            "Method": "PUT",
-            "OperationID": "Deployments_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/deployments/{deploymentName}",
-            "Method": "DELETE",
-            "OperationID": "Deployments_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/deployments/{deploymentName}",
+          "Method": "GET",
+          "OperationID": "Deployments_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/deployments/{deploymentName}",
+          "Method": "PUT",
+          "OperationID": "Deployments_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/deployments/{deploymentName}",
+          "Method": "PUT",
+          "OperationID": "Deployments_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/deployments/{deploymentName}",
+          "Method": "DELETE",
+          "OperationID": "Deployments_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -602,50 +557,42 @@
     "Device": [
       {
         "Name": "Device",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceName}",
-            "Method": "GET",
-            "OperationID": "Devices_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get a Device. Use '.unassigned' or '.default' for the device group and product names when a device does not belong to a device group and product."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceName}",
-            "Method": "PUT",
-            "OperationID": "Devices_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create a Device. Use '.unassigned' or '.default' for the device group and product names to claim a device to the catalog only."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceName}",
-            "Method": "PATCH",
-            "OperationID": "Devices_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Update a Device. Use '.unassigned' or '.default' for the device group and product names to move a device to the catalog level."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceName}",
-            "Method": "DELETE",
-            "OperationID": "Devices_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete a Device"
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceName}",
+          "Method": "GET",
+          "OperationID": "Devices_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a Device. Use '.unassigned' or '.default' for the device group and product names when a device does not belong to a device group and product."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceName}",
+          "Method": "PUT",
+          "OperationID": "Devices_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create a Device. Use '.unassigned' or '.default' for the device group and product names to claim a device to the catalog only."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceName}",
+          "Method": "PATCH",
+          "OperationID": "Devices_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Update a Device. Use '.unassigned' or '.default' for the device group and product names to move a device to the catalog level."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceName}",
+          "Method": "DELETE",
+          "OperationID": "Devices_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a Device"
+        },
         "ListOperations": [
           {
             "Name": "GetAll",

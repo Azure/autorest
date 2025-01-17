@@ -3,50 +3,42 @@
     "TrafficController": [
       {
         "Name": "TrafficController",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}",
-            "Method": "GET",
-            "OperationID": "TrafficControllerInterface_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get a TrafficController"
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}",
-            "Method": "PUT",
-            "OperationID": "TrafficControllerInterface_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create a TrafficController"
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}",
-            "Method": "PATCH",
-            "OperationID": "TrafficControllerInterface_Update",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Update a TrafficController"
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}",
-            "Method": "DELETE",
-            "OperationID": "TrafficControllerInterface_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete a TrafficController"
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}",
+          "Method": "GET",
+          "OperationID": "TrafficControllerInterface_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a TrafficController"
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}",
+          "Method": "PUT",
+          "OperationID": "TrafficControllerInterface_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create a TrafficController"
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}",
+          "Method": "PATCH",
+          "OperationID": "TrafficControllerInterface_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Update a TrafficController"
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}",
+          "Method": "DELETE",
+          "OperationID": "TrafficControllerInterface_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a TrafficController"
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -99,50 +91,42 @@
     "Association": [
       {
         "Name": "Association",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/associations/{associationName}",
-            "Method": "GET",
-            "OperationID": "AssociationsInterface_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get a Association"
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/associations/{associationName}",
-            "Method": "PUT",
-            "OperationID": "AssociationsInterface_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create a Association"
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/associations/{associationName}",
-            "Method": "PATCH",
-            "OperationID": "AssociationsInterface_Update",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Update a Association"
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/associations/{associationName}",
-            "Method": "DELETE",
-            "OperationID": "AssociationsInterface_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete a Association"
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/associations/{associationName}",
+          "Method": "GET",
+          "OperationID": "AssociationsInterface_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a Association"
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/associations/{associationName}",
+          "Method": "PUT",
+          "OperationID": "AssociationsInterface_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create a Association"
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/associations/{associationName}",
+          "Method": "PATCH",
+          "OperationID": "AssociationsInterface_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Update a Association"
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/associations/{associationName}",
+          "Method": "DELETE",
+          "OperationID": "AssociationsInterface_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a Association"
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -181,50 +165,42 @@
     "Frontend": [
       {
         "Name": "Frontend",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/frontends/{frontendName}",
-            "Method": "GET",
-            "OperationID": "FrontendsInterface_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get a Frontend"
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/frontends/{frontendName}",
-            "Method": "PUT",
-            "OperationID": "FrontendsInterface_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create a Frontend"
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/frontends/{frontendName}",
-            "Method": "PATCH",
-            "OperationID": "FrontendsInterface_Update",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Update a Frontend"
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/frontends/{frontendName}",
-            "Method": "DELETE",
-            "OperationID": "FrontendsInterface_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete a Frontend"
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/frontends/{frontendName}",
+          "Method": "GET",
+          "OperationID": "FrontendsInterface_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a Frontend"
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/frontends/{frontendName}",
+          "Method": "PUT",
+          "OperationID": "FrontendsInterface_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create a Frontend"
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/frontends/{frontendName}",
+          "Method": "PATCH",
+          "OperationID": "FrontendsInterface_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Update a Frontend"
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/frontends/{frontendName}",
+          "Method": "DELETE",
+          "OperationID": "FrontendsInterface_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a Frontend"
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
