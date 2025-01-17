@@ -1,10 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+import { readFileSync } from "fs";
 import { join } from "path";
 import { getSession } from "../autorest-session";
 import { formatTypespecFile } from "../utils/format";
-import { readFileSync } from "fs";
 
 export async function emitLegacy(filePath: string): Promise<void> {
   const session = getSession();

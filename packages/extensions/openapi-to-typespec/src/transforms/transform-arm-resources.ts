@@ -34,12 +34,12 @@ import {
   getResourceOperations,
   isResourceSchema,
 } from "../utils/resource-discovery";
+import { isStringSchema } from "../utils/schemas";
+import { escapeRegex } from "../utils/strings";
 import { getSuppresssionWithCode } from "../utils/suppressions";
 import { getFullyQualifiedName, getTemplateResponses, NamesOfResponseTemplate } from "../utils/type-mapping";
 import { getTypespecType, isTypespecType, transformObjectProperty } from "./transform-object";
 import { transformParameter } from "./transform-operations";
-import { isStringSchema } from "../utils/schemas";
-import { escapeRegex } from "../utils/strings";
 
 const logger = () => getLogger("parse-metadata");
 

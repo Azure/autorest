@@ -6,11 +6,12 @@ import { CodeModel, codeModelSchema } from "@autorest/codemodel";
 import { AutoRestExtension, AutorestExtensionHost, Session, startSession } from "@autorest/extension-base";
 import { serialize } from "@azure-tools/codegen";
 import { OpenAPI3Document } from "@azure-tools/openapi";
+import { Metadata } from "utils/resource-discovery";
 import { setArmCommonTypeVersion, setSession } from "./autorest-session";
 import { emitArmResources } from "./emiters/emit-arm-resources";
 import { emitClient } from "./emiters/emit-client";
-import { emitMain } from "./emiters/emit-main";
 import { emitLegacy } from "./emiters/emit-legacy";
+import { emitMain } from "./emiters/emit-main";
 
 import { emitModels } from "./emiters/emit-models";
 import { emitPackage } from "./emiters/emit-package";
@@ -25,7 +26,6 @@ import { parseMetadata } from "./resource/parse-metadata";
 import { markErrorModels } from "./utils/errors";
 import { markPagination } from "./utils/paging";
 import { markResources } from "./utils/resources";
-import { Metadata } from "utils/resource-discovery";
 
 export async function processConverter(host: AutorestExtensionHost) {
   const session = await startSession<CodeModel>(host, codeModelSchema);

@@ -15,8 +15,8 @@ import { TypespecDecorator, DecoratorArgument, WithSuppressDirective } from "../
 import { getOptions } from "../options";
 import { createCSharpNameDecorator } from "../pretransforms/rename-pretransform";
 import { getOwnDiscriminator } from "./discriminator";
-import { escapeRegex } from "./strings";
 import { isStringSchema } from "./schemas";
+import { escapeRegex } from "./strings";
 
 export function getModelDecorators(model: ObjectSchema): TypespecDecorator[] {
   const decorators: TypespecDecorator[] = [];

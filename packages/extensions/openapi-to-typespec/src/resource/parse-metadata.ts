@@ -1,4 +1,5 @@
 import { CodeModel, HttpMethod, Operation } from "@autorest/codemodel";
+import { getOptions } from "../options";
 import { getLogger } from "../utils/logger";
 import { _ArmPagingMetadata, _ArmResourceOperation, ArmResource, Metadata } from "../utils/resource-discovery";
 import { lastWordToSingular } from "../utils/strings";
@@ -20,7 +21,6 @@ import {
 } from "./operation-set";
 import { getPagingItemType, isTrackedResource } from "./resource-equivalent";
 import { getResourceKey, getResourceKeySegment, getResourceType, isScopedPath, isSingleton } from "./utils";
-import { getOptions } from "../options";
 
 const logger = () => getLogger("parse-metadata");
 
