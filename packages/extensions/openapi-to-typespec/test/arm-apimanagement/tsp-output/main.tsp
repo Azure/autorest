@@ -55,6 +55,7 @@ import "./SubscriptionContract.tsp";
 import "./AccessInformationContract.tsp";
 import "./UserContract.tsp";
 import "./routes.tsp";
+import "./legacy.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

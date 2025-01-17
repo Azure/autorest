@@ -30,7 +30,20 @@ interface RoleEligibilityScheduleInstances {
    */
   get is ArmResourceRead<
     RoleEligibilityScheduleInstance,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
+      /**
+       * The scope of the role eligibility schedules.
+       */
+      @path
+      scope: string;
+
+      /**
+       * The name (hash of schedule name + time) of the role eligibility schedule to get.
+       */
+      @path
+      roleEligibilityScheduleInstanceName: string;
+    }
   >;
 
   /**
@@ -40,6 +53,12 @@ interface RoleEligibilityScheduleInstances {
     RoleEligibilityScheduleInstance,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
+      /**
+       * The scope of the role eligibility schedule.
+       */
+      @path
+      scope: string;
+
       /**
        * The filter to apply on the operation. Use $filter=atScope() to return all role assignment schedules at or above the scope. Use $filter=principalId eq {id} to return all role assignment schedules at, above or below the scope for the specified principal. Use $filter=assignedTo('{userId}') to return all role eligibility schedules for the user. Use $filter=asTarget() to return all role eligibility schedules created for the current user.
        */

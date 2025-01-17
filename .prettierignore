@@ -341,3 +341,6 @@ packages/extensions/core/test/plugins/*/expected/*.json
 # Generated typespec and examples
 packages/extensions/openapi-to-typespec/test/**/*.tsp
 packages/extensions/openapi-to-typespec/test/**/*.json
+
+# TypeSpec assets
+packages/extensions/openapi-to-typespec/src/assets/**/*.tsp

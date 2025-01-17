@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "instanceId": "0",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "myvmScaleSet"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "myRunCommand",
+            "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/runCommands",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myvmScaleSet/virtualMachines/0/runCommands/myRunCommand",
+            "location": "westus",
+            "properties": {
+              "asyncExecution": false,
+              "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt",
+              "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
+              "parameters": [
+                {
+                  "name": "param1",
+                  "value": "value1"
+                },
+                {
+                  "name": "param2",
+                  "value": "value2"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "runAsUser": "user1",
+              "source": {
+                "script": "Write-Host Hello World! ; Remove-Item C:\test\testFile.txt"
+              },
+              "timeoutInSeconds": 0,
+              "treatFailureAsDeploymentFailure": false
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetVMRunCommands_List",
+  "title": "List run commands in Vmss instance."
+}

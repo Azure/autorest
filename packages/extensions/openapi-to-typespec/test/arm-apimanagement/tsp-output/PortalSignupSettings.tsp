@@ -27,27 +27,21 @@ model PortalSignupSettings
 }
 
 @armResourceOperations
-interface PortalSignupSettingsOperationGroup {
+interface SignUpSettings {
   /**
    * Get Sign Up Settings for the Portal
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SignUpSettings_Get")
   get is ArmResourceRead<PortalSignupSettings>;
 
   /**
    * Gets the entity state (Etag) version of the SignUpSettings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SignUpSettings_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<PortalSignupSettings>;
 
   /**
    * Create or Update Sign-Up settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("SignUpSettings_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PortalSignupSettings,
     Parameters = {
@@ -63,9 +57,7 @@ interface PortalSignupSettingsOperationGroup {
   /**
    * Update Sign-Up settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
-  @operationId("SignUpSettings_Update")
   update is ArmCustomPatchSync<
     PortalSignupSettings,
     PatchModel = PortalSignupSettings,
@@ -82,9 +74,7 @@ interface PortalSignupSettingsOperationGroup {
 
 @@doc(PortalSignupSettings.name, "");
 @@doc(PortalSignupSettings.properties, "Sign-up settings contract properties.");
-@@doc(PortalSignupSettingsOperationGroup.createOrUpdate::parameters.resource,
+@@doc(SignUpSettings.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@doc(PortalSignupSettingsOperationGroup.update::parameters.properties,
-  "Update Sign-Up settings."
-);
+@@doc(SignUpSettings.update::parameters.properties, "Update Sign-Up settings.");

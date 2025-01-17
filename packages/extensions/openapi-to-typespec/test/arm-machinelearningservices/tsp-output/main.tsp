@@ -42,6 +42,7 @@ import "./WorkspaceConnectionPropertiesV2BasicResource.tsp";
 import "./OutboundRuleBasicResource.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./routes.tsp";
+import "./legacy.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

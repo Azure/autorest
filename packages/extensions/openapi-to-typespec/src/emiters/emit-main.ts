@@ -76,7 +76,7 @@ function getArmResourceImports(program: TypespecProgram, metadata: Metadata): st
   const imports: string[] = [];
 
   for (const resource in metadata.Resources) {
-    const fileName = metadata.Resources[resource].SwaggerModelName;
+    const fileName = metadata.Resources[resource][0].SwaggerModelName;
     if (fileName) {
       imports.push(`import "./${fileName}.tsp";`);
     }
@@ -84,6 +84,10 @@ function getArmResourceImports(program: TypespecProgram, metadata: Metadata): st
 
   if (program.operationGroups.length > 0) {
     imports.push(`import "./routes.tsp";`);
+  }
+
+  if (Object.keys(metadata.Resources).find((key) => metadata.Resources[key].length > 1)) {
+    imports.push(`import "./legacy.tsp";`);
   }
 
   return imports;

@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "name": "testContainer",
+    "api-version": "2023-06-01-preview",
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "workspace123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "nextlink",
+        "value": [
+          {
+            "name": "testContainer",
+            "type": "Microsoft.MachineLearningServices/workspaces/models",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspace123/models/testContainer",
+            "properties": {
+              "description": "Model container description",
+              "tags": {
+                "tag1": "value1",
+                "tag2": "value2"
+              }
+            },
+            "systemData": {
+              "createdAt": "2020-12-01T12:00:00.000Z",
+              "createdBy": "John Smith",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-12-01T12:00:00.000Z",
+              "lastModifiedBy": "John Smith",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ModelContainers_List",
+  "title": "List Workspace Model Container."
+}

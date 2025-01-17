@@ -53,13 +53,13 @@ using Microsoft.Storage;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(BlobInventoryPolicy.properties);
 
-@@clientName(ObjectReplicationPoliciesOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(ObjectReplicationPolicyOperationGroup.createOrUpdate::parameters.resource,
   "properties"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ObjectReplicationPolicy.properties);
 
-@@clientName(LocalUsersOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(LocalUserOperationGroup.createOrUpdate::parameters.resource,
   "properties"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
@@ -71,7 +71,7 @@ using Microsoft.Storage;
 @@flattenProperty(EncryptionScope.properties);
 
 @@clientName(BlobServicePropertiesOperationGroup, "BlobServiceProperties");
-@@clientName(BlobServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
+@@clientName(BlobServices.setServiceProperties::parameters.resource,
   "parameters"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
@@ -91,7 +91,7 @@ using Microsoft.Storage;
 @@flattenProperty(ImmutabilityPolicy.properties);
 
 @@clientName(FileServicePropertiesOperationGroup, "FileServiceProperties");
-@@clientName(FileServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
+@@clientName(FileServices.setServiceProperties::parameters.resource,
   "parameters"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
@@ -104,7 +104,7 @@ using Microsoft.Storage;
 @@flattenProperty(FileShare.properties);
 
 @@clientName(QueueServicePropertiesOperationGroup, "QueueServiceProperties");
-@@clientName(QueueServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
+@@clientName(QueueServices.setServiceProperties::parameters.resource,
   "parameters"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
@@ -116,7 +116,7 @@ using Microsoft.Storage;
 @@flattenProperty(StorageQueue.properties);
 
 @@clientName(TableServicePropertiesOperationGroup, "TableServiceProperties");
-@@clientName(TableServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
+@@clientName(TableServices.setServiceProperties::parameters.resource,
   "parameters"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."

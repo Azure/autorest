@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "apiId": "5600b57e7e8880006a040001",
+    "parameters": {
+      "properties": {
+        "format": "rawxml",
+        "value": "<policies>\r\n     <inbound>\r\n     <base />\r\n  <set-header name=\"newvalue\" exists-action=\"override\">\r\n   <value>\"@(context.Request.Headers.FirstOrDefault(h => h.Ke==\"Via\"))\" </value>\r\n    </set-header>\r\n  </inbound>\r\n      </policies>"
+      }
+    },
+    "policyId": "policy",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "policy",
+        "type": "Microsoft.ApiManagement/service/apis/operations/policies",
+        "id": "/subscriptions/4c1a3bc6-89f9-46fe-a175-5d8984b25095/resourcegroups/Api-DF-West-US/providers/Microsoft.ApiManagement/service/samirmsiservice2/apis/echo-api/operations/create-resource/policies/policy",
+        "properties": {
+          "value": "<policies>\r\n  <inbound>\r\n    <base />\r\n    <set-header name=\"newvalue\" exists-action=\"override\">\r\n      <value>\"@(context.Request.Headers.FirstOrDefault(h =&gt; h.Ke==\"Via\"))\" </value>\r\n    </set-header>\r\n  </inbound>\r\n</policies>"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "policy",
+        "type": "Microsoft.ApiManagement/service/apis/operations/policies",
+        "id": "/subscriptions/4c1a3bc6-89f9-46fe-a175-5d8984b25095/resourcegroups/Api-DF-West-US/providers/Microsoft.ApiManagement/service/samirmsiservice2/apis/echo-api/operations/create-resource/policies/policy",
+        "properties": {
+          "value": "<policies>\r\n  <inbound>\r\n    <base />\r\n    <set-header name=\"newvalue\" exists-action=\"override\">\r\n      <value>\"@(context.Request.Headers.FirstOrDefault(h =&gt; h.Ke==\"Via\"))\" </value>\r\n    </set-header>\r\n  </inbound>\r\n</policies>"
+        }
+      }
+    }
+  },
+  "operationId": "ApiPolicy_CreateOrUpdate",
+  "title": "ApiManagementCreateApiPolicyNonXmlEncoded"
+}

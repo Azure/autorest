@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "sid": "5fa9b096f3df14003c070001",
+    "subscriptionId": "subid",
+    "userId": "1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "5fa9b096f3df14003c070001",
+        "type": "Microsoft.ApiManagement/service/users/subscriptions",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/1/subscriptions/5fa9b096f3df14003c070001",
+        "properties": {
+          "allowTracing": true,
+          "createdDate": "2020-11-09T21:11:50.58Z",
+          "ownerId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/1",
+          "scope": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/starter",
+          "state": "active"
+        }
+      }
+    }
+  },
+  "operationId": "UserSubscription_Get",
+  "title": "ApiManagementGetUserSubscription"
+}

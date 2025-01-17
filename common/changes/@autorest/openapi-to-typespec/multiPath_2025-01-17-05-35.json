@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/openapi-to-typespec",
+      "comment": "add multi path support",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/openapi-to-typespec"
+}

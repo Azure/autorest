@@ -27,27 +27,21 @@ model PortalDelegationSettings
 }
 
 @armResourceOperations
-interface PortalDelegationSettingsOperationGroup {
+interface DelegationSettings {
   /**
    * Get Delegation Settings for the Portal.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DelegationSettings_Get")
   get is ArmResourceRead<PortalDelegationSettings>;
 
   /**
    * Gets the entity state (Etag) version of the DelegationSettings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DelegationSettings_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<PortalDelegationSettings>;
 
   /**
    * Create or Update Delegation settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("DelegationSettings_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PortalDelegationSettings,
     Parameters = {
@@ -63,9 +57,7 @@ interface PortalDelegationSettingsOperationGroup {
   /**
    * Update Delegation settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
-  @operationId("DelegationSettings_Update")
   update is ArmCustomPatchSync<
     PortalDelegationSettings,
     PatchModel = PortalDelegationSettings,
@@ -82,8 +74,6 @@ interface PortalDelegationSettingsOperationGroup {
   /**
    * Gets the secret validation key of the DelegationSettings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DelegationSettings_ListSecrets")
   listSecrets is ArmResourceActionSync<
     PortalDelegationSettings,
     void,
@@ -95,9 +85,9 @@ interface PortalDelegationSettingsOperationGroup {
 @@doc(PortalDelegationSettings.properties,
   "Delegation settings contract properties."
 );
-@@doc(PortalDelegationSettingsOperationGroup.createOrUpdate::parameters.resource,
+@@doc(DelegationSettings.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@doc(PortalDelegationSettingsOperationGroup.update::parameters.properties,
+@@doc(DelegationSettings.update::parameters.properties,
   "Update Delegation settings."
 );

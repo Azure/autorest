@@ -278,8 +278,6 @@ export interface TspArmResourceLifeCycleOperation extends TspArmResourceOperatio
     | "ArmResourceCreateOrReplaceAsync"
     | "ArmResourcePatchSync"
     | "ArmResourcePatchAsync"
-    | "ArmTagsPatchSync"
-    | "ArmTagsPatchAsync"
     | "ArmCustomPatchSync"
     | "ArmCustomPatchAsync"
     | "ArmResourceDeleteSync"
@@ -298,8 +296,6 @@ export type TspArmOperationType =
   | "ArmResourceCreateOrReplaceAsync"
   | "ArmResourcePatchSync"
   | "ArmResourcePatchAsync"
-  | "ArmTagsPatchSync"
-  | "ArmTagsPatchAsync"
   | "ArmCustomPatchSync"
   | "ArmCustomPatchAsync"
   | "ArmResourceDeleteSync"
@@ -307,9 +303,6 @@ export type TspArmOperationType =
   | "ArmResourceActionSync"
   | "ArmResourceActionAsync"
   | "ArmResourceActionAsyncBase"
-  | "checkGlobalNameAvailability"
-  | "checkLocalNameAvailability"
-  | "checkNameAvailability"
   | "ArmResourceListByParent"
   | "ArmListBySubscription"
   | "ArmResourceListAtScope";
@@ -336,10 +329,21 @@ export interface TspArmResource extends TypespecObject {
   propertiesPropertyDescription: string;
   propertiesPropertyClientDecorator: TypespecDecorator[];
   resourceParent?: TspArmResource;
-  resourceOperations: TspArmResourceOperation[];
-  // TO-DO: delete
-  normalOperations: TypespecOperation[];
+  resourceOperationGroups: TspArmResourceOperationGroup[];
   optionalStandardProperties: string[];
   baseModelName?: string;
   locationParent?: string;
+}
+
+export interface TspArmResourceOperationGroup {
+  isLegacy: boolean;
+  interfaceName: string;
+  resourceOperations: TspArmResourceOperation[];
+  legacyOperationGroup?: TspArmResourceLegacyOperationGroup;
+}
+
+export interface TspArmResourceLegacyOperationGroup {
+  interfaceName: string;
+  parentParameters: string[];
+  resourceTypeParameter: string;
 }

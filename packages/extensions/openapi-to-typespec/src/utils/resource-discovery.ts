@@ -21,7 +21,7 @@ export interface _ArmPagingMetadata {
 }
 
 export interface Metadata {
-  Resources: Record<string, ArmResource>;
+  Resources: Record<string, ArmResource[]>;
   RenameMapping: Record<string, string>;
   OverrideOperationName: Record<string, string>;
 }
@@ -126,7 +126,7 @@ export function getResourceExistOperation(resource: ArmResource): Operation | un
 }
 
 export interface ArmResourceSchema extends ObjectSchema {
-  resourceMetadata: ArmResource;
+  resourceMetadata: ArmResource[];
 }
 
 export interface ArmResourcePropertiesModel extends ObjectSchema {
@@ -137,7 +137,7 @@ export function tagSchemaAsResource(schema: ObjectSchema, metadata: Metadata): v
   const resourcesMetadata = metadata.Resources;
 
   for (const resourceName in resourcesMetadata) {
-    if (resourcesMetadata[resourceName].SwaggerModelName === schema.language.default.name) {
+    if (resourcesMetadata[resourceName][0].SwaggerModelName === schema.language.default.name) {
       (schema as ArmResourceSchema).resourceMetadata = resourcesMetadata[resourceName];
       const propertiesModel = schema.properties?.find((p) => p.serializedName === "properties");
       if (propertiesModel && isObjectSchema(propertiesModel.schema)) {

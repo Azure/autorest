@@ -33,6 +33,18 @@ interface RoleAssignments {
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
       /**
+       * The scope of the operation or resource. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
+       */
+      @path
+      scope: string;
+
+      /**
+       * The name of the role assignment. It can be any valid GUID.
+       */
+      @path
+      roleAssignmentName: string;
+
+      /**
        * Tenant ID for cross-tenant request
        */
       @query("tenantId")
@@ -45,7 +57,20 @@ interface RoleAssignments {
    */
   create is ArmResourceCreateOrReplaceSync<
     RoleAssignment,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
+      /**
+       * The scope of the operation or resource. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
+       */
+      @path
+      scope: string;
+
+      /**
+       * The name of the role assignment. It can be any valid GUID.
+       */
+      @path
+      roleAssignmentName: string;
+    }
   >;
 
   /**
@@ -56,6 +81,18 @@ interface RoleAssignments {
     RoleAssignment,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
+      /**
+       * The scope of the operation or resource. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
+       */
+      @path
+      scope: string;
+
+      /**
+       * The name of the role assignment. It can be any valid GUID.
+       */
+      @path
+      roleAssignmentName: string;
+
       /**
        * Tenant ID for cross-tenant request
        */
@@ -72,6 +109,12 @@ interface RoleAssignments {
     RoleAssignment,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
+      /**
+       * The scope of the operation or resource. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
+       */
+      @path
+      scope: string;
+
       /**
        * The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal.
        */

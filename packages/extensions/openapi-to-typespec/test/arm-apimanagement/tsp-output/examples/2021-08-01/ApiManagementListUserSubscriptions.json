@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid",
+    "userId": "57681833a40f7eb6c49f6acf"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "",
+        "value": [
+          {
+            "name": "57681850a40f7eb6c49f6ae3",
+            "type": "Microsoft.ApiManagement/service/users/subscriptions",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/57681833a40f7eb6c49f6acf/subscriptions/57681850a40f7eb6c49f6ae3",
+            "properties": {
+              "createdDate": "2016-06-20T16:22:39.547Z",
+              "displayName": "57681850a40f7eb6c49f6ae5",
+              "ownerId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/57681833a40f7eb6c49f6acf",
+              "scope": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/5768181ea40f7eb6c49f6ac7",
+              "startDate": "2016-06-20T00:00:00Z",
+              "state": "active"
+            }
+          },
+          {
+            "name": "57681850a40f7eb6c49f6b2b",
+            "type": "Microsoft.ApiManagement/service/users/subscriptions",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/57681833a40f7eb6c49f6acf/subscriptions/57681850a40f7eb6c49f6b2b",
+            "properties": {
+              "createdDate": "2016-06-20T16:22:41.103Z",
+              "displayName": "57681850a40f7eb6c49f6b2d",
+              "ownerId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/57681833a40f7eb6c49f6acf",
+              "scope": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/5768181ea40f7eb6c49f6ac7",
+              "startDate": "2016-06-20T00:00:00Z",
+              "state": "active"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "UserSubscription_List",
+  "title": "ApiManagementListUserSubscriptions"
+}

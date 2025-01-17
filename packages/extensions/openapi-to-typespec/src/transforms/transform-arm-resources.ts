@@ -1,13 +1,4 @@
-import {
-  ArraySchema,
-  ObjectSchema,
-  Operation,
-  Parameter,
-  Property,
-  Response,
-  SchemaResponse,
-  SchemaType,
-} from "@autorest/codemodel";
+import { Operation, Parameter, Property, SchemaType } from "@autorest/codemodel";
 import _ from "lodash";
 import pluralize, { singular } from "pluralize";
 import { getArmCommonTypeVersion, getSession } from "../autorest-session";
@@ -28,6 +19,8 @@ import {
   TspArmResourceLifeCycleOperation,
   TspArmResourceListOperation,
   isArmResourceActionOperation,
+  TspArmResourceLegacyOperationGroup,
+  TspArmResourceOperationGroup,
 } from "../interfaces";
 import { getOptions, updateOptions } from "../options";
 import { createClientNameDecorator, createCSharpNameDecorator } from "../pretransforms/rename-pretransform";
@@ -41,6 +34,8 @@ import {
   getResourceOperations,
   isResourceSchema,
 } from "../utils/resource-discovery";
+import { isStringSchema } from "../utils/schemas";
+import { escapeRegex } from "../utils/strings";
 import { getSuppresssionWithCode } from "../utils/suppressions";
 import { getFullyQualifiedName, getTemplateResponses, NamesOfResponseTemplate } from "../utils/type-mapping";
 import { getTypespecType, isTypespecType, transformObjectProperty } from "./transform-object";
@@ -56,7 +51,7 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
   const fixMe: string[] = [];
 
   if (!getSession().configuration["namespace"]) {
-    const segments = schema.resourceMetadata.GetOperations[0].Path.split("/");
+    const segments = schema.resourceMetadata[0].GetOperations[0].Path.split("/");
     for (let i = segments.length - 1; i >= 0; i--) {
       if (segments[i] === "providers") {
         getSession().configuration["namespace"] = segments[i + 1];
@@ -67,9 +62,9 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
   }
 
   // TODO: deal with a resource with multiple parents
-  if (schema.resourceMetadata.Parents.length > 1) {
+  if (schema.resourceMetadata[0].Parents.length > 1) {
     fixMe.push(
-      `// FIXME: ${schema.resourceMetadata.SwaggerModelName} has more than one parent, currently converter will only use the first one`,
+      `// FIXME: ${schema.resourceMetadata[0].SwaggerModelName} has more than one parent, currently converter will only use the first one`,
     );
   }
 
@@ -88,11 +83,11 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
 
   // TODO: deal with resources that has no properties property
   if (!propertiesModelName) {
-    fixMe.push(`// FIXME: ${schema.resourceMetadata.SwaggerModelName} has no properties property`);
+    fixMe.push(`// FIXME: ${schema.resourceMetadata[0].SwaggerModelName} has no properties property`);
     propertiesModelName = "{}";
   }
 
-  const armResourceOperations = getTspOperations(schema);
+  const armResourceOperationGroups = getTspOperationGroups(schema);
 
   let baseModelName = undefined;
   if (!getArmCommonTypeVersion()) {
@@ -104,7 +99,7 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
   }
 
   const decorators = buildResourceDecorators(schema);
-  if (!getArmCommonTypeVersion() && schema.resourceMetadata.IsExtensionResource) {
+  if (!getArmCommonTypeVersion() && schema.resourceMetadata[0].IsExtensionResource) {
     decorators.push({ name: "extensionResource" });
   }
 
@@ -141,7 +136,7 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
     kind: "object",
     properties,
     keyExpression,
-    name: schema.resourceMetadata.SwaggerModelName,
+    name: schema.resourceMetadata[0].SwaggerModelName,
     parents: [],
     resourceParent: getParentResource(schema),
     propertiesModelName,
@@ -152,8 +147,7 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
     decorators,
     clientDecorators,
     augmentDecorators,
-    resourceOperations: armResourceOperations,
-    normalOperations: [],
+    resourceOperationGroups: armResourceOperationGroups,
     optionalStandardProperties: getArmCommonTypeVersion() ? getResourceOptionalStandardProperties(schema) : [],
     baseModelName,
     locationParent: getLocationParent(schema),
@@ -162,35 +156,124 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
   return tspResource;
 }
 
-function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation[] {
-  const resourceMetadata = armSchema.resourceMetadata;
-  const operations = getResourceOperations(resourceMetadata);
-  const tspOperations: TspArmResourceOperation[] = [];
+function getTspOperationGroups(armSchema: ArmResourceSchema): TspArmResourceOperationGroup[] {
+  const operationGroups: TspArmResourceOperationGroup[] = [];
+  for (const resourceMetadata of armSchema.resourceMetadata) {
+    const operations = getResourceOperations(resourceMetadata);
+    const interfaceName = getTSPOperationGroupName(resourceMetadata);
+    const tspOperations: TspArmResourceOperation[] = [];
 
-  // TODO: handle operations under resource group / management group / tenant
+    // TODO: handle operations under resource group / management group / tenant
 
-  // read operation
-  tspOperations.push(...convertResourceReadOperation(resourceMetadata, operations));
+    // read operation
+    tspOperations.push(...convertResourceReadOperation(resourceMetadata, operations));
 
-  // exist operation
-  tspOperations.push(...convertResourceExistsOperation(resourceMetadata, operations));
+    // exist operation
+    tspOperations.push(...convertResourceExistsOperation(resourceMetadata, operations));
 
-  // create operation
-  tspOperations.push(...convertResourceCreateOrReplaceOperation(resourceMetadata, operations));
+    // create operation
+    tspOperations.push(...convertResourceCreateOrReplaceOperation(resourceMetadata, operations));
 
-  // patch update operation could either be patch for resource/tag or custom patch
-  tspOperations.push(...convertResourceUpdateOperation(resourceMetadata, operations));
+    // patch update operation could either be patch for resource/tag or custom patch
+    tspOperations.push(...convertResourceUpdateOperation(resourceMetadata, operations));
 
-  // delete operation
-  tspOperations.push(...convertResourceDeleteOperation(resourceMetadata, operations));
+    // delete operation
+    tspOperations.push(...convertResourceDeleteOperation(resourceMetadata, operations));
 
-  // list operation
-  tspOperations.push(...convertResourceListOperations(resourceMetadata, operations));
+    // list operation
+    tspOperations.push(...convertResourceListOperations(resourceMetadata, operations));
 
-  // action operation
-  tspOperations.push(...convertResourceActionOperations(resourceMetadata, operations));
+    // action operation
+    tspOperations.push(...convertResourceActionOperations(resourceMetadata, operations));
 
-  return tspOperations;
+    if (armSchema.resourceMetadata.length === 1) {
+      return [
+        {
+          isLegacy: false,
+          interfaceName,
+          resourceOperations: tspOperations,
+        },
+      ];
+    }
+
+    operationGroups.push({
+      isLegacy: true,
+      interfaceName,
+      resourceOperations: tspOperations,
+      legacyOperationGroup: convertLegacyOperationGroup(resourceMetadata),
+    });
+  }
+
+  return operationGroups;
+}
+
+function convertLegacyOperationGroup(armResource: ArmResource): TspArmResourceLegacyOperationGroup {
+  const pathParameters = getPathParameters(armResource);
+  const lastParameter = pathParameters.pop();
+
+  const parentParameters: string[] = ["...ApiVersionParameter"];
+  for (const parameter of pathParameters) {
+    if (parameter.keyName === "subscriptionId") {
+      parentParameters.push("...SubscriptionIdParameter");
+    } else if (parameter.keyName === "resourceGroupName") {
+      parentParameters.push("...ResourceGroupParameter");
+    } else if (parameter.keyName === "location") {
+      parentParameters.push("...LocationParameter");
+    } else if (parameter.segmentName === "providers") {
+      parentParameters.push("...Azure.ResourceManager.Legacy.Provider");
+    } else {
+      const resourceNameParameter = buildResourceNameParameterForSegment(
+        parameter.segmentName,
+        parameter.keyName,
+        parameter.pattern,
+      );
+      if (resourceNameParameter) {
+        parentParameters.push(resourceNameParameter);
+      } else {
+        parentParameters.push(
+          `/** ${parameter.segmentName} */\n@path @segment("${parameter.segmentName}") ${parameter.keyName}: string`,
+        );
+      }
+    }
+  }
+
+  const resourceTypeParameter = `KeysOf<ResourceNameParameter<
+    Resource = ${armResource.SwaggerModelName},
+    KeyName = "${lastParameter!.keyName}",
+    SegmentName = "${lastParameter!.segmentName}",
+    NamePattern = "${lastParameter!.pattern}"
+  >>`;
+  const interfaceName = `${singular(getTSPOperationGroupName(armResource))}Ops`;
+  return {
+    interfaceName,
+    parentParameters,
+    resourceTypeParameter,
+  };
+}
+
+function buildResourceNameParameterForSegment(
+  segmentName: string,
+  keyName: string,
+  pattern: string,
+): string | undefined {
+  for (const objectSchema of getSession().model.schemas.objects ?? []) {
+    if (!isResourceSchema(objectSchema)) {
+      continue;
+    }
+
+    const resource = objectSchema.resourceMetadata.find(
+      (r) => r.ResourceKeySegment === segmentName && r.ResourceKey === keyName,
+    );
+    if (resource === undefined) continue;
+
+    return `...KeysOf<ResourceNameParameter<
+    Resource = ${resource.SwaggerModelName},
+    KeyName = "${keyName}",
+    SegmentName = "${segmentName}",
+    NamePattern = "${pattern}"
+  >>`;
+  }
+  return undefined;
 }
 
 function convertResourceReadOperation(
@@ -766,7 +849,7 @@ function buildBodyDecorator(
   templateName: string,
   templateDoc: string,
 ): void {
-  const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
+  const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata);
   const [augmentedDecorators, clientDecorators] = getBodyDecorators(
     bodyParam,
     tspOperationGroupName,
@@ -835,17 +918,33 @@ function getResourceOptionalStandardProperties(schema: ArmResourceSchema): strin
   return optionalStandardProperties;
 }
 
-export function getTSPOperationGroupName(resourceName: string): string {
-  const codeModel = getSession().model;
-  const operationGroupName = pluralize(resourceName);
-  if (
-    operationGroupName === resourceName ||
-    codeModel.schemas.objects?.find((o) => o.language.default.name === operationGroupName)
-  ) {
-    return `${operationGroupName}OperationGroup`;
+const operationGroupNameCache: Map<ArmResource, string> = new Map<ArmResource, string>();
+export function getTSPOperationGroupName(resourceMetadata: ArmResource): string {
+  if (operationGroupNameCache.has(resourceMetadata)) return operationGroupNameCache.get(resourceMetadata)!;
+
+  // Try pluralizing the resource name first
+  let operationGroupName = pluralize(resourceMetadata.SwaggerModelName);
+  if (operationGroupName !== resourceMetadata.SwaggerModelName && !isExistingOperationGroupName(operationGroupName)) {
+    operationGroupNameCache.set(resourceMetadata, operationGroupName);
   } else {
-    return operationGroupName;
+    // Try operationId then
+    operationGroupName = resourceMetadata.GetOperations[0].OperationID.split("_")[0];
+    if (operationGroupName !== resourceMetadata.SwaggerModelName && !isExistingOperationGroupName(operationGroupName)) {
+      operationGroupNameCache.set(resourceMetadata, operationGroupName);
+    } else {
+      operationGroupName = `${resourceMetadata.SwaggerModelName}OperationGroup`;
+      operationGroupNameCache.set(resourceMetadata, operationGroupName);
+    }
   }
+  return operationGroupName;
+}
+
+function isExistingOperationGroupName(operationGroupName: string): boolean {
+  const codeModel = getSession().model;
+  return (
+    codeModel.schemas.objects?.find((o) => o.language.default.name === operationGroupName) !== undefined ||
+    Array.from(operationGroupNameCache.values()).find((v) => v === operationGroupName) !== undefined
+  );
 }
 
 function getBodyDecorators(
@@ -887,7 +986,7 @@ function buildNewArmOperation(
   return {
     doc: operation.Description,
     kind,
-    name: getOperationName(resourceMetadata.Name, operation.OperationID),
+    name: getOperationName(getTSPOperationGroupName(resourceMetadata), operation.OperationID),
     resource: resourceMetadata.SwaggerModelName,
     baseParameters: baseParameters.length > 0 ? baseParameters : undefined,
     parameters: parameters.length > 0 ? parameters : undefined,
@@ -897,14 +996,14 @@ function buildNewArmOperation(
   };
 }
 
-const existingNames: { [resourceName: string]: Set<string> } = {};
+const existingNames: { [interfaceName: string]: Set<string> } = {};
 // TO-DO: Figure out a way to create a new name if the name exists
-function getOperationName(resourceName: string, operationId: string): string {
+function getOperationName(interfaceName: string, operationId: string): string {
   if (!operationId) return "";
 
   let operationName = _.lowerFirst(_.last(operationId.split("_")));
-  if (resourceName in existingNames) {
-    if (existingNames[resourceName].has(operationName)) {
+  if (interfaceName in existingNames) {
+    if (existingNames[interfaceName].has(operationName)) {
       operationName = _.lowerFirst(
         operationId
           .split("_")
@@ -912,19 +1011,31 @@ function getOperationName(resourceName: string, operationId: string): string {
           .join(""),
       );
     }
-    existingNames[resourceName].add(operationName);
+    existingNames[interfaceName].add(operationName);
   } else {
-    existingNames[resourceName] = new Set<string>([operationName]);
+    existingNames[interfaceName] = new Set<string>([operationName]);
   }
   return operationName;
 }
 
-function getOperationGroupName(name: string | undefined): string {
-  if (name && name.includes("_")) {
-    return _.first(name.split("_"))!;
-  } else {
-    return "";
+function getPathParameters(resource: ArmResource): { segmentName: string; keyName: string; pattern: string }[] {
+  const pathParameters = [];
+  const pathSegments = resource.GetOperations[0].Path.split("/").filter((s) => s !== "");
+  for (let i = 0; i + 1 < pathSegments.length; i += 2) {
+    const operation = getSession()
+      .model.operationGroups.flatMap((og) => og.operations)
+      .find((o) => o.operationId === resource.GetOperations[0].OperationID);
+
+    const keyName = pathSegments[i + 1].replace("{", "").replace("}", "");
+    const parameter = operation?.parameters?.find((p) => p.language.default.serializedName === keyName);
+    const pattern =
+      parameter && isStringSchema(parameter.schema) && parameter.schema.pattern
+        ? escapeRegex(parameter.schema.pattern)
+        : "";
+
+    pathParameters.push({ segmentName: pathSegments[i], keyName, pattern });
   }
+  return pathParameters;
 }
 
 function buildOperationParameters(
@@ -933,12 +1044,7 @@ function buildOperationParameters(
 ): { baseParameters: string[]; parameters: TypespecParameter[] } {
   const codeModel = getSession().model;
   const otherParameters: TypespecParameter[] = [];
-  const pathParameters = [];
-  resource.GetOperations[0].Path.split("/").forEach((p) => {
-    if (p.match(/^{.+}$/)) {
-      pathParameters.push(p.replace("{", "").replace("}", ""));
-    }
-  });
+  const pathParameters = getPathParameters(resource).map((p) => p.keyName);
   pathParameters.push("api-version");
   pathParameters.push("$host");
   if (operation.parameters) {
@@ -994,7 +1100,7 @@ function generateSingletonKeyParameter(): TypespecParameter {
 }
 
 function getParentResource(schema: ArmResourceSchema): TspArmResource | undefined {
-  const resourceParent = schema.resourceMetadata.Parents?.[0];
+  const resourceParent = schema.resourceMetadata[0].Parents?.[0];
 
   if (!resourceParent || isFirstLevelResource(resourceParent)) {
     return undefined;
@@ -1005,18 +1111,18 @@ function getParentResource(schema: ArmResourceSchema): TspArmResource | undefine
       continue;
     }
 
-    if (objectSchema.resourceMetadata.Name === resourceParent) {
+    if (objectSchema.resourceMetadata[0].Name === resourceParent) {
       return transformTspArmResource(objectSchema);
     }
   }
 }
 
 function getResourceKind(schema: ArmResourceSchema): ArmResourceKind {
-  if (schema.resourceMetadata.IsExtensionResource) {
+  if (schema.resourceMetadata[0].IsExtensionResource) {
     return "ExtensionResource";
   }
 
-  if (schema.resourceMetadata.IsTrackedResource) {
+  if (schema.resourceMetadata[0].IsTrackedResource) {
     return "TrackedResource";
   }
 
@@ -1028,7 +1134,7 @@ function buildKeyExpression(schema: ArmResourceSchema, keyProperty: TypespecObje
   const keyName = keyProperty.decorators?.find((d) => d.name === "key")?.arguments?.[0];
   const segmentName = keyProperty.decorators?.find((d) => d.name === "segment")?.arguments?.[0];
   return `...ResourceNameParameter<
-    Resource = ${schema.resourceMetadata.SwaggerModelName}
+    Resource = ${schema.resourceMetadata[0].SwaggerModelName}
     ${keyName ? `, KeyName = "${keyName}"` : ""}
     ${segmentName ? `, SegmentName = "${segmentName}"` : ""},
     NamePattern = ${namePattern ? `"${namePattern}"` : `""`}
@@ -1044,12 +1150,12 @@ function buildKeyAugmentDecorators(
     ?.filter((d) => !["pattern", "key", "segment", "path"].includes(d.name))
     .filter((d) => !(d.name === "visibility" && d.arguments?.[0] === "read"))
     .map((d) => {
-      d.target = `${schema.resourceMetadata.SwaggerModelName}.name`;
+      d.target = `${schema.resourceMetadata[0].SwaggerModelName}.name`;
       return d;
     })
     .concat({
       name: "doc",
-      target: `${schema.resourceMetadata.SwaggerModelName}.name`,
+      target: `${schema.resourceMetadata[0].SwaggerModelName}.name`,
       arguments: [generateDocsContent(keyProperty)],
     });
 }
@@ -1058,7 +1164,7 @@ function buildPropertiesAugmentDecorators(schema: ArmResourceSchema, propertiesM
   return [
     {
       name: "doc",
-      target: `${schema.resourceMetadata.SwaggerModelName}.properties`,
+      target: `${schema.resourceMetadata[0].SwaggerModelName}.properties`,
       arguments: [generateDocsContent({ doc: propertiesModel?.language.default.description })],
     },
   ];
@@ -1066,11 +1172,11 @@ function buildPropertiesAugmentDecorators(schema: ArmResourceSchema, propertiesM
 
 function buildKeyProperty(schema: ArmResourceSchema): TypespecObjectProperty {
   let parameter;
-  if (!schema.resourceMetadata.IsSingletonResource) {
-    const keyProperty = getKeyParameter(schema.resourceMetadata);
+  if (!schema.resourceMetadata[0].IsSingletonResource) {
+    const keyProperty = getKeyParameter(schema.resourceMetadata[0]);
     if (!keyProperty) {
       throw new Error(
-        `Failed to find key property ${schema.resourceMetadata.ResourceKey} for ${schema.language.default.name}`,
+        `Failed to find key property ${schema.resourceMetadata[0].ResourceKey} for ${schema.language.default.name}`,
       );
     }
     parameter = transformParameter(keyProperty, getSession().model);
@@ -1086,14 +1192,14 @@ function buildKeyProperty(schema: ArmResourceSchema): TypespecObjectProperty {
     {
       name: "key",
       arguments: [
-        schema.resourceMetadata.IsSingletonResource
-          ? singular(schema.resourceMetadata.ResourceKeySegment)
-          : schema.resourceMetadata.ResourceKey,
+        schema.resourceMetadata[0].IsSingletonResource
+          ? singular(schema.resourceMetadata[0].ResourceKeySegment)
+          : schema.resourceMetadata[0].ResourceKey,
       ],
     },
     {
       name: "segment",
-      arguments: [schema.resourceMetadata.ResourceKeySegment],
+      arguments: [schema.resourceMetadata[0].ResourceKeySegment],
     },
     {
       name: "visibility",
@@ -1114,18 +1220,18 @@ function buildKeyProperty(schema: ArmResourceSchema): TypespecObjectProperty {
 function buildResourceDecorators(schema: ArmResourceSchema): TypespecDecorator[] {
   const resourceModelDecorators: TypespecDecorator[] = [];
 
-  if (schema.resourceMetadata.IsSingletonResource) {
+  if (schema.resourceMetadata[0].IsSingletonResource) {
     resourceModelDecorators.push({
       name: "singleton",
       arguments: [getSingletonName(schema)],
     });
   }
 
-  if (schema.resourceMetadata.IsTenantResource) {
+  if (schema.resourceMetadata[0].IsTenantResource) {
     resourceModelDecorators.push({
       name: "tenantResource",
     });
-  } else if (schema.resourceMetadata.IsSubscriptionResource) {
+  } else if (schema.resourceMetadata[0].IsSubscriptionResource) {
     resourceModelDecorators.push({
       name: "subscriptionResource",
     });
@@ -1144,8 +1250,8 @@ function buildResourceClientDecorators(schema: ArmResourceSchema): TypespecDecor
 }
 
 function getSingletonName(schema: ArmResourceSchema): string {
-  const key = schema.resourceMetadata.ResourceKey;
-  const pathLast = schema.resourceMetadata.GetOperations[0].Path.split("/").pop() ?? "";
+  const key = schema.resourceMetadata[0].ResourceKey;
+  const pathLast = schema.resourceMetadata[0].GetOperations[0].Path.split("/").pop() ?? "";
   if (key !== pathLast) {
     if (pathLast?.includes("{")) {
       // this is from c# config, which need confirm with service
@@ -1158,12 +1264,12 @@ function getSingletonName(schema: ArmResourceSchema): string {
 }
 
 function getLocationParent(schema: ArmResourceSchema): string | undefined {
-  if (schema.resourceMetadata.GetOperations[0].Path.includes("/locations/")) {
-    if (schema.resourceMetadata.IsTenantResource) {
+  if (schema.resourceMetadata[0].GetOperations[0].Path.includes("/locations/")) {
+    if (schema.resourceMetadata[0].IsTenantResource) {
       return "TenantLocationResource";
-    } else if (schema.resourceMetadata.IsSubscriptionResource) {
+    } else if (schema.resourceMetadata[0].IsSubscriptionResource) {
       return "SubscriptionLocationResource";
-    } else if (schema.resourceMetadata.Parents?.[0] === "ResourceGroupResource") {
+    } else if (schema.resourceMetadata[0].Parents?.[0] === "ResourceGroupResource") {
       return "ResourceGroupLocationResource";
     }
   }

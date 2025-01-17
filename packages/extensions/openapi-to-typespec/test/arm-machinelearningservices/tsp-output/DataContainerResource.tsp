@@ -26,20 +26,43 @@ model DataContainerResource
 }
 
 @armResourceOperations
+interface DataContainerResourceOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...KeysOf<ResourceNameParameter<
+          Resource = Registry,
+          KeyName = "registryName",
+          SegmentName = "registries",
+          NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$"
+        >>,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = DataContainerResource,
+        KeyName = "name",
+        SegmentName = "data",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface DataContainerResources {
   /**
    * Get container.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryDataContainers_Get")
-  get is ArmResourceRead<DataContainerResource>;
+  get is DataContainerResourceOps.Read<DataContainerResource>;
 
   /**
    * Create or update container.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryDataContainers_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<DataContainerResource>;
+  createOrUpdate is DataContainerResourceOps.CreateOrUpdateAsync<DataContainerResource>;
 
   /**
    * Delete container.
@@ -47,7 +70,7 @@ interface DataContainerResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("RegistryDataContainers_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is DataContainerResourceOps.DeleteWithoutOkAsync<
     DataContainerResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -57,7 +80,68 @@ interface DataContainerResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryDataContainers_List")
-  list is ArmResourceListByParent<
+  list is DataContainerResourceOps.List<
+    DataContainerResource,
+    Parameters = {
+      /**
+       * Continuation token for pagination.
+       */
+      @query("$skip")
+      $skip?: string;
+
+      /**
+       * View type for including/excluding (for example) archived entities.
+       */
+      @query("listViewType")
+      listViewType?: ListViewType;
+    },
+    Response = ArmResponse<DataContainerResourceArmPaginatedResult>
+  >;
+}
+@armResourceOperations
+interface DataContainerOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...KeysOf<ResourceNameParameter<
+          Resource = Workspace,
+          KeyName = "workspaceName",
+          SegmentName = "workspaces",
+          NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+        >>,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = DataContainerResource,
+        KeyName = "name",
+        SegmentName = "data",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
+interface DataContainers {
+  /**
+   * Get container.
+   */
+  get is DataContainerOps.Read<DataContainerResource>;
+
+  /**
+   * Create or update container.
+   */
+  createOrUpdate is DataContainerOps.CreateOrUpdateSync<DataContainerResource>;
+
+  /**
+   * Delete container.
+   */
+  delete is DataContainerOps.DeleteSync<DataContainerResource>;
+
+  /**
+   * List data containers.
+   */
+  list is DataContainerOps.List<
     DataContainerResource,
     Parameters = {
       /**
@@ -81,5 +165,8 @@ interface DataContainerResources {
   "[Required] Additional attributes of the entity."
 );
 @@doc(DataContainerResources.createOrUpdate::parameters.resource,
+  "Container entity to create or update."
+);
+@@doc(DataContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );

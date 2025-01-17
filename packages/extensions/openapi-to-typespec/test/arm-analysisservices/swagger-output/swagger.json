@@ -41,7 +41,7 @@
   },
   "tags": [
     {
-      "name": "AnalysisServicesServersOperationGroup"
+      "name": "Servers"
     }
   ],
   "paths": {
@@ -89,7 +89,7 @@
       "get": {
         "operationId": "Servers_List",
         "tags": [
-          "AnalysisServicesServersOperationGroup"
+          "Servers"
         ],
         "description": "Lists all the Analysis Services servers for the given subscription.",
         "parameters": [
@@ -153,7 +153,7 @@
       "get": {
         "operationId": "Servers_ListByResourceGroup",
         "tags": [
-          "AnalysisServicesServersOperationGroup"
+          "Servers"
         ],
         "description": "Gets all the Analysis Services servers for the given resource group.",
         "parameters": [
@@ -192,7 +192,7 @@
       "get": {
         "operationId": "Servers_GetDetails",
         "tags": [
-          "AnalysisServicesServersOperationGroup"
+          "Servers"
         ],
         "description": "Gets details about the specified Analysis Services server.",
         "parameters": [
@@ -239,7 +239,7 @@
       "put": {
         "operationId": "Servers_Create",
         "tags": [
-          "AnalysisServicesServersOperationGroup"
+          "Servers"
         ],
         "description": "Provisions the specified Analysis Services server based on the configuration specified in the request.",
         "parameters": [
@@ -333,7 +333,7 @@
       "patch": {
         "operationId": "Servers_Update",
         "tags": [
-          "AnalysisServicesServersOperationGroup"
+          "Servers"
         ],
         "description": "Updates the current state of the specified Analysis Services server.",
         "parameters": [
@@ -407,7 +407,7 @@
       "delete": {
         "operationId": "Servers_Delete",
         "tags": [
-          "AnalysisServicesServersOperationGroup"
+          "Servers"
         ],
         "description": "Deletes the specified Analysis Services server.",
         "parameters": [
@@ -474,7 +474,7 @@
       "post": {
         "operationId": "Servers_DissociateGateway",
         "tags": [
-          "AnalysisServicesServersOperationGroup"
+          "Servers"
         ],
         "description": "Dissociates a Unified Gateway associated with the server.",
         "parameters": [
@@ -520,7 +520,7 @@
       "post": {
         "operationId": "Servers_ListGatewayStatus",
         "tags": [
-          "AnalysisServicesServersOperationGroup"
+          "Servers"
         ],
         "description": "Return the gateway status of the specified Analysis Services server instance.",
         "parameters": [
@@ -569,7 +569,7 @@
       "post": {
         "operationId": "Servers_Resume",
         "tags": [
-          "AnalysisServicesServersOperationGroup"
+          "Servers"
         ],
         "description": "Resumes operation of the specified Analysis Services server instance.",
         "parameters": [
@@ -633,7 +633,7 @@
       "get": {
         "operationId": "Servers_ListSkusForExisting",
         "tags": [
-          "AnalysisServicesServersOperationGroup"
+          "Servers"
         ],
         "description": "Lists eligible SKUs for an Analysis Services resource.",
         "parameters": [
@@ -682,7 +682,7 @@
       "post": {
         "operationId": "Servers_Suspend",
         "tags": [
-          "AnalysisServicesServersOperationGroup"
+          "Servers"
         ],
         "description": "Suspends operation of the specified Analysis Services server instance.",
         "parameters": [

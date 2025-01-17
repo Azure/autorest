@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "productId": "armTemplateProduct4",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 1,
+        "nextLink": "",
+        "value": [
+          {
+            "name": "policy",
+            "type": "Microsoft.ApiManagement/service/products/policies",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/armTemplateProduct4/policies/policy",
+            "properties": {
+              "value": "<policies>\r\n  <inbound>\r\n    <base />\r\n  </inbound>\r\n  <backend>\r\n    <base />\r\n  </backend>\r\n  <outbound>\r\n    <base />\r\n  </outbound>\r\n  <on-error>\r\n    <base />\r\n  </on-error>\r\n</policies>"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ProductPolicy_ListByProduct",
+  "title": "ApiManagementListProductPolicies"
+}

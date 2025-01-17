@@ -1,1 +1,0 @@
-// You defined multiple pathes under the model EnvironmentVersionResource. We currently don't support it. Please fix it manually.

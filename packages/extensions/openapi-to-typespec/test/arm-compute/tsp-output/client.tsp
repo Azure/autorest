@@ -272,6 +272,12 @@ using Microsoft.Compute;
 @@clientName(VirtualMachineRunCommands.update::parameters.properties,
   "runCommand"
 );
+@@clientName(VirtualMachineScaleSetVMRunCommands.createOrUpdate::parameters.resource,
+  "runCommand"
+);
+@@clientName(VirtualMachineScaleSetVMRunCommands.update::parameters.properties,
+  "runCommand"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VirtualMachineRunCommand.properties);
 

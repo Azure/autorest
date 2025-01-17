@@ -26,7 +26,7 @@ model ObjectReplicationPolicy
 }
 
 @armResourceOperations
-interface ObjectReplicationPoliciesOperationGroup {
+interface ObjectReplicationPolicyOperationGroup {
   /**
    * Get the object replication policy of the storage account by policy ID.
    */
@@ -70,6 +70,6 @@ interface ObjectReplicationPoliciesOperationGroup {
 @@doc(ObjectReplicationPolicy.properties,
   "Returns the Storage Account Object Replication Policy."
 );
-@@doc(ObjectReplicationPoliciesOperationGroup.createOrUpdate::parameters.resource,
+@@doc(ObjectReplicationPolicyOperationGroup.createOrUpdate::parameters.resource,
   "The object replication policy set to a storage account. A unique policy ID will be created if absent."
 );

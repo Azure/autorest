@@ -33,38 +33,48 @@ using Azure.ResourceManager.MachineLearning;
 @@clientName(CodeContainerResources.createOrUpdate::parameters.resource,
   "body"
 );
+@@clientName(CodeContainers.createOrUpdate::parameters.resource, "body");
 
 @@clientName(CodeVersionResources.createOrUpdate::parameters.resource, "body");
+@@clientName(CodeVersions.createOrUpdate::parameters.resource, "body");
 
 @@clientName(ComponentContainerResources.createOrUpdate::parameters.resource,
   "body"
 );
+@@clientName(ComponentContainers.createOrUpdate::parameters.resource, "body");
 
 @@clientName(ComponentVersionResources.createOrUpdate::parameters.resource,
   "body"
 );
+@@clientName(ComponentVersions.createOrUpdate::parameters.resource, "body");
 
 @@clientName(DataContainerResources.createOrUpdate::parameters.resource,
   "body"
 );
+@@clientName(DataContainers.createOrUpdate::parameters.resource, "body");
 
 @@clientName(DataVersionBaseResources.createOrUpdate::parameters.resource,
   "body"
 );
+@@clientName(DataVersions.createOrUpdate::parameters.resource, "body");
 
 @@clientName(EnvironmentContainerResources.createOrUpdate::parameters.resource,
   "body"
 );
+@@clientName(EnvironmentContainers.createOrUpdate::parameters.resource, "body");
 
 @@clientName(EnvironmentVersionResources.createOrUpdate::parameters.resource,
   "body"
 );
+@@clientName(EnvironmentVersions.createOrUpdate::parameters.resource, "body");
 
 @@clientName(ModelContainerResources.createOrUpdate::parameters.resource,
   "body"
 );
+@@clientName(ModelContainers.createOrUpdate::parameters.resource, "body");
 
 @@clientName(ModelVersionResources.createOrUpdate::parameters.resource, "body");
+@@clientName(ModelVersions.createOrUpdate::parameters.resource, "body");
 
 @@clientName(BatchEndpointTrackedResources.createOrUpdate::parameters.resource,
   "body"
