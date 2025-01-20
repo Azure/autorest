@@ -1,6 +1,15 @@
 # Change Log - @autorest/openapi-to-typespec
 
-This log was last generated on Wed, 08 Jan 2025 06:06:48 GMT and should not be manually modified.
+This log was last generated on Mon, 20 Jan 2025 02:16:28 GMT and should not be manually modified.
+
+## 0.10.7
+Mon, 20 Jan 2025 02:16:28 GMT
+
+### Patches
+
+- Upgrade compiler version to 0.64
+- add multi path support
+- Fix action operation for non-resource operation
 
 ## 0.10.6
 Wed, 08 Jan 2025 06:06:48 GMT
