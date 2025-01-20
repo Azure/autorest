@@ -3,50 +3,42 @@
     "Account": [
       {
         "Name": "Account",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{name}",
-            "Method": "GET",
-            "OperationID": "Accounts_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get a Account"
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{name}",
-            "Method": "PUT",
-            "OperationID": "Accounts_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create a Account"
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{name}",
-            "Method": "PATCH",
-            "OperationID": "Accounts_Update",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Update a Account"
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{name}",
-            "Method": "DELETE",
-            "OperationID": "Accounts_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete a Account"
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{name}",
+          "Method": "GET",
+          "OperationID": "Accounts_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a Account"
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{name}",
+          "Method": "PUT",
+          "OperationID": "Accounts_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create a Account"
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{name}",
+          "Method": "PATCH",
+          "OperationID": "Accounts_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Update a Account"
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{name}",
+          "Method": "DELETE",
+          "OperationID": "Accounts_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a Account"
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -99,20 +91,15 @@
     "Quota": [
       {
         "Name": "Quota",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/locations/{location}/quotas/{name}",
-            "Method": "GET",
-            "OperationID": "Quotas_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get quota by name."
-          }
-        ],
-        "CreateOperations": [],
-        "UpdateOperations": [],
-        "DeleteOperations": [],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/locations/{location}/quotas/{name}",
+          "Method": "GET",
+          "OperationID": "Quotas_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get quota by name."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",

@@ -99,11 +99,11 @@ export function parseMetadata(codeModel: CodeModel, configuration: Record<string
         resources[resourceSchemaName + "FixMe"] = [
           {
             Name: resourceSchemaName + "FixMe",
-            GetOperations: [],
+            GetOperation: undefined,
             ExistOperation: undefined,
-            CreateOperations: [],
-            UpdateOperations: [],
-            DeleteOperations: [],
+            CreateOperation: undefined,
+            UpdateOperation: undefined,
+            DeleteOperation: undefined,
             ListOperations: [],
             OperationsFromResourceGroupExtension: [],
             OperationsFromSubscriptionExtension: [],
@@ -151,6 +151,9 @@ function buildResource(
   codeModel: CodeModel,
 ): ArmResource {
   const getOperation = buildLifeCycleOperation(set, HttpMethod.Get, "Get");
+  if (getOperation === undefined) {
+    logger().error(`Resource ${resourceSchemaName} must have a GET operation.`);
+  }
   const createOperation = buildLifeCycleOperation(set, HttpMethod.Put, "CreateOrUpdate");
   const updateOperation =
     buildLifeCycleOperation(set, HttpMethod.Patch, "Update") ?? buildLifeCycleOperation(set, HttpMethod.Put, "Update");
@@ -194,11 +197,11 @@ function buildResource(
 
   return {
     Name: lastWordToSingular(resourceSchemaName),
-    GetOperations: getOperation ? [getOperation] : [],
+    GetOperation: getOperation,
     ExistOperation: existOperation,
-    CreateOperations: createOperation ? [createOperation] : [],
-    UpdateOperations: updateOperation ? [updateOperation] : [],
-    DeleteOperations: deleteOperation ? [deleteOperation] : [],
+    CreateOperation: createOperation,
+    UpdateOperation: updateOperation,
+    DeleteOperation: deleteOperation,
     ListOperations: listOperation ?? [],
     OperationsFromResourceGroupExtension: operationsFromResourceGroupExtension,
     OperationsFromSubscriptionExtension: operationsFromSubscriptionExtension,

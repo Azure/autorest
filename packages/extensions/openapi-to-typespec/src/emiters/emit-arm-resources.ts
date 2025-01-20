@@ -43,7 +43,7 @@ export async function emitArmResources(program: TypespecProgram, metadata: Metad
     const filePath = join(basePath, `${resource}.tsp`);
     session.writeFile({
       filename: filePath,
-      content: `// You defined multiple pathes under the model ${originalName}. We currently don't support it. Please fix it manually.`,
+      content: `// You defined multiple pathes under the model ${originalName}. Some operations will be lost. Turn on isFullCompatible to keep all operations, or fix your TypeSpec manually.`,
     });
   }
 }

@@ -51,7 +51,7 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
   const fixMe: string[] = [];
 
   if (!getSession().configuration["namespace"]) {
-    const segments = schema.resourceMetadata[0].GetOperations[0].Path.split("/");
+    const segments = schema.resourceMetadata[0].GetOperation!.Path.split("/");
     for (let i = segments.length - 1; i >= 0; i--) {
       if (segments[i] === "providers") {
         getSession().configuration["namespace"] = segments[i + 1];
@@ -281,7 +281,7 @@ function convertResourceReadOperation(
   operations: Record<string, Operation>,
 ): TspArmResourceOperation[] {
   // every resource should have a get operation
-  const operation = resourceMetadata.GetOperations[0];
+  const operation = resourceMetadata.GetOperation!;
   const swaggerOperation = operations[operation.OperationID];
   return [
     buildNewArmOperation(
@@ -317,8 +317,8 @@ function convertResourceCreateOrReplaceOperation(
   operations: Record<string, Operation>,
 ): TspArmResourceOperation[] {
   const { isFullCompatible } = getOptions();
-  if (resourceMetadata.CreateOperations.length) {
-    const operation = resourceMetadata.CreateOperations[0];
+  if (resourceMetadata.CreateOperation) {
+    const operation = resourceMetadata.CreateOperation;
     const swaggerOperation = operations[operation.OperationID];
     const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
     const armOperation = buildNewArmOperation(
@@ -441,12 +441,9 @@ function convertResourceUpdateOperation(
   resourceMetadata: ArmResource,
   operations: Record<string, Operation>,
 ): TspArmResourceOperation[] {
-  if (resourceMetadata.UpdateOperations.length) {
-    const operation = resourceMetadata.UpdateOperations[0];
-    if (
-      !resourceMetadata.CreateOperations.length ||
-      resourceMetadata.CreateOperations[0].OperationID !== operation.OperationID
-    ) {
+  if (resourceMetadata.UpdateOperation) {
+    const operation = resourceMetadata.UpdateOperation;
+    if (!resourceMetadata.CreateOperation || resourceMetadata.CreateOperation.OperationID !== operation.OperationID) {
       const swaggerOperation = operations[operation.OperationID];
       const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
       const armOperation = buildNewArmOperation(
@@ -549,8 +546,8 @@ function convertResourceDeleteOperation(
 ): TspArmResourceOperation[] {
   const { isFullCompatible } = getOptions();
 
-  if (resourceMetadata.DeleteOperations.length) {
-    const operation = resourceMetadata.DeleteOperations[0];
+  if (resourceMetadata.DeleteOperation) {
+    const operation = resourceMetadata.DeleteOperation;
     const swaggerOperation = operations[operation.OperationID];
     const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
     const armOperation = buildNewArmOperation(
@@ -928,7 +925,7 @@ export function getTSPOperationGroupName(resourceMetadata: ArmResource): string 
     operationGroupNameCache.set(resourceMetadata, operationGroupName);
   } else {
     // Try operationId then
-    operationGroupName = resourceMetadata.GetOperations[0].OperationID.split("_")[0];
+    operationGroupName = resourceMetadata.GetOperation!.OperationID.split("_")[0];
     if (operationGroupName !== resourceMetadata.SwaggerModelName && !isExistingOperationGroupName(operationGroupName)) {
       operationGroupNameCache.set(resourceMetadata, operationGroupName);
     } else {
@@ -1020,11 +1017,11 @@ function getOperationName(interfaceName: string, operationId: string): string {
 
 function getPathParameters(resource: ArmResource): { segmentName: string; keyName: string; pattern: string }[] {
   const pathParameters = [];
-  const pathSegments = resource.GetOperations[0].Path.split("/").filter((s) => s !== "");
+  const pathSegments = resource.GetOperation!.Path.split("/").filter((s) => s !== "");
   for (let i = 0; i + 1 < pathSegments.length; i += 2) {
     const operation = getSession()
       .model.operationGroups.flatMap((og) => og.operations)
-      .find((o) => o.operationId === resource.GetOperations[0].OperationID);
+      .find((o) => o.operationId === resource.GetOperation!.OperationID);
 
     const keyName = pathSegments[i + 1].replace("{", "").replace("}", "");
     const parameter = operation?.parameters?.find((p) => p.language.default.serializedName === keyName);
@@ -1077,7 +1074,7 @@ function buildOperationParameters(
 function getKeyParameter(resourceMetadata: ArmResource): Parameter | undefined {
   for (const operationGroup of getSession().model.operationGroups) {
     for (const operation of operationGroup.operations) {
-      if (operation.operationId === resourceMetadata.GetOperations[0].OperationID) {
+      if (operation.operationId === resourceMetadata.GetOperation!.OperationID) {
         for (const parameter of operation.parameters ?? []) {
           if (parameter.language.default.serializedName === resourceMetadata.ResourceKey) {
             return parameter;
@@ -1251,7 +1248,7 @@ function buildResourceClientDecorators(schema: ArmResourceSchema): TypespecDecor
 
 function getSingletonName(schema: ArmResourceSchema): string {
   const key = schema.resourceMetadata[0].ResourceKey;
-  const pathLast = schema.resourceMetadata[0].GetOperations[0].Path.split("/").pop() ?? "";
+  const pathLast = schema.resourceMetadata[0].GetOperation!.Path.split("/").pop() ?? "";
   if (key !== pathLast) {
     if (pathLast?.includes("{")) {
       // this is from c# config, which need confirm with service
@@ -1264,7 +1261,7 @@ function getSingletonName(schema: ArmResourceSchema): string {
 }
 
 function getLocationParent(schema: ArmResourceSchema): string | undefined {
-  if (schema.resourceMetadata[0].GetOperations[0].Path.includes("/locations/")) {
+  if (schema.resourceMetadata[0].GetOperation!.Path.includes("/locations/")) {
     if (schema.resourceMetadata[0].IsTenantResource) {
       return "TenantLocationResource";
     } else if (schema.resourceMetadata[0].IsSubscriptionResource) {

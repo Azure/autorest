@@ -3,50 +3,42 @@
     "DataConnector": [
       {
         "Name": "DataConnector",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/dataConnectors/{dataConnectorName}",
-            "Method": "GET",
-            "OperationID": "DataConnectors_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get specific Data Connector resource by DataConnectorName."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/dataConnectors/{dataConnectorName}",
-            "Method": "PUT",
-            "OperationID": "DataConnectors_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create or update Data Connector For MADMA resource."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/dataConnectors/{dataConnectorName}",
-            "Method": "PUT",
-            "OperationID": "DataConnectors_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create or update Data Connector For MADMA resource."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/dataConnectors/{dataConnectorName}",
-            "Method": "DELETE",
-            "OperationID": "DataConnectors_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete a Data Connectors with given dataConnector name."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/dataConnectors/{dataConnectorName}",
+          "Method": "GET",
+          "OperationID": "DataConnectors_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get specific Data Connector resource by DataConnectorName."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/dataConnectors/{dataConnectorName}",
+          "Method": "PUT",
+          "OperationID": "DataConnectors_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create or update Data Connector For MADMA resource."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/dataConnectors/{dataConnectorName}",
+          "Method": "PUT",
+          "OperationID": "DataConnectors_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create or update Data Connector For MADMA resource."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/dataConnectors/{dataConnectorName}",
+          "Method": "DELETE",
+          "OperationID": "DataConnectors_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a Data Connectors with given dataConnector name."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -85,20 +77,15 @@
     "DataManagerForAgricultureExtension": [
       {
         "Name": "DataManagerForAgricultureExtension",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/providers/Microsoft.AgFoodPlatform/farmBeatsExtensionDefinitions/{dataManagerForAgricultureExtensionId}",
-            "Method": "GET",
-            "OperationID": "DataManagerForAgricultureExtensions_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get Data Manager For Agriculture extension."
-          }
-        ],
-        "CreateOperations": [],
-        "UpdateOperations": [],
-        "DeleteOperations": [],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/providers/Microsoft.AgFoodPlatform/farmBeatsExtensionDefinitions/{dataManagerForAgricultureExtensionId}",
+          "Method": "GET",
+          "OperationID": "DataManagerForAgricultureExtensions_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get Data Manager For Agriculture extension."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -137,50 +124,42 @@
     "DataManagerForAgriculture": [
       {
         "Name": "DataManagerForAgriculture",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}",
-            "Method": "GET",
-            "OperationID": "DataManagerForAgricultureResources_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get DataManagerForAgriculture resource."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}",
-            "Method": "PUT",
-            "OperationID": "DataManagerForAgricultureResources_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Create or update Data Manager For Agriculture resource."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}",
-            "Method": "PATCH",
-            "OperationID": "DataManagerForAgricultureResources_Update",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Update a Data Manager For Agriculture resource."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}",
-            "Method": "DELETE",
-            "OperationID": "DataManagerForAgricultureResources_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete a Data Manager For Agriculture resource."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}",
+          "Method": "GET",
+          "OperationID": "DataManagerForAgricultureResources_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get DataManagerForAgriculture resource."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}",
+          "Method": "PUT",
+          "OperationID": "DataManagerForAgricultureResources_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create or update Data Manager For Agriculture resource."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}",
+          "Method": "PATCH",
+          "OperationID": "DataManagerForAgricultureResources_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Update a Data Manager For Agriculture resource."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}",
+          "Method": "DELETE",
+          "OperationID": "DataManagerForAgricultureResources_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a Data Manager For Agriculture resource."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -233,50 +212,42 @@
     "Extension": [
       {
         "Name": "Extension",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/extensions/{extensionId}",
-            "Method": "GET",
-            "OperationID": "Extensions_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get installed extension details by extension id."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/extensions/{extensionId}",
-            "Method": "PUT",
-            "OperationID": "Extensions_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Install or Update extension. Additional Api Properties are merged patch and if the extension is updated to a new version then the obsolete entries will be auto deleted from Additional Api Properties."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/extensions/{extensionId}",
-            "Method": "PUT",
-            "OperationID": "Extensions_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Install or Update extension. Additional Api Properties are merged patch and if the extension is updated to a new version then the obsolete entries will be auto deleted from Additional Api Properties."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/extensions/{extensionId}",
-            "Method": "DELETE",
-            "OperationID": "Extensions_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Uninstall extension."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/extensions/{extensionId}",
+          "Method": "GET",
+          "OperationID": "Extensions_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get installed extension details by extension id."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/extensions/{extensionId}",
+          "Method": "PUT",
+          "OperationID": "Extensions_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Install or Update extension. Additional Api Properties are merged patch and if the extension is updated to a new version then the obsolete entries will be auto deleted from Additional Api Properties."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/extensions/{extensionId}",
+          "Method": "PUT",
+          "OperationID": "Extensions_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Install or Update extension. Additional Api Properties are merged patch and if the extension is updated to a new version then the obsolete entries will be auto deleted from Additional Api Properties."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/extensions/{extensionId}",
+          "Method": "DELETE",
+          "OperationID": "Extensions_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Uninstall extension."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -315,50 +286,42 @@
     "PrivateEndpointConnection": [
       {
         "Name": "PrivateEndpointConnection",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections/{privateEndpointConnectionName}",
-            "Method": "GET",
-            "OperationID": "PrivateEndpointConnections_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get Private endpoint connection object."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections/{privateEndpointConnectionName}",
-            "Method": "PUT",
-            "OperationID": "PrivateEndpointConnections_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Approves or Rejects a Private endpoint connection request."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections/{privateEndpointConnectionName}",
-            "Method": "PUT",
-            "OperationID": "PrivateEndpointConnections_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Approves or Rejects a Private endpoint connection request."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections/{privateEndpointConnectionName}",
-            "Method": "DELETE",
-            "OperationID": "PrivateEndpointConnections_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Delete Private endpoint connection request."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections/{privateEndpointConnectionName}",
+          "Method": "GET",
+          "OperationID": "PrivateEndpointConnections_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get Private endpoint connection object."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections/{privateEndpointConnectionName}",
+          "Method": "PUT",
+          "OperationID": "PrivateEndpointConnections_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Approves or Rejects a Private endpoint connection request."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections/{privateEndpointConnectionName}",
+          "Method": "PUT",
+          "OperationID": "PrivateEndpointConnections_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Approves or Rejects a Private endpoint connection request."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections/{privateEndpointConnectionName}",
+          "Method": "DELETE",
+          "OperationID": "PrivateEndpointConnections_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete Private endpoint connection request."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -397,20 +360,15 @@
     "PrivateLinkResource": [
       {
         "Name": "PrivateLinkResource",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateLinkResources/{subResourceName}",
-            "Method": "GET",
-            "OperationID": "PrivateLinkResources_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get Private link resource object."
-          }
-        ],
-        "CreateOperations": [],
-        "UpdateOperations": [],
-        "DeleteOperations": [],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateLinkResources/{subResourceName}",
+          "Method": "GET",
+          "OperationID": "PrivateLinkResources_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get Private link resource object."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -449,50 +407,42 @@
     "Solution": [
       {
         "Name": "Solution",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/solutions/{solutionId}",
-            "Method": "GET",
-            "OperationID": "Solutions_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get installed Solution details by Solution id."
-          }
-        ],
-        "CreateOperations": [
-          {
-            "Name": "CreateOrUpdate",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/solutions/{solutionId}",
-            "Method": "PUT",
-            "OperationID": "Solutions_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Install Or Update Solution."
-          }
-        ],
-        "UpdateOperations": [
-          {
-            "Name": "Update",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/solutions/{solutionId}",
-            "Method": "PUT",
-            "OperationID": "Solutions_CreateOrUpdate",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Install Or Update Solution."
-          }
-        ],
-        "DeleteOperations": [
-          {
-            "Name": "Delete",
-            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/solutions/{solutionId}",
-            "Method": "DELETE",
-            "OperationID": "Solutions_Delete",
-            "IsLongRunning": true,
-            "PagingMetadata": null,
-            "Description": "Uninstall Solution."
-          }
-        ],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/solutions/{solutionId}",
+          "Method": "GET",
+          "OperationID": "Solutions_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get installed Solution details by Solution id."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/solutions/{solutionId}",
+          "Method": "PUT",
+          "OperationID": "Solutions_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Install Or Update Solution."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/solutions/{solutionId}",
+          "Method": "PUT",
+          "OperationID": "Solutions_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Install Or Update Solution."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/solutions/{solutionId}",
+          "Method": "DELETE",
+          "OperationID": "Solutions_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Uninstall Solution."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",
@@ -531,20 +481,15 @@
     "DataManagerForAgricultureSolution": [
       {
         "Name": "DataManagerForAgricultureSolution",
-        "GetOperations": [
-          {
-            "Name": "Get",
-            "Path": "/providers/Microsoft.AgFoodPlatform/farmBeatsSolutionDefinitions/{dataManagerForAgricultureSolutionId}",
-            "Method": "GET",
-            "OperationID": "SolutionsDiscoverability_Get",
-            "IsLongRunning": false,
-            "PagingMetadata": null,
-            "Description": "Get Data Manager For Agriculture solution by id."
-          }
-        ],
-        "CreateOperations": [],
-        "UpdateOperations": [],
-        "DeleteOperations": [],
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/providers/Microsoft.AgFoodPlatform/farmBeatsSolutionDefinitions/{dataManagerForAgricultureSolutionId}",
+          "Method": "GET",
+          "OperationID": "SolutionsDiscoverability_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get Data Manager For Agriculture solution by id."
+        },
         "ListOperations": [
           {
             "Name": "GetAll",

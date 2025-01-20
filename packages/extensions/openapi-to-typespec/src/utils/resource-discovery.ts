@@ -28,11 +28,11 @@ export interface Metadata {
 
 export interface ArmResource {
   Name: string;
-  GetOperations: _ArmResourceOperation[];
-  ExistOperation: _ArmResourceOperation | undefined;
-  CreateOperations: _ArmResourceOperation[];
-  UpdateOperations: _ArmResourceOperation[];
-  DeleteOperations: _ArmResourceOperation[];
+  GetOperation?: _ArmResourceOperation;
+  ExistOperation?: _ArmResourceOperation;
+  CreateOperation?: _ArmResourceOperation;
+  UpdateOperation?: _ArmResourceOperation;
+  DeleteOperation?: _ArmResourceOperation;
   ListOperations: _ArmResourceOperation[];
   OperationsFromResourceGroupExtension: _ArmResourceOperation[];
   OperationsFromSubscriptionExtension: _ArmResourceOperation[];
@@ -62,10 +62,15 @@ export function getResourceOperations(resource: ArmResource): Record<string, Ope
   const operations: Record<string, Operation> = {};
   const codeModel = getSession().model;
 
-  const allOperations = resource.GetOperations.concat(resource.CreateOperations)
-    .concat(resource.ExistOperation ? [resource.ExistOperation] : [])
-    .concat(resource.UpdateOperations)
-    .concat(resource.DeleteOperations)
+  const allOperations: _ArmResourceOperation[] = (
+    [
+      resource.GetOperation,
+      resource.CreateOperation,
+      resource.ExistOperation,
+      resource.UpdateOperation,
+      resource.DeleteOperation,
+    ].filter((o) => o !== undefined) as _ArmResourceOperation[]
+  )
     .concat(resource.ListOperations)
     .concat(resource.OperationsFromResourceGroupExtension)
     .concat(resource.OperationsFromSubscriptionExtension)
@@ -92,7 +97,7 @@ export function getSingletonResouceListOperation(resource: ArmResource): Operati
   if (resource.IsSingletonResource) {
     let predictSingletonResourcePath: string | undefined;
     if (resource.IsSingletonResource) {
-      predictSingletonResourcePath = resource.GetOperations[0].Path.split("/").slice(0, -1).join("/");
+      predictSingletonResourcePath = resource.GetOperation!.Path.split("/").slice(0, -1).join("/");
     }
 
     for (const operationGroup of codeModel.operationGroups) {
@@ -116,7 +121,7 @@ export function getResourceExistOperation(resource: ArmResource): Operation | un
     for (const operation of operationGroup.operations) {
       if (
         operation.requests?.length &&
-        operation.requests[0].protocol?.http?.path === resource.GetOperations[0].Path &&
+        operation.requests[0].protocol?.http?.path === resource.GetOperation!.Path &&
         operation.requests[0].protocol.http?.method === "head"
       ) {
         return operation;
