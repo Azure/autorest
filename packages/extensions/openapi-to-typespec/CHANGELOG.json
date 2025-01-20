@@ -2,6 +2,24 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.10.7",
+      "tag": "@autorest/openapi-to-typespec_v0.10.7",
+      "date": "Mon, 20 Jan 2025 02:16:28 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Upgrade compiler version to 0.64"
+          },
+          {
+            "comment": "add multi path support"
+          },
+          {
+            "comment": "Fix action operation for non-resource operation"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.10.6",
       "tag": "@autorest/openapi-to-typespec_v0.10.6",
       "date": "Wed, 08 Jan 2025 06:06:48 GMT",
