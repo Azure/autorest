@@ -14,6 +14,7 @@ import "./routes.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+
 /**
  * Client that can be used to manage and query indexes and documents, as well as
  * manage other resources, on a search service.

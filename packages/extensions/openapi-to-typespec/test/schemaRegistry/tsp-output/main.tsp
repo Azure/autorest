@@ -14,6 +14,7 @@ import "./routes.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+
 /**
  * Azure Schema Registry is as a central schema repository, with support for
  * versioning, management, compatibility checking, and RBAC.

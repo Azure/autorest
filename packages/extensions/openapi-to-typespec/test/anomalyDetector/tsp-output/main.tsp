@@ -14,6 +14,7 @@ import "./routes.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+
 /**
  * The Anomaly Detector API detects anomalies automatically in time series data.
  * It supports two kinds of mode, one is for stateless using, another is for

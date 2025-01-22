@@ -1,5 +1,5 @@
 import { execSync, spawnSync } from "child_process";
-import { readFileSync, unlinkSync, lstatSync } from "fs";
+import { existsSync, readFileSync, rmSync } from "fs";
 import { readdir } from "fs/promises";
 import { join, dirname, extname, resolve } from "path";
 import { resolveProject } from "./resolve-root";
@@ -79,11 +79,9 @@ async function generate(root: string, path: string, debug = false, isFullCompati
     overrideGuess = fileContent.includes("guessResourceKey: false");
   }
 
-  const files = await readdir(join(dirname(path), "tsp-output"), { recursive: true });
-  for (const file of files) {
-    const fullPath = join(dirname(path), "tsp-output", file);
-    if (lstatSync(fullPath).isDirectory()) continue;
-    unlinkSync(fullPath);
+  const outputPath = join(dirname(path), "tsp-output");
+  if (existsSync(outputPath)) {
+    rmSync(outputPath, { recursive: true });
   }
 
   const args = [

@@ -9,11 +9,14 @@
  */
 import "@typespec/rest";
 import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.Core;
+
 /**
  * These APIs allow end users to create, view and run load tests using Azure Load
  * Test Service.

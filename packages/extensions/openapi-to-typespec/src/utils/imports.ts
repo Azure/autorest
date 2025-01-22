@@ -6,6 +6,19 @@ export type Imports = {
   namespaces: string[];
 };
 
+export function getMainImports(program: TypespecProgram): Imports {
+  const modules = new Set<string>();
+  const namespaces = new Set<string>();
+  if (program.serviceInformation.authentication?.some((a) => a.kind === "AadOauth2Auth")) {
+    modules.add(`import "@azure-tools/typespec-azure-core";`);
+    namespaces.add("using Azure.Core;");
+  }
+  return {
+    modules: [...modules],
+    namespaces: [...namespaces],
+  };
+}
+
 export function getModelsImports(program: TypespecProgram): Imports {
   const modules = new Set<string>();
   const namespaces = new Set<string>();
