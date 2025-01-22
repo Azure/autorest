@@ -2,6 +2,18 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.10.8",
+      "tag": "@autorest/openapi-to-typespec_v0.10.8",
+      "date": "Wed, 22 Jan 2025 05:15:07 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add Azure.Core import if Oauth2"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.10.7",
       "tag": "@autorest/openapi-to-typespec_v0.10.7",
       "date": "Mon, 20 Jan 2025 02:16:28 GMT",
