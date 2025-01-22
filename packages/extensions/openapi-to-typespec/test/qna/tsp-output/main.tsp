@@ -9,11 +9,14 @@
  */
 import "@typespec/rest";
 import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.Core;
+
 /**
  * The language service API is a suite of natural language processing (NLP) skills
  * built with best-in-class Microsoft machine learning algorithms.  The API can be

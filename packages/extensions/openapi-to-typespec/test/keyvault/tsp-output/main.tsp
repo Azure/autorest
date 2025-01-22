@@ -14,6 +14,7 @@ import "./routes.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+
 /**
  * The key vault client performs cryptographic key operations and vault operations
  * against the Key Vault service.

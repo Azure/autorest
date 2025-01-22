@@ -14,6 +14,7 @@ import "./routes.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+
 /**
  * The ConfidentialLedgerClient writes and retrieves ledger entries against the
  * Confidential Ledger service.

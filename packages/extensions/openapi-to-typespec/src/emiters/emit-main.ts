@@ -3,6 +3,7 @@ import { generateServiceInformation } from "../generate/generate-service-informa
 import { TypespecProgram } from "../interfaces";
 import { getOptions } from "../options";
 import { formatTypespecFile } from "../utils/format";
+import { getMainImports } from "../utils/imports";
 import { Metadata } from "../utils/resource-discovery";
 const packageInfo = require("../../package.json");
 
@@ -37,18 +38,19 @@ function getHeaders() {
 }
 
 function getServiceInformation(program: TypespecProgram) {
+  const { modules, namespaces: namespacesSet } = getMainImports(program);
   const imports = [
-    `import "@typespec/rest";`,
-    `import "@typespec/http";`,
-    `import "./routes.tsp";`,
-    ``,
-    `using TypeSpec.Rest;`,
-    `using TypeSpec.Http;`,
-    `using TypeSpec.Versioning;`,
-  ];
-  const content = generateServiceInformation(program);
-
-  return [...imports, content].join("\n");
+    ...new Set<string>([`import "@typespec/rest";`, `import "@typespec/http";`, ...modules, `import "./routes.tsp"`]),
+  ].join("\n");
+  const namespaces = [
+    ...new Set<string>([
+      `using TypeSpec.Rest;`,
+      `using TypeSpec.Http;`,
+      `using TypeSpec.Versioning;`,
+      ...namespacesSet,
+    ]),
+  ].join("\n");
+  return [imports, "\n", namespaces, "\n", generateServiceInformation(program)].join("\n");
 }
 
 function getArmServiceInformation(program: TypespecProgram, metadata: Metadata) {

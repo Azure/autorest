@@ -9,11 +9,14 @@
  */
 import "@typespec/rest";
 import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.Core;
+
 /**
  * A client for issuing REST requests to the Azure Batch service.
  */
