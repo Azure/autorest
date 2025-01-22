@@ -1,9 +1,9 @@
-import { getMainImports } from "../utils/imports";
 import { getSession } from "../autorest-session";
 import { generateServiceInformation } from "../generate/generate-service-information";
 import { TypespecProgram } from "../interfaces";
 import { getOptions } from "../options";
 import { formatTypespecFile } from "../utils/format";
+import { getMainImports } from "../utils/imports";
 import { Metadata } from "../utils/resource-discovery";
 const packageInfo = require("../../package.json");
 
