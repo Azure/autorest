@@ -1,6 +1,13 @@
 # Change Log - @autorest/openapi-to-typespec
 
-This log was last generated on Mon, 20 Jan 2025 02:16:28 GMT and should not be manually modified.
+This log was last generated on Wed, 22 Jan 2025 05:15:07 GMT and should not be manually modified.
+
+## 0.10.8
+Wed, 22 Jan 2025 05:15:07 GMT
+
+### Patches
+
+- Add Azure.Core import if Oauth2
 
 ## 0.10.7
 Mon, 20 Jan 2025 02:16:28 GMT
