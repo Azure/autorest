@@ -21,13 +21,14 @@ model BatchDeploymentTrackedResource
     SegmentName = "deployments",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 
   /**
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   kind?: string;
 
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
   ...Azure.ResourceManager.ResourceSkuProperty;
 }
 

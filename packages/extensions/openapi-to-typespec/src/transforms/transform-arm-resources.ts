@@ -21,10 +21,13 @@ import {
   isArmResourceActionOperation,
   TspArmResourceLegacyOperationGroup,
   TspArmResourceOperationGroup,
+  TypespecSpreadStatement,
 } from "../interfaces";
+import { transformDataType } from "../model";
 import { getOptions, updateOptions } from "../options";
 import { createClientNameDecorator, createCSharpNameDecorator } from "../pretransforms/rename-pretransform";
-import { getOperationClientDecorators } from "../utils/decorators";
+import { isExtendedLocation, isManagedSerivceIdentity, isPlan, isSku } from "../utils/common-type-mapping";
+import { getOperationClientDecorators, getPropertyDecorators } from "../utils/decorators";
 import { generateDocsContent } from "../utils/docs";
 import { getLogger } from "../utils/logger";
 import {
@@ -34,14 +37,14 @@ import {
   getResourceOperations,
   isResourceSchema,
 } from "../utils/resource-discovery";
-import { isStringSchema } from "../utils/schemas";
+import { isArraySchema, isStringSchema } from "../utils/schemas";
 import { escapeRegex } from "../utils/strings";
 import { getSuppresssionWithCode } from "../utils/suppressions";
 import { getFullyQualifiedName, getTemplateResponses, NamesOfResponseTemplate } from "../utils/type-mapping";
 import { getTypespecType, isTypespecType, transformObjectProperty } from "./transform-object";
 import { transformParameter } from "./transform-operations";
 
-const logger = () => getLogger("parse-metadata");
+const logger = () => getLogger("transform-arm-resources");
 
 const armResourceCache: Map<ArmResourceSchema, TspArmResource> = new Map<ArmResourceSchema, TspArmResource>();
 export function transformTspArmResource(schema: ArmResourceSchema): TspArmResource {
@@ -89,34 +92,18 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
 
   const armResourceOperationGroups = getTspOperationGroups(schema);
 
-  let baseModelName = undefined;
-  if (!getArmCommonTypeVersion()) {
-    const immediateParents = schema.parents?.immediate ?? [];
-
-    baseModelName = immediateParents
-      .filter((p) => p.language.default.name !== schema.language.default.name)
-      .map((p) => p.language.default.name)[0];
-  }
-
   const decorators = buildResourceDecorators(schema);
-  if (!getArmCommonTypeVersion() && schema.resourceMetadata[0].IsExtensionResource) {
+  if (schema.resourceMetadata[0].IsExtensionResource) {
     decorators.push({ name: "extensionResource" });
   }
 
   const clientDecorators = buildResourceClientDecorators(schema);
   const keyProperty = buildKeyProperty(schema);
-  const properties = [...getOtherProperties(schema, !getArmCommonTypeVersion())];
-  let keyExpression, augmentDecorators;
-  if (keyProperty.name === "name") {
-    keyExpression = buildKeyExpression(schema, keyProperty);
-    augmentDecorators = buildKeyAugmentDecorators(schema, keyProperty);
-  } else {
-    properties.unshift(keyProperty);
-  }
+  const properties = [keyProperty, ...getOtherProperties(schema)];
+  const augmentDecorators = buildKeyAugmentDecorators(schema, keyProperty) ?? [];
 
   if (propertiesModel) {
-    if (augmentDecorators === undefined) augmentDecorators = buildPropertiesAugmentDecorators(schema, propertiesModel);
-    else augmentDecorators.push(...buildPropertiesAugmentDecorators(schema, propertiesModel));
+    augmentDecorators.push(...buildPropertiesAugmentDecorators(schema, propertiesModel));
   }
 
   const propertiesPropertyClientDecorator = [];
@@ -131,13 +118,11 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
   }
 
   const tspResource: TspArmResource = {
+    kind: "ArmResource",
+    name: schema.resourceMetadata[0].SwaggerModelName,
     fixMe,
     resourceKind: getResourceKind(schema),
-    kind: "object",
     properties,
-    keyExpression,
-    name: schema.resourceMetadata[0].SwaggerModelName,
-    parents: [],
     resourceParent: getParentResource(schema),
     propertiesModelName,
     propertiesPropertyRequired,
@@ -148,8 +133,6 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
     clientDecorators,
     augmentDecorators,
     resourceOperationGroups: armResourceOperationGroups,
-    optionalStandardProperties: getArmCommonTypeVersion() ? getResourceOptionalStandardProperties(schema) : [],
-    baseModelName,
     locationParent: getLocationParent(schema),
   };
   armResourceCache.set(schema, tspResource);
@@ -711,9 +694,6 @@ function convertResourceActionOperations(
   resourceMetadata: ArmResource,
   operations: Record<string, Operation>,
 ): TspArmResourceActionOperation[] {
-  const codeModel = getSession().model;
-  const dataTypes = getDataTypes(codeModel);
-
   const converted: TspArmResourceActionOperation[] = [];
 
   if (resourceMetadata.OtherOperations.length) {
@@ -862,57 +842,98 @@ function buildBodyDecorator(
     : clientDecorators;
 }
 
-function getOtherProperties(schema: ArmResourceSchema, noCommonTypes: boolean): TypespecObjectProperty[] {
+function getOtherProperties(schema: ArmResourceSchema): (TypespecObjectProperty | TypespecSpreadStatement)[] {
   const knownProperties = ["properties", "name", "id", "type", "systemData"];
   const resourceKind = getResourceKind(schema);
   if (resourceKind === "TrackedResource") {
     knownProperties.push(...["location", "tags"]);
   }
-  if (!noCommonTypes) {
-    knownProperties.push(...["identity", "sku", "eTag", "plan"]);
-  }
-  const otherProperties: TypespecObjectProperty[] = [];
+  const otherProperties: (TypespecObjectProperty | TypespecSpreadStatement)[] = [];
   for (const property of schema.properties ?? []) {
     if (!knownProperties.includes(property.serializedName)) {
-      otherProperties.push(transformObjectProperty(property, getSession().model));
+      const envolopeProperty = getEnvolopeProperty(property);
+      otherProperties.push(
+        envolopeProperty ?? {
+          ...transformObjectProperty(property, getSession().model),
+          suppressions: getOptions().isFullCompatible
+            ? [
+                getSuppresssionWithCode(
+                  "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property",
+                ),
+              ]
+            : undefined,
+        },
+      );
     }
   }
   return otherProperties;
 }
 
-function getResourceOptionalStandardProperties(schema: ArmResourceSchema): string[] {
-  const optionalStandardProperties = [];
-
-  const msi = schema.properties?.find((p) => p.serializedName === "identity");
-  if (msi) {
-    let msiType;
-    if (msi.schema.language.default.name === "ManagedServiceIdentity") {
-      msiType = "Azure.ResourceManager.ManagedServiceIdentityProperty";
-    } else if (msi.schema.language.default.name === "SystemAssignedServiceIdentity") {
-      msiType = "Azure.ResourceManager.ManagedSystemAssignedIdentityProperty";
-    } else {
-      // TODO: handle non-standard property
-      msiType = "Azure.ResourceManager.ManagedServiceIdentityProperty";
-    }
-    optionalStandardProperties.push(msiType);
+function getEnvolopeProperty(property: Property): TypespecSpreadStatement | undefined {
+  if (property.serializedName === "sku" && !property.required && isSku(property.schema)) {
+    return {
+      kind: "spread",
+      model: {
+        kind: "template",
+        name: "Azure.ResourceManager.ResourceSkuProperty",
+      },
+    };
   }
-
-  if (schema.properties?.find((p) => p.serializedName === "sku")) {
-    // TODO: handle non-standard property
-    optionalStandardProperties.push("Azure.ResourceManager.ResourceSkuProperty");
+  if (
+    property.serializedName === "extendedLocation" &&
+    !property.required &&
+    property.readOnly &&
+    isExtendedLocation(property.schema)
+  ) {
+    return {
+      kind: "spread",
+      model: {
+        kind: "template",
+        name: "Azure.ResourceManager.ExtendedLocationProperty",
+      },
+    };
   }
-
-  if (schema.properties?.find((p) => p.serializedName === "eTag")) {
-    // TODO: handle non-standard property
-    optionalStandardProperties.push("Azure.ResourceManager.EntityTagProperty");
+  if (property.serializedName === "plan" && !property.required && isPlan(property.schema)) {
+    return {
+      kind: "spread",
+      model: {
+        kind: "template",
+        name: "Azure.ResourceManager.ResourcePlanProperty",
+      },
+    };
   }
-
-  if (schema.properties?.find((p) => p.serializedName === "plan")) {
-    // TODO: handle non-standard property
-    optionalStandardProperties.push("Azure.ResourceManager.ResourcePlanProperty");
+  if (
+    property.serializedName === "zones" &&
+    !property.required &&
+    isArraySchema(property.schema) &&
+    isStringSchema(property.schema.elementType)
+  ) {
+    return {
+      kind: "spread",
+      model: {
+        kind: "template",
+        name: "Azure.ResourceManager.AvailabilityZonesProperty",
+      },
+    };
   }
-
-  return optionalStandardProperties;
+  if (property.serializedName === "identity" && !property.required && isManagedSerivceIdentity(property.schema)) {
+    return {
+      kind: "spread",
+      model: {
+        kind: "template",
+        name: "Azure.ResourceManager.ManagedServiceIdentityProperty",
+      },
+    };
+  }
+  if (property.serializedName === "eTag" && !property.required && isStringSchema(property.schema)) {
+    return {
+      kind: "spread",
+      model: {
+        kind: "template",
+        name: "Azure.ResourceManager.EntityTagProperty",
+      },
+    };
+  }
 }
 
 const operationGroupNameCache: Map<ArmResource, string> = new Map<ArmResource, string>();
@@ -1085,17 +1106,6 @@ function getKeyParameter(resourceMetadata: ArmResource): Parameter | undefined {
   }
 }
 
-function generateSingletonKeyParameter(): TypespecParameter {
-  return {
-    kind: "parameter",
-    name: "name",
-    isOptional: false,
-    type: "string",
-    location: "path",
-    serializedName: "name",
-  };
-}
-
 function getParentResource(schema: ArmResourceSchema): TspArmResource | undefined {
   const resourceParent = schema.resourceMetadata[0].Parents?.[0];
 
@@ -1126,35 +1136,23 @@ function getResourceKind(schema: ArmResourceSchema): ArmResourceKind {
   return "ProxyResource";
 }
 
-function buildKeyExpression(schema: ArmResourceSchema, keyProperty: TypespecObjectProperty): string {
-  const namePattern = keyProperty.decorators?.find((d) => d.name === "pattern")?.arguments?.[0];
-  const keyName = keyProperty.decorators?.find((d) => d.name === "key")?.arguments?.[0];
-  const segmentName = keyProperty.decorators?.find((d) => d.name === "segment")?.arguments?.[0];
-  return `...ResourceNameParameter<
-    Resource = ${schema.resourceMetadata[0].SwaggerModelName}
-    ${keyName ? `, KeyName = "${keyName}"` : ""}
-    ${segmentName ? `, SegmentName = "${segmentName}"` : ""},
-    NamePattern = ${namePattern ? `"${namePattern}"` : `""`}
-    ${keyProperty.type !== "string" ? `, Type = ${keyProperty.type}` : ""}
-  >`;
-}
-
 function buildKeyAugmentDecorators(
   schema: ArmResourceSchema,
-  keyProperty: TypespecObjectProperty,
-): TypespecDecorator[] | undefined {
-  return keyProperty.decorators
-    ?.filter((d) => !["pattern", "key", "segment", "path"].includes(d.name))
-    .filter((d) => !(d.name === "visibility" && d.arguments?.[0] === "read"))
-    .map((d) => {
-      d.target = `${schema.resourceMetadata[0].SwaggerModelName}.name`;
-      return d;
-    })
-    .concat({
-      name: "doc",
-      target: `${schema.resourceMetadata[0].SwaggerModelName}.name`,
-      arguments: [generateDocsContent(keyProperty)],
-    });
+  keyProperty: TypespecSpreadStatement,
+): TypespecDecorator[] {
+  return (
+    keyProperty.decorators
+      ?.filter((d) => !["pattern", "key", "segment", "path"].includes(d.name))
+      .filter((d) => !(d.name === "visibility" && d.arguments?.[0] === "read"))
+      .map((d) => {
+        d.target = `${schema.resourceMetadata[0].SwaggerModelName}.name`;
+        return d;
+      }) ?? []
+  ).concat({
+    name: "doc",
+    target: `${schema.resourceMetadata[0].SwaggerModelName}.name`,
+    arguments: [generateDocsContent(keyProperty)],
+  });
 }
 
 function buildPropertiesAugmentDecorators(schema: ArmResourceSchema, propertiesModel: Property): TypespecDecorator[] {
@@ -1167,51 +1165,51 @@ function buildPropertiesAugmentDecorators(schema: ArmResourceSchema, propertiesM
   ];
 }
 
-function buildKeyProperty(schema: ArmResourceSchema): TypespecObjectProperty {
-  let parameter;
+function buildKeyProperty(schema: ArmResourceSchema): TypespecSpreadStatement {
+  let decorators;
+  let namePattern;
+  let keyName;
+  let type = "string";
+  let doc;
+  const segmentName = schema.resourceMetadata[0].ResourceKeySegment;
   if (!schema.resourceMetadata[0].IsSingletonResource) {
     const keyProperty = getKeyParameter(schema.resourceMetadata[0]);
-    if (!keyProperty) {
-      throw new Error(
+    if (keyProperty === undefined) {
+      logger().error(
         `Failed to find key property ${schema.resourceMetadata[0].ResourceKey} for ${schema.language.default.name}`,
       );
     }
-    parameter = transformParameter(keyProperty, getSession().model);
+    decorators = getPropertyDecorators(keyProperty!);
+    namePattern = decorators.find((d) => d.name === "pattern")?.arguments?.[0];
+    keyName = schema.resourceMetadata[0].ResourceKey;
+
+    const codeModel = getSession().model;
+    const dataTypes = getDataTypes(codeModel);
+    const visited = dataTypes.get(keyProperty!.schema) ?? transformDataType(keyProperty!.schema, codeModel);
+    type = visited.name;
+
+    doc = keyProperty!.language.default.description;
   } else {
-    parameter = generateSingletonKeyParameter();
+    keyName = singular(schema.resourceMetadata[0].ResourceKeySegment);
   }
 
-  if (!parameter.decorators) {
-    parameter.decorators = [];
-  }
-
-  parameter.decorators.push(
-    {
-      name: "key",
-      arguments: [
-        schema.resourceMetadata[0].IsSingletonResource
-          ? singular(schema.resourceMetadata[0].ResourceKeySegment)
-          : schema.resourceMetadata[0].ResourceKey,
-      ],
+  const keyProperty: TypespecSpreadStatement = {
+    kind: "spread",
+    model: {
+      kind: "template",
+      name: "ResourceNameParameter",
+      namedArguments: { Resource: schema.resourceMetadata[0].SwaggerModelName },
     },
-    {
-      name: "segment",
-      arguments: [schema.resourceMetadata[0].ResourceKeySegment],
-    },
-    {
-      name: "visibility",
-      arguments: ["read"],
-    },
-  );
+    decorators,
+    doc,
+  };
+  if (keyName) keyProperty.model.namedArguments!["KeyName"] = `"${keyName}"`;
+  if (segmentName) keyProperty.model.namedArguments!["SegmentName"] = `"${segmentName}"`;
+  if (namePattern !== "^[a-zA-Z0-9-]{3,24}$")
+    keyProperty.model.namedArguments!["NamePattern"] = (namePattern as string) ? `"${namePattern}"` : `""`;
+  if (type !== "string") keyProperty.model.namedArguments!["Type"] = `${type}`;
 
-  // remove @path decorator for key parameter
-  // TODO: still under discussion with TSP team about this behavior, in order to keep generated swagger good, comment out for now
-  // parameter.decorators = parameter.decorators.filter((d) => d.name !== "path");
-
-  // by convention the property itself needs to be called "name"
-  parameter.name = "name";
-
-  return { ...parameter, kind: "property" };
+  return keyProperty;
 }
 
 function buildResourceDecorators(schema: ArmResourceSchema): TypespecDecorator[] {

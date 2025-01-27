@@ -823,7 +823,7 @@
           "readOnly": true
         },
         "sku": {
-          "$ref": "#/definitions/ResourceSku",
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceSkuProperty",
           "description": "The SKU of the Analysis Services resource."
         }
       },
@@ -838,7 +838,7 @@
       "description": "Provision request specification",
       "properties": {
         "sku": {
-          "$ref": "#/definitions/ResourceSku",
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceSkuProperty",
           "description": "The SKU of the Analysis Services resource."
         },
         "tags": {
@@ -870,6 +870,16 @@
       "required": [
         "value"
       ]
+    },
+    "Azure.ResourceManager.ResourceSkuProperty": {
+      "type": "object",
+      "description": "The SKU (Stock Keeping Unit) assigned to this resource.",
+      "properties": {
+        "sku": {
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        }
+      }
     },
     "CheckServerNameAvailabilityParameters": {
       "type": "object",
@@ -1073,31 +1083,6 @@
       },
       "readOnly": true
     },
-    "ResourceSku": {
-      "type": "object",
-      "description": "Represents the SKU name and Azure pricing tier for Analysis Services resource.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the SKU level."
-        },
-        "tier": {
-          "$ref": "#/definitions/SkuTier",
-          "description": "The name of the Azure pricing tier to which the SKU applies."
-        },
-        "capacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of instances in the read only query pool.",
-          "default": 1,
-          "minimum": 1,
-          "maximum": 8
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
     "ServerAdministrators": {
       "type": "object",
       "description": "An array of administrator user identities.",
@@ -1138,7 +1123,7 @@
       "description": "An object that represents SKU details for existing resources.",
       "properties": {
         "sku": {
-          "$ref": "#/definitions/ResourceSku",
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceSkuProperty",
           "description": "The SKU in SKU details for existing resources."
         },
         "resourceType": {
@@ -1171,39 +1156,12 @@
           "type": "array",
           "description": "The collection of available SKUs for new resources.",
           "items": {
-            "$ref": "#/definitions/ResourceSku"
+            "$ref": "#/definitions/Azure.ResourceManager.ResourceSkuProperty"
           },
           "x-ms-identifiers": [
             "name"
           ]
         }
-      }
-    },
-    "SkuTier": {
-      "type": "string",
-      "description": "The name of the Azure pricing tier to which the SKU applies.",
-      "enum": [
-        "Development",
-        "Basic",
-        "Standard"
-      ],
-      "x-ms-enum": {
-        "name": "SkuTier",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Development",
-            "value": "Development"
-          },
-          {
-            "name": "Basic",
-            "value": "Basic"
-          },
-          {
-            "name": "Standard",
-            "value": "Standard"
-          }
-        ]
       }
     },
     "State": {

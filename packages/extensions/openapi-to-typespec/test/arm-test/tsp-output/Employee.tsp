@@ -17,8 +17,7 @@ model Employee is Azure.ResourceManager.TrackedResource<EmployeeProperties> {
   ...ResourceNameParameter<
     Resource = Employee,
     KeyName = "employeeName",
-    SegmentName = "employees",
-    NamePattern = "^[a-zA-Z0-9-]{3,24}$"
+    SegmentName = "employees"
   >;
 }
 

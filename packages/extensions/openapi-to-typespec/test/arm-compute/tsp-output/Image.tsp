@@ -24,6 +24,7 @@ model Image is Azure.ResourceManager.TrackedResource<ImageProperties> {
   /**
    * The extended location of the Image.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   extendedLocation?: ExtendedLocation;
 }
 

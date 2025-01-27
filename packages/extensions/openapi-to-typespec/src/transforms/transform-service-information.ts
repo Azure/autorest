@@ -6,7 +6,7 @@ import {
   ParameterLocation,
   SecurityScheme,
 } from "@autorest/codemodel";
-import { getArmCommonTypeVersion } from "../autorest-session";
+import { getArmCommonTypeVersion, getUserSetArmCommonTypeVersion } from "../autorest-session";
 import { ApiVersion } from "../constants";
 import { AadOauth2AuthFlow, ApiKeyAuthentication, Auth, EndpointParameter, ServiceInformation } from "../interfaces";
 import { getOptions } from "../options";
@@ -22,6 +22,7 @@ export function transformServiceInformation(model: CodeModel): ServiceInformatio
     endpointParameters: transformEndpointParameters(model),
     versions: getApiVersions(model),
     armCommonTypeVersion: isArm ? getArmCommonTypeVersion() : undefined,
+    userSetArmCommonTypeVersion: isArm ? getUserSetArmCommonTypeVersion() : undefined,
     authentication: getAuth(model),
   };
 }

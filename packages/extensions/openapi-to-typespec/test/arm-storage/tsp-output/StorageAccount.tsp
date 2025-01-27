@@ -23,18 +23,30 @@ model StorageAccount
   >;
 
   /**
+   * Gets the SKU.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility("read")
+  sku?: Sku;
+
+  /**
    * Gets the Kind.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility("read")
   kind?: Kind;
 
   /**
+   * The identity of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  identity?: Identity;
+
+  /**
    * The extendedLocation of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   extendedLocation?: ExtendedLocation;
-
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
-  ...Azure.ResourceManager.ResourceSkuProperty;
 }
 
 @armResourceOperations

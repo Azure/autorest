@@ -7214,8 +7214,8 @@ model ProximityPlacementGroupProperties {
   intent?: ProximityPlacementGroupPropertiesIntent;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SubResourceWithColocationStatus extends SubResource {
   /**
    * Describes colocation status of a resource in the Proximity Placement Group.
@@ -7973,29 +7973,6 @@ model DiskRestorePointReplicationStatus {
    * Replication completion percentage.
    */
   completionPercent?: int32;
-}
-
-/**
- * The resource model definition for an Azure Resource Manager proxy resource. It will not have tags and a location
- */
-model ProxyResource {
-  /**
-   * Resource Id
-   */
-  @visibility("read")
-  id?: string;
-
-  /**
-   * Resource name
-   */
-  @visibility("read")
-  name?: string;
-
-  /**
-   * Resource type
-   */
-  @visibility("read")
-  type?: string;
 }
 
 /**
@@ -9878,93 +9855,6 @@ model SnapshotList is Azure.Core.Page<Snapshot>;
  * The List Resource Skus operation response.
  */
 model ResourceSkusResult is Azure.Core.Page<ResourceSku>;
-
-/**
- * Describes an available Compute SKU.
- */
-model ResourceSku {
-  /**
-   * The type of resource the SKU applies to.
-   */
-  @visibility("read")
-  resourceType?: string;
-
-  /**
-   * The name of SKU.
-   */
-  @visibility("read")
-  name?: string;
-
-  /**
-   * Specifies the tier of virtual machines in a scale set.<br /><br /> Possible Values:<br /><br /> **Standard**<br /><br /> **Basic**
-   */
-  @visibility("read")
-  tier?: string;
-
-  /**
-   * The Size of the SKU.
-   */
-  @visibility("read")
-  size?: string;
-
-  /**
-   * The Family of this particular SKU.
-   */
-  @visibility("read")
-  family?: string;
-
-  /**
-   * The Kind of resources that are supported in this SKU.
-   */
-  @visibility("read")
-  kind?: string;
-
-  /**
-   * Specifies the number of virtual machines in the scale set.
-   */
-  @visibility("read")
-  capacity?: ResourceSkuCapacity;
-
-  /**
-   * The set of locations that the SKU is available.
-   */
-  @visibility("read")
-  locations?: string[];
-
-  /**
-   * A list of locations and availability zones in those locations where the SKU is available.
-   */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["location"])
-  locationInfo?: ResourceSkuLocationInfo[];
-
-  /**
-   * The api versions that support this SKU.
-   */
-  @visibility("read")
-  apiVersions?: string[];
-
-  /**
-   * Metadata for retrieving price info.
-   */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
-  costs?: ResourceSkuCosts[];
-
-  /**
-   * A name value pair to describe the capability.
-   */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
-  capabilities?: ResourceSkuCapabilities[];
-
-  /**
-   * The restrictions because of which SKU cannot be used. This is empty if there are no restrictions.
-   */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
-  restrictions?: ResourceSkuRestrictions[];
-}
 
 /**
  * Describes scaling information of a SKU.

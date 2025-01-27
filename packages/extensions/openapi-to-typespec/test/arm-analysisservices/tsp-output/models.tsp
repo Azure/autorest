@@ -75,19 +75,6 @@ union ProvisioningState {
 }
 
 /**
- * The name of the Azure pricing tier to which the SKU applies.
- */
-union SkuTier {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Development: "Development",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Basic: "Basic",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Standard: "Standard",
-}
-
-/**
  * The managed mode of the server (0 = not managed, 1 = managed).
  */
 union ManagedMode {
@@ -146,28 +133,6 @@ model AnalysisServicesServerProperties
    * The SKU of the Analysis Services resource.
    */
   sku?: ResourceSku;
-}
-
-/**
- * Represents the SKU name and Azure pricing tier for Analysis Services resource.
- */
-model ResourceSku {
-  /**
-   * Name of the SKU level.
-   */
-  name: string;
-
-  /**
-   * The name of the Azure pricing tier to which the SKU applies.
-   */
-  tier?: SkuTier;
-
-  /**
-   * The number of instances in the read only query pool.
-   */
-  @maxValue(8)
-  @minValue(1)
-  capacity?: int32 = 1;
 }
 
 /**

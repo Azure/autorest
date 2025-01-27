@@ -27,6 +27,7 @@ model RoleInstance
   /**
    * The role instance SKU.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: InstanceSku;
 }
 

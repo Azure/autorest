@@ -4,8 +4,6 @@ import { getOptions } from "../options";
 import { generateDocs } from "../utils/docs";
 import { getNamespaceStatement } from "../utils/namespace";
 
-const VALID_VERSIONS = ["v3", "v4", "v5"];
-
 export function generateServiceInformation(program: TypespecProgram) {
   const { serviceInformation } = program;
   const definitions: string[] = [];
@@ -24,18 +22,18 @@ export function generateServiceInformation(program: TypespecProgram) {
   }
 
   if (isArm && serviceInformation.armCommonTypeVersion) {
-    if (VALID_VERSIONS.includes(serviceInformation.armCommonTypeVersion)) {
+    if (serviceInformation.armCommonTypeVersion !== serviceInformation.userSetArmCommonTypeVersion) {
       definitions.push(
-        `@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.${serviceInformation.armCommonTypeVersion})`,
-      );
-    } else {
-      definitions.push(
-        `// FIXME: Common type version ${serviceInformation.armCommonTypeVersion} is not supported for now.`,
-      );
-      definitions.push(
-        `// @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.${serviceInformation.armCommonTypeVersion})`,
+        `// FIXME: ${
+          serviceInformation.userSetArmCommonTypeVersion
+            ? `Common type version ${serviceInformation.userSetArmCommonTypeVersion} is not supported for now.`
+            : "Common type version not set."
+        } Set to v3.`,
       );
     }
+    definitions.push(
+      `@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.${serviceInformation.armCommonTypeVersion})`,
+    );
   }
 
   if (!isArm && serviceInformation.endpoint) {

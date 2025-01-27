@@ -224,7 +224,3 @@ export function filterArmEnums(enums: TypespecEnum[]): TypespecEnum[] {
   }
   return enums.filter((e) => !filtered.includes(e.name));
 }
-
-export function isTspArmResource(schema: TypespecObject): schema is TspArmResource {
-  return Boolean((schema as TspArmResource).resourceKind);
-}

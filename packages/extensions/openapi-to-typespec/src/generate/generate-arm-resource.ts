@@ -2,25 +2,26 @@ import { Case } from "change-case-all";
 import _ from "lodash";
 import pluralize from "pluralize";
 import {
-  TypespecOperation,
   TspArmResource,
   TypespecTemplateModel,
   TypespecVoidType,
-  TspLroHeaders,
   TypespecParameter,
   TypespecDataType,
   TspArmResourceOperationGroup,
   TspArmOperationType,
 } from "../interfaces";
 import { getOptions } from "../options";
-import { getTSPOperationGroupName } from "../transforms/transform-arm-resources";
 import { generateAugmentedDecorators, generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
 import { getLogger } from "../utils/logger";
 import { generateLroHeaders } from "../utils/lro";
-import { getModelPropertiesDeclarations } from "../utils/model-generation";
+import {
+  generateTemplateModel,
+  getModelPropertyDeclarations,
+  getSpreadExpressionDecalaration,
+} from "../utils/model-generation";
 import { generateSuppressions } from "../utils/suppressions";
-import { generateOperation, generateParameters } from "./generate-operations";
+import { generateParameters } from "./generate-operations";
 import { generateParameter } from "./generate-parameter";
 
 const logger = () => getLogger("generate-arm-resource");
@@ -50,7 +51,7 @@ export function generateArmResource(resource: TspArmResource): string {
 }
 
 function generateArmResourceModel(resource: TspArmResource): string {
-  let definitions: string[] = [];
+  const definitions: string[] = [];
 
   for (const fixme of resource.fixMe ?? []) {
     definitions.push(fixme);
@@ -76,13 +77,9 @@ function generateArmResourceModel(resource: TspArmResource): string {
     }> {`,
   );
 
-  if (resource.keyExpression) {
-    definitions.push(`${resource.keyExpression};`);
-  }
-  definitions = [...definitions, ...getModelPropertiesDeclarations(resource.properties)];
-
-  for (const p of resource.optionalStandardProperties) {
-    definitions.push(`\n...${p}`);
+  for (const property of resource.properties) {
+    if (property.kind === "property") definitions.push(...getModelPropertyDeclarations(property));
+    else if (property.kind === "spread") definitions.push(getSpreadExpressionDecalaration(property));
   }
 
   definitions.push("}\n");
@@ -236,20 +233,6 @@ function generateArmResponse(responses: TypespecTemplateModel[] | TypespecVoidTy
   }
 
   return responses.map((r) => generateTemplateModel(r)).join(" | ");
-}
-
-export function generateTemplateModel(templateModel: TypespecTemplateModel): string {
-  return `${templateModel.name}${
-    templateModel.arguments
-      ? `<${templateModel.arguments
-          .map((a) => (a.kind === "template" ? generateTemplateModel(a as TypespecTemplateModel) : a.name))
-          .join(",")}>`
-      : ""
-  }${
-    templateModel.additionalProperties
-      ? ` & { ${templateModel.additionalProperties.map((p) => generateParameter(p)).join(";")} }`
-      : ""
-  }${templateModel.additionalTemplateModel ? templateModel.additionalTemplateModel : ""}`;
 }
 
 export function generateArmResourceExamples(resource: TspArmResource): Record<string, string> {

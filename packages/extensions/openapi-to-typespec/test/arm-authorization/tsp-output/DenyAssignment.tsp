@@ -13,6 +13,7 @@ namespace Azure.ResourceManager.Authorization;
 /**
  * Deny Assignment
  */
+@extensionResource
 model DenyAssignment
   is Azure.ResourceManager.ExtensionResource<DenyAssignmentProperties> {
   ...ResourceNameParameter<

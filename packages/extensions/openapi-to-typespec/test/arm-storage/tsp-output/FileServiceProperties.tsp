@@ -24,7 +24,13 @@ model FileServiceProperties
     SegmentName = "fileServices",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.ResourceSkuProperty;
+
+  /**
+   * Sku name and tier.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility("read")
+  sku?: Sku;
 }
 
 @armResourceOperations

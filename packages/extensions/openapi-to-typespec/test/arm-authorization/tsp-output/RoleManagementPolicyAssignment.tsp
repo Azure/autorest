@@ -13,6 +13,7 @@ namespace Azure.ResourceManager.Authorization;
 /**
  * Role management policy
  */
+@extensionResource
 model RoleManagementPolicyAssignment
   is Azure.ResourceManager.ExtensionResource<RoleManagementPolicyAssignmentProperties> {
   ...ResourceNameParameter<

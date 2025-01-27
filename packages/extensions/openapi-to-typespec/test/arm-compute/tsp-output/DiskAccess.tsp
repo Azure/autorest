@@ -25,6 +25,7 @@ model DiskAccess
   /**
    * The extended location where the disk access will be created. Extended location cannot be changed.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   extendedLocation?: ExtendedLocation;
 }
 

@@ -26,6 +26,7 @@ model OSFamily is Azure.ResourceManager.ProxyResource<OSFamilyProperties> {
   /**
    * Resource location.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility("read")
   location?: string;
 }

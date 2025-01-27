@@ -4131,8 +4131,8 @@ model CodeContainer extends AssetContainer {
   provisioningState?: AssetProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AssetContainer extends ResourceBase {
   /**
    * Is the asset archived?
@@ -4196,8 +4196,8 @@ model CodeVersion extends AssetBase {
   provisioningState?: AssetProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AssetBase extends ResourceBase {
   /**
    * Specifies the lifecycle setting of managed data asset.
@@ -4557,8 +4557,8 @@ model Route {
 model ModelContainerResourceArmPaginatedResult
   is Azure.Core.Page<ModelContainerResource>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ModelContainer extends AssetContainer {
   /**
    * Provisioning state for the model container.
@@ -5021,8 +5021,8 @@ model BatchDeploymentConfiguration {}
 @discriminator("referenceType")
 model AssetReferenceBase {}
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DeploymentResourceConfiguration extends ResourceConfiguration {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -6079,8 +6079,8 @@ model OnlineEndpoint extends EndpointPropertiesBase {
 model OnlineDeploymentTrackedResourceArmPaginatedResult
   is Azure.Core.Page<OnlineDeploymentTrackedResource>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("endpointComputeType")
 model OnlineDeployment extends EndpointDeploymentPropertiesBase {
   /**
@@ -7405,8 +7405,8 @@ model EncryptionKeyVaultUpdateProperties {
 model WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult
   is Azure.Core.Page<WorkspaceConnectionPropertiesV2BasicResource>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("authType")
 model WorkspaceConnectionPropertiesV2 {
   /**
@@ -7414,8 +7414,8 @@ model WorkspaceConnectionPropertiesV2 {
    */
   category?: ConnectionCategory;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   expiryTime?: utcDateTime;
 
   /**
@@ -9481,8 +9481,8 @@ model QueueSettings {
   priority?: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model JobResourceConfiguration extends ResourceConfiguration {
   /**
    * Extra arguments to pass to the Docker run command. This would override any parameters that have already been set by the system, or in this section. This parameter is only supported for Azure ML compute types.
@@ -11779,8 +11779,8 @@ model ImageClassification extends AutoMLVertical {
   taskType: "ImageClassification";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ImageClassificationBase extends ImageVertical {
   /**
    * Settings used for training the model.
@@ -12314,8 +12314,8 @@ model ImageInstanceSegmentation extends AutoMLVertical {
   taskType: "ImageInstanceSegmentation";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ImageObjectDetectionBase extends ImageVertical {
   /**
    * Settings used for training the model.
@@ -13117,8 +13117,8 @@ model NlpVertical {
   validationData?: MLTableJobInput;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model NlpVerticalFeaturizationSettings extends FeaturizationSettings {}
 
 /**

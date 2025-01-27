@@ -21,11 +21,7 @@ model CapacityReservationGroup
     SegmentName = "capacityReservationGroups",
     NamePattern = ""
   >;
-
-  /**
-   * Availability Zones to use for this capacity reservation group. The zones can be assigned only during creation. If not provided, the group supports only regional resources in the region. If provided, enforces each capacity reservation in the group to be in one of the zones.
-   */
-  zones?: string[];
+  ...Azure.ResourceManager.AvailabilityZonesProperty;
 }
 
 @armResourceOperations
