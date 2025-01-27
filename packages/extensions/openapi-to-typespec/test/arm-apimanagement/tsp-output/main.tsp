@@ -72,8 +72,8 @@ using TypeSpec.Versioning;
   title: "ApiManagementClient",
 })
 @versioned(Versions)
-// FIXME: Common type version v2 is not supported for now.
-// @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v2)
+// FIXME: Common type version v2 is not supported for now. Set to v3.
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Azure.ResourceManager.ApiManagement;
 
 /**

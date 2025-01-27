@@ -26,18 +26,25 @@ model ApiManagementServiceResource
   >;
 
   /**
+   * SKU properties of the API Management service.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  sku: ApiManagementServiceSkuProperties;
+
+  /**
+   * Managed service identity of the Api Management service.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  identity?: ApiManagementServiceIdentity;
+
+  /**
    * ETag of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility("read")
   etag?: string;
 
-  /**
-   * A list of availability zones denoting where the resource needs to come from.
-   */
-  zones?: string[];
-
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
-  ...Azure.ResourceManager.ResourceSkuProperty;
+  ...Azure.ResourceManager.AvailabilityZonesProperty;
 }
 
 @armResourceOperations

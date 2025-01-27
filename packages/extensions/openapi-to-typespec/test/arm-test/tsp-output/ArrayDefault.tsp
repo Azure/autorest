@@ -20,8 +20,7 @@ model ArrayDefault
   ...ResourceNameParameter<
     Resource = ArrayDefault,
     KeyName = "name",
-    SegmentName = "arraydefaults",
-    NamePattern = "^[a-zA-Z0-9-]{3,24}$"
+    SegmentName = "arraydefaults"
   >;
 }
 

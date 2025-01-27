@@ -21,7 +21,12 @@ model DataManagerForAgriculture
     SegmentName = "farmBeats",
     NamePattern = "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
   >;
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+
+  /**
+   * Identity for the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  identity?: Identity;
 }
 
 @armResourceOperations

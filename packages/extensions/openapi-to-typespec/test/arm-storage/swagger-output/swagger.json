@@ -6200,8 +6200,9 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+          "$ref": "#/definitions/Sku",
+          "description": "Sku name and tier.",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -7072,8 +7073,9 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+          "$ref": "#/definitions/Sku",
+          "description": "Sku name and tier.",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -10003,22 +10005,23 @@
           "description": "Properties of the storage account.",
           "x-ms-client-flatten": true
         },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Gets the SKU.",
+          "readOnly": true
+        },
         "kind": {
           "$ref": "#/definitions/Kind",
           "description": "Gets the Kind.",
           "readOnly": true
         },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
           "description": "The extendedLocation of the resource."
-        },
-        "identity": {
-          "$ref": "../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "sku": {
-          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         }
       },
       "allOf": [

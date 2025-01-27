@@ -2,17 +2,8 @@ import { Property } from "@autorest/codemodel";
 import { WithSuppressDirective } from "../interfaces";
 import { isDictionarySchema } from "./schemas";
 
-// TO-DO: remove it
-export function generateSuppressionForDocumentRequired(): string {
-  return `#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"`;
-}
-
 export function generateSuppressionForNoEnum(): string {
   return `#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"`;
-}
-
-export function getPropertySuppressions(propertySchema: Property): WithSuppressDirective[] | undefined {
-  return isDictionarySchema(propertySchema.schema) ? getSuppressionsForRecordProperty() : undefined;
 }
 
 export function generateSuppressions(suppressions: WithSuppressDirective[]): string[] {
@@ -70,15 +61,6 @@ export function getSuppressionsForModelExtension(): WithSuppressDirective[] {
   return [
     {
       suppressionCode: "@azure-tools/typespec-azure-core/composition-over-inheritance",
-      suppressionMessage: "For backward compatibility",
-    },
-  ];
-}
-
-export function getSuppressionsForRecordProperty(): WithSuppressDirective[] {
-  return [
-    {
-      suppressionCode: "@azure-tools/typespec-azure-resource-manager/arm-no-record",
       suppressionMessage: "For backward compatibility",
     },
   ];

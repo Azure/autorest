@@ -13,6 +13,7 @@ namespace Azure.ResourceManager.Authorization;
 /**
  * Role Assignment schedule request
  */
+@extensionResource
 model RoleAssignmentScheduleRequest
   is Azure.ResourceManager.ExtensionResource<RoleAssignmentScheduleRequestProperties> {
   ...ResourceNameParameter<

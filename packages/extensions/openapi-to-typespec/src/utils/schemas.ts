@@ -12,6 +12,7 @@ import {
   StringSchema,
   ArmIdSchema,
   UriSchema,
+  UuidSchema,
 } from "@autorest/codemodel";
 
 export function isConstantSchema(schema: Schema): schema is ConstantSchema {
@@ -24,6 +25,10 @@ export function isStringSchema(schema: Schema): schema is StringSchema {
 
 export function isUriSchema(schema: Schema): schema is UriSchema {
   return schema.type === SchemaType.Uri;
+}
+
+export function isUuidSchema(schema: Schema): schema is UuidSchema {
+  return schema.type === SchemaType.Uuid;
 }
 
 export function isArraySchema(schema: Schema): schema is ArraySchema {

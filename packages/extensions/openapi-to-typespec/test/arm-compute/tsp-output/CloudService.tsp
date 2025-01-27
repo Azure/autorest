@@ -21,11 +21,7 @@ model CloudService
     SegmentName = "cloudServices",
     NamePattern = ""
   >;
-
-  /**
-   * List of logical availability zone of the resource. List should contain only 1 zone where cloud service should be provisioned. This field is optional.
-   */
-  zones?: string[];
+  ...Azure.ResourceManager.AvailabilityZonesProperty;
 }
 
 @armResourceOperations

@@ -26,17 +26,20 @@ model ProviderOperationsMetadata is Azure.ResourceManager.ProxyResource<{}> {
   /**
    * The provider display name.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   displayName?: string;
 
   /**
    * The provider resource types
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", ["name"])
   resourceTypes?: AuthorizationProviderResourceType[];
 
   /**
    * The provider operations.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", [])
   operations?: ProviderOperation[];
 }

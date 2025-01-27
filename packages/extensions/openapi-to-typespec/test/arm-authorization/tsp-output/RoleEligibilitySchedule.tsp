@@ -13,6 +13,7 @@ namespace Azure.ResourceManager.Authorization;
 /**
  * Role eligibility schedule
  */
+@extensionResource
 model RoleEligibilitySchedule
   is Azure.ResourceManager.ExtensionResource<RoleEligibilityScheduleProperties> {
   ...ResourceNameParameter<

@@ -13,6 +13,7 @@ namespace Azure.ResourceManager.Authorization;
 /**
  * Role definition.
  */
+@extensionResource
 model RoleDefinition
   is Azure.ResourceManager.ExtensionResource<RoleDefinitionProperties> {
   ...ResourceNameParameter<

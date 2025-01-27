@@ -1963,11 +1963,12 @@ model StorageAccountInternetEndpoints {
  * Storage account keys creation time.
  */
 model KeyCreationTime {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   key1?: utcDateTime;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   key2?: utcDateTime;
 }
 
@@ -4339,8 +4340,8 @@ model QueueServicePropertiesProperties {
   cors?: CorsRules;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model QueueProperties {
   /**
    * A name-value pair that represents queue metadata.
@@ -4380,8 +4381,8 @@ model TableServicePropertiesProperties {
   cors?: CorsRules;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model TableProperties {
   /**
    * Table name under the specified account
@@ -4463,8 +4464,8 @@ model FileShareItem extends AzureEntityResource {
   properties?: FileShareProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ListQueue extends Resource {
   /**
    * List Queue resource properties.
