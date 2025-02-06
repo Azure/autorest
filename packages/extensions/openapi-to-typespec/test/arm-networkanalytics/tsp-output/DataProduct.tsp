@@ -21,7 +21,11 @@ model DataProduct
     SegmentName = "dataProducts",
     NamePattern = "^[a-z][a-z0-9]*$"
   >;
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+
+  /**
+   * The managed service identities assigned to this resource.
+   */
+  identity?: ManagedServiceIdentity;
 }
 
 @armResourceOperations

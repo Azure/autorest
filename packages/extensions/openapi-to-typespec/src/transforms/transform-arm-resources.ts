@@ -1,7 +1,7 @@
 import { Operation, Parameter, Property, SchemaType } from "@autorest/codemodel";
 import _ from "lodash";
 import pluralize, { singular } from "pluralize";
-import { getArmCommonTypeVersion, getSession } from "../autorest-session";
+import { getSession } from "../autorest-session";
 import { getDataTypes } from "../data-types";
 import {
   ArmResourceKind,

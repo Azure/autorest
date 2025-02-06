@@ -1,186 +1,162 @@
-import { isObjectSchema, Schema } from "@autorest/codemodel";
-import { getArmCommonTypeVersion } from "../autorest-session";
-import { isChoiceSchema, isDictionarySchema, isSealedChoiceSchema, isUriSchema, isUuidSchema } from "./schemas";
+import { ChoiceSchema, isObjectSchema, ObjectSchema, Schema, SealedChoiceSchema } from "@autorest/codemodel";
+import { ArmCommonTypeVersion, getArmCommonTypeVersion } from "../autorest-session";
+import { isChoiceSchema, isDictionarySchema, isSealedChoiceSchema, isUuidSchema } from "./schemas";
 
+interface PropertyCondition {
+  serializedName: string;
+  required: boolean;
+  schema: (property: Schema) => boolean;
+}
+function isEquivalentObject(schema: ObjectSchema, properties: Record<string, PropertyCondition>): boolean {
+  if (schema.properties?.length !== Object.keys(properties).length) return false;
+
+  for (const property of schema.properties ?? []) {
+    if (property.serializedName in properties) {
+      const propertySchema = properties[property.serializedName];
+      if ((property.required ?? false) !== propertySchema.required) return false;
+      if (!propertySchema.schema(property.schema)) return false;
+    } else return false;
+  }
+  return true;
+}
+
+interface ChoiceValueCondition {
+  value: string;
+}
+function isEquivalentChoice(
+  schema: SealedChoiceSchema | ChoiceSchema,
+  choices: Record<ArmCommonTypeVersion, Record<string, ChoiceValueCondition>>,
+): boolean {
+  const commonTypeVersion = getArmCommonTypeVersion();
+  const choiceVersion = choices[commonTypeVersion];
+  if (schema.choices.length !== Object.keys(choiceVersion).length) return false;
+
+  for (const choice of schema.choices) {
+    if (choice.language.default.name in choiceVersion) {
+      if (choiceVersion[choice.language.default.name].value !== choice.value) return false;
+    } else return false;
+  }
+  return true;
+}
+
+const skuProperties: Record<string, PropertyCondition> = {
+  name: { serializedName: "name", required: true, schema: (schema) => schema.type === "string" },
+  tier: { serializedName: "tier", required: false, schema: isSkuTier },
+  size: { serializedName: "size", required: false, schema: (schema) => schema.type === "string" },
+  family: { serializedName: "family", required: false, schema: (schema) => schema.type === "string" },
+  capacity: { serializedName: "capacity", required: false, schema: (schema) => schema.type === "integer" },
+};
 export function isSku(schema: Schema): boolean {
-  if (!isObjectSchema(schema) || schema.properties?.length !== 5) return false;
-
-  let nameFound = false;
-  let tierFound = false;
-  let sizeFound = false;
-  let familyFound = false;
-  let capacityFound = false;
-
-  for (const property of schema.properties) {
-    if (property.serializedName === "name" && property.required && property.schema.type === "string") {
-      nameFound = true;
-    } else if (property.serializedName === "tier" && !property.required && isSkuTier(property.schema)) {
-      tierFound = true;
-    } else if (property.serializedName === "size" && !property.required && property.schema.type === "string") {
-      sizeFound = true;
-    } else if (property.serializedName === "family" && !property.required && property.schema.type === "string") {
-      familyFound = true;
-    } else if (property.serializedName === "capacity" && !property.required && property.schema.type === "integer") {
-      capacityFound = true;
-    }
-  }
-  return nameFound && tierFound && sizeFound && familyFound && capacityFound;
+  return isObjectSchema(schema) && isEquivalentObject(schema, skuProperties);
 }
 
+const skuTierChoiceValues: Record<ArmCommonTypeVersion, Record<string, ChoiceValueCondition>> = [
+  "v3",
+  "v4",
+  "v5",
+  "v6",
+].reduce(
+  (acc, version) => {
+    acc[version] = {
+      Free: { value: "Free" },
+      Basic: { value: "Basic" },
+      Standard: { value: "Standard" },
+      Premium: { value: "Premium" },
+    };
+    return acc;
+  },
+  {} as Record<string, Record<string, ChoiceValueCondition>>,
+);
 function isSkuTier(schema: Schema): boolean {
-  if (!isSealedChoiceSchema(schema) || schema.choices.length !== 4) return false;
-
-  let freeFound = false;
-  let basicFound = false;
-  let standardFound = false;
-  let premiumFound = false;
-  for (const choice of schema.choices) {
-    if (choice.value === "Free") {
-      freeFound = true;
-    } else if (choice.value === "Basic") {
-      basicFound = true;
-    } else if (choice.value === "Standard") {
-      standardFound = true;
-    } else if (choice.value === "Premium") {
-      premiumFound = true;
-    }
-  }
-  return freeFound && basicFound && standardFound && premiumFound;
+  return isSealedChoiceSchema(schema) && isEquivalentChoice(schema, skuTierChoiceValues);
 }
 
+const extendedLocationProperties: Record<string, PropertyCondition> = {
+  type: { serializedName: "type", required: true, schema: isExtendedLocationType },
+  name: { serializedName: "name", required: true, schema: (schema) => schema.type === "string" },
+};
 export function isExtendedLocation(schema: Schema): boolean {
-  if (!isObjectSchema(schema) || schema.properties?.length !== 2) return false;
-
-  let typeFound = false;
-  let nameFound = false;
-
-  for (const property of schema.properties) {
-    if (property.serializedName === "type" && property.required && isExtendedLocationType(property.schema)) {
-      typeFound = true;
-    } else if (property.serializedName === "name" && property.required && property.schema.type === "string") {
-      nameFound = true;
-    }
-  }
-  return typeFound && nameFound;
+  return isObjectSchema(schema) && isEquivalentObject(schema, extendedLocationProperties);
 }
 
+const extendLocationTypeChoiceValues: Record<ArmCommonTypeVersion, Record<string, ChoiceValueCondition>> = [
+  "v3",
+  "v4",
+  "v5",
+  "v6",
+].reduce(
+  (acc, version) => {
+    acc[version] = {
+      Edge: { value: "Edge" },
+      CustomLocation: { value: "CustomLocation" },
+    };
+    return acc;
+  },
+  {} as Record<string, Record<string, ChoiceValueCondition>>,
+);
 function isExtendedLocationType(schema: Schema): boolean {
-  if (!isChoiceSchema(schema) || schema.choices.length !== 2) return false;
-
-  let edgeFound = false;
-  let customLocationFound = false;
-
-  for (const choice of schema.choices) {
-    if (choice.value === "Edge") {
-      edgeFound = true;
-    } else if (choice.value === "CustomLocation") {
-      customLocationFound = true;
-    }
-  }
-  return edgeFound && customLocationFound;
+  return isChoiceSchema(schema) && isEquivalentChoice(schema, extendLocationTypeChoiceValues);
 }
 
+const planProperties: Record<string, PropertyCondition> = {
+  name: { serializedName: "name", required: true, schema: (schema) => schema.type === "string" },
+  publisher: { serializedName: "publisher", required: true, schema: (schema) => schema.type === "string" },
+  product: { serializedName: "product", required: true, schema: (schema) => schema.type === "string" },
+  promotionCode: { serializedName: "promotionCode", required: false, schema: (schema) => schema.type === "string" },
+  version: { serializedName: "version", required: false, schema: (schema) => schema.type === "string" },
+};
 export function isPlan(schema: Schema): boolean {
-  if (!isObjectSchema(schema) || schema.properties?.length !== 5) return false;
-
-  let nameFound = false;
-  let publisherFound = false;
-  let productFound = false;
-  let promotionCodeFound = false;
-  let versionFound = false;
-
-  for (const property of schema.properties) {
-    if (property.serializedName === "name" && property.required && property.schema.type === "string") {
-      nameFound = true;
-    } else if (property.serializedName === "publisher" && property.required && property.schema.type === "string") {
-      publisherFound = true;
-    } else if (property.serializedName === "product" && property.required && property.schema.type === "string") {
-      productFound = true;
-    } else if (property.serializedName === "promotionCode" && !property.required && property.schema.type === "string") {
-      promotionCodeFound = true;
-    } else if (property.serializedName === "version" && !property.required && property.schema.type === "string") {
-      versionFound = true;
-    }
-  }
-
-  return nameFound && publisherFound && productFound && promotionCodeFound && versionFound;
+  return isObjectSchema(schema) && isEquivalentObject(schema, planProperties);
 }
 
+const managedServiceIdentityProperties: Record<string, PropertyCondition> = {
+  principalId: { serializedName: "principalId", required: false, schema: isUuidSchema },
+  tenantId: { serializedName: "tenantId", required: false, schema: isUuidSchema },
+  type: { serializedName: "type", required: true, schema: isManagedSerivceIdentityType },
+  userAssignedIdentities: {
+    serializedName: "userAssignedIdentities",
+    required: false,
+    schema: (schema) => isDictionarySchema(schema) && isUserAssignedIdentity(schema.elementType),
+  },
+};
 export function isManagedSerivceIdentity(schema: Schema): boolean {
-  if (!isObjectSchema(schema) || schema.properties?.length !== 4) return false;
-
-  const commonTypeVersion = getArmCommonTypeVersion();
-  let principalIdFound = false;
-  let tenantIdFound = false;
-  let typeFound = false;
-  let userAssignedIdentitiesFound = false;
-
-  for (const property of schema.properties) {
-    if (property.serializedName === "principalId" && !property.required && isUuidSchema(property.schema)) {
-      principalIdFound = true;
-    } else if (property.serializedName === "tenantId" && !property.required && isUuidSchema(property.schema)) {
-      tenantIdFound = true;
-    } else if (
-      property.serializedName === "type" &&
-      property.required &&
-      isManagedSerivceIdentityType(property.schema)
-    ) {
-      typeFound = true;
-    }
-    // For all the common type versions only check if it is dictionary with specific value type because of https://github.com/Azure/typespec-azure/issues/1163
-    else if (
-      property.serializedName === "userAssignedIdentities" &&
-      !property.required &&
-      isDictionarySchema(property.schema) &&
-      isUserAssignedIdentity(property.schema.elementType)
-    ) {
-      return (userAssignedIdentitiesFound = true);
-    }
-  }
-
-  return principalIdFound && tenantIdFound && typeFound && userAssignedIdentitiesFound;
+  return isObjectSchema(schema) && isEquivalentObject(schema, managedServiceIdentityProperties);
 }
 
+const managedServiceIdentityTypeChoiceValues: Record<ArmCommonTypeVersion, Record<string, ChoiceValueCondition>> = {
+  v3: {
+    None: { value: "None" },
+    SystemAssigned: { value: "SystemAssigned" },
+    UserAssigned: { value: "UserAssigned" },
+    "SystemAssigned,UserAssigned": { value: "SystemAssigned,UserAssigned" },
+  },
+  v4: {
+    None: { value: "None" },
+    SystemAssigned: { value: "SystemAssigned" },
+    UserAssigned: { value: "UserAssigned" },
+    "SystemAssigned, UserAssigned": { value: "SystemAssigned, UserAssigned" },
+  },
+  v5: {
+    None: { value: "None" },
+    SystemAssigned: { value: "SystemAssigned" },
+    UserAssigned: { value: "UserAssigned" },
+    "SystemAssigned,UserAssigned": { value: "SystemAssigned, UserAssigned" },
+  },
+  v6: {
+    None: { value: "None" },
+    SystemAssigned: { value: "SystemAssigned" },
+    UserAssigned: { value: "UserAssigned" },
+    "SystemAssigned,UserAssigned": { value: "SystemAssigned,UserAssigned" },
+  },
+};
 function isManagedSerivceIdentityType(schema: Schema): boolean {
-  if (!isChoiceSchema(schema) || schema.choices.length !== 4) return false;
-
-  const commonTypeVersion = getArmCommonTypeVersion();
-  let noneFound = false;
-  let systemAssignedFound = false;
-  let userAssignedFound = false;
-  let systemAssignedUserAssignedFound = false;
-
-  for (const choice of schema.choices) {
-    if (choice.value === "None") {
-      noneFound = true;
-    } else if (choice.value === "SystemAssigned") {
-      systemAssignedFound = true;
-    } else if (choice.value === "UserAssigned") {
-      userAssignedFound = true;
-    } else if (
-      (choice.value === "SystemAssigned,UserAssigned" && ["v6", "v5", "v3"].includes(commonTypeVersion)) ||
-      (choice.value === "SystemAssigned, UserAssigned" && commonTypeVersion === "v4")
-    ) {
-      systemAssignedUserAssignedFound = true;
-    }
-  }
-
-  return noneFound && systemAssignedFound && userAssignedFound && systemAssignedUserAssignedFound;
+  return isChoiceSchema(schema) && isEquivalentChoice(schema, managedServiceIdentityTypeChoiceValues);
 }
 
+const userAssignedIdentityProperties: Record<string, PropertyCondition> = {
+  principalId: { serializedName: "principalId", required: false, schema: isUuidSchema },
+  clientId: { serializedName: "clientId", required: false, schema: isUuidSchema },
+};
 function isUserAssignedIdentity(schema: Schema): boolean {
-  if (!isObjectSchema(schema) || schema.properties?.length !== 2) return false;
-
-  let principalIdFound = false;
-  let clientIdFound = false;
-
-  for (const property of schema.properties) {
-    if (property.serializedName === "principalId" && !property.required && isUuidSchema(property.schema)) {
-      principalIdFound = true;
-    } else if (property.serializedName === "clientId" && !property.required && isUuidSchema(property.schema)) {
-      clientIdFound = true;
-    }
-  }
-
-  return principalIdFound && clientIdFound;
+  return isObjectSchema(schema) && isEquivalentObject(schema, userAssignedIdentityProperties);
 }

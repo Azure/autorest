@@ -8,7 +8,6 @@ import { isArraySchema, isResponseSchema, isStringSchema, isUriSchema } from "./
 
 export function getFullyQualifiedName(type: string, namespace: string | undefined = undefined): string {
   switch (type) {
-    case "ManagedServiceIdentity":
     case "TenantBaseParameters":
     case "BaseParameters":
     case "SubscriptionBaseParameters":

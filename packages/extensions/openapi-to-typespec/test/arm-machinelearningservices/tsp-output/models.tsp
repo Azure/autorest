@@ -3671,6 +3671,34 @@ model ResourceName {
 model PaginatedComputeResourcesList is Azure.Core.Page<ComputeResource>;
 
 /**
+ * Managed service identity (system assigned and/or user assigned identities)
+ */
+model ManagedServiceIdentity {
+  /**
+   * The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.
+   */
+  @visibility("read")
+  principalId?: string;
+
+  /**
+   * The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.
+   */
+  @visibility("read")
+  tenantId?: string;
+
+  /**
+   * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
+   */
+  type: ManagedServiceIdentityType;
+
+  /**
+   * The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  userAssignedIdentities?: Record<UserAssignedIdentity>;
+}
+
+/**
  * The resource model definition representing SKU
  */
 model Sku {
@@ -7296,7 +7324,7 @@ model WorkspaceUpdateParameters {
   /**
    * Managed service identity (system assigned and/or user assigned identities)
    */
-  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
+  identity?: ManagedServiceIdentity;
 
   /**
    * The properties that the machine learning workspace will be updated with.
@@ -7756,7 +7784,7 @@ model PrivateLinkResource extends Resource {
   /**
    * Managed service identity (system assigned and/or user assigned identities)
    */
-  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
+  identity?: ManagedServiceIdentity;
 
   /**
    * Same as workspace location.
@@ -12826,7 +12854,7 @@ model ManagedComputeIdentity extends MonitorComputeIdentityBase {
   /**
    * Managed service identity (system assigned and/or user assigned identities)
    */
-  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
+  identity?: ManagedServiceIdentity;
 
   /**
    * [Required] Monitor compute identity type enum.

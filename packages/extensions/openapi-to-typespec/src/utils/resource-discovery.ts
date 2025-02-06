@@ -174,7 +174,6 @@ const _ArmCoreCustomTypes = [
   "TrackedResource",
   "ProxyResource",
   "ExtensionResource",
-  "ManagedServiceIdentity",
   "ManagedIdentityProperties",
   "UserAssignedIdentity",
   "ManagedSystemAssignedIdentity",

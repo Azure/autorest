@@ -433,6 +433,33 @@ model ConsumptionEndpointsProperties {
 }
 
 /**
+ * Managed service identity (system assigned and/or user assigned identities)
+ */
+model ManagedServiceIdentity {
+  /**
+   * The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.
+   */
+  @visibility("read")
+  principalId?: string;
+
+  /**
+   * The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.
+   */
+  @visibility("read")
+  tenantId?: string;
+
+  /**
+   * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
+   */
+  type: ManagedServiceIdentityType;
+
+  /**
+   * The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.
+   */
+  userAssignedIdentities?: Record<UserAssignedIdentity>;
+}
+
+/**
  * Common fields that are returned in the response for all Azure Resource Manager resources
  */
 model Resource {
@@ -532,7 +559,7 @@ model DataProductUpdate {
   /**
    * The managed service identities assigned to this resource.
    */
-  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
+  identity?: ManagedServiceIdentity;
 
   /**
    * Resource tags.
