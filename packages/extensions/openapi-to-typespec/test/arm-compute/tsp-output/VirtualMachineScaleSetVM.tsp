@@ -51,7 +51,12 @@ model VirtualMachineScaleSetVM
   @visibility("read")
   resources?: VirtualMachineExtension[];
 
-  ...Azure.ResourceManager.AvailabilityZonesProperty;
+  /**
+   * The virtual machine zones.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility("read")
+  zones?: string[];
 
   /**
    * The identity of the virtual machine, if configured.
