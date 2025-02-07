@@ -3514,8 +3514,8 @@ model ConnectivityIssue {
   context?: Record<string>[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ContentTypeContractProperties {
   /**
    * Content type identifier
@@ -3543,8 +3543,8 @@ model ContentTypeContractProperties {
   version?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DeletedServiceContractProperties {
   /**
    * Fully-qualified API Management Service Resource ID
@@ -4563,8 +4563,8 @@ model GatewayHostnameConfigurationContractProperties {
   http2Enabled?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model GatewayApiData extends ApiContract {}
 
 /**
@@ -4714,8 +4714,8 @@ model GroupUpdateParametersProperties {
   externalId?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ApiManagementGroupUserData extends UserContract {}
 
 /**
@@ -5495,8 +5495,8 @@ model PolicyDescriptionContractProperties {
   scope?: int64;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model PortalRevisionContractProperties {
   /**
    * Portal revision description.
@@ -5832,12 +5832,12 @@ model ProductUpdateProperties extends ProductEntityBaseParameters {
   displayName?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ProductApiData extends ApiContract {}
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ProductGroupData extends GroupContract {}
 
 /**

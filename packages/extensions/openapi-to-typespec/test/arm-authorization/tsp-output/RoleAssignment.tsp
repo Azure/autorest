@@ -13,6 +13,7 @@ namespace Azure.ResourceManager.Authorization;
 /**
  * Role Assignments
  */
+@extensionResource
 model RoleAssignment
   is Azure.ResourceManager.ExtensionResource<RoleAssignmentProperties> {
   ...ResourceNameParameter<

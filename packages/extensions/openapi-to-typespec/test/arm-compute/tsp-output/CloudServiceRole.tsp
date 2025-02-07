@@ -27,12 +27,14 @@ model CloudServiceRole
   /**
    * Resource location
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility("read")
   location?: string;
 
   /**
    * Describes the cloud service role sku.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: CloudServiceRoleSku;
 }
 

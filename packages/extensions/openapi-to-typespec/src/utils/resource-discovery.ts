@@ -174,7 +174,6 @@ const _ArmCoreCustomTypes = [
   "TrackedResource",
   "ProxyResource",
   "ExtensionResource",
-  "ManagedServiceIdentity",
   "ManagedIdentityProperties",
   "UserAssignedIdentity",
   "ManagedSystemAssignedIdentity",
@@ -223,8 +222,4 @@ export function filterArmEnums(enums: TypespecEnum[]): TypespecEnum[] {
     filtered.push(..._ArmCoreCustomEnums);
   }
   return enums.filter((e) => !filtered.includes(e.name));
-}
-
-export function isTspArmResource(schema: TypespecObject): schema is TspArmResource {
-  return Boolean((schema as TspArmResource).resourceKind);
 }

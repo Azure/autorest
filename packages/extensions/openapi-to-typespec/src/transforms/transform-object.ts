@@ -10,7 +10,6 @@ import {
   SchemaType,
   StringSchema,
 } from "@autorest/codemodel";
-import { get } from "lodash";
 import { getDataTypes } from "../data-types";
 import { TypespecObject, TypespecObjectProperty, WithSuppressDirective } from "../interfaces";
 import { getOptions } from "../options";
@@ -36,10 +35,9 @@ import {
   isStringSchema,
 } from "../utils/schemas";
 import {
-  getPropertySuppressions,
   getSuppressionsForModelExtension,
   getSuppressionsForProvisioningState,
-  getSuppressionsForRecordProperty,
+  getSuppresssionWithCode,
 } from "../utils/suppressions";
 import { getDefaultValue, transformValue } from "../utils/values";
 import { transformEnum } from "./transform-choices";
@@ -120,6 +118,8 @@ export function transformObject(schema: ObjectSchema, codeModel: CodeModel): Typ
     const provisioningProperty = properties.find((p) => p.name === "provisioningState");
   }
 
+  if (isFullCompatible && !doc)
+    suppressions.push(getSuppresssionWithCode("@azure-tools/typespec-azure-core/documentation-required"));
   const updatedVisited: TypespecObject = {
     name,
     doc,
@@ -171,6 +171,7 @@ export function transformObjectProperty(propertySchema: Property, codeModel: Cod
       decorators: getPropertyDecorators(propertySchema),
       clientDecorators: getPropertyClientDecorators(propertySchema),
       defaultValue: getDefaultValue(visited.name, propertySchema.schema),
+      suppressions: getPropertySuppressions(propertySchema),
     };
   }
 
@@ -200,6 +201,20 @@ export function transformObjectProperty(propertySchema: Property, codeModel: Cod
     defaultValue: getDefaultValue(type, propertySchema.schema),
     suppressions: getPropertySuppressions(propertySchema),
   };
+}
+
+function getPropertySuppressions(property: Property): WithSuppressDirective[] | undefined {
+  if (!getOptions().isFullCompatible) return undefined;
+
+  const suppressions = [];
+  if (isDictionarySchema(property.schema)) {
+    suppressions.push(getSuppresssionWithCode("@azure-tools/typespec-azure-resource-manager/arm-no-record"));
+  }
+  if (!property.language.default.description) {
+    suppressions.push(getSuppresssionWithCode("@azure-tools/typespec-azure-core/documentation-required"));
+  }
+
+  return suppressions.length > 0 ? suppressions : undefined;
 }
 
 function getFixme(property: Property, codeModel: CodeModel): string[] {

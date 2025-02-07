@@ -19,8 +19,7 @@ model DictProperty is Azure.ResourceManager.TrackedResource<Record<unknown>> {
   ...ResourceNameParameter<
     Resource = DictProperty,
     KeyName = "name",
-    SegmentName = "dictproperties",
-    NamePattern = "^[a-zA-Z0-9-]{3,24}$"
+    SegmentName = "dictproperties"
   >;
 }
 

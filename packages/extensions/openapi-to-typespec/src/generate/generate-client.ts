@@ -59,6 +59,7 @@ export function generateArmResourceClientDecorator(resource: TspArmResource): st
   }
 
   for (const property of resource.properties) {
+    if (property.kind !== "property") continue;
     const decorators = generateAugmentedDecorators(`${targetName}.${property.name}`, property.clientDecorators);
     decorators && definitions.push(decorators);
   }

@@ -2173,8 +2173,8 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "$ref": "#/definitions/Identity",
+          "description": "Identity for the resource."
         }
       },
       "allOf": [

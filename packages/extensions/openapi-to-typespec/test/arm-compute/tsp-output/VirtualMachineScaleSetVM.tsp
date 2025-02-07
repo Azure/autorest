@@ -27,35 +27,36 @@ model VirtualMachineScaleSetVM
   /**
    * The virtual machine instance ID.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility("read")
   instanceId?: string;
 
   /**
    * The virtual machine SKU.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility("read")
   sku?: Sku;
 
   /**
    * Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   plan?: Plan;
 
   /**
    * The virtual machine child extension resources.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility("read")
   resources?: VirtualMachineExtension[];
 
-  /**
-   * The virtual machine zones.
-   */
-  @visibility("read")
-  zones?: string[];
+  ...Azure.ResourceManager.AvailabilityZonesProperty;
 
   /**
    * The identity of the virtual machine, if configured.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   identity?: VirtualMachineIdentity;
 }
 

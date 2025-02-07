@@ -1,14 +1,13 @@
 import { ArraySchema, isObjectSchema, ObjectSchema, Operation, Response, SchemaResponse } from "@autorest/codemodel";
 import { getSession } from "../autorest-session";
 import { getDataTypes } from "../data-types";
-import { generateTemplateModel } from "../generate/generate-arm-resource";
 import { TypespecDataType, TypespecTemplateModel } from "../interfaces";
 import { isResource } from "../resource/resource-equivalent";
+import { generateTemplateModel } from "./model-generation";
 import { isArraySchema, isResponseSchema, isStringSchema, isUriSchema } from "./schemas";
 
 export function getFullyQualifiedName(type: string, namespace: string | undefined = undefined): string {
   switch (type) {
-    case "ManagedServiceIdentity":
     case "TenantBaseParameters":
     case "BaseParameters":
     case "SubscriptionBaseParameters":

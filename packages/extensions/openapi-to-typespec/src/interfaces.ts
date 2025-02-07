@@ -31,6 +31,7 @@ export interface WithSummary {
 export interface WithDecorators {
   decorators?: TypespecDecorator[];
   clientDecorators?: TypespecDecorator[];
+  augmentDecorators?: TypespecDecorator[];
 }
 
 export interface TypespecOperationGroup extends WithDoc, WithSuppressDirectives {
@@ -101,6 +102,7 @@ export interface ServiceInformation extends WithDoc {
   consumes?: string[];
   authentication?: Auth[];
   armCommonTypeVersion?: string;
+  userSetArmCommonTypeVersion?: string;
 }
 
 export interface EndpointParameter extends WithDoc {
@@ -122,6 +124,7 @@ export type TypespecModel = TypespecTemplateModel | TypespecDataType;
 export interface TypespecTemplateModel extends TypespecDataType {
   kind: "template";
   arguments?: TypespecModel[];
+  namedArguments?: Record<string, string>; // TO-DO: value is string for now, should be refacted to some object type
   additionalProperties?: TypespecParameter[]; // Currently for body purpose
   additionalTemplateModel?: string; // Currently for LRO header purpose
 }
@@ -180,6 +183,12 @@ export interface TypespecObjectProperty extends TypespecDataType, WithSuppressDi
   decorators?: TypespecDecorator[];
   clientDecorators?: TypespecDecorator[];
   defaultValue?: any;
+}
+
+// A spread statement is always spreading some model or template from library
+export interface TypespecSpreadStatement extends WithSuppressDirectives, WithDecorators, WithDoc {
+  kind: "spread";
+  model: TypespecTemplateModel;
 }
 
 export interface TypespecDecorator extends WithFixMe, WithSuppressDirective {
@@ -321,17 +330,15 @@ export interface TspArmProviderActionOperation extends WithDoc, WithSummary, Wit
   lroHeaders?: TspLroHeaders;
 }
 
-export interface TspArmResource extends TypespecObject {
+export interface TspArmResource extends TypespecDataType, WithFixMe, WithDoc, WithDecorators {
   resourceKind: ArmResourceKind;
-  keyExpression: string | undefined;
+  properties: (TypespecObjectProperty | TypespecSpreadStatement)[];
   propertiesModelName: string;
   propertiesPropertyRequired: boolean;
   propertiesPropertyDescription: string;
   propertiesPropertyClientDecorator: TypespecDecorator[];
   resourceParent?: TspArmResource;
   resourceOperationGroups: TspArmResourceOperationGroup[];
-  optionalStandardProperties: string[];
-  baseModelName?: string;
   locationParent?: string;
 }
 

@@ -1577,7 +1577,7 @@
           "description": "The resource-specific properties for this resource."
         },
         "identity": {
-          "$ref": "../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
@@ -1840,7 +1840,7 @@
       "description": "The type used for update operations of the DataProduct.",
       "properties": {
         "identity": {
-          "$ref": "../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {
@@ -2298,6 +2298,68 @@
         "name",
         "location"
       ]
+    },
+    "ManagedServiceIdentity": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/ManagedServiceIdentityType",
+          "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed)."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.",
+          "additionalProperties": {
+            "$ref": "../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentity"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ManagedServiceIdentityType": {
+      "type": "string",
+      "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedServiceIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None"
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned"
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned"
+          },
+          {
+            "name": "SystemAssigned, UserAssigned",
+            "value": "SystemAssigned, UserAssigned"
+          }
+        ]
+      }
     },
     "ProvisioningState": {
       "type": "string",
