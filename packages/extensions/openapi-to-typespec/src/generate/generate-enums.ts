@@ -2,7 +2,12 @@ import { TypespecEnum } from "../interfaces";
 import { getOptions } from "../options";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
-import { generateSuppressionForNoEnum, generateSuppressions, getSuppresssionWithCode } from "../utils/suppressions";
+import {
+  generateSuppressionForNoEnum,
+  generateSuppressions,
+  getSuppressionWithCode,
+  SuppressionCode,
+} from "../utils/suppressions";
 
 export function generateEnums(typespecEnum: TypespecEnum) {
   const { isFullCompatible } = getOptions();
@@ -11,9 +16,7 @@ export function generateEnums(typespecEnum: TypespecEnum) {
   definitions.push(
     doc.length > 0 || !isFullCompatible
       ? doc
-      : `${generateSuppressions([
-          getSuppresssionWithCode("@azure-tools/typespec-azure-core/documentation-required"),
-        ])}\n`,
+      : `${generateSuppressions([getSuppressionWithCode(SuppressionCode.DocumentRequired)])}\n`,
   );
 
   const isExtensible = typespecEnum.isExtensible && !["ApiVersion"].includes(typespecEnum.name);
@@ -39,10 +42,7 @@ export function generateEnums(typespecEnum: TypespecEnum) {
             const doc = generateDocs(m);
             const kv = `"${m.name}": ${m.value}`;
             if (doc.length > 0 || !isFullCompatible) return `${doc}${kv}`;
-            else
-              return `${generateSuppressions([
-                getSuppresssionWithCode("@azure-tools/typespec-azure-core/documentation-required"),
-              ])}\n${kv}`;
+            else return `${generateSuppressions([getSuppressionWithCode(SuppressionCode.DocumentRequired)])}\n${kv}`;
           })
           .join(", ")}
     }\n\n`

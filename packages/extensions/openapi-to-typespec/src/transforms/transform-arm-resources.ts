@@ -39,7 +39,7 @@ import {
 } from "../utils/resource-discovery";
 import { isStringSchema } from "../utils/schemas";
 import { escapeRegex } from "../utils/strings";
-import { getSuppresssionWithCode } from "../utils/suppressions";
+import { getSuppressionWithCode, SuppressionCode } from "../utils/suppressions";
 import { getFullyQualifiedName, getTemplateResponses, NamesOfResponseTemplate } from "../utils/type-mapping";
 import { getTypespecType, isTypespecType, transformObjectProperty } from "./transform-object";
 import { transformParameter } from "./transform-operations";
@@ -399,18 +399,14 @@ function convertResourceCreateOrReplaceOperation(
     if (isFullCompatible) {
       if (armOperation.response) {
         armOperation.suppressions = armOperation.suppressions ?? [];
-        armOperation.suppressions.push(
-          getSuppresssionWithCode("@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes"),
-        );
+        armOperation.suppressions.push(getSuppressionWithCode(SuppressionCode.ArmPutOperationResponseCodes));
 
         if (
           (armOperation.response as TypespecTemplateModel[]).find(
             (r) => r.name === asyncNames._202Name && (!r.arguments || r.arguments.length === 0),
           )
         ) {
-          armOperation.suppressions.push(
-            getSuppresssionWithCode("@azure-tools/typespec-azure-resource-manager/no-response-body"),
-          );
+          armOperation.suppressions.push(getSuppressionWithCode(SuppressionCode.NoResponseBody));
         }
       }
     }
@@ -547,9 +543,7 @@ function convertResourceDeleteOperation(
 
     if (armOperation.lroHeaders && isFullCompatible) {
       armOperation.suppressions = armOperation.suppressions ?? [];
-      armOperation.suppressions.push(
-        getSuppresssionWithCode("@azure-tools/typespec-azure-resource-manager/lro-location-header"),
-      );
+      armOperation.suppressions.push(getSuppressionWithCode(SuppressionCode.LroLocationHeader));
     }
 
     const asyncNames: NamesOfResponseTemplate = {
@@ -602,9 +596,7 @@ function convertResourceDeleteOperation(
 
     if (armOperation.response && isFullCompatible) {
       armOperation.suppressions = armOperation.suppressions ?? [];
-      armOperation.suppressions.push(
-        getSuppresssionWithCode("@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"),
-      );
+      armOperation.suppressions.push(getSuppressionWithCode(SuppressionCode.ArmDeleteOperationResponseCodes));
     }
 
     return [armOperation as TspArmResourceLifeCycleOperation];
@@ -865,11 +857,7 @@ function getOtherProperties(
         envolopeProperty ?? {
           ...transformObjectProperty(property, getSession().model),
           suppressions: getOptions().isFullCompatible
-            ? [
-                getSuppresssionWithCode(
-                  "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property",
-                ),
-              ]
+            ? [getSuppressionWithCode(SuppressionCode.ArmResourceInvalidEnvelopeProperty)]
             : undefined,
         },
       );
