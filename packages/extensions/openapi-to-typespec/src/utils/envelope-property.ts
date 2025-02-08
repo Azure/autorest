@@ -1,14 +1,20 @@
-import { Property, Schema } from "@autorest/codemodel";
+import { Property } from "@autorest/codemodel";
 import { TypespecDecorator, TypespecSpreadStatement } from "../interfaces";
-import { isExtendedLocation, isManagedSerivceIdentity, isPlan, isSku } from "./common-type-mapping";
+import {
+  extendedLocationLibraryType,
+  isEquivalent,
+  LibraryType,
+  managedServiceIdentityLibraryType,
+  planLibraryType,
+  skuLibraryType,
+} from "./library-type-mapping";
 import { ArmResourceSchema } from "./resource-discovery";
-import { isArraySchema, isStringSchema } from "./schemas";
 
 interface Envelope {
   serializedName: string;
   required: boolean;
   isReadOnly: boolean;
-  check: (schema: Schema) => boolean;
+  schema: LibraryType;
 
   envelopeName: string;
 }
@@ -18,42 +24,46 @@ const knownEnvelopes: Record<string, Envelope> = {
     serializedName: "sku",
     required: false,
     isReadOnly: false,
-    check: isSku,
+    schema: skuLibraryType,
     envelopeName: "Azure.ResourceManager.ResourceSkuProperty",
   },
   plan: {
     serializedName: "plan",
     required: false,
     isReadOnly: false,
-    check: isPlan,
+    schema: planLibraryType,
     envelopeName: "Azure.ResourceManager.ResourcePlanProperty",
   },
   extendedLocation: {
     serializedName: "extendedLocation",
     required: false,
     isReadOnly: true,
-    check: isExtendedLocation,
+    schema: extendedLocationLibraryType,
     envelopeName: "Azure.ResourceManager.ExtendedLocationProperty",
   },
   zones: {
     serializedName: "zones",
     required: false,
     isReadOnly: false,
-    check: (schema) => isArraySchema(schema) && isStringSchema(schema.elementType),
+    schema: {
+      name: "_",
+      type: "array",
+      elementType: () => ({ name: "string", type: "primitive", schema: (schema) => schema.type === "string" }),
+    },
     envelopeName: "Azure.ResourceManager.AvailabilityZonesProperty",
   },
   identity: {
     serializedName: "identity",
     required: false,
     isReadOnly: false,
-    check: isManagedSerivceIdentity,
+    schema: managedServiceIdentityLibraryType,
     envelopeName: "Azure.ResourceManager.ManagedServiceIdentityProperty",
   },
   eTag: {
     serializedName: "eTag",
     required: false,
     isReadOnly: true,
-    check: isStringSchema,
+    schema: { name: "string", type: "primitive", schema: (schema) => schema.type === "string" },
     envelopeName: "Azure.ResourceManager.EntityTagProperty",
   },
 };
@@ -65,7 +75,7 @@ export function getEnvelopeProperty(property: Property): TypespecSpreadStatement
       property.serializedName.toLowerCase() === envelope.serializedName.toLowerCase() &&
       (property.required ?? false) === envelope.required &&
       (property.readOnly ?? false) === envelope.isReadOnly &&
-      envelope.check(property.schema)
+      isEquivalent(property.schema, envelope.schema)
     ) {
       return {
         kind: "spread",
