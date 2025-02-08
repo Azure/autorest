@@ -1,6 +1,6 @@
-import { ChoiceSchema, isObjectSchema, Schema, SealedChoiceSchema } from "@autorest/codemodel";
+import { ChoiceSchema, isObjectSchema, Schema, SchemaType, SealedChoiceSchema } from "@autorest/codemodel";
 import { getArmCommonTypeVersion } from "../autorest-session";
-import { isArraySchema, isChoiceSchema, isDictionarySchema, isSealedChoiceSchema, isUuidSchema } from "./schemas";
+import { isArraySchema, isChoiceSchema, isDictionarySchema, isSealedChoiceSchema } from "./schemas";
 
 // TO-DO: we might need a isReadonly
 interface LibraryPropertyBase {
@@ -11,7 +11,7 @@ interface LibraryPropertyBase {
 
 interface LibraryPrimitiveProperty extends LibraryPropertyBase {
   type: "primitive";
-  schema: (schema: Schema) => boolean;
+  typeName: string;
 }
 
 interface LibraryNonPrimitiveProperty extends LibraryPropertyBase {
@@ -70,7 +70,7 @@ export function isEquivalent(schema: Schema, expected: LibraryType): boolean {
         if ((property.required ?? false) !== expectedProperty.required) return false;
 
         if (expectedProperty.type === "primitive") {
-          if (!expectedProperty.schema(property.schema)) return false;
+          if (expectedProperty.typeName !== property.schema.type) return false;
         } else {
           if (!isEquivalent(property.schema, expectedProperty.schema())) return false;
         }
@@ -117,20 +117,20 @@ export const skuLibraryType: LibraryObjectType = {
   name: "sku",
   type: "object",
   properties: {
-    name: { serializedName: "name", required: true, type: "primitive", schema: (schema) => schema.type === "string" },
+    name: { serializedName: "name", required: true, type: "primitive", typeName: SchemaType.String },
     tier: { serializedName: "tier", required: false, type: "nonPrimitive", schema: () => skuTierLibraryType },
-    size: { serializedName: "size", required: false, type: "primitive", schema: (schema) => schema.type === "string" },
+    size: { serializedName: "size", required: false, type: "primitive", typeName: SchemaType.String },
     family: {
       serializedName: "family",
       required: false,
       type: "primitive",
-      schema: (schema) => schema.type === "string",
+      typeName: SchemaType.String,
     },
     capacity: {
       serializedName: "capacity",
       required: false,
       type: "primitive",
-      schema: (schema) => schema.type === "integer",
+      typeName: SchemaType.Integer,
     },
   },
 };
@@ -155,7 +155,7 @@ export const extendedLocationLibraryType: LibraryObjectType = {
       type: "nonPrimitive",
       schema: () => extendedLocationTypeLibraryType,
     },
-    name: { serializedName: "name", required: true, type: "primitive", schema: (schema) => schema.type === "string" },
+    name: { serializedName: "name", required: true, type: "primitive", typeName: SchemaType.String },
   },
 };
 
@@ -163,30 +163,30 @@ export const planLibraryType: LibraryObjectType = {
   name: "plan",
   type: "object",
   properties: {
-    name: { serializedName: "name", required: true, type: "primitive", schema: (schema) => schema.type === "string" },
+    name: { serializedName: "name", required: true, type: "primitive", typeName: SchemaType.String },
     publisher: {
       serializedName: "publisher",
       required: true,
       type: "primitive",
-      schema: (schema) => schema.type === "string",
+      typeName: "string",
     },
     product: {
       serializedName: "product",
       required: true,
       type: "primitive",
-      schema: (schema) => schema.type === "string",
+      typeName: "string",
     },
     promotionCode: {
       serializedName: "promotionCode",
       required: false,
       type: "primitive",
-      schema: (schema) => schema.type === "string",
+      typeName: "string",
     },
     version: {
       serializedName: "version",
       required: false,
       type: "primitive",
-      schema: (schema) => schema.type === "string",
+      typeName: "string",
     },
   },
 };
@@ -219,8 +219,8 @@ const userAssignedIdentityLibraryType: LibraryObjectType = {
   name: "userAssignedIdentity",
   type: "object",
   properties: {
-    principalId: { serializedName: "principalId", required: false, type: "primitive", schema: isUuidSchema },
-    clientId: { serializedName: "clientId", required: false, type: "primitive", schema: isUuidSchema },
+    principalId: { serializedName: "principalId", required: false, type: "primitive", typeName: SchemaType.Uuid },
+    clientId: { serializedName: "clientId", required: false, type: "primitive", typeName: SchemaType.Uuid },
   },
 };
 
@@ -228,8 +228,8 @@ export const managedServiceIdentityLibraryType: LibraryObjectType = {
   name: "managedServiceIdentity",
   type: "object",
   properties: {
-    principalId: { serializedName: "principalId", required: false, type: "primitive", schema: isUuidSchema },
-    tenantId: { serializedName: "tenantId", required: false, type: "primitive", schema: isUuidSchema },
+    principalId: { serializedName: "principalId", required: false, type: "primitive", typeName: SchemaType.Uuid },
+    tenantId: { serializedName: "tenantId", required: false, type: "primitive", typeName: SchemaType.Uuid },
     type: {
       serializedName: "type",
       required: true,

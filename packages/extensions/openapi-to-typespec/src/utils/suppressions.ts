@@ -9,7 +9,7 @@ export enum SuppressionCode {
   ArmDeleteOperationResponseCodes = "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes",
   ArmResourceInvalidEnvelopeProperty = "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property",
   ArmNoRecord = "@azure-tools/typespec-azure-resource-manager/arm-no-record",
-  ArmResourceInterfaceRequiresDecorator = "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+  ArmResourceInterfaceRequiresDecorator = "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator",
 }
 
 export function generateSuppressionForNoEnum(): string {
