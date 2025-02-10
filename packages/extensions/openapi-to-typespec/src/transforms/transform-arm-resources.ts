@@ -26,9 +26,9 @@ import {
 import { transformDataType } from "../model";
 import { getOptions, updateOptions } from "../options";
 import { createClientNameDecorator, createCSharpNameDecorator } from "../pretransforms/rename-pretransform";
-import { isExtendedLocation, isManagedSerivceIdentity, isPlan, isSku } from "../utils/common-type-mapping";
 import { getOperationClientDecorators, getPropertyDecorators } from "../utils/decorators";
 import { generateDocsContent } from "../utils/docs";
+import { getEnvelopeProperty, getEnvelopeAugmentedDecorator } from "../utils/envelope-property";
 import { getLogger } from "../utils/logger";
 import {
   ArmResource,
@@ -37,9 +37,9 @@ import {
   getResourceOperations,
   isResourceSchema,
 } from "../utils/resource-discovery";
-import { isArraySchema, isStringSchema } from "../utils/schemas";
+import { isStringSchema } from "../utils/schemas";
 import { escapeRegex } from "../utils/strings";
-import { getSuppresssionWithCode } from "../utils/suppressions";
+import { getSuppressionWithCode, SuppressionCode } from "../utils/suppressions";
 import { getFullyQualifiedName, getTemplateResponses, NamesOfResponseTemplate } from "../utils/type-mapping";
 import { getTypespecType, isTypespecType, transformObjectProperty } from "./transform-object";
 import { transformParameter } from "./transform-operations";
@@ -99,8 +99,8 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
 
   const clientDecorators = buildResourceClientDecorators(schema);
   const keyProperty = buildKeyProperty(schema);
-  const properties = [keyProperty, ...getOtherProperties(schema)];
   const augmentDecorators = buildKeyAugmentDecorators(schema, keyProperty) ?? [];
+  const properties = [keyProperty, ...getOtherProperties(schema, augmentDecorators)];
 
   if (propertiesModel) {
     augmentDecorators.push(...buildPropertiesAugmentDecorators(schema, propertiesModel));
@@ -399,18 +399,14 @@ function convertResourceCreateOrReplaceOperation(
     if (isFullCompatible) {
       if (armOperation.response) {
         armOperation.suppressions = armOperation.suppressions ?? [];
-        armOperation.suppressions.push(
-          getSuppresssionWithCode("@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes"),
-        );
+        armOperation.suppressions.push(getSuppressionWithCode(SuppressionCode.ArmPutOperationResponseCodes));
 
         if (
           (armOperation.response as TypespecTemplateModel[]).find(
             (r) => r.name === asyncNames._202Name && (!r.arguments || r.arguments.length === 0),
           )
         ) {
-          armOperation.suppressions.push(
-            getSuppresssionWithCode("@azure-tools/typespec-azure-resource-manager/no-response-body"),
-          );
+          armOperation.suppressions.push(getSuppressionWithCode(SuppressionCode.NoResponseBody));
         }
       }
     }
@@ -547,9 +543,7 @@ function convertResourceDeleteOperation(
 
     if (armOperation.lroHeaders && isFullCompatible) {
       armOperation.suppressions = armOperation.suppressions ?? [];
-      armOperation.suppressions.push(
-        getSuppresssionWithCode("@azure-tools/typespec-azure-resource-manager/lro-location-header"),
-      );
+      armOperation.suppressions.push(getSuppressionWithCode(SuppressionCode.LroLocationHeader));
     }
 
     const asyncNames: NamesOfResponseTemplate = {
@@ -602,9 +596,7 @@ function convertResourceDeleteOperation(
 
     if (armOperation.response && isFullCompatible) {
       armOperation.suppressions = armOperation.suppressions ?? [];
-      armOperation.suppressions.push(
-        getSuppresssionWithCode("@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"),
-      );
+      armOperation.suppressions.push(getSuppressionWithCode(SuppressionCode.ArmDeleteOperationResponseCodes));
     }
 
     return [armOperation as TspArmResourceLifeCycleOperation];
@@ -842,7 +834,10 @@ function buildBodyDecorator(
     : clientDecorators;
 }
 
-function getOtherProperties(schema: ArmResourceSchema): (TypespecObjectProperty | TypespecSpreadStatement)[] {
+function getOtherProperties(
+  schema: ArmResourceSchema,
+  augmentDecorators: TypespecDecorator[],
+): (TypespecObjectProperty | TypespecSpreadStatement)[] {
   const knownProperties = ["properties", "name", "id", "type", "systemData"];
   const resourceKind = getResourceKind(schema);
   if (resourceKind === "TrackedResource") {
@@ -851,89 +846,24 @@ function getOtherProperties(schema: ArmResourceSchema): (TypespecObjectProperty 
   const otherProperties: (TypespecObjectProperty | TypespecSpreadStatement)[] = [];
   for (const property of schema.properties ?? []) {
     if (!knownProperties.includes(property.serializedName)) {
-      const envolopeProperty = getEnvolopeProperty(property);
+      const envolopeProperty = getEnvelopeProperty(property);
+      if (envolopeProperty) {
+        const envelopeAugmentedDecorator = getEnvelopeAugmentedDecorator(schema, property);
+        if (envelopeAugmentedDecorator) {
+          augmentDecorators.push(envelopeAugmentedDecorator);
+        }
+      }
       otherProperties.push(
         envolopeProperty ?? {
           ...transformObjectProperty(property, getSession().model),
           suppressions: getOptions().isFullCompatible
-            ? [
-                getSuppresssionWithCode(
-                  "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property",
-                ),
-              ]
+            ? [getSuppressionWithCode(SuppressionCode.ArmResourceInvalidEnvelopeProperty)]
             : undefined,
         },
       );
     }
   }
   return otherProperties;
-}
-
-function getEnvolopeProperty(property: Property): TypespecSpreadStatement | undefined {
-  if (property.serializedName === "sku" && !property.required && isSku(property.schema)) {
-    return {
-      kind: "spread",
-      model: {
-        kind: "template",
-        name: "Azure.ResourceManager.ResourceSkuProperty",
-      },
-    };
-  }
-  if (
-    property.serializedName === "extendedLocation" &&
-    !property.required &&
-    property.readOnly &&
-    isExtendedLocation(property.schema)
-  ) {
-    return {
-      kind: "spread",
-      model: {
-        kind: "template",
-        name: "Azure.ResourceManager.ExtendedLocationProperty",
-      },
-    };
-  }
-  if (property.serializedName === "plan" && !property.required && isPlan(property.schema)) {
-    return {
-      kind: "spread",
-      model: {
-        kind: "template",
-        name: "Azure.ResourceManager.ResourcePlanProperty",
-      },
-    };
-  }
-  if (
-    property.serializedName === "zones" &&
-    !property.required &&
-    isArraySchema(property.schema) &&
-    isStringSchema(property.schema.elementType)
-  ) {
-    return {
-      kind: "spread",
-      model: {
-        kind: "template",
-        name: "Azure.ResourceManager.AvailabilityZonesProperty",
-      },
-    };
-  }
-  if (property.serializedName === "identity" && !property.required && isManagedSerivceIdentity(property.schema)) {
-    return {
-      kind: "spread",
-      model: {
-        kind: "template",
-        name: "Azure.ResourceManager.ManagedServiceIdentityProperty",
-      },
-    };
-  }
-  if (property.serializedName === "eTag" && !property.required && isStringSchema(property.schema)) {
-    return {
-      kind: "spread",
-      model: {
-        kind: "template",
-        name: "Azure.ResourceManager.EntityTagProperty",
-      },
-    };
-  }
 }
 
 const operationGroupNameCache: Map<ArmResource, string> = new Map<ArmResource, string>();

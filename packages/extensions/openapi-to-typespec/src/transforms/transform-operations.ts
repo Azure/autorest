@@ -32,7 +32,7 @@ import { createOperationIdDecorator, getOperationClientDecorators, getPropertyDe
 import { getLogger } from "../utils/logger";
 import { getLanguageMetadata } from "../utils/metadata";
 import { isArraySchema, isConstantSchema, isResponseSchema } from "../utils/schemas";
-import { getSuppresssionWithCode } from "../utils/suppressions";
+import { getSuppressionWithCode, SuppressionCode } from "../utils/suppressions";
 import { isResourceListResult } from "../utils/type-mapping";
 import { getDefaultValue } from "../utils/values";
 
@@ -49,11 +49,7 @@ export function transformOperationGroup(
   const { isArm, isFullCompatible } = getOptions();
   const suppressions =
     isArm && isFullCompatible
-      ? [
-          getSuppresssionWithCode(
-            "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator",
-          ),
-        ]
+      ? [getSuppressionWithCode(SuppressionCode.ArmResourceInterfaceRequiresDecorator)]
       : undefined;
   return {
     name,
@@ -197,9 +193,7 @@ export function transformRequest(
         const lroHeaders =
           isLongRunning && finalStateVia === "azure-async-operation" ? "Azure-AsyncOperation" : undefined;
         const suppressions =
-          isFullCompatible && lroHeaders
-            ? [getSuppresssionWithCode("@azure-tools/typespec-azure-resource-manager/lro-location-header")]
-            : undefined;
+          isFullCompatible && lroHeaders ? [getSuppressionWithCode(SuppressionCode.LroLocationHeader)] : undefined;
         return {
           kind: isLongRunning ? "ArmProviderActionAsync" : "ArmProviderActionSync",
           doc,
@@ -324,10 +318,7 @@ export function transformParameter(parameter: Parameter, codeModel: CodeModel): 
     decorators: getPropertyDecorators(parameter),
     serializedName: parameter.language.default.serializedName ?? parameter.language.default.name,
     defaultValue: getDefaultValue(visited.name, parameter.schema),
-    suppressions:
-      !doc && isFullCompatible
-        ? [getSuppresssionWithCode("@azure-tools/typespec-azure-core/documentation-required")]
-        : undefined,
+    suppressions: !doc && isFullCompatible ? [getSuppressionWithCode(SuppressionCode.DocumentRequired)] : undefined,
   };
 }
 

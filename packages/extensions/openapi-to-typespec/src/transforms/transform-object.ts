@@ -37,7 +37,8 @@ import {
 import {
   getSuppressionsForModelExtension,
   getSuppressionsForProvisioningState,
-  getSuppresssionWithCode,
+  getSuppressionWithCode,
+  SuppressionCode,
 } from "../utils/suppressions";
 import { getDefaultValue, transformValue } from "../utils/values";
 import { transformEnum } from "./transform-choices";
@@ -118,8 +119,7 @@ export function transformObject(schema: ObjectSchema, codeModel: CodeModel): Typ
     const provisioningProperty = properties.find((p) => p.name === "provisioningState");
   }
 
-  if (isFullCompatible && !doc)
-    suppressions.push(getSuppresssionWithCode("@azure-tools/typespec-azure-core/documentation-required"));
+  if (isFullCompatible && !doc) suppressions.push(getSuppressionWithCode(SuppressionCode.DocumentRequired));
   const updatedVisited: TypespecObject = {
     name,
     doc,
@@ -208,10 +208,10 @@ function getPropertySuppressions(property: Property): WithSuppressDirective[] | 
 
   const suppressions = [];
   if (isDictionarySchema(property.schema)) {
-    suppressions.push(getSuppresssionWithCode("@azure-tools/typespec-azure-resource-manager/arm-no-record"));
+    suppressions.push(getSuppressionWithCode(SuppressionCode.ArmNoRecord));
   }
   if (!property.language.default.description) {
-    suppressions.push(getSuppresssionWithCode("@azure-tools/typespec-azure-core/documentation-required"));
+    suppressions.push(getSuppressionWithCode(SuppressionCode.DocumentRequired));
   }
 
   return suppressions.length > 0 ? suppressions : undefined;
