@@ -1,6 +1,14 @@
 # Change Log - @autorest/openapi-to-typespec
 
-This log was last generated on Wed, 22 Jan 2025 05:15:07 GMT and should not be manually modified.
+This log was last generated on Mon, 10 Feb 2025 01:59:37 GMT and should not be manually modified.
+
+## 0.10.9
+Mon, 10 Feb 2025 01:59:37 GMT
+
+### Patches
+
+- Envelope property replacement with case sensitive
+- Add resourcemodel envelope properties
 
 ## 0.10.8
 Wed, 22 Jan 2025 05:15:07 GMT

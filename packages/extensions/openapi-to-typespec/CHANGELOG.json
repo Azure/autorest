@@ -2,6 +2,21 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.10.9",
+      "tag": "@autorest/openapi-to-typespec_v0.10.9",
+      "date": "Mon, 10 Feb 2025 01:59:37 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Envelope property replacement with case sensitive"
+          },
+          {
+            "comment": "Add resourcemodel envelope properties"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.10.8",
       "tag": "@autorest/openapi-to-typespec_v0.10.8",
       "date": "Wed, 22 Jan 2025 05:15:07 GMT",
