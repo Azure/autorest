@@ -8,6 +8,7 @@ import {
 } from "@autorest/codemodel";
 import { isArmIdSchema, isArraySchema, isDictionarySchema, isResponseSchema, isStringSchema } from "../utils/schemas";
 
+// Common-type v2 resource doesn't have systemData
 export function isResource(schema: ObjectSchema): boolean {
   let idPropertyFound = false;
   let typePropertyFound = false;

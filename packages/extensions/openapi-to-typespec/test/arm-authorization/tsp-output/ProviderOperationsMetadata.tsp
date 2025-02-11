@@ -26,17 +26,20 @@ model ProviderOperationsMetadata is Azure.ResourceManager.ProxyResource<{}> {
   /**
    * The provider display name.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   displayName?: string;
 
   /**
    * The provider resource types
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", ["name"])
   resourceTypes?: AuthorizationProviderResourceType[];
 
   /**
    * The provider operations.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", [])
   operations?: ProviderOperation[];
 }
@@ -50,7 +53,7 @@ interface ProviderOperationsMetadataOperationGroup {
   @operationId("ProviderOperationsMetadata_Get")
   get is ArmResourceRead<
     ProviderOperationsMetadata,
-    Azure.ResourceManager.Foundations.TenantBaseParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
       /**
        * Specifies whether to expand the values.
@@ -67,15 +70,14 @@ interface ProviderOperationsMetadataOperationGroup {
   @operationId("ProviderOperationsMetadata_List")
   list is ArmResourceListByParent<
     ProviderOperationsMetadata,
-    Azure.ResourceManager.Foundations.TenantBaseParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
       /**
        * Specifies whether to expand the values.
        */
       @query("$expand")
       $expand?: string = "resourceTypes";
-    },
-    Response = ProviderOperationsMetadataListResult
+    }
   >;
 }
 

@@ -6,6 +6,19 @@ export type Imports = {
   namespaces: string[];
 };
 
+export function getMainImports(program: TypespecProgram): Imports {
+  const modules: string[] = [];
+  const namespaces: string[] = [];
+  if (program.serviceInformation.authentication?.some((a) => a.kind === "AadOauth2Auth")) {
+    modules.push(`import "@azure-tools/typespec-azure-core";`);
+    namespaces.push("using Azure.Core;");
+  }
+  return {
+    modules,
+    namespaces,
+  };
+}
+
 export function getModelsImports(program: TypespecProgram): Imports {
   const modules = new Set<string>();
   const namespaces = new Set<string>();
@@ -71,10 +84,7 @@ export function getClientImports(program: TypespecProgram) {
     for (const property of resource.properties) {
       addImports(property.clientDecorators);
     }
-    for (const op of resource.resourceOperations) {
-      addImports(op.clientDecorators);
-    }
-    for (const op of resource.normalOperations) {
+    for (const op of resource.resourceOperationGroups.flatMap((g) => g.resourceOperations)) {
       addImports(op.clientDecorators);
     }
     addImports(resource.propertiesPropertyClientDecorator);

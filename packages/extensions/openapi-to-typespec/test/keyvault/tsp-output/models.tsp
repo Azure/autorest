@@ -765,6 +765,7 @@ model CertificateItem {
 /**
  * The certificate management attributes.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model CertificateAttributes extends Attributes {
   /**
    * softDelete data retention days. Value should be >=7 and <=90 when softDelete
@@ -821,6 +822,7 @@ model Attributes {
  * A Deleted Certificate consisting of its previous id, attributes and its tags,
  * as well as information on when it will be purged.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DeletedCertificateBundle extends CertificateBundle {
   /**
    * The url of the recovery object, used to identify and recover the deleted
@@ -1540,6 +1542,7 @@ model DeletedCertificateListResult is Azure.Core.Page<DeletedCertificateItem>;
 /**
  * The deleted certificate item containing metadata about the deleted certificate.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DeletedCertificateItem extends CertificateItem {
   /**
    * The url of the recovery object, used to identify and recover the deleted
@@ -1611,6 +1614,7 @@ model KeyCreateParameters {
 /**
  * The attributes of a key managed by the key vault service.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model KeyAttributes extends Attributes {
   /**
    * softDelete data retention days. Value should be >=7 and <=90 when softDelete
@@ -1815,6 +1819,7 @@ model KeyImportParameters {
 /**
  * A DeletedKeyBundle consisting of a WebKey plus its Attributes and deletion info
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DeletedKeyBundle extends KeyBundle {
   /**
    * The url of the recovery object, used to identify and recover the deleted key.
@@ -2064,6 +2069,7 @@ model DeletedKeyListResult is Azure.Core.Page<DeletedKeyItem>;
  * The deleted key item containing the deleted key metadata and information about
  * deletion.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DeletedKeyItem extends KeyItem {
   /**
    * The url of the recovery object, used to identify and recover the deleted key.
@@ -2405,6 +2411,7 @@ model SecretSetParameters {
 /**
  * The secret management attributes.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model SecretAttributes extends Attributes {
   /**
    * softDelete data retention days. Value should be >=7 and <=90 when softDelete
@@ -2471,6 +2478,7 @@ model SecretBundle {
  * A Deleted Secret consisting of its previous id, attributes and its tags, as
  * well as information on when it will be purged.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DeletedSecretBundle extends SecretBundle {
   /**
    * The url of the recovery object, used to identify and recover the deleted secret.
@@ -2556,6 +2564,7 @@ model DeletedSecretListResult is Azure.Core.Page<DeletedSecretItem>;
 /**
  * The deleted secret item containing metadata about the deleted secret.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DeletedSecretItem extends SecretItem {
   /**
    * The url of the recovery object, used to identify and recover the deleted secret.
@@ -2821,6 +2830,7 @@ model DeletedStorageListResult is Azure.Core.Page<DeletedStorageAccountItem>;
  * The deleted storage account item containing metadata about the deleted storage
  * account.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DeletedStorageAccountItem extends StorageAccountItem {
   /**
    * The url of the recovery object, used to identify and recover the deleted
@@ -2845,6 +2855,7 @@ model DeletedStorageAccountItem extends StorageAccountItem {
  * A deleted storage account bundle consisting of its previous id, attributes and
  * its tags, as well as information on when it will be purged.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DeletedStorageBundle extends StorageBundle {
   /**
    * The url of the recovery object, used to identify and recover the deleted
@@ -3095,6 +3106,7 @@ model DeletedSasDefinitionListResult
  * The deleted SAS definition item containing metadata about the deleted SAS
  * definition.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DeletedSasDefinitionItem extends SasDefinitionItem {
   /**
    * The url of the recovery object, used to identify and recover the deleted SAS
@@ -3119,6 +3131,7 @@ model DeletedSasDefinitionItem extends SasDefinitionItem {
  * A deleted SAS definition bundle consisting of its previous id, attributes and
  * its tags, as well as information on when it will be purged.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DeletedSasDefinitionBundle extends SasDefinitionBundle {
   /**
    * The url of the recovery object, used to identify and recover the deleted SAS

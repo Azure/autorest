@@ -35,10 +35,12 @@ interface NotificationContracts {
   @operationId("Notification_Get")
   get is ArmResourceRead<NotificationContract>;
 
+  // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
    * Create or Update API Management publisher notification.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("Notification_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     NotificationContract,
@@ -48,7 +50,8 @@ interface NotificationContracts {
        */
       @header
       `If-Match`?: string;
-    }
+    },
+    Response = ArmResourceUpdatedResponse<NotificationContract>
   >;
 
   /**
@@ -71,69 +74,160 @@ interface NotificationContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = NotificationListResult
+    }
   >;
 
   /**
    * Gets the list of the Notification Recipient User subscribed to the notification.
    */
-  // FIXME: NotificationRecipientUser_ListByNotification could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("NotificationRecipientUser_ListByNotification")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientUsers")
   @get
-  listByNotification(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
+  @action("recipientUsers")
+  @operationId("NotificationRecipientUser_ListByNotification")
+  listByNotification is ArmResourceActionSync<
+    NotificationContract,
+    void,
+    ArmResponse<ResourceListResult<RecipientUserContract>>
+  >;
 
-    /**
-     * The name of the API Management service.
-     */
-    @maxLength(50)
-    @minLength(1)
-    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-    @path
-    serviceName: string,
+  /**
+   * Determine if the Notification Recipient User is subscribed to the notification.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @head
+  @action("{userId}")
+  @operationId("NotificationRecipientUser_CheckEntityExists")
+  checkEntityExists is ArmResourceActionSync<
+    NotificationContract,
+    void,
+    NoContentResponse,
+    Parameters = {
+      /**
+       * User identifier. Must be unique in the current API Management service instance.
+       */
+      @maxLength(80)
+      @minLength(1)
+      @path
+      userId: string;
+    }
+  >;
 
-    /**
-     * Notification Name Identifier.
-     */
-    @path
-    notificationName: NotificationName,
+  /**
+   * Adds the API Management User to the list of Recipients for the Notification.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @put
+  @action("{userId}")
+  @operationId("NotificationRecipientUser_CreateOrUpdate")
+  notificationRecipientUserCreateOrUpdate is ArmResourceActionSync<
+    NotificationContract,
+    void,
+    ArmResponse<RecipientUserContract> | ArmResourceCreatedSyncResponse<RecipientUserContract>,
+    Parameters = {
+      /**
+       * User identifier. Must be unique in the current API Management service instance.
+       */
+      @maxLength(80)
+      @minLength(1)
+      @path
+      userId: string;
+    }
+  >;
 
-    ...SubscriptionIdParameter,
-  ): ArmResponse<RecipientUserListResult> | ErrorResponse;
+  /**
+   * Removes the API Management user from the list of Notification.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @delete
+  @action("{userId}")
+  @operationId("NotificationRecipientUser_Delete")
+  delete is ArmResourceActionSync<
+    NotificationContract,
+    void,
+    OkResponse | NoContentResponse,
+    Parameters = {
+      /**
+       * User identifier. Must be unique in the current API Management service instance.
+       */
+      @maxLength(80)
+      @minLength(1)
+      @path
+      userId: string;
+    }
+  >;
 
   /**
    * Gets the list of the Notification Recipient Emails subscribed to a notification.
    */
-  // FIXME: NotificationRecipientEmail_ListByNotification could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("NotificationRecipientEmail_ListByNotification")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientEmails")
   @get
-  listByNotification(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
+  @action("recipientEmails")
+  @operationId("NotificationRecipientEmail_ListByNotification")
+  notificationRecipientEmailListByNotification is ArmResourceActionSync<
+    NotificationContract,
+    void,
+    ArmResponse<ResourceListResult<RecipientEmailContract>>
+  >;
 
-    /**
-     * The name of the API Management service.
-     */
-    @maxLength(50)
-    @minLength(1)
-    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-    @path
-    serviceName: string,
+  /**
+   * Determine if Notification Recipient Email subscribed to the notification.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @head
+  @action("{email}")
+  @operationId("NotificationRecipientEmail_CheckEntityExists")
+  notificationRecipientEmailCheckEntityExists is ArmResourceActionSync<
+    NotificationContract,
+    void,
+    NoContentResponse,
+    Parameters = {
+      /**
+       * Email identifier.
+       */
+      @path
+      email: string;
+    }
+  >;
 
-    /**
-     * Notification Name Identifier.
-     */
-    @path
-    notificationName: NotificationName,
+  /**
+   * Adds the Email address to the list of Recipients for the Notification.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @put
+  @action("{email}")
+  @operationId("NotificationRecipientEmail_CreateOrUpdate")
+  notificationRecipientEmailCreateOrUpdate is ArmResourceActionSync<
+    NotificationContract,
+    void,
+    ArmResponse<RecipientEmailContract> | ArmResourceCreatedSyncResponse<RecipientEmailContract>,
+    Parameters = {
+      /**
+       * Email identifier.
+       */
+      @path
+      email: string;
+    }
+  >;
 
-    ...SubscriptionIdParameter,
-  ): ArmResponse<RecipientEmailListResult> | ErrorResponse;
+  /**
+   * Removes the email from the list of Notification.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @delete
+  @action("{email}")
+  @operationId("NotificationRecipientEmail_Delete")
+  notificationRecipientEmailDelete is ArmResourceActionSync<
+    NotificationContract,
+    void,
+    OkResponse | NoContentResponse,
+    Parameters = {
+      /**
+       * Email identifier.
+       */
+      @path
+      email: string;
+    }
+  >;
 }
 
 @@doc(NotificationContract.name, "Notification Name Identifier.");

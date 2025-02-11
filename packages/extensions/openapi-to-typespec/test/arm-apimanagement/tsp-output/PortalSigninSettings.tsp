@@ -27,32 +27,21 @@ model PortalSigninSettings
 }
 
 @armResourceOperations
-interface PortalSigninSettingsOperationGroup {
+interface SignInSettings {
   /**
    * Get Sign In Settings for the Portal
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SignInSettings_Get")
   get is ArmResourceRead<PortalSigninSettings>;
 
   /**
    * Gets the entity state (Etag) version of the SignInSettings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
-  @operationId("SignInSettings_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      PortalSigninSettings,
-      BaseParameters<PortalSigninSettings>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<PortalSigninSettings>;
 
   /**
    * Create or Update Sign-In settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SignInSettings_CreateOrUpdate")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PortalSigninSettings,
     Parameters = {
@@ -61,33 +50,31 @@ interface PortalSigninSettingsOperationGroup {
        */
       @header
       `If-Match`?: string;
-    }
+    },
+    Response = ArmResourceUpdatedResponse<PortalSigninSettings>
   >;
 
   /**
    * Update Sign-In settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
-  @operationId("SignInSettings_Update")
   update is ArmCustomPatchSync<
     PortalSigninSettings,
-    PortalSigninSettings,
+    PatchModel = PortalSigninSettings,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
       @header
       `If-Match`: string;
-    }
+    },
+    Response = ArmNoContentResponse
   >;
 }
 
 @@doc(PortalSigninSettings.name, "");
 @@doc(PortalSigninSettings.properties, "Sign-in settings contract properties.");
-@@doc(PortalSigninSettingsOperationGroup.createOrUpdate::parameters.resource,
+@@doc(SignInSettings.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@doc(PortalSigninSettingsOperationGroup.update::parameters.properties,
-  "Update Sign-In settings."
-);
+@@doc(SignInSettings.update::parameters.properties, "Update Sign-In settings.");

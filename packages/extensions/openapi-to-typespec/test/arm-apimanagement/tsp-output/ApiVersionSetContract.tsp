@@ -38,14 +38,8 @@ interface ApiVersionSetContracts {
    * Gets the entity state (Etag) version of the Api Version Set specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("ApiVersionSet_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      ApiVersionSetContract,
-      BaseParameters<ApiVersionSetContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<ApiVersionSetContract>;
 
   /**
    * Creates or Updates a Api Version Set.
@@ -71,7 +65,7 @@ interface ApiVersionSetContracts {
   @operationId("ApiVersionSet_Update")
   update is ArmCustomPatchSync<
     ApiVersionSetContract,
-    ApiVersionSetUpdateParameters,
+    PatchModel = ApiVersionSetUpdateParameters,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -85,7 +79,6 @@ interface ApiVersionSetContracts {
    * Deletes specific Api Version Set.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiVersionSet_Delete")
   delete is ArmResourceDeleteSync<
     ApiVersionSetContract,
@@ -124,8 +117,7 @@ interface ApiVersionSetContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = ApiVersionSetListResult
+    }
   >;
 }
 

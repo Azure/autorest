@@ -2,6 +2,7 @@ import { TypespecParameter } from "../interfaces";
 import { getOptions } from "../options";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
+import { generateSuppressions } from "../utils/suppressions";
 
 const _ARM_PARAM_REPLACEMENTS: { [key: string]: string } = {
   subscriptionId: "...SubscriptionIdParameter",
@@ -18,6 +19,7 @@ export function generateParameter(parameter: TypespecParameter): string {
   const doc = generateDocs(parameter);
   definitions.push(doc);
 
+  parameter.suppressions && definitions.push(...generateSuppressions(parameter.suppressions));
   const decorators = generateDecorators(parameter.decorators);
   decorators && definitions.push(decorators);
   let defaultValue = "";

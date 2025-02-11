@@ -35,12 +35,15 @@ interface PrivateEndpointConnections {
   /**
    * Update the state of specified private endpoint connection associated with the storage account.
    */
-  put is ArmResourceCreateOrReplaceSync<PrivateEndpointConnection>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  put is ArmResourceCreateOrReplaceSync<
+    PrivateEndpointConnection,
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection>
+  >;
 
   /**
    * Deletes the specified private endpoint connection associated with the storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<PrivateEndpointConnection>;
 
   /**
@@ -48,7 +51,7 @@ interface PrivateEndpointConnections {
    */
   list is ArmResourceListByParent<
     PrivateEndpointConnection,
-    Response = PrivateEndpointConnectionListResult
+    Response = ArmResponse<PrivateEndpointConnectionListResult>
   >;
 }
 

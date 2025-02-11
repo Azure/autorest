@@ -2,6 +2,120 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.10.9",
+      "tag": "@autorest/openapi-to-typespec_v0.10.9",
+      "date": "Mon, 10 Feb 2025 01:59:37 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Envelope property replacement with case sensitive"
+          },
+          {
+            "comment": "Add resourcemodel envelope properties"
+          }
+        ]
+      }
+    },
+    {
+      "version": "0.10.8",
+      "tag": "@autorest/openapi-to-typespec_v0.10.8",
+      "date": "Wed, 22 Jan 2025 05:15:07 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add Azure.Core import if Oauth2"
+          }
+        ]
+      }
+    },
+    {
+      "version": "0.10.7",
+      "tag": "@autorest/openapi-to-typespec_v0.10.7",
+      "date": "Mon, 20 Jan 2025 02:16:28 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Upgrade compiler version to 0.64"
+          },
+          {
+            "comment": "add multi path support"
+          },
+          {
+            "comment": "Fix action operation for non-resource operation"
+          }
+        ]
+      }
+    },
+    {
+      "version": "0.10.6",
+      "tag": "@autorest/openapi-to-typespec_v0.10.6",
+      "date": "Wed, 08 Jan 2025 06:06:48 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix the ResourceListResult issue in data plane."
+          }
+        ]
+      }
+    },
+    {
+      "version": "0.10.5",
+      "tag": "@autorest/openapi-to-typespec_v0.10.5",
+      "date": "Thu, 19 Dec 2024 10:44:01 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix sample path issue"
+          },
+          {
+            "comment": "Refactor resource operation template to accept customzations"
+          }
+        ]
+      }
+    },
+    {
+      "version": "0.10.4",
+      "tag": "@autorest/openapi-to-typespec_v0.10.4",
+      "date": "Fri, 29 Nov 2024 09:20:01 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Change @body to @bodyRoot"
+          },
+          {
+            "comment": "Upgrade tsp compiler to 0.62"
+          }
+        ]
+      }
+    },
+    {
+      "version": "0.10.3",
+      "tag": "@autorest/openapi-to-typespec_v0.10.3",
+      "date": "Thu, 24 Oct 2024 11:53:16 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix some warnings in tsp converter"
+          }
+        ]
+      }
+    },
+    {
+      "version": "0.10.2",
+      "tag": "@autorest/openapi-to-typespec_v0.10.2",
+      "date": "Thu, 17 Oct 2024 10:14:02 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix paging, LRO and provideraction template. Upgrade compiler to 0.61"
+          },
+          {
+            "comment": "Fix flatter and no doc warning "
+          }
+        ]
+      }
+    },
+    {
       "version": "0.10.1",
       "tag": "@autorest/openapi-to-typespec_v0.10.1",
       "date": "Tue, 08 Oct 2024 09:03:42 GMT",

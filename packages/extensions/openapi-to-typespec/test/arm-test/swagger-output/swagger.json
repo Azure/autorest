@@ -105,7 +105,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EmployeeListResult"
             }
@@ -142,7 +142,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EmployeeListResult"
             }
@@ -388,7 +388,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ArrayDefaultListResult"
             }
@@ -483,7 +483,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DictPropertyListResult"
             }
@@ -611,7 +611,7 @@
     },
     "ArrayDefaultListResult": {
       "type": "object",
-      "description": "The response of a resource list operation.",
+      "description": "The response of a ArrayDefault list operation.",
       "properties": {
         "value": {
           "type": "array",
@@ -666,7 +666,7 @@
     },
     "DictPropertyListResult": {
       "type": "object",
-      "description": "The response of a resource list operation.",
+      "description": "The response of a DictProperty list operation.",
       "properties": {
         "value": {
           "type": "array",

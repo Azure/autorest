@@ -1,6 +1,6 @@
 import { readFileSync } from "fs";
 import { join } from "path";
-import { CodeModel, ObjectSchema, Operation, SchemaResponse } from "@autorest/codemodel";
+import { CodeModel, isObjectSchema, ObjectSchema, Operation, SchemaResponse } from "@autorest/codemodel";
 import { getArmCommonTypeVersion, getSession } from "../autorest-session";
 import { TypespecObject, TspArmResource, TypespecEnum } from "../interfaces";
 import { getSkipList } from "./type-mapping";
@@ -21,17 +21,18 @@ export interface _ArmPagingMetadata {
 }
 
 export interface Metadata {
-  Resources: Record<string, ArmResource>;
+  Resources: Record<string, ArmResource[]>;
   RenameMapping: Record<string, string>;
   OverrideOperationName: Record<string, string>;
 }
 
 export interface ArmResource {
   Name: string;
-  GetOperations: _ArmResourceOperation[];
-  CreateOperations: _ArmResourceOperation[];
-  UpdateOperations: _ArmResourceOperation[];
-  DeleteOperations: _ArmResourceOperation[];
+  GetOperation?: _ArmResourceOperation;
+  ExistOperation?: _ArmResourceOperation;
+  CreateOperation?: _ArmResourceOperation;
+  UpdateOperation?: _ArmResourceOperation;
+  DeleteOperation?: _ArmResourceOperation;
   ListOperations: _ArmResourceOperation[];
   OperationsFromResourceGroupExtension: _ArmResourceOperation[];
   OperationsFromSubscriptionExtension: _ArmResourceOperation[];
@@ -61,9 +62,15 @@ export function getResourceOperations(resource: ArmResource): Record<string, Ope
   const operations: Record<string, Operation> = {};
   const codeModel = getSession().model;
 
-  const allOperations = resource.GetOperations.concat(resource.CreateOperations)
-    .concat(resource.UpdateOperations)
-    .concat(resource.DeleteOperations)
+  const allOperations: _ArmResourceOperation[] = (
+    [
+      resource.GetOperation,
+      resource.CreateOperation,
+      resource.ExistOperation,
+      resource.UpdateOperation,
+      resource.DeleteOperation,
+    ].filter((o) => o !== undefined) as _ArmResourceOperation[]
+  )
     .concat(resource.ListOperations)
     .concat(resource.OperationsFromResourceGroupExtension)
     .concat(resource.OperationsFromSubscriptionExtension)
@@ -90,7 +97,7 @@ export function getSingletonResouceListOperation(resource: ArmResource): Operati
   if (resource.IsSingletonResource) {
     let predictSingletonResourcePath: string | undefined;
     if (resource.IsSingletonResource) {
-      predictSingletonResourcePath = resource.GetOperations[0].Path.split("/").slice(0, -1).join("/");
+      predictSingletonResourcePath = resource.GetOperation!.Path.split("/").slice(0, -1).join("/");
     }
 
     for (const operationGroup of codeModel.operationGroups) {
@@ -114,7 +121,7 @@ export function getResourceExistOperation(resource: ArmResource): Operation | un
     for (const operation of operationGroup.operations) {
       if (
         operation.requests?.length &&
-        operation.requests[0].protocol?.http?.path === resource.GetOperations[0].Path &&
+        operation.requests[0].protocol?.http?.path === resource.GetOperation!.Path &&
         operation.requests[0].protocol.http?.method === "head"
       ) {
         return operation;
@@ -124,15 +131,23 @@ export function getResourceExistOperation(resource: ArmResource): Operation | un
 }
 
 export interface ArmResourceSchema extends ObjectSchema {
-  resourceMetadata: ArmResource;
+  resourceMetadata: ArmResource[];
+}
+
+export interface ArmResourcePropertiesModel extends ObjectSchema {
+  isPropertiesModel: boolean;
 }
 
 export function tagSchemaAsResource(schema: ObjectSchema, metadata: Metadata): void {
   const resourcesMetadata = metadata.Resources;
 
   for (const resourceName in resourcesMetadata) {
-    if (resourcesMetadata[resourceName].SwaggerModelName === schema.language.default.name) {
+    if (resourcesMetadata[resourceName][0].SwaggerModelName === schema.language.default.name) {
       (schema as ArmResourceSchema).resourceMetadata = resourcesMetadata[resourceName];
+      const propertiesModel = schema.properties?.find((p) => p.serializedName === "properties");
+      if (propertiesModel && isObjectSchema(propertiesModel.schema)) {
+        (propertiesModel.schema as ArmResourcePropertiesModel).isPropertiesModel = true;
+      }
       return;
     }
   }
@@ -159,7 +174,6 @@ const _ArmCoreCustomTypes = [
   "TrackedResource",
   "ProxyResource",
   "ExtensionResource",
-  "ManagedServiceIdentity",
   "ManagedIdentityProperties",
   "UserAssignedIdentity",
   "ManagedSystemAssignedIdentity",
@@ -208,8 +222,4 @@ export function filterArmEnums(enums: TypespecEnum[]): TypespecEnum[] {
     filtered.push(..._ArmCoreCustomEnums);
   }
   return enums.filter((e) => !filtered.includes(e.name));
-}
-
-export function isTspArmResource(schema: TypespecObject): schema is TspArmResource {
-  return Boolean((schema as TspArmResource).resourceKind);
 }

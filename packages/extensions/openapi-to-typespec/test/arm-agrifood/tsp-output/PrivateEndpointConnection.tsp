@@ -10,7 +10,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Azure.ResourceManager.AgFoodPlatform;
+namespace Microsoft.AgFoodPlatform;
 /**
  * The private endpoint connection resource.
  */
@@ -35,22 +35,29 @@ interface PrivateEndpointConnections {
   /**
    * Approves or Rejects a Private endpoint connection request.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<PrivateEndpointConnection>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    PrivateEndpointConnection,
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection>
+  >;
 
   /**
    * Delete Private endpoint connection request.
    */
-  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<PrivateEndpointConnection>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    PrivateEndpointConnection,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Get list of Private endpoint connections.
    */
   listByResource is ArmResourceListByParent<
     PrivateEndpointConnection,
-    Response = PrivateEndpointConnectionListResult
+    Response = ArmResponse<PrivateEndpointConnectionListResult>
   >;
 }
 

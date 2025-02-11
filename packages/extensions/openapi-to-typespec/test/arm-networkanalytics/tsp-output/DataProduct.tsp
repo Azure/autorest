@@ -21,7 +21,11 @@ model DataProduct
     SegmentName = "dataProducts",
     NamePattern = "^[a-z][a-z0-9]*$"
   >;
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+
+  /**
+   * The managed service identities assigned to this resource.
+   */
+  identity?: ManagedServiceIdentity;
 }
 
 @armResourceOperations
@@ -40,7 +44,7 @@ interface DataProducts {
    * Update data product resource.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<DataProduct, DataProductUpdate>;
+  update is ArmCustomPatchAsync<DataProduct, PatchModel = DataProductUpdate>;
 
   /**
    * Delete data product resource.
@@ -50,18 +54,12 @@ interface DataProducts {
   /**
    * List data products by resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<
-    DataProduct,
-    Response = DataProductListResult
-  >;
+  listByResourceGroup is ArmResourceListByParent<DataProduct>;
 
   /**
    * List data products by subscription.
    */
-  listBySubscription is ArmListBySubscription<
-    DataProduct,
-    Response = DataProductListResult
-  >;
+  listBySubscription is ArmListBySubscription<DataProduct>;
 
   /**
    * Assign role to the data product.
@@ -69,7 +67,7 @@ interface DataProducts {
   addUserRole is ArmResourceActionSync<
     DataProduct,
     RoleAssignmentCommonProperties,
-    RoleAssignmentDetail
+    ArmResponse<RoleAssignmentDetail>
   >;
 
   /**
@@ -78,7 +76,7 @@ interface DataProducts {
   generateStorageAccountSasToken is ArmResourceActionSync<
     DataProduct,
     AccountSas,
-    AccountSasToken
+    ArmResponse<AccountSasToken>
   >;
 
   /**
@@ -87,21 +85,26 @@ interface DataProducts {
   listRolesAssignments is ArmResourceActionSync<
     DataProduct,
     Record<unknown>,
-    ListRoleAssignments
+    ArmResponse<ListRoleAssignments>
   >;
 
   /**
    * Remove role from the data product.
    */
-  removeUserRole is ArmResourceActionNoContentSync<
+  removeUserRole is ArmResourceActionSync<
     DataProduct,
-    RoleAssignmentDetail
+    RoleAssignmentDetail,
+    NoContentResponse
   >;
 
   /**
    * Initiate key rotation on Data Product.
    */
-  rotateKey is ArmResourceActionNoContentSync<DataProduct, KeyVaultInfo>;
+  rotateKey is ArmResourceActionSync<
+    DataProduct,
+    KeyVaultInfo,
+    NoContentResponse
+  >;
 }
 
 @@maxLength(DataProduct.name, 63);

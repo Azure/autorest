@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
@@ -51,11 +50,6 @@ union ProvisioningStateTest {
    */
   Accepted: "Accepted",
 }
-
-/**
- * The response of a Employee list operation.
- */
-model EmployeeListResult is Azure.Core.Page<Employee>;
 
 /**
  * Employee properties
@@ -161,16 +155,6 @@ model EnrollProperties {
    */
   city?: string;
 }
-
-/**
- * The response of a resource list operation.
- */
-model DictPropertyListResult is Azure.Core.Page<DictProperty>;
-
-/**
- * The response of a resource list operation.
- */
-model ArrayDefaultListResult is Azure.Core.Page<ArrayDefault>;
 
 /**
  * Resource properties

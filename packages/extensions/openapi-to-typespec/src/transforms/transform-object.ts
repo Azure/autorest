@@ -10,9 +10,9 @@ import {
   SchemaType,
   StringSchema,
 } from "@autorest/codemodel";
-import { get } from "lodash";
 import { getDataTypes } from "../data-types";
 import { TypespecObject, TypespecObjectProperty, WithSuppressDirective } from "../interfaces";
+import { getOptions } from "../options";
 import { addCorePageAlias } from "../utils/alias";
 import {
   getModelClientDecorators,
@@ -22,6 +22,7 @@ import {
 } from "../utils/decorators";
 import { getDiscriminator, getOwnDiscriminator } from "../utils/discriminator";
 import { getLogger } from "../utils/logger";
+import { ArmResourcePropertiesModel } from "../utils/resource-discovery";
 import {
   isAnyObjectSchema,
   isAnySchema,
@@ -34,9 +35,10 @@ import {
   isStringSchema,
 } from "../utils/schemas";
 import {
-  getPropertySuppressions,
+  getSuppressionsForModelExtension,
   getSuppressionsForProvisioningState,
-  getSuppressionsForRecordProperty,
+  getSuppressionWithCode,
+  SuppressionCode,
 } from "../utils/suppressions";
 import { getDefaultValue, transformValue } from "../utils/values";
 import { transformEnum } from "./transform-choices";
@@ -63,7 +65,12 @@ const typespecTypes = new Map<string, string>([
   [SchemaType.AnyObject, "object"],
 ]);
 
+export function isTypespecType(typeName: string): boolean {
+  return typespecTypes.has(typeName);
+}
+
 export function transformObject(schema: ObjectSchema, codeModel: CodeModel): TypespecObject {
+  const { isFullCompatible } = getOptions();
   const typespecTypes = getDataTypes(codeModel);
   let visited: Partial<TypespecObject> = typespecTypes.get(schema) as TypespecObject;
   if (visited) {
@@ -92,7 +99,27 @@ export function transformObject(schema: ObjectSchema, codeModel: CodeModel): Typ
     discriminatorProperty && properties.push(discriminatorProperty);
   }
 
-  const [extendedParents, spreadParents] = getExtendedAndSpreadParents(schema, codeModel);
+  const [extendedParents, spreadParents, extendSuppressions] = getExtendedAndSpreadParents(schema, codeModel);
+  const suppressions = extendSuppressions;
+
+  if (isFullCompatible && (schema as ArmResourcePropertiesModel).isPropertiesModel === true) {
+    const provisioningProperty = schema.properties?.find((p) => p.language.default.name === "provisioningState");
+    if (provisioningProperty === undefined) {
+      suppressions.push(...getSuppressionsForProvisioningState());
+    } else if (!isChoiceSchema(provisioningProperty.schema) && !isSealedChoiceSchema(provisioningProperty.schema)) {
+      const provisioningProperty = properties.find((p) => p.name === "provisioningState");
+      if (provisioningProperty) {
+        const propertySuppression = provisioningProperty.suppressions ?? [];
+        propertySuppression.push(...getSuppressionsForProvisioningState());
+        provisioningProperty.suppressions = propertySuppression;
+      }
+    }
+  }
+  if (isFullCompatible) {
+    const provisioningProperty = properties.find((p) => p.name === "provisioningState");
+  }
+
+  if (isFullCompatible && !doc) suppressions.push(getSuppressionWithCode(SuppressionCode.DocumentRequired));
   const updatedVisited: TypespecObject = {
     name,
     doc,
@@ -103,6 +130,7 @@ export function transformObject(schema: ObjectSchema, codeModel: CodeModel): Typ
     spreadParents,
     decorators: getModelDecorators(schema),
     clientDecorators: getModelClientDecorators(schema),
+    suppressions,
   };
 
   addCorePageAlias(updatedVisited);
@@ -143,6 +171,7 @@ export function transformObjectProperty(propertySchema: Property, codeModel: Cod
       decorators: getPropertyDecorators(propertySchema),
       clientDecorators: getPropertyClientDecorators(propertySchema),
       defaultValue: getDefaultValue(visited.name, propertySchema.schema),
+      suppressions: getPropertySuppressions(propertySchema),
     };
   }
 
@@ -174,6 +203,20 @@ export function transformObjectProperty(propertySchema: Property, codeModel: Cod
   };
 }
 
+function getPropertySuppressions(property: Property): WithSuppressDirective[] | undefined {
+  if (!getOptions().isFullCompatible) return undefined;
+
+  const suppressions = [];
+  if (isDictionarySchema(property.schema)) {
+    suppressions.push(getSuppressionWithCode(SuppressionCode.ArmNoRecord));
+  }
+  if (!property.language.default.description) {
+    suppressions.push(getSuppressionWithCode(SuppressionCode.DocumentRequired));
+  }
+
+  return suppressions.length > 0 ? suppressions : undefined;
+}
+
 function getFixme(property: Property, codeModel: CodeModel): string[] {
   const typespecType = getTypespecType(property.schema, codeModel);
   if (typespecType === "utcDateTime") {
@@ -194,7 +237,7 @@ function getParents(schema: ObjectSchema): string[] {
 function getExtendedAndSpreadParents(
   schema: ObjectSchema,
   codeModel: CodeModel,
-): [extendedParents: string[], spreadParents: string[]] {
+): [extendedParents: string[], spreadParents: string[], suppressions: WithSuppressDirective[]] {
   // If there is a discriminative parent: extendedParents = [this discriminative parent], spreadParents = [all the other parents]
   // Else if only one parent which is not dictionary: extendedParents = [this parent], spreadParents = []
   // Else if only one parent which is dictionary: extendedParents = [], spreadParents = [Record<elementType>]
@@ -210,11 +253,12 @@ function getExtendedAndSpreadParents(
         .map((p) =>
           isDictionarySchema(p) ? `Record<${getTypespecType(p.elementType, codeModel)}>` : p.language.default.name,
         ),
+      [],
     ];
   }
 
   if (immediateParents.length === 1 && !isDictionarySchema(immediateParents[0])) {
-    return [[immediateParents[0].language.default.name], []];
+    return [[immediateParents[0].language.default.name], [], getSuppressionsForModelExtension()];
   }
 
   return [
@@ -222,6 +266,7 @@ function getExtendedAndSpreadParents(
     immediateParents.map((p) =>
       isDictionarySchema(p) ? `Record<${getTypespecType(p.elementType, codeModel)}>` : p.language.default.name,
     ),
+    [],
   ];
 }
 

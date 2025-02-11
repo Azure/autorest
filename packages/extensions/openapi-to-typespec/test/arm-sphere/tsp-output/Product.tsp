@@ -40,25 +40,29 @@ interface Products {
    * Update a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<Product, ProductUpdate>;
+  update is ArmCustomPatchAsync<Product, PatchModel = ProductUpdate>;
 
   /**
    * Delete a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name'
    */
-  delete is ArmResourceDeleteAsync<Product>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Product,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List Product resources by Catalog
    */
-  listByCatalog is ArmResourceListByParent<
-    Product,
-    Response = ProductListResult
-  >;
+  listByCatalog is ArmResourceListByParent<Product>;
 
   /**
    * Counts devices in product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
    */
-  countDevices is ArmResourceActionSync<Product, void, CountDeviceResponse>;
+  countDevices is ArmResourceActionSync<
+    Product,
+    void,
+    ArmResponse<CountDeviceResponse>
+  >;
 
   /**
    * Generates default device groups for the product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
@@ -66,7 +70,7 @@ interface Products {
   generateDefaultDeviceGroups is ArmResourceActionSync<
     Product,
     void,
-    DeviceGroupListResult
+    ArmResponse<ResourceListResult<DeviceGroup>>
   >;
 }
 

@@ -25,27 +25,28 @@ model VirtualMachine
   /**
    * Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   plan?: Plan;
 
   /**
    * The virtual machine child extension resources.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility("read")
   resources?: VirtualMachineExtension[];
 
   /**
    * The identity of the virtual machine, if configured.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   identity?: VirtualMachineIdentity;
 
-  /**
-   * The virtual machine zones.
-   */
-  zones?: string[];
+  ...Azure.ResourceManager.AvailabilityZonesProperty;
 
   /**
    * The extended location of the Virtual Machine.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   extendedLocation?: ExtendedLocation;
 }
 
@@ -68,21 +69,26 @@ interface VirtualMachines {
   /**
    * The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualMachine>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    VirtualMachine,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * The operation to update a virtual machine.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<VirtualMachine, VirtualMachineUpdate>;
+  update is ArmCustomPatchAsync<
+    VirtualMachine,
+    PatchModel = VirtualMachineUpdate,
+    Response = ArmResponse<VirtualMachine>
+  >;
 
   /**
    * The operation to delete a virtual machine.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<
+  delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachine,
     Parameters = {
       /**
@@ -90,7 +96,8 @@ interface VirtualMachines {
        */
       @query("forceDeletion")
       forceDeletion?: boolean;
-    }
+    },
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -110,8 +117,7 @@ interface VirtualMachines {
        */
       @query("$expand")
       $expand?: ExpandTypeForListVMs;
-    },
-    Response = VirtualMachineListResult
+    }
   >;
 
   /**
@@ -137,8 +143,7 @@ interface VirtualMachines {
        */
       @query("$expand")
       $expand?: ExpandTypesForListVMs;
-    },
-    Response = VirtualMachineListResult
+    }
   >;
 
   /**
@@ -147,13 +152,27 @@ interface VirtualMachines {
   capture is ArmResourceActionAsync<
     VirtualMachine,
     VirtualMachineCaptureParameters,
-    VirtualMachineCaptureResult
+    ArmResponse<VirtualMachineCaptureResult>
+  >;
+
+  /**
+   * Retrieves information about the run-time state of a virtual machine.
+   */
+  @get
+  instanceView is ArmResourceActionSync<
+    VirtualMachine,
+    void,
+    ArmResponse<VirtualMachineInstanceView>
   >;
 
   /**
    * Converts virtual machine disks from blob-based to managed disks. Virtual machine must be stop-deallocated before invoking this operation.
    */
-  convertToManagedDisks is ArmResourceActionAsync<VirtualMachine, void, void>;
+  convertToManagedDisks is ArmResourceActionAsync<
+    VirtualMachine,
+    void,
+    OkResponse
+  >;
 
   /**
    * Shuts down the virtual machine and releases the compute resources. You are not billed for the compute resources that this virtual machine uses.
@@ -161,7 +180,7 @@ interface VirtualMachines {
   deallocate is ArmResourceActionAsync<
     VirtualMachine,
     void,
-    void,
+    OkResponse,
     Parameters = {
       /**
        * Optional parameter to hibernate a virtual machine. (Feature in Preview)
@@ -174,7 +193,18 @@ interface VirtualMachines {
   /**
    * Sets the OS state of the virtual machine to generalized. It is recommended to sysprep the virtual machine before performing this operation. For Windows, please refer to [Create a managed image of a generalized VM in Azure](https://docs.microsoft.com/azure/virtual-machines/windows/capture-image-resource). For Linux, please refer to [How to create an image of a virtual machine or VHD](https://docs.microsoft.com/azure/virtual-machines/linux/capture-image).
    */
-  generalize is ArmResourceActionSync<VirtualMachine, void, void>;
+  generalize is ArmResourceActionSync<VirtualMachine, void, OkResponse>;
+
+  /**
+   * Lists all available virtual machine sizes to which the specified virtual machine can be resized.
+   */
+  @get
+  @action("vmSizes")
+  listAvailableSizes is ArmResourceActionSync<
+    VirtualMachine,
+    void,
+    ArmResponse<VirtualMachineSizeListResult>
+  >;
 
   /**
    * The operation to power off (stop) a virtual machine. The virtual machine can be restarted with the same provisioned resources. You are still charged for this virtual machine.
@@ -182,7 +212,7 @@ interface VirtualMachines {
   powerOff is ArmResourceActionAsync<
     VirtualMachine,
     void,
-    void,
+    OkResponse,
     Parameters = {
       /**
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
@@ -195,30 +225,36 @@ interface VirtualMachines {
   /**
    * The operation to reapply a virtual machine's state.
    */
-  reapply is ArmResourceActionAsync<VirtualMachine, void, void>;
+  reapply is ArmResourceActionAsync<VirtualMachine, void, OkResponse>;
 
   /**
    * The operation to restart a virtual machine.
    */
-  restart is ArmResourceActionAsync<VirtualMachine, void, void>;
+  restart is ArmResourceActionAsync<VirtualMachine, void, OkResponse>;
 
   /**
    * The operation to start a virtual machine.
    */
-  start is ArmResourceActionAsync<VirtualMachine, void, void>;
+  start is ArmResourceActionAsync<VirtualMachine, void, OkResponse>;
 
   /**
    * Shuts down the virtual machine, moves it to a new node, and powers it back on.
    */
-  redeploy is ArmResourceActionAsync<VirtualMachine, void, void>;
+  redeploy is ArmResourceActionAsync<VirtualMachine, void, OkResponse>;
 
   /**
    * Reimages (upgrade the operating system) a virtual machine which don't have a ephemeral OS disk, for virtual machines who have a ephemeral OS disk the virtual machine is reset to initial state. NOTE: The retaining of old OS disk depends on the value of deleteOption of OS disk. If deleteOption is detach, the old OS disk will be preserved after reimage. If deleteOption is delete, the old OS disk will be deleted after reimage. The deleteOption of the OS disk should be updated accordingly before performing the reimage.
    */
   reimage is ArmResourceActionAsync<
     VirtualMachine,
-    VirtualMachineReimageParameters,
-    void
+    {
+      /**
+       * Parameters supplied to the Reimage Virtual Machine operation.
+       */
+      @bodyRoot
+      parameters?: VirtualMachineReimageParameters;
+    },
+    OkResponse
   >;
 
   /**
@@ -227,7 +263,7 @@ interface VirtualMachines {
   retrieveBootDiagnosticsData is ArmResourceActionSync<
     VirtualMachine,
     void,
-    RetrieveBootDiagnosticsDataResult,
+    ArmResponse<RetrieveBootDiagnosticsDataResult>,
     Parameters = {
       /**
        * Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. **Note:** If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes.
@@ -240,12 +276,20 @@ interface VirtualMachines {
   /**
    * The operation to perform maintenance on a virtual machine.
    */
-  performMaintenance is ArmResourceActionAsync<VirtualMachine, void, void>;
+  performMaintenance is ArmResourceActionAsync<
+    VirtualMachine,
+    void,
+    OkResponse
+  >;
 
   /**
    * The operation to simulate the eviction of spot virtual machine.
    */
-  simulateEviction is ArmResourceActionNoContentSync<VirtualMachine, void>;
+  simulateEviction is ArmResourceActionSync<
+    VirtualMachine,
+    void,
+    NoContentResponse
+  >;
 
   /**
    * Assess patches on the VM.
@@ -253,7 +297,7 @@ interface VirtualMachines {
   assessPatches is ArmResourceActionAsync<
     VirtualMachine,
     void,
-    VirtualMachineAssessPatchesResult
+    ArmResponse<VirtualMachineAssessPatchesResult>
   >;
 
   /**
@@ -262,7 +306,7 @@ interface VirtualMachines {
   installPatches is ArmResourceActionAsync<
     VirtualMachine,
     VirtualMachineInstallPatchesParameters,
-    VirtualMachineInstallPatchesResult
+    ArmResponse<VirtualMachineInstallPatchesResult>
   >;
 
   /**
@@ -271,46 +315,8 @@ interface VirtualMachines {
   runCommand is ArmResourceActionAsync<
     VirtualMachine,
     RunCommandInput,
-    RunCommandResult
+    ArmResponse<RunCommandResult>
   >;
-
-  /**
-   * Retrieves information about the run-time state of a virtual machine.
-   */
-  // FIXME: VirtualMachines_InstanceView could not be converted to a resource operation
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/instanceView")
-  @get
-  instanceView(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the virtual machine.
-     */
-    @path
-    vmName: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<VirtualMachineInstanceView> | ErrorResponse;
-
-  /**
-   * Lists all available virtual machine sizes to which the specified virtual machine can be resized.
-   */
-  // FIXME: VirtualMachines_ListAvailableSizes could not be converted to a resource operation
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmSizes")
-  @get
-  listAvailableSizes(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the virtual machine.
-     */
-    @path
-    vmName: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<VirtualMachineSizeListResult> | ErrorResponse;
 }
 
 @@doc(VirtualMachine.name, "The name of the virtual machine.");
@@ -325,9 +331,6 @@ interface VirtualMachines {
 );
 @@doc(VirtualMachines.capture::parameters.body,
   "Parameters supplied to the Capture Virtual Machine operation."
-);
-@@doc(VirtualMachines.reimage::parameters.body,
-  "Parameters supplied to the Reimage Virtual Machine operation."
 );
 @@doc(VirtualMachines.installPatches::parameters.body,
   "Input for InstallPatches as directly received by the API"

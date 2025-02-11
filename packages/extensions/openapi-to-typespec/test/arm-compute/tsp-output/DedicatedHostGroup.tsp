@@ -21,11 +21,7 @@ model DedicatedHostGroup
     SegmentName = "hostGroups",
     NamePattern = ""
   >;
-
-  /**
-   * Availability Zone to use for this host group. Only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone.
-   */
-  zones?: string[];
+  ...Azure.ResourceManager.AvailabilityZonesProperty;
 }
 
 @armResourceOperations
@@ -53,29 +49,25 @@ interface DedicatedHostGroups {
    * Update an dedicated host group.
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<DedicatedHostGroup, DedicatedHostGroupUpdate>;
+  update is ArmCustomPatchSync<
+    DedicatedHostGroup,
+    PatchModel = DedicatedHostGroupUpdate
+  >;
 
   /**
    * Delete a dedicated host group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<DedicatedHostGroup>;
 
   /**
    * Lists all of the dedicated host groups in the specified resource group. Use the nextLink property in the response to get the next page of dedicated host groups.
    */
-  listByResourceGroup is ArmResourceListByParent<
-    DedicatedHostGroup,
-    Response = DedicatedHostGroupListResult
-  >;
+  listByResourceGroup is ArmResourceListByParent<DedicatedHostGroup>;
 
   /**
    * Lists all of the dedicated host groups in the subscription. Use the nextLink property in the response to get the next page of dedicated host groups.
    */
-  listBySubscription is ArmListBySubscription<
-    DedicatedHostGroup,
-    Response = DedicatedHostGroupListResult
-  >;
+  listBySubscription is ArmListBySubscription<DedicatedHostGroup>;
 }
 
 @@doc(DedicatedHostGroup.name, "The name of the dedicated host group.");

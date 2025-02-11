@@ -40,7 +40,7 @@ interface DataTypes {
    * Update data type resource.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<DataType, DataTypeUpdate>;
+  update is ArmCustomPatchAsync<DataType, PatchModel = DataTypeUpdate>;
 
   /**
    * Delete data type resource.
@@ -50,17 +50,15 @@ interface DataTypes {
   /**
    * List data type by parent resource.
    */
-  listByDataProduct is ArmResourceListByParent<
-    DataType,
-    Response = DataTypeListResult
-  >;
+  listByDataProduct is ArmResourceListByParent<DataType>;
 
   /**
    * Delete data for data type.
    */
-  deleteData is ArmResourceActionNoResponseContentAsync<
+  deleteData is ArmResourceActionAsync<
     DataType,
-    Record<unknown>
+    Record<unknown>,
+    NoContentResponse
   >;
 
   /**
@@ -69,7 +67,7 @@ interface DataTypes {
   generateStorageContainerSasToken is ArmResourceActionSync<
     DataType,
     ContainerSaS,
-    ContainerSasToken
+    ArmResponse<ContainerSasToken>
   >;
 }
 

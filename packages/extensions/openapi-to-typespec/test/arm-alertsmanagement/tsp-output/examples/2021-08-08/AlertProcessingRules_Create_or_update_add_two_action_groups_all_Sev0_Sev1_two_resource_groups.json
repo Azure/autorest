@@ -1,0 +1,131 @@
+{
+  "parameters": {
+    "alertProcessingRule": {
+      "location": "Global",
+      "properties": {
+        "description": "Add AGId1 and AGId2 to all Sev0 and Sev1 alerts in these resourceGroups",
+        "actions": [
+          {
+            "actionGroupIds": [
+              "/subscriptions/subId1/resourcegroups/RGId1/providers/microsoft.insights/actiongroups/AGId1",
+              "/subscriptions/subId1/resourcegroups/RGId1/providers/microsoft.insights/actiongroups/AGId2"
+            ],
+            "actionType": "AddActionGroups"
+          }
+        ],
+        "conditions": [
+          {
+            "field": "Severity",
+            "operator": "Equals",
+            "values": [
+              "sev0",
+              "sev1"
+            ]
+          }
+        ],
+        "enabled": true,
+        "scopes": [
+          "/subscriptions/subId1/resourceGroups/RGId1",
+          "/subscriptions/subId1/resourceGroups/RGId2"
+        ]
+      },
+      "tags": {}
+    },
+    "alertProcessingRuleName": "AddActionGroupsBySeverity",
+    "api-version": "2021-08-08",
+    "resourceGroupName": "alertscorrelationrg",
+    "subscriptionId": "subId1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "AddActionGroupsBySeverity",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/AddActionGroupsBySeverity",
+        "location": "Global",
+        "properties": {
+          "description": "Add AGId1 and AGId2 to all Sev0 and Sev1 alerts in these resourceGroups",
+          "actions": [
+            {
+              "actionGroupIds": [
+                "/subscriptions/subId1/resourcegroups/RGId1/providers/microsoft.insights/actiongroups/AGId1",
+                "/subscriptions/subId1/resourcegroups/RGId1/providers/microsoft.insights/actiongroups/AGId2"
+              ],
+              "actionType": "AddActionGroups"
+            }
+          ],
+          "conditions": [
+            {
+              "field": "Severity",
+              "operator": "Equals",
+              "values": [
+                "sev0",
+                "sev1"
+              ]
+            }
+          ],
+          "enabled": true,
+          "scopes": [
+            "/subscriptions/subId1/resourceGroups/RGId1",
+            "/subscriptions/subId1/resourceGroups/RGId2"
+          ]
+        },
+        "systemData": {
+          "createdAt": "2018-06-12T22:05:09Z",
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2018-06-13T22:05:09Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      }
+    },
+    "201": {
+      "body": {
+        "name": "AddActionGroupsBySeverity",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/AddActionGroupsBySeverity",
+        "location": "Global",
+        "properties": {
+          "description": "Add AGId1 and AGId2 to all Sev0 and Sev1 alerts in these resourceGroups",
+          "actions": [
+            {
+              "actionGroupIds": [
+                "/subscriptions/subId1/resourcegroups/RGId1/providers/microsoft.insights/actiongroups/AGId1",
+                "/subscriptions/subId1/resourcegroups/RGId1/providers/microsoft.insights/actiongroups/AGId2"
+              ],
+              "actionType": "AddActionGroups"
+            }
+          ],
+          "conditions": [
+            {
+              "field": "Severity",
+              "operator": "Equals",
+              "values": [
+                "sev0",
+                "sev1"
+              ]
+            }
+          ],
+          "enabled": true,
+          "scopes": [
+            "/subscriptions/subId1/resourceGroups/RGId1",
+            "/subscriptions/subId1/resourceGroups/RGId2"
+          ]
+        },
+        "systemData": {
+          "createdAt": "2018-06-12T22:05:09Z",
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2018-06-13T22:05:09Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      }
+    }
+  },
+  "operationId": "AlertProcessingRules_CreateOrUpdate",
+  "title": "Create or update a rule that adds two action groups to all Sev0 and Sev1 alerts in two resource groups"
+}

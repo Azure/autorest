@@ -1,9 +1,9 @@
 {
   "Resources": {
-    "DenyAssignment": {
-      "Name": "DenyAssignment",
-      "GetOperations": [
-        {
+    "DenyAssignment": [
+      {
+        "Name": "DenyAssignment",
+        "GetOperation": {
           "Name": "Get",
           "Path": "/{scope}/providers/Microsoft.Authorization/denyAssignments/{denyAssignmentId}",
           "Method": "GET",
@@ -11,88 +11,85 @@
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Get the specified deny assignment."
-        }
-      ],
-      "CreateOperations": [],
-      "UpdateOperations": [],
-      "DeleteOperations": [],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/denyAssignments",
-          "Method": "GET",
-          "OperationID": "DenyAssignments_ListForResource",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListForResource",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "Gets deny assignments for a resource."
         },
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/denyAssignments",
-          "Method": "GET",
-          "OperationID": "DenyAssignments_ListForResourceGroup",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListForResourceGroup",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/denyAssignments",
+            "Method": "GET",
+            "OperationID": "DenyAssignments_ListForResource",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListForResource",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Gets deny assignments for a resource."
           },
-          "Description": "Gets deny assignments for a resource group."
-        },
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/denyAssignments",
-          "Method": "GET",
-          "OperationID": "DenyAssignments_List",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "List",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/denyAssignments",
+            "Method": "GET",
+            "OperationID": "DenyAssignments_ListForResourceGroup",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListForResourceGroup",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Gets deny assignments for a resource group."
           },
-          "Description": "Gets all deny assignments for the subscription."
-        },
-        {
-          "Name": "GetAll",
-          "Path": "/{scope}/providers/Microsoft.Authorization/denyAssignments",
-          "Method": "GET",
-          "OperationID": "DenyAssignments_ListForScope",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListForScope",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/denyAssignments",
+            "Method": "GET",
+            "OperationID": "DenyAssignments_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Gets all deny assignments for the subscription."
           },
-          "Description": "Gets deny assignments for a scope."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
-      "Parents": [
-        "ArmResource"
-      ],
-      "SwaggerModelName": "DenyAssignment",
-      "ResourceType": "Microsoft.Authorization/denyAssignments",
-      "ResourceKey": "denyAssignmentId",
-      "ResourceKeySegment": "denyAssignments",
-      "IsTrackedResource": false,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": true,
-      "IsSingletonResource": false
-    },
-    "ProviderOperationsMetadata": {
-      "Name": "ProviderOperationsMetadatum",
-      "GetOperations": [
-        {
+          {
+            "Name": "GetAll",
+            "Path": "/{scope}/providers/Microsoft.Authorization/denyAssignments",
+            "Method": "GET",
+            "OperationID": "DenyAssignments_ListForScope",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListForScope",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Gets deny assignments for a scope."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "ArmResource"
+        ],
+        "SwaggerModelName": "DenyAssignment",
+        "ResourceType": "Microsoft.Authorization/denyAssignments",
+        "ResourceKey": "denyAssignmentId",
+        "ResourceKeySegment": "denyAssignments",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "IsExtensionResource": true,
+        "IsSingletonResource": false
+      }
+    ],
+    "ProviderOperationsMetadata": [
+      {
+        "Name": "ProviderOperationsMetadatum",
+        "GetOperation": {
           "Name": "Get",
           "Path": "/providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}",
           "Method": "GET",
@@ -100,49 +97,46 @@
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Gets provider operations metadata for the specified resource provider."
-        }
-      ],
-      "CreateOperations": [],
-      "UpdateOperations": [],
-      "DeleteOperations": [],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/providers/Microsoft.Authorization/providerOperations",
-          "Method": "GET",
-          "OperationID": "ProviderOperationsMetadata_List",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "List",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "Gets provider operations metadata for all resource providers."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
-      "Parents": [
-        "TenantResource"
-      ],
-      "SwaggerModelName": "ProviderOperationsMetadata",
-      "ResourceType": "Microsoft.Authorization/providerOperations",
-      "ResourceKey": "resourceProviderNamespace",
-      "ResourceKeySegment": "providerOperations",
-      "IsTrackedResource": false,
-      "IsTenantResource": true,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": false,
-      "IsSingletonResource": false
-    },
-    "RoleAssignment": {
-      "Name": "RoleAssignment",
-      "GetOperations": [
-        {
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/providers/Microsoft.Authorization/providerOperations",
+            "Method": "GET",
+            "OperationID": "ProviderOperationsMetadata_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Gets provider operations metadata for all resource providers."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "TenantResource"
+        ],
+        "SwaggerModelName": "ProviderOperationsMetadata",
+        "ResourceType": "Microsoft.Authorization/providerOperations",
+        "ResourceKey": "resourceProviderNamespace",
+        "ResourceKeySegment": "providerOperations",
+        "IsTrackedResource": false,
+        "IsTenantResource": true,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "IsExtensionResource": false,
+        "IsSingletonResource": false
+      }
+    ],
+    "RoleAssignment": [
+      {
+        "Name": "RoleAssignment",
+        "GetOperation": {
           "Name": "Get",
           "Path": "/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}",
           "Method": "GET",
@@ -150,10 +144,8 @@
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Get a role assignment by scope and name."
-        }
-      ],
-      "CreateOperations": [
-        {
+        },
+        "CreateOperation": {
           "Name": "CreateOrUpdate",
           "Path": "/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}",
           "Method": "PUT",
@@ -161,10 +153,8 @@
           "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Create or update a role assignment by scope and name."
-        }
-      ],
-      "UpdateOperations": [
-        {
+        },
+        "UpdateOperation": {
           "Name": "Update",
           "Path": "/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}",
           "Method": "PUT",
@@ -172,10 +162,8 @@
           "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Create or update a role assignment by scope and name."
-        }
-      ],
-      "DeleteOperations": [
-        {
+        },
+        "DeleteOperation": {
           "Name": "Delete",
           "Path": "/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}",
           "Method": "DELETE",
@@ -183,46 +171,46 @@
           "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Delete a role assignment by scope and name."
-        }
-      ],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/{scope}/providers/Microsoft.Authorization/roleAssignments",
-          "Method": "GET",
-          "OperationID": "RoleAssignments_ListForScope",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListForScope",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "List all role assignments that apply to a scope."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
-      "Parents": [
-        "ArmResource"
-      ],
-      "SwaggerModelName": "RoleAssignment",
-      "ResourceType": "Microsoft.Authorization/roleAssignments",
-      "ResourceKey": "roleAssignmentName",
-      "ResourceKeySegment": "roleAssignments",
-      "IsTrackedResource": false,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": true,
-      "IsSingletonResource": false
-    },
-    "RoleDefinition": {
-      "Name": "RoleDefinition",
-      "GetOperations": [
-        {
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/{scope}/providers/Microsoft.Authorization/roleAssignments",
+            "Method": "GET",
+            "OperationID": "RoleAssignments_ListForScope",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListForScope",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "List all role assignments that apply to a scope."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "ArmResource"
+        ],
+        "SwaggerModelName": "RoleAssignment",
+        "ResourceType": "Microsoft.Authorization/roleAssignments",
+        "ResourceKey": "roleAssignmentName",
+        "ResourceKeySegment": "roleAssignments",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "IsExtensionResource": true,
+        "IsSingletonResource": false
+      }
+    ],
+    "RoleDefinition": [
+      {
+        "Name": "RoleDefinition",
+        "GetOperation": {
           "Name": "Get",
           "Path": "/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId}",
           "Method": "GET",
@@ -230,10 +218,8 @@
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Get role definition by name (GUID)."
-        }
-      ],
-      "CreateOperations": [
-        {
+        },
+        "CreateOperation": {
           "Name": "CreateOrUpdate",
           "Path": "/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId}",
           "Method": "PUT",
@@ -241,10 +227,8 @@
           "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Creates or updates a role definition."
-        }
-      ],
-      "UpdateOperations": [
-        {
+        },
+        "UpdateOperation": {
           "Name": "Update",
           "Path": "/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId}",
           "Method": "PUT",
@@ -252,10 +236,8 @@
           "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Creates or updates a role definition."
-        }
-      ],
-      "DeleteOperations": [
-        {
+        },
+        "DeleteOperation": {
           "Name": "Delete",
           "Path": "/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId}",
           "Method": "DELETE",
@@ -263,46 +245,46 @@
           "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Deletes a role definition."
-        }
-      ],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/{scope}/providers/Microsoft.Authorization/roleDefinitions",
-          "Method": "GET",
-          "OperationID": "RoleDefinitions_List",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "List",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "Get all role definitions that are applicable at scope and above."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
-      "Parents": [
-        "ArmResource"
-      ],
-      "SwaggerModelName": "RoleDefinition",
-      "ResourceType": "Microsoft.Authorization/roleDefinitions",
-      "ResourceKey": "roleDefinitionId",
-      "ResourceKeySegment": "roleDefinitions",
-      "IsTrackedResource": false,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": true,
-      "IsSingletonResource": false
-    },
-    "RoleAssignmentSchedule": {
-      "Name": "RoleAssignmentSchedule",
-      "GetOperations": [
-        {
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/{scope}/providers/Microsoft.Authorization/roleDefinitions",
+            "Method": "GET",
+            "OperationID": "RoleDefinitions_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Get all role definitions that are applicable at scope and above."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "ArmResource"
+        ],
+        "SwaggerModelName": "RoleDefinition",
+        "ResourceType": "Microsoft.Authorization/roleDefinitions",
+        "ResourceKey": "roleDefinitionId",
+        "ResourceKeySegment": "roleDefinitions",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "IsExtensionResource": true,
+        "IsSingletonResource": false
+      }
+    ],
+    "RoleAssignmentSchedule": [
+      {
+        "Name": "RoleAssignmentSchedule",
+        "GetOperation": {
           "Name": "Get",
           "Path": "/{scope}/providers/Microsoft.Authorization/roleAssignmentSchedules/{roleAssignmentScheduleName}",
           "Method": "GET",
@@ -310,49 +292,46 @@
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Get the specified role assignment schedule for a resource scope"
-        }
-      ],
-      "CreateOperations": [],
-      "UpdateOperations": [],
-      "DeleteOperations": [],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/{scope}/providers/Microsoft.Authorization/roleAssignmentSchedules",
-          "Method": "GET",
-          "OperationID": "RoleAssignmentSchedules_ListForScope",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListForScope",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "Gets role assignment schedules for a resource scope."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
-      "Parents": [
-        "ArmResource"
-      ],
-      "SwaggerModelName": "RoleAssignmentSchedule",
-      "ResourceType": "Microsoft.Authorization/roleAssignmentSchedules",
-      "ResourceKey": "roleAssignmentScheduleName",
-      "ResourceKeySegment": "roleAssignmentSchedules",
-      "IsTrackedResource": false,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": true,
-      "IsSingletonResource": false
-    },
-    "RoleAssignmentScheduleInstance": {
-      "Name": "RoleAssignmentScheduleInstance",
-      "GetOperations": [
-        {
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/{scope}/providers/Microsoft.Authorization/roleAssignmentSchedules",
+            "Method": "GET",
+            "OperationID": "RoleAssignmentSchedules_ListForScope",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListForScope",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Gets role assignment schedules for a resource scope."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "ArmResource"
+        ],
+        "SwaggerModelName": "RoleAssignmentSchedule",
+        "ResourceType": "Microsoft.Authorization/roleAssignmentSchedules",
+        "ResourceKey": "roleAssignmentScheduleName",
+        "ResourceKeySegment": "roleAssignmentSchedules",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "IsExtensionResource": true,
+        "IsSingletonResource": false
+      }
+    ],
+    "RoleAssignmentScheduleInstance": [
+      {
+        "Name": "RoleAssignmentScheduleInstance",
+        "GetOperation": {
           "Name": "Get",
           "Path": "/{scope}/providers/Microsoft.Authorization/roleAssignmentScheduleInstances/{roleAssignmentScheduleInstanceName}",
           "Method": "GET",
@@ -360,49 +339,46 @@
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Gets the specified role assignment schedule instance."
-        }
-      ],
-      "CreateOperations": [],
-      "UpdateOperations": [],
-      "DeleteOperations": [],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/{scope}/providers/Microsoft.Authorization/roleAssignmentScheduleInstances",
-          "Method": "GET",
-          "OperationID": "RoleAssignmentScheduleInstances_ListForScope",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListForScope",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "Gets role assignment schedule instances of a role assignment schedule."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
-      "Parents": [
-        "ArmResource"
-      ],
-      "SwaggerModelName": "RoleAssignmentScheduleInstance",
-      "ResourceType": "Microsoft.Authorization/roleAssignmentScheduleInstances",
-      "ResourceKey": "roleAssignmentScheduleInstanceName",
-      "ResourceKeySegment": "roleAssignmentScheduleInstances",
-      "IsTrackedResource": false,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": true,
-      "IsSingletonResource": false
-    },
-    "RoleAssignmentScheduleRequest": {
-      "Name": "RoleAssignmentScheduleRequest",
-      "GetOperations": [
-        {
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/{scope}/providers/Microsoft.Authorization/roleAssignmentScheduleInstances",
+            "Method": "GET",
+            "OperationID": "RoleAssignmentScheduleInstances_ListForScope",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListForScope",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Gets role assignment schedule instances of a role assignment schedule."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "ArmResource"
+        ],
+        "SwaggerModelName": "RoleAssignmentScheduleInstance",
+        "ResourceType": "Microsoft.Authorization/roleAssignmentScheduleInstances",
+        "ResourceKey": "roleAssignmentScheduleInstanceName",
+        "ResourceKeySegment": "roleAssignmentScheduleInstances",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "IsExtensionResource": true,
+        "IsSingletonResource": false
+      }
+    ],
+    "RoleAssignmentScheduleRequest": [
+      {
+        "Name": "RoleAssignmentScheduleRequest",
+        "GetOperation": {
           "Name": "Get",
           "Path": "/{scope}/providers/Microsoft.Authorization/roleAssignmentScheduleRequests/{roleAssignmentScheduleRequestName}",
           "Method": "GET",
@@ -410,10 +386,8 @@
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Get the specified role assignment schedule request."
-        }
-      ],
-      "CreateOperations": [
-        {
+        },
+        "CreateOperation": {
           "Name": "CreateOrUpdate",
           "Path": "/{scope}/providers/Microsoft.Authorization/roleAssignmentScheduleRequests/{roleAssignmentScheduleRequestName}",
           "Method": "PUT",
@@ -421,10 +395,8 @@
           "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Creates a role assignment schedule request."
-        }
-      ],
-      "UpdateOperations": [
-        {
+        },
+        "UpdateOperation": {
           "Name": "Update",
           "Path": "/{scope}/providers/Microsoft.Authorization/roleAssignmentScheduleRequests/{roleAssignmentScheduleRequestName}",
           "Method": "PUT",
@@ -432,66 +404,65 @@
           "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Creates a role assignment schedule request."
-        }
-      ],
-      "DeleteOperations": [],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/{scope}/providers/Microsoft.Authorization/roleAssignmentScheduleRequests",
-          "Method": "GET",
-          "OperationID": "RoleAssignmentScheduleRequests_ListForScope",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListForScope",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "Gets role assignment schedule requests for a scope."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "Cancel",
-          "Path": "/{scope}/providers/Microsoft.Authorization/roleAssignmentScheduleRequests/{roleAssignmentScheduleRequestName}/cancel",
-          "Method": "POST",
-          "OperationID": "RoleAssignmentScheduleRequests_Cancel",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Cancels a pending role assignment schedule request."
         },
-        {
-          "Name": "Validate",
-          "Path": "/{scope}/providers/Microsoft.Authorization/roleAssignmentScheduleRequests/{roleAssignmentScheduleRequestName}/validate",
-          "Method": "POST",
-          "OperationID": "RoleAssignmentScheduleRequests_Validate",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Validates a new role assignment schedule request."
-        }
-      ],
-      "Parents": [
-        "ArmResource"
-      ],
-      "SwaggerModelName": "RoleAssignmentScheduleRequest",
-      "ResourceType": "Microsoft.Authorization/roleAssignmentScheduleRequests",
-      "ResourceKey": "roleAssignmentScheduleRequestName",
-      "ResourceKeySegment": "roleAssignmentScheduleRequests",
-      "IsTrackedResource": false,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": true,
-      "IsSingletonResource": false
-    },
-    "RoleEligibilitySchedule": {
-      "Name": "RoleEligibilitySchedule",
-      "GetOperations": [
-        {
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/{scope}/providers/Microsoft.Authorization/roleAssignmentScheduleRequests",
+            "Method": "GET",
+            "OperationID": "RoleAssignmentScheduleRequests_ListForScope",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListForScope",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Gets role assignment schedule requests for a scope."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [
+          {
+            "Name": "Cancel",
+            "Path": "/{scope}/providers/Microsoft.Authorization/roleAssignmentScheduleRequests/{roleAssignmentScheduleRequestName}/cancel",
+            "Method": "POST",
+            "OperationID": "RoleAssignmentScheduleRequests_Cancel",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Cancels a pending role assignment schedule request."
+          },
+          {
+            "Name": "Validate",
+            "Path": "/{scope}/providers/Microsoft.Authorization/roleAssignmentScheduleRequests/{roleAssignmentScheduleRequestName}/validate",
+            "Method": "POST",
+            "OperationID": "RoleAssignmentScheduleRequests_Validate",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Validates a new role assignment schedule request."
+          }
+        ],
+        "Parents": [
+          "ArmResource"
+        ],
+        "SwaggerModelName": "RoleAssignmentScheduleRequest",
+        "ResourceType": "Microsoft.Authorization/roleAssignmentScheduleRequests",
+        "ResourceKey": "roleAssignmentScheduleRequestName",
+        "ResourceKeySegment": "roleAssignmentScheduleRequests",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "IsExtensionResource": true,
+        "IsSingletonResource": false
+      }
+    ],
+    "RoleEligibilitySchedule": [
+      {
+        "Name": "RoleEligibilitySchedule",
+        "GetOperation": {
           "Name": "Get",
           "Path": "/{scope}/providers/Microsoft.Authorization/roleEligibilitySchedules/{roleEligibilityScheduleName}",
           "Method": "GET",
@@ -499,49 +470,46 @@
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Get the specified role eligibility schedule for a resource scope"
-        }
-      ],
-      "CreateOperations": [],
-      "UpdateOperations": [],
-      "DeleteOperations": [],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/{scope}/providers/Microsoft.Authorization/roleEligibilitySchedules",
-          "Method": "GET",
-          "OperationID": "RoleEligibilitySchedules_ListForScope",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListForScope",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "Gets role eligibility schedules for a resource scope."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
-      "Parents": [
-        "ArmResource"
-      ],
-      "SwaggerModelName": "RoleEligibilitySchedule",
-      "ResourceType": "Microsoft.Authorization/roleEligibilitySchedules",
-      "ResourceKey": "roleEligibilityScheduleName",
-      "ResourceKeySegment": "roleEligibilitySchedules",
-      "IsTrackedResource": false,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": true,
-      "IsSingletonResource": false
-    },
-    "RoleEligibilityScheduleInstance": {
-      "Name": "RoleEligibilityScheduleInstance",
-      "GetOperations": [
-        {
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/{scope}/providers/Microsoft.Authorization/roleEligibilitySchedules",
+            "Method": "GET",
+            "OperationID": "RoleEligibilitySchedules_ListForScope",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListForScope",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Gets role eligibility schedules for a resource scope."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "ArmResource"
+        ],
+        "SwaggerModelName": "RoleEligibilitySchedule",
+        "ResourceType": "Microsoft.Authorization/roleEligibilitySchedules",
+        "ResourceKey": "roleEligibilityScheduleName",
+        "ResourceKeySegment": "roleEligibilitySchedules",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "IsExtensionResource": true,
+        "IsSingletonResource": false
+      }
+    ],
+    "RoleEligibilityScheduleInstance": [
+      {
+        "Name": "RoleEligibilityScheduleInstance",
+        "GetOperation": {
           "Name": "Get",
           "Path": "/{scope}/providers/Microsoft.Authorization/roleEligibilityScheduleInstances/{roleEligibilityScheduleInstanceName}",
           "Method": "GET",
@@ -549,49 +517,46 @@
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Gets the specified role eligibility schedule instance."
-        }
-      ],
-      "CreateOperations": [],
-      "UpdateOperations": [],
-      "DeleteOperations": [],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/{scope}/providers/Microsoft.Authorization/roleEligibilityScheduleInstances",
-          "Method": "GET",
-          "OperationID": "RoleEligibilityScheduleInstances_ListForScope",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListForScope",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "Gets role eligibility schedule instances of a role eligibility schedule."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
-      "Parents": [
-        "ArmResource"
-      ],
-      "SwaggerModelName": "RoleEligibilityScheduleInstance",
-      "ResourceType": "Microsoft.Authorization/roleEligibilityScheduleInstances",
-      "ResourceKey": "roleEligibilityScheduleInstanceName",
-      "ResourceKeySegment": "roleEligibilityScheduleInstances",
-      "IsTrackedResource": false,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": true,
-      "IsSingletonResource": false
-    },
-    "RoleEligibilityScheduleRequest": {
-      "Name": "RoleEligibilityScheduleRequest",
-      "GetOperations": [
-        {
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/{scope}/providers/Microsoft.Authorization/roleEligibilityScheduleInstances",
+            "Method": "GET",
+            "OperationID": "RoleEligibilityScheduleInstances_ListForScope",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListForScope",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Gets role eligibility schedule instances of a role eligibility schedule."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "ArmResource"
+        ],
+        "SwaggerModelName": "RoleEligibilityScheduleInstance",
+        "ResourceType": "Microsoft.Authorization/roleEligibilityScheduleInstances",
+        "ResourceKey": "roleEligibilityScheduleInstanceName",
+        "ResourceKeySegment": "roleEligibilityScheduleInstances",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "IsExtensionResource": true,
+        "IsSingletonResource": false
+      }
+    ],
+    "RoleEligibilityScheduleRequest": [
+      {
+        "Name": "RoleEligibilityScheduleRequest",
+        "GetOperation": {
           "Name": "Get",
           "Path": "/{scope}/providers/Microsoft.Authorization/roleEligibilityScheduleRequests/{roleEligibilityScheduleRequestName}",
           "Method": "GET",
@@ -599,10 +564,8 @@
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Get the specified role eligibility schedule request."
-        }
-      ],
-      "CreateOperations": [
-        {
+        },
+        "CreateOperation": {
           "Name": "CreateOrUpdate",
           "Path": "/{scope}/providers/Microsoft.Authorization/roleEligibilityScheduleRequests/{roleEligibilityScheduleRequestName}",
           "Method": "PUT",
@@ -610,10 +573,8 @@
           "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Creates a role eligibility schedule request."
-        }
-      ],
-      "UpdateOperations": [
-        {
+        },
+        "UpdateOperation": {
           "Name": "Update",
           "Path": "/{scope}/providers/Microsoft.Authorization/roleEligibilityScheduleRequests/{roleEligibilityScheduleRequestName}",
           "Method": "PUT",
@@ -621,66 +582,65 @@
           "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Creates a role eligibility schedule request."
-        }
-      ],
-      "DeleteOperations": [],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/{scope}/providers/Microsoft.Authorization/roleEligibilityScheduleRequests",
-          "Method": "GET",
-          "OperationID": "RoleEligibilityScheduleRequests_ListForScope",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListForScope",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "Gets role eligibility schedule requests for a scope."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "Cancel",
-          "Path": "/{scope}/providers/Microsoft.Authorization/roleEligibilityScheduleRequests/{roleEligibilityScheduleRequestName}/cancel",
-          "Method": "POST",
-          "OperationID": "RoleEligibilityScheduleRequests_Cancel",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Cancels a pending role eligibility schedule request."
         },
-        {
-          "Name": "Validate",
-          "Path": "/{scope}/providers/Microsoft.Authorization/roleEligibilityScheduleRequests/{roleEligibilityScheduleRequestName}/validate",
-          "Method": "POST",
-          "OperationID": "RoleEligibilityScheduleRequests_Validate",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Validates a new role eligibility schedule request."
-        }
-      ],
-      "Parents": [
-        "ArmResource"
-      ],
-      "SwaggerModelName": "RoleEligibilityScheduleRequest",
-      "ResourceType": "Microsoft.Authorization/roleEligibilityScheduleRequests",
-      "ResourceKey": "roleEligibilityScheduleRequestName",
-      "ResourceKeySegment": "roleEligibilityScheduleRequests",
-      "IsTrackedResource": false,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": true,
-      "IsSingletonResource": false
-    },
-    "RoleManagementPolicy": {
-      "Name": "RoleManagementPolicy",
-      "GetOperations": [
-        {
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/{scope}/providers/Microsoft.Authorization/roleEligibilityScheduleRequests",
+            "Method": "GET",
+            "OperationID": "RoleEligibilityScheduleRequests_ListForScope",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListForScope",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Gets role eligibility schedule requests for a scope."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [
+          {
+            "Name": "Cancel",
+            "Path": "/{scope}/providers/Microsoft.Authorization/roleEligibilityScheduleRequests/{roleEligibilityScheduleRequestName}/cancel",
+            "Method": "POST",
+            "OperationID": "RoleEligibilityScheduleRequests_Cancel",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Cancels a pending role eligibility schedule request."
+          },
+          {
+            "Name": "Validate",
+            "Path": "/{scope}/providers/Microsoft.Authorization/roleEligibilityScheduleRequests/{roleEligibilityScheduleRequestName}/validate",
+            "Method": "POST",
+            "OperationID": "RoleEligibilityScheduleRequests_Validate",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Validates a new role eligibility schedule request."
+          }
+        ],
+        "Parents": [
+          "ArmResource"
+        ],
+        "SwaggerModelName": "RoleEligibilityScheduleRequest",
+        "ResourceType": "Microsoft.Authorization/roleEligibilityScheduleRequests",
+        "ResourceKey": "roleEligibilityScheduleRequestName",
+        "ResourceKeySegment": "roleEligibilityScheduleRequests",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "IsExtensionResource": true,
+        "IsSingletonResource": false
+      }
+    ],
+    "RoleManagementPolicy": [
+      {
+        "Name": "RoleManagementPolicy",
+        "GetOperation": {
           "Name": "Get",
           "Path": "/{scope}/providers/Microsoft.Authorization/roleManagementPolicies/{roleManagementPolicyName}",
           "Method": "GET",
@@ -688,11 +648,8 @@
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Get the specified role management policy for a resource scope"
-        }
-      ],
-      "CreateOperations": [],
-      "UpdateOperations": [
-        {
+        },
+        "UpdateOperation": {
           "Name": "Update",
           "Path": "/{scope}/providers/Microsoft.Authorization/roleManagementPolicies/{roleManagementPolicyName}",
           "Method": "PATCH",
@@ -700,47 +657,46 @@
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Update a role management policy"
-        }
-      ],
-      "DeleteOperations": [],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/{scope}/providers/Microsoft.Authorization/roleManagementPolicies",
-          "Method": "GET",
-          "OperationID": "RoleManagementPolicies_ListForScope",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListForScope",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "Gets role management policies for a resource scope."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
-      "Parents": [
-        "ArmResource"
-      ],
-      "SwaggerModelName": "RoleManagementPolicy",
-      "ResourceType": "Microsoft.Authorization/roleManagementPolicies",
-      "ResourceKey": "roleManagementPolicyName",
-      "ResourceKeySegment": "roleManagementPolicies",
-      "IsTrackedResource": false,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": true,
-      "IsSingletonResource": false
-    },
-    "RoleManagementPolicyAssignment": {
-      "Name": "RoleManagementPolicyAssignment",
-      "GetOperations": [
-        {
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/{scope}/providers/Microsoft.Authorization/roleManagementPolicies",
+            "Method": "GET",
+            "OperationID": "RoleManagementPolicies_ListForScope",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListForScope",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Gets role management policies for a resource scope."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "ArmResource"
+        ],
+        "SwaggerModelName": "RoleManagementPolicy",
+        "ResourceType": "Microsoft.Authorization/roleManagementPolicies",
+        "ResourceKey": "roleManagementPolicyName",
+        "ResourceKeySegment": "roleManagementPolicies",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "IsExtensionResource": true,
+        "IsSingletonResource": false
+      }
+    ],
+    "RoleManagementPolicyAssignment": [
+      {
+        "Name": "RoleManagementPolicyAssignment",
+        "GetOperation": {
           "Name": "Get",
           "Path": "/{scope}/providers/Microsoft.Authorization/roleManagementPolicyAssignments/{roleManagementPolicyAssignmentName}",
           "Method": "GET",
@@ -748,10 +704,8 @@
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Get the specified role management policy assignment for a resource scope"
-        }
-      ],
-      "CreateOperations": [
-        {
+        },
+        "CreateOperation": {
           "Name": "CreateOrUpdate",
           "Path": "/{scope}/providers/Microsoft.Authorization/roleManagementPolicyAssignments/{roleManagementPolicyAssignmentName}",
           "Method": "PUT",
@@ -759,10 +713,8 @@
           "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Create a role management policy assignment"
-        }
-      ],
-      "UpdateOperations": [
-        {
+        },
+        "UpdateOperation": {
           "Name": "Update",
           "Path": "/{scope}/providers/Microsoft.Authorization/roleManagementPolicyAssignments/{roleManagementPolicyAssignmentName}",
           "Method": "PUT",
@@ -770,43 +722,42 @@
           "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Create a role management policy assignment"
-        }
-      ],
-      "DeleteOperations": [],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/{scope}/providers/Microsoft.Authorization/roleManagementPolicyAssignments",
-          "Method": "GET",
-          "OperationID": "RoleManagementPolicyAssignments_ListForScope",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListForScope",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "Gets role management assignment policies for a resource scope."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
-      "Parents": [
-        "ArmResource"
-      ],
-      "SwaggerModelName": "RoleManagementPolicyAssignment",
-      "ResourceType": "Microsoft.Authorization/roleManagementPolicyAssignments",
-      "ResourceKey": "roleManagementPolicyAssignmentName",
-      "ResourceKeySegment": "roleManagementPolicyAssignments",
-      "IsTrackedResource": false,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": true,
-      "IsSingletonResource": false
-    }
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/{scope}/providers/Microsoft.Authorization/roleManagementPolicyAssignments",
+            "Method": "GET",
+            "OperationID": "RoleManagementPolicyAssignments_ListForScope",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListForScope",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Gets role management assignment policies for a resource scope."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "ArmResource"
+        ],
+        "SwaggerModelName": "RoleManagementPolicyAssignment",
+        "ResourceType": "Microsoft.Authorization/roleManagementPolicyAssignments",
+        "ResourceKey": "roleManagementPolicyAssignmentName",
+        "ResourceKeySegment": "roleManagementPolicyAssignments",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "IsExtensionResource": true,
+        "IsSingletonResource": false
+      }
+    ]
   },
   "RenameMapping": {},
   "OverrideOperationName": {}

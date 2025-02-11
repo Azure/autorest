@@ -41,7 +41,7 @@ interface EncryptionScopes {
    * Update encryption scope properties as specified in the request body. Update fails if the specified encryption scope does not already exist.
    */
   @parameterVisibility
-  patch is ArmCustomPatchSync<EncryptionScope, EncryptionScope>;
+  patch is ArmCustomPatchSync<EncryptionScope, PatchModel = EncryptionScope>;
 
   /**
    * Lists all the encryption scopes available under the specified storage account.
@@ -68,8 +68,7 @@ interface EncryptionScopes {
        */
       @query("$include")
       $include?: ListEncryptionScopesInclude;
-    },
-    Response = EncryptionScopeListResult
+    }
   >;
 }
 

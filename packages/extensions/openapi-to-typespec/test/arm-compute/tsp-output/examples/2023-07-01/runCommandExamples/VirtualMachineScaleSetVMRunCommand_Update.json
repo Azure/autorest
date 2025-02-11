@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "instanceId": "0",
+    "resourceGroupName": "myResourceGroup",
+    "runCommand": {
+      "properties": {
+        "source": {
+          "scriptUri": "https://mystorageaccount.blob.core.windows.net/scriptcontainer/MyScript.ps1",
+          "scriptUriManagedIdentity": {
+            "objectId": "4231e4d2-33e4-4e23-96b2-17888afa6072"
+          }
+        }
+      }
+    },
+    "runCommandName": "myRunCommand",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "myvmScaleSet"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myRunCommand",
+        "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/runCommands",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myvmScaleSet/virtualMachines/0/runCommands/myRunCommand",
+        "location": "westus",
+        "properties": {
+          "asyncExecution": false,
+          "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt",
+          "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
+          "parameters": [
+            {
+              "name": "param1",
+              "value": "value1"
+            },
+            {
+              "name": "param2",
+              "value": "value2"
+            }
+          ],
+          "provisioningState": "Updating",
+          "runAsUser": "user1",
+          "source": {
+            "scriptUri": "https://mystorageaccount.blob.core.windows.net/scriptcontainer/MyScript.ps1"
+          },
+          "timeoutInSeconds": 3600,
+          "treatFailureAsDeploymentFailure": false
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetVMRunCommands_Update",
+  "title": "Update VirtualMachineScaleSet VM run command."
+}

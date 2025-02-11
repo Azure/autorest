@@ -13,6 +13,7 @@ namespace Azure.ResourceManager.Authorization;
 /**
  * Deny Assignment
  */
+@extensionResource
 model DenyAssignment
   is Azure.ResourceManager.ExtensionResource<DenyAssignmentProperties> {
   ...ResourceNameParameter<
@@ -30,7 +31,20 @@ interface DenyAssignments {
    */
   get is ArmResourceRead<
     DenyAssignment,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
+      /**
+       * The scope of the deny assignment.
+       */
+      @path
+      scope: string;
+
+      /**
+       * The ID of the deny assignment to get.
+       */
+      @path
+      denyAssignmentId: string;
+    }
   >;
 
   /**
@@ -38,7 +52,7 @@ interface DenyAssignments {
    */
   listForResource is ArmResourceListByParent<
     DenyAssignment,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
       ...SubscriptionIdParameter;
       ...ResourceGroupParameter;
@@ -72,8 +86,7 @@ interface DenyAssignments {
        */
       @query("$filter")
       $filter?: string;
-    },
-    Response = DenyAssignmentListResult
+    }
   >;
 }
 

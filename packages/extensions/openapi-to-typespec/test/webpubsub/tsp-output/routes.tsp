@@ -41,7 +41,7 @@ interface WebPubSubOperations {
       /**
        * Target groups and connection filter.
        */
-      @body
+      @bodyRoot
       groupsToAdd: AddToGroupsRequest;
     },
     void
@@ -158,7 +158,7 @@ interface WebPubSubOperations {
       /**
        * Target groups and connection filter.
        */
-      @body
+      @bodyRoot
       groupsToRemove: RemoveFromGroupsRequest;
     },
     void
@@ -214,7 +214,7 @@ interface WebPubSubOperations {
       /**
        * The payload body.
        */
-      @body
+      @bodyRoot
       message: bytes;
     },
     void
@@ -324,7 +324,7 @@ interface WebPubSubOperations {
       /**
        * The payload body.
        */
-      @body
+      @bodyRoot
       message: bytes;
     },
     void
@@ -486,7 +486,7 @@ interface WebPubSubOperations {
       /**
        * The payload body.
        */
-      @body
+      @bodyRoot
       message: bytes;
     },
     void
@@ -804,7 +804,7 @@ interface WebPubSubOperations {
       /**
        * The payload body.
        */
-      @body
+      @bodyRoot
       message: bytes;
     },
     void

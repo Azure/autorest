@@ -165,7 +165,7 @@ interface IndexersOperations {
 @header
 "x-ms-client-request-id"?: string
 
-@body
+@bodyRoot
 "keysOrIds"?: DocumentKeysOrIds}, void>;
 
 
@@ -452,7 +452,7 @@ interface SkillsetsOperations {
 /**
 * The names of skills to reset.
 */
-@body
+@bodyRoot
 "skillNames": SkillNames}, void>;
 
 
@@ -716,7 +716,7 @@ interface IndexesOperations {
 /**
 * The text and analyzer or analysis components to test.
 */
-@body
+@bodyRoot
 "request": AnalyzeRequest}, AnalyzeResult>;
 
 
@@ -1097,7 +1097,7 @@ interface DocumentsOperations {
 /**
 * The definition of the Search request.
 */
-@body
+@bodyRoot
 "searchRequest": SearchRequest}, SearchDocumentsResult>;
 
 
@@ -1227,7 +1227,7 @@ interface DocumentsOperations {
 /**
 * The Suggest request.
 */
-@body
+@bodyRoot
 "suggestRequest": SuggestRequest}, SuggestDocumentsResult>;
 
 
@@ -1245,7 +1245,7 @@ interface DocumentsOperations {
 /**
 * The batch of index actions.
 */
-@body
+@bodyRoot
 "batch": IndexBatch}, IndexDocumentsResult>;
 
 
@@ -1343,7 +1343,7 @@ interface DocumentsOperations {
 /**
 * The definition of the Autocomplete request.
 */
-@body
+@bodyRoot
 "autocompleteRequest": AutocompleteRequest}, AutocompleteResult>;
 
 

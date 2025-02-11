@@ -39,7 +39,10 @@ interface Images {
   /**
    * Delete a Image
    */
-  delete is ArmResourceDeleteAsync<Image>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Image,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List Image resources by Catalog
@@ -70,8 +73,7 @@ interface Images {
        */
       @query("$maxpagesize")
       maxpagesize?: int32;
-    },
-    Response = ImageListResult
+    }
   >;
 }
 

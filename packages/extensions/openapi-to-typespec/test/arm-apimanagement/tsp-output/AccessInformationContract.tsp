@@ -39,19 +39,14 @@ interface AccessInformationContracts {
    * Tenant access metadata
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("TenantAccess_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      AccessInformationContract,
-      BaseParameters<AccessInformationContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<AccessInformationContract>;
 
   /**
    * Update tenant access information details.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("TenantAccess_Create")
   create is ArmResourceCreateOrReplaceSync<
     AccessInformationContract,
@@ -61,7 +56,8 @@ interface AccessInformationContracts {
        */
       @header
       `If-Match`: string;
-    }
+    },
+    Response = ArmResourceUpdatedResponse<AccessInformationContract>
   >;
 
   /**
@@ -72,7 +68,7 @@ interface AccessInformationContracts {
   @operationId("TenantAccess_Update")
   update is ArmCustomPatchSync<
     AccessInformationContract,
-    AccessInformationUpdateParameters,
+    PatchModel = AccessInformationUpdateParameters,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -95,8 +91,7 @@ interface AccessInformationContracts {
        */
       @query("$filter")
       $filter?: string;
-    },
-    Response = AccessInformationListResult
+    }
   >;
 
   /**
@@ -104,9 +99,10 @@ interface AccessInformationContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("TenantAccess_RegeneratePrimaryKey")
-  regeneratePrimaryKey is ArmResourceActionNoContentSync<
+  regeneratePrimaryKey is ArmResourceActionSync<
     AccessInformationContract,
-    void
+    void,
+    NoContentResponse
   >;
 
   /**
@@ -114,9 +110,10 @@ interface AccessInformationContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("TenantAccess_RegenerateSecondaryKey")
-  regenerateSecondaryKey is ArmResourceActionNoContentSync<
+  regenerateSecondaryKey is ArmResourceActionSync<
     AccessInformationContract,
-    void
+    void,
+    NoContentResponse
   >;
 
   /**
@@ -127,27 +124,31 @@ interface AccessInformationContracts {
   listSecrets is ArmResourceActionSync<
     AccessInformationContract,
     void,
-    AccessInformationSecretsContract
+    ArmResponse<AccessInformationSecretsContract>
   >;
 
   /**
    * Regenerate primary access key for GIT.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("regeneratePrimaryKey")
   @operationId("TenantAccessGit_RegeneratePrimaryKey")
-  tenantAccessGitRegeneratePrimaryKey is ArmResourceActionNoContentSync<
+  tenantAccessGitRegeneratePrimaryKey is ArmResourceActionSync<
     AccessInformationContract,
-    void
+    void,
+    NoContentResponse
   >;
 
   /**
    * Regenerate secondary access key for GIT.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("regenerateSecondaryKey")
   @operationId("TenantAccessGit_RegenerateSecondaryKey")
-  tenantAccessGitRegenerateSecondaryKey is ArmResourceActionNoContentSync<
+  tenantAccessGitRegenerateSecondaryKey is ArmResourceActionSync<
     AccessInformationContract,
-    void
+    void,
+    NoContentResponse
   >;
 
   /**
@@ -158,7 +159,7 @@ interface AccessInformationContracts {
   deploy is ArmResourceActionAsync<
     AccessInformationContract,
     DeployConfigurationParameters,
-    OperationResultContract,
+    ArmResponse<OperationResultContract>,
     Parameters = {
       /**
        * The identifier of the Git Configuration Operation.
@@ -176,7 +177,7 @@ interface AccessInformationContracts {
   save is ArmResourceActionAsync<
     AccessInformationContract,
     SaveConfigurationParameter,
-    OperationResultContract,
+    ArmResponse<OperationResultContract>,
     Parameters = {
       /**
        * The identifier of the Git Configuration Operation.
@@ -194,7 +195,7 @@ interface AccessInformationContracts {
   validate is ArmResourceActionAsync<
     AccessInformationContract,
     DeployConfigurationParameters,
-    OperationResultContract,
+    ArmResponse<OperationResultContract>,
     Parameters = {
       /**
        * The identifier of the Git Configuration Operation.
@@ -207,32 +208,22 @@ interface AccessInformationContracts {
   /**
    * Gets the status of the most recent synchronization between the configuration database and the Git repository.
    */
-  // FIXME: TenantConfiguration_GetSyncState could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TenantConfiguration_GetSyncState")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/syncState")
   @get
-  getSyncState(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the API Management service.
-     */
-    @maxLength(50)
-    @minLength(1)
-    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-    @path
-    serviceName: string,
-
-    ...SubscriptionIdParameter,
-
-    /**
-     * The identifier of the Git Configuration Operation.
-     */
-    @path
-    configurationName: ConfigurationIdName,
-  ): ArmResponse<TenantConfigurationSyncStateContract> | ErrorResponse;
+  @action("syncState")
+  @operationId("TenantConfiguration_GetSyncState")
+  getSyncState is ArmResourceActionSync<
+    AccessInformationContract,
+    void,
+    ArmResponse<TenantConfigurationSyncStateContract>,
+    Parameters = {
+      /**
+       * The identifier of the Git Configuration Operation.
+       */
+      @path
+      configurationName: ConfigurationIdName;
+    }
+  >;
 }
 
 @@doc(AccessInformationContract.name,

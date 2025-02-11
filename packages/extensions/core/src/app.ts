@@ -358,6 +358,9 @@ async function main() {
     if (e !== false) {
       logger.log({ level: "error", message: `!${e}` });
     }
+    if ((e as any).stack) {
+      logger.log({ level: "error", message: `stack: ${(e as any).stack}` });
+    }
     logger.log({
       level: "error",
       message:

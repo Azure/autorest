@@ -38,11 +38,8 @@ interface UserContracts {
    * Gets the entity state (Etag) version of the user specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("User_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<UserContract, BaseParameters<UserContract>>,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<UserContract>;
 
   /**
    * Creates or Updates a user.
@@ -74,7 +71,7 @@ interface UserContracts {
   @operationId("User_Update")
   update is ArmCustomPatchSync<
     UserContract,
-    UserUpdateParameters,
+    PatchModel = UserUpdateParameters,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -88,7 +85,6 @@ interface UserContracts {
    * Deletes specific user.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("User_Delete")
   delete is ArmResourceDeleteSync<
     UserContract,
@@ -151,8 +147,7 @@ interface UserContracts {
        */
       @query("expandGroups")
       expandGroups?: boolean;
-    },
-    Response = UserListResult
+    }
   >;
 
   /**
@@ -163,18 +158,65 @@ interface UserContracts {
   generateSsoUrl is ArmResourceActionSync<
     UserContract,
     void,
-    GenerateSsoUrlResult
+    ArmResponse<GenerateSsoUrlResult>
   >;
 
   /**
    * Gets the Shared Access Authorization Token for the User.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("token")
   @operationId("User_GetSharedAccessToken")
   getSharedAccessToken is ArmResourceActionSync<
     UserContract,
     UserTokenParameters,
-    UserTokenResult
+    ArmResponse<UserTokenResult>
+  >;
+
+  /**
+   * Lists all user groups.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @get
+  @action("groups")
+  @operationId("UserGroup_List")
+  list is ArmResourceActionSync<
+    UserContract,
+    void,
+    ArmResponse<ResourceListResult<GroupContract>>,
+    Parameters = {
+      /**
+       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|------------------------|-----------------------------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * Number of records to return.
+       */
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
+
+      /**
+       * Number of records to skip.
+       */
+      @query("$skip")
+      $skip?: int32;
+    }
+  >;
+
+  /**
+   * List of all user identities.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @get
+  @action("identities")
+  @operationId("UserIdentities_List")
+  userIdentitiesList is ArmResourceActionSync<
+    UserContract,
+    void,
+    ArmResponse<UserIdentityListResult>
   >;
 
   /**
@@ -182,9 +224,10 @@ interface UserContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("UserConfirmationPassword_Send")
-  send is ArmResourceActionNoContentSync<
+  send is ArmResourceActionSync<
     UserContract,
     void,
+    NoContentResponse,
     Parameters = {
       /**
        * Determines the type of application which send the create user request. Default is legacy publisher portal.
@@ -193,89 +236,6 @@ interface UserContracts {
       appType?: AppType;
     }
   >;
-
-  /**
-   * Lists all user groups.
-   */
-  // FIXME: UserGroup_List could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("UserGroup_List")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/groups")
-  @get
-  list(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the API Management service.
-     */
-    @maxLength(50)
-    @minLength(1)
-    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-    @path
-    serviceName: string,
-
-    /**
-     * User identifier. Must be unique in the current API Management service instance.
-     */
-    @maxLength(80)
-    @minLength(1)
-    @path
-    userId: string,
-
-    /**
-     * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|------------------------|-----------------------------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-     */
-    @query("$filter")
-    $filter?: string,
-
-    /**
-     * Number of records to return.
-     */
-    @minValue(1)
-    @query("$top")
-    $top?: int32,
-
-    /**
-     * Number of records to skip.
-     */
-    @query("$skip")
-    $skip?: int32,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<GroupListResult> | ErrorResponse;
-
-  /**
-   * List of all user identities.
-   */
-  // FIXME: UserIdentities_List could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("UserIdentities_List")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/identities")
-  @get
-  list(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the API Management service.
-     */
-    @maxLength(50)
-    @minLength(1)
-    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-    @path
-    serviceName: string,
-
-    /**
-     * User identifier. Must be unique in the current API Management service instance.
-     */
-    @maxLength(80)
-    @minLength(1)
-    @path
-    userId: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<UserIdentityListResult> | ErrorResponse;
 }
 
 @@maxLength(UserContract.name, 80);

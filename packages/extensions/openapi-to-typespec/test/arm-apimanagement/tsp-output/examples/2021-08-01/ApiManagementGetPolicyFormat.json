@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "format": "rawxml",
+    "api-version": "2021-08-01",
+    "policyId": "policy",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "policy",
+        "type": "Microsoft.ApiManagement/service/policies",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/policies/policy",
+        "properties": {
+          "format": "rawxml",
+          "value": "<!--\n    IMPORTANT:\n    - Policy elements can appear only within the <inbound>, <outbound>, <backend> section elements.\n    - Only the <forward-request> policy element can appear within the <backend> section element.\n    - To apply a policy to the incoming request (before it is forwarded to the backend service), place a corresponding policy element within the <inbound> section element.\n    - To apply a policy to the outgoing response (before it is sent back to the caller), place a corresponding policy element within the <outbound> section element.\n    - To add a policy position the cursor at the desired insertion point and click on the round button associated with the policy.\n    - To remove a policy, delete the corresponding policy statement from the policy document.\n    - Policies are applied in the order of their appearance, from the top down.\n-->\r\n<policies>\r\n\t<inbound>\r\n\t\t<set-header name=\"correlationid\" exists-action=\"skip\">\r\n\t\t\t<value>@{\n                var guidBinary = new byte[16];\n                Array.Copy(Guid.NewGuid().ToByteArray(), 0, guidBinary, 0, 10);\n                long time = DateTime.Now.Ticks;\n                byte[] bytes = new byte[6];\n                unchecked\n                {\n                       bytes[5] = (byte)(time >> 40);\n                       bytes[4] = (byte)(time >> 32);\n                       bytes[3] = (byte)(time >> 24);\n                       bytes[2] = (byte)(time >> 16);\n                       bytes[1] = (byte)(time >> 8);\n                       bytes[0] = (byte)(time);\n                }\n                Array.Copy(bytes, 0, guidBinary, 10, 6);\n                return new Guid(guidBinary).ToString();\n            }\n            </value>\r\n\t\t</set-header>\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<forward-request />\r\n\t</backend>\r\n\t<outbound />\r\n\t<on-error />\r\n</policies>"
+        }
+      }
+    }
+  },
+  "operationId": "Policy_Get",
+  "title": "ApiManagementGetPolicyFormat"
+}

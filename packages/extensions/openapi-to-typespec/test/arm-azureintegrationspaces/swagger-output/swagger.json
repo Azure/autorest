@@ -1,0 +1,3316 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Integration Spaces resource management API.",
+    "version": "2023-11-14-preview",
+    "description": "The azure integration spaces resource provider.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "AadOauth2Auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "AadOauth2Auth": {
+      "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Spaces"
+    },
+    {
+      "name": "Applications"
+    },
+    {
+      "name": "BusinessProcesses"
+    },
+    {
+      "name": "BusinessProcessVersions"
+    },
+    {
+      "name": "ApplicationResources"
+    },
+    {
+      "name": "InfrastructureResources"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.IntegrationSpaces/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IntegrationSpaces/spaces": {
+      "get": {
+        "operationId": "Spaces_ListBySubscription",
+        "tags": [
+          "Spaces"
+        ],
+        "description": "List Space resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SpaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListSpacesBySubscription": {
+            "$ref": "./examples/Spaces_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces": {
+      "get": {
+        "operationId": "Spaces_ListByResourceGroup",
+        "tags": [
+          "Spaces"
+        ],
+        "description": "List Space resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Select the specified fields to be included in the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "Expand the indicated resources into the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "orderby",
+            "in": "query",
+            "description": "Expressions that specify the order of returned results.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SpaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListSpacesByResourceGroup": {
+            "$ref": "./examples/Spaces_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}": {
+      "get": {
+        "operationId": "Spaces_Get",
+        "tags": [
+          "Spaces"
+        ],
+        "description": "Get a Space",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Space"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetSpace": {
+            "$ref": "./examples/Spaces_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Spaces_CreateOrUpdate",
+        "tags": [
+          "Spaces"
+        ],
+        "description": "Create a Space",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Space"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Space' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Space"
+            }
+          },
+          "201": {
+            "description": "Resource 'Space' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Space"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateSpace": {
+            "$ref": "./examples/Spaces_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Spaces_Patch",
+        "tags": [
+          "Spaces"
+        ],
+        "description": "Update a Space",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SpaceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Space"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PatchSpace": {
+            "$ref": "./examples/Spaces_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Spaces_Delete",
+        "tags": [
+          "Spaces"
+        ],
+        "description": "Delete a Space",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteSpace": {
+            "$ref": "./examples/Spaces_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications": {
+      "get": {
+        "operationId": "Applications_ListBySpace",
+        "tags": [
+          "Applications"
+        ],
+        "description": "List Application resources by Space",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Select the specified fields to be included in the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "Expand the indicated resources into the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "orderby",
+            "in": "query",
+            "description": "Expressions that specify the order of returned results.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListApplicationsBySpace": {
+            "$ref": "./examples/Applications_ListBySpace.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}": {
+      "get": {
+        "operationId": "Applications_Get",
+        "tags": [
+          "Applications"
+        ],
+        "description": "Get a Application",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetApplication": {
+            "$ref": "./examples/Applications_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Applications_CreateOrUpdate",
+        "tags": [
+          "Applications"
+        ],
+        "description": "Create a Application",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Application' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "201": {
+            "description": "Resource 'Application' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateApplication": {
+            "$ref": "./examples/Applications_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Applications_Patch",
+        "tags": [
+          "Applications"
+        ],
+        "description": "Update a Application",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PatchApplication": {
+            "$ref": "./examples/Applications_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Applications_Delete",
+        "tags": [
+          "Applications"
+        ],
+        "description": "Delete a Application",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteApplication": {
+            "$ref": "./examples/Applications_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/businessProcesses": {
+      "get": {
+        "operationId": "BusinessProcesses_ListByApplication",
+        "tags": [
+          "BusinessProcesses"
+        ],
+        "description": "List BusinessProcess resources by Application",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Select the specified fields to be included in the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "Expand the indicated resources into the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "orderby",
+            "in": "query",
+            "description": "Expressions that specify the order of returned results.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BusinessProcessListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBusinessProcessesByApplication": {
+            "$ref": "./examples/BusinessProcesses_ListByApplication.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/businessProcesses/{businessProcessName}": {
+      "get": {
+        "operationId": "BusinessProcesses_Get",
+        "tags": [
+          "BusinessProcesses"
+        ],
+        "description": "Get a BusinessProcess",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "businessProcessName",
+            "in": "path",
+            "description": "The name of the business process",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BusinessProcess"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetBusinessProcess": {
+            "$ref": "./examples/BusinessProcesses_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "BusinessProcesses_CreateOrUpdate",
+        "tags": [
+          "BusinessProcesses"
+        ],
+        "description": "Create a BusinessProcess",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "businessProcessName",
+            "in": "path",
+            "description": "The name of the business process",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BusinessProcess"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'BusinessProcess' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BusinessProcess"
+            }
+          },
+          "201": {
+            "description": "Resource 'BusinessProcess' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BusinessProcess"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateBusinessProcess": {
+            "$ref": "./examples/BusinessProcesses_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "BusinessProcesses_Patch",
+        "tags": [
+          "BusinessProcesses"
+        ],
+        "description": "Update a BusinessProcess",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "businessProcessName",
+            "in": "path",
+            "description": "The name of the business process",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BusinessProcessUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BusinessProcess"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PatchBusinessProcess": {
+            "$ref": "./examples/BusinessProcesses_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "BusinessProcesses_Delete",
+        "tags": [
+          "BusinessProcesses"
+        ],
+        "description": "Delete a BusinessProcess",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "businessProcessName",
+            "in": "path",
+            "description": "The name of the business process",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteBusinessProcess": {
+            "$ref": "./examples/BusinessProcesses_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/businessProcesses/{businessProcessName}/versions": {
+      "get": {
+        "operationId": "BusinessProcessVersions_ListByBusinessProcess",
+        "tags": [
+          "BusinessProcessVersions"
+        ],
+        "description": "List BusinessProcessVersion resources by BusinessProcess",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "businessProcessName",
+            "in": "path",
+            "description": "The name of the business process",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Select the specified fields to be included in the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "Expand the indicated resources into the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "orderby",
+            "in": "query",
+            "description": "Expressions that specify the order of returned results.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BusinessProcessVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBusinessProcessVersionsByBusinessProcess": {
+            "$ref": "./examples/BusinessProcessVersions_ListByBusinessProcess.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/businessProcesses/{businessProcessName}/versions/{businessProcessVersion}": {
+      "get": {
+        "operationId": "BusinessProcessVersions_Get",
+        "tags": [
+          "BusinessProcessVersions"
+        ],
+        "description": "Get a BusinessProcessVersion",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "businessProcessName",
+            "in": "path",
+            "description": "The name of the business process",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "businessProcessVersion",
+            "in": "path",
+            "description": "The version of the business process",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BusinessProcessVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetBusinessProcessVersion": {
+            "$ref": "./examples/BusinessProcessVersions_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/deleteBusinessProcessDevelopmentArtifact": {
+      "post": {
+        "operationId": "Applications_DeleteBusinessProcessDevelopmentArtifact",
+        "tags": [
+          "Applications"
+        ],
+        "description": "The delete business process development artifact action.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetOrDeleteBusinessProcessDevelopmentArtifactRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteBusinessProcessDevelopmentArtifact": {
+            "$ref": "./examples/Applications_DeleteBusinessProcessDevelopmentArtifact.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/getBusinessProcessDevelopmentArtifact": {
+      "post": {
+        "operationId": "Applications_GetBusinessProcessDevelopmentArtifact",
+        "tags": [
+          "Applications"
+        ],
+        "description": "The get business process development artifact action.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetOrDeleteBusinessProcessDevelopmentArtifactRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SaveOrGetBusinessProcessDevelopmentArtifactResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetBusinessProcessDevelopmentArtifact": {
+            "$ref": "./examples/Applications_GetBusinessProcessDevelopmentArtifact.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/listBusinessProcessDevelopmentArtifacts": {
+      "post": {
+        "operationId": "Applications_ListBusinessProcessDevelopmentArtifacts",
+        "tags": [
+          "Applications"
+        ],
+        "description": "The list business process development artifacts action.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ListBusinessProcessDevelopmentArtifactsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBusinessProcessDevelopmentArtifacts": {
+            "$ref": "./examples/Applications_ListBusinessProcessDevelopmentArtifacts.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/resources": {
+      "get": {
+        "operationId": "ApplicationResources_ListByApplication",
+        "tags": [
+          "ApplicationResources"
+        ],
+        "description": "List ApplicationResource resources by Application",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Select the specified fields to be included in the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "Expand the indicated resources into the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "orderby",
+            "in": "query",
+            "description": "Expressions that specify the order of returned results.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListApplicationResourceByApplication": {
+            "$ref": "./examples/ApplicationResources_ListByApplication.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/resources/{resourceName}": {
+      "get": {
+        "operationId": "ApplicationResources_Get",
+        "tags": [
+          "ApplicationResources"
+        ],
+        "description": "Get a ApplicationResource",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the application resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetApplicationResource": {
+            "$ref": "./examples/ApplicationResources_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ApplicationResources_CreateOrUpdate",
+        "tags": [
+          "ApplicationResources"
+        ],
+        "description": "Create a ApplicationResource",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the application resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ApplicationResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'ApplicationResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateApplicationResource": {
+            "$ref": "./examples/ApplicationResources_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ApplicationResources_Patch",
+        "tags": [
+          "ApplicationResources"
+        ],
+        "description": "Update a ApplicationResource",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the application resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PatchApplicationResource": {
+            "$ref": "./examples/ApplicationResources_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ApplicationResources_Delete",
+        "tags": [
+          "ApplicationResources"
+        ],
+        "description": "Delete a ApplicationResource",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the application resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteApplicationResource": {
+            "$ref": "./examples/ApplicationResources_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/saveBusinessProcessDevelopmentArtifact": {
+      "post": {
+        "operationId": "Applications_SaveBusinessProcessDevelopmentArtifact",
+        "tags": [
+          "Applications"
+        ],
+        "description": "The save business process development artifact action.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaveOrValidateBusinessProcessDevelopmentArtifactRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SaveOrGetBusinessProcessDevelopmentArtifactResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SaveBusinessProcessDevelopmentArtifact": {
+            "$ref": "./examples/Applications_SaveBusinessProcessDevelopmentArtifact.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/validateBusinessProcessDevelopmentArtifact": {
+      "post": {
+        "operationId": "Applications_ValidateBusinessProcessDevelopmentArtifact",
+        "tags": [
+          "Applications"
+        ],
+        "description": "The validate business process development artifact action.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the Application",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaveOrValidateBusinessProcessDevelopmentArtifactRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidateBusinessProcessDevelopmentArtifact": {
+            "$ref": "./examples/Applications_ValidateBusinessProcessDevelopmentArtifact.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/infrastructureResources": {
+      "get": {
+        "operationId": "InfrastructureResources_ListBySpace",
+        "tags": [
+          "InfrastructureResources"
+        ],
+        "description": "List InfrastructureResource resources by Space",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Select the specified fields to be included in the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "Expand the indicated resources into the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "orderby",
+            "in": "query",
+            "description": "Expressions that specify the order of returned results.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InfrastructureResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListInfrastructureResourcesBySpace": {
+            "$ref": "./examples/InfrastructureResources_ListBySpace.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/infrastructureResources/{infrastructureResourceName}": {
+      "get": {
+        "operationId": "InfrastructureResources_Get",
+        "tags": [
+          "InfrastructureResources"
+        ],
+        "description": "Get a InfrastructureResource",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "infrastructureResourceName",
+            "in": "path",
+            "description": "The name of the infrastructure resource in the space.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InfrastructureResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetInfrastructureResource": {
+            "$ref": "./examples/InfrastructureResources_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "InfrastructureResources_CreateOrUpdate",
+        "tags": [
+          "InfrastructureResources"
+        ],
+        "description": "Create a InfrastructureResource",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "infrastructureResourceName",
+            "in": "path",
+            "description": "The name of the infrastructure resource in the space.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InfrastructureResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'InfrastructureResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/InfrastructureResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'InfrastructureResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/InfrastructureResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateInfrastructureResource": {
+            "$ref": "./examples/InfrastructureResources_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "InfrastructureResources_Patch",
+        "tags": [
+          "InfrastructureResources"
+        ],
+        "description": "Update a InfrastructureResource",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "infrastructureResourceName",
+            "in": "path",
+            "description": "The name of the infrastructure resource in the space.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InfrastructureResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InfrastructureResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PatchInfrastructureResource": {
+            "$ref": "./examples/InfrastructureResources_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "InfrastructureResources_Delete",
+        "tags": [
+          "InfrastructureResources"
+        ],
+        "description": "Delete a InfrastructureResource",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "spaceName",
+            "in": "path",
+            "description": "The name of the space",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "infrastructureResourceName",
+            "in": "path",
+            "description": "The name of the infrastructure resource in the space.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteInfrastructureResource": {
+            "$ref": "./examples/InfrastructureResources_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Application": {
+      "type": "object",
+      "description": "An integration application under space.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ApplicationListResult": {
+      "type": "object",
+      "description": "The response of a Application list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Application items on this page",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ApplicationProperties": {
+      "type": "object",
+      "description": "The properties of application.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the resource."
+        },
+        "trackingDataStores": {
+          "type": "object",
+          "description": "The tracking data stores.",
+          "additionalProperties": {
+            "$ref": "#/definitions/TrackingDataStore"
+          }
+        }
+      },
+      "required": [
+        "trackingDataStores"
+      ]
+    },
+    "ApplicationResource": {
+      "type": "object",
+      "description": "A resource under application.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ApplicationResourceListResult": {
+      "type": "object",
+      "description": "The response of a ApplicationResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ApplicationResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ApplicationResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ApplicationResourceProperties": {
+      "type": "object",
+      "description": "The properties of application resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The type of the application resource."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The Arm id of the application resource."
+        },
+        "resourceKind": {
+          "type": "string",
+          "description": "The kind of the application resource."
+        }
+      },
+      "required": [
+        "resourceType",
+        "resourceId"
+      ]
+    },
+    "ApplicationResourceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the ApplicationResource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationResourceUpdateProperties",
+          "description": "The updatable properties of the ApplicationResource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ApplicationResourceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the ApplicationResource.",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The type of the application resource."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The Arm id of the application resource."
+        },
+        "resourceKind": {
+          "type": "string",
+          "description": "The kind of the application resource."
+        }
+      }
+    },
+    "ApplicationUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Application.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ApplicationUpdateProperties",
+          "description": "The updatable properties of the Application.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ApplicationUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Application.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the resource."
+        },
+        "trackingDataStores": {
+          "type": "object",
+          "description": "The tracking data stores.",
+          "additionalProperties": {
+            "$ref": "#/definitions/TrackingDataStore"
+          }
+        }
+      }
+    },
+    "BusinessProcess": {
+      "type": "object",
+      "description": "A business process under application.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BusinessProcessProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "BusinessProcessDevelopmentArtifactProperties": {
+      "type": "object",
+      "description": "The properties of business process development artifact.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the business process."
+        },
+        "identifier": {
+          "$ref": "#/definitions/BusinessProcessIdentifier",
+          "description": "The business process identifier."
+        },
+        "businessProcessStages": {
+          "type": "object",
+          "description": "The business process stages.",
+          "additionalProperties": {
+            "$ref": "#/definitions/BusinessProcessStage"
+          }
+        },
+        "businessProcessMapping": {
+          "type": "object",
+          "description": "The business process mapping.",
+          "additionalProperties": {
+            "$ref": "#/definitions/BusinessProcessMappingItem"
+          }
+        },
+        "trackingProfiles": {
+          "type": "object",
+          "description": "The tracking profile for the business process.",
+          "additionalProperties": {
+            "$ref": "#/definitions/TrackingProfileDefinition"
+          }
+        }
+      }
+    },
+    "BusinessProcessDevelopmentArtifactSystemData": {
+      "type": "object",
+      "description": "The system data for business process development artifact.",
+      "properties": {
+        "lastModifiedAt": {
+          "type": "string",
+          "description": "The timestamp of last modification (UTC)."
+        }
+      }
+    },
+    "BusinessProcessIdentifier": {
+      "type": "object",
+      "description": "The properties of business process identifier.",
+      "properties": {
+        "propertyName": {
+          "type": "string",
+          "description": "The property name of the business process identifier."
+        },
+        "propertyType": {
+          "type": "string",
+          "description": "The property type of the business process identifier."
+        }
+      }
+    },
+    "BusinessProcessListResult": {
+      "type": "object",
+      "description": "The response of a BusinessProcess list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BusinessProcess items on this page",
+          "items": {
+            "$ref": "#/definitions/BusinessProcess"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BusinessProcessMappingItem": {
+      "type": "object",
+      "description": "The properties of business process mapping.",
+      "properties": {
+        "logicAppResourceId": {
+          "type": "string",
+          "description": "The logic app resource id."
+        },
+        "workflowName": {
+          "type": "string",
+          "description": "The workflow name within the logic app."
+        },
+        "operationName": {
+          "type": "string",
+          "description": "The operation name."
+        },
+        "operationType": {
+          "type": "string",
+          "description": "The mapping item operation type of the business process."
+        }
+      }
+    },
+    "BusinessProcessProperties": {
+      "type": "object",
+      "description": "The properties of business process.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the business process.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the business process."
+        },
+        "tableName": {
+          "type": "string",
+          "description": "The table name of the business process."
+        },
+        "trackingDataStoreReferenceName": {
+          "type": "string",
+          "description": "The tracking data store reference name."
+        },
+        "identifier": {
+          "$ref": "#/definitions/BusinessProcessIdentifier",
+          "description": "The business process identifier."
+        },
+        "businessProcessStages": {
+          "type": "object",
+          "description": "The business process stages.",
+          "additionalProperties": {
+            "$ref": "#/definitions/BusinessProcessStage"
+          }
+        },
+        "businessProcessMapping": {
+          "type": "object",
+          "description": "The business process mapping.",
+          "additionalProperties": {
+            "$ref": "#/definitions/BusinessProcessMappingItem"
+          }
+        }
+      }
+    },
+    "BusinessProcessReference": {
+      "type": "object",
+      "description": "The business process reference.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The business process name."
+        },
+        "version": {
+          "type": "string",
+          "description": "The business process version."
+        }
+      }
+    },
+    "BusinessProcessStage": {
+      "type": "object",
+      "description": "The properties of business process stage.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the business stage."
+        },
+        "properties": {
+          "type": "object",
+          "description": "The properties within the properties of the business process stage.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "stagesBefore": {
+          "type": "array",
+          "description": "The property to keep track of stages before current in the business process stage.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "BusinessProcessUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the BusinessProcess.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BusinessProcessUpdateProperties",
+          "description": "The updatable properties of the BusinessProcess.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "BusinessProcessUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the BusinessProcess.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the business process."
+        },
+        "tableName": {
+          "type": "string",
+          "description": "The table name of the business process."
+        },
+        "trackingDataStoreReferenceName": {
+          "type": "string",
+          "description": "The tracking data store reference name."
+        },
+        "identifier": {
+          "$ref": "#/definitions/BusinessProcessIdentifier",
+          "description": "The business process identifier."
+        },
+        "businessProcessStages": {
+          "type": "object",
+          "description": "The business process stages.",
+          "additionalProperties": {
+            "$ref": "#/definitions/BusinessProcessStage"
+          }
+        },
+        "businessProcessMapping": {
+          "type": "object",
+          "description": "The business process mapping.",
+          "additionalProperties": {
+            "$ref": "#/definitions/BusinessProcessMappingItem"
+          }
+        }
+      }
+    },
+    "BusinessProcessVersion": {
+      "type": "object",
+      "description": "A business process version.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BusinessProcessProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "BusinessProcessVersionListResult": {
+      "type": "object",
+      "description": "The response of a BusinessProcessVersion list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BusinessProcessVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/BusinessProcessVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FlowTrackingDefinition": {
+      "type": "object",
+      "description": "The workflow tracking definition.",
+      "properties": {
+        "correlationContext": {
+          "$ref": "#/definitions/TrackingCorrelationContext",
+          "description": "The tracking correlation context."
+        },
+        "events": {
+          "type": "object",
+          "description": "The tracking events.",
+          "additionalProperties": {
+            "$ref": "#/definitions/TrackingEventDefinition"
+          }
+        }
+      }
+    },
+    "GetOrDeleteBusinessProcessDevelopmentArtifactRequest": {
+      "type": "object",
+      "description": "The business process development artifact get or delete request.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the business process development artifact."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "InfrastructureResource": {
+      "type": "object",
+      "description": "An infrastructure resource under Space.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InfrastructureResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "InfrastructureResourceListResult": {
+      "type": "object",
+      "description": "The response of a InfrastructureResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The InfrastructureResource items on this page",
+          "items": {
+            "$ref": "#/definitions/InfrastructureResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "InfrastructureResourceProperties": {
+      "type": "object",
+      "description": "The properties of infrastructure resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The type of the infrastructure resource."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The id of the infrastructure resource."
+        }
+      },
+      "required": [
+        "resourceType",
+        "resourceId"
+      ]
+    },
+    "InfrastructureResourceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the InfrastructureResource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InfrastructureResourceUpdateProperties",
+          "description": "The updatable properties of the InfrastructureResource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "InfrastructureResourceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the InfrastructureResource.",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The type of the infrastructure resource."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The id of the infrastructure resource."
+        }
+      }
+    },
+    "ListBusinessProcessDevelopmentArtifactsResponse": {
+      "type": "object",
+      "description": "The business process development artifact get collection response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of the business process development artifact.",
+          "items": {
+            "$ref": "#/definitions/SaveOrGetBusinessProcessDevelopmentArtifactResponse"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "SaveOrGetBusinessProcessDevelopmentArtifactResponse": {
+      "type": "object",
+      "description": "The business process development artifact save or get response.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the business process development artifact."
+        },
+        "systemData": {
+          "$ref": "#/definitions/BusinessProcessDevelopmentArtifactSystemData",
+          "description": "The system data of the business process development artifact."
+        },
+        "properties": {
+          "$ref": "#/definitions/BusinessProcessDevelopmentArtifactProperties",
+          "description": "The properties of the business process development artifact."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "SaveOrValidateBusinessProcessDevelopmentArtifactRequest": {
+      "type": "object",
+      "description": "The business process development artifact save or validate request.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the business process development artifact."
+        },
+        "properties": {
+          "$ref": "#/definitions/BusinessProcessDevelopmentArtifactProperties",
+          "description": "The properties of the business process development artifact."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "Space": {
+      "type": "object",
+      "description": "An integration space.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SpaceResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SpaceListResult": {
+      "type": "object",
+      "description": "The response of a Space list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Space items on this page",
+          "items": {
+            "$ref": "#/definitions/Space"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SpaceResourceProperties": {
+      "type": "object",
+      "description": "The properties of space.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the resource."
+        }
+      }
+    },
+    "SpaceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Space.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/SpaceUpdateProperties",
+          "description": "The updatable properties of the Space.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SpaceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Space.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the resource."
+        }
+      }
+    },
+    "TrackingCorrelationContext": {
+      "type": "object",
+      "description": "The tracking correlation context.",
+      "properties": {
+        "operationType": {
+          "type": "string",
+          "description": "The operation type for correlation context."
+        },
+        "operationName": {
+          "type": "string",
+          "description": "The operation name for correlation context."
+        },
+        "propertyName": {
+          "type": "string",
+          "description": "The name of the correlation property."
+        },
+        "value": {
+          "type": "string",
+          "description": "The template expression for correlation context property value."
+        }
+      }
+    },
+    "TrackingDataStore": {
+      "type": "object",
+      "description": "The properties of tracking data store.",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "The database name."
+        },
+        "dataStoreResourceId": {
+          "type": "string",
+          "description": "The data store resource id."
+        },
+        "dataStoreUri": {
+          "type": "string",
+          "description": "The data store URI."
+        },
+        "dataStoreIngestionUri": {
+          "type": "string",
+          "description": "The data store ingestion URI."
+        }
+      },
+      "required": [
+        "databaseName",
+        "dataStoreResourceId",
+        "dataStoreUri",
+        "dataStoreIngestionUri"
+      ]
+    },
+    "TrackingEventDefinition": {
+      "type": "object",
+      "description": "The tracking event definition.",
+      "properties": {
+        "operationType": {
+          "type": "string",
+          "description": "The operation type."
+        },
+        "operationName": {
+          "type": "string",
+          "description": "The operation name."
+        },
+        "properties": {
+          "type": "object",
+          "description": "The properties to be collected for event.",
+          "additionalProperties": {
+            "additionalProperties": {},
+            "type": "object"
+          }
+        }
+      }
+    },
+    "TrackingProfileDefinition": {
+      "type": "object",
+      "description": "The tracking profile for the business process",
+      "properties": {
+        "$schema": {
+          "type": "string",
+          "description": "The tracking definition schema uri.",
+          "x-ms-client-name": "schema"
+        },
+        "businessProcess": {
+          "$ref": "#/definitions/BusinessProcessReference",
+          "description": "The business process reference."
+        },
+        "trackingDefinitions": {
+          "type": "object",
+          "description": "The tracking definitions.",
+          "additionalProperties": {
+            "$ref": "#/definitions/FlowTrackingDefinition"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

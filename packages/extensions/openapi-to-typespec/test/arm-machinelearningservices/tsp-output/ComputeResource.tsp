@@ -41,7 +41,10 @@ interface ComputeResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Compute_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ComputeResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ComputeResource,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.
@@ -49,17 +52,19 @@ interface ComputeResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("Compute_Update")
-  update is ArmCustomPatchAsync<ComputeResource, ClusterUpdateParameters>;
+  update is ArmCustomPatchAsync<
+    ComputeResource,
+    PatchModel = ClusterUpdateParameters,
+    Response = ArmResponse<ComputeResource>
+  >;
 
   /**
    * Deletes specified Machine Learning compute.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Compute_Delete")
-  delete is ArmResourceDeleteAsync<
+  delete is ArmResourceDeleteWithoutOkAsync<
     ComputeResource,
     Parameters = {
       /**
@@ -67,7 +72,8 @@ interface ComputeResources {
        */
       @query("underlyingResourceAction")
       underlyingResourceAction: UnderlyingResourceAction;
-    }
+    },
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -84,18 +90,19 @@ interface ComputeResources {
       @query("$skip")
       $skip?: string;
     },
-    Response = PaginatedComputeResourcesList
+    Response = ArmResponse<PaginatedComputeResourcesList>
   >;
 
   /**
    * Updates the custom services list. The list of custom services provided shall be overwritten
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("customServices")
   @operationId("Compute_UpdateCustomServices")
   updateCustomServices is ArmResourceActionSync<
     ComputeResource,
     CustomService[],
-    void
+    OkResponse
   >;
 
   /**
@@ -106,7 +113,7 @@ interface ComputeResources {
   listNodes is ArmResourceActionSync<
     ComputeResource,
     void,
-    AmlComputeNodesInformation
+    ArmResponse<AmlComputeNodesInformation>
   >;
 
   /**
@@ -114,28 +121,32 @@ interface ComputeResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Compute_ListKeys")
-  listKeys is ArmResourceActionSync<ComputeResource, void, ComputeSecrets>;
+  listKeys is ArmResourceActionSync<
+    ComputeResource,
+    void,
+    ArmResponse<ComputeSecrets>
+  >;
 
   /**
    * Posts a start action to a compute instance
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Compute_Start")
-  start is ArmResourceActionNoResponseContentAsync<ComputeResource, void>;
+  start is ArmResourceActionAsync<ComputeResource, void, void>;
 
   /**
    * Posts a stop action to a compute instance
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Compute_Stop")
-  stop is ArmResourceActionNoResponseContentAsync<ComputeResource, void>;
+  stop is ArmResourceActionAsync<ComputeResource, void, void>;
 
   /**
    * Posts a restart action to a compute instance
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Compute_Restart")
-  restart is ArmResourceActionNoResponseContentAsync<ComputeResource, void>;
+  restart is ArmResourceActionAsync<ComputeResource, void, void>;
 
   /**
    * Updates the idle shutdown setting of a compute instance.
@@ -145,7 +156,7 @@ interface ComputeResources {
   updateIdleShutdownSetting is ArmResourceActionSync<
     ComputeResource,
     IdleShutdownSetting,
-    void
+    OkResponse
   >;
 }
 

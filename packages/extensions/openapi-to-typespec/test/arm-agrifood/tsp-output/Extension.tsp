@@ -10,7 +10,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Azure.ResourceManager.AgFoodPlatform;
+namespace Microsoft.AgFoodPlatform;
 /**
  * Extension resource.
  */
@@ -35,12 +35,15 @@ interface Extensions {
   /**
    * Install or Update extension. Additional Api Properties are merged patch and if the extension is updated to a new version then the obsolete entries will be auto deleted from Additional Api Properties.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Extension>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    Extension,
+    Response = ArmResourceCreatedSyncResponse<Extension>
+  >;
 
   /**
    * Uninstall extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<Extension>;
 
   /**
@@ -52,12 +55,14 @@ interface Extensions {
       /**
        * Installed extension ids.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "extensionIds", explode: true })
       extensionIds?: string[];
 
       /**
        * Installed extension categories.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "extensionCategories", explode: true })
       extensionCategories?: string[];
 
@@ -76,7 +81,7 @@ interface Extensions {
       @query("$skipToken")
       $skipToken?: string;
     },
-    Response = ExtensionListResponse
+    Response = ArmResponse<ExtensionListResponse>
   >;
 }
 

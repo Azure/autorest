@@ -50,32 +50,27 @@ interface RestorePointCollections {
   @parameterVisibility
   update is ArmCustomPatchSync<
     RestorePointCollection,
-    RestorePointCollectionUpdate
+    PatchModel = RestorePointCollectionUpdate
   >;
 
   /**
    * The operation to delete the restore point collection. This operation will also delete all the contained restore points.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<RestorePointCollection>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    RestorePointCollection,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Gets the list of restore point collections in a resource group.
    */
-  list is ArmResourceListByParent<
-    RestorePointCollection,
-    Response = RestorePointCollectionListResult
-  >;
+  list is ArmResourceListByParent<RestorePointCollection>;
 
   /**
    * Gets the list of restore point collections in the subscription. Use nextLink property in the response to get the next page of restore point collections. Do this till nextLink is not null to fetch all the restore point collections.
    */
-  listAll is ArmListBySubscription<
-    RestorePointCollection,
-    Response = RestorePointCollectionListResult
-  >;
+  listAll is ArmListBySubscription<RestorePointCollection>;
 }
 
 @@doc(RestorePointCollection.name, "The name of the restore point collection.");

@@ -40,10 +40,11 @@ interface Schedules {
   /**
    * Delete schedule.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<Schedule>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Schedule,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List schedules in specified workspace.
@@ -63,7 +64,7 @@ interface Schedules {
       @query("listViewType")
       listViewType?: ScheduleListViewType;
     },
-    Response = ScheduleResourceArmPaginatedResult
+    Response = ArmResponse<ScheduleResourceArmPaginatedResult>
   >;
 }
 

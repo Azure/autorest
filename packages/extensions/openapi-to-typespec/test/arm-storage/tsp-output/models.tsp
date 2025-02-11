@@ -1,13 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
-using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -1043,7 +1041,8 @@ model StorageAccountCreateParameters {
   /**
    * The parameters used to create the storage account.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StorageAccountPropertiesCreateParameters;
 }
 
@@ -1965,9 +1964,11 @@ model StorageAccountInternetEndpoints {
  */
 model KeyCreationTime {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   key1?: utcDateTime;
 
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   key2?: utcDateTime;
 }
 
@@ -2184,7 +2185,8 @@ model StorageAccountUpdateParameters {
   /**
    * The parameters used when updating a storage account.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StorageAccountPropertiesUpdateParameters;
 
   /**
@@ -2308,13 +2310,9 @@ model StorageAccountPropertiesUpdateParameters {
 }
 
 /**
- * The response from the List Deleted Accounts operation.
- */
-model DeletedAccountListResult is Azure.Core.Page<DeletedAccount>;
-
-/**
  * Attributes of a deleted storage account.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model DeletedAccountProperties {
   /**
    * Full resource id of the original storage account.
@@ -2363,11 +2361,6 @@ model ErrorResponseBody {
    */
   message?: string;
 }
-
-/**
- * The response from the List Storage Accounts operation.
- */
-model StorageAccountListResult is Azure.Core.Page<StorageAccount>;
 
 /**
  * The response from the ListKeys operation.
@@ -2673,6 +2666,7 @@ model ListServiceSasResponse {
 /**
  * The Storage Account ManagementPolicy properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model ManagementPolicyProperties {
   /**
    * Returns the date and time the ManagementPolicies was last modified.
@@ -2938,6 +2932,7 @@ model TagFilter {
 /**
  * The storage account blob inventory policy properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model BlobInventoryPolicyProperties {
   /**
    * Returns the last modified date and time of the blob inventory policy.
@@ -3142,11 +3137,13 @@ model PrivateLinkResourceListResult {
 /**
  * A private link resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model PrivateLinkResource extends Resource {
   /**
    * Resource properties.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PrivateLinkResourceProperties;
 }
 
@@ -3187,6 +3184,7 @@ model ObjectReplicationPolicies {
 /**
  * The Storage Account ObjectReplicationPolicy properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model ObjectReplicationPolicyProperties {
   /**
    * A unique id for object replication policy.
@@ -3272,6 +3270,7 @@ model LocalUsers {
 /**
  * The Storage Account Local User properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model LocalUserProperties {
   /**
    * The permission scopes of the local user.
@@ -3310,6 +3309,7 @@ model LocalUserProperties {
   hasSshPassword?: boolean;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model PermissionScope {
   /**
    * The permissions for the local user. Possible values include: Read (r), Write (w), Delete (d), List (l), and Create (c).
@@ -3327,6 +3327,7 @@ model PermissionScope {
   resourceName: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SshPublicKey {
   /**
    * Optional. It is used to store the function/usage of the key
@@ -3369,6 +3370,7 @@ model LocalUserRegeneratePasswordResult {
 /**
  * Properties of the encryption scope.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model EncryptionScopeProperties {
   /**
    * The provider for the encryption scope. Possible values (case-insensitive):  Microsoft.Storage, Microsoft.KeyVault.
@@ -3428,11 +3430,7 @@ model EncryptionScopeKeyVaultProperties {
   lastKeyRotationTimestamp?: utcDateTime;
 }
 
-/**
- * List of encryption scopes requested, and if paging is required, a URL to the next page of encryption scopes.
- */
-model EncryptionScopeListResult is Azure.Core.Page<EncryptionScope>;
-
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @pagedResult
 model BlobServiceItems {
   /**
@@ -3446,6 +3444,7 @@ model BlobServiceItems {
 /**
  * The properties of a storage account’s Blob service.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model BlobServicePropertiesProperties {
   /**
    * Specifies CORS rules for the Blob service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the Blob service.
@@ -3636,6 +3635,7 @@ model ListContainerItems is Azure.Core.Page<BlobContainer>;
 /**
  * The properties of a container.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model ContainerProperties {
   /**
    * The version of the deleted blob container.
@@ -3755,7 +3755,8 @@ model ImmutabilityPolicyProperties {
   /**
    * The properties of an ImmutabilityPolicy of a blob container.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ImmutabilityPolicyProperty;
 
   /**
@@ -3774,6 +3775,7 @@ model ImmutabilityPolicyProperties {
 /**
  * The properties of an ImmutabilityPolicy of a blob container.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model ImmutabilityPolicyProperty {
   /**
    * The immutability period for the blobs in the container since the policy creation, in days.
@@ -3949,6 +3951,7 @@ model ImmutableStorageWithVersioning {
 /**
  * The resource model definition for an Azure Resource Manager resource with an etag.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model AzureEntityResource extends Resource {
   /**
    * Resource Etag.
@@ -4023,6 +4026,7 @@ model LeaseContainerResponse {
   leaseTimeSeconds?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model FileServiceItems {
   /**
    * List of file services returned.
@@ -4034,6 +4038,7 @@ model FileServiceItems {
 /**
  * The properties of File services in storage account.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model FileServicePropertiesProperties {
   /**
    * Specifies CORS rules for the File service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the File service.
@@ -4109,6 +4114,7 @@ model FileShareItems is Azure.Core.Page<FileShare>;
 /**
  * The properties of the file share.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model FileShareProperties {
   /**
    * Returns the date and time the share was last modified.
@@ -4221,6 +4227,7 @@ model FileShareProperties {
   snapshotTime?: utcDateTime;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SignedIdentifier {
   /**
    * An unique identifier of the stored access policy.
@@ -4233,6 +4240,7 @@ model SignedIdentifier {
   accessPolicy?: AccessPolicy;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AccessPolicy {
   /**
    * Start time of the access policy
@@ -4312,6 +4320,7 @@ model LeaseShareResponse {
   leaseTimeSeconds?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ListQueueServices {
   /**
    * List of queue services returned.
@@ -4323,6 +4332,7 @@ model ListQueueServices {
 /**
  * The properties of a storage account’s Queue service.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model QueueServicePropertiesProperties {
   /**
    * Specifies CORS rules for the Queue service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the Queue service.
@@ -4330,6 +4340,8 @@ model QueueServicePropertiesProperties {
   cors?: CorsRules;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model QueueProperties {
   /**
    * A name-value pair that represents queue metadata.
@@ -4349,6 +4361,7 @@ model QueueProperties {
  */
 model ListQueueResource is Azure.Core.Page<StorageQueue>;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ListTableServices {
   /**
    * List of table services returned.
@@ -4360,6 +4373,7 @@ model ListTableServices {
 /**
  * The properties of a storage account’s Table service.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model TableServicePropertiesProperties {
   /**
    * Specifies CORS rules for the Table service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the Table service.
@@ -4367,6 +4381,8 @@ model TableServicePropertiesProperties {
   cors?: CorsRules;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model TableProperties {
   /**
    * Table name under the specified account
@@ -4425,34 +4441,42 @@ model ListTableResource is Azure.Core.Page<Table>;
 /**
  * The blob container properties be listed out.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ListContainerItem extends AzureEntityResource {
   /**
    * The blob container properties be listed out.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ContainerProperties;
 }
 
 /**
  * The file share properties be listed out.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model FileShareItem extends AzureEntityResource {
   /**
    * The file share properties be listed out.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: FileShareProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ListQueue extends Resource {
   /**
    * List Queue resource properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @encodedName("application/json", "properties")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   queueProperties?: ListQueueProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ListQueueProperties {
   /**
    * A name-value pair that represents queue metadata.

@@ -59,16 +59,16 @@
       "name": "PrivateEndpointConnections"
     },
     {
-      "name": "ObjectReplicationPoliciesOperationGroup"
+      "name": "ObjectReplicationPolicyOperationGroup"
     },
     {
-      "name": "LocalUsersOperationGroup"
+      "name": "LocalUserOperationGroup"
     },
     {
       "name": "EncryptionScopes"
     },
     {
-      "name": "BlobServicePropertiesOperationGroup"
+      "name": "BlobServices"
     },
     {
       "name": "BlobContainers"
@@ -77,34 +77,22 @@
       "name": "ImmutabilityPolicies"
     },
     {
-      "name": "FileServicePropertiesOperationGroup"
+      "name": "FileServices"
     },
     {
       "name": "FileShares"
     },
     {
-      "name": "QueueServicePropertiesOperationGroup"
+      "name": "QueueServices"
     },
     {
       "name": "StorageQueues"
     },
     {
-      "name": "TableServicePropertiesOperationGroup"
+      "name": "TableServices"
     },
     {
       "name": "Tables"
-    },
-    {
-      "name": "SkusOperations"
-    },
-    {
-      "name": "StorageAccountsOperations"
-    },
-    {
-      "name": "DeletedAccountsOperations"
-    },
-    {
-      "name": "UsagesOperations"
     }
   ],
   "paths": {
@@ -142,9 +130,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability": {
       "post": {
         "operationId": "StorageAccounts_CheckNameAvailability",
-        "tags": [
-          "StorageAccountsOperations"
-        ],
         "description": "Checks that the storage account name is valid and is not already in use.",
         "parameters": [
           {
@@ -182,9 +167,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts": {
       "get": {
         "operationId": "DeletedAccounts_List",
-        "tags": [
-          "DeletedAccountsOperations"
-        ],
         "description": "Lists deleted accounts under the subscription.",
         "parameters": [
           {
@@ -256,7 +238,7 @@
         },
         "x-ms-examples": {
           "DeletedAccountGet": {
-            "$ref": "./examples/DeletedAccounts_Get.json"
+            "$ref": "./examples/DeletedAccountGet.json"
           }
         }
       }
@@ -264,9 +246,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/usages": {
       "get": {
         "operationId": "Usages_ListByLocation",
-        "tags": [
-          "UsagesOperations"
-        ],
         "description": "Gets the current usage count and the limit for the resources of the location under the subscription.",
         "parameters": [
           {
@@ -298,9 +277,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus": {
       "get": {
         "operationId": "Skus_List",
-        "tags": [
-          "SkusOperations"
-        ],
         "description": "Lists the available SKUs supported by Microsoft.Storage for given subscription.",
         "parameters": [
           {
@@ -343,7 +319,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/StorageAccountListResult"
             }
@@ -357,7 +333,7 @@
         },
         "x-ms-examples": {
           "StorageAccountList": {
-            "$ref": "./examples/StorageAccounts_List.json"
+            "$ref": "./examples/StorageAccountList.json"
           }
         },
         "x-ms-pageable": {
@@ -385,7 +361,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/StorageAccountListResult"
             }
@@ -399,7 +375,7 @@
         },
         "x-ms-examples": {
           "StorageAccountListByResourceGroup": {
-            "$ref": "./examples/StorageAccounts_ListByResourceGroup.json"
+            "$ref": "./examples/StorageAccountListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -465,16 +441,16 @@
         },
         "x-ms-examples": {
           "StorageAccountGetAsyncSkuConversionStatus": {
-            "$ref": "./examples/StorageAccounts_GetProperties_Storage_Account_Get_Async_Sku_Conversion_Status.json"
+            "$ref": "./examples/StorageAccountGetAsyncSkuConversionStatus.json"
           },
           "StorageAccountGetProperties": {
-            "$ref": "./examples/StorageAccounts_GetProperties_Storage_Account_Get_Properties.json"
+            "$ref": "./examples/StorageAccountGetProperties.json"
           },
           "StorageAccountGetPropertiesCMKEnabled": {
-            "$ref": "./examples/StorageAccounts_GetProperties_Storage_Account_Get_Properties_Cmk_Enabled.json"
+            "$ref": "./examples/StorageAccountGetPropertiesCMKEnabled.json"
           },
           "StorageAccountGetPropertiesCMKVersionExpirationTime": {
-            "$ref": "./examples/StorageAccounts_GetProperties_Storage_Account_Get_Properties_Cmk_Version_Expiration_Time.json"
+            "$ref": "./examples/StorageAccountGetPropertiesCMKVersionExpirationTime.json"
           }
         }
       },
@@ -520,19 +496,6 @@
               "$ref": "#/definitions/StorageAccount"
             }
           },
-          "201": {
-            "description": "Resource 'StorageAccount' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/StorageAccount"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -556,42 +519,46 @@
         },
         "x-ms-examples": {
           "NfsV3AccountCreate": {
-            "$ref": "./examples/StorageAccounts_Create_Nfs_V3_Account_Create.json"
+            "$ref": "./examples/NfsV3AccountCreate.json"
           },
           "StorageAccountCreate": {
-            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create.json"
+            "$ref": "./examples/StorageAccountCreate.json"
           },
           "StorageAccountCreateAllowedCopyScopeToAAD": {
-            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_Allowed_Copy_Scope_To_Aad.json"
+            "$ref": "./examples/StorageAccountCreateAllowedCopyScopeToAAD.json"
           },
           "StorageAccountCreateAllowedCopyScopeToPrivateLink": {
-            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_Allowed_Copy_Scope_To_Private_Link.json"
+            "$ref": "./examples/StorageAccountCreateAllowedCopyScopeToPrivateLink.json"
           },
           "StorageAccountCreateDisallowPublicNetworkAccess": {
-            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_Disallow_Public_Network_Access.json"
+            "$ref": "./examples/StorageAccountCreateDisallowPublicNetworkAccess.json"
           },
           "StorageAccountCreateDnsEndpointTypeToAzureDnsZone": {
-            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_Dns_Endpoint_Type_To_Azure_Dns_Zone.json"
+            "$ref": "./examples/StorageAccountCreateDnsEndpointTypeToAzureDnsZone.json"
           },
           "StorageAccountCreateDnsEndpointTypeToStandard": {
-            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_Dns_Endpoint_Type_To_Standard.json"
+            "$ref": "./examples/StorageAccountCreateDnsEndpointTypeToStandard.json"
           },
           "StorageAccountCreateEnablePublicNetworkAccess": {
-            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_Enable_Public_Network_Access.json"
+            "$ref": "./examples/StorageAccountCreateEnablePublicNetworkAccess.json"
           },
           "StorageAccountCreatePremiumBlockBlobStorage": {
-            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_Premium_Block_Blob_Storage.json"
+            "$ref": "./examples/StorageAccountCreatePremiumBlockBlobStorage.json"
           },
           "StorageAccountCreateUserAssignedEncryptionIdentityWithCMK": {
-            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_User_Assigned_Encryption_Identity_With_Cmk.json"
+            "$ref": "./examples/StorageAccountCreateUserAssignedEncryptionIdentityWithCMK.json"
           },
           "StorageAccountCreateUserAssignedIdentityWithFederatedIdentityClientId.": {
-            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_User_Assigned_Identity_With_Federated_Identity_Client_Id.json"
+            "$ref": "./examples/StorageAccountCreateUserAssignedIdentityWithFederatedIdentityClientId.json"
           },
           "StorageAccountCreateWithImmutabilityPolicy": {
-            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_With_Immutability_Policy.json"
+            "$ref": "./examples/StorageAccountCreateWithImmutabilityPolicy.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "StorageAccounts_Update",
@@ -644,28 +611,28 @@
         },
         "x-ms-examples": {
           "StorageAccountEnableAD": {
-            "$ref": "./examples/StorageAccounts_Update_Storage_Account_Enable_Ad.json"
+            "$ref": "./examples/StorageAccountEnableAD.json"
           },
           "StorageAccountEnableCMK": {
-            "$ref": "./examples/StorageAccounts_Update_Storage_Account_Enable_Cmk.json"
+            "$ref": "./examples/StorageAccountEnableCMK.json"
           },
           "StorageAccountUpdate": {
-            "$ref": "./examples/StorageAccounts_Update_Storage_Account_Update.json"
+            "$ref": "./examples/StorageAccountUpdate.json"
           },
           "StorageAccountUpdateAllowedCopyScopeToAAD": {
-            "$ref": "./examples/StorageAccounts_Update_Storage_Account_Update_Allowed_Copy_Scope_To_Aad.json"
+            "$ref": "./examples/StorageAccountUpdateAllowedCopyScopeToAAD.json"
           },
           "StorageAccountUpdateDisablePublicNetworkAccess": {
-            "$ref": "./examples/StorageAccounts_Update_Storage_Account_Update_Disable_Public_Network_Access.json"
+            "$ref": "./examples/StorageAccountUpdateDisablePublicNetworkAccess.json"
           },
           "StorageAccountUpdateUserAssignedEncryptionIdentityWithCMK": {
-            "$ref": "./examples/StorageAccounts_Update_Storage_Account_Update_User_Assigned_Encryption_Identity_With_Cmk.json"
+            "$ref": "./examples/StorageAccountUpdateUserAssignedEncryptionIdentityWithCMK.json"
           },
           "StorageAccountUpdateUserAssignedIdentityWithFederatedIdentityClientId": {
-            "$ref": "./examples/StorageAccounts_Update_Storage_Account_Update_User_Assigned_Identity_With_Federated_Identity_Client_Id.json"
+            "$ref": "./examples/StorageAccountUpdateUserAssignedIdentityWithFederatedIdentityClientId.json"
           },
           "StorageAccountUpdateWithImmutabilityPolicy": {
-            "$ref": "./examples/StorageAccounts_Update_Storage_Account_Update_With_Immutability_Policy.json"
+            "$ref": "./examples/StorageAccountUpdateWithImmutabilityPolicy.json"
           }
         }
       },
@@ -711,12 +678,12 @@
         },
         "x-ms-examples": {
           "StorageAccountDelete": {
-            "$ref": "./examples/StorageAccounts_Delete.json"
+            "$ref": "./examples/StorageAccountDelete.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/abortHierarchicalNamespaceMigration": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/aborthnsonmigration": {
       "post": {
         "operationId": "StorageAccounts_AbortHierarchicalNamespaceMigration",
         "tags": [
@@ -744,6 +711,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -758,9 +728,6 @@
               }
             }
           },
-          "204": {
-            "description": "Azure operation completed successfully."
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -770,7 +737,7 @@
         },
         "x-ms-examples": {
           "StorageAccountAbortHierarchicalNamespaceMigration": {
-            "$ref": "./examples/StorageAccounts_AbortHierarchicalNamespaceMigration.json"
+            "$ref": "./examples/StorageAccountAbortHierarchicalNamespaceMigration.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -783,7 +750,7 @@
       "get": {
         "operationId": "BlobServices_List",
         "tags": [
-          "BlobServicePropertiesOperationGroup"
+          "BlobServices"
         ],
         "description": "List blob services of storage account. It returns a collection of one object named default.",
         "parameters": [
@@ -808,7 +775,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/BlobServiceItems"
             }
@@ -822,7 +789,7 @@
         },
         "x-ms-examples": {
           "ListBlobServices": {
-            "$ref": "./examples/BlobServices_List.json"
+            "$ref": "./examples/BlobServicesList.json"
           }
         }
       }
@@ -831,7 +798,7 @@
       "get": {
         "operationId": "BlobServices_GetServiceProperties",
         "tags": [
-          "BlobServicePropertiesOperationGroup"
+          "BlobServices"
         ],
         "description": "Gets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
         "parameters": [
@@ -870,14 +837,14 @@
         },
         "x-ms-examples": {
           "GetBlobServices": {
-            "$ref": "./examples/BlobServices_GetServiceProperties.json"
+            "$ref": "./examples/BlobServicesGet.json"
           }
         }
       },
       "put": {
         "operationId": "BlobServices_SetServiceProperties",
         "tags": [
-          "BlobServicePropertiesOperationGroup"
+          "BlobServices"
         ],
         "description": "Sets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
         "parameters": [
@@ -916,12 +883,6 @@
               "$ref": "#/definitions/BlobServiceProperties"
             }
           },
-          "201": {
-            "description": "Resource 'BlobServiceProperties' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/BlobServiceProperties"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -931,13 +892,13 @@
         },
         "x-ms-examples": {
           "BlobServicesPutAllowPermanentDelete": {
-            "$ref": "./examples/BlobServices_SetServiceProperties_Blob_Services_Put_Allow_Permanent_Delete.json"
+            "$ref": "./examples/BlobServicesPutAllowPermanentDelete.json"
           },
           "BlobServicesPutLastAccessTimeBasedTracking": {
-            "$ref": "./examples/BlobServices_SetServiceProperties_Blob_Services_Put_Last_Access_Time_Based_Tracking.json"
+            "$ref": "./examples/BlobServicesPutLastAccessTimeBasedTracking.json"
           },
           "PutBlobServices": {
-            "$ref": "./examples/BlobServices_SetServiceProperties_Put_Blob_Services.json"
+            "$ref": "./examples/BlobServicesPut.json"
           }
         }
       }
@@ -1005,7 +966,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ListContainerItems"
             }
@@ -1019,10 +980,10 @@
         },
         "x-ms-examples": {
           "ListContainers": {
-            "$ref": "./examples/BlobContainers_List_List_Containers.json"
+            "$ref": "./examples/BlobContainersList.json"
           },
           "ListDeletedContainers": {
-            "$ref": "./examples/BlobContainers_List_List_Deleted_Containers.json"
+            "$ref": "./examples/DeletedBlobContainersList.json"
           }
         },
         "x-ms-pageable": {
@@ -1082,10 +1043,10 @@
         },
         "x-ms-examples": {
           "GetBlobContainersGetWithAllowProtectedAppendWritesAll": {
-            "$ref": "./examples/BlobContainers_Get_Get_Blob_Containers_Get_With_Allow_Protected_Append_Writes_All.json"
+            "$ref": "./examples/BlobContainersGetWithAllowProtectedAppendWritesAll.json"
           },
           "GetContainers": {
-            "$ref": "./examples/BlobContainers_Get_Get_Containers.json"
+            "$ref": "./examples/BlobContainersGet.json"
           }
         }
       },
@@ -1155,13 +1116,13 @@
         },
         "x-ms-examples": {
           "PutContainerWithDefaultEncryptionScope": {
-            "$ref": "./examples/BlobContainers_Create_Put_Container_With_Default_Encryption_Scope.json"
+            "$ref": "./examples/BlobContainersPutDefaultEncryptionScope.json"
           },
           "PutContainerWithObjectLevelWorm": {
-            "$ref": "./examples/BlobContainers_Create_Put_Container_With_Object_Level_Worm.json"
+            "$ref": "./examples/BlobContainersPutObjectLevelWorm.json"
           },
           "PutContainers": {
-            "$ref": "./examples/BlobContainers_Create_Put_Containers.json"
+            "$ref": "./examples/BlobContainersPut.json"
           }
         }
       },
@@ -1225,7 +1186,7 @@
         },
         "x-ms-examples": {
           "UpdateContainers": {
-            "$ref": "./examples/BlobContainers_Update.json"
+            "$ref": "./examples/BlobContainersPatch.json"
           }
         }
       },
@@ -1280,7 +1241,7 @@
         },
         "x-ms-examples": {
           "DeleteContainers": {
-            "$ref": "./examples/BlobContainers_Delete.json"
+            "$ref": "./examples/BlobContainersDelete.json"
           }
         }
       }
@@ -1346,7 +1307,7 @@
         },
         "x-ms-examples": {
           "ClearLegalHoldContainers": {
-            "$ref": "./examples/BlobContainers_ClearLegalHold.json"
+            "$ref": "./examples/BlobContainersClearLegalHold.json"
           }
         }
       }
@@ -1411,7 +1372,7 @@
         },
         "x-ms-examples": {
           "GetImmutabilityPolicy": {
-            "$ref": "./examples/BlobContainers_GetImmutabilityPolicy.json"
+            "$ref": "./examples/BlobContainersGetImmutabilityPolicy.json"
           }
         }
       },
@@ -1474,12 +1435,6 @@
               "$ref": "#/definitions/ImmutabilityPolicy"
             }
           },
-          "201": {
-            "description": "Resource 'ImmutabilityPolicy' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/ImmutabilityPolicy"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1489,10 +1444,10 @@
         },
         "x-ms-examples": {
           "CreateOrUpdateImmutabilityPolicy": {
-            "$ref": "./examples/BlobContainers_CreateOrUpdateImmutabilityPolicy_Create_Or_Update_Immutability_Policy.json"
+            "$ref": "./examples/BlobContainersPutImmutabilityPolicy.json"
           },
           "CreateOrUpdateImmutabilityPolicyWithAllowProtectedAppendWritesAll": {
-            "$ref": "./examples/BlobContainers_CreateOrUpdateImmutabilityPolicy_Create_Or_Update_Immutability_Policy_With_Allow_Protected_Append_Writes_All.json"
+            "$ref": "./examples/BlobContainersPutImmutabilityPolicyAllowProtectedAppendWritesAll.json"
           }
         }
       },
@@ -1541,10 +1496,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ImmutabilityPolicy"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1555,12 +1510,12 @@
         },
         "x-ms-examples": {
           "DeleteImmutabilityPolicy": {
-            "$ref": "./examples/BlobContainers_DeleteImmutabilityPolicy.json"
+            "$ref": "./examples/BlobContainersDeleteImmutabilityPolicy.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/default/extendImmutabilityPolicy": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/default/extend": {
       "post": {
         "operationId": "BlobContainers_ExtendImmutabilityPolicy",
         "tags": [
@@ -1604,10 +1559,10 @@
             "x-ms-client-name": "If-Match"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "description": "The ImmutabilityPolicy Properties that will be extended for a blob container.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/ImmutabilityPolicy"
             }
@@ -1629,12 +1584,12 @@
         },
         "x-ms-examples": {
           "ExtendImmutabilityPolicy": {
-            "$ref": "./examples/BlobContainers_ExtendImmutabilityPolicy.json"
+            "$ref": "./examples/BlobContainersExtendImmutabilityPolicy.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/default/lockImmutabilityPolicy": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/default/lock": {
       "post": {
         "operationId": "BlobContainers_LockImmutabilityPolicy",
         "tags": [
@@ -1694,7 +1649,7 @@
         },
         "x-ms-examples": {
           "LockImmutabilityPolicy": {
-            "$ref": "./examples/BlobContainers_LockImmutabilityPolicy.json"
+            "$ref": "./examples/BlobContainersLockImmutabilityPolicy.json"
           }
         }
       }
@@ -1735,10 +1690,10 @@
             "maxLength": 63
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "description": "Lease Container request body.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/LeaseContainerRequest"
             }
@@ -1760,15 +1715,15 @@
         },
         "x-ms-examples": {
           "Acquire a lease on a container": {
-            "$ref": "./examples/BlobContainers_Lease_Acquire_A_Lease_On_A_Container.json"
+            "$ref": "./examples/BlobContainersLease_Acquire.json"
           },
           "Break a lease on a container": {
-            "$ref": "./examples/BlobContainers_Lease_Break_A_Lease_On_A_Container.json"
+            "$ref": "./examples/BlobContainersLease_Break.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/objectLevelWorm": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/migrate": {
       "post": {
         "operationId": "BlobContainers_ObjectLevelWorm",
         "tags": [
@@ -1805,6 +1760,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -1819,9 +1777,6 @@
               }
             }
           },
-          "204": {
-            "description": "Azure operation completed successfully."
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1831,7 +1786,7 @@
         },
         "x-ms-examples": {
           "VersionLevelWormContainerMigration": {
-            "$ref": "./examples/BlobContainers_ObjectLevelWorm.json"
+            "$ref": "./examples/ObjectLevelWormContainerMigration.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1901,10 +1856,10 @@
         },
         "x-ms-examples": {
           "SetLegalHoldContainers": {
-            "$ref": "./examples/BlobContainers_SetLegalHold_Set_Legal_Hold_Containers.json"
+            "$ref": "./examples/BlobContainersSetLegalHold.json"
           },
           "SetLegalHoldContainersWithAllowProtectedAppendWritesAll": {
-            "$ref": "./examples/BlobContainers_SetLegalHold_Set_Legal_Hold_Containers_With_Allow_Protected_Append_Writes_All.json"
+            "$ref": "./examples/BlobContainersSetLegalHoldAllowProtectedAppendWritesAll.json"
           }
         }
       }
@@ -1985,7 +1940,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EncryptionScopeListResult"
             }
@@ -1999,7 +1954,7 @@
         },
         "x-ms-examples": {
           "StorageAccountEncryptionScopeList": {
-            "$ref": "./examples/EncryptionScopes_List.json"
+            "$ref": "./examples/StorageAccountEncryptionScopeList.json"
           }
         },
         "x-ms-pageable": {
@@ -2059,7 +2014,7 @@
         },
         "x-ms-examples": {
           "StorageAccountGetEncryptionScope": {
-            "$ref": "./examples/EncryptionScopes_Get.json"
+            "$ref": "./examples/StorageAccountGetEncryptionScope.json"
           }
         }
       },
@@ -2129,10 +2084,10 @@
         },
         "x-ms-examples": {
           "StorageAccountPutEncryptionScope": {
-            "$ref": "./examples/EncryptionScopes_Put_Storage_Account_Put_Encryption_Scope.json"
+            "$ref": "./examples/StorageAccountPutEncryptionScope.json"
           },
           "StorageAccountPutEncryptionScopeWithInfrastructureEncryption": {
-            "$ref": "./examples/EncryptionScopes_Put_Storage_Account_Put_Encryption_Scope_With_Infrastructure_Encryption.json"
+            "$ref": "./examples/StorageAccountPutEncryptionScopeWithInfrastructureEncryption.json"
           }
         }
       },
@@ -2196,7 +2151,7 @@
         },
         "x-ms-examples": {
           "StorageAccountPatchEncryptionScope": {
-            "$ref": "./examples/EncryptionScopes_Patch.json"
+            "$ref": "./examples/StorageAccountPatchEncryptionScope.json"
           }
         }
       }
@@ -2242,6 +2197,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -2256,9 +2214,6 @@
               }
             }
           },
-          "204": {
-            "description": "Azure operation completed successfully."
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -2268,10 +2223,10 @@
         },
         "x-ms-examples": {
           "StorageAccountFailover": {
-            "$ref": "./examples/StorageAccounts_Failover_Storage_Account_Failover.json"
+            "$ref": "./examples/StorageAccountFailover.json"
           },
           "StorageAccountFailoverPlanned": {
-            "$ref": "./examples/StorageAccounts_Failover_Storage_Account_Failover_Planned.json"
+            "$ref": "./examples/StorageAccountFailoverPlanned.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2284,7 +2239,7 @@
       "get": {
         "operationId": "FileServices_List",
         "tags": [
-          "FileServicePropertiesOperationGroup"
+          "FileServices"
         ],
         "description": "List all file services in storage accounts",
         "parameters": [
@@ -2309,7 +2264,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/FileServiceItems"
             }
@@ -2323,7 +2278,7 @@
         },
         "x-ms-examples": {
           "ListFileServices": {
-            "$ref": "./examples/FileServices_List.json"
+            "$ref": "./examples/FileServicesList.json"
           }
         }
       }
@@ -2332,7 +2287,7 @@
       "get": {
         "operationId": "FileServices_GetServiceProperties",
         "tags": [
-          "FileServicePropertiesOperationGroup"
+          "FileServices"
         ],
         "description": "Gets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules.",
         "parameters": [
@@ -2371,14 +2326,14 @@
         },
         "x-ms-examples": {
           "GetFileServices": {
-            "$ref": "./examples/FileServices_GetServiceProperties.json"
+            "$ref": "./examples/FileServicesGet.json"
           }
         }
       },
       "put": {
         "operationId": "FileServices_SetServiceProperties",
         "tags": [
-          "FileServicePropertiesOperationGroup"
+          "FileServices"
         ],
         "description": "Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules.",
         "parameters": [
@@ -2417,12 +2372,6 @@
               "$ref": "#/definitions/FileServiceProperties"
             }
           },
-          "201": {
-            "description": "Resource 'FileServiceProperties' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/FileServiceProperties"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -2432,13 +2381,13 @@
         },
         "x-ms-examples": {
           "PutFileServices": {
-            "$ref": "./examples/FileServices_SetServiceProperties_Put_File_Services.json"
+            "$ref": "./examples/FileServicesPut.json"
           },
           "PutFileServices_EnableSMBMultichannel": {
-            "$ref": "./examples/FileServices_SetServiceProperties_Put_File_Services_Enable_Smb_Multichannel.json"
+            "$ref": "./examples/FileServicesPut_EnableSMBMultichannel.json"
           },
           "PutFileServices_EnableSecureSmbFeatures": {
-            "$ref": "./examples/FileServices_SetServiceProperties_Put_File_Services_Enable_Secure_Smb_Features.json"
+            "$ref": "./examples/FileServicesPut_EnableSecureSmbFeatures.json"
           }
         }
       }
@@ -2493,7 +2442,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/FileShareItems"
             }
@@ -2507,13 +2456,13 @@
         },
         "x-ms-examples": {
           "ListDeletedShares": {
-            "$ref": "./examples/FileShares_List_List_Deleted_Shares.json"
+            "$ref": "./examples/DeletedFileSharesList.json"
           },
           "ListShareSnapshots": {
-            "$ref": "./examples/FileShares_List_List_Share_Snapshots.json"
+            "$ref": "./examples/FileShareSnapshotsList.json"
           },
           "ListShares": {
-            "$ref": "./examples/FileShares_List_List_Shares.json"
+            "$ref": "./examples/FileSharesList.json"
           }
         },
         "x-ms-pageable": {
@@ -2587,10 +2536,10 @@
         },
         "x-ms-examples": {
           "GetShareStats": {
-            "$ref": "./examples/FileShares_Get_Get_Share_Stats.json"
+            "$ref": "./examples/FileSharesGet_Stats.json"
           },
           "GetShares": {
-            "$ref": "./examples/FileShares_Get_Get_Shares.json"
+            "$ref": "./examples/FileSharesGet.json"
           }
         }
       },
@@ -2667,13 +2616,13 @@
         },
         "x-ms-examples": {
           "Create NFS Shares": {
-            "$ref": "./examples/FileShares_Create_Create_Nfs_Shares.json"
+            "$ref": "./examples/FileSharesPut_NFS.json"
           },
           "PutShares": {
-            "$ref": "./examples/FileShares_Create_Put_Shares.json"
+            "$ref": "./examples/FileSharesPut.json"
           },
           "PutShares with Access Tier": {
-            "$ref": "./examples/FileShares_Create_Put_Shares_With_Access_Tier.json"
+            "$ref": "./examples/FileSharesPut_AccessTier.json"
           }
         }
       },
@@ -2737,10 +2686,10 @@
         },
         "x-ms-examples": {
           "UpdateShareAcls": {
-            "$ref": "./examples/FileShares_Update_Update_Share_Acls.json"
+            "$ref": "./examples/FileShareAclsPatch.json"
           },
           "UpdateShares": {
-            "$ref": "./examples/FileShares_Update_Update_Shares.json"
+            "$ref": "./examples/FileSharesPatch.json"
           }
         }
       },
@@ -2809,7 +2758,7 @@
         },
         "x-ms-examples": {
           "DeleteShares": {
-            "$ref": "./examples/FileShares_Delete.json"
+            "$ref": "./examples/FileSharesDelete.json"
           }
         }
       }
@@ -2857,10 +2806,10 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "description": "Lease Share request body.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/LeaseShareRequest"
             }
@@ -2882,10 +2831,10 @@
         },
         "x-ms-examples": {
           "Acquire a lease on a share": {
-            "$ref": "./examples/FileShares_Lease_Acquire_A_Lease_On_A_Share.json"
+            "$ref": "./examples/FileSharesLease_Acquire.json"
           },
           "Break a lease on a share": {
-            "$ref": "./examples/FileShares_Lease_Break_A_Lease_On_A_Share.json"
+            "$ref": "./examples/FileSharesLease_Break.json"
           }
         }
       }
@@ -2936,8 +2885,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Azure operation completed successfully."
+          "200": {
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2948,12 +2897,12 @@
         },
         "x-ms-examples": {
           "RestoreShares": {
-            "$ref": "./examples/FileShares_Restore.json"
+            "$ref": "./examples/FileSharesRestore.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/hierarchicalNamespaceMigration": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/hnsonmigration": {
       "post": {
         "operationId": "StorageAccounts_HierarchicalNamespaceMigration",
         "tags": [
@@ -2988,6 +2937,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -3002,9 +2954,6 @@
               }
             }
           },
-          "204": {
-            "description": "Azure operation completed successfully."
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -3014,7 +2963,7 @@
         },
         "x-ms-examples": {
           "StorageAccountHierarchicalNamespaceMigration": {
-            "$ref": "./examples/StorageAccounts_HierarchicalNamespaceMigration.json"
+            "$ref": "./examples/StorageAccountHierarchicalNamespaceMigration.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3052,7 +3001,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ListBlobInventoryPolicy"
             }
@@ -3066,7 +3015,7 @@
         },
         "x-ms-examples": {
           "StorageAccountGetBlobInventoryPolicy": {
-            "$ref": "./examples/BlobInventoryPolicies_List.json"
+            "$ref": "./examples/StorageAccountListBlobInventoryPolicy.json"
           }
         }
       }
@@ -3134,7 +3083,7 @@
         },
         "x-ms-examples": {
           "StorageAccountGetBlobInventoryPolicy": {
-            "$ref": "./examples/BlobInventoryPolicies_Get.json"
+            "$ref": "./examples/StorageAccountGetBlobInventoryPolicy.json"
           }
         }
       },
@@ -3200,12 +3149,6 @@
               "$ref": "#/definitions/BlobInventoryPolicy"
             }
           },
-          "201": {
-            "description": "Resource 'BlobInventoryPolicy' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/BlobInventoryPolicy"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -3215,13 +3158,13 @@
         },
         "x-ms-examples": {
           "StorageAccountSetBlobInventoryPolicy": {
-            "$ref": "./examples/BlobInventoryPolicies_CreateOrUpdate_Storage_Account_Set_Blob_Inventory_Policy.json"
+            "$ref": "./examples/StorageAccountSetBlobInventoryPolicy.json"
           },
           "StorageAccountSetBlobInventoryPolicyIncludeDeleteAndNewSchemaForHnsAccount": {
-            "$ref": "./examples/BlobInventoryPolicies_CreateOrUpdate_Storage_Account_Set_Blob_Inventory_Policy_Include_Delete_And_New_Schema_For_Hns_Account.json"
+            "$ref": "./examples/StorageAccountSetBlobInventoryPolicyIncludeDeleteAndNewSchemaForHnsAccount.json"
           },
           "StorageAccountSetBlobInventoryPolicyIncludeDeleteAndNewSchemaForNonHnsAccount": {
-            "$ref": "./examples/BlobInventoryPolicies_CreateOrUpdate_Storage_Account_Set_Blob_Inventory_Policy_Include_Delete_And_New_Schema_For_Non_Hns_Account.json"
+            "$ref": "./examples/StorageAccountSetBlobInventoryPolicyIncludeDeleteAndNewSchemaForNonHnsAccount.json"
           }
         }
       },
@@ -3287,12 +3230,12 @@
         },
         "x-ms-examples": {
           "StorageAccountDeleteBlobInventoryPolicy": {
-            "$ref": "./examples/BlobInventoryPolicies_Delete.json"
+            "$ref": "./examples/StorageAccountDeleteBlobInventoryPolicy.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listAccountSAS": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listAccountSas": {
       "post": {
         "operationId": "StorageAccounts_ListAccountSAS",
         "tags": [
@@ -3344,7 +3287,7 @@
         },
         "x-ms-examples": {
           "StorageAccountListAccountSAS": {
-            "$ref": "./examples/StorageAccounts_ListAccountSAS.json"
+            "$ref": "./examples/StorageAccountListAccountSAS.json"
           }
         }
       }
@@ -3405,12 +3348,12 @@
         },
         "x-ms-examples": {
           "StorageAccountListKeys": {
-            "$ref": "./examples/StorageAccounts_ListKeys.json"
+            "$ref": "./examples/StorageAccountListKeys.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listServiceSAS": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listServiceSas": {
       "post": {
         "operationId": "StorageAccounts_ListServiceSAS",
         "tags": [
@@ -3462,7 +3405,7 @@
         },
         "x-ms-examples": {
           "StorageAccountListServiceSAS": {
-            "$ref": "./examples/StorageAccounts_ListServiceSAS.json"
+            "$ref": "./examples/StorageAccountListServiceSAS.json"
           }
         }
       }
@@ -3471,7 +3414,7 @@
       "get": {
         "operationId": "LocalUsers_List",
         "tags": [
-          "LocalUsersOperationGroup"
+          "LocalUserOperationGroup"
         ],
         "description": "List the local users associated with the storage account.",
         "parameters": [
@@ -3496,7 +3439,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/LocalUsers"
             }
@@ -3510,7 +3453,7 @@
         },
         "x-ms-examples": {
           "ListLocalUsers": {
-            "$ref": "./examples/LocalUsers_List.json"
+            "$ref": "./examples/LocalUsersList.json"
           }
         }
       }
@@ -3519,7 +3462,7 @@
       "get": {
         "operationId": "LocalUsers_Get",
         "tags": [
-          "LocalUsersOperationGroup"
+          "LocalUserOperationGroup"
         ],
         "description": "Get the local user of the storage account by username.",
         "parameters": [
@@ -3567,14 +3510,14 @@
         },
         "x-ms-examples": {
           "GetLocalUser": {
-            "$ref": "./examples/LocalUsers_Get.json"
+            "$ref": "./examples/LocalUserGet.json"
           }
         }
       },
       "put": {
         "operationId": "LocalUsers_CreateOrUpdate",
         "tags": [
-          "LocalUsersOperationGroup"
+          "LocalUserOperationGroup"
         ],
         "description": "Create or update the properties of a local user associated with the storage account",
         "parameters": [
@@ -3622,12 +3565,6 @@
               "$ref": "#/definitions/LocalUser"
             }
           },
-          "201": {
-            "description": "Resource 'LocalUser' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/LocalUser"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -3637,17 +3574,17 @@
         },
         "x-ms-examples": {
           "CreateLocalUser": {
-            "$ref": "./examples/LocalUsers_CreateOrUpdate_Create_Local_User.json"
+            "$ref": "./examples/LocalUserCreate.json"
           },
           "UpdateLocalUser": {
-            "$ref": "./examples/LocalUsers_CreateOrUpdate_Update_Local_User.json"
+            "$ref": "./examples/LocalUserUpdate.json"
           }
         }
       },
       "delete": {
         "operationId": "LocalUsers_Delete",
         "tags": [
-          "LocalUsersOperationGroup"
+          "LocalUserOperationGroup"
         ],
         "description": "Deletes the local user associated with the specified storage account.",
         "parameters": [
@@ -3695,7 +3632,7 @@
         },
         "x-ms-examples": {
           "DeleteLocalUser": {
-            "$ref": "./examples/LocalUsers_Delete.json"
+            "$ref": "./examples/LocalUserDelete.json"
           }
         }
       }
@@ -3704,7 +3641,7 @@
       "post": {
         "operationId": "LocalUsers_ListKeys",
         "tags": [
-          "LocalUsersOperationGroup"
+          "LocalUserOperationGroup"
         ],
         "description": "List SSH authorized keys and shared key of the local user.",
         "parameters": [
@@ -3752,7 +3689,7 @@
         },
         "x-ms-examples": {
           "ListLocalUserKeys": {
-            "$ref": "./examples/LocalUsers_ListKeys.json"
+            "$ref": "./examples/LocalUserListKeys.json"
           }
         }
       }
@@ -3761,7 +3698,7 @@
       "post": {
         "operationId": "LocalUsers_RegeneratePassword",
         "tags": [
-          "LocalUsersOperationGroup"
+          "LocalUserOperationGroup"
         ],
         "description": "Regenerate the local user SSH password.",
         "parameters": [
@@ -3809,7 +3746,7 @@
         },
         "x-ms-examples": {
           "RegenerateLocalUserPassword": {
-            "$ref": "./examples/LocalUsers_RegeneratePassword.json"
+            "$ref": "./examples/LocalUserRegeneratePassword.json"
           }
         }
       }
@@ -3877,7 +3814,7 @@
         },
         "x-ms-examples": {
           "StorageAccountGetManagementPolicies": {
-            "$ref": "./examples/ManagementPolicies_Get.json"
+            "$ref": "./examples/StorageAccountGetManagementPolicy.json"
           }
         }
       },
@@ -3943,12 +3880,6 @@
               "$ref": "#/definitions/ManagementPolicy"
             }
           },
-          "201": {
-            "description": "Resource 'ManagementPolicy' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/ManagementPolicy"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -3958,28 +3889,28 @@
         },
         "x-ms-examples": {
           "StorageAccountSetManagementPolicies": {
-            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_Storage_Account_Set_Management_Policies.json"
+            "$ref": "./examples/StorageAccountSetManagementPolicy.json"
           },
           "StorageAccountSetManagementPolicyColdTierActions": {
-            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_Storage_Account_Set_Management_Policy_Cold_Tier_Actions.json"
+            "$ref": "./examples/StorageAccountSetManagementPolicyColdTierActions.json"
           },
           "StorageAccountSetManagementPolicyForBlockAndAppendBlobs": {
-            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_Storage_Account_Set_Management_Policy_For_Block_And_Append_Blobs.json"
+            "$ref": "./examples/StorageAccountSetManagementPolicyForBlockAndAppendBlobs.json"
           },
           "StorageAccountSetManagementPolicyHotTierActions": {
-            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_Storage_Account_Set_Management_Policy_Hot_Tier_Actions.json"
+            "$ref": "./examples/StorageAccountSetManagementPolicyHotTierActions.json"
           },
           "StorageAccountSetManagementPolicyWithSnapshotAndVersion": {
-            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_Storage_Account_Set_Management_Policy_With_Snapshot_And_Version.json"
+            "$ref": "./examples/StorageAccountSetManagementPolicyWithSnapshotAndVersion.json"
           },
           "StorageAccountSetManagementPolicy_BaseBlobDaysAfterCreationActions": {
-            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_Storage_Account_Set_Management_Policy_Base_Blob_Days_After_Creation_Actions.json"
+            "$ref": "./examples/StorageAccountSetManagementPolicy_BaseBlobDaysAfterCreationActions.json"
           },
           "StorageAccountSetManagementPolicy_LastAccessTimeBasedBlobActions": {
-            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_Storage_Account_Set_Management_Policy_Last_Access_Time_Based_Blob_Actions.json"
+            "$ref": "./examples/StorageAccountSetManagementPolicy_LastAccessTimeBasedBlobActions.json"
           },
           "StorageAccountSetManagementPolicy_LastTierChangeTimeActions": {
-            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_Storage_Account_Set_Management_Policy_Last_Tier_Change_Time_Actions.json"
+            "$ref": "./examples/StorageAccountSetManagementPolicy_LastTierChangeTimeActions.json"
           }
         }
       },
@@ -4045,7 +3976,7 @@
         },
         "x-ms-examples": {
           "StorageAccountDeleteManagementPolicies": {
-            "$ref": "./examples/ManagementPolicies_Delete.json"
+            "$ref": "./examples/StorageAccountDeleteManagementPolicy.json"
           }
         }
       }
@@ -4054,7 +3985,7 @@
       "get": {
         "operationId": "ObjectReplicationPolicies_List",
         "tags": [
-          "ObjectReplicationPoliciesOperationGroup"
+          "ObjectReplicationPolicyOperationGroup"
         ],
         "description": "List the object replication policies associated with the storage account.",
         "parameters": [
@@ -4079,7 +4010,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ObjectReplicationPolicies"
             }
@@ -4093,7 +4024,7 @@
         },
         "x-ms-examples": {
           "StorageAccountListObjectReplicationPolicies": {
-            "$ref": "./examples/ObjectReplicationPolicies_List.json"
+            "$ref": "./examples/StorageAccountListObjectReplicationPolicies.json"
           }
         }
       }
@@ -4102,7 +4033,7 @@
       "get": {
         "operationId": "ObjectReplicationPolicies_Get",
         "tags": [
-          "ObjectReplicationPoliciesOperationGroup"
+          "ObjectReplicationPolicyOperationGroup"
         ],
         "description": "Get the object replication policy of the storage account by policy ID.",
         "parameters": [
@@ -4149,14 +4080,14 @@
         },
         "x-ms-examples": {
           "StorageAccountGetObjectReplicationPolicies": {
-            "$ref": "./examples/ObjectReplicationPolicies_Get.json"
+            "$ref": "./examples/StorageAccountGetObjectReplicationPolicy.json"
           }
         }
       },
       "put": {
         "operationId": "ObjectReplicationPolicies_CreateOrUpdate",
         "tags": [
-          "ObjectReplicationPoliciesOperationGroup"
+          "ObjectReplicationPolicyOperationGroup"
         ],
         "description": "Create or update the object replication policy of the storage account.",
         "parameters": [
@@ -4203,12 +4134,6 @@
               "$ref": "#/definitions/ObjectReplicationPolicy"
             }
           },
-          "201": {
-            "description": "Resource 'ObjectReplicationPolicy' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/ObjectReplicationPolicy"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -4218,23 +4143,23 @@
         },
         "x-ms-examples": {
           "StorageAccountCreateObjectReplicationPolicyOnDestination": {
-            "$ref": "./examples/ObjectReplicationPolicies_CreateOrUpdate_Storage_Account_Create_Object_Replication_Policy_On_Destination.json"
+            "$ref": "./examples/StorageAccountCreateObjectReplicationPolicyOnDestination.json"
           },
           "StorageAccountCreateObjectReplicationPolicyOnSource": {
-            "$ref": "./examples/ObjectReplicationPolicies_CreateOrUpdate_Storage_Account_Create_Object_Replication_Policy_On_Source.json"
+            "$ref": "./examples/StorageAccountCreateObjectReplicationPolicyOnSource.json"
           },
           "StorageAccountUpdateObjectReplicationPolicyOnDestination": {
-            "$ref": "./examples/ObjectReplicationPolicies_CreateOrUpdate_Storage_Account_Update_Object_Replication_Policy_On_Destination.json"
+            "$ref": "./examples/StorageAccountUpdateObjectReplicationPolicyOnDestination.json"
           },
           "StorageAccountUpdateObjectReplicationPolicyOnSource": {
-            "$ref": "./examples/ObjectReplicationPolicies_CreateOrUpdate_Storage_Account_Update_Object_Replication_Policy_On_Source.json"
+            "$ref": "./examples/StorageAccountUpdateObjectReplicationPolicyOnSource.json"
           }
         }
       },
       "delete": {
         "operationId": "ObjectReplicationPolicies_Delete",
         "tags": [
-          "ObjectReplicationPoliciesOperationGroup"
+          "ObjectReplicationPolicyOperationGroup"
         ],
         "description": "Deletes the object replication policy associated with the specified storage account.",
         "parameters": [
@@ -4281,7 +4206,7 @@
         },
         "x-ms-examples": {
           "StorageAccountDeleteObjectReplicationPolicies": {
-            "$ref": "./examples/ObjectReplicationPolicies_Delete.json"
+            "$ref": "./examples/StorageAccountDeleteObjectReplicationPolicy.json"
           }
         }
       }
@@ -4315,7 +4240,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
@@ -4329,7 +4254,7 @@
         },
         "x-ms-examples": {
           "StorageAccountListPrivateEndpointConnections": {
-            "$ref": "./examples/PrivateEndpointConnections_List.json"
+            "$ref": "./examples/StorageAccountListPrivateEndpointConnections.json"
           }
         }
       }
@@ -4384,7 +4309,7 @@
         },
         "x-ms-examples": {
           "StorageAccountGetPrivateEndpointConnection": {
-            "$ref": "./examples/PrivateEndpointConnections_Get.json"
+            "$ref": "./examples/StorageAccountGetPrivateEndpointConnection.json"
           }
         }
       },
@@ -4437,12 +4362,6 @@
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
-          "201": {
-            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -4452,7 +4371,7 @@
         },
         "x-ms-examples": {
           "StorageAccountPutPrivateEndpointConnection": {
-            "$ref": "./examples/PrivateEndpointConnections_Put.json"
+            "$ref": "./examples/StorageAccountPutPrivateEndpointConnection.json"
           }
         }
       },
@@ -4505,12 +4424,12 @@
         },
         "x-ms-examples": {
           "StorageAccountDeletePrivateEndpointConnection": {
-            "$ref": "./examples/PrivateEndpointConnections_Delete.json"
+            "$ref": "./examples/StorageAccountDeletePrivateEndpointConnection.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateLinkResources/resourceGroups/{resourceGroupName}/{accountName}/subscriptions/{subscriptionId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateLinkResources": {
       "get": {
         "operationId": "PrivateLinkResources_ListByStorageAccount",
         "tags": [
@@ -4520,6 +4439,9 @@
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -4532,9 +4454,6 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 24
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -4553,7 +4472,7 @@
         },
         "x-ms-examples": {
           "StorageAccountListPrivateLinkResources": {
-            "$ref": "./examples/PrivateLinkResources_ListByStorageAccount.json"
+            "$ref": "./examples/StorageAccountListPrivateLinkResources.json"
           }
         }
       }
@@ -4562,7 +4481,7 @@
       "get": {
         "operationId": "QueueServices_List",
         "tags": [
-          "QueueServicePropertiesOperationGroup"
+          "QueueServices"
         ],
         "description": "List all queue services for the storage account",
         "parameters": [
@@ -4587,7 +4506,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ListQueueServices"
             }
@@ -4601,7 +4520,7 @@
         },
         "x-ms-examples": {
           "QueueServicesList": {
-            "$ref": "./examples/QueueServices_List.json"
+            "$ref": "./examples/QueueServicesList.json"
           }
         }
       }
@@ -4610,7 +4529,7 @@
       "get": {
         "operationId": "QueueServices_GetServiceProperties",
         "tags": [
-          "QueueServicePropertiesOperationGroup"
+          "QueueServices"
         ],
         "description": "Gets the properties of a storage account’s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
         "parameters": [
@@ -4649,14 +4568,14 @@
         },
         "x-ms-examples": {
           "QueueServicesGet": {
-            "$ref": "./examples/QueueServices_GetServiceProperties.json"
+            "$ref": "./examples/QueueServicesGet.json"
           }
         }
       },
       "put": {
         "operationId": "QueueServices_SetServiceProperties",
         "tags": [
-          "QueueServicePropertiesOperationGroup"
+          "QueueServices"
         ],
         "description": "Sets the properties of a storage account’s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
         "parameters": [
@@ -4695,12 +4614,6 @@
               "$ref": "#/definitions/QueueServiceProperties"
             }
           },
-          "201": {
-            "description": "Resource 'QueueServiceProperties' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/QueueServiceProperties"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -4710,7 +4623,7 @@
         },
         "x-ms-examples": {
           "QueueServicesPut": {
-            "$ref": "./examples/QueueServices_SetServiceProperties.json"
+            "$ref": "./examples/QueueServicesPut.json"
           }
         }
       }
@@ -4758,7 +4671,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ListQueueResource"
             }
@@ -4772,7 +4685,7 @@
         },
         "x-ms-examples": {
           "QueueOperationList": {
-            "$ref": "./examples/Queue_List.json"
+            "$ref": "./examples/QueueOperationList.json"
           }
         },
         "x-ms-pageable": {
@@ -4833,7 +4746,7 @@
         },
         "x-ms-examples": {
           "QueueOperationGet": {
-            "$ref": "./examples/Queue_Get.json"
+            "$ref": "./examples/QueueOperationGet.json"
           }
         }
       },
@@ -4889,12 +4802,6 @@
               "$ref": "#/definitions/StorageQueue"
             }
           },
-          "201": {
-            "description": "Resource 'StorageQueue' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/StorageQueue"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -4904,10 +4811,10 @@
         },
         "x-ms-examples": {
           "QueueOperationPut": {
-            "$ref": "./examples/Queue_Create_Queue_Operation_Put.json"
+            "$ref": "./examples/QueueOperationPut.json"
           },
           "QueueOperationPutWithMetadata": {
-            "$ref": "./examples/Queue_Create_Queue_Operation_Put_With_Metadata.json"
+            "$ref": "./examples/QueueOperationPutWithMetadata.json"
           }
         }
       },
@@ -4972,7 +4879,7 @@
         },
         "x-ms-examples": {
           "QueueOperationPatch": {
-            "$ref": "./examples/Queue_Update.json"
+            "$ref": "./examples/QueueOperationPatch.json"
           }
         }
       },
@@ -5013,9 +4920,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "204": {
             "description": "Resource does not exist."
           },
@@ -5028,7 +4932,7 @@
         },
         "x-ms-examples": {
           "QueueOperationDelete": {
-            "$ref": "./examples/Queue_Delete.json"
+            "$ref": "./examples/QueueOperationDelete.json"
           }
         }
       }
@@ -5085,10 +4989,10 @@
         },
         "x-ms-examples": {
           "StorageAccountRegenerateKerbKey": {
-            "$ref": "./examples/StorageAccounts_RegenerateKey_Storage_Account_Regenerate_Kerb_Key.json"
+            "$ref": "./examples/StorageAccountRegenerateKerbKey.json"
           },
           "StorageAccountRegenerateKey": {
-            "$ref": "./examples/StorageAccounts_RegenerateKey_Storage_Account_Regenerate_Key.json"
+            "$ref": "./examples/StorageAccountRegenerateKey.json"
           }
         }
       }
@@ -5159,7 +5063,7 @@
         },
         "x-ms-examples": {
           "BlobRangesRestore": {
-            "$ref": "./examples/StorageAccounts_RestoreBlobRanges.json"
+            "$ref": "./examples/BlobRangesRestore.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -5196,8 +5100,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Azure operation completed successfully."
+          "200": {
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -5208,7 +5112,7 @@
         },
         "x-ms-examples": {
           "StorageAccountRevokeUserDelegationKeys": {
-            "$ref": "./examples/StorageAccounts_RevokeUserDelegationKeys.json"
+            "$ref": "./examples/StorageAccountRevokeUserDelegationKeys.json"
           }
         }
       }
@@ -5217,7 +5121,7 @@
       "get": {
         "operationId": "TableServices_List",
         "tags": [
-          "TableServicePropertiesOperationGroup"
+          "TableServices"
         ],
         "description": "List all table services for the storage account.",
         "parameters": [
@@ -5242,7 +5146,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ListTableServices"
             }
@@ -5256,7 +5160,7 @@
         },
         "x-ms-examples": {
           "TableServicesList": {
-            "$ref": "./examples/TableServices_List.json"
+            "$ref": "./examples/TableServicesList.json"
           }
         }
       }
@@ -5265,7 +5169,7 @@
       "get": {
         "operationId": "TableServices_GetServiceProperties",
         "tags": [
-          "TableServicePropertiesOperationGroup"
+          "TableServices"
         ],
         "description": "Gets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
         "parameters": [
@@ -5304,14 +5208,14 @@
         },
         "x-ms-examples": {
           "TableServicesGet": {
-            "$ref": "./examples/TableServices_GetServiceProperties.json"
+            "$ref": "./examples/TableServicesGet.json"
           }
         }
       },
       "put": {
         "operationId": "TableServices_SetServiceProperties",
         "tags": [
-          "TableServicePropertiesOperationGroup"
+          "TableServices"
         ],
         "description": "Sets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
         "parameters": [
@@ -5350,12 +5254,6 @@
               "$ref": "#/definitions/TableServiceProperties"
             }
           },
-          "201": {
-            "description": "Resource 'TableServiceProperties' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/TableServiceProperties"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -5365,7 +5263,7 @@
         },
         "x-ms-examples": {
           "TableServicesPut": {
-            "$ref": "./examples/TableServices_SetServiceProperties.json"
+            "$ref": "./examples/TableServicesPut.json"
           }
         }
       }
@@ -5399,7 +5297,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ListTableResource"
             }
@@ -5413,7 +5311,7 @@
         },
         "x-ms-examples": {
           "TableOperationList": {
-            "$ref": "./examples/Table_List.json"
+            "$ref": "./examples/TableOperationList.json"
           }
         },
         "x-ms-pageable": {
@@ -5474,7 +5372,7 @@
         },
         "x-ms-examples": {
           "TableOperationGet": {
-            "$ref": "./examples/Table_Get.json"
+            "$ref": "./examples/TableOperationGet.json"
           }
         }
       },
@@ -5530,12 +5428,6 @@
               "$ref": "#/definitions/Table"
             }
           },
-          "201": {
-            "description": "Resource 'Table' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Table"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -5545,10 +5437,7 @@
         },
         "x-ms-examples": {
           "TableOperationPut": {
-            "$ref": "./examples/Table_Create_Table_Operation_Put.json"
-          },
-          "TableOperationPutOrPatchAcls": {
-            "$ref": "./examples/Table_Create_Table_Operation_Put_Or_Patch_Acls.json"
+            "$ref": "./examples/TableOperationPut.json"
           }
         }
       },
@@ -5613,10 +5502,10 @@
         },
         "x-ms-examples": {
           "TableOperationPatch": {
-            "$ref": "./examples/Table_Update_Table_Operation_Patch.json"
+            "$ref": "./examples/TableOperationPatch.json"
           },
           "TableOperationPutOrPatchAcls": {
-            "$ref": "./examples/Table_Update_Table_Operation_Put_Or_Patch_Acls.json"
+            "$ref": "./examples/TableOperationPutOrPatchAcls.json"
           }
         }
       },
@@ -5657,9 +5546,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "204": {
             "description": "Resource does not exist."
           },
@@ -5672,7 +5558,7 @@
         },
         "x-ms-examples": {
           "TableOperationDelete": {
-            "$ref": "./examples/Table_Delete.json"
+            "$ref": "./examples/TableOperationDelete.json"
           }
         }
       }
@@ -5960,6 +5846,19 @@
           }
         ]
       }
+    },
+    "Azure.ResourceManager.ArmResponse<BlobRestoreStatus>": {
+      "type": "object",
+      "description": "Azure operation completed successfully.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/BlobRestoreStatus",
+          "description": "The body type of the operation request or response."
+        }
+      },
+      "required": [
+        "body"
+      ]
     },
     "AzureEntityResource": {
       "type": "object",
@@ -6301,8 +6200,9 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+          "$ref": "#/definitions/Sku",
+          "description": "Sku name and tier.",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -6684,7 +6584,7 @@
     },
     "DeletedAccountListResult": {
       "type": "object",
-      "description": "The response from the List Deleted Accounts operation.",
+      "description": "The response of a DeletedAccount list operation.",
       "properties": {
         "value": {
           "type": "array",
@@ -6932,7 +6832,7 @@
     },
     "EncryptionScopeListResult": {
       "type": "object",
-      "description": "List of encryption scopes requested, and if paging is required, a URL to the next page of encryption scopes.",
+      "description": "The response of a EncryptionScope list operation.",
       "properties": {
         "value": {
           "type": "array",
@@ -7173,8 +7073,9 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+          "$ref": "#/definitions/Sku",
+          "description": "Sku name and tier.",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -10104,22 +10005,23 @@
           "description": "Properties of the storage account.",
           "x-ms-client-flatten": true
         },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Gets the SKU.",
+          "readOnly": true
+        },
         "kind": {
           "$ref": "#/definitions/Kind",
           "description": "Gets the Kind.",
           "readOnly": true
         },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
           "description": "The extendedLocation of the resource."
-        },
-        "identity": {
-          "$ref": "../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "sku": {
-          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         }
       },
       "allOf": [
@@ -10222,7 +10124,7 @@
     },
     "StorageAccountListResult": {
       "type": "object",
-      "description": "The response from the List Storage Accounts operation.",
+      "description": "The response of a StorageAccount list operation.",
       "properties": {
         "value": {
           "type": "array",
@@ -10817,6 +10719,10 @@
           "readOnly": true
         }
       }
+    },
+    "TypeSpec.Http.OkResponse": {
+      "type": "object",
+      "description": "The request has succeeded."
     },
     "UpdateHistoryProperty": {
       "type": "object",

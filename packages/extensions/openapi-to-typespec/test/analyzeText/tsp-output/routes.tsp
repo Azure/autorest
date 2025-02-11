@@ -107,7 +107,7 @@ interface TextAnalysisAuthoringOperations {
       /**
        * The project data to import.
        */
-      @body
+      @bodyRoot
       body: ExportedProject;
     },
     void
@@ -131,7 +131,7 @@ interface TextAnalysisAuthoringOperations {
       /**
        * The training input parameters.
        */
-      @body
+      @bodyRoot
       body: TrainingJobOptions;
     },
     void
@@ -184,7 +184,7 @@ interface TextAnalysisAuthoringOperations {
       /**
        * The job object to swap two deployments.
        */
-      @body
+      @bodyRoot
       body: SwapDeploymentsOptions;
     },
     void

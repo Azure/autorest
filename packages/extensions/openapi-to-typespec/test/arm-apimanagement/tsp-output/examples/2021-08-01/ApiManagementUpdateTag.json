@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "parameters": {
+      "properties": {
+        "displayName": "temp tag"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid",
+    "tagId": "temptag"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "temptag",
+        "type": "Microsoft.ApiManagement/service/tags",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tags/temptag",
+        "properties": {
+          "displayName": "tag1"
+        }
+      }
+    }
+  },
+  "operationId": "Tag_Update",
+  "title": "ApiManagementUpdateTag"
+}

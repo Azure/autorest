@@ -1,0 +1,47 @@
+{
+  "operationId": "ApplicationResources_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2023-11-14-preview",
+    "applicationName": "Application1",
+    "resource": {
+      "properties": {
+        "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/sites/LogicApp1",
+        "resourceKind": "LogicApp",
+        "resourceType": "Microsoft.Web/sites"
+      }
+    },
+    "resourceGroupName": "testrg",
+    "resourceName": "Resource1",
+    "spaceName": "Space1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "CreateOrUpdateApplicationResource",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "Resource1",
+        "type": "Microsoft.IntegrationSpaces/spaces/applications/resources",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.IntegrationSpaces/spaces/Space1/applications/Application1/resources/Resource1",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/sites/LogicApp1",
+          "resourceKind": "LogicApp",
+          "resourceType": "Microsoft.Web/sites"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "Resource1",
+        "type": "Microsoft.IntegrationSpaces/spaces/applications/resources",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.IntegrationSpaces/spaces/Space1/applications/Application1/resources/Resource1",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/sites/LogicApp1",
+          "resourceKind": "LogicApp",
+          "resourceType": "Microsoft.Web/sites"
+        }
+      }
+    }
+  }
+}

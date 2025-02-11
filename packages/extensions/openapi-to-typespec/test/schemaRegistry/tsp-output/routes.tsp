@@ -135,7 +135,7 @@ interface SchemaOperations {
       /**
        * String representation (UTF-8) of the registered schema.
        */
-      @body
+      @bodyRoot
       schemaContent: bytes;
     },
     void
@@ -171,7 +171,7 @@ interface SchemaOperations {
       /**
        * String representation (UTF-8) of the schema being registered.
        */
-      @body
+      @bodyRoot
       schemaContent: bytes;
     },
     void

@@ -1,6 +1,68 @@
 # Change Log - @autorest/openapi-to-typespec
 
-This log was last generated on Tue, 08 Oct 2024 09:03:42 GMT and should not be manually modified.
+This log was last generated on Mon, 10 Feb 2025 01:59:37 GMT and should not be manually modified.
+
+## 0.10.9
+Mon, 10 Feb 2025 01:59:37 GMT
+
+### Patches
+
+- Envelope property replacement with case sensitive
+- Add resourcemodel envelope properties
+
+## 0.10.8
+Wed, 22 Jan 2025 05:15:07 GMT
+
+### Patches
+
+- Add Azure.Core import if Oauth2
+
+## 0.10.7
+Mon, 20 Jan 2025 02:16:28 GMT
+
+### Patches
+
+- Upgrade compiler version to 0.64
+- add multi path support
+- Fix action operation for non-resource operation
+
+## 0.10.6
+Wed, 08 Jan 2025 06:06:48 GMT
+
+### Patches
+
+- Fix the ResourceListResult issue in data plane.
+
+## 0.10.5
+Thu, 19 Dec 2024 10:44:01 GMT
+
+### Patches
+
+- Fix sample path issue
+- Refactor resource operation template to accept customzations
+
+## 0.10.4
+Fri, 29 Nov 2024 09:20:01 GMT
+
+### Patches
+
+- Change @body to @bodyRoot
+- Upgrade tsp compiler to 0.62
+
+## 0.10.3
+Thu, 24 Oct 2024 11:53:16 GMT
+
+### Patches
+
+- Fix some warnings in tsp converter
+
+## 0.10.2
+Thu, 17 Oct 2024 10:14:02 GMT
+
+### Patches
+
+- Fix paging, LRO and provideraction template. Upgrade compiler to 0.61
+- Fix flatter and no doc warning 
 
 ## 0.10.1
 Tue, 08 Oct 2024 09:03:42 GMT

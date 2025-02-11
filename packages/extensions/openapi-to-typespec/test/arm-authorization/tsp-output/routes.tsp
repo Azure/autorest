@@ -13,33 +13,35 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.Authorization;
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface ClassicAdministratorsOperations {
   /**
    * Gets service administrator, account administrator, and co-administrators for the subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ClassicAdministrators_List")
+  @autoRoute
   @get
   @action("classicAdministrators")
-  list is ArmProviderActionAsync<
-    Response = ClassicAdministratorListResult,
+  list is ArmProviderActionSync<
+    Response = ResourceListResult<ClassicAdministrator>,
     Scope = SubscriptionActionScope,
     Parameters = {}
   >;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface GlobalAdministratorOperations {
   /**
    * Elevates access for a Global Administrator.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GlobalAdministrator_ElevateAccess")
-  @post
-  elevateAccess is ArmProviderActionAsync<Scope = TenantActionScope>;
+  @autoRoute
+  elevateAccess is ArmProviderActionSync<Response = void>;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface AzurePermissionsForResourceGroupOperations {
   /**
    * Gets all permissions the caller has for a resource group.
@@ -55,6 +57,7 @@ interface AzurePermissionsForResourceGroupOperations {
   ): ArmResponse<PermissionGetResult> | ErrorResponse;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface AzurePermissionsForResourceOperations {
   /**
    * Gets all permissions the caller has for a resource.
@@ -95,6 +98,7 @@ interface AzurePermissionsForResourceOperations {
   ): ArmResponse<PermissionGetResult> | ErrorResponse;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface EligibleChildResourcesOperations {
   /**
    * Get the child resources of a resource on which user has eligible access
@@ -117,5 +121,5 @@ interface EligibleChildResourcesOperations {
      */
     @query("$filter")
     $filter?: string,
-  ): ArmResponse<EligibleChildResourcesListResult> | ErrorResponse;
+  ): ArmResponse<ResourceListResult<EligibleChildResource>> | ErrorResponse;
 }

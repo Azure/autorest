@@ -24,17 +24,20 @@ model Snapshot is Azure.ResourceManager.TrackedResource<SnapshotProperties> {
   /**
    * Unused. Always Null.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility("read")
   managedBy?: string;
 
   /**
    * The snapshots sku name. Can be Standard_LRS, Premium_LRS, or Standard_ZRS. This is an optional parameter for incremental snapshot and the default behavior is the SKU will be set to the same sku as the previous snapshot
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: SnapshotSku;
 
   /**
    * The extended location where the snapshot will be created. Extended location cannot be changed.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   extendedLocation?: ExtendedLocation;
 }
 
@@ -52,47 +55,56 @@ interface Snapshots {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Snapshot,
-    Response = ArmResourceCreatedResponse<Snapshot> | ArmResourceUpdatedResponse<Snapshot> | (ArmAcceptedLroResponse & {
-      @body _: Snapshot;
-    })
+    Response = ArmResourceUpdatedResponse<Snapshot> | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: Snapshot;
+    }),
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Updates (patches) a snapshot.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<Snapshot, SnapshotUpdate>;
+  update is ArmCustomPatchAsync<Snapshot, PatchModel = SnapshotUpdate>;
 
   /**
    * Deletes a snapshot.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<Snapshot>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Snapshot,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Lists snapshots under a resource group.
    */
   listByResourceGroup is ArmResourceListByParent<
     Snapshot,
-    Response = SnapshotList
+    Response = ArmResponse<SnapshotList>
   >;
 
   /**
    * Lists snapshots under a subscription.
    */
-  list is ArmListBySubscription<Snapshot, Response = SnapshotList>;
+  list is ArmListBySubscription<Snapshot, Response = ArmResponse<SnapshotList>>;
 
   /**
    * Grants access to a snapshot.
    */
-  grantAccess is ArmResourceActionAsync<Snapshot, GrantAccessData, AccessUri>;
+  @action("beginGetAccess")
+  grantAccess is ArmResourceActionAsync<
+    Snapshot,
+    GrantAccessData,
+    ArmResponse<AccessUri>
+  >;
 
   /**
    * Revokes access to a snapshot.
    */
-  revokeAccess is ArmResourceActionAsync<Snapshot, void, void>;
+  @action("endGetAccess")
+  revokeAccess is ArmResourceActionAsync<Snapshot, void, OkResponse>;
 }
 
 @@doc(Snapshot.name,

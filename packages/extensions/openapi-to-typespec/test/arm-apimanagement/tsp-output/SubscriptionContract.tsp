@@ -26,33 +26,50 @@ model SubscriptionContract
 }
 
 @armResourceOperations
+interface SubscriptionContractOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...KeysOf<ResourceNameParameter<
+          Resource = ApiManagementServiceResource,
+          KeyName = "serviceName",
+          SegmentName = "service",
+          NamePattern = "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+        >>,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = SubscriptionContract,
+        KeyName = "sid",
+        SegmentName = "subscriptions",
+        NamePattern = "^[^*#&+:<>?]+$"
+      >>
+    > {}
+
+@armResourceOperations
 interface SubscriptionContracts {
   /**
    * Gets the specified Subscription entity.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Subscription_Get")
-  get is ArmResourceRead<SubscriptionContract>;
+  get is SubscriptionContractOps.Read<SubscriptionContract>;
 
   /**
    * Gets the entity state (Etag) version of the apimanagement subscription specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("Subscription_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      SubscriptionContract,
-      BaseParameters<SubscriptionContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is SubscriptionContractOps.CheckExistence<SubscriptionContract>;
 
   /**
    * Creates or updates the subscription of specified user to the specified product.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Subscription_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is SubscriptionContractOps.CreateOrUpdateSync<
     SubscriptionContract,
     Parameters = {
       /**
@@ -83,9 +100,9 @@ interface SubscriptionContracts {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("Subscription_Update")
-  update is ArmCustomPatchSync<
+  update is SubscriptionContractOps.CustomPatchSync<
     SubscriptionContract,
-    SubscriptionUpdateParameters,
+    PatchModel = SubscriptionUpdateParameters,
     Parameters = {
       /**
        * Notify change in Subscription State.
@@ -113,9 +130,8 @@ interface SubscriptionContracts {
    * Deletes the specified subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Subscription_Delete")
-  delete is ArmResourceDeleteSync<
+  delete is SubscriptionContractOps.DeleteSync<
     SubscriptionContract,
     Parameters = {
       /**
@@ -131,7 +147,7 @@ interface SubscriptionContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Subscription_List")
-  list is ArmResourceListByParent<
+  list is SubscriptionContractOps.List<
     SubscriptionContract,
     Parameters = {
       /**
@@ -152,8 +168,7 @@ interface SubscriptionContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = SubscriptionListResult
+    }
   >;
 
   /**
@@ -161,9 +176,10 @@ interface SubscriptionContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Subscription_RegeneratePrimaryKey")
-  regeneratePrimaryKey is ArmResourceActionNoContentSync<
+  regeneratePrimaryKey is SubscriptionContractOps.ActionSync<
     SubscriptionContract,
-    void
+    void,
+    NoContentResponse
   >;
 
   /**
@@ -171,9 +187,10 @@ interface SubscriptionContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Subscription_RegenerateSecondaryKey")
-  regenerateSecondaryKey is ArmResourceActionNoContentSync<
+  regenerateSecondaryKey is SubscriptionContractOps.ActionSync<
     SubscriptionContract,
-    void
+    void,
+    NoContentResponse
   >;
 
   /**
@@ -181,10 +198,73 @@ interface SubscriptionContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Subscription_ListSecrets")
-  listSecrets is ArmResourceActionSync<
+  listSecrets is SubscriptionContractOps.ActionSync<
     SubscriptionContract,
     void,
-    SubscriptionKeysContract
+    ArmResponse<SubscriptionKeysContract>
+  >;
+}
+@armResourceOperations
+interface UserSubscriptionOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...KeysOf<ResourceNameParameter<
+          Resource = ApiManagementServiceResource,
+          KeyName = "serviceName",
+          SegmentName = "service",
+          NamePattern = "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+        >>,
+        ...KeysOf<ResourceNameParameter<
+          Resource = UserContract,
+          KeyName = "userId",
+          SegmentName = "users",
+          NamePattern = ""
+        >>,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = SubscriptionContract,
+        KeyName = "sid",
+        SegmentName = "subscriptions",
+        NamePattern = "^[^*#&+:<>?]+$"
+      >>
+    > {}
+
+@armResourceOperations
+interface UserSubscription {
+  /**
+   * Gets the specified Subscription entity associated with a particular user.
+   */
+  get is UserSubscriptionOps.Read<SubscriptionContract>;
+
+  /**
+   * Lists the collection of subscriptions of the specified user.
+   */
+  list is UserSubscriptionOps.List<
+    SubscriptionContract,
+    Parameters = {
+      /**
+       * | Field     |     Usage     |     Supported operators    | Supported functions               |</br>|-------------|------------------------|-----------------------------------|</br>|name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|stateComment | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|ownerId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|scope | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|userId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|productId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * Number of records to return.
+       */
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
+
+      /**
+       * Number of records to skip.
+       */
+      @query("$skip")
+      $skip?: int32;
+    }
   >;
 }
 

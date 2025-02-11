@@ -1,12 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -269,11 +267,6 @@ union RecipientType {
 }
 
 /**
- * ClassicAdministrator list result information.
- */
-model ClassicAdministratorListResult is Azure.Core.Page<ClassicAdministrator>;
-
-/**
  * Classic Administrators
  */
 model ClassicAdministrator {
@@ -295,7 +288,8 @@ model ClassicAdministrator {
   /**
    * Properties for the classic administrator.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ClassicAdministratorProperties;
 }
 
@@ -315,13 +309,9 @@ model ClassicAdministratorProperties {
 }
 
 /**
- * Deny assignment list operation result.
- */
-model DenyAssignmentListResult is Azure.Core.Page<DenyAssignment>;
-
-/**
  * Deny assignment properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model DenyAssignmentProperties {
   /**
    * The display name of the deny assignment.
@@ -474,7 +464,8 @@ model ProviderOperation {
   /**
    * The operation properties.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: Record<unknown>;
 
   /**
@@ -484,14 +475,9 @@ model ProviderOperation {
 }
 
 /**
- * Provider operations metadata list
- */
-model ProviderOperationsMetadataListResult
-  is Azure.Core.Page<ProviderOperationsMetadata>;
-
-/**
  * Role assignment properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RoleAssignmentProperties {
   /**
    * The role assignment scope.
@@ -566,14 +552,10 @@ model RoleAssignmentCreateParameters {
   /**
    * Role assignment properties.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: RoleAssignmentProperties;
 }
-
-/**
- * Role assignment list operation result.
- */
-model RoleAssignmentListResult is Azure.Core.Page<RoleAssignment>;
 
 /**
  * Permissions information.
@@ -608,6 +590,7 @@ model Permission {
 /**
  * Role definition properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RoleDefinitionProperties {
   /**
    * The role name.
@@ -636,17 +619,6 @@ model RoleDefinitionProperties {
    */
   assignableScopes?: string[];
 }
-
-/**
- * Role definition list operation result.
- */
-model RoleDefinitionListResult is Azure.Core.Page<RoleDefinition>;
-
-/**
- * Eligible child resources list operation result.
- */
-model EligibleChildResourcesListResult
-  is Azure.Core.Page<EligibleChildResource>;
 
 /**
  * Eligible child resource
@@ -700,6 +672,7 @@ model CloudErrorBody {
 /**
  * Role assignment schedule properties with scope.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RoleAssignmentScheduleProperties {
   /**
    * The role assignment schedule scope.
@@ -784,23 +757,27 @@ model RoleAssignmentScheduleProperties {
   expandedProperties?: ExpandedProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ExpandedProperties {
   /**
    * Details of the resource scope
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   scope?: ExpandedPropertiesScope;
 
   /**
    * Details of role definition
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   roleDefinition?: ExpandedPropertiesRoleDefinition;
 
   /**
    * Details of the principal
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   principal?: ExpandedPropertiesPrincipal;
 }
 
@@ -879,20 +856,9 @@ model ExpandedPropertiesPrincipal {
 }
 
 /**
- * Role assignment schedule list operation result.
- */
-model RoleAssignmentScheduleListResult
-  is Azure.Core.Page<RoleAssignmentSchedule>;
-
-/**
- * Role assignment schedule instance list operation result.
- */
-model RoleAssignmentScheduleInstanceListResult
-  is Azure.Core.Page<RoleAssignmentScheduleInstance>;
-
-/**
  * Role assignment schedule properties with scope.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RoleAssignmentScheduleInstanceProperties {
   /**
    * The role assignment schedule scope.
@@ -984,6 +950,7 @@ model RoleAssignmentScheduleInstanceProperties {
 /**
  * Role assignment schedule request properties with scope.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RoleAssignmentScheduleRequestProperties {
   /**
    * The role assignment schedule request scope.
@@ -1037,7 +1004,8 @@ model RoleAssignmentScheduleRequestProperties {
   /**
    * Schedule info of the role assignment schedule
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   scheduleInfo?: RoleAssignmentScheduleRequestPropertiesScheduleInfo;
 
   /**
@@ -1096,7 +1064,8 @@ model RoleAssignmentScheduleRequestPropertiesScheduleInfo {
   /**
    * Expiration of the role assignment schedule
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   expiration?: RoleAssignmentScheduleRequestPropertiesScheduleInfoExpiration;
 }
 
@@ -1138,14 +1107,9 @@ model RoleAssignmentScheduleRequestPropertiesTicketInfo {
 }
 
 /**
- * Role assignment schedule request list operation result.
- */
-model RoleAssignmentScheduleRequestListResult
-  is Azure.Core.Page<RoleAssignmentScheduleRequest>;
-
-/**
  * Role eligibility schedule properties with scope.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RoleEligibilityScheduleProperties {
   /**
    * The role eligibility schedule scope.
@@ -1221,20 +1185,9 @@ model RoleEligibilityScheduleProperties {
 }
 
 /**
- * role eligibility schedule list operation result.
- */
-model RoleEligibilityScheduleListResult
-  is Azure.Core.Page<RoleEligibilitySchedule>;
-
-/**
- * Role eligibility schedule instance list operation result.
- */
-model RoleEligibilityScheduleInstanceListResult
-  is Azure.Core.Page<RoleEligibilityScheduleInstance>;
-
-/**
  * Role eligibility schedule properties with scope.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RoleEligibilityScheduleInstanceProperties {
   /**
    * The role eligibility schedule scope.
@@ -1306,6 +1259,7 @@ model RoleEligibilityScheduleInstanceProperties {
 /**
  * Role eligibility schedule request properties with scope.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RoleEligibilityScheduleRequestProperties {
   /**
    * The role eligibility schedule request scope.
@@ -1349,7 +1303,8 @@ model RoleEligibilityScheduleRequestProperties {
   /**
    * Schedule info of the role eligibility schedule
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   scheduleInfo?: RoleEligibilityScheduleRequestPropertiesScheduleInfo;
 
   /**
@@ -1413,7 +1368,8 @@ model RoleEligibilityScheduleRequestPropertiesScheduleInfo {
   /**
    * Expiration of the role eligibility schedule
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   expiration?: RoleEligibilityScheduleRequestPropertiesScheduleInfoExpiration;
 }
 
@@ -1455,14 +1411,9 @@ model RoleEligibilityScheduleRequestPropertiesTicketInfo {
 }
 
 /**
- * Role eligibility schedule request list operation result.
- */
-model RoleEligibilityScheduleRequestListResult
-  is Azure.Core.Page<RoleEligibilityScheduleRequest>;
-
-/**
  * Role management policy properties with scope.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RoleManagementPolicyProperties {
   /**
    * The role management policy scope.
@@ -1573,8 +1524,9 @@ model PolicyProperties {
   /**
    * Details of the resource scope
    */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @visibility("read")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   scope?: PolicyPropertiesScope;
 }
 
@@ -1602,13 +1554,9 @@ model PolicyPropertiesScope {
 }
 
 /**
- * Role management policy list operation result.
- */
-model RoleManagementPolicyListResult is Azure.Core.Page<RoleManagementPolicy>;
-
-/**
  * Role management policy assignment properties with scope.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RoleManagementPolicyAssignmentProperties {
   /**
    * The role management policy scope.
@@ -1645,19 +1593,22 @@ model PolicyAssignmentProperties {
   /**
    * Details of the resource scope
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   scope?: PolicyAssignmentPropertiesScope;
 
   /**
    * Details of role definition
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   roleDefinition?: PolicyAssignmentPropertiesRoleDefinition;
 
   /**
    * Details of the policy
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   policy?: PolicyAssignmentPropertiesPolicy;
 }
 
@@ -1729,12 +1680,6 @@ model PolicyAssignmentPropertiesPolicy {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime?: utcDateTime;
 }
-
-/**
- * Role management policy assignment list operation result.
- */
-model RoleManagementPolicyAssignmentListResult
-  is Azure.Core.Page<RoleManagementPolicyAssignment>;
 
 /**
  * Deny Assignments filter

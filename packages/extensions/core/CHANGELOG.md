@@ -1,6 +1,13 @@
 # Change Log - @autorest/core
 
-This log was last generated on Wed, 28 Feb 2024 18:02:21 GMT and should not be manually modified.
+This log was last generated on Thu, 31 Oct 2024 00:11:17 GMT and should not be manually modified.
+
+## 3.10.3
+Thu, 31 Oct 2024 00:11:17 GMT
+
+### Patches
+
+- Include stack trace when logging errors
 
 ## 3.10.2
 Wed, 28 Feb 2024 18:02:21 GMT

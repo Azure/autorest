@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Azure.ResourceManager.AgFoodPlatform;
+namespace Microsoft.AgFoodPlatform;
 /**
  * Data Manager For Agriculture ARM Resource.
  */
@@ -21,7 +21,12 @@ model DataManagerForAgriculture
     SegmentName = "farmBeats",
     NamePattern = "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
   >;
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+
+  /**
+   * Identity for the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  identity?: Identity;
 }
 
 @armResourceOperations
@@ -48,14 +53,13 @@ interface DataManagerForAgricultures {
   @operationId("DataManagerForAgricultureResources_Update")
   update is ArmCustomPatchAsync<
     DataManagerForAgriculture,
-    DataManagerForAgricultureUpdateRequestModel
+    PatchModel = DataManagerForAgricultureUpdateRequestModel
   >;
 
   /**
    * Delete a Data Manager For Agriculture resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("DataManagerForAgricultureResources_Delete")
   delete is ArmResourceDeleteSync<DataManagerForAgriculture>;
 
@@ -82,7 +86,7 @@ interface DataManagerForAgricultures {
       @query("$skipToken")
       $skipToken?: string;
     },
-    Response = DataManagerForAgricultureListResponse
+    Response = ArmResponse<DataManagerForAgricultureListResponse>
   >;
 
   /**
@@ -108,7 +112,7 @@ interface DataManagerForAgricultures {
       @query("$skipToken")
       $skipToken?: string;
     },
-    Response = DataManagerForAgricultureListResponse
+    Response = ArmResponse<DataManagerForAgricultureListResponse>
   >;
 }
 

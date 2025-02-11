@@ -26,7 +26,7 @@ model ObjectReplicationPolicy
 }
 
 @armResourceOperations
-interface ObjectReplicationPoliciesOperationGroup {
+interface ObjectReplicationPolicyOperationGroup {
   /**
    * Get the object replication policy of the storage account by policy ID.
    */
@@ -38,14 +38,17 @@ interface ObjectReplicationPoliciesOperationGroup {
    * Create or update the object replication policy of the storage account.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("ObjectReplicationPolicies_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<ObjectReplicationPolicy>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    ObjectReplicationPolicy,
+    Response = ArmResourceUpdatedResponse<ObjectReplicationPolicy>
+  >;
 
   /**
    * Deletes the object replication policy associated with the specified storage account.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ObjectReplicationPolicies_Delete")
   delete is ArmResourceDeleteSync<ObjectReplicationPolicy>;
 
@@ -56,7 +59,7 @@ interface ObjectReplicationPoliciesOperationGroup {
   @operationId("ObjectReplicationPolicies_List")
   list is ArmResourceListByParent<
     ObjectReplicationPolicy,
-    Response = ObjectReplicationPolicies
+    Response = ArmResponse<ObjectReplicationPolicies>
   >;
 }
 
@@ -67,6 +70,6 @@ interface ObjectReplicationPoliciesOperationGroup {
 @@doc(ObjectReplicationPolicy.properties,
   "Returns the Storage Account Object Replication Policy."
 );
-@@doc(ObjectReplicationPoliciesOperationGroup.createOrUpdate::parameters.resource,
+@@doc(ObjectReplicationPolicyOperationGroup.createOrUpdate::parameters.resource,
   "The object replication policy set to a storage account. A unique policy ID will be created if absent."
 );

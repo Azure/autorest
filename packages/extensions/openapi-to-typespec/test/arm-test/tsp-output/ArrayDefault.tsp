@@ -20,8 +20,7 @@ model ArrayDefault
   ...ResourceNameParameter<
     Resource = ArrayDefault,
     KeyName = "name",
-    SegmentName = "arraydefaults",
-    NamePattern = "^[a-zA-Z0-9-]{3,24}$"
+    SegmentName = "arraydefaults"
   >;
 }
 
@@ -35,10 +34,7 @@ interface ArrayDefaults {
   /**
    * List resources by resource group
    */
-  listByResourceGroup is ArmResourceListByParent<
-    ArrayDefault,
-    Response = ArrayDefaultListResult
-  >;
+  listByResourceGroup is ArmResourceListByParent<ArrayDefault>;
 }
 
 @@doc(ArrayDefault.name, "Name of resource");

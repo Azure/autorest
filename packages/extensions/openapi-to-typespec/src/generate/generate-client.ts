@@ -53,12 +53,13 @@ export function generateArmResourceClientDecorator(resource: TspArmResource): st
   if (resource.clientDecorators && resource.clientDecorators.length > 0)
     definitions.push(generateAugmentedDecorators(resource.name, resource.clientDecorators));
 
-  for (const op of resource.resourceOperations) {
+  for (const op of resource.resourceOperationGroups.flatMap((g) => g.resourceOperations)) {
     if (op.clientDecorators && op.clientDecorators.length > 0)
       definitions.push(generateAugmentedDecorators(`${targetName}.${op.name}`, op.clientDecorators));
   }
 
   for (const property of resource.properties) {
+    if (property.kind !== "property") continue;
     const decorators = generateAugmentedDecorators(`${targetName}.${property.name}`, property.clientDecorators);
     decorators && definitions.push(decorators);
   }

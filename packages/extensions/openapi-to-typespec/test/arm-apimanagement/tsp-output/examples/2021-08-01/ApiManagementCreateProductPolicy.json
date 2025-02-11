@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "parameters": {
+      "properties": {
+        "format": "xml",
+        "value": "<policies>\r\n  <inbound>\r\n    <rate-limit calls=\"{{call-count}}\" renewal-period=\"15\"></rate-limit>\r\n    <log-to-eventhub logger-id=\"16\">\r\n                      @( string.Join(\",\", DateTime.UtcNow, context.Deployment.ServiceName, context.RequestId, context.Request.IpAddress, context.Operation.Name) ) \r\n                  </log-to-eventhub>\r\n    <quota-by-key calls=\"40\" counter-key=\"cc\" renewal-period=\"3600\" increment-count=\"@(context.Request.Method == &quot;POST&quot; ? 1:2)\" />\r\n    <base />\r\n  </inbound>\r\n  <backend>\r\n    <base />\r\n  </backend>\r\n  <outbound>\r\n    <base />\r\n  </outbound>\r\n</policies>"
+      }
+    },
+    "policyId": "policy",
+    "productId": "5702e97e5157a50f48dce801",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "policy",
+        "type": "Microsoft.ApiManagement/service/products/policies",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/5702e97e5157a50f48dce801/policies/policy",
+        "properties": {
+          "value": "<policies>\r\n  <inbound>\r\n    <rate-limit calls=\"{{58c884fed8d14f127cec38f0}}\" renewal-period=\"15\" version=\"2\"></rate-limit>\r\n    <log-to-eventhub logger-id=\"16\">\r\n                      @( string.Join(\",\", DateTime.UtcNow, context.Deployment.ServiceName, context.RequestId, context.Request.IpAddress, context.Operation.Name) ) \r\n                  </log-to-eventhub>\r\n    <quota-by-key calls=\"40\" counter-key=\"cc\" renewal-period=\"3600\" increment-count=\"@(context.Request.Method == &quot;POST&quot; ? 1:2)\" />\r\n    <base />\r\n  </inbound>\r\n  <backend>\r\n    <base />\r\n  </backend>\r\n  <outbound>\r\n    <base />\r\n  </outbound>\r\n</policies>"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "policy",
+        "type": "Microsoft.ApiManagement/service/products/policies",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/5702e97e5157a50f48dce801/policies/policy",
+        "properties": {
+          "value": "<policies>\r\n  <inbound>\r\n    <rate-limit calls=\"{{58c884fed8d14f127cec38f0}}\" renewal-period=\"15\" version=\"2\"></rate-limit>\r\n    <log-to-eventhub logger-id=\"16\">\r\n                      @( string.Join(\",\", DateTime.UtcNow, context.Deployment.ServiceName, context.RequestId, context.Request.IpAddress, context.Operation.Name) ) \r\n                  </log-to-eventhub>\r\n    <quota-by-key calls=\"40\" counter-key=\"cc\" renewal-period=\"3600\" increment-count=\"@(context.Request.Method == &quot;POST&quot; ? 1:2)\" />\r\n    <base />\r\n  </inbound>\r\n  <backend>\r\n    <base />\r\n  </backend>\r\n  <outbound>\r\n    <base />\r\n  </outbound>\r\n</policies>"
+        }
+      }
+    }
+  },
+  "operationId": "ProductPolicy_CreateOrUpdate",
+  "title": "ApiManagementCreateProductPolicy"
+}

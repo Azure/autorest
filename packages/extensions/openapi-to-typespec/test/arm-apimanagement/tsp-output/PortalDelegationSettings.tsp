@@ -27,32 +27,21 @@ model PortalDelegationSettings
 }
 
 @armResourceOperations
-interface PortalDelegationSettingsOperationGroup {
+interface DelegationSettings {
   /**
    * Get Delegation Settings for the Portal.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DelegationSettings_Get")
   get is ArmResourceRead<PortalDelegationSettings>;
 
   /**
    * Gets the entity state (Etag) version of the DelegationSettings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
-  @operationId("DelegationSettings_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      PortalDelegationSettings,
-      BaseParameters<PortalDelegationSettings>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<PortalDelegationSettings>;
 
   /**
    * Create or Update Delegation settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DelegationSettings_CreateOrUpdate")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PortalDelegationSettings,
     Parameters = {
@@ -61,36 +50,34 @@ interface PortalDelegationSettingsOperationGroup {
        */
       @header
       `If-Match`?: string;
-    }
+    },
+    Response = ArmResourceUpdatedResponse<PortalDelegationSettings>
   >;
 
   /**
    * Update Delegation settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
-  @operationId("DelegationSettings_Update")
   update is ArmCustomPatchSync<
     PortalDelegationSettings,
-    PortalDelegationSettings,
+    PatchModel = PortalDelegationSettings,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
       @header
       `If-Match`: string;
-    }
+    },
+    Response = ArmNoContentResponse
   >;
 
   /**
    * Gets the secret validation key of the DelegationSettings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DelegationSettings_ListSecrets")
   listSecrets is ArmResourceActionSync<
     PortalDelegationSettings,
     void,
-    PortalSettingValidationKeyContract
+    ArmResponse<PortalSettingValidationKeyContract>
   >;
 }
 
@@ -98,9 +85,9 @@ interface PortalDelegationSettingsOperationGroup {
 @@doc(PortalDelegationSettings.properties,
   "Delegation settings contract properties."
 );
-@@doc(PortalDelegationSettingsOperationGroup.createOrUpdate::parameters.resource,
+@@doc(DelegationSettings.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@doc(PortalDelegationSettingsOperationGroup.update::parameters.properties,
+@@doc(DelegationSettings.update::parameters.properties,
   "Update Delegation settings."
 );

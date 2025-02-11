@@ -32,7 +32,7 @@ interface LoadTestAdministrationOperations {
       /**
        * Load test model
        */
-      @body
+      @bodyRoot
       body: Test;
     },
     Test
@@ -173,7 +173,7 @@ interface LoadTestAdministrationOperations {
       /**
        * The file content as application/octet-stream.
        */
-      @body
+      @bodyRoot
       body: bytes;
     },
     FileInfo
@@ -279,7 +279,7 @@ interface LoadTestAdministrationOperations {
       /**
        * App Component model.
        */
-      @body
+      @bodyRoot
       body: TestAppComponents;
     },
     TestAppComponents
@@ -329,7 +329,7 @@ interface LoadTestAdministrationOperations {
       /**
        * Server metric configuration model.
        */
-      @body
+      @bodyRoot
       body: TestServerMetricConfig;
     },
     TestServerMetricConfig
@@ -390,7 +390,7 @@ interface LoadTestRunOperations {
       /**
        * Load test run model
        */
-      @body
+      @bodyRoot
       body: TestRun;
     },
     TestRun
@@ -650,7 +650,7 @@ interface LoadTestRunOperations {
       /**
        * Metric dimension filter
        */
-      @body
+      @bodyRoot
       body?: MetricRequestPayload;
     },
     Metrics
@@ -715,7 +715,7 @@ interface LoadTestRunOperations {
       /**
        * App Component model.
        */
-      @body
+      @bodyRoot
       body: TestRunAppComponents;
     },
     TestRunAppComponents
@@ -769,7 +769,7 @@ interface LoadTestRunOperations {
       /**
        * Server metric configuration model.
        */
-      @body
+      @bodyRoot
       body: TestRunServerMetricConfig;
     },
     TestRunServerMetricConfig

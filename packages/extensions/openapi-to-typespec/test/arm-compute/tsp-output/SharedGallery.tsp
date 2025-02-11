@@ -32,7 +32,7 @@ interface SharedGalleries {
    */
   get is ArmResourceRead<
     SharedGallery,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
   /**
@@ -40,7 +40,7 @@ interface SharedGalleries {
    */
   list is ArmResourceListByParent<
     SharedGallery,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {
       /**
        * The query parameter to decide what shared galleries to fetch when doing listing operations.
@@ -48,7 +48,7 @@ interface SharedGalleries {
       @query("sharedTo")
       sharedTo?: SharedToValues;
     },
-    Response = SharedGalleryList
+    Response = ArmResponse<SharedGalleryList>
   >;
 }
 

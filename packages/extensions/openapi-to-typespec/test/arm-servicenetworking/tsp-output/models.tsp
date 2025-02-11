@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
@@ -25,11 +24,6 @@ union AssociationType {
   string,
   subnets: "subnets",
 }
-
-/**
- * The response of a TrafficController list operation.
- */
-model TrafficControllerListResult is Azure.Core.Page<TrafficController>;
 
 /**
  * Traffic Controller Properties.
@@ -110,11 +104,6 @@ model TrafficControllerUpdate {
 }
 
 /**
- * The response of a Association list operation.
- */
-model AssociationListResult is Azure.Core.Page<Association>;
-
-/**
  * Association Properties.
  */
 model AssociationProperties {
@@ -184,11 +173,6 @@ model AssociationSubnetUpdate {
    */
   id?: string;
 }
-
-/**
- * The response of a Frontend list operation.
- */
-model FrontendListResult is Azure.Core.Page<Frontend>;
 
 /**
  * Frontend Properties.

@@ -21,13 +21,14 @@ model BatchDeploymentTrackedResource
     SegmentName = "deployments",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 
   /**
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   kind?: string;
 
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
   ...Azure.ResourceManager.ResourceSkuProperty;
 }
 
@@ -55,18 +56,19 @@ interface BatchDeploymentTrackedResources {
   @operationId("BatchDeployments_Update")
   update is ArmCustomPatchAsync<
     BatchDeploymentTrackedResource,
-    PartialBatchDeploymentPartialMinimalTrackedResourceWithProperties
+    PatchModel = PartialBatchDeploymentPartialMinimalTrackedResourceWithProperties
   >;
 
   /**
    * Delete Batch Inference deployment (asynchronous).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("BatchDeployments_Delete")
-  delete is ArmResourceDeleteAsync<BatchDeploymentTrackedResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    BatchDeploymentTrackedResource,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Lists Batch inference deployments in the workspace.
@@ -94,7 +96,7 @@ interface BatchDeploymentTrackedResources {
       @query("$skip")
       $skip?: string;
     },
-    Response = BatchDeploymentTrackedResourceArmPaginatedResult
+    Response = ArmResponse<BatchDeploymentTrackedResourceArmPaginatedResult>
   >;
 }
 

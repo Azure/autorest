@@ -27,13 +27,48 @@ model PolicyContract
 }
 
 @armResourceOperations
+interface PolicyContractOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...KeysOf<ResourceNameParameter<
+          Resource = ApiManagementServiceResource,
+          KeyName = "serviceName",
+          SegmentName = "service",
+          NamePattern = "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+        >>,
+        ...KeysOf<ResourceNameParameter<
+          Resource = ApiContract,
+          KeyName = "apiId",
+          SegmentName = "apis",
+          NamePattern = "^[^*#&+:<>?]+$"
+        >>,
+        ...KeysOf<ResourceNameParameter<
+          Resource = OperationContract,
+          KeyName = "operationId",
+          SegmentName = "operations",
+          NamePattern = ""
+        >>,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = PolicyContract,
+        KeyName = "policyId",
+        SegmentName = "policies",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface PolicyContracts {
   /**
    * Get the policy configuration at the API Operation level.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiOperationPolicy_Get")
-  get is ArmResourceRead<
+  get is PolicyContractOps.Read<
     PolicyContract,
     Parameters = {
       /**
@@ -48,21 +83,15 @@ interface PolicyContracts {
    * Gets the entity state (Etag) version of the API operation policy specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("ApiOperationPolicy_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      PolicyContract,
-      BaseParameters<PolicyContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is PolicyContractOps.CheckExistence<PolicyContract>;
 
   /**
    * Creates or updates policy configuration for the API Operation level.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiOperationPolicy_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is PolicyContractOps.CreateOrUpdateSync<
     PolicyContract,
     Parameters = {
       /**
@@ -77,9 +106,8 @@ interface PolicyContracts {
    * Deletes the policy configuration at the Api Operation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiOperationPolicy_Delete")
-  delete is ArmResourceDeleteSync<
+  delete is PolicyContractOps.DeleteSync<
     PolicyContract,
     Parameters = {
       /**
@@ -95,14 +123,263 @@ interface PolicyContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiOperationPolicy_ListByOperation")
-  listByOperation is ArmResourceListByParent<
+  listByOperation is PolicyContractOps.List<PolicyContract>;
+}
+@armResourceOperations
+interface ApiPolicyOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...KeysOf<ResourceNameParameter<
+          Resource = ApiManagementServiceResource,
+          KeyName = "serviceName",
+          SegmentName = "service",
+          NamePattern = "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+        >>,
+        ...KeysOf<ResourceNameParameter<
+          Resource = ApiContract,
+          KeyName = "apiId",
+          SegmentName = "apis",
+          NamePattern = "^[^*#&+:<>?]+$"
+        >>,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = PolicyContract,
+        KeyName = "policyId",
+        SegmentName = "policies",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
+interface ApiPolicy {
+  /**
+   * Get the policy configuration at the API level.
+   */
+  get is ApiPolicyOps.Read<
     PolicyContract,
-    Response = PolicyListResult
+    Parameters = {
+      /**
+       * Policy Export Format.
+       */
+      @query("format")
+      format?: PolicyExportFormat = PolicyExportFormat.xml;
+    }
   >;
+
+  /**
+   * Gets the entity state (Etag) version of the API policy specified by its identifier.
+   */
+  getEntityTag is ApiPolicyOps.CheckExistence<PolicyContract>;
+
+  /**
+   * Creates or updates policy configuration for the API.
+   */
+  createOrUpdate is ApiPolicyOps.CreateOrUpdateSync<
+    PolicyContract,
+    Parameters = {
+      /**
+       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
+       */
+      @header
+      `If-Match`?: string;
+    }
+  >;
+
+  /**
+   * Deletes the policy configuration at the Api.
+   */
+  delete is ApiPolicyOps.DeleteSync<
+    PolicyContract,
+    Parameters = {
+      /**
+       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
+       */
+      @header
+      `If-Match`: string;
+    }
+  >;
+
+  /**
+   * Get the policy configuration at the API level.
+   */
+  listByApi is ApiPolicyOps.List<PolicyContract>;
+}
+@armResourceOperations
+interface PolicyOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...KeysOf<ResourceNameParameter<
+          Resource = ApiManagementServiceResource,
+          KeyName = "serviceName",
+          SegmentName = "service",
+          NamePattern = "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+        >>,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = PolicyContract,
+        KeyName = "policyId",
+        SegmentName = "policies",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
+interface Policy {
+  /**
+   * Get the Global policy definition of the Api Management service.
+   */
+  get is PolicyOps.Read<
+    PolicyContract,
+    Parameters = {
+      /**
+       * Policy Export Format.
+       */
+      @query("format")
+      format?: PolicyExportFormat = PolicyExportFormat.xml;
+    }
+  >;
+
+  /**
+   * Gets the entity state (Etag) version of the Global policy definition in the Api Management service.
+   */
+  getEntityTag is PolicyOps.CheckExistence<PolicyContract>;
+
+  /**
+   * Creates or updates the global policy configuration of the Api Management service.
+   */
+  createOrUpdate is PolicyOps.CreateOrUpdateSync<
+    PolicyContract,
+    Parameters = {
+      /**
+       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
+       */
+      @header
+      `If-Match`?: string;
+    }
+  >;
+
+  /**
+   * Deletes the global policy configuration of the Api Management Service.
+   */
+  delete is PolicyOps.DeleteSync<
+    PolicyContract,
+    Parameters = {
+      /**
+       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
+       */
+      @header
+      `If-Match`: string;
+    }
+  >;
+
+  /**
+   * Lists all the Global Policy definitions of the Api Management service.
+   */
+  listByService is PolicyOps.List<PolicyContract>;
+}
+@armResourceOperations
+interface ProductPolicyOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...KeysOf<ResourceNameParameter<
+          Resource = ApiManagementServiceResource,
+          KeyName = "serviceName",
+          SegmentName = "service",
+          NamePattern = "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+        >>,
+        ...KeysOf<ResourceNameParameter<
+          Resource = ProductContract,
+          KeyName = "productId",
+          SegmentName = "products",
+          NamePattern = ""
+        >>,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = PolicyContract,
+        KeyName = "policyId",
+        SegmentName = "policies",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
+interface ProductPolicy {
+  /**
+   * Get the policy configuration at the Product level.
+   */
+  get is ProductPolicyOps.Read<
+    PolicyContract,
+    Parameters = {
+      /**
+       * Policy Export Format.
+       */
+      @query("format")
+      format?: PolicyExportFormat = PolicyExportFormat.xml;
+    }
+  >;
+
+  /**
+   * Get the ETag of the policy configuration at the Product level.
+   */
+  getEntityTag is ProductPolicyOps.CheckExistence<PolicyContract>;
+
+  /**
+   * Creates or updates policy configuration for the Product.
+   */
+  createOrUpdate is ProductPolicyOps.CreateOrUpdateSync<
+    PolicyContract,
+    Parameters = {
+      /**
+       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
+       */
+      @header
+      `If-Match`?: string;
+    }
+  >;
+
+  /**
+   * Deletes the policy configuration at the Product.
+   */
+  delete is ProductPolicyOps.DeleteSync<
+    PolicyContract,
+    Parameters = {
+      /**
+       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
+       */
+      @header
+      `If-Match`: string;
+    }
+  >;
+
+  /**
+   * Get the policy configuration at the Product level.
+   */
+  listByProduct is ProductPolicyOps.List<PolicyContract>;
 }
 
 @@doc(PolicyContract.name, "The identifier of the Policy.");
 @@doc(PolicyContract.properties, "Properties of the Policy.");
 @@doc(PolicyContracts.createOrUpdate::parameters.resource,
+  "The policy contents to apply."
+);
+@@doc(ApiPolicy.createOrUpdate::parameters.resource,
+  "The policy contents to apply."
+);
+@@doc(Policy.createOrUpdate::parameters.resource,
+  "The policy contents to apply."
+);
+@@doc(ProductPolicy.createOrUpdate::parameters.resource,
   "The policy contents to apply."
 );

@@ -97,6 +97,7 @@ model QueryDTO {
 /**
  * Context object with previous QnA's information.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model QueryDTOContext extends QueryContextDTO {}
 
 /**
@@ -186,6 +187,7 @@ model QnASearchResult {
 /**
  * Context object of the QnA
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model QnASearchResultContext extends ContextDTO {}
 
 /**
@@ -235,6 +237,7 @@ model PromptDTO {
 /**
  * QnADTO - Either QnaId or QnADTO needs to be present in a PromptDTO object
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model PromptDTOQna extends QnAdto {}
 
 /**
@@ -279,6 +282,7 @@ model QnAdto {
 /**
  * Context of a QnA
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model QnAdtoContext extends ContextDTO {}
 
 /**
@@ -296,6 +300,7 @@ model ErrorResponse {
 /**
  * The error object.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ErrorResponseError extends Error {}
 
 /**

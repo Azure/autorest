@@ -26,37 +26,67 @@ model EnvironmentVersionResource
 }
 
 @armResourceOperations
+interface EnvironmentVersionResourceOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...KeysOf<ResourceNameParameter<
+          Resource = Registry,
+          KeyName = "registryName",
+          SegmentName = "registries",
+          NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$"
+        >>,
+        ...KeysOf<ResourceNameParameter<
+          Resource = EnvironmentContainerResource,
+          KeyName = "environmentName",
+          SegmentName = "environments",
+          NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+        >>,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = EnvironmentVersionResource,
+        KeyName = "version",
+        SegmentName = "versions",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface EnvironmentVersionResources {
   /**
    * Get version.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryEnvironmentVersions_Get")
-  get is ArmResourceRead<EnvironmentVersionResource>;
+  get is EnvironmentVersionResourceOps.Read<EnvironmentVersionResource>;
 
   /**
    * Create or update version.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryEnvironmentVersions_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<EnvironmentVersionResource>;
+  createOrUpdate is EnvironmentVersionResourceOps.CreateOrUpdateAsync<EnvironmentVersionResource>;
 
   /**
    * Delete version.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("RegistryEnvironmentVersions_Delete")
-  delete is ArmResourceDeleteAsync<EnvironmentVersionResource>;
+  delete is EnvironmentVersionResourceOps.DeleteWithoutOkAsync<
+    EnvironmentVersionResource,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List versions.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryEnvironmentVersions_List")
-  list is ArmResourceListByParent<
+  list is EnvironmentVersionResourceOps.List<
     EnvironmentVersionResource,
     Parameters = {
       /**
@@ -89,7 +119,92 @@ interface EnvironmentVersionResources {
       @query("stage")
       stage?: string;
     },
-    Response = EnvironmentVersionResourceArmPaginatedResult
+    Response = ArmResponse<EnvironmentVersionResourceArmPaginatedResult>
+  >;
+}
+@armResourceOperations
+interface EnvironmentVersionOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...KeysOf<ResourceNameParameter<
+          Resource = Workspace,
+          KeyName = "workspaceName",
+          SegmentName = "workspaces",
+          NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+        >>,
+        ...KeysOf<ResourceNameParameter<
+          Resource = EnvironmentContainerResource,
+          KeyName = "name",
+          SegmentName = "environments",
+          NamePattern = ""
+        >>,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = EnvironmentVersionResource,
+        KeyName = "version",
+        SegmentName = "versions",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
+interface EnvironmentVersions {
+  /**
+   * Get version.
+   */
+  get is EnvironmentVersionOps.Read<EnvironmentVersionResource>;
+
+  /**
+   * Creates or updates an EnvironmentVersion.
+   */
+  createOrUpdate is EnvironmentVersionOps.CreateOrUpdateSync<EnvironmentVersionResource>;
+
+  /**
+   * Delete version.
+   */
+  delete is EnvironmentVersionOps.DeleteSync<EnvironmentVersionResource>;
+
+  /**
+   * List versions.
+   */
+  list is EnvironmentVersionOps.List<
+    EnvironmentVersionResource,
+    Parameters = {
+      /**
+       * Ordering of list.
+       */
+      @query("$orderBy")
+      $orderBy?: string;
+
+      /**
+       * Maximum number of records to return.
+       */
+      @query("$top")
+      $top?: int32;
+
+      /**
+       * Continuation token for pagination.
+       */
+      @query("$skip")
+      $skip?: string;
+
+      /**
+       * View type for including/excluding (for example) archived entities.
+       */
+      @query("listViewType")
+      listViewType?: ListViewType;
+
+      /**
+       * Stage for including/excluding (for example) archived entities. Takes priority over listViewType
+       */
+      @query("stage")
+      stage?: string;
+    },
+    Response = ArmResponse<EnvironmentVersionResourceArmPaginatedResult>
   >;
 }
 
@@ -101,4 +216,7 @@ interface EnvironmentVersionResources {
 );
 @@doc(EnvironmentVersionResources.createOrUpdate::parameters.resource,
   "Version entity to create or update."
+);
+@@doc(EnvironmentVersions.createOrUpdate::parameters.resource,
+  "Definition of EnvironmentVersion."
 );

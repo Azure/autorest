@@ -38,14 +38,8 @@ interface OperationContracts {
    * Gets the entity state (Etag) version of the API operation specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("ApiOperation_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      OperationContract,
-      BaseParameters<OperationContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<OperationContract>;
 
   /**
    * Creates a new operation in the API or updates an existing one.
@@ -71,7 +65,7 @@ interface OperationContracts {
   @operationId("ApiOperation_Update")
   update is ArmCustomPatchSync<
     OperationContract,
-    OperationUpdateContract,
+    PatchModel = OperationUpdateContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -85,7 +79,6 @@ interface OperationContracts {
    * Deletes the specified operation in the API.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiOperation_Delete")
   delete is ArmResourceDeleteSync<
     OperationContract,
@@ -130,8 +123,7 @@ interface OperationContracts {
        */
       @query("tags")
       tags?: string;
-    },
-    Response = OperationListResult
+    }
   >;
 }
 

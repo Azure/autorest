@@ -78,7 +78,7 @@ interface QuestionAnsweringProjectsOperations {
       /**
        * Parameters needed to create the project.
        */
-      @body
+      @bodyRoot
       body: CreateProjectOptions;
     },
     ProjectMetadata
@@ -212,7 +212,7 @@ interface QuestionAnsweringProjectsOperations {
       /**
        * Project assets the needs to be imported.
        */
-      @body
+      @bodyRoot
       body?: ImportJobOptions;
     },
     void
@@ -392,7 +392,7 @@ interface QuestionAnsweringProjectsOperations {
       /**
        * All the synonyms of a project.
        */
-      @body
+      @bodyRoot
       body: SynonymAssets;
     },
     void
@@ -454,7 +454,7 @@ interface QuestionAnsweringProjectsOperations {
       /**
        * Update sources parameters of a project.
        */
-      @body
+      @bodyRoot
       body: UpdateSourceRecord[];
     },
     void
@@ -547,7 +547,7 @@ interface QuestionAnsweringProjectsOperations {
       /**
        * Update QnAs parameters of a project.
        */
-      @body
+      @bodyRoot
       body: UpdateQnaRecord[];
     },
     void
@@ -597,7 +597,7 @@ interface QuestionAnsweringProjectsOperations {
       /**
        * Feedback for Active Learning.
        */
-      @body
+      @bodyRoot
       body: ActiveLearningFeedback;
     },
     void

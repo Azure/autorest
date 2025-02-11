@@ -1,12 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -314,6 +312,7 @@ model AlertProcessingRulesList is Azure.Core.Page<AlertProcessingRule>;
 /**
  * Alert processing rule properties defining scopes, conditions and scheduling logic for alert processing rule.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model AlertProcessingRuleProperties {
   /**
    * Scopes on which alert processing rule will apply.
@@ -418,6 +417,7 @@ model Action {}
 /**
  * An azure managed resource object.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ManagedResource extends Resource {
   /**
    * Resource location
@@ -500,7 +500,8 @@ model PatchObject {
   /**
    * Properties supported by patch operation.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PatchProperties;
 
   /**
@@ -580,6 +581,7 @@ model AlertsList is Azure.Core.Page<Alert>;
 /**
  * Alert property bag
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model AlertProperties {
   /**
    * This object contains consistent fields across different monitor services.
@@ -728,6 +730,7 @@ model ActionStatus {
 /**
  * Alert Modification details
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model AlertModification extends Resource {
   /**
    * Properties of the alert modification item.
@@ -794,6 +797,7 @@ model AlertModificationItem {
 /**
  * Summary of alerts based on the input filters and 'groupby' parameters.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model AlertsSummary extends Resource {
   /**
    * Group the result set.
@@ -859,6 +863,7 @@ model SmartGroupsList is Azure.Core.Page<SmartGroup>;
 /**
  * Properties of smart group.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model SmartGroupProperties {
   /**
    * Total number of alerts in smart group
@@ -992,6 +997,7 @@ model SmartGroupErrorResponseBody {
 /**
  * Alert Modification details
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model SmartGroupModification extends Resource {
   /**
    * Properties of the smartGroup modification item.

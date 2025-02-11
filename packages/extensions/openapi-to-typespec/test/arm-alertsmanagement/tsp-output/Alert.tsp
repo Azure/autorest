@@ -30,7 +30,7 @@ interface Alerts {
    */
   getById is ArmResourceRead<
     Alert,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
   /**
@@ -38,7 +38,7 @@ interface Alerts {
    */
   getAll is ArmResourceListByParent<
     Alert,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {
       /**
        * Filter by target resource( which is full ARM ID) Default value is select all.
@@ -142,17 +142,24 @@ interface Alerts {
       @query("customTimeRange")
       customTimeRange?: string;
     },
-    Response = AlertsList
+    Response = ArmResponse<AlertsList>
   >;
 
   /**
    * Change the state of an alert.
    */
+  @action("changestate")
   changeState is ArmResourceActionSync<
     Alert,
-    string,
-    Alert,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    {
+      /**
+       * reason of change alert state
+       */
+      @bodyRoot
+      comment?: string;
+    },
+    ArmResponse<Alert>,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {
       /**
        * New state of the alert.
@@ -165,22 +172,15 @@ interface Alerts {
   /**
    * Get the history of an alert, which captures any monitor condition changes (Fired/Resolved) and alert state changes (New/Acknowledged/Closed).
    */
-  // FIXME: Alerts_GetHistory could not be converted to a resource operation
-  @route("undefined")
   @get
-  getHistory(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-
-    /**
-     * Unique ID of an alert instance.
-     */
-    @path
-    @segment("alerts")
-    alertId: string,
-  ): ArmResponse<l> | ErrorResponse;
+  @action("history")
+  getHistory is ArmResourceActionSync<
+    Alert,
+    void,
+    ArmResponse<AlertModification>,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 }
 
 @@doc(Alert.name, "Unique ID of an alert instance.");
 @@doc(Alert.properties, "Alert property bag");
-@@doc(Alerts.changeState::parameters.body, "reason of change alert state");

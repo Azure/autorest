@@ -39,14 +39,8 @@ interface IdentityProviderContracts {
    * Gets the entity state (Etag) version of the identityProvider specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("IdentityProvider_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      IdentityProviderContract,
-      BaseParameters<IdentityProviderContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<IdentityProviderContract>;
 
   /**
    * Creates or Updates the IdentityProvider configuration.
@@ -72,7 +66,7 @@ interface IdentityProviderContracts {
   @operationId("IdentityProvider_Update")
   update is ArmCustomPatchSync<
     IdentityProviderContract,
-    IdentityProviderUpdateParameters,
+    PatchModel = IdentityProviderUpdateParameters,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -86,7 +80,6 @@ interface IdentityProviderContracts {
    * Deletes the specified identity provider configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("IdentityProvider_Delete")
   delete is ArmResourceDeleteSync<
     IdentityProviderContract,
@@ -106,7 +99,7 @@ interface IdentityProviderContracts {
   @operationId("IdentityProvider_ListByService")
   listByService is ArmResourceListByParent<
     IdentityProviderContract,
-    Response = IdentityProviderList
+    Response = ArmResponse<IdentityProviderList>
   >;
 
   /**
@@ -117,7 +110,7 @@ interface IdentityProviderContracts {
   listSecrets is ArmResourceActionSync<
     IdentityProviderContract,
     void,
-    ClientSecretContract
+    ArmResponse<ClientSecretContract>
   >;
 }
 

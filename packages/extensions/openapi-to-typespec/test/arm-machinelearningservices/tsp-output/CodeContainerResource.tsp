@@ -26,37 +26,61 @@ model CodeContainerResource
 }
 
 @armResourceOperations
+interface CodeContainerResourceOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...KeysOf<ResourceNameParameter<
+          Resource = Registry,
+          KeyName = "registryName",
+          SegmentName = "registries",
+          NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$"
+        >>,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = CodeContainerResource,
+        KeyName = "codeName",
+        SegmentName = "codes",
+        NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+      >>
+    > {}
+
+@armResourceOperations
 interface CodeContainerResources {
   /**
    * Get Code container.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryCodeContainers_Get")
-  get is ArmResourceRead<CodeContainerResource>;
+  get is CodeContainerResourceOps.Read<CodeContainerResource>;
 
   /**
    * Create or update Code container.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryCodeContainers_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<CodeContainerResource>;
+  createOrUpdate is CodeContainerResourceOps.CreateOrUpdateAsync<CodeContainerResource>;
 
   /**
    * Delete Code container.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("RegistryCodeContainers_Delete")
-  delete is ArmResourceDeleteAsync<CodeContainerResource>;
+  delete is CodeContainerResourceOps.DeleteWithoutOkAsync<
+    CodeContainerResource,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List containers.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryCodeContainers_List")
-  list is ArmResourceListByParent<
+  list is CodeContainerResourceOps.List<
     CodeContainerResource,
     Parameters = {
       /**
@@ -65,7 +89,62 @@ interface CodeContainerResources {
       @query("$skip")
       $skip?: string;
     },
-    Response = CodeContainerResourceArmPaginatedResult
+    Response = ArmResponse<CodeContainerResourceArmPaginatedResult>
+  >;
+}
+@armResourceOperations
+interface CodeContainerOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...KeysOf<ResourceNameParameter<
+          Resource = Workspace,
+          KeyName = "workspaceName",
+          SegmentName = "workspaces",
+          NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+        >>,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = CodeContainerResource,
+        KeyName = "name",
+        SegmentName = "codes",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
+interface CodeContainers {
+  /**
+   * Get container.
+   */
+  get is CodeContainerOps.Read<CodeContainerResource>;
+
+  /**
+   * Create or update container.
+   */
+  createOrUpdate is CodeContainerOps.CreateOrUpdateSync<CodeContainerResource>;
+
+  /**
+   * Delete container.
+   */
+  delete is CodeContainerOps.DeleteSync<CodeContainerResource>;
+
+  /**
+   * List containers.
+   */
+  list is CodeContainerOps.List<
+    CodeContainerResource,
+    Parameters = {
+      /**
+       * Continuation token for pagination.
+       */
+      @query("$skip")
+      $skip?: string;
+    },
+    Response = ArmResponse<CodeContainerResourceArmPaginatedResult>
   >;
 }
 
@@ -74,5 +153,8 @@ interface CodeContainerResources {
   "[Required] Additional attributes of the entity."
 );
 @@doc(CodeContainerResources.createOrUpdate::parameters.resource,
+  "Container entity to create or update."
+);
+@@doc(CodeContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );

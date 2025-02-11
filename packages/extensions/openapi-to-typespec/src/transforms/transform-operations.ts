@@ -24,6 +24,7 @@ import {
   TypespecParameterLocation,
   Extension,
   TspArmProviderActionOperation,
+  TypespecDecorator,
 } from "../interfaces";
 import { transformDataType } from "../model";
 import { getOptions } from "../options";
@@ -31,6 +32,7 @@ import { createOperationIdDecorator, getOperationClientDecorators, getPropertyDe
 import { getLogger } from "../utils/logger";
 import { getLanguageMetadata } from "../utils/metadata";
 import { isArraySchema, isConstantSchema, isResponseSchema } from "../utils/schemas";
+import { getSuppressionWithCode, SuppressionCode } from "../utils/suppressions";
 import { isResourceListResult } from "../utils/type-mapping";
 import { getDefaultValue } from "../utils/values";
 
@@ -44,10 +46,16 @@ export function transformOperationGroup(
     acc = [...acc, ...transformOperation(op, codeModel, name)];
     return acc;
   }, []);
+  const { isArm, isFullCompatible } = getOptions();
+  const suppressions =
+    isArm && isFullCompatible
+      ? [getSuppressionWithCode(SuppressionCode.ArmResourceInterfaceRequiresDecorator)]
+      : undefined;
   return {
     name,
     doc,
     operations: ops,
+    suppressions,
   };
 }
 
@@ -60,6 +68,7 @@ function transformVerb(protocol?: Protocols) {
 }
 
 function transformResponse(response: Response): [string, string] {
+  const { isArm } = getOptions();
   const statusCode = response.protocol.http?.statusCodes[0] as string;
   const codeModel = getSession().model;
   const dataTypes = getDataTypes(codeModel);
@@ -67,7 +76,7 @@ function transformResponse(response: Response): [string, string] {
     return [statusCode, "void"];
   }
 
-  if (isResourceListResult(response)) {
+  if (isResourceListResult(response) && isArm) {
     const valueSchema = ((response as SchemaResponse).schema as ObjectSchema).properties?.find(
       (p) => p.language.default.name === "value",
     );
@@ -147,7 +156,7 @@ export function transformRequest(
   }
 
   const resource = operation.language.default.resource;
-  let decorators = undefined;
+  let decorators: TypespecDecorator[] | undefined = undefined;
   if (
     groupName &&
     operation.operationId &&
@@ -166,15 +175,34 @@ export function transformRequest(
     if (route.startsWith("/subscriptions/{subscriptionId}/providers/") || route.startsWith("/providers/")) {
       const action = getActionForPrviderTemplate(route);
       if (action !== undefined) {
+        const isLongRunning = operation.extensions?.["x-ms-long-running-operation"] ?? false;
+        decorators ??= [];
+        decorators.push({
+          name: "autoRoute",
+          module: "@typespec/rest",
+          namespace: "TypeSpec.Rest",
+        });
+
+        const verb = transformVerb(requests?.[0].protocol);
+
+        // For Async, there should be a 202 response without body and might be a 200 response with body
+        // For Sync, there might be a 200 response with body
+        const response = transformedResponses.find((r) => r[0] === "200")?.[1] ?? undefined;
+        const finalStateVia =
+          operation.extensions?.["x-ms-long-running-operation-options"]?.["final-state-via"] ?? "location";
+        const lroHeaders =
+          isLongRunning && finalStateVia === "azure-async-operation" ? "Azure-AsyncOperation" : undefined;
+        const suppressions =
+          isFullCompatible && lroHeaders ? [getSuppressionWithCode(SuppressionCode.LroLocationHeader)] : undefined;
         return {
-          kind: "ArmProviderActionAsync",
+          kind: isLongRunning ? "ArmProviderActionAsync" : "ArmProviderActionSync",
           doc,
           summary,
           name,
-          verb: transformVerb(requests?.[0].protocol),
+          verb: verb === "post" ? undefined : verb,
           action: action === name ? undefined : action,
-          scope: route.startsWith("/providers/") ? "TenantActionScope" : "SubscriptionActionScope",
-          responses: transformedResponses.map((r) => r[1]),
+          scope: route.startsWith("/providers/") ? undefined : "SubscriptionActionScope",
+          response,
           parameters: parameters
             .filter((p) => p.location !== "body")
             .map((p) => {
@@ -190,6 +218,8 @@ export function transformRequest(
             }),
           request: parameters.find((p) => p.location === "body"),
           decorators,
+          lroHeaders,
+          suppressions,
         };
       }
     }
@@ -270,6 +300,7 @@ function filterOperationParameters(parameter: Parameter, visitedParameters: Set<
 }
 
 export function transformParameter(parameter: Parameter, codeModel: CodeModel): TypespecParameter {
+  const { isFullCompatible } = getOptions();
   // Body parameter doesn't have a serializedName, in that case we get the name
   const name = parameter.language.default.name;
   const doc = parameter.language.default.description;
@@ -287,6 +318,7 @@ export function transformParameter(parameter: Parameter, codeModel: CodeModel): 
     decorators: getPropertyDecorators(parameter),
     serializedName: parameter.language.default.serializedName ?? parameter.language.default.name,
     defaultValue: getDefaultValue(visited.name, parameter.schema),
+    suppressions: !doc && isFullCompatible ? [getSuppressionWithCode(SuppressionCode.DocumentRequired)] : undefined,
   };
 }
 

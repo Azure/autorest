@@ -13,6 +13,7 @@ namespace Azure.ResourceManager.Authorization;
 /**
  * Role Assignments
  */
+@extensionResource
 model RoleAssignment
   is Azure.ResourceManager.ExtensionResource<RoleAssignmentProperties> {
   ...ResourceNameParameter<
@@ -30,8 +31,20 @@ interface RoleAssignments {
    */
   get is ArmResourceRead<
     RoleAssignment,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
+      /**
+       * The scope of the operation or resource. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
+       */
+      @path
+      scope: string;
+
+      /**
+       * The name of the role assignment. It can be any valid GUID.
+       */
+      @path
+      roleAssignmentName: string;
+
       /**
        * Tenant ID for cross-tenant request
        */
@@ -45,23 +58,49 @@ interface RoleAssignments {
    */
   create is ArmResourceCreateOrReplaceSync<
     RoleAssignment,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
+      /**
+       * The scope of the operation or resource. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
+       */
+      @path
+      scope: string;
+
+      /**
+       * The name of the role assignment. It can be any valid GUID.
+       */
+      @path
+      roleAssignmentName: string;
+    }
   >;
 
   /**
    * Delete a role assignment by scope and name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteSync<
     RoleAssignment,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
+      /**
+       * The scope of the operation or resource. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
+       */
+      @path
+      scope: string;
+
+      /**
+       * The name of the role assignment. It can be any valid GUID.
+       */
+      @path
+      roleAssignmentName: string;
+
       /**
        * Tenant ID for cross-tenant request
        */
       @query("tenantId")
       tenantId?: string;
-    }
+    },
+    Response = ArmResponse<RoleAssignment> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -69,8 +108,14 @@ interface RoleAssignments {
    */
   listForScope is ArmResourceListByParent<
     RoleAssignment,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
+      /**
+       * The scope of the operation or resource. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
+       */
+      @path
+      scope: string;
+
       /**
        * The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal.
        */
@@ -88,8 +133,7 @@ interface RoleAssignments {
        */
       @query("$skipToken")
       $skipToken?: string;
-    },
-    Response = RoleAssignmentListResult
+    }
   >;
 }
 

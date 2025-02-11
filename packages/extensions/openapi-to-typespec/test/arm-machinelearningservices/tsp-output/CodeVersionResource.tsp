@@ -26,37 +26,67 @@ model CodeVersionResource
 }
 
 @armResourceOperations
+interface CodeVersionResourceOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...KeysOf<ResourceNameParameter<
+          Resource = Registry,
+          KeyName = "registryName",
+          SegmentName = "registries",
+          NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$"
+        >>,
+        ...KeysOf<ResourceNameParameter<
+          Resource = CodeContainerResource,
+          KeyName = "codeName",
+          SegmentName = "codes",
+          NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+        >>,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = CodeVersionResource,
+        KeyName = "version",
+        SegmentName = "versions",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface CodeVersionResources {
   /**
    * Get version.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryCodeVersions_Get")
-  get is ArmResourceRead<CodeVersionResource>;
+  get is CodeVersionResourceOps.Read<CodeVersionResource>;
 
   /**
    * Create or update version.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryCodeVersions_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<CodeVersionResource>;
+  createOrUpdate is CodeVersionResourceOps.CreateOrUpdateAsync<CodeVersionResource>;
 
   /**
    * Delete version.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("RegistryCodeVersions_Delete")
-  delete is ArmResourceDeleteAsync<CodeVersionResource>;
+  delete is CodeVersionResourceOps.DeleteWithoutOkAsync<
+    CodeVersionResource,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List versions.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryCodeVersions_List")
-  list is ArmResourceListByParent<
+  list is CodeVersionResourceOps.List<
     CodeVersionResource,
     Parameters = {
       /**
@@ -77,18 +107,114 @@ interface CodeVersionResources {
       @query("$skip")
       $skip?: string;
     },
-    Response = CodeVersionResourceArmPaginatedResult
+    Response = ArmResponse<CodeVersionResourceArmPaginatedResult>
   >;
 
   /**
    * Generate a storage location and credential for the client to upload a code asset to.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("startPendingUpload")
   @operationId("RegistryCodeVersions_CreateOrGetStartPendingUpload")
-  createOrGetStartPendingUpload is ArmResourceActionSync<
+  createOrGetStartPendingUpload is CodeVersionResourceOps.ActionSync<
     CodeVersionResource,
     PendingUploadRequestDto,
-    PendingUploadResponseDto
+    ArmResponse<PendingUploadResponseDto>
+  >;
+}
+@armResourceOperations
+interface CodeVersionOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...KeysOf<ResourceNameParameter<
+          Resource = Workspace,
+          KeyName = "workspaceName",
+          SegmentName = "workspaces",
+          NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+        >>,
+        ...KeysOf<ResourceNameParameter<
+          Resource = CodeContainerResource,
+          KeyName = "name",
+          SegmentName = "codes",
+          NamePattern = ""
+        >>,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = CodeVersionResource,
+        KeyName = "version",
+        SegmentName = "versions",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
+interface CodeVersions {
+  /**
+   * Get version.
+   */
+  get is CodeVersionOps.Read<CodeVersionResource>;
+
+  /**
+   * Create or update version.
+   */
+  createOrUpdate is CodeVersionOps.CreateOrUpdateSync<CodeVersionResource>;
+
+  /**
+   * Delete version.
+   */
+  delete is CodeVersionOps.DeleteSync<CodeVersionResource>;
+
+  /**
+   * List versions.
+   */
+  list is CodeVersionOps.List<
+    CodeVersionResource,
+    Parameters = {
+      /**
+       * Ordering of list.
+       */
+      @query("$orderBy")
+      $orderBy?: string;
+
+      /**
+       * Maximum number of records to return.
+       */
+      @query("$top")
+      $top?: int32;
+
+      /**
+       * Continuation token for pagination.
+       */
+      @query("$skip")
+      $skip?: string;
+
+      /**
+       * If specified, return CodeVersion assets with specified content hash value, regardless of name
+       */
+      @query("hash")
+      hash?: string;
+
+      /**
+       * Hash algorithm version when listing by hash
+       */
+      @query("hashVersion")
+      hashVersion?: string;
+    },
+    Response = ArmResponse<CodeVersionResourceArmPaginatedResult>
+  >;
+
+  /**
+   * Generate a storage location and credential for the client to upload a code asset to.
+   */
+  @action("startPendingUpload")
+  createOrGetStartPendingUpload is CodeVersionOps.ActionSync<
+    CodeVersionResource,
+    PendingUploadRequestDto,
+    ArmResponse<PendingUploadResponseDto>
   >;
 }
 
@@ -100,5 +226,11 @@ interface CodeVersionResources {
   "Version entity to create or update."
 );
 @@doc(CodeVersionResources.createOrGetStartPendingUpload::parameters.body,
+  "Pending upload request object"
+);
+@@doc(CodeVersions.createOrUpdate::parameters.resource,
+  "Version entity to create or update."
+);
+@@doc(CodeVersions.createOrGetStartPendingUpload::parameters.body,
   "Pending upload request object"
 );

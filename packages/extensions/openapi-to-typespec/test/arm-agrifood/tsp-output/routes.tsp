@@ -11,24 +11,25 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
-namespace Azure.ResourceManager.AgFoodPlatform;
+namespace Microsoft.AgFoodPlatform;
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface CheckNameAvailabilityOperations {
   /**
    * Checks the name availability of the resource with requested resource name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CheckNameAvailability_CheckNameAvailability")
-  @post
-  checkNameAvailability is ArmProviderActionAsync<
+  @autoRoute
+  checkNameAvailability is ArmProviderActionSync<
+    Request = CheckNameAvailabilityRequest,
     Response = CheckNameAvailabilityResponse,
     Scope = SubscriptionActionScope,
-    Parameters = {},
-    Request = CheckNameAvailabilityRequest
+    Parameters = {}
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface OperationResultsOperations {
   /**
    * Get operationResults for a Data Manager For Agriculture resource.

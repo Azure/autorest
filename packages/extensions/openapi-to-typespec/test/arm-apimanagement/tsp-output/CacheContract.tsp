@@ -38,11 +38,8 @@ interface CacheContracts {
    * Gets the entity state (Etag) version of the Cache specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("Cache_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<CacheContract, BaseParameters<CacheContract>>,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<CacheContract>;
 
   /**
    * Creates or updates an External Cache to be used in Api Management instance.
@@ -68,7 +65,7 @@ interface CacheContracts {
   @operationId("Cache_Update")
   update is ArmCustomPatchSync<
     CacheContract,
-    CacheUpdateParameters,
+    PatchModel = CacheUpdateParameters,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -82,7 +79,6 @@ interface CacheContracts {
    * Deletes specific Cache.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Cache_Delete")
   delete is ArmResourceDeleteSync<
     CacheContract,
@@ -115,8 +111,7 @@ interface CacheContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = CacheListResult
+    }
   >;
 }
 

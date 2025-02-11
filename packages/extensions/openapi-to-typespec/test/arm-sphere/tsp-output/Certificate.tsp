@@ -61,8 +61,7 @@ interface Certificates {
        */
       @query("$maxpagesize")
       maxpagesize?: int32;
-    },
-    Response = CertificateListResult
+    }
   >;
 
   /**
@@ -71,7 +70,7 @@ interface Certificates {
   retrieveCertChain is ArmResourceActionSync<
     Certificate,
     void,
-    CertificateChainResponse
+    ArmResponse<CertificateChainResponse>
   >;
 
   /**
@@ -80,7 +79,7 @@ interface Certificates {
   retrieveProofOfPossessionNonce is ArmResourceActionSync<
     Certificate,
     ProofOfPossessionNonceRequest,
-    ProofOfPossessionNonceResponse
+    ArmResponse<ProofOfPossessionNonceResponse>
   >;
 }
 

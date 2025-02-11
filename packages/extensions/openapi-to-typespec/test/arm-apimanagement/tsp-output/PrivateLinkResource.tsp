@@ -41,7 +41,7 @@ interface PrivateLinkResources {
   @operationId("PrivateEndpointConnection_ListPrivateLinkResources")
   listPrivateLinkResources is ArmResourceListByParent<
     PrivateLinkResource,
-    Response = PrivateLinkResourceListResult
+    Response = ArmResponse<PrivateLinkResourceListResult>
   >;
 }
 

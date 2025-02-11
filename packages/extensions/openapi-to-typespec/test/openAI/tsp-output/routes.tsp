@@ -22,7 +22,7 @@ interface completionsOperations {
       @path
       `deployment-id`: string;
 
-      @body
+      @bodyRoot
       body: Paths1Vtxb06DeploymentsDeploymentIdCompletionsPostRequestbodyContentApplicationJsonSchema;
     },
     PathsMaorw9DeploymentsDeploymentIdCompletionsPostResponses200ContentApplicationJsonSchema
@@ -45,7 +45,7 @@ interface embeddingsOperations {
       @path
       `deployment-id`: string;
 
-      @body
+      @bodyRoot
       body: Paths13PiqocDeploymentsDeploymentIdEmbeddingsPostRequestbodyContentApplicationJsonSchema;
     },
     void

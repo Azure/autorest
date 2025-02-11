@@ -48,8 +48,12 @@ interface GalleryApplicationVersions {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     GalleryApplicationVersion,
-    Response = ArmResourceCreatedResponse<GalleryApplicationVersion> | ArmResourceUpdatedResponse<GalleryApplicationVersion> | (ArmAcceptedLroResponse & {
-      @body _: GalleryApplicationVersion;
+    Response = ArmResourceUpdatedResponse<GalleryApplicationVersion> | ArmResourceCreatedResponse<
+      GalleryApplicationVersion,
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    > | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: GalleryApplicationVersion;
     })
   >;
 
@@ -59,23 +63,25 @@ interface GalleryApplicationVersions {
   @parameterVisibility
   update is ArmCustomPatchAsync<
     GalleryApplicationVersion,
-    GalleryApplicationVersionUpdate
+    PatchModel = GalleryApplicationVersionUpdate,
+    Response = ArmResponse<GalleryApplicationVersion>
   >;
 
   /**
    * Delete a gallery Application Version.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<GalleryApplicationVersion>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    GalleryApplicationVersion,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List gallery Application Versions in a gallery Application Definition.
    */
   listByGalleryApplication is ArmResourceListByParent<
     GalleryApplicationVersion,
-    Response = GalleryApplicationVersionList
+    Response = ArmResponse<GalleryApplicationVersionList>
   >;
 }
 

@@ -13,6 +13,7 @@ namespace Azure.ResourceManager.Authorization;
 /**
  * Information about current or upcoming role assignment schedule instance
  */
+@extensionResource
 model RoleAssignmentScheduleInstance
   is Azure.ResourceManager.ExtensionResource<RoleAssignmentScheduleInstanceProperties> {
   ...ResourceNameParameter<
@@ -30,7 +31,20 @@ interface RoleAssignmentScheduleInstances {
    */
   get is ArmResourceRead<
     RoleAssignmentScheduleInstance,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
+      /**
+       * The scope of the role assignments schedules.
+       */
+      @path
+      scope: string;
+
+      /**
+       * The name (hash of schedule name + time) of the role assignment schedule to get.
+       */
+      @path
+      roleAssignmentScheduleInstanceName: string;
+    }
   >;
 
   /**
@@ -38,15 +52,20 @@ interface RoleAssignmentScheduleInstances {
    */
   listForScope is ArmResourceListByParent<
     RoleAssignmentScheduleInstance,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
+      /**
+       * The scope of the role assignment schedule.
+       */
+      @path
+      scope: string;
+
       /**
        * The filter to apply on the operation. Use $filter=atScope() to return all role assignment schedules at or above the scope. Use $filter=principalId eq {id} to return all role assignment schedules at, above or below the scope for the specified principal.  Use $filter=assignedTo('{userId}') to return all role assignment schedule instances for the user. Use $filter=asTarget() to return all role assignment schedule instances created for the current user.
        */
       @query("$filter")
       $filter?: string;
-    },
-    Response = RoleAssignmentScheduleInstanceListResult
+    }
   >;
 }
 

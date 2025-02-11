@@ -39,28 +39,28 @@ interface TrafficControllers {
    * Update a TrafficController
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<TrafficController, TrafficControllerUpdate>;
+  update is ArmCustomPatchSync<
+    TrafficController,
+    PatchModel = TrafficControllerUpdate
+  >;
 
   /**
    * Delete a TrafficController
    */
-  delete is ArmResourceDeleteAsync<TrafficController>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    TrafficController,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List TrafficController resources by resource group
    */
-  listByResourceGroup is ArmResourceListByParent<
-    TrafficController,
-    Response = TrafficControllerListResult
-  >;
+  listByResourceGroup is ArmResourceListByParent<TrafficController>;
 
   /**
    * List TrafficController resources by subscription ID
    */
-  listBySubscription is ArmListBySubscription<
-    TrafficController,
-    Response = TrafficControllerListResult
-  >;
+  listBySubscription is ArmListBySubscription<TrafficController>;
 }
 
 @@doc(TrafficController.name, "traffic controller name for path");

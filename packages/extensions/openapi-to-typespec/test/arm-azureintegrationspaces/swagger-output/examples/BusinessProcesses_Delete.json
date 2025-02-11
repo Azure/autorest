@@ -1,0 +1,16 @@
+{
+  "operationId": "BusinessProcesses_Delete",
+  "parameters": {
+    "api-version": "2023-11-14-preview",
+    "applicationName": "Application1",
+    "businessProcessName": "BusinessProcess1",
+    "resourceGroupName": "testrg",
+    "spaceName": "Space1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "DeleteBusinessProcess",
+  "responses": {
+    "200": {},
+    "204": {}
+  }
+}

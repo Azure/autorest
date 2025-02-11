@@ -13,64 +13,67 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface SkusOperations {
   /**
    * Lists the available SKUs supported by Microsoft.Storage for given subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Skus_List")
+  @autoRoute
   @get
   @action("skus")
-  list is ArmProviderActionAsync<
+  list is ArmProviderActionSync<
     Response = StorageSkuListResult,
     Scope = SubscriptionActionScope,
     Parameters = {}
   >;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface StorageAccountsOperations {
   /**
    * Checks that the storage account name is valid and is not already in use.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StorageAccounts_CheckNameAvailability")
-  @post
-  checkNameAvailability is ArmProviderActionAsync<
+  @autoRoute
+  checkNameAvailability is ArmProviderActionSync<
+    Request = StorageAccountCheckNameAvailabilityParameters,
     Response = CheckNameAvailabilityResult,
     Scope = SubscriptionActionScope,
-    Parameters = {},
-    Request = StorageAccountCheckNameAvailabilityParameters
+    Parameters = {}
   >;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface DeletedAccountsOperations {
   /**
    * Lists deleted accounts under the subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DeletedAccounts_List")
+  @autoRoute
   @get
   @action("deletedAccounts")
-  list is ArmProviderActionAsync<
-    Response = DeletedAccountListResult,
+  list is ArmProviderActionSync<
+    Response = ResourceListResult<DeletedAccount>,
     Scope = SubscriptionActionScope,
     Parameters = {}
   >;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface UsagesOperations {
   /**
    * Gets the current usage count and the limit for the resources of the location under the subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Usages_ListByLocation")
+  @autoRoute
   @get
   @action("usages")
-  listByLocation is ArmProviderActionAsync<
+  listByLocation is ArmProviderActionSync<
     Response = UsageListResult,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter

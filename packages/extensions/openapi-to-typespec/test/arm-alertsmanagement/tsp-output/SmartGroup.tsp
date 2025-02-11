@@ -30,7 +30,7 @@ interface SmartGroups {
    */
   getById is ArmResourceRead<
     SmartGroup,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
   /**
@@ -38,7 +38,7 @@ interface SmartGroups {
    */
   getAll is ArmResourceListByParent<
     SmartGroup,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {
       /**
        * Filter by target resource( which is full ARM ID) Default value is select all.
@@ -106,7 +106,7 @@ interface SmartGroups {
       @query("sortOrder")
       sortOrder?: SortOrder;
     },
-    Response = SmartGroupsList
+    Response = ArmResponse<SmartGroupsList>
   >;
 
   /**
@@ -115,8 +115,8 @@ interface SmartGroups {
   changeState is ArmResourceActionSync<
     SmartGroup,
     void,
-    SmartGroup,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    ArmResponse<SmartGroup>,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {
       /**
        * New state of the alert.
@@ -129,20 +129,14 @@ interface SmartGroups {
   /**
    * Get the history a smart group, which captures any Smart Group state changes (New/Acknowledged/Closed) .
    */
-  // FIXME: SmartGroups_GetHistory could not be converted to a resource operation
-  @route("undefined")
   @get
-  getHistory(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-
-    /**
-     * Smart group unique id.
-     */
-    @path
-    @segment("smartGroups")
-    smartGroupId: string,
-  ): ArmResponse<m> | ErrorResponse;
+  @action("history")
+  getHistory is ArmResourceActionSync<
+    SmartGroup,
+    void,
+    ArmResponse<SmartGroupModification>,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 }
 
 @@doc(SmartGroup.name, "Smart group unique id. ");

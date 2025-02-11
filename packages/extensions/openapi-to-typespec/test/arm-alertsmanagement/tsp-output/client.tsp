@@ -7,14 +7,11 @@ using Azure.ResourceManager.AlertsManagement;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PatchObject.properties);
 
-@@clientName(AlertProcessingRules.update,
-  "AlertProcessingRules.update::parameters.properties",
-  "alertProcessingRulePatch"
+@@clientName(AlertProcessingRules.createOrUpdate::parameters.resource,
+  "alertProcessingRule"
 );
-
-@@clientName(Alerts.changeState,
-  "Alerts.changeState::parameters.body",
-  "comment"
+@@clientName(AlertProcessingRules.update::parameters.properties,
+  "alertProcessingRulePatch"
 );
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."

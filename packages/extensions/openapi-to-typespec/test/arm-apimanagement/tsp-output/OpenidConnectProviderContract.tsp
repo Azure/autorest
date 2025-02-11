@@ -38,14 +38,8 @@ interface OpenidConnectProviderContracts {
    * Gets the entity state (Etag) version of the openIdConnectProvider specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("OpenIdConnectProvider_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      OpenidConnectProviderContract,
-      BaseParameters<OpenidConnectProviderContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<OpenidConnectProviderContract>;
 
   /**
    * Creates or updates the OpenID Connect Provider.
@@ -71,7 +65,7 @@ interface OpenidConnectProviderContracts {
   @operationId("OpenIdConnectProvider_Update")
   update is ArmCustomPatchSync<
     OpenidConnectProviderContract,
-    OpenidConnectProviderUpdateContract,
+    PatchModel = OpenidConnectProviderUpdateContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -85,7 +79,6 @@ interface OpenidConnectProviderContracts {
    * Deletes specific OpenID Connect Provider of the API Management service instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("OpenIdConnectProvider_Delete")
   delete is ArmResourceDeleteSync<
     OpenidConnectProviderContract,
@@ -124,8 +117,7 @@ interface OpenidConnectProviderContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = OpenIdConnectProviderListResult
+    }
   >;
 
   /**
@@ -136,7 +128,7 @@ interface OpenidConnectProviderContracts {
   listSecrets is ArmResourceActionSync<
     OpenidConnectProviderContract,
     void,
-    ClientSecretContract
+    ArmResponse<ClientSecretContract>
   >;
 }
 

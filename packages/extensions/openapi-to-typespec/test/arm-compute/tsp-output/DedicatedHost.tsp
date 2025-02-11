@@ -27,6 +27,7 @@ model DedicatedHost
   /**
    * SKU of the dedicated host for Hardware Generation and VM family. Only name is required to be set. List Microsoft.Compute SKUs for a list of possible values.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku: Sku;
 }
 
@@ -49,61 +50,55 @@ interface DedicatedHosts {
   /**
    * Create or update a dedicated host .
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<DedicatedHost>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    DedicatedHost,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Update a dedicated host .
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<DedicatedHost, DedicatedHostUpdate>;
+  update is ArmCustomPatchAsync<
+    DedicatedHost,
+    PatchModel = DedicatedHostUpdate,
+    Response = ArmResponse<DedicatedHost>
+  >;
 
   /**
    * Delete a dedicated host.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<DedicatedHost>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    DedicatedHost,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Lists all of the dedicated hosts in the specified dedicated host group. Use the nextLink property in the response to get the next page of dedicated hosts.
    */
-  listByHostGroup is ArmResourceListByParent<
-    DedicatedHost,
-    Response = DedicatedHostListResult
-  >;
+  listByHostGroup is ArmResourceListByParent<DedicatedHost>;
 
   /**
    * Restart the dedicated host. The operation will complete successfully once the dedicated host has restarted and is running. To determine the health of VMs deployed on the dedicated host after the restart check the Resource Health Center in the Azure Portal. Please refer to https://docs.microsoft.com/azure/service-health/resource-health-overview for more details.
    */
-  restart is ArmResourceActionAsync<DedicatedHost, void, void>;
+  restart is ArmResourceActionAsyncBase<
+    DedicatedHost,
+    void,
+    OkResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<DedicatedHost>
+  >;
 
   /**
    * Lists all available dedicated host sizes to which the specified dedicated host can be resized. NOTE: The dedicated host sizes provided can be used to only scale up the existing dedicated host.
    */
-  // FIXME: DedicatedHosts_ListAvailableSizes could not be converted to a resource operation
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}/hostSizes")
   @get
-  listAvailableSizes(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the dedicated host group.
-     */
-    @pattern("^[-\\w\\._]+$")
-    @path
-    hostGroupName: string,
-
-    /**
-     * The name of the dedicated host.
-     */
-    @pattern("^[-\\w\\._]+$")
-    @path
-    hostName: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<DedicatedHostSizeListResult> | ErrorResponse;
+  @action("hostSizes")
+  listAvailableSizes is ArmResourceActionSync<
+    DedicatedHost,
+    void,
+    ArmResponse<DedicatedHostSizeListResult>
+  >;
 }
 
 @@doc(DedicatedHost.name, "The name of the dedicated host.");

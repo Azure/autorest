@@ -38,14 +38,8 @@ interface BackendContracts {
    * Gets the entity state (Etag) version of the backend specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("Backend_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      BackendContract,
-      BaseParameters<BackendContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<BackendContract>;
 
   /**
    * Creates or Updates a backend.
@@ -71,7 +65,7 @@ interface BackendContracts {
   @operationId("Backend_Update")
   update is ArmCustomPatchSync<
     BackendContract,
-    BackendUpdateParameters,
+    PatchModel = BackendUpdateParameters,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -85,7 +79,6 @@ interface BackendContracts {
    * Deletes the specified backend.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Backend_Delete")
   delete is ArmResourceDeleteSync<
     BackendContract,
@@ -124,8 +117,7 @@ interface BackendContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = BackendListResult
+    }
   >;
 
   /**
@@ -133,9 +125,16 @@ interface BackendContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Backend_Reconnect")
-  reconnect is ArmResourceActionNoContentSync<
+  reconnect is ArmResourceActionSync<
     BackendContract,
-    BackendReconnectContract
+    {
+      /**
+       * Reconnect request parameters.
+       */
+      @bodyRoot
+      parameters?: BackendReconnectContract;
+    },
+    AcceptedResponse
   >;
 }
 
@@ -149,6 +148,3 @@ interface BackendContracts {
   "Create parameters."
 );
 @@doc(BackendContracts.update::parameters.properties, "Update parameters.");
-@@doc(BackendContracts.reconnect::parameters.body,
-  "Reconnect request parameters."
-);

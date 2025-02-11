@@ -1,0 +1,101 @@
+{
+  "parameters": {
+    "alertProcessingRule": {
+      "location": "Global",
+      "properties": {
+        "description": "Removes all ActionGroups from all Alerts on VMName during the maintenance window",
+        "actions": [
+          {
+            "actionType": "RemoveAllActionGroups"
+          }
+        ],
+        "enabled": true,
+        "schedule": {
+          "effectiveFrom": "2021-04-15T18:00:00",
+          "effectiveUntil": "2021-04-15T20:00:00",
+          "timeZone": "Pacific Standard Time"
+        },
+        "scopes": [
+          "/subscriptions/subId1/resourceGroups/RGId1/providers/Microsoft.Compute/virtualMachines/VMName"
+        ]
+      },
+      "tags": {}
+    },
+    "alertProcessingRuleName": "RemoveActionGroupsMaintenanceWindow",
+    "api-version": "2021-08-08",
+    "resourceGroupName": "alertscorrelationrg",
+    "subscriptionId": "subId1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "RemoveActionGroupsMaintenanceWindow",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/RemoveActionGroupsMaintenanceWindow",
+        "location": "Global",
+        "properties": {
+          "description": "Removes all ActionGroups from all Alerts on VMName during the maintenance window",
+          "actions": [
+            {
+              "actionType": "RemoveAllActionGroups"
+            }
+          ],
+          "enabled": true,
+          "schedule": {
+            "effectiveFrom": "2021-04-15T18:00:00",
+            "effectiveUntil": "2021-04-15T20:00:00",
+            "timeZone": "Pacific Standard Time"
+          },
+          "scopes": [
+            "/subscriptions/subId1/resourceGroups/RGId1/providers/Microsoft.Compute/virtualMachines/VMName"
+          ]
+        },
+        "systemData": {
+          "createdAt": "2018-06-12T20:13:29Z",
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2018-06-12T22:05:09Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      }
+    },
+    "201": {
+      "body": {
+        "name": "RemoveActionGroupsMaintenanceWindow",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/RemoveActionGroupsMaintenanceWindow",
+        "location": "Global",
+        "properties": {
+          "description": "Removes all ActionGroups from all Alerts on VMName during the maintenance window",
+          "actions": [
+            {
+              "actionType": "RemoveAllActionGroups"
+            }
+          ],
+          "enabled": true,
+          "schedule": {
+            "effectiveFrom": "2021-04-15T18:00:00",
+            "effectiveUntil": "2021-04-15T20:00:00",
+            "timeZone": "Pacific Standard Time"
+          },
+          "scopes": [
+            "/subscriptions/subId1/resourceGroups/RGId1/providers/Microsoft.Compute/virtualMachines/VMName"
+          ]
+        },
+        "systemData": {
+          "createdAt": "2018-06-12T20:13:29Z",
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2018-06-12T22:05:09Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      }
+    }
+  },
+  "operationId": "AlertProcessingRules_CreateOrUpdate",
+  "title": "Create or update a rule that removes all action groups from alerts on a specific VM during a one-off maintenance window (1800-2000 at a specific date, Pacific Standard Time)"
+}

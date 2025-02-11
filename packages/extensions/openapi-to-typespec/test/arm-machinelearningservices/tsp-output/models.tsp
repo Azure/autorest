@@ -1,12 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -3673,6 +3671,34 @@ model ResourceName {
 model PaginatedComputeResourcesList is Azure.Core.Page<ComputeResource>;
 
 /**
+ * Managed service identity (system assigned and/or user assigned identities)
+ */
+model ManagedServiceIdentity {
+  /**
+   * The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.
+   */
+  @visibility("read")
+  principalId?: string;
+
+  /**
+   * The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.
+   */
+  @visibility("read")
+  tenantId?: string;
+
+  /**
+   * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
+   */
+  type: ManagedServiceIdentityType;
+
+  /**
+   * The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  userAssignedIdentities?: Record<UserAssignedIdentity>;
+}
+
+/**
  * The resource model definition representing SKU
  */
 model Sku {
@@ -3731,6 +3757,7 @@ model Resource {
   systemData?: SystemData;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ComputeResourceSchema {
   /**
    * Compute properties
@@ -3806,7 +3833,8 @@ model ClusterUpdateParameters {
   /**
    * The properties of the amlCompute.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ClusterUpdateProperties;
 }
 
@@ -3890,6 +3918,7 @@ model CustomService {
   volumes?: VolumeDefinition[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model Image {
   ...Record<unknown>;
 
@@ -3904,6 +3933,7 @@ model Image {
   reference?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model EnvironmentVariable {
   ...Record<unknown>;
 
@@ -3918,6 +3948,7 @@ model EnvironmentVariable {
   value?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model Docker {
   ...Record<unknown>;
 
@@ -3927,6 +3958,7 @@ model Docker {
   privileged?: boolean;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model Endpoint {
   /**
    * Protocol over which communication will happen over this endpoint
@@ -3954,6 +3986,7 @@ model Endpoint {
   hostIp?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model VolumeDefinition {
   /**
    * Type of Volume Definition. Possible Values: bind,volume,tmpfs,npipe
@@ -3996,6 +4029,7 @@ model VolumeDefinition {
   tmpfs?: TmpfsOptions;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model BindOptions {
   /**
    * Type of Bind Option
@@ -4013,6 +4047,7 @@ model BindOptions {
   selinux?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model VolumeOptions {
   /**
    * Indicate whether volume is nocopy
@@ -4020,6 +4055,7 @@ model VolumeOptions {
   nocopy?: boolean;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model TmpfsOptions {
   /**
    * Mention the Tmpfs size
@@ -4114,6 +4150,7 @@ model CodeContainerResourceArmPaginatedResult
 /**
  * Container for code asset versions.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model CodeContainer extends AssetContainer {
   /**
    * Provisioning state for the code container.
@@ -4122,6 +4159,8 @@ model CodeContainer extends AssetContainer {
   provisioningState?: AssetProvisioningState;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AssetContainer extends ResourceBase {
   /**
    * Is the asset archived?
@@ -4142,6 +4181,7 @@ model AssetContainer extends ResourceBase {
   nextVersion?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ResourceBase {
   /**
    * The asset description text.
@@ -4170,6 +4210,7 @@ model CodeVersionResourceArmPaginatedResult
 /**
  * Code asset version details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model CodeVersion extends AssetBase {
   /**
    * Uri where code is located
@@ -4183,6 +4224,8 @@ model CodeVersion extends AssetBase {
   provisioningState?: AssetProvisioningState;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AssetBase extends ResourceBase {
   /**
    * Specifies the lifecycle setting of managed data asset.
@@ -4203,6 +4246,7 @@ model AssetBase extends ResourceBase {
   isArchived?: boolean;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AutoDeleteSetting {
   /**
    * When to check if an asset is expired
@@ -4217,6 +4261,7 @@ model AutoDeleteSetting {
   value?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model PendingUploadRequestDto {
   /**
    * If PendingUploadId = null then random guid will be used.
@@ -4229,6 +4274,7 @@ model PendingUploadRequestDto {
   pendingUploadType?: PendingUploadType;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model PendingUploadResponseDto {
   /**
    * Container level read, write, list SAS
@@ -4246,6 +4292,7 @@ model PendingUploadResponseDto {
   pendingUploadType?: PendingUploadType;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model BlobReferenceForConsumptionDto {
   /**
    * Blob URI path for client to upload data.
@@ -4264,6 +4311,7 @@ model BlobReferenceForConsumptionDto {
   storageAccountArmId?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("credentialType")
 model PendingUploadCredentialDto {}
 
@@ -4277,6 +4325,7 @@ model ComponentContainerResourceArmPaginatedResult
  * Component container definition.
  * <see href="https://docs.microsoft.com/en-us/azure/machine-learning/reference-yaml-component-command" />
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ComponentContainer extends AssetContainer {
   /**
    * Provisioning state for the component container.
@@ -4294,6 +4343,7 @@ model ComponentVersionResourceArmPaginatedResult
 /**
  * Definition of a component version: defines resources that span component types.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ComponentVersion extends AssetBase {
   /**
    * Defines Component definition details.
@@ -4323,6 +4373,8 @@ model DataContainerResourceArmPaginatedResult
 /**
  * Container for data asset versions.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model DataContainer extends AssetContainer {
   /**
    * [Required] Specifies the type of data.
@@ -4340,6 +4392,8 @@ model DataVersionBaseResourceArmPaginatedResult
 /**
  * Data version base definition
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 @discriminator("dataType")
 model DataVersionBase extends AssetBase {
   /**
@@ -4388,6 +4442,7 @@ model EnvironmentContainerResourceArmPaginatedResult
 /**
  * Container for environment specification versions.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model EnvironmentContainer extends AssetContainer {
   /**
    * Provisioning state for the environment container.
@@ -4405,6 +4460,7 @@ model EnvironmentVersionResourceArmPaginatedResult
 /**
  * Environment version details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model EnvironmentVersion extends AssetBase {
   /**
    * Defines if image needs to be rebuilt based on base image changes.
@@ -4490,6 +4546,7 @@ model BuildContext {
   dockerfilePath?: string = "Dockerfile";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model InferenceContainerProperties {
   /**
    * The route to check the liveness of the inference server container.
@@ -4507,6 +4564,7 @@ model InferenceContainerProperties {
   scoringRoute?: Route;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model Route {
   /**
    * [Required] The path for the route.
@@ -4527,6 +4585,8 @@ model Route {
 model ModelContainerResourceArmPaginatedResult
   is Azure.Core.Page<ModelContainerResource>;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ModelContainer extends AssetContainer {
   /**
    * Provisioning state for the model container.
@@ -4544,6 +4604,7 @@ model ModelVersionResourceArmPaginatedResult
 /**
  * Model asset version details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ModelVersion extends AssetBase {
   /**
    * Mapping of model flavors to their properties.
@@ -4584,6 +4645,7 @@ model ModelVersion extends AssetBase {
   stage?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model FlavorData {
   /**
    * Model flavor-specific data.
@@ -4644,9 +4706,11 @@ model PackageRequest {
   targetEnvironmentId: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("baseEnvironmentSourceType")
 model BaseEnvironmentSource {}
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("serverType")
 model InferencingServer {}
 
@@ -4675,6 +4739,7 @@ model ModelPackageInput {
   path: PackageInputPathBase;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("inputPathType")
 model PackageInputPathBase {}
 
@@ -4770,6 +4835,7 @@ model BatchEndpointTrackedResourceArmPaginatedResult
 /**
  * Batch endpoint configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model BatchEndpoint extends EndpointPropertiesBase {
   /**
    * Default values for Batch Endpoint.
@@ -4854,6 +4920,7 @@ model EndpointAuthKeys {
 /**
  * Strictly used in update requests.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model PartialMinimalTrackedResourceWithIdentity
   extends PartialMinimalTrackedResource {
   /**
@@ -4898,6 +4965,7 @@ model BatchDeploymentTrackedResourceArmPaginatedResult
 /**
  * Batch inference settings per deployment.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model BatchDeployment extends EndpointDeploymentPropertiesBase {
   /**
    * Compute target for batch inference operation.
@@ -4981,8 +5049,11 @@ model BatchDeploymentConfiguration {}
 @discriminator("referenceType")
 model AssetReferenceBase {}
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DeploymentResourceConfiguration extends ResourceConfiguration {}
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ResourceConfiguration {
   /**
    * Optional number of instances or nodes used by the compute target.
@@ -5117,6 +5188,8 @@ model DatastoreResourceArmPaginatedResult is Azure.Core.Page<DatastoreResource>;
 /**
  * Base definition for datastore contents configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 @discriminator("datastoreType")
 model Datastore extends ResourceBase {
   /**
@@ -5158,6 +5231,7 @@ model FeaturesetContainerResourceArmPaginatedResult
 /**
  * Dto object representing feature set
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model FeaturesetContainerProperties extends AssetContainer {
   /**
    * Provisioning state for the featureset container.
@@ -5174,6 +5248,8 @@ model FeatureResourceArmPaginatedResult is Azure.Core.Page<Feature>;
 /**
  * Dto object representing feature
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model FeatureProperties extends ResourceBase {
   /**
    * Specifies type
@@ -5195,6 +5271,7 @@ model FeaturesetVersionResourceArmPaginatedResult
 /**
  * Dto object representing feature set version
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model FeaturesetVersionProperties extends AssetBase {
   /**
    * Specifies list of entities
@@ -5223,6 +5300,7 @@ model FeaturesetVersionProperties extends AssetBase {
   stage?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model MaterializationSettings {
   /**
    * Specifies the notification details
@@ -5297,6 +5375,7 @@ model MaterializationComputeResource {
   instanceType?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model RecurrenceTrigger extends TriggerBase {
   /**
    * [Required] The frequency to trigger schedule.
@@ -5319,6 +5398,7 @@ model RecurrenceTrigger extends TriggerBase {
   triggerType: "Recurrence";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model RecurrenceSchedule {
   /**
    * [Required] List of hours for the schedule.
@@ -5341,6 +5421,7 @@ model RecurrenceSchedule {
   weekDays?: WeekDay[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("triggerType")
 model TriggerBase {
   /**
@@ -5492,6 +5573,7 @@ model FeaturestoreEntityContainerResourceArmPaginatedResult
 /**
  * Dto object representing feature entity
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model FeaturestoreEntityContainerProperties extends AssetContainer {
   /**
    * Provisioning state for the featurestore entity container.
@@ -5509,6 +5591,7 @@ model FeaturestoreEntityVersionResourceArmPaginatedResult
 /**
  * Dto object representing feature entity version
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model FeaturestoreEntityVersionProperties extends AssetBase {
   /**
    * Specifies index columns
@@ -5551,6 +5634,8 @@ model JobBaseResourceArmPaginatedResult is Azure.Core.Page<JobBaseResource>;
 /**
  * Base definition for a job.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 @discriminator("jobType")
 model JobBase extends ResourceBase {
   /**
@@ -5945,6 +6030,7 @@ model StatusMessage {
   message?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("format")
 model ExportSummary {
   /**
@@ -5983,6 +6069,7 @@ model OnlineEndpointTrackedResourceArmPaginatedResult
 /**
  * Online endpoint configuration
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model OnlineEndpoint extends EndpointPropertiesBase {
   /**
    * ARM resource ID of the compute if it exists.
@@ -6020,6 +6107,8 @@ model OnlineEndpoint extends EndpointPropertiesBase {
 model OnlineDeploymentTrackedResourceArmPaginatedResult
   is Azure.Core.Page<OnlineDeploymentTrackedResource>;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("endpointComputeType")
 model OnlineDeployment extends EndpointDeploymentPropertiesBase {
   /**
@@ -6083,6 +6172,7 @@ model OnlineDeployment extends EndpointDeploymentPropertiesBase {
   scaleSettings?: OnlineScaleSettings;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DataCollector {
   /**
    * [Required] The collection configuration. Each collection has it own configuration to collect model data and the name of collection can be arbitrary string.
@@ -6105,6 +6195,7 @@ model DataCollector {
   rollingRate?: RollingRateType;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model Collection {
   /**
    * The msi client id used to collect logging to blob storage. If it's null,backend will pick a registered endpoint identity to auth.
@@ -6127,6 +6218,7 @@ model Collection {
   samplingRate?: float64 = 1;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model RequestLogging {
   /**
    * For payload logging, we only collect payload by default. If customers also want to collect the specified headers, they can set them in captureHeaders so that backend will collect those headers along with payload.
@@ -6195,6 +6287,7 @@ model OnlineScaleSettings {}
 /**
  * Strictly used in update requests.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model PartialMinimalTrackedResourceWithSku
   extends PartialMinimalTrackedResource {
   /**
@@ -6233,6 +6326,7 @@ model PartialSku {
   tier?: SkuTier;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DeploymentLogsRequest {
   /**
    * The type of container to retrieve logs from.
@@ -6245,6 +6339,7 @@ model DeploymentLogsRequest {
   tail?: int32;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DeploymentLogs {
   /**
    * The retrieved online deployment logs.
@@ -6320,6 +6415,7 @@ model SkuSetting {
   tier?: SkuTier;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model RegenerateEndpointKeysRequest {
   /**
    * [Required] Specification for which type of key to generate. Primary or Secondary.
@@ -6365,6 +6461,7 @@ model ScheduleResourceArmPaginatedResult is Azure.Core.Page<Schedule>;
 /**
  * Base definition of a schedule
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ScheduleProperties extends ResourceBase {
   /**
    * [Required] Specifies the action of the schedule
@@ -6397,6 +6494,7 @@ model ScheduleProperties extends ResourceBase {
   trigger: TriggerBase;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("actionType")
 model ScheduleActionBase {}
 
@@ -6408,6 +6506,7 @@ model RegistryTrackedResourceArmPaginatedResult is Azure.Core.Page<Registry>;
 /**
  * Details of the Registry
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RegistryProperties {
   /**
    * Discovery URL for the Registry
@@ -6477,7 +6576,8 @@ model RegistryPrivateEndpointConnection {
   /**
    * Properties of the Private Endpoint Connection
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: RegistryPrivateEndpointConnectionProperties;
 }
 
@@ -6509,6 +6609,7 @@ model RegistryPrivateEndpointConnectionProperties {
 /**
  * The PE network resource that is linked to this PE connection.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model PrivateEndpointResource extends PrivateEndpoint {
   /**
    * The subnetId that the private endpoint is connected to.
@@ -6584,6 +6685,7 @@ model AcrDetails {
   userCreatedAcrAccount?: UserCreatedAcrAccount;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SystemCreatedAcrAccount {
   /**
    * Name of the ACR account
@@ -6601,6 +6703,7 @@ model SystemCreatedAcrAccount {
   armResourceId?: ArmResourceId;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model UserCreatedAcrAccount {
   /**
    * ARM ResourceId of a resource
@@ -6623,6 +6726,7 @@ model StorageAccountDetails {
   userCreatedStorageAccount?: UserCreatedStorageAccount;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SystemCreatedStorageAccount {
   /**
    * Public blob access allowed
@@ -6658,6 +6762,7 @@ model SystemCreatedStorageAccount {
   storageAccountType?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model UserCreatedStorageAccount {
   /**
    * ARM ResourceId of a resource
@@ -6689,6 +6794,7 @@ model PartialRegistryPartialTrackedResource {
 /**
  * Managed service identity (system assigned and/or user assigned identities)
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model RegistryPartialManagedServiceIdentity extends ManagedServiceIdentity {}
 
 /**
@@ -6742,11 +6848,6 @@ model AmlOperation {
 }
 
 /**
- * The result of a request to list machine learning workspaces.
- */
-model WorkspaceListResult is Azure.Core.Page<Workspace>;
-
-/**
  * The properties of a machine learning workspace.
  */
 model WorkspaceProperties {
@@ -6760,7 +6861,9 @@ model WorkspaceProperties {
    */
   applicationInsights?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   associatedWorkspaces?: string[];
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   containerRegistries?: string[];
 
   /**
@@ -6778,8 +6881,11 @@ model WorkspaceProperties {
    */
   discoveryUrl?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   enableDataIsolation?: boolean;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   encryption?: EncryptionProperty;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   existingWorkspaces?: string[];
 
   /**
@@ -6797,6 +6903,7 @@ model WorkspaceProperties {
    */
   hbiWorkspace?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   hubResourceId?: string;
 
   /**
@@ -6809,6 +6916,7 @@ model WorkspaceProperties {
    */
   keyVault?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   keyVaults?: string[];
 
   /**
@@ -6884,6 +6992,7 @@ model WorkspaceProperties {
    */
   storageAccount?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   storageAccounts?: string[];
 
   /**
@@ -6920,6 +7029,7 @@ model WorkspaceProperties {
   workspaceId?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model EncryptionProperty {
   /**
    * The byok cosmosdb account that customer brings to store customer's data
@@ -6990,13 +7100,19 @@ model KeyVaultProperties {
   keyVaultArmId: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model FeatureStoreSettings {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   computeRuntime?: ComputeRuntimeDto;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   offlineStoreConnectionName?: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   onlineStoreConnectionName?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ComputeRuntimeDto {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   sparkRuntimeVersion?: string;
 }
 
@@ -7009,6 +7125,7 @@ model ManagedNetworkSettings {
    */
   isolationMode?: IsolationMode;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility("read")
   networkId?: string;
 
@@ -7027,6 +7144,7 @@ model ManagedNetworkSettings {
 /**
  * Outbound Rule for the managed network of a machine learning workspace.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 @discriminator("type")
 model OutboundRule {
   /**
@@ -7044,6 +7162,7 @@ model OutboundRule {
  * Status of the Provisioning for the managed network of a machine learning workspace.
  */
 model ManagedNetworkProvisionStatus {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   sparkReady?: boolean;
 
   /**
@@ -7052,8 +7171,11 @@ model ManagedNetworkProvisionStatus {
   status?: ManagedNetworkStatus;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model NotebookResourceInfo {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   fqdn?: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   isPrivateLinkEnabled?: boolean;
 
   /**
@@ -7067,8 +7189,11 @@ model NotebookResourceInfo {
   resourceId?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model NotebookPreparationError {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   errorMessage?: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   statusCode?: int32;
 }
 
@@ -7130,14 +7255,19 @@ model PrivateLinkServiceConnectionState {
   status?: EndpointServiceConnectionStatus;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ServiceManagedResourcesSettings {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   cosmosDb?: CosmosDbSettings;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CosmosDbSettings {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   collectionsThroughput?: int32;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SharedPrivateLinkResource {
   /**
    * Unique name of the private link
@@ -7147,7 +7277,8 @@ model SharedPrivateLinkResource {
   /**
    * Properties of a shared private link resource.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SharedPrivateLinkResourceProperty;
 }
 
@@ -7180,7 +7311,9 @@ model SharedPrivateLinkResourceProperty {
  * WorkspaceHub's configuration object.
  */
 model WorkspaceHubConfig {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   additionalWorkspaceStorageAccounts?: string[];
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   defaultWorkspaceResourceGroup?: string;
 }
 
@@ -7191,12 +7324,13 @@ model WorkspaceUpdateParameters {
   /**
    * Managed service identity (system assigned and/or user assigned identities)
    */
-  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
+  identity?: ManagedServiceIdentity;
 
   /**
    * The properties that the machine learning workspace will be updated with.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: WorkspacePropertiesUpdateParameters;
 
   /**
@@ -7230,7 +7364,9 @@ model WorkspacePropertiesUpdateParameters {
    */
   description?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   enableDataIsolation?: boolean;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   encryption?: EncryptionUpdateProperties;
 
   /**
@@ -7279,19 +7415,26 @@ model WorkspacePropertiesUpdateParameters {
   v1LegacyMode?: boolean;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model EncryptionUpdateProperties {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   keyVaultProperties: EncryptionKeyVaultUpdateProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model EncryptionKeyVaultUpdateProperties {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   keyIdentifier: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult
   is Azure.Core.Page<WorkspaceConnectionPropertiesV2BasicResource>;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("authType")
 model WorkspaceConnectionPropertiesV2 {
   /**
@@ -7300,6 +7443,7 @@ model WorkspaceConnectionPropertiesV2 {
   category?: ConnectionCategory;
 
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   expiryTime?: utcDateTime;
 
   /**
@@ -7307,6 +7451,7 @@ model WorkspaceConnectionPropertiesV2 {
    */
   metadata?: Record<unknown>;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   target?: string;
 }
 
@@ -7324,9 +7469,11 @@ model WorkspaceConnectionUpdateParameter {
  * Parameters to diagnose a workspace
  */
 model DiagnoseWorkspaceParameters {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   value?: DiagnoseRequestProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DiagnoseRequestProperties {
   /**
    * Setting for diagnosing dependent application insights
@@ -7383,35 +7530,47 @@ model DiagnoseRequestProperties {
   udr?: Record<unknown>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DiagnoseResponseResult {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   value?: DiagnoseResponseResultValue;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DiagnoseResponseResultValue {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", ["message"])
   userDefinedRouteResults?: DiagnoseResult[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", ["message"])
   networkSecurityRuleResults?: DiagnoseResult[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", ["message"])
   resourceLockResults?: DiagnoseResult[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", ["message"])
   dnsResolutionResults?: DiagnoseResult[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", ["message"])
   storageAccountResults?: DiagnoseResult[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", ["message"])
   keyVaultResults?: DiagnoseResult[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", ["message"])
   containerRegistryResults?: DiagnoseResult[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", ["message"])
   applicationInsightsResults?: DiagnoseResult[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", ["message"])
   otherResults?: DiagnoseResult[];
 }
@@ -7439,6 +7598,7 @@ model DiagnoseResult {
   message?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ListWorkspaceKeysResult {
   /**
    * The access key of the workspace app insights
@@ -7446,7 +7606,9 @@ model ListWorkspaceKeysResult {
   @visibility("read")
   appInsightsInstrumentationKey?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   containerRegistryCredentials?: RegistryListCredentialsResult;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   notebookAccessKeys?: ListNotebookKeysResult;
 
   /**
@@ -7462,6 +7624,7 @@ model ListWorkspaceKeysResult {
   userStorageKey?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model RegistryListCredentialsResult {
   /**
    * The location of the workspace ACR
@@ -7469,6 +7632,7 @@ model RegistryListCredentialsResult {
   @visibility("read")
   location?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", ["name"])
   passwords?: Password[];
 
@@ -7479,14 +7643,18 @@ model RegistryListCredentialsResult {
   username?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model Password {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility("read")
   name?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility("read")
   value?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ListNotebookKeysResult {
   /**
    * The primary access key of the Notebook
@@ -7501,32 +7669,42 @@ model ListNotebookKeysResult {
   secondaryAccessKey?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model NotebookAccessTokenResult {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility("read")
   accessToken?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility("read")
   expiresIn?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility("read")
   hostName?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility("read")
   notebookResourceId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility("read")
   publicDns?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility("read")
   refreshToken?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility("read")
   scope?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility("read")
   tokenType?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ListStorageAccountKeysResult {
   /**
    * The access key of the storage
@@ -7535,7 +7713,9 @@ model ListStorageAccountKeysResult {
   userStorageKey?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ExternalFqdnResponse {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", ["/properties/category"])
   value?: FqdnEndpointsPropertyBag[];
 }
@@ -7544,31 +7724,35 @@ model ExternalFqdnResponse {
  * Property bag for FQDN endpoints result
  */
 model FqdnEndpointsPropertyBag {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   properties?: FqdnEndpoints;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model FqdnEndpoints {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   category?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", ["domainName"])
   endpoints?: FqdnEndpoint[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model FqdnEndpoint {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   domainName?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", ["port"])
   endpointDetails?: FqdnEndpointDetail[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model FqdnEndpointDetail {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   port?: int32;
 }
-
-/**
- * List of outbound rules for the managed network of a machine learning workspace.
- */
-model OutboundRuleListResult is Azure.Core.Page<OutboundRuleBasicResource>;
 
 /**
  * List of private endpoint connection associated with the specified workspace
@@ -7587,6 +7771,7 @@ model PrivateEndpointConnectionListResult {
  */
 @pagedResult
 model PrivateLinkResourceListResult {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @items
   value?: PrivateLinkResource[];
 }
@@ -7594,11 +7779,12 @@ model PrivateLinkResourceListResult {
 /**
  * A private link resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model PrivateLinkResource extends Resource {
   /**
    * Managed service identity (system assigned and/or user assigned identities)
    */
-  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
+  identity?: ManagedServiceIdentity;
 
   /**
    * Same as workspace location.
@@ -7608,7 +7794,8 @@ model PrivateLinkResource extends Resource {
   /**
    * Properties of a private link resource.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PrivateLinkResourceProperties;
 
   /**
@@ -7649,6 +7836,7 @@ model PrivateLinkResourceProperties {
  * Managed Network Provisioning options for managed network of a machine learning workspace.
  */
 model ManagedNetworkProvisionOptions {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   includeSpark?: boolean;
 }
 
@@ -7674,6 +7862,7 @@ model AKS extends Compute {
   computeType: "AKS";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AKSSchema {
   /**
    * AKS properties
@@ -8571,6 +8760,7 @@ model Cron {
   expression?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ScheduleBase {
   /**
    * A system assigned id for the schedule.
@@ -8760,10 +8950,13 @@ model VirtualMachine extends Compute {
   computeType: "VirtualMachine";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model VirtualMachineSchema {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   properties?: VirtualMachineSchemaProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model VirtualMachineSchemaProperties {
   /**
    * Virtual Machine size
@@ -8853,6 +9046,7 @@ model HDInsight extends Compute {
   computeType: "HDInsight";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model HDInsightSchema {
   /**
    * HDInsight compute properties
@@ -8897,6 +9091,7 @@ model Databricks extends Compute {
   computeType: "Databricks";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DatabricksSchema {
   /**
    * Properties of Databricks
@@ -8916,10 +9111,13 @@ model DataLakeAnalytics extends Compute {
   computeType: "DataLakeAnalytics";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DataLakeAnalyticsSchema {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   properties?: DataLakeAnalyticsSchemaProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DataLakeAnalyticsSchemaProperties {
   /**
    * DataLake Store Account Name
@@ -8931,6 +9129,7 @@ model DataLakeAnalyticsSchemaProperties {
  * A SynapseSpark compute.
  */
 model SynapseSpark extends Compute {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   properties?: SynapseSparkProperties;
 
   /**
@@ -8939,6 +9138,7 @@ model SynapseSpark extends Compute {
   computeType: "SynapseSpark";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SynapseSparkProperties {
   /**
    * Auto scale properties.
@@ -8995,8 +9195,11 @@ model SynapseSparkProperties {
  * Auto scale properties
  */
 model AutoScaleProperties {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   minNodeCount?: int32;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   enabled?: boolean;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   maxNodeCount?: int32;
 }
 
@@ -9004,7 +9207,9 @@ model AutoScaleProperties {
  * Auto pause properties
  */
 model AutoPauseProperties {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   delayInMinutes?: int32;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   enabled?: boolean;
 }
 
@@ -9052,6 +9257,7 @@ model VirtualMachineSecrets extends ComputeSecrets {
   computeType: "VirtualMachine";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model VirtualMachineSecretsSchema {
   /**
    * Admin credentials for virtual machine.
@@ -9112,6 +9318,7 @@ model AccountKeyDatastoreSecrets extends DatastoreSecrets {
   secretsType: "AccountKey";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AllFeatures extends MonitoringFeatureFilterBase {
   /**
    * [Required] Specifies the feature filter to leverage when selecting features to calculate metrics over.
@@ -9119,6 +9326,7 @@ model AllFeatures extends MonitoringFeatureFilterBase {
   filterType: "AllFeatures";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("filterType")
 model MonitoringFeatureFilterBase {}
 
@@ -9286,6 +9494,7 @@ model JobOutput {
   description?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model QueueSettings {
   /**
    * Controls the compute job tier
@@ -9300,6 +9509,8 @@ model QueueSettings {
   priority?: int32;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model JobResourceConfiguration extends ResourceConfiguration {
   /**
    * Extra arguments to pass to the Docker run command. This would override any parameters that have already been set by the system, or in this section. This parameter is only supported for Azure ML compute types.
@@ -9338,6 +9549,7 @@ model AutoMLVertical {
   trainingData: MLTableJobInput;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model MLTableJobInput extends JobInput {
   ...AssetJobInput;
 
@@ -9375,6 +9587,7 @@ model AutoNCrossValidations extends NCrossValidations {
 @discriminator("mode")
 model NCrossValidations {}
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AutoSeasonality extends Seasonality {
   /**
    * [Required] Seasonality mode.
@@ -9388,6 +9601,7 @@ model AutoSeasonality extends Seasonality {
 @discriminator("mode")
 model Seasonality {}
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AutoTargetLags extends TargetLags {
   /**
    * [Required] Set target lags mode - Auto/Custom
@@ -9428,6 +9642,7 @@ model AutologgerSettings {
   mlflowAutologger: MLFlowAutologgerState;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AzMonMonitoringAlertNotificationSettings
   extends MonitoringAlertNotificationSettingsBase {
   /**
@@ -9436,6 +9651,7 @@ model AzMonMonitoringAlertNotificationSettings
   alertNotificationType: "AzureMonitor";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("alertNotificationType")
 model MonitoringAlertNotificationSettingsBase {}
 
@@ -9774,6 +9990,7 @@ model BayesianSamplingAlgorithm extends SamplingAlgorithm {
 @discriminator("samplingAlgorithmType")
 model SamplingAlgorithm {}
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CategoricalDataDriftMetricThreshold extends DataDriftMetricThresholdBase {
   /**
    * [Required] The categorical data drift metric to calculate.
@@ -9787,6 +10004,7 @@ model CategoricalDataDriftMetricThreshold extends DataDriftMetricThresholdBase {
   dataType: "Categorical";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("dataType")
 model DataDriftMetricThresholdBase {
   /**
@@ -9796,6 +10014,7 @@ model DataDriftMetricThresholdBase {
   threshold?: MonitoringThreshold;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model MonitoringThreshold {
   /**
    * The threshold value. If null, the set default is dependent on the metric type.
@@ -9804,6 +10023,7 @@ model MonitoringThreshold {
   value?: float64;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CategoricalDataQualityMetricThreshold
   extends DataQualityMetricThresholdBase {
   /**
@@ -9818,6 +10038,7 @@ model CategoricalDataQualityMetricThreshold
   dataType: "Categorical";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("dataType")
 model DataQualityMetricThresholdBase {
   /**
@@ -9827,6 +10048,7 @@ model DataQualityMetricThresholdBase {
   threshold?: MonitoringThreshold;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CategoricalPredictionDriftMetricThreshold
   extends PredictionDriftMetricThresholdBase {
   /**
@@ -9841,6 +10063,7 @@ model CategoricalPredictionDriftMetricThreshold
   dataType: "Categorical";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("dataType")
 model PredictionDriftMetricThresholdBase {
   /**
@@ -9938,6 +10161,7 @@ model Classification extends AutoMLVertical {
 /**
  * Classification Training related configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ClassificationTrainingSettings extends TrainingSettings {
   /**
    * Allowed models for classification task.
@@ -10092,6 +10316,7 @@ model TableVertical {
 /**
  * Featurization Configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model TableVerticalFeaturizationSettings extends FeaturizationSettings {
   /**
    * These transformers shall not be used in featurization.
@@ -10309,6 +10534,7 @@ model TableVerticalLimitSettings {
   trialTimeout?: duration;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model TableParameterSubspace {
   /**
    * Specify the boosting type, e.g gbdt for XGBoost.
@@ -10411,6 +10637,7 @@ model TableParameterSubspace {
   withStd?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model TableSweepSettings {
   /**
    * Type of early termination policy for the sweeping job.
@@ -10423,6 +10650,7 @@ model TableSweepSettings {
   samplingAlgorithm: SamplingAlgorithmType;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ClassificationModelPerformanceMetricThreshold
   extends ModelPerformanceMetricThresholdBase {
   /**
@@ -10437,6 +10665,7 @@ model ClassificationModelPerformanceMetricThreshold
   modelType: "Classification";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("modelType")
 model ModelPerformanceMetricThresholdBase {
   /**
@@ -10446,6 +10675,7 @@ model ModelPerformanceMetricThresholdBase {
   threshold?: MonitoringThreshold;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CocoExportSummary extends ExportSummary {
   /**
    * The container name to which the labels will be exported.
@@ -10570,6 +10800,7 @@ model CommandJobLimits extends JobLimits {
   jobLimitsType: "Command";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("jobLimitsType")
 model JobLimits {
   /**
@@ -10593,6 +10824,7 @@ model ContainerResourceRequirements {
   containerResourceRequests?: ContainerResourceSettings;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ContainerResourceSettings {
   /**
    * Number of vCPUs request/limit for container. More info:
@@ -10613,6 +10845,7 @@ model ContainerResourceSettings {
   memory?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CreateMonitorAction extends ScheduleActionBase {
   /**
    * [Required] Defines the monitor.
@@ -10626,6 +10859,7 @@ model CreateMonitorAction extends ScheduleActionBase {
   actionType: "CreateMonitor";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model MonitorDefinition {
   /**
    * The monitor's notification settings.
@@ -10682,6 +10916,7 @@ model MonitoringTarget {
   taskType: ModelTaskType;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("signalType")
 model MonitoringSignalBase {
   /**
@@ -10697,6 +10932,7 @@ model MonitoringSignalBase {
   properties?: Record<string>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CronTrigger extends TriggerBase {
   /**
    * [Required] Specifies cron expression of schedule.
@@ -10712,6 +10948,7 @@ model CronTrigger extends TriggerBase {
   triggerType: "Cron";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CsvExportSummary extends ExportSummary {
   /**
    * The container name to which the labels will be exported.
@@ -10792,6 +11029,7 @@ model OnlineInferenceConfiguration {
   scoringRoute?: Route;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CustomMetricThreshold {
   /**
    * [Required] The user-defined metric to calculate.
@@ -10808,6 +11046,7 @@ model CustomMetricThreshold {
   threshold?: MonitoringThreshold;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CustomModelJobInput extends JobInput {
   ...AssetJobInput;
 
@@ -10817,6 +11056,7 @@ model CustomModelJobInput extends JobInput {
   jobInputType: "custom_model";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CustomModelJobOutput extends JobOutput {
   ...AssetJobOutput;
 
@@ -10826,6 +11066,7 @@ model CustomModelJobOutput extends JobOutput {
   jobOutputType: "custom_model";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CustomMonitoringSignal extends MonitoringSignalBase {
   /**
    * [Required] ARM resource ID of the component resource used to calculate the custom metrics.
@@ -10937,6 +11178,7 @@ model CustomNCrossValidations extends NCrossValidations {
   mode: "Custom";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CustomSeasonality extends Seasonality {
   /**
    * [Required] Seasonality value.
@@ -10949,6 +11191,7 @@ model CustomSeasonality extends Seasonality {
   mode: "Custom";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CustomTargetLags extends TargetLags {
   /**
    * [Required] Set target lags values.
@@ -10961,6 +11204,7 @@ model CustomTargetLags extends TargetLags {
   mode: "Custom";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CustomTargetRollingWindowSize extends TargetRollingWindowSize {
   /**
    * [Required] TargetRollingWindowSize value.
@@ -10973,6 +11217,7 @@ model CustomTargetRollingWindowSize extends TargetRollingWindowSize {
   mode: "Custom";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DataDriftMonitoringSignal extends MonitoringSignalBase {
   /**
    * The data segment used for scoping on a subset of the data population.
@@ -11018,6 +11263,7 @@ model DataDriftMonitoringSignal extends MonitoringSignalBase {
   signalType: "DataDrift";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model MonitoringDataSegment {
   /**
    * The feature to segment the data on.
@@ -11032,6 +11278,7 @@ model MonitoringDataSegment {
   values?: string[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DataImport extends DataVersionBase {
   /**
    * Name of the asset for data import job to create
@@ -11049,6 +11296,7 @@ model DataImport extends DataVersionBase {
   dataType: "uri_folder";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("sourceType")
 model DataImportSource {
   /**
@@ -11077,6 +11325,7 @@ model DataPathAssetReference extends AssetReferenceBase {
   referenceType: "DataPath";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DataQualityMonitoringSignal extends MonitoringSignalBase {
   /**
    * A dictionary that maps feature names to their respective data types.
@@ -11116,6 +11365,7 @@ model DataQualityMonitoringSignal extends MonitoringSignalBase {
   signalType: "DataQuality";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DatabaseSource extends DataImportSource {
   /**
    * SQL Query statement for data import Database source
@@ -11144,6 +11394,7 @@ model DatabaseSource extends DataImportSource {
   sourceType: "database";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DatasetExportSummary extends ExportSummary {
   /**
    * The unique name of the labeled data asset.
@@ -11157,6 +11408,7 @@ model DatasetExportSummary extends ExportSummary {
   format: "Dataset";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DefaultScaleSettings extends OnlineScaleSettings {
   /**
    * [Required] Type of deployment scaling algorithm
@@ -11164,6 +11416,7 @@ model DefaultScaleSettings extends OnlineScaleSettings {
   scaleType: "Default";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model EmailMonitoringAlertNotificationSettings
   extends MonitoringAlertNotificationSettingsBase {
   /**
@@ -11178,6 +11431,7 @@ model EmailMonitoringAlertNotificationSettings
   alertNotificationType: "Email";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model EndpointScheduleAction extends ScheduleActionBase {
   /**
    * [Required] Defines Schedule action definition details.
@@ -11192,6 +11446,7 @@ model EndpointScheduleAction extends ScheduleActionBase {
   actionType: "InvokeBatchEndpoint";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model FeatureAttributionDriftMonitoringSignal extends MonitoringSignalBase {
   /**
    * [Required] A list of metrics to calculate and their associated thresholds.
@@ -11218,6 +11473,7 @@ model FeatureAttributionDriftMonitoringSignal extends MonitoringSignalBase {
   signalType: "FeatureAttributionDrift";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model FeatureAttributionMetricThreshold {
   /**
    * [Required] The feature attribution metric to calculate.
@@ -11232,6 +11488,7 @@ model FeatureAttributionMetricThreshold {
   threshold?: MonitoringThreshold;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model FeatureSubset extends MonitoringFeatureFilterBase {
   /**
    * [Required] The list of features to include.
@@ -11245,6 +11502,7 @@ model FeatureSubset extends MonitoringFeatureFilterBase {
   filterType: "FeatureSubset";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model FileSystemSource extends DataImportSource {
   /**
    * Path on data import FileSystem source
@@ -11379,6 +11637,7 @@ model ForecastingSettings {
 /**
  * Forecasting Training related configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ForecastingTrainingSettings extends TrainingSettings {
   /**
    * Allowed models for forecasting task.
@@ -11502,6 +11761,7 @@ model GridSamplingAlgorithm extends SamplingAlgorithm {
   samplingAlgorithmType: "Grid";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model HdfsDatastore extends Datastore {
   /**
    * The TLS cert of the HDFS server. Needs to be a base64 encoded string. Required if "Https" protocol is selected.
@@ -11547,6 +11807,8 @@ model ImageClassification extends AutoMLVertical {
   taskType: "ImageClassification";
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ImageClassificationBase extends ImageVertical {
   /**
    * Settings used for training the model.
@@ -11565,6 +11827,7 @@ model ImageClassificationBase extends ImageVertical {
  * For more information on the available settings please visit the official documentation:
  * https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ImageModelSettingsClassification extends ImageModelSettings {
   /**
    * Image crop size that is input to the neural network for the training dataset. Must be a positive integer.
@@ -11764,6 +12027,7 @@ model ImageModelSettings {
   weightDecay?: float32;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model MLFlowModelJobInput extends JobInput {
   ...AssetJobInput;
 
@@ -11787,6 +12051,7 @@ model MLFlowModelJobInput extends JobInput {
  * For more information on the available settings please visit the official documentation:
  * https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ImageModelDistributionSettingsClassification
   extends ImageModelDistributionSettings {
   /**
@@ -12077,6 +12342,8 @@ model ImageInstanceSegmentation extends AutoMLVertical {
   taskType: "ImageInstanceSegmentation";
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ImageObjectDetectionBase extends ImageVertical {
   /**
    * Settings used for training the model.
@@ -12095,6 +12362,7 @@ model ImageObjectDetectionBase extends ImageVertical {
  * For more information on the available settings please visit the official documentation:
  * https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ImageModelSettingsObjectDetection extends ImageModelSettings {
   /**
    * Maximum number of detections per image, for all classes. Must be a positive integer.
@@ -12203,6 +12471,7 @@ model ImageModelSettingsObjectDetection extends ImageModelSettings {
  * For more information on the available settings please visit the official documentation:
  * https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ImageModelDistributionSettingsObjectDetection
   extends ImageModelDistributionSettings {
   /**
@@ -12307,6 +12576,7 @@ model ImageObjectDetection extends AutoMLVertical {
   taskType: "ImageObjectDetection";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ImportDataAction extends ScheduleActionBase {
   /**
    * [Required] Defines Schedule action definition details.
@@ -12320,6 +12590,7 @@ model ImportDataAction extends ScheduleActionBase {
   actionType: "ImportData";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model JobScheduleAction extends ScheduleActionBase {
   /**
    * [Required] Defines Schedule action definition details.
@@ -12333,6 +12604,7 @@ model JobScheduleAction extends ScheduleActionBase {
   actionType: "CreateJob";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model KerberosCredentials {
   /**
    * [Required] IP Address or DNS HostName.
@@ -12359,6 +12631,7 @@ model KerberosCredentials {
   kerberosRealm: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model KerberosKeytabCredentials extends DatastoreCredentials {
   ...KerberosCredentials;
 
@@ -12374,6 +12647,7 @@ model KerberosKeytabCredentials extends DatastoreCredentials {
   credentialsType: "KerberosKeytab";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model KerberosKeytabSecrets extends DatastoreSecrets {
   /**
    * Kerberos keytab secret.
@@ -12386,6 +12660,7 @@ model KerberosKeytabSecrets extends DatastoreSecrets {
   secretsType: "KerberosKeytab";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model KerberosPasswordCredentials extends DatastoreCredentials {
   ...KerberosCredentials;
 
@@ -12401,6 +12676,7 @@ model KerberosPasswordCredentials extends DatastoreCredentials {
   credentialsType: "KerberosPassword";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model KerberosPasswordSecrets extends DatastoreSecrets {
   /**
    * Kerberos password secret.
@@ -12460,6 +12736,7 @@ model LabelingJobTextProperties extends LabelingJobMediaProperties {
   mediaType: "Text";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model LakeHouseArtifact extends OneLakeArtifact {
   /**
    * [Required] OneLake artifact type
@@ -12534,6 +12811,7 @@ model MLAssistConfigurationEnabled extends MLAssistConfiguration {
   mlAssist: "Enabled";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model MLFlowModelJobOutput extends JobOutput {
   ...AssetJobOutput;
 
@@ -12559,6 +12837,7 @@ model MLTableData extends DataVersionBase {
   dataType: "mltable";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model MLTableJobOutput extends JobOutput {
   ...AssetJobOutput;
 
@@ -12575,7 +12854,7 @@ model ManagedComputeIdentity extends MonitorComputeIdentityBase {
   /**
    * Managed service identity (system assigned and/or user assigned identities)
    */
-  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
+  identity?: ManagedServiceIdentity;
 
   /**
    * [Required] Monitor compute identity type enum.
@@ -12866,6 +13145,8 @@ model NlpVertical {
   validationData?: MLTableJobInput;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model NlpVerticalFeaturizationSettings extends FeaturizationSettings {}
 
 /**
@@ -12908,6 +13189,7 @@ model NoneDatastoreCredentials extends DatastoreCredentials {
   credentialsType: "None";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model NumericalDataDriftMetricThreshold extends DataDriftMetricThresholdBase {
   /**
    * [Required] The numerical data drift metric to calculate.
@@ -12920,6 +13202,7 @@ model NumericalDataDriftMetricThreshold extends DataDriftMetricThresholdBase {
   dataType: "Numerical";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model NumericalDataQualityMetricThreshold
   extends DataQualityMetricThresholdBase {
   /**
@@ -12934,6 +13217,7 @@ model NumericalDataQualityMetricThreshold
   dataType: "Numerical";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model NumericalPredictionDriftMetricThreshold
   extends PredictionDriftMetricThresholdBase {
   /**
@@ -13114,6 +13398,7 @@ model PipelineJob extends JobBase {
   jobType: "Pipeline";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model PredictionDriftMonitoringSignal extends MonitoringSignalBase {
   /**
    * [Required] A list of metrics to calculate and their associated thresholds.
@@ -13251,6 +13536,7 @@ model Regression extends AutoMLVertical {
 /**
  * Regression Training related configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model RegressionTrainingSettings extends TrainingSettings {
   /**
    * Allowed models for regression task.
@@ -13263,6 +13549,7 @@ model RegressionTrainingSettings extends TrainingSettings {
   blockedTrainingAlgorithms?: RegressionModels[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model RegressionModelPerformanceMetricThreshold
   extends ModelPerformanceMetricThresholdBase {
   /**
@@ -13277,6 +13564,7 @@ model RegressionModelPerformanceMetricThreshold
   modelType: "Regression";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SASCredentialDto extends PendingUploadCredentialDto {
   /**
    * Full SAS Uri, including the storage, container/blob path and SAS token
@@ -13470,6 +13758,7 @@ model SparkJob extends JobBase {
 @discriminator("sparkJobEntryType")
 model SparkJobEntry {}
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SparkResourceConfiguration {
   /**
    * Optional type of VM used as supported by the compute target.
@@ -13484,6 +13773,7 @@ model SparkResourceConfiguration {
   runtimeVersion?: string = "3.1";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SparkJobPythonEntry extends SparkJobEntry {
   /**
    * [Required] Relative python file path for job entry point.
@@ -13499,6 +13789,7 @@ model SparkJobPythonEntry extends SparkJobEntry {
   sparkJobEntryType: "SparkJobPythonEntry";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SparkJobScalaEntry extends SparkJobEntry {
   /**
    * [Required] Scala class name used as entry point.
@@ -13675,6 +13966,7 @@ model TrialComponent {
   resources?: JobResourceConfiguration;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model TargetUtilizationScaleSettings extends OnlineScaleSettings {
   /**
    * The maximum number of instances that the deployment can scale to. The quota will be reserved for max_instances.
@@ -13783,6 +14075,7 @@ model TextNer extends AutoMLVertical {
   taskType: "TextNER";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model TopNFeaturesByAttribution extends MonitoringFeatureFilterBase {
   /**
    * The number of top features to include.
@@ -13839,6 +14132,7 @@ model TritonInferencingServer extends InferencingServer {
   serverType: "Triton";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model TritonModelJobInput extends JobInput {
   ...AssetJobInput;
 
@@ -13848,6 +14142,7 @@ model TritonModelJobInput extends JobInput {
   jobInputType: "triton_model";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model TritonModelJobOutput extends JobOutput {
   ...AssetJobOutput;
 
@@ -13882,6 +14177,7 @@ model UriFileDataVersion extends DataVersionBase {
   dataType: "uri_file";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model UriFileJobInput extends JobInput {
   ...AssetJobInput;
 
@@ -13891,6 +14187,7 @@ model UriFileJobInput extends JobInput {
   jobInputType: "uri_file";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model UriFileJobOutput extends JobOutput {
   ...AssetJobOutput;
 
@@ -13910,6 +14207,7 @@ model UriFolderDataVersion extends DataVersionBase {
   dataType: "uri_folder";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model UriFolderJobInput extends JobInput {
   ...AssetJobInput;
 
@@ -13919,6 +14217,7 @@ model UriFolderJobInput extends JobInput {
   jobInputType: "uri_folder";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model UriFolderJobOutput extends JobOutput {
   ...AssetJobOutput;
 
@@ -13938,8 +14237,10 @@ model UserIdentity extends IdentityConfiguration {
   identityType: "UserIdentity";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AccessKeyAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   credentials?: WorkspaceConnectionAccessKey;
 
   /**
@@ -13948,8 +14249,11 @@ model AccessKeyAuthTypeWorkspaceConnectionProperties
   authType: "AccessKey";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model WorkspaceConnectionAccessKey {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   accessKeyId?: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   secretAccessKey?: string;
 }
 
@@ -13992,6 +14296,7 @@ model ApiKeyAuthWorkspaceConnectionProperties
  * Api key object for workspace connection credential.
  */
 model WorkspaceConnectionApiKey {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   key?: string;
 }
 
@@ -14030,6 +14335,7 @@ model CustomKeysWorkspaceConnectionProperties
  * FQDN Outbound Rule for the managed network of a machine learning workspace.
  */
 model FqdnOutboundRule extends OutboundRule {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   destination?: string;
 
   /**
@@ -14038,8 +14344,10 @@ model FqdnOutboundRule extends OutboundRule {
   type: "FQDN";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ManagedIdentityAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   credentials?: WorkspaceConnectionManagedIdentity;
 
   /**
@@ -14048,11 +14356,15 @@ model ManagedIdentityAuthTypeWorkspaceConnectionProperties
   authType: "ManagedIdentity";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model WorkspaceConnectionManagedIdentity {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   clientId?: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   resourceId?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model NoneAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
   /**
@@ -14061,8 +14373,10 @@ model NoneAuthTypeWorkspaceConnectionProperties
   authType: "None";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model PATAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   credentials?: WorkspaceConnectionPersonalAccessToken;
 
   /**
@@ -14071,7 +14385,9 @@ model PATAuthTypeWorkspaceConnectionProperties
   authType: "PAT";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model WorkspaceConnectionPersonalAccessToken {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   pat?: string;
 }
 
@@ -14079,7 +14395,9 @@ model WorkspaceConnectionPersonalAccessToken {
  * Private Endpoint destination for a Private Endpoint Outbound Rule for the managed network of a machine learning workspace.
  */
 model PrivateEndpointDestination {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   serviceResourceId?: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   sparkEnabled?: boolean;
 
   /**
@@ -14087,6 +14405,7 @@ model PrivateEndpointDestination {
    */
   sparkStatus?: RuleStatus;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   subresourceTarget?: string;
 }
 
@@ -14105,8 +14424,10 @@ model PrivateEndpointOutboundRule extends OutboundRule {
   type: "PrivateEndpoint";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SASAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   credentials?: WorkspaceConnectionSharedAccessSignature;
 
   /**
@@ -14115,12 +14436,16 @@ model SASAuthTypeWorkspaceConnectionProperties
   authType: "SAS";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model WorkspaceConnectionSharedAccessSignature {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   sas?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ServicePrincipalAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   credentials?: WorkspaceConnectionServicePrincipal;
 
   /**
@@ -14129,9 +14454,13 @@ model ServicePrincipalAuthTypeWorkspaceConnectionProperties
   authType: "ServicePrincipal";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model WorkspaceConnectionServicePrincipal {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   clientId?: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   clientSecret?: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   tenantId?: string;
 }
 
@@ -14150,8 +14479,11 @@ model ServiceTagDestination {
   @visibility("read")
   addressPrefixes?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   portRanges?: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   protocol?: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   serviceTag?: string;
 }
 
@@ -14170,8 +14502,10 @@ model ServiceTagOutboundRule extends OutboundRule {
   type: "ServiceTag";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model UsernamePasswordAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   credentials?: WorkspaceConnectionUsernamePassword;
 
   /**
@@ -14180,7 +14514,10 @@ model UsernamePasswordAuthTypeWorkspaceConnectionProperties
   authType: "UsernamePassword";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model WorkspaceConnectionUsernamePassword {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   password?: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   username?: string;
 }

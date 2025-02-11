@@ -1,4 +1,5 @@
 import { CodeModel, HttpMethod, Operation } from "@autorest/codemodel";
+import { getOptions } from "../options";
 import { getLogger } from "../utils/logger";
 import { _ArmPagingMetadata, _ArmResourceOperation, ArmResource, Metadata } from "../utils/resource-discovery";
 import { lastWordToSingular } from "../utils/strings";
@@ -24,6 +25,8 @@ import { getResourceKey, getResourceKeySegment, getResourceType, isScopedPath, i
 const logger = () => getLogger("parse-metadata");
 
 export function parseMetadata(codeModel: CodeModel, configuration: Record<string, any>): Metadata {
+  const { isFullCompatible } = getOptions();
+
   const operationSets: { [path: string]: OperationSet } = {};
   const operations = codeModel.operationGroups.flatMap((og) => og.operations);
   for (const operation of operations) {
@@ -82,46 +85,55 @@ export function parseMetadata(codeModel: CodeModel, configuration: Record<string
     }
   }
 
-  const resources: { [name: string]: ArmResource } = {};
+  const resources: { [name: string]: ArmResource[] } = {};
   for (const resourceSchemaName in operationSetsByResourceDataSchemaName) {
     const operationSets = operationSetsByResourceDataSchemaName[resourceSchemaName];
-    if (operationSets.length > 1) {
-      logger().info(
-        `We cannot support multi path with same model. Some operations will be lost. \nResource schema name: ${resourceSchemaName}.\nPath:\n${operationSets
-          .map((o) => o.RequestPath)
-          .join("\n")}`,
+
+    for (let index = 0; index < operationSets.length; index++) {
+      if (index >= 1 && !isFullCompatible) {
+        logger().info(
+          `Multi-path operations applied on the same resource. Some operations will be lost. \nResource schema name: ${resourceSchemaName}.\nPath:\n${operationSets
+            .map((o) => o.RequestPath)
+            .join("\n")}\nTurn on isFullCompatible to keep all operations, or adjust your TypeSpec.`,
+        );
+        resources[resourceSchemaName + "FixMe"] = [
+          {
+            Name: resourceSchemaName + "FixMe",
+            GetOperation: undefined,
+            ExistOperation: undefined,
+            CreateOperation: undefined,
+            UpdateOperation: undefined,
+            DeleteOperation: undefined,
+            ListOperations: [],
+            OperationsFromResourceGroupExtension: [],
+            OperationsFromSubscriptionExtension: [],
+            OperationsFromManagementGroupExtension: [],
+            OperationsFromTenantExtension: [],
+            OtherOperations: [],
+            Parents: [],
+            SwaggerModelName: "",
+            ResourceType: "",
+            ResourceKey: "",
+            ResourceKeySegment: "",
+            IsTrackedResource: false,
+            IsTenantResource: false,
+            IsSubscriptionResource: false,
+            IsManagementGroupResource: false,
+            IsExtensionResource: false,
+            IsSingletonResource: false,
+          },
+        ];
+        break;
+      }
+      (resources[resourceSchemaName] ??= []).push(
+        buildResource(
+          resourceSchemaName,
+          operationSets[index],
+          Object.values(operationSetsByResourceDataSchemaName).flat(),
+          codeModel,
+        ),
       );
-      resources[resourceSchemaName + "FixMe"] = {
-        Name: resourceSchemaName + "FixMe",
-        GetOperations: [],
-        CreateOperations: [],
-        UpdateOperations: [],
-        DeleteOperations: [],
-        ListOperations: [],
-        OperationsFromResourceGroupExtension: [],
-        OperationsFromSubscriptionExtension: [],
-        OperationsFromManagementGroupExtension: [],
-        OperationsFromTenantExtension: [],
-        OtherOperations: [],
-        Parents: [],
-        SwaggerModelName: "",
-        ResourceType: "",
-        ResourceKey: "",
-        ResourceKeySegment: "",
-        IsTrackedResource: false,
-        IsTenantResource: false,
-        IsSubscriptionResource: false,
-        IsManagementGroupResource: false,
-        IsExtensionResource: false,
-        IsSingletonResource: false,
-      };
     }
-    resources[resourceSchemaName] = buildResource(
-      resourceSchemaName,
-      operationSets[0],
-      Object.values(operationSetsByResourceDataSchemaName).flat(),
-      codeModel,
-    );
   }
 
   return {
@@ -139,10 +151,14 @@ function buildResource(
   codeModel: CodeModel,
 ): ArmResource {
   const getOperation = buildLifeCycleOperation(set, HttpMethod.Get, "Get");
+  if (getOperation === undefined) {
+    logger().error(`Resource ${resourceSchemaName} must have a GET operation.`);
+  }
   const createOperation = buildLifeCycleOperation(set, HttpMethod.Put, "CreateOrUpdate");
   const updateOperation =
     buildLifeCycleOperation(set, HttpMethod.Patch, "Update") ?? buildLifeCycleOperation(set, HttpMethod.Put, "Update");
   const deleteOperation = buildLifeCycleOperation(set, HttpMethod.Delete, "Delete");
+  const existOperation = buildLifeCycleOperation(set, HttpMethod.Head, "CheckExistence");
   const listOperation = buildListOperation(set);
   const otherOperation = buildOtherOperation(set);
 
@@ -181,10 +197,11 @@ function buildResource(
 
   return {
     Name: lastWordToSingular(resourceSchemaName),
-    GetOperations: getOperation ? [getOperation] : [],
-    CreateOperations: createOperation ? [createOperation] : [],
-    UpdateOperations: updateOperation ? [updateOperation] : [],
-    DeleteOperations: deleteOperation ? [deleteOperation] : [],
+    GetOperation: getOperation,
+    ExistOperation: existOperation,
+    CreateOperation: createOperation,
+    UpdateOperation: updateOperation,
+    DeleteOperation: deleteOperation,
     ListOperations: listOperation ?? [],
     OperationsFromResourceGroupExtension: operationsFromResourceGroupExtension,
     OperationsFromSubscriptionExtension: operationsFromSubscriptionExtension,

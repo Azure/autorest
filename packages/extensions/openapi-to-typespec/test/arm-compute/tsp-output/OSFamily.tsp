@@ -24,20 +24,9 @@ model OSFamily is Azure.ResourceManager.ProxyResource<OSFamilyProperties> {
   >;
 
   /**
-   * Resource Id.
-   */
-  @visibility("read")
-  id?: string;
-
-  /**
-   * Resource type.
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
    * Resource location.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility("read")
   location?: string;
 }
@@ -51,7 +40,7 @@ interface OSFamilies {
   @operationId("CloudServiceOperatingSystems_GetOSFamily")
   getOSFamily is ArmResourceRead<
     OSFamily,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
   /**
@@ -61,8 +50,7 @@ interface OSFamilies {
   @operationId("CloudServiceOperatingSystems_ListOSFamilies")
   listOSFamilies is ArmResourceListByParent<
     OSFamily,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = OSFamilyListResult
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 }
 

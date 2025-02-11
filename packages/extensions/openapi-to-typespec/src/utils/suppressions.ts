@@ -1,17 +1,19 @@
-import { ChoiceSchema, Property, Schema, SealedChoiceSchema } from "@autorest/codemodel";
 import { WithSuppressDirective } from "../interfaces";
-import { isChoiceSchema, isSealedChoiceSchema, isDictionarySchema, isStringSchema } from "./schemas";
 
-export function generateSuppressionForDocumentRequired(): string {
-  return `#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"`;
+export enum SuppressionCode {
+  NoEnum = "@azure-tools/typespec-azure-core/no-enum",
+  ArmPutOperationResponseCodes = "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes",
+  DocumentRequired = "@azure-tools/typespec-azure-core/documentation-required",
+  NoResponseBody = "@azure-tools/typespec-azure-resource-manager/no-response-body",
+  LroLocationHeader = "@azure-tools/typespec-azure-resource-manager/lro-location-header",
+  ArmDeleteOperationResponseCodes = "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes",
+  ArmResourceInvalidEnvelopeProperty = "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property",
+  ArmNoRecord = "@azure-tools/typespec-azure-resource-manager/arm-no-record",
+  ArmResourceInterfaceRequiresDecorator = "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator",
 }
 
 export function generateSuppressionForNoEnum(): string {
   return `#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"`;
-}
-
-export function getPropertySuppressions(propertySchema: Property): WithSuppressDirective[] | undefined {
-  return isDictionarySchema(propertySchema.schema) ? getSuppressionsForRecordProperty() : undefined;
 }
 
 export function generateSuppressions(suppressions: WithSuppressDirective[]): string[] {
@@ -22,46 +24,17 @@ export function generateSuppressions(suppressions: WithSuppressDirective[]): str
   return definitions;
 }
 
-export function getSuppressionsForArmResourceDeleteAsync(): WithSuppressDirective[] {
-  return [
-    { suppressionCode: "deprecated", suppressionMessage: "For backward compatibility" },
-    {
-      suppressionCode: "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes",
-      suppressionMessage: "For backward compatibility",
-    },
-    {
-      suppressionCode: "@azure-tools/typespec-azure-core/no-response-body",
-      suppressionMessage: "For backward compatibility",
-    },
-  ];
+export function getSuppressionWithCode(suppressionCode: SuppressionCode): WithSuppressDirective {
+  return {
+    suppressionCode,
+    suppressionMessage: "For backward compatibility",
+  };
 }
 
-export function getSuppressionsForArmResourceCreateOrReplaceAsync(): WithSuppressDirective[] {
+export function getSuppressionsForModelExtension(): WithSuppressDirective[] {
   return [
     {
-      suppressionCode: "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes",
-      suppressionMessage: "For backward compatibility",
-    },
-    {
-      suppressionCode: "@azure-tools/typespec-azure-resource-manager/no-response-body",
-      suppressionMessage: "For backward compatibility",
-    },
-  ];
-}
-
-export function getSuppressionsForArmResourceDeleteSync(): WithSuppressDirective[] {
-  return [
-    {
-      suppressionCode: "@azure-tools/typespec-azure-core/no-response-body",
-      suppressionMessage: "For backward compatibility",
-    },
-  ];
-}
-
-export function getSuppressionsForRecordProperty(): WithSuppressDirective[] {
-  return [
-    {
-      suppressionCode: "@azure-tools/typespec-azure-resource-manager/arm-no-record",
+      suppressionCode: "@azure-tools/typespec-azure-core/composition-over-inheritance",
       suppressionMessage: "For backward compatibility",
     },
   ];

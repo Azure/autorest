@@ -38,14 +38,8 @@ interface GlobalSchemaContracts {
    * Gets the entity state (Etag) version of the Schema specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("GlobalSchema_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      GlobalSchemaContract,
-      BaseParameters<GlobalSchemaContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<GlobalSchemaContract>;
 
   /**
    * Creates new or updates existing specified Schema of the API Management service instance.
@@ -63,14 +57,16 @@ interface GlobalSchemaContracts {
       @header
       `If-Match`?: string;
     },
-    Response = ArmResourceCreatedResponse<GlobalSchemaContract> | ArmResourceUpdatedResponse<GlobalSchemaContract> | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<GlobalSchemaContract> | ArmResourceCreatedResponse<
+      GlobalSchemaContract,
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
   >;
 
   /**
    * Deletes specific Schema.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("GlobalSchema_Delete")
   delete is ArmResourceDeleteSync<
     GlobalSchemaContract,
@@ -109,8 +105,7 @@ interface GlobalSchemaContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = GlobalSchemaListResult
+    }
   >;
 }
 

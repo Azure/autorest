@@ -21,13 +21,14 @@ model BatchEndpointTrackedResource
     SegmentName = "batchEndpoints",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 
   /**
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   kind?: string;
 
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
   ...Azure.ResourceManager.ResourceSkuProperty;
 }
 
@@ -55,18 +56,19 @@ interface BatchEndpointTrackedResources {
   @operationId("BatchEndpoints_Update")
   update is ArmCustomPatchAsync<
     BatchEndpointTrackedResource,
-    PartialMinimalTrackedResourceWithIdentity
+    PatchModel = PartialMinimalTrackedResourceWithIdentity
   >;
 
   /**
    * Delete Batch Inference Endpoint (asynchronous).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("BatchEndpoints_Delete")
-  delete is ArmResourceDeleteAsync<BatchEndpointTrackedResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    BatchEndpointTrackedResource,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Lists Batch inference endpoint in the workspace.
@@ -88,18 +90,19 @@ interface BatchEndpointTrackedResources {
       @query("$skip")
       $skip?: string;
     },
-    Response = BatchEndpointTrackedResourceArmPaginatedResult
+    Response = ArmResponse<BatchEndpointTrackedResourceArmPaginatedResult>
   >;
 
   /**
    * Lists batch Inference Endpoint keys.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("listkeys")
   @operationId("BatchEndpoints_ListKeys")
   listKeys is ArmResourceActionSync<
     BatchEndpointTrackedResource,
     void,
-    EndpointAuthKeys
+    ArmResponse<EndpointAuthKeys>
   >;
 }
 

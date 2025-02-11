@@ -23,6 +23,13 @@ model DeletedServiceContract
     SegmentName = "deletedservices",
     NamePattern = "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
   >;
+
+  /**
+   * API Management Service Master Location.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility("read")
+  location?: string;
 }
 
 @armResourceOperations
@@ -34,20 +41,22 @@ interface DeletedServiceContracts {
   @operationId("DeletedServices_GetByName")
   getByName is ArmResourceRead<
     DeletedServiceContract,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
   /**
    * Purges Api Management Service (deletes it with no option to undelete).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("DeletedServices_Purge")
-  purge is ArmResourceDeleteAsync<
+  purge is ArmResourceDeleteWithoutOkAsync<
     DeletedServiceContract,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      @bodyRoot
+      _: DeletedServiceContract;
+    }) | ArmDeletedNoContentResponse
   >;
 }
 

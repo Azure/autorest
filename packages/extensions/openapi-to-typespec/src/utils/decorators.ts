@@ -11,11 +11,12 @@ import {
   Operation,
   isNumberSchema,
 } from "@autorest/codemodel";
-import { TypespecDecorator, DecoratorArgument } from "../interfaces";
+import { TypespecDecorator, DecoratorArgument, WithSuppressDirective } from "../interfaces";
 import { getOptions } from "../options";
 import { createCSharpNameDecorator } from "../pretransforms/rename-pretransform";
 import { getOwnDiscriminator } from "./discriminator";
-import { isSealedChoiceSchema, isStringSchema } from "./schemas";
+import { isStringSchema } from "./schemas";
+import { escapeRegex } from "./strings";
 
 export function getModelDecorators(model: ObjectSchema): TypespecDecorator[] {
   const decorators: TypespecDecorator[] = [];
@@ -106,7 +107,7 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
   }
 
   if (isParameter(element) && element?.protocol?.http?.in) {
-    const location = element.protocol.http.in;
+    const location = element.protocol.http.in === "body" ? "bodyRoot" : element.protocol.http.in;
     const locationDecorator: TypespecDecorator = { name: location };
 
     if (location === "query") {
@@ -149,6 +150,11 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
                   options: { unwrap: true },
                 },
               ];
+
+        if (isFullCompatible && locationDecorator.name === "query" && format === "multi") {
+          locationDecorator.suppressionCode = "@azure-tools/typespec-azure-core/no-query-explode";
+          locationDecorator.suppressionMessage = "For backward compatibility";
+        }
       }
     }
 
@@ -173,10 +179,9 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
 
   if (element.extensions?.["x-ms-client-flatten"] && isFullCompatible) {
     decorators.push({
-      name: "extension",
-      module: "@typespec/openapi",
-      namespace: "TypeSpec.OpenAPI",
-      arguments: [{ value: `"x-ms-client-flatten"` }, { value: "true" }],
+      name: "Azure.ResourceManager.Private.conditionalClientFlatten",
+      suppressionCode: "@azure-tools/typespec-azure-core/no-private-usage",
+      suppressionMessage: "For backward compatibility",
     });
   }
 
@@ -280,10 +285,6 @@ function getStringSchemaDecorators(schema: Schema, decorators: TypespecDecorator
   }
 }
 
-function escapeRegex(str: string) {
-  return str.replace(/\\/g, "\\\\");
-}
-
 export function getEnumClientDecorators(enumeration: SealedChoiceSchema | ChoiceSchema): TypespecDecorator[] {
   const decorators: TypespecDecorator[] = [];
 
@@ -342,7 +343,7 @@ export function generateAugmentedDecorators(keyName: string, decorators: Typespe
     }
     if (decorator.arguments) {
       definitions.push(
-        `@@${decorator.name}(${keyName}, ${decorator.arguments.map((a) => getArgumentValue(a)).join(", ")})`,
+        `@@${decorator.name}(${decorator.target}, ${decorator.arguments.map((a) => getArgumentValue(a)).join(", ")})`,
       );
     } else {
       definitions.push(`@@${decorator.name}(${keyName})`);

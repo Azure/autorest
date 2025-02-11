@@ -1,0 +1,17 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "groupId": "templategroup",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid",
+    "userId": "59307d350af58404d8a26300"
+  },
+  "responses": {
+    "200": {},
+    "204": {}
+  },
+  "operationId": "GroupUser_Delete",
+  "title": "ApiManagementDeleteGroupUser"
+}

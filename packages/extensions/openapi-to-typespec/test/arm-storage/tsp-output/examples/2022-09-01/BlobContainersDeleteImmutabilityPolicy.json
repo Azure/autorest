@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "If-Match": "\"8d59f81a7fa7be0\"",
+    "accountName": "sto9621",
+    "api-version": "2022-09-01",
+    "containerName": "container4910",
+    "immutabilityPolicyName": "default",
+    "monitor": "true",
+    "resourceGroupName": "res1581",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.Storage/storageAccounts/blobServices/containers/immutabilityPolicies",
+        "etag": "\"8d59f81a87b40c0\"",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res1581/providers/Microsoft.Storage/storageAccounts/sto9621/blobServices/default/containers/container4910/immutabilityPolicies/default",
+        "properties": {
+          "immutabilityPeriodSinceCreationInDays": 0,
+          "state": "Unlocked"
+        }
+      }
+    }
+  },
+  "operationId": "BlobContainers_DeleteImmutabilityPolicy",
+  "title": "DeleteImmutabilityPolicy"
+}

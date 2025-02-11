@@ -1,12 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -77,19 +75,6 @@ union ProvisioningState {
 }
 
 /**
- * The name of the Azure pricing tier to which the SKU applies.
- */
-union SkuTier {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Development: "Development",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Basic: "Basic",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Standard: "Standard",
-}
-
-/**
  * The managed mode of the server (0 = not managed, 1 = managed).
  */
 union ManagedMode {
@@ -123,6 +108,7 @@ enum ConnectionMode {
 /**
  * Properties of Analysis Services resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model AnalysisServicesServerProperties
   extends AnalysisServicesServerMutableProperties {
   /**
@@ -147,28 +133,6 @@ model AnalysisServicesServerProperties
    * The SKU of the Analysis Services resource.
    */
   sku?: ResourceSku;
-}
-
-/**
- * Represents the SKU name and Azure pricing tier for Analysis Services resource.
- */
-model ResourceSku {
-  /**
-   * Name of the SKU level.
-   */
-  name: string;
-
-  /**
-   * The name of the Azure pricing tier to which the SKU applies.
-   */
-  tier?: SkuTier;
-
-  /**
-   * The number of instances in the read only query pool.
-   */
-  @maxValue(8)
-  @minValue(1)
-  capacity?: int32 = 1;
 }
 
 /**
@@ -339,7 +303,8 @@ model AnalysisServicesServerUpdateParameters {
   /**
    * Properties of the provision operation request.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AnalysisServicesServerMutableProperties;
 }
 

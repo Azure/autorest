@@ -38,14 +38,8 @@ interface ProductContracts {
    * Gets the entity state (Etag) version of the product specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("Product_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      ProductContract,
-      BaseParameters<ProductContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<ProductContract>;
 
   /**
    * Creates or Updates a product.
@@ -71,7 +65,7 @@ interface ProductContracts {
   @operationId("Product_Update")
   update is ArmCustomPatchSync<
     ProductContract,
-    ProductUpdateParameters,
+    PatchModel = ProductUpdateParameters,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -85,7 +79,6 @@ interface ProductContracts {
    * Delete product.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Product_Delete")
   delete is ArmResourceDeleteSync<
     ProductContract,
@@ -142,162 +135,242 @@ interface ProductContracts {
        */
       @query("tags")
       tags?: string;
-    },
-    Response = ProductListResult
+    }
   >;
 
   /**
    * Lists a collection of the APIs associated with a product.
    */
-  // FIXME: ProductApi_ListByProduct could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductApi_ListByProduct")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/apis")
   @get
-  listByProduct(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
+  @action("apis")
+  @operationId("ProductApi_ListByProduct")
+  listByProduct is ArmResourceActionSync<
+    ProductContract,
+    void,
+    ArmResponse<ResourceListResult<ProductApiData>>,
+    Parameters = {
+      /**
+       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| serviceUrl | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| path | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
+       */
+      @query("$filter")
+      $filter?: string;
 
-    /**
-     * The name of the API Management service.
-     */
-    @maxLength(50)
-    @minLength(1)
-    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-    @path
-    serviceName: string,
+      /**
+       * Number of records to return.
+       */
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
 
-    /**
-     * Product identifier. Must be unique in the current API Management service instance.
-     */
-    @maxLength(256)
-    @minLength(1)
-    @path
-    productId: string,
+      /**
+       * Number of records to skip.
+       */
+      @query("$skip")
+      $skip?: int32;
+    }
+  >;
 
-    /**
-     * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| serviceUrl | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| path | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-     */
-    @query("$filter")
-    $filter?: string,
+  /**
+   * Checks that API entity specified by identifier is associated with the Product entity.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @head
+  @action("{apiId}")
+  @operationId("ProductApi_CheckEntityExists")
+  checkEntityExists is ArmResourceActionSync<
+    ProductContract,
+    void,
+    NoContentResponse,
+    Parameters = {
+      /**
+       * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
+       */
+      @maxLength(256)
+      @minLength(1)
+      @pattern("^[^*#&+:<>?]+$")
+      @path
+      apiId: string;
+    }
+  >;
 
-    /**
-     * Number of records to return.
-     */
-    @minValue(1)
-    @query("$top")
-    $top?: int32,
+  /**
+   * Adds an API to the specified product.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @put
+  @action("{apiId}")
+  @operationId("ProductApi_CreateOrUpdate")
+  productApiCreateOrUpdate is ArmResourceActionSync<
+    ProductContract,
+    void,
+    ArmResponse<ProductApiData> | ArmResourceCreatedSyncResponse<ProductApiData>,
+    Parameters = {
+      /**
+       * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
+       */
+      @maxLength(256)
+      @minLength(1)
+      @pattern("^[^*#&+:<>?]+$")
+      @path
+      apiId: string;
+    }
+  >;
 
-    /**
-     * Number of records to skip.
-     */
-    @query("$skip")
-    $skip?: int32,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<ApiManagementProductApiListResult> | ErrorResponse;
+  /**
+   * Deletes the specified API from the specified product.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @delete
+  @action("{apiId}")
+  @operationId("ProductApi_Delete")
+  productApiDelete is ArmResourceActionSync<
+    ProductContract,
+    void,
+    OkResponse | NoContentResponse,
+    Parameters = {
+      /**
+       * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
+       */
+      @maxLength(256)
+      @minLength(1)
+      @pattern("^[^*#&+:<>?]+$")
+      @path
+      apiId: string;
+    }
+  >;
 
   /**
    * Lists the collection of developer groups associated with the specified product.
    */
-  // FIXME: ProductGroup_ListByProduct could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductGroup_ListByProduct")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/groups")
   @get
-  listByProduct(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
+  @action("groups")
+  @operationId("ProductGroup_ListByProduct")
+  productGroupListByProduct is ArmResourceActionSync<
+    ProductContract,
+    void,
+    ArmResponse<ResourceListResult<ProductGroupData>>,
+    Parameters = {
+      /**
+       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt |     |</br>| displayName | filter | eq, ne |     |</br>| description | filter | eq, ne |     |</br>
+       */
+      @query("$filter")
+      $filter?: string;
 
-    /**
-     * The name of the API Management service.
-     */
-    @maxLength(50)
-    @minLength(1)
-    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-    @path
-    serviceName: string,
+      /**
+       * Number of records to return.
+       */
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
 
-    /**
-     * Product identifier. Must be unique in the current API Management service instance.
-     */
-    @maxLength(256)
-    @minLength(1)
-    @path
-    productId: string,
+      /**
+       * Number of records to skip.
+       */
+      @query("$skip")
+      $skip?: int32;
+    }
+  >;
 
-    /**
-     * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt |     |</br>| displayName | filter | eq, ne |     |</br>| description | filter | eq, ne |     |</br>
-     */
-    @query("$filter")
-    $filter?: string,
+  /**
+   * Checks that Group entity specified by identifier is associated with the Product entity.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @head
+  @action("{groupId}")
+  @operationId("ProductGroup_CheckEntityExists")
+  productGroupCheckEntityExists is ArmResourceActionSync<
+    ProductContract,
+    void,
+    NoContentResponse,
+    Parameters = {
+      /**
+       * Group identifier. Must be unique in the current API Management service instance.
+       */
+      @maxLength(256)
+      @minLength(1)
+      @path
+      groupId: string;
+    }
+  >;
 
-    /**
-     * Number of records to return.
-     */
-    @minValue(1)
-    @query("$top")
-    $top?: int32,
+  /**
+   * Adds the association between the specified developer group with the specified product.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @put
+  @action("{groupId}")
+  @operationId("ProductGroup_CreateOrUpdate")
+  productGroupCreateOrUpdate is ArmResourceActionSync<
+    ProductContract,
+    void,
+    ArmResponse<ProductGroupData> | ArmResourceCreatedSyncResponse<ProductGroupData>,
+    Parameters = {
+      /**
+       * Group identifier. Must be unique in the current API Management service instance.
+       */
+      @maxLength(256)
+      @minLength(1)
+      @path
+      groupId: string;
+    }
+  >;
 
-    /**
-     * Number of records to skip.
-     */
-    @query("$skip")
-    $skip?: int32,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<ApiManagementProductGroupListResult> | ErrorResponse;
+  /**
+   * Deletes the association between the specified group and product.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @delete
+  @action("{groupId}")
+  @operationId("ProductGroup_Delete")
+  productGroupDelete is ArmResourceActionSync<
+    ProductContract,
+    void,
+    OkResponse | NoContentResponse,
+    Parameters = {
+      /**
+       * Group identifier. Must be unique in the current API Management service instance.
+       */
+      @maxLength(256)
+      @minLength(1)
+      @path
+      groupId: string;
+    }
+  >;
 
   /**
    * Lists the collection of subscriptions to the specified product.
    */
-  // FIXME: ProductSubscriptions_List could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductSubscriptions_List")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/subscriptions")
   @get
-  list(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
+  @action("subscriptions")
+  @operationId("ProductSubscriptions_List")
+  list is ArmResourceActionSync<
+    ProductContract,
+    void,
+    ArmResponse<ResourceListResult<SubscriptionContract>>,
+    Parameters = {
+      /**
+       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| stateComment | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| ownerId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| scope | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| userId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| productId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq |     |</br>| user | expand |     |     |</br>
+       */
+      @query("$filter")
+      $filter?: string;
 
-    /**
-     * The name of the API Management service.
-     */
-    @maxLength(50)
-    @minLength(1)
-    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-    @path
-    serviceName: string,
+      /**
+       * Number of records to return.
+       */
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
 
-    /**
-     * Product identifier. Must be unique in the current API Management service instance.
-     */
-    @maxLength(256)
-    @minLength(1)
-    @path
-    productId: string,
-
-    /**
-     * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| stateComment | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| ownerId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| scope | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| userId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| productId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq |     |</br>| user | expand |     |     |</br>
-     */
-    @query("$filter")
-    $filter?: string,
-
-    /**
-     * Number of records to return.
-     */
-    @minValue(1)
-    @query("$top")
-    $top?: int32,
-
-    /**
-     * Number of records to skip.
-     */
-    @query("$skip")
-    $skip?: int32,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<SubscriptionListResult> | ErrorResponse;
+      /**
+       * Number of records to skip.
+       */
+      @query("$skip")
+      $skip?: int32;
+    }
+  >;
 }
 
 @@maxLength(ProductContract.name, 256);

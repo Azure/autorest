@@ -6,9 +6,11 @@ import { CodeModel, codeModelSchema } from "@autorest/codemodel";
 import { AutoRestExtension, AutorestExtensionHost, Session, startSession } from "@autorest/extension-base";
 import { serialize } from "@azure-tools/codegen";
 import { OpenAPI3Document } from "@azure-tools/openapi";
+import { Metadata } from "utils/resource-discovery";
 import { setArmCommonTypeVersion, setSession } from "./autorest-session";
 import { emitArmResources } from "./emiters/emit-arm-resources";
 import { emitClient } from "./emiters/emit-client";
+import { emitLegacy } from "./emiters/emit-legacy";
 import { emitMain } from "./emiters/emit-main";
 
 import { emitModels } from "./emiters/emit-models";
@@ -31,7 +33,7 @@ export async function processConverter(host: AutorestExtensionHost) {
   const codeModel = session.model;
   pretransformNames(codeModel);
   const { isArm } = getOptions();
-  let metadata = undefined;
+  let metadata: Metadata | undefined = undefined;
   if (isArm) {
     // await host.writeFile({ filename: "codeModel.yaml", content: serialize(codeModel, codeModelSchema) });
     metadata = parseMetadata(codeModel, session.configuration);
@@ -54,6 +56,9 @@ export async function processConverter(host: AutorestExtensionHost) {
   await emitPackage(getFilePath(session, "package.json"), programDetails);
   await emitTypespecConfig(getFilePath(session, "tspconfig.yaml"), programDetails);
   await emitClient(getFilePath(session, "client.tsp"), programDetails);
+  if (metadata && Object.keys(metadata.Resources).find((key) => metadata!.Resources[key].length > 1)) {
+    await emitLegacy(getFilePath(session, "legacy.tsp"));
+  }
 }
 
 function getOutuptDirectory(session: Session<CodeModel>) {

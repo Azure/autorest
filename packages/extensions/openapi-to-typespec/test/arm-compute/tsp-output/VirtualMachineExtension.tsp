@@ -44,7 +44,10 @@ interface VirtualMachineExtensions {
   /**
    * The operation to create or update the extension.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualMachineExtension>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    VirtualMachineExtension,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * The operation to update the extension.
@@ -52,16 +55,18 @@ interface VirtualMachineExtensions {
   @parameterVisibility
   update is ArmCustomPatchAsync<
     VirtualMachineExtension,
-    VirtualMachineExtensionUpdate
+    PatchModel = VirtualMachineExtensionUpdate,
+    Response = ArmResponse<VirtualMachineExtension>
   >;
 
   /**
    * The operation to delete the extension.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<VirtualMachineExtension>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    VirtualMachineExtension,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * The operation to get all extensions of a Virtual Machine.
@@ -75,7 +80,7 @@ interface VirtualMachineExtensions {
       @query("$expand")
       $expand?: string;
     },
-    Response = VirtualMachineExtensionsListResult
+    Response = ArmResponse<VirtualMachineExtensionsListResult>
   >;
 }
 

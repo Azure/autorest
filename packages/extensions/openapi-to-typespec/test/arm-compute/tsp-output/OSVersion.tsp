@@ -24,20 +24,9 @@ model OSVersion is Azure.ResourceManager.ProxyResource<OSVersionProperties> {
   >;
 
   /**
-   * Resource Id.
-   */
-  @visibility("read")
-  id?: string;
-
-  /**
-   * Resource type.
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
    * Resource location.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility("read")
   location?: string;
 }
@@ -51,7 +40,7 @@ interface OSVersions {
   @operationId("CloudServiceOperatingSystems_GetOSVersion")
   getOSVersion is ArmResourceRead<
     OSVersion,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
   /**
@@ -61,8 +50,7 @@ interface OSVersions {
   @operationId("CloudServiceOperatingSystems_ListOSVersions")
   listOSVersions is ArmResourceListByParent<
     OSVersion,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = OSVersionListResult
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 }
 

@@ -24,6 +24,7 @@ model Image is Azure.ResourceManager.TrackedResource<ImageProperties> {
   /**
    * The extended location of the Image.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   extendedLocation?: ExtendedLocation;
 }
 
@@ -46,34 +47,39 @@ interface Images {
   /**
    * Create or update an image.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Image>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Image,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Update an image.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<Image, ImageUpdate>;
+  update is ArmCustomPatchAsync<
+    Image,
+    PatchModel = ImageUpdate,
+    Response = ArmResponse<Image> | ArmResourceCreatedResponse<Image>
+  >;
 
   /**
    * Deletes an Image.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<Image>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Image,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Gets the list of images under a resource group. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.
    */
-  listByResourceGroup is ArmResourceListByParent<
-    Image,
-    Response = ImageListResult
-  >;
+  listByResourceGroup is ArmResourceListByParent<Image>;
 
   /**
    * Gets the list of Images in the subscription. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.
    */
-  list is ArmListBySubscription<Image, Response = ImageListResult>;
+  list is ArmListBySubscription<Image>;
 }
 
 @@doc(Image.name, "The name of the image.");

@@ -27,29 +27,27 @@ model TableServiceProperties
 }
 
 @armResourceOperations
-interface TableServicePropertiesOperationGroup {
+interface TableServices {
   /**
    * Gets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TableServices_GetServiceProperties")
   getServiceProperties is ArmResourceRead<TableServiceProperties>;
 
   /**
    * Sets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TableServices_SetServiceProperties")
-  setServiceProperties is ArmResourceCreateOrReplaceSync<TableServiceProperties>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  setServiceProperties is ArmResourceCreateOrReplaceSync<
+    TableServiceProperties,
+    Response = ArmResourceUpdatedResponse<TableServiceProperties>
+  >;
 
   /**
    * List all table services for the storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TableServices_List")
   list is ArmResourceListByParent<
     TableServiceProperties,
-    Response = ListTableServices
+    Response = ArmResponse<ListTableServices>
   >;
 }
 
@@ -57,6 +55,6 @@ interface TableServicePropertiesOperationGroup {
 @@doc(TableServiceProperties.properties,
   "The properties of a storage account’s Table service."
 );
-@@doc(TableServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
+@@doc(TableServices.setServiceProperties::parameters.resource,
   "The properties of a storage account’s Table service, only properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules can be specified."
 );

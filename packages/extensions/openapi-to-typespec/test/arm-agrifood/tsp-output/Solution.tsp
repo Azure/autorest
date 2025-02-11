@@ -10,7 +10,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Azure.ResourceManager.AgFoodPlatform;
+namespace Microsoft.AgFoodPlatform;
 /**
  * Solution resource.
  */
@@ -40,7 +40,6 @@ interface Solutions {
   /**
    * Uninstall Solution.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<Solution>;
 
   /**
@@ -52,18 +51,21 @@ interface Solutions {
       /**
        * Installed Solution ids.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "solutionIds", explode: true })
       solutionIds?: string[];
 
       /**
        * Ids of the resource.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "ids", explode: true })
       ids?: string[];
 
       /**
        * Names of the resource.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "names", explode: true })
       names?: string[];
 
@@ -71,12 +73,14 @@ interface Solutions {
        * Filters on key-value pairs within the Properties object.
        * eg. "{testKey} eq {testValue}".
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "propertyFilters", explode: true })
       propertyFilters?: string[];
 
       /**
        * Statuses of the resource.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "statuses", explode: true })
       statuses?: string[];
 
@@ -119,7 +123,7 @@ interface Solutions {
       @query("$skipToken")
       $skipToken?: string;
     },
-    Response = SolutionListResponse
+    Response = ArmResponse<SolutionListResponse>
   >;
 }
 

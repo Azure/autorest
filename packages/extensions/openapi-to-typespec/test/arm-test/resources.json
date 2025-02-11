@@ -1,9 +1,9 @@
 {
   "Resources": {
-    "Employee": {
-      "Name": "Employee",
-      "GetOperations": [
-        {
+    "Employee": [
+      {
+        "Name": "Employee",
+        "GetOperation": {
           "Name": "Get",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}",
           "Method": "GET",
@@ -11,10 +11,8 @@
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Get a Employee"
-        }
-      ],
-      "CreateOperations": [
-        {
+        },
+        "CreateOperation": {
           "Name": "CreateOrUpdate",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}",
           "Method": "PUT",
@@ -22,10 +20,8 @@
           "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Create a Employee"
-        }
-      ],
-      "UpdateOperations": [
-        {
+        },
+        "UpdateOperation": {
           "Name": "Update",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}",
           "Method": "PATCH",
@@ -33,10 +29,8 @@
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Update a Employee"
-        }
-      ],
-      "DeleteOperations": [
-        {
+        },
+        "DeleteOperation": {
           "Name": "Delete",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}",
           "Method": "DELETE",
@@ -44,60 +38,60 @@
           "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Delete a Employee"
-        }
-      ],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees",
-          "Method": "GET",
-          "OperationID": "Employees_ListByResourceGroup",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListByResourceGroup",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "List Employee resources by resource group"
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [
-        {
-          "Name": "_",
-          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Test/employees",
-          "Method": "GET",
-          "OperationID": "Employees_ListBySubscription",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListBySubscription",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "List Employee resources by subscription ID"
-        }
-      ],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
-      "Parents": [
-        "ResourceGroupResource"
-      ],
-      "SwaggerModelName": "Employee",
-      "ResourceType": "Microsoft.Test/employees",
-      "ResourceKey": "employeeName",
-      "ResourceKeySegment": "employees",
-      "IsTrackedResource": true,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": false,
-      "IsSingletonResource": false
-    },
-    "Enroll": {
-      "Name": "Enroll",
-      "GetOperations": [
-        {
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees",
+            "Method": "GET",
+            "OperationID": "Employees_ListByResourceGroup",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListByResourceGroup",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "List Employee resources by resource group"
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [
+          {
+            "Name": "_",
+            "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Test/employees",
+            "Method": "GET",
+            "OperationID": "Employees_ListBySubscription",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListBySubscription",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "List Employee resources by subscription ID"
+          }
+        ],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "ResourceGroupResource"
+        ],
+        "SwaggerModelName": "Employee",
+        "ResourceType": "Microsoft.Test/employees",
+        "ResourceKey": "employeeName",
+        "ResourceKeySegment": "employees",
+        "IsTrackedResource": true,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "IsExtensionResource": false,
+        "IsSingletonResource": false
+      }
+    ],
+    "Enroll": [
+      {
+        "Name": "Enroll",
+        "GetOperation": {
           "Name": "Get",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}/enrolls/default",
           "Method": "GET",
@@ -105,35 +99,32 @@
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Get a Enroll."
-        }
-      ],
-      "CreateOperations": [],
-      "UpdateOperations": [],
-      "DeleteOperations": [],
-      "ListOperations": [],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
-      "Parents": [
-        "Employee"
-      ],
-      "SwaggerModelName": "Enroll",
-      "ResourceType": "Microsoft.Test/employees/enrolls",
-      "ResourceKey": "default",
-      "ResourceKeySegment": "enrolls",
-      "IsTrackedResource": true,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": false,
-      "IsSingletonResource": true
-    },
-    "DictProperty": {
-      "Name": "DictProperty",
-      "GetOperations": [
-        {
+        },
+        "ListOperations": [],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "Employee"
+        ],
+        "SwaggerModelName": "Enroll",
+        "ResourceType": "Microsoft.Test/employees/enrolls",
+        "ResourceKey": "default",
+        "ResourceKeySegment": "enrolls",
+        "IsTrackedResource": true,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "IsExtensionResource": false,
+        "IsSingletonResource": true
+      }
+    ],
+    "DictProperty": [
+      {
+        "Name": "DictProperty",
+        "GetOperation": {
           "Name": "Get",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}/dictproperties/{name}",
           "Method": "GET",
@@ -141,49 +132,46 @@
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Get a Resource."
-        }
-      ],
-      "CreateOperations": [],
-      "UpdateOperations": [],
-      "DeleteOperations": [],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}/dictproperties",
-          "Method": "GET",
-          "OperationID": "DictProperties_ListByResourceGroup",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListByResourceGroup",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "List resources by resource group"
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
-      "Parents": [
-        "Employee"
-      ],
-      "SwaggerModelName": "DictProperty",
-      "ResourceType": "Microsoft.Test/employees/dictproperties",
-      "ResourceKey": "name",
-      "ResourceKeySegment": "dictproperties",
-      "IsTrackedResource": true,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": false,
-      "IsSingletonResource": false
-    },
-    "ArrayDefault": {
-      "Name": "ArrayDefault",
-      "GetOperations": [
-        {
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}/dictproperties",
+            "Method": "GET",
+            "OperationID": "DictProperties_ListByResourceGroup",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListByResourceGroup",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "List resources by resource group"
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "Employee"
+        ],
+        "SwaggerModelName": "DictProperty",
+        "ResourceType": "Microsoft.Test/employees/dictproperties",
+        "ResourceKey": "name",
+        "ResourceKeySegment": "dictproperties",
+        "IsTrackedResource": true,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "IsExtensionResource": false,
+        "IsSingletonResource": false
+      }
+    ],
+    "ArrayDefault": [
+      {
+        "Name": "ArrayDefault",
+        "GetOperation": {
           "Name": "Get",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}/arraydefaults/{name}",
           "Method": "GET",
@@ -191,45 +179,42 @@
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Get a Resource."
-        }
-      ],
-      "CreateOperations": [],
-      "UpdateOperations": [],
-      "DeleteOperations": [],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}/arraydefaults",
-          "Method": "GET",
-          "OperationID": "ArrayDefault_ListByResourceGroup",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListByResourceGroup",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "List resources by resource group"
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
-      "Parents": [
-        "Employee"
-      ],
-      "SwaggerModelName": "ArrayDefault",
-      "ResourceType": "Microsoft.Test/employees/arraydefaults",
-      "ResourceKey": "name",
-      "ResourceKeySegment": "arraydefaults",
-      "IsTrackedResource": true,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": false,
-      "IsSingletonResource": false
-    }
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}/arraydefaults",
+            "Method": "GET",
+            "OperationID": "ArrayDefault_ListByResourceGroup",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListByResourceGroup",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "List resources by resource group"
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "Employee"
+        ],
+        "SwaggerModelName": "ArrayDefault",
+        "ResourceType": "Microsoft.Test/employees/arraydefaults",
+        "ResourceKey": "name",
+        "ResourceKeySegment": "arraydefaults",
+        "IsTrackedResource": true,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "IsExtensionResource": false,
+        "IsSingletonResource": false
+      }
+    ]
   },
   "RenameMapping": {},
   "OverrideOperationName": {}

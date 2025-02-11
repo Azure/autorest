@@ -54,7 +54,6 @@ interface DatastoreResources {
    * Delete datastore.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Datastores_Delete")
   delete is ArmResourceDeleteSync<DatastoreResource>;
 
@@ -108,7 +107,7 @@ interface DatastoreResources {
       @query("orderByAsc")
       orderByAsc?: boolean;
     },
-    Response = DatastoreResourceArmPaginatedResult
+    Response = ArmResponse<DatastoreResourceArmPaginatedResult>
   >;
 
   /**
@@ -119,7 +118,7 @@ interface DatastoreResources {
   listSecrets is ArmResourceActionSync<
     DatastoreResource,
     void,
-    DatastoreSecrets
+    ArmResponse<DatastoreSecrets>
   >;
 }
 

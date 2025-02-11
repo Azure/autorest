@@ -547,7 +547,7 @@ namespace Azure.Search;
 * Services Vision Vectorize API.
 */"AIServicesVision": "aiServicesVision", /**
 * Generate embeddings using an Azure Machine Learning endpoint deployed via the
-* Azure AI Studio Model Catalog at query time.
+* Azure AI Foundry Model Catalog at query time.
 */"AML": "aml"
     }
 
@@ -660,7 +660,7 @@ namespace Azure.Search;
 * Forms bigrams of CJK terms that are generated from the standard tokenizer. See
 * http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKBigramFilter.html
 */"CjkBigram": "cjk_bigram", /**
-* Normalizes CJK width differences. Folds fullwidth ASCII variants into the
+* Normalizes CJK width differences. Folds full-width ASCII variants into the
 * equivalent basic Latin, and half-width Katakana variants into the equivalent
 * Kana. See
 * http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKWidthFilter.html
@@ -1238,7 +1238,7 @@ threshold direction will be chosen for higher @search.score.
     }
 
 /**
-* The name of the embedding model from the Azure AI Studio Catalog that will be
+* The name of the embedding model from the Azure AI Foundry Catalog that will be
 * called.
 */
     union AIStudioModelCatalogName {
@@ -3936,6 +3936,7 @@ model SearchIndexerKnowledgeStoreProjection {
 /**
 * Description for what data to store in Azure Tables.
 */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model SearchIndexerKnowledgeStoreTableProjectionSelector extends SearchIndexerKnowledgeStoreProjectionSelector {
 /**
 * Name of the Azure table to store projected data in.
@@ -3972,12 +3973,14 @@ model SearchIndexerKnowledgeStoreProjectionSelector {
 /**
 * Projection definition for what data to store in Azure Blob.
 */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model SearchIndexerKnowledgeStoreObjectProjectionSelector extends SearchIndexerKnowledgeStoreBlobProjectionSelector {
 }
 
 /**
 * Abstract class to share properties between concrete selectors.
 */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model SearchIndexerKnowledgeStoreBlobProjectionSelector extends SearchIndexerKnowledgeStoreProjectionSelector {
 /**
 * Blob container to store projections in.
@@ -3988,6 +3991,7 @@ model SearchIndexerKnowledgeStoreBlobProjectionSelector extends SearchIndexerKno
 /**
 * Projection definition for what data to store in Azure Files.
 */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model SearchIndexerKnowledgeStoreFileProjectionSelector extends SearchIndexerKnowledgeStoreBlobProjectionSelector {
 }
 
@@ -5071,8 +5075,8 @@ model SearchDocumentsResult {
 * Debug information that applies to the search results as a whole.
 */
 @visibility("read")
-@encodedName("application/json", "@search.debugInfo")
-"debugInfo"?: DebugInfo;
+@encodedName("application/json", "@search.debug")
+"debug"?: DebugInfo;
 @doc("""
 Continuation JSON payload returned when the query can't return all the
 requested results in a single response. You can use this JSON along with
@@ -5205,6 +5209,12 @@ model QueryRewritesDebugInfo {
 * Contains debugging information specific to query rewrites.
 */
 model QueryRewritesValuesDebugInfo {
+/**
+* The input text to the generative query rewriting model. There may be cases
+* where the user query and the input to the generative model are not identical.
+*/
+@visibility("read")
+"inputQuery"?: string;
 /**
 * List of query rewrites.
 */
@@ -7324,7 +7334,7 @@ model AIServicesVisionParameters {
 }
 
 /**
-* Specifies an Azure Machine Learning endpoint deployed via the Azure AI Studio
+* Specifies an Azure Machine Learning endpoint deployed via the Azure AI Foundry
 * Model Catalog for generating the vector embedding of a query string.
 */
 model AMLVectorizer extends VectorSearchVectorizer {
@@ -7372,7 +7382,7 @@ model AMLParameters {
 */
 "region"?: string;
 /**
-* The name of the embedding model from the Azure AI Studio Catalog that is
+* The name of the embedding model from the Azure AI Foundry Catalog that is
 * deployed at the provided endpoint.
 */
 "modelName"?: AIStudioModelCatalogName;

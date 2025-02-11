@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "policyId": "policy",
+    "productId": "unlimited",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "etag": "AAAAAAAAAAa="
+      }
+    }
+  },
+  "operationId": "ProductPolicy_GetEntityTag",
+  "title": "ApiManagementHeadProductPolicy"
+}

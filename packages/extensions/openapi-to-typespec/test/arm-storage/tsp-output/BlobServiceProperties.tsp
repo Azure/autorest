@@ -24,33 +24,37 @@ model BlobServiceProperties
     SegmentName = "blobServices",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.ResourceSkuProperty;
+
+  /**
+   * Sku name and tier.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility("read")
+  sku?: Sku;
 }
 
 @armResourceOperations
-interface BlobServicePropertiesOperationGroup {
+interface BlobServices {
   /**
    * Gets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BlobServices_GetServiceProperties")
   getServiceProperties is ArmResourceRead<BlobServiceProperties>;
 
   /**
    * Sets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BlobServices_SetServiceProperties")
-  setServiceProperties is ArmResourceCreateOrReplaceSync<BlobServiceProperties>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  setServiceProperties is ArmResourceCreateOrReplaceSync<
+    BlobServiceProperties,
+    Response = ArmResourceUpdatedResponse<BlobServiceProperties>
+  >;
 
   /**
    * List blob services of storage account. It returns a collection of one object named default.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BlobServices_List")
   list is ArmResourceListByParent<
     BlobServiceProperties,
-    Response = BlobServiceItems
+    Response = ArmResponse<BlobServiceItems>
   >;
 }
 
@@ -58,6 +62,6 @@ interface BlobServicePropertiesOperationGroup {
 @@doc(BlobServiceProperties.properties,
   "The properties of a storage account’s Blob service."
 );
-@@doc(BlobServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
+@@doc(BlobServices.setServiceProperties::parameters.resource,
   "The properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules."
 );

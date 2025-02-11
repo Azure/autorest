@@ -24,28 +24,29 @@ model Disk is Azure.ResourceManager.TrackedResource<DiskProperties> {
   /**
    * A relative URI containing the ID of the VM that has the disk attached.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility("read")
   managedBy?: string;
 
   /**
    * List of relative URIs containing the IDs of the VMs that have the disk attached. maxShares should be set to a value greater than one for disks to allow attaching them to multiple VMs.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility("read")
   managedByExtended?: string[];
 
   /**
    * The disks sku name. Can be Standard_LRS, Premium_LRS, StandardSSD_LRS, UltraSSD_LRS, Premium_ZRS, StandardSSD_ZRS, or PremiumV2_LRS.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: DiskSku;
 
-  /**
-   * The Logical zone list for Disk.
-   */
-  zones?: string[];
+  ...Azure.ResourceManager.AvailabilityZonesProperty;
 
   /**
    * The extended location where the disk will be created. Extended location cannot be changed.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   extendedLocation?: ExtendedLocation;
 }
 
@@ -63,44 +64,56 @@ interface Disks {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Disk,
-    Response = ArmResourceCreatedResponse<Disk> | ArmResourceUpdatedResponse<Disk> | (ArmAcceptedLroResponse & {
-      @body _: Disk;
-    })
+    Response = ArmResourceUpdatedResponse<Disk> | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: Disk;
+    }),
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Updates (patches) a disk.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<Disk, DiskUpdate>;
+  update is ArmCustomPatchAsync<Disk, PatchModel = DiskUpdate>;
 
   /**
    * Deletes a disk.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<Disk>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Disk,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Lists all the disks under a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<Disk, Response = DiskList>;
+  listByResourceGroup is ArmResourceListByParent<
+    Disk,
+    Response = ArmResponse<DiskList>
+  >;
 
   /**
    * Lists all the disks under a subscription.
    */
-  list is ArmListBySubscription<Disk, Response = DiskList>;
+  list is ArmListBySubscription<Disk, Response = ArmResponse<DiskList>>;
 
   /**
    * Grants access to a disk.
    */
-  grantAccess is ArmResourceActionAsync<Disk, GrantAccessData, AccessUri>;
+  @action("beginGetAccess")
+  grantAccess is ArmResourceActionAsync<
+    Disk,
+    GrantAccessData,
+    ArmResponse<AccessUri>
+  >;
 
   /**
    * Revokes access to a disk.
    */
-  revokeAccess is ArmResourceActionAsync<Disk, void, void>;
+  @action("endGetAccess")
+  revokeAccess is ArmResourceActionAsync<Disk, void, OkResponse>;
 }
 
 @@doc(Disk.name,

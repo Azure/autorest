@@ -1,9 +1,9 @@
 {
   "Resources": {
-    "Account": {
-      "Name": "Account",
-      "GetOperations": [
-        {
+    "Account": [
+      {
+        "Name": "Account",
+        "GetOperation": {
           "Name": "Get",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{name}",
           "Method": "GET",
@@ -11,10 +11,8 @@
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Get a Account"
-        }
-      ],
-      "CreateOperations": [
-        {
+        },
+        "CreateOperation": {
           "Name": "CreateOrUpdate",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{name}",
           "Method": "PUT",
@@ -22,10 +20,8 @@
           "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Create a Account"
-        }
-      ],
-      "UpdateOperations": [
-        {
+        },
+        "UpdateOperation": {
           "Name": "Update",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{name}",
           "Method": "PATCH",
@@ -33,10 +29,8 @@
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Update a Account"
-        }
-      ],
-      "DeleteOperations": [
-        {
+        },
+        "DeleteOperation": {
           "Name": "Delete",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{name}",
           "Method": "DELETE",
@@ -44,60 +38,60 @@
           "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Delete a Account"
-        }
-      ],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts",
-          "Method": "GET",
-          "OperationID": "Accounts_ListByResourceGroup",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListByResourceGroup",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "List Account resources by resource group"
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [
-        {
-          "Name": "_",
-          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/accounts",
-          "Method": "GET",
-          "OperationID": "Accounts_ListBySubscription",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListBySubscription",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "List Account resources by subscription ID"
-        }
-      ],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
-      "Parents": [
-        "ResourceGroupResource"
-      ],
-      "SwaggerModelName": "Account",
-      "ResourceType": "Microsoft.AzurePlaywrightService/accounts",
-      "ResourceKey": "name",
-      "ResourceKeySegment": "accounts",
-      "IsTrackedResource": true,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": false,
-      "IsSingletonResource": false
-    },
-    "Quota": {
-      "Name": "Quota",
-      "GetOperations": [
-        {
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts",
+            "Method": "GET",
+            "OperationID": "Accounts_ListByResourceGroup",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListByResourceGroup",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "List Account resources by resource group"
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [
+          {
+            "Name": "_",
+            "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/accounts",
+            "Method": "GET",
+            "OperationID": "Accounts_ListBySubscription",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListBySubscription",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "List Account resources by subscription ID"
+          }
+        ],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "ResourceGroupResource"
+        ],
+        "SwaggerModelName": "Account",
+        "ResourceType": "Microsoft.AzurePlaywrightService/accounts",
+        "ResourceKey": "name",
+        "ResourceKeySegment": "accounts",
+        "IsTrackedResource": true,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "IsExtensionResource": false,
+        "IsSingletonResource": false
+      }
+    ],
+    "Quota": [
+      {
+        "Name": "Quota",
+        "GetOperation": {
           "Name": "Get",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/locations/{location}/quotas/{name}",
           "Method": "GET",
@@ -105,45 +99,42 @@
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Get quota by name."
-        }
-      ],
-      "CreateOperations": [],
-      "UpdateOperations": [],
-      "DeleteOperations": [],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/locations/{location}/quotas",
-          "Method": "GET",
-          "OperationID": "Quotas_ListBySubscription",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListBySubscription",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "List quotas for a given subscription Id."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
-      "Parents": [
-        "SubscriptionResource"
-      ],
-      "SwaggerModelName": "Quota",
-      "ResourceType": "Microsoft.AzurePlaywrightService/locations/quotas",
-      "ResourceKey": "name",
-      "ResourceKeySegment": "quotas",
-      "IsTrackedResource": false,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": true,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": false,
-      "IsSingletonResource": false
-    }
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/locations/{location}/quotas",
+            "Method": "GET",
+            "OperationID": "Quotas_ListBySubscription",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListBySubscription",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "List quotas for a given subscription Id."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "SubscriptionResource"
+        ],
+        "SwaggerModelName": "Quota",
+        "ResourceType": "Microsoft.AzurePlaywrightService/locations/quotas",
+        "ResourceKey": "name",
+        "ResourceKeySegment": "quotas",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": true,
+        "IsManagementGroupResource": false,
+        "IsExtensionResource": false,
+        "IsSingletonResource": false
+      }
+    ]
   },
   "RenameMapping": {},
   "OverrideOperationName": {}

@@ -41,12 +41,11 @@ interface Applications {
    * Update a Application
    */
   @parameterVisibility
-  patch is ArmCustomPatchSync<Application, ApplicationUpdate>;
+  patch is ArmCustomPatchSync<Application, PatchModel = ApplicationUpdate>;
 
   /**
    * Delete a Application
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<Application>;
 
   /**
@@ -82,22 +81,24 @@ interface Applications {
       /**
        * Select the specified fields to be included in the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "select", explode: true })
       select?: string[];
 
       /**
        * Expand the indicated resources into the response.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "expand", explode: true })
       expand?: string[];
 
       /**
        * Expressions that specify the order of returned results.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "orderby", explode: true })
       orderby?: string[];
-    },
-    Response = ApplicationListResult
+    }
   >;
 
   /**
@@ -106,7 +107,7 @@ interface Applications {
   deleteBusinessProcessDevelopmentArtifact is ArmResourceActionSync<
     Application,
     GetOrDeleteBusinessProcessDevelopmentArtifactRequest,
-    void
+    OkResponse
   >;
 
   /**
@@ -115,7 +116,7 @@ interface Applications {
   getBusinessProcessDevelopmentArtifact is ArmResourceActionSync<
     Application,
     GetOrDeleteBusinessProcessDevelopmentArtifactRequest,
-    SaveOrGetBusinessProcessDevelopmentArtifactResponse
+    ArmResponse<SaveOrGetBusinessProcessDevelopmentArtifactResponse>
   >;
 
   /**
@@ -124,7 +125,7 @@ interface Applications {
   listBusinessProcessDevelopmentArtifacts is ArmResourceActionSync<
     Application,
     void,
-    ListBusinessProcessDevelopmentArtifactsResponse
+    ArmResponse<ListBusinessProcessDevelopmentArtifactsResponse>
   >;
 
   /**
@@ -133,7 +134,7 @@ interface Applications {
   saveBusinessProcessDevelopmentArtifact is ArmResourceActionSync<
     Application,
     SaveOrValidateBusinessProcessDevelopmentArtifactRequest,
-    SaveOrGetBusinessProcessDevelopmentArtifactResponse
+    ArmResponse<SaveOrGetBusinessProcessDevelopmentArtifactResponse>
   >;
 
   /**
@@ -142,7 +143,7 @@ interface Applications {
   validateBusinessProcessDevelopmentArtifact is ArmResourceActionSync<
     Application,
     SaveOrValidateBusinessProcessDevelopmentArtifactRequest,
-    void
+    OkResponse
   >;
 }
 

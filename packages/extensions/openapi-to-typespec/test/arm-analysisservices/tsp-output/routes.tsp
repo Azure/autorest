@@ -13,16 +13,17 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.Analysis;
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface ServersOperations {
   /**
    * Lists eligible SKUs for Analysis Services resource provider.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Servers_ListSkusForNew")
+  @autoRoute
   @get
   @action("skus")
-  listSkusForNew is ArmProviderActionAsync<
+  listSkusForNew is ArmProviderActionSync<
     Response = SkuEnumerationForNewResourceResult,
     Scope = SubscriptionActionScope,
     Parameters = {}
@@ -32,11 +33,11 @@ interface ServersOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Servers_CheckNameAvailability")
-  @post
-  checkNameAvailability is ArmProviderActionAsync<
+  @autoRoute
+  checkNameAvailability is ArmProviderActionSync<
+    Request = CheckServerNameAvailabilityParameters,
     Response = CheckServerNameAvailabilityResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
-    Request = CheckServerNameAvailabilityParameters
+    Parameters = LocationParameter
   >;
 }

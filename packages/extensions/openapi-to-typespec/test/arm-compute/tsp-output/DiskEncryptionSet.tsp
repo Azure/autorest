@@ -25,6 +25,7 @@ model DiskEncryptionSet
   /**
    * The managed identity for the disk encryption set. It should be given permission on the key vault before it can be used to encrypt disks.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   identity?: EncryptionSetIdentity;
 }
 
@@ -42,31 +43,37 @@ interface DiskEncryptionSets {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DiskEncryptionSet,
-    Response = ArmResourceCreatedResponse<DiskEncryptionSet> | ArmResourceUpdatedResponse<DiskEncryptionSet> | (ArmAcceptedLroResponse & {
-      @body _: DiskEncryptionSet;
-    })
+    Response = ArmResourceUpdatedResponse<DiskEncryptionSet> | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: DiskEncryptionSet;
+    }),
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Updates (patches) a disk encryption set.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<DiskEncryptionSet, DiskEncryptionSetUpdate>;
+  update is ArmCustomPatchAsync<
+    DiskEncryptionSet,
+    PatchModel = DiskEncryptionSetUpdate
+  >;
 
   /**
    * Deletes a disk encryption set.
    */
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<DiskEncryptionSet>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    DiskEncryptionSet,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Lists all the disk encryption sets under a resource group.
    */
   listByResourceGroup is ArmResourceListByParent<
     DiskEncryptionSet,
-    Response = DiskEncryptionSetList
+    Response = ArmResponse<DiskEncryptionSetList>
   >;
 
   /**
@@ -74,26 +81,19 @@ interface DiskEncryptionSets {
    */
   list is ArmListBySubscription<
     DiskEncryptionSet,
-    Response = DiskEncryptionSetList
+    Response = ArmResponse<DiskEncryptionSetList>
   >;
 
   /**
    * Lists all resources that are encrypted with this disk encryption set.
    */
-  // FIXME: DiskEncryptionSets_ListAssociatedResources could not be converted to a resource operation
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}/associatedResources")
   @get
-  listAssociatedResources(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the disk encryption set that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.
-     */
-    @path
-    diskEncryptionSetName: string,
-  ): ArmResponse<ResourceUriList> | ErrorResponse;
+  @action("associatedResources")
+  listAssociatedResources is ArmResourceActionSync<
+    DiskEncryptionSet,
+    void,
+    ArmResponse<ResourceUriList>
+  >;
 }
 
 @@doc(DiskEncryptionSet.name,

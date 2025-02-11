@@ -38,14 +38,8 @@ interface GatewayContracts {
    * Gets the entity state (Etag) version of the Gateway specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @head
   @operationId("Gateway_GetEntityTag")
-  getEntityTag(
-    ...ResourceInstanceParameters<
-      GatewayContract,
-      BaseParameters<GatewayContract>
-    >,
-  ): OkResponse | ErrorResponse;
+  getEntityTag is ArmResourceCheckExistence<GatewayContract>;
 
   /**
    * Creates or updates a Gateway to be used in Api Management instance.
@@ -71,7 +65,7 @@ interface GatewayContracts {
   @operationId("Gateway_Update")
   update is ArmCustomPatchSync<
     GatewayContract,
-    GatewayContract,
+    PatchModel = GatewayContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -85,7 +79,6 @@ interface GatewayContracts {
    * Deletes specific Gateway.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Gateway_Delete")
   delete is ArmResourceDeleteSync<
     GatewayContract,
@@ -124,8 +117,7 @@ interface GatewayContracts {
        */
       @query("$skip")
       $skip?: int32;
-    },
-    Response = GatewayListResult
+    }
   >;
 
   /**
@@ -133,16 +125,21 @@ interface GatewayContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Gateway_ListKeys")
-  listKeys is ArmResourceActionSync<GatewayContract, void, GatewayKeysContract>;
+  listKeys is ArmResourceActionSync<
+    GatewayContract,
+    void,
+    ArmResponse<GatewayKeysContract>
+  >;
 
   /**
    * Regenerates specified gateway key invalidating any tokens created with it.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Gateway_RegenerateKey")
-  regenerateKey is ArmResourceActionNoContentSync<
+  regenerateKey is ArmResourceActionSync<
     GatewayContract,
-    GatewayKeyRegenerationRequestContract
+    GatewayKeyRegenerationRequestContract,
+    NoContentResponse
   >;
 
   /**
@@ -153,59 +150,110 @@ interface GatewayContracts {
   generateToken is ArmResourceActionSync<
     GatewayContract,
     GatewayTokenRequestContract,
-    GatewayTokenContract
+    ArmResponse<GatewayTokenContract>
   >;
 
   /**
    * Lists a collection of the APIs associated with a gateway.
    */
-  // FIXME: GatewayApi_ListByService could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GatewayApi_ListByService")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/apis")
   @get
-  listByService(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
+  @action("apis")
+  @operationId("GatewayApi_ListByService")
+  gatewayApiListByService is ArmResourceActionSync<
+    GatewayContract,
+    void,
+    ArmResponse<ResourceListResult<GatewayApiData>>,
+    Parameters = {
+      /**
+       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
+       */
+      @query("$filter")
+      $filter?: string;
 
-    /**
-     * The name of the API Management service.
-     */
-    @maxLength(50)
-    @minLength(1)
-    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-    @path
-    serviceName: string,
+      /**
+       * Number of records to return.
+       */
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
 
-    /**
-     * Gateway entity identifier. Must be unique in the current API Management service instance. Must not have value 'managed'
-     */
-    @maxLength(80)
-    @minLength(1)
-    @path
-    gatewayId: string,
+      /**
+       * Number of records to skip.
+       */
+      @query("$skip")
+      $skip?: int32;
+    }
+  >;
 
-    /**
-     * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-     */
-    @query("$filter")
-    $filter?: string,
+  /**
+   * Checks that API entity specified by identifier is associated with the Gateway entity.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @head
+  @action("{apiId}")
+  @operationId("GatewayApi_GetEntityTag")
+  gatewayApiGetEntityTag is ArmResourceActionSync<
+    GatewayContract,
+    void,
+    OkResponse,
+    Parameters = {
+      /**
+       * API identifier. Must be unique in the current API Management service instance.
+       */
+      @maxLength(80)
+      @minLength(1)
+      @path
+      apiId: string;
+    }
+  >;
 
-    /**
-     * Number of records to return.
-     */
-    @minValue(1)
-    @query("$top")
-    $top?: int32,
+  /**
+   * Adds an API to the specified Gateway.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @put
+  @action("{apiId}")
+  @operationId("GatewayApi_CreateOrUpdate")
+  gatewayApiCreateOrUpdate is ArmResourceActionSync<
+    GatewayContract,
+    {
+      @bodyRoot
+      parameters?: AssociationContract;
+    },
+    ArmResponse<GatewayApiData> | ArmResourceCreatedSyncResponse<GatewayApiData>,
+    Parameters = {
+      /**
+       * API identifier. Must be unique in the current API Management service instance.
+       */
+      @maxLength(80)
+      @minLength(1)
+      @path
+      apiId: string;
+    }
+  >;
 
-    /**
-     * Number of records to skip.
-     */
-    @query("$skip")
-    $skip?: int32,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<ApiManagementGatewayApiListResult> | ErrorResponse;
+  /**
+   * Deletes the specified API from the specified Gateway.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @delete
+  @action("{apiId}")
+  @operationId("GatewayApi_Delete")
+  gatewayApiDelete is ArmResourceActionSync<
+    GatewayContract,
+    void,
+    OkResponse | NoContentResponse,
+    Parameters = {
+      /**
+       * API identifier. Must be unique in the current API Management service instance.
+       */
+      @maxLength(80)
+      @minLength(1)
+      @path
+      apiId: string;
+    }
+  >;
 }
 
 @@maxLength(GatewayContract.name, 80);

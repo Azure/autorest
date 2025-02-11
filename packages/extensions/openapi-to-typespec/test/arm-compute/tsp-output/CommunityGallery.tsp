@@ -32,7 +32,7 @@ interface CommunityGalleries {
    */
   get is ArmResourceRead<
     CommunityGallery,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 }
 

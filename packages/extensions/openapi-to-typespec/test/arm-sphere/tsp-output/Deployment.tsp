@@ -39,7 +39,10 @@ interface Deployments {
   /**
    * Delete a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
    */
-  delete is ArmResourceDeleteAsync<Deployment>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Deployment,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List Deployment resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
@@ -70,8 +73,7 @@ interface Deployments {
        */
       @query("$maxpagesize")
       maxpagesize?: int32;
-    },
-    Response = DeploymentListResult
+    }
   >;
 }
 

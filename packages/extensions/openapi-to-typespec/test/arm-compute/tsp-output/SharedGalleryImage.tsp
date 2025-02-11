@@ -44,7 +44,7 @@ interface SharedGalleryImages {
       @query("sharedTo")
       sharedTo?: SharedToValues;
     },
-    Response = SharedGalleryImageList
+    Response = ArmResponse<SharedGalleryImageList>
   >;
 }
 

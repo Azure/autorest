@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "alertProcessingRuleName": "WeeklySuppression",
+    "alertProcessingRulePatch": {
+      "properties": {
+        "enabled": false
+      },
+      "tags": {
+        "key1": "value1",
+        "key2": "value2"
+      }
+    },
+    "api-version": "2021-08-08",
+    "resourceGroupName": "alertscorrelationrg",
+    "subscriptionId": "1e3ff1c0-771a-4119-a03b-be82a51e232d"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "WeeklySuppression",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "id": "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/WeeklySuppression",
+        "location": "Global",
+        "properties": {
+          "description": "Alert processing rule on resource group for weekly suppression",
+          "actions": [
+            {
+              "actionType": "RemoveAllActionGroups"
+            }
+          ],
+          "conditions": [
+            {
+              "field": "Severity",
+              "operator": "Equals",
+              "values": [
+                "Sev0",
+                "Sev2"
+              ]
+            },
+            {
+              "field": "MonitorService",
+              "operator": "Equals",
+              "values": [
+                "Platform",
+                "Application Insights"
+              ]
+            },
+            {
+              "field": "TargetResourceType",
+              "operator": "NotEquals",
+              "values": [
+                "Microsoft.Compute/VirtualMachines"
+              ]
+            }
+          ],
+          "enabled": false,
+          "schedule": {
+            "effectiveFrom": "2018-12-10T22:05:09",
+            "effectiveUntil": "2018-12-05T22:05:09",
+            "recurrences": [
+              {
+                "daysOfWeek": [
+                  "Tuesday",
+                  "Friday"
+                ],
+                "endTime": "14:00:00",
+                "recurrenceType": "Weekly",
+                "startTime": "06:00:00"
+              }
+            ],
+            "timeZone": "Pacific Standard Time"
+          },
+          "scopes": [
+            "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg"
+          ]
+        },
+        "systemData": {
+          "createdAt": "2018-06-12T22:05:09Z",
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2018-06-12T22:05:09Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "AlertProcessingRules_Update",
+  "title": "PatchAlertProcessingRule"
+}

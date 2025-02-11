@@ -274,7 +274,7 @@ interface PoolOperations {
       /**
        * The Pool to be added.
        */
-      @body
+      @bodyRoot
       pool: BatchPool;
     },
     void
@@ -683,7 +683,7 @@ interface PoolOperations {
       /**
        * The parameters for the request.
        */
-      @body
+      @bodyRoot
       poolUpdate: BatchPoolUpdate;
     },
     void
@@ -818,7 +818,7 @@ interface PoolOperations {
       /**
        * The parameters for the request.
        */
-      @body
+      @bodyRoot
       parameters: BatchPoolEnableAutoScaleParameters;
     },
     void
@@ -872,7 +872,7 @@ interface PoolOperations {
       /**
        * The parameters for the request.
        */
-      @body
+      @bodyRoot
       parameters: BatchPoolEvaluateAutoScaleParameters;
     },
     AutoScaleRun
@@ -962,7 +962,7 @@ interface PoolOperations {
       /**
        * The parameters for the request.
        */
-      @body
+      @bodyRoot
       parameters: BatchPoolResizeParameters;
     },
     void
@@ -1100,7 +1100,7 @@ interface PoolOperations {
       /**
        * The parameters for the request.
        */
-      @body
+      @bodyRoot
       poolUpdatePropertiesParameter: BatchPool;
     },
     void
@@ -1186,7 +1186,7 @@ interface PoolOperations {
       /**
        * The parameters for the request.
        */
-      @body
+      @bodyRoot
       parameters: NodeRemoveParameters;
     },
     void
@@ -1606,7 +1606,7 @@ interface JobOperations {
       /**
        * The parameters for the request.
        */
-      @body
+      @bodyRoot
       jobUpdate: BatchJobUpdate;
     },
     void
@@ -1692,7 +1692,7 @@ interface JobOperations {
       /**
        * The parameters for the request.
        */
-      @body
+      @bodyRoot
       job: BatchJob;
     },
     void
@@ -1783,7 +1783,7 @@ interface JobOperations {
       /**
        * The parameters for the request.
        */
-      @body
+      @bodyRoot
       parameters: BatchJobDisableParameters;
     },
     void
@@ -1955,7 +1955,7 @@ interface JobOperations {
       /**
        * The parameters for the request.
        */
-      @body
+      @bodyRoot
       parameters?: BatchJobTerminateParameters;
     },
     void
@@ -2009,7 +2009,7 @@ interface JobOperations {
       /**
        * The Job to be added.
        */
-      @body
+      @bodyRoot
       job: BatchJob;
     },
     void
@@ -2324,7 +2324,7 @@ interface CertificateOperations {
       /**
        * The Certificate to be added.
        */
-      @body
+      @bodyRoot
       certificate: Certificate;
     },
     void
@@ -3503,7 +3503,7 @@ interface JobScheduleOperations {
       /**
        * The parameters for the request.
        */
-      @body
+      @bodyRoot
       jobScheduleUpdate: BatchJobScheduleUpdate;
     },
     void
@@ -3591,7 +3591,7 @@ interface JobScheduleOperations {
       /**
        * The parameters for the request.
        */
-      @body
+      @bodyRoot
       jobSchedule: BatchJobSchedule;
     },
     void
@@ -3871,7 +3871,7 @@ interface JobScheduleOperations {
       /**
        * The Job Schedule to be added.
        */
-      @body
+      @bodyRoot
       jobSchedule: BatchJobSchedule;
     },
     void
@@ -3995,7 +3995,7 @@ interface TaskOperations {
       /**
        * The Task to be added.
        */
-      @body
+      @bodyRoot
       task: BatchTask;
     },
     void
@@ -4136,7 +4136,7 @@ interface TaskOperations {
       /**
        * The Tasks to be added.
        */
-      @body
+      @bodyRoot
       taskCollection: BatchTaskCollection;
     },
     TaskAddCollectionResult
@@ -4411,7 +4411,7 @@ interface TaskOperations {
       /**
        * The parameters for the request.
        */
-      @body
+      @bodyRoot
       task: BatchTask;
     },
     void
@@ -4712,7 +4712,7 @@ interface ComputeNodeOperations {
       /**
        * The user Account to be created.
        */
-      @body
+      @bodyRoot
       user: ComputeNodeUser;
     },
     void
@@ -4841,7 +4841,7 @@ interface ComputeNodeOperations {
       /**
        * The parameters for the request.
        */
-      @body
+      @bodyRoot
       parameters: NodeUpdateUserParameters;
     },
     void
@@ -4957,7 +4957,7 @@ interface ComputeNodeOperations {
       /**
        * The parameters for the request.
        */
-      @body
+      @bodyRoot
       parameters?: NodeRebootParameters;
     },
     void
@@ -5017,7 +5017,7 @@ interface ComputeNodeOperations {
       /**
        * The parameters for the request.
        */
-      @body
+      @bodyRoot
       parameters?: NodeReimageParameters;
     },
     void
@@ -5076,7 +5076,7 @@ interface ComputeNodeOperations {
       /**
        * The parameters for the request.
        */
-      @body
+      @bodyRoot
       parameters?: NodeDisableSchedulingParameters;
     },
     void

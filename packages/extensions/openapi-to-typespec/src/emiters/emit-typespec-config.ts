@@ -15,7 +15,7 @@ export async function emitTypespecConfig(filePath: string, programDetails: Types
     "@azure-tools/typespec-autorest":
       azure-resource-provider-folder: "data-plane"
       emitter-output-dir: "{project-root}/.."
-      examples-directory: "{project-root}/examples"
+      examples-dir: "{project-root}/examples"
       output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
     # "@azure-tools/typespec-python":
@@ -43,7 +43,7 @@ options:
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/${swaggerName}"
-    examples-directory: "{project-root}/examples"${
+    examples-dir: "{project-root}/examples"${
       isFullCompatible
         ? `
     arm-resource-flattening: true`

@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "groupId": "templateGroup",
+    "productId": "testproduct",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "templateGroup",
+        "type": "Microsoft.ApiManagement/service/products/groups",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/groups/templateGroup",
+        "properties": {
+          "type": "custom",
+          "description": "group created via Template",
+          "builtIn": false,
+          "displayName": "Template Group"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "templateGroup",
+        "type": "Microsoft.ApiManagement/service/products/groups",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/groups/templateGroup",
+        "properties": {
+          "type": "custom",
+          "description": "group created via Template",
+          "builtIn": false,
+          "displayName": "Template Group"
+        }
+      }
+    }
+  },
+  "operationId": "ProductGroup_CreateOrUpdate",
+  "title": "ApiManagementCreateProductGroup"
+}

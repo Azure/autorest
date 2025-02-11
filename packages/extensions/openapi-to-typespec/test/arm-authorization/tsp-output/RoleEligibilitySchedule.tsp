@@ -13,6 +13,7 @@ namespace Azure.ResourceManager.Authorization;
 /**
  * Role eligibility schedule
  */
+@extensionResource
 model RoleEligibilitySchedule
   is Azure.ResourceManager.ExtensionResource<RoleEligibilityScheduleProperties> {
   ...ResourceNameParameter<
@@ -30,7 +31,20 @@ interface RoleEligibilitySchedules {
    */
   get is ArmResourceRead<
     RoleEligibilitySchedule,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
+      /**
+       * The scope of the role eligibility schedule.
+       */
+      @path
+      scope: string;
+
+      /**
+       * The name (guid) of the role eligibility schedule to get.
+       */
+      @path
+      roleEligibilityScheduleName: string;
+    }
   >;
 
   /**
@@ -38,15 +52,20 @@ interface RoleEligibilitySchedules {
    */
   listForScope is ArmResourceListByParent<
     RoleEligibilitySchedule,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
+      /**
+       * The scope of the role eligibility schedules.
+       */
+      @path
+      scope: string;
+
       /**
        * The filter to apply on the operation. Use $filter=atScope() to return all role eligibility schedules at or above the scope. Use $filter=principalId eq {id} to return all role eligibility schedules at, above or below the scope for the specified principal. Use $filter=assignedTo('{userId}') to return all role eligibility schedules for the user. Use $filter=asTarget() to return all role eligibility schedules created for the current user.
        */
       @query("$filter")
       $filter?: string;
-    },
-    Response = RoleEligibilityScheduleListResult
+    }
   >;
 }
 

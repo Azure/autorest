@@ -26,37 +26,61 @@ model ModelContainerResource
 }
 
 @armResourceOperations
+interface ModelContainerResourceOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...KeysOf<ResourceNameParameter<
+          Resource = Registry,
+          KeyName = "registryName",
+          SegmentName = "registries",
+          NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$"
+        >>,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = ModelContainerResource,
+        KeyName = "modelName",
+        SegmentName = "models",
+        NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+      >>
+    > {}
+
+@armResourceOperations
 interface ModelContainerResources {
   /**
    * Get container.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryModelContainers_Get")
-  get is ArmResourceRead<ModelContainerResource>;
+  get is ModelContainerResourceOps.Read<ModelContainerResource>;
 
   /**
    * Create or update model container.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryModelContainers_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ModelContainerResource>;
+  createOrUpdate is ModelContainerResourceOps.CreateOrUpdateAsync<ModelContainerResource>;
 
   /**
    * Delete container.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("RegistryModelContainers_Delete")
-  delete is ArmResourceDeleteAsync<ModelContainerResource>;
+  delete is ModelContainerResourceOps.DeleteWithoutOkAsync<
+    ModelContainerResource,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List model containers.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryModelContainers_List")
-  list is ArmResourceListByParent<
+  list is ModelContainerResourceOps.List<
     ModelContainerResource,
     Parameters = {
       /**
@@ -71,7 +95,74 @@ interface ModelContainerResources {
       @query("listViewType")
       listViewType?: ListViewType;
     },
-    Response = ModelContainerResourceArmPaginatedResult
+    Response = ArmResponse<ModelContainerResourceArmPaginatedResult>
+  >;
+}
+@armResourceOperations
+interface ModelContainerOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...KeysOf<ResourceNameParameter<
+          Resource = Workspace,
+          KeyName = "workspaceName",
+          SegmentName = "workspaces",
+          NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+        >>,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = ModelContainerResource,
+        KeyName = "name",
+        SegmentName = "models",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
+interface ModelContainers {
+  /**
+   * Get container.
+   */
+  get is ModelContainerOps.Read<ModelContainerResource>;
+
+  /**
+   * Create or update container.
+   */
+  createOrUpdate is ModelContainerOps.CreateOrUpdateSync<ModelContainerResource>;
+
+  /**
+   * Delete container.
+   */
+  delete is ModelContainerOps.DeleteSync<ModelContainerResource>;
+
+  /**
+   * List model containers.
+   */
+  list is ModelContainerOps.List<
+    ModelContainerResource,
+    Parameters = {
+      /**
+       * Continuation token for pagination.
+       */
+      @query("$skip")
+      $skip?: string;
+
+      /**
+       * Maximum number of results to return.
+       */
+      @query("count")
+      count?: int32;
+
+      /**
+       * View type for including/excluding (for example) archived entities.
+       */
+      @query("listViewType")
+      listViewType?: ListViewType;
+    },
+    Response = ArmResponse<ModelContainerResourceArmPaginatedResult>
   >;
 }
 
@@ -80,5 +171,8 @@ interface ModelContainerResources {
   "[Required] Additional attributes of the entity."
 );
 @@doc(ModelContainerResources.createOrUpdate::parameters.resource,
+  "Container entity to create or update."
+);
+@@doc(ModelContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );
