@@ -315,7 +315,10 @@ interface VirtualMachines {
   runCommand is ArmResourceActionAsync<
     VirtualMachine,
     RunCommandInput,
-    ArmResponse<RunCommandResult>
+    ArmResponse<RunCommandResult & {
+      @header
+      contentType: "application/json" | "text/json";
+    }>
   >;
 }
 

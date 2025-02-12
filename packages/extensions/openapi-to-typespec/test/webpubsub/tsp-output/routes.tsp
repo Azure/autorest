@@ -128,14 +128,11 @@ interface WebPubSubOperations {
        */
       @query("clientType")
       clientType?: WebPubSubClientType = WebPubSubClientType.Default;
-
-      /**
-       * Accept header
-       */
-      @header
-      accept: "application/json, text/json";
     },
-    ClientTokenResponse
+    ClientTokenResponse & {
+      @header
+      contentType: "application/json" | "text/json";
+    }
   >;
 
   /**

@@ -37,12 +37,6 @@ interface SchemaOperations {
        */
       @path
       id: string;
-
-      /**
-       * Accept header
-       */
-      @header
-      accept: "application/json; serialization=Avro";
     },
     void
   >;

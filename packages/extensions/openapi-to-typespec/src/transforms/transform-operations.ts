@@ -1,7 +1,5 @@
 import {
-  ArraySchema,
   CodeModel,
-  ObjectSchema,
   Operation,
   OperationGroup,
   Parameter,
@@ -10,12 +8,10 @@ import {
   Request,
   Response,
   Schema,
-  SchemaResponse,
 } from "@autorest/codemodel";
 import { Case } from "change-case-all";
 import _ from "lodash";
 import { OperationWithResourceOperationFlag } from "utils/resource-discovery";
-import { getSession } from "../autorest-session";
 import { getDataTypes } from "../data-types";
 import {
   TypespecOperation,
@@ -25,6 +21,7 @@ import {
   Extension,
   TspArmProviderActionOperation,
   TypespecDecorator,
+  TypespecTemplateModel,
 } from "../interfaces";
 import { transformDataType } from "../model";
 import { getOptions } from "../options";
@@ -33,8 +30,9 @@ import { getLogger } from "../utils/logger";
 import { getLanguageMetadata } from "../utils/metadata";
 import { isArraySchema, isConstantSchema, isResponseSchema } from "../utils/schemas";
 import { getSuppressionWithCode, SuppressionCode } from "../utils/suppressions";
-import { isResourceListResult } from "../utils/type-mapping";
 import { getDefaultValue } from "../utils/values";
+import { transformSchemaResponse } from "../utils/response";
+import { generateAdditionalProperties, generateTemplateModel } from "../utils/model-generation";
 
 export function transformOperationGroup(
   { language, operations }: OperationGroup,
@@ -68,38 +66,20 @@ function transformVerb(protocol?: Protocols) {
 }
 
 function transformResponse(response: Response): [string, string] {
-  const { isArm } = getOptions();
   const statusCode = response.protocol.http?.statusCodes[0] as string;
-  const codeModel = getSession().model;
-  const dataTypes = getDataTypes(codeModel);
   if (!isResponseSchema(response)) {
     return [statusCode, "void"];
   }
 
-  if (isResourceListResult(response) && isArm) {
-    const valueSchema = ((response as SchemaResponse).schema as ObjectSchema).properties?.find(
-      (p) => p.language.default.name === "value",
-    );
-    const responseName = dataTypes.get((valueSchema!.schema as ArraySchema).elementType)?.name;
-    return [statusCode, `ResourceListResult<${responseName ?? "void"}>`];
-  }
-
-  const schema = response.schema;
-  if (isArraySchema(schema)) {
-    const itemName = dataTypes.get(schema.elementType)?.name;
-    return [statusCode, `${itemName}[]`];
-  }
-
-  const responseName = dataTypes.get(schema)?.name;
-
-  if (!responseName) {
-    return [statusCode, "void"];
-  }
-
-  if (schema.language.default.paging?.isPageable && schema.language.default.resource) {
-    return [statusCode, `Azure.Core.ResourceList<${responseName}>`];
-  }
-
+  const transformedResponse = transformSchemaResponse(response);
+  const responseName =
+    transformedResponse.kind === "template"
+      ? generateTemplateModel(transformedResponse as TypespecTemplateModel)
+      : `${transformedResponse.name}${
+          transformedResponse.additionalProperties
+            ? `& {${generateAdditionalProperties(transformedResponse.additionalProperties)}}`
+            : ""
+        }`;
   return [statusCode, responseName];
 }
 
@@ -136,7 +116,7 @@ export function transformRequest(
   const doc = language.default.description;
   const summary = language.default.summary;
   const { paging } = getLanguageMetadata(operation.language);
-  const transformedResponses = transformResponses([...(responses ?? [])]);
+  const transformedResponses = transformResponses(responses ?? []);
   const visitedParameter: Set<Parameter> = new Set();
   let parameters = (operation.parameters ?? [])
     .filter((p) => filterOperationParameters(p, visitedParameter))
@@ -279,10 +259,7 @@ function filterOperationParameters(parameter: Parameter, visitedParameters: Set<
     return false;
   }
 
-  if (
-    parameter.origin === "modelerfour:synthesized/accept" &&
-    constantValueEquals(parameter.schema, "application/json")
-  ) {
+  if (parameter.origin === "modelerfour:synthesized/accept") {
     return false;
   }
 

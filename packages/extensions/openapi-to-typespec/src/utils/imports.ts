@@ -35,7 +35,7 @@ export function getModelsImports(program: TypespecProgram): Imports {
       decorator.namespace && namespaces.add(`using ${decorator.namespace};`);
     }
 
-    for (const property of model.properties) {
+    for (const property of model.properties ?? []) {
       for (const decorator of property.decorators ?? []) {
         decorator.module && modules.add(`import "${decorator.module}";`);
         decorator.namespace && namespaces.add(`using ${decorator.namespace};`);
@@ -67,7 +67,7 @@ export function getClientImports(program: TypespecProgram) {
   };
   for (const model of program.models.objects) {
     addImports(model.clientDecorators);
-    for (const property of model.properties) {
+    for (const property of model.properties ?? []) {
       addImports(property.clientDecorators);
     }
   }

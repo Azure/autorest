@@ -73,7 +73,6 @@ interface RoleDefinitions {
   /**
    * Deletes a role definition.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteSync<
     RoleDefinition,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,

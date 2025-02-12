@@ -1,5 +1,4 @@
 import { TypespecObject } from "../interfaces";
-import { getOptions } from "../options";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
 import { getModelPropertiesDeclarations } from "../utils/model-generation";
@@ -36,7 +35,7 @@ export function generateObject(typespecObject: TypespecObject) {
     }
   }
 
-  definitions = [...definitions, ...getModelPropertiesDeclarations(typespecObject.properties)];
+  definitions = [...definitions, ...getModelPropertiesDeclarations(typespecObject.properties ?? [])];
   definitions.push("}");
 
   return definitions.join("\n");

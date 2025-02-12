@@ -77,7 +77,6 @@ interface RoleAssignments {
   /**
    * Delete a role assignment by scope and name.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteSync<
     RoleAssignment,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,

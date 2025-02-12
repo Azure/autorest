@@ -74,8 +74,16 @@ interface Disks {
   /**
    * Updates (patches) a disk.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @parameterVisibility
-  update is ArmCustomPatchAsync<Disk, PatchModel = DiskUpdate>;
+  update is ArmCustomPatchAsync<
+    Disk,
+    PatchModel = DiskUpdate,
+    Response = ArmResponse<Disk> | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: Disk;
+    })
+  >;
 
   /**
    * Deletes a disk.

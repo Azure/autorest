@@ -374,7 +374,10 @@
             }
           },
           "202": {
-            "description": "Resource update request accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/AnalysisServicesServer"
+            },
             "headers": {
               "Location": {
                 "type": "string",

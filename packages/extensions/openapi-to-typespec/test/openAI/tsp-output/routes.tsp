@@ -48,6 +48,6 @@ interface embeddingsOperations {
       @bodyRoot
       body: Paths13PiqocDeploymentsDeploymentIdEmbeddingsPostRequestbodyContentApplicationJsonSchema;
     },
-    void
+    string
   >;
 }

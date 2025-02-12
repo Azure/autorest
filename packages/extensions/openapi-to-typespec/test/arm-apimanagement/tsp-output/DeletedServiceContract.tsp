@@ -48,6 +48,7 @@ interface DeletedServiceContracts {
    * Purges Api Management Service (deletes it with no option to undelete).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("DeletedServices_Purge")
   purge is ArmResourceDeleteWithoutOkAsync<

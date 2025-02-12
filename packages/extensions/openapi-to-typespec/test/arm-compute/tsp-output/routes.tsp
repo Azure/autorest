@@ -518,17 +518,12 @@ interface VirtualMachineRunCommandsOperations {
   @get
   @action("runCommands")
   list is ArmProviderActionSync<
-    Response = RunCommandListResult,
-    Scope = SubscriptionActionScope,
-    Parameters = {
-      ...LocationParameter;
-
-      /**
-       * Accept header
-       */
+    Response = RunCommandListResult & {
       @header
-      accept: "application/json, text/json";
-    }
+      contentType: "application/json" | "text/json";
+    },
+    Scope = SubscriptionActionScope,
+    Parameters = LocationParameter
   >;
   /**
    * Gets specific run command for a subscription in a location.
@@ -548,13 +543,10 @@ interface VirtualMachineRunCommandsOperations {
     commandId: string,
 
     ...SubscriptionIdParameter,
-
-    /**
-     * Accept header
-     */
+  ): ArmResponse<RunCommandDocument & {
     @header
-    accept: "application/json, text/json",
-  ): ArmResponse<RunCommandDocument> | ErrorResponse;
+    contentType: "application/json" | "text/json";
+  }> | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
