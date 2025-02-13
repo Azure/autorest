@@ -69,7 +69,16 @@ interface VirtualMachineRunCommands {
    */
   createOrUpdate is VirtualMachineRunCommandOps.CreateOrUpdateAsync<
     VirtualMachineRunCommand,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<VirtualMachineRunCommand & {
+      @header
+      contentType: "application/json" | "text/json";
+    }> | ArmResourceCreatedResponse<
+      VirtualMachineRunCommand & {
+        @header
+        contentType: "application/json" | "text/json";
+      },
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    >
   >;
 
   /**
@@ -79,7 +88,10 @@ interface VirtualMachineRunCommands {
   update is VirtualMachineRunCommandOps.CustomPatchAsync<
     VirtualMachineRunCommand,
     PatchModel = VirtualMachineRunCommandUpdate,
-    Response = ArmResponse<VirtualMachineRunCommand>
+    Response = ArmResponse<VirtualMachineRunCommand & {
+      @header
+      contentType: "application/json" | "text/json";
+    }>
   >;
 
   /**
@@ -159,7 +171,16 @@ interface VirtualMachineScaleSetVMRunCommands {
   @operationId("VirtualMachineScaleSetVMRunCommands_CreateOrUpdate")
   createOrUpdate is VirtualMachineScaleSetVMRunCommandOps.CreateOrUpdateAsync<
     VirtualMachineRunCommand,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<VirtualMachineRunCommand & {
+      @header
+      contentType: "application/json" | "text/json";
+    }> | ArmResourceCreatedResponse<
+      VirtualMachineRunCommand & {
+        @header
+        contentType: "application/json" | "text/json";
+      },
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    >
   >;
 
   /**
@@ -171,7 +192,10 @@ interface VirtualMachineScaleSetVMRunCommands {
   update is VirtualMachineScaleSetVMRunCommandOps.CustomPatchAsync<
     VirtualMachineRunCommand,
     PatchModel = VirtualMachineRunCommandUpdate,
-    Response = ArmResponse<VirtualMachineRunCommand>
+    Response = ArmResponse<VirtualMachineRunCommand & {
+      @header
+      contentType: "application/json" | "text/json";
+    }>
   >;
 
   /**

@@ -296,7 +296,10 @@ interface VirtualMachineScaleSetVMS {
   runCommand is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
     RunCommandInput,
-    ArmResponse<RunCommandResult>
+    ArmResponse<RunCommandResult & {
+      @header
+      contentType: "application/json" | "text/json";
+    }>
   >;
 }
 

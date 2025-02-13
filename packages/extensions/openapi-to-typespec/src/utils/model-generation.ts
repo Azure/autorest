@@ -53,12 +53,22 @@ export function generateTemplateModel(templateModel: TypespecTemplateModel): str
   }${
     !templateModel.namedArguments && templateModel.arguments
       ? `<${templateModel.arguments
-          .map((a) => (a.kind === "template" ? generateTemplateModel(a as TypespecTemplateModel) : a.name))
+          .map((a) =>
+            a.kind === "template"
+              ? generateTemplateModel(a as TypespecTemplateModel)
+              : `${a.name}${
+                  a.additionalProperties ? ` & { ${generateAdditionalProperties(a.additionalProperties)} }` : ""
+                }`,
+          )
           .join(",")}>`
       : ""
   }${
     templateModel.additionalProperties
-      ? ` & { ${templateModel.additionalProperties.map((p) => generateParameter(p)).join(";")} }`
+      ? ` & { ${generateAdditionalProperties(templateModel.additionalProperties)} }`
       : ""
   }${templateModel.additionalTemplateModel ? templateModel.additionalTemplateModel : ""}`;
+}
+
+export function generateAdditionalProperties(properties: TypespecObjectProperty[]): string {
+  return properties.map((p) => getModelPropertyDeclarations(p).join("\n")).join(";");
 }

@@ -59,14 +59,11 @@ op getNotificationHub is Azure.Core.Foundations.Operation<
      */
     @header
     Authorization: string;
-
-    /**
-     * Accept header
-     */
-    @header
-    accept: "application/atom+xml;type=entry;charset=utf-8";
   },
-  NotificationHubEntryModel
+  NotificationHubEntryModel & {
+    @header
+    contentType: "application/atom+xml;type=entry;charset=utf-8";
+  }
 >;
 
 /**
@@ -102,14 +99,11 @@ op createOrUpdateNotificationHub is Azure.Core.Foundations.Operation<
 
     @bodyRoot
     body: NotificationHubEntryModel;
-
-    /**
-     * Accept header
-     */
-    @header
-    accept: "application/atom+xml;type=entry;charset=utf-8";
   },
-  NotificationHubEntryModel
+  NotificationHubEntryModel & {
+    @header
+    contentType: "application/atom+xml;type=entry;charset=utf-8";
+  }
 >;
 
 /**
@@ -155,14 +149,11 @@ op getRegistrationsByTag is Azure.Core.Foundations.Operation<
      */
     @query("$top")
     $top?: string;
-
-    /**
-     * Accept header
-     */
-    @header
-    accept: "application/atom+xml;type=entry;charset=utf-8";
   },
-  RegistrationEntryModel[]
+  RegistrationEntryModel[] & {
+    @header
+    contentType: "application/atom+xml;type=entry;charset=utf-8";
+  }
 >;
 
 /**
@@ -236,14 +227,11 @@ op getRegistrations is Azure.Core.Foundations.Operation<
      */
     @query("$top")
     $top?: string;
-
-    /**
-     * Accept header
-     */
-    @header
-    accept: "application/atom+xml;type=entry;charset=utf-8";
   },
-  RegistrationEntryModel[]
+  RegistrationEntryModel[] & {
+    @header
+    contentType: "application/atom+xml;type=entry;charset=utf-8";
+  }
 >;
 
 /**
@@ -270,14 +258,11 @@ op createRegistration is Azure.Core.Foundations.Operation<
      */
     @header
     Authorization: string;
-
-    /**
-     * Accept header
-     */
-    @header
-    accept: "application/atom+xml;type=entry;charset=utf-8";
   },
-  RegistrationEntryModel
+  RegistrationEntryModel & {
+    @header
+    contentType: "application/atom+xml;type=entry;charset=utf-8";
+  }
 >;
 
 /**
@@ -350,14 +335,11 @@ op getRegistration is Azure.Core.Foundations.Operation<
      */
     @header
     Authorization: string;
-
-    /**
-     * Accept header
-     */
-    @header
-    accept: "application/atom+xml;type=entry;charset=utf-8";
   },
-  RegistrationEntryModel
+  RegistrationEntryModel & {
+    @header
+    contentType: "application/atom+xml;type=entry;charset=utf-8";
+  }
 >;
 
 /**
@@ -393,14 +375,11 @@ op createOrUpdateRegistration is Azure.Core.Foundations.Operation<
 
     @bodyRoot
     body: RegistrationEntryModel;
-
-    /**
-     * Accept header
-     */
-    @header
-    accept: "application/atom+xml;type=entry;charset=utf-8";
   },
-  RegistrationEntryModel
+  RegistrationEntryModel & {
+    @header
+    contentType: "application/atom+xml;type=entry;charset=utf-8";
+  }
 >;
 
 /**

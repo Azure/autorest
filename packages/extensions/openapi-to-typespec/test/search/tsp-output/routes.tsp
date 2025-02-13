@@ -846,7 +846,7 @@ interface DocumentsOperations {
 * The tracking ID sent with the request to help with debugging.
 */
 @header
-"x-ms-client-request-id"?: string}, void>;
+"x-ms-client-request-id"?: string}, integer>;
 
 
 
@@ -1122,7 +1122,7 @@ interface DocumentsOperations {
 * The tracking ID sent with the request to help with debugging.
 */
 @header
-"x-ms-client-request-id"?: string}, void>;
+"x-ms-client-request-id"?: string}, LookupDocument>;
 
 
 

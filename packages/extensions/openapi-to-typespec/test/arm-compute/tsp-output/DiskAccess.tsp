@@ -53,8 +53,16 @@ interface DiskAccesses {
   /**
    * Updates (patches) a disk access resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @parameterVisibility
-  update is ArmCustomPatchAsync<DiskAccess, PatchModel = DiskAccessUpdate>;
+  update is ArmCustomPatchAsync<
+    DiskAccess,
+    PatchModel = DiskAccessUpdate,
+    Response = ArmResponse<DiskAccess> | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: DiskAccess;
+    })
+  >;
 
   /**
    * Deletes a disk access resource.

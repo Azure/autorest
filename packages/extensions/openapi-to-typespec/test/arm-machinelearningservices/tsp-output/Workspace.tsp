@@ -38,7 +38,6 @@ interface Workspaces {
    * Creates or updates a workspace with the specified parameters.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Workspace,
     Response = ArmResourceUpdatedResponse<Workspace> | ArmAcceptedLroResponse,

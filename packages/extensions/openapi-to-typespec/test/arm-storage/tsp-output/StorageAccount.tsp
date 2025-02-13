@@ -69,7 +69,6 @@ interface StorageAccounts {
    * Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   create is ArmResourceCreateOrReplaceAsync<
     StorageAccount,
     Response = ArmResourceUpdatedResponse<StorageAccount> | ArmAcceptedLroResponse,

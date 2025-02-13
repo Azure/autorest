@@ -39,7 +39,13 @@ import {
 } from "../utils/resource-discovery";
 import { isStringSchema } from "../utils/schemas";
 import { escapeRegex } from "../utils/strings";
-import { getSuppressionWithCode, SuppressionCode } from "../utils/suppressions";
+import {
+  checkArmDeleteOperationResponseCodes,
+  checkArmPutOperationResponseCodes,
+  checkNoResponseBody,
+  getSuppressionWithCode,
+  SuppressionCode,
+} from "../utils/suppressions";
 import { getFullyQualifiedName, getTemplateResponses, NamesOfResponseTemplate } from "../utils/type-mapping";
 import { getTypespecType, isTypespecType, transformObjectProperty } from "./transform-object";
 import { transformParameter } from "./transform-operations";
@@ -299,7 +305,6 @@ function convertResourceCreateOrReplaceOperation(
   resourceMetadata: ArmResource,
   operations: Record<string, Operation>,
 ): TspArmResourceOperation[] {
-  const { isFullCompatible } = getOptions();
   if (resourceMetadata.CreateOperation) {
     const operation = resourceMetadata.CreateOperation;
     const swaggerOperation = operations[operation.OperationID];
@@ -345,46 +350,38 @@ function convertResourceCreateOrReplaceOperation(
     let responses: TypespecTemplateModel[] = isLongRunning
       ? getTemplateResponses(swaggerOperation, asyncNames)
       : getTemplateResponses(swaggerOperation, syncNames);
-    if (
-      isLongRunning &&
-      responses.length === 2 &&
-      responses.find(
-        (r) =>
-          r.name === asyncNames._200Name &&
-          r.arguments?.length === 1 &&
-          r.arguments[0].name === resourceMetadata.SwaggerModelName,
-      ) &&
-      responses.find(
-        (r) =>
-          r.name === asyncNames._201Name &&
-          r.arguments?.length === 1 &&
-          r.arguments[0].name === resourceMetadata.SwaggerModelName,
-      )
-    )
-      responses = [];
-    if (
-      !isLongRunning &&
-      responses.length === 2 &&
-      responses.find(
-        (r) =>
-          r.name === syncNames._200Name &&
-          r.arguments?.length === 1 &&
-          r.arguments[0].name === resourceMetadata.SwaggerModelName,
-      ) &&
-      responses.find(
-        (r) =>
-          r.name === syncNames._200Name &&
-          r.arguments?.length === 1 &&
-          r.arguments[0].name === resourceMetadata.SwaggerModelName,
-      )
-    )
-      responses = [];
+    const templateAsyncResponses: TypespecTemplateModel[] = [
+      {
+        kind: "template",
+        name: asyncNames._200Name,
+        arguments: [{ kind: "object", name: resourceMetadata.SwaggerModelName }],
+      },
+      {
+        kind: "template",
+        name: asyncNames._201Name,
+        arguments: [{ kind: "object", name: resourceMetadata.SwaggerModelName }],
+      },
+    ];
+    const templateSyncResponses: TypespecTemplateModel[] = [
+      {
+        kind: "template",
+        name: syncNames._200Name,
+        arguments: [{ kind: "object", name: resourceMetadata.SwaggerModelName }],
+      },
+      {
+        kind: "template",
+        name: syncNames._201Name,
+        arguments: [{ kind: "object", name: resourceMetadata.SwaggerModelName }],
+      },
+    ];
+    if (isLongRunning && isSameResponses(responses, templateAsyncResponses)) responses = [];
+    if (!isLongRunning && isSameResponses(responses, templateSyncResponses)) responses = [];
     if (responses.length > 0) armOperation.response = responses;
     if (armOperation.lroHeaders && responses) {
       let _201Response = responses.find((r) => r.name === asyncNames._201Name);
       if (_201Response) {
         _201Response.arguments!.push({
-          kind: "&",
+          kind: "object",
           name: "ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader",
         }); //TO-DO: do it in a better way
         armOperation.lroHeaders = undefined;
@@ -396,21 +393,7 @@ function convertResourceCreateOrReplaceOperation(
       }
     }
 
-    if (isFullCompatible) {
-      if (armOperation.response) {
-        armOperation.suppressions = armOperation.suppressions ?? [];
-        armOperation.suppressions.push(getSuppressionWithCode(SuppressionCode.ArmPutOperationResponseCodes));
-
-        if (
-          (armOperation.response as TypespecTemplateModel[]).find(
-            (r) => r.name === asyncNames._202Name && (!r.arguments || r.arguments.length === 0),
-          )
-        ) {
-          armOperation.suppressions.push(getSuppressionWithCode(SuppressionCode.NoResponseBody));
-        }
-      }
-    }
-
+    buildSuppressionsForArmOperation(armOperation, asyncNames, syncNames);
     return [armOperation as TspArmResourceLifeCycleOperation];
   }
   return [];
@@ -476,29 +459,26 @@ function convertResourceUpdateOperation(
       let responses = isLongRunning
         ? getTemplateResponses(swaggerOperation, asyncNames)
         : getTemplateResponses(swaggerOperation, syncNames);
-      if (
-        isLongRunning &&
-        responses.length === 2 &&
-        responses.find(
-          (r) =>
-            r.name === asyncNames._200Name &&
-            r.arguments?.length === 1 &&
-            r.arguments[0].name === resourceMetadata.SwaggerModelName,
-        ) &&
-        responses.find((r) => r.name === asyncNames._202NameNoBody && !r.arguments)
-      )
-        responses = [];
-      if (
-        !isLongRunning &&
-        responses.length === 1 &&
-        responses.find(
-          (r) =>
-            r.name === syncNames._200Name &&
-            r.arguments?.length === 1 &&
-            r.arguments[0].name === resourceMetadata.SwaggerModelName,
-        )
-      )
-        responses = [];
+      const templateAsyncResponses: TypespecTemplateModel[] = [
+        {
+          kind: "template",
+          name: asyncNames._200Name,
+          arguments: [{ kind: "object", name: resourceMetadata.SwaggerModelName }],
+        },
+        {
+          kind: "template",
+          name: asyncNames._202NameNoBody,
+        },
+      ];
+      const templateSyncResponses: TypespecTemplateModel[] = [
+        {
+          kind: "template",
+          name: syncNames._200Name,
+          arguments: [{ kind: "object", name: resourceMetadata.SwaggerModelName }],
+        },
+      ];
+      if (isLongRunning && isSameResponses(responses, templateAsyncResponses)) responses = [];
+      if (!isLongRunning && isSameResponses(responses, templateSyncResponses)) responses = [];
       if (responses.length > 0) armOperation.response = responses;
       if (armOperation.lroHeaders && responses) {
         const _202response = responses.find(
@@ -506,12 +486,13 @@ function convertResourceUpdateOperation(
         );
         if (_202response) {
           _202response.arguments = [
-            { kind: "&", name: "ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader" },
+            { kind: "object", name: "ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader" },
           ]; //TO-DO: do it in a better way
           armOperation.lroHeaders = undefined;
         }
       }
 
+      buildSuppressionsForArmOperation(armOperation, asyncNames, syncNames);
       armOperation.decorators = [{ name: "parameterVisibility", arguments: [] }];
       return [armOperation as TspArmResourceLifeCycleOperation];
     }
@@ -567,38 +548,43 @@ function convertResourceDeleteOperation(
     let responses = isLongRunning
       ? getTemplateResponses(swaggerOperation, asyncNames)
       : getTemplateResponses(swaggerOperation, syncNames);
-    if (
-      isLongRunning &&
-      responses.length === 2 &&
-      responses.find((r) => r.name === asyncNames._202NameNoBody && !r.arguments) &&
-      responses.find((r) => r.name === asyncNames._204Name && !r.arguments)
-    )
-      responses = [];
-    if (
-      !isLongRunning &&
-      responses.length === 2 &&
-      responses.find((r) => r.name === syncNames._200NameNoBody && !r.arguments) &&
-      responses.find((r) => r.name === asyncNames._204Name && !r.arguments)
-    )
-      responses = [];
+
+    const templateAsyncResponses: TypespecTemplateModel[] = [
+      {
+        kind: "template",
+        name: asyncNames._202NameNoBody,
+      },
+      {
+        kind: "template",
+        name: asyncNames._204Name,
+      },
+    ];
+    const templateSyncResponses: TypespecTemplateModel[] = [
+      {
+        kind: "template",
+        name: syncNames._200NameNoBody,
+      },
+      {
+        kind: "template",
+        name: syncNames._204Name,
+      },
+    ];
+    if (isLongRunning && isSameResponses(responses, templateAsyncResponses)) responses = [];
+    if (!isLongRunning && isSameResponses(responses, templateSyncResponses)) responses = [];
     if (armOperation.lroHeaders && responses) {
       const _202response = responses.find(
         (r) => r.name === asyncNames._202NameNoBody || r.name === asyncNames._202Name,
       );
       if (_202response) {
         _202response.arguments = [
-          { kind: "&", name: "ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader" },
+          { kind: "object", name: "ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader" },
         ]; //TO-DO: do it in a better way
         armOperation.lroHeaders = undefined;
       }
     }
     if (responses.length > 0) armOperation.response = responses;
 
-    if (armOperation.response && isFullCompatible) {
-      armOperation.suppressions = armOperation.suppressions ?? [];
-      armOperation.suppressions.push(getSuppressionWithCode(SuppressionCode.ArmDeleteOperationResponseCodes));
-    }
-
+    buildSuppressionsForArmOperation(armOperation, asyncNames, syncNames);
     return [armOperation as TspArmResourceLifeCycleOperation];
   }
   return [];
@@ -758,7 +744,7 @@ function convertResourceActionOperations(
           const _202Response = responses.find((r) => r.name === asyncNames._202Name);
           if (_202Response && armOperation.lroHeaders === "Azure-AsyncOperation") {
             _202Response.arguments!.push({
-              kind: "&",
+              kind: "object",
               name: "ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader",
             });
           }
@@ -832,6 +818,34 @@ function buildBodyDecorator(
   armOperation.clientDecorators = armOperation.clientDecorators
     ? armOperation.clientDecorators.concat(clientDecorators)
     : clientDecorators;
+}
+
+function isSameResponses(actual: TypespecTemplateModel[], expected: TypespecTemplateModel[]): boolean {
+  if (actual.length !== expected.length) return false;
+  for (const actualModel of actual) {
+    const expectedModel = expected.find((m) => isSameResponse(actualModel, m));
+    if (!expectedModel) return false;
+  }
+  return true;
+}
+
+function isSameResponse(actual: TypespecTemplateModel, expected: TypespecTemplateModel): boolean {
+  if (actual.name !== expected.name) return false;
+  if (actual.arguments?.length !== expected.arguments?.length) return false;
+  for (const actualArgument of actual.arguments ?? []) {
+    const expectedArgument = expected.arguments?.find(
+      (a) => a.name === actualArgument.name && a.kind === actualArgument.kind,
+    );
+    if (!expectedArgument) return false;
+
+    if (actualArgument.kind === "template" && isSameResponse(actualArgument, expectedArgument as TypespecTemplateModel))
+      return false;
+
+    if (actualArgument.additionalProperties !== undefined) return false; // Attention: expected.additionalProperties is always undefined
+  }
+  if (actual.additionalProperties !== undefined) return false; // Attention: expected.additionalProperties is always undefined
+
+  return true;
 }
 
 function getOtherProperties(
@@ -942,6 +956,52 @@ function buildNewArmOperation(
     examples: swaggerOperation.extensions?.["x-ms-examples"],
     clientDecorators: getOperationClientDecorators(swaggerOperation),
   };
+}
+
+function buildSuppressionsForArmOperation(
+  operation: TspArmResourceOperationBase,
+  asyncNames: NamesOfResponseTemplate,
+  syncNames: NamesOfResponseTemplate,
+) {
+  if (!getOptions().isFullCompatible) return;
+
+  if (
+    operation.response &&
+    (operation.kind === "ArmResourceCreateOrReplaceAsync" || operation.kind === "ArmResourceCreateOrReplaceSync")
+  ) {
+    const armPutOperationResponseCodes = checkArmPutOperationResponseCodes(
+      operation.response as TypespecTemplateModel[],
+      asyncNames,
+      syncNames,
+    );
+    if (armPutOperationResponseCodes) {
+      operation.suppressions = operation.suppressions ?? [];
+      operation.suppressions.push(armPutOperationResponseCodes);
+    }
+  }
+
+  if (operation.response) {
+    const noResponseBody = checkNoResponseBody(operation.response as TypespecTemplateModel[], asyncNames, syncNames);
+    if (noResponseBody) {
+      operation.suppressions = operation.suppressions ?? [];
+      operation.suppressions.push(noResponseBody);
+    }
+  }
+
+  if (
+    operation.response &&
+    (operation.kind === "ArmResourceDeleteWithoutOkAsync" || operation.kind === "ArmResourceDeleteSync")
+  ) {
+    const armDeleteOperationResponseCodes = checkArmDeleteOperationResponseCodes(
+      operation.response as TypespecTemplateModel[],
+      asyncNames,
+      syncNames,
+    );
+    if (armDeleteOperationResponseCodes) {
+      operation.suppressions = operation.suppressions ?? [];
+      operation.suppressions.push(armDeleteOperationResponseCodes);
+    }
+  }
 }
 
 const existingNames: { [interfaceName: string]: Set<string> } = {};

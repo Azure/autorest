@@ -1,9 +1,8 @@
-import { ArraySchema, isObjectSchema, ObjectSchema, Operation, Response, SchemaResponse } from "@autorest/codemodel";
-import { getSession } from "../autorest-session";
-import { getDataTypes } from "../data-types";
-import { TypespecDataType, TypespecTemplateModel } from "../interfaces";
+import { isObjectSchema, Operation, Response, SchemaResponse } from "@autorest/codemodel";
+import { TypespecTemplateModel } from "../interfaces";
 import { isResource } from "../resource/resource-equivalent";
 import { generateTemplateModel } from "./model-generation";
+import { transformSchemaResponse } from "./response";
 import { isArraySchema, isResponseSchema, isStringSchema, isUriSchema } from "./schemas";
 
 export function getFullyQualifiedName(type: string, namespace: string | undefined = undefined): string {
@@ -83,21 +82,19 @@ export function getTemplateResponses(
   const _202Response = operation.responses?.find((r) => r.protocol.http?.statusCodes[0] === "202");
   if (_202Response) {
     if (isResponseSchema(_202Response)) {
-      const equivalentResponse = getEquivalentResponse(_202Response as SchemaResponse);
+      const equivalentResponse = transformSchemaResponse(_202Response as SchemaResponse);
       responses.push({
         kind: "template",
         name: namesOfResponseTemplate._202Name,
         additionalProperties: [
           {
-            kind: "parameter",
+            kind: "property",
             name: "_",
             isOptional: false,
             type:
               equivalentResponse.kind === "template"
                 ? generateTemplateModel(equivalentResponse as TypespecTemplateModel)
                 : _202Response.schema.language.default.name,
-            location: "body",
-            serializedName: "_",
             decorators: [{ name: "bodyRoot" }],
           },
         ],
@@ -123,27 +120,8 @@ function generateResponseWithBody(
   const responseSchemaName = getSchemaResponseSchemaName(response);
   if (responseSchemaName === undefined) return { kind: "template", name: templateNameNoBody };
 
-  const equivalentResponse = getEquivalentResponse(response as SchemaResponse);
+  const equivalentResponse = transformSchemaResponse(response as SchemaResponse);
   return { kind: "template", name: templateName, arguments: [equivalentResponse] };
-}
-
-function getEquivalentResponse(response: SchemaResponse): TypespecTemplateModel | TypespecDataType {
-  const codeModel = getSession().model;
-  const dataTypes = getDataTypes(codeModel);
-
-  if (isResourceListResult(response as SchemaResponse)) {
-    const valueSchema = ((response as SchemaResponse).schema as ObjectSchema).properties?.find(
-      (p) => p.language.default.name === "value",
-    );
-    const valueName = dataTypes.get((valueSchema!.schema as ArraySchema).elementType)?.name ?? "void";
-    return {
-      kind: "template",
-      name: "ResourceListResult",
-      arguments: [{ kind: "object", name: valueName }],
-    };
-  }
-
-  return { kind: "object", name: response.schema.language.default.name };
 }
 
 function getSchemaResponseSchemaName(response: Response): string | undefined {

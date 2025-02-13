@@ -46,7 +46,6 @@ interface GlobalSchemaContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("GlobalSchema_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     GlobalSchemaContract,

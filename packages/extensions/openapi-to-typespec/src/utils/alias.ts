@@ -4,8 +4,8 @@ export function addCorePageAlias(typespecObject: TypespecObject): TypespecAlias 
   if (!typespecObject.decorators?.some((d) => d.name === "pagedResult")) {
     return;
   }
-  const value = typespecObject.properties.filter((p) => p.name === "value");
-  if (!typespecObject.properties.some((p) => p.name === "nextLink") || !value.length) {
+  const value = typespecObject.properties?.filter((p) => p.name === "value");
+  if (!typespecObject.properties?.some((p) => p.name === "nextLink") || !value?.length) {
     return;
   }
 

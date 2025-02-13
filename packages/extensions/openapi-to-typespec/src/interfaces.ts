@@ -119,13 +119,12 @@ export interface TypespecVoidType extends TypespecDataType {
   name: "_";
 }
 
-export type TypespecModel = TypespecTemplateModel | TypespecDataType;
+export type TypespecModel = TypespecTemplateModel | TypespecObject;
 
-export interface TypespecTemplateModel extends TypespecDataType {
+export interface TypespecTemplateModel extends TypespecDataType, WithAdditionalProperties {
   kind: "template";
   arguments?: TypespecModel[];
   namedArguments?: Record<string, string>; // TO-DO: value is string for now, should be refacted to some object type
-  additionalProperties?: TypespecParameter[]; // Currently for body purpose
   additionalTemplateModel?: string; // Currently for LRO header purpose
 }
 
@@ -162,6 +161,10 @@ export interface WithSuppressDirectives {
 export interface WithSuppressDirective {
   suppressionCode?: string;
   suppressionMessage?: string;
+}
+
+export interface WithAdditionalProperties {
+  additionalProperties?: TypespecObjectProperty[];
 }
 
 export type TypespecParameterLocation = "path" | "query" | "header" | "body";
@@ -205,10 +208,10 @@ export interface TypespecAlias {
   module?: string;
 }
 
-export interface TypespecObject extends TypespecDataType {
+export interface TypespecObject extends TypespecDataType, WithAdditionalProperties {
   kind: "object";
-  properties: TypespecObjectProperty[];
-  parents: string[];
+  properties?: TypespecObjectProperty[];
+  parents?: string[];
   extendedParents?: string[];
   spreadParents?: string[];
   decorators?: TypespecDecorator[];

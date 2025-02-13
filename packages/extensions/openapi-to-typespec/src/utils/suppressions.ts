@@ -1,4 +1,5 @@
-import { WithSuppressDirective } from "../interfaces";
+import { TypespecTemplateModel, WithSuppressDirective } from "../interfaces";
+import { NamesOfResponseTemplate } from "./type-mapping";
 
 export enum SuppressionCode {
   NoEnum = "@azure-tools/typespec-azure-core/no-enum",
@@ -10,6 +11,64 @@ export enum SuppressionCode {
   ArmResourceInvalidEnvelopeProperty = "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property",
   ArmNoRecord = "@azure-tools/typespec-azure-resource-manager/arm-no-record",
   ArmResourceInterfaceRequiresDecorator = "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator",
+}
+
+export function checkArmPutOperationResponseCodes(
+  responses: TypespecTemplateModel[],
+  asyncNames: NamesOfResponseTemplate,
+  syncNames: NamesOfResponseTemplate,
+): WithSuppressDirective | undefined {
+  if (
+    (responses.length === 2 &&
+      responses.find((r) => r.name === asyncNames._200Name) !== undefined &&
+      responses.find((r) => r.name === asyncNames._201Name) !== undefined) ||
+    (responses.find((r) => r.name === syncNames._201Name) !== undefined &&
+      responses.find((r) => r.name === syncNames._200Name) !== undefined)
+  )
+    return undefined;
+  return getSuppressionWithCode(SuppressionCode.ArmPutOperationResponseCodes);
+}
+
+export function checkNoResponseBody(
+  responses: TypespecTemplateModel[],
+  asyncNames: NamesOfResponseTemplate,
+  syncNames: NamesOfResponseTemplate,
+): WithSuppressDirective | undefined {
+  // 202 and 204 templates don't accept body, therefore if they have a body, it must be like `& {@body _ : T}`
+  function hasBody(response: TypespecTemplateModel): boolean {
+    return (
+      response.additionalProperties !== undefined &&
+      response.additionalProperties.find(
+        (p) => p.decorators?.find((d) => d.name === "bodyRoot" || d.name === "body") !== undefined,
+      ) !== undefined
+    );
+  }
+
+  if (
+    responses.find(
+      (r) =>
+        ((r.name === asyncNames._202Name || r.name === syncNames._202Name) && hasBody(r)) ||
+        ((r.name === asyncNames._204Name || r.name === syncNames._204Name) && hasBody(r)),
+    )
+  ) {
+    return getSuppressionWithCode(SuppressionCode.NoResponseBody);
+  } else return undefined;
+}
+
+export function checkArmDeleteOperationResponseCodes(
+  responses: TypespecTemplateModel[],
+  asyncNames: NamesOfResponseTemplate,
+  syncNames: NamesOfResponseTemplate,
+): WithSuppressDirective | undefined {
+  if (
+    (responses.length === 2 &&
+      responses.find((r) => r.name === asyncNames._200Name) !== undefined &&
+      responses.find((r) => r.name === asyncNames._204Name) !== undefined) ||
+    (responses.find((r) => r.name === syncNames._204Name) !== undefined &&
+      responses.find((r) => r.name === syncNames._200Name) !== undefined)
+  )
+    return undefined;
+  else return getSuppressionWithCode(SuppressionCode.ArmDeleteOperationResponseCodes);
 }
 
 export function generateSuppressionForNoEnum(): string {

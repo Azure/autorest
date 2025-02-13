@@ -2712,12 +2712,6 @@ interface FileOperations {
        */
       @header
       `If-Unmodified-Since`?: utcDateTime;
-
-      /**
-       * Accept header
-       */
-      @header
-      accept: "application/json, application/octet-stream";
     },
     void
   >;
@@ -2938,12 +2932,6 @@ interface FileOperations {
        */
       @header
       `If-Unmodified-Since`?: utcDateTime;
-
-      /**
-       * Accept header
-       */
-      @header
-      accept: "application/json, application/octet-stream";
     },
     void
   >;
@@ -5243,12 +5231,6 @@ interface ComputeNodeOperations {
        */
       @header
       `ocp-date`?: utcDateTime;
-
-      /**
-       * Accept header
-       */
-      @header
-      accept: "application/json, application/octet-stream";
     },
     void
   >;

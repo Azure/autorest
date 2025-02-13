@@ -49,10 +49,15 @@ interface Servers {
   /**
    * Updates the current state of the specified Analysis Services server.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @parameterVisibility
   update is ArmCustomPatchAsync<
     AnalysisServicesServer,
-    PatchModel = AnalysisServicesServerUpdateParameters
+    PatchModel = AnalysisServicesServerUpdateParameters,
+    Response = ArmResponse<AnalysisServicesServer> | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: AnalysisServicesServer;
+    })
   >;
 
   /**
