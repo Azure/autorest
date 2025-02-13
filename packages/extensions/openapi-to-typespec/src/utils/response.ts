@@ -1,10 +1,10 @@
 import { ArraySchema, ObjectSchema, SchemaResponse } from "@autorest/codemodel";
 import { getSession } from "../autorest-session";
 import { getDataTypes } from "../data-types";
-import { isResourceListResult } from "./type-mapping";
-import { getOptions } from "../options";
 import { TypespecModel, TypespecObjectProperty } from "../interfaces";
+import { getOptions } from "../options";
 import { isArraySchema } from "./schemas";
+import { isResourceListResult } from "./type-mapping";
 
 export function transformSchemaResponse(response: SchemaResponse): TypespecModel {
   const codeModel = getSession().model;
