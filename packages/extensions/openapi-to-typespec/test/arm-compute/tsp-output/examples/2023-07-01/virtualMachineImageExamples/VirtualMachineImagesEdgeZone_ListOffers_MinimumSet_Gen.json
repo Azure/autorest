@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "edgeZone": "aaaaaaaaaaaaaaaaaaaaa",
+    "location": "aaaaaaaaaaaaaa",
+    "publisherName": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "name": "aaaaaaaa",
+          "id": "aaaaaaaaaaa",
+          "location": "aaaaaaaaaaaaaaaaaa"
+        }
+      ]
+    }
+  },
+  "operationId": "VirtualMachineImagesEdgeZone_ListOffers",
+  "title": "VirtualMachineImagesEdgeZone_ListOffers_MinimumSet_Gen"
+}

@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "key-name": "ImportSoftKeyTest",
+    "parameters": {
+      "key": {
+        "d": "GeT1_D5LAZa7qlC7WZ0DKJnOth8kcPrN0urTEFtWCbmHQWkAad_px_VUpGp0BWDDzENbXbQcu4QCCdf4crve5eXt8dVI86OSah-RpEdBq8OFsETIhg2Tmq8MbYTJexoynRcIC62xAaCmkFMmu931gQSvWnYWTEuOPgmD2oE_F-bP9TFlGRc69a6MSbtcSRyFTsd5KsUr40QS4zf2W4kZCOWejyLuxk88SXgUqcJx86Ulc1Ol1KkTBLadvReAZCyCMwKBlNRGw46BU_iK0vK7rTD9fmEd639Gjti6eLpnyQYpnVe8uGgwVU1fHBkAKyapWoEG6VMhMntcrvgukKLIsQ",
+        "dp": "ZGnmWx-Nca71z9a9vvT4g02iv3S-3kSgmhl8JST09YQwK8tfiK7nXnNMtXJi2K4dLKKnLicGtCzB6W3mXdLcP2SUOWDOeStoBt8HEBT4MrI1psCKqnBum78WkHju90rBFj99amkP6UeQy5EASAzgmKQu2nUaUnRV0lYP8LHMCkE",
+        "dq": "dtpke0foFs04hPS6XYLA5lc7-1MAHfZKN4CkMAofwDqPmRQzCxpDJUk0gMWGJEdU_Lqfbg22Py44cci0dczH36NW3UU5BL86T2_SPPDOuyX7kDscrIJCdowxQCGJHGRBEozM_uTL46wu6UnUIv7m7cuGgodJyZBcdwpo6ziFink",
+        "e": "AQAB",
+        "kty": "RSA",
+        "n": "nKAwarTrOpzd1hhH4cQNdVTgRF-b0ubPD8ZNVf0UXjb62QuAk3Dn68ESThcF7SoDYRx2QVcfoMC9WCcuQUQDieJF-lvJTSer1TwH72NBovwKlHvrXqEI0a6_uVYY5n-soGt7qFZNbwQLdWWA6PrbqTLIkv6r01dcuhTiQQAn6OWEa0JbFvWfF1kILQIaSBBBaaQ4R7hZs7-VQTHGD7J1xGteof4gw2VTiwNdcE8p5UG5b6S9KQwAeET4yB4KFPwQ3TDdzxJQ89mwYVi_sgAIggN54hTq4oEKYJHBOMtFGIN0_HQ60ZSUnpOi87xNC-8VFqnv4rfTQ7nkK6XMvjMVfw",
+        "p": "v1jeCPnuJQM2PW2690Q9KJk0Ulok8VFGjkcHUHVi3orKdy7y_TCIWM6ZGvgFzI6abinzYbTEPKV4wFdMAwvOWmawXj5YrsoeB44_HXJ0ak_5_iP6XXR8MLGXbd0ZqsxvAZyzMj9vyle7EN2cBod6aenI2QZoRDucPvjPwZsZotk",
+        "q": "0Yv-Dj6qnvx_LL70lUnKA6MgHE_bUC4drl5ZNDDsUdUUYfxIK4G1rGU45kHGtp-Qg-Uyf9s52ywLylhcVE3jfbjOgEozlSwKyhqfXkLpMLWHqOKj9fcfYd4PWKPOgpzWsqjA6fJbBUMYo0CU2G9cWCtVodO7sBJVSIZunWrAlBc",
+        "qi": "Y9KD5GaHkAYmAqpOfAQUMr71QuAAaBb0APzMuUvoEYw39PD3_vJeh9HZ15QmJ8zCX10-nlzUB-bWwvK-rGcJXbK4pArilr5MiaYv7e8h5eW2zs2_itDJ6Oebi-wVbMhg7DvUTBbkCvPhhIedE4UlDQmMYP7RhzVVs7SfmkGs_DQ"
+      },
+      "tags": {
+        "purpose": "unit test"
+      }
+    },
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "attributes": {
+          "created": 1493942691,
+          "enabled": true,
+          "recoveryLevel": "Recoverable+Purgeable",
+          "updated": 1493942691
+        },
+        "key": {
+          "e": "AQAB",
+          "key_ops": [
+            "encrypt",
+            "decrypt",
+            "sign",
+            "verify",
+            "wrapKey",
+            "unwrapKey"
+          ],
+          "kid": "https://myvault.vault.azure.net/keys/ImportSoftKeyTest/2eb4a15d74184c6f84159c3ca90f0f4b",
+          "kty": "RSA",
+          "n": "nKAwarTrOpzd1hhH4cQNdVTgRF-b0ubPD8ZNVf0UXjb62QuAk3Dn68ESThcF7SoDYRx2QVcfoMC9WCcuQUQDieJF-lvJTSer1TwH72NBovwKlHvrXqEI0a6_uVYY5n-soGt7qFZNbwQLdWWA6PrbqTLIkv6r01dcuhTiQQAn6OWEa0JbFvWfF1kILQIaSBBBaaQ4R7hZs7-VQTHGD7J1xGteof4gw2VTiwNdcE8p5UG5b6S9KQwAeET4yB4KFPwQ3TDdzxJQ89mwYVi_sgAIggN54hTq4oEKYJHBOMtFGIN0_HQ60ZSUnpOi87xNC-8VFqnv4rfTQ7nkK6XMvjMVfw"
+        },
+        "tags": {
+          "purpose": "unit test"
+        }
+      }
+    }
+  },
+  "operationId": "ImportKey",
+  "title": "Import key"
+}

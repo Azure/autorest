@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "jobId": "jobId",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT",
+    "taskCollection": {
+      "value": [
+        {
+          "commandLine": "cmd /c dir /s",
+          "id": "simple1"
+        },
+        {
+          "commandLine": "cmd /c dir /s",
+          "id": "simple2"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "eTag": "0x8D3D623CD661246",
+            "lastModified": "2022-08-26T07:02:44.7589958Z",
+            "location": "https://account.region.batch.azure.com/jobs/jobId/tasks/simple1",
+            "status": "success",
+            "taskId": "simple1"
+          },
+          {
+            "eTag": "0x8D3D623CD7072CC",
+            "lastModified": "2022-08-26T07:02:44.8270028Z",
+            "location": "https://account.region.batch.azure.com/jobs/jobId/tasks/simple2",
+            "status": "success",
+            "taskId": "simple2"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Task_AddCollection",
+  "title": "Add a basic collection of tasks"
+}

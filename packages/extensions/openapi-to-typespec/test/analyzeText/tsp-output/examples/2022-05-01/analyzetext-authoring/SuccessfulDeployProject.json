@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "Content-Type": "application/json",
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2022-05-01",
+    "body": {
+      "trainedModelLabel": "model1"
+    },
+    "deploymentName": "production",
+    "projectName": "LoanAgreements"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "operation-location": "{Endpoint}/language/authoring/analyze-text/projects/LoanAgreements/deployments/production/jobs/66fa9a67-a561-42f1-8a13-f3a879b1a324_637858368000000000?api-version=2022-05-01"
+      }
+    }
+  },
+  "operationId": "TextAnalysisAuthoring_DeployProject",
+  "title": "Successful Deploy Project"
+}

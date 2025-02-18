@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "api-version": "2022-11-01",
+    "testRunId": "12316678-1234-1234-1234-122451189012"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "LoadTestRunMetrics",
+            "description": "Load test run metrics"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "LoadTestRun_ListMetricNamespaces",
+  "title": "Lists the metric namespaces for a load test run."
+}

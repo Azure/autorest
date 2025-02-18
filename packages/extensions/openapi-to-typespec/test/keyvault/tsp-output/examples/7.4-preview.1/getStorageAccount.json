@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "storage-account-name": "readStrg01",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "activeKeyName": "key1",
+        "attributes": {
+          "created": 1490738386,
+          "enabled": true,
+          "recoveryLevel": "Recoverable+Purgeable",
+          "updated": 1490738386
+        },
+        "autoRegenerateKey": true,
+        "id": "https://myvault.vault.azure.net/storage/readStrg01",
+        "regenerationPeriod": "P30D",
+        "resourceId": "/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc",
+        "tags": {
+          "tag1": "val1",
+          "tag2": "val2"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "GetStorageAccount",
+  "title": "Get Storage account"
+}

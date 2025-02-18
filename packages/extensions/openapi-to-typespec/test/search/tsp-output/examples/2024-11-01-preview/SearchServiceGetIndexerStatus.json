@@ -1,0 +1,91 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "endpoint": "https://myservice.search.windows.net",
+    "indexerName": "myindexer"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "executionHistory": [
+          {
+            "endTime": "2014-11-26T03:37:19.012Z",
+            "errorMessage": null,
+            "errors": [],
+            "finalTrackingState": null,
+            "initialTrackingState": null,
+            "itemsFailed": 0,
+            "itemsProcessed": 11,
+            "startTime": "2014-11-26T03:37:18.853Z",
+            "status": "success",
+            "warnings": []
+          },
+          {
+            "endTime": "2014-11-26T03:28:12.007Z",
+            "errorMessage": null,
+            "errors": [
+              {
+                "name": null,
+                "documentationLink": null,
+                "errorMessage": "Document key cannot be missing or empty.",
+                "key": "",
+                "statusCode": 400,
+                "details": null
+              },
+              {
+                "name": "DocumentExtraction.AzureBlob.MyDataSource",
+                "documentationLink": "https://go.microsoft.com/fwlink/?linkid=2049388",
+                "errorMessage": "Could not read the value of column 'foo' at index '0'.",
+                "key": "document id 1",
+                "statusCode": 400,
+                "details": "The file could not be parsed."
+              }
+            ],
+            "finalTrackingState": null,
+            "initialTrackingState": null,
+            "itemsFailed": 2,
+            "itemsProcessed": 1,
+            "startTime": "2014-11-26T03:28:10.125Z",
+            "status": "transientFailure",
+            "warnings": [
+              {
+                "name": null,
+                "documentationLink": null,
+                "key": "document id",
+                "message": "A warning doesn't stop indexing, and is intended to inform you of certain interesting situations, like when a blob indexer truncates the amount of text extracted from a blob.",
+                "details": null
+              },
+              {
+                "name": "Enrichment.LanguageDetectionSkill.#4",
+                "documentationLink": "https://go.microsoft.com/fwlink/?linkid=2099692",
+                "key": "document id 2",
+                "message": "Document was truncated to 50000 characters.",
+                "details": "The skill did something that didn't break anything, nonetheless something we didn't expect happened, so it might be worth double checking."
+              }
+            ]
+          }
+        ],
+        "lastResult": {
+          "endTime": "2014-11-26T03:37:19.012Z",
+          "errorMessage": null,
+          "errors": [],
+          "finalTrackingState": null,
+          "initialTrackingState": null,
+          "itemsFailed": 0,
+          "itemsProcessed": 11,
+          "startTime": "2014-11-26T03:37:18.853Z",
+          "status": "success",
+          "warnings": []
+        },
+        "limits": {
+          "maxDocumentContentCharactersToExtract": 4000000,
+          "maxDocumentExtractionSize": 256000000,
+          "maxRunTime": "PT22H"
+        },
+        "status": "running"
+      }
+    }
+  },
+  "operationId": "Indexers_GetStatus",
+  "title": "SearchServiceGetIndexerStatus"
+}

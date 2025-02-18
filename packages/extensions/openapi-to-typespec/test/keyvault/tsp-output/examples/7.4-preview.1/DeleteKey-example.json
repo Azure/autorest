@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "key-name": "CreateSoftKeyTest",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "attributes": {
+          "created": 1493942451,
+          "enabled": true,
+          "recoveryLevel": "Recoverable+Purgeable",
+          "updated": 1493942451
+        },
+        "deletedDate": 1493942452,
+        "key": {
+          "e": "AQAB",
+          "key_ops": [
+            "encrypt",
+            "decrypt",
+            "sign",
+            "verify",
+            "wrapKey",
+            "unwrapKey"
+          ],
+          "kid": "https://myvault.vault.azure.net/keys/CreateSoftKeyTest/78deebed173b48e48f55abf87ed4cf71",
+          "kty": "RSA",
+          "n": "2HJAE5fU3Cw2Rt9hEuq-F6XjINKGa-zskfISVqopqUy60GOs2eyhxbWbJBeUXNor_gf-tXtNeuqeBgitLeVa640UDvnEjYTKWjCniTxZRaU7ewY8BfTSk-7KxoDdLsPSpX_MX4rwlAx-_1UGk5t4sQgTbm9T6Fm2oqFd37dsz5-Gj27UP2GTAShfJPFD7MqU_zIgOI0pfqsbNL5xTQVM29K6rX4jSPtylZV3uWJtkoQIQnrIHhk1d0SC0KwlBV3V7R_LVYjiXLyIXsFzSNYgQ68ZjAwt8iL7I8Osa-ehQLM13DVvLASaf7Jnu3sC3CWl3Gyirgded6cfMmswJzY87w"
+        },
+        "recoveryId": "https://myvault.vault.azure.net/deletedkeys/CreateSoftKeyTest",
+        "scheduledPurgeDate": 1501718452,
+        "tags": {
+          "purpose": "unit test",
+          "test name ": "CreateGetDeleteKeyTest"
+        }
+      }
+    }
+  },
+  "operationId": "DeleteKey",
+  "title": "Delete key"
+}

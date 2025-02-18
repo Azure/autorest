@@ -1,0 +1,171 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "location": "eastus",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "{virtualMachineScaleSetName}",
+            "type": "Microsoft.Compute/virtualMachineScaleSets",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}",
+            "location": "eastus",
+            "properties": {
+              "doNotRunExtensionsOnOverprovisionedVMs": false,
+              "overprovision": false,
+              "platformFaultDomainCount": 1,
+              "provisioningState": "succeeded",
+              "singlePlacementGroup": false,
+              "upgradePolicy": {
+                "automaticOSUpgradePolicy": {
+                  "enableAutomaticOSUpgrade": false
+                },
+                "mode": "Automatic"
+              },
+              "virtualMachineProfile": {
+                "networkProfile": {
+                  "networkInterfaceConfigurations": [
+                    {
+                      "name": "myNic",
+                      "properties": {
+                        "ipConfigurations": [
+                          {
+                            "name": "myIPConfig",
+                            "properties": {
+                              "primary": true,
+                              "subnet": {
+                                "id": "/subscriptions/{subscription-id}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/myVNet/subnets/mySubnet"
+                              }
+                            }
+                          }
+                        ],
+                        "networkSecurityGroup": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup"
+                        },
+                        "primary": true
+                      }
+                    }
+                  ]
+                },
+                "osProfile": {
+                  "adminUsername": "admin",
+                  "computerNamePrefix": "{virtualMachineScaleSetName}",
+                  "linuxConfiguration": {
+                    "disablePasswordAuthentication": false
+                  }
+                },
+                "storageProfile": {
+                  "dataDisks": [],
+                  "imageReference": {
+                    "offer": "databricks",
+                    "publisher": "azuredatabricks",
+                    "sku": "databricksworker",
+                    "version": "3.15.2"
+                  },
+                  "osDisk": {
+                    "caching": "ReadWrite",
+                    "createOption": "FromImage",
+                    "diskSizeGB": 30,
+                    "managedDisk": {
+                      "storageAccountType": "Premium_LRS"
+                    }
+                  }
+                }
+              }
+            },
+            "sku": {
+              "name": "Standard_D2s_v3",
+              "capacity": 4,
+              "tier": "Standard"
+            },
+            "tags": {
+              "myTag1": "tagValue1"
+            }
+          },
+          {
+            "name": "{virtualMachineScaleSetName}",
+            "type": "Microsoft.Compute/virtualMachineScaleSets",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}1",
+            "location": "eastus",
+            "properties": {
+              "doNotRunExtensionsOnOverprovisionedVMs": false,
+              "overprovision": false,
+              "platformFaultDomainCount": 1,
+              "provisioningState": "succeeded",
+              "singlePlacementGroup": false,
+              "upgradePolicy": {
+                "automaticOSUpgradePolicy": {
+                  "enableAutomaticOSUpgrade": false
+                },
+                "mode": "Automatic"
+              },
+              "virtualMachineProfile": {
+                "networkProfile": {
+                  "networkInterfaceConfigurations": [
+                    {
+                      "name": "myNic1",
+                      "properties": {
+                        "ipConfigurations": [
+                          {
+                            "name": "myIPConfig",
+                            "properties": {
+                              "primary": true,
+                              "subnet": {
+                                "id": "/subscriptions/{subscription-id}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/myVNet/subnets/mySubnet"
+                              }
+                            }
+                          }
+                        ],
+                        "networkSecurityGroup": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup"
+                        },
+                        "primary": true
+                      }
+                    }
+                  ]
+                },
+                "osProfile": {
+                  "adminUsername": "admin",
+                  "computerNamePrefix": "{virtualMachineScaleSetName}",
+                  "linuxConfiguration": {
+                    "disablePasswordAuthentication": false
+                  }
+                },
+                "storageProfile": {
+                  "dataDisks": [],
+                  "imageReference": {
+                    "offer": "databricks",
+                    "publisher": "azuredatabricks",
+                    "sku": "databricksworker",
+                    "version": "3.15.2"
+                  },
+                  "osDisk": {
+                    "caching": "ReadWrite",
+                    "createOption": "FromImage",
+                    "diskSizeGB": 30,
+                    "managedDisk": {
+                      "storageAccountType": "Premium_LRS"
+                    }
+                  }
+                }
+              }
+            },
+            "sku": {
+              "name": "Standard_D2s_v3",
+              "capacity": 4,
+              "tier": "Standard"
+            },
+            "tags": {
+              "myTag1": "tagValue2"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSets_ListByLocation",
+  "title": "Lists all the VM scale sets under the specified subscription for the specified location."
+}

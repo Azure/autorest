@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "key-name": "sdktestkey",
+    "key-version": "f6bc1f3d37c14b2bb1a2ebb4b24e9535",
+    "parameters": {
+      "alg": "RSA1_5",
+      "value": "5ka5IVsnGrzufA"
+    },
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "kid": "https://myvault.vault.azure.net/keys/sdktestkey/f6bc1f3d37c14b2bb1a2ebb4b24e9535",
+        "value": "CR0Hk0z72oOit5TxObqRpo-WFGZkb5BeN1C0xJFKHxzdDCESYPCNB-OkiWVAnMcSyu6g2aC8riVRRxY5MC2CWKj-CJ_SMke5X2kTi5yi4hJ5vuOLzmg_M6Bmqib7LsI-TeJHr9rs3-tZaSCdZ2zICeFWYduWV5rPjTnAD98epTorT8AA1zMaYHMIhKpmttcj18-dHr0E0T55dgRtsjK04uC3FlRd3odl4RhO1UHAmYpDd5FUqN-20R0dK0Zk8F8sOtThLhEmuLvqPHOCUBiGUhHA4nRDq1La4SUbThu2KMQJL6BbxxEymuliaYcNNtW7MxgVOf6V3mFxVNRY622i9g"
+      }
+    }
+  },
+  "operationId": "encrypt",
+  "title": "Encrypt example"
+}

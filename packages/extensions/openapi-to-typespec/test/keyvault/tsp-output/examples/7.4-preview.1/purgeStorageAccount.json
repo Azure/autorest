@@ -1,0 +1,14 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "storage-account-name": "purgeStrg01",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "204": {
+      "headers": {}
+    }
+  },
+  "operationId": "PurgeDeletedStorageAccount",
+  "title": "Purge Deleted Storage Account"
+}

@@ -1,0 +1,123 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "dedicated": {
+              "creating": 0,
+              "idle": 0,
+              "leavingPool": 0,
+              "offline": 0,
+              "preempted": 0,
+              "rebooting": 0,
+              "reimaging": 0,
+              "running": 0,
+              "startTaskFailed": 0,
+              "starting": 0,
+              "total": 0,
+              "unknown": 0,
+              "unusable": 0,
+              "waitingForStartTask": 0
+            },
+            "lowPriority": {
+              "creating": 0,
+              "idle": 0,
+              "leavingPool": 0,
+              "offline": 0,
+              "preempted": 0,
+              "rebooting": 0,
+              "reimaging": 0,
+              "running": 2,
+              "startTaskFailed": 0,
+              "starting": 1,
+              "total": 3,
+              "unknown": 0,
+              "unusable": 0,
+              "waitingForStartTask": 0
+            },
+            "poolId": "pool1"
+          },
+          {
+            "dedicated": {
+              "creating": 0,
+              "idle": 1,
+              "leavingPool": 0,
+              "offline": 3,
+              "preempted": 0,
+              "rebooting": 0,
+              "reimaging": 0,
+              "running": 0,
+              "startTaskFailed": 0,
+              "starting": 0,
+              "total": 4,
+              "unknown": 0,
+              "unusable": 0,
+              "waitingForStartTask": 0
+            },
+            "lowPriority": {
+              "creating": 0,
+              "idle": 0,
+              "leavingPool": 0,
+              "offline": 0,
+              "preempted": 0,
+              "rebooting": 0,
+              "reimaging": 0,
+              "running": 0,
+              "startTaskFailed": 0,
+              "starting": 0,
+              "total": 0,
+              "unknown": 0,
+              "unusable": 0,
+              "waitingForStartTask": 0
+            },
+            "poolId": "pool2"
+          },
+          {
+            "dedicated": {
+              "creating": 0,
+              "idle": 5,
+              "leavingPool": 0,
+              "offline": 0,
+              "preempted": 0,
+              "rebooting": 0,
+              "reimaging": 4,
+              "running": 0,
+              "startTaskFailed": 0,
+              "starting": 0,
+              "total": 9,
+              "unknown": 0,
+              "unusable": 0,
+              "waitingForStartTask": 0
+            },
+            "lowPriority": {
+              "creating": 7,
+              "idle": 0,
+              "leavingPool": 0,
+              "offline": 0,
+              "preempted": 0,
+              "rebooting": 0,
+              "reimaging": 0,
+              "running": 4,
+              "startTaskFailed": 0,
+              "starting": 0,
+              "total": 11,
+              "unknown": 0,
+              "unusable": 0,
+              "waitingForStartTask": 0
+            },
+            "poolId": "pool3"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Account_ListPoolNodeCounts",
+  "title": "NodeCountsPayload"
+}

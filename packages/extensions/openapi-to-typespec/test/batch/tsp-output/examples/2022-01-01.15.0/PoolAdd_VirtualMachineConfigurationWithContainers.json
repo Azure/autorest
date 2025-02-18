@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT",
+    "pool": {
+      "enableAutoScale": false,
+      "id": "pool2",
+      "resizeTimeout": "PT15M",
+      "targetDedicatedNodes": 5,
+      "targetLowPriorityNodes": 0,
+      "taskSchedulingPolicy": {
+        "nodeFillType": "spread"
+      },
+      "taskSlotsPerNode": 3,
+      "virtualMachineConfiguration": {
+        "containerConfiguration": {
+          "type": "dockerCompatible",
+          "containerImageNames": [
+            "busybox"
+          ]
+        },
+        "imageReference": {
+          "offer": "0001-com-ubuntu-server-focal",
+          "publisher": "Canonical",
+          "sku": "120_04-lts"
+        },
+        "nodeAgentSKUId": "batch.node.ubuntu 20.04"
+      },
+      "vmSize": "standard_a1"
+    }
+  },
+  "responses": {
+    "201": {
+      "ETag": "0x8D45765A6A2DC04",
+      "Last-Modified": "Fri, 26 Aug 2022 00:00:00 GMT",
+      "request-id": "00000000-0000-0000-0000-000000000000"
+    }
+  },
+  "operationId": "Pool_Add",
+  "title": "Add a VirtualMachineConfiguration pool with containers"
+}

@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "edgeZone": "aaaaaaaa",
+    "location": "aaaaaaaaaaaaaaaaaaaaaaaa",
+    "offer": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "publisherName": "aaaaaaaaaaaaaaaaaaaaaaa",
+    "skus": "aaaaaaaaaa",
+    "subscriptionId": "{subscription-id}",
+    "version": "aaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "aaaaaaaaa",
+        "extendedLocation": {
+          "name": "aaaaaaaaaaaaaaaaaaaaa",
+          "type": "EdgeZone"
+        },
+        "id": "aaaaaaaaaaa",
+        "location": "aaaaa",
+        "properties": {
+          "automaticOSUpgradeProperties": {
+            "automaticOSUpgradeSupported": true
+          },
+          "dataDiskImages": [
+            {
+              "lun": 17
+            }
+          ],
+          "disallowed": {
+            "vmDiskType": "None"
+          },
+          "features": [
+            {
+              "name": "aaaaaaaaaaaaaaaaaaaaa",
+              "value": "aaaaaaaaaaaaaaaaaaaa"
+            }
+          ],
+          "hyperVGeneration": "V1",
+          "osDiskImage": {
+            "operatingSystem": "Windows"
+          },
+          "plan": {
+            "name": "aaaaaaaaa",
+            "product": "aaaaaaaaaaaaaa",
+            "publisher": "aaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        "tags": {
+          "key6817": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachineImagesEdgeZone_Get",
+  "title": "VirtualMachineImagesEdgeZone_Get_MaximumSet_Gen"
+}

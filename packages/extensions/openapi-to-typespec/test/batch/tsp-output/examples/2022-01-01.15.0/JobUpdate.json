@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "job": {
+      "constraints": {
+        "maxTaskRetryCount": -1,
+        "maxWallClockTime": "PT1H"
+      },
+      "poolInfo": {
+        "poolId": "poolId"
+      },
+      "priority": 100
+    },
+    "jobId": "jobId",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "Job_Update",
+  "title": "Job update"
+}

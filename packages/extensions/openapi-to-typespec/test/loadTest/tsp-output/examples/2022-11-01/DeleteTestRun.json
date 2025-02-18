@@ -1,0 +1,11 @@
+{
+  "parameters": {
+    "api-version": "2022-11-01",
+    "testRunId": "12316678-1234-1234-1234-122451189012"
+  },
+  "responses": {
+    "204": {}
+  },
+  "operationId": "LoadTestRun_DeleteTestRun",
+  "title": "Delete a test run"
+}

@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "key_format": "jwk",
+        "transfer_key": {
+          "alg": "RSA-OAEP-256",
+          "e": "AQAB",
+          "key_ops": [
+            "encrypt"
+          ],
+          "kid": "https://myvault.vault.azure.net/transfer_key",
+          "kty": "RSA",
+          "n": "2HJAE5fU3Cw2Rt9hEuq-F6XjINKGa-zskfISVqopqUy60GOs2eyhxbWbJBeUXNor_gf-tXtNeuqeBgitLeVa640UDvnEjYTKWjCniTxZRaU7ewY8BfTSk-7KxoDdLsPSpX_MX4rwlAx-_1UGk5t4sQgTbm9T6Fm2oqFd37dsz5-Gj27UP2GTAShfJPFD7MqU_zIgOI0pfqsbNL5xTQVM29K6rX4jSPtylZV3uWJtkoQIQnrIHhk1d0SC0KwlBV3V7R_LVYjiXLyIXsFzSNYgQ68ZjAwt8iL7I8Osa-ehQLM13DVvLASaf7Jnu3sC3CWl3Gyirgded6cfMmswJzY87w",
+          "x5c": [
+            "MIIEnTCCBAgIBATANBgkAoWgAwIqhkiG9w0BAQsFADAQMQ4wDAYDVQQDDAVjZXJ0QTAeFw0yMDA0MjYwM/mivTQ26aDwb1Pd8h+SGcgJNy1VOnmI5+uvgfh9Qj6glJZHEyvh6dat6f4DDTwRVf6Vvc5noB/yiilaMj1GPW0Bwg5u5atZcjzTb6wOFYOGd2Y1WFBwQqqxriWo62Fp/TO5+kQigYkgVZXcPjbm2c0hdkisPt+APqEdMotmYTANxtC6McP+9KOO8+12K2fj2a9NEhRJOboGQeZ0M7DJoQDl4wg8f2nswxH/36Vfc5ad+nxRYwYObRYfgOh8vpYaw3cpj5+UHBaPQ8ZiQNDoWHJWvX5z1nTmCc2NmLHdi3ijkoc7AKHIv/ZX7qbNhv11a76gJRi/IoHkcf1UTpxCoD+eTbo8Isxt4c9fBTk1vS4wSGsJCewxcyMlTB9FHufPM8k5Uz/ZCOrc+RoaznKPGamgMJOOwbPE1WcBnxuG4rQcskdCa59NiZXyZsx5vsCAwEAAaMCMAAwDQYJKoZIhvcNAQELBQADggIBAAjHy9GCPejDYIVb/iv8Wo40n317LQN7H6ay+YB5L2byEQATvC1ixde6VqwU6k9VdoQOTfP3xJhfstKrO+n5mFJBL4KG8BZBbd6XQu/ggPLKEIVZFbeQkX6o03K54gY8GxYjHr6gF12I6heLWVKA/Qi480GqSlp2Nz+LE1jgPp9u52xpUPjsvRHXtxYZ7Q3O2jhPToNr3D/TZSu3tmQOeqj9M/igLDe9TxqN9C9jraUGR7Lr4zN1srtvIKhxGMS3Q9kC4Mq+ZNNIwC9+jzzd8fB2pGJP/iTFDzB0pDh9Jz0/CR4O4aGoYqkQEx629aZH2TzhOh2yf04TaniwkHXnUEsPTxrpY8ty/OUG3HzBMHCDhS08ZSimrrxhiWyH6g0OEglXVGrI2nH6nnQIn1MTNILcjUTMRt/WSOz6G07oZciAouKD2YS/W1qPap600kGhTya81BuYThGmFoXVMs7Mk3XBzZ81b6hJ6ncwCLb3g4YzqeQ8bOf42jYJctq4tPNaXTfoC7N0FX7lPVJpRdh6BFcHYcg0NPWJsdk6LtSJB6bp2qptRAgJ5S94s843FRd8PRFE10TKDfj3YFRBNkx7qDjwUhtN8/JC9+RHHw0Ngd0x2/BLqeCEMAQaJoC53h0aMLW6PSyovnsLvdJbN/rYc15qUXSz8TtjaHFpjsy/Fo5H"
+          ],
+          "x5t": "dJKBile6IJDrRGqa3k5d8_IKFdI",
+          "x5t#S256": "gIBQCTDDN"
+        }
+      }
+    }
+  },
+  "operationId": "HSMSecurityDomain_TransferKey",
+  "title": "Retrieve Security Domain transfer key"
+}

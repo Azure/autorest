@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "jobId": "jobId",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT",
+    "task": {
+      "commandLine": "cmd /c exit 3",
+      "exitConditions": {
+        "exitCodeRanges": [
+          {
+            "end": 4,
+            "exitOptions": {
+              "jobAction": "terminate"
+            },
+            "start": 2
+          }
+        ]
+      },
+      "id": "taskId",
+      "userIdentity": {
+        "autoUser": {
+          "elevationLevel": "nonadmin",
+          "scope": "task"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {}
+  },
+  "operationId": "Task_Add",
+  "title": "Add a task with exit conditions"
+}

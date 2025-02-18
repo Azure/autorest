@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "endTime": "2022-08-26T00:30:00Z",
+            "poolId": "p1",
+            "startTime": "2022-08-26T00:00:00Z",
+            "totalCoreHours": 39.384838,
+            "vmSize": "a1"
+          },
+          {
+            "endTime": "2022-08-26T01:00:00Z",
+            "poolId": "p2",
+            "startTime": "2022-08-26T00:30:00Z",
+            "totalCoreHours": 3039.384838,
+            "vmSize": "a8"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Pool_ListUsageMetrics",
+  "title": "Pool list usage metrics"
+}

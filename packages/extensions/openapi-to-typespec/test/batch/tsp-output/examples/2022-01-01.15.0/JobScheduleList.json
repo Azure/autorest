@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "creationTime": "2022-08-26T21:52:22.5431125Z",
+            "eTag": "0x8D40FFD2E10996A",
+            "executionInfo": {
+              "recentJob": {
+                "id": "jobSchedule1:job-1",
+                "url": "https://account.region.batch.azure.com/jobs/jobSchedule1:job-1"
+              }
+            },
+            "id": "jobSchedule1",
+            "jobSpecification": {
+              "allowTaskPreemption": false,
+              "constraints": {
+                "maxTaskRetryCount": 0,
+                "maxWallClockTime": "P10675199DT2H48M5.4775807S"
+              },
+              "maxParallelTasks": -1,
+              "onAllTasksComplete": "noaction",
+              "onTaskFailure": "noaction",
+              "poolInfo": {
+                "poolId": "poolId"
+              },
+              "priority": 0,
+              "usesTaskDependencies": false
+            },
+            "lastModified": "2022-08-26T21:52:24.0064874Z",
+            "previousState": "disabled",
+            "previousStateTransitionTime": "2022-08-26T21:52:23.6471782Z",
+            "state": "active",
+            "stateTransitionTime": "2022-08-26T21:52:24.0064874Z",
+            "url": "https://account.region.batch.azure.com/jobschedules/jobSchedule1"
+          },
+          {
+            "creationTime": "2022-08-26T21:51:05.8184017Z",
+            "eTag": "0x8D40FFCFF760B51",
+            "executionInfo": {
+              "nextRunTime": "2023-01-01T12:30:00Z"
+            },
+            "id": "jobSchedule2",
+            "jobSpecification": {
+              "constraints": {
+                "maxTaskRetryCount": 0,
+                "maxWallClockTime": "P10675199DT2H48M5.4775807S"
+              },
+              "maxParallelTasks": -1,
+              "onAllTasksComplete": "noaction",
+              "onTaskFailure": "noaction",
+              "poolInfo": {
+                "poolId": "testPool2"
+              },
+              "priority": 0,
+              "usesTaskDependencies": false
+            },
+            "lastModified": "2022-08-26T21:51:05.8184017Z",
+            "schedule": {
+              "doNotRunUntil": "2023-01-01T12:30:00Z"
+            },
+            "state": "active",
+            "stateTransitionTime": "2022-08-26T21:51:05.8184017Z",
+            "url": "https://account.region.batch.azure.com/jobschedules/jobSchedule2"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "JobSchedule_List",
+  "title": "JobSchedule list"
+}

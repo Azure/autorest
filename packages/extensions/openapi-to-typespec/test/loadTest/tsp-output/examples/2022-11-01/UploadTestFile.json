@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "api-version": "2022-11-01",
+    "body": "application/octet-stream content",
+    "fileName": "sample.jmx",
+    "fileType": "ADDITIONAL_ARTIFACTS",
+    "testId": "12345678-1234-1234-1234-123456789012"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "expireDateTime": "2021-12-05T16:43:46.072Z",
+        "fileName": "sample.jmx",
+        "fileType": "ADDITIONAL_ARTIFACTS",
+        "url": "https://dummyurl.com/testscriptresource",
+        "validationStatus": "VALIDATION_SUCCESS"
+      }
+    }
+  },
+  "operationId": "LoadTestAdministration_UploadTestFile",
+  "title": "Upload a test file"
+}

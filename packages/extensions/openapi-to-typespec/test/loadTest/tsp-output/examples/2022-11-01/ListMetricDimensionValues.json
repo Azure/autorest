@@ -1,0 +1,23 @@
+{
+  "parameters": {
+    "name": "SamplerName",
+    "aggregation": "Average",
+    "api-version": "2022-11-01",
+    "interval": "PT1H",
+    "metricNamespace": "LoadTestRunMetrics",
+    "metricname": "ActiveThreads",
+    "testRunId": "12316678-1234-1234-1234-122451189012",
+    "timespan": "2022-09-24T19:00:40Z/2022-09-25T19:28:40Z"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          "HighLoadTest"
+        ]
+      }
+    }
+  },
+  "operationId": "LoadTestRun_ListMetricDimensionValues",
+  "title": "Lists the metric dimension values for a load test run."
+}

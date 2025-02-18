@@ -1,0 +1,12 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "certificate-name": "deletedcertificates",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "204": {}
+  },
+  "operationId": "PurgeDeletedCertificate",
+  "title": "PurgeDeletedCertificate"
+}

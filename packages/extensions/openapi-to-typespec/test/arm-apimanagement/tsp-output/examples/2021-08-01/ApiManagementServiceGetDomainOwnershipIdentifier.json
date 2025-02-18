@@ -1,0 +1,16 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "domainOwnershipIdentifier": "KLE1vdMblVeHECAi4nCe3oNaXXXXvNlLrXt2ev84KM="
+      }
+    }
+  },
+  "operationId": "ApiManagementService_GetDomainOwnershipIdentifier",
+  "title": "ApiManagementServiceGetDomainOwnershipIdentifier"
+}

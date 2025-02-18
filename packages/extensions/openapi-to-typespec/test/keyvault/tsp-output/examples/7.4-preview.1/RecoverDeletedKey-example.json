@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "key-name": "CreateDeleteRecoverPurgeTest",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "attributes": {
+          "created": 1493938342,
+          "enabled": true,
+          "recoveryLevel": "Recoverable+Purgeable",
+          "updated": 1493938342
+        },
+        "key": {
+          "e": "AQAB",
+          "key_ops": [
+            "encrypt",
+            "decrypt",
+            "sign",
+            "verify",
+            "wrapKey",
+            "unwrapKey"
+          ],
+          "kid": "https://myvault.vault.azure.net/keys/CreateDeleteRecoverPurgeTest/6fc2be54c6be4a7ea7bbb8a2a99a1996",
+          "kty": "RSA",
+          "n": "v-SWMCmPNKoK_rB_pNXUl6Iwh9Kqd3XzQlh6SXi_slBishqP7pyKEFjNbUvMSlyvPt21rJupLbJr-yhsK2Rq2V6O0doGuCsoadgNGih1aVAuUJAJls1-b-G1IJjD18ArM4RitnCvJmQFqyK2RVHa3EpEfaQW4gcRrsRAhiJDjc1L1S3skdt-E_rZfL7DIh1ZtqFyQAqIWSAG0BXDdbgfEx1kJKqH-HRokDKeMCIaJtKZof6e-DJr3e9Iy8aAR7V-BsZ7vY7JMjyeEukMzEji4MEsIyOESL67DgFllDEi4OM_3WKyxr6uXxzHDzmppWsk2ykLsYA_ALLnR3ZNZCuL9Q"
+        },
+        "tags": {
+          "purpose": "unit test",
+          "test name ": "CreateDeleteRecoverPurgeTest"
+        }
+      }
+    }
+  },
+  "operationId": "RecoverDeletedKey",
+  "title": "RecoverDeletedKey"
+}

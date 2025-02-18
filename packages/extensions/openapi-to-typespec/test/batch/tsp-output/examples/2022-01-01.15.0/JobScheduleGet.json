@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "jobScheduleId": "jobScheduleId",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "creationTime": "2022-08-26T21:52:22.5431125Z",
+        "eTag": "0x8D40FFD2E848323",
+        "executionInfo": {
+          "endTime": "2022-08-26T21:52:24.8371778Z",
+          "recentJob": {
+            "id": "jobScheduleId:job-1",
+            "url": "https://account.region.batch.azure.com/jobschedules/jobScheduleId:job-1"
+          }
+        },
+        "id": "jobScheduleId",
+        "jobSpecification": {
+          "allowTaskPreemption": false,
+          "constraints": {
+            "maxTaskRetryCount": 0,
+            "maxWallClockTime": "P10675199DT2H48M5.4775807S"
+          },
+          "maxParallelTasks": -1,
+          "onAllTasksComplete": "noaction",
+          "onTaskFailure": "noaction",
+          "poolInfo": {
+            "poolId": "testPool"
+          },
+          "priority": 0,
+          "usesTaskDependencies": false
+        },
+        "lastModified": "2022-08-26T21:52:24.7661347Z",
+        "previousState": "active",
+        "previousStateTransitionTime": "2022-08-26T21:52:24.0064874Z",
+        "state": "completed",
+        "stateTransitionTime": "2022-08-26T21:52:24.8371778Z",
+        "url": "https://account.region.batch.azure.com/jobschedules/jobScheduleId"
+      }
+    }
+  },
+  "operationId": "JobSchedule_Get",
+  "title": "JobSchedule get"
+}

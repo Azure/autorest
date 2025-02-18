@@ -1,0 +1,91 @@
+{
+  "parameters": {
+    "api-version": "2019-05-05-preview",
+    "identifier": "MonitorServiceList"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "data": [
+            {
+              "name": "ActivityLog Administrative",
+              "displayName": "Activity Log - Administrative"
+            },
+            {
+              "name": "ActivityLog Autoscale",
+              "displayName": "Activity Log - Autoscale"
+            },
+            {
+              "name": "ActivityLog Policy",
+              "displayName": "Activity Log - Policy"
+            },
+            {
+              "name": "ActivityLog Recommendation",
+              "displayName": "Activity Log - Recommendation"
+            },
+            {
+              "name": "ActivityLog Security",
+              "displayName": "Activity Log - Security"
+            },
+            {
+              "name": "Application Insights",
+              "displayName": "Application Insights"
+            },
+            {
+              "name": "Azure Backup",
+              "displayName": "Azure Backup"
+            },
+            {
+              "name": "Custom",
+              "displayName": "Custom"
+            },
+            {
+              "name": "Data Box Edge",
+              "displayName": "Data Box Edge"
+            },
+            {
+              "name": "VM Insights",
+              "displayName": "VM Insights"
+            },
+            {
+              "name": "Log Analytics",
+              "displayName": "Log Analytics"
+            },
+            {
+              "name": "Nagios",
+              "displayName": "NAGIOS"
+            },
+            {
+              "name": "Platform",
+              "displayName": "Platform"
+            },
+            {
+              "name": "Resource Health",
+              "displayName": "Resource Health"
+            },
+            {
+              "name": "SCOM",
+              "displayName": "SCOM"
+            },
+            {
+              "name": "ServiceHealth",
+              "displayName": "Service Health"
+            },
+            {
+              "name": "Smart Detector",
+              "displayName": "SmartDetector"
+            },
+            {
+              "name": "Zabbix",
+              "displayName": "ZABBIX"
+            }
+          ],
+          "metadataIdentifier": "MonitorServiceList"
+        }
+      }
+    }
+  },
+  "operationId": "Alerts_MetaData",
+  "title": "MonService"
+}

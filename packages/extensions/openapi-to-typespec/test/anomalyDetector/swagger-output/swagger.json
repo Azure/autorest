@@ -108,6 +108,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Get detection result": {
+            "$ref": "./examples/GetResult.json"
+          }
         }
       }
     },
@@ -139,6 +144,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Multivariate model": {
+            "$ref": "./examples/ListModel.json"
           }
         },
         "x-ms-pageable": {
@@ -178,6 +188,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Train Multivariate model": {
+            "$ref": "./examples/TrainModel.json"
+          }
         }
       }
     },
@@ -213,6 +228,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete multivariate model": {
+            "$ref": "./examples/DeleteModel.json"
           }
         }
       }
@@ -252,6 +272,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get multivariate model": {
+            "$ref": "./examples/GetModel.json"
           }
         }
       }
@@ -297,6 +322,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Detect anomaly with multivariate Model": {
+            "$ref": "./examples/DetectAnomaly.json"
           }
         }
       }
@@ -346,6 +376,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Detect anomaly with multivariate Model": {
+            "$ref": "./examples/LastDetectAnomaly.json"
+          }
         }
       }
     },
@@ -385,6 +420,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Detect change point example": {
+            "$ref": "./examples/ChangePointDetect.json"
           }
         }
       }
@@ -426,6 +466,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Find anomalies for the entire series in batch example": {
+            "$ref": "./examples/EntireDetect.json"
+          }
         }
       }
     },
@@ -465,6 +510,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Detect anomaly status of the latest point in time series example": {
+            "$ref": "./examples/LastDetect.json"
           }
         }
       }

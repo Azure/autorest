@@ -1,0 +1,16 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "InProgress",
+        "status_details": ""
+      }
+    }
+  },
+  "operationId": "HSMSecurityDomain_UploadPending",
+  "title": "Find Security Domain upload operation status"
+}

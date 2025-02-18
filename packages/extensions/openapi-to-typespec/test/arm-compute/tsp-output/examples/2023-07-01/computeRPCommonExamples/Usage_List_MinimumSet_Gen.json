@@ -1,0 +1,23 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "location": "_--",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": {},
+            "currentValue": 17,
+            "limit": 19,
+            "unit": "Count"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Usage_List",
+  "title": "Usage_List_MinimumSet_Gen"
+}

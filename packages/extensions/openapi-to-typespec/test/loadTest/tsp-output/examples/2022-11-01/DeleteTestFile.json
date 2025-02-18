@@ -1,0 +1,12 @@
+{
+  "parameters": {
+    "api-version": "2022-11-01",
+    "fileName": "app.jmx",
+    "testId": "12345678-1234-1234-1234-123456789012"
+  },
+  "responses": {
+    "204": {}
+  },
+  "operationId": "LoadTestAdministration_DeleteTestFile",
+  "title": "Delete a test file"
+}

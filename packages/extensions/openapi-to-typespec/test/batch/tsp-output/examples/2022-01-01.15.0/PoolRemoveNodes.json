@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT",
+    "parameters": {
+      "nodeList": [
+        "tvm-1695681911_1-20161122t224741z",
+        "tvm-1695681911_2-20161122t224741z"
+      ]
+    },
+    "poolId": "poolId"
+  },
+  "responses": {
+    "202": {}
+  },
+  "operationId": "Pool_RemoveNodes",
+  "title": "Pool remove nodes"
+}

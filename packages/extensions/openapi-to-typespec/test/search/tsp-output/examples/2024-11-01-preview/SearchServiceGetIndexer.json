@@ -1,0 +1,43 @@
+{
+  "operationId": "Indexers_Get",
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "indexerName": "myindexer",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "SearchServiceGetIndexer",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myindexer",
+        "description": "Description of the indexer",
+        "@odata.etag": "0x1234568AE7E58A1",
+        "dataSourceName": "mydocdbdatasource",
+        "disabled": false,
+        "encryptionKey": {
+          "accessCredentials": {
+            "applicationId": "00000000-0000-0000-0000-000000000000",
+            "applicationSecret": "<applicationSecret>"
+          },
+          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+          "keyVaultUri": "https://myKeyVault.vault.azure.net"
+        },
+        "fieldMappings": [],
+        "outputFieldMappings": [],
+        "parameters": {
+          "configuration": {},
+          "maxFailedItems": 10,
+          "maxFailedItemsPerBatch": 5
+        },
+        "schedule": {
+          "interval": "P1D",
+          "startTime": "2024-06-06T00:01:50.265Z"
+        },
+        "skillsetName": "myskillset",
+        "targetIndexName": "preview-test"
+      }
+    }
+  }
+}

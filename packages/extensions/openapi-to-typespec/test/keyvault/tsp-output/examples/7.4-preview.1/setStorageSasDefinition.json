@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "parameters": {
+      "attributes": {
+        "enabled": true
+      },
+      "sasType": "service",
+      "templateUri": "se=2018-02-01T00%3A00Z&spr=https&sv=2017-04-17&sr=b&sig=XXFNfuMCHYrBx0bhemJ7PWn0xGfImMXT6LfbXWvtRUk%3D",
+      "validityPeriod": "P15D"
+    },
+    "sas-definition-name": "setStrgSasDef01",
+    "storage-account-name": "setsas01",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "attributes": {
+          "created": 1490738438,
+          "enabled": true,
+          "recoveryLevel": "Recoverable",
+          "updated": 1490738438
+        },
+        "id": "https://myvault.vault.azure.net/storage/setsas01/sas/setStrgSasDef01",
+        "sasType": "service",
+        "sid": "https://myvault.vault.azure.net/secrets/setsas01-setStrgSasDef01",
+        "templateUri": "se=2018-02-01T00%3A00Z&spr=https&sv=2017-04-17&sr=b&sig=XXFNfuMCHYrBx0bhemJ7PWn0xGfImMXT6LfbXWvtRUk%3D",
+        "validityPeriod": "P15D"
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "SetSasDefinition",
+  "title": "Set Storage Sas definition"
+}

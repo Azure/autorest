@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://{BaseUri}/storage?api-version=7.2&%24skiptoken=<token>",
+        "value": [
+          {
+            "attributes": {
+              "created": 1490738386,
+              "enabled": true,
+              "recoveryLevel": "Recoverable+Purgeable",
+              "updated": 1490738386
+            },
+            "deletedDate": 1490760000,
+            "id": "https://myvault.vault.azure.net/storage/listDeletedStorage01",
+            "recoveryId": "https://myvault.vault.azure.net/deletedstorage/listDeletedStorage01",
+            "resourceId": "/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc1",
+            "scheduledPurgeDate": 1490790000,
+            "tags": {
+              "tag1": "val1",
+              "tag2": "val2"
+            }
+          },
+          {
+            "attributes": {
+              "created": 1490738386,
+              "enabled": true,
+              "recoveryLevel": "Recoverable+Purgeable",
+              "updated": 1490738386
+            },
+            "deletedDate": 1490760000,
+            "id": "https://myvault.vault.azure.net/storage/listDeletedStorage02",
+            "recoveryId": "https://myvault.vault.azure.net/deletedstorage/listDeletedStorage02",
+            "resourceId": "/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc2",
+            "scheduledPurgeDate": 1490790000,
+            "tags": {
+              "tag3": "val3",
+              "tag4": "val4"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "GetDeletedStorageAccounts",
+  "title": "List Deleted Storage Accounts"
+}

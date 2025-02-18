@@ -1,0 +1,13 @@
+{
+  "parameters": {
+    "api-version": "2024-01-01",
+    "group": "group1",
+    "hub": "hub1",
+    "reason": "Close reason"
+  },
+  "responses": {
+    "204": {}
+  },
+  "operationId": "WebPubSub_CloseGroupConnections",
+  "title": "WebPubSub_CloseGroupConnections"
+}

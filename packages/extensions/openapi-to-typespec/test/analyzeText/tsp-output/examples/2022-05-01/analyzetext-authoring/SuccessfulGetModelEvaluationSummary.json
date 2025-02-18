@@ -1,0 +1,234 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2022-05-01",
+    "projectName": "LoanAgreements",
+    "trainedModelLabel": "model2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "customEntityRecognitionEvaluation": {
+          "confusionMatrix": {
+            "$none": {
+              "$none": {
+                "normalizedValue": 99.81485,
+                "rawValue": 51.90372
+              },
+              "BorrowerAddress": {
+                "normalizedValue": 0.18315019,
+                "rawValue": 0.0952381
+              },
+              "Interest": {
+                "normalizedValue": 0.002005294,
+                "rawValue": 0.0010427529
+              }
+            },
+            "BorrowerAddress": {
+              "$none": {
+                "normalizedValue": 13.793103,
+                "rawValue": 0.55172414
+              },
+              "BorrowerAddress": {
+                "normalizedValue": 86.206894,
+                "rawValue": 3.4482758
+              }
+            },
+            "BorrowerCity": {
+              "BorrowerCity": {
+                "normalizedValue": 100,
+                "rawValue": 4
+              }
+            },
+            "BorrowerName": {
+              "BorrowerName": {
+                "normalizedValue": 100,
+                "rawValue": 4
+              }
+            },
+            "BorrowerState": {
+              "BorrowerState": {
+                "normalizedValue": 100,
+                "rawValue": 4
+              }
+            },
+            "Date": {
+              "Date": {
+                "normalizedValue": 100,
+                "rawValue": 4
+              }
+            },
+            "Interest": {
+              "Interest": {
+                "normalizedValue": 100,
+                "rawValue": 4
+              }
+            },
+            "LenderAddress": {
+              "LenderAddress": {
+                "normalizedValue": 100,
+                "rawValue": 4
+              }
+            },
+            "LenderCity": {
+              "LenderCity": {
+                "normalizedValue": 100,
+                "rawValue": 4
+              }
+            },
+            "LenderName": {
+              "LenderName": {
+                "normalizedValue": 100,
+                "rawValue": 4
+              }
+            },
+            "LenderState": {
+              "LenderState": {
+                "normalizedValue": 100,
+                "rawValue": 4
+              }
+            },
+            "LoanAmountNumbers": {
+              "LoanAmountNumbers": {
+                "normalizedValue": 100,
+                "rawValue": 4
+              }
+            },
+            "LoanAmountWords": {
+              "LoanAmountWords": {
+                "normalizedValue": 100,
+                "rawValue": 4
+              }
+            }
+          },
+          "entities": {
+            "BorrowerAddress": {
+              "f1": 0.6666666865348816,
+              "falseNegativeCount": 1,
+              "falsePositiveCount": 2,
+              "precision": 0.6000000238418579,
+              "recall": 0.75,
+              "trueNegativeCount": 0,
+              "truePositiveCount": 3
+            },
+            "BorrowerCity": {
+              "f1": 1,
+              "falseNegativeCount": 0,
+              "falsePositiveCount": 0,
+              "precision": 1,
+              "recall": 1,
+              "trueNegativeCount": 0,
+              "truePositiveCount": 4
+            },
+            "BorrowerName": {
+              "f1": 1,
+              "falseNegativeCount": 0,
+              "falsePositiveCount": 0,
+              "precision": 1,
+              "recall": 1,
+              "trueNegativeCount": 0,
+              "truePositiveCount": 4
+            },
+            "BorrowerState": {
+              "f1": 1,
+              "falseNegativeCount": 0,
+              "falsePositiveCount": 0,
+              "precision": 1,
+              "recall": 1,
+              "trueNegativeCount": 0,
+              "truePositiveCount": 4
+            },
+            "Date": {
+              "f1": 1,
+              "falseNegativeCount": 0,
+              "falsePositiveCount": 0,
+              "precision": 1,
+              "recall": 1,
+              "trueNegativeCount": 0,
+              "truePositiveCount": 4
+            },
+            "Interest": {
+              "f1": 0.75,
+              "falseNegativeCount": 1,
+              "falsePositiveCount": 1,
+              "precision": 0.75,
+              "recall": 0.75,
+              "trueNegativeCount": 0,
+              "truePositiveCount": 3
+            },
+            "LenderAddress": {
+              "f1": 1,
+              "falseNegativeCount": 0,
+              "falsePositiveCount": 0,
+              "precision": 1,
+              "recall": 1,
+              "trueNegativeCount": 0,
+              "truePositiveCount": 4
+            },
+            "LenderCity": {
+              "f1": 1,
+              "falseNegativeCount": 0,
+              "falsePositiveCount": 0,
+              "precision": 1,
+              "recall": 1,
+              "trueNegativeCount": 0,
+              "truePositiveCount": 4
+            },
+            "LenderName": {
+              "f1": 1,
+              "falseNegativeCount": 0,
+              "falsePositiveCount": 0,
+              "precision": 1,
+              "recall": 1,
+              "trueNegativeCount": 0,
+              "truePositiveCount": 4
+            },
+            "LenderState": {
+              "f1": 1,
+              "falseNegativeCount": 0,
+              "falsePositiveCount": 0,
+              "precision": 1,
+              "recall": 1,
+              "trueNegativeCount": 0,
+              "truePositiveCount": 4
+            },
+            "LoanAmountNumbers": {
+              "f1": 1,
+              "falseNegativeCount": 0,
+              "falsePositiveCount": 0,
+              "precision": 1,
+              "recall": 1,
+              "trueNegativeCount": 0,
+              "truePositiveCount": 4
+            },
+            "LoanAmountWords": {
+              "f1": 1,
+              "falseNegativeCount": 0,
+              "falsePositiveCount": 0,
+              "precision": 1,
+              "recall": 1,
+              "trueNegativeCount": 0,
+              "truePositiveCount": 4
+            }
+          },
+          "macroF1": 0.9513889,
+          "macroPrecision": 0.9458334,
+          "macroRecall": 0.9583333,
+          "microF1": 0.94845366,
+          "microPrecision": 0.93877554,
+          "microRecall": 0.9583333
+        },
+        "evaluationOptions": {
+          "kind": "percentage",
+          "testingSplitPercentage": 20,
+          "trainingSplitPercentage": 80
+        },
+        "projectKind": "CustomEntityRecognition"
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "TextAnalysisAuthoring_GetModelEvaluationSummary",
+  "title": "Successful Get Model Evaluation Summary"
+}

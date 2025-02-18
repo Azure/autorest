@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2022-05-01",
+    "projectName": "LoanAgreements"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "createdDateTime": "2022-04-18T15:44:44Z",
+            "expirationDateTime": "2022-04-25T15:44:44Z",
+            "jobId": "8ccf2ffe-e758-4d04-a44a-31512918c7e8_637858368000000000",
+            "lastUpdatedDateTime": "2022-04-18T15:47:50Z",
+            "result": {
+              "evaluationStatus": {
+                "endDateTime": "2022-04-18T15:47:23.8378892Z",
+                "percentComplete": 100,
+                "startDateTime": "2022-04-18T15:47:19.2734976Z",
+                "status": "succeeded"
+              },
+              "modelLabel": "model1",
+              "trainingConfigVersion": "2022-05-01",
+              "trainingStatus": {
+                "endDateTime": "2022-04-18T15:47:19.2639682Z",
+                "percentComplete": 100,
+                "startDateTime": "2022-04-18T15:45:06.8190649Z",
+                "status": "succeeded"
+              }
+            },
+            "status": "succeeded"
+          },
+          {
+            "createdDateTime": "2022-04-18T17:22:11Z",
+            "expirationDateTime": "2022-04-25T17:22:11Z",
+            "jobId": "9145f93f-6f37-418c-8527-d2ded84cece0_637858368000000000",
+            "lastUpdatedDateTime": "2022-04-18T17:25:23Z",
+            "result": {
+              "evaluationStatus": {
+                "endDateTime": "2022-04-18T17:24:58.1427823Z",
+                "percentComplete": 100,
+                "startDateTime": "2022-04-18T17:24:51.9571747Z",
+                "status": "succeeded"
+              },
+              "modelLabel": "model2",
+              "trainingConfigVersion": "2022-05-01",
+              "trainingStatus": {
+                "endDateTime": "2022-04-18T17:24:51.9440947Z",
+                "percentComplete": 100,
+                "startDateTime": "2022-04-18T17:22:39.3663023Z",
+                "status": "succeeded"
+              }
+            },
+            "status": "succeeded"
+          },
+          {
+            "createdDateTime": "2022-04-18T17:44:04Z",
+            "expirationDateTime": "2022-04-25T17:44:04Z",
+            "jobId": "ee23c900-354d-4b6d-96e1-8197db2bd5f7_637858368000000000",
+            "lastUpdatedDateTime": "2022-04-18T17:51:11Z",
+            "result": {
+              "evaluationStatus": {
+                "endDateTime": "2022-04-18T17:50:35.3482185Z",
+                "percentComplete": 100,
+                "startDateTime": "2022-04-18T17:50:29.5808461Z",
+                "status": "succeeded"
+              },
+              "modelLabel": "model2",
+              "trainingConfigVersion": "2022-05-01",
+              "trainingStatus": {
+                "endDateTime": "2022-04-18T17:50:29.5675101Z",
+                "percentComplete": 100,
+                "startDateTime": "2022-04-18T17:44:41.388358Z",
+                "status": "succeeded"
+              }
+            },
+            "status": "succeeded"
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "TextAnalysisAuthoring_ListTrainingJobs",
+  "title": "Successful List Training Jobs"
+}

@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "jobScheduleId": "jobScheduleId",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "constraints": {
+              "maxTaskRetryCount": 0,
+              "maxWallClockTime": "P10675199DT2H48M5.4775807S"
+            },
+            "creationTime": "2022-08-26T00:05:25.311915Z",
+            "eTag": "0x8D4100FC46D5BF4",
+            "executionInfo": {
+              "poolId": "poolId",
+              "startTime": "2022-08-26T00:05:25.3309105Z"
+            },
+            "id": "jobId",
+            "lastModified": "2022-08-26T00:05:27.2137716Z",
+            "onAllTasksComplete": "noaction",
+            "onTaskFailure": "noaction",
+            "poolInfo": {
+              "poolId": "poolId"
+            },
+            "previousState": "disabled",
+            "previousStateTransitionTime": "2022-08-26T00:05:26.88777Z",
+            "priority": 0,
+            "state": "active",
+            "stateTransitionTime": "2022-08-26T00:05:27.2137716Z",
+            "url": "https://account.region.batch.azure.com/jobs/jobId",
+            "usesTaskDependencies": false
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Job_ListFromJobSchedule",
+  "title": "List Job Under Job Schedule"
+}

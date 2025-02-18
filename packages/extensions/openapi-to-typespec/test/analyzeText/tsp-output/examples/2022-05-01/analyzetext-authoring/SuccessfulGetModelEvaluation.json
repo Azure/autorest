@@ -1,0 +1,297 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2022-05-01",
+    "maxpagesize": 10,
+    "projectName": "LoanAgreements",
+    "stringIndexType": "Utf16CodeUnit",
+    "trainedModelLabel": "model2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "{Endpoint}/language/authoring/analyze-text/projects/LoanAgreements/models/model2/evaluation/result/?api-version=2022-05-01&top=2147483645&skip=2&maxpagesize=2",
+        "value": [
+          {
+            "customEntityRecognitionResult": {
+              "entities": [
+                {
+                  "expectedEntities": [
+                    {
+                      "category": "Date",
+                      "length": 9,
+                      "offset": 5
+                    },
+                    {
+                      "category": "BorrowerName",
+                      "length": 13,
+                      "offset": 160
+                    },
+                    {
+                      "category": "BorrowerAddress",
+                      "length": 34,
+                      "offset": 181
+                    },
+                    {
+                      "category": "BorrowerCity",
+                      "length": 6,
+                      "offset": 225
+                    },
+                    {
+                      "category": "BorrowerState",
+                      "length": 8,
+                      "offset": 242
+                    },
+                    {
+                      "category": "LenderName",
+                      "length": 12,
+                      "offset": 271
+                    },
+                    {
+                      "category": "LenderAddress",
+                      "length": 20,
+                      "offset": 310
+                    },
+                    {
+                      "category": "LenderCity",
+                      "length": 8,
+                      "offset": 340
+                    },
+                    {
+                      "category": "LenderState",
+                      "length": 11,
+                      "offset": 359
+                    },
+                    {
+                      "category": "LoanAmountWords",
+                      "length": 52,
+                      "offset": 448
+                    },
+                    {
+                      "category": "LoanAmountNumbers",
+                      "length": 10,
+                      "offset": 502
+                    },
+                    {
+                      "category": "Interest",
+                      "length": 2,
+                      "offset": 588
+                    }
+                  ],
+                  "predictedEntities": [
+                    {
+                      "category": "Date",
+                      "length": 9,
+                      "offset": 5
+                    },
+                    {
+                      "category": "BorrowerName",
+                      "length": 13,
+                      "offset": 160
+                    },
+                    {
+                      "category": "BorrowerAddress",
+                      "length": 15,
+                      "offset": 200
+                    },
+                    {
+                      "category": "BorrowerCity",
+                      "length": 6,
+                      "offset": 225
+                    },
+                    {
+                      "category": "BorrowerState",
+                      "length": 8,
+                      "offset": 242
+                    },
+                    {
+                      "category": "LenderName",
+                      "length": 12,
+                      "offset": 271
+                    },
+                    {
+                      "category": "LenderAddress",
+                      "length": 20,
+                      "offset": 310
+                    },
+                    {
+                      "category": "LenderCity",
+                      "length": 8,
+                      "offset": 340
+                    },
+                    {
+                      "category": "LenderState",
+                      "length": 11,
+                      "offset": 359
+                    },
+                    {
+                      "category": "LoanAmountWords",
+                      "length": 52,
+                      "offset": 448
+                    },
+                    {
+                      "category": "LoanAmountNumbers",
+                      "length": 10,
+                      "offset": 502
+                    },
+                    {
+                      "category": "Interest",
+                      "length": 2,
+                      "offset": 588
+                    }
+                  ],
+                  "regionLength": 1780,
+                  "regionOffset": 0
+                }
+              ]
+            },
+            "location": "11.txt",
+            "projectKind": "CustomEntityRecognition",
+            "language": "en-us"
+          },
+          {
+            "customEntityRecognitionResult": {
+              "entities": [
+                {
+                  "expectedEntities": [
+                    {
+                      "category": "Date",
+                      "length": 9,
+                      "offset": 5
+                    },
+                    {
+                      "category": "BorrowerName",
+                      "length": 13,
+                      "offset": 160
+                    },
+                    {
+                      "category": "BorrowerAddress",
+                      "length": 13,
+                      "offset": 200
+                    },
+                    {
+                      "category": "BorrowerCity",
+                      "length": 9,
+                      "offset": 223
+                    },
+                    {
+                      "category": "BorrowerState",
+                      "length": 8,
+                      "offset": 243
+                    },
+                    {
+                      "category": "LenderName",
+                      "length": 14,
+                      "offset": 273
+                    },
+                    {
+                      "category": "LenderAddress",
+                      "length": 15,
+                      "offset": 314
+                    },
+                    {
+                      "category": "LenderCity",
+                      "length": 10,
+                      "offset": 339
+                    },
+                    {
+                      "category": "LenderState",
+                      "length": 8,
+                      "offset": 360
+                    },
+                    {
+                      "category": "LoanAmountWords",
+                      "length": 66,
+                      "offset": 446
+                    },
+                    {
+                      "category": "LoanAmountNumbers",
+                      "length": 11,
+                      "offset": 514
+                    },
+                    {
+                      "category": "Interest",
+                      "length": 2,
+                      "offset": 601
+                    }
+                  ],
+                  "predictedEntities": [
+                    {
+                      "category": "Date",
+                      "length": 9,
+                      "offset": 5
+                    },
+                    {
+                      "category": "BorrowerName",
+                      "length": 13,
+                      "offset": 160
+                    },
+                    {
+                      "category": "BorrowerAddress",
+                      "length": 13,
+                      "offset": 200
+                    },
+                    {
+                      "category": "BorrowerCity",
+                      "length": 9,
+                      "offset": 223
+                    },
+                    {
+                      "category": "BorrowerState",
+                      "length": 8,
+                      "offset": 243
+                    },
+                    {
+                      "category": "LenderName",
+                      "length": 14,
+                      "offset": 273
+                    },
+                    {
+                      "category": "LenderAddress",
+                      "length": 15,
+                      "offset": 314
+                    },
+                    {
+                      "category": "LenderCity",
+                      "length": 10,
+                      "offset": 339
+                    },
+                    {
+                      "category": "LenderState",
+                      "length": 8,
+                      "offset": 360
+                    },
+                    {
+                      "category": "LoanAmountWords",
+                      "length": 66,
+                      "offset": 446
+                    },
+                    {
+                      "category": "LoanAmountNumbers",
+                      "length": 11,
+                      "offset": 514
+                    },
+                    {
+                      "category": "Interest",
+                      "length": 2,
+                      "offset": 601
+                    }
+                  ],
+                  "regionLength": 1793,
+                  "regionOffset": 0
+                }
+              ]
+            },
+            "location": "01.txt",
+            "projectKind": "CustomEntityRecognition",
+            "language": "en-us"
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "TextAnalysisAuthoring_GetModelEvaluationResults",
+  "title": "Successful Get Model Evaluation"
+}

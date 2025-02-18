@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "lastUpdateTime": "2022-08-26T18:30:00.4345729Z",
+        "resourceStats": {
+          "avgCPUPercentage": 40,
+          "avgDiskGiB": 125,
+          "avgMemoryGiB": 2,
+          "diskReadGiB": 10,
+          "diskReadIOps": 0,
+          "diskWriteGiB": 1,
+          "diskWriteIOps": 0,
+          "lastUpdateTime": "2022-08-26T18:30:00.4345729Z",
+          "networkReadGiB": 20,
+          "networkWriteGiB": 25,
+          "peakDiskGiB": 240,
+          "peakMemoryGiB": 4,
+          "startTime": "2022-08-26T18:30:00.4345729Z"
+        },
+        "startTime": "2022-08-26T18:30:00.4345729Z",
+        "url": "https://account.region.batch.core.windows.net/lifetimepoolstats",
+        "usageStats": {
+          "dedicatedCoreTime": "PT0S",
+          "lastUpdateTime": "2022-08-26T18:30:00.4345729Z",
+          "startTime": "2022-08-26T18:30:00.4345729Z"
+        }
+      }
+    }
+  },
+  "operationId": "Pool_GetAllLifetimeStatistics",
+  "title": "Pool get lifetime statistics"
+}

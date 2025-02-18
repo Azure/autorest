@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2022-09-01",
+    "monitor": "true",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "sto1125",
+            "type": "Microsoft.Storage/deletedAccounts",
+            "id": "/subscriptions/{subscription-id}/providers/Microsoft.Storage/locations/eastus/deletedAccounts/sto1125",
+            "properties": {
+              "creationTime": "2020-08-17T03:35:37.4588848Z",
+              "deletionTime": "2020-08-17T04:41:37.3442475Z",
+              "location": "eastus",
+              "restoreReference": "sto1125|2020-08-17T03:35:37.4588848Z",
+              "storageAccountResourceId": "/subscriptions/{subscription-id}/resourceGroups/sto/providers/Microsoft.Storage/storageAccounts/sto1125"
+            }
+          },
+          {
+            "name": "sto1126",
+            "type": "Microsoft.Storage/deletedAccounts",
+            "id": "/subscriptions/{subscription-id}/providers/Microsoft.Storage/locations/eastus/deletedAccounts/sto1126",
+            "properties": {
+              "creationTime": "2020-08-19T15:10:21.5902165Z",
+              "deletionTime": "2020-08-20T06:11:55.1957302Z",
+              "location": "eastus",
+              "restoreReference": "sto1126|2020-08-17T03:35:37.4588848Z",
+              "storageAccountResourceId": "/subscriptions/{subscription-id}/resourceGroups/sto/providers/Microsoft.Storage/storageAccounts/sto1126"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DeletedAccounts_List",
+  "title": "DeletedAccountList"
+}

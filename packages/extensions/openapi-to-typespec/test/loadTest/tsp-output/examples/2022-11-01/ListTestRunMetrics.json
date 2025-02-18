@@ -1,0 +1,465 @@
+{
+  "parameters": {
+    "aggregation": "Average",
+    "api-version": "2022-11-01",
+    "body": {
+      "filters": [
+        {
+          "name": "SamplerName",
+          "values": [
+            "HTTP Request"
+          ]
+        }
+      ]
+    },
+    "interval": "PT1H",
+    "metricNamespace": "LoadTestRunMetrics",
+    "metricname": "ActiveThreads",
+    "testRunId": "12316678-1234-1234-1234-122451189012",
+    "timespan": "2022-09-24T19:00:40Z/2022-09-25T19:28:40Z"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "data": [
+              {
+                "timestamp": "2022-10-29T08:44:40.000Z",
+                "value": 10
+              },
+              {
+                "timestamp": "2022-10-29T08:44:45.000Z",
+                "value": 28
+              },
+              {
+                "timestamp": "2022-10-29T08:44:50.000Z",
+                "value": 45
+              },
+              {
+                "timestamp": "2022-10-29T08:44:55.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:45:00.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:45:05.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:45:10.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:45:15.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:45:20.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:45:25.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:45:30.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:45:35.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:45:40.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:45:45.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:45:50.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:45:55.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:46:00.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:46:05.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:46:10.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:46:15.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:46:20.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:46:25.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:46:30.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:46:35.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:46:40.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:46:45.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:46:50.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:46:55.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:47:00.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:47:05.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:47:10.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:47:15.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:47:20.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:47:25.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:47:30.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:47:35.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:47:40.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:47:45.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:47:50.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:47:55.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:48:00.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:48:05.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:48:10.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:48:15.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:48:20.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:48:25.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:48:30.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:48:35.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:48:40.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:48:45.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:48:50.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:48:55.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:49:00.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:49:05.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:49:10.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:49:15.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:49:20.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:49:25.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:49:30.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:49:35.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:49:40.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:49:45.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:49:50.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:49:55.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:50:00.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:50:05.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:50:10.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:50:15.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:50:20.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:50:25.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:50:30.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:50:35.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:50:40.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:50:45.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:50:50.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:50:55.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:51:00.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:51:05.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:51:10.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:51:15.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:51:20.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:51:25.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:51:30.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:51:35.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:51:40.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:51:45.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:51:50.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:51:55.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:52:00.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:52:05.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:52:10.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:52:15.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:52:20.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:52:25.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:52:30.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:52:35.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:52:40.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:52:45.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:52:50.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:52:55.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:53:00.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:53:05.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:53:10.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:53:15.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:53:20.000Z",
+                "value": 50
+              },
+              {
+                "timestamp": "2022-10-29T08:53:25.000Z",
+                "value": 49
+              }
+            ],
+            "dimensionValues": [
+              {
+                "name": "SamplerName",
+                "value": "HighLoadTest"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "LoadTestRun_ListMetrics",
+  "title": "Lists the metric values for a load test run."
+}

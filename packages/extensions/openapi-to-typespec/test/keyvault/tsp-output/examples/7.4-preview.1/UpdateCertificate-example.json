@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "certificate-name": "updateCert01",
+    "certificate-version": "c3d31d7b36c942ad83ef36fc0785a4fc",
+    "parameters": {
+      "attributes": {
+        "enabled": true,
+        "exp": 2208988799,
+        "nbf": 1430344421
+      },
+      "tags": {
+        "department": "KeyVaultTest"
+      }
+    },
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "attributes": {
+          "created": 1482188981,
+          "enabled": true,
+          "exp": 2208988799,
+          "nbf": 1430344421,
+          "updated": 1482188981
+        },
+        "cer": "MIICODCCAeagAwIBAgIQqHmpBAv+CY9IJFoUhlbziTAJBgUrDgMCHQUAMBYxFDASBgNVBAMTC1Jvb3QgQWdlbmN5MB4XDTE1MDQyOTIxNTM0MVoXDTM5MTIzMTIzNTk1OVowFzEVMBMGA1UEAxMMS2V5VmF1bHRUZXN0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5bVAT73zr4+N4WVv2+SvTunAw08ksS4BrJW/nNliz3S9XuzMBMXvmYzU5HJ8TtEgluBiZZYd5qsMJD+OXHSNbsLdmMhni0jYX09h3XlC2VJw2sGKeYF+xEaavXm337aZZaZyjrFBrrUl51UePaN+kVFXNlBb3N3TYpqa7KokXenJQuR+i9Gv9a77c0UsSsDSryxppYhKK7HvTZCpKrhVtulF5iPMswWe9np3uggfMamyIsK/0L7X9w9B2qN7993RR0A00nOk4H6CnkuwO77dSsD0KJsk6FyAoZBzRXDZh9+d9R76zCL506NcQy/jl0lCiQYwsUX73PG5pxOh02OwKwIDAQABo0swSTBHBgNVHQEEQDA+gBAS5AktBh0dTwCNYSHcFmRjoRgwFjEUMBIGA1UEAxMLUm9vdCBBZ2VuY3mCEAY3bACqAGSKEc+41KpcNfQwCQYFKw4DAh0FAANBAGqIjo2geVagzuzaZOe1ClGKhZeiCKfWAxklaGN+qlGUbVS4IN4V1lot3VKnzabasmkEHeNxPwLn1qvSD0cX9CE=",
+        "id": "https://myvault.vault.azure.net/certificates/updateCert01/c3d31d7b36c942ad83ef36fc0785a4fc",
+        "kid": "https://myvault.vault.azure.net/keys/updateCert01/c3d31d7b36c942ad83ef36fc0785a4fc",
+        "sid": "https://myvault.vault.azure.net/secrets/updateCert01/c3d31d7b36c942ad83ef36fc0785a4fc",
+        "tags": {
+          "department": "KeyVaultTest"
+        },
+        "x5t": "fLi3U52HunIVNXubkEnf8tP6Wbo"
+      }
+    }
+  },
+  "operationId": "UpdateCertificate",
+  "title": "UpdateCertificate"
+}

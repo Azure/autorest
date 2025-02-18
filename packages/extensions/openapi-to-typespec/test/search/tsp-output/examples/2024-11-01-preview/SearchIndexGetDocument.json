@@ -1,0 +1,29 @@
+{
+  "operationId": "Documents_Get",
+  "parameters": {
+    "$select": [
+      "id",
+      "description",
+      "name",
+      "category",
+      "ownerId"
+    ],
+    "api-version": "2024-11-01-preview",
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "indexName": "preview-test",
+    "key": "1",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "SearchIndexGetDocument",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test",
+        "description": "test1 hello",
+        "category": "purple",
+        "id": "1",
+        "ownerId": "sam"
+      }
+    }
+  }
+}

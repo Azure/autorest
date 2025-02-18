@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "storage-account-name": "deleteStrg01",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "activeKeyName": "key1",
+        "attributes": {
+          "created": 1490738386,
+          "enabled": true,
+          "recoveryLevel": "Recoverable+Purgeable",
+          "updated": 1490738386
+        },
+        "autoRegenerateKey": true,
+        "deletedDate": 1490760000,
+        "id": "https://myvault.vault.azure.net/storage/deleteStrg01",
+        "recoveryId": "https://myvault.vault.azure.net/deletedstorage/deleteStrg01",
+        "regenerationPeriod": "P30D",
+        "resourceId": "/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc",
+        "scheduledPurgeDate": 1490790000,
+        "tags": {
+          "tag1": "val1",
+          "tag2": "val2"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "GetDeletedStorageAccount",
+  "title": "Get Deleted Storage"
+}

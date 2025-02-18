@@ -1,0 +1,101 @@
+{
+  "parameters": {
+    "Content-Type": "application/json",
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2022-07-01-preview",
+    "deploymentName": "production",
+    "knowledgeBaseQueryOptions": {
+      "answerSpanRequest": {
+        "confidenceScoreThreshold": 0.2,
+        "enable": true,
+        "topAnswersWithSpan": 1
+      },
+      "confidenceScoreThreshold": 0.2,
+      "context": {
+        "previousQnaId": 9,
+        "previousUserQuery": "Where are QnA Maker quickstarts?"
+      },
+      "filters": {
+        "logicalOperation": "AND",
+        "metadataFilter": {
+          "logicalOperation": "AND",
+          "metadata": [
+            {
+              "key": "category",
+              "value": "api"
+            },
+            {
+              "key": "editorial",
+              "value": "chitchat"
+            }
+          ]
+        },
+        "sourceFilter": [
+          "filename1.pdf",
+          "https://www.wikipedia.org/microsoft"
+        ]
+      },
+      "includeUnstructuredSources": true,
+      "question": "how long it takes to charge surface?",
+      "rankerType": "Default",
+      "top": 3,
+      "userId": "sd53lsY="
+    },
+    "projectName": "proj1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "answers": [
+          {
+            "answer": "Power and charging**\n\nIt takes two to four hours to charge the Surface Pro 4 battery fully from an empty state. It can take longer if you’re using your Surface for power-intensive activities like gaming or video streaming while you’re charging it.\n\nYou can use the USB port on your Surface Pro 4 power supply to charge other devices, like a phone, while your Surface charges. The USB port on the power supply is only for charging, not for data transfer. If you want to use a USB device, plug it into the USB port on your Surface.",
+            "answerSpan": {
+              "confidenceScore": 0.3,
+              "length": 50,
+              "offset": 33,
+              "text": "two to four hours"
+            },
+            "confidenceScore": 0.65,
+            "dialog": {
+              "isContextOnly": false,
+              "prompts": [
+                {
+                  "displayOrder": 1,
+                  "displayText": "prompt1",
+                  "qnaId": 23
+                },
+                {
+                  "displayOrder": 2,
+                  "displayText": "prompt2",
+                  "qnaId": 36
+                }
+              ]
+            },
+            "id": 20,
+            "metadata": {
+              "category": "api",
+              "editorial": "chitchat"
+            },
+            "questions": [
+              "Power and charging"
+            ],
+            "source": "surface-pro-4-user-guide-EN.pdf"
+          },
+          {
+            "answer": "**Charge your Surface Pro 4**\n\n1.  Connect the two parts of the power cord.\n\n2.  Connect the power cord securely to the charging port.\n\n3.  Plug the power supply into an electrical outlet.",
+            "confidenceScore": 0.32,
+            "id": 13,
+            "questions": [
+              "Charge your Surface Pro 4"
+            ],
+            "source": "surface-pro-4-user-guide-EN.pdf"
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "QuestionAnswering_GetAnswers",
+  "title": "Successful query"
+}

@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "key-name": "UpdateKeyAttributesTest",
+    "key-version": "3d31e6e5c4c14eaf9be8d42c00225088",
+    "parameters": {
+      "attributes": {
+        "enabled": false,
+        "exp": 662716800,
+        "nbf": 631180800
+      },
+      "key_ops": [
+        "decrypt",
+        "encrypt"
+      ]
+    },
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "attributes": {
+          "created": 1493860275,
+          "enabled": false,
+          "exp": 662716800,
+          "nbf": 631180800,
+          "recoveryLevel": "Recoverable+Purgeable",
+          "updated": 1493860277
+        },
+        "key": {
+          "e": "AQAB",
+          "key_ops": [
+            "decrypt",
+            "encrypt"
+          ],
+          "kid": "https://myvault.vault.azure.net/keys/UpdateKeyAttributesTest/3d31e6e5c4c14eaf9be8d42c00225088",
+          "kty": "RSA",
+          "n": "tHCSyq1FqGHXIFHs1m4riKYgPFNSTlJGPzxwfUyZJUxxZsFWMxmZRzbM3kcXC5N40AJfeqDOMs0gY0LZEfhw8kJHBf2GEH2Sz923E4OQjLk_ECdAiKPW_8t22cqD_pGIuB7uibjLZgFFRv7oe0t8cTXKn7IwAH5gQBLs8NNV7hx1Ozy82ekCgOovFldmD3c3P1oZQ_v_-jOP6O202aEfDcZut42J6zI8eYwvGiDKmo2fCPPeth1LYBOeUMnrEZGT_f_w3yAgqvuSkHCL0x4MjZzc2EoNI_3ooAHZohDaPHLRfz8neDPADZzbHA6SDn3GgvC1K_Je5GBmqjTH3aIMlw"
+        }
+      }
+    }
+  },
+  "operationId": "UpdateKey",
+  "title": "Update key"
+}

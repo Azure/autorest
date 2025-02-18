@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "restoreBlobDetails": {
+      "folderToRestore": "mhsm-mypool-20200303062926785",
+      "sasTokenParameters": {
+        "storageResourceUri": "https://myaccount.blob.core.windows.net/sascontainer/sasContainer",
+        "token": "se=2018-02-01T00%3A00Z&spr=https&sv=2017-04-17&sr=b&sig=XXFNfuMCHYrBx0bhemJ7PWn0xGfImMXT6LfbXWvtRUk%3D"
+      }
+    },
+    "vaultBaseUrl": "https://myhsm.managedhsm.azure.net"
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "endTime": 0,
+        "jobId": "45aacd568ab049a2803861e8dd3ae21f",
+        "startTime": 1490790000,
+        "status": "InProgress",
+        "statusDetails": "Full restore is in progress"
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://myvault.vault.azure.net/restore/45aacd568ab049a2803861e8dd3ae21f/pending",
+        "Retry-After": 5
+      }
+    }
+  },
+  "operationId": "FullRestoreOperation",
+  "title": "Create full restore from backup"
+}

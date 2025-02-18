@@ -9,6 +9,7 @@ import { generateDecorators } from "../utils/decorators";
 import { generateDocs, generateSummary } from "../utils/docs";
 import { generateLroHeaders } from "../utils/lro";
 import { generateSuppressions } from "../utils/suppressions";
+import { generateExamples, getGeneratedOperationId } from "./generate-arm-resource";
 import { generateParameter } from "./generate-parameter";
 
 export function generateOperation(operation: TypespecOperation, operationGroup?: TypespecOperationGroup) {
@@ -201,4 +202,17 @@ export function generateOperationGroup(operationGroup: TypespecOperationGroup) {
   hasInterface && statements.push(`}`);
 
   return statements.join("\n");
+}
+
+export function generateOperationGroupExamples(operationGroup: TypespecOperationGroup): Record<string, string> {
+  const examples: Record<string, string> = {};
+  const { name, operations } = operationGroup;
+  for (const operation of operations) {
+    generateExamples(
+      operation.examples ?? {},
+      operation.operationId ?? getGeneratedOperationId(name, operation.name),
+      examples,
+    );
+  }
+  return examples;
 }

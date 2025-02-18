@@ -1,11 +1,12 @@
 import { CodeModel, isObjectSchema, Schema } from "@autorest/codemodel";
 import { getDataTypes } from "./data-types";
+import { generateExamples } from "./generate/generate-arm-resource";
 import { TypespecDataType, TypespecProgram } from "./interfaces";
 import { getOptions } from "./options";
 import { transformTspArmResource } from "./transforms/transform-arm-resources";
 import { transformEnum } from "./transforms/transform-choices";
 import { getTypespecType, transformObject } from "./transforms/transform-object";
-import { transformOperationGroup } from "./transforms/transform-operations";
+import { isListOperation, transformOperationGroup } from "./transforms/transform-operations";
 import { transformServiceInformation } from "./transforms/transform-service-information";
 import { ArmResourceSchema, filterArmEnums, filterArmModels, isResourceSchema } from "./utils/resource-discovery";
 import { isChoiceSchema } from "./utils/schemas";
@@ -67,7 +68,16 @@ function transformModel(codeModel: CodeModel): TypespecProgram {
     }
   }
 
-  const listOperationRoute = `/providers/${namespace}/operations`;
+  let listOperationInfo = undefined;
+  const listOperation = codeModel.operationGroups.flatMap((g) => g.operations).find((o) => isListOperation(o));
+  if (listOperation !== undefined) {
+    const examples: Record<string, string> = {};
+    generateExamples(listOperation.extensions?.["x-ms-examples"] ?? {}, listOperation.operationId!, examples);
+
+    listOperationInfo = {
+      examples,
+    };
+  }
   return {
     serviceInformation,
     models: {
@@ -76,10 +86,6 @@ function transformModel(codeModel: CodeModel): TypespecProgram {
       armResources,
     },
     operationGroups: typespecOperationGroups,
-    containsListOperation:
-      codeModel.operationGroups
-        .flatMap((g) => g.operations)
-        .map((o) => o.requests?.[0].protocol.http?.path)
-        .find((r) => r === listOperationRoute) !== undefined,
+    listOperation: listOperationInfo,
   };
 }

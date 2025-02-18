@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "nameAvailabilityRequest": {
+      "name": "newaccountname",
+      "type": "Microsoft.AgFoodPlatform/farmBeats"
+    },
+    "subscriptionId": "11111111-2222-3333-4444-555555555555"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nameAvailable": true
+      }
+    }
+  },
+  "operationId": "CheckNameAvailability_CheckNameAvailability",
+  "title": "CheckNameAvailability_CheckNameAvailability_Available"
+}

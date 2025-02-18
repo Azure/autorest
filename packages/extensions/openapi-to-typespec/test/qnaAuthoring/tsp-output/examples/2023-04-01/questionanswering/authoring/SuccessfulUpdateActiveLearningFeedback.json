@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "Content-Type": "application/json",
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2023-04-01",
+    "body": {
+      "records": [
+        {
+          "qnaId": 1,
+          "userId": "user1",
+          "userQuestion": "hi"
+        },
+        {
+          "qnaId": 2,
+          "userId": "user1",
+          "userQuestion": "hello"
+        }
+      ]
+    },
+    "projectName": "proj1"
+  },
+  "responses": {
+    "204": {}
+  },
+  "operationId": "QuestionAnsweringProjects_AddFeedback",
+  "title": "Successful query"
+}

@@ -2,7 +2,9 @@ export interface TypespecProgram {
   models: Models;
   operationGroups: TypespecOperationGroup[];
   serviceInformation: ServiceInformation;
-  containsListOperation: boolean;
+  listOperation?: {
+    examples: Record<string, string>;
+  };
 }
 
 export interface TypespecOptions {
@@ -331,6 +333,8 @@ export interface TspArmProviderActionOperation extends WithDoc, WithSummary, Wit
   request?: TypespecParameter;
   decorators?: TypespecDecorator[];
   lroHeaders?: TspLroHeaders;
+  examples?: Record<string, Record<string, unknown>>;
+  operationId?: string;
 }
 
 export interface TspArmResource extends TypespecDataType, WithFixMe, WithDoc, WithDecorators {

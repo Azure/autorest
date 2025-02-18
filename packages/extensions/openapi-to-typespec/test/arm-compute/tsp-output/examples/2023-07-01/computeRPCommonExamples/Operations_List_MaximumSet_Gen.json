@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "aaaaaaaaaaaa",
+            "display": {
+              "description": "aaaaaaaaaaaaaaaaaaaaaa",
+              "operation": "aaaaaaaaaaaaaaaaaaaaaa",
+              "provider": "aaaaaaaaaaaaaaaaaa",
+              "resource": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "origin": "aaaaa"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Operations_List",
+  "title": "Operations_List_MaximumSet_Gen"
+}

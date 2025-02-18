@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "api-version": "2021-10",
+    "endpoint": "mynamespace.servicebus.windows.net",
+    "groupName": "sample-sr-group",
+    "schemaName": "sample-schema-name"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "schemaVersions": [
+          0,
+          1,
+          2
+        ]
+      }
+    }
+  },
+  "operationId": "Schema_GetVersions",
+  "title": "Get schema by ID"
+}

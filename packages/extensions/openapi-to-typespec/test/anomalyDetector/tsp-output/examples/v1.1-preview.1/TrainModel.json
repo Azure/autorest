@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "ApiVersion": "1.1",
+    "Content-Type": "application/json",
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "body": {
+      "alignPolicy": {
+        "alignMode": "Outer",
+        "fillNAMethod": "Linear",
+        "paddingValue": 0
+      },
+      "dataSource": "https://multiadsample.blob.core.windows.net/data/sample_data_2_1000.zip",
+      "displayName": "Devops-MultiAD",
+      "endTime": "2019-04-02T00:00:00Z",
+      "slidingWindow": 20,
+      "startTime": "2019-04-01T00:00:00Z"
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Location": "{Endpoint}/anomalydetector/v1.1-preview/multivariate/models/{modelId}"
+      }
+    },
+    "default": {
+      "body": {
+        "code": "Error Code",
+        "message": "Error Message"
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "x-ms-error-code": "Error Code"
+      }
+    }
+  },
+  "operationId": "TrainMultivariateModel",
+  "title": "Train Multivariate model"
+}

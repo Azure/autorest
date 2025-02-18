@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "location": "westus",
+    "parameters": {
+      "blobContainerSasUri": "https://somesasuri",
+      "fromTime": "2018-01-21T01:54:06.862601Z",
+      "groupByClientApplicationId": false,
+      "groupByOperationName": true,
+      "groupByResourceName": false,
+      "groupByUserAgent": false,
+      "toTime": "2018-01-23T01:54:06.862601Z"
+    },
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "output": "https://crptestar4227.blob.core.windows.net:443/sascontainer/ThrottledRequests_20180121-0154_20180123-0154.csv"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/westus/operations/{operationId}&monitor=true&api-version=2023-07-01"
+      }
+    }
+  },
+  "operationId": "LogAnalytics_ExportThrottledRequests",
+  "title": "Export logs which contain all throttled Api requests made to Compute Resource Provider within the given time period."
+}

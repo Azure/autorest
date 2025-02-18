@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "Authorization": "EndpointKey {Primary/Secondary EndpointKey}",
+    "Content-Type": "application/json",
+    "RuntimeEndpoint": "{RuntimeEndpoint}",
+    "generateAnswerPayload": {
+      "isTest": true,
+      "question": "qna maker and luis",
+      "scoreThreshold": 20,
+      "strictFilters": [
+        {
+          "name": "category",
+          "value": "api"
+        }
+      ],
+      "top": 6,
+      "userId": "sd53lsY="
+    },
+    "kbId": "9d091697-fb8c-4ed5-9ac0-35bf8273bfff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "answers": [
+          {
+            "answer": "There is no direct integration of LUIS with QnA Maker. But, in your bot code, you can use LUIS and QnA Maker together.",
+            "id": 20,
+            "metadata": [
+              {
+                "name": "category",
+                "value": "api"
+              }
+            ],
+            "questions": [
+              "How can I integrate LUIS with QnA Maker?"
+            ],
+            "score": 28.54820341616869,
+            "source": "Custom Editorial"
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Runtime_GenerateAnswer",
+  "title": "Successful query"
+}

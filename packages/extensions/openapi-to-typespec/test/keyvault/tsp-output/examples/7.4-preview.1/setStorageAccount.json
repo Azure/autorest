@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "parameters": {
+      "activeKeyName": "key2",
+      "attributes": {
+        "enabled": true
+      },
+      "autoRegenerateKey": true,
+      "regenerationPeriod": "P15D",
+      "resourceId": "/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc",
+      "tags": {
+        "tag1": "val1",
+        "tag2": "val2"
+      }
+    },
+    "storage-account-name": "setStrg01",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "activeKeyName": "key2",
+        "attributes": {
+          "created": 1490738386,
+          "enabled": true,
+          "recoveryLevel": "Recoverable+Purgeable",
+          "updated": 1490738386
+        },
+        "autoRegenerateKey": true,
+        "id": "https://myvault.vault.azure.net/storage/setStrg01",
+        "regenerationPeriod": "P15D",
+        "resourceId": "/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc",
+        "tags": {
+          "tag1": "val1",
+          "tag2": "val2"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "SetStorageAccount",
+  "title": "Set Storage account"
+}

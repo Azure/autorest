@@ -1,0 +1,14 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2022-05-01",
+    "projectName": "LoanAgreements",
+    "trainedModelLabel": "model2"
+  },
+  "responses": {
+    "204": {}
+  },
+  "operationId": "TextAnalysisAuthoring_DeleteTrainedModel",
+  "title": "Successful Delete Model"
+}

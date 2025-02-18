@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "location": "4_.",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "value": [
+          {
+            "name": {
+              "localizedValue": "aaaaaaaaaaaaaa",
+              "value": "aaaaaaaaaaaaaaaaaa"
+            },
+            "currentValue": 17,
+            "limit": 19,
+            "unit": "Count"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Usage_List",
+  "title": "Usage_List_MaximumSet_Gen"
+}

@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "jobId": "jobId",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "commandLine": "cmd /c echo task1",
+            "constraints": {
+              "maxTaskRetryCount": 0,
+              "maxWallClockTime": "P10675199DT2H48M5.4775807S",
+              "retentionTime": "P10675199DT2H48M5.4775807S"
+            },
+            "creationTime": "2022-08-26T22:43:31.4733476Z",
+            "eTag": "0x8D4125FD1A825A4",
+            "executionInfo": {
+              "requeueCount": 0,
+              "retryCount": 0
+            },
+            "id": "task1",
+            "lastModified": "2022-08-26T22:43:31.4733476Z",
+            "requiredSlots": 2,
+            "state": "active",
+            "stateTransitionTime": "2022-08-26T22:43:31.4733476Z",
+            "url": "https://account.region.batch.azure.com/jobs/jobId/tasks/task1",
+            "userIdentity": {
+              "autoUser": {
+                "elevationLevel": "nonadmin",
+                "scope": "task"
+              }
+            }
+          },
+          {
+            "commandLine": "cmd /c echo task2",
+            "constraints": {
+              "maxTaskRetryCount": 3,
+              "maxWallClockTime": "P10675199DT2H48M5.4775807S",
+              "retentionTime": "P10675199DT2H48M5.4775807S"
+            },
+            "creationTime": "2022-08-26T22:43:31.6736345Z",
+            "eTag": "0x8D4125FD2153345",
+            "executionInfo": {
+              "requeueCount": 0,
+              "retryCount": 0
+            },
+            "id": "task2",
+            "lastModified": "2022-08-26T22:43:32.1880389Z",
+            "requiredSlots": 2,
+            "state": "active",
+            "stateTransitionTime": "2022-08-26T22:43:31.6736345Z",
+            "url": "https://account.region.batch.azure.com/jobs/jobId/tasks/task2",
+            "userIdentity": {
+              "autoUser": {
+                "elevationLevel": "nonadmin",
+                "scope": "task"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Task_List",
+  "title": "Task list"
+}

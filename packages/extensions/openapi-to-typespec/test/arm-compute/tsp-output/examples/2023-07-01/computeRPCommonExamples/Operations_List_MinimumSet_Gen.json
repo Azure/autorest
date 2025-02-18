@@ -1,0 +1,12 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01"
+  },
+  "responses": {
+    "200": {
+      "body": {}
+    }
+  },
+  "operationId": "Operations_List",
+  "title": "Operations_List_MinimumSet_Gen"
+}

@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "key-name": "key01",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "attributes": {
+          "created": 1482188947,
+          "expiryTime": "P2Y",
+          "updated": 1482188948
+        },
+        "id": "https://myvault.vault.azure.net/keys/key01/rotationpolicy",
+        "lifetimeActions": [
+          {
+            "action": {
+              "type": "rotate"
+            },
+            "trigger": {
+              "timeAfterCreate": "P90D"
+            }
+          },
+          {
+            "action": {
+              "type": "notify"
+            },
+            "trigger": {
+              "timeBeforeExpiry": "P30D"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "GetKeyRotationPolicy",
+  "title": "GetKeyRotationPolicy"
+}

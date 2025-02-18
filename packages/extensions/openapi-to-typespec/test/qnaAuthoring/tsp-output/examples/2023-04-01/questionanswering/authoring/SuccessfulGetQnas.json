@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "Content-Type": "application/json",
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2023-04-01",
+    "projectName": "proj1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "answer": "ans1",
+            "dialog": {
+              "isContextOnly": false,
+              "prompts": [
+                {
+                  "displayOrder": 1,
+                  "displayText": "prompt 1.1",
+                  "qnaId": 11
+                },
+                {
+                  "displayOrder": 2,
+                  "displayText": "prompt 1.2",
+                  "qnaId": 21
+                }
+              ]
+            },
+            "id": 1,
+            "lastUpdatedDateTime": "2021-05-01T17:21:14Z",
+            "metadata": {
+              "k1": "v1",
+              "k2": "v2"
+            },
+            "questions": [
+              "question 1.1",
+              "question 1.2"
+            ],
+            "source": "source1"
+          },
+          {
+            "answer": "ans2",
+            "id": 2,
+            "lastUpdatedDateTime": "2021-05-01T17:21:14Z",
+            "questions": [
+              "question 2.1",
+              "question 2.2"
+            ],
+            "source": "source2"
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "QuestionAnsweringProjects_GetQnas",
+  "title": "Successful query"
+}

@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "location": "aaaaa",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "name": "aaaaaaaa",
+          "extendedLocation": {
+            "name": "aaaaaaaaaaaaaaaaaaaaa",
+            "type": "EdgeZone"
+          },
+          "id": "aaaaaaaaaaa",
+          "location": "aaaaaaaaaaaaaaaaaa",
+          "tags": {
+            "key7868": "aaaaa"
+          }
+        }
+      ]
+    }
+  },
+  "operationId": "VirtualMachineImages_ListPublishers",
+  "title": "VirtualMachineImage_ListPublishers_MaximumSet_Gen"
+}

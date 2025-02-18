@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "ApiVersion": "1.1",
+    "Content-Type": "application/json",
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "body": {},
+    "modelId": "45aad126-aafd-11ea-b8fb-d89ef3400c5f"
+  },
+  "responses": {
+    "204": {},
+    "default": {
+      "body": {
+        "code": "Error Code",
+        "message": "Error Message"
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "x-ms-error-code": "Error Code"
+      }
+    }
+  },
+  "operationId": "DeleteMultivariateModel",
+  "title": "Delete multivariate model"
+}

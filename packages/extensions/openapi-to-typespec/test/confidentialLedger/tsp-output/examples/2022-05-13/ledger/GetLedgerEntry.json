@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "api-version": "2022-05-13",
+    "ledgerUri": "myledger.confidentialledger.azure.com",
+    "transactionId": "3.14"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "entry": {
+          "collectionId": "DEFAULT_SUBLEDGER",
+          "contents": "Ledger entry contents at transaction id 3.14.",
+          "transactionId": "3.14"
+        },
+        "state": "Ready"
+      }
+    }
+  },
+  "operationId": "GetLedgerEntry",
+  "title": "GetLedgerEntry"
+}

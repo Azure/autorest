@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "maxresults": 1,
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://myvault.vault.azure.net:443/deletedcertificates?api-version=7.2&$skiptoken=eyJOZXh0TWFya2VyIjoiMiExMTIhTURBd01ETTVJV05sY25ScFptbGpZWFJsTDB4SlUxUkVSVXhGVkVWRVEwVlNWRlJGVTFRd0wxQlBURWxEV1NFd01EQXdNamdoT1RrNU9TMHhNaTB6TVZReU16bzFPVG8xT1M0NU9UazVPVGs1V2lFLSIsIlRhcmdldExvY2F0aW9uIjowfQ&maxresults=1",
+        "value": [
+          {
+            "attributes": {
+              "created": 1493937658,
+              "enabled": true,
+              "exp": 2208988799,
+              "nbf": 1430344421,
+              "recoveryLevel": "Recoverable+Purgeable",
+              "updated": 1493937658
+            },
+            "deletedDate": 1493937659,
+            "id": "https://myvault.vault.azure.net/certificates/listdeletedcerttest0",
+            "recoveryId": "https://myvault.vault.azure.net/deletedcertificates/listdeletedcerttest0",
+            "scheduledPurgeDate": 1501713659,
+            "x5t": "fLi3U52HunIVNXubkEnf8tP6Wbo"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "GetDeletedCertificates",
+  "title": "GetDeletedCertificates"
+}

@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT",
+    "poolId": "poolId",
+    "poolUpdatePropertiesParameter": {
+      "applicationPackageReferences": [],
+      "certificateReferences": [],
+      "metadata": [],
+      "startTask": {
+        "commandLine": "/bin/bash -c 'echo start task'"
+      }
+    }
+  },
+  "responses": {
+    "204": {}
+  },
+  "operationId": "Pool_UpdateProperties",
+  "title": "Pool update"
+}

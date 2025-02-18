@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT",
+    "parameters": {
+      "autoScaleFormula": "$TargetDedicated=1"
+    },
+    "poolId": "poolId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "results": "$TargetDedicated=1;$NodeDeallocationOption=requeue",
+        "timestamp": "2022-08-26T19:39:28.5246331Z"
+      }
+    }
+  },
+  "operationId": "Pool_EvaluateAutoScale",
+  "title": "Pool evaluate autoscale"
+}

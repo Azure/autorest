@@ -1,0 +1,109 @@
+{
+  "parameters": {
+    "ApiVersion": "1.1",
+    "Content-Type": "application/json",
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "body": {},
+    "resultId": "663884e6-b117-11ea-b3de-0242ac130004"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "resultId": "663884e6-b117-11ea-b3de-0242ac130004",
+        "results": [
+          {
+            "errors": [],
+            "timestamp": "2021-01-01T00:28:00Z",
+            "value": {
+              "isAnomaly": false,
+              "score": 0.6928471326828003,
+              "severity": 0
+            }
+          },
+          {
+            "timestamp": "2021-01-01T00:29:00Z",
+            "value": {
+              "interpretation": [
+                {
+                  "contributionScore": 0.5371576215,
+                  "correlationChanges": {
+                    "changedVariables": [
+                      "variable_1",
+                      "variable_3"
+                    ]
+                  },
+                  "variable": "variable_2"
+                },
+                {
+                  "contributionScore": 0.3324159383,
+                  "correlationChanges": {
+                    "changedVariables": [
+                      "variable_2"
+                    ]
+                  },
+                  "variable": "variable_3"
+                },
+                {
+                  "contributionScore": 0.1304264402,
+                  "correlationChanges": {
+                    "changedVariables": []
+                  },
+                  "variable": "variable_1"
+                }
+              ],
+              "isAnomaly": true,
+              "score": 0.9171165823936462,
+              "severity": 0.5337404608726501
+            }
+          }
+        ],
+        "summary": {
+          "errors": [],
+          "setupInfo": {
+            "dataSource": "https://multiadsample.blob.core.windows.net/data/sample_data_2_1000.zip",
+            "endTime": "2021-01-01T00:29:00Z",
+            "startTime": "2021-01-01T00:00:00Z",
+            "topContributorCount": 10
+          },
+          "status": "READY",
+          "variableStates": [
+            {
+              "effectiveCount": 30,
+              "filledNARatio": 0,
+              "firstTimestamp": "2021-01-01T00:00:00Z",
+              "lastTimestamp": "2021-01-01T00:29:00Z",
+              "variable": "variable_1"
+            },
+            {
+              "effectiveCount": 30,
+              "filledNARatio": 0,
+              "firstTimestamp": "2021-01-01T00:00:00Z",
+              "lastTimestamp": "2021-01-01T00:29:00Z",
+              "variable": "variable_2"
+            },
+            {
+              "effectiveCount": 30,
+              "filledNARatio": 0,
+              "firstTimestamp": "2021-01-01T00:00:00Z",
+              "lastTimestamp": "2021-01-01T00:29:00Z",
+              "variable": "variable_3"
+            }
+          ]
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "code": "Error Code",
+        "message": "Error Message"
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "x-ms-error-code": "Error Code"
+      }
+    }
+  },
+  "operationId": "GetDetectionResult",
+  "title": "Get detection result"
+}

@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2021-10",
+    "endpoint": "mynamespace.servicebus.windows.net",
+    "groupName": "sample-sr-group",
+    "schemaContent": "{\"type\":\"record\",\"name\":\"ExampleUser\",\"namespace\":\"com.azure.schemaregistry.samples\",\"fields\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"favoriteNumber\",\"type\":\"int\"}]}",
+    "schemaName": "sample-schema-name"
+  },
+  "responses": {
+    "204": {
+      "headers": {
+        "Location": "https://sample-namespace.servicebus.windows.net/$schemagroups/sample-sr-group/schemas/sample-schema-name/versions/3?api-version=2021-10",
+        "Schema-Group-Name": "sample-sr-group",
+        "Schema-Id": "a489dc4916744e3db72dda8f9693f342",
+        "Schema-Id-Location": "https://sample-namespace.servicebus.windows.net/$schemagroups?api-version=2021-10&schema-id=a489dc4916744e3db72dda8f9693f342",
+        "Schema-Name": "sample-schema-name",
+        "Schema-Version": 3
+      }
+    },
+    "415": {
+      "body": {
+        "error": {
+          "code": "InvalidSchemaType",
+          "message": "Invalid schema type for POST request. 'not-valid' is not supported. TrackingId:7fe9dcfb-0fca-4ab2-9beb-473aa5fe6406_G23, SystemTracker:endpoint:$schemaGroups/sample-sr-group/schemas/sample-schema-name:get-id, Timestamp:2021-11-10T07:53:32"
+        }
+      },
+      "headers": {
+        "x-ms-error-code": "InvalidSchemaType"
+      }
+    }
+  },
+  "operationId": "Schema_QueryIdByContent",
+  "title": "Get schema ID"
+}

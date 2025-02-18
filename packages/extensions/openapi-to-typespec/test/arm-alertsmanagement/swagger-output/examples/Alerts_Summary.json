@@ -1,0 +1,120 @@
+{
+  "parameters": {
+    "api-version": "2019-05-05-preview",
+    "groupby": "severity,alertState",
+    "subscriptionId": "1e3ff1c0-771a-4119-a03b-be82a51e232d"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "current",
+        "type": "Microsoft.AlertsManagement/alertsSummary",
+        "id": "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/providers/Microsoft.AlertsManagement/alertsSummary/current",
+        "properties": {
+          "groupedby": "severity",
+          "smartGroupsCount": 100,
+          "total": 14189,
+          "values": [
+            {
+              "name": "Sev0",
+              "count": 6517,
+              "groupedby": "alertState",
+              "values": [
+                {
+                  "name": "New",
+                  "count": 6517
+                },
+                {
+                  "name": "Acknowledged",
+                  "count": 0
+                },
+                {
+                  "name": "Closed",
+                  "count": 0
+                }
+              ]
+            },
+            {
+              "name": "Sev1",
+              "count": 3175,
+              "groupedby": "alertState",
+              "values": [
+                {
+                  "name": "New",
+                  "count": 3175
+                },
+                {
+                  "name": "Acknowledged",
+                  "count": 0
+                },
+                {
+                  "name": "Closed",
+                  "count": 0
+                }
+              ]
+            },
+            {
+              "name": "Sev2",
+              "count": 1120,
+              "groupedby": "alertState",
+              "values": [
+                {
+                  "name": "New",
+                  "count": 1120
+                },
+                {
+                  "name": "Acknowledged",
+                  "count": 0
+                },
+                {
+                  "name": "Closed",
+                  "count": 0
+                }
+              ]
+            },
+            {
+              "name": "Sev3",
+              "count": 1902,
+              "groupedby": "alertState",
+              "values": [
+                {
+                  "name": "New",
+                  "count": 1902
+                },
+                {
+                  "name": "Acknowledged",
+                  "count": 0
+                },
+                {
+                  "name": "Closed",
+                  "count": 0
+                }
+              ]
+            },
+            {
+              "name": "Sev4",
+              "count": 1475,
+              "groupedby": "alertState",
+              "values": [
+                {
+                  "name": "New",
+                  "count": 1475
+                },
+                {
+                  "name": "Acknowledged",
+                  "count": 0
+                },
+                {
+                  "name": "Closed",
+                  "count": 0
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "Alerts_GetSummary",
+  "title": "Summary"
+}

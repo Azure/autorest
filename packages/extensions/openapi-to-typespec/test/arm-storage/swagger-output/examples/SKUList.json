@@ -1,0 +1,6456 @@
+{
+  "parameters": {
+    "api-version": "2022-09-01",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "eastus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "eastus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "eastus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "eastus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "eastus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "eastus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "eastus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "eastus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "eastus2"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "eastus2"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "eastus2"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "eastus2"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "eastus2"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "true"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "eastus2"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "eastus2"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "eastus2"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "true"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "eastus2(stage)"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "true"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "eastus2(stage)"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "true"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "eastus2(stage)"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "eastus2(stage)"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsnetworkacls",
+                "value": "true"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "eastus2(stage)"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "true"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "true"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "eastus2(stage)"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "true"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "true"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "eastus2(stage)"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "true"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "eastus2(stage)"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "westus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "westus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "westus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "westus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "westus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "westus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "westus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "westus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "westeurope"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "westeurope"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "westeurope"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "westeurope"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "westeurope"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "westeurope"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "westeurope"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "westeurope"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "eastasia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "eastasia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "eastasia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "eastasia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "eastasia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "eastasia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "eastasia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "eastasia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "southeastasia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "southeastasia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "southeastasia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "southeastasia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "southeastasia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "southeastasia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "southeastasia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "southeastasia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "japaneast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "japaneast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "japaneast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "japaneast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "japaneast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "japaneast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "japaneast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "japaneast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "japanwest"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "japanwest"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "japanwest"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "japanwest"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "japanwest"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "japanwest"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "japanwest"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "japanwest"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "northcentralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "northcentralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "northcentralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "northcentralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "northcentralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "northcentralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "northcentralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "northcentralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "southcentralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "southcentralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "southcentralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "southcentralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "southcentralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "southcentralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "southcentralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "southcentralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "centralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "centralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "centralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "centralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "centralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "centralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "centralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "centralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "northeurope"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "northeurope"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "northeurope"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "northeurope"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "northeurope"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "northeurope"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "northeurope"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "northeurope"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "brazilsouth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "brazilsouth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "brazilsouth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "brazilsouth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "brazilsouth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "brazilsouth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "brazilsouth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "brazilsouth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "australiaeast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "australiaeast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "australiaeast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "australiaeast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "australiaeast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "australiaeast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "australiaeast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "australiaeast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "australiasoutheast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "australiasoutheast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "australiasoutheast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "australiasoutheast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "australiasoutheast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "australiasoutheast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "australiasoutheast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "australiasoutheast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "southindia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "southindia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "southindia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "southindia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "southindia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "southindia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "southindia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "southindia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "centralindia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "centralindia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "centralindia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "centralindia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "centralindia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "centralindia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "centralindia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "centralindia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "westindia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "westindia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "westindia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "westindia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "westindia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "westindia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "westindia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "westindia"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "canadaeast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "canadaeast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "canadaeast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "canadaeast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "canadaeast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "canadaeast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "canadaeast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "canadaeast"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "canadacentral"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "canadacentral"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "canadacentral"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "canadacentral"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "canadacentral"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "canadacentral"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "canadacentral"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "canadacentral"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "westus2"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "westus2"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "westus2"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "westus2"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "westus2"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "westus2"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "westus2"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "westus2"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "true"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "westcentralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "true"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "westcentralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "true"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "westcentralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "westcentralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "true"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "westcentralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "true"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "westcentralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "true"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "westcentralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "true"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "westcentralus"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "uksouth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "uksouth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "uksouth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "uksouth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "uksouth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "uksouth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "uksouth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "uksouth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "ukwest"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "ukwest"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "ukwest"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "ukwest"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "ukwest"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "ukwest"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "ukwest"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "ukwest"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "koreacentral"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "koreacentral"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "koreacentral"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "koreacentral"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "koreacentral"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "koreacentral"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "koreacentral"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "koreacentral"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "koreasouth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "koreasouth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "koreasouth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "koreasouth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "koreasouth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "koreasouth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "koreasouth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "koreasouth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "uknorth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "uknorth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "uknorth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "uknorth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "uknorth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "uknorth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "uknorth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "uknorth"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "uksouth2"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "uksouth2"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "uksouth2"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "uksouth2"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "uksouth2"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "uksouth2"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "uksouth2"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "false"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "uksouth2"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "true"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "eastus2euap"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "true"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "eastus2euap"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "true"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "eastus2euap"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "eastus2euap"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "true"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "eastus2euap"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "true"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "true"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "eastus2euap"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "true"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "true"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "eastus2euap"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "true"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "eastus2euap"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "true"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "centraluseuap"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_ZRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "true"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "centraluseuap"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "true"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "centraluseuap"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "true"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "centraluseuap"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Premium_LRS",
+            "capabilities": [
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "true"
+              }
+            ],
+            "kind": "Storage",
+            "locations": [
+              "centraluseuap"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Premium"
+          },
+          {
+            "name": "Standard_LRS",
+            "capabilities": [
+              {
+                "name": "supportsarchivepreview",
+                "value": "false"
+              },
+              {
+                "name": "supportschangenotification",
+                "value": "true"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "true"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "centraluseuap"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_GRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "true"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "true"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "centraluseuap"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "capabilities": [
+              {
+                "name": "supportschangenotification",
+                "value": "true"
+              },
+              {
+                "name": "supportsfileencryption",
+                "value": "false"
+              },
+              {
+                "name": "supportshoeboxcapacitymetrics",
+                "value": "false"
+              },
+              {
+                "name": "supportsnetworkacls",
+                "value": "false"
+              }
+            ],
+            "kind": "BlobStorage",
+            "locations": [
+              "centraluseuap"
+            ],
+            "resourceType": "storageAccounts",
+            "restrictions": [],
+            "tier": "Standard"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Skus_List",
+  "title": "SkuList"
+}

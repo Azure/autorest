@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2022-05-01",
+    "deploymentName": "production",
+    "jobId": "66fa9a67-a561-42f1-8a13-f3a879b1a324_637858368000000000",
+    "projectName": "LoanAgreements"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "createdDateTime": "2022-04-18T15:52:48Z",
+        "expirationDateTime": "2022-04-25T15:52:48Z",
+        "jobId": "66fa9a67-a561-42f1-8a13-f3a879b1a324_637858368000000000",
+        "lastUpdatedDateTime": "2022-04-18T15:53:04Z",
+        "status": "succeeded"
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "TextAnalysisAuthoring_GetDeploymentStatus",
+  "title": "Successful Get Deployment Status"
+}

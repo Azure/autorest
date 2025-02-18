@@ -1,0 +1,156 @@
+{
+  "parameters": {
+    "api-version": "2022-11-01",
+    "metricNamespace": "LoadTestRunMetrics",
+    "testRunId": "12316678-1234-1234-1234-122451189012"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "VirtualUsers",
+            "description": "No of concurrent virtual users",
+            "dimensions": [
+              {
+                "name": "SamplerName",
+                "description": "Sampler Name"
+              }
+            ],
+            "metricAvailabilities": [
+              {
+                "timeGrain": "PT5S"
+              },
+              {
+                "timeGrain": "PT10S"
+              },
+              {
+                "timeGrain": "PT1M"
+              },
+              {
+                "timeGrain": "PT5M"
+              },
+              {
+                "timeGrain": "PT1H"
+              }
+            ],
+            "namespace": "LoadTestRunMetrics",
+            "primaryAggregationType": "Total",
+            "supportedAggregationTypes": [
+              "Total"
+            ],
+            "unit": "Count"
+          },
+          {
+            "name": "ResponseTime",
+            "description": "Response time (Successful request)",
+            "dimensions": [
+              {
+                "name": "SamplerName",
+                "description": "Sampler Name"
+              }
+            ],
+            "metricAvailabilities": [
+              {
+                "timeGrain": "PT5S"
+              },
+              {
+                "timeGrain": "PT10S"
+              },
+              {
+                "timeGrain": "PT1M"
+              },
+              {
+                "timeGrain": "PT5M"
+              },
+              {
+                "timeGrain": "PT1H"
+              }
+            ],
+            "namespace": "LoadTestRunMetrics",
+            "primaryAggregationType": "Percentile90",
+            "supportedAggregationTypes": [
+              "Average",
+              "Percentile90",
+              "Percentile95",
+              "Percentile99"
+            ],
+            "unit": "Milliseconds"
+          },
+          {
+            "name": "TotalRequests",
+            "description": "Total Requests",
+            "dimensions": [
+              {
+                "name": "SamplerName",
+                "description": "Sampler Name"
+              }
+            ],
+            "metricAvailabilities": [
+              {
+                "timeGrain": "PT5S"
+              },
+              {
+                "timeGrain": "PT10S"
+              },
+              {
+                "timeGrain": "PT1M"
+              },
+              {
+                "timeGrain": "PT5M"
+              },
+              {
+                "timeGrain": "PT1H"
+              }
+            ],
+            "namespace": "LoadTestRunMetrics",
+            "primaryAggregationType": "Total",
+            "supportedAggregationTypes": [
+              "Total"
+            ],
+            "unit": "Count"
+          },
+          {
+            "name": "Errors",
+            "description": "Total Errors",
+            "dimensions": [
+              {
+                "name": "SamplerName",
+                "description": "Sampler Name"
+              },
+              {
+                "name": "Errors",
+                "description": "Error response code"
+              }
+            ],
+            "metricAvailabilities": [
+              {
+                "timeGrain": "PT5S"
+              },
+              {
+                "timeGrain": "PT10S"
+              },
+              {
+                "timeGrain": "PT1M"
+              },
+              {
+                "timeGrain": "PT5M"
+              },
+              {
+                "timeGrain": "PT1H"
+              }
+            ],
+            "namespace": "LoadTestRunMetrics",
+            "primaryAggregationType": "Total",
+            "supportedAggregationTypes": [
+              "Total"
+            ],
+            "unit": "Count"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "LoadTestRun_ListMetricDefinitions",
+  "title": "Lists the metric definitions for a load test run."
+}

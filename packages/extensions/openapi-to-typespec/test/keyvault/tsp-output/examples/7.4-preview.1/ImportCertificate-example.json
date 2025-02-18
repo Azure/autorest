@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "certificate-name": "importCert01",
+    "parameters": {
+      "policy": {
+        "key_props": {
+          "exportable": true,
+          "key_size": 2048,
+          "kty": "RSA",
+          "reuse_key": false
+        },
+        "secret_props": {
+          "contentType": "application/x-pkcs12"
+        }
+      },
+      "pwd": "123",
+      "value": "MIIJ..."
+    },
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "attributes": {
+          "created": 1493938557,
+          "enabled": true,
+          "exp": 2208988799,
+          "nbf": 1430344421,
+          "recoveryLevel": "Recoverable+Purgeable",
+          "updated": 1493938557
+        },
+        "cer": "MIIC...",
+        "id": "https://myvault.vault.azure.net/certificates/importCert01/f00e72f0ddee4dddadc27c0f605d84d7",
+        "kid": "https://myvault.vault.azure.net/keys/importCert01/f00e72f0ddee4dddadc27c0f605d84d7",
+        "policy": {
+          "attributes": {
+            "created": 1493938557,
+            "enabled": true,
+            "updated": 1493938557
+          },
+          "id": "https://myvault.vault.azure.net/certificates/importCert01/policy",
+          "issuer": {
+            "name": "Unknown"
+          },
+          "key_props": {
+            "exportable": true,
+            "key_size": 2048,
+            "kty": "RSA",
+            "reuse_key": false
+          },
+          "lifetime_actions": [
+            {
+              "action": {
+                "action_type": "EmailContacts"
+              },
+              "trigger": {
+                "lifetime_percentage": 80
+              }
+            }
+          ],
+          "secret_props": {
+            "contentType": "application/x-pkcs12"
+          },
+          "x509_props": {
+            "ekus": [],
+            "key_usage": [],
+            "subject": "CN=KeyVaultTest",
+            "validity_months": 297
+          }
+        },
+        "sid": "https://myvault.vault.azure.net/secrets/importCert01/f00e72f0ddee4dddadc27c0f605d84d7",
+        "x5t": "fLi3U52HunIVNXubkEnf8tP6Wbo"
+      }
+    }
+  },
+  "operationId": "ImportCertificate",
+  "title": "ImportCertificate"
+}

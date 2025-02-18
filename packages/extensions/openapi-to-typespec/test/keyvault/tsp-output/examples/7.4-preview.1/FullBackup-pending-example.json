@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "jobId": "45aacd568ab049a2803861e8dd3ae21f",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "azureStorageBlobContainerUri": "https://myaccount.blob.core.windows.net/sascontainer/.fullbackup-pool-61e8dd3ae21f-1579243113",
+        "endTime": 0,
+        "jobId": "45aacd568ab049a2803861e8dd3ae21f",
+        "startTime": 1490790000,
+        "status": "InProgress",
+        "statusDetails": "Full backup is in progress"
+      }
+    }
+  },
+  "operationId": "FullBackupStatus",
+  "title": "Full backup status"
+}

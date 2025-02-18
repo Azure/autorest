@@ -122,6 +122,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -161,6 +166,11 @@
               "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "StorageAccountCheckNameAvailability": {
+            "$ref": "./examples/StorageAccountCheckNameAvailability.json"
+          }
         }
       }
     },
@@ -188,6 +198,11 @@
             "schema": {
               "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DeletedAccountList": {
+            "$ref": "./examples/DeletedAccountList.json"
           }
         },
         "x-ms-pageable": {
@@ -271,6 +286,11 @@
               "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "UsageList": {
+            "$ref": "./examples/StorageAccountListLocationUsage.json"
+          }
         }
       }
     },
@@ -298,6 +318,11 @@
             "schema": {
               "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "SkuList": {
+            "$ref": "./examples/SKUList.json"
           }
         }
       }

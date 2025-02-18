@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "format": "openapi-link",
+    "api-version": "2021-08-01",
+    "apiId": "aid9676",
+    "export": "true",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "format": "openapi-link",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/aid9676",
+        "value": {
+          "link": "https: //apimgmtstkjpszxxxxxxx.blob.core.windows.net/api-export/Swagger Petstore.yaml?sv=2015-07-08&sr=b&sig=qqtR1y5iTbz5P7USBduqB5vriIU4gmiGqe0lKVV8j9k%3D&se=2019-04-10T22:40:57Z&sp=r"
+        }
+      }
+    }
+  },
+  "operationId": "ApiExport_Get",
+  "title": "ApiManagementGetApiExportInOpenApi3dot0"
+}

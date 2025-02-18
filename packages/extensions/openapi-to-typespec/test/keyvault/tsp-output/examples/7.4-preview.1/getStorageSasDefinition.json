@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "sas-definition-name": "getStrgSasDef01",
+    "storage-account-name": "getsas01",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "attributes": {
+          "created": 1490738438,
+          "enabled": true,
+          "recoveryLevel": "Recoverable",
+          "updated": 1490738438
+        },
+        "id": "https://myvault.vault.azure.net/storage/getsas01/sas/getStrgSasDef01",
+        "sasType": "service",
+        "sid": "https://myvault.vault.azure.net/secrets/getsas01-getStrgSasDef01",
+        "templateUri": "se=2018-02-01T00%3A00Z&spr=https&sv=2017-04-17&sr=b&sig=XXFNfuMCHYrBx0bhemJ7PWn0xGfImMXT6LfbXWvtRUk%3D",
+        "validityPeriod": "P15D"
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "GetSasDefinition",
+  "title": "Get Storage Sas Definition"
+}

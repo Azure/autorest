@@ -80,6 +80,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get Operations List": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }

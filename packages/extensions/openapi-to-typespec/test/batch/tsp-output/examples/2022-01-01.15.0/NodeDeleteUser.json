@@ -1,0 +1,16 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "nodeId": "tvm-1695681911_1-20161121t182739z",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT",
+    "poolId": "poolId",
+    "userName": "userName"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "ComputeNode_DeleteUser",
+  "title": "Node delete user"
+}

@@ -1,0 +1,12 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "key-name": "testdeletedkey",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "204": {}
+  },
+  "operationId": "PurgeDeletedKey",
+  "title": "PurgeDeletedKey"
+}

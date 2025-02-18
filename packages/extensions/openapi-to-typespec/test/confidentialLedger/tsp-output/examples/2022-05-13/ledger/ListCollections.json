@@ -1,0 +1,23 @@
+{
+  "parameters": {
+    "api-version": "2022-05-13",
+    "ledgerUri": "myledger.confidentialledger.azure.com"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "collections": [
+          {
+            "collectionId": "first"
+          },
+          {
+            "collectionId": "second"
+          }
+        ]
+      },
+      "nextLink": "<link>"
+    }
+  },
+  "operationId": "ListCollections",
+  "title": "GetCollectionIds"
+}

@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "attributes": {
+              "created": 1482188987,
+              "enabled": true,
+              "exp": 2208988799,
+              "nbf": 1430344421,
+              "updated": 1482188987
+            },
+            "id": "https://myvault.vault.azure.net/certificates/listCert01",
+            "x5t": "fLi3U52HunIVNXubkEnf8tP6Wbo"
+          },
+          {
+            "attributes": {
+              "created": 1482188988,
+              "enabled": true,
+              "exp": 2208988799,
+              "nbf": 1430344421,
+              "updated": 1482188988
+            },
+            "id": "https://myvault.vault.azure.net/certificates/listCert02",
+            "x5t": "fLi3U52HunIVNXubkEnf8tP6Wbo"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "GetCertificates",
+  "title": "GetCertificates"
+}

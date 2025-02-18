@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "Content-Type": "application/json",
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2023-04-01",
+    "projectName": "proj1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "displayName": "source1",
+            "lastUpdatedDateTime": "2021-05-01T15:13:22Z",
+            "source": "https://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/overview/overview",
+            "sourceKind": "url",
+            "sourceUri": "https://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/overview/overview"
+          },
+          {
+            "contentStructureKind": "unstructured",
+            "displayName": "source2",
+            "lastUpdatedDateTime": "2021-05-01T15:13:22Z",
+            "source": "surface-guide.pdf",
+            "sourceKind": "file",
+            "sourceUri": "https://download.microsoft.com/download/2/9/B/29B20383-302C-4517-A006-B0186F04BE28/surface-pro-4-user-guide-EN.pdf"
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "QuestionAnsweringProjects_GetSources",
+  "title": "Successful query"
+}

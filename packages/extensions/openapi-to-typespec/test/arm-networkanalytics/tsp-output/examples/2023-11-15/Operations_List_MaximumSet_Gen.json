@@ -1,0 +1,28 @@
+{
+  "operationId": "Operations_List",
+  "parameters": {
+    "api-version": "2023-11-15"
+  },
+  "title": "Operations_List_MaximumSet_Gen",
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://fully.qualified.hyperlink",
+        "value": [
+          {
+            "name": "Microsoft.NetworkAnalytics/resourceName/operationName",
+            "actionType": "Internal",
+            "display": {
+              "description": "Description of the operation",
+              "operation": "OperationName",
+              "provider": "Microsoft.NetworkAnalytics",
+              "resource": "ResourceName"
+            },
+            "isDataAction": false,
+            "origin": "user"
+          }
+        ]
+      }
+    }
+  }
+}

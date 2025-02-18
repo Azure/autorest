@@ -1,0 +1,14 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "location": "._..",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {}
+    }
+  },
+  "operationId": "VirtualMachineSizes_List",
+  "title": "VirtualMachineSizes_List_MinimumSet_Gen"
+}

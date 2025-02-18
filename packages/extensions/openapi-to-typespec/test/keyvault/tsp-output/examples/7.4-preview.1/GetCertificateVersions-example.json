@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "certificate-name": "listVersionsCert01",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "attributes": {
+              "created": 1482189534,
+              "enabled": true,
+              "exp": 2208988799,
+              "nbf": 1430344421,
+              "updated": 1482189534
+            },
+            "id": "https://myvault.vault.azure.net/certificates/listVersionsCert01/002ade539442463aba45c0efb42e3e84",
+            "x5t": "fLi3U52HunIVNXubkEnf8tP6Wbo"
+          },
+          {
+            "attributes": {
+              "created": 1482189532,
+              "enabled": true,
+              "exp": 2208988799,
+              "nbf": 1430344421,
+              "updated": 1482189532
+            },
+            "id": "https://myvault.vault.azure.net/certificates/listVersionsCert01/7fcb3e9eb8bf43f3a6ff4b9c3740801d",
+            "x5t": "fLi3U52HunIVNXubkEnf8tP6Wbo"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "GetCertificateVersions",
+  "title": "GetCertificateVersions"
+}

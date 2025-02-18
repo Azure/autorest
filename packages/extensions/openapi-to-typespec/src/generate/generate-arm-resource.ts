@@ -248,7 +248,7 @@ export function generateArmResourceExamples(resource: TspArmResource): Record<st
   return examples;
 }
 
-function generateExamples(
+export function generateExamples(
   examples: Record<string, Record<string, unknown>>,
   operationId: string,
   generatedExamples: Record<string, string>,
@@ -273,19 +273,9 @@ function generateExamples(
     logger().info(
       `Cannot find the example original path or the path isn't in the examples folder for operation ${operationId}`,
     );
-    filename = operationId;
-    if (count > 1) {
-      if (title.startsWith(filename)) {
-        filename = title;
-      } else {
-        const suffix = Case.train(title).replaceAll("-", "_");
-        filename = `${filename}_${suffix}`;
-      }
-    }
-    generatedExamples[filename] = JSON.stringify(example, null, 2);
   }
 }
 
-function getGeneratedOperationId(operationGroupName: string, operationName: string): string {
+export function getGeneratedOperationId(operationGroupName: string, operationName: string): string {
   return `${Case.pascal(operationGroupName)}_${Case.pascal(operationName)}`;
 }

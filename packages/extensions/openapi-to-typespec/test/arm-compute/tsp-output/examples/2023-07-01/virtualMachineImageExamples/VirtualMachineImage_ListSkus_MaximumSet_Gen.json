@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "location": "aaaa",
+    "offer": "aaaaaaa",
+    "publisherName": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "name": "aaaaaaaa",
+          "extendedLocation": {
+            "name": "aaaaaaaaaaaaaaaaaaaaa",
+            "type": "EdgeZone"
+          },
+          "id": "aaaaaaaaaaa",
+          "location": "aaaaaaaaaaaaaaaaaa",
+          "tags": {
+            "key7868": "aaaaa"
+          }
+        }
+      ]
+    }
+  },
+  "operationId": "VirtualMachineImages_ListSkus",
+  "title": "VirtualMachineImage_ListSkus_MaximumSet_Gen"
+}

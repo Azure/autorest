@@ -1,0 +1,213 @@
+{
+  "parameters": {
+    "api-version": "2019-05-05-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Microsoft.AlertsManagement/register/action",
+            "display": {
+              "description": "Subscription Registration Action",
+              "operation": "Subscription Registration Action",
+              "provider": "Microsoft.AlertsManagement",
+              "resource": "Subscription"
+            }
+          },
+          {
+            "name": "Microsoft.AlertsManagement/register/action",
+            "display": {
+              "description": "Registers the subscription for the Microsoft Alerts Management",
+              "operation": "Register subscription",
+              "provider": "Microsoft.AlertsManagement",
+              "resource": "register"
+            }
+          },
+          {
+            "name": "Microsoft.AlertsManagement/alerts/read",
+            "display": {
+              "description": "Get all the alerts for the input filters.",
+              "operation": "Read alerts",
+              "provider": "Microsoft.AlertsManagement",
+              "resource": "alerts"
+            }
+          },
+          {
+            "name": "Microsoft.AlertsManagement/alerts/changestate/action",
+            "display": {
+              "description": "Change the state of the alert.",
+              "operation": "Resolve alerts",
+              "provider": "Microsoft.AlertsManagement",
+              "resource": "alerts"
+            }
+          },
+          {
+            "name": "Microsoft.AlertsManagement/alerts/history/read",
+            "display": {
+              "description": "Get history of the alert",
+              "operation": "Read alert history",
+              "provider": "Microsoft.AlertsManagement",
+              "resource": "alerts"
+            }
+          },
+          {
+            "name": "Microsoft.AlertsManagement/smartDetectorAlertRules/write",
+            "display": {
+              "description": "Create or update Smart Detector alert rule in a given subscription",
+              "operation": "Create Smart Detector alert rule",
+              "provider": "Microsoft.AlertsManagement",
+              "resource": "smartDetectorAlertRules"
+            }
+          },
+          {
+            "name": "Microsoft.AlertsManagement/smartDetectorAlertRules/read",
+            "display": {
+              "description": "Get all the Smart Detector alert rules for the input filters",
+              "operation": "Read Smart Detector alert rules",
+              "provider": "Microsoft.AlertsManagement",
+              "resource": "smartDetectorAlertRules"
+            }
+          },
+          {
+            "name": "Microsoft.AlertsManagement/smartDetectorAlertRules/delete",
+            "display": {
+              "description": "Delete Smart Detector alert rule in a given subscription",
+              "operation": "Delete Smart Detector alert rule",
+              "provider": "Microsoft.AlertsManagement",
+              "resource": "smartDetectorAlertRules"
+            }
+          },
+          {
+            "name": "Microsoft.AlertsManagement/resourceHealthAlertRules/write",
+            "display": {
+              "description": "Create or update Resource Health alert rule in a given subscription",
+              "operation": "Create Resource Health alert rule",
+              "provider": "Microsoft.AlertsManagement",
+              "resource": "resourceHealthAlertRules"
+            }
+          },
+          {
+            "name": "Microsoft.AlertsManagement/resourceHealthAlertRules/read",
+            "display": {
+              "description": "Get all the Resource Health alert rules for the input filters",
+              "operation": "Read Resource Health alert rules",
+              "provider": "Microsoft.AlertsManagement",
+              "resource": "resourceHealthAlertRules"
+            }
+          },
+          {
+            "name": "Microsoft.AlertsManagement/resourceHealthAlertRules/delete",
+            "display": {
+              "description": "Delete Resource Health alert rule in a given subscription",
+              "operation": "Delete Resource Health alert rule",
+              "provider": "Microsoft.AlertsManagement",
+              "resource": "resourceHealthAlertRules"
+            }
+          },
+          {
+            "name": "Microsoft.AlertsManagement/migrateFromSmartDetection/read",
+            "display": {
+              "description": "Get the status of an asynchronous Smart Detection to smart alerts migration process",
+              "operation": "Get Smart Detection Migration status",
+              "provider": "Microsoft.AlertsManagement",
+              "resource": "migrateFromSmartDetection"
+            }
+          },
+          {
+            "name": "Microsoft.AlertsManagement/migrateFromSmartDetection/action",
+            "display": {
+              "description": "Starts an asynchronous migration process of Smart Detection to smart alerts in an Application Insights resource",
+              "operation": "Migrate From Smart Detection",
+              "provider": "Microsoft.AlertsManagement",
+              "resource": "migrateFromSmartDetection"
+            }
+          },
+          {
+            "name": "Microsoft.AlertsManagement/alertsSummary/read",
+            "display": {
+              "description": "Get the summary of alerts",
+              "operation": "Read alerts summary",
+              "provider": "Microsoft.AlertsManagement",
+              "resource": "alertsSummary"
+            }
+          },
+          {
+            "name": "Microsoft.AlertsManagement/smartGroups/read",
+            "display": {
+              "description": "Get all the smart groups for the input filters",
+              "operation": "Read smart groups",
+              "provider": "Microsoft.AlertsManagement",
+              "resource": "smartGroups"
+            }
+          },
+          {
+            "name": "Microsoft.AlertsManagement/smartGroups/changestate/action",
+            "display": {
+              "description": "Change the state of the smart group",
+              "operation": "Read smart groups",
+              "provider": "Microsoft.AlertsManagement",
+              "resource": "smartGroups"
+            }
+          },
+          {
+            "name": "Microsoft.AlertsManagement/smartGroups/history/read",
+            "display": {
+              "description": "Get history of the smart group",
+              "operation": "Read smart group history",
+              "provider": "Microsoft.AlertsManagement",
+              "resource": "smartGroups"
+            }
+          },
+          {
+            "name": "Microsoft.AlertsManagement/actionRules/read",
+            "display": {
+              "description": "Get all the alert processing rules for the input filters.",
+              "operation": "Read action rules",
+              "provider": "Microsoft.AlertsManagement",
+              "resource": "actionRules"
+            }
+          },
+          {
+            "name": "Microsoft.AlertsManagement/actionRules/write",
+            "display": {
+              "description": "Create or update alert processing rule in a given subscription",
+              "operation": "Write action rule",
+              "provider": "Microsoft.AlertsManagement",
+              "resource": "actionRules"
+            }
+          },
+          {
+            "name": "Microsoft.AlertsManagement/actionRules/delete",
+            "display": {
+              "description": "Delete alert processing rule in a given subscription.",
+              "operation": "Delete action rule",
+              "provider": "Microsoft.AlertsManagement",
+              "resource": "actionRules"
+            }
+          },
+          {
+            "name": "Microsoft.AlertsManagement/alertsMetaData/read",
+            "display": {
+              "description": "Get alerts meta data for the input parameter.",
+              "operation": "Read alerts meta data",
+              "provider": "Microsoft.AlertsManagement",
+              "resource": "Microsoft.AlertsManagement/alertsMetaData"
+            }
+          },
+          {
+            "name": "Microsoft.AlertsManagement/Operations/read",
+            "display": {
+              "description": "Reads the operations provided",
+              "operation": "Read operations",
+              "provider": "Microsoft.AlertsManagement",
+              "resource": "operations"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Operations_List",
+  "title": "ListOperations"
+}

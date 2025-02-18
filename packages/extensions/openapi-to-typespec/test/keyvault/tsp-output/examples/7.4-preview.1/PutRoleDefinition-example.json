@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "parameters": {
+      "properties": {
+        "type": "CustomRole",
+        "description": "Role description",
+        "permissions": [
+          {
+            "dataActions": [
+              "Microsoft.KeyVault/managedHsm/keys/sign/action"
+            ]
+          }
+        ],
+        "roleName": "My custom role"
+      }
+    },
+    "roleDefinitionName": "00000000-0000-0000-0000-000000000000",
+    "scope": "keys",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "00000000-0000-0000-0000-000000000000",
+        "type": "Microsoft.Authorization/roleDefinitions",
+        "id": "Microsoft.KeyVault/providers/Microsoft.Authorization/roleDefinitions/00000000-0000-0000-0000-000000000000",
+        "properties": {
+          "type": "CustomRole",
+          "description": "Role description",
+          "assignableScopes": [
+            "/"
+          ],
+          "permissions": [
+            {
+              "dataActions": [
+                "Microsoft.KeyVault/managedHsm/keys/sign/action"
+              ]
+            }
+          ],
+          "roleName": "My custom role"
+        }
+      }
+    }
+  },
+  "operationId": "RoleDefinitions_CreateOrUpdate",
+  "title": "PutRoleDefinition"
+}

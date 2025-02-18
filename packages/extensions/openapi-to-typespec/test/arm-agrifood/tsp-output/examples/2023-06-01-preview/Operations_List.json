@@ -1,0 +1,96 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/providers/Microsoft.AgFoodPlatform/operations",
+        "value": [
+          {
+            "name": "Microsoft.AgFoodPlatform/farmBeats/read",
+            "display": {
+              "description": "Gets or Lists existing AgFoodPlatform FarmBeats resource(s).",
+              "operation": "Get or List AgFoodPlatform FarmBeats resource(s).",
+              "provider": "Microsoft AgFoodPlatform",
+              "resource": "AgFoodPlatform FarmBeats"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.AgFoodPlatform/farmBeats/write",
+            "display": {
+              "description": "Creates or Updates AgFoodPlatform FarmBeats.",
+              "operation": "Create or Update AgFoodPlatform FarmBeats.",
+              "provider": "Microsoft AgFoodPlatform",
+              "resource": "AgFoodPlatform FarmBeats"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.AgFoodPlatform/farmBeats/delete",
+            "display": {
+              "description": "Deletes an existing AgFoodPlatform FarmBeats resource.",
+              "operation": "Delete AgFoodPlatform FarmBeats resource.",
+              "provider": "Microsoft AgFoodPlatform",
+              "resource": "AgFoodPlatform FarmBeats"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.AgFoodPlatform/locations/checkNameAvailability/action",
+            "display": {
+              "description": "Checks that resource name is valid and is not in use.",
+              "operation": "Check Name Availability",
+              "provider": "Microsoft AgFoodPlatform",
+              "resource": "Locations"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.AgFoodPlatform/operations/read",
+            "display": {
+              "description": "List all operations in Microsoft AgFoodPlatform resource provider.",
+              "operation": "List all operations.",
+              "provider": "Microsoft AgFoodPlatform",
+              "resource": "List all operations in Microsoft AgFoodPlatform resource provider."
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.AgFoodPlatform/farmBeats/extensions/read",
+            "display": {
+              "description": "Gets or Lists existing AgFoodPlatform Extensions resource(s).",
+              "operation": "Get or List AgFoodPlatform Extensions resource(s).",
+              "provider": "Microsoft AgFoodPlatform",
+              "resource": "AgFoodPlatform Extensions"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.AgFoodPlatform/farmBeats/extensions/write",
+            "display": {
+              "description": "Creates or Updates AgFoodPlatform Extensions.",
+              "operation": "Create or Update AgFoodPlatform Extensions.",
+              "provider": "Microsoft AgFoodPlatform",
+              "resource": "AgFoodPlatform Extensions"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.AgFoodPlatform/farmBeats/extensions/delete",
+            "display": {
+              "description": "Deletes an existing AgFoodPlatform Extensions resource.",
+              "operation": "Delete AgFoodPlatform Extensions resource.",
+              "provider": "Microsoft AgFoodPlatform",
+              "resource": "AgFoodPlatform Extensions"
+            },
+            "isDataAction": false
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Operations_List",
+  "title": "Operations_List"
+}

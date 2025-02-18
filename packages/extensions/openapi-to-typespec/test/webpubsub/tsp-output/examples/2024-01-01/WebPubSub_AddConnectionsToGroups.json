@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "api-version": "2024-01-01",
+    "groupsToAdd": {
+      "filter": "startswith(userId, 'listener-')",
+      "groups": [
+        "group1",
+        "group2"
+      ]
+    },
+    "hub": "hub1"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "WebPubSub_AddConnectionsToGroups",
+  "title": "WebPubSub_AddConnectionsToGroups"
+}
