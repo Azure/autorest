@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "$skiptoken": "eyJOZXh0TWFya2VyIjoiMiE4MCFNREF3TURFMElXdGxlUzlUUkV0VVJWTlVTMFZaSVRBd01EQXlPQ0V5TURFM0xUQXlMVEUzVkRBd09qQXhPakEyTGpnd056azBOemhhSVEtLSIsIlRhcmdldExvY2F0aW9uIjowfQ",
+    "api-version": "7.4-preview.1",
+    "maxresults": 1,
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://myvault.vault.azure.net:443/keys?api-version=7.2&$skiptoken=eyJOZXh0TWFya2VyIjoiMiE5NiFNREF3TURJM0lXdGxlUzlWVUVSQlZFVkxSVmxCVkZSU1NVSlZWRVZUVkVWVFZDRXdNREF3TWpnaE1qQXhOeTB3TlMwd05GUXdNVG94TVRveE5pNDNNekE0TnpReVdpRS0iLCJUYXJnZXRMb2NhdGlvbiI6MH0&maxresults=1",
+        "value": [
+          {
+            "attributes": {
+              "created": 1493937656,
+              "enabled": true,
+              "recoveryLevel": "Recoverable+Purgeable",
+              "updated": 1493937656
+            },
+            "kid": "https://myvault.vault.azure.net/keys/sdktestkey"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "GetKeys",
+  "title": "GetKeys"
+}

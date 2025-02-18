@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "api-version": "2024-01-01",
+    "clientType": "MQTT",
+    "hub": "hub1",
+    "minutesToExpire": 5,
+    "userId": "user1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "token": "ABCDEFG.ABC.ABC"
+      }
+    }
+  },
+  "operationId": "WebPubSub_GenerateClientToken",
+  "title": "WebPubSub_GenerateClientToken"
+}

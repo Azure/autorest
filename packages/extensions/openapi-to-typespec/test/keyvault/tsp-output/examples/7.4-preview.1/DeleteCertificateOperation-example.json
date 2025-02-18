@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "certificate-name": "deletedRequestedCert01",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "cancellation_requested": false,
+        "csr": "MIIC4zCCAcsCAQAwGjEYMBYGA1UEAwwPKi5taWNyb3NvZnQuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApf+kGcL+5uivj/ToYbQ15zcx3caEnpzXaX2eJgL0/Kwaz4u2/bNJ9+hoXnlOFFbCp4canVoNvgu8fw5NOu9U3gJNFQwjHeAqfsg8okZGkIk0riIpp4MMb/4GQb2y3B28AcTu2FANdzLoZzBqmQs51KBe1RONkdtqDYXIvnb5G+9+P7PCy5G//Ga0JAP6Y6P8+TrE9JLEj6Sny0ljLMpMyt4rIRAtNfKYSeiWVQmYX4jZfImIW3iq91zwMsRlrzTm80mNfHPCv7V/8NmYuh0MQgCr49lLbbKCgzDyo9h8sblVQvR5TAylpIk7bSQNf4tSdVNHnsF6CJWu6Pg31hyMpQIDAQABoIGDMIGABgkqhkiG9w0BCQ4xczBxMA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwNQYDVR0RBC4wLIIWb25lZHJpdmUubWljcm9zb2Z0LmNvbYISeGJveC5taWNyb3NvZnQuY29tMAkGA1UdEwQCMAAwDQYJKoZIhvcNAQELBQADggEBAHVjmYFs3FmecaJ1ExhK1WCFJaQJUTVbPJ1xJ93UJlLivhzI1yhQO9nMC2DKV+E+UCxceqjae6OG5LUhXfYAziS0HTc80+ZcUqrZRb5ZRt+8HU0TPbTDDqjj8wMZ4VlgQ3eXGAGesMfZV3AqWwa5itofvqm8KAmL4Yn/XMSHcKfRx3h9WnC6RXgZ8WNYK+r5o+gHlmuF7/AaNFh8UjIsjjOZQ0Yin/vA4yBEYTt1/OC7pScs3bdL9CIf4rC98qaMSf4B2W/vfrXUo0gGPYcep25jy7xnIltSY80Trn3Mty5YQ0IT+KPQcJKhbryGg6bIy4jJDwS7zkn51MR1q3kNoOA=",
+        "id": "https://myvault.vault.azure.net/certificates/deletedRequestedCert01/pending",
+        "issuer": {
+          "name": "issuer03"
+        },
+        "request_id": "b88791e33d9c4d609d3e3cc3d2d40d11",
+        "status": "inProgress",
+        "status_details": "Pending certificate created. Certificate request is in progress. This may take some time based on the issuer provider. Please check again later."
+      }
+    }
+  },
+  "operationId": "DeleteCertificateOperation",
+  "title": "DeleteCertificateOperation"
+}

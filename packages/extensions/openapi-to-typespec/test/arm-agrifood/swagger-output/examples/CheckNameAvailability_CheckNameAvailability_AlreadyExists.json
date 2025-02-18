@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "nameAvailabilityRequest": {
+      "name": "existingaccountname",
+      "type": "Microsoft.AgFoodPlatform/farmBeats"
+    },
+    "subscriptionId": "11111111-2222-3333-4444-555555555555"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "message": "An account named 'existingaccountname' is already in use.",
+        "nameAvailable": false,
+        "reason": "AlreadyExists"
+      }
+    }
+  },
+  "operationId": "CheckNameAvailability_CheckNameAvailability",
+  "title": "CheckNameAvailability_CheckNameAvailability_AlreadyExists"
+}

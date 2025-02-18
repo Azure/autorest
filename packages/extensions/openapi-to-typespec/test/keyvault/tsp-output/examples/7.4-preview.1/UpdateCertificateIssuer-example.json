@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "issuer-name": "issuer01",
+    "parameter": {
+      "credentials": {
+        "account_id": "newuseraccount",
+        "pwd": "newpassword"
+      },
+      "provider": "Test"
+    },
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "attributes": {
+          "created": 1482188806,
+          "enabled": true,
+          "updated": 1482189526
+        },
+        "credentials": {
+          "account_id": "newuseraccount"
+        },
+        "id": "https://myvault.vault.azure.net/certificates/issuers/issuer01",
+        "org_details": {
+          "admin_details": [
+            {
+              "email": "admin@microsoft.com",
+              "first_name": "John",
+              "last_name": "Doe",
+              "phone": "4255555555"
+            }
+          ]
+        },
+        "provider": "Test"
+      }
+    }
+  },
+  "operationId": "UpdateCertificateIssuer",
+  "title": "UpdateCertificateIssuer"
+}

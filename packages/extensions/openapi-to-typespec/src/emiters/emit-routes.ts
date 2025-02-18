@@ -1,18 +1,26 @@
+import { join } from "path";
 import { getSession } from "../autorest-session";
-import { generateOperationGroup } from "../generate/generate-operations";
+import { generateOperationGroup, generateOperationGroupExamples } from "../generate/generate-operations";
 import { TypespecProgram } from "../interfaces";
 import { getOptions } from "../options";
 import { formatTypespecFile } from "../utils/format";
 import { getRoutesImports } from "../utils/imports";
 import { getNamespaceStatement } from "../utils/namespace";
+import { emitExamples } from "./emit-main";
 
-export async function emitRoutes(filePath: string, program: TypespecProgram): Promise<void> {
+export async function emitRoutes(program: TypespecProgram, basePath: string): Promise<void> {
   if (program.operationGroups.length === 0) {
     return;
   }
   const content = generateRoutes(program);
   const session = getSession();
+  const filePath = join(basePath, "routes.tsp");
   session.writeFile({ filename: filePath, content: await formatTypespecFile(content, filePath) });
+
+  for (const operationGroup of program.operationGroups) {
+    const examples = generateOperationGroupExamples(operationGroup);
+    emitExamples(examples, program.serviceInformation.versions, basePath);
+  }
 }
 
 function generateRoutes(program: TypespecProgram) {

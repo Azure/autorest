@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "Authorization": "EndpointKey {Primary/Secondary Endpoint Key}",
+    "Content-Type": "application/json",
+    "RuntimeEndpoint": "{RuntimeEndpoint}",
+    "kbId": "9d091697-fb8c-4ed5-9ac0-35bf8273bfff",
+    "trainPayload": {
+      "feedbackRecords": [
+        {
+          "qnaId": 4,
+          "userId": "sd53lsY=",
+          "userQuestion": "qna maker with luis"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "204": {}
+  },
+  "operationId": "Runtime_Train",
+  "title": "Successful query"
+}

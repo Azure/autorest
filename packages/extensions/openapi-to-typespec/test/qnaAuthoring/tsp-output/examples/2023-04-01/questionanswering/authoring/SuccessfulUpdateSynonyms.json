@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "Content-Type": "application/json",
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2023-04-01",
+    "body": {
+      "value": [
+        {
+          "alterations": [
+            "qnamaker",
+            "qna maker"
+          ]
+        },
+        {
+          "alterations": [
+            "botframework",
+            "bot framework"
+          ]
+        }
+      ]
+    },
+    "projectName": "proj1"
+  },
+  "responses": {
+    "204": {}
+  },
+  "operationId": "QuestionAnsweringProjects_UpdateSynonyms",
+  "title": "Successful query"
+}

@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2022-05-01",
+    "projectKind": "CustomEntityRecognition"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "modelExpirationDate": "2022-10-28",
+            "trainingConfigVersion": "2022-05-01"
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "TextAnalysisAuthoring_ListTrainingConfigVersions",
+  "title": "Successful Get Supported Training Config Versions"
+}

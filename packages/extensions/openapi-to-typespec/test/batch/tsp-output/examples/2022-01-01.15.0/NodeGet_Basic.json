@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "nodeId": "tvm-1695681911_2-20161122t193202z",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT",
+    "poolId": "poolId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "affinityId": "TVM:tvm-1695681911_2-20161122t193202z",
+        "allocationTime": "2022-08-26T19:32:02.8155319Z",
+        "id": "tvm-1695681911_2-20161122t193202z",
+        "ipAddress": "1.1.1.1",
+        "isDedicated": true,
+        "lastBootTime": "2022-08-26T19:37:28.623369Z",
+        "nodeAgentInfo": {
+          "lastUpdateTime": "2022-08-26T19:37:28.623369Z",
+          "version": "1.2.0.0"
+        },
+        "runningTasksCount": 0,
+        "schedulingState": "enabled",
+        "startTask": {
+          "commandLine": "cmd /c echo hello",
+          "maxTaskRetryCount": 0,
+          "userIdentity": {
+            "autoUser": {
+              "elevationLevel": "nonadmin",
+              "scope": "task"
+            }
+          },
+          "waitForSuccess": false
+        },
+        "startTaskInfo": {
+          "endTime": "2022-08-26T19:37:31.838028Z",
+          "exitCode": 0,
+          "retryCount": 0,
+          "startTime": "2022-08-26T19:37:31.4285526Z",
+          "state": "completed"
+        },
+        "state": "idle",
+        "stateTransitionTime": "2022-08-26T19:37:31.4285526Z",
+        "totalTasksRun": 0,
+        "totalTasksSucceeded": 0,
+        "url": "https://account.region.batch.azure.com/pools/poolId/nodes/tvm-1695681911_2-20161122t193202z",
+        "vmSize": "small"
+      }
+    }
+  },
+  "operationId": "ComputeNode_Get",
+  "title": "Node get"
+}

@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "Content-Type": "application/json",
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2023-04-01",
+    "projectName": "proj1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "deploymentName": "production",
+            "lastDeployedDateTime": "2021-05-01T15:13:22Z"
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "QuestionAnsweringProjects_ListDeployments",
+  "title": "Successful query"
+}

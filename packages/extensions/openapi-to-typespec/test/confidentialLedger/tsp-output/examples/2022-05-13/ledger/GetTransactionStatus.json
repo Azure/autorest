@@ -1,0 +1,17 @@
+{
+  "parameters": {
+    "api-version": "2022-05-13",
+    "ledgerUri": "myledger.confidentialledger.azure.com",
+    "transactionId": "4.2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "state": "Committed",
+        "transactionId": "4.2"
+      }
+    }
+  },
+  "operationId": "GetTransactionStatus",
+  "title": "GetTransactionStatus"
+}

@@ -1,0 +1,46 @@
+{
+  "operationId": "Operations_List",
+  "parameters": {
+    "api-version": "2023-10-01-preview"
+  },
+  "title": "Operations_List",
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "http://nextlink.contoso.com",
+        "value": [
+          {
+            "name": "Microsoft.AzurePlaywrightService/accounts/Write",
+            "display": {
+              "description": "Set PlaywrightAccounts",
+              "operation": "Creates or updates the PlaywrightAccounts",
+              "provider": "Microsoft.AzurePlaywrightService",
+              "resource": "accounts"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.AzurePlaywrightService/accounts/Delete",
+            "display": {
+              "description": "Delete PlaywrightAccounts",
+              "operation": "Deletes the PlaywrightAccounts",
+              "provider": "Microsoft.AzurePlaywrightService",
+              "resource": "accounts"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.AzurePlaywrightService/accounts/Read",
+            "display": {
+              "description": "Read PlaywrightAccounts",
+              "operation": "Reads the PlaywrightAccounts",
+              "provider": "Microsoft.AzurePlaywrightService",
+              "resource": "accounts"
+            },
+            "isDataAction": false
+          }
+        ]
+      }
+    }
+  }
+}

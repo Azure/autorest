@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "api-version": "2022-04-01",
+    "parentResourcePath": "parentResourcePath",
+    "resourceGroupName": "rgname",
+    "resourceName": "resourceName",
+    "resourceProviderNamespace": "rpnamespace",
+    "resourceType": "resourceType",
+    "subscriptionId": "subId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "actions": [],
+            "notActions": []
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "AzurePermissionsForResource_List",
+  "title": "List permissions for resource"
+}

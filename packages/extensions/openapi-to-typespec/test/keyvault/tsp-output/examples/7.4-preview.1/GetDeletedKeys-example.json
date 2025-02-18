@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "$skiptoken": "eyJOZXh0TWFya2VyIjoiMiE5MiFNREF3TURJeklXdGxlUzlNU1ZOVVJFVk1SVlJGUkV0RldWUkZVMVF3SVRBd01EQXlPQ0V5TURFM0xUQTFMVEEwVkRJeU9qRTJPakF5TGpnM09URXpOemxhSVEtLSIsIlRhcmdldExvY2F0aW9uIjowfQ",
+    "api-version": "7.4-preview.1",
+    "maxresults": 1,
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://myvault.vault.azure.net:443/deletedkeys?api-version=7.2&$skiptoken=eyJOZXh0TWFya2VyIjoiMiExMzYhTURBd01EVTJJV3RsZVM5TVNWTlVSRVZNUlZSRlJFdEZXVlJGVTFRd0x6RkRRa0ZGTkVaQk5qQTBNelJGTmtZNE9FUXdORE5GTkRFM09FUkNPVFE1SVRBd01EQXlPQ0V5TURFM0xUQTFMVEEwVkRJeU9qUTNPakU1TGpVeU1UZ3dPVEZhSVEtLSIsIlRhcmdldExvY2F0aW9uIjowfQ&maxresults=1",
+        "value": [
+          {
+            "attributes": {
+              "created": 1493938031,
+              "enabled": true,
+              "recoveryLevel": "Recoverable+Purgeable",
+              "updated": 1493938031
+            },
+            "deletedDate": 1493938031,
+            "kid": "https://myvault.vault.azure.net/keys/listdeletedkeytest0",
+            "recoveryId": "https://myvault.vault.azure.net/deletedkeys/listdeletedkeytest0",
+            "scheduledPurgeDate": 1501714031
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "GetDeletedKeys",
+  "title": "GetDeletedKeys"
+}

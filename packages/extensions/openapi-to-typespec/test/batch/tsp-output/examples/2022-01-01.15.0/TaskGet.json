@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "jobId": "jobId",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT",
+    "taskId": "taskId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "commandLine": "cmd /c hostname",
+        "constraints": {
+          "maxTaskRetryCount": 0,
+          "maxWallClockTime": "P10675199DT2H48M5.4775807S",
+          "retentionTime": "P10675199DT2H48M5.4775807S"
+        },
+        "creationTime": "2022-08-26T06:59:15.1161429Z",
+        "eTag": "0x8D3D62350711C55",
+        "executionInfo": {
+          "requeueCount": 0,
+          "retryCount": 0
+        },
+        "id": "testTask",
+        "lastModified": "2022-08-26T06:59:15.1161429Z",
+        "multiInstanceSettings": {
+          "coordinationCommandLine": "cmd /c echo coordinating",
+          "numberOfInstances": 3
+        },
+        "requiredSlots": 2,
+        "state": "active",
+        "stateTransitionTime": "2022-08-26T06:59:15.1161429Z",
+        "url": "https://account.region.batch.azure.com/jobs/jobId/tasks/taskId",
+        "userIdentity": {
+          "autoUser": {
+            "elevationLevel": "nonadmin",
+            "scope": "task"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Task_Get",
+  "title": "Task get"
+}

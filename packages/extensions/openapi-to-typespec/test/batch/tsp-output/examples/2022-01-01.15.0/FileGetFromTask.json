@@ -1,0 +1,23 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "filePath": "wd\\testFile.txt",
+    "jobId": "jobId",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT",
+    "taskId": "task1"
+  },
+  "responses": {
+    "200": {
+      "Content-Length": "17",
+      "Content-Type": "application/octet-stream",
+      "Last-Modified": "Fri, 26 Aug 2022 00:00:00 GMT",
+      "body": "This is actually a byte stream. This request/response is being presented as a string for readability in the example",
+      "ocp-batch-file-isdirectory": "false",
+      "ocp-creation-time": "Fri, 26 Aug 2022 00:00:00 GMT"
+    }
+  },
+  "operationId": "File_GetFromTask",
+  "title": "Get File From Task"
+}

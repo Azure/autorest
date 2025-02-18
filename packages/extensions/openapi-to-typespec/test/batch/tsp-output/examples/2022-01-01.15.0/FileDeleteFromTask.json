@@ -1,0 +1,17 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "filePath": "wd\\testFile.txt",
+    "jobId": "jobId",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT",
+    "recursive": false,
+    "taskId": "task1"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "File_DeleteFromTask",
+  "title": "File delete from task"
+}

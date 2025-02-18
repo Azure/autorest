@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "Content-Type": "application/json",
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2023-04-01",
+    "projectName": "proj1"
+  },
+  "responses": {
+    "202": {
+      "description": "A successful call results with an Operation-Location header used to check the status of the analysis job.",
+      "headers": {
+        "Operation-Location": "https://<resource-endpoint>/language/authoring/query-knowledgebases/projects/deletion-jobs/job1?api-version=2023-05-01"
+      }
+    }
+  },
+  "operationId": "QuestionAnsweringProjects_DeleteProject",
+  "title": "Successful query"
+}

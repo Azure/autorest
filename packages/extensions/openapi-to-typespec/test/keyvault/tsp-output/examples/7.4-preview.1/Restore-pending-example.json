@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "jobId": "45aacd568ab049a2803861e8dd3ae21f",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "endTime": 0,
+        "jobId": "45aacd568ab049a2803861e8dd3ae21f",
+        "startTime": 1490790000,
+        "status": "InProgress",
+        "statusDetails": "Full restore is in progress"
+      }
+    }
+  },
+  "operationId": "RestoreStatus",
+  "title": "Restore status"
+}

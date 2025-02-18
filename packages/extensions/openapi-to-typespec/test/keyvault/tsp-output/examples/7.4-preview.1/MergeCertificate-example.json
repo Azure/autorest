@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "certificate-name": "testcert",
+    "parameters": {
+      "x5c": [
+        "MIICxTCCAb....trimmed for brevitiy...EPAQj8="
+      ]
+    },
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "attributes": {
+          "created": 1435699919,
+          "enabled": true,
+          "exp": 1530394215,
+          "nbf": 1435699215,
+          "updated": 1435699919
+        },
+        "cer": "……de34534……",
+        "id": "https://myvault.vault.azure.net/certificates/mycert1/f366e1a9dd774288ad84a45a5f620352",
+        "kid": "https:// mykeyvault.vault.azure.net/keys/mycert1/f366e1a9dd774288ad84a45a5f620352",
+        "policy": {
+          "attributes": {
+            "created": 1435699811,
+            "enabled": true,
+            "updated": 1435699811
+          },
+          "id": "https:// mykeyvault.vault.azure.net/certificates/mycert1/policy",
+          "issuer": {
+            "name": "Unknown"
+          },
+          "key_props": {
+            "exportable": false,
+            "key_size": 2048,
+            "kty": "RSA",
+            "reuse_key": false
+          },
+          "lifetime_actions": [
+            {
+              "action": {
+                "action_type": "EmailContacts"
+              },
+              "trigger": {
+                "lifetime_percentage": 80
+              }
+            }
+          ],
+          "secret_props": {
+            "contentType": "application/x-pkcs12"
+          },
+          "x509_props": {
+            "ekus": [
+              "1.3.6.1.5.5.7.3.1",
+              "1.3.6.1.5.5.7.3.2"
+            ],
+            "subject": "CN=Mycert1",
+            "validity_months": 12
+          }
+        },
+        "sid": " mykeyvault.vault.azure.net/secrets/mycert1/f366e1a9dd774288ad84a45a5f620352",
+        "x5t": "n14q2wbvyXr71Pcb58NivuiwJKk"
+      }
+    }
+  },
+  "operationId": "MergeCertificate",
+  "title": "MergeCertificate"
+}

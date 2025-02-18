@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "$expand": "aaaaaaaaaaaaaaaaaaaaaaaa",
+    "$orderby": "aa",
+    "$top": 18,
+    "api-version": "2023-07-01",
+    "location": "aaaaaaaaaaaaaaa",
+    "offer": "aaaaaaaaaaaaaaaa",
+    "publisherName": "aaaaaa",
+    "skus": "aaaaaaaaaaaaaaaaaaaaaaa",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "name": "aaaaaaaa",
+          "extendedLocation": {
+            "name": "aaaaaaaaaaaaaaaaaaaaa",
+            "type": "EdgeZone"
+          },
+          "id": "aaaaaaaaaaa",
+          "location": "aaaaaaaaaaaaaaaaaa",
+          "tags": {
+            "key7868": "aaaaa"
+          }
+        }
+      ]
+    }
+  },
+  "operationId": "VirtualMachineImages_List",
+  "title": "VirtualMachineImage_List_MaximumSet_Gen"
+}

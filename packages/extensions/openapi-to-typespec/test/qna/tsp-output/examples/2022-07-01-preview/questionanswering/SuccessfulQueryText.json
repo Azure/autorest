@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "Content-Type": "application/json",
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2022-07-01-preview",
+    "stringIndexType": "TextElements_v8",
+    "textQueryOptions": {
+      "question": "how long it takes to charge surface?",
+      "records": [
+        {
+          "id": "1",
+          "text": "Power and charging. It takes two to four hours to charge the Surface Pro 4 battery fully from an empty state. It can take longer if you’re using your Surface for power-intensive activities like gaming or video streaming while you’re charging it."
+        },
+        {
+          "id": "2",
+          "text": "You can use the USB port on your Surface Pro 4 power supply to charge other devices, like a phone, while your Surface charges. The USB port on the power supply is only for charging, not for data transfer. If you want to use a USB device, plug it into the USB port on your Surface."
+        }
+      ],
+      "language": "en"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "answers": [
+          {
+            "answer": "Power and charging. It takes two to four hours to charge the Surface Pro 4 battery fully from an empty state. It can take longer if you’re using your Surface for power-intensive activities like gaming or video streaming while you’re charging it.",
+            "answerSpan": {
+              "confidenceScore": 0,
+              "length": 45,
+              "offset": 28,
+              "text": "two to four hours"
+            },
+            "confidenceScore": 0.93,
+            "id": "1",
+            "length": 224,
+            "offset": 0
+          },
+          {
+            "answer": "It takes two to four hours to charge the Surface Pro 4 battery fully from an empty state. It can take longer if you’re using your Surface for power-intensive activities like gaming or video streaming while you’re charging it.",
+            "answerSpan": {
+              "confidenceScore": 0,
+              "length": 25,
+              "offset": 8,
+              "text": "two to four hours"
+            },
+            "confidenceScore": 0.92,
+            "id": "1",
+            "length": 224,
+            "offset": 20
+          },
+          {
+            "answer": "It can take longer if you’re using your Surface for power-intensive activities like gaming or video streaming while you’re charging it.",
+            "answerSpan": null,
+            "confidenceScore": 0.05,
+            "id": "1",
+            "length": 244,
+            "offset": 110
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "QuestionAnswering_GetAnswersFromText",
+  "title": "Successful query"
+}

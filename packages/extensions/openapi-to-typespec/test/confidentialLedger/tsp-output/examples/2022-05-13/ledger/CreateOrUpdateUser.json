@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "api-version": "2022-05-13",
+    "ledgerUri": "myledger.confidentialledger.azure.com",
+    "userDetails": {
+      "assignedRole": "Reader"
+    },
+    "userId": "AAD object id"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "assignedRole": "Reader",
+        "userId": "AAD object id"
+      }
+    }
+  },
+  "operationId": "CreateOrUpdateUser",
+  "title": "CreateOrUpdateUser"
+}

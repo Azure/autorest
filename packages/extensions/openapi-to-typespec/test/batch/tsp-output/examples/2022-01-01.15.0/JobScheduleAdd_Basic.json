@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "jobSchedule": {
+      "id": "jobScheduleId",
+      "jobSpecification": {
+        "poolInfo": {
+          "poolId": "poolId"
+        }
+      },
+      "schedule": {
+        "recurrenceInterval": "PT5M"
+      }
+    },
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT"
+  },
+  "responses": {
+    "201": {}
+  },
+  "operationId": "JobSchedule_Add",
+  "title": "Add a basic JobSchedule"
+}

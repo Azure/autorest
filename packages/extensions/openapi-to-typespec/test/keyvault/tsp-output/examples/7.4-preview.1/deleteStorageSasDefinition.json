@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "sas-definition-name": "deleteStrgSasDef01",
+    "storage-account-name": "deletesas01",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "attributes": {
+          "created": 1490738438,
+          "enabled": true,
+          "recoveryLevel": "Recoverable",
+          "updated": 1490738438
+        },
+        "deletedDate": 1490760000,
+        "id": "https://myvault.vault.azure.net/storage/deletesas01/sas/deleteStrgSasDef01",
+        "recoveryId": "https://myvault.vault.azure.net/deletedstorage/deletesas01/sas/deleteStrgSasDef01",
+        "sasType": "service",
+        "scheduledPurgeDate": 1490790000,
+        "sid": "https://myvault.vault.azure.net/secrets/deletesas01-deleteStrgSasDef01",
+        "templateUri": "se=2018-02-01T00%3A00Z&spr=https&sv=2017-04-17&sr=b&sig=XXFNfuMCHYrBx0bhemJ7PWn0xGfImMXT6LfbXWvtRUk%3D",
+        "validityPeriod": "P15D"
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "DeleteSasDefinition",
+  "title": "Delete Storage Sas Definition"
+}

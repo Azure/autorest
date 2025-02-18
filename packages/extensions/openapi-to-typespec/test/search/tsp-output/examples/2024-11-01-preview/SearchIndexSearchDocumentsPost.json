@@ -1,0 +1,220 @@
+{
+  "operationId": "Documents_SearchPost",
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "indexName": "preview-test",
+    "searchRequest": {
+      "count": true,
+      "facets": [
+        "ownerId"
+      ],
+      "filter": "category eq 'purple' or category eq 'pink'",
+      "highlight": "category",
+      "highlightPostTag": "</em>",
+      "highlightPreTag": "</em>",
+      "hybridSearch": {
+        "countAndFacetMode": "countAllResults",
+        "maxTextRecallSize": 100
+      },
+      "orderby": "id desc",
+      "queryType": "simple",
+      "scoringParameters": [
+        "categoryTag:desiredCategoryValue"
+      ],
+      "scoringProfile": "stringFieldBoost",
+      "scoringStatistics": "global",
+      "search": "purple",
+      "searchFields": "id,name,description,category,ownerId",
+      "searchMode": "any",
+      "select": "id,name,description,category,ownerId",
+      "sessionId": "mysessionid",
+      "skip": 0,
+      "top": 10,
+      "vectorFilterMode": "preFilter",
+      "vectorQueries": [
+        {
+          "fields": "vector22, vector1b",
+          "filterOverride": "ownerId eq 'sam'",
+          "k": 50,
+          "kind": "vector",
+          "oversampling": 20,
+          "threshold": {
+            "kind": "vectorSimilarity",
+            "value": 0.984
+          },
+          "vector": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "SearchIndexSearchDocumentsPost",
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.count": 27,
+        "@search.facets": {
+          "ownerId": [
+            {
+              "count": 16,
+              "value": "sam"
+            },
+            {
+              "count": 8,
+              "value": "ryan"
+            },
+            {
+              "count": 3,
+              "value": "benny"
+            }
+          ]
+        },
+        "value": [
+          {
+            "name": "test",
+            "description": "no vector",
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.score": 1,
+            "category": "purple",
+            "id": "no-vectors",
+            "ownerId": "sam"
+          },
+          {
+            "name": "test",
+            "description": "no vector",
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.score": 1,
+            "category": "purple",
+            "id": "empty-vectors",
+            "ownerId": "sam"
+          },
+          {
+            "name": "test",
+            "description": "test9 hello",
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.score": 1,
+            "category": "purple",
+            "id": "9",
+            "ownerId": "ryan"
+          },
+          {
+            "name": "test",
+            "description": "test8 hello",
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.score": 1,
+            "category": "purple",
+            "id": "8",
+            "ownerId": "sam"
+          },
+          {
+            "name": "test",
+            "description": "test7 hello",
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.score": 1,
+            "category": "purple",
+            "id": "7",
+            "ownerId": "sam"
+          },
+          {
+            "name": "test",
+            "description": "test6 hello",
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.score": 1,
+            "category": "purple",
+            "id": "6",
+            "ownerId": "ryan"
+          },
+          {
+            "name": "test",
+            "description": "test5 hello",
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.score": 1,
+            "category": "purple",
+            "id": "5",
+            "ownerId": "sam"
+          },
+          {
+            "name": "test",
+            "description": "test4 hello",
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.score": 1,
+            "category": "purple",
+            "id": "4",
+            "ownerId": "sam"
+          },
+          {
+            "name": "test",
+            "description": "test3 hello",
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.score": 1,
+            "category": "purple",
+            "id": "3",
+            "ownerId": "ryan"
+          },
+          {
+            "name": "test",
+            "description": "test24 hello",
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.score": 1,
+            "category": "purple",
+            "id": "24",
+            "ownerId": "ryan"
+          }
+        ]
+      }
+    }
+  }
+}

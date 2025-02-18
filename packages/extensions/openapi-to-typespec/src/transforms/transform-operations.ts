@@ -94,14 +94,15 @@ function transformOperation(
 ): (TypespecOperation | TspArmProviderActionOperation)[] {
   const { isArm } = getOptions();
   if (isArm) {
-    if (
-      (operation as OperationWithResourceOperationFlag).isResourceOperation ||
-      transformRoute(operation.requests?.[0].protocol)?.match(/^\/providers\/[^/]+\/operations$/)
-    ) {
+    if ((operation as OperationWithResourceOperationFlag).isResourceOperation || isListOperation(operation)) {
       return [];
     }
   }
   return (operation.requests ?? []).map((r) => transformRequest(r, operation, codeModel, groupName));
+}
+
+export function isListOperation(operation: Operation): boolean {
+  return transformRoute(operation.requests?.[0].protocol)?.match(/^\/providers\/[^/]+\/operations$/);
 }
 
 export function transformRequest(
@@ -200,6 +201,8 @@ export function transformRequest(
           decorators,
           lroHeaders,
           suppressions,
+          examples: operation.extensions?.["x-ms-examples"],
+          operationId: operation.operationId,
         };
       }
     }
@@ -217,6 +220,8 @@ export function transformRequest(
     extensions: [],
     resource,
     decorators,
+    examples: operation.extensions?.["x-ms-examples"],
+    operationId: operation.operationId,
   };
 }
 

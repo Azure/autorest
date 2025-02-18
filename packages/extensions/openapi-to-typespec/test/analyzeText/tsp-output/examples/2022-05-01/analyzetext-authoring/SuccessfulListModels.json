@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2022-05-01",
+    "projectName": "LoanAgreements"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "label": "model1",
+            "lastTrainedDateTime": "2022-04-18T15:47:49Z",
+            "lastTrainingDurationInSeconds": 186,
+            "modelExpirationDate": "2022-10-28",
+            "modelId": "model1-20220418T034749-299f45b8114849538c1a750b21b05a94",
+            "modelTrainingConfigVersion": "2022-05-01"
+          },
+          {
+            "label": "model2",
+            "lastTrainedDateTime": "2022-04-18T17:25:22Z",
+            "lastTrainingDurationInSeconds": 192,
+            "modelExpirationDate": "2022-10-28",
+            "modelId": "model2-20220418T052522-c63bd244dd9e4bf8adec1a7129968c99",
+            "modelTrainingConfigVersion": "2022-05-01"
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "TextAnalysisAuthoring_ListTrainedModels",
+  "title": "Successful List Models"
+}

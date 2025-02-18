@@ -1,0 +1,14 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "jobScheduleId": "jobScheduleId",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT"
+  },
+  "responses": {
+    "202": {}
+  },
+  "operationId": "JobSchedule_Delete",
+  "title": "JobSchedule delete"
+}

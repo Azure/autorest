@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "jobSchedule": {
+      "jobSpecification": {
+        "constraints": {
+          "maxTaskRetryCount": 0,
+          "maxWallClockTime": "P10675199DT2H48M5.4775807S"
+        },
+        "poolInfo": {
+          "poolId": "poolId"
+        },
+        "priority": 0,
+        "usesTaskDependencies": false
+      },
+      "schedule": {
+        "doNotRunUntil": "2025-01-01T12:30:00Z"
+      }
+    },
+    "jobScheduleId": "jobScheduleId",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "JobSchedule_Update",
+  "title": "JobSchedule update"
+}

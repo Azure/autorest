@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "allocationState": "steady",
+            "allocationStateTransitionTime": "2022-08-26T18:27:40.287803Z",
+            "cloudServiceConfiguration": {
+              "osFamily": "4",
+              "osVersion": "*"
+            },
+            "creationTime": "2022-08-26T18:26:39.7108787Z",
+            "currentDedicatedNodes": 3,
+            "currentLowPriorityNodes": 0,
+            "eTag": "0x8D4123BEF87D233",
+            "enableAutoScale": false,
+            "enableInterNodeCommunication": false,
+            "id": "testPool",
+            "lastModified": "2022-08-26T18:26:39.7108787Z",
+            "resizeTimeout": "PT15M",
+            "startTask": {
+              "commandLine": "cmd /c echo hello",
+              "maxTaskRetryCount": 0,
+              "userIdentity": {
+                "autoUser": {
+                  "elevationLevel": "nonadmin",
+                  "scope": "task"
+                }
+              },
+              "waitForSuccess": false
+            },
+            "state": "active",
+            "stateTransitionTime": "2022-08-26T18:26:39.7108787Z",
+            "targetDedicatedNodes": 3,
+            "targetLowPriorityNodes": 0,
+            "taskSchedulingPolicy": {
+              "nodeFillType": "spread"
+            },
+            "taskSlotsPerNode": 1,
+            "url": "https://accountname.region.batch.azure.com/pools/testPool",
+            "vmSize": "small"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Pool_List",
+  "title": "Pool list"
+}

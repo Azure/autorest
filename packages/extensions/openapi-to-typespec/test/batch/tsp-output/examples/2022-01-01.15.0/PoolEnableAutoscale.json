@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT",
+    "parameters": {
+      "autoScaleEvaluationInterval": "PT8M",
+      "autoScaleFormula": "$TargetDedicated=0"
+    },
+    "poolId": "poolId"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "Pool_EnableAutoScale",
+  "title": "Pool enable autoscale"
+}

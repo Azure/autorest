@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://{BaseUri}/storage?api-version=7.2&%24skiptoken=<token>",
+        "value": [
+          {
+            "attributes": {
+              "created": 1490738386,
+              "enabled": true,
+              "recoveryLevel": "Recoverable+Purgeable",
+              "updated": 1490738386
+            },
+            "id": "https://myvault.vault.azure.net/storage/listStorage01",
+            "resourceId": "/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc1",
+            "tags": {
+              "tag1": "val1",
+              "tag2": "val2"
+            }
+          },
+          {
+            "attributes": {
+              "created": 1490738386,
+              "enabled": true,
+              "recoveryLevel": "Recoverable+Purgeable",
+              "updated": 1490738386
+            },
+            "id": "https://myvault.vault.azure.net/storage/listStorage02",
+            "resourceId": "/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc2",
+            "tags": {
+              "tag3": "val3",
+              "tag4": "val4"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "GetStorageAccounts",
+  "title": "List Storage account"
+}

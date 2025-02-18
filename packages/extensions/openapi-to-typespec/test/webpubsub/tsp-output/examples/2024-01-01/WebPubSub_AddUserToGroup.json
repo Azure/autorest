@@ -1,0 +1,13 @@
+{
+  "parameters": {
+    "api-version": "2024-01-01",
+    "group": "group1",
+    "hub": "hub1",
+    "userId": "user1"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "WebPubSub_AddUserToGroup",
+  "title": "WebPubSub_AddUserToGroup"
+}

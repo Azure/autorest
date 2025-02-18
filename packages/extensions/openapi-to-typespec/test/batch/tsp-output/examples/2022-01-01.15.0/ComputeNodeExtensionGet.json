@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "extensionName": "batchNodeExtension",
+    "nodeId": "tvm-1695681911_2-20161122t193202z",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT",
+    "poolId": "poolId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "instanceView": {
+          "name": "batchNodeExtension",
+          "statuses": [
+            {
+              "code": "ProvisioningState/succeeded",
+              "displayStatus": "Provisioning succeeded",
+              "level": "Info",
+              "message": "Enable succeeded: Enabling and starting agent and controller"
+            }
+          ]
+        },
+        "vmExtension": {
+          "name": "batchNodeExtension",
+          "type": "CustomScript",
+          "autoUpgradeMinorVersion": true,
+          "publisher": "Microsoft.Azure.Extensions",
+          "typeHandlerVersion": "2.0"
+        }
+      }
+    }
+  },
+  "operationId": "ComputeNodeExtension_Get",
+  "title": "Get compute node extension"
+}

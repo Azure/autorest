@@ -1,0 +1,16 @@
+{
+  "parameters": {
+    "api-version": "2022-05-13",
+    "ledgerUri": "myledger.confidentialledger.azure.com"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "digest": "cd04f484d93a13df44eab4235c14df37e20907b3216c5a37b9e484a363a76c8e",
+        "script": "<constitution script contents>"
+      }
+    }
+  },
+  "operationId": "GetConstitution",
+  "title": "GetConstitution"
+}

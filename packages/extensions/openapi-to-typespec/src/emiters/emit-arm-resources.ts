@@ -5,6 +5,7 @@ import { TypespecProgram, TspArmResource } from "../interfaces";
 import { formatTypespecFile } from "../utils/format";
 import { getNamespaceStatement } from "../utils/namespace";
 import { Metadata } from "../utils/resource-discovery";
+import { emitExamples } from "./emit-main";
 
 export async function emitArmResources(program: TypespecProgram, metadata: Metadata, basePath: string) {
   // Create a file per resource
@@ -25,16 +26,7 @@ export async function emitArmResources(program: TypespecProgram, metadata: Metad
     session.writeFile({ filename: filePath, content: await formatTypespecFile(content, filePath) });
     // generate examples for each operation
     const examples = generateArmResourceExamples(armResource);
-    for (const [filename, content] of Object.entries(examples)) {
-      if (serviceInformation.versions) {
-        session.writeFile({
-          filename: join(basePath, "examples", serviceInformation.versions[0], filename),
-          content,
-        });
-      } else {
-        session.writeFile({ filename: join(basePath, "examples", "unknown", filename), content });
-      }
-    }
+    emitExamples(examples, serviceInformation.versions, basePath);
   }
 
   const multiPathResources = Object.keys(metadata.Resources).filter((key) => key.endsWith("FixMe"));

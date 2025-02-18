@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "location": "aaaaaaaaaaaa",
+    "offer": "aa",
+    "publisherName": "aaaaaaaaaaa",
+    "skus": "aaaaaaaaa",
+    "subscriptionId": "{subscription-id}",
+    "version": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "aaaaaaaaa",
+        "id": "aaaaaaaaaaa",
+        "location": "aaaaa"
+      }
+    }
+  },
+  "operationId": "VirtualMachineImages_Get",
+  "title": "VirtualMachineImage_Get_MinimumSet_Gen"
+}

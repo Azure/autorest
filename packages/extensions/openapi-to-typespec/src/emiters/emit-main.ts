@@ -1,3 +1,4 @@
+import { join } from "path";
 import { getSession } from "../autorest-session";
 import { generateServiceInformation } from "../generate/generate-service-information";
 import { TypespecProgram } from "../interfaces";
@@ -8,18 +9,25 @@ import { Metadata } from "../utils/resource-discovery";
 const packageInfo = require("../../package.json");
 
 export async function emitMain(
-  filePath: string,
   program: TypespecProgram,
   metadata: Metadata | undefined,
+  basePath: string,
 ): Promise<void> {
   const { isArm } = getOptions();
   const content = `${getHeaders()}\n${
     isArm ? getArmServiceInformation(program, metadata!) : getServiceInformation(program)
   }${
-    isArm && program.containsListOperation ? "\n\ninterface Operations extends Azure.ResourceManager.Operations {}" : ""
+    isArm && program.listOperation !== undefined
+      ? "\n\ninterface Operations extends Azure.ResourceManager.Operations {}"
+      : ""
   }`;
+  const filePath = join(basePath, "main.tsp");
   const session = getSession();
   session.writeFile({ filename: filePath, content: await formatTypespecFile(content, filePath) });
+
+  if (program.listOperation?.examples) {
+    emitExamples(program.listOperation.examples, program.serviceInformation.versions, basePath);
+  }
 }
 
 function getHeaders() {
@@ -93,4 +101,18 @@ function getArmResourceImports(program: TypespecProgram, metadata: Metadata): st
   }
 
   return imports;
+}
+
+export function emitExamples(examples: Record<string, string>, versions: string[] | undefined, basePath: string): void {
+  const session = getSession();
+  for (const [filename, content] of Object.entries(examples)) {
+    if (versions) {
+      session.writeFile({
+        filename: join(basePath, "examples", versions[0], filename), // TODO: how to handle multiple versions?
+        content,
+      });
+    } else {
+      session.writeFile({ filename: join(basePath, "examples", "unknown", filename), content });
+    }
+  }
 }

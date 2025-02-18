@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "commandId": "RunPowerShellScript",
+    "location": "SoutheastAsia",
+    "subscriptionId": "24fb23e3-6ba3-41f0-9b6e-e41131d5d61e"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "description": "Custom multiline PowerShell script should be defined in script property. Optional parameters can be set in parameters property.",
+        "$schema": "http://schema.management.azure.com/schemas/2016-11-17/runcommands.json",
+        "id": "RunPowerShellScript",
+        "label": "Executes a PowerShell script",
+        "osType": "Windows",
+        "parameters": [
+          {
+            "name": "arg1",
+            "type": "string",
+            "defaultValue": "value1"
+          },
+          {
+            "name": "arg2",
+            "type": "string",
+            "defaultValue": "value2"
+          }
+        ],
+        "script": [
+          "param(",
+          "    [string]$arg1,",
+          "    [string]$arg2",
+          ")",
+          "Write-Host This is a sample script with parameters $arg1 $arg2"
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachineRunCommands_Get",
+  "title": "VirtualMachineRunCommandGet"
+}

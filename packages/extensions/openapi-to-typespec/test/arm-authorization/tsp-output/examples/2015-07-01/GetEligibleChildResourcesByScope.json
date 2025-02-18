@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "$filter": "resourceType+eq+'resourcegroup'",
+    "api-version": "2020-10-01",
+    "scope": "providers/Microsoft.Subscription/subscriptions/dfa2a084-766f-4003-8ae1-c4aeb893a99f"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "RG-1",
+            "type": "resourcegroup",
+            "id": "/subscriptions/dfa2a084-766f-4003-8ae1-c4aeb893a99f/resourceGroups/RG-1"
+          },
+          {
+            "name": "RG-2",
+            "type": "resourcegroup",
+            "id": "/subscriptions/dfa2a084-766f-4003-8ae1-c4aeb893a99f/resourceGroups/RG-2"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "EligibleChildResources_Get",
+  "title": "GetEligibleChildResourcesByScope"
+}

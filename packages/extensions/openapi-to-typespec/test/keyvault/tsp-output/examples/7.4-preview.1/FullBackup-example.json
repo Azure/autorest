@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "azureStorageBlobContainerUri": {
+      "storageResourceUri": "https://myaccount.blob.core.windows.net/sascontainer/sasContainer",
+      "token": "se=2018-02-01T00%3A00Z&spr=https&sv=2017-04-17&sr=b&sig=XXFNfuMCHYrBx0bhemJ7PWn0xGfImMXT6LfbXWvtRUk%3D"
+    },
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "azureStorageBlobContainerUri": "https://myaccount.blob.core.windows.net/sascontainer/fullbackup-pool-61e8dd3ae21f-1579243113",
+        "endTime": 0,
+        "jobId": "45aacd568ab049a2803861e8dd3ae21f",
+        "startTime": 1490790000,
+        "status": "InProgress",
+        "statusDetails": "Full backup is in progress"
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://myvault.vault.azure.net/backup/45aacd568ab049a2803861e8dd3ae21f/pending",
+        "Retry-After": 5
+      }
+    }
+  },
+  "operationId": "FullBackup",
+  "title": "Create full backup"
+}

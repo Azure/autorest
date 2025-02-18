@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2022-05-01",
+    "jobId": "8ccf2ffe-e758-4d04-a44a-31512918c7e8_637858368000000000",
+    "projectName": "LoanAgreements"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "operation-location": "{Endpoint}/language/authoring/analyze-text/projects/LoanAgreements/train/jobs/4d37982f-fded-4c2c-afe3-15953b5919b6_637858368000000000?api-version=2022-05-01"
+      }
+    }
+  },
+  "operationId": "TextAnalysisAuthoring_CancelTrainingJob",
+  "title": "Successful Cancel Training Job"
+}

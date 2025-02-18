@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "api-version": "2024-01-01",
+    "groupsToRemove": {
+      "filter": "startswith(userId, 'listener-')",
+      "groups": [
+        "group1",
+        "group2"
+      ]
+    },
+    "hub": "hub1"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "WebPubSub_RemoveConnectionsFromGroups",
+  "title": "WebPubSub_RemoveConnectionsFromGroups"
+}

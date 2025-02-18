@@ -1,0 +1,115 @@
+{
+  "operationId": "Indexers_CreateOrUpdate",
+  "parameters": {
+    "If-Match": null,
+    "If-None-Match": null,
+    "Prefer": "return=representation",
+    "api-version": "2024-11-01-preview",
+    "disableCacheReprocessingChangeDetection": null,
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "ignoreResetRequirements": null,
+    "indexer": {
+      "name": "myindexer",
+      "description": "Description of the indexer",
+      "dataSourceName": "mydocdbdatasource",
+      "disabled": false,
+      "encryptionKey": {
+        "accessCredentials": {
+          "applicationId": "00000000-0000-0000-0000-000000000000",
+          "applicationSecret": "<applicationSecret>"
+        },
+        "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+        "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+        "keyVaultUri": "https://myKeyVault.vault.azure.net"
+      },
+      "fieldMappings": [],
+      "outputFieldMappings": [],
+      "parameters": {
+        "configuration": {
+          "markdownParsingSubmode": "oneToOne",
+          "parsingMode": "markdown"
+        },
+        "maxFailedItems": 10,
+        "maxFailedItemsPerBatch": 5
+      },
+      "schedule": {
+        "interval": "P1D"
+      },
+      "skillsetName": "myskillset",
+      "targetIndexName": "preview-test"
+    },
+    "indexerName": "myindexer",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "SearchServiceCreateOrUpdateIndexer",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myindexer",
+        "description": "Description of the indexer",
+        "@odata.etag": "0x1234568AE7E58A1",
+        "dataSourceName": "mydocdbdatasource",
+        "disabled": false,
+        "encryptionKey": {
+          "accessCredentials": {
+            "applicationId": "00000000-0000-0000-0000-000000000000",
+            "applicationSecret": "<applicationSecret>"
+          },
+          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+          "keyVaultUri": "https://myKeyVault.vault.azure.net"
+        },
+        "fieldMappings": [],
+        "outputFieldMappings": [],
+        "parameters": {
+          "configuration": {
+            "markdownParsingSubmode": "oneToOne",
+            "parsingMode": "markdown"
+          },
+          "maxFailedItems": 10,
+          "maxFailedItemsPerBatch": 5
+        },
+        "schedule": {
+          "interval": "P1D",
+          "startTime": "2024-06-06T00:01:50.265Z"
+        },
+        "skillsetName": "myskillset",
+        "targetIndexName": "preview-test"
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myindexer",
+        "description": "Description of the indexer",
+        "@odata.etag": "0x1234568AE7E58A1",
+        "dataSourceName": "mydocdbdatasource",
+        "disabled": false,
+        "encryptionKey": {
+          "accessCredentials": {
+            "applicationId": "00000000-0000-0000-0000-000000000000",
+            "applicationSecret": "<applicationSecret>"
+          },
+          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+          "keyVaultUri": "https://myKeyVault.vault.azure.net"
+        },
+        "fieldMappings": [],
+        "outputFieldMappings": [],
+        "parameters": {
+          "configuration": {
+            "markdownParsingSubmode": "oneToOne",
+            "parsingMode": "markdown"
+          },
+          "maxFailedItems": 10,
+          "maxFailedItemsPerBatch": 5
+        },
+        "schedule": {
+          "interval": "P1D",
+          "startTime": "2024-06-06T00:01:50.265Z"
+        },
+        "skillsetName": "myskillset",
+        "targetIndexName": "preview-test"
+      }
+    }
+  }
+}

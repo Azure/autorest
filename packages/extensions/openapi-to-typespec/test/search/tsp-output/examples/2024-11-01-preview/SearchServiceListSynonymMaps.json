@@ -1,0 +1,33 @@
+{
+  "operationId": "SynonymMaps_List",
+  "parameters": {
+    "$select": null,
+    "api-version": "2024-11-01-preview",
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "SearchServiceListSynonymMaps",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "mysynonymmap",
+            "format": "solr",
+            "@odata.etag": "0x1234568AE7E58A1",
+            "encryptionKey": {
+              "accessCredentials": {
+                "applicationId": "00000000-0000-0000-0000-000000000000",
+                "applicationSecret": "<applicationSecret>"
+              },
+              "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+              "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+              "keyVaultUri": "https://myKeyVault.vault.azure.net"
+            },
+            "synonyms": "United States, United States of America, USA\nWashington, Wash. => WA"
+          }
+        ]
+      }
+    }
+  }
+}

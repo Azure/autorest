@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "api-version": "2022-05-13",
+    "entry": {
+      "contents": "New ledger entry contents."
+    },
+    "ledgerUri": "myledger.confidentialledger.azure.com"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "collectionId": "DEFAULT_SUBLEDGER"
+      },
+      "headers": {
+        "x-ms-ccf-transaction-id": "19.2"
+      }
+    }
+  },
+  "operationId": "CreateLedgerEntry",
+  "title": "CreateLedgerEntry"
+}

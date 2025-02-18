@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "parameters": {
+      "value": "true"
+    },
+    "setting-name": "AllowKeyManagementOperationsThroughARM",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "AllowKeyManagementOperationsThroughARM",
+        "type": "boolean",
+        "value": "true"
+      }
+    }
+  },
+  "operationId": "GetSettingValue",
+  "title": "GetSetting"
+}

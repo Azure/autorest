@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "contacts": [
+          {
+            "name": "John Doe",
+            "email": "admin@contoso.com",
+            "phone": "1111111111"
+          },
+          {
+            "name": "Johnathan Doeman",
+            "email": "admin@contoso2.com",
+            "phone": "2222222222"
+          }
+        ],
+        "id": "https://myvault.vault.azure.net/certificates/contacts"
+      }
+    }
+  },
+  "operationId": "GetCertificateContacts",
+  "title": "GetCertificateContacts"
+}

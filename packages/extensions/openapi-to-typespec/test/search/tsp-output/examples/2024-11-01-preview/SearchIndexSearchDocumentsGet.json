@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "$count": true,
+    "$filter": "rating gt 10",
+    "$orderby": [
+      "search.score() desc",
+      "rating desc"
+    ],
+    "$select": [
+      "docId",
+      "title",
+      "description"
+    ],
+    "$skip": 100,
+    "$top": 10,
+    "api-version": "2024-11-01-preview",
+    "endpoint": "https://myservice.search.windows.net",
+    "facet": [
+      "category,count:10,sort:count"
+    ],
+    "highlight": [
+      "title"
+    ],
+    "highlightPostTag": "</em>",
+    "highlightPreTag": "<em>",
+    "indexName": "myindex",
+    "minimumCoverage": 80,
+    "queryType": "simple",
+    "scoringParameters": [
+      "currentLocation--122.123,44.77233"
+    ],
+    "scoringProfile": "sp",
+    "scoringStatistics": "global",
+    "search": "nice hotels",
+    "searchFields": [
+      "title",
+      "description"
+    ],
+    "searchMode": "any",
+    "sessionId": "mysessionid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.count": 25,
+        "@search.coverage": 80,
+        "@search.facets": {
+          "category": [
+            {
+              "count": 1,
+              "value": "Economy"
+            },
+            {
+              "count": 1,
+              "value": "Luxury"
+            }
+          ]
+        },
+        "value": [
+          {
+            "description": "Cheapest hotel in town",
+            "@search.highlights": {
+              "title": [
+                "<em>Nice</em> <em>Hotel</em>"
+              ]
+            },
+            "@search.score": 1.5,
+            "docId": "1",
+            "title": "Nice Hotel"
+          },
+          {
+            "description": "Best hotel in town",
+            "@search.highlights": {
+              "title": [
+                "Fancy <em>Hotel</em>"
+              ]
+            },
+            "@search.score": 0.7,
+            "docId": "2",
+            "title": "Fancy Hotel"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Documents_SearchGet",
+  "title": "SearchIndexSearchDocumentsGet"
+}

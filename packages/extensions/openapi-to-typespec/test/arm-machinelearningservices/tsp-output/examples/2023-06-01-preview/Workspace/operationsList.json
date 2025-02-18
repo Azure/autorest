@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Microsoft.MachineLearningServices/workspaces/write",
+            "display": {
+              "operation": "Create/Update Machine Learning workspaces",
+              "provider": "Microsoft MachineLearningServices",
+              "resource": "workspaces"
+            }
+          },
+          {
+            "name": "Microsoft.MachineLearningServices/workspaces/delete",
+            "display": {
+              "operation": "Delete Machine Learning workspaces",
+              "provider": "Microsoft MachineLearningServices",
+              "resource": "workspaces"
+            }
+          },
+          {
+            "name": "Microsoft.MachineLearningServices/workspaces/listkeys/action",
+            "display": {
+              "operation": "List workspace Keys",
+              "provider": "Microsoft MachineLearningServices",
+              "resource": "workspaces"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Operations_List",
+  "title": "OperationsList"
+}

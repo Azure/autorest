@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2022-05-01",
+    "body": {
+      "evaluationOptions": {
+        "kind": "percentage",
+        "testingSplitPercentage": 20,
+        "trainingSplitPercentage": 80
+      },
+      "modelLabel": "model1",
+      "trainingConfigVersion": "latest"
+    },
+    "projectName": "LoanAgreements"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "operation-location": "{Endpoint}/language/authoring/analyze-text/projects/LoanAgreements/train/jobs/4d37982f-fded-4c2c-afe3-15953b5919b6_637858368000000000?api-version=2022-05-01"
+      }
+    }
+  },
+  "operationId": "TextAnalysisAuthoring_Train",
+  "title": "Successful Train Project"
+}

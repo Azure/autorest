@@ -337,6 +337,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -375,6 +380,14 @@
             "schema": {
               "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CheckNameAvailability_CheckNameAvailability_AlreadyExists": {
+            "$ref": "./examples/CheckNameAvailability_CheckNameAvailability_AlreadyExists.json"
+          },
+          "CheckNameAvailability_CheckNameAvailability_Available": {
+            "$ref": "./examples/CheckNameAvailability_CheckNameAvailability_Available.json"
           }
         }
       }
@@ -474,6 +487,11 @@
             "schema": {
               "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "OperationResults_Get": {
+            "$ref": "./examples/OperationResults_Get.json"
           }
         }
       }

@@ -1,0 +1,226 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Developer",
+            "capacity": {
+              "default": 1,
+              "maximum": 1,
+              "minimum": 1,
+              "scaleType": "None"
+            },
+            "locationInfo": [
+              {
+                "location": "centralindia",
+                "zoneDetails": [],
+                "zones": []
+              }
+            ],
+            "locations": [
+              "centralindia"
+            ],
+            "resourceType": "service",
+            "restrictions": []
+          },
+          {
+            "name": "Standard",
+            "capacity": {
+              "default": 1,
+              "maximum": 4,
+              "minimum": 1,
+              "scaleType": "Automatic"
+            },
+            "locationInfo": [
+              {
+                "location": "centralindia",
+                "zoneDetails": [],
+                "zones": []
+              }
+            ],
+            "locations": [
+              "centralindia"
+            ],
+            "resourceType": "service",
+            "restrictions": []
+          },
+          {
+            "name": "Premium",
+            "capacity": {
+              "default": 1,
+              "maximum": 10,
+              "minimum": 1,
+              "scaleType": "Automatic"
+            },
+            "locationInfo": [
+              {
+                "location": "centralindia",
+                "zoneDetails": [],
+                "zones": []
+              }
+            ],
+            "locations": [
+              "centralindia"
+            ],
+            "resourceType": "service",
+            "restrictions": []
+          },
+          {
+            "name": "Basic",
+            "capacity": {
+              "default": 1,
+              "maximum": 2,
+              "minimum": 1,
+              "scaleType": "Manual"
+            },
+            "locationInfo": [
+              {
+                "location": "centralindia",
+                "zoneDetails": [],
+                "zones": []
+              }
+            ],
+            "locations": [
+              "centralindia"
+            ],
+            "resourceType": "service",
+            "restrictions": []
+          },
+          {
+            "name": "Consumption",
+            "capacity": {
+              "default": 0,
+              "maximum": 0,
+              "minimum": 0,
+              "scaleType": "None"
+            },
+            "locationInfo": [
+              {
+                "location": "centralindia",
+                "zoneDetails": [],
+                "zones": []
+              }
+            ],
+            "locations": [
+              "centralindia"
+            ],
+            "resourceType": "service",
+            "restrictions": []
+          },
+          {
+            "name": "Developer",
+            "capacity": {
+              "default": 1,
+              "maximum": 1,
+              "minimum": 1,
+              "scaleType": "None"
+            },
+            "locationInfo": [
+              {
+                "location": "uaenorth",
+                "zoneDetails": [],
+                "zones": []
+              }
+            ],
+            "locations": [
+              "uaenorth"
+            ],
+            "resourceType": "service",
+            "restrictions": []
+          },
+          {
+            "name": "Standard",
+            "capacity": {
+              "default": 1,
+              "maximum": 4,
+              "minimum": 1,
+              "scaleType": "Automatic"
+            },
+            "locationInfo": [
+              {
+                "location": "uaenorth",
+                "zoneDetails": [],
+                "zones": []
+              }
+            ],
+            "locations": [
+              "uaenorth"
+            ],
+            "resourceType": "service",
+            "restrictions": []
+          },
+          {
+            "name": "Premium",
+            "capacity": {
+              "default": 1,
+              "maximum": 10,
+              "minimum": 1,
+              "scaleType": "Automatic"
+            },
+            "locationInfo": [
+              {
+                "location": "uaenorth",
+                "zoneDetails": [],
+                "zones": []
+              }
+            ],
+            "locations": [
+              "uaenorth"
+            ],
+            "resourceType": "service",
+            "restrictions": []
+          },
+          {
+            "name": "Basic",
+            "capacity": {
+              "default": 1,
+              "maximum": 2,
+              "minimum": 1,
+              "scaleType": "Manual"
+            },
+            "locationInfo": [
+              {
+                "location": "uaenorth",
+                "zoneDetails": [],
+                "zones": []
+              }
+            ],
+            "locations": [
+              "uaenorth"
+            ],
+            "resourceType": "service",
+            "restrictions": []
+          },
+          {
+            "name": "Developer",
+            "capacity": {
+              "default": 1,
+              "maximum": 1,
+              "minimum": 1,
+              "scaleType": "None"
+            },
+            "locationInfo": [
+              {
+                "location": "australiacentral",
+                "zoneDetails": [],
+                "zones": []
+              }
+            ],
+            "locations": [
+              "australiacentral"
+            ],
+            "resourceType": "service",
+            "restrictions": []
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ApiManagementSkus_List",
+  "title": "Lists all available Resource SKUs"
+}

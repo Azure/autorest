@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2022-05-01",
+    "jobId": "129d3182-625d-496c-bcf9-43686e85160b_637858368000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "createdDateTime": "2022-04-18T14:02:34Z",
+        "expirationDateTime": "2022-04-25T14:02:34Z",
+        "jobId": "129d3182-625d-496c-bcf9-43686e85160b_637858368000000000",
+        "lastUpdatedDateTime": "2022-04-18T14:02:34Z",
+        "status": "succeeded"
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "TextAnalysisAuthoring_GetProjectDeletionStatus",
+  "title": "Successful Get Project Deletion Status"
+}

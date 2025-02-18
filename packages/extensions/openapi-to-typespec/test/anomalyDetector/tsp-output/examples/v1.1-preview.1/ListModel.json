@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "ApiVersion": "1.1",
+    "Content-Type": "application/json",
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "body": {}
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "currentCount": 1,
+        "maxCount": 20,
+        "models": [
+          {
+            "createdTime": "2020-06-30T00:00:00Z",
+            "displayName": "DevOps-MultiAD",
+            "lastUpdatedTime": "2020-06-30T00:00:00Z",
+            "modelId": "45aad126-aafd-11ea-b8fb-d89ef3400c5f",
+            "status": "READY",
+            "variablesCount": 18
+          }
+        ],
+        "nextLink": ""
+      }
+    },
+    "default": {
+      "body": {
+        "code": "Error Code",
+        "message": "Error Message"
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "x-ms-error-code": "Error Code"
+      }
+    }
+  },
+  "operationId": "ListMultivariateModel",
+  "title": "List Multivariate model"
+}

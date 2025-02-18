@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "Content-Type": "application/json",
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2022-05-01",
+    "body": {
+      "firstDeploymentName": "production",
+      "secondDeploymentName": "staging"
+    },
+    "projectName": "LoanAgreements"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "operation-location": "{Endpoint}/language/authoring/analyze-text/projects/LoanAgreements/deployments/swap/jobs/c36a8775-35b9-4cb5-a8db-665e7d91aafe_637858368000000000?api-version=2022-05-01"
+      }
+    }
+  },
+  "operationId": "TextAnalysisAuthoring_SwapDeployments",
+  "title": "Successful Swap Deployments"
+}

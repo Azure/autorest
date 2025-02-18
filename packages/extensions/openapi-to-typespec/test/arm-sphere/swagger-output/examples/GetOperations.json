@@ -1,0 +1,35 @@
+{
+  "operationId": "Operations_List",
+  "parameters": {
+    "api-version": "2022-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Operations_List",
+  "responses": {
+    "200": {
+      "description": "ARM operation completed successfully.",
+      "body": {
+        "value": [
+          {
+            "name": "Microsoft.AzureSphere/catalogs/Read",
+            "display": {
+              "description": "Read Azure Sphere catalogs",
+              "operation": "Gets/List catalog",
+              "provider": "Microsoft.AzureSphere",
+              "resource": "catalog"
+            }
+          },
+          {
+            "name": "Microsoft.AzureSphere/catalogs/Write",
+            "display": {
+              "description": "Writes Azure Sphere catalogs",
+              "operation": "Create/Update catalog",
+              "provider": "Microsoft.AzureSphere",
+              "resource": "catalog"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

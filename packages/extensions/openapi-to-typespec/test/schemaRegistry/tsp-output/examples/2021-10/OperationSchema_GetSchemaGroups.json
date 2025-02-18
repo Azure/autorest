@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "api-version": "2021-10",
+    "endpoint": "mynamespace.servicebus.windows.net"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "schemaGroups": [
+          "group1",
+          "group2",
+          "group3"
+        ]
+      }
+    }
+  },
+  "operationId": "SchemaGroups_List",
+  "title": "Get schema by ID"
+}

@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "Content-Type": "application/json",
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2023-04-01",
+    "deploymentName": "production",
+    "jobId": "job1",
+    "projectName": "proj1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "createdDateTime": "2021-05-01T17:21:14Z",
+        "errors": [],
+        "expirationDateTime": "2021-05-01T17:21:14Z",
+        "jobId": "635c2741-15c4-4c2c-9f78-bfd30b6b2a4a",
+        "lastUpdatedDateTime": "2021-05-01T17:21:14Z",
+        "status": "succeeded"
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "QuestionAnsweringProjects_GetDeployStatus",
+  "title": "Successful query"
+}

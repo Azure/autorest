@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "storage-account-name": "listsas01",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://{BaseUri}/storage/listsas01/sas?api-version=7.2&%24skiptoken=<token>",
+        "value": [
+          {
+            "attributes": {
+              "created": 1490738438,
+              "enabled": true,
+              "recoveryLevel": "Recoverable",
+              "updated": 1490738438
+            },
+            "id": "https://myvault.vault.azure.net/storage/listsas01/sas/listStrgSasDef01",
+            "sid": "https://myvault.vault.azure.net/secrets/listsas01-listStrgSasDef01"
+          },
+          {
+            "attributes": {
+              "created": 1490738438,
+              "enabled": true,
+              "recoveryLevel": "Recoverable",
+              "updated": 1490738438
+            },
+            "id": "https://myvault.vault.azure.net/storage/listsas01/sas/listStrgSasDef02",
+            "sid": "https://myvault.vault.azure.net/secrets/listsas01-listStrgSasDef02"
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "GetSasDefinitions",
+  "title": "List Storage Sas Definition"
+}

@@ -1,0 +1,16 @@
+{
+  "operationId": "Skillsets_Delete",
+  "parameters": {
+    "If-Match": null,
+    "If-None-Match": null,
+    "api-version": "2024-11-01-preview",
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "skillsetName": "tempskillset",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "SearchServiceDeleteSkillset",
+  "responses": {
+    "204": {},
+    "404": {}
+  }
+}

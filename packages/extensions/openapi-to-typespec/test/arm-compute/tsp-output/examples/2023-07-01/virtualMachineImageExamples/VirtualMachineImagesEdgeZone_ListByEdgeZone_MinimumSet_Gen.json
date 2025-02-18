@@ -1,0 +1,17 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "edgeZone": "microsoftlosangeles1",
+    "location": "WestUS",
+    "subscriptionId": "5ece5940-d962-4dad-a98f-ca9ac0f021a5"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": []
+      }
+    }
+  },
+  "operationId": "VirtualMachineImages_ListByEdgeZone",
+  "title": "VirtualMachineImagesEdgeZone_ListByEdgeZone_MinimumSet_Gen"
+}

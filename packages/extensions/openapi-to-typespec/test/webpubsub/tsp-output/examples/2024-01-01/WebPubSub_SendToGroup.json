@@ -1,0 +1,15 @@
+{
+  "parameters": {
+    "api-version": "2024-01-01",
+    "filter": "startswith(userId, 'listener-')",
+    "group": "group1",
+    "hub": "hub1",
+    "message": "Message to send",
+    "messageTtlSeconds": 15
+  },
+  "responses": {
+    "202": {}
+  },
+  "operationId": "WebPubSub_SendToGroup",
+  "title": "WebPubSub_SendToGroup"
+}

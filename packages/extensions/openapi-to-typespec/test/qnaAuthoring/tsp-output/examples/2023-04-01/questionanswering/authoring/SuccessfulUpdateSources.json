@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "Content-Type": "application/json",
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2023-04-01",
+    "body": [
+      {
+        "op": "add",
+        "value": {
+          "displayName": "source3",
+          "source": "https://docs.microsoft.com/en-us/azure/cognitive-services/cognitive-services-support-options?context=/azure/cognitive-services/qnamaker/context/context",
+          "sourceKind": "url",
+          "sourceUri": "https://docs.microsoft.com/en-us/azure/cognitive-services/cognitive-services-support-options?context=/azure/cognitive-services/qnamaker/context/context"
+        }
+      },
+      {
+        "op": "replace",
+        "value": {
+          "displayName": "source1",
+          "refresh": true,
+          "source": "https://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/overview/overview",
+          "sourceKind": "url",
+          "sourceUri": "https://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/overview/overview"
+        }
+      },
+      {
+        "op": "delete",
+        "value": {
+          "displayName": "source2",
+          "source": "surface-guide.pdf",
+          "sourceKind": "file",
+          "sourceUri": "https://download.microsoft.com/download/2/9/B/29B20383-302C-4517-A006-B0186F04BE28/surface-pro-4-user-guide-EN.pdf"
+        }
+      }
+    ],
+    "projectName": "proj1"
+  },
+  "responses": {
+    "202": {
+      "description": "A successful call results with an Operation-Location header used to check the status of the analysis job.",
+      "headers": {
+        "Operation-Location": "https://<resource-endpoint>/language/authoring/query-knowledgebases/projects/proj1/sources/jobs/job1?api-version=2023-04-01"
+      }
+    }
+  },
+  "operationId": "QuestionAnsweringProjects_UpdateSources",
+  "title": "Successful query"
+}

@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2022-05-01",
+    "jobId": "c95efa2a-44e8-461e-8aa5-04b4677bfa84_637858368000000000",
+    "projectName": "LoanAgreements"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "createdDateTime": "2022-04-18T15:23:07Z",
+        "expirationDateTime": "2022-04-25T15:23:07Z",
+        "jobId": "c4946bfa-4fbf-493b-bfcf-2d232eb9de69_637858368000000000",
+        "lastUpdatedDateTime": "2022-04-18T15:23:08Z",
+        "resultUrl": "{Endpoint}/language/authoring/analyze-text/projects/LoanAgreements/export/jobs/c4946bfa-4fbf-493b-bfcf-2d232eb9de69_637858368000000000/result?api-version=2022-05-01",
+        "status": "succeeded"
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "TextAnalysisAuthoring_GetExportStatus",
+  "title": "Successful Get Export Status"
+}

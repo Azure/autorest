@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "api-version": "2022-09-01",
+    "location": "eastus2(stage)",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": {
+              "localizedValue": "Storage Accounts",
+              "value": "StorageAccounts"
+            },
+            "currentValue": 55,
+            "limit": 250,
+            "unit": "Count"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Usages_ListByLocation",
+  "title": "UsageList"
+}

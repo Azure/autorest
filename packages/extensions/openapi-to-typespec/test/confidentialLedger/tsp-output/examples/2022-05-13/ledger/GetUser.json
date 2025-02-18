@@ -1,0 +1,17 @@
+{
+  "parameters": {
+    "api-version": "2022-05-13",
+    "ledgerUri": "myledger.confidentialledger.azure.com",
+    "userId": "AAD object id"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "assignedRole": "Administrator",
+        "userId": "AAD object id"
+      }
+    }
+  },
+  "operationId": "GetUser",
+  "title": "GetUser"
+}

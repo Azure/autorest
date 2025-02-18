@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "parameters": {
+      "count": 4
+    },
+    "vaultBaseUrl": "https://myhsm.managedhsm.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": "MTIzNA"
+      }
+    }
+  },
+  "operationId": "GetRandomBytes",
+  "title": "GetRandomBytes"
+}

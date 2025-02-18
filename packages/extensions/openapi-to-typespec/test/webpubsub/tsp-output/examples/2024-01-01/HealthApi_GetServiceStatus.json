@@ -1,0 +1,10 @@
+{
+  "parameters": {
+    "api-version": "2024-01-01"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "HealthApi_GetServiceStatus",
+  "title": "HealthApi_GetServiceStatus"
+}

@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "jobId": "jobId",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "allowTaskPreemption": false,
+        "constraints": {
+          "maxTaskRetryCount": 0,
+          "maxWallClockTime": "P10675199DT2H48M5.4775807S"
+        },
+        "creationTime": "2022-08-26T00:05:25.311915Z",
+        "eTag": "0x8D4100FC49F0278",
+        "executionInfo": {
+          "endTime": "2022-08-26T00:05:27.578581Z",
+          "poolId": "poolId",
+          "startTime": "2022-08-26T00:05:25.3309105Z",
+          "terminateReason": "UserTerminate"
+        },
+        "id": "jobId",
+        "lastModified": "2022-08-26T00:05:27.5391608Z",
+        "maxParallelTasks": -1,
+        "onAllTasksComplete": "noaction",
+        "onTaskFailure": "noaction",
+        "poolInfo": {
+          "poolId": "poolId"
+        },
+        "previousState": "active",
+        "previousStateTransitionTime": "2022-08-26T00:05:27.2137716Z",
+        "priority": 0,
+        "state": "completed",
+        "stateTransitionTime": "2022-08-26T00:05:27.578581Z",
+        "url": "https://account.region.batch.azure.com/jobs/jobId",
+        "usesTaskDependencies": false
+      }
+    }
+  },
+  "operationId": "Job_Get",
+  "title": "Job get"
+}

@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "nodeId": "tvm-1695681911_1-20161122t193202z",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT",
+    "parameters": {
+      "nodeReimageOption": "terminate"
+    },
+    "poolId": "poolId"
+  },
+  "responses": {
+    "202": {}
+  },
+  "operationId": "ComputeNode_Reimage",
+  "title": "Node reimage"
+}

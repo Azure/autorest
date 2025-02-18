@@ -1,0 +1,74 @@
+{
+  "operationId": "Indexers_Create",
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "indexer": {
+      "name": "myindexer",
+      "description": "Description of the indexer",
+      "dataSourceName": "mydocdbdatasource",
+      "disabled": false,
+      "encryptionKey": {
+        "accessCredentials": {
+          "applicationId": "00000000-0000-0000-0000-000000000000",
+          "applicationSecret": "<applicationSecret>"
+        },
+        "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+        "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+        "keyVaultUri": "https://myKeyVault.vault.azure.net"
+      },
+      "fieldMappings": [],
+      "outputFieldMappings": [],
+      "parameters": {
+        "configuration": {
+          "markdownParsingSubmode": "oneToMany",
+          "parsingMode": "markdown"
+        },
+        "maxFailedItems": 10,
+        "maxFailedItemsPerBatch": 5
+      },
+      "schedule": {
+        "interval": "P1D"
+      },
+      "skillsetName": "myskillset",
+      "targetIndexName": "preview-test"
+    },
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "SearchServiceCreateIndexer",
+  "responses": {
+    "201": {
+      "body": {
+        "name": "myindexer",
+        "description": "Description of the indexer",
+        "dataSourceName": "mydocdbdatasource",
+        "disabled": false,
+        "encryptionKey": {
+          "accessCredentials": {
+            "applicationId": "00000000-0000-0000-0000-000000000000",
+            "applicationSecret": "<applicationSecret>"
+          },
+          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+          "keyVaultUri": "https://myKeyVault.vault.azure.net"
+        },
+        "fieldMappings": [],
+        "outputFieldMappings": [],
+        "parameters": {
+          "configuration": {
+            "markdownParsingSubmode": "oneToMany",
+            "parsingMode": "markdown"
+          },
+          "maxFailedItems": 10,
+          "maxFailedItemsPerBatch": 5
+        },
+        "schedule": {
+          "interval": "P1D",
+          "startTime": "2024-06-06T00:01:50.265Z"
+        },
+        "skillsetName": "myskillset",
+        "targetIndexName": "preview-test"
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "operationId": "Indexes_Analyze",
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "indexName": "preview-test",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "request": {
+      "analyzer": "ar.lucene",
+      "text": "Text to analyze"
+    }
+  },
+  "title": "SearchServiceIndexAnalyze",
+  "responses": {
+    "200": {
+      "body": {
+        "tokens": [
+          {
+            "endOffset": 4,
+            "position": 0,
+            "startOffset": 0,
+            "token": "text"
+          },
+          {
+            "endOffset": 7,
+            "position": 1,
+            "startOffset": 5,
+            "token": "to"
+          },
+          {
+            "endOffset": 15,
+            "position": 2,
+            "startOffset": 8,
+            "token": "analyze"
+          }
+        ]
+      }
+    }
+  }
+}

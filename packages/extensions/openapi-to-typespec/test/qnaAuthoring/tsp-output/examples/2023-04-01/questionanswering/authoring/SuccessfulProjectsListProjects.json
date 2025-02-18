@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "Content-Type": "application/json",
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2023-04-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "description": "proj1 is a test project.",
+            "createdDateTime": "2021-05-01T15:13:22Z",
+            "lastDeployedDateTime": "2021-05-01T15:13:22Z",
+            "lastModifiedDateTime": "2021-05-01T15:13:22Z",
+            "multilingualResource": true,
+            "projectName": "proj1",
+            "language": "en"
+          },
+          {
+            "description": "proj2 is a test project.",
+            "createdDateTime": "2021-05-01T15:13:22Z",
+            "lastDeployedDateTime": "2021-05-01T15:13:22Z",
+            "lastModifiedDateTime": "2021-05-01T15:13:22Z",
+            "multilingualResource": true,
+            "projectName": "proj2",
+            "language": "fr"
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "QuestionAnsweringProjects_ListProjects",
+  "title": "Successful query"
+}

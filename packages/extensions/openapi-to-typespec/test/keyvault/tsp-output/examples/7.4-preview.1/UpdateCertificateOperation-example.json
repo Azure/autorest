@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "certificate-name": "cancellationRequestedCert01",
+    "certificateOperation": {
+      "cancellation_requested": true
+    },
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "cancellation_requested": true,
+        "csr": "MIIC4zCCAcsCAQAwGjEYMBYGA1UEAwwPKi5taWNyb3NvZnQuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxxM2zqnPtpH8aiHX5TdEoZLO0Y6fsjk9QcjKgnHomrwUc9vK20UYYEPKt9aGOT7HNx0do8OulPCnLPrKowci8UHu1qRW/qHvsOJQ/UrQoMCHxtXptVc7Avx8WQb045sCdgp/Cl4xO8LMZa70kE4dghZU9zmNZk8wqDIxyYdh1lqqfGe49EWOxcfszTeeKs8KCsQznjExbsudBHLLWoX4VFTGMe3VcIPcV6iFf70buHKznDMXFiRC0IYwkc/GyWIadB1CSEae8k/0evsPI5lYYZLaO/kLffEUtzysqxZNCQR+S0eVPTGTLHa+fndnPPs65XZDzSZi2fZL01oXUfCAQQIDAQABoIGDMIGABgkqhkiG9w0BCQ4xczBxMA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwNQYDVR0RBC4wLIIWb25lZHJpdmUubWljcm9zb2Z0LmNvbYISeGJveC5taWNyb3NvZnQuY29tMAkGA1UdEwQCMAAwDQYJKoZIhvcNAQELBQADggEBAKto/ZF9+02fQ3sLuIsRuap/O/AZz3IhAubNfyCaWvVGVAQz/Aqpf5c/liyKhxqRG6LR9Zu50oxRK5222ezR+56vJikjdXRVShf2xYsMm1CbCM1JuzsnkTeoUHHE12xx1srH/9TH+DVZIk6NXxc4wVIagbpwxiS5gR3Nly5k0ZVv7R1B79J0GUqSwK6qjuooWrBsYMEx319hz8fB/Y4jnPE8p+Cnn3AGEqnebVngXncq/QnHxnrRVfvKFVySqRvlsvM8buILmBbIaywEUqwhNtZX2i9E7reEJ8aeZcf+lAeKF3YDvffaXGTc75aiZlBk30Lv/hn0vs9T0/FedUnIae4=",
+        "id": "https://myvault.vault.azure.net/certificates/cancellationRequestedCert01/pending",
+        "issuer": {
+          "name": "issuer02"
+        },
+        "request_id": "3dd81d528cc84c5a837c607f1a50f2e1",
+        "status": "inProgress",
+        "status_details": "Pending certificate created. Certificate request is in progress. This may take some time based on the issuer provider. Please check again later."
+      }
+    }
+  },
+  "operationId": "UpdateCertificateOperation",
+  "title": "UpdateCertificateOperation"
+}

@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "capabilities": [
+              "DockerCompatible",
+              "NvidiaTeslaDriverInstalled"
+            ],
+            "imageReference": {
+              "offer": "CentOS",
+              "publisher": "OpenLogic",
+              "sku": "7.2",
+              "version": "latest"
+            },
+            "nodeAgentSKUId": "batch.node.centos 7",
+            "osType": "linux",
+            "verificationType": "verified"
+          },
+          {
+            "batchSupportEndOfLife": "2019-11-01T00:00:00.0Z",
+            "imageReference": {
+              "offer": "CentOS",
+              "publisher": "OpenLogic",
+              "sku": "7.1",
+              "version": "latest"
+            },
+            "nodeAgentSKUId": "batch.node.centos 7",
+            "osType": "linux",
+            "verificationType": "unverified"
+          },
+          {
+            "imageReference": {
+              "offer": "Debian",
+              "publisher": "Credativ",
+              "sku": "8",
+              "version": "latest"
+            },
+            "nodeAgentSKUId": "batch.node.debian 8",
+            "osType": "linux",
+            "verificationType": "verified"
+          },
+          {
+            "imageReference": {
+              "offer": "WindowsServer",
+              "publisher": "MicrosoftWindowsServer",
+              "sku": "2012-R2-Datacenter",
+              "version": "latest"
+            },
+            "nodeAgentSKUId": "batch.node.windows amd64",
+            "osType": "windows",
+            "verificationType": "verified"
+          },
+          {
+            "imageReference": {
+              "offer": "WindowsServer",
+              "publisher": "MicrosoftWindowsServer",
+              "sku": "2012-Datacenter",
+              "version": "latest"
+            },
+            "nodeAgentSKUId": "batch.node.windows amd64",
+            "osType": "windows",
+            "verificationType": "verified"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Account_ListSupportedImages",
+  "title": "Account list node agent skus"
+}

@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "kernelCPUTime": "PT0S",
+        "lastUpdateTime": "2022-08-26T18:30:00.4345729Z",
+        "numFailedTasks": 0,
+        "numSucceededTasks": 0,
+        "numTaskRetries": 0,
+        "readIOGiB": 10,
+        "readIOps": 0,
+        "startTime": "2022-08-26T18:30:00.4345729Z",
+        "url": "https://account.region.batch.core.windows.net/lifetimejobstats",
+        "userCPUTime": "PT0S",
+        "waitTime": "PT0S",
+        "wallClockTime": "PT0S",
+        "writeIOGiB": 5,
+        "writeIOps": 0
+      }
+    }
+  },
+  "operationId": "Job_GetAllLifetimeStatistics",
+  "title": "Job get lifetime statistics"
+}

@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "nodeId": "tvm-1695681911_1-20161121t182739z",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT",
+    "poolId": "poolId",
+    "uploadBatchServiceLogsConfiguration": {
+      "containerUrl": "https://somestorageacct.blob.core.windows.net/batch-compute-node-logs?se=2022-08-26T18%3A51%3A00Z&sp=w&sv=2022-08-26&sr=c&sig",
+      "startTime": "2022-08-26T00:00:00Z"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "numberOfFilesUploaded": 8,
+        "virtualDirectoryName": "poolId/tvm-1695681911-1-20161121t182739z/0795539d-82fe-48e3-bbff-2964905b6de0"
+      }
+    }
+  },
+  "operationId": "ComputeNode_UploadBatchServiceLogs",
+  "title": "Upload BatchService Logs"
+}

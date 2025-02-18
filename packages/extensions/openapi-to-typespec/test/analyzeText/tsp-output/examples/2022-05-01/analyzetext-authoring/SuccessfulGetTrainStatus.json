@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2022-05-01",
+    "jobId": "8ccf2ffe-e758-4d04-a44a-31512918c7e8_637858368000000000",
+    "projectName": "LoanAgreements"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "createdDateTime": "2022-04-18T15:44:44Z",
+        "expirationDateTime": "2022-04-25T15:44:44Z",
+        "jobId": "8ccf2ffe-e758-4d04-a44a-31512918c7e8_637858368000000000",
+        "lastUpdatedDateTime": "2022-04-18T15:45:48Z",
+        "result": {
+          "estimatedEndDateTime": "2022-04-18T15:47:58.8190649Z",
+          "evaluationStatus": {
+            "percentComplete": 0,
+            "status": "notStarted"
+          },
+          "modelLabel": "model1",
+          "trainingConfigVersion": "2022-05-01",
+          "trainingStatus": {
+            "percentComplete": 3,
+            "startDateTime": "2022-04-18T15:45:06.8190649Z",
+            "status": "running"
+          }
+        },
+        "status": "running"
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "TextAnalysisAuthoring_GetTrainingStatus",
+  "title": "Successful Get Train Status"
+}

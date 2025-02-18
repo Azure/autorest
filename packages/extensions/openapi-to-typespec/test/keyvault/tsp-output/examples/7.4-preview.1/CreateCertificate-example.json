@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "certificate-name": "selfSignedCert01",
+    "parameters": {
+      "policy": {
+        "issuer": {
+          "name": "Self"
+        },
+        "key_props": {
+          "exportable": true,
+          "key_size": 2048,
+          "kty": "RSA",
+          "reuse_key": false
+        },
+        "secret_props": {
+          "contentType": "application/x-pkcs12"
+        },
+        "x509_props": {
+          "sans": {
+            "dns_names": [
+              "onedrive.microsoft.com",
+              "xbox.microsoft.com"
+            ]
+          },
+          "subject": "CN=*.microsoft.com"
+        }
+      }
+    },
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "cancellation_requested": false,
+        "csr": "MIIC4zCCAcsCAQAwGjEYMBYGA1UEAwwPKi5taWNyb3NvZnQuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqe8aINnShK+wQC8QU7fwsviQc9+yiOnqU3adXA6qNjn21HTdRBa7cyQIk1STxHIBLTT/GaEJwqsUi6UvZaPEHokOWsr1bP9M7xOPTicBcRyMrr6bOxsmGczYtu1z2TzzXDD7q7IEignE7/LowGEaIADCIU9iuWk7TiJ+1Q/VLh/B3xPsgVjY+n7zEQ53gBiDHSl7XfELfwmslOQ28TVNogUyXsxHcVxQQYJeI7HqqY448LeleK69Ld86lkBixLEm1pD7HSbEx3WI2lyUQAGR6hD3YFaiIWVpQeEyI7p1jmtQlnfZdEL4q9wdlEEcwd3h3PAZpEBhCixahF54fci3pwIDAQABoIGDMIGABgkqhkiG9w0BCQ4xczBxMA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwNQYDVR0RBC4wLIIWb25lZHJpdmUubWljcm9zb2Z0LmNvbYISeGJveC5taWNyb3NvZnQuY29tMAkGA1UdEwQCMAAwDQYJKoZIhvcNAQELBQADggEBACiLeghirF+yCuYGVUPDB3wKQJn2iLY1za9ncxCehIVqOkFK09AphzoxF6Yid90AKCaa/dT/Ohm7oTyVQ+YcZnT00LUNFVG48AOE8YDiw9tjAG9OORsAz80xnv2qaLw2TCVIQ6NjrI83LqAm1GJ8rAnpdD/ZTuWM7TvSO5g/jm/Q0oSuKpMgj3YxpwgB9Ac6YEfVzOnm76OkUcpvR5MS4BoTfRv4thdSnU+uwqxM+HtdSVTbHQeC2U/hM1cyzDMpl1rZRklmiEOoPUeDasEIBVTJhAxR8xAeKJJD7Wzj4mJPw4UMvF8zQZzW8EKYvB1hkVYY+HQ85L+XcXd8lco7hU4=",
+        "id": "https://myvault.vault.azure.net/certificates/selfSignedCert01/pending",
+        "issuer": {
+          "name": "Self"
+        },
+        "request_id": "6faacd568ab049a2803861e8dd3ae21f",
+        "status": "inProgress",
+        "status_details": "Pending certificate created. Certificate request is in progress. This may take some time based on the issuer provider. Please check again later."
+      }
+    }
+  },
+  "operationId": "CreateCertificate",
+  "title": "CreateCertificate"
+}

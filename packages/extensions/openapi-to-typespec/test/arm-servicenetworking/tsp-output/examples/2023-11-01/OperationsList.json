@@ -1,0 +1,26 @@
+{
+  "operationId": "Operations_List",
+  "parameters": {
+    "api-version": "2023-11-01"
+  },
+  "title": "Get Operations List",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Microsoft.ServiceNetworking/trafficControllers/read",
+            "display": {
+              "description": "Traffic Controller is a L7 Load Balancing solution for a Multi Cluster setup",
+              "operation": "Get Traffic Controller configuration",
+              "provider": "Microsoft Service Networking",
+              "resource": "Traffic Controller"
+            },
+            "isDataAction": false,
+            "origin": "user,system"
+          }
+        ]
+      }
+    }
+  }
+}

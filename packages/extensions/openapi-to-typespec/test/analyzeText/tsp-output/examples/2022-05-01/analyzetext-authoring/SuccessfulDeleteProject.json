@@ -1,0 +1,17 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2022-05-01",
+    "projectName": "LoanAgreements"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "operation-location": "{Endpoint}/language/authoring/analyze-text/projects/global/deletion-jobs/129d3182-625d-496c-bcf9-43686e85160b_637858368000000000?api-version=2022-05-01"
+      }
+    }
+  },
+  "operationId": "TextAnalysisAuthoring_DeleteProject",
+  "title": "Successful Delete Project"
+}

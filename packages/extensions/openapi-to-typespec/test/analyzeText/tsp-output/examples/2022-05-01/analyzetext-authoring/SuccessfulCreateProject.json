@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "Content-Type": "application/merge-patch+json",
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2022-05-01",
+    "body": {
+      "description": "This is a sample dataset provided by the Azure Language service team to help users get started with [Custom named entity recognition](https://aka.ms/ct-docs). The provided sample dataset contains 20 loan agreements drawn up between two entities.",
+      "multilingual": false,
+      "projectKind": "CustomEntityRecognition",
+      "projectName": "LoanAgreements",
+      "storageInputContainerName": "loanagreements",
+      "language": "en"
+    },
+    "projectName": "LoanAgreements"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "description": "This is a sample dataset provided by the Azure Language service team to help users get started with [Custom named entity recognition](https://aka.ms/ct-docs). The provided sample dataset contains 20 loan agreements drawn up between two entities.",
+        "createdDateTime": "2022-04-18T13:53:03Z",
+        "lastDeployedDateTime": "2022-04-18T14:49:01Z",
+        "lastModifiedDateTime": "2022-04-18T13:53:03Z",
+        "lastTrainedDateTime": "2022-04-18T14:14:28Z",
+        "multilingual": false,
+        "projectKind": "CustomEntityRecognition",
+        "projectName": "LoanAgreements",
+        "storageInputContainerName": "loanagreements",
+        "language": "en"
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "description": "This is a sample dataset provided by the Azure Language service team to help users get started with [Custom named entity recognition](https://aka.ms/ct-docs). The provided sample dataset contains 20 loan agreements drawn up between two entities.",
+        "createdDateTime": "2022-04-18T13:53:03Z",
+        "lastModifiedDateTime": "2022-04-18T13:53:03Z",
+        "multilingual": false,
+        "projectKind": "CustomEntityRecognition",
+        "projectName": "LoanAgreements",
+        "storageInputContainerName": "loanagreements",
+        "language": "en"
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "TextAnalysisAuthoring_CreateProject",
+  "title": "Successful Create Project"
+}

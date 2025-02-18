@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "format": "swagger-link",
+    "api-version": "2021-08-01",
+    "apiId": "echo-api",
+    "export": "true",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "format": "swagger-link-json",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echo-api",
+        "value": {
+          "link": "https://apimgmtstkjpszxxxxxxx.blob.core.windows.net/api-export/Swagger Petstore Extensive.json?sv=2015-07-08&sr=b&sig=mxhLsFuOonu8EXIjyFPV%2FnDra0qTIoip7N7MuU%2BTFsA%3D&se=2019-04-10T22:41:31Z&sp=r"
+        }
+      }
+    }
+  },
+  "operationId": "ApiExport_Get",
+  "title": "ApiManagementGetApiExportInOpenApi2dot0"
+}

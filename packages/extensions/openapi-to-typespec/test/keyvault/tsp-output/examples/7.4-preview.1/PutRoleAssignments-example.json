@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "7.4-preview.1",
+    "parameters": {
+      "properties": {
+        "principalId": "principalId",
+        "roleDefinitionId": "/keys/providers/Microsoft.Authorization/roleDefinitions/roleDefinitionId"
+      }
+    },
+    "roleAssignmentName": "roleAssignmentName",
+    "scope": "keys",
+    "vaultBaseUrl": "https://myvault.vault.azure.net/"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "roleAssignmentId",
+        "type": "Microsoft.Authorization/roleAssignments",
+        "id": "/keys/providers/Microsoft.Authorization/roleAssignments/roleAssignmentId",
+        "properties": {
+          "principalId": "principalId",
+          "roleDefinitionId": "/keys/providers/Microsoft.Authorization/roleDefinitions/roleDefinitionId",
+          "scope": "/keys"
+        }
+      }
+    }
+  },
+  "operationId": "RoleAssignments_Create",
+  "title": "PutRoleAssignments"
+}

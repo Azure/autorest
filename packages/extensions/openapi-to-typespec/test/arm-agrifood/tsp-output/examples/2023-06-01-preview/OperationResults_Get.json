@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "locations": "westus",
+    "operationResultsId": "resource-provisioning-id-farmBeatsResourceName",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "error": {
+          "code": "BadArgument",
+          "message": "The provided database 'foo' has an invalid username."
+        },
+        "status": "Failed"
+      }
+    }
+  },
+  "operationId": "OperationResults_Get",
+  "title": "OperationResults_Get"
+}

@@ -1,0 +1,15 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT",
+    "thumbprint": "0123456789abcdef0123456789abcdef01234567",
+    "thumbprintAlgorithm": "sha1"
+  },
+  "responses": {
+    "202": {}
+  },
+  "operationId": "Certificate_Delete",
+  "title": "Certificate delete"
+}

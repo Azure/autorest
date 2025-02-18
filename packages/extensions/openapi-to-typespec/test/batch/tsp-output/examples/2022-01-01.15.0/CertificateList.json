@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "deleteCertificateError": {
+              "code": "PoolsReferencingCertificate",
+              "message": "The specified certificate is being used by the below mentioned pool(s)",
+              "values": [
+                {
+                  "name": "Pools",
+                  "value": "mypool1"
+                }
+              ]
+            },
+            "previousState": "deleting",
+            "previousStateTransitionTime": "2022-08-26T21:11:58.236Z",
+            "publicData": "#####...",
+            "state": "deletefailed",
+            "stateTransitionTime": "2022-08-26T21:12:58.236Z",
+            "thumbprint": "0123456789abcdef0123456789abcdef01234567",
+            "thumbprintAlgorithm": "sha1",
+            "url": "https://account.region.batch.azure.com/certificates(thumbprintAlgorithm=sha1,thumbprint=0123456789abcdef0123456789abcdef01234567)"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Certificate_List",
+  "title": "Certificate list"
+}

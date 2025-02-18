@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2022-11-01",
+    "body": {
+      "components": {
+        "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/microsoft.insights/components/appcomponentresource": {
+          "displayName": "Performance_LoadTest_Insights",
+          "kind": "web",
+          "resourceName": "appcomponentresource",
+          "resourceType": "microsoft.insights/components"
+        }
+      }
+    },
+    "testId": "ee843bd9-a6d4-4364-a45c-427a03c39fa7"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "components": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/microsoft.insights/components/appcomponentresource": {
+            "displayName": "Performance_LoadTest_Insights",
+            "kind": "web",
+            "resourceGroup": "samplerg",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/microsoft.insights/components/appcomponentresource",
+            "resourceName": "appcomponentresource",
+            "resourceType": "microsoft.insights/components",
+            "subscriptionId": "00000000-0000-0000-0000-000000000000"
+          }
+        },
+        "createdBy": "elon-musk@microsoft.com",
+        "createdDateTime": "2021-12-05T16:43:46.072Z",
+        "lastModifiedBy": "elon-musk@microsoft.com",
+        "lastModifiedDateTime": "2021-12-05T16:43:46.072Z",
+        "testId": "12345678-1234-1234-1234-123456789012"
+      }
+    },
+    "201": {
+      "body": {
+        "components": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/microsoft.insights/components/appcomponentresource": {
+            "displayName": "Performance_LoadTest_Insights",
+            "kind": "web",
+            "resourceGroup": "samplerg",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/microsoft.insights/components/appcomponentresource",
+            "resourceName": "appcomponentresource",
+            "resourceType": "microsoft.insights/components",
+            "subscriptionId": "00000000-0000-0000-0000-000000000000"
+          }
+        },
+        "createdBy": "elon-musk@microsoft.com",
+        "createdDateTime": "2021-12-05T16:43:46.072Z",
+        "lastModifiedBy": "elon-musk@microsoft.com",
+        "lastModifiedDateTime": "2021-12-05T16:43:46.072Z",
+        "testId": "12345678-1234-1234-1234-123456789012"
+      }
+    }
+  },
+  "operationId": "LoadTestAdministration_CreateOrUpdateAppComponents",
+  "title": "Create or update app components for a test"
+}

@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "location": "aaaa",
+    "offer": "aaaaaaa",
+    "publisherName": "aaaaaaaaaaaaa",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "name": "aaaaaaaa",
+          "id": "aaaaaaaaaaa",
+          "location": "aaaaaaaaaaaaaaaaaa"
+        }
+      ]
+    }
+  },
+  "operationId": "VirtualMachineImages_ListSkus",
+  "title": "VirtualMachineImage_ListSkus_MinimumSet_Gen"
+}

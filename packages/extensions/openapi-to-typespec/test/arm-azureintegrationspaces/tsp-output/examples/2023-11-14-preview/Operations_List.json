@@ -1,0 +1,42 @@
+{
+  "operationId": "Operations_List",
+  "parameters": {
+    "api-version": "2023-11-14-preview"
+  },
+  "title": "Operations_List",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Microsoft.IntegrationSpaces/spaces/read",
+            "display": {
+              "description": "Read space",
+              "operation": "Read space",
+              "provider": "Microsoft Azure Integration Spaces",
+              "resource": "space"
+            }
+          },
+          {
+            "name": "Microsoft.IntegrationSpaces/spaces/write",
+            "display": {
+              "description": "Update space",
+              "operation": "Update space",
+              "provider": "Microsoft Azure Integration Spaces",
+              "resource": "space"
+            }
+          },
+          {
+            "name": "Microsoft.IntegrationSpaces/spaces/delete",
+            "display": {
+              "description": "Delete space",
+              "operation": "Delete space",
+              "provider": "Microsoft Azure Integration Spaces",
+              "resource": "space"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

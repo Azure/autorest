@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "api-version": "2022-11-01",
+    "testId": "12345678-1234-1234-1234-123456789012"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "description": "sample description",
+        "createdBy": "elon-musk@microsoft.com",
+        "createdDateTime": "2021-12-05T16:43:46.072Z",
+        "displayName": "Performance_LoadTest",
+        "environmentVariables": {
+          "envvar1": "sampletext"
+        },
+        "inputArtifacts": {
+          "additionalFileInfo": [],
+          "configFileInfo": {
+            "expireDateTime": "2021-12-05T16:43:46.072Z",
+            "fileName": "config.yaml",
+            "fileType": "ADDITIONAL_ARTIFACTS",
+            "url": "https://dummyurl.com/configresource",
+            "validationStatus": ""
+          },
+          "inputArtifactsZipFileInfo": {
+            "expireDateTime": "2021-12-05T16:43:46.072Z",
+            "fileName": "inputartifacts.zip",
+            "fileType": "ADDITIONAL_ARTIFACTS",
+            "url": "https://dummyurl.com/inputartifactzipresource",
+            "validationStatus": ""
+          },
+          "testScriptFileInfo": {
+            "expireDateTime": "2021-12-05T16:43:46.072Z",
+            "fileName": "sample.jmx",
+            "fileType": "JMX_FILE",
+            "url": "https://dummyurl.com/testscriptresource",
+            "validationStatus": "VALIDATION_SUCCESS"
+          },
+          "userPropFileInfo": {
+            "expireDateTime": "2021-12-05T16:43:46.072Z",
+            "fileName": "user.properties",
+            "fileType": "USER_PROPERTIES",
+            "url": "https://dummyurl.com/userpropresource",
+            "validationStatus": ""
+          }
+        },
+        "keyvaultReferenceIdentityId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1",
+        "keyvaultReferenceIdentityType": "UserAssigned",
+        "lastModifiedBy": "elon-musk@microsoft.com",
+        "lastModifiedDateTime": "2021-12-05T16:43:46.072Z",
+        "loadTestConfiguration": {
+          "engineInstances": 6,
+          "splitAllCSVs": true
+        },
+        "passFailCriteria": {
+          "passFailMetrics": {
+            "fefd759d-7fe8-4f83-8b6d-aeebe0f491fe": {
+              "action": "continue",
+              "actualValue": 0,
+              "aggregate": "percentage",
+              "clientMetric": "response_time_ms",
+              "condition": ">",
+              "result": null,
+              "value": 20
+            }
+          }
+        },
+        "secrets": {
+          "secret1": {
+            "type": "AKV_SECRET_URI",
+            "value": "https://samplevault.vault.azure.net/secrets/samplesecret/f113f91fd4c44a368049849c164db827"
+          }
+        },
+        "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/Microsoft.Network/virtualNetworks/samplenetworkresource/subnets/AAAAA0A0A0",
+        "testId": "12345678-1234-1234-1234-123456789012"
+      }
+    }
+  },
+  "operationId": "LoadTestAdministration_GetTest",
+  "title": "Get a test by an unique name"
+}

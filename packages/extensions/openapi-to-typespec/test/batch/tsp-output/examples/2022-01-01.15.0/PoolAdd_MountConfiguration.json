@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "ocp-data": "Fri, 26 Aug 2022 00:00:00 GMT",
+    "pool": {
+      "enableAutoScale": false,
+      "id": "pool2",
+      "mountConfiguration": [
+        {
+          "azureBlobFileSystemConfiguration": {
+            "accountKey": "accountKey",
+            "accountName": "accountName",
+            "containerName": "blobContainerName",
+            "relativeMountPath": "bfusepath"
+          }
+        },
+        {
+          "azureFileShareConfiguration": {
+            "accountKey": "accountKey",
+            "accountName": "accountName",
+            "azureFileUrl": "https://myaccount.file.core.windows.net/fileshare",
+            "mountOptions": "mount options ver=1.0",
+            "relativeMountPath": "filesharepath"
+          }
+        },
+        {
+          "nfsMountConfiguration": {
+            "mountOptions": "mount options ver=1.0",
+            "relativeMountPath": "mountpath",
+            "source": "somesource nfs url"
+          }
+        },
+        {
+          "cifsMountConfiguration": {
+            "mountOptions": "mount options ver=1.0",
+            "password": "password",
+            "relativeMountPath": "mountpath",
+            "source": "//myaccount.file.core.windows.net/file",
+            "username": "accountName"
+          }
+        }
+      ],
+      "resizeTimeout": "PT15M",
+      "targetDedicatedNodes": 5,
+      "targetLowPriorityNodes": 0,
+      "taskSchedulingPolicy": {
+        "nodeFillType": "spread"
+      },
+      "taskSlotsPerNode": 3,
+      "virtualMachineConfiguration": {
+        "imageReference": {
+          "offer": "UbuntuServer",
+          "publisher": "Canonical",
+          "sku": "20_04-lts"
+        },
+        "nodeAgentSKUId": "batch.node.ubuntu 20.04"
+      },
+      "vmSize": "standard_a1"
+    }
+  },
+  "responses": {
+    "201": {
+      "ETag": "0x8D45765A6A2DC04",
+      "Last-Modified": "Fri, 26 Aug 2022 00:00:00 GMT",
+      "request-id": "00000000-0000-0000-0000-000000000000"
+    }
+  },
+  "operationId": "Pool_Add",
+  "title": "Add a pool with mount drive specified"
+}

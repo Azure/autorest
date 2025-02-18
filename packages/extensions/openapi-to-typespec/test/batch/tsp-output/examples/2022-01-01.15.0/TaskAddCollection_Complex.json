@@ -1,0 +1,80 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "jobId": "jobId",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT",
+    "taskCollection": {
+      "value": [
+        {
+          "affinityInfo": {
+            "affinityId": "affinityId"
+          },
+          "commandLine": "cmd /c dir /s",
+          "constraints": {
+            "maxTaskRetryCount": 5,
+            "maxWallClockTime": "P1D",
+            "retentionTime": "P2D"
+          },
+          "environmentSettings": [
+            {
+              "name": "env1",
+              "value": "value1"
+            },
+            {
+              "name": "env2",
+              "value": "value2"
+            }
+          ],
+          "id": "complex1",
+          "multiInstanceSettings": {
+            "commonResourceFiles": [
+              {
+                "filePath": "common.exe",
+                "httpUrl": "https://common.blob.core.windows.net/"
+              }
+            ],
+            "coordinationCommandLine": "cmd /c echo coordinating",
+            "numberOfInstances": 3
+          },
+          "requiredSlots": 2,
+          "resourceFiles": [
+            {
+              "autoStorageContainerName": "containerName",
+              "filePath": "data"
+            }
+          ]
+        },
+        {
+          "commandLine": "cmd /c dir /s",
+          "id": "simple3"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "eTag": "0x8D3D623CE295629",
+            "lastModified": "2022-08-26T07:02:46.0386857Z",
+            "location": "https://account.region.batch.azure.com/jobs/jobId/tasks/simple3",
+            "status": "success",
+            "taskId": "simple3"
+          },
+          {
+            "eTag": "0x8D3D623CE29A412",
+            "lastModified": "2022-08-26T07:02:46.0406802Z",
+            "location": "https://account.region.batch.azure.com/jobs/jobId/tasks/complex1",
+            "status": "success",
+            "taskId": "complex1"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Task_AddCollection",
+  "title": "Add a complex collection of tasks"
+}

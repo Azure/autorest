@@ -1,0 +1,17 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "nodeId": "tvm-1695681911_1-20161121t182739z",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT",
+    "poolId": "poolId"
+  },
+  "responses": {
+    "200": {
+      "body": "This is actually a byte stream. This request/response is being presented as a string for readability in the example"
+    }
+  },
+  "operationId": "ComputeNode_GetRemoteDesktop",
+  "title": "Get RDP file of the compute node"
+}

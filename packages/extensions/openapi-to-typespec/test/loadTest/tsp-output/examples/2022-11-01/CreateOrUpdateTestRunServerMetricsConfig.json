@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "api-version": "2022-11-01",
+    "body": {
+      "metrics": {
+        "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/microsoft.insights/components/appcomponentresource/providers/microsoft.insights/metricdefinitions/requests/duration": {
+          "name": "requests/duration",
+          "aggregation": "Average",
+          "displayDescription": "sample description",
+          "metricNamespace": "microsoft.insights/components",
+          "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/microsoft.insights/components/appcomponentresource",
+          "resourceType": "microsoft.insights/components",
+          "unit": null
+        }
+      }
+    },
+    "testRunId": "edc6e529-d009-4b99-b763-ca492e3a2823"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "createdBy": "elon-musk@microsoft.com",
+        "createdDateTime": "2021-12-05T16:43:46.072Z",
+        "lastModifiedBy": "elon-musk@microsoft.com",
+        "lastModifiedDateTime": "2021-12-05T16:43:46.072Z",
+        "metrics": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/microsoft.insights/components/appcomponentresource/providers/microsoft.insights/metricdefinitions/requests/duration": {
+            "name": "requests/duration",
+            "aggregation": "Average",
+            "displayDescription": "sample description",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/microsoft.insights/components/appcomponentresource/providers/microsoft.insights/metricdefinitions/requests/duration",
+            "metricNamespace": "microsoft.insights/components",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/microsoft.insights/components/appcomponentresource",
+            "resourceType": "microsoft.insights/components",
+            "unit": null
+          }
+        },
+        "testRunId": "12316678-1234-1234-1234-122451189012"
+      }
+    },
+    "201": {
+      "body": {
+        "createdBy": "elon-musk@microsoft.com",
+        "createdDateTime": "2021-12-05T16:43:46.072Z",
+        "lastModifiedBy": "elon-musk@microsoft.com",
+        "lastModifiedDateTime": "2021-12-05T16:43:46.072Z",
+        "metrics": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/microsoft.insights/components/appcomponentresource/providers/microsoft.insights/metricdefinitions/requests/duration": {
+            "name": "requests/duration",
+            "aggregation": "Average",
+            "displayDescription": "sample description",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/microsoft.insights/components/appcomponentresource/providers/microsoft.insights/metricdefinitions/requests/duration",
+            "metricNamespace": "microsoft.insights/components",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/microsoft.insights/components/appcomponentresource",
+            "resourceType": "microsoft.insights/components",
+            "unit": null
+          }
+        },
+        "testRunId": "12316678-1234-1234-1234-122451189012"
+      }
+    }
+  },
+  "operationId": "LoadTestRun_CreateOrUpdateServerMetricsConfig",
+  "title": "Configure server metrics config for a test run"
+}

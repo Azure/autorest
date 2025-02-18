@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01.15.0",
+    "batchUrl": "account.region.batch.azure.com",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "nodeId": "tvm-1695681911_1-20161122t193202z",
+    "ocp-date": "Fri, 26 Aug 2022 00:00:00 GMT",
+    "poolId": "poolId",
+    "recursive": false
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "shared",
+            "isDirectory": true,
+            "url": "https://account.region.batch.azure.com/pools/poolId/nodes/tvm-2167304207_2-20140919t215614z/files/shared"
+          },
+          {
+            "name": "startup\\ProcessEnv.cmd",
+            "isDirectory": false,
+            "properties": {
+              "contentLength": 1813,
+              "contentType": "application/octet-stream",
+              "creationTime": "2022-08-26T21:56:17.679195Z",
+              "lastModified": "2022-08-26T21:56:17.679195Z"
+            },
+            "url": "https://account.region.batch.azure.com/pools/poolId/nodes/tvm-2167304207_2-20140919t215614z/files/startup\\ProcessEnv.cmd"
+          },
+          {
+            "name": "startup\\stderr.txt",
+            "isDirectory": false,
+            "properties": {
+              "contentLength": 0,
+              "contentType": "application/octet-stream",
+              "creationTime": "2022-08-26T21:56:17.5590855Z",
+              "lastModified": "2022-08-26T21:56:17.5590855Z"
+            },
+            "url": "https://account.region.batch.azure.com/pools/poolId/nodes/tvm-2167304207_2-20140919t215614z/files/startup\\stderr.txt"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "File_ListFromComputeNode",
+  "title": "File list from node"
+}
