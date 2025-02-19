@@ -1,6 +1,14 @@
 # Change Log - @autorest/openapi-to-typespec
 
-This log was last generated on Mon, 10 Feb 2025 01:59:37 GMT and should not be manually modified.
+This log was last generated on Tue, 18 Feb 2025 09:41:04 GMT and should not be manually modified.
+
+## 0.10.10
+Tue, 18 Feb 2025 09:41:04 GMT
+
+### Patches
+
+- Fix content type header
+- Add missing examples for non-resource operation
 
 ## 0.10.9
 Mon, 10 Feb 2025 01:59:37 GMT
