@@ -347,7 +347,12 @@ model ExportedProject {
  * Represents the assets of an exported project.
  */
 @discriminator("projectKind")
-model ExportedProjectAssets {}
+model ExportedProjectAssets {
+  /**
+   * The type of the project the assets belong to.
+   */
+  projectKind: ProjectKind;
+}
 
 /**
  * Represents the options for starting a new training job.
@@ -614,6 +619,11 @@ model DocumentEvaluationResult {
    * etc.
    */
   language: string;
+
+  /**
+   * Represents the project kind.
+   */
+  projectKind: ProjectKind;
 }
 
 /**
@@ -621,6 +631,11 @@ model DocumentEvaluationResult {
  */
 @discriminator("projectKind")
 model EvaluationSummary {
+  /**
+   * Represents the project type that the evaluation ran on.
+   */
+  projectKind: ProjectKind;
+
   /**
    * Represents the options used running the evaluation.
    */

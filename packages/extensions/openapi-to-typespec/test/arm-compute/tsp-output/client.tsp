@@ -7,6 +7,10 @@ using Microsoft.Compute;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ComputeOperationValue.display);
 
+@@clientName(VirtualMachineScaleSetDataDisk.diskIOPSReadWrite,
+  "diskIopsReadWrite"
+);
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VirtualMachineScaleSetNetworkConfiguration.properties);
 
@@ -36,6 +40,8 @@ using Microsoft.Compute;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VirtualMachineScaleSetVMExtensionUpdate.properties);
 
+@@clientName(DataDisk.diskIOPSReadWrite, "diskIopsReadWrite");
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(NetworkInterfaceReference.properties);
 
@@ -50,6 +56,8 @@ using Microsoft.Compute;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VirtualMachineExtensionUpdate.properties);
+
+@@clientName(VirtualMachineCaptureResult.$schema, "schema");
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VirtualMachineUpdate.properties);
@@ -72,6 +80,8 @@ using Microsoft.Compute;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ImageUpdate.properties);
 
+@@clientName(RestorePointSourceVMStorageProfile.dataDisks, "dataDiskList");
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RestorePointCollectionUpdate.properties);
 
@@ -81,11 +91,20 @@ using Microsoft.Compute;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(CapacityReservationUpdate.properties);
 
+@@clientName(RunCommandDocumentBase.$schema, "schema");
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VirtualMachineRunCommandUpdate.properties);
 
+@@clientName(DiskProperties.diskIOPSReadWrite, "diskIopsReadWrite");
+@@clientName(DiskProperties.diskIOPSReadOnly, "diskIopsReadOnly");
+@@clientName(DiskProperties.LastOwnershipUpdateTime, "lastOwnershipUpdateTime");
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(DiskUpdate.properties);
+
+@@clientName(DiskUpdateProperties.diskIOPSReadWrite, "diskIopsReadWrite");
+@@clientName(DiskUpdateProperties.diskIOPSReadOnly, "diskIopsReadOnly");
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PrivateLinkResource.properties);

@@ -21,8 +21,7 @@ model Paths1Vtxb06DeploymentsDeploymentIdCompletionsPostRequestbodyContentApplic
   /**
    * The maximum number of tokens to generate. Has minimum of 0.
    */
-  @encodedName("application/json", "max_tokens")
-  maxTokens?: int32 = 16;
+  max_tokens?: int32 = 16;
 
   /**
    * What sampling temperature to use. Higher values means the model will take more
@@ -42,8 +41,7 @@ model Paths1Vtxb06DeploymentsDeploymentIdCompletionsPostRequestbodyContentApplic
    * Minimum of 0 and maximum of 1 allowed.
    *
    */
-  @encodedName("application/json", "top_p")
-  topP?: float32 = 1;
+  top_p?: float32 = 1;
 
   /**
    * Defaults to null. Modify the likelihood of specified tokens appearing in the
@@ -57,8 +55,7 @@ model Paths1Vtxb06DeploymentsDeploymentIdCompletionsPostRequestbodyContentApplic
    * token. As an example, you can pass {"50256" &#58; -100} to prevent the
    * <|endoftext|> token from being generated.
    */
-  @encodedName("application/json", "logit_bias")
-  logitBias?: Record<unknown>;
+  logit_bias?: Record<unknown>;
 
   /**
    * The ID of the end-user, for use in tracking and rate-limiting.
@@ -100,37 +97,32 @@ model Paths1Vtxb06DeploymentsDeploymentIdCompletionsPostRequestbodyContentApplic
    */
   stop?: unknown;
 
-  @encodedName("application/json", "completion_config")
-  completionConfig?: string;
+  completion_config?: string;
 
   /**
    * can be used to disable any server-side caching, 0=no cache, 1=prompt prefix
    * enabled, 2=full cache
    */
-  @encodedName("application/json", "cache_level")
-  cacheLevel?: int32;
+  cache_level?: int32;
 
   /**
    * How much to penalize new tokens based on their existing frequency in the text
    * so far. Decreases the model's likelihood to repeat the same line verbatim. Has
    * minimum of -2 and maximum of 2.
    */
-  @encodedName("application/json", "presence_penalty")
-  presencePenalty?: float32;
+  presence_penalty?: float32;
 
   /**
    * How much to penalize new tokens based on whether they appear in the text so
    * far. Increases the model's likelihood to talk about new topics.
    */
-  @encodedName("application/json", "frequency_penalty")
-  frequencyPenalty?: float32;
+  frequency_penalty?: float32;
 
   /**
    * How many generations to create server side, and display only the best. Will not
    * stream intermediate progress if best_of > 1. Has maximum value of 128.
    */
-  @encodedName("application/json", "best_of")
-  bestOf?: int32;
+  best_of?: int32;
 }
 
 model PathsMaorw9DeploymentsDeploymentIdCompletionsPostResponses200ContentApplicationJsonSchema {
@@ -145,22 +137,14 @@ model Post200ApplicationJsonPropertiesItemsItem {
   text?: string;
   index?: int32;
   logprobs?: PostResponses200ContentApplicationJsonSchemaChoicesItemLogprobs;
-
-  @encodedName("application/json", "finish_reason")
-  finishReason?: string;
+  finish_reason?: string;
 }
 
 model PostResponses200ContentApplicationJsonSchemaChoicesItemLogprobs {
   tokens?: string[];
-
-  @encodedName("application/json", "token_logprobs")
-  tokenLogprobs?: float32[];
-
-  @encodedName("application/json", "top_logprobs")
-  topLogprobs?: Record<float32>[];
-
-  @encodedName("application/json", "text_offset")
-  textOffset?: int32[];
+  token_logprobs?: float32[];
+  top_logprobs?: Record<float32>[];
+  text_offset?: int32[];
 }
 
 @error
@@ -192,8 +176,7 @@ model Paths13PiqocDeploymentsDeploymentIdEmbeddingsPostRequestbodyContentApplica
   /**
    * input type of embedding search to use
    */
-  @encodedName("application/json", "input_type")
-  inputType?: string;
+  input_type?: string;
 
   /**
    * ID of the model to use

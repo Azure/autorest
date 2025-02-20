@@ -2061,14 +2061,36 @@
       "description": "AuthCredentials abstract base class for Auth Purpose.",
       "properties": {
         "kind": {
-          "type": "string",
-          "description": "Discriminator property for AuthCredentials."
+          "$ref": "#/definitions/AuthCredentialsKind",
+          "description": "Enum for different types of AuthCredentials supported."
         }
       },
       "discriminator": "kind",
       "required": [
         "kind"
       ]
+    },
+    "AuthCredentialsKind": {
+      "type": "string",
+      "description": "Enum for different types of AuthCredentials supported.",
+      "enum": [
+        "OAuthClientCredentials",
+        "ApiKeyAuthCredentials"
+      ],
+      "x-ms-enum": {
+        "name": "AuthCredentialsKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OAuthClientCredentials",
+            "value": "OAuthClientCredentials"
+          },
+          {
+            "name": "ApiKeyAuthCredentials",
+            "value": "ApiKeyAuthCredentials"
+          }
+        ]
+      }
     },
     "Azure.ResourceManager.CommonTypes.CheckNameAvailabilityReason": {
       "type": "string",
@@ -2238,8 +2260,7 @@
         },
         "$skipToken": {
           "type": "string",
-          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
-          "x-ms-client-name": "skipToken"
+          "description": "Token used in retrieving the next page. If null, there are no additional pages."
         }
       },
       "required": [
@@ -2338,8 +2359,7 @@
         },
         "$skipToken": {
           "type": "string",
-          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
-          "x-ms-client-name": "skipToken"
+          "description": "Token used in retrieving the next page. If null, there are no additional pages."
         }
       },
       "required": [
@@ -2413,8 +2433,7 @@
         },
         "$skipToken": {
           "type": "string",
-          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
-          "x-ms-client-name": "skipToken"
+          "description": "Token used in retrieving the next page. If null, there are no additional pages."
         }
       },
       "required": [
@@ -2615,8 +2634,7 @@
         },
         "$skipToken": {
           "type": "string",
-          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
-          "x-ms-client-name": "skipToken"
+          "description": "Token used in retrieving the next page. If null, there are no additional pages."
         }
       },
       "required": [
@@ -3078,8 +3096,7 @@
         },
         "$skipToken": {
           "type": "string",
-          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
-          "x-ms-client-name": "skipToken"
+          "description": "Token used in retrieving the next page. If null, there are no additional pages."
         }
       },
       "required": [

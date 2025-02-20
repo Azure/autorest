@@ -4,6 +4,20 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.AgFoodPlatform;
 
+@@clientName(DataManagerForAgricultureExtensionListResponse.$skipToken,
+  "skipToken"
+);
+
+@@clientName(DataManagerForAgricultureListResponse.$skipToken, "skipToken");
+
+@@clientName(ExtensionListResponse.$skipToken, "skipToken");
+
+@@clientName(SolutionListResponse.$skipToken, "skipToken");
+
+@@clientName(DataManagerForAgricultureSolutionListResponse.$skipToken,
+  "skipToken"
+);
+
 @@clientName(DataConnectors.createOrUpdate::parameters.resource, "body");
 
 @@clientName(DataManagerForAgricultures.createOrUpdate::parameters.resource,

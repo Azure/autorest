@@ -589,12 +589,16 @@ model FullBackupOperation {
   /**
    * The start time of the backup operation in UTC
    */
-  startTime?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startTime?: utcDateTime;
 
   /**
    * The end time of the backup operation in UTC
    */
-  endTime?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endTime?: utcDateTime;
 
   /**
    * Identifier for the full backup operation.
@@ -627,8 +631,7 @@ model Error {
    * The key vault server error.
    */
   @visibility("read")
-  @encodedName("application/json", "innererror")
-  innerError?: Error;
+  innererror?: Error;
 }
 
 /**
@@ -679,12 +682,16 @@ model RestoreOperation {
   /**
    * The start time of the restore operation
    */
-  startTime?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startTime?: utcDateTime;
 
   /**
    * The end time of the restore operation
    */
-  endTime?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endTime?: utcDateTime;
 }
 
 model SelectiveKeyRestoreOperationParameters {
@@ -723,12 +730,16 @@ model SelectiveKeyRestoreOperation {
   /**
    * The start time of the restore operation
    */
-  startTime?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startTime?: utcDateTime;
 
   /**
    * The end time of the restore operation
    */
-  endTime?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endTime?: utcDateTime;
 }
 
 /**
@@ -758,8 +769,7 @@ model CertificateItem {
   /**
    * Thumbprint of the certificate.
    */
-  @encodedName("application/json", "x5t")
-  x509Thumbprint?: bytes;
+  x5t?: bytes;
 }
 
 /**
@@ -796,26 +806,32 @@ model Attributes {
   /**
    * Not before date in UTC.
    */
-  @encodedName("application/json", "nbf")
-  notBefore?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  nbf?: utcDateTime;
 
   /**
    * Expiry date in UTC.
    */
-  @encodedName("application/json", "exp")
-  expires?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  exp?: utcDateTime;
 
   /**
    * Creation time in UTC.
    */
   @visibility("read")
-  created?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  created?: utcDateTime;
 
   /**
    * Last updated time in UTC.
    */
   @visibility("read")
-  updated?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  updated?: utcDateTime;
 }
 
 /**
@@ -834,13 +850,17 @@ model DeletedCertificateBundle extends CertificateBundle {
    * The time when the certificate is scheduled to be purged, in UTC
    */
   @visibility("read")
-  scheduledPurgeDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  scheduledPurgeDate?: utcDateTime;
 
   /**
    * The time when the certificate was deleted, in UTC
    */
   @visibility("read")
-  deletedDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  deletedDate?: utcDateTime;
 }
 
 /**
@@ -869,8 +889,7 @@ model CertificateBundle {
    * Thumbprint of the certificate.
    */
   @visibility("read")
-  @encodedName("application/json", "x5t")
-  x509Thumbprint?: bytes;
+  x5t?: bytes;
 
   /**
    * The management policy.
@@ -913,32 +932,27 @@ model CertificatePolicy {
   /**
    * Properties of the key backing a certificate.
    */
-  @encodedName("application/json", "key_props")
-  keyProperties?: KeyProperties;
+  key_props?: KeyProperties;
 
   /**
    * Properties of the secret backing a certificate.
    */
-  @encodedName("application/json", "secret_props")
-  secretProperties?: SecretProperties;
+  secret_props?: SecretProperties;
 
   /**
    * Properties of the X509 component of a certificate.
    */
-  @encodedName("application/json", "x509_props")
-  x509CertificateProperties?: X509CertificateProperties;
+  x509_props?: X509CertificateProperties;
 
   /**
    * Actions that will be performed by Key Vault over the lifetime of a certificate.
    */
-  @encodedName("application/json", "lifetime_actions")
-  lifetimeActions?: LifetimeAction[];
+  lifetime_actions?: LifetimeAction[];
 
   /**
    * Parameters for the issuer of the X509 component of a certificate.
    */
-  @encodedName("application/json", "issuer")
-  issuerParameters?: IssuerParameters;
+  issuer?: IssuerParameters;
 
   /**
    * The certificate attributes.
@@ -959,26 +973,22 @@ model KeyProperties {
   /**
    * The type of key pair to be used for the certificate.
    */
-  @encodedName("application/json", "kty")
-  keyType?: JsonWebKeyType;
+  kty?: JsonWebKeyType;
 
   /**
    * The key size in bits. For example: 2048, 3072, or 4096 for RSA.
    */
-  @encodedName("application/json", "key_size")
-  keySize?: int32;
+  key_size?: int32;
 
   /**
    * Indicates if the same key pair will be used on certificate renewal.
    */
-  @encodedName("application/json", "reuse_key")
-  reuseKey?: boolean;
+  reuse_key?: boolean;
 
   /**
    * Elliptic curve name. For valid values, see JsonWebKeyCurveName.
    */
-  @encodedName("application/json", "crv")
-  curve?: JsonWebKeyCurveName;
+  crv?: JsonWebKeyCurveName;
 }
 
 /**
@@ -1008,20 +1018,17 @@ model X509CertificateProperties {
   /**
    * The subject alternative names.
    */
-  @encodedName("application/json", "sans")
-  subjectAlternativeNames?: SubjectAlternativeNames;
+  sans?: SubjectAlternativeNames;
 
   /**
    * Defines how the certificate's key may be used.
    */
-  @encodedName("application/json", "key_usage")
-  keyUsage?: KeyUsageType[];
+  key_usage?: KeyUsageType[];
 
   /**
    * The duration that the certificate is valid in months.
    */
-  @encodedName("application/json", "validity_months")
-  validityInMonths?: int32;
+  validity_months?: int32;
 }
 
 /**
@@ -1036,8 +1043,7 @@ model SubjectAlternativeNames {
   /**
    * Domain names.
    */
-  @encodedName("application/json", "dns_names")
-  dnsNames?: string[];
+  dns_names?: string[];
 
   /**
    * User principal names.
@@ -1070,16 +1076,14 @@ model Trigger {
    */
   @maxValue(99)
   @minValue(1)
-  @encodedName("application/json", "lifetime_percentage")
-  lifetimePercentage?: int32;
+  lifetime_percentage?: int32;
 
   /**
    * Days before expiry to attempt renewal. Value should be between 1 and
    * validity_in_months multiplied by 27. If validity_in_months is 36, then value
    * should be between 1 and 972 (36 * 27).
    */
-  @encodedName("application/json", "days_before_expiry")
-  daysBeforeExpiry?: int32;
+  days_before_expiry?: int32;
 }
 
 /**
@@ -1089,8 +1093,7 @@ model Action {
   /**
    * The type of the action.
    */
-  @encodedName("application/json", "action_type")
-  actionType?: ActionType;
+  action_type?: ActionType;
 }
 
 /**
@@ -1107,15 +1110,13 @@ model IssuerParameters {
    * Certificate type as supported by the provider (optional); for example 'OV-SSL',
    * 'EV-SSL'
    */
-  @encodedName("application/json", "cty")
-  certificateType?: string;
+  cty?: string;
 
   /**
    * Indicates if the certificates generated under this policy should be published
    * to certificate transparency logs.
    */
-  @encodedName("application/json", "cert_transparency")
-  certificateTransparency?: boolean;
+  cert_transparency?: boolean;
 }
 
 /**
@@ -1131,8 +1132,7 @@ model Contacts {
   /**
    * The contact list for the vault certificates.
    */
-  @encodedName("application/json", "contacts")
-  contactList?: Contact[];
+  contacts?: Contact[];
 }
 
 /**
@@ -1142,8 +1142,7 @@ model Contact {
   /**
    * Email address.
    */
-  @encodedName("application/json", "email")
-  emailAddress?: string;
+  email?: string;
 
   /**
    * Name.
@@ -1193,8 +1192,7 @@ model CertificateIssuerSetParameters {
   /**
    * Details of the organization as provided to the issuer.
    */
-  @encodedName("application/json", "org_details")
-  organizationDetails?: OrganizationDetails;
+  org_details?: OrganizationDetails;
 
   /**
    * Attributes of the issuer object.
@@ -1209,14 +1207,12 @@ model IssuerCredentials {
   /**
    * The user name/account name/account id.
    */
-  @encodedName("application/json", "account_id")
-  accountId?: string;
+  account_id?: string;
 
   /**
    * The password/secret/account key.
    */
-  @encodedName("application/json", "pwd")
-  password?: string;
+  pwd?: string;
 }
 
 /**
@@ -1231,8 +1227,7 @@ model OrganizationDetails {
   /**
    * Details of the organization administrator.
    */
-  @encodedName("application/json", "admin_details")
-  adminDetails?: AdministratorDetails[];
+  admin_details?: AdministratorDetails[];
 }
 
 /**
@@ -1242,20 +1237,17 @@ model AdministratorDetails {
   /**
    * First name.
    */
-  @encodedName("application/json", "first_name")
-  firstName?: string;
+  first_name?: string;
 
   /**
    * Last name.
    */
-  @encodedName("application/json", "last_name")
-  lastName?: string;
+  last_name?: string;
 
   /**
    * Email address.
    */
-  @encodedName("application/json", "email")
-  emailAddress?: string;
+  email?: string;
 
   /**
    * Phone number.
@@ -1276,13 +1268,17 @@ model IssuerAttributes {
    * Creation time in UTC.
    */
   @visibility("read")
-  created?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  created?: utcDateTime;
 
   /**
    * Last updated time in UTC.
    */
   @visibility("read")
-  updated?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  updated?: utcDateTime;
 }
 
 /**
@@ -1308,8 +1304,7 @@ model IssuerBundle {
   /**
    * Details of the organization as provided to the issuer.
    */
-  @encodedName("application/json", "org_details")
-  organizationDetails?: OrganizationDetails;
+  org_details?: OrganizationDetails;
 
   /**
    * Attributes of the issuer object.
@@ -1334,8 +1329,7 @@ model CertificateIssuerUpdateParameters {
   /**
    * Details of the organization as provided to the issuer.
    */
-  @encodedName("application/json", "org_details")
-  organizationDetails?: OrganizationDetails;
+  org_details?: OrganizationDetails;
 
   /**
    * Attributes of the issuer object.
@@ -1350,14 +1344,12 @@ model CertificateCreateParameters {
   /**
    * The management policy for the certificate.
    */
-  @encodedName("application/json", "policy")
-  certificatePolicy?: CertificatePolicy;
+  policy?: CertificatePolicy;
 
   /**
    * The attributes of the certificate (optional).
    */
-  @encodedName("application/json", "attributes")
-  certificateAttributes?: CertificateAttributes;
+  attributes?: CertificateAttributes;
 
   /**
    * Application specific metadata in the form of key-value pairs.
@@ -1378,8 +1370,7 @@ model CertificateOperation {
   /**
    * Parameters for the issuer of the X509 component of a certificate.
    */
-  @encodedName("application/json", "issuer")
-  issuerParameters?: IssuerParameters;
+  issuer?: IssuerParameters;
 
   /**
    * The certificate signing request (CSR) that is being used in the certificate
@@ -1390,8 +1381,7 @@ model CertificateOperation {
   /**
    * Indicates if cancellation was requested on the certificate operation.
    */
-  @encodedName("application/json", "cancellation_requested")
-  cancellationRequested?: boolean;
+  cancellation_requested?: boolean;
 
   /**
    * Status of the certificate operation.
@@ -1401,8 +1391,7 @@ model CertificateOperation {
   /**
    * The status details of the certificate operation.
    */
-  @encodedName("application/json", "status_details")
-  statusDetails?: string;
+  status_details?: string;
 
   /**
    * Error encountered, if any, during the certificate operation.
@@ -1417,8 +1406,7 @@ model CertificateOperation {
   /**
    * Identifier for the certificate operation.
    */
-  @encodedName("application/json", "request_id")
-  requestId?: string;
+  request_id?: string;
 }
 
 /**
@@ -1429,27 +1417,23 @@ model CertificateImportParameters {
    * Base64 encoded representation of the certificate object to import. This
    * certificate needs to contain the private key.
    */
-  @encodedName("application/json", "value")
-  base64EncodedCertificate: string;
+  value: string;
 
   /**
    * If the private key in base64EncodedCertificate is encrypted, the password used
    * for encryption.
    */
-  @encodedName("application/json", "pwd")
-  password?: string;
+  pwd?: string;
 
   /**
    * The management policy for the certificate.
    */
-  @encodedName("application/json", "policy")
-  certificatePolicy?: CertificatePolicy;
+  policy?: CertificatePolicy;
 
   /**
    * The attributes of the certificate (optional).
    */
-  @encodedName("application/json", "attributes")
-  certificateAttributes?: CertificateAttributes;
+  attributes?: CertificateAttributes;
 
   /**
    * Application specific metadata in the form of key-value pairs.
@@ -1464,14 +1448,12 @@ model CertificateUpdateParameters {
   /**
    * The management policy for the certificate.
    */
-  @encodedName("application/json", "policy")
-  certificatePolicy?: CertificatePolicy;
+  policy?: CertificatePolicy;
 
   /**
    * The attributes of the certificate (optional).
    */
-  @encodedName("application/json", "attributes")
-  certificateAttributes?: CertificateAttributes;
+  attributes?: CertificateAttributes;
 
   /**
    * Application specific metadata in the form of key-value pairs.
@@ -1486,8 +1468,7 @@ model CertificateOperationUpdateParameter {
   /**
    * Indicates if cancellation was requested on the certificate operation.
    */
-  @encodedName("application/json", "cancellation_requested")
-  cancellationRequested: boolean;
+  cancellation_requested: boolean;
 }
 
 /**
@@ -1497,14 +1478,12 @@ model CertificateMergeParameters {
   /**
    * The certificate or the certificate chain to merge.
    */
-  @encodedName("application/json", "x5c")
-  x509Certificates: bytes[];
+  x5c: bytes[];
 
   /**
    * The attributes of the certificate (optional).
    */
-  @encodedName("application/json", "attributes")
-  certificateAttributes?: CertificateAttributes;
+  attributes?: CertificateAttributes;
 
   /**
    * Application specific metadata in the form of key-value pairs.
@@ -1530,8 +1509,7 @@ model CertificateRestoreParameters {
   /**
    * The backup blob associated with a certificate bundle.
    */
-  @encodedName("application/json", "value")
-  certificateBundleBackup: bytes;
+  value: bytes;
 }
 
 /**
@@ -1554,13 +1532,17 @@ model DeletedCertificateItem extends CertificateItem {
    * The time when the certificate is scheduled to be purged, in UTC
    */
   @visibility("read")
-  scheduledPurgeDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  scheduledPurgeDate?: utcDateTime;
 
   /**
    * The time when the certificate was deleted, in UTC
    */
   @visibility("read")
-  deletedDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  deletedDate?: utcDateTime;
 }
 
 /**
@@ -1575,23 +1557,19 @@ model KeyCreateParameters {
   /**
    * The key size in bits. For example: 2048, 3072, or 4096 for RSA.
    */
-  @encodedName("application/json", "key_size")
-  keySize?: int32;
+  key_size?: int32;
 
   /**
    * The public exponent for a RSA key.
    */
-  @encodedName("application/json", "public_exponent")
-  publicExponent?: int32;
+  public_exponent?: int32;
 
-  @encodedName("application/json", "key_ops")
-  keyOps?: JsonWebKeyOperation[];
+  key_ops?: JsonWebKeyOperation[];
 
   /**
    * The attributes of a key managed by the key vault service.
    */
-  @encodedName("application/json", "attributes")
-  keyAttributes?: KeyAttributes;
+  attributes?: KeyAttributes;
 
   /**
    * Application specific metadata in the form of key-value pairs.
@@ -1601,14 +1579,12 @@ model KeyCreateParameters {
   /**
    * Elliptic curve name. For valid values, see JsonWebKeyCurveName.
    */
-  @encodedName("application/json", "crv")
-  curve?: JsonWebKeyCurveName;
+  crv?: JsonWebKeyCurveName;
 
   /**
    * The policy rules under which the key can be exported.
    */
-  @encodedName("application/json", "release_policy")
-  releasePolicy?: KeyReleasePolicy;
+  release_policy?: KeyReleasePolicy;
 }
 
 /**
@@ -1658,8 +1634,7 @@ model KeyReleasePolicy {
    * Blob encoding the policy rules under which the key can be released. Blob must
    * be base64 URL encoded.
    */
-  @encodedName("application/json", "data")
-  encodedPolicy?: bytes;
+  data?: bytes;
 }
 
 /**
@@ -1691,8 +1666,7 @@ model KeyBundle {
   /**
    * The policy rules under which the key can be exported.
    */
-  @encodedName("application/json", "release_policy")
-  releasePolicy?: KeyReleasePolicy;
+  release_policy?: KeyReleasePolicy;
 }
 
 /**
@@ -1710,8 +1684,7 @@ model JsonWebKey {
    */
   kty?: JsonWebKeyType;
 
-  @encodedName("application/json", "key_ops")
-  keyOps?: string[];
+  key_ops?: string[];
 
   /**
    * RSA modulus.
@@ -1731,20 +1704,17 @@ model JsonWebKey {
   /**
    * RSA private key parameter.
    */
-  @encodedName("application/json", "dp")
-  DP?: bytes;
+  dp?: bytes;
 
   /**
    * RSA private key parameter.
    */
-  @encodedName("application/json", "dq")
-  DQ?: bytes;
+  dq?: bytes;
 
   /**
    * RSA private key parameter.
    */
-  @encodedName("application/json", "qi")
-  QI?: bytes;
+  qi?: bytes;
 
   /**
    * RSA secret prime.
@@ -1764,8 +1734,7 @@ model JsonWebKey {
   /**
    * Protected Key, used with 'Bring Your Own Key'.
    */
-  @encodedName("application/json", "key_hsm")
-  t?: bytes;
+  key_hsm?: bytes;
 
   /**
    * Elliptic curve name. For valid values, see JsonWebKeyCurveName.
@@ -1790,8 +1759,7 @@ model KeyImportParameters {
   /**
    * Whether to import as a hardware key (HSM) or software key.
    */
-  @encodedName("application/json", "Hsm")
-  hsm?: boolean;
+  Hsm?: boolean;
 
   /**
    * The Json web key
@@ -1801,8 +1769,7 @@ model KeyImportParameters {
   /**
    * The key management attributes.
    */
-  @encodedName("application/json", "attributes")
-  keyAttributes?: KeyAttributes;
+  attributes?: KeyAttributes;
 
   /**
    * Application specific metadata in the form of key-value pairs.
@@ -1812,8 +1779,7 @@ model KeyImportParameters {
   /**
    * The policy rules under which the key can be exported.
    */
-  @encodedName("application/json", "release_policy")
-  releasePolicy?: KeyReleasePolicy;
+  release_policy?: KeyReleasePolicy;
 }
 
 /**
@@ -1830,13 +1796,17 @@ model DeletedKeyBundle extends KeyBundle {
    * The time when the key is scheduled to be purged, in UTC
    */
   @visibility("read")
-  scheduledPurgeDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  scheduledPurgeDate?: utcDateTime;
 
   /**
    * The time when the key was deleted, in UTC
    */
   @visibility("read")
-  deletedDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  deletedDate?: utcDateTime;
 }
 
 /**
@@ -1847,14 +1817,12 @@ model KeyUpdateParameters {
    * Json web key operations. For more information on possible key operations, see
    * JsonWebKeyOperation.
    */
-  @encodedName("application/json", "key_ops")
-  keyOps?: JsonWebKeyOperation[];
+  key_ops?: JsonWebKeyOperation[];
 
   /**
    * The attributes of a key managed by the key vault service.
    */
-  @encodedName("application/json", "attributes")
-  keyAttributes?: KeyAttributes;
+  attributes?: KeyAttributes;
 
   /**
    * Application specific metadata in the form of key-value pairs.
@@ -1864,8 +1832,7 @@ model KeyUpdateParameters {
   /**
    * The policy rules under which the key can be exported.
    */
-  @encodedName("application/json", "release_policy")
-  releasePolicy?: KeyReleasePolicy;
+  release_policy?: KeyReleasePolicy;
 }
 
 /**
@@ -1918,8 +1885,7 @@ model KeyRestoreParameters {
   /**
    * The backup blob associated with a key bundle.
    */
-  @encodedName("application/json", "value")
-  keyBundleBackup: bytes;
+  value: bytes;
 }
 
 /**
@@ -1929,8 +1895,7 @@ model KeyOperationsParameters {
   /**
    * algorithm identifier
    */
-  @encodedName("application/json", "alg")
-  algorithm: JsonWebKeyEncryptionAlgorithm;
+  alg: JsonWebKeyEncryptionAlgorithm;
 
   value: bytes;
 
@@ -1964,19 +1929,16 @@ model KeyOperationResult {
   kid?: string;
 
   @visibility("read")
-  @encodedName("application/json", "value")
-  result?: bytes;
+  value?: bytes;
 
   @visibility("read")
   iv?: bytes;
 
   @visibility("read")
-  @encodedName("application/json", "tag")
-  authenticationTag?: bytes;
+  tag?: bytes;
 
   @visibility("read")
-  @encodedName("application/json", "aad")
-  additionalAuthenticatedData?: bytes;
+  aad?: bytes;
 }
 
 /**
@@ -1987,8 +1949,7 @@ model KeySignParameters {
    * The signing/verification algorithm identifier. For more information on possible
    * algorithm types, see JsonWebKeySignatureAlgorithm.
    */
-  @encodedName("application/json", "alg")
-  algorithm: JsonWebKeySignatureAlgorithm;
+  alg: JsonWebKeySignatureAlgorithm;
 
   value: bytes;
 }
@@ -2001,8 +1962,7 @@ model KeyVerifyParameters {
    * The signing/verification algorithm. For more information on possible algorithm
    * types, see JsonWebKeySignatureAlgorithm.
    */
-  @encodedName("application/json", "alg")
-  algorithm: JsonWebKeySignatureAlgorithm;
+  alg: JsonWebKeySignatureAlgorithm;
 
   /**
    * The digest used for signing.
@@ -2012,8 +1972,7 @@ model KeyVerifyParameters {
   /**
    * The signature to be verified.
    */
-  @encodedName("application/json", "value")
-  signature: bytes;
+  value: bytes;
 }
 
 /**
@@ -2035,8 +1994,7 @@ model KeyReleaseParameters {
    * The attestation assertion for the target of the key release.
    */
   @minLength(1)
-  @encodedName("application/json", "target")
-  targetAttestationToken: string;
+  target: string;
 
   /**
    * A client provided nonce for freshness.
@@ -2080,13 +2038,17 @@ model DeletedKeyItem extends KeyItem {
    * The time when the key is scheduled to be purged, in UTC
    */
   @visibility("read")
-  scheduledPurgeDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  scheduledPurgeDate?: utcDateTime;
 
   /**
    * The time when the key was deleted, in UTC
    */
   @visibility("read")
-  deletedDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  deletedDate?: utcDateTime;
 }
 
 /**
@@ -2171,13 +2133,17 @@ model KeyRotationPolicyAttributes {
    * The key rotation policy created time in UTC.
    */
   @visibility("read")
-  created?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  created?: utcDateTime;
 
   /**
    * The key rotation policy's last updated time in UTC.
    */
   @visibility("read")
-  updated?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  updated?: utcDateTime;
 }
 
 /**
@@ -2247,8 +2213,7 @@ model RoleDefinitionProperties {
   /**
    * The role type.
    */
-  @encodedName("application/json", "type")
-  roleType?: RoleType;
+  type?: RoleType;
 
   /**
    * Role definition permissions.
@@ -2404,8 +2369,7 @@ model SecretSetParameters {
   /**
    * The secret management attributes.
    */
-  @encodedName("application/json", "attributes")
-  secretAttributes?: SecretAttributes;
+  attributes?: SecretAttributes;
 }
 
 /**
@@ -2489,13 +2453,17 @@ model DeletedSecretBundle extends SecretBundle {
    * The time when the secret is scheduled to be purged, in UTC
    */
   @visibility("read")
-  scheduledPurgeDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  scheduledPurgeDate?: utcDateTime;
 
   /**
    * The time when the secret was deleted, in UTC
    */
   @visibility("read")
-  deletedDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  deletedDate?: utcDateTime;
 }
 
 /**
@@ -2510,8 +2478,7 @@ model SecretUpdateParameters {
   /**
    * The secret management attributes.
    */
-  @encodedName("application/json", "attributes")
-  secretAttributes?: SecretAttributes;
+  attributes?: SecretAttributes;
 
   /**
    * Application specific metadata in the form of key-value pairs.
@@ -2575,13 +2542,17 @@ model DeletedSecretItem extends SecretItem {
    * The time when the secret is scheduled to be purged, in UTC
    */
   @visibility("read")
-  scheduledPurgeDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  scheduledPurgeDate?: utcDateTime;
 
   /**
    * The time when the secret was deleted, in UTC
    */
   @visibility("read")
-  deletedDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  deletedDate?: utcDateTime;
 }
 
 /**
@@ -2602,8 +2573,7 @@ model SecretRestoreParameters {
   /**
    * The backup blob associated with a secret bundle.
    */
-  @encodedName("application/json", "value")
-  secretBundleBackup: bytes;
+  value: bytes;
 }
 
 model SecurityDomainOperationStatus {
@@ -2612,8 +2582,7 @@ model SecurityDomainOperationStatus {
    */
   status?: OperationStatus;
 
-  @encodedName("application/json", "status_details")
-  statusDetails?: string;
+  status_details?: string;
 }
 
 model CertificateInfoObject {
@@ -2644,8 +2613,7 @@ model SecurityDomainJsonWebKey {
    */
   kty: string;
 
-  @encodedName("application/json", "key_ops")
-  keyOps: string[];
+  key_ops: string[];
 
   /**
    * RSA modulus.
@@ -2660,8 +2628,7 @@ model SecurityDomainJsonWebKey {
   /**
    * X509 certificate chain parameter
    */
-  @encodedName("application/json", "x5c")
-  x5C: string[];
+  x5c: string[];
 
   /**
    * Public Key Use Parameter. This is optional and if present must be enc.
@@ -2671,14 +2638,12 @@ model SecurityDomainJsonWebKey {
   /**
    * X509 certificate SHA1 thumbprint. This is optional.
    */
-  @encodedName("application/json", "x5t")
-  x5T?: string;
+  x5t?: string;
 
   /**
    * X509 certificate SHA256 thumbprint.
    */
-  @encodedName("application/json", "x5t#S256")
-  x5TS256: string;
+  `x5t#S256`: string;
 
   /**
    * Algorithm intended for use with the key.
@@ -2700,14 +2665,12 @@ model TransferKey {
   /**
    * Specifies the format of the transfer key
    */
-  @encodedName("application/json", "key_format")
-  keyFormat?: string = "jwk";
+  key_format?: string = "jwk";
 
   /**
    * Specifies the transfer key in JWK format
    */
-  @encodedName("application/json", "transfer_key")
-  transferKey: SecurityDomainJsonWebKey;
+  transfer_key: SecurityDomainJsonWebKey;
 }
 
 /**
@@ -2796,13 +2759,17 @@ model StorageAccountAttributes {
    * Creation time in UTC.
    */
   @visibility("read")
-  created?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  created?: utcDateTime;
 
   /**
    * Last updated time in UTC.
    */
   @visibility("read")
-  updated?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  updated?: utcDateTime;
 
   /**
    * softDelete data retention days. Value should be >=7 and <=90 when softDelete
@@ -2842,13 +2809,17 @@ model DeletedStorageAccountItem extends StorageAccountItem {
    * The time when the storage account is scheduled to be purged, in UTC
    */
   @visibility("read")
-  scheduledPurgeDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  scheduledPurgeDate?: utcDateTime;
 
   /**
    * The time when the storage account was deleted, in UTC
    */
   @visibility("read")
-  deletedDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  deletedDate?: utcDateTime;
 }
 
 /**
@@ -2867,13 +2838,17 @@ model DeletedStorageBundle extends StorageBundle {
    * The time when the storage account is scheduled to be purged, in UTC
    */
   @visibility("read")
-  scheduledPurgeDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  scheduledPurgeDate?: utcDateTime;
 
   /**
    * The time when the storage account was deleted, in UTC
    */
   @visibility("read")
-  deletedDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  deletedDate?: utcDateTime;
 }
 
 /**
@@ -2942,8 +2917,7 @@ model StorageRestoreParameters {
   /**
    * The backup blob associated with a storage account.
    */
-  @encodedName("application/json", "value")
-  storageBundleBackup: bytes;
+  value: bytes;
 }
 
 /**
@@ -2973,8 +2947,7 @@ model StorageAccountCreateParameters {
   /**
    * The attributes of the storage account.
    */
-  @encodedName("application/json", "attributes")
-  storageAccountAttributes?: StorageAccountAttributes;
+  attributes?: StorageAccountAttributes;
 
   /**
    * Application specific metadata in the form of key-value pairs.
@@ -3004,8 +2977,7 @@ model StorageAccountUpdateParameters {
   /**
    * The attributes of the storage account.
    */
-  @encodedName("application/json", "attributes")
-  storageAccountAttributes?: StorageAccountAttributes;
+  attributes?: StorageAccountAttributes;
 
   /**
    * Application specific metadata in the form of key-value pairs.
@@ -3042,8 +3014,7 @@ model SasDefinitionItem {
    * The storage account SAS definition secret id.
    */
   @visibility("read")
-  @encodedName("application/json", "sid")
-  secretId?: string;
+  sid?: string;
 
   /**
    * The SAS definition management attributes.
@@ -3071,13 +3042,17 @@ model SasDefinitionAttributes {
    * Creation time in UTC.
    */
   @visibility("read")
-  created?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  created?: utcDateTime;
 
   /**
    * Last updated time in UTC.
    */
   @visibility("read")
-  updated?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  updated?: utcDateTime;
 
   /**
    * softDelete data retention days. Value should be >=7 and <=90 when softDelete
@@ -3118,13 +3093,17 @@ model DeletedSasDefinitionItem extends SasDefinitionItem {
    * The time when the SAS definition is scheduled to be purged, in UTC
    */
   @visibility("read")
-  scheduledPurgeDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  scheduledPurgeDate?: utcDateTime;
 
   /**
    * The time when the SAS definition was deleted, in UTC
    */
   @visibility("read")
-  deletedDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  deletedDate?: utcDateTime;
 }
 
 /**
@@ -3143,13 +3122,17 @@ model DeletedSasDefinitionBundle extends SasDefinitionBundle {
    * The time when the SAS definition is scheduled to be purged, in UTC
    */
   @visibility("read")
-  scheduledPurgeDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  scheduledPurgeDate?: utcDateTime;
 
   /**
    * The time when the SAS definition was deleted, in UTC
    */
   @visibility("read")
-  deletedDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  deletedDate?: utcDateTime;
 }
 
 /**
@@ -3167,8 +3150,7 @@ model SasDefinitionBundle {
    * Storage account SAS definition secret id.
    */
   @visibility("read")
-  @encodedName("application/json", "sid")
-  secretId?: string;
+  sid?: string;
 
   /**
    * The SAS definition token template signed with an arbitrary key.  Tokens created
@@ -3225,8 +3207,7 @@ model SasDefinitionCreateParameters {
   /**
    * The attributes of the SAS definition.
    */
-  @encodedName("application/json", "attributes")
-  sasDefinitionAttributes?: SasDefinitionAttributes;
+  attributes?: SasDefinitionAttributes;
 
   /**
    * Application specific metadata in the form of key-value pairs.
@@ -3257,8 +3238,7 @@ model SasDefinitionUpdateParameters {
   /**
    * The attributes of the SAS definition.
    */
-  @encodedName("application/json", "attributes")
-  sasDefinitionAttributes?: SasDefinitionAttributes;
+  attributes?: SasDefinitionAttributes;
 
   /**
    * Application specific metadata in the form of key-value pairs.

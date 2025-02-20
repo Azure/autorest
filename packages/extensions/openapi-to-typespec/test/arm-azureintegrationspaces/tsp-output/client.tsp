@@ -13,6 +13,8 @@ using Microsoft.IntegrationSpaces;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(BusinessProcessUpdate.properties);
 
+@@clientName(TrackingProfileDefinition.$schema, "schema");
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ApplicationResourceUpdate.properties);
 

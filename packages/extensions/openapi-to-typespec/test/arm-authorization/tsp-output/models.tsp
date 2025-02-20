@@ -407,8 +407,7 @@ model Principal {
   /**
    * Type of the principal.
    */
-  @encodedName("application/json", "type")
-  principalType?: PrincipalType;
+  type?: PrincipalType;
 
   /**
    * Email of principal
@@ -605,8 +604,7 @@ model RoleDefinitionProperties {
   /**
    * The role type.
    */
-  @encodedName("application/json", "type")
-  roleType?: RoleType;
+  type?: RoleType;
 
   /**
    * Role definition permissions.
@@ -788,20 +786,17 @@ model ExpandedPropertiesScope {
   /**
    * Scope id of the resource
    */
-  @encodedName("application/json", "id")
-  scopeId?: string;
+  id?: string;
 
   /**
    * Display name of the resource
    */
-  @encodedName("application/json", "displayName")
-  scopeDisplayName?: string;
+  displayName?: string;
 
   /**
    * Type of the scope.
    */
-  @encodedName("application/json", "type")
-  scopeType?: ScopeType;
+  type?: ScopeType;
 }
 
 /**
@@ -811,20 +806,17 @@ model ExpandedPropertiesRoleDefinition {
   /**
    * Id of the role definition
    */
-  @encodedName("application/json", "id")
-  roleDefinitionId?: string;
+  id?: string;
 
   /**
    * Display name of the role definition
    */
-  @encodedName("application/json", "displayName")
-  roleDefinitionDisplayName?: string;
+  displayName?: string;
 
   /**
    * The role type.
    */
-  @encodedName("application/json", "type")
-  roleType?: RoleType;
+  type?: RoleType;
 }
 
 /**
@@ -834,14 +826,12 @@ model ExpandedPropertiesPrincipal {
   /**
    * Id of the principal
    */
-  @encodedName("application/json", "id")
-  principalId?: string;
+  id?: string;
 
   /**
    * Display name of the principal
    */
-  @encodedName("application/json", "displayName")
-  principalDisplayName?: string;
+  displayName?: string;
 
   /**
    * Email id of the principal
@@ -851,8 +841,7 @@ model ExpandedPropertiesPrincipal {
   /**
    * Type of the principal.
    */
-  @encodedName("application/json", "type")
-  principalType?: PrincipalType;
+  type?: PrincipalType;
 }
 
 /**
@@ -1076,8 +1065,7 @@ model RoleAssignmentScheduleRequestPropertiesScheduleInfoExpiration {
   /**
    * Type of the role assignment schedule expiration
    */
-  @encodedName("application/json", "type")
-  expirationType?: RoleManagementScheduleExpirationType;
+  type?: RoleManagementScheduleExpirationType;
 
   /**
    * End DateTime of the role assignment schedule.
@@ -1380,8 +1368,7 @@ model RoleEligibilityScheduleRequestPropertiesScheduleInfoExpiration {
   /**
    * Type of the role eligibility schedule expiration
    */
-  @encodedName("application/json", "type")
-  expirationType?: RoleManagementScheduleExpirationType;
+  type?: RoleManagementScheduleExpirationType;
 
   /**
    * End DateTime of the role eligibility schedule.
@@ -1477,6 +1464,11 @@ model RoleManagementPolicyRule {
   id?: string;
 
   /**
+   * The type of rule
+   */
+  ruleType: RoleManagementPolicyRuleType;
+
+  /**
    * The target of the current rule.
    */
   target?: RoleManagementPolicyRuleTarget;
@@ -1537,20 +1529,17 @@ model PolicyPropertiesScope {
   /**
    * Scope id of the resource
    */
-  @encodedName("application/json", "id")
-  scopeId?: string;
+  id?: string;
 
   /**
    * Display name of the resource
    */
-  @encodedName("application/json", "displayName")
-  scopeDisplayName?: string;
+  displayName?: string;
 
   /**
    * Type of the scope.
    */
-  @encodedName("application/json", "type")
-  scopeType?: ScopeType;
+  type?: ScopeType;
 }
 
 /**
@@ -1619,20 +1608,17 @@ model PolicyAssignmentPropertiesScope {
   /**
    * Scope id of the resource
    */
-  @encodedName("application/json", "id")
-  scopeId?: string;
+  id?: string;
 
   /**
    * Display name of the resource
    */
-  @encodedName("application/json", "displayName")
-  scopeDisplayName?: string;
+  displayName?: string;
 
   /**
    * Type of the scope.
    */
-  @encodedName("application/json", "type")
-  scopeType?: ScopeType;
+  type?: ScopeType;
 }
 
 /**
@@ -1642,20 +1628,17 @@ model PolicyAssignmentPropertiesRoleDefinition {
   /**
    * Id of the role definition
    */
-  @encodedName("application/json", "id")
-  roleDefinitionId?: string;
+  id?: string;
 
   /**
    * Display name of the role definition
    */
-  @encodedName("application/json", "displayName")
-  roleDefinitionDisplayName?: string;
+  displayName?: string;
 
   /**
    * The role type.
    */
-  @encodedName("application/json", "type")
-  roleType?: RoleType;
+  type?: RoleType;
 }
 
 /**
@@ -1665,8 +1648,7 @@ model PolicyAssignmentPropertiesPolicy {
   /**
    * Id of the policy
    */
-  @encodedName("application/json", "id")
-  policyId?: string;
+  id?: string;
 
   /**
    * The name of the entity last modified it

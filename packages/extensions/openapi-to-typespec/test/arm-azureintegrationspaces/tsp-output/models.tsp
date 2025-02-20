@@ -433,8 +433,7 @@ model TrackingProfileDefinition {
   /**
    * The tracking definition schema uri.
    */
-  @encodedName("application/json", "$schema")
-  schema?: string;
+  $schema?: string;
 
   /**
    * The business process reference.

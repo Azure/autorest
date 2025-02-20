@@ -4,14 +4,28 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager.ApiManagement;
 
+@@clientName(ApiEntityBaseContract.type, "apiType");
+@@clientName(ApiEntityBaseContract.subscriptionRequired,
+  "IsSubscriptionRequired"
+);
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ApiCreateOrUpdateParameter.properties);
+
+@@clientName(ApiCreateOrUpdateProperties.apiType, "soapApiType");
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ApiUpdateContract.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(OperationUpdateContract.properties);
+
+@@clientName(ProductEntityBaseParameters.subscriptionRequired,
+  "IsSubscriptionRequired"
+);
+@@clientName(ProductEntityBaseParameters.approvalRequired,
+  "IsApprovalRequired"
+);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(SchemaContractProperties.document);
@@ -22,8 +36,17 @@ using Azure.ResourceManager.ApiManagement;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(TagDescriptionCreateParameters.properties);
 
+@@clientName(ApiExportResult.format, "exportResultFormat");
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ApiVersionSetUpdateParameters.properties);
+
+@@clientName(AuthorizationServerContractBaseProperties.clientAuthenticationMethod,
+  "clientAuthenticationMethods"
+);
+@@clientName(AuthorizationServerContractBaseProperties.supportState,
+  "doesSupportState"
+);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(AuthorizationServerUpdateContract.properties);
@@ -34,11 +57,19 @@ using Azure.ResourceManager.ApiManagement;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(BackendReconnectContract.properties);
 
+@@clientName(CacheContractProperties.resourceId, "resourceUri");
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(CacheUpdateParameters.properties);
 
+@@clientName(CacheUpdateProperties.resourceId, "resourceUri");
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(CertificateCreateOrUpdateParameters.properties);
+
+@@clientName(ConnectivityCheckRequestProtocolConfiguration.HTTPConfiguration,
+  "httpConfiguration"
+);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RemotePrivateEndpointConnectionWrapper.properties);
@@ -58,6 +89,15 @@ using Azure.ResourceManager.ApiManagement;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(GroupUpdateParameters.properties);
 
+@@clientName(IdentityProviderBaseParameters.type, "identityProviderType");
+@@clientName(IdentityProviderBaseParameters.signinTenant, "signInTenant");
+@@clientName(IdentityProviderBaseParameters.signupPolicyName,
+  "signUpPolicyName"
+);
+@@clientName(IdentityProviderBaseParameters.signinPolicyName,
+  "signInPolicyName"
+);
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(IdentityProviderCreateContract.properties);
 
@@ -66,6 +106,8 @@ using Azure.ResourceManager.ApiManagement;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(LoggerUpdateContract.properties);
+
+@@clientName(NamedValueEntityBaseParameters.secret, "IsSecret");
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(NamedValueCreateContract.properties);
@@ -87,6 +129,11 @@ using Azure.ResourceManager.ApiManagement;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PortalSettingsContract.properties);
+
+@@clientName(PortalSettingsContractProperties.subscriptions, "IsSubscriptions");
+@@clientName(PortalSettingsContractProperties.userRegistration,
+  "IsUserRegistration"
+);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ProductUpdateParameters.properties);

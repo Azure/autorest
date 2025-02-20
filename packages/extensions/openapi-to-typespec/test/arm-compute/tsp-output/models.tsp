@@ -3097,8 +3097,7 @@ model VirtualMachineScaleSetDataDisk {
   /**
    * Specifies the Read-Write IOPS for the managed disk. Should be used only when StorageAccountType is UltraSSD_LRS. If not specified, a default value would be assigned based on diskSizeGB.
    */
-  @encodedName("application/json", "diskIOPSReadWrite")
-  diskIopsReadWrite?: int64;
+  diskIOPSReadWrite?: int64;
 
   /**
    * Specifies the bandwidth in MB per second for the managed disk. Should be used only when StorageAccountType is UltraSSD_LRS. If not specified, a default value would be assigned based on diskSizeGB.
@@ -5639,8 +5638,7 @@ model DataDisk {
    * Specifies the Read-Write IOPS for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.
    */
   @visibility("read")
-  @encodedName("application/json", "diskIOPSReadWrite")
-  diskIopsReadWrite?: int64;
+  diskIOPSReadWrite?: int64;
 
   /**
    * Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.
@@ -6502,8 +6500,7 @@ model VirtualMachineCaptureResult extends SubResource {
    * the schema of the captured virtual machine
    */
   @visibility("read")
-  @encodedName("application/json", "$schema")
-  schema?: string;
+  $schema?: string;
 
   /**
    * the version of the content
@@ -7797,9 +7794,8 @@ model RestorePointSourceVMStorageProfile {
   /**
    * Gets the data disks of the VM captured at the time of the restore point creation.
    */
-  @encodedName("application/json", "dataDisks")
   @OpenAPI.extension("x-ms-identifiers", ["lun"])
-  dataDiskList?: RestorePointSourceVMDataDisk[];
+  dataDisks?: RestorePointSourceVMDataDisk[];
 }
 
 /**
@@ -8247,8 +8243,7 @@ model RunCommandDocumentBase {
   /**
    * The VM run command schema.
    */
-  @encodedName("application/json", "$schema")
-  schema: string;
+  $schema: string;
 
   /**
    * The VM run command id.
@@ -8623,8 +8618,7 @@ model DiskProperties {
   /**
    * The number of IOPS allowed for this disk; only settable for UltraSSD disks. One operation can transfer between 4k and 256k bytes.
    */
-  @encodedName("application/json", "diskIOPSReadWrite")
-  diskIopsReadWrite?: int64;
+  diskIOPSReadWrite?: int64;
 
   /**
    * The bandwidth allowed for this disk; only settable for UltraSSD disks. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10.
@@ -8634,8 +8628,7 @@ model DiskProperties {
   /**
    * The total number of IOPS that will be allowed across all VMs mounting the shared disk as ReadOnly. One operation can transfer between 4k and 256k bytes.
    */
-  @encodedName("application/json", "diskIOPSReadOnly")
-  diskIopsReadOnly?: int64;
+  diskIOPSReadOnly?: int64;
 
   /**
    * The total throughput (MBps) that will be allowed across all VMs mounting the shared disk as ReadOnly. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10.
@@ -8732,9 +8725,8 @@ model DiskProperties {
    * The UTC time when the ownership state of the disk was last changed i.e., the time the disk was last attached or detached from a VM or the time when the VM to which the disk was attached was deallocated or started.
    */
   @visibility("read")
-  @encodedName("application/json", "LastOwnershipUpdateTime")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastOwnershipUpdateTime?: utcDateTime;
+  LastOwnershipUpdateTime?: utcDateTime;
 }
 
 /**
@@ -9043,8 +9035,7 @@ model DiskUpdateProperties {
   /**
    * The number of IOPS allowed for this disk; only settable for UltraSSD disks. One operation can transfer between 4k and 256k bytes.
    */
-  @encodedName("application/json", "diskIOPSReadWrite")
-  diskIopsReadWrite?: int64;
+  diskIOPSReadWrite?: int64;
 
   /**
    * The bandwidth allowed for this disk; only settable for UltraSSD disks. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10.
@@ -9054,8 +9045,7 @@ model DiskUpdateProperties {
   /**
    * The total number of IOPS that will be allowed across all VMs mounting the shared disk as ReadOnly. One operation can transfer between 4k and 256k bytes.
    */
-  @encodedName("application/json", "diskIOPSReadOnly")
-  diskIopsReadOnly?: int64;
+  diskIOPSReadOnly?: int64;
 
   /**
    * The total throughput (MBps) that will be allowed across all VMs mounting the shared disk as ReadOnly. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10.

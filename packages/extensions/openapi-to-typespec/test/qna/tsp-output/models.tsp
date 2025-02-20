@@ -138,20 +138,17 @@ model AnswersOptions {
    * Minimum threshold score for answers, value ranges from 0 to 1.
    */
   @maxValue(1)
-  @encodedName("application/json", "confidenceScoreThreshold")
-  confidenceThreshold?: float64;
+  confidenceScoreThreshold?: float64;
 
   /**
    * Context object with previous QnA's information.
    */
-  @encodedName("application/json", "context")
-  answerContext?: KnowledgeBaseAnswerContext;
+  context?: KnowledgeBaseAnswerContext;
 
   /**
    * Type of ranker to be used.
    */
-  @encodedName("application/json", "rankerType")
-  rankerKind?: RankerKind;
+  rankerType?: RankerKind;
 
   /**
    * Filter QnAs based on given metadata list and knowledge base sources.
@@ -161,8 +158,7 @@ model AnswersOptions {
   /**
    * To configure Answer span prediction feature.
    */
-  @encodedName("application/json", "answerSpanRequest")
-  shortAnswerOptions?: ShortAnswerOptions;
+  answerSpanRequest?: ShortAnswerOptions;
 
   /**
    * (Optional) Flag to enable Query over Unstructured Sources.
@@ -182,8 +178,7 @@ model KnowledgeBaseAnswerContext {
   /**
    * Previous user query.
    */
-  @encodedName("application/json", "previousUserQuery")
-  previousQuestion?: string;
+  previousUserQuery?: string;
 }
 
 /**
@@ -248,16 +243,14 @@ model ShortAnswerOptions {
    * to 1.
    */
   @maxValue(1)
-  @encodedName("application/json", "confidenceScoreThreshold")
-  confidenceThreshold?: float64;
+  confidenceScoreThreshold?: float64;
 
   /**
    * Number of Top answers to be considered for span prediction from 1 to 10.
    */
   @maxValue(10)
   @minValue(1)
-  @encodedName("application/json", "topAnswersWithSpan")
-  top?: int32;
+  topAnswersWithSpan?: int32;
 }
 
 /**
@@ -288,14 +281,12 @@ model KnowledgeBaseAnswer {
    * Answer confidence score, value ranges from 0 to 1.
    */
   @maxValue(1)
-  @encodedName("application/json", "confidenceScore")
-  confidence?: float64;
+  confidenceScore?: float64;
 
   /**
    * ID of the QnA result.
    */
-  @encodedName("application/json", "id")
-  qnaId?: int32;
+  id?: int32;
 
   /**
    * Source of QnA result.
@@ -316,8 +307,7 @@ model KnowledgeBaseAnswer {
   /**
    * Answer span object of QnA with respect to user's question.
    */
-  @encodedName("application/json", "answerSpan")
-  shortAnswer?: AnswerSpan;
+  answerSpan?: AnswerSpan;
 }
 
 /**
@@ -371,8 +361,7 @@ model AnswerSpan {
    * Predicted score of answer span, value ranges from 0 to 1.
    */
   @maxValue(1)
-  @encodedName("application/json", "confidenceScore")
-  confidence?: float64;
+  confidenceScore?: float64;
 
   /**
    * The answer span offset from the start of answer.
@@ -474,8 +463,7 @@ model AnswersFromTextOptions {
   /**
    * Text records to be searched for given question.
    */
-  @encodedName("application/json", "records")
-  textDocuments: TextDocument[];
+  records: TextDocument[];
 
   /**
    * Language of the text records. This is BCP-47 representation of a language. For
@@ -530,8 +518,7 @@ model TextAnswer {
    * answer confidence score, value ranges from 0 to 1.
    */
   @maxValue(1)
-  @encodedName("application/json", "confidenceScore")
-  confidence?: float64;
+  confidenceScore?: float64;
 
   /**
    * record ID.
@@ -541,8 +528,7 @@ model TextAnswer {
   /**
    * Answer span object with respect to user's question.
    */
-  @encodedName("application/json", "answerSpan")
-  shortAnswer?: AnswerSpan;
+  answerSpan?: AnswerSpan;
 
   /**
    * The sentence offset from the start of the document.

@@ -398,6 +398,11 @@ model Schedule {
 @discriminator("recurrenceType")
 model Recurrence {
   /**
+   * Specifies when the recurrence should be applied.
+   */
+  recurrenceType: RecurrenceType;
+
+  /**
    * Start time for recurrence.
    */
   startTime?: plainTime;
@@ -412,7 +417,12 @@ model Recurrence {
  * Action to be applied.
  */
 @discriminator("actionType")
-model Action {}
+model Action {
+  /**
+   * Action that should be applied.
+   */
+  actionType: ActionType;
+}
 
 /**
  * An azure managed resource object.
@@ -571,7 +581,12 @@ model AlertsMetaData {
  * alert meta data property bag
  */
 @discriminator("metadataIdentifier")
-model AlertsMetaDataProperties {}
+model AlertsMetaDataProperties {
+  /**
+   * Identification of the information to be retrieved by API call
+   */
+  metadataIdentifier: MetadataIdentifier;
+}
 
 /**
  * List the alerts.

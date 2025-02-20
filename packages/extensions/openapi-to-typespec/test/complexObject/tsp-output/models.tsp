@@ -22,8 +22,7 @@ model Product {
    * longitude. For example, uberX in San Francisco will have a different product_id
    * than uberX in Los Angeles.
    */
-  @encodedName("application/json", "product_id")
-  productId?: string;
+  product_id?: string;
 
   /**
    * Description of product.
@@ -33,8 +32,7 @@ model Product {
   /**
    * Display name of product.
    */
-  @encodedName("application/json", "display_name")
-  displayName?: string;
+  display_name?: string;
 
   /**
    * Capacity of product. For example, 4 people.
@@ -72,4 +70,18 @@ model CatalogArrayOfDictionary {
    * Array of dictionary of products
    */
   productArrayOfDictionary?: Record<Product>[];
+}
+
+model Attributes {
+  /**
+   * Determines whether the object is enabled.
+   */
+  enabled?: boolean;
+
+  /**
+   * Not before date in seconds since 1970-01-01T00:00:00Z.
+   */
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  nbf?: utcDateTime;
 }

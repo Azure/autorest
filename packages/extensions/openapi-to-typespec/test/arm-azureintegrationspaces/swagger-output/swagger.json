@@ -3300,8 +3300,7 @@
       "properties": {
         "$schema": {
           "type": "string",
-          "description": "The tracking definition schema uri.",
-          "x-ms-client-name": "schema"
+          "description": "The tracking definition schema uri."
         },
         "businessProcess": {
           "$ref": "#/definitions/BusinessProcessReference",

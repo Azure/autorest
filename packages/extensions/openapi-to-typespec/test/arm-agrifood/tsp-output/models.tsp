@@ -131,7 +131,12 @@ model DataConnectorProperties {
  * AuthCredentials abstract base class for Auth Purpose.
  */
 @discriminator("kind")
-model AuthCredentials {}
+model AuthCredentials {
+  /**
+   * Enum for different types of AuthCredentials supported.
+   */
+  kind: AuthCredentialsKind;
+}
 
 /**
  * Common fields that are returned in the response for all Azure Resource Manager resources
@@ -175,8 +180,7 @@ model DataManagerForAgricultureExtensionListResponse
   /**
    * Token used in retrieving the next page. If null, there are no additional pages.
    */
-  @encodedName("application/json", "$skipToken")
-  skipToken?: string;
+  $skipToken?: string;
 }
 
 /**
@@ -508,8 +512,7 @@ model DataManagerForAgricultureListResponse
   /**
    * Token used in retrieving the next page. If null, there are no additional pages.
    */
-  @encodedName("application/json", "$skipToken")
-  skipToken?: string;
+  $skipToken?: string;
 }
 
 /**
@@ -626,8 +629,7 @@ model ExtensionListResponse is Azure.Core.Page<Extension> {
   /**
    * Token used in retrieving the next page. If null, there are no additional pages.
    */
-  @encodedName("application/json", "$skipToken")
-  skipToken?: string;
+  $skipToken?: string;
 }
 
 /**
@@ -735,8 +737,7 @@ model SolutionListResponse is Azure.Core.Page<Solution> {
   /**
    * Token used in retrieving the next page. If null, there are no additional pages.
    */
-  @encodedName("application/json", "$skipToken")
-  skipToken?: string;
+  $skipToken?: string;
 }
 
 /**
@@ -747,8 +748,7 @@ model DataManagerForAgricultureSolutionListResponse
   /**
    * Token used in retrieving the next page. If null, there are no additional pages.
    */
-  @encodedName("application/json", "$skipToken")
-  skipToken?: string;
+  $skipToken?: string;
 }
 
 /**

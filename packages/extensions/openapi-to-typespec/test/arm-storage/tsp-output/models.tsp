@@ -1142,8 +1142,7 @@ model StorageAccountPropertiesCreateParameters {
   /**
    * Network rule set
    */
-  @encodedName("application/json", "networkAcls")
-  networkRuleSet?: NetworkRuleSet;
+  networkAcls?: NetworkRuleSet;
 
   /**
    * Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier is the default value for premium block blobs storage account type and it cannot be changed for the premium block blobs storage account type.
@@ -1158,26 +1157,22 @@ model StorageAccountPropertiesCreateParameters {
   /**
    * Allows https traffic only to storage service if sets to true. The default value is true since API version 2019-04-01.
    */
-  @encodedName("application/json", "supportsHttpsTrafficOnly")
-  enableHttpsTrafficOnly?: boolean;
+  supportsHttpsTrafficOnly?: boolean;
 
   /**
    * Enables Secure File Transfer Protocol, if set to true
    */
-  @encodedName("application/json", "isSftpEnabled")
-  IsSftpEnabled?: boolean;
+  isSftpEnabled?: boolean;
 
   /**
    * Enables local users feature, if set to true
    */
-  @encodedName("application/json", "isLocalUserEnabled")
-  IsLocalUserEnabled?: boolean;
+  isLocalUserEnabled?: boolean;
 
   /**
    * Account HierarchicalNamespace enabled if sets to true.
    */
-  @encodedName("application/json", "isHnsEnabled")
-  IsHnsEnabled?: boolean;
+  isHnsEnabled?: boolean;
 
   /**
    * Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled.
@@ -1207,8 +1202,7 @@ model StorageAccountPropertiesCreateParameters {
   /**
    * NFS 3.0 protocol support enabled if set to true.
    */
-  @encodedName("application/json", "isNfsV3Enabled")
-  enableNfsV3?: boolean;
+  isNfsV3Enabled?: boolean;
 
   /**
    * Allow or disallow cross AAD tenant object replication. The default interpretation is true for this property.
@@ -1293,14 +1287,12 @@ model Encryption {
   /**
    * Properties provided by key vault.
    */
-  @encodedName("application/json", "keyvaultproperties")
-  keyVaultProperties?: KeyVaultProperties;
+  keyvaultproperties?: KeyVaultProperties;
 
   /**
    * The identity to be used with service-side encryption at rest.
    */
-  @encodedName("application/json", "identity")
-  encryptionIdentity?: EncryptionIdentity;
+  identity?: EncryptionIdentity;
 }
 
 /**
@@ -1358,20 +1350,17 @@ model KeyVaultProperties {
   /**
    * The name of KeyVault key.
    */
-  @encodedName("application/json", "keyname")
-  keyName?: string;
+  keyname?: string;
 
   /**
    * The version of KeyVault key.
    */
-  @encodedName("application/json", "keyversion")
-  keyVersion?: string;
+  keyversion?: string;
 
   /**
    * The Uri of KeyVault.
    */
-  @encodedName("application/json", "keyvaulturi")
-  keyVaultUri?: string;
+  keyvaulturi?: string;
 
   /**
    * The object identifier of the current versioned Key Vault Key in use.
@@ -1401,14 +1390,12 @@ model EncryptionIdentity {
   /**
    * Resource identifier of the UserAssigned identity to be associated with server-side encryption on the storage account.
    */
-  @encodedName("application/json", "userAssignedIdentity")
-  encryptionUserAssignedIdentity?: string;
+  userAssignedIdentity?: string;
 
   /**
    * ClientId of the multi-tenant application to be used in conjunction with the user-assigned identity for cross-tenant customer-managed-keys server-side encryption on the storage account.
    */
-  @encodedName("application/json", "federatedIdentityClientId")
-  encryptionFederatedIdentityClientId?: string;
+  federatedIdentityClientId?: string;
 }
 
 /**
@@ -1463,8 +1450,7 @@ model VirtualNetworkRule {
   /**
    * Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}.
    */
-  @encodedName("application/json", "id")
-  virtualNetworkResourceId: string;
+  id: string;
 
   /**
    * The action of virtual network rule.
@@ -1484,8 +1470,7 @@ model IPRule {
   /**
    * Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed.
    */
-  @encodedName("application/json", "value")
-  IPAddressOrRange: string;
+  value: string;
 
   /**
    * The action of IP ACL rule.
@@ -1719,33 +1704,28 @@ model StorageAccountProperties {
   /**
    * Allows https traffic only to storage service if sets to true.
    */
-  @encodedName("application/json", "supportsHttpsTrafficOnly")
-  enableHttpsTrafficOnly?: boolean;
+  supportsHttpsTrafficOnly?: boolean;
 
   /**
    * Network rule set
    */
   @visibility("read")
-  @encodedName("application/json", "networkAcls")
-  networkRuleSet?: NetworkRuleSet;
+  networkAcls?: NetworkRuleSet;
 
   /**
    * Enables Secure File Transfer Protocol, if set to true
    */
-  @encodedName("application/json", "isSftpEnabled")
-  IsSftpEnabled?: boolean;
+  isSftpEnabled?: boolean;
 
   /**
    * Enables local users feature, if set to true
    */
-  @encodedName("application/json", "isLocalUserEnabled")
-  IsLocalUserEnabled?: boolean;
+  isLocalUserEnabled?: boolean;
 
   /**
    * Account HierarchicalNamespace enabled if sets to true.
    */
-  @encodedName("application/json", "isHnsEnabled")
-  IsHnsEnabled?: boolean;
+  isHnsEnabled?: boolean;
 
   /**
    * Geo Replication Stats
@@ -1799,8 +1779,7 @@ model StorageAccountProperties {
   /**
    * NFS 3.0 protocol support enabled if set to true.
    */
-  @encodedName("application/json", "isNfsV3Enabled")
-  enableNfsV3?: boolean;
+  isNfsV3Enabled?: boolean;
 
   /**
    * Allow or disallow cross AAD tenant object replication. The default interpretation is true for this property.
@@ -2107,9 +2086,8 @@ model BlobRestoreParameters {
   /**
    * Restore blob to the specified time.
    */
-  @encodedName("application/json", "timetoRestore")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  timeToRestore: utcDateTime;
+  timetoRestore: utcDateTime;
 
   /**
    * Blob ranges to restore.
@@ -2232,26 +2210,22 @@ model StorageAccountPropertiesUpdateParameters {
   /**
    * Allows https traffic only to storage service if sets to true.
    */
-  @encodedName("application/json", "supportsHttpsTrafficOnly")
-  enableHttpsTrafficOnly?: boolean;
+  supportsHttpsTrafficOnly?: boolean;
 
   /**
    * Enables Secure File Transfer Protocol, if set to true
    */
-  @encodedName("application/json", "isSftpEnabled")
-  IsSftpEnabled?: boolean;
+  isSftpEnabled?: boolean;
 
   /**
    * Enables local users feature, if set to true
    */
-  @encodedName("application/json", "isLocalUserEnabled")
-  IsLocalUserEnabled?: boolean;
+  isLocalUserEnabled?: boolean;
 
   /**
    * Network rule set
    */
-  @encodedName("application/json", "networkAcls")
-  networkRuleSet?: NetworkRuleSet;
+  networkAcls?: NetworkRuleSet;
 
   /**
    * Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled.
@@ -2480,46 +2454,39 @@ model AccountSasParameters {
   /**
    * The signed services accessible with the account SAS. Possible values include: Blob (b), Queue (q), Table (t), File (f).
    */
-  @encodedName("application/json", "signedServices")
-  services: Services;
+  signedServices: Services;
 
   /**
    * The signed resource types that are accessible with the account SAS. Service (s): Access to service-level APIs; Container (c): Access to container-level APIs; Object (o): Access to object-level APIs for blobs, queue messages, table entities, and files.
    */
-  @encodedName("application/json", "signedResourceTypes")
-  resourceTypes: SignedResourceTypes;
+  signedResourceTypes: SignedResourceTypes;
 
   /**
    * The signed permissions for the account SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p).
    */
-  @encodedName("application/json", "signedPermission")
-  permissions: Permissions;
+  signedPermission: Permissions;
 
   /**
    * An IP address or a range of IP addresses from which to accept requests.
    */
-  @encodedName("application/json", "signedIp")
-  IPAddressOrRange?: string;
+  signedIp?: string;
 
   /**
    * The protocol permitted for a request made with the account SAS.
    */
-  @encodedName("application/json", "signedProtocol")
-  protocols?: HttpProtocol;
+  signedProtocol?: HttpProtocol;
 
   /**
    * The time at which the SAS becomes valid.
    */
-  @encodedName("application/json", "signedStart")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  sharedAccessStartTime?: utcDateTime;
+  signedStart?: utcDateTime;
 
   /**
    * The time at which the shared access signature becomes invalid.
    */
-  @encodedName("application/json", "signedExpiry")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  sharedAccessExpiryTime: utcDateTime;
+  signedExpiry: utcDateTime;
 
   /**
    * The key to sign the account SAS token with.
@@ -2550,71 +2517,60 @@ model ServiceSasParameters {
   /**
    * The signed services accessible with the service SAS. Possible values include: Blob (b), Container (c), File (f), Share (s).
    */
-  @encodedName("application/json", "signedResource")
-  resource?: SignedResource;
+  signedResource?: SignedResource;
 
   /**
    * The signed permissions for the service SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p).
    */
-  @encodedName("application/json", "signedPermission")
-  permissions?: Permissions;
+  signedPermission?: Permissions;
 
   /**
    * An IP address or a range of IP addresses from which to accept requests.
    */
-  @encodedName("application/json", "signedIp")
-  IPAddressOrRange?: string;
+  signedIp?: string;
 
   /**
    * The protocol permitted for a request made with the account SAS.
    */
-  @encodedName("application/json", "signedProtocol")
-  protocols?: HttpProtocol;
+  signedProtocol?: HttpProtocol;
 
   /**
    * The time at which the SAS becomes valid.
    */
-  @encodedName("application/json", "signedStart")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  sharedAccessStartTime?: utcDateTime;
+  signedStart?: utcDateTime;
 
   /**
    * The time at which the shared access signature becomes invalid.
    */
-  @encodedName("application/json", "signedExpiry")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  sharedAccessExpiryTime?: utcDateTime;
+  signedExpiry?: utcDateTime;
 
   /**
    * A unique value up to 64 characters in length that correlates to an access policy specified for the container, queue, or table.
    */
   @maxLength(64)
-  @encodedName("application/json", "signedIdentifier")
-  identifier?: string;
+  signedIdentifier?: string;
 
   /**
    * The start of partition key.
    */
-  @encodedName("application/json", "startPk")
-  partitionKeyStart?: string;
+  startPk?: string;
 
   /**
    * The end of partition key.
    */
-  @encodedName("application/json", "endPk")
-  partitionKeyEnd?: string;
+  endPk?: string;
 
   /**
    * The start of row key.
    */
-  @encodedName("application/json", "startRk")
-  rowKeyStart?: string;
+  startRk?: string;
 
   /**
    * The end of row key.
    */
-  @encodedName("application/json", "endRk")
-  rowKeyEnd?: string;
+  endRk?: string;
 
   /**
    * The key to sign the account SAS token with.
@@ -2624,32 +2580,27 @@ model ServiceSasParameters {
   /**
    * The response header override for cache control.
    */
-  @encodedName("application/json", "rscc")
-  cacheControl?: string;
+  rscc?: string;
 
   /**
    * The response header override for content disposition.
    */
-  @encodedName("application/json", "rscd")
-  contentDisposition?: string;
+  rscd?: string;
 
   /**
    * The response header override for content encoding.
    */
-  @encodedName("application/json", "rsce")
-  contentEncoding?: string;
+  rsce?: string;
 
   /**
    * The response header override for content language.
    */
-  @encodedName("application/json", "rscl")
-  contentLanguage?: string;
+  rscl?: string;
 
   /**
    * The response header override for content type.
    */
-  @encodedName("application/json", "rsct")
-  contentType?: string;
+  rsct?: string;
 }
 
 /**
@@ -4471,9 +4422,8 @@ model ListQueue extends Resource {
    * List Queue resource properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @encodedName("application/json", "properties")
   @Azure.ResourceManager.Private.conditionalClientFlatten
-  queueProperties?: ListQueueProperties;
+  properties?: ListQueueProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
