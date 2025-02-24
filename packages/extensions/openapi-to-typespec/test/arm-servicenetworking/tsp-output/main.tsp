@@ -26,7 +26,6 @@ using TypeSpec.Versioning;
  * Traffic Controller Provider management API.
  */
 @armProviderNamespace
-@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Traffic Controller Provider management API.",
 })
