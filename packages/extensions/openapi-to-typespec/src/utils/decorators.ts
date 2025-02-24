@@ -15,7 +15,7 @@ import { TypespecDecorator, DecoratorArgument, WithSuppressDirective } from "../
 import { getOptions } from "../options";
 import { createCSharpNameDecorator } from "../pretransforms/rename-pretransform";
 import { getOwnDiscriminator } from "./discriminator";
-import { isStringSchema } from "./schemas";
+import { isStringSchema, isUnixTimeSchema } from "./schemas";
 import { escapeRegex } from "./strings";
 
 export function getModelDecorators(model: ObjectSchema): TypespecDecorator[] {
@@ -96,6 +96,7 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
 
   getNumberSchemaDecorators(element.schema, decorators);
   getStringSchemaDecorators(element.schema, decorators);
+  getUnixTimeSchemaDecorators(element.schema, decorators);
 
   if (element.language.default.isResourceKey) {
     decorators.push({
@@ -161,13 +162,6 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
     decorators.push(locationDecorator);
   }
 
-  if (!isParameter(element) && element.serializedName !== element.language.default.name) {
-    decorators.push({
-      name: "encodedName",
-      arguments: ["application/json", (element as Property).serializedName],
-    });
-  }
-
   if (!isParameter(element) && element.extensions?.["x-ms-identifiers"]?.length >= 0) {
     decorators.push({
       name: "OpenAPI.extension",
@@ -197,7 +191,7 @@ export function createOperationIdDecorator(operationId: string): TypespecDecorat
   };
 }
 
-export function getPropertyClientDecorators(element: Property | Parameter): TypespecDecorator[] {
+export function getPropertyClientDecorators(element: Property): TypespecDecorator[] {
   const { isFullCompatible } = getOptions();
   const decorators: TypespecDecorator[] = [];
 
@@ -208,6 +202,15 @@ export function getPropertyClientDecorators(element: Property | Parameter): Type
       namespace: "Azure.ClientGenerator.Core",
       suppressionCode: "deprecated",
       suppressionMessage: "@flattenProperty decorator is not recommended to use.",
+    });
+  }
+
+  if (element.language.default.name !== element.serializedName) {
+    decorators.push({
+      name: "clientName",
+      module: "@azure-tools/typespec-client-generator-core",
+      namespace: "Azure.ClientGenerator.Core",
+      arguments: [element.language.default.name],
     });
   }
 
@@ -243,6 +246,20 @@ export function getPropertyVisibility(property: Property): string[] {
   }
 
   return visibility;
+}
+
+function getUnixTimeSchemaDecorators(schema: Schema, decorators: TypespecDecorator[]): void {
+  if (!isUnixTimeSchema(schema)) {
+    return;
+  }
+
+  decorators.push({
+    name: "encode",
+    arguments: [
+      { value: `"unixTimestamp"`, options: { unwrap: false } },
+      { value: "int32", options: { unwrap: true } },
+    ],
+  });
 }
 
 function getNumberSchemaDecorators(schema: Schema, decorators: TypespecDecorator[]): void {
@@ -343,7 +360,9 @@ export function generateAugmentedDecorators(keyName: string, decorators: Typespe
     }
     if (decorator.arguments) {
       definitions.push(
-        `@@${decorator.name}(${decorator.target}, ${decorator.arguments.map((a) => getArgumentValue(a)).join(", ")})`,
+        `@@${decorator.name}(${decorator.target ?? keyName}, ${decorator.arguments
+          .map((a) => getArgumentValue(a))
+          .join(", ")})`,
       );
     } else {
       definitions.push(`@@${decorator.name}(${keyName})`);

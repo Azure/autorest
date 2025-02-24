@@ -463,8 +463,9 @@ interface pathsOperations {
       /**
        * Unix time encoded value
        */
+      @encode("unixTimestamp", int32)
       @path
-      unixTimeUrlPath: plainTime;
+      unixTimeUrlPath: utcDateTime;
     },
     void
   >;

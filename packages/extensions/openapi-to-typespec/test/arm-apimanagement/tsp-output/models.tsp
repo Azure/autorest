@@ -1272,8 +1272,7 @@ model ApiEntityBaseContract {
   /**
    * Type of API.
    */
-  @encodedName("application/json", "type")
-  apiType?: ApiType;
+  type?: ApiType;
 
   /**
    * Describes the revision of the API. If no value is provided, default revision 1 is created
@@ -1319,8 +1318,7 @@ model ApiEntityBaseContract {
   /**
    * Specifies whether an API or Product subscription is required for accessing the API.
    */
-  @encodedName("application/json", "subscriptionRequired")
-  IsSubscriptionRequired?: boolean;
+  subscriptionRequired?: boolean;
 
   /**
    *  A URL to the Terms of Service for the API. MUST be in the format of a URL.
@@ -1536,8 +1534,7 @@ model ApiCreateOrUpdateProperties extends ApiContractProperties {
    *  * `websocket` creates websocket API
    *  * `graphql` creates GraphQL API.
    */
-  @encodedName("application/json", "apiType")
-  soapApiType?: SoapApiType;
+  apiType?: SoapApiType;
 }
 
 /**
@@ -2016,14 +2013,12 @@ model ProductEntityBaseParameters {
   /**
    * Whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as "protected" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as "open" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it's value is assumed to be true.
    */
-  @encodedName("application/json", "subscriptionRequired")
-  IsSubscriptionRequired?: boolean;
+  subscriptionRequired?: boolean;
 
   /**
    * whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false.
    */
-  @encodedName("application/json", "approvalRequired")
-  IsApprovalRequired?: boolean;
+  approvalRequired?: boolean;
 
   /**
    * Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false.
@@ -2563,8 +2558,7 @@ model ApiExportResult {
   /**
    * Format in which the API Details are exported to the Storage Blob with Sas Key valid for 5 minutes.
    */
-  @encodedName("application/json", "format")
-  exportResultFormat?: ExportResultFormat;
+  format?: ExportResultFormat;
 
   /**
    * The object defining the schema of the exported API Detail
@@ -2712,8 +2706,7 @@ model AuthorizationServerContractBaseProperties {
   /**
    * Method of authentication supported by the token endpoint of this authorization server. Possible values are Basic and/or Body. When Body is specified, client credentials and other parameters are passed within the request body in the application/x-www-form-urlencoded format.
    */
-  @encodedName("application/json", "clientAuthenticationMethod")
-  clientAuthenticationMethods?: ClientAuthenticationMethod[];
+  clientAuthenticationMethod?: ClientAuthenticationMethod[];
 
   /**
    * Additional parameters required by the token endpoint of this authorization server represented as an array of JSON objects with name and value string properties, i.e. {"name" : "name value", "value": "a value"}.
@@ -2729,8 +2722,7 @@ model AuthorizationServerContractBaseProperties {
   /**
    * If true, authorization server will include state parameter from the authorization request to its response. Client may use state parameter to raise protocol security.
    */
-  @encodedName("application/json", "supportState")
-  doesSupportState?: boolean;
+  supportState?: boolean;
 
   /**
    * Access token scope that is going to be requested by default. Can be overridden at the API level. Should be provided in the form of a string containing space-delimited values.
@@ -3134,8 +3126,7 @@ model CacheContractProperties {
    * Original uri of entity in external system cache points to
    */
   @maxLength(2000)
-  @encodedName("application/json", "resourceId")
-  resourceUri?: string;
+  resourceId?: string;
 }
 
 /**
@@ -3176,8 +3167,7 @@ model CacheUpdateProperties {
    * Original uri of entity in external system cache points to
    */
   @maxLength(2000)
-  @encodedName("application/json", "resourceId")
-  resourceUri?: string;
+  resourceId?: string;
 }
 
 /**
@@ -3355,8 +3345,7 @@ model ConnectivityCheckRequestProtocolConfiguration {
   /**
    * Configuration for HTTP or HTTPS requests.
    */
-  @encodedName("application/json", "HTTPConfiguration")
-  httpConfiguration?: ConnectivityCheckRequestProtocolConfigurationHttpConfiguration;
+  HTTPConfiguration?: ConnectivityCheckRequestProtocolConfigurationHttpConfiguration;
 }
 
 /**
@@ -4826,14 +4815,12 @@ model IdentityProviderBaseParameters {
   /**
    * Identity Provider Type identifier.
    */
-  @encodedName("application/json", "type")
-  identityProviderType?: IdentityProviderType;
+  type?: IdentityProviderType;
 
   /**
    * The TenantId to use instead of Common when logging into Active Directory
    */
-  @encodedName("application/json", "signinTenant")
-  signInTenant?: string;
+  signinTenant?: string;
 
   /**
    * List of Allowed Tenants when configuring Azure Active Directory login.
@@ -4849,15 +4836,13 @@ model IdentityProviderBaseParameters {
    * Signup Policy Name. Only applies to AAD B2C Identity Provider.
    */
   @minLength(1)
-  @encodedName("application/json", "signupPolicyName")
-  signUpPolicyName?: string;
+  signupPolicyName?: string;
 
   /**
    * Signin Policy Name. Only applies to AAD B2C Identity Provider.
    */
   @minLength(1)
-  @encodedName("application/json", "signinPolicyName")
-  signInPolicyName?: string;
+  signinPolicyName?: string;
 
   /**
    * Profile Editing Policy Name. Only applies to AAD B2C Identity Provider.
@@ -5054,8 +5039,7 @@ model NamedValueEntityBaseParameters {
   /**
    * Determines whether the value is a secret and should be encrypted or not. Default value is false.
    */
-  @encodedName("application/json", "secret")
-  IsSecret?: boolean;
+  secret?: boolean;
 }
 
 /**
@@ -5582,14 +5566,12 @@ model PortalSettingsContractProperties {
   /**
    * Subscriptions delegation settings.
    */
-  @encodedName("application/json", "subscriptions")
-  IsSubscriptions?: SubscriptionsDelegationSettingsProperties;
+  subscriptions?: SubscriptionsDelegationSettingsProperties;
 
   /**
    * User registration delegation settings.
    */
-  @encodedName("application/json", "userRegistration")
-  IsUserRegistration?: RegistrationDelegationSettingsProperties;
+  userRegistration?: RegistrationDelegationSettingsProperties;
 
   /**
    * Redirect Anonymous users to the Sign-In page.

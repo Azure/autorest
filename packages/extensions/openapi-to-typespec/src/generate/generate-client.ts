@@ -9,7 +9,7 @@ export function generateObjectClientDecorator(typespecObject: TypespecObject) {
 
   for (const property of typespecObject.properties ?? []) {
     const decorators = generateAugmentedDecorators(
-      `${typespecObject.name}.${property.name}`,
+      `${typespecObject.name}.\`${property.name}\``, // TO-DO: this a workaround to add `\``, we need a better way
       property.clientDecorators,
     );
     decorators && definitions.push(decorators);

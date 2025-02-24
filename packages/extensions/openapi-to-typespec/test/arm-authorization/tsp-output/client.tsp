@@ -7,11 +7,15 @@ using Azure.ResourceManager.Authorization;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ClassicAdministrator.properties);
 
+@@clientName(Principal.type, "principalType");
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ProviderOperation.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleAssignmentCreateParameters.properties);
+
+@@clientName(RoleDefinitionProperties.type, "roleType");
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ExpandedProperties.scope);
@@ -20,11 +24,29 @@ using Azure.ResourceManager.Authorization;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ExpandedProperties.principal);
 
+@@clientName(ExpandedPropertiesScope.id, "scopeId");
+@@clientName(ExpandedPropertiesScope.displayName, "scopeDisplayName");
+@@clientName(ExpandedPropertiesScope.type, "scopeType");
+
+@@clientName(ExpandedPropertiesRoleDefinition.id, "roleDefinitionId");
+@@clientName(ExpandedPropertiesRoleDefinition.displayName,
+  "roleDefinitionDisplayName"
+);
+@@clientName(ExpandedPropertiesRoleDefinition.type, "roleType");
+
+@@clientName(ExpandedPropertiesPrincipal.id, "principalId");
+@@clientName(ExpandedPropertiesPrincipal.displayName, "principalDisplayName");
+@@clientName(ExpandedPropertiesPrincipal.type, "principalType");
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleAssignmentScheduleRequestProperties.scheduleInfo);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleAssignmentScheduleRequestPropertiesScheduleInfo.expiration
+);
+
+@@clientName(RoleAssignmentScheduleRequestPropertiesScheduleInfoExpiration.type,
+  "expirationType"
 );
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
@@ -34,8 +56,16 @@ using Azure.ResourceManager.Authorization;
 @@flattenProperty(RoleEligibilityScheduleRequestPropertiesScheduleInfo.expiration
 );
 
+@@clientName(RoleEligibilityScheduleRequestPropertiesScheduleInfoExpiration.type,
+  "expirationType"
+);
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PolicyProperties.scope);
+
+@@clientName(PolicyPropertiesScope.id, "scopeId");
+@@clientName(PolicyPropertiesScope.displayName, "scopeDisplayName");
+@@clientName(PolicyPropertiesScope.type, "scopeType");
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PolicyAssignmentProperties.scope);
@@ -43,6 +73,18 @@ using Azure.ResourceManager.Authorization;
 @@flattenProperty(PolicyAssignmentProperties.roleDefinition);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PolicyAssignmentProperties.policy);
+
+@@clientName(PolicyAssignmentPropertiesScope.id, "scopeId");
+@@clientName(PolicyAssignmentPropertiesScope.displayName, "scopeDisplayName");
+@@clientName(PolicyAssignmentPropertiesScope.type, "scopeType");
+
+@@clientName(PolicyAssignmentPropertiesRoleDefinition.id, "roleDefinitionId");
+@@clientName(PolicyAssignmentPropertiesRoleDefinition.displayName,
+  "roleDefinitionDisplayName"
+);
+@@clientName(PolicyAssignmentPropertiesRoleDefinition.type, "roleType");
+
+@@clientName(PolicyAssignmentPropertiesPolicy.id, "policyId");
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(DenyAssignment.properties);

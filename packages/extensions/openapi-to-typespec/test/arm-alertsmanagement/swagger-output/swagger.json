@@ -1769,8 +1769,8 @@
       "description": "Action to be applied.",
       "properties": {
         "actionType": {
-          "type": "string",
-          "description": "Discriminator property for Action."
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ActionType",
+          "description": "Action that should be applied."
         }
       },
       "discriminator": "actionType",
@@ -2080,8 +2080,8 @@
       "description": "alert meta data property bag",
       "properties": {
         "metadataIdentifier": {
-          "type": "string",
-          "description": "Discriminator property for AlertsMetaDataProperties."
+          "$ref": "#/definitions/MetadataIdentifier",
+          "description": "Identification of the information to be retrieved by API call"
         }
       },
       "discriminator": "metadataIdentifier",
@@ -2157,6 +2157,24 @@
           },
           "x-ms-identifiers": []
         }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.ActionType": {
+      "type": "string",
+      "description": "Extensible enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
+      "enum": [
+        "Internal"
+      ],
+      "x-ms-enum": {
+        "name": "ActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Internal",
+            "value": "Internal",
+            "description": "Actions are for internal-only APIs."
+          }
+        ]
       }
     },
     "Condition": {
@@ -2431,6 +2449,23 @@
         }
       ]
     },
+    "MetadataIdentifier": {
+      "type": "string",
+      "description": "Identification of the information to be retrieved by API call",
+      "enum": [
+        "MonitorServiceList"
+      ],
+      "x-ms-enum": {
+        "name": "MetadataIdentifier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MonitorServiceList",
+            "value": "MonitorServiceList"
+          }
+        ]
+      }
+    },
     "MonitorCondition": {
       "type": "string",
       "enum": [
@@ -2658,8 +2693,8 @@
       "description": "Recurrence object.",
       "properties": {
         "recurrenceType": {
-          "type": "string",
-          "description": "Discriminator property for Recurrence."
+          "$ref": "#/definitions/RecurrenceType",
+          "description": "Specifies when the recurrence should be applied."
         },
         "startTime": {
           "type": "string",
@@ -2676,6 +2711,33 @@
       "required": [
         "recurrenceType"
       ]
+    },
+    "RecurrenceType": {
+      "type": "string",
+      "description": "Specifies when the recurrence should be applied.",
+      "enum": [
+        "Daily",
+        "Weekly",
+        "Monthly"
+      ],
+      "x-ms-enum": {
+        "name": "RecurrenceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Daily",
+            "value": "Daily"
+          },
+          {
+            "name": "Weekly",
+            "value": "Weekly"
+          },
+          {
+            "name": "Monthly",
+            "value": "Monthly"
+          }
+        ]
+      }
     },
     "RemoveAllActionGroups": {
       "type": "object",

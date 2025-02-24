@@ -16,23 +16,19 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 /**
- * Client that can be used to manage and query indexes and documents, as well as
- * manage other resources, on a search service.
+ * Client that can be used to query an index and upload, merge, or delete
+ * documents.
  */
 @service({
   title: "SearchClient",
 })
 @versioned(Versions)
 @server(
-  "{endpoint}",
-  "Client that can be used to manage and query indexes and documents, as well as manage other resources, on a search service.",
+  "{endpoint}/indexes('{indexName}')",
+  "Client that can be used to query an index and upload, merge, or delete documents.",
   {
-    /**
-     * The name of the index.
-     */
-    indexName: string,
-
     endpoint: string,
+    indexName: string,
   }
 )
 namespace Azure.Search;

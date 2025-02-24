@@ -66,3 +66,7 @@ export function isArmIdSchema(schema: Schema): schema is ArmIdSchema {
 export function isDurationSchema(schema: Schema): boolean {
   return schema.type === SchemaType.Duration;
 }
+
+export function isUnixTimeSchema(schema: Schema): boolean {
+  return schema.type === SchemaType.UnixTime;
+}

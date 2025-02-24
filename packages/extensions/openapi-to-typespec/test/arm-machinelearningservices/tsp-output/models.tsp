@@ -3771,6 +3771,11 @@ model ComputeResourceSchema {
 @discriminator("computeType")
 model Compute {
   /**
+   * The type of compute
+   */
+  computeType: ComputeType;
+
+  /**
    * Location for the underlying compute
    */
   @visibility("read", "create")
@@ -4129,7 +4134,12 @@ model AmlComputeNodeInformation {
  * Secrets related to a Machine Learning compute. Might differ for every type of compute.
  */
 @discriminator("computeType")
-model ComputeSecrets {}
+model ComputeSecrets {
+  /**
+   * The type of compute
+   */
+  computeType: ComputeType;
+}
 
 /**
  * Stops compute instance after user defined period of inactivity.
@@ -4313,7 +4323,12 @@ model BlobReferenceForConsumptionDto {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("credentialType")
-model PendingUploadCredentialDto {}
+model PendingUploadCredentialDto {
+  /**
+   * [Required] Credential type used to authentication with storage.
+   */
+  credentialType: PendingUploadCredentialType;
+}
 
 /**
  * A paginated list of ComponentContainer entities.
@@ -4396,6 +4411,12 @@ model DataVersionBaseResourceArmPaginatedResult
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 @discriminator("dataType")
 model DataVersionBase extends AssetBase {
+  /**
+   * [Required] Specifies the type of data.
+   */
+  @visibility("read", "create")
+  dataType: DataType;
+
   /**
    * [Required] Uri of the data. Example: https://go.microsoft.com/fwlink/?linkid=2202330
    */
@@ -4708,11 +4729,21 @@ model PackageRequest {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("baseEnvironmentSourceType")
-model BaseEnvironmentSource {}
+model BaseEnvironmentSource {
+  /**
+   * [Required] Base environment type.
+   */
+  baseEnvironmentSourceType: BaseEnvironmentSourceType;
+}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("serverType")
-model InferencingServer {}
+model InferencingServer {
+  /**
+   * [Required] Inferencing server type for various targets.
+   */
+  serverType: InferencingServerType;
+}
 
 /**
  * Model package input options.
@@ -4741,7 +4772,12 @@ model ModelPackageInput {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("inputPathType")
-model PackageInputPathBase {}
+model PackageInputPathBase {
+  /**
+   * [Required] Input path type for package inputs.
+   */
+  inputPathType: InputPathType;
+}
 
 /**
  * Model configuration options.
@@ -5041,13 +5077,23 @@ model BatchDeployment extends EndpointDeploymentPropertiesBase {
  * Properties relevant to different deployment types.
  */
 @discriminator("deploymentConfigurationType")
-model BatchDeploymentConfiguration {}
+model BatchDeploymentConfiguration {
+  /**
+   * [Required] The type of the deployment
+   */
+  deploymentConfigurationType: BatchDeploymentConfigurationType;
+}
 
 /**
  * Base definition for asset references.
  */
 @discriminator("referenceType")
-model AssetReferenceBase {}
+model AssetReferenceBase {
+  /**
+   * [Required] Specifies the type of asset reference.
+   */
+  referenceType: ReferenceType;
+}
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -5198,6 +5244,11 @@ model Datastore extends ResourceBase {
   credentials: DatastoreCredentials;
 
   /**
+   * [Required] Storage type backing the datastore.
+   */
+  datastoreType: DatastoreType;
+
+  /**
    * Intellectual Property details.
    */
   @visibility("read", "create")
@@ -5214,13 +5265,23 @@ model Datastore extends ResourceBase {
  * Base definition for datastore credentials.
  */
 @discriminator("credentialsType")
-model DatastoreCredentials {}
+model DatastoreCredentials {
+  /**
+   * [Required] Credential type used to authentication with storage.
+   */
+  credentialsType: CredentialsType;
+}
 
 /**
  * Base definition for datastore secrets.
  */
 @discriminator("secretsType")
-model DatastoreSecrets {}
+model DatastoreSecrets {
+  /**
+   * [Required] Credential type used to authentication with storage.
+   */
+  secretsType: SecretsType;
+}
 
 /**
  * A paginated list of FeaturesetContainer entities.
@@ -5363,6 +5424,12 @@ model Webhook {
    */
   @visibility("read", "create")
   eventType?: string;
+
+  /**
+   * [Required] Specifies the type of service to send a callback
+   */
+  @visibility("read", "create")
+  webhookType: WebhookType;
 }
 
 /**
@@ -5441,6 +5508,12 @@ model TriggerBase {
    * TimeZone should follow Windows time zone format. Refer: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/default-time-zones?view=windows-11
    */
   timeZone?: string = "UTC";
+
+  /**
+   * [Required]
+   */
+  @visibility("read", "create", "update")
+  triggerType: TriggerType;
 }
 
 /**
@@ -5676,6 +5749,12 @@ model JobBase extends ResourceBase {
   isArchived?: boolean;
 
   /**
+   * [Required] Specifies the type of job.
+   */
+  @visibility("read", "create")
+  jobType: JobType;
+
+  /**
    * Notification setting for the job
    */
   @visibility("read", "create", "update")
@@ -5706,7 +5785,13 @@ model JobBase extends ResourceBase {
  * Base definition for identity configuration.
  */
 @discriminator("identityType")
-model IdentityConfiguration {}
+model IdentityConfiguration {
+  /**
+   * [Required] Specifies the type of identity framework.
+   */
+  @visibility("read", "create")
+  identityType: IdentityConfigurationType;
+}
 
 /**
  * Secret Configuration definition.
@@ -5777,7 +5862,13 @@ model JobService {
  * Abstract Nodes definition
  */
 @discriminator("nodesValueType")
-model Nodes {}
+model Nodes {
+  /**
+   * [Required] Type of the Nodes value
+   */
+  @visibility("read", "create")
+  nodesValueType: NodesValueType;
+}
 
 /**
  * Azure Resource Manager resource envelope strictly used in update requests.
@@ -5962,13 +6053,25 @@ model LabelClass {
  * Properties of a labeling job
  */
 @discriminator("mediaType")
-model LabelingJobMediaProperties {}
+model LabelingJobMediaProperties {
+  /**
+   * [Required] Media type of the job.
+   */
+  @visibility("read", "create")
+  mediaType: MediaType;
+}
 
 /**
  * Labeling MLAssist configuration definition
  */
 @discriminator("mlAssist")
-model MLAssistConfiguration {}
+model MLAssistConfiguration {
+  /**
+   * [Required] Indicates whether MLAssist feature is enabled.
+   */
+  @visibility("read", "create", "update")
+  mlAssist: MLAssistConfigurationType;
+}
 
 /**
  * Progress metrics definition
@@ -6045,6 +6148,12 @@ model ExportSummary {
    */
   @visibility("read")
   exportedRowCount?: int64;
+
+  /**
+   * [Required] The format of exported labels, also as the discriminator.
+   */
+  @visibility("read", "create")
+  format: ExportFormatType;
 
   /**
    * Name and identifier of the job containing exported labels.
@@ -6125,6 +6234,11 @@ model OnlineDeployment extends EndpointDeploymentPropertiesBase {
    * If Enabled, allow egress public network access. If Disabled, this will create secure egress. Default: Enabled.
    */
   egressPublicNetworkAccess?: EgressPublicNetworkAccessType;
+
+  /**
+   * [Required] The compute type of the endpoint.
+   */
+  endpointComputeType: EndpointComputeType;
 
   /**
    * Compute instance type.
@@ -6282,7 +6396,12 @@ model OnlineRequestSettings {
  * Online deployment scaling configuration.
  */
 @discriminator("scaleType")
-model OnlineScaleSettings {}
+model OnlineScaleSettings {
+  /**
+   * [Required] Type of deployment scaling algorithm
+   */
+  scaleType: ScaleType;
+}
 
 /**
  * Strictly used in update requests.
@@ -6440,12 +6559,16 @@ model EndpointAuthToken {
   /**
    * Access token expiry time (UTC).
    */
-  expiryTimeUtc?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  expiryTimeUtc?: utcDateTime;
 
   /**
    * Refresh access token after time (UTC).
    */
-  refreshAfterTimeUtc?: plainTime;
+  @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  refreshAfterTimeUtc?: utcDateTime;
 
   /**
    * Access token type.
@@ -6496,7 +6619,13 @@ model ScheduleProperties extends ResourceBase {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("actionType")
-model ScheduleActionBase {}
+model ScheduleActionBase {
+  /**
+   * [Required] Specifies the action type of the schedule
+   */
+  @visibility("read", "create", "update")
+  actionType: ScheduleActionType;
+}
 
 /**
  * A paginated list of Registry entities.
@@ -7156,6 +7285,11 @@ model OutboundRule {
    * Type of a managed network Outbound Rule of a machine learning workspace.
    */
   status?: RuleStatus;
+
+  /**
+   * Type of a managed network Outbound Rule of a machine learning workspace.
+   */
+  type: RuleType;
 }
 
 /**
@@ -7437,6 +7571,11 @@ model WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("authType")
 model WorkspaceConnectionPropertiesV2 {
+  /**
+   * Authentication type of the connection target
+   */
+  authType: ConnectionAuthType;
+
   /**
    * Category of the connection
    */
@@ -9328,7 +9467,13 @@ model AllFeatures extends MonitoringFeatureFilterBase {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("filterType")
-model MonitoringFeatureFilterBase {}
+model MonitoringFeatureFilterBase {
+  /**
+   * [Required] Specifies the feature filter to leverage when selecting features to calculate metrics over.
+   */
+  @visibility("read", "create")
+  filterType: MonitoringFeatureFilterType;
+}
 
 /**
  * All nodes means the service will be running on all of the nodes of the job
@@ -9364,7 +9509,13 @@ model AmlTokenComputeIdentity extends MonitorComputeIdentityBase {
  * Monitor compute identity base definition.
  */
 @discriminator("computeIdentityType")
-model MonitorComputeIdentityBase {}
+model MonitorComputeIdentityBase {
+  /**
+   * [Required] Monitor compute identity type enum.
+   */
+  @visibility("read", "create")
+  computeIdentityType: MonitorComputeIdentityType;
+}
 
 /**
  * Asset input type.
@@ -9430,7 +9581,13 @@ model AutoForecastHorizon extends ForecastHorizon {
  * The desired maximum forecast horizon in units of time-series frequency.
  */
 @discriminator("mode")
-model ForecastHorizon {}
+model ForecastHorizon {
+  /**
+   * [Required] Set forecast horizon value selection mode.
+   */
+  @visibility("read", "create")
+  mode: ForecastHorizonMode;
+}
 
 /**
  * AutoMLJob class.
@@ -9492,6 +9649,12 @@ model JobOutput {
    */
   @visibility("read", "create")
   description?: string;
+
+  /**
+   * [Required] Specifies the type of job.
+   */
+  @visibility("read", "create")
+  jobOutputType: JobOutputType;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -9544,6 +9707,12 @@ model AutoMLVertical {
   targetColumnName?: string;
 
   /**
+   * [Required] Task type for AutoMLJob.
+   */
+  @visibility("read", "create")
+  taskType: TaskType;
+
+  /**
    * [Required] Training data input.
    */
   trainingData: MLTableJobInput;
@@ -9569,6 +9738,12 @@ model JobInput {
    */
   @visibility("read", "create")
   description?: string;
+
+  /**
+   * [Required] Specifies the type of job.
+   */
+  @visibility("read", "create")
+  jobInputType: JobInputType;
 }
 
 /**
@@ -9585,7 +9760,13 @@ model AutoNCrossValidations extends NCrossValidations {
  * N-Cross validations value.
  */
 @discriminator("mode")
-model NCrossValidations {}
+model NCrossValidations {
+  /**
+   * [Required] Mode for determining N-Cross validations.
+   */
+  @visibility("read", "create")
+  mode: NCrossValidationsMode;
+}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AutoSeasonality extends Seasonality {
@@ -9599,7 +9780,13 @@ model AutoSeasonality extends Seasonality {
  * Forecasting seasonality.
  */
 @discriminator("mode")
-model Seasonality {}
+model Seasonality {
+  /**
+   * [Required] Seasonality mode.
+   */
+  @visibility("read", "create")
+  mode: SeasonalityMode;
+}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AutoTargetLags extends TargetLags {
@@ -9613,7 +9800,13 @@ model AutoTargetLags extends TargetLags {
  * The number of past periods to lag from the target column.
  */
 @discriminator("mode")
-model TargetLags {}
+model TargetLags {
+  /**
+   * [Required] Set target lags mode - Auto/Custom
+   */
+  @visibility("read", "create")
+  mode: TargetLagsMode;
+}
 
 /**
  * Target lags rolling window determined automatically.
@@ -9629,7 +9822,13 @@ model AutoTargetRollingWindowSize extends TargetRollingWindowSize {
  * Forecasting target rolling window size.
  */
 @discriminator("mode")
-model TargetRollingWindowSize {}
+model TargetRollingWindowSize {
+  /**
+   * [Required] TargetRollingWindowSiz detection mode.
+   */
+  @visibility("read", "create")
+  mode: TargetRollingWindowSizeMode;
+}
 
 /**
  * Settings for Autologger.
@@ -9653,7 +9852,13 @@ model AzMonMonitoringAlertNotificationSettings
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("alertNotificationType")
-model MonitoringAlertNotificationSettingsBase {}
+model MonitoringAlertNotificationSettingsBase {
+  /**
+   * [Required] Specifies the type of signal to monitor.
+   */
+  @visibility("read", "create")
+  alertNotificationType: MonitoringAlertNotificationType;
+}
 
 /**
  * Azure Blob datastore configuration.
@@ -9904,6 +10109,11 @@ model EarlyTerminationPolicy {
    * Interval (number of runs) between policy evaluations.
    */
   evaluationInterval?: int32;
+
+  /**
+   * [Required] Name of policy configuration
+   */
+  policyType: EarlyTerminationPolicyType;
 }
 
 /**
@@ -9988,7 +10198,12 @@ model BayesianSamplingAlgorithm extends SamplingAlgorithm {
  * configure the algorithm
  */
 @discriminator("samplingAlgorithmType")
-model SamplingAlgorithm {}
+model SamplingAlgorithm {
+  /**
+   * [Required] The algorithm used for generating hyperparameter values, along with configuration properties
+   */
+  samplingAlgorithmType: SamplingAlgorithmType;
+}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CategoricalDataDriftMetricThreshold extends DataDriftMetricThresholdBase {
@@ -10007,6 +10222,12 @@ model CategoricalDataDriftMetricThreshold extends DataDriftMetricThresholdBase {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("dataType")
 model DataDriftMetricThresholdBase {
+  /**
+   * [Required] Specifies the data type of the metric threshold.
+   */
+  @visibility("read", "create")
+  dataType: MonitoringFeatureDataType;
+
   /**
    * The threshold value. If null, a default value will be set depending on the selected metric.
    */
@@ -10042,6 +10263,12 @@ model CategoricalDataQualityMetricThreshold
 @discriminator("dataType")
 model DataQualityMetricThresholdBase {
   /**
+   * [Required] Specifies the data type of the metric threshold.
+   */
+  @visibility("read", "create")
+  dataType: MonitoringFeatureDataType;
+
+  /**
    * The threshold value. If null, a default value will be set depending on the selected metric.
    */
   @visibility("read", "create")
@@ -10066,6 +10293,12 @@ model CategoricalPredictionDriftMetricThreshold
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("dataType")
 model PredictionDriftMetricThresholdBase {
+  /**
+   * [Required] Specifies the data type of the metric threshold.
+   */
+  @visibility("read", "create")
+  dataType: MonitoringFeatureDataType;
+
   /**
    * The threshold value. If null, a default value will be set depending on the selected metric.
    */
@@ -10669,6 +10902,12 @@ model ClassificationModelPerformanceMetricThreshold
 @discriminator("modelType")
 model ModelPerformanceMetricThresholdBase {
   /**
+   * [Required] Specifies the data type of the metric threshold.
+   */
+  @visibility("read", "create")
+  modelType: MonitoringModelType;
+
+  /**
    * The threshold value. If null, a default value will be set depending on the selected metric.
    */
   @visibility("read", "create")
@@ -10788,7 +11027,13 @@ model CommandJob extends JobBase {
  * Base definition for job distribution configuration.
  */
 @discriminator("distributionType")
-model DistributionConfiguration {}
+model DistributionConfiguration {
+  /**
+   * [Required] Specifies the type of distribution framework.
+   */
+  @visibility("read", "create")
+  distributionType: DistributionType;
+}
 
 /**
  * Command Job limit class.
@@ -10803,6 +11048,11 @@ model CommandJobLimits extends JobLimits {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("jobLimitsType")
 model JobLimits {
+  /**
+   * [Required] JobLimit type.
+   */
+  jobLimitsType: JobLimitsType;
+
   /**
    * The max run duration in ISO 8601 format, after which the job will be cancelled. Only supports duration with precision as low as Seconds.
    */
@@ -10891,7 +11141,13 @@ model MonitorDefinition {
  * Monitor compute configuration base definition.
  */
 @discriminator("computeType")
-model MonitorComputeConfigurationBase {}
+model MonitorComputeConfigurationBase {
+  /**
+   * [Required] Specifies the type of signal to monitor.
+   */
+  @visibility("read", "create")
+  computeType: MonitorComputeType;
+}
 
 /**
  * Monitoring target definition.
@@ -10930,6 +11186,12 @@ model MonitoringSignalBase {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   properties?: Record<string>;
+
+  /**
+   * [Required] Specifies the type of signal to monitor.
+   */
+  @visibility("read", "create")
+  signalType: MonitoringSignalType;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -11128,6 +11390,12 @@ model MonitoringInputDataBase {
   dataContext?: string;
 
   /**
+   * [Required] Specifies the type of signal to monitor.
+   */
+  @visibility("read", "create")
+  inputDataType: MonitoringInputDataType;
+
+  /**
    * [Required] Specifies the type of job.
    */
   @visibility("read", "create")
@@ -11303,6 +11571,12 @@ model DataImportSource {
    * Workspace connection for data import source storage
    */
   connection?: string;
+
+  /**
+   * [Required] Specifies the type of data.
+   */
+  @visibility("read", "create")
+  sourceType: DataImportSourceType;
 }
 
 /**
@@ -12756,6 +13030,11 @@ model OneLakeArtifact {
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   artifactName: string;
+
+  /**
+   * [Required] OneLake artifact type
+   */
+  artifactType: OneLakeArtifactType;
 }
 
 /**
@@ -13756,7 +14035,13 @@ model SparkJob extends JobBase {
  * Spark job entry point definition.
  */
 @discriminator("sparkJobEntryType")
-model SparkJobEntry {}
+model SparkJobEntry {
+  /**
+   * [Required] Type of the job's entry point.
+   */
+  @visibility("read", "create")
+  sparkJobEntryType: SparkJobEntryType;
+}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SparkResourceConfiguration {

@@ -143,79 +143,40 @@ model NotificationHubEntryModel {
 
 model NotificationHubContentModel {
   type?: NotificationHubContentModelType;
-
-  @encodedName("application/json", "NotificationHubDescription")
-  notificationHubDescription?: NotificationHubDescriptionModel;
+  NotificationHubDescription?: NotificationHubDescriptionModel;
 }
 
 model NotificationHubDescriptionModel {
-  @encodedName("application/json", "xmlns:i")
-  xmlnsI?: NotificationHubDescriptionModelXmlnsI;
-
-  @encodedName("application/json", "RegistrationTtl")
-  registrationTtl?: string;
-
-  @encodedName("application/json", "Location")
-  location?: string;
-
-  @encodedName("application/json", "ApnsCredential")
-  apnsCredential?: PropertyBagModelItem[];
-
-  @encodedName("application/json", "GcmCredential")
-  gcmCredential?: PropertyBagModelItem[];
-
-  @encodedName("application/json", "WnsCredential")
-  wnsCredential?: PropertyBagModelItem[];
-
-  @encodedName("application/json", "AuthorizationRules")
-  authorizationRules?: NotificationHubDescriptionModelAuthorizationRulesItem[];
+  `xmlns:i`?: NotificationHubDescriptionModelXmlnsI;
+  RegistrationTtl?: string;
+  Location?: string;
+  ApnsCredential?: PropertyBagModelItem[];
+  GcmCredential?: PropertyBagModelItem[];
+  WnsCredential?: PropertyBagModelItem[];
+  AuthorizationRules?: NotificationHubDescriptionModelAuthorizationRulesItem[];
 }
 
 model PropertyBagModelItem {
-  @encodedName("application/json", "Name")
-  name?: string;
-
-  @encodedName("application/json", "Value")
-  value?: string;
+  Name?: string;
+  Value?: string;
 }
 
 model NotificationHubDescriptionModelAuthorizationRulesItem {
-  @encodedName("application/json", "i:type")
-  iType?: NotificationHubDescriptionModelAuthorizationRulesItemIType;
-
-  @encodedName("application/json", "ClaimType")
-  claimType?: NotificationHubDescriptionModelAuthorizationRulesItemClaimType;
-
-  @encodedName("application/json", "ClaimValue")
-  claimValue?: string;
-
-  @encodedName("application/json", "Rights")
-  rights?: string[];
-
-  @encodedName("application/json", "CreatedTime")
-  createdTime?: string;
-
-  @encodedName("application/json", "ModifiedTime")
-  modifiedTime?: string;
-
-  @encodedName("application/json", "KeyName")
-  keyName?: string;
-
-  @encodedName("application/json", "PrimaryKey")
-  primaryKey?: string;
-
-  @encodedName("application/json", "SecondaryKey")
-  secondaryKey?: string;
+  `i:type`?: NotificationHubDescriptionModelAuthorizationRulesItemIType;
+  ClaimType?: NotificationHubDescriptionModelAuthorizationRulesItemClaimType;
+  ClaimValue?: string;
+  Rights?: string[];
+  CreatedTime?: string;
+  ModifiedTime?: string;
+  KeyName?: string;
+  PrimaryKey?: string;
+  SecondaryKey?: string;
 }
 
 model RegistrationEntryModel {
   content?: NotificationHubContentModel;
-
-  @encodedName("application/json", "xmlns:m")
-  xmlnsM?: RegistrationEntryModelXmlnsM;
-
-  @encodedName("application/json", "m:etag")
-  mEtag?: string;
+  `xmlns:m`?: RegistrationEntryModelXmlnsM;
+  `m:etag`?: string;
 }
 
 @resource("{hubName}/installations/{installationId}")
@@ -326,148 +287,73 @@ model InstallationPatchModelItem {
 
 model RegistrationContentModel {
   type?: RegistrationContentModelType;
-
-  @encodedName("application/json", "AppleRegistrationDescription")
-  appleRegistrationDescription?: AppleRegistrationContentModel;
-
-  @encodedName("application/json", "AppleTemplateRegistrationDescription")
-  appleTemplateRegistrationDescription?: AppleTemplateRegistrationContentModel;
-
-  @encodedName("application/json", "BaiduRegistrationDescription")
-  baiduRegistrationDescription?: BaiduRegistrationContentModel;
-
-  @encodedName("application/json", "BaiduTemplateRegistrationDescription")
-  baiduTemplateRegistrationDescription?: BaiduTemplateRegistrationContentModel;
-
-  @encodedName("application/json", "GcmRegistrationDescription")
-  gcmRegistrationDescription?: GcmRegistrationContentModel;
-
-  @encodedName("application/json", "GcmTemplateRegistrationDescription")
-  gcmTemplateRegistrationDescription?: GcmTemplateRegistrationContentModel;
-
-  @encodedName("application/json", "WindowsRegistrationDescription")
-  windowsRegistrationDescription?: WindowsRegistrationContentModel;
-
-  @encodedName("application/json", "WindowsTemplateRegistrationDescription")
-  windowsTemplateRegistrationDescription?: WindowsTemplateRegistrationContentModel;
+  AppleRegistrationDescription?: AppleRegistrationContentModel;
+  AppleTemplateRegistrationDescription?: AppleTemplateRegistrationContentModel;
+  BaiduRegistrationDescription?: BaiduRegistrationContentModel;
+  BaiduTemplateRegistrationDescription?: BaiduTemplateRegistrationContentModel;
+  GcmRegistrationDescription?: GcmRegistrationContentModel;
+  GcmTemplateRegistrationDescription?: GcmTemplateRegistrationContentModel;
+  WindowsRegistrationDescription?: WindowsRegistrationContentModel;
+  WindowsTemplateRegistrationDescription?: WindowsTemplateRegistrationContentModel;
 }
 
 model AppleRegistrationContentModel {
-  @encodedName("application/json", "xmlns:i")
-  xmlnsI?: AppleRegistrationContentModelXmlnsI;
-
-  @encodedName("application/json", "Tags")
-  tags?: string;
-
-  @encodedName("application/json", "DeviceToken")
-  deviceToken: string;
+  `xmlns:i`?: AppleRegistrationContentModelXmlnsI;
+  Tags?: string;
+  DeviceToken: string;
 }
 
 model AppleTemplateRegistrationContentModel {
-  @encodedName("application/json", "xmlns:i")
-  xmlnsI?: AppleTemplateRegistrationContentModelXmlnsI;
-
-  @encodedName("application/json", "Tags")
-  tags?: string;
-
-  @encodedName("application/json", "DeviceToken")
-  deviceToken: string;
-
-  @encodedName("application/json", "BodyTemplate")
-  bodyTemplate: string;
-
-  @encodedName("application/json", "Expiry")
-  expiry?: string;
+  `xmlns:i`?: AppleTemplateRegistrationContentModelXmlnsI;
+  Tags?: string;
+  DeviceToken: string;
+  BodyTemplate: string;
+  Expiry?: string;
 }
 
 model BaiduRegistrationContentModel {
-  @encodedName("application/json", "xmlns:i")
-  xmlnsI?: BaiduRegistrationContentModelXmlnsI;
-
-  @encodedName("application/json", "Tags")
-  tags?: string;
-
-  @encodedName("application/json", "BaiduUserId")
-  baiduUserId: string;
-
-  @encodedName("application/json", "BaiduChannelId")
-  baiduChannelId: string;
+  `xmlns:i`?: BaiduRegistrationContentModelXmlnsI;
+  Tags?: string;
+  BaiduUserId: string;
+  BaiduChannelId: string;
 }
 
 model BaiduTemplateRegistrationContentModel {
-  @encodedName("application/json", "xmlns:i")
-  xmlnsI?: BaiduTemplateRegistrationContentModelXmlnsI;
-
-  @encodedName("application/json", "Tags")
-  tags?: string;
-
-  @encodedName("application/json", "BaiduUserId")
-  baiduUserId: string;
-
-  @encodedName("application/json", "BaiduChannelId")
-  baiduChannelId: string;
-
-  @encodedName("application/json", "BodyTemplate")
-  bodyTemplate: string;
+  `xmlns:i`?: BaiduTemplateRegistrationContentModelXmlnsI;
+  Tags?: string;
+  BaiduUserId: string;
+  BaiduChannelId: string;
+  BodyTemplate: string;
 }
 
 model GcmRegistrationContentModel {
-  @encodedName("application/json", "xmlns:i")
-  xmlnsI?: GcmRegistrationContentModelXmlnsI;
-
-  @encodedName("application/json", "Tags")
-  tags?: string;
-
-  @encodedName("application/json", "GcmRegistrationId")
-  gcmRegistrationId?: string;
+  `xmlns:i`?: GcmRegistrationContentModelXmlnsI;
+  Tags?: string;
+  GcmRegistrationId?: string;
 }
 
 model GcmTemplateRegistrationContentModel {
-  @encodedName("application/json", "xmlns:i")
-  xmlnsI?: GcmTemplateRegistrationContentModelXmlnsI;
-
-  @encodedName("application/json", "Tags")
-  tags?: string;
-
-  @encodedName("application/json", "GcmRegistrationId")
-  gcmRegistrationId: string;
-
-  @encodedName("application/json", "BodyTemplate")
-  bodyTemplate: string;
+  `xmlns:i`?: GcmTemplateRegistrationContentModelXmlnsI;
+  Tags?: string;
+  GcmRegistrationId: string;
+  BodyTemplate: string;
 }
 
 model WindowsRegistrationContentModel {
-  @encodedName("application/json", "xmlns:i")
-  xmlnsI?: WindowsRegistrationContentModelXmlnsI;
-
-  @encodedName("application/json", "Tags")
-  tags?: string;
-
-  @encodedName("application/json", "ChannelUri")
-  channelUri: string;
+  `xmlns:i`?: WindowsRegistrationContentModelXmlnsI;
+  Tags?: string;
+  ChannelUri: string;
 }
 
 model WindowsTemplateRegistrationContentModel {
-  @encodedName("application/json", "xmlns:i")
-  xmlnsI?: WindowsTemplateRegistrationContentModelXmlnsI;
-
-  @encodedName("application/json", "Tags")
-  tags?: string;
-
-  @encodedName("application/json", "ChannelUri")
-  channelUri: string;
-
-  @encodedName("application/json", "BodyTemplate")
-  bodyTemplate: string;
-
-  @encodedName("application/json", "WnsHeaders")
-  wnsHeaders?: WindowsTemplateRegistrationContentModelWnsHeadersItem[];
+  `xmlns:i`?: WindowsTemplateRegistrationContentModelXmlnsI;
+  Tags?: string;
+  ChannelUri: string;
+  BodyTemplate: string;
+  WnsHeaders?: WindowsTemplateRegistrationContentModelWnsHeadersItem[];
 }
 
 model WindowsTemplateRegistrationContentModelWnsHeadersItem {
-  @encodedName("application/json", "Header")
-  header?: string;
-
-  @encodedName("application/json", "Value")
-  value?: string;
+  Header?: string;
+  Value?: string;
 }

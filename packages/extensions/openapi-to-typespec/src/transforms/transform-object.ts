@@ -33,6 +33,7 @@ import {
   isDictionarySchema,
   isSealedChoiceSchema,
   isStringSchema,
+  isUnixTimeSchema,
 } from "../utils/schemas";
 import {
   getSuppressionsForModelExtension,
@@ -89,9 +90,7 @@ export function transformObject(schema: ObjectSchema, codeModel: CodeModel): Typ
   visited = { name, doc };
   typespecTypes.set(schema, visited as any);
 
-  const properties = (schema.properties ?? [])
-    .filter((p) => !p.isDiscriminator)
-    .map((p) => transformObjectProperty(p, codeModel));
+  const properties = (schema.properties ?? []).map((p) => transformObjectProperty(p, codeModel));
 
   const ownDiscriminator = getOwnDiscriminator(schema);
   if (!ownDiscriminator) {
@@ -152,7 +151,7 @@ function addFixmes(typespecObject: TypespecObject): void {
 }
 
 export function transformObjectProperty(propertySchema: Property, codeModel: CodeModel): TypespecObjectProperty {
-  const name = propertySchema.language.default.name;
+  const name = propertySchema.serializedName;
   const doc = propertySchema.language.default.description;
   if (isObjectSchema(propertySchema.schema)) {
     const dataTypes = getDataTypes(codeModel);
@@ -324,6 +323,10 @@ export function getTypespecType(schema: Schema, codeModel: CodeModel): string {
 
   if (isNumberSchema(schema)) {
     schemaType += `${(schema as NumberSchema).precision}`;
+  }
+
+  if (isUnixTimeSchema(schema)) {
+    return "utcDateTime";
   }
 
   const typespecType = typespecTypes.get(schemaType);

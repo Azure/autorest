@@ -145,6 +145,20 @@
     }
   },
   "definitions": {
+    "Attributes": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Determines whether the object is enabled."
+        },
+        "nbf": {
+          "x-ms-client-name": "NotBefore",
+          "type": "integer",
+          "format": "unixtime",
+          "description": "Not before date in seconds since 1970-01-01T00:00:00Z."
+        }
+      }
+    },
     "Product": {
       "type": "object",
       "description": "The product documentation.",

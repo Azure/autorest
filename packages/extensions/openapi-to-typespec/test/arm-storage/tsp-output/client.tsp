@@ -7,8 +7,94 @@ using Microsoft.Storage;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(StorageAccountCreateParameters.properties);
 
+@@clientName(StorageAccountPropertiesCreateParameters.networkAcls,
+  "networkRuleSet"
+);
+@@clientName(StorageAccountPropertiesCreateParameters.supportsHttpsTrafficOnly,
+  "enableHttpsTrafficOnly"
+);
+@@clientName(StorageAccountPropertiesCreateParameters.isSftpEnabled,
+  "IsSftpEnabled"
+);
+@@clientName(StorageAccountPropertiesCreateParameters.isLocalUserEnabled,
+  "IsLocalUserEnabled"
+);
+@@clientName(StorageAccountPropertiesCreateParameters.isHnsEnabled,
+  "IsHnsEnabled"
+);
+@@clientName(StorageAccountPropertiesCreateParameters.isNfsV3Enabled,
+  "enableNfsV3"
+);
+
+@@clientName(Encryption.keyvaultproperties, "keyVaultProperties");
+@@clientName(Encryption.identity, "encryptionIdentity");
+
+@@clientName(KeyVaultProperties.keyname, "keyName");
+@@clientName(KeyVaultProperties.keyversion, "keyVersion");
+@@clientName(KeyVaultProperties.keyvaulturi, "keyVaultUri");
+
+@@clientName(EncryptionIdentity.userAssignedIdentity,
+  "encryptionUserAssignedIdentity"
+);
+@@clientName(EncryptionIdentity.federatedIdentityClientId,
+  "encryptionFederatedIdentityClientId"
+);
+
+@@clientName(VirtualNetworkRule.id, "virtualNetworkResourceId");
+
+@@clientName(IPRule.value, "IPAddressOrRange");
+
+@@clientName(StorageAccountProperties.supportsHttpsTrafficOnly,
+  "enableHttpsTrafficOnly"
+);
+@@clientName(StorageAccountProperties.networkAcls, "networkRuleSet");
+@@clientName(StorageAccountProperties.isSftpEnabled, "IsSftpEnabled");
+@@clientName(StorageAccountProperties.isLocalUserEnabled, "IsLocalUserEnabled");
+@@clientName(StorageAccountProperties.isHnsEnabled, "IsHnsEnabled");
+@@clientName(StorageAccountProperties.isNfsV3Enabled, "enableNfsV3");
+
+@@clientName(BlobRestoreParameters.timetoRestore, "timeToRestore");
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(StorageAccountUpdateParameters.properties);
+
+@@clientName(StorageAccountPropertiesUpdateParameters.supportsHttpsTrafficOnly,
+  "enableHttpsTrafficOnly"
+);
+@@clientName(StorageAccountPropertiesUpdateParameters.isSftpEnabled,
+  "IsSftpEnabled"
+);
+@@clientName(StorageAccountPropertiesUpdateParameters.isLocalUserEnabled,
+  "IsLocalUserEnabled"
+);
+@@clientName(StorageAccountPropertiesUpdateParameters.networkAcls,
+  "networkRuleSet"
+);
+
+@@clientName(AccountSasParameters.signedServices, "services");
+@@clientName(AccountSasParameters.signedResourceTypes, "resourceTypes");
+@@clientName(AccountSasParameters.signedPermission, "permissions");
+@@clientName(AccountSasParameters.signedIp, "IPAddressOrRange");
+@@clientName(AccountSasParameters.signedProtocol, "protocols");
+@@clientName(AccountSasParameters.signedStart, "sharedAccessStartTime");
+@@clientName(AccountSasParameters.signedExpiry, "sharedAccessExpiryTime");
+
+@@clientName(ServiceSasParameters.signedResource, "resource");
+@@clientName(ServiceSasParameters.signedPermission, "permissions");
+@@clientName(ServiceSasParameters.signedIp, "IPAddressOrRange");
+@@clientName(ServiceSasParameters.signedProtocol, "protocols");
+@@clientName(ServiceSasParameters.signedStart, "sharedAccessStartTime");
+@@clientName(ServiceSasParameters.signedExpiry, "sharedAccessExpiryTime");
+@@clientName(ServiceSasParameters.signedIdentifier, "identifier");
+@@clientName(ServiceSasParameters.startPk, "partitionKeyStart");
+@@clientName(ServiceSasParameters.endPk, "partitionKeyEnd");
+@@clientName(ServiceSasParameters.startRk, "rowKeyStart");
+@@clientName(ServiceSasParameters.endRk, "rowKeyEnd");
+@@clientName(ServiceSasParameters.rscc, "cacheControl");
+@@clientName(ServiceSasParameters.rscd, "contentDisposition");
+@@clientName(ServiceSasParameters.rsce, "contentEncoding");
+@@clientName(ServiceSasParameters.rscl, "contentLanguage");
+@@clientName(ServiceSasParameters.rsct, "contentType");
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PrivateLinkResource.properties);
@@ -23,7 +109,8 @@ using Microsoft.Storage;
 @@flattenProperty(FileShareItem.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ListQueue.queueProperties);
+@@flattenProperty(ListQueue.properties);
+@@clientName(ListQueue.properties, "queueProperties");
 
 @@clientName(StorageAccounts.create::parameters.resource, "parameters");
 @@clientName(StorageAccounts.update::parameters.properties, "parameters");

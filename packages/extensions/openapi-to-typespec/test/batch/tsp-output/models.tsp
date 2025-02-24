@@ -1064,8 +1064,7 @@ model ApplicationListResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  @encodedName("application/json", "odata.nextLink")
-  odataNextLink?: string;
+  `odata.nextLink`?: string;
 }
 
 /**
@@ -1158,8 +1157,7 @@ model PoolListUsageMetricsResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  @encodedName("application/json", "odata.nextLink")
-  odataNextLink?: string;
+  `odata.nextLink`?: string;
 }
 
 /**
@@ -1214,8 +1212,7 @@ model AccountListSupportedImagesResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  @encodedName("application/json", "odata.nextLink")
-  odataNextLink?: string;
+  `odata.nextLink`?: string;
 }
 
 /**
@@ -1326,8 +1323,7 @@ model PoolNodeCountsListResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  @encodedName("application/json", "odata.nextLink")
-  odataNextLink?: string;
+  `odata.nextLink`?: string;
 }
 
 /**
@@ -1791,8 +1787,7 @@ model CertificateListResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  @encodedName("application/json", "odata.nextLink")
-  odataNextLink?: string;
+  `odata.nextLink`?: string;
 }
 
 /**
@@ -1811,8 +1806,7 @@ model NodeFileListResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  @encodedName("application/json", "odata.nextLink")
-  odataNextLink?: string;
+  `odata.nextLink`?: string;
 }
 
 /**
@@ -2377,8 +2371,7 @@ model ContainerRegistry {
   /**
    * The user name to log into the registry server.
    */
-  @encodedName("application/json", "username")
-  userName?: string;
+  username?: string;
 
   /**
    * The password to log into the registry server.
@@ -2631,8 +2624,7 @@ model UserIdentity {
    * The userName and autoUser properties are mutually exclusive; you must specify
    * one but not both.
    */
-  @encodedName("application/json", "username")
-  userName?: string;
+  username?: string;
 
   /**
    * The userName and autoUser properties are mutually exclusive; you must specify
@@ -4113,8 +4105,7 @@ model BatchJobScheduleListResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  @encodedName("application/json", "odata.nextLink")
-  odataNextLink?: string;
+  `odata.nextLink`?: string;
 }
 
 /**
@@ -4488,8 +4479,7 @@ model BatchJobListResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  @encodedName("application/json", "odata.nextLink")
-  odataNextLink?: string;
+  `odata.nextLink`?: string;
 }
 
 /**
@@ -4508,8 +4498,7 @@ model BatchJobListPreparationAndReleaseTaskStatusResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  @encodedName("application/json", "odata.nextLink")
-  odataNextLink?: string;
+  `odata.nextLink`?: string;
 }
 
 /**
@@ -5210,8 +5199,7 @@ model BatchPoolListResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  @encodedName("application/json", "odata.nextLink")
-  odataNextLink?: string;
+  `odata.nextLink`?: string;
 }
 
 /**
@@ -5952,8 +5940,7 @@ model BatchTaskListResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  @encodedName("application/json", "odata.nextLink")
-  odataNextLink?: string;
+  `odata.nextLink`?: string;
 }
 
 /**
@@ -6500,8 +6487,7 @@ model InboundEndpoint {
   /**
    * The public fully qualified domain name for the Compute Node.
    */
-  @encodedName("application/json", "publicFQDN")
-  publicFqdn: string;
+  publicFQDN: string;
 
   /**
    * The public port number of the endpoint.
@@ -6664,8 +6650,7 @@ model ComputeNodeListResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  @encodedName("application/json", "odata.nextLink")
-  odataNextLink?: string;
+  `odata.nextLink`?: string;
 }
 
 /**
@@ -6753,6 +6738,5 @@ model NodeVMExtensionList {
    * The URL to get the next set of results.
    */
   @nextLink
-  @encodedName("application/json", "odata.nextLink")
-  odataNextLink?: string;
+  `odata.nextLink`?: string;
 }

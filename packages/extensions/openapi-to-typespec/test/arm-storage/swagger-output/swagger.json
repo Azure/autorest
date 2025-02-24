@@ -5676,40 +5676,33 @@
       "properties": {
         "signedServices": {
           "$ref": "#/definitions/Services",
-          "description": "The signed services accessible with the account SAS. Possible values include: Blob (b), Queue (q), Table (t), File (f).",
-          "x-ms-client-name": "services"
+          "description": "The signed services accessible with the account SAS. Possible values include: Blob (b), Queue (q), Table (t), File (f)."
         },
         "signedResourceTypes": {
           "$ref": "#/definitions/SignedResourceTypes",
-          "description": "The signed resource types that are accessible with the account SAS. Service (s): Access to service-level APIs; Container (c): Access to container-level APIs; Object (o): Access to object-level APIs for blobs, queue messages, table entities, and files.",
-          "x-ms-client-name": "resourceTypes"
+          "description": "The signed resource types that are accessible with the account SAS. Service (s): Access to service-level APIs; Container (c): Access to container-level APIs; Object (o): Access to object-level APIs for blobs, queue messages, table entities, and files."
         },
         "signedPermission": {
           "$ref": "#/definitions/Permissions",
-          "description": "The signed permissions for the account SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p).",
-          "x-ms-client-name": "permissions"
+          "description": "The signed permissions for the account SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p)."
         },
         "signedIp": {
           "type": "string",
-          "description": "An IP address or a range of IP addresses from which to accept requests.",
-          "x-ms-client-name": "IPAddressOrRange"
+          "description": "An IP address or a range of IP addresses from which to accept requests."
         },
         "signedProtocol": {
           "$ref": "#/definitions/HttpProtocol",
-          "description": "The protocol permitted for a request made with the account SAS.",
-          "x-ms-client-name": "protocols"
+          "description": "The protocol permitted for a request made with the account SAS."
         },
         "signedStart": {
           "type": "string",
           "format": "date-time",
-          "description": "The time at which the SAS becomes valid.",
-          "x-ms-client-name": "sharedAccessStartTime"
+          "description": "The time at which the SAS becomes valid."
         },
         "signedExpiry": {
           "type": "string",
           "format": "date-time",
-          "description": "The time at which the shared access signature becomes invalid.",
-          "x-ms-client-name": "sharedAccessExpiryTime"
+          "description": "The time at which the shared access signature becomes invalid."
         },
         "keyToSign": {
           "type": "string",
@@ -6114,8 +6107,7 @@
         "timetoRestore": {
           "type": "string",
           "format": "date-time",
-          "description": "Restore blob to the specified time.",
-          "x-ms-client-name": "timeToRestore"
+          "description": "Restore blob to the specified time."
         },
         "blobRanges": {
           "type": "array",
@@ -6792,13 +6784,11 @@
         },
         "keyvaultproperties": {
           "$ref": "#/definitions/KeyVaultProperties",
-          "description": "Properties provided by key vault.",
-          "x-ms-client-name": "keyVaultProperties"
+          "description": "Properties provided by key vault."
         },
         "identity": {
           "$ref": "#/definitions/EncryptionIdentity",
-          "description": "The identity to be used with service-side encryption at rest.",
-          "x-ms-client-name": "encryptionIdentity"
+          "description": "The identity to be used with service-side encryption at rest."
         }
       }
     },
@@ -6808,13 +6798,11 @@
       "properties": {
         "userAssignedIdentity": {
           "type": "string",
-          "description": "Resource identifier of the UserAssigned identity to be associated with server-side encryption on the storage account.",
-          "x-ms-client-name": "encryptionUserAssignedIdentity"
+          "description": "Resource identifier of the UserAssigned identity to be associated with server-side encryption on the storage account."
         },
         "federatedIdentityClientId": {
           "type": "string",
-          "description": "ClientId of the multi-tenant application to be used in conjunction with the user-assigned identity for cross-tenant customer-managed-keys server-side encryption on the storage account.",
-          "x-ms-client-name": "encryptionFederatedIdentityClientId"
+          "description": "ClientId of the multi-tenant application to be used in conjunction with the user-assigned identity for cross-tenant customer-managed-keys server-side encryption on the storage account."
         }
       }
     },
@@ -7378,8 +7366,7 @@
       "properties": {
         "value": {
           "type": "string",
-          "description": "Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed.",
-          "x-ms-client-name": "IPAddressOrRange"
+          "description": "Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed."
         },
         "action": {
           "type": "string",
@@ -7695,18 +7682,15 @@
       "properties": {
         "keyname": {
           "type": "string",
-          "description": "The name of KeyVault key.",
-          "x-ms-client-name": "keyName"
+          "description": "The name of KeyVault key."
         },
         "keyversion": {
           "type": "string",
-          "description": "The version of KeyVault key.",
-          "x-ms-client-name": "keyVersion"
+          "description": "The version of KeyVault key."
         },
         "keyvaulturi": {
           "type": "string",
-          "description": "The Uri of KeyVault.",
-          "x-ms-client-name": "keyVaultUri"
+          "description": "The Uri of KeyVault."
         },
         "currentVersionedKeyIdentifier": {
           "type": "string",
@@ -8176,8 +8160,7 @@
         "properties": {
           "$ref": "#/definitions/ListQueueProperties",
           "description": "List Queue resource properties.",
-          "x-ms-client-flatten": true,
-          "x-ms-client-name": "queueProperties"
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -8732,8 +8715,7 @@
           "description": "Sets the virtual network rules",
           "items": {
             "$ref": "#/definitions/VirtualNetworkRule"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "ipRules": {
           "type": "array",
@@ -9567,61 +9549,50 @@
         },
         "signedResource": {
           "$ref": "#/definitions/SignedResource",
-          "description": "The signed services accessible with the service SAS. Possible values include: Blob (b), Container (c), File (f), Share (s).",
-          "x-ms-client-name": "resource"
+          "description": "The signed services accessible with the service SAS. Possible values include: Blob (b), Container (c), File (f), Share (s)."
         },
         "signedPermission": {
           "$ref": "#/definitions/Permissions",
-          "description": "The signed permissions for the service SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p).",
-          "x-ms-client-name": "permissions"
+          "description": "The signed permissions for the service SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p)."
         },
         "signedIp": {
           "type": "string",
-          "description": "An IP address or a range of IP addresses from which to accept requests.",
-          "x-ms-client-name": "IPAddressOrRange"
+          "description": "An IP address or a range of IP addresses from which to accept requests."
         },
         "signedProtocol": {
           "$ref": "#/definitions/HttpProtocol",
-          "description": "The protocol permitted for a request made with the account SAS.",
-          "x-ms-client-name": "protocols"
+          "description": "The protocol permitted for a request made with the account SAS."
         },
         "signedStart": {
           "type": "string",
           "format": "date-time",
-          "description": "The time at which the SAS becomes valid.",
-          "x-ms-client-name": "sharedAccessStartTime"
+          "description": "The time at which the SAS becomes valid."
         },
         "signedExpiry": {
           "type": "string",
           "format": "date-time",
-          "description": "The time at which the shared access signature becomes invalid.",
-          "x-ms-client-name": "sharedAccessExpiryTime"
+          "description": "The time at which the shared access signature becomes invalid."
         },
         "signedIdentifier": {
           "type": "string",
           "description": "A unique value up to 64 characters in length that correlates to an access policy specified for the container, queue, or table.",
-          "maxLength": 64,
-          "x-ms-client-name": "identifier"
+          "maxLength": 64
         },
         "startPk": {
           "type": "string",
-          "description": "The start of partition key.",
-          "x-ms-client-name": "partitionKeyStart"
+          "description": "The start of partition key."
         },
         "endPk": {
           "type": "string",
-          "description": "The end of partition key.",
-          "x-ms-client-name": "partitionKeyEnd"
+          "description": "The end of partition key."
         },
         "startRk": {
           "type": "string",
-          "description": "The start of row key.",
-          "x-ms-client-name": "rowKeyStart"
+          "description": "The start of row key."
         },
         "endRk": {
           "type": "string",
-          "description": "The end of row key.",
-          "x-ms-client-name": "rowKeyEnd"
+          "description": "The end of row key."
         },
         "keyToSign": {
           "type": "string",
@@ -9629,28 +9600,23 @@
         },
         "rscc": {
           "type": "string",
-          "description": "The response header override for cache control.",
-          "x-ms-client-name": "cacheControl"
+          "description": "The response header override for cache control."
         },
         "rscd": {
           "type": "string",
-          "description": "The response header override for content disposition.",
-          "x-ms-client-name": "contentDisposition"
+          "description": "The response header override for content disposition."
         },
         "rsce": {
           "type": "string",
-          "description": "The response header override for content encoding.",
-          "x-ms-client-name": "contentEncoding"
+          "description": "The response header override for content encoding."
         },
         "rscl": {
           "type": "string",
-          "description": "The response header override for content language.",
-          "x-ms-client-name": "contentLanguage"
+          "description": "The response header override for content language."
         },
         "rsct": {
           "type": "string",
-          "description": "The response header override for content type.",
-          "x-ms-client-name": "contentType"
+          "description": "The response header override for content type."
         }
       },
       "required": [
@@ -10291,29 +10257,24 @@
         },
         "supportsHttpsTrafficOnly": {
           "type": "boolean",
-          "description": "Allows https traffic only to storage service if sets to true.",
-          "x-ms-client-name": "enableHttpsTrafficOnly"
+          "description": "Allows https traffic only to storage service if sets to true."
         },
         "networkAcls": {
           "$ref": "#/definitions/NetworkRuleSet",
           "description": "Network rule set",
-          "readOnly": true,
-          "x-ms-client-name": "networkRuleSet"
+          "readOnly": true
         },
         "isSftpEnabled": {
           "type": "boolean",
-          "description": "Enables Secure File Transfer Protocol, if set to true",
-          "x-ms-client-name": "IsSftpEnabled"
+          "description": "Enables Secure File Transfer Protocol, if set to true"
         },
         "isLocalUserEnabled": {
           "type": "boolean",
-          "description": "Enables local users feature, if set to true",
-          "x-ms-client-name": "IsLocalUserEnabled"
+          "description": "Enables local users feature, if set to true"
         },
         "isHnsEnabled": {
           "type": "boolean",
-          "description": "Account HierarchicalNamespace enabled if sets to true.",
-          "x-ms-client-name": "IsHnsEnabled"
+          "description": "Account HierarchicalNamespace enabled if sets to true."
         },
         "geoReplicationStats": {
           "$ref": "#/definitions/GeoReplicationStats",
@@ -10360,8 +10321,7 @@
         },
         "isNfsV3Enabled": {
           "type": "boolean",
-          "description": "NFS 3.0 protocol support enabled if set to true.",
-          "x-ms-client-name": "enableNfsV3"
+          "description": "NFS 3.0 protocol support enabled if set to true."
         },
         "allowCrossTenantReplication": {
           "type": "boolean",
@@ -10423,23 +10383,19 @@
         },
         "supportsHttpsTrafficOnly": {
           "type": "boolean",
-          "description": "Allows https traffic only to storage service if sets to true.",
-          "x-ms-client-name": "enableHttpsTrafficOnly"
+          "description": "Allows https traffic only to storage service if sets to true."
         },
         "isSftpEnabled": {
           "type": "boolean",
-          "description": "Enables Secure File Transfer Protocol, if set to true",
-          "x-ms-client-name": "IsSftpEnabled"
+          "description": "Enables Secure File Transfer Protocol, if set to true"
         },
         "isLocalUserEnabled": {
           "type": "boolean",
-          "description": "Enables local users feature, if set to true",
-          "x-ms-client-name": "IsLocalUserEnabled"
+          "description": "Enables local users feature, if set to true"
         },
         "networkAcls": {
           "$ref": "#/definitions/NetworkRuleSet",
-          "description": "Network rule set",
-          "x-ms-client-name": "networkRuleSet"
+          "description": "Network rule set"
         },
         "largeFileSharesState": {
           "$ref": "#/definitions/LargeFileSharesState",
@@ -10875,8 +10831,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}.",
-          "x-ms-client-name": "virtualNetworkResourceId"
+          "description": "Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}."
         },
         "action": {
           "type": "string",
