@@ -54,7 +54,6 @@ using TypeSpec.Versioning;
  * These APIs allow end users to operate on Azure Machine Learning Workspace resources.
  */
 @armProviderNamespace
-@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Azure Machine Learning Services",
 })

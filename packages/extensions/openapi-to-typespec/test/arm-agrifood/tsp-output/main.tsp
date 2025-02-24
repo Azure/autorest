@@ -32,7 +32,6 @@ using TypeSpec.Versioning;
  * APIs documentation for Microsoft Azure Data Manager for Agriculture Service.
  */
 @armProviderNamespace
-@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Azure AgFoodPlatform RP Service",
 })

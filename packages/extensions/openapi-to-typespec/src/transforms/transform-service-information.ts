@@ -23,7 +23,7 @@ export function transformServiceInformation(model: CodeModel): ServiceInformatio
     versions: getApiVersions(model),
     armCommonTypeVersion: isArm ? getArmCommonTypeVersion() : undefined,
     userSetArmCommonTypeVersion: isArm ? getUserSetArmCommonTypeVersion() : undefined,
-    authentication: getAuth(model),
+    authentication: isArm ? undefined : getAuth(model),
   };
 }
 

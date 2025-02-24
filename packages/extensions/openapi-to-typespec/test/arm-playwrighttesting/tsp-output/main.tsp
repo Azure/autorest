@@ -25,7 +25,6 @@ using TypeSpec.Versioning;
  * Azure Playwright testing management service
  */
 @armProviderNamespace
-@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Microsoft AzurePlaywrightService Management API",
 })

@@ -67,7 +67,6 @@ using TypeSpec.Versioning;
  * ApiManagement Client
  */
 @armProviderNamespace
-@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "ApiManagementClient",
 })

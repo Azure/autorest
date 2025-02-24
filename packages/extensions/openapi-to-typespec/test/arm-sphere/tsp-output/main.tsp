@@ -30,7 +30,6 @@ using TypeSpec.Versioning;
  * Azure Sphere resource management API.
  */
 @armProviderNamespace
-@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Azure Sphere resource management API.",
 })

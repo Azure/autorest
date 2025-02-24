@@ -41,7 +41,6 @@ using TypeSpec.Versioning;
  * The Azure Storage Management API.
  */
 @armProviderNamespace
-@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Azure Storage resource management API.",
 })
