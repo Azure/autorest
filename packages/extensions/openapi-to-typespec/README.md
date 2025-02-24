@@ -51,7 +51,3 @@ pipeline:
     input: openapi-to-typespec
     scope: openapi-to-typespec-scope/emitter
 ```
-
-## Known issues
-
-### Some operations are marked as singleton
