@@ -2,6 +2,21 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.10.10",
+      "tag": "@autorest/openapi-to-typespec_v0.10.10",
+      "date": "Tue, 18 Feb 2025 09:41:04 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix content type header"
+          },
+          {
+            "comment": "Add missing examples for non-resource operation"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.10.9",
       "tag": "@autorest/openapi-to-typespec_v0.10.9",
       "date": "Mon, 10 Feb 2025 01:59:37 GMT",
