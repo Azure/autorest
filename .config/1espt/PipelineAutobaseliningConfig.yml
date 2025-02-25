@@ -25,4 +25,4 @@ pipelines:
         credscan:
           lastModifiedDate: 2025-02-07
         binskim:
-          lastModifiedDate: 2025-02-07
+          lastModifiedDate: 2025-02-25
