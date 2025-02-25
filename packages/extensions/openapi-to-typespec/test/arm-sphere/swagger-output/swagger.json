@@ -2238,9 +2238,6 @@
               }
             }
           },
-          "204": {
-            "description": "Azure operation completed successfully."
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {

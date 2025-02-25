@@ -132,21 +132,36 @@ interface ComputeResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Compute_Start")
-  start is ArmResourceActionAsync<ComputeResource, void, void>;
+  start is ArmResourceActionAsyncBase<
+    ComputeResource,
+    void,
+    ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ComputeResource>
+  >;
 
   /**
    * Posts a stop action to a compute instance
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Compute_Stop")
-  stop is ArmResourceActionAsync<ComputeResource, void, void>;
+  stop is ArmResourceActionAsyncBase<
+    ComputeResource,
+    void,
+    ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ComputeResource>
+  >;
 
   /**
    * Posts a restart action to a compute instance
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Compute_Restart")
-  restart is ArmResourceActionAsync<ComputeResource, void, void>;
+  restart is ArmResourceActionAsyncBase<
+    ComputeResource,
+    void,
+    ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ComputeResource>
+  >;
 
   /**
    * Updates the idle shutdown setting of a compute instance.

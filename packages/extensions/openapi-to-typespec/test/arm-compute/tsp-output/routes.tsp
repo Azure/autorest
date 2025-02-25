@@ -130,9 +130,7 @@ interface VirtualMachineImagesOperations {
   @get
   @action("versions")
   list is ArmProviderActionSync<
-    Response = {
-      @bodyRoot _: VirtualMachineImageResource[];
-    },
+    Response = Azure.Core.Page<VirtualMachineImageResource>,
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -182,9 +180,7 @@ interface VirtualMachineImagesOperations {
   @get
   @action("artifacttypes/vmimage/offers")
   listOffers is ArmProviderActionSync<
-    Response = {
-      @bodyRoot _: VirtualMachineImageResource[];
-    },
+    Response = Azure.Core.Page<VirtualMachineImageResource>,
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -206,9 +202,7 @@ interface VirtualMachineImagesOperations {
   @get
   @action("publishers")
   listPublishers is ArmProviderActionSync<
-    Response = {
-      @bodyRoot _: VirtualMachineImageResource[];
-    },
+    Response = Azure.Core.Page<VirtualMachineImageResource>,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
   >;
@@ -221,9 +215,7 @@ interface VirtualMachineImagesOperations {
   @get
   @action("skus")
   listSkus is ArmProviderActionSync<
-    Response = {
-      @bodyRoot _: VirtualMachineImageResource[];
-    },
+    Response = Azure.Core.Page<VirtualMachineImageResource>,
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -322,9 +314,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @get
   @action("versions")
   list is ArmProviderActionSync<
-    Response = {
-      @bodyRoot _: VirtualMachineImageResource[];
-    },
+    Response = Azure.Core.Page<VirtualMachineImageResource>,
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -385,9 +375,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @get
   @action("artifacttypes/vmimage/offers")
   listOffers is ArmProviderActionSync<
-    Response = {
-      @bodyRoot _: VirtualMachineImageResource[];
-    },
+    Response = Azure.Core.Page<VirtualMachineImageResource>,
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -416,9 +404,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @get
   @action("publishers")
   listPublishers is ArmProviderActionSync<
-    Response = {
-      @bodyRoot _: VirtualMachineImageResource[];
-    },
+    Response = Azure.Core.Page<VirtualMachineImageResource>,
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -440,9 +426,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @get
   @action("skus")
   listSkus is ArmProviderActionSync<
-    Response = {
-      @bodyRoot _: VirtualMachineImageResource[];
-    },
+    Response = Azure.Core.Page<VirtualMachineImageResource>,
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;

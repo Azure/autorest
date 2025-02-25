@@ -43,6 +43,7 @@ interface ApplicationOperations {
          * The caller-generated request identity, in the form of a GUID with no decoration
          * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
          */
+        @format("uuid")
         @header
         `client-request-id`?: string;
 
@@ -87,6 +88,7 @@ interface ApplicationOperations {
          * The caller-generated request identity, in the form of a GUID with no decoration
          * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
          */
+        @format("uuid")
         @header
         `client-request-id`?: string;
 
@@ -169,6 +171,7 @@ interface PoolOperations {
          * The caller-generated request identity, in the form of a GUID with no decoration
          * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
          */
+        @format("uuid")
         @header
         `client-request-id`?: string;
 
@@ -212,6 +215,7 @@ interface PoolOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -254,6 +258,7 @@ interface PoolOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -328,6 +333,7 @@ interface PoolOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -385,6 +391,7 @@ interface PoolOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -462,6 +469,7 @@ interface PoolOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -551,6 +559,7 @@ interface PoolOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -631,6 +640,7 @@ interface PoolOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -715,6 +725,7 @@ interface PoolOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -766,6 +777,7 @@ interface PoolOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -852,6 +864,7 @@ interface PoolOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -910,6 +923,7 @@ interface PoolOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -1000,6 +1014,7 @@ interface PoolOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -1080,6 +1095,7 @@ interface PoolOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -1134,6 +1150,7 @@ interface PoolOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -1230,6 +1247,7 @@ interface AccountOperations {
          * The caller-generated request identity, in the form of a GUID with no decoration
          * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
          */
+        @format("uuid")
         @header
         `client-request-id`?: string;
 
@@ -1286,6 +1304,7 @@ interface AccountOperations {
          * The caller-generated request identity, in the form of a GUID with no decoration
          * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
          */
+        @format("uuid")
         @header
         `client-request-id`?: string;
 
@@ -1331,6 +1350,7 @@ interface JobOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -1384,6 +1404,7 @@ interface JobOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -1474,6 +1495,7 @@ interface JobOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -1554,6 +1576,7 @@ interface JobOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -1640,6 +1663,7 @@ interface JobOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -1731,6 +1755,7 @@ interface JobOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -1820,6 +1845,7 @@ interface JobOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -1903,6 +1929,7 @@ interface JobOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -1989,6 +2016,7 @@ interface JobOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -2063,6 +2091,7 @@ interface JobOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -2137,6 +2166,7 @@ interface JobOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -2213,6 +2243,7 @@ interface JobOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -2262,6 +2293,7 @@ interface JobOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -2304,6 +2336,7 @@ interface CertificateOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -2372,6 +2405,7 @@ interface CertificateOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -2430,6 +2464,7 @@ interface CertificateOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -2490,6 +2525,7 @@ interface CertificateOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -2547,6 +2583,7 @@ interface CertificateOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -2616,6 +2653,7 @@ interface FileOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -2673,6 +2711,7 @@ interface FileOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -2753,6 +2792,7 @@ interface FileOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -2836,6 +2876,7 @@ interface FileOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -2893,6 +2934,7 @@ interface FileOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -2973,6 +3015,7 @@ interface FileOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -3064,6 +3107,7 @@ interface FileOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -3138,6 +3182,7 @@ interface FileOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -3186,6 +3231,7 @@ interface JobScheduleOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -3268,6 +3314,7 @@ interface JobScheduleOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -3357,6 +3404,7 @@ interface JobScheduleOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -3439,6 +3487,7 @@ interface JobScheduleOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -3527,6 +3576,7 @@ interface JobScheduleOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -3611,6 +3661,7 @@ interface JobScheduleOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -3689,6 +3740,7 @@ interface JobScheduleOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -3767,6 +3819,7 @@ interface JobScheduleOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -3839,6 +3892,7 @@ interface JobScheduleOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -3913,6 +3967,7 @@ interface JobScheduleOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -3963,6 +4018,7 @@ interface TaskOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -4045,6 +4101,7 @@ interface TaskOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -4104,6 +4161,7 @@ interface TaskOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -4166,6 +4224,7 @@ interface TaskOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -4264,6 +4323,7 @@ interface TaskOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -4347,6 +4407,7 @@ interface TaskOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -4446,6 +4507,7 @@ interface TaskOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -4500,6 +4562,7 @@ interface TaskOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -4593,6 +4656,7 @@ interface TaskOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -4680,6 +4744,7 @@ interface ComputeNodeOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -4745,6 +4810,7 @@ interface ComputeNodeOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -4809,6 +4875,7 @@ interface ComputeNodeOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -4873,6 +4940,7 @@ interface ComputeNodeOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -4925,6 +4993,7 @@ interface ComputeNodeOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -4985,6 +5054,7 @@ interface ComputeNodeOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -5044,6 +5114,7 @@ interface ComputeNodeOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -5103,6 +5174,7 @@ interface ComputeNodeOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -5159,6 +5231,7 @@ interface ComputeNodeOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -5215,6 +5288,7 @@ interface ComputeNodeOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -5261,6 +5335,7 @@ interface ComputeNodeOperations {
          * The caller-generated request identity, in the form of a GUID with no decoration
          * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
          */
+        @format("uuid")
         @header
         `client-request-id`?: string;
 
@@ -5329,6 +5404,7 @@ interface ComputeNodeOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -5396,6 +5472,7 @@ interface ComputeNodeExtensionOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 
@@ -5463,6 +5540,7 @@ interface ComputeNodeExtensionOperations {
        * The caller-generated request identity, in the form of a GUID with no decoration
        * such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
        */
+      @format("uuid")
       @header
       `client-request-id`?: string;
 

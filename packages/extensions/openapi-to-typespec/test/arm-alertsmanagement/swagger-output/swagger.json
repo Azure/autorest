@@ -592,7 +592,8 @@
             "in": "path",
             "description": "Unique ID of an alert instance.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -630,7 +631,8 @@
             "in": "path",
             "description": "Unique ID of an alert instance.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "newState",
@@ -707,7 +709,8 @@
             "in": "path",
             "description": "Unique ID of an alert instance.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -1418,7 +1421,8 @@
             "in": "path",
             "description": "Smart group unique id. ",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -1456,7 +1460,8 @@
             "in": "path",
             "description": "Smart group unique id. ",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "newState",
@@ -1524,7 +1529,8 @@
             "in": "path",
             "description": "Smart group unique id. ",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {

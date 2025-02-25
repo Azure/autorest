@@ -3906,7 +3906,9 @@ model VirtualNetworkConfiguration {
   /**
    * The virtual network ID. This is typically a GUID. Expect a null GUID by default.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility("read")
+  @format("uuid")
   vnetid?: string;
 
   /**
@@ -4126,13 +4128,17 @@ model ApiManagementServiceIdentity {
   /**
    * The principal id of the identity.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility("read")
+  @format("uuid")
   principalId?: string;
 
   /**
    * The client tenant id of the identity.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility("read")
+  @format("uuid")
   tenantId?: string;
 
   /**

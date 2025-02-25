@@ -87,11 +87,7 @@ export function generateProviderAction(operation: TspArmProviderActionOperation)
   }
 
   if (operation.response) {
-    if (operation.response.endsWith("[]")) {
-      templateParameters.push(`Response = {@bodyRoot _: ${operation.response}}`);
-    } else {
-      templateParameters.push(`Response = ${operation.response}`);
-    }
+    templateParameters.push(`Response = ${operation.response}`);
   }
 
   if (operation.scope) {

@@ -42,11 +42,15 @@ export function transformSchemaResponse(response: SchemaResponse): TypespecModel
     };
   }
 
-  let responseTypeName = "";
   if (isArraySchema(response.schema)) {
     const itemName = dataTypes.get(response.schema.elementType)?.name;
-    responseTypeName = `${itemName}[]`;
-  } else responseTypeName = response.schema.language.default.name;
+    return {
+      kind: "template",
+      name: "Azure.Core.Page",
+      arguments: [{ kind: "object", name: itemName! }],
+      additionalProperties: additionalProperties,
+    };
+  }
 
-  return { kind: "object", name: responseTypeName, additionalProperties };
+  return { kind: "object", name: response.schema.language.default.name, additionalProperties };
 }

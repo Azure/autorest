@@ -125,8 +125,11 @@ function generateResponseWithBody(
 }
 
 function getSchemaResponseSchemaName(response: Response): string | undefined {
-  if (!isResponseSchema(response) || isArraySchema(response.schema)) {
+  if (!isResponseSchema(response)) {
     return undefined;
+  }
+
+  if (isArraySchema(response.schema)) {
   }
 
   return (response as SchemaResponse).schema.language.default.name;

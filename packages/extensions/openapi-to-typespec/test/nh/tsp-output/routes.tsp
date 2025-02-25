@@ -150,7 +150,7 @@ op getRegistrationsByTag is Azure.Core.Foundations.Operation<
     @query("$top")
     $top?: string;
   },
-  RegistrationEntryModel[] & {
+  Azure.Core.Page<RegistrationEntryModel> & {
     @header
     contentType: "application/atom+xml;type=entry;charset=utf-8";
   }
@@ -228,7 +228,7 @@ op getRegistrations is Azure.Core.Foundations.Operation<
     @query("$top")
     $top?: string;
   },
-  RegistrationEntryModel[] & {
+  Azure.Core.Page<RegistrationEntryModel> & {
     @header
     contentType: "application/atom+xml;type=entry;charset=utf-8";
   }

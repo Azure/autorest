@@ -2472,6 +2472,7 @@
         },
         "accessFBApplicationId": {
           "type": "string",
+          "format": "uuid",
           "description": "Application id of the multi tenant application to be used by partner to access Data Manager For Agriculture data.",
           "readOnly": true
         },
@@ -2687,11 +2688,13 @@
       "properties": {
         "principalId": {
           "type": "string",
+          "format": "uuid",
           "description": "The principal ID of resource identity. The value must be an UUID.",
           "readOnly": true
         },
         "tenantId": {
           "type": "string",
+          "format": "uuid",
           "description": "The tenant ID of resource. The value must be an UUID.",
           "readOnly": true
         },

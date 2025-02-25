@@ -182,5 +182,7 @@ interface Alerts {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-format"
+@@format(Alert.name, "uuid");
 @@doc(Alert.name, "Unique ID of an alert instance.");
 @@doc(Alert.properties, "Alert property bag");

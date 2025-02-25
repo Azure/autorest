@@ -21,6 +21,7 @@ interface DocumentsOperations {
       /**
        * The tracking ID sent with the request to help with debugging.
        */
+      @format("uuid")
       @header
       `x-ms-client-request-id`?: string;
     },
@@ -193,6 +194,7 @@ interface DocumentsOperations {
       /**
        * The tracking ID sent with the request to help with debugging.
        */
+      @format("uuid")
       @header
       `x-ms-client-request-id`?: string;
 
@@ -306,6 +308,7 @@ interface DocumentsOperations {
       /**
        * The tracking ID sent with the request to help with debugging.
        */
+      @format("uuid")
       @header
       `x-ms-client-request-id`?: string;
 
@@ -342,6 +345,7 @@ interface DocumentsOperations {
       /**
        * The tracking ID sent with the request to help with debugging.
        */
+      @format("uuid")
       @header
       `x-ms-client-request-id`?: string;
     },
@@ -445,6 +449,7 @@ interface DocumentsOperations {
       /**
        * The tracking ID sent with the request to help with debugging.
        */
+      @format("uuid")
       @header
       `x-ms-client-request-id`?: string;
     },
@@ -462,6 +467,7 @@ interface DocumentsOperations {
       /**
        * The tracking ID sent with the request to help with debugging.
        */
+      @format("uuid")
       @header
       `x-ms-client-request-id`?: string;
 
@@ -485,6 +491,7 @@ interface DocumentsOperations {
       /**
        * The tracking ID sent with the request to help with debugging.
        */
+      @format("uuid")
       @header
       `x-ms-client-request-id`?: string;
 
@@ -509,6 +516,7 @@ interface DocumentsOperations {
       /**
        * The tracking ID sent with the request to help with debugging.
        */
+      @format("uuid")
       @header
       `x-ms-client-request-id`?: string;
 
@@ -602,6 +610,7 @@ interface DocumentsOperations {
       /**
        * The tracking ID sent with the request to help with debugging.
        */
+      @format("uuid")
       @header
       `x-ms-client-request-id`?: string;
 

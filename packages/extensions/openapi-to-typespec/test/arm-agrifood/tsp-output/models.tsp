@@ -336,13 +336,17 @@ model Identity {
   /**
    * The principal ID of resource identity. The value must be an UUID.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility("read")
+  @format("uuid")
   principalId?: string;
 
   /**
    * The tenant ID of resource. The value must be an UUID.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility("read")
+  @format("uuid")
   tenantId?: string;
 
   /**
@@ -788,7 +792,9 @@ model DataManagerForAgricultureSolutionProperties {
   /**
    * Application id of the multi tenant application to be used by partner to access Data Manager For Agriculture data.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility("read")
+  @format("uuid")
   accessFBApplicationId?: string;
 
   /**

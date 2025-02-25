@@ -406,6 +406,7 @@ model ChangePointDetectResponse {
  */
 @resource("multivariate/entire/detect/{resultId}")
 model DetectionResult {
+  @format("uuid")
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   resultId: string;
@@ -703,6 +704,7 @@ model ModelSnapshot {
   /**
    * Model identifier.
    */
+  @format("uuid")
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   modelId: string;
@@ -740,6 +742,7 @@ model Model {
   /**
    * Model identifier.
    */
+  @format("uuid")
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   modelId: string;

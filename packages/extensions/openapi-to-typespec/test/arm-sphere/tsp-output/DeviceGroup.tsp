@@ -86,10 +86,11 @@ interface DeviceGroups {
   /**
    * Bulk claims the devices. Use '.unassigned' or '.default' for the device group and product names when bulk claiming devices to a catalog only.
    */
-  claimDevices is ArmResourceActionAsync<
+  claimDevices is ArmResourceActionAsyncBase<
     DeviceGroup,
     ClaimDevicesRequest,
-    void
+    ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<DeviceGroup>
   >;
 
   /**

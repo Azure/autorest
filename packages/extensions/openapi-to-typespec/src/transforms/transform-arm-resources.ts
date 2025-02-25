@@ -272,14 +272,27 @@ function convertResourceReadOperation(
   // every resource should have a get operation
   const operation = resourceMetadata.GetOperation!;
   const swaggerOperation = operations[operation.OperationID];
-  return [
-    buildNewArmOperation(
-      resourceMetadata,
-      operation,
-      swaggerOperation,
-      "ArmResourceRead",
-    ) as TspArmResourceLifeCycleOperation,
+  const armOperation = buildNewArmOperation(resourceMetadata, operation, swaggerOperation, "ArmResourceRead");
+  const syncNames: NamesOfResponseTemplate = {
+    _200Name: "ArmResponse",
+    _200NameNoBody: "OkResponse",
+    _201Name: "ArmResourceCreatedSyncResponse",
+    _201NameNoBody: "CreatedResponse",
+    _202Name: "AcceptedResponse",
+    _202NameNoBody: "AcceptedResponse",
+    _204Name: "ArmNoContentResponse",
+  };
+  let responses: TypespecTemplateModel[] = getTemplateResponses(swaggerOperation, syncNames);
+  const templateSyncResponses: TypespecTemplateModel[] = [
+    {
+      kind: "template",
+      name: syncNames._200Name,
+      arguments: [{ kind: "object", name: resourceMetadata.SwaggerModelName }],
+    },
   ];
+  if (isSameResponses(responses, templateSyncResponses)) responses = [];
+  if (responses.length > 0) armOperation.response = responses;
+  return [armOperation as TspArmResourceLifeCycleOperation];
 }
 
 function convertResourceExistsOperation(
@@ -734,7 +747,7 @@ function convertResourceActionOperations(
         const _202NoBodyResponseIndex = responses.findIndex(
           (r) => r.name === asyncNames._202NameNoBody && !r.arguments,
         );
-        if (_202NoBodyResponseIndex >= 0) {
+        if (_202NoBodyResponseIndex >= 0 && responses.length > 1) {
           responses.splice(_202NoBodyResponseIndex, 1);
         } else {
           armOperation.kind = "ArmResourceActionAsyncBase";
