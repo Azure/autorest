@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2024-01-01",
+    "api-version": "2024-12-01",
     "hub": "hub1",
     "userId": "user1"
   },

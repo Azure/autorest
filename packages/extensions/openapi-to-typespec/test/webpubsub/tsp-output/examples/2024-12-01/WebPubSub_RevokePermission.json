@@ -1,14 +1,14 @@
 {
   "parameters": {
-    "api-version": "2024-01-01",
+    "api-version": "2024-12-01",
     "connectionId": "connection1",
     "hub": "hub1",
     "permission": "joinLeaveGroup",
     "targetName": "group1"
   },
   "responses": {
-    "200": {}
+    "204": {}
   },
-  "operationId": "WebPubSub_GrantPermission",
-  "title": "WebPubSub_GrantPermission"
+  "operationId": "WebPubSub_RevokePermission",
+  "title": "WebPubSub_RevokePermission"
 }
