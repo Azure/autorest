@@ -1,6 +1,13 @@
 # Change Log - @autorest/compare
 
-This log was last generated on Thu, 16 Nov 2023 16:00:04 GMT and should not be manually modified.
+This log was last generated on Mon, 24 Feb 2025 08:05:13 GMT and should not be manually modified.
+
+## 0.5.1
+Mon, 24 Feb 2025 08:05:13 GMT
+
+### Patches
+
+- Upgrade tree-sitter version to support node 22
 
 ## 0.5.0
 Thu, 16 Nov 2023 16:00:04 GMT

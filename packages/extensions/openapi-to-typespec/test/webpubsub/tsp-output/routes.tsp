@@ -490,6 +490,46 @@ interface WebPubSubOperations {
   >;
 
   /**
+   * List connections in a group.
+   */
+  @summary("List connections in a group.")
+  @operationId("WebPubSub_ListConnectionsInGroup")
+  listConnectionsInGroup is Azure.Core.ResourceList<
+    GroupMember,
+    {
+      parameters: {
+        /**
+         * The maximum number of connections to include in a single response. It should be
+         * between 1 and 200.
+         */
+        @maxValue(200)
+        @minValue(1)
+        @query("maxpagesize")
+        maxpagesize?: int32;
+
+        /**
+         * The maximum number of connections to return. If the value is not set, then all
+         * the connections in a group are returned.
+         */
+        @maxValue(2147483647)
+        @minValue(1)
+        @query("top")
+        top?: int32;
+
+        /**
+         * A token that allows the client to retrieve the next page of results. This
+         * parameter is provided by the service in the response of a previous request when
+         * there are additional results to be fetched. Clients should include the
+         * continuationToken in the next request to receive the subsequent page of data.
+         * If this parameter is omitted, the server will return the first page of results.
+         */
+        @query("continuationToken")
+        continuationToken?: string;
+      };
+    }
+  >;
+
+  /**
    * Remove a connection from the target group.
    */
   @summary("Remove a connection from the target group.")
