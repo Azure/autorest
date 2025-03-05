@@ -1,8 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
 
 namespace AzureWebPubSubServiceRESTAPI;
 
@@ -113,4 +115,24 @@ model RemoveFromGroupsRequest {
    * An OData filter which target connections satisfy
    */
   filter?: string;
+}
+
+/**
+ * Represents a page of elements as a LIST REST API result.
+ */
+model GroupMemberPagedValues is Azure.Core.Page<GroupMember>;
+
+@resource("api/hubs/{hub}/groups/{group}/connections")
+model GroupMember {
+  /**
+   * A unique identifier of a connection.
+   */
+  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
+  @key
+  connectionId: string;
+
+  /**
+   * The user ID of the connection. A user can have multiple connections.
+   */
+  userId?: string;
 }

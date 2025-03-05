@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2024-01-01",
+    "api-version": "2024-12-01",
     "group": "group1",
     "hub": "hub1",
     "reason": "Close reason"
