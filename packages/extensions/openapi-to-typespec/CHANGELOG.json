@@ -2,6 +2,18 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.10.12",
+      "tag": "@autorest/openapi-to-typespec_v0.10.12",
+      "date": "Wed, 05 Mar 2025 05:42:51 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Float the dependecy version"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.10.11",
       "tag": "@autorest/openapi-to-typespec_v0.10.11",
       "date": "Mon, 24 Feb 2025 08:05:13 GMT",
