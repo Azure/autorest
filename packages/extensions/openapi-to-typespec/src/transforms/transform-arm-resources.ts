@@ -30,6 +30,7 @@ import { getOperationClientDecorators, getPropertyDecorators } from "../utils/de
 import { generateDocsContent } from "../utils/docs";
 import { getEnvelopeProperty, getEnvelopeAugmentedDecorator } from "../utils/envelope-property";
 import { getLogger } from "../utils/logger";
+import { getTSPOperationGroupName } from "../utils/operation-group";
 import {
   ArmResource,
   ArmResourceSchema,
@@ -49,7 +50,6 @@ import {
 import { getFullyQualifiedName, getTemplateResponses, NamesOfResponseTemplate } from "../utils/type-mapping";
 import { getTypespecType, isTypespecType, transformObjectProperty } from "./transform-object";
 import { transformParameter } from "./transform-operations";
-import { getTSPOperationGroupName } from "../utils/operation-group";
 
 const logger = () => getLogger("transform-arm-resources");
 

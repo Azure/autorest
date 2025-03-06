@@ -1,7 +1,7 @@
 import pluralize from "pluralize";
-import { ArmResource } from "./resource-discovery";
 import { getSession } from "../autorest-session";
 import { getOptions } from "../options";
+import { ArmResource } from "./resource-discovery";
 
 const operationGroupNameCache: Map<ArmResource, string> = new Map<ArmResource, string>();
 export function getTSPOperationGroupName(resourceMetadata: ArmResource): string {

@@ -29,11 +29,11 @@ import { createOperationIdDecorator, getOperationClientDecorators, getPropertyDe
 import { getLogger } from "../utils/logger";
 import { getLanguageMetadata } from "../utils/metadata";
 import { generateAdditionalProperties, generateTemplateModel } from "../utils/model-generation";
+import { getTSPNonResourceOperationGroupName } from "../utils/operation-group";
 import { transformSchemaResponse } from "../utils/response";
 import { isConstantSchema, isResponseSchema } from "../utils/schemas";
 import { getSuppressionWithCode, SuppressionCode } from "../utils/suppressions";
 import { getDefaultValue } from "../utils/values";
-import { getTSPNonResourceOperationGroupName } from "../utils/operation-group";
 
 export function transformOperationGroup(
   { language, operations }: OperationGroup,
