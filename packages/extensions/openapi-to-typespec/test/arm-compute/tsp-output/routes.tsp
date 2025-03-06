@@ -14,7 +14,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.Compute;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface UsageOperations {
+interface UsageOperationGroup {
   /**
    * Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription.
    */
@@ -31,7 +31,7 @@ interface UsageOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface VirtualMachineSizesOperations {
+interface VirtualMachineSizesOperationGroup {
   /**
    * This API is deprecated. Use [Resources Skus](https://docs.microsoft.com/rest/api/compute/resourceskus/list)
    */
@@ -48,7 +48,7 @@ interface VirtualMachineSizesOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface VirtualMachineScaleSetsOperations {
+interface VirtualMachineScaleSetsOperationGroup {
   /**
    * Gets all the VM scale sets under the specified subscription for the specified location.
    */
@@ -65,7 +65,7 @@ interface VirtualMachineScaleSetsOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface VirtualMachinesOperations {
+interface VirtualMachinesOperationGroup {
   /**
    * Gets all the virtual machines under the specified subscription for the specified location.
    */
@@ -82,7 +82,7 @@ interface VirtualMachinesOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface VirtualMachineImagesOperations {
+interface VirtualMachineImagesOperationGroup {
   /**
    * Gets a virtual machine image.
    */
@@ -268,7 +268,7 @@ interface VirtualMachineImagesOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface VirtualMachineImagesEdgeZoneOperations {
+interface VirtualMachineImagesEdgeZoneOperationGroup {
   /**
    * Gets a virtual machine image in an edge zone.
    */
@@ -472,7 +472,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface LogAnalyticsOperations {
+interface LogAnalyticsOperationGroup {
   /**
    * Export logs that show Api requests made by this subscription in the given time window to show throttling activities.
    */
@@ -508,7 +508,7 @@ interface LogAnalyticsOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface VirtualMachineRunCommandsOperations {
+interface VirtualMachineRunCommandsOperationGroup {
   /**
    * Lists all available run commands for a subscription in a location.
    */
@@ -550,7 +550,7 @@ interface VirtualMachineRunCommandsOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface ResourceSkusOperations {
+interface ResourceSkusOperationGroup {
   /**
    * Gets the list of Microsoft.Compute SKUs available for your Subscription.
    */

@@ -440,12 +440,14 @@ model ManagedServiceIdentity {
    * The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.
    */
   @visibility("read")
+  @format("uuid")
   principalId?: string;
 
   /**
    * The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.
    */
   @visibility("read")
+  @format("uuid")
   tenantId?: string;
 
   /**

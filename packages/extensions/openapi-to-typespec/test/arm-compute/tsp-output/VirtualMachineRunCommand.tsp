@@ -61,7 +61,11 @@ interface VirtualMachineRunCommands {
        */
       @query("$expand")
       $expand?: string;
-    }
+    },
+    Response = ArmResponse<VirtualMachineRunCommand & {
+      @header
+      contentType: "application/json" | "text/json";
+    }>
   >;
 
   /**
@@ -161,7 +165,11 @@ interface VirtualMachineScaleSetVMRunCommands {
        */
       @query("$expand")
       $expand?: string;
-    }
+    },
+    Response = ArmResponse<VirtualMachineRunCommand & {
+      @header
+      contentType: "application/json" | "text/json";
+    }>
   >;
 
   /**

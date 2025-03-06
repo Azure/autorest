@@ -1,6 +1,6 @@
 import { Operation, Parameter, Property, SchemaType } from "@autorest/codemodel";
 import _ from "lodash";
-import pluralize, { singular } from "pluralize";
+import { singular } from "pluralize";
 import { getSession } from "../autorest-session";
 import { getDataTypes } from "../data-types";
 import {
@@ -30,6 +30,7 @@ import { getOperationClientDecorators, getPropertyDecorators } from "../utils/de
 import { generateDocsContent } from "../utils/docs";
 import { getEnvelopeProperty, getEnvelopeAugmentedDecorator } from "../utils/envelope-property";
 import { getLogger } from "../utils/logger";
+import { getTSPOperationGroupName } from "../utils/operation-group";
 import {
   ArmResource,
   ArmResourceSchema,
@@ -272,14 +273,27 @@ function convertResourceReadOperation(
   // every resource should have a get operation
   const operation = resourceMetadata.GetOperation!;
   const swaggerOperation = operations[operation.OperationID];
-  return [
-    buildNewArmOperation(
-      resourceMetadata,
-      operation,
-      swaggerOperation,
-      "ArmResourceRead",
-    ) as TspArmResourceLifeCycleOperation,
+  const armOperation = buildNewArmOperation(resourceMetadata, operation, swaggerOperation, "ArmResourceRead");
+  const syncNames: NamesOfResponseTemplate = {
+    _200Name: "ArmResponse",
+    _200NameNoBody: "OkResponse",
+    _201Name: "ArmResourceCreatedSyncResponse",
+    _201NameNoBody: "CreatedResponse",
+    _202Name: "AcceptedResponse",
+    _202NameNoBody: "AcceptedResponse",
+    _204Name: "ArmNoContentResponse",
+  };
+  let responses: TypespecTemplateModel[] = getTemplateResponses(swaggerOperation, syncNames);
+  const templateSyncResponses: TypespecTemplateModel[] = [
+    {
+      kind: "template",
+      name: syncNames._200Name,
+      arguments: [{ kind: "object", name: resourceMetadata.SwaggerModelName }],
+    },
   ];
+  if (isSameResponses(responses, templateSyncResponses)) responses = [];
+  if (responses.length > 0) armOperation.response = responses;
+  return [armOperation as TspArmResourceLifeCycleOperation];
 }
 
 function convertResourceExistsOperation(
@@ -734,7 +748,7 @@ function convertResourceActionOperations(
         const _202NoBodyResponseIndex = responses.findIndex(
           (r) => r.name === asyncNames._202NameNoBody && !r.arguments,
         );
-        if (_202NoBodyResponseIndex >= 0) {
+        if (_202NoBodyResponseIndex >= 0 && responses.length > 1) {
           responses.splice(_202NoBodyResponseIndex, 1);
         } else {
           armOperation.kind = "ArmResourceActionAsyncBase";
@@ -878,35 +892,6 @@ function getOtherProperties(
     }
   }
   return otherProperties;
-}
-
-const operationGroupNameCache: Map<ArmResource, string> = new Map<ArmResource, string>();
-export function getTSPOperationGroupName(resourceMetadata: ArmResource): string {
-  if (operationGroupNameCache.has(resourceMetadata)) return operationGroupNameCache.get(resourceMetadata)!;
-
-  // Try pluralizing the resource name first
-  let operationGroupName = pluralize(resourceMetadata.SwaggerModelName);
-  if (operationGroupName !== resourceMetadata.SwaggerModelName && !isExistingOperationGroupName(operationGroupName)) {
-    operationGroupNameCache.set(resourceMetadata, operationGroupName);
-  } else {
-    // Try operationId then
-    operationGroupName = resourceMetadata.GetOperation!.OperationID.split("_")[0];
-    if (operationGroupName !== resourceMetadata.SwaggerModelName && !isExistingOperationGroupName(operationGroupName)) {
-      operationGroupNameCache.set(resourceMetadata, operationGroupName);
-    } else {
-      operationGroupName = `${resourceMetadata.SwaggerModelName}OperationGroup`;
-      operationGroupNameCache.set(resourceMetadata, operationGroupName);
-    }
-  }
-  return operationGroupName;
-}
-
-function isExistingOperationGroupName(operationGroupName: string): boolean {
-  const codeModel = getSession().model;
-  return (
-    codeModel.schemas.objects?.find((o) => o.language.default.name === operationGroupName) !== undefined ||
-    Array.from(operationGroupNameCache.values()).find((v) => v === operationGroupName) !== undefined
-  );
 }
 
 function getBodyDecorators(

@@ -14,7 +14,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.AgFoodPlatform;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface CheckNameAvailabilityOperations {
+interface CheckNameAvailabilityOperationGroup {
   /**
    * Checks the name availability of the resource with requested resource name.
    */
@@ -30,7 +30,7 @@ interface CheckNameAvailabilityOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface OperationResultsOperations {
+interface OperationResultsOperationGroup {
   /**
    * Get operationResults for a Data Manager For Agriculture resource.
    */

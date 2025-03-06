@@ -9,7 +9,7 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.LoadTesting;
 
-interface LoadTestAdministrationOperations {
+interface LoadTestAdministrationOperationGroup {
   /**
    * Create a new test or update an existing test.
    */
@@ -358,7 +358,7 @@ interface LoadTestAdministrationOperations {
   >;
 }
 
-interface LoadTestRunOperations {
+interface LoadTestRunOperationGroup {
   /**
    * Create and start a new test run with the given name.
    */

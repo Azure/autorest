@@ -2312,11 +2312,13 @@
       "properties": {
         "principalId": {
           "type": "string",
+          "format": "uuid",
           "description": "The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.",
           "readOnly": true
         },
         "tenantId": {
           "type": "string",
+          "format": "uuid",
           "description": "The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.",
           "readOnly": true
         },

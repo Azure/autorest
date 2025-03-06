@@ -15,7 +15,7 @@ import { TypespecDecorator, DecoratorArgument, WithSuppressDirective } from "../
 import { getOptions } from "../options";
 import { createCSharpNameDecorator } from "../pretransforms/rename-pretransform";
 import { getOwnDiscriminator } from "./discriminator";
-import { isStringSchema, isUnixTimeSchema } from "./schemas";
+import { isStringSchema, isUnixTimeSchema, isUuidSchema } from "./schemas";
 import { escapeRegex } from "./strings";
 
 export function getModelDecorators(model: ObjectSchema): TypespecDecorator[] {
@@ -97,6 +97,7 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
   getNumberSchemaDecorators(element.schema, decorators);
   getStringSchemaDecorators(element.schema, decorators);
   getUnixTimeSchemaDecorators(element.schema, decorators);
+  getUuidSchemaDecorators(element.schema, decorators);
 
   if (element.language.default.isResourceKey) {
     decorators.push({
@@ -284,6 +285,18 @@ function getNumberSchemaDecorators(schema: Schema, decorators: TypespecDecorator
   }
 }
 
+function getUuidSchemaDecorators(schema: Schema, decorators: TypespecDecorator[]): void {
+  if (!isUuidSchema(schema)) {
+    return;
+  }
+
+  decorators.push({
+    name: "format",
+    arguments: ["uuid"],
+    suppressionCode: getOptions().isFullCompatible ? "@azure-tools/typespec-azure-core/no-format" : undefined,
+  });
+}
+
 function getStringSchemaDecorators(schema: Schema, decorators: TypespecDecorator[]): void {
   if (!isStringSchema(schema)) {
     return;
@@ -337,7 +350,11 @@ export function generateDecorators(decorators: TypespecDecorator[] = []): string
       definitions.push(decorator.fixMe.join(`\n`));
     }
     if (decorator.suppressionCode) {
-      definitions.push(`#suppress "${decorator.suppressionCode}" "${decorator.suppressionMessage}"`);
+      definitions.push(
+        `#suppress "${decorator.suppressionCode}"${
+          decorator.suppressionMessage ? ` "${decorator.suppressionMessage}"` : ""
+        }`,
+      );
     }
     if (decorator.arguments) {
       definitions.push(`@${decorator.name}(${decorator.arguments.map((a) => getArgumentValue(a)).join(", ")})`);
@@ -356,7 +373,11 @@ export function generateAugmentedDecorators(keyName: string, decorators: Typespe
       definitions.push(decorator.fixMe.join(`\n`));
     }
     if (decorator.suppressionCode) {
-      definitions.push(`#suppress "${decorator.suppressionCode}" "${decorator.suppressionMessage}"`);
+      definitions.push(
+        `#suppress "${decorator.suppressionCode}"${
+          decorator.suppressionMessage ? ` "${decorator.suppressionMessage}"` : ""
+        }`,
+      );
     }
     if (decorator.arguments) {
       definitions.push(

@@ -9,7 +9,7 @@ using TypeSpec.OpenAPI;
 
 namespace AzureSchemaRegistry;
 
-interface SchemaGroupsOperations {
+interface SchemaGroupsOperationGroup {
   /**
    * Gets the list of schema groups user is authorized to access.
    */
@@ -20,7 +20,7 @@ interface SchemaGroupsOperations {
   list is Azure.Core.Foundations.Operation<{}, SchemaGroups>;
 }
 
-interface SchemaOperations {
+interface SchemaOperationGroup {
   /**
    * Gets a registered schema by its unique ID.  Azure Schema Registry guarantees
    * that ID is unique within a namespace. Operation response type is based on

@@ -86,7 +86,8 @@
             "name": "resultId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -210,7 +211,8 @@
             "in": "path",
             "description": "Model identifier",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -251,7 +253,8 @@
             "in": "path",
             "description": "Model identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -295,7 +298,8 @@
             "in": "path",
             "description": "Model identifier",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "body",
@@ -345,7 +349,8 @@
             "in": "path",
             "description": "Model identifier",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "body",
@@ -955,7 +960,8 @@
       "description": "Detection results for the given resultId.",
       "properties": {
         "resultId": {
-          "type": "string"
+          "type": "string",
+          "format": "uuid"
         },
         "summary": {
           "$ref": "#/definitions/DetectionResultSummary",
@@ -1318,6 +1324,7 @@
       "properties": {
         "modelId": {
           "type": "string",
+          "format": "uuid",
           "description": "Model identifier."
         },
         "createdTime": {
@@ -1437,6 +1444,7 @@
       "properties": {
         "modelId": {
           "type": "string",
+          "format": "uuid",
           "description": "Model identifier."
         },
         "createdTime": {

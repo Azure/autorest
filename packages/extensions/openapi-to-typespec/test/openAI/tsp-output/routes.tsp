@@ -9,7 +9,7 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.AI.OpenAI;
 
-interface completionsOperations {
+interface completionsOperationGroup {
   /**
    * Create a completion from a chosen model
    */
@@ -29,7 +29,7 @@ interface completionsOperations {
   >;
 }
 
-interface embeddingsOperations {
+interface embeddingsOperationGroup {
   /**
    * Return the embeddings for a given prompt.
    */

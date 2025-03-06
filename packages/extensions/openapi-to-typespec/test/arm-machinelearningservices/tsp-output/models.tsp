@@ -3677,13 +3677,17 @@ model ManagedServiceIdentity {
   /**
    * The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility("read")
+  @format("uuid")
   principalId?: string;
 
   /**
    * The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility("read")
+  @format("uuid")
   tenantId?: string;
 
   /**
@@ -5957,7 +5961,9 @@ model LabelingJobProperties extends JobBase {
   /**
    * Internal id of the job(Previously called project).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility("read")
+  @format("uuid")
   projectId?: string;
 
   /**
@@ -10318,6 +10324,8 @@ model CertificateDatastoreCredentials extends DatastoreCredentials {
   /**
    * [Required] Service principal client ID.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
+  @format("uuid")
   clientId: string;
 
   /**
@@ -10334,6 +10342,8 @@ model CertificateDatastoreCredentials extends DatastoreCredentials {
   /**
    * [Required] ID of the tenant to which the service principal belongs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
+  @format("uuid")
   tenantId: string;
 
   /**
@@ -13148,13 +13158,17 @@ model ManagedIdentity extends IdentityConfiguration {
   /**
    * Specifies a user-assigned identity by client ID. For system-assigned, do not set this field.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility("read", "create")
+  @format("uuid")
   clientId?: string;
 
   /**
    * Specifies a user-assigned identity by object ID. For system-assigned, do not set this field.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility("read", "create")
+  @format("uuid")
   objectId?: string;
 
   /**
@@ -13899,6 +13913,8 @@ model ServicePrincipalDatastoreCredentials extends DatastoreCredentials {
   /**
    * [Required] Service principal client ID.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
+  @format("uuid")
   clientId: string;
 
   /**
@@ -13915,6 +13931,8 @@ model ServicePrincipalDatastoreCredentials extends DatastoreCredentials {
   /**
    * [Required] ID of the tenant to which the service principal belongs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
+  @format("uuid")
   tenantId: string;
 
   /**

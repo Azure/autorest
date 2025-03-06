@@ -14,7 +14,7 @@ using TypeSpec.OpenAPI;
 namespace Azure.ResourceManager.MachineLearning;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface UsagesOperations {
+interface UsagesOperationGroup {
   /**
    * Gets the current usage information as well as limits for AML resources for given subscription and location.
    */
@@ -31,7 +31,7 @@ interface UsagesOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface VirtualMachineSizesOperations {
+interface VirtualMachineSizesOperationGroup {
   /**
    * Returns supported VM Sizes in a location
    */
@@ -48,7 +48,7 @@ interface VirtualMachineSizesOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface QuotasOperations {
+interface QuotasOperationGroup {
   /**
    * Update quota for each VM family in workspace.
    */

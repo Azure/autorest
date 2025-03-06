@@ -117,17 +117,8 @@ function generateResponseWithBody(
   templateName: string,
   templateNameNoBody: string,
 ): TypespecTemplateModel {
-  const responseSchemaName = getSchemaResponseSchemaName(response);
-  if (responseSchemaName === undefined) return { kind: "template", name: templateNameNoBody };
+  if (!isResponseSchema(response)) return { kind: "template", name: templateNameNoBody };
 
   const equivalentResponse = transformSchemaResponse(response as SchemaResponse);
   return { kind: "template", name: templateName, arguments: [equivalentResponse] };
-}
-
-function getSchemaResponseSchemaName(response: Response): string | undefined {
-  if (!isResponseSchema(response) || isArraySchema(response.schema)) {
-    return undefined;
-  }
-
-  return (response as SchemaResponse).schema.language.default.name;
 }

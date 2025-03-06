@@ -100,6 +100,7 @@ op deleteMultivariateModel is Azure.Core.Foundations.Operation<
     /**
      * Model identifier
      */
+    @format("uuid")
     @path
     modelId: string;
   },
@@ -131,6 +132,7 @@ op detectAnomaly is Azure.Core.Foundations.Operation<
     /**
      * Model identifier
      */
+    @format("uuid")
     @path
     modelId: string;
 
@@ -154,6 +156,7 @@ op lastDetectAnomaly is Azure.Core.Foundations.Operation<
     /**
      * Model identifier
      */
+    @format("uuid")
     @path
     modelId: string;
 

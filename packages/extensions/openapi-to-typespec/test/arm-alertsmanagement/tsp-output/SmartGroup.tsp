@@ -139,5 +139,7 @@ interface SmartGroups {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-format"
+@@format(SmartGroup.name, "uuid");
 @@doc(SmartGroup.name, "Smart group unique id. ");
 @@doc(SmartGroup.properties, "Properties of smart group.");

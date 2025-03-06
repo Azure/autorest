@@ -9,7 +9,7 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.Language.QnAMaker;
 
-interface QuestionAnsweringOperations {
+interface QuestionAnsweringOperationGroup {
   /**
    * Answers the specified question using your knowledge base.
    */

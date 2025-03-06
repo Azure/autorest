@@ -9,7 +9,7 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.Language.Authoring;
 
-interface TextAnalysisAuthoringOperations {
+interface TextAnalysisAuthoringOperationGroup {
   /**
    * Lists the existing projects.
    */

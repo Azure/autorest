@@ -14,7 +14,7 @@ using TypeSpec.OpenAPI;
 namespace Azure.ResourceManager.Analysis;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface ServersOperations {
+interface ServersOperationGroup {
   /**
    * Lists eligible SKUs for Analysis Services resource provider.
    */
