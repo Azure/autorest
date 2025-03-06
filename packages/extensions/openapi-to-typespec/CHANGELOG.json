@@ -2,6 +2,18 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.10.13",
+      "tag": "@autorest/openapi-to-typespec_v0.10.13",
+      "date": "Thu, 06 Mar 2025 10:18:09 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix bugs: 1) uuid, 2) paged model, 3) operation response"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.10.12",
       "tag": "@autorest/openapi-to-typespec_v0.10.12",
       "date": "Wed, 05 Mar 2025 05:42:51 GMT",
