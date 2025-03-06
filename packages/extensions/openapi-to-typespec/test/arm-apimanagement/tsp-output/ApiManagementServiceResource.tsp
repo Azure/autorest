@@ -230,7 +230,7 @@ interface ApiManagementServiceResources {
   listByService is ArmResourceActionSync<
     ApiManagementServiceResource,
     void,
-    ArmResponse<Azure.Core.Page<NetworkStatusContractByLocation>>
+    ArmResponse<NetworkStatusContractByLocation[]>
   >;
 
   /**
