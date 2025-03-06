@@ -9,7 +9,7 @@ using TypeSpec.OpenAPI;
 
 namespace AzureWebPubSubServiceRESTAPI;
 
-interface HealthApiOperations {
+interface HealthApiOperationGroup {
   /**
    * Get service health status.
    */
@@ -20,7 +20,7 @@ interface HealthApiOperations {
   getServiceStatus is Azure.Core.Foundations.Operation<{}, void>;
 }
 
-interface WebPubSubOperations {
+interface WebPubSubOperationGroup {
   /**
    * Add filtered connections to multiple groups.
    */

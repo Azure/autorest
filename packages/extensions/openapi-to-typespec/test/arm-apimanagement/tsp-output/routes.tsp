@@ -14,7 +14,7 @@ using TypeSpec.OpenAPI;
 namespace Azure.ResourceManager.ApiManagement;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface ApiExportOperations {
+interface ApiExportOperationGroup {
   /**
    * Gets the details of the API specified by its identifier in the format specified to the Storage Blob with SAS Key valid for 5 minutes.
    */
@@ -61,7 +61,7 @@ interface ApiExportOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface DeletedServicesOperations {
+interface DeletedServicesOperationGroup {
   /**
    * Lists all soft-deleted services available for undelete for the given subscription.
    */
@@ -78,7 +78,7 @@ interface DeletedServicesOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface ApiManagementServiceOperations {
+interface ApiManagementServiceOperationGroup {
   /**
    * Checks availability and correctness of a name for an API Management service.
    */
@@ -105,7 +105,7 @@ interface ApiManagementServiceOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface ApiManagementSkusOperations {
+interface ApiManagementSkusOperationGroup {
   /**
    * Gets the list of Microsoft.ApiManagement SKUs available for your Subscription.
    */

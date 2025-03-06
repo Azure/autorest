@@ -14,7 +14,7 @@ using TypeSpec.OpenAPI;
 namespace Azure.ResourceManager.Authorization;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface ClassicAdministratorsOperations {
+interface ClassicAdministratorsOperationGroup {
   /**
    * Gets service administrator, account administrator, and co-administrators for the subscription.
    */
@@ -31,7 +31,7 @@ interface ClassicAdministratorsOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface GlobalAdministratorOperations {
+interface GlobalAdministratorOperationGroup {
   /**
    * Elevates access for a Global Administrator.
    */
@@ -42,7 +42,7 @@ interface GlobalAdministratorOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface AzurePermissionsForResourceGroupOperations {
+interface AzurePermissionsForResourceGroupOperationGroup {
   /**
    * Gets all permissions the caller has for a resource group.
    */
@@ -58,7 +58,7 @@ interface AzurePermissionsForResourceGroupOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface AzurePermissionsForResourceOperations {
+interface AzurePermissionsForResourceOperationGroup {
   /**
    * Gets all permissions the caller has for a resource.
    */
@@ -99,7 +99,7 @@ interface AzurePermissionsForResourceOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface EligibleChildResourcesOperations {
+interface EligibleChildResourcesOperationGroup {
   /**
    * Get the child resources of a resource on which user has eligible access
    */

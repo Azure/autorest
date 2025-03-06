@@ -9,7 +9,7 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.Batch;
 
-interface ApplicationOperations {
+interface ApplicationOperationGroup {
   /**
    * This operation returns only Applications and versions that are available for
    * use on Compute Nodes; that is, that can be used in an Package reference. For
@@ -110,7 +110,7 @@ interface ApplicationOperations {
   >;
 }
 
-interface PoolOperations {
+interface PoolOperationGroup {
   /**
    * If you do not specify a $filter clause including a poolId, the response
    * includes all Pools that existed in the Account in the time range of the
@@ -1210,7 +1210,7 @@ interface PoolOperations {
   >;
 }
 
-interface AccountOperations {
+interface AccountOperationGroup {
   /**
    * Lists all Virtual Machine Images supported by the Azure Batch service.
    */
@@ -1326,7 +1326,7 @@ interface AccountOperations {
   >;
 }
 
-interface JobOperations {
+interface JobOperationGroup {
   /**
    * Statistics are aggregated across all Jobs that have ever existed in the
    * Account, from Account creation to the last update time of the statistics. The
@@ -2315,7 +2315,7 @@ interface JobOperations {
   >;
 }
 
-interface CertificateOperations {
+interface CertificateOperationGroup {
   /**
    * Adds a Certificate to the specified Account.
    */
@@ -2605,7 +2605,7 @@ interface CertificateOperations {
   >;
 }
 
-interface FileOperations {
+interface FileOperationGroup {
   /**
    * Deletes the specified Task file from the Compute Node where the Task ran.
    */
@@ -3204,7 +3204,7 @@ interface FileOperations {
   >;
 }
 
-interface JobScheduleOperations {
+interface JobScheduleOperationGroup {
   /**
    * Checks the specified Job Schedule exists.
    */
@@ -3989,7 +3989,7 @@ interface JobScheduleOperations {
   >;
 }
 
-interface TaskOperations {
+interface TaskOperationGroup {
   /**
    * The maximum lifetime of a Task from addition to completion is 180 days. If a
    * Task has not completed within 180 days of being added it will be terminated by
@@ -4710,7 +4710,7 @@ interface TaskOperations {
   >;
 }
 
-interface ComputeNodeOperations {
+interface ComputeNodeOperationGroup {
   /**
    * You can add a user Account to a Compute Node only when it is in the idle or
    * running state.
@@ -5426,7 +5426,7 @@ interface ComputeNodeOperations {
   >;
 }
 
-interface ComputeNodeExtensionOperations {
+interface ComputeNodeExtensionOperationGroup {
   /**
    * Gets information about the specified Compute Node Extension.
    */

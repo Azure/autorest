@@ -9,7 +9,7 @@ using TypeSpec.OpenAPI;
 
 namespace MicrosoftCognitiveLanguageServiceQuestionAnsweringAuthoring;
 
-interface QuestionAnsweringProjectsOperations {
+interface QuestionAnsweringProjectsOperationGroup {
   /**
    * Gets all projects for a user.
    */

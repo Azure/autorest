@@ -9,7 +9,7 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.Search;
 
-interface DocumentsOperations {
+interface DocumentsOperationGroup {
   /**
    * Queries the number of documents in the index.
    */

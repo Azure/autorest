@@ -1,6 +1,6 @@
 import { Operation, Parameter, Property, SchemaType } from "@autorest/codemodel";
 import _ from "lodash";
-import pluralize, { singular } from "pluralize";
+import { singular } from "pluralize";
 import { getSession } from "../autorest-session";
 import { getDataTypes } from "../data-types";
 import {
@@ -49,6 +49,7 @@ import {
 import { getFullyQualifiedName, getTemplateResponses, NamesOfResponseTemplate } from "../utils/type-mapping";
 import { getTypespecType, isTypespecType, transformObjectProperty } from "./transform-object";
 import { transformParameter } from "./transform-operations";
+import { getTSPOperationGroupName } from "../utils/operation-group";
 
 const logger = () => getLogger("transform-arm-resources");
 
@@ -891,35 +892,6 @@ function getOtherProperties(
     }
   }
   return otherProperties;
-}
-
-const operationGroupNameCache: Map<ArmResource, string> = new Map<ArmResource, string>();
-export function getTSPOperationGroupName(resourceMetadata: ArmResource): string {
-  if (operationGroupNameCache.has(resourceMetadata)) return operationGroupNameCache.get(resourceMetadata)!;
-
-  // Try pluralizing the resource name first
-  let operationGroupName = pluralize(resourceMetadata.SwaggerModelName);
-  if (operationGroupName !== resourceMetadata.SwaggerModelName && !isExistingOperationGroupName(operationGroupName)) {
-    operationGroupNameCache.set(resourceMetadata, operationGroupName);
-  } else {
-    // Try operationId then
-    operationGroupName = resourceMetadata.GetOperation!.OperationID.split("_")[0];
-    if (operationGroupName !== resourceMetadata.SwaggerModelName && !isExistingOperationGroupName(operationGroupName)) {
-      operationGroupNameCache.set(resourceMetadata, operationGroupName);
-    } else {
-      operationGroupName = `${resourceMetadata.SwaggerModelName}OperationGroup`;
-      operationGroupNameCache.set(resourceMetadata, operationGroupName);
-    }
-  }
-  return operationGroupName;
-}
-
-function isExistingOperationGroupName(operationGroupName: string): boolean {
-  const codeModel = getSession().model;
-  return (
-    codeModel.schemas.objects?.find((o) => o.language.default.name === operationGroupName) !== undefined ||
-    Array.from(operationGroupNameCache.values()).find((v) => v === operationGroupName) !== undefined
-  );
 }
 
 function getBodyDecorators(

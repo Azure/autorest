@@ -9,7 +9,7 @@ using TypeSpec.OpenAPI;
 
 namespace AutoRestPagingTestService;
 
-interface PagingOperations {
+interface PagingOperationGroup {
   /**
    * A paging operation that must return result of the default 'value' node.
    */

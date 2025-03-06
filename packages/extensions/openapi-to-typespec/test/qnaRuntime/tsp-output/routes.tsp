@@ -9,7 +9,7 @@ using TypeSpec.OpenAPI;
 
 namespace QnAMakerRuntimeClient;
 
-interface RuntimeOperations {
+interface RuntimeOperationGroup {
   /**
    * GenerateAnswer call to query the knowledgebase.
    */

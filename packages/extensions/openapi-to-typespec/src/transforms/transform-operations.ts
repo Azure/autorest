@@ -30,15 +30,16 @@ import { getLogger } from "../utils/logger";
 import { getLanguageMetadata } from "../utils/metadata";
 import { generateAdditionalProperties, generateTemplateModel } from "../utils/model-generation";
 import { transformSchemaResponse } from "../utils/response";
-import { isArraySchema, isConstantSchema, isResponseSchema } from "../utils/schemas";
+import { isConstantSchema, isResponseSchema } from "../utils/schemas";
 import { getSuppressionWithCode, SuppressionCode } from "../utils/suppressions";
 import { getDefaultValue } from "../utils/values";
+import { getTSPNonResourceOperationGroupName } from "../utils/operation-group";
 
 export function transformOperationGroup(
   { language, operations }: OperationGroup,
   codeModel: CodeModel,
 ): TypespecOperationGroup {
-  const name = language.default.name ? `${language.default.name}Operations` : "";
+  const name = language.default.name ? getTSPNonResourceOperationGroupName(language.default.name) : "";
   const doc = language.default.description;
   const ops = operations.reduce<(TypespecOperation | TspArmProviderActionOperation)[]>((acc, op) => {
     acc = [...acc, ...transformOperation(op, codeModel, name)];

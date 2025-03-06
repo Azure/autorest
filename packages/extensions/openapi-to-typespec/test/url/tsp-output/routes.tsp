@@ -9,7 +9,7 @@ using TypeSpec.OpenAPI;
 
 namespace AutoRestUrlTestService;
 
-interface pathsOperations {
+interface pathsOperationGroup {
   /**
    * Get true Boolean value on path
    */
@@ -471,7 +471,7 @@ interface pathsOperations {
   >;
 }
 
-interface queriesOperations {
+interface queriesOperationGroup {
   /**
    * Get true Boolean value on path
    */
@@ -1082,7 +1082,7 @@ interface queriesOperations {
   >;
 }
 
-interface pathItemsOperations {
+interface pathItemsOperationGroup {
   /**
    * send globalStringPath='globalStringPath',
    * pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',

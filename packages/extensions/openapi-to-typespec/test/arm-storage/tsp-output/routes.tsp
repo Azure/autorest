@@ -14,7 +14,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.Storage;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface SkusOperations {
+interface SkusOperationGroup {
   /**
    * Lists the available SKUs supported by Microsoft.Storage for given subscription.
    */
@@ -31,7 +31,7 @@ interface SkusOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface StorageAccountsOperations {
+interface StorageAccountsOperationGroup {
   /**
    * Checks that the storage account name is valid and is not already in use.
    */
@@ -47,7 +47,7 @@ interface StorageAccountsOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface DeletedAccountsOperations {
+interface DeletedAccountsOperationGroup {
   /**
    * Lists deleted accounts under the subscription.
    */
@@ -64,7 +64,7 @@ interface DeletedAccountsOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface UsagesOperations {
+interface UsagesOperationGroup {
   /**
    * Gets the current usage count and the limit for the resources of the location under the subscription.
    */

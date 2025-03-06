@@ -2111,7 +2111,7 @@ op updateSasDefinition is Azure.Core.Foundations.Operation<
   SasDefinitionBundle
 >;
 
-interface RoleDefinitionsOperations {
+interface RoleDefinitionsOperationGroup {
   /**
    * Deletes a custom role definition.
    */
@@ -2213,7 +2213,7 @@ interface RoleDefinitionsOperations {
   >;
 }
 
-interface RoleAssignmentsOperations {
+interface RoleAssignmentsOperationGroup {
   /**
    * Deletes a role assignment.
    */
@@ -2315,7 +2315,7 @@ interface RoleAssignmentsOperations {
   >;
 }
 
-interface HSMSecurityDomainOperations {
+interface HSMSecurityDomainOperationGroup {
   /**
    * Retrieves the Security Domain download operation status
    */

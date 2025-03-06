@@ -9,7 +9,7 @@ using TypeSpec.OpenAPI;
 
 namespace AutoRestComplexTestService;
 
-interface basicOperations {
+interface basicOperationGroup {
   /**
    * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
    */
@@ -59,7 +59,7 @@ interface basicOperations {
   getNotProvided is Azure.Core.Foundations.Operation<{}, Basic>;
 }
 
-interface primitiveOperations {
+interface primitiveOperationGroup {
   /**
    * Get complex types with integer properties
    */
@@ -243,7 +243,7 @@ interface primitiveOperations {
   putByte is Azure.Core.Foundations.Operation<ByteWrapper, void>;
 }
 
-interface arrayOperations {
+interface arrayOperationGroup {
   /**
    * Get complex types with array property
    */
@@ -286,7 +286,7 @@ interface arrayOperations {
   getNotProvided is Azure.Core.Foundations.Operation<{}, ArrayWrapper>;
 }
 
-interface dictionaryOperations {
+interface dictionaryOperationGroup {
   /**
    * Get complex types with dictionary property
    */
@@ -337,7 +337,7 @@ interface dictionaryOperations {
   getNotProvided is Azure.Core.Foundations.Operation<{}, DictionaryWrapper>;
 }
 
-interface inheritanceOperations {
+interface inheritanceOperationGroup {
   /**
    * Get complex types that extend others
    */
@@ -355,7 +355,7 @@ interface inheritanceOperations {
   putValid is Azure.Core.Foundations.Operation<Siamese, void>;
 }
 
-interface polymorphismOperations {
+interface polymorphismOperationGroup {
   /**
    * Get complex types that are polymorphic
    */
@@ -442,7 +442,7 @@ interface polymorphismOperations {
   putValidMissingRequired is Azure.Core.Foundations.Operation<Fish, void>;
 }
 
-interface polymorphicrecursiveOperations {
+interface polymorphicrecursiveOperationGroup {
   /**
    * Get complex types that are polymorphic and have recursive references
    */
@@ -460,7 +460,7 @@ interface polymorphicrecursiveOperations {
   putValid is Azure.Core.Foundations.Operation<Fish, void>;
 }
 
-interface readonlypropertyOperations {
+interface readonlypropertyOperationGroup {
   /**
    * Get complex types that have readonly properties
    */
@@ -478,7 +478,7 @@ interface readonlypropertyOperations {
   putValid is Azure.Core.Foundations.Operation<ReadonlyObj, void>;
 }
 
-interface flattencomplexOperations {
+interface flattencomplexOperationGroup {
   @operationId("flattencomplex_getValid")
   @route("/complex/flatten/valid")
   @get
