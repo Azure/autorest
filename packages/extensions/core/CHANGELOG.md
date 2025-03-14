@@ -1,6 +1,13 @@
 # Change Log - @autorest/core
 
-This log was last generated on Thu, 31 Oct 2024 00:11:17 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Mar 2025 16:49:52 GMT and should not be manually modified.
+
+## 3.10.4
+Fri, 14 Mar 2025 16:49:52 GMT
+
+### Patches
+
+- [deduplication] Only treat "$ref" as reference if value is string
 
 ## 3.10.3
 Thu, 31 Oct 2024 00:11:17 GMT

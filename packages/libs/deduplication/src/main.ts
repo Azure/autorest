@@ -400,11 +400,11 @@ export class Deduplicator {
         continue;
       }
 
-      if (key === "$ref") {
+      if (key === "$ref" && typeof value === "string") {
         const refParts = value.split("/");
         const componentUid = refParts.pop();
         const type = refParts.pop();
-        await this.deduplicateComponent(componentUid, type);
+        await this.deduplicateComponent(componentUid!, type!);
       } else if (value && typeof value === "object") {
         await this.crawlObject(value);
       }
