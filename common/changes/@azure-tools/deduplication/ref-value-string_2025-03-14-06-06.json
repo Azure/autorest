@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/deduplication",
+      "comment": "Only treat \"$ref\" as reference if value is string",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@azure-tools/deduplication"
+}
