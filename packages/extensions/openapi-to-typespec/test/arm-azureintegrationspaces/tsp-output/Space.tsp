@@ -37,7 +37,7 @@ interface Spaces {
   /**
    * Update a Space
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   patch is ArmCustomPatchSync<Space, PatchModel = SpaceUpdate>;
 
   /**

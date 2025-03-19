@@ -98,7 +98,7 @@ interface SubscriptionContracts {
    * Updates the details of a subscription specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   @operationId("Subscription_Update")
   update is SubscriptionContractOps.CustomPatchSync<
     SubscriptionContract,

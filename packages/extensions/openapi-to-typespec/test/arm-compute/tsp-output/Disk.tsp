@@ -25,14 +25,14 @@ model Disk is Azure.ResourceManager.TrackedResource<DiskProperties> {
    * A relative URI containing the ID of the VM that has the disk attached.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managedBy?: string;
 
   /**
    * List of relative URIs containing the IDs of the VMs that have the disk attached. maxShares should be set to a value greater than one for disks to allow attaching them to multiple VMs.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managedByExtended?: string[];
 
   /**
@@ -75,7 +75,7 @@ interface Disks {
    * Updates (patches) a disk.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Disk,
     PatchModel = DiskUpdate,

@@ -45,7 +45,7 @@ interface Registries {
   /**
    * Update tags
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     Registry,
     PatchModel = PartialRegistryPartialTrackedResource

@@ -64,7 +64,7 @@ interface AccessInformationContracts {
    * Update tenant access information details.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   @operationId("TenantAccess_Update")
   update is ArmCustomPatchSync<
     AccessInformationContract,

@@ -26,9 +26,7 @@ using TypeSpec.Versioning;
  * // FIXME: (missing-service-description) Add service description
  */
 @armProviderNamespace
-@service({
-  title: "Azure Network Analytics resource management API.",
-})
+@service(#{ title: "Azure Network Analytics resource management API." })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.NetworkAnalytics;

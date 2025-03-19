@@ -63,7 +63,7 @@ interface Galleries {
   /**
    * Update a Shared Image Gallery.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Gallery,
     PatchModel = GalleryUpdate,

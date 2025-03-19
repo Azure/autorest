@@ -39,7 +39,7 @@ interface Frontends {
   /**
    * Update a Frontend
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Frontend, PatchModel = FrontendUpdate>;
 
   /**

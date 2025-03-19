@@ -50,7 +50,7 @@ interface RoleManagementPolicies {
   /**
    * Update a role management policy
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     RoleManagementPolicy,
     PatchModel = RoleManagementPolicy,

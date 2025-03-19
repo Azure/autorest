@@ -24,7 +24,7 @@ using TypeSpec.Versioning;
  * href="https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.
  */
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
-@service({
+@service(#{
   title: "Microsoft Cognitive Language Service - Analyze Text Authoring",
 })
 @versioned(Versions)

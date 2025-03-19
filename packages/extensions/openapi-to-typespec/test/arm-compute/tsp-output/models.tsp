@@ -1986,13 +1986,13 @@ model ComputeOperationValue {
   /**
    * The origin of the compute operation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   origin?: string;
 
   /**
    * The name of the compute operation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
@@ -2010,25 +2010,25 @@ model ComputeOperationValueDisplay {
   /**
    * The display name of the compute operation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   operation?: string;
 
   /**
    * The display name of the resource the operation applies to.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resource?: string;
 
   /**
    * The description of the operation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   description?: string;
 
   /**
    * The resource provider for the operation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provider?: string;
 }
 
@@ -2050,7 +2050,7 @@ model ApiError {
   /**
    * The Api error details
    */
-  @OpenAPI.extension("x-ms-identifiers", ["message", "target"])
+  @OpenAPI.extension("x-ms-identifiers", #["message", "target"])
   details?: ApiErrorBase[];
 
   /**
@@ -2163,7 +2163,7 @@ model VirtualMachineSizeListResult {
    * The list of virtual machine sizes.
    */
   @items
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   value?: VirtualMachineSize[];
 }
 
@@ -2270,7 +2270,7 @@ model VirtualMachineScaleSetProperties {
    * The provisioning state, which only appears in the response.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
@@ -2286,7 +2286,7 @@ model VirtualMachineScaleSetProperties {
   /**
    * Specifies the ID which uniquely identifies a Virtual Machine Scale Set.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uniqueId?: string;
 
   /**
@@ -2342,7 +2342,7 @@ model VirtualMachineScaleSetProperties {
   /**
    * Specifies the time at which the Virtual Machine Scale Set resource was created. Minimum api-version: 2021-11-01.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timeCreated?: utcDateTime;
 
@@ -2587,7 +2587,7 @@ model VirtualMachineScaleSetOSProfile {
   /**
    * Specifies set of certificates that should be installed onto the virtual machines in the scale set. To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
-  @OpenAPI.extension("x-ms-identifiers", ["sourceVault/id"])
+  @OpenAPI.extension("x-ms-identifiers", #["sourceVault/id"])
   secrets?: VaultSecretGroup[];
 
   /**
@@ -2623,7 +2623,7 @@ model WindowsConfiguration {
   /**
    * Specifies additional base-64 encoded XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   additionalUnattendContent?: AdditionalUnattendContent[];
 
   /**
@@ -2714,7 +2714,7 @@ model WinRMConfiguration {
   /**
    * The list of Windows Remote Management listeners
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   listeners?: WinRMListener[];
 }
 
@@ -2770,7 +2770,7 @@ model SshConfiguration {
   /**
    * The list of SSH public keys used to authenticate with linux based VMs.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["path"])
+  @OpenAPI.extension("x-ms-identifiers", #["path"])
   publicKeys?: SshPublicKey[];
 }
 
@@ -2836,7 +2836,7 @@ model VaultSecretGroup {
   /**
    * The list of key vault references in SourceVault which contain certificates.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["certificateUrl"])
+  @OpenAPI.extension("x-ms-identifiers", #["certificateUrl"])
   vaultCertificates?: VaultCertificate[];
 }
 
@@ -2880,7 +2880,7 @@ model VirtualMachineScaleSetStorageProfile {
   /**
    * Specifies the parameters that are used to add data disks to the virtual machines in the scale set. For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name", "lun"])
+  @OpenAPI.extension("x-ms-identifiers", #["name", "lun"])
   dataDisks?: VirtualMachineScaleSetDataDisk[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -2915,7 +2915,7 @@ model ImageReference extends SubResource {
   /**
    * Specifies in decimal numbers, the version of platform image or marketplace image used to create the virtual machine. This readonly field differs from 'version', only if the value specified in 'version' field is 'latest'.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   exactVersion?: string;
 
   /**
@@ -3122,7 +3122,7 @@ model VirtualMachineScaleSetNetworkProfile {
   /**
    * The list of network configurations.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   networkInterfaceConfigurations?: VirtualMachineScaleSetNetworkConfiguration[];
 
   /**
@@ -3195,7 +3195,7 @@ model VirtualMachineScaleSetNetworkConfigurationProperties {
   /**
    * Specifies the IP configurations of the network interface.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   ipConfigurations: VirtualMachineScaleSetIPConfiguration[];
 
   /**
@@ -3330,7 +3330,7 @@ model VirtualMachineScaleSetPublicIPAddressConfigurationProperties {
   /**
    * The list of IP tags associated with the public IP address.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   ipTags?: VirtualMachineScaleSetIpTag[];
 
   /**
@@ -3517,7 +3517,7 @@ model VirtualMachineScaleSetExtensionProperties {
    * The provisioning state, which only appears in the response.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
@@ -3556,7 +3556,7 @@ model SubResourceReadOnly {
   /**
    * Resource Id
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
@@ -3626,7 +3626,7 @@ model ApplicationProfile {
   /**
    * Specifies the gallery applications that should be made available to the VM/VMSS
    */
-  @OpenAPI.extension("x-ms-identifiers", ["packageReferenceId"])
+  @OpenAPI.extension("x-ms-identifiers", #["packageReferenceId"])
   galleryApplications?: VMGalleryApplication[];
 }
 
@@ -3763,7 +3763,7 @@ model VirtualMachineExtensionProperties {
    * The provisioning state, which only appears in the response.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
@@ -3809,13 +3809,13 @@ model VirtualMachineExtensionInstanceView {
   /**
    * The resource status information.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   substatuses?: InstanceViewStatus[];
 
   /**
    * The resource status information.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   statuses?: InstanceViewStatus[];
 }
 
@@ -3862,19 +3862,19 @@ model ResourceWithOptionalLocation {
   /**
    * Resource Id
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * Resource name
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Resource type
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
@@ -3952,13 +3952,13 @@ model VirtualMachineScaleSetIdentity {
   /**
    * The principal id of virtual machine scale set identity. This property will only be provided for a system assigned identity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   principalId?: string;
 
   /**
    * The tenant id associated with the virtual machine scale set. This property will only be provided for a system assigned identity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tenantId?: string;
 
   /**
@@ -3978,13 +3978,13 @@ model UserAssignedIdentitiesValue {
   /**
    * The principal id of user assigned identity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   principalId?: string;
 
   /**
    * The client id of user assigned identity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   clientId?: string;
 }
 
@@ -4010,19 +4010,19 @@ model Resource {
   /**
    * Resource Id
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * Resource name
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Resource type
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
@@ -4207,7 +4207,7 @@ model VirtualMachineScaleSetUpdateOSProfile {
   /**
    * The List of certificates for addition to the VM.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["sourceVault/id"])
+  @OpenAPI.extension("x-ms-identifiers", #["sourceVault/id"])
   secrets?: VaultSecretGroup[];
 }
 
@@ -4228,7 +4228,7 @@ model VirtualMachineScaleSetUpdateStorageProfile {
   /**
    * The data disks.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name", "lun"])
+  @OpenAPI.extension("x-ms-identifiers", #["name", "lun"])
   dataDisks?: VirtualMachineScaleSetDataDisk[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -4287,7 +4287,7 @@ model VirtualMachineScaleSetUpdateNetworkProfile {
   /**
    * The list of network configurations.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   networkInterfaceConfigurations?: VirtualMachineScaleSetUpdateNetworkConfiguration[];
 
   /**
@@ -4350,7 +4350,7 @@ model VirtualMachineScaleSetUpdateNetworkConfigurationProperties {
   /**
    * The virtual machine scale set IP Configuration.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   ipConfigurations?: VirtualMachineScaleSetUpdateIPConfiguration[];
 
   /**
@@ -4516,27 +4516,27 @@ model VirtualMachineScaleSetInstanceView {
   /**
    * The instance view status summary for the virtual machine scale set.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   virtualMachine?: VirtualMachineScaleSetInstanceViewStatusesSummary;
 
   /**
    * The extensions information.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   extensions?: VirtualMachineScaleSetVMExtensionsSummary[];
 
   /**
    * The resource status information.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   statuses?: InstanceViewStatus[];
 
   /**
    * The orchestration services information.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["serviceName"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["serviceName"])
   orchestrationServices?: OrchestrationServiceSummary[];
 }
 
@@ -4547,8 +4547,8 @@ model VirtualMachineScaleSetInstanceViewStatusesSummary {
   /**
    * The extensions information.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   statusesSummary?: VirtualMachineStatusCodeCount[];
 }
 
@@ -4559,13 +4559,13 @@ model VirtualMachineStatusCodeCount {
   /**
    * The instance view status code.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   code?: string;
 
   /**
    * The number of instances having a particular status code.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   count?: int32;
 }
 
@@ -4576,14 +4576,14 @@ model VirtualMachineScaleSetVMExtensionsSummary {
   /**
    * The extension name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The extensions information.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   statusesSummary?: VirtualMachineStatusCodeCount[];
 }
 
@@ -4594,13 +4594,13 @@ model OrchestrationServiceSummary {
   /**
    * The name of the service.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   serviceName?: OrchestrationServiceNames;
 
   /**
    * The current state of the service.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   serviceState?: OrchestrationServiceState;
 }
 
@@ -4612,13 +4612,13 @@ model VirtualMachineScaleSetExtensionUpdate extends SubResourceReadOnly {
   /**
    * The name of the extension.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Resource type
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
@@ -4648,19 +4648,19 @@ model VirtualMachineScaleSetSku {
   /**
    * The type of resource the sku applies to.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceType?: string;
 
   /**
    * The Sku.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sku?: Sku;
 
   /**
    * Specifies the number of virtual machines in the scale set.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   capacity?: VirtualMachineScaleSetSkuCapacity;
 }
 
@@ -4671,25 +4671,25 @@ model VirtualMachineScaleSetSkuCapacity {
   /**
    * The minimum capacity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   minimum?: int64;
 
   /**
    * The maximum capacity that can be set.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   maximum?: int64;
 
   /**
    * The default capacity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   defaultCapacity?: int64;
 
   /**
    * The scale type applicable to the sku.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   scaleType?: VirtualMachineScaleSetSkuScaleType;
 }
 
@@ -4706,19 +4706,19 @@ model UpgradeOperationHistoricalStatusInfo {
   /**
    * Information about the properties of the upgrade operation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   properties?: UpgradeOperationHistoricalStatusInfoProperties;
 
   /**
    * Resource type
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Resource location
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   location?: string;
 }
 
@@ -4729,37 +4729,37 @@ model UpgradeOperationHistoricalStatusInfoProperties {
   /**
    * Information about the overall status of the upgrade operation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   runningStatus?: UpgradeOperationHistoryStatus;
 
   /**
    * Counts of the VMs in each state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   progress?: RollingUpgradeProgressInfo;
 
   /**
    * Error Details for this upgrade if there are any.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   error?: ApiError;
 
   /**
    * Invoker of the Upgrade Operation
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   startedBy?: UpgradeOperationInvoker;
 
   /**
    * Image Reference details
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetImageReference?: ImageReference;
 
   /**
    * Information about OS rollback if performed
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   rollbackInfo?: RollbackStatusInfo;
 }
 
@@ -4770,20 +4770,20 @@ model UpgradeOperationHistoryStatus {
   /**
    * Code indicating the current status of the upgrade.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   code?: UpgradeState;
 
   /**
    * Start time of the upgrade.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * End time of the upgrade.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 }
@@ -4795,25 +4795,25 @@ model RollingUpgradeProgressInfo {
   /**
    * The number of instances that have been successfully upgraded.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   successfulInstanceCount?: int32;
 
   /**
    * The number of instances that have failed to be upgraded successfully.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   failedInstanceCount?: int32;
 
   /**
    * The number of instances that are currently being upgraded.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   inProgressInstanceCount?: int32;
 
   /**
    * The number of instances that have not yet begun to be upgraded.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   pendingInstanceCount?: int32;
 }
 
@@ -4824,19 +4824,19 @@ model RollbackStatusInfo {
   /**
    * The number of instances which have been successfully rolled back.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   successfullyRolledbackInstanceCount?: int32;
 
   /**
    * The number of instances which failed to rollback.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   failedRolledbackInstanceCount?: int32;
 
   /**
    * Error details if OS rollback failed.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   rollbackError?: ApiError;
 }
 
@@ -4900,25 +4900,25 @@ model RollingUpgradeStatusInfoProperties {
   /**
    * The rolling upgrade policies applied for this upgrade.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   policy?: RollingUpgradePolicy;
 
   /**
    * Information about the current running state of the overall upgrade.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   runningStatus?: RollingUpgradeRunningStatus;
 
   /**
    * Information about the number of virtual machine instances in each upgrade state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   progress?: RollingUpgradeProgressInfo;
 
   /**
    * Error details for this upgrade, if there are any.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   error?: ApiError;
 }
 
@@ -4929,26 +4929,26 @@ model RollingUpgradeRunningStatus {
   /**
    * Code indicating the current status of the upgrade.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   code?: RollingUpgradeStatusCode;
 
   /**
    * Start time of the upgrade.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * The last action performed on the rolling upgrade.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastAction?: RollingUpgradeActionType;
 
   /**
    * Last action time of the upgrade.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastActionTime?: utcDateTime;
 }
@@ -4960,13 +4960,13 @@ model RecoveryWalkResponse {
   /**
    * Whether the recovery walk was performed
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   walkPerformed?: boolean;
 
   /**
    * The next update domain that needs to be walked. Null means walk spanning all update domains has been completed
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nextPlatformUpdateDomain?: int32;
 }
 
@@ -5001,13 +5001,13 @@ model VirtualMachineScaleSetVMExtensionUpdate extends SubResourceReadOnly {
   /**
    * The name of the extension.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Resource type
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
@@ -5090,19 +5090,19 @@ model VirtualMachineScaleSetVMProperties {
   /**
    * Specifies whether the latest model has been applied to the virtual machine.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   latestModelApplied?: boolean;
 
   /**
    * Azure VM unique ID.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vmId?: string;
 
   /**
    * The virtual machine instance view.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   instanceView?: VirtualMachineScaleSetVMInstanceView;
 
   /**
@@ -5154,7 +5154,7 @@ model VirtualMachineScaleSetVMProperties {
    * The provisioning state, which only appears in the response.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
@@ -5165,7 +5165,7 @@ model VirtualMachineScaleSetVMProperties {
   /**
    * Specifies whether the model applied to the virtual machine is the model of the virtual machine scale set or the customized model for the virtual machine.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   modelDefinitionApplied?: string;
 
   /**
@@ -5181,7 +5181,7 @@ model VirtualMachineScaleSetVMProperties {
   /**
    * Specifies the time at which the Virtual Machine resource was created.<br><br>Minimum api-version: 2021-11-01.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timeCreated?: utcDateTime;
 }
@@ -5218,19 +5218,19 @@ model VirtualMachineScaleSetVMInstanceView {
   /**
    * The disks information.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   disks?: DiskInstanceView[];
 
   /**
    * The extensions information.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name", "type"])
+  @OpenAPI.extension("x-ms-identifiers", #["name", "type"])
   extensions?: VirtualMachineExtensionInstanceView[];
 
   /**
    * The health status for the VM.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vmHealth?: VirtualMachineHealthStatus;
 
   /**
@@ -5241,13 +5241,13 @@ model VirtualMachineScaleSetVMInstanceView {
   /**
    * The resource status information.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   statuses?: InstanceViewStatus[];
 
   /**
    * Resource id of the dedicated host, on which the virtual machine is allocated through automatic placement, when the virtual machine is associated with a dedicated host group that has automatic placement enabled. Minimum api-version: 2020-06-01.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   assignedHost?: string;
 
   /**
@@ -5288,13 +5288,13 @@ model VirtualMachineAgentInstanceView {
   /**
    * The virtual machine extension handler instance view.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   extensionHandlers?: VirtualMachineExtensionHandlerInstanceView[];
 
   /**
    * The resource status information.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   statuses?: InstanceViewStatus[];
 }
 
@@ -5374,13 +5374,13 @@ model DiskInstanceView {
   /**
    * Specifies the encryption settings for the OS Disk. <br><br> Minimum api-version: 2015-06-15
    */
-  @OpenAPI.extension("x-ms-identifiers", ["diskEncryptionKey/sourceVault/id"])
+  @OpenAPI.extension("x-ms-identifiers", #["diskEncryptionKey/sourceVault/id"])
   encryptionSettings?: DiskEncryptionSettings[];
 
   /**
    * The resource status information.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   statuses?: InstanceViewStatus[];
 }
 
@@ -5426,7 +5426,7 @@ model VirtualMachineHealthStatus {
   /**
    * The health status information for the VM.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: InstanceViewStatus;
 }
 
@@ -5437,19 +5437,19 @@ model BootDiagnosticsInstanceView {
   /**
    * The console screenshot blob URI. **Note:** This will **not** be set if boot diagnostics is currently enabled with managed storage.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   consoleScreenshotBlobUri?: string;
 
   /**
    * The serial console log blob Uri. **Note:** This will **not** be set if boot diagnostics is currently enabled with managed storage.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   serialConsoleLogBlobUri?: string;
 
   /**
    * The boot diagnostics status information for the VM. **Note:** It will be set only if there are errors encountered in enabling boot diagnostics.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: InstanceViewStatus;
 }
 
@@ -5485,7 +5485,7 @@ model StorageProfile {
   /**
    * Specifies the parameters that are used to add a data disk to a virtual machine. For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).
    */
-  @OpenAPI.extension("x-ms-identifiers", ["lun"])
+  @OpenAPI.extension("x-ms-identifiers", #["lun"])
   dataDisks?: DataDisk[];
 
   /**
@@ -5637,13 +5637,13 @@ model DataDisk {
   /**
    * Specifies the Read-Write IOPS for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskIOPSReadWrite?: int64;
 
   /**
    * Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskMBpsReadWrite?: int64;
 
   /**
@@ -5692,7 +5692,7 @@ model OSProfile {
   /**
    * Specifies set of certificates that should be installed onto the virtual machine. To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
-  @OpenAPI.extension("x-ms-identifiers", ["sourceVault/id"])
+  @OpenAPI.extension("x-ms-identifiers", #["sourceVault/id"])
   secrets?: VaultSecretGroup[];
 
   /**
@@ -5723,7 +5723,7 @@ model NetworkProfile {
   /**
    * Specifies the networking configurations that will be used to create the virtual machine networking resources.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   networkInterfaceConfigurations?: VirtualMachineNetworkInterfaceConfiguration[];
 }
 
@@ -5819,7 +5819,7 @@ model VirtualMachineNetworkInterfaceConfigurationProperties {
   /**
    * Specifies the IP configurations of the network interface.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   ipConfigurations: VirtualMachineNetworkInterfaceIPConfiguration[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -5947,7 +5947,7 @@ model VirtualMachinePublicIPAddressConfigurationProperties {
   /**
    * The list of IP tags associated with the public IP address.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   ipTags?: VirtualMachineIpTag[];
 
   /**
@@ -6003,7 +6003,7 @@ model VirtualMachineScaleSetVMNetworkProfileConfiguration {
   /**
    * The list of network configurations.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   networkInterfaceConfigurations?: VirtualMachineScaleSetNetworkConfiguration[];
 }
 
@@ -6029,13 +6029,13 @@ model VirtualMachineIdentity {
   /**
    * The principal id of virtual machine identity. This property will only be provided for a system assigned identity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   principalId?: string;
 
   /**
    * The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tenantId?: string;
 
   /**
@@ -6057,13 +6057,13 @@ model RetrieveBootDiagnosticsDataResult {
   /**
    * The console screenshot blob URI
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   consoleScreenshotBlobUri?: string;
 
   /**
    * The serial console log blob URI.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   serialConsoleLogBlobUri?: string;
 }
 
@@ -6173,13 +6173,13 @@ model VirtualMachineProperties {
    * The provisioning state, which only appears in the response.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
    * The virtual machine instance view.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   instanceView?: VirtualMachineInstanceView;
 
   /**
@@ -6190,7 +6190,7 @@ model VirtualMachineProperties {
   /**
    * Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vmId?: string;
 
   /**
@@ -6226,7 +6226,7 @@ model VirtualMachineProperties {
   /**
    * Specifies the time at which the Virtual Machine resource was created. Minimum api-version: 2021-11-01.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timeCreated?: utcDateTime;
 }
@@ -6283,19 +6283,19 @@ model VirtualMachineInstanceView {
   /**
    * The virtual machine disk information.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   disks?: DiskInstanceView[];
 
   /**
    * The extensions information.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name", "type"])
+  @OpenAPI.extension("x-ms-identifiers", #["name", "type"])
   extensions?: VirtualMachineExtensionInstanceView[];
 
   /**
    * The health status for the VM.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vmHealth?: VirtualMachineHealthStatus;
 
   /**
@@ -6306,13 +6306,13 @@ model VirtualMachineInstanceView {
   /**
    * Resource id of the dedicated host, on which the virtual machine is allocated through automatic placement, when the virtual machine is associated with a dedicated host group that has automatic placement enabled. Minimum api-version: 2020-06-01.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   assignedHost?: string;
 
   /**
    * The resource status information.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   statuses?: InstanceViewStatus[];
 
   /**
@@ -6338,8 +6338,8 @@ model VirtualMachinePatchStatus {
   /**
    * The enablement status of the specified patchMode
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   configurationStatuses?: InstanceViewStatus[];
 }
 
@@ -6350,51 +6350,51 @@ model AvailablePatchSummary {
   /**
    * The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Unknown", "Failed", "Succeeded", or "CompletedWithWarnings."
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: PatchOperationStatus;
 
   /**
    * The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   assessmentActivityId?: string;
 
   /**
    * The overall reboot status of the VM. It will be true when partially installed patches require a reboot to complete installation but the reboot has not yet occurred.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   rebootPending?: boolean;
 
   /**
    * The number of critical or security patches that have been detected as available and not yet installed.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   criticalAndSecurityPatchCount?: int32;
 
   /**
    * The number of all available patches excluding critical and security.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   otherPatchCount?: int32;
 
   /**
    * The UTC timestamp when the operation began.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * The UTC timestamp when the operation began.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedTime?: utcDateTime;
 
   /**
    * The errors that were encountered during execution of the operation. The details array contains the list of them.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   error?: ApiError;
 }
 
@@ -6405,69 +6405,69 @@ model LastPatchInstallationSummary {
   /**
    * The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Unknown", "Failed", "Succeeded", or "CompletedWithWarnings."
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: PatchOperationStatus;
 
   /**
    * The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   installationActivityId?: string;
 
   /**
    * Describes whether the operation ran out of time before it completed all its intended actions
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   maintenanceWindowExceeded?: boolean;
 
   /**
    * The number of all available patches but not going to be installed because it didn't match a classification or inclusion list entry.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   notSelectedPatchCount?: int32;
 
   /**
    * The number of all available patches but excluded explicitly by a customer-specified exclusion list match.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   excludedPatchCount?: int32;
 
   /**
    * The number of all available patches expected to be installed over the course of the patch installation operation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   pendingPatchCount?: int32;
 
   /**
    * The count of patches that successfully installed.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   installedPatchCount?: int32;
 
   /**
    * The count of patches that failed installation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   failedPatchCount?: int32;
 
   /**
    * The UTC timestamp when the operation began.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * The UTC timestamp when the operation began.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedTime?: utcDateTime;
 
   /**
    * The errors that were encountered during execution of the operation. The details array contains the list of them.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   error?: ApiError;
 }
 
@@ -6499,26 +6499,26 @@ model VirtualMachineCaptureResult extends SubResource {
   /**
    * the schema of the captured virtual machine
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   $schema?: string;
 
   /**
    * the version of the content
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   contentVersion?: string;
 
   /**
    * parameters of the captured virtual machine
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   parameters?: Record<unknown>;
 
   /**
    * a list of resource items of the captured virtual machine
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   resources?: Record<unknown>[];
 }
 
@@ -6557,51 +6557,51 @@ model VirtualMachineAssessPatchesResult {
   /**
    * The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Unknown", "Failed", "Succeeded", or "CompletedWithWarnings."
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: PatchOperationStatus;
 
   /**
    * The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   assessmentActivityId?: string;
 
   /**
    * The overall reboot status of the VM. It will be true when partially installed patches require a reboot to complete installation but the reboot has not yet occurred.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   rebootPending?: boolean;
 
   /**
    * The number of critical or security patches that have been detected as available and not yet installed.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   criticalAndSecurityPatchCount?: int32;
 
   /**
    * The number of all available patches excluding critical and security.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   otherPatchCount?: int32;
 
   /**
    * The UTC timestamp when the operation began.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDateTime?: utcDateTime;
 
   /**
    * The list of patches that have been detected as available for installation.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["patchId"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["patchId"])
   availablePatches?: VirtualMachineSoftwarePatchProperties[];
 
   /**
    * The errors that were encountered during execution of the operation. The details array contains the list of them.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   error?: ApiError;
 }
 
@@ -6612,63 +6612,63 @@ model VirtualMachineSoftwarePatchProperties {
   /**
    * A unique identifier for the patch.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   patchId?: string;
 
   /**
    * The friendly name of the patch.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The version number of the patch. This property applies only to Linux patches.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   version?: string;
 
   /**
    * The KBID of the patch. Only applies to Windows patches.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   kbId?: string;
 
   /**
    * The classification(s) of the patch as provided by the patch publisher.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   classifications?: string[];
 
   /**
    * Describes the reboot requirements of the patch.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   rebootBehavior?: VMGuestPatchRebootBehavior;
 
   /**
    * The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   activityId?: string;
 
   /**
    * The UTC timestamp when the repository published this patch.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   publishedDate?: utcDateTime;
 
   /**
    * The UTC timestamp of the last update to this patch record.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime?: utcDateTime;
 
   /**
    * Describes the availability of a given patch.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   assessmentState?: PatchAssessmentState;
 }
 
@@ -6760,75 +6760,75 @@ model VirtualMachineInstallPatchesResult {
   /**
    * The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Failed", "Succeeded", "Unknown" or "CompletedWithWarnings."
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: PatchOperationStatus;
 
   /**
    * The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   installationActivityId?: string;
 
   /**
    * The reboot state of the VM following completion of the operation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   rebootStatus?: VMGuestPatchRebootStatus;
 
   /**
    * Whether the operation ran out of time before it completed all its intended actions.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   maintenanceWindowExceeded?: boolean;
 
   /**
    * The number of patches that were not installed due to the user blocking their installation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   excludedPatchCount?: int32;
 
   /**
    * The number of patches that were detected as available for install, but did not meet the operation's criteria.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   notSelectedPatchCount?: int32;
 
   /**
    * The number of patches that were identified as meeting the installation criteria, but were not able to be installed. Typically this happens when maintenanceWindowExceeded == true.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   pendingPatchCount?: int32;
 
   /**
    * The number of patches successfully installed.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   installedPatchCount?: int32;
 
   /**
    * The number of patches that could not be installed due to some issue. See errors for details.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   failedPatchCount?: int32;
 
   /**
    * The patches that were installed during the operation.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["patchId"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["patchId"])
   patches?: PatchInstallationDetail[];
 
   /**
    * The UTC timestamp when the operation began.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDateTime?: utcDateTime;
 
   /**
    * The errors that were encountered during execution of the operation. The details array contains the list of them.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   error?: ApiError;
 }
 
@@ -6839,37 +6839,37 @@ model PatchInstallationDetail {
   /**
    * A unique identifier for the patch.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   patchId?: string;
 
   /**
    * The friendly name of the patch.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The version string of the package. It may conform to Semantic Versioning. Only applies to Linux.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   version?: string;
 
   /**
    * The KBID of the patch. Only applies to Windows patches.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   kbId?: string;
 
   /**
    * The classification(s) of the patch as provided by the patch publisher.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   classifications?: string[];
 
   /**
    * The state of the patch after the installation operation completed.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   installationState?: PatchInstallationState;
 }
 
@@ -6903,7 +6903,7 @@ model VirtualMachineImageProperties {
   /**
    * The list of data disk images information.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["lun"])
+  @OpenAPI.extension("x-ms-identifiers", #["lun"])
   dataDiskImages?: DataDiskImage[];
 
   /**
@@ -6922,7 +6922,7 @@ model VirtualMachineImageProperties {
   disallowed?: DisallowedConfiguration;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   features?: VirtualMachineImageFeature[];
 
   /**
@@ -6973,7 +6973,7 @@ model DataDiskImage {
   /**
    * Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lun?: int32;
 }
 
@@ -7149,8 +7149,8 @@ model AvailabilitySetProperties {
   /**
    * The resource status information.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   statuses?: InstanceViewStatus[];
 }
 
@@ -7185,19 +7185,19 @@ model ProximityPlacementGroupProperties {
   /**
    * A list of references to all virtual machines in the proximity placement group.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   virtualMachines?: SubResourceWithColocationStatus[];
 
   /**
    * A list of references to all virtual machine scale sets in the proximity placement group.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   virtualMachineScaleSets?: SubResourceWithColocationStatus[];
 
   /**
    * A list of references to all availability sets in the proximity placement group.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   availabilitySets?: SubResourceWithColocationStatus[];
 
   /**
@@ -7250,13 +7250,13 @@ model DedicatedHostGroupProperties {
   /**
    * A list of references to all dedicated hosts in the dedicated host group.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hosts?: SubResourceReadOnly[];
 
   /**
    * The dedicated host group instance view, which has the list of instance view of the dedicated hosts under the dedicated host group.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   instanceView?: DedicatedHostGroupInstanceView;
 
   /**
@@ -7275,7 +7275,7 @@ model DedicatedHostGroupInstanceView {
   /**
    * List of instance view of the dedicated hosts under the dedicated host group.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   hosts?: DedicatedHostInstanceViewWithName[];
 }
 
@@ -7287,7 +7287,7 @@ model DedicatedHostInstanceViewWithName extends DedicatedHostInstanceView {
   /**
    * The name of the dedicated host.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 }
 
@@ -7298,7 +7298,7 @@ model DedicatedHostInstanceView {
   /**
    * Specifies the unique id of the dedicated physical machine on which the dedicated host resides.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   assetId?: string;
 
   /**
@@ -7309,7 +7309,7 @@ model DedicatedHostInstanceView {
   /**
    * The resource status information.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   statuses?: InstanceViewStatus[];
 }
 
@@ -7320,7 +7320,7 @@ model DedicatedHostAvailableCapacity {
   /**
    * The unutilized capacity of the dedicated host represented in terms of each VM size that is allowed to be deployed to the dedicated host.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   allocatableVMs?: DedicatedHostAllocatableVM[];
 }
 
@@ -7384,13 +7384,13 @@ model DedicatedHostProperties {
   /**
    * A unique id generated and assigned to the dedicated host by the platform. Does not change throughout the lifetime of the host.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hostId?: string;
 
   /**
    * A list of references to all virtual machines in the Dedicated Host.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   virtualMachines?: SubResourceReadOnly[];
 
   /**
@@ -7401,7 +7401,7 @@ model DedicatedHostProperties {
   /**
    * The date when the host was first provisioned.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   provisioningTime?: utcDateTime;
 
@@ -7409,19 +7409,19 @@ model DedicatedHostProperties {
    * The provisioning state, which only appears in the response.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
    * The dedicated host instance view.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   instanceView?: DedicatedHostInstanceView;
 
   /**
    * Specifies the time at which the Dedicated Host resource was created. Minimum api-version: 2021-11-01.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timeCreated?: utcDateTime;
 }
@@ -7453,7 +7453,7 @@ model DedicatedHostSizeListResult {
    * The list of dedicated host sizes.
    */
   @items
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   value?: string[];
 }
 
@@ -7519,7 +7519,7 @@ model ImageProperties {
    * The provisioning state.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
@@ -7540,7 +7540,7 @@ model ImageStorageProfile {
   /**
    * Specifies the parameters that are used to add a data disk to a virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).
    */
-  @OpenAPI.extension("x-ms-identifiers", ["lun"])
+  @OpenAPI.extension("x-ms-identifiers", #["lun"])
   dataDisks?: ImageDataDisk[];
 
   /**
@@ -7642,19 +7642,19 @@ model RestorePointCollectionProperties {
    * The provisioning state of the restore point collection.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
    * The unique id of the restore point collection.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   restorePointCollectionId?: string;
 
   /**
    * A list containing all restore points created under this restore point collection.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   restorePoints?: RestorePoint[];
 }
 
@@ -7665,7 +7665,7 @@ model RestorePointCollectionSourceProperties {
   /**
    * Location of the source resource used to create this restore point collection.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   location?: string;
 
   /**
@@ -7692,7 +7692,7 @@ model RestorePointProperties {
    * Gets the provisioning state of the restore point.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
@@ -7714,7 +7714,7 @@ model RestorePointProperties {
   /**
    * The restore point instance view.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   instanceView?: RestorePointInstanceView;
 }
 
@@ -7725,7 +7725,7 @@ model RestorePointSourceMetadata {
   /**
    * Gets the hardware profile.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hardwareProfile?: HardwareProfile;
 
   /**
@@ -7736,49 +7736,49 @@ model RestorePointSourceMetadata {
   /**
    * Gets the OS profile.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osProfile?: OSProfile;
 
   /**
    * Gets the diagnostics profile.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diagnosticsProfile?: DiagnosticsProfile;
 
   /**
    * Gets the license type, which is for bring your own license scenario.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   licenseType?: string;
 
   /**
    * Gets the virtual machine unique id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vmId?: string;
 
   /**
    * Gets the security profile.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   securityProfile?: SecurityProfile;
 
   /**
    * Location of the VM from which the restore point was created.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   location?: string;
 
   /**
    * UserData associated with the source VM for which restore point is captured, which is a base-64 encoded value.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   userData?: string;
 
   /**
    * HyperVGeneration of the source VM for which restore point is captured.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hyperVGeneration?: HyperVGenerationTypes;
 }
 
@@ -7794,7 +7794,7 @@ model RestorePointSourceVMStorageProfile {
   /**
    * Gets the data disks of the VM captured at the time of the restore point creation.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["lun"])
+  @OpenAPI.extension("x-ms-identifiers", #["lun"])
   dataDisks?: RestorePointSourceVMDataDisk[];
 }
 
@@ -7805,31 +7805,31 @@ model RestorePointSourceVmosDisk {
   /**
    * Gets the Operating System type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osType?: OperatingSystemType;
 
   /**
    * Gets the disk encryption settings.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   encryptionSettings?: DiskEncryptionSettings;
 
   /**
    * Gets the disk name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Gets the caching type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   caching?: CachingTypes;
 
   /**
    * Gets the disk size in GB.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskSizeGB?: int32;
 
   /**
@@ -7845,7 +7845,7 @@ model RestorePointSourceVmosDisk {
   /**
    * Shows true if the disk is write-accelerator enabled.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   writeAcceleratorEnabled?: boolean;
 }
 
@@ -7887,25 +7887,25 @@ model RestorePointSourceVMDataDisk {
   /**
    * Gets the logical unit number.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lun?: int32;
 
   /**
    * Gets the disk name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Gets the caching type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   caching?: CachingTypes;
 
   /**
    * Gets the initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskSizeGB?: int32;
 
   /**
@@ -7921,7 +7921,7 @@ model RestorePointSourceVMDataDisk {
   /**
    * Shows true if the disk is write-accelerator enabled.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   writeAcceleratorEnabled?: boolean;
 }
 
@@ -7937,7 +7937,7 @@ model RestorePointInstanceView {
   /**
    * The resource status information.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   statuses?: InstanceViewStatus[];
 }
 
@@ -7992,19 +7992,19 @@ model CapacityReservationGroupProperties {
   /**
    * A list of all capacity reservation resource ids that belong to capacity reservation group.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   capacityReservations?: SubResourceReadOnly[];
 
   /**
    * A list of references to all virtual machines associated to the capacity reservation group.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   virtualMachinesAssociated?: SubResourceReadOnly[];
 
   /**
    * The capacity reservation group instance view which has the list of instance views for all the capacity reservations that belong to the capacity reservation group.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   instanceView?: CapacityReservationGroupInstanceView;
 }
 
@@ -8013,8 +8013,8 @@ model CapacityReservationGroupInstanceView {
   /**
    * List of instance view of the capacity reservations under the capacity reservation group.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   capacityReservations?: CapacityReservationInstanceViewWithName[];
 }
 
@@ -8027,7 +8027,7 @@ model CapacityReservationInstanceViewWithName
   /**
    * The name of the capacity reservation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 }
 
@@ -8043,7 +8043,7 @@ model CapacityReservationInstanceView {
   /**
    * The resource status information.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   statuses?: InstanceViewStatus[];
 }
 
@@ -8054,13 +8054,13 @@ model CapacityReservationUtilization {
   /**
    * The value provides the current capacity of the VM size which was reserved successfully and for which the customer is getting billed. Minimum api-version: 2022-08-01.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   currentCapacity?: int32;
 
   /**
    * A list of all virtual machines resource ids allocated against the capacity reservation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   virtualMachinesAllocated?: SubResourceReadOnly[];
 }
 
@@ -8084,25 +8084,25 @@ model CapacityReservationProperties {
   /**
    * A unique id generated and assigned to the capacity reservation by the platform which does not change throughout the lifetime of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reservationId?: string;
 
   /**
    * Specifies the value of fault domain count that Capacity Reservation supports for requested VM size. **Note:** The fault domain count specified for a resource (like virtual machines scale set) must be less than or equal to this value if it deploys using capacity reservation. Minimum api-version: 2022-08-01.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   platformFaultDomainCount?: int32;
 
   /**
    * A list of all virtual machine resource ids that are associated with the capacity reservation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   virtualMachinesAssociated?: SubResourceReadOnly[];
 
   /**
    * The date time when the capacity reservation was last updated.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   provisioningTime?: utcDateTime;
 
@@ -8110,19 +8110,19 @@ model CapacityReservationProperties {
    * The provisioning state, which only appears in the response.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
    * The Capacity reservation instance view.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   instanceView?: CapacityReservationInstanceView;
 
   /**
    * Specifies the time at which the Capacity Reservation resource was created. Minimum api-version: 2021-11-01.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timeCreated?: utcDateTime;
 }
@@ -8210,7 +8210,7 @@ model LogAnalyticsOperationResult {
   /**
    * LogAnalyticsOutput
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   properties?: LogAnalyticsOutput;
 }
 
@@ -8221,7 +8221,7 @@ model LogAnalyticsOutput {
   /**
    * Output file Uri path to blob container.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   output?: string;
 }
 
@@ -8279,7 +8279,7 @@ model RunCommandDocument extends RunCommandDocumentBase {
   /**
    * The parameters used by the script.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name", "type"])
+  @OpenAPI.extension("x-ms-identifiers", #["name", "type"])
   parameters?: RunCommandParameterDefinition[];
 }
 
@@ -8325,7 +8325,7 @@ model RunCommandInput {
   /**
    * The run command parameters.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   parameters?: RunCommandInputParameter[];
 }
 
@@ -8349,7 +8349,7 @@ model RunCommandResult {
   /**
    * Run command operation response.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   value?: InstanceViewStatus[];
 }
 
@@ -8365,13 +8365,13 @@ model VirtualMachineRunCommandProperties {
   /**
    * The parameters used by the script.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   parameters?: RunCommandInputParameter[];
 
   /**
    * The parameters used by the script.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   protectedParameters?: RunCommandInputParameter[];
 
   /**
@@ -8418,13 +8418,13 @@ model VirtualMachineRunCommandProperties {
    * The provisioning state, which only appears in the response. If treatFailureAsDeploymentFailure set to true, any failure in the script will fail the deployment and ProvisioningState will be marked as Failed. If treatFailureAsDeploymentFailure set to false, ProvisioningState would only reflect whether the run command was run or not by the extensions platform, it would not indicate whether script failed in case of script failures. See instance view of run command in case of script failures to see executionMessage, output, error: https://aka.ms/runcommandmanaged#get-execution-status-and-results
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
    * The virtual machine run command instance view.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   instanceView?: VirtualMachineRunCommandInstanceView;
 
   /**
@@ -8517,7 +8517,7 @@ model VirtualMachineRunCommandInstanceView {
   /**
    * The resource status information.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   statuses?: InstanceViewStatus[];
 }
 
@@ -8546,7 +8546,7 @@ model DiskSku {
   /**
    * The sku tier.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tier?: string;
 }
 
@@ -8557,7 +8557,7 @@ model DiskProperties {
   /**
    * The time when the disk was created.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timeCreated?: utcDateTime;
 
@@ -8594,13 +8594,13 @@ model DiskProperties {
   /**
    * The size of the disk in bytes. This field is read only.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskSizeBytes?: int64;
 
   /**
    * Unique Guid identifying the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uniqueId?: string;
 
   /**
@@ -8612,7 +8612,7 @@ model DiskProperties {
    * The disk provisioning state.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
@@ -8638,7 +8638,7 @@ model DiskProperties {
   /**
    * The state of the disk.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskState?: DiskState;
 
   /**
@@ -8654,8 +8654,8 @@ model DiskProperties {
   /**
    * Details of the list of all VMs that have the disk attached. maxShares should be set to a value greater than one for disks to allow attaching them to multiple VMs.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["vmUri"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["vmUri"])
   shareInfo?: ShareInfoElement[];
 
   /**
@@ -8671,7 +8671,7 @@ model DiskProperties {
   /**
    * Latest time when bursting was last enabled on a disk.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   burstingEnabledTime?: utcDateTime;
 
@@ -8688,7 +8688,7 @@ model DiskProperties {
   /**
    * Properties of the disk for which update is pending.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   propertyUpdatesInProgress?: PropertyUpdatesInProgress;
 
   /**
@@ -8724,7 +8724,7 @@ model DiskProperties {
   /**
    * The UTC time when the ownership state of the disk was last changed i.e., the time the disk was last attached or detached from a VM or the time when the VM to which the disk was attached was deallocated or started.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   LastOwnershipUpdateTime?: utcDateTime;
 }
@@ -8811,7 +8811,7 @@ model CreationData {
   /**
    * If this field is set, this is the unique id identifying the source of this resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceUniqueId?: string;
 
   /**
@@ -8877,7 +8877,7 @@ model EncryptionSettingsCollection {
   /**
    * A collection of encryption settings, one for each disk volume.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["diskEncryptionKey/sourceVault/id"])
+  @OpenAPI.extension("x-ms-identifiers", #["diskEncryptionKey/sourceVault/id"])
   encryptionSettings?: EncryptionSettingsElement[];
 
   /**
@@ -8961,7 +8961,7 @@ model ShareInfoElement {
   /**
    * A relative URI containing the ID of the VM that has the disk attached.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vmUri?: string;
 }
 
@@ -9095,7 +9095,7 @@ model DiskUpdateProperties {
   /**
    * Properties of the disk for which update is pending.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   propertyUpdatesInProgress?: PropertyUpdatesInProgress;
 
   /**
@@ -9156,13 +9156,13 @@ model AccessUri {
   /**
    * A SAS uri for accessing a disk.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   accessSAS?: string;
 
   /**
    * A SAS uri for accessing a VM guest state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   securityDataAccessSAS?: string;
 }
 
@@ -9171,20 +9171,20 @@ model DiskAccessProperties {
   /**
    * A readonly collection of private endpoint connections created on the disk. Currently only one endpoint connection is supported.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnection[];
 
   /**
    * The disk access resource provisioning state.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
    * The time when the disk access was created.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timeCreated?: utcDateTime;
 }
@@ -9196,7 +9196,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * The resource of private end point.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   privateEndpoint?: PrivateEndpoint;
 
   /**
@@ -9207,7 +9207,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * The provisioning state of the private endpoint connection resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: PrivateEndpointConnectionProvisioningState;
 }
 
@@ -9218,7 +9218,7 @@ model PrivateEndpoint {
   /**
    * The ARM identifier for Private Endpoint
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
@@ -9282,19 +9282,19 @@ model PrivateLinkResource {
   /**
    * private link resource Id
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * private link resource name
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * private link resource type
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 }
 
@@ -9305,13 +9305,13 @@ model PrivateLinkResourceProperties {
   /**
    * The private link resource group id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   groupId?: string;
 
   /**
    * The private link resource required member names.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   requiredMembers?: string[];
 
   /**
@@ -9332,13 +9332,13 @@ model EncryptionSetIdentity {
   /**
    * The object id of the Managed Identity Resource. This will be sent to the RP from ARM via the x-ms-identity-principal-id header in the PUT request if the resource has a systemAssigned(implicit) identity
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   principalId?: string;
 
   /**
    * The tenant id of the Managed Identity Resource. This will be sent to the RP from ARM via the x-ms-client-tenant-id header in the PUT request if the resource has a systemAssigned(implicit) identity
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tenantId?: string;
 
   /**
@@ -9363,15 +9363,15 @@ model EncryptionSetProperties {
   /**
    * A readonly collection of key vault keys previously used by this disk encryption set while a key rotation is in progress. It will be empty if there is no ongoing key rotation.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["sourceVault/id"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["sourceVault/id"])
   previousKeys?: KeyForDiskEncryptionSet[];
 
   /**
    * The disk encryption set provisioning state.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
@@ -9382,14 +9382,14 @@ model EncryptionSetProperties {
   /**
    * The time when the active key of this disk encryption set was updated.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastKeyRotationTimestamp?: utcDateTime;
 
   /**
    * The error that was encountered during auto-key rotation. If an error is present, then auto-key rotation will not be attempted until the error on this disk encryption set is fixed.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   autoKeyRotationError?: ApiError;
 
   /**
@@ -9479,20 +9479,20 @@ model DiskRestorePointProperties {
   /**
    * The timestamp of restorePoint creation
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timeCreated?: utcDateTime;
 
   /**
    * arm id of source disk or source disk restore point.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceResourceId?: string;
 
   /**
    * The Operating System type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osType?: OperatingSystemTypes;
 
   /**
@@ -9513,19 +9513,19 @@ model DiskRestorePointProperties {
   /**
    * id of the backing snapshot's MIS family
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   familyId?: string;
 
   /**
    * unique incarnation id of the source disk
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceUniqueId?: string;
 
   /**
    * Encryption property can be used to encrypt data at rest with customer managed keys or platform managed keys.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   encryption?: Encryption;
 
   /**
@@ -9556,13 +9556,13 @@ model DiskRestorePointProperties {
   /**
    * Replication state of disk restore point when source resource is from a different region.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   replicationState?: string;
 
   /**
    * Location of source disk or source disk restore point when source resource is from a different region.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceResourceLocation?: string;
 
   /**
@@ -9578,19 +9578,19 @@ model ProxyOnlyResource {
   /**
    * Resource Id
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * Resource name
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Resource type
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 }
 
@@ -9611,7 +9611,7 @@ model SnapshotSku {
   /**
    * The sku tier.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tier?: string;
 }
 
@@ -9622,7 +9622,7 @@ model SnapshotProperties {
   /**
    * The time when the snapshot was created.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timeCreated?: utcDateTime;
 
@@ -9659,19 +9659,19 @@ model SnapshotProperties {
   /**
    * The size of the disk in bytes. This field is read only.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskSizeBytes?: int64;
 
   /**
    * The state of the snapshot.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskState?: DiskState;
 
   /**
    * Unique Guid identifying the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uniqueId?: string;
 
   /**
@@ -9683,7 +9683,7 @@ model SnapshotProperties {
    * The disk provisioning state.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
@@ -9694,7 +9694,7 @@ model SnapshotProperties {
   /**
    * Incremental snapshots for a disk share an incremental snapshot family id. The Get Page Range Diff API can only be called on incremental snapshots with the same family id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   incrementalSnapshotFamilyId?: string;
 
   /**
@@ -9853,25 +9853,25 @@ model ResourceSkuCapacity {
   /**
    * The minimum capacity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   minimum?: int64;
 
   /**
    * The maximum capacity that can be set.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   maximum?: int64;
 
   /**
    * The default capacity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   default?: int64;
 
   /**
    * The scale type applicable to the sku.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   scaleType?: ResourceSkuCapacityScaleType;
 }
 
@@ -9882,32 +9882,32 @@ model ResourceSkuLocationInfo {
   /**
    * Location of the SKU
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   location?: string;
 
   /**
    * List of availability zones where the SKU is supported.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   zones?: string[];
 
   /**
    * Details of capabilities available to a SKU in specific zones.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   zoneDetails?: ResourceSkuZoneDetails[];
 
   /**
    * The names of extended locations.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   extendedLocations?: string[];
 
   /**
    * The type of the extended location.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: ExtendedLocationType;
 }
 
@@ -9918,14 +9918,14 @@ model ResourceSkuZoneDetails {
   /**
    * The set of zones that the SKU is available in with the specified capabilities.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string[];
 
   /**
    * A list of capabilities that are available for the SKU in the specified list of zones.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   capabilities?: ResourceSkuCapabilities[];
 }
 
@@ -9936,13 +9936,13 @@ model ResourceSkuCapabilities {
   /**
    * An invariant to describe the feature.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * An invariant if the feature is measured by quantity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: string;
 }
 
@@ -9953,19 +9953,19 @@ model ResourceSkuCosts {
   /**
    * Used for querying price from commerce.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   meterID?: string;
 
   /**
    * The multiplier is needed to extend the base metered cost.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   quantity?: int64;
 
   /**
    * An invariant to show the extended unit.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   extendedUnit?: string;
 }
 
@@ -9976,25 +9976,25 @@ model ResourceSkuRestrictions {
   /**
    * The type of restrictions.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: ResourceSkuRestrictionsType;
 
   /**
    * The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   values?: string[];
 
   /**
    * The information about the restriction where the SKU cannot be used.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   restrictionInfo?: ResourceSkuRestrictionInfo;
 
   /**
    * The reason for restriction.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reasonCode?: ResourceSkuRestrictionsReasonCode;
 }
 
@@ -10005,13 +10005,13 @@ model ResourceSkuRestrictionInfo {
   /**
    * Locations where the SKU is restricted
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   locations?: string[];
 
   /**
    * List of availability zones where the SKU is restricted.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   zones?: string[];
 }
 
@@ -10032,7 +10032,7 @@ model GalleryProperties {
   /**
    * The provisioning state, which only appears in the response.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: GalleryProvisioningState;
 
   /**
@@ -10048,7 +10048,7 @@ model GalleryProperties {
   /**
    * Sharing status of current gallery.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sharingStatus?: SharingStatus;
 }
 
@@ -10059,7 +10059,7 @@ model GalleryIdentifier {
   /**
    * The unique name of the Shared Image Gallery. This name is generated automatically by Azure.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uniqueName?: string;
 }
 
@@ -10075,8 +10075,8 @@ model SharingProfile {
   /**
    * A list of sharing profile groups.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   groups?: SharingProfileGroup[];
 
   /**
@@ -10127,13 +10127,13 @@ model CommunityGalleryInfo {
   /**
    * Contains info about whether community gallery sharing is enabled.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   communityGalleryEnabled?: boolean;
 
   /**
    * Community gallery public name list.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   publicNames?: string[];
 }
 
@@ -10154,13 +10154,13 @@ model SharingStatus {
   /**
    * Aggregated sharing state of current gallery.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   aggregatedState?: SharingState;
 
   /**
    * Summary of all regional sharing status.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["region"])
+  @OpenAPI.extension("x-ms-identifiers", #["region"])
   summary?: RegionalSharingStatus[];
 }
 
@@ -10176,7 +10176,7 @@ model RegionalSharingStatus {
   /**
    * Gallery sharing state in current region
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: SharingState;
 
   /**
@@ -10205,19 +10205,19 @@ model UpdateResourceDefinition {
   /**
    * Resource Id
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * Resource name
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Resource type
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
@@ -10295,13 +10295,13 @@ model GalleryImageProperties {
   /**
    * The provisioning state, which only appears in the response.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: GalleryProvisioningState;
 
   /**
    * A list of gallery image features.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   features?: GalleryImageFeature[];
 
   /**
@@ -10430,7 +10430,7 @@ model GalleryImageVersionProperties {
   /**
    * The provisioning state, which only appears in the response.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: GalleryProvisioningState;
 
   /**
@@ -10446,7 +10446,7 @@ model GalleryImageVersionProperties {
   /**
    * This is the replication status of the gallery image version.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   replicationStatus?: ReplicationStatus;
 }
 
@@ -10464,7 +10464,7 @@ model GalleryArtifactPublishingProfileBase {
   /**
    * The target regions where the Image Version is going to be replicated to. This property is updatable.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   targetRegions?: TargetRegion[];
 
   /**
@@ -10480,7 +10480,7 @@ model GalleryArtifactPublishingProfileBase {
   /**
    * The timestamp for when the gallery image version is published.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   publishedDate?: utcDateTime;
 
@@ -10503,7 +10503,7 @@ model GalleryArtifactPublishingProfileBase {
   /**
    * The target extended locations where the Image Version is going to be replicated to. This property is updatable.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name", "extendedLocation/name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name", "extendedLocation/name"])
   targetExtendedLocations?: GalleryTargetExtendedLocation[];
 }
 
@@ -10549,7 +10549,7 @@ model EncryptionImages {
   /**
    * A list of encryption specifications for data disk images.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["lun"])
+  @OpenAPI.extension("x-ms-identifiers", #["lun"])
   dataDiskImages?: DataDiskImageEncryption[];
 }
 
@@ -10658,7 +10658,7 @@ model GalleryImageVersionStorageProfile {
   /**
    * A list of data disk images.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["lun"])
+  @OpenAPI.extension("x-ms-identifiers", #["lun"])
   dataDiskImages?: GalleryDataDiskImage[];
 }
 
@@ -10696,7 +10696,7 @@ model GalleryDiskImage {
   /**
    * This property indicates the size of the VHD to be created.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sizeInGB?: int32;
 
   /**
@@ -10746,14 +10746,14 @@ model GalleryImageVersionSafetyProfile
   /**
    * Indicates whether this image has been reported as violating Microsoft's policies.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reportedForPolicyViolation?: boolean;
 
   /**
    * A list of Policy Violations that have been reported for this Gallery Image Version.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   policyViolations?: PolicyViolation[];
 }
 
@@ -10789,14 +10789,14 @@ model ReplicationStatus {
   /**
    * This is the aggregated replication status based on all the regional replication status flags.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   aggregatedState?: AggregatedReplicationState;
 
   /**
    * This is a summary of replication status for each region.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["region"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["region"])
   summary?: RegionalReplicationStatus[];
 }
 
@@ -10807,25 +10807,25 @@ model RegionalReplicationStatus {
   /**
    * The region to which the gallery image version is being replicated to.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   region?: string;
 
   /**
    * This is the regional replication state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: ReplicationState;
 
   /**
    * The details of the replication status.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   details?: string;
 
   /**
    * It indicates progress of the replication job.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   progress?: int32;
 }
 
@@ -10881,7 +10881,7 @@ model GalleryApplicationProperties {
   /**
    * A list of custom actions that can be performed with all of the Gallery Application Versions within this Gallery Application.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   customActions?: GalleryApplicationCustomAction[];
 }
 
@@ -10907,7 +10907,7 @@ model GalleryApplicationCustomAction {
   /**
    * The parameters that this custom action uses
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   parameters?: GalleryApplicationCustomActionParameter[];
 }
 
@@ -10971,13 +10971,13 @@ model GalleryApplicationVersionProperties {
   /**
    * The provisioning state, which only appears in the response.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: GalleryProvisioningState;
 
   /**
    * This is the replication status of the gallery image version.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   replicationStatus?: ReplicationStatus;
 }
 
@@ -11014,7 +11014,7 @@ model GalleryApplicationVersionPublishingProfile
   /**
    * A list of custom actions that can be performed with this Gallery Application Version.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   customActions?: GalleryApplicationCustomAction[];
 }
 
@@ -11124,7 +11124,7 @@ model SharingUpdate {
   /**
    * A list of sharing profile groups.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   groups?: SharingProfileGroup[];
 }
 
@@ -11163,13 +11163,13 @@ model PirResource {
   /**
    * Resource name
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Resource location
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   location?: string;
 }
 
@@ -11222,7 +11222,7 @@ model SharedGalleryImageProperties {
   /**
    * A list of gallery image features.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   features?: GalleryImageFeature[];
 
   /**
@@ -11292,7 +11292,7 @@ model SharedGalleryImageVersionStorageProfile {
   /**
    * A list of data disk images.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["lun"])
+  @OpenAPI.extension("x-ms-identifiers", #["lun"])
   dataDiskImages?: SharedGalleryDataDiskImage[];
 }
 
@@ -11309,7 +11309,7 @@ model SharedGalleryDiskImage {
   /**
    * This property indicates the size of the VHD to be created.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskSizeGB?: int32;
 
   /**
@@ -11336,19 +11336,19 @@ model PirCommunityGalleryResource {
   /**
    * Resource name
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Resource location
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   location?: string;
 
   /**
    * Resource type
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
@@ -11413,7 +11413,7 @@ model CommunityGalleryImageProperties {
   /**
    * A list of gallery image features.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   features?: GalleryImageFeature[];
 
   /**
@@ -11503,13 +11503,13 @@ model InstanceSku {
   /**
    * The sku name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The tier of the cloud service role instance.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tier?: string;
 }
 
@@ -11536,7 +11536,7 @@ model RoleInstanceNetworkProfile {
   /**
    * Specifies the list of resource Ids for the network interfaces associated with the role instance.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkInterfaces?: SubResource[];
 }
 
@@ -11547,24 +11547,24 @@ model RoleInstanceInstanceView {
   /**
    * The Update Domain.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   platformUpdateDomain?: int32;
 
   /**
    * The Fault Domain.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   platformFaultDomain?: int32;
 
   /**
    * Specifies a unique identifier generated internally for the cloud service associated with this role instance. <br /><br /> NOTE: If you are using Azure Diagnostics extension, this property can be used as 'DeploymentId' for querying details.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   privateId?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   statuses?: ResourceInstanceViewStatus[];
 }
 
@@ -11575,25 +11575,25 @@ model ResourceInstanceViewStatus {
   /**
    * The status code.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   code?: string;
 
   /**
    * The short localizable label for the status.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   displayStatus?: string;
 
   /**
    * The detailed status message, including for alerts and error messages.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 
   /**
    * The time of the status.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   time?: utcDateTime;
 
@@ -11631,7 +11631,7 @@ model CloudServiceRoleProperties {
   /**
    * Specifies the ID which uniquely identifies a cloud service role.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uniqueId?: string;
 }
 
@@ -11699,13 +11699,13 @@ model CloudServiceProperties {
    * The provisioning state, which only appears in the response.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
    * The unique identifier for the cloud service.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uniqueId?: string;
 }
 
@@ -11716,7 +11716,7 @@ model CloudServiceRoleProfile {
   /**
    * List of roles for the cloud service.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   roles?: CloudServiceRoleProfileProperties[];
 }
 
@@ -11742,7 +11742,7 @@ model CloudServiceOsProfile {
   /**
    * Specifies set of certificates that should be installed onto the role instances.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["sourceVault/id"])
+  @OpenAPI.extension("x-ms-identifiers", #["sourceVault/id"])
   secrets?: CloudServiceVaultSecretGroup[];
 }
 
@@ -11758,7 +11758,7 @@ model CloudServiceVaultSecretGroup {
   /**
    * The list of key vault references in SourceVault which contain certificates.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["certificateUrl"])
+  @OpenAPI.extension("x-ms-identifiers", #["certificateUrl"])
   vaultCertificates?: CloudServiceVaultCertificate[];
 }
 
@@ -11823,7 +11823,7 @@ model LoadBalancerConfigurationProperties {
   /**
    * Specifies the frontend IP to be used for the load balancer. Only IPv4 frontend IP address is supported. Each load balancer configuration must have exactly one frontend IP configuration.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   frontendIpConfigurations: LoadBalancerFrontendIpConfiguration[];
 }
 
@@ -11871,7 +11871,7 @@ model CloudServiceExtensionProfile {
   /**
    * List of extensions for the cloud service.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   extensions?: Extension[];
 }
 
@@ -11943,7 +11943,7 @@ model CloudServiceExtensionProperties {
   /**
    * The provisioning state, which only appears in the response.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
@@ -11988,18 +11988,18 @@ model CloudServiceInstanceView {
   /**
    * The version of the SDK that was used to generate the package for the cloud service.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sdkVersion?: string;
 
   /**
    * Specifies a list of unique identifiers generated internally for the cloud service. <br /><br /> NOTE: If you are using Azure Diagnostics extension, this property can be used as 'DeploymentId' for querying details.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   privateIds?: string[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   statuses?: ResourceInstanceViewStatus[];
 }
 
@@ -12010,8 +12010,8 @@ model InstanceViewStatusesSummary {
   /**
    * The summary.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   statusesSummary?: StatusCodeCount[];
 }
 
@@ -12022,13 +12022,13 @@ model StatusCodeCount {
   /**
    * The instance view status code
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   code?: string;
 
   /**
    * Number of instances having this status code
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   count?: int32;
 }
 
@@ -12049,13 +12049,13 @@ model UpdateDomain {
   /**
    * Resource Id
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * Resource Name
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 }
 
@@ -12072,37 +12072,37 @@ model OSVersionProperties {
   /**
    * The family of this OS version.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   family?: string;
 
   /**
    * The family label of this OS version.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   familyLabel?: string;
 
   /**
    * The OS version.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   version?: string;
 
   /**
    * The OS version label.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   label?: string;
 
   /**
    * Specifies whether this is the default OS version for its family.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isDefault?: boolean;
 
   /**
    * Specifies whether this OS version is active.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isActive?: boolean;
 }
 
@@ -12114,20 +12114,20 @@ model OSFamilyProperties {
   /**
    * The OS family name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The OS family label.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   label?: string;
 
   /**
    * List of OS versions belonging to this family.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["version"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["version"])
   versions?: OSVersionPropertiesBase[];
 }
 
@@ -12138,25 +12138,25 @@ model OSVersionPropertiesBase {
   /**
    * The OS version.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   version?: string;
 
   /**
    * The OS version label.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   label?: string;
 
   /**
    * Specifies whether this is the default OS version for its family.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isDefault?: boolean;
 
   /**
    * Specifies whether this OS version is active.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isActive?: boolean;
 }
 

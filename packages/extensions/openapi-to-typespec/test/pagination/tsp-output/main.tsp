@@ -18,9 +18,7 @@ using TypeSpec.Versioning;
 /**
  * Long-running Operation for AutoRest
  */
-@service({
-  title: "AutoRest Paging Test Service",
-})
+@service(#{ title: "AutoRest Paging Test Service" })
 @versioned(Versions)
 @server(
   "{$host}",

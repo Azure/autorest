@@ -76,7 +76,7 @@ interface VirtualMachineScaleSets {
   /**
    * Update a VM scale set.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     VirtualMachineScaleSet,
     PatchModel = VirtualMachineScaleSetUpdate,

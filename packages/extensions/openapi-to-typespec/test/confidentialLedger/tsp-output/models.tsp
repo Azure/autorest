@@ -61,7 +61,7 @@ model ConfidentialLedgerError {
   /**
    * An error response from Confidential Ledger.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   error?: ConfidentialLedgerErrorBody;
 }
 
@@ -72,13 +72,13 @@ model ConfidentialLedgerErrorBody {
   /**
    * The error code.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   code?: string;
 
   /**
    * The error message.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 }
 
@@ -217,14 +217,14 @@ model LedgerEntry {
   @key
   contents: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   collectionId?: string;
 
   /**
    * A unique identifier for the state of the ledger. If returned as part of a
    * LedgerEntry, it indicates the state from which the entry was read.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   transactionId?: string;
 }
 
@@ -335,7 +335,7 @@ model LedgerUser {
    * Identifier for the user. This must either be an AAD object id or a certificate
    * fingerprint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   userId?: string;
 }
 

@@ -114,19 +114,19 @@ model AnalysisServicesServerProperties
   /**
    * The current state of Analysis Services resource. The state is to indicate more states outside of resource provisioning.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: State;
 
   /**
    * The current deployment state of Analysis Services resource. The provisioningState is to indicate states for resource provisioning.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * The full name of the Analysis Services resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   serverFullName?: string;
 
   /**
@@ -197,13 +197,13 @@ model GatewayDetails {
   /**
    * Gateway object id from in the DMTS cluster for the gateway resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   gatewayObjectId?: string;
 
   /**
    * Uri of the DMTS cluster.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dmtsClusterUri?: string;
 }
 
@@ -214,7 +214,7 @@ model IPv4FirewallSettings {
   /**
    * An array of firewall rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["firewallRuleName"])
+  @OpenAPI.extension("x-ms-identifiers", #["firewallRuleName"])
   firewallRules?: IPv4FirewallRule[];
 
   /**
@@ -250,25 +250,25 @@ model Resource {
   /**
    * An identifier that represents the Analysis Services resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The name of the Analysis Services resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The type of the Analysis Services resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Location of the Analysis Services resource.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   location: string;
@@ -327,7 +327,7 @@ model SkuEnumerationForNewResourceResult {
   /**
    * The collection of available SKUs for new resources.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   value?: ResourceSku[];
 }
 
@@ -338,7 +338,7 @@ model SkuEnumerationForExistingResourceResult {
   /**
    * The collection of available SKUs for existing resources.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["sku/name"])
+  @OpenAPI.extension("x-ms-identifiers", #["sku/name"])
   value?: SkuDetailsForExistingResource[];
 }
 
@@ -433,15 +433,15 @@ model OperationPropertiesServiceSpecification {
   /**
    * The metric specifications.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   metricSpecifications?: MetricSpecifications[];
 
   /**
    * The log specifications.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   logSpecifications?: LogSpecifications[];
 }
 
@@ -452,38 +452,38 @@ model MetricSpecifications {
   /**
    * The name of metric.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The displayed name of metric.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   displayName?: string;
 
   /**
    * The displayed description of metric.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   displayDescription?: string;
 
   /**
    * The unit of the metric.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   unit?: string;
 
   /**
    * The aggregation type of metric.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   aggregationType?: string;
 
   /**
    * The dimensions of metric.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   dimensions?: MetricDimensions[];
 }
 
@@ -494,13 +494,13 @@ model MetricDimensions {
   /**
    * Dimension name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Dimension display name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   displayName?: string;
 }
 
@@ -511,19 +511,19 @@ model LogSpecifications {
   /**
    * The name of metric.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The displayed name of log.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   displayName?: string;
 
   /**
    * The blob duration for the log.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   blobDuration?: string;
 }
 

@@ -30,9 +30,7 @@ using TypeSpec.Versioning;
  * Azure Sphere resource management API.
  */
 @armProviderNamespace
-@service({
-  title: "Azure Sphere resource management API.",
-})
+@service(#{ title: "Azure Sphere resource management API." })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.AzureSphere;

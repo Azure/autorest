@@ -47,7 +47,7 @@ interface Workspaces {
   /**
    * Updates a machine learning workspace with the specified parameters.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Workspace,
     PatchModel = WorkspaceUpdateParameters

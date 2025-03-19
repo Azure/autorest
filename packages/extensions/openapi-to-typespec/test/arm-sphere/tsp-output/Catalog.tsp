@@ -37,7 +37,7 @@ interface Catalogs {
   /**
    * Update a Catalog
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Catalog, PatchModel = CatalogUpdate>;
 
   /**

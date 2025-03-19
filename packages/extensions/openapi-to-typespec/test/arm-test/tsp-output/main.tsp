@@ -27,9 +27,7 @@ using TypeSpec.Versioning;
  * For test.
  */
 @armProviderNamespace
-@service({
-  title: "Azure Test resource management API.",
-})
+@service(#{ title: "Azure Test resource management API." })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.Test;

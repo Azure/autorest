@@ -37,7 +37,7 @@ interface Accounts {
   /**
    * Update a Account
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Account, PatchModel = AccountUpdate>;
 
   /**

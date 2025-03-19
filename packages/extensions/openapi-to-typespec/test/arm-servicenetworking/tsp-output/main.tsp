@@ -26,9 +26,7 @@ using TypeSpec.Versioning;
  * Traffic Controller Provider management API.
  */
 @armProviderNamespace
-@service({
-  title: "Traffic Controller Provider management API.",
-})
+@service(#{ title: "Traffic Controller Provider management API." })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.ServiceNetworking;

@@ -38,7 +38,7 @@ interface AlertProcessingRules {
   /**
    * Enable, disable, or update tags for an alert processing rule.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<AlertProcessingRule, PatchModel = PatchObject>;
 
   /**

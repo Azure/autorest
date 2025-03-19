@@ -385,7 +385,7 @@ model ChangePointDetectResponse {
    * Frequency extracted from the series, zero means no recurrent pattern has been
    * found.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   period?: int32;
 
   /**

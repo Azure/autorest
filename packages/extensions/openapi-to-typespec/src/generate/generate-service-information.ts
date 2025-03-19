@@ -13,7 +13,7 @@ export function generateServiceInformation(program: TypespecProgram) {
   }
 
   generateUseAuth(serviceInformation.authentication, definitions);
-  definitions.push(`@service({
+  definitions.push(`@service(#{
     title: "${serviceInformation.name}"
   })`);
 

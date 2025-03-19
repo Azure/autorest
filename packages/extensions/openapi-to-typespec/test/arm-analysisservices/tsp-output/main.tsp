@@ -25,9 +25,7 @@ using TypeSpec.Versioning;
  * The Azure Analysis Services Web API provides a RESTful set of web services that enables users to create, retrieve, update, and delete Analysis Services servers
  */
 @armProviderNamespace
-@service({
-  title: "AzureAnalysisServices",
-})
+@service(#{ title: "AzureAnalysisServices" })
 @versioned(Versions)
 // FIXME: Common type version not set. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)

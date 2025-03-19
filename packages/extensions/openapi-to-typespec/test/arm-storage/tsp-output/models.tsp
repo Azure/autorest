@@ -876,7 +876,7 @@ model StorageSkuListResult {
   /**
    * Get the list result of storage SKUs and their properties.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @items
   value?: SkuInformation[];
 }
@@ -893,31 +893,31 @@ model SkuInformation {
   /**
    * The SKU tier. This is based on the SKU name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tier?: SkuTier;
 
   /**
    * The type of the resource, usually it is 'storageAccounts'.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceType?: string;
 
   /**
    * Indicates the type of storage account.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   kind?: Kind;
 
   /**
    * The set of locations that the SKU is available. This will be supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.).
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   locations?: string[];
 
   /**
    * The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   capabilities?: SKUCapability[];
 
   /**
@@ -933,13 +933,13 @@ model SKUCapability {
   /**
    * The name of capability, The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * A string value to indicate states of given capability. Possibly 'true' or 'false'.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: string;
 }
 
@@ -950,13 +950,13 @@ model Restriction {
   /**
    * The type of restrictions. As of now only possible value for this is location.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   values?: string[];
 
   /**
@@ -987,19 +987,19 @@ model CheckNameAvailabilityResult {
   /**
    * Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nameAvailable?: boolean;
 
   /**
    * Gets the reason that a storage account name could not be used. The Reason element is only returned if NameAvailable is false.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reason?: Reason;
 
   /**
    * Gets an error message explaining the Reason value in more detail.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 }
 
@@ -1058,7 +1058,7 @@ model Sku {
   /**
    * The SKU tier. This is based on the SKU name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tier?: SkuTier;
 }
 
@@ -1084,13 +1084,13 @@ model Identity {
   /**
    * The principal ID of resource identity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   principalId?: string;
 
   /**
    * The tenant ID of resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tenantId?: string;
 
   /**
@@ -1332,14 +1332,14 @@ model EncryptionService {
   /**
    * Gets a rough estimate of the date/time when the encryption was last enabled by the user. Data is encrypted at rest by default today and cannot be disabled.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastEnabledTime?: utcDateTime;
 
   /**
    * Encryption key type to be used for the encryption service. 'Account' key type implies that an account-scoped encryption key will be used. 'Service' key type implies that a default service key is used.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   keyType?: KeyType;
 }
 
@@ -1365,20 +1365,20 @@ model KeyVaultProperties {
   /**
    * The object identifier of the current versioned Key Vault Key in use.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   currentVersionedKeyIdentifier?: string;
 
   /**
    * Timestamp of last rotation of the Key Vault Key.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastKeyRotationTimestamp?: utcDateTime;
 
   /**
    * This is a read only property that represents the expiration time of the current version of the customer managed key used for encryption.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   currentVersionedKeyExpirationTimestamp?: utcDateTime;
 }
@@ -1607,93 +1607,93 @@ model StorageAccountProperties {
   /**
    * Gets the status of the storage account at the time the operation was called.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * Gets the URLs that are used to perform a retrieval of a public blob, queue, or table object. Note that Standard_ZRS and Premium_LRS accounts only return the blob endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   primaryEndpoints?: Endpoints;
 
   /**
    * Gets the location of the primary data center for the storage account.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   primaryLocation?: string;
 
   /**
    * Gets the status indicating whether the primary location of the storage account is available or unavailable.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   statusOfPrimary?: AccountStatus;
 
   /**
    * Gets the timestamp of the most recent instance of a failover to the secondary location. Only the most recent timestamp is retained. This element is not returned if there has never been a failover instance. Only available if the accountType is Standard_GRS or Standard_RAGRS.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastGeoFailoverTime?: utcDateTime;
 
   /**
    * Gets the location of the geo-replicated secondary for the storage account. Only available if the accountType is Standard_GRS or Standard_RAGRS.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   secondaryLocation?: string;
 
   /**
    * Gets the status indicating whether the secondary location of the storage account is available or unavailable. Only available if the SKU name is Standard_GRS or Standard_RAGRS.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   statusOfSecondary?: AccountStatus;
 
   /**
    * Gets the creation date and time of the storage account in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   creationTime?: utcDateTime;
 
   /**
    * Gets the custom domain the user assigned to this storage account.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   customDomain?: CustomDomain;
 
   /**
    * SasPolicy assigned to the storage account.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sasPolicy?: SasPolicy;
 
   /**
    * KeyPolicy assigned to the storage account.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   keyPolicy?: KeyPolicy;
 
   /**
    * Storage account keys creation time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   keyCreationTime?: KeyCreationTime;
 
   /**
    * Gets the URLs that are used to perform a retrieval of a public blob, queue, or table object from the secondary location of the storage account. Only available if the SKU name is Standard_RAGRS.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   secondaryEndpoints?: Endpoints;
 
   /**
    * Encryption settings to be used for server-side encryption for the storage account.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   encryption?: Encryption;
 
   /**
    * Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier is the default value for premium block blobs storage account type and it cannot be changed for the premium block blobs storage account type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   accessTier?: AccessTier;
 
   /**
@@ -1709,7 +1709,7 @@ model StorageAccountProperties {
   /**
    * Network rule set
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkAcls?: NetworkRuleSet;
 
   /**
@@ -1730,13 +1730,13 @@ model StorageAccountProperties {
   /**
    * Geo Replication Stats
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   geoReplicationStats?: GeoReplicationStats;
 
   /**
    * If the failover is in progress, the value will be true, otherwise, it will be null.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   failoverInProgress?: boolean;
 
   /**
@@ -1747,7 +1747,7 @@ model StorageAccountProperties {
   /**
    * List of private endpoint connection associated with the specified storage account
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnection[];
 
   /**
@@ -1758,7 +1758,7 @@ model StorageAccountProperties {
   /**
    * Blob restore status
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   blobRestoreStatus?: BlobRestoreStatus;
 
   /**
@@ -1824,37 +1824,37 @@ model Endpoints {
   /**
    * Gets the blob endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   blob?: string;
 
   /**
    * Gets the queue endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   queue?: string;
 
   /**
    * Gets the table endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   table?: string;
 
   /**
    * Gets the file endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   file?: string;
 
   /**
    * Gets the web endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   web?: string;
 
   /**
    * Gets the dfs endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dfs?: string;
 
   /**
@@ -1875,37 +1875,37 @@ model StorageAccountMicrosoftEndpoints {
   /**
    * Gets the blob endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   blob?: string;
 
   /**
    * Gets the queue endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   queue?: string;
 
   /**
    * Gets the table endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   table?: string;
 
   /**
    * Gets the file endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   file?: string;
 
   /**
    * Gets the web endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   web?: string;
 
   /**
    * Gets the dfs endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dfs?: string;
 }
 
@@ -1916,25 +1916,25 @@ model StorageAccountInternetEndpoints {
   /**
    * Gets the blob endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   blob?: string;
 
   /**
    * Gets the file endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   file?: string;
 
   /**
    * Gets the web endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   web?: string;
 
   /**
    * Gets the dfs endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dfs?: string;
 }
 
@@ -1958,20 +1958,20 @@ model GeoReplicationStats {
   /**
    * The status of the secondary location. Possible values are: - Live: Indicates that the secondary location is active and operational. - Bootstrap: Indicates initial synchronization from the primary location to the secondary location is in progress.This typically occurs when replication is first enabled. - Unavailable: Indicates that the secondary location is temporarily unavailable.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: GeoReplicationStatus;
 
   /**
    * All primary writes preceding this UTC date/time value are guaranteed to be available for read operations. Primary writes following this point in time may or may not be available for reads. Element may be default value if value of LastSyncTime is not available, this can happen if secondary is offline or we are in bootstrap.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastSyncTime?: utcDateTime;
 
   /**
    * A boolean flag which indicates whether or not account failover is supported for the account.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   canFailover?: boolean;
 }
 
@@ -1992,7 +1992,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * The provisioning state of the private endpoint connection resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: PrivateEndpointConnectionProvisioningState;
 }
 
@@ -2003,7 +2003,7 @@ model PrivateEndpoint {
   /**
    * The ARM identifier for Private Endpoint
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
@@ -2034,19 +2034,19 @@ model Resource {
   /**
    * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The name of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 }
 
@@ -2057,25 +2057,25 @@ model BlobRestoreStatus {
   /**
    * The status of blob restore progress. Possible values are: - InProgress: Indicates that blob restore is ongoing. - Complete: Indicates that blob restore has been completed successfully. - Failed: Indicates that blob restore is failed.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: BlobRestoreProgressStatus;
 
   /**
    * Failure reason when blob restore is failed.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   failureReason?: string;
 
   /**
    * Id for tracking blob restore request.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   restoreId?: string;
 
   /**
    * Blob restore request parameters.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   parameters?: BlobRestoreParameters;
 }
 
@@ -2117,7 +2117,7 @@ model StorageAccountSkuConversionStatus {
   /**
    * This property indicates the current sku conversion status.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   skuConversionStatus?: SkuConversionStatus;
 
   /**
@@ -2128,14 +2128,14 @@ model StorageAccountSkuConversionStatus {
   /**
    * This property represents the sku conversion start time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * This property represents the sku conversion end time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 }
@@ -2291,32 +2291,32 @@ model DeletedAccountProperties {
   /**
    * Full resource id of the original storage account.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   storageAccountResourceId?: string;
 
   /**
    * Location of the deleted account.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   location?: string;
 
   /**
    * Can be used to attempt recovering this deleted account via PutStorageAccount API.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   restoreReference?: string;
 
   /**
    * Creation time of the deleted account.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   creationTime?: utcDateTime;
 
   /**
    * Deletion time of the deleted account.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletionTime?: utcDateTime;
 }
@@ -2344,7 +2344,7 @@ model StorageAccountListKeysResult {
   /**
    * Gets the list of storage account keys and their properties for the specified storage account.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @items
   keys?: StorageAccountKey[];
 }
@@ -2356,25 +2356,25 @@ model StorageAccountKey {
   /**
    * Name of the key.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   keyName?: string;
 
   /**
    * Base 64-encoded value of the key.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: string;
 
   /**
    * Permissions for the key -- read-only or full permissions.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   permissions?: KeyPermission;
 
   /**
    * Creation time of the key, in round trip date format.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   creationTime?: utcDateTime;
 }
@@ -2408,25 +2408,25 @@ model Usage {
   /**
    * Gets the unit of measurement.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   unit?: UsageUnit;
 
   /**
    * Gets the current count of the allocated resources in the subscription.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   currentValue?: int32;
 
   /**
    * Gets the maximum count of the resources that can be allocated in the subscription.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   limit?: int32;
 
   /**
    * Gets the name of the type of usage.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: UsageName;
 }
 
@@ -2437,13 +2437,13 @@ model UsageName {
   /**
    * Gets a string describing the resource name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: string;
 
   /**
    * Gets a localized string describing the resource name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   localizedValue?: string;
 }
 
@@ -2501,7 +2501,7 @@ model ListAccountSasResponse {
   /**
    * List SAS credentials of storage account.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   accountSasToken?: string;
 }
 
@@ -2610,7 +2610,7 @@ model ListServiceSasResponse {
   /**
    * List service SAS credentials of specific resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   serviceSasToken?: string;
 }
 
@@ -2622,7 +2622,7 @@ model ManagementPolicyProperties {
   /**
    * Returns the date and time the ManagementPolicies was last modified.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedTime?: utcDateTime;
 
@@ -2888,7 +2888,7 @@ model BlobInventoryPolicyProperties {
   /**
    * Returns the last modified date and time of the blob inventory policy.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedTime?: utcDateTime;
 
@@ -2910,7 +2910,7 @@ model BlobInventoryPolicySchema {
   /**
    * Deprecated Property from API version 2021-04-01 onwards, the required destination container name must be specified at the rule level 'policy.rule.destination'
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   destination?: string;
 
   /**
@@ -3058,7 +3058,7 @@ model ListBlobInventoryPolicy {
   /**
    * List of blob inventory policies.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @items
   value?: BlobInventoryPolicy[];
 }
@@ -3105,13 +3105,13 @@ model PrivateLinkResourceProperties {
   /**
    * The private link resource group id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   groupId?: string;
 
   /**
    * The private link resource required member names.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   requiredMembers?: string[];
 
   /**
@@ -3140,13 +3140,13 @@ model ObjectReplicationPolicyProperties {
   /**
    * A unique id for object replication policy.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   policyId?: string;
 
   /**
    * Indicates when the policy is enabled on the source account.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   enabledTime?: utcDateTime;
 
@@ -3241,7 +3241,7 @@ model LocalUserProperties {
   /**
    * A unique Security Identifier that is generated by the server.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sid?: string;
 
   /**
@@ -3303,7 +3303,7 @@ model LocalUserKeys {
   /**
    * Auto generated by the server for SMB authentication.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sharedKey?: string;
 }
 
@@ -3314,7 +3314,7 @@ model LocalUserRegeneratePasswordResult {
   /**
    * Auto generated password by the server for SSH authentication if hasSshPassword is set to true on the creation of local user.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sshPassword?: string;
 }
 
@@ -3336,14 +3336,14 @@ model EncryptionScopeProperties {
   /**
    * Gets the creation date and time of the encryption scope in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   creationTime?: utcDateTime;
 
   /**
    * Gets the last modification date and time of the encryption scope in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedTime?: utcDateTime;
 
@@ -3370,13 +3370,13 @@ model EncryptionScopeKeyVaultProperties {
   /**
    * The object identifier of the current versioned Key Vault Key in use.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   currentVersionedKeyIdentifier?: string;
 
   /**
    * Timestamp of last rotation of the Key Vault Key.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastKeyRotationTimestamp?: utcDateTime;
 }
@@ -3387,7 +3387,7 @@ model BlobServiceItems {
   /**
    * List of blob services returned.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @items
   value?: BlobServiceProperties[];
 }
@@ -3541,14 +3541,14 @@ model RestorePolicyProperties {
   /**
    * Deprecated in favor of minRestoreTime property.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastEnabledTime?: utcDateTime;
 
   /**
    * Returns the minimum date and time that the restore can be started.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   minRestoreTime?: utcDateTime;
 }
@@ -3591,26 +3591,26 @@ model ContainerProperties {
   /**
    * The version of the deleted blob container.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   version?: string;
 
   /**
    * Indicates whether the blob container was deleted.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   deleted?: boolean;
 
   /**
    * Blob container deletion time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedTime?: utcDateTime;
 
   /**
    * Remaining retention days for soft deleted blob container.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   remainingRetentionDays?: int32;
 
   /**
@@ -3631,26 +3631,26 @@ model ContainerProperties {
   /**
    * Returns the date and time the container was last modified.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedTime?: utcDateTime;
 
   /**
    * The lease status of the container.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   leaseStatus?: LeaseStatus;
 
   /**
    * Lease state of the container.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   leaseState?: LeaseState;
 
   /**
    * Specifies whether the lease on a container is of infinite or fixed duration, only when the container is leased.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   leaseDuration?: LeaseDuration;
 
   /**
@@ -3662,25 +3662,25 @@ model ContainerProperties {
   /**
    * The ImmutabilityPolicy property of the container.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   immutabilityPolicy?: ImmutabilityPolicyProperties;
 
   /**
    * The LegalHold property of the container.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   legalHold?: LegalHoldProperties;
 
   /**
    * The hasLegalHold public property is set to true by SRP if there are at least one existing tag. The hasLegalHold public property is set to false by SRP if all existing legal hold tags are cleared out. There can be a maximum of 1000 blob containers with hasLegalHold=true for a given account.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hasLegalHold?: boolean;
 
   /**
    * The hasImmutabilityPolicy public property is set to true by SRP if ImmutabilityPolicy has been created for this container. The hasImmutabilityPolicy public property is set to false by SRP if ImmutabilityPolicy has not been created for this container.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hasImmutabilityPolicy?: boolean;
 
   /**
@@ -3713,13 +3713,13 @@ model ImmutabilityPolicyProperties {
   /**
    * ImmutabilityPolicy Etag.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
    * The ImmutabilityPolicy update history of the blob container.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   updateHistory?: UpdateHistoryProperty[];
 }
 
@@ -3736,7 +3736,7 @@ model ImmutabilityPolicyProperty {
   /**
    * The ImmutabilityPolicy state of a blob container, possible values include: Locked and Unlocked.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: ImmutabilityPolicyState;
 
   /**
@@ -3757,38 +3757,38 @@ model UpdateHistoryProperty {
   /**
    * The ImmutabilityPolicy update type of a blob container, possible values include: put, lock and extend.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   update?: ImmutabilityPolicyUpdateType;
 
   /**
    * The immutability period for the blobs in the container since the policy creation, in days.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   immutabilityPeriodSinceCreationInDays?: int32;
 
   /**
    * Returns the date and time the ImmutabilityPolicy was updated.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timestamp?: utcDateTime;
 
   /**
    * Returns the Object ID of the user who updated the ImmutabilityPolicy.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   objectIdentifier?: string;
 
   /**
    * Returns the Tenant ID that issued the token for the user who updated the ImmutabilityPolicy.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tenantId?: string;
 
   /**
    * Returns the User Principal Name of the user who updated the ImmutabilityPolicy.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   upn?: string;
 
   /**
@@ -3809,7 +3809,7 @@ model LegalHoldProperties {
   /**
    * The hasLegalHold public property is set to true by SRP if there are at least one existing tag. The hasLegalHold public property is set to false by SRP if all existing legal hold tags are cleared out. There can be a maximum of 1000 blob containers with hasLegalHold=true for a given account.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hasLegalHold?: boolean;
 
   /**
@@ -3830,32 +3830,32 @@ model TagProperty {
   /**
    * The tag value.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tag?: string;
 
   /**
    * Returns the date and time the tag was added.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timestamp?: utcDateTime;
 
   /**
    * Returns the Object ID of the user who added the tag.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   objectIdentifier?: string;
 
   /**
    * Returns the Tenant ID that issued the token for the user who added the tag.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tenantId?: string;
 
   /**
    * Returns the User Principal Name of the user who added the tag.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   upn?: string;
 }
 
@@ -3871,7 +3871,7 @@ model ProtectedAppendWritesHistory {
   /**
    * Returns the date and time the tag was added.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timestamp?: utcDateTime;
 }
@@ -3888,14 +3888,14 @@ model ImmutableStorageWithVersioning {
   /**
    * Returns the date and time the object level immutability was enabled.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timeStamp?: utcDateTime;
 
   /**
    * This property denotes the container level immutability to object level immutability migration state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   migrationState?: MigrationState;
 }
 
@@ -3907,7 +3907,7 @@ model AzureEntityResource extends Resource {
   /**
    * Resource Etag.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   etag?: string;
 }
 
@@ -3918,7 +3918,7 @@ model LegalHold {
   /**
    * The hasLegalHold public property is set to true by SRP if there are at least one existing tag. The hasLegalHold public property is set to false by SRP if all existing legal hold tags are cleared out. There can be a maximum of 1000 blob containers with hasLegalHold=true for a given account.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hasLegalHold?: boolean;
 
   /**
@@ -3982,7 +3982,7 @@ model FileServiceItems {
   /**
    * List of file services returned.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: FileServiceProperties[];
 }
 
@@ -4070,7 +4070,7 @@ model FileShareProperties {
   /**
    * Returns the date and time the share was last modified.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedTime?: utcDateTime;
 
@@ -4090,7 +4090,7 @@ model FileShareProperties {
   /**
    * The authentication protocol that is used for the file share. Can only be specified when creating a share.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   enabledProtocols?: EnabledProtocols;
 
   /**
@@ -4101,26 +4101,26 @@ model FileShareProperties {
   /**
    * The version of the share.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   version?: string;
 
   /**
    * Indicates whether the share was deleted.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   deleted?: boolean;
 
   /**
    * The deleted time if the share was deleted.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedTime?: utcDateTime;
 
   /**
    * Remaining retention days for share that was soft deleted.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   remainingRetentionDays?: int32;
 
   /**
@@ -4131,38 +4131,38 @@ model FileShareProperties {
   /**
    * Indicates the last modification time for share access tier.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   accessTierChangeTime?: utcDateTime;
 
   /**
    * Indicates if there is a pending transition for access tier.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   accessTierStatus?: string;
 
   /**
    * The approximate size of the data stored on the share. Note that this value may not include all recently created or recently resized files.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   shareUsageBytes?: int64;
 
   /**
    * The lease status of the share.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   leaseStatus?: LeaseStatus;
 
   /**
    * Lease state of the share.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   leaseState?: LeaseState;
 
   /**
    * Specifies whether the lease on a share is of infinite or fixed duration, only when the share is leased.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   leaseDuration?: LeaseDuration;
 
   /**
@@ -4173,7 +4173,7 @@ model FileShareProperties {
   /**
    * Creation time of share snapshot returned in the response of list shares with expand param "snapshots".
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   snapshotTime?: utcDateTime;
 }
@@ -4276,7 +4276,7 @@ model ListQueueServices {
   /**
    * List of queue services returned.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: QueueServiceProperties[];
 }
 
@@ -4303,7 +4303,7 @@ model QueueProperties {
   /**
    * Integer indicating an approximate number of messages in the queue. This number is not lower than the actual number of messages in the queue, but could be higher.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   approximateMessageCount?: int32;
 }
 
@@ -4317,7 +4317,7 @@ model ListTableServices {
   /**
    * List of table services returned.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: TableServiceProperties[];
 }
 
@@ -4338,7 +4338,7 @@ model TableProperties {
   /**
    * Table name under the specified account
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tableName?: string;
 
   /**

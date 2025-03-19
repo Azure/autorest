@@ -38,7 +38,7 @@ interface TrafficControllers {
   /**
    * Update a TrafficController
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     TrafficController,
     PatchModel = TrafficControllerUpdate

@@ -57,7 +57,7 @@ interface SignInSettings {
   /**
    * Update Sign-In settings.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     PortalSigninSettings,
     PatchModel = PortalSigninSettings,

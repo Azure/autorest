@@ -3334,43 +3334,43 @@ model Usage {
   /**
    * Specifies the resource ID.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * Region of the AML workspace in the id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   amlWorkspaceLocation?: string;
 
   /**
    * Specifies the resource type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * An enum describing the unit of usage measurement.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   unit?: UsageUnit;
 
   /**
    * The current usage of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   currentValue?: int64;
 
   /**
    * The maximum permitted usage of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   limit?: int64;
 
   /**
    * The name of the type of usage.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: UsageName;
 }
 
@@ -3381,13 +3381,13 @@ model UsageName {
   /**
    * The name of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: string;
 
   /**
    * The localized name of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   localizedValue?: string;
 }
 
@@ -3398,7 +3398,7 @@ model VirtualMachineSizeListResult {
   /**
    * The list of virtual machine sizes supported by AmlCompute.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   value?: VirtualMachineSize[];
 }
 
@@ -3409,55 +3409,55 @@ model VirtualMachineSize {
   /**
    * The name of the virtual machine size.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The family name of the virtual machine size.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   family?: string;
 
   /**
    * The number of vCPUs supported by the virtual machine size.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vCPUs?: int32;
 
   /**
    * The number of gPUs supported by the virtual machine size.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   gpus?: int32;
 
   /**
    * The OS VHD disk size, in MB, allowed by the virtual machine size.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osVhdSizeMB?: int32;
 
   /**
    * The resource volume size, in MB, allowed by the virtual machine size.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   maxResourceVolumeMB?: int32;
 
   /**
    * The amount of memory, in GB, supported by the virtual machine size.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   memoryGB?: float64;
 
   /**
    * Specifies if the virtual machine size supports low priority VMs.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lowPriorityCapable?: boolean;
 
   /**
    * Specifies if the virtual machine size supports premium IO.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   premiumIO?: boolean;
 
   /**
@@ -3488,7 +3488,7 @@ model EstimatedVMPrices {
   /**
    * The list of estimated prices for using a VM of a particular OS type, tier, etc.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   values: EstimatedVMPrice[];
 }
 
@@ -3559,13 +3559,13 @@ model UpdateWorkspaceQuotasResult {
   /**
    * The list of workspace quota update result.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: UpdateWorkspaceQuotas[];
 
   /**
    * The URI to fetch the next page of workspace quota update result. Call ListNext() with this to fetch the next page of Workspace Quota update result.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nextLink?: string;
 }
 
@@ -3576,13 +3576,13 @@ model UpdateWorkspaceQuotas {
   /**
    * Specifies the resource ID.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * Specifies the resource type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
@@ -3593,7 +3593,7 @@ model UpdateWorkspaceQuotas {
   /**
    * An enum describing the unit of quota measurement.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   unit?: QuotaUnit;
 
   /**
@@ -3614,37 +3614,37 @@ model ResourceQuota {
   /**
    * Specifies the resource ID.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * Region of the AML workspace in the id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   amlWorkspaceLocation?: string;
 
   /**
    * Specifies the resource type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Name of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: ResourceName;
 
   /**
    * The maximum permitted quota of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   limit?: int64;
 
   /**
    * An enum describing the unit of quota measurement.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   unit?: QuotaUnit;
 }
 
@@ -3655,13 +3655,13 @@ model ResourceName {
   /**
    * The name of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: string;
 
   /**
    * The localized name of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   localizedValue?: string;
 }
 
@@ -3678,7 +3678,7 @@ model ManagedServiceIdentity {
    * The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.
    */
   #suppress "@azure-tools/typespec-azure-core/no-format"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @format("uuid")
   principalId?: string;
 
@@ -3686,7 +3686,7 @@ model ManagedServiceIdentity {
    * The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.
    */
   #suppress "@azure-tools/typespec-azure-core/no-format"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @format("uuid")
   tenantId?: string;
 
@@ -3739,25 +3739,25 @@ model Resource {
   /**
    * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The name of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
 
@@ -3782,13 +3782,13 @@ model Compute {
   /**
    * Location for the underlying compute
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   computeLocation?: string;
 
   /**
    * The provision state of the cluster. Valid values are Unknown, Updating, Provisioning, Succeeded, and Failed.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
@@ -3799,14 +3799,14 @@ model Compute {
   /**
    * The time at which the compute was created.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdOn?: utcDateTime;
 
   /**
    * The time at which the compute was last modified.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   modifiedOn?: utcDateTime;
 
@@ -3818,20 +3818,20 @@ model Compute {
   /**
    * Errors during provisioning
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["/error/code"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
   provisioningErrors?: ErrorResponse[];
 
   /**
    * Indicating whether the compute was provisioned by user and brought from outside if true, or machine learning service provisioned it if false.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isAttachedCompute?: boolean;
 
   /**
    * Opt-out of local authentication and ensure customers can use only MSI and AAD exclusively for authentication.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   disableLocalAuth?: boolean;
 }
 
@@ -3917,13 +3917,13 @@ model CustomService {
   /**
    * Configuring the endpoints for the container
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   endpoints?: Endpoint[];
 
   /**
    * Configuring the volumes for the container
    */
-  @OpenAPI.extension("x-ms-identifiers", ["source", "target"])
+  @OpenAPI.extension("x-ms-identifiers", #["source", "target"])
   volumes?: VolumeDefinition[];
 }
 
@@ -4080,15 +4080,15 @@ model AmlComputeNodesInformation {
   /**
    * The collection of returned AmlCompute nodes details.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @items
-  @OpenAPI.extension("x-ms-identifiers", ["nodeId"])
+  @OpenAPI.extension("x-ms-identifiers", #["nodeId"])
   nodes?: AmlComputeNodeInformation[];
 
   /**
    * The continuation token.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @nextLink
   nextLink?: string;
 }
@@ -4100,37 +4100,37 @@ model AmlComputeNodeInformation {
   /**
    * ID of the compute node.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nodeId?: string;
 
   /**
    * Private IP address of the compute node.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   privateIpAddress?: string;
 
   /**
    * Public IP address of the compute node.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   publicIpAddress?: string;
 
   /**
    * SSH port number of the node.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   port?: int32;
 
   /**
    * State of the compute node. Values are idle, running, preparing, unusable, leaving and preempted.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nodeState?: NodeState;
 
   /**
    * ID of the Experiment running on the node, if any else null.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   runId?: string;
 }
 
@@ -4169,7 +4169,7 @@ model CodeContainer extends AssetContainer {
   /**
    * Provisioning state for the code container.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AssetProvisioningState;
 }
 
@@ -4179,19 +4179,19 @@ model AssetContainer extends ResourceBase {
   /**
    * Is the asset archived?
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   isArchived?: boolean;
 
   /**
    * The latest version inside this container.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   latestVersion?: string;
 
   /**
    * The next auto incremental version
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nextVersion?: string;
 }
 
@@ -4234,7 +4234,7 @@ model CodeVersion extends AssetBase {
   /**
    * Provisioning state for the code version.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AssetProvisioningState;
 }
 
@@ -4244,19 +4244,19 @@ model AssetBase extends ResourceBase {
   /**
    * Specifies the lifecycle setting of managed data asset.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   autoDeleteSetting?: AutoDeleteSetting;
 
   /**
    * If the name version are system generated (anonymous registration). For types where Stage is defined, when Stage is provided it will be used to populate IsAnonymous
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   isAnonymous?: boolean;
 
   /**
    * Is the asset archived? For types where Stage is defined, when Stage is provided it will be used to populate IsArchived
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   isArchived?: boolean;
 }
 
@@ -4265,13 +4265,13 @@ model AutoDeleteSetting {
   /**
    * When to check if an asset is expired
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   condition?: AutoDeleteCondition;
 
   /**
    * Expiration condition value.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   value?: string;
 }
 
@@ -4349,7 +4349,7 @@ model ComponentContainer extends AssetContainer {
   /**
    * Provisioning state for the component container.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AssetProvisioningState;
 }
 
@@ -4368,13 +4368,13 @@ model ComponentVersion extends AssetBase {
    * Defines Component definition details.
    * <see href="https://docs.microsoft.com/en-us/azure/machine-learning/reference-yaml-component-command" />
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   componentSpec?: Record<unknown>;
 
   /**
    * Provisioning state for the component version.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AssetProvisioningState;
 
   /**
@@ -4398,7 +4398,7 @@ model DataContainer extends AssetContainer {
   /**
    * [Required] Specifies the type of data.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   dataType: DataType;
 }
 
@@ -4418,13 +4418,13 @@ model DataVersionBase extends AssetBase {
   /**
    * [Required] Specifies the type of data.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   dataType: DataType;
 
   /**
    * [Required] Uri of the data. Example: https://go.microsoft.com/fwlink/?linkid=2202330
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   dataUri: string;
@@ -4432,7 +4432,7 @@ model DataVersionBase extends AssetBase {
   /**
    * Intellectual Property details. Used if data is an Intellectual Property.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   intellectualProperty?: IntellectualProperty;
 
   /**
@@ -4472,7 +4472,7 @@ model EnvironmentContainer extends AssetContainer {
   /**
    * Provisioning state for the environment container.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AssetProvisioningState;
 }
 
@@ -4490,58 +4490,58 @@ model EnvironmentVersion extends AssetBase {
   /**
    * Defines if image needs to be rebuilt based on base image changes.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   autoRebuild?: AutoRebuildSetting;
 
   /**
    * Configuration settings for Docker build context.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   build?: BuildContext;
 
   /**
    * Standard configuration file used by Conda that lets you install any kind of package, including Python, R, and C/C++ packages.
    * <see href="https://repo2docker.readthedocs.io/en/latest/config_files.html#environment-yml-install-a-conda-environment" />
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   condaFile?: string;
 
   /**
    * Environment type is either user managed or curated by the Azure ML service
    * <see href="https://docs.microsoft.com/en-us/azure/machine-learning/resource-curated-environments" />
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   environmentType?: EnvironmentType;
 
   /**
    * Name of the image that will be used for the environment.
    * <seealso href="https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-custom-docker-image#use-a-custom-base-image" />
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   image?: string;
 
   /**
    * Defines configuration specific to inference.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   inferenceConfig?: InferenceContainerProperties;
 
   /**
    * Intellectual Property details. Used if environment is an Intellectual Property.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   intellectualProperty?: IntellectualProperty;
 
   /**
    * The OS type of the environment.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   osType?: OperatingSystemType;
 
   /**
    * Provisioning state for the environment version.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AssetProvisioningState;
 
   /**
@@ -4558,7 +4558,7 @@ model BuildContext {
    * [Required] URI of the Docker build context used to build the image. Supports blob URIs on environment creation and may return blob or Git URIs.
    * <seealso href="https://docs.docker.com/engine/reference/commandline/build/#extended-description" />
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   contextUri: string;
@@ -4567,7 +4567,7 @@ model BuildContext {
    * Path to the Dockerfile in the build context.
    * <seealso href="https://docs.docker.com/engine/reference/builder/" />
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   dockerfilePath?: string = "Dockerfile";
 }
 
@@ -4616,7 +4616,7 @@ model ModelContainer extends AssetContainer {
   /**
    * Provisioning state for the model container.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AssetProvisioningState;
 }
 
@@ -4640,7 +4640,7 @@ model ModelVersion extends AssetBase {
   /**
    * Intellectual Property details. Used if model is an Intellectual Property.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   intellectualProperty?: IntellectualProperty;
 
   /**
@@ -4661,7 +4661,7 @@ model ModelVersion extends AssetBase {
   /**
    * Provisioning state for the model version.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AssetProvisioningState;
 
   /**
@@ -4686,46 +4686,46 @@ model PackageRequest {
   /**
    * Base environment to start with.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   baseEnvironmentSource?: BaseEnvironmentSource;
 
   /**
    * Collection of environment variables.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentVariables?: Record<string>;
 
   /**
    * [Required] Inferencing server configurations.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   inferencingServer: InferencingServer;
 
   /**
    * Collection of inputs.
    */
-  @visibility("read", "create")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   inputs?: ModelPackageInput[];
 
   /**
    * Model configuration including the mount mode.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   modelConfiguration?: ModelConfiguration;
 
   /**
    * Tag dictionary. Tags can be added, removed, and updated.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   tags?: Record<string>;
 
   /**
    * [Required] Arm ID of the target environment to be created by package operation.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   targetEnvironmentId: string;
@@ -4805,64 +4805,64 @@ model PackageResponse {
   /**
    * Base environment to start with.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   baseEnvironmentSource?: BaseEnvironmentSource;
 
   /**
    * Build id of the image build operation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   buildId?: string;
 
   /**
    * Build state of the image build operation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   buildState?: PackageBuildState;
 
   /**
    * Collection of environment variables.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   environmentVariables?: Record<string>;
 
   /**
    * Inferencing server configurations.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   inferencingServer?: InferencingServer;
 
   /**
    * Collection of inputs.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   inputs?: ModelPackageInput[];
 
   /**
    * Log url of the image build operation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   logUrl?: string;
 
   /**
    * Model configuration including the mount mode.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   modelConfiguration?: ModelConfiguration;
 
   /**
    * Tag dictionary. Tags can be added, removed, and updated.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tags?: Record<string>;
 
   /**
    * Asset ID of the target environment created by package operation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetEnvironmentId?: string;
 }
 
@@ -4885,7 +4885,7 @@ model BatchEndpoint extends EndpointPropertiesBase {
   /**
    * Provisioning state for the endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: EndpointProvisioningState;
 }
 
@@ -4918,7 +4918,7 @@ model EndpointPropertiesBase {
    * EndpointAuthKeys to set initially on an Endpoint.
    * This property will always be returned as null. AuthKey values must be retrieved using the ListKeys API.
    */
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   keys?: EndpointAuthKeys;
 
   /**
@@ -4930,13 +4930,13 @@ model EndpointPropertiesBase {
   /**
    * Endpoint URI.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   scoringUri?: url;
 
   /**
    * Endpoint Swagger URI.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   swaggerUri?: url;
 }
 
@@ -4947,13 +4947,13 @@ model EndpointAuthKeys {
   /**
    * The primary key.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   primaryKey?: string;
 
   /**
    * The secondary key.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   secondaryKey?: string;
 }
 
@@ -5061,7 +5061,7 @@ model BatchDeployment extends EndpointDeploymentPropertiesBase {
   /**
    * Provisioning state for the endpoint deployment.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: DeploymentProvisioningState;
 
   /**
@@ -5108,33 +5108,33 @@ model ResourceConfiguration {
   /**
    * Optional number of instances or nodes used by the compute target.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   instanceCount?: int32 = 1;
 
   /**
    * Optional type of VM used as supported by the compute target.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   instanceType?: string;
 
   /**
    * Locations where the job can run.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   locations?: string[];
 
   /**
    * Optional max allowed number of instances or nodes to be used by the compute target.
    * For use with elastic training, currently supported by PyTorch distribution type only.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   maxInstanceCount?: int32;
 
   /**
    * Additional properties bag.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   properties?: Record<Record<unknown>>;
 }
 
@@ -5192,13 +5192,13 @@ model CodeConfiguration {
   /**
    * ARM resource ID of the code asset.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   codeId?: string;
 
   /**
    * [Required] The script to execute on startup. eg. "score.py"
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   scoringScript: string;
@@ -5255,13 +5255,13 @@ model Datastore extends ResourceBase {
   /**
    * Intellectual Property details.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   intellectualProperty?: IntellectualProperty;
 
   /**
    * Readonly property to indicate if datastore is the workspace default datastore
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isDefault?: boolean;
 }
 
@@ -5301,7 +5301,7 @@ model FeaturesetContainerProperties extends AssetContainer {
   /**
    * Provisioning state for the featureset container.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AssetProvisioningState;
 }
 
@@ -5351,7 +5351,7 @@ model FeaturesetVersionProperties extends AssetBase {
   /**
    * Provisioning state for the featureset version container.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AssetProvisioningState;
 
   /**
@@ -5401,20 +5401,20 @@ model NotificationSetting {
   /**
    * Send email notification to user on specified notification type
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   emailOn?: EmailNotificationEnableType[];
 
   /**
    * This is the email recipient list which has a limitation of 499 characters in total concat with comma separator
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   emails?: string[];
 
   /**
    * Send webhook callback to a service. Key is a user-provided name for the webhook.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   webhooks?: Record<Webhook>;
 }
 
@@ -5426,13 +5426,13 @@ model Webhook {
   /**
    * Send callback on a specified notification event
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   eventType?: string;
 
   /**
    * [Required] Specifies the type of service to send a callback
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   webhookType: WebhookType;
 }
 
@@ -5516,7 +5516,7 @@ model TriggerBase {
   /**
    * [Required]
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   triggerType: TriggerType;
 }
 
@@ -5655,7 +5655,7 @@ model FeaturestoreEntityContainerProperties extends AssetContainer {
   /**
    * Provisioning state for the featurestore entity container.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AssetProvisioningState;
 }
 
@@ -5673,13 +5673,13 @@ model FeaturestoreEntityVersionProperties extends AssetBase {
   /**
    * Specifies index columns
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   indexColumns?: IndexColumn[];
 
   /**
    * Provisioning state for the featurestore entity version.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AssetProvisioningState;
 
   /**
@@ -5718,57 +5718,57 @@ model JobBase extends ResourceBase {
   /**
    * ARM resource ID of the component resource.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   componentId?: string;
 
   /**
    * ARM resource ID of the compute resource.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   computeId?: string;
 
   /**
    * Display name of job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   displayName?: string;
 
   /**
    * The name of the experiment the job belongs to. If not set, the job is placed in the "Default" experiment.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   experimentName?: string = "Default";
 
   /**
    * Identity configuration. If set, this should be one of AmlToken, ManagedIdentity, UserIdentity or null.
    * Defaults to AmlToken if null.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   identity?: IdentityConfiguration;
 
   /**
    * Is the asset archived?
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   isArchived?: boolean;
 
   /**
    * [Required] Specifies the type of job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   jobType: JobType;
 
   /**
    * Notification setting for the job
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   notificationSetting?: NotificationSetting;
 
   /**
    * Configuration for secrets to be made available during runtime.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   secretsConfiguration?: Record<SecretConfiguration>;
 
   /**
@@ -5781,7 +5781,7 @@ model JobBase extends ResourceBase {
   /**
    * Status of the job.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: JobStatus;
 }
 
@@ -5793,7 +5793,7 @@ model IdentityConfiguration {
   /**
    * [Required] Specifies the type of identity framework.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   identityType: IdentityConfigurationType;
 }
 
@@ -5805,13 +5805,13 @@ model SecretConfiguration {
    * Secret Uri.
    * Sample Uri : https://myvault.vault.azure.net/secrets/mysecretname/secretversion
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   uri?: string;
 
   /**
    * Name of secret in workspace key vault.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   workspaceSecretName?: string;
 }
 
@@ -5822,19 +5822,19 @@ model JobService {
   /**
    * Url for endpoint.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   endpoint?: string;
 
   /**
    * Any error in the service.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errorMessage?: string;
 
   /**
    * Endpoint type.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   jobServiceType?: string;
 
   /**
@@ -5846,7 +5846,7 @@ model JobService {
   /**
    * Port for endpoint set by user.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   port?: int32;
 
   /**
@@ -5858,7 +5858,7 @@ model JobService {
   /**
    * Status of endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: string;
 }
 
@@ -5870,7 +5870,7 @@ model Nodes {
   /**
    * [Required] Type of the Nodes value
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   nodesValueType: NodesValueType;
 }
 
@@ -5917,66 +5917,66 @@ model LabelingJobProperties extends JobBase {
   /**
    * Created time of the job in UTC timezone.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
   /**
    * Configuration of data used in the job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   dataConfiguration?: LabelingDataConfiguration;
 
   /**
    * Labeling instructions of the job.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   jobInstructions?: LabelingJobInstructions;
 
   /**
    * Label categories of the job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   labelCategories?: Record<LabelCategory>;
 
   /**
    * Media type specific properties in the job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   labelingJobMediaProperties?: LabelingJobMediaProperties;
 
   /**
    * Configuration of MLAssist feature in the job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   mlAssistConfiguration?: MLAssistConfiguration;
 
   /**
    * Progress metrics of the job.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   progressMetrics?: ProgressMetrics;
 
   /**
    * Internal id of the job(Previously called project).
    */
   #suppress "@azure-tools/typespec-azure-core/no-format"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @format("uuid")
   projectId?: string;
 
   /**
    * Specifies the labeling job provisioning state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: JobProvisioningState;
 
   /**
    * Status messages of the job.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   statusMessages?: StatusMessage[];
 
   /**
@@ -5992,13 +5992,13 @@ model LabelingDataConfiguration {
   /**
    * Resource Id of the data asset to perform labeling.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   dataId?: string;
 
   /**
    * Indicates whether to enable incremental data refresh.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   incrementalDataRefresh?: IncrementalDataRefresh;
 }
 
@@ -6009,7 +6009,7 @@ model LabelingJobInstructions {
   /**
    * The link to a page with detailed labeling instructions for labelers.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   uri?: string;
 }
 
@@ -6021,19 +6021,19 @@ model LabelCategory {
    * Dictionary of label classes in this category.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   classes?: Record<LabelClass>;
 
   /**
    * Display name of the label category.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   displayName?: string;
 
   /**
    * Indicates whether it is allowed to select multiple classes in this category.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   multiSelect?: MultiSelect;
 }
 
@@ -6044,14 +6044,14 @@ model LabelClass {
   /**
    * Display name of the label class.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   displayName?: string;
 
   /**
    * Dictionary of subclasses of the label class.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   subclasses?: Record<LabelClass>;
 }
 
@@ -6063,7 +6063,7 @@ model LabelingJobMediaProperties {
   /**
    * [Required] Media type of the job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   mediaType: MediaType;
 }
 
@@ -6075,7 +6075,7 @@ model MLAssistConfiguration {
   /**
    * [Required] Indicates whether MLAssist feature is enabled.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   mlAssist: MLAssistConfigurationType;
 }
 
@@ -6086,26 +6086,26 @@ model ProgressMetrics {
   /**
    * The completed datapoint count.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   completedDatapointCount?: int64;
 
   /**
    * The time of last successful incremental data refresh in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   incrementalDataLastRefreshDateTime?: utcDateTime;
 
   /**
    * The skipped datapoint count.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   skippedDatapointCount?: int64;
 
   /**
    * The total datapoint count.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   totalDatapointCount?: int64;
 }
 
@@ -6116,26 +6116,26 @@ model StatusMessage {
   /**
    * Service-defined message code.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   code?: string;
 
   /**
    * Time in UTC at which the message was created.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
   /**
    * Severity level of message.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   level?: StatusMessageLevel;
 
   /**
    * A human-readable representation of the message code.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 }
 
@@ -6145,32 +6145,32 @@ model ExportSummary {
   /**
    * The time when the export was completed.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endDateTime?: utcDateTime;
 
   /**
    * The total number of labeled datapoints exported.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   exportedRowCount?: int64;
 
   /**
    * [Required] The format of exported labels, also as the discriminator.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   format: ExportFormatType;
 
   /**
    * Name and identifier of the job containing exported labels.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   labelingJobId?: string;
 
   /**
    * The time when the export was requested.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDateTime?: utcDateTime;
 }
@@ -6201,7 +6201,7 @@ model OnlineEndpoint extends EndpointPropertiesBase {
   /**
    * Provisioning state for the endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: EndpointProvisioningState;
 
   /**
@@ -6249,7 +6249,7 @@ model OnlineDeployment extends EndpointDeploymentPropertiesBase {
   /**
    * Compute instance type.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   instanceType?: string;
 
   /**
@@ -6270,7 +6270,7 @@ model OnlineDeployment extends EndpointDeploymentPropertiesBase {
   /**
    * Provisioning state for the endpoint deployment.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: DeploymentProvisioningState;
 
   /**
@@ -6489,7 +6489,7 @@ model SkuResource {
   /**
    * The resource type name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceType?: string;
 
   /**
@@ -6565,14 +6565,14 @@ model EndpointAuthToken {
   /**
    * Access token expiry time (UTC).
    */
-  @encode("unixTimestamp", int32)
+  @encode("", unixTimestamp, "", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiryTimeUtc?: utcDateTime;
 
   /**
    * Refresh access token after time (UTC).
    */
-  @encode("unixTimestamp", int32)
+  @encode("", unixTimestamp, "", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   refreshAfterTimeUtc?: utcDateTime;
 
@@ -6595,31 +6595,31 @@ model ScheduleProperties extends ResourceBase {
   /**
    * [Required] Specifies the action of the schedule
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   action: ScheduleActionBase;
 
   /**
    * Display name of schedule.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   displayName?: string;
 
   /**
    * Is the schedule enabled?
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   isEnabled?: boolean = true;
 
   /**
    * Provisioning state for the schedule.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ScheduleProvisioningStatus;
 
   /**
    * [Required] Specifies the trigger details
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   trigger: TriggerBase;
 }
 
@@ -6629,7 +6629,7 @@ model ScheduleActionBase {
   /**
    * [Required] Specifies the action type of the schedule
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   actionType: ScheduleActionType;
 }
 
@@ -6677,7 +6677,7 @@ model RegistryProperties {
   /**
    * Details of each region the registry is in
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   regionDetails?: RegistryRegionArmDetails[];
 }
 
@@ -6705,7 +6705,7 @@ model RegistryPrivateEndpointConnection {
   /**
    * Same as workspace location.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
 
   /**
@@ -6759,7 +6759,7 @@ model PrivateEndpoint {
   /**
    * The ARM identifier for Private Endpoint
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
@@ -6790,7 +6790,7 @@ model RegistryRegionArmDetails {
   /**
    * List of ACR accounts
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   acrDetails?: AcrDetails[];
 
   /**
@@ -6801,7 +6801,7 @@ model RegistryRegionArmDetails {
   /**
    * List of storage accounts
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   storageAccountDetails?: StorageAccountDetails[];
 }
 
@@ -7062,13 +7062,13 @@ model WorkspaceProperties {
   /**
    * The URI associated with this workspace that machine learning flow must point at to set up tracking.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   mlFlowTrackingUri?: string;
 
   /**
    * The notebook info of Azure ML workspace.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   notebookInfo?: NotebookResourceInfo;
 
   /**
@@ -7079,20 +7079,20 @@ model WorkspaceProperties {
   /**
    * The list of private endpoint connections in the workspace.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   privateEndpointConnections?: PrivateEndpointConnection[];
 
   /**
    * Count of private connections in the workspace
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   privateLinkCount?: int32;
 
   /**
    * The current deployment state of workspace resource. The provisioningState is to indicate states for resource provisioning.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
@@ -7108,13 +7108,13 @@ model WorkspaceProperties {
   /**
    * The name of the managed resource group created by workspace RP in customer subscription if the workspace is CMK workspace
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   serviceProvisionedResourceGroup?: string;
 
   /**
    * The list of shared private link resources in this workspace.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   sharedPrivateLinkResources?: SharedPrivateLinkResource[];
 
   /**
@@ -7133,7 +7133,7 @@ model WorkspaceProperties {
   /**
    * If the storage associated with the workspace has hierarchical namespace(HNS) enabled.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   storageHnsEnabled?: boolean;
 
   /**
@@ -7144,7 +7144,7 @@ model WorkspaceProperties {
   /**
    * The tenant id associated with this workspace.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tenantId?: string;
 
   /**
@@ -7160,7 +7160,7 @@ model WorkspaceProperties {
   /**
    * The immutable id associated with this workspace.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   workspaceId?: string;
 }
 
@@ -7261,7 +7261,7 @@ model ManagedNetworkSettings {
   isolationMode?: IsolationMode;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkId?: string;
 
   /**
@@ -7354,7 +7354,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * The current provisioning state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: PrivateEndpointConnectionProvisioningState;
 }
 
@@ -7365,13 +7365,13 @@ model WorkspacePrivateEndpointResource {
   /**
    * e.g. /subscriptions/{networkSubscriptionId}/resourceGroups/{rgName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The subnetId that the private endpoint is connected to.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   subnetArmId?: string;
 }
 
@@ -7684,39 +7684,39 @@ model DiagnoseResponseResult {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DiagnoseResponseResultValue {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", ["message"])
+  @OpenAPI.extension("x-ms-identifiers", #["message"])
   userDefinedRouteResults?: DiagnoseResult[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", ["message"])
+  @OpenAPI.extension("x-ms-identifiers", #["message"])
   networkSecurityRuleResults?: DiagnoseResult[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", ["message"])
+  @OpenAPI.extension("x-ms-identifiers", #["message"])
   resourceLockResults?: DiagnoseResult[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", ["message"])
+  @OpenAPI.extension("x-ms-identifiers", #["message"])
   dnsResolutionResults?: DiagnoseResult[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", ["message"])
+  @OpenAPI.extension("x-ms-identifiers", #["message"])
   storageAccountResults?: DiagnoseResult[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", ["message"])
+  @OpenAPI.extension("x-ms-identifiers", #["message"])
   keyVaultResults?: DiagnoseResult[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", ["message"])
+  @OpenAPI.extension("x-ms-identifiers", #["message"])
   containerRegistryResults?: DiagnoseResult[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", ["message"])
+  @OpenAPI.extension("x-ms-identifiers", #["message"])
   applicationInsightsResults?: DiagnoseResult[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", ["message"])
+  @OpenAPI.extension("x-ms-identifiers", #["message"])
   otherResults?: DiagnoseResult[];
 }
 
@@ -7727,19 +7727,19 @@ model DiagnoseResult {
   /**
    * Code for workspace setup error
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   code?: string;
 
   /**
    * Level of workspace setup error
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   level?: DiagnoseResultLevel;
 
   /**
    * Message of workspace setup error
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 }
 
@@ -7748,7 +7748,7 @@ model ListWorkspaceKeysResult {
   /**
    * The access key of the workspace app insights
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   appInsightsInstrumentationKey?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -7759,13 +7759,13 @@ model ListWorkspaceKeysResult {
   /**
    * The arm Id key of the workspace storage
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   userStorageArmId?: string;
 
   /**
    * The access key of the workspace storage
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   userStorageKey?: string;
 }
 
@@ -7774,28 +7774,28 @@ model RegistryListCredentialsResult {
   /**
    * The location of the workspace ACR
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   location?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   passwords?: Password[];
 
   /**
    * The username of the workspace ACR
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   username?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model Password {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: string;
 }
 
@@ -7804,48 +7804,48 @@ model ListNotebookKeysResult {
   /**
    * The primary access key of the Notebook
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   primaryAccessKey?: string;
 
   /**
    * The secondary access key of the Notebook
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   secondaryAccessKey?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model NotebookAccessTokenResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   accessToken?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   expiresIn?: int32;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hostName?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   notebookResourceId?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   publicDns?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   refreshToken?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   scope?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tokenType?: string;
 }
 
@@ -7854,14 +7854,14 @@ model ListStorageAccountKeysResult {
   /**
    * The access key of the storage
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   userStorageKey?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ExternalFqdnResponse {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", ["/properties/category"])
+  @OpenAPI.extension("x-ms-identifiers", #["/properties/category"])
   value?: FqdnEndpointsPropertyBag[];
 }
 
@@ -7879,7 +7879,7 @@ model FqdnEndpoints {
   category?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", ["domainName"])
+  @OpenAPI.extension("x-ms-identifiers", #["domainName"])
   endpoints?: FqdnEndpoint[];
 }
 
@@ -7889,7 +7889,7 @@ model FqdnEndpoint {
   domainName?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", ["port"])
+  @OpenAPI.extension("x-ms-identifiers", #["port"])
   endpointDetails?: FqdnEndpointDetail[];
 }
 
@@ -7962,13 +7962,13 @@ model PrivateLinkResourceProperties {
   /**
    * The private link resource group id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   groupId?: string;
 
   /**
    * The private link resource required member names.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   requiredMembers?: string[];
 
   /**
@@ -8027,8 +8027,8 @@ model AKSSchemaProperties {
   /**
    * System services
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["publicIpAddress"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["publicIpAddress"])
   systemServices?: SystemService[];
 
   /**
@@ -8074,19 +8074,19 @@ model SystemService {
   /**
    * The type of this system service.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemServiceType?: string;
 
   /**
    * Public IP address
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   publicIpAddress?: string;
 
   /**
    * The version for this type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   version?: string;
 }
 
@@ -8306,39 +8306,39 @@ model AmlComputeProperties {
   /**
    * Allocation state of the compute. Possible values are: steady - Indicates that the compute is not resizing. There are no changes to the number of compute nodes in the compute in progress. A compute enters this state when it is created and when no operations are being performed on the compute to change the number of compute nodes. resizing - Indicates that the compute is resizing; that is, compute nodes are being added to or removed from the compute.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   allocationState?: AllocationState;
 
   /**
    * The time at which the compute entered its current allocation state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   allocationStateTransitionTime?: utcDateTime;
 
   /**
    * Collection of errors encountered by various compute nodes during node setup.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["/error/code"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
   errors?: ErrorResponse[];
 
   /**
    * The number of compute nodes currently assigned to the compute.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   currentNodeCount?: int32;
 
   /**
    * The target number of compute nodes for the compute. If the allocationState is resizing, this property denotes the target node count for the ongoing resize operation. If the allocationState is steady, this property denotes the target node count for the previous resize operation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetNodeCount?: int32;
 
   /**
    * Counts of various node states on the compute.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nodeStateCounts?: NodeStateCounts;
 
   /**
@@ -8389,37 +8389,37 @@ model NodeStateCounts {
   /**
    * Number of compute nodes in idle state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   idleNodeCount?: int32;
 
   /**
    * Number of compute nodes which are running jobs.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   runningNodeCount?: int32;
 
   /**
    * Number of compute nodes which are being prepared.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   preparingNodeCount?: int32;
 
   /**
    * Number of compute nodes which are in unusable state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   unusableNodeCount?: int32;
 
   /**
    * Number of compute nodes which are leaving the amlCompute.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   leavingNodeCount?: int32;
 
   /**
    * Number of compute nodes which are in preempted state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   preemptedNodeCount?: int32;
 }
 
@@ -8477,45 +8477,45 @@ model ComputeInstanceProperties {
   /**
    * List of Custom Services added to the compute.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   customServices?: CustomService[];
 
   /**
    * Returns metadata about the operating system image for this compute instance.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osImageMetadata?: ImageMetadata;
 
   /**
    * Describes all connectivity endpoints available for this ComputeInstance.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   connectivityEndpoints?: ComputeInstanceConnectivityEndpoints;
 
   /**
    * Describes available applications and their endpoints on this ComputeInstance.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["displayName"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["displayName"])
   applications?: ComputeInstanceApplication[];
 
   /**
    * Describes information on user who created this ComputeInstance.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdBy?: ComputeInstanceCreatedBy;
 
   /**
    * Collection of errors encountered on this ComputeInstance.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["/error/code"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
   errors?: ErrorResponse[];
 
   /**
    * The current state of this ComputeInstance.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: ComputeInstanceState;
 
   /**
@@ -8536,7 +8536,7 @@ model ComputeInstanceProperties {
   /**
    * The last operation on ComputeInstance.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastOperation?: ComputeInstanceLastOperation;
 
   /**
@@ -8557,28 +8557,28 @@ model ComputeInstanceProperties {
   /**
    * Describes informations of containers on this ComputeInstance.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   containers?: ComputeInstanceContainer[];
 
   /**
    * Describes informations of dataDisks on this ComputeInstance.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   dataDisks?: ComputeInstanceDataDisk[];
 
   /**
    * Describes informations of dataMounts on this ComputeInstance.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   dataMounts?: ComputeInstanceDataMount[];
 
   /**
    * ComputeInstance version.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   versions?: ComputeInstanceVersion;
 }
 
@@ -8604,13 +8604,13 @@ model ComputeInstanceSshSettings {
   /**
    * Describes the admin user name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   adminUserName?: string;
 
   /**
    * Describes the port for connecting through SSH.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sshPort?: int32;
 
   /**
@@ -8646,13 +8646,13 @@ model ComputeInstanceConnectivityEndpoints {
   /**
    * Public IP Address of this ComputeInstance.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   publicIpAddress?: string;
 
   /**
    * Private IP Address of this ComputeInstance (local to the VNET in which the compute instance is deployed).
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   privateIpAddress?: string;
 }
 
@@ -8678,19 +8678,19 @@ model ComputeInstanceCreatedBy {
   /**
    * Name of the user.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   userName?: string;
 
   /**
    * Uniquely identifies user' Azure Active Directory organization.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   userOrgId?: string;
 
   /**
    * Uniquely identifies the user within his/her organization.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   userId?: string;
 }
 
@@ -8812,13 +8812,13 @@ model ComputeStartStopSchedule {
   /**
    * A system assigned id for the schedule.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The current deployment state of schedule.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningStatus?: ProvisioningStatus;
 
   /**
@@ -8955,8 +8955,8 @@ model ComputeInstanceContainer {
   /**
    * services of this containers.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   services?: Record<unknown>[];
 }
 
@@ -9439,7 +9439,7 @@ model AccountKeyDatastoreCredentials extends DatastoreCredentials {
   /**
    * [Required] Storage account secrets.
    */
-  @visibility("create", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   secrets: AccountKeyDatastoreSecrets;
 
   /**
@@ -9477,7 +9477,7 @@ model MonitoringFeatureFilterBase {
   /**
    * [Required] Specifies the feature filter to leverage when selecting features to calculate metrics over.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   filterType: MonitoringFeatureFilterType;
 }
 
@@ -9519,7 +9519,7 @@ model MonitorComputeIdentityBase {
   /**
    * [Required] Monitor compute identity type enum.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   computeIdentityType: MonitorComputeIdentityType;
 }
 
@@ -9530,7 +9530,7 @@ model AssetJobInput {
   /**
    * Input Asset Delivery Mode.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   mode?: InputDeliveryMode;
 
   /**
@@ -9558,13 +9558,13 @@ model AssetJobOutput {
   /**
    * Auto delete setting of output data asset.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   autoDeleteSetting?: AutoDeleteSetting;
 
   /**
    * Output Asset Delivery Mode.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   mode?: OutputDeliveryMode;
 
   /**
@@ -9591,7 +9591,7 @@ model ForecastHorizon {
   /**
    * [Required] Set forecast horizon value selection mode.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   mode: ForecastHorizonMode;
 }
 
@@ -9605,33 +9605,33 @@ model AutoMLJob extends JobBase {
    * The ARM resource ID of the Environment specification for the job.
    * This is optional value to provide, if not provided, AutoML will default this to Production AutoML curated environment version when running the job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentId?: string;
 
   /**
    * Environment variables included in the job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentVariables?: Record<string>;
 
   /**
    * Mapping of output data bindings used in the job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   outputs?: Record<JobOutput>;
 
   /**
    * Queue settings for the job
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   queueSettings?: QueueSettings;
 
   /**
    * Compute Resource configuration for the job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   resources?: JobResourceConfiguration;
 
   /**
@@ -9653,13 +9653,13 @@ model JobOutput {
   /**
    * Description for the output.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   description?: string;
 
   /**
    * [Required] Specifies the type of job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   jobOutputType: JobOutputType;
 }
 
@@ -9668,13 +9668,13 @@ model QueueSettings {
   /**
    * Controls the compute job tier
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   jobTier?: JobTier;
 
   /**
    * Controls the priority of the job on a compute.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   priority?: int32;
 }
 
@@ -9684,13 +9684,13 @@ model JobResourceConfiguration extends ResourceConfiguration {
   /**
    * Extra arguments to pass to the Docker run command. This would override any parameters that have already been set by the system, or in this section. This parameter is only supported for Azure ML compute types.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   dockerArgs?: string;
 
   /**
    * Size of the docker container's shared memory block. This should be in the format of (number)(unit) where number as to be greater than 0 and the unit can be one of b(bytes), k(kilobytes), m(megabytes), or g(gigabytes).
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @pattern("\\d+[bBkKmMgG]")
   shmSize?: string = "2g";
 }
@@ -9715,7 +9715,7 @@ model AutoMLVertical {
   /**
    * [Required] Task type for AutoMLJob.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   taskType: TaskType;
 
   /**
@@ -9742,13 +9742,13 @@ model JobInput {
   /**
    * Description for the input.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   description?: string;
 
   /**
    * [Required] Specifies the type of job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   jobInputType: JobInputType;
 }
 
@@ -9770,7 +9770,7 @@ model NCrossValidations {
   /**
    * [Required] Mode for determining N-Cross validations.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   mode: NCrossValidationsMode;
 }
 
@@ -9790,7 +9790,7 @@ model Seasonality {
   /**
    * [Required] Seasonality mode.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   mode: SeasonalityMode;
 }
 
@@ -9810,7 +9810,7 @@ model TargetLags {
   /**
    * [Required] Set target lags mode - Auto/Custom
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   mode: TargetLagsMode;
 }
 
@@ -9832,7 +9832,7 @@ model TargetRollingWindowSize {
   /**
    * [Required] TargetRollingWindowSiz detection mode.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   mode: TargetRollingWindowSizeMode;
 }
 
@@ -9843,7 +9843,7 @@ model AutologgerSettings {
   /**
    * [Required] Indicates whether mlflow autologger is enabled.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   mlflowAutologger: MLFlowAutologgerState;
 }
 
@@ -9862,7 +9862,7 @@ model MonitoringAlertNotificationSettingsBase {
   /**
    * [Required] Specifies the type of signal to monitor.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   alertNotificationType: MonitoringAlertNotificationType;
 }
 
@@ -9875,31 +9875,31 @@ model AzureBlobDatastore extends Datastore {
   /**
    * Storage account name.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   accountName?: string;
 
   /**
    * Storage account container name.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   containerName?: string;
 
   /**
    * Azure cloud endpoint for the storage account.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   endpoint?: string;
 
   /**
    * Protocol used to communicate with the storage account.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   protocol?: string;
 
   /**
    * Indicates which identity to use to authenticate service data access to customer's storage.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   serviceDataAccessAuthIdentity?: ServiceDataAccessAuthIdentity;
 
   /**
@@ -9932,13 +9932,13 @@ model AzureDataLakeGen1Datastore extends Datastore {
   /**
    * Indicates which identity to use to authenticate service data access to customer's storage.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   serviceDataAccessAuthIdentity?: ServiceDataAccessAuthIdentity;
 
   /**
    * [Required] Azure Data Lake store name.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   storeName: string;
@@ -9958,7 +9958,7 @@ model AzureDataLakeGen2Datastore extends Datastore {
   /**
    * [Required] Storage account name.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   accountName: string;
@@ -9966,13 +9966,13 @@ model AzureDataLakeGen2Datastore extends Datastore {
   /**
    * Azure cloud endpoint for the storage account.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   endpoint?: string;
 
   /**
    * [Required] The name of the Data Lake Gen2 filesystem.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   filesystem: string;
@@ -9980,13 +9980,13 @@ model AzureDataLakeGen2Datastore extends Datastore {
   /**
    * Protocol used to communicate with the storage account.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   protocol?: string;
 
   /**
    * Indicates which identity to use to authenticate service data access to customer's storage.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   serviceDataAccessAuthIdentity?: ServiceDataAccessAuthIdentity;
 
   /**
@@ -10014,7 +10014,7 @@ model AzureFileDatastore extends Datastore {
   /**
    * [Required] Storage account name.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   accountName: string;
@@ -10022,13 +10022,13 @@ model AzureFileDatastore extends Datastore {
   /**
    * Azure cloud endpoint for the storage account.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   endpoint?: string;
 
   /**
    * [Required] The name of the Azure file share that the datastore points to.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   fileShareName: string;
@@ -10036,13 +10036,13 @@ model AzureFileDatastore extends Datastore {
   /**
    * Protocol used to communicate with the storage account.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   protocol?: string;
 
   /**
    * Indicates which identity to use to authenticate service data access to customer's storage.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   serviceDataAccessAuthIdentity?: ServiceDataAccessAuthIdentity;
 
   /**
@@ -10216,7 +10216,7 @@ model CategoricalDataDriftMetricThreshold extends DataDriftMetricThresholdBase {
   /**
    * [Required] The categorical data drift metric to calculate.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   metric: CategoricalDataDriftMetric;
 
   /**
@@ -10231,13 +10231,13 @@ model DataDriftMetricThresholdBase {
   /**
    * [Required] Specifies the data type of the metric threshold.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   dataType: MonitoringFeatureDataType;
 
   /**
    * The threshold value. If null, a default value will be set depending on the selected metric.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   threshold?: MonitoringThreshold;
 }
 
@@ -10246,7 +10246,7 @@ model MonitoringThreshold {
   /**
    * The threshold value. If null, the set default is dependent on the metric type.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   value?: float64;
 }
 
@@ -10256,7 +10256,7 @@ model CategoricalDataQualityMetricThreshold
   /**
    * [Required] The categorical data quality metric to calculate.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   metric: CategoricalDataQualityMetric;
 
   /**
@@ -10271,13 +10271,13 @@ model DataQualityMetricThresholdBase {
   /**
    * [Required] Specifies the data type of the metric threshold.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   dataType: MonitoringFeatureDataType;
 
   /**
    * The threshold value. If null, a default value will be set depending on the selected metric.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   threshold?: MonitoringThreshold;
 }
 
@@ -10287,7 +10287,7 @@ model CategoricalPredictionDriftMetricThreshold
   /**
    * [Required] The categorical prediction drift metric to calculate.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   metric: CategoricalPredictionDriftMetric;
 
   /**
@@ -10302,13 +10302,13 @@ model PredictionDriftMetricThresholdBase {
   /**
    * [Required] Specifies the data type of the metric threshold.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   dataType: MonitoringFeatureDataType;
 
   /**
    * The threshold value. If null, a default value will be set depending on the selected metric.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   threshold?: MonitoringThreshold;
 }
 
@@ -10336,7 +10336,7 @@ model CertificateDatastoreCredentials extends DatastoreCredentials {
   /**
    * [Required] Service principal secrets.
    */
-  @visibility("create", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   secrets: CertificateDatastoreSecrets;
 
   /**
@@ -10518,7 +10518,7 @@ model TableVertical {
   /**
    * Search space for sampling different combinations of models and their hyperparameters.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   searchSpace?: TableParameterSubspace[];
 
   /**
@@ -10899,7 +10899,7 @@ model ClassificationModelPerformanceMetricThreshold
   /**
    * [Required] The classification model performance to calculate.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   metric: ClassificationModelPerformanceMetric;
 
   /**
@@ -10914,13 +10914,13 @@ model ModelPerformanceMetricThresholdBase {
   /**
    * [Required] Specifies the data type of the metric threshold.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   modelType: MonitoringModelType;
 
   /**
    * The threshold value. If null, a default value will be set depending on the selected metric.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   threshold?: MonitoringThreshold;
 }
 
@@ -10929,13 +10929,13 @@ model CocoExportSummary extends ExportSummary {
   /**
    * The container name to which the labels will be exported.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   containerName?: string;
 
   /**
    * The output path where the labels will be exported.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   snapshotPath?: string;
 
   /**
@@ -10951,19 +10951,19 @@ model CommandJob extends JobBase {
   /**
    * Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   autologgerSettings?: AutologgerSettings;
 
   /**
    * ARM resource ID of the code asset.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   codeId?: string;
 
   /**
    * [Required] The command to execute on startup of the job. eg. "python train.py"
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   command: string;
@@ -10971,13 +10971,13 @@ model CommandJob extends JobBase {
   /**
    * Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, Ray, or null.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   distribution?: DistributionConfiguration;
 
   /**
    * [Required] The ARM resource ID of the Environment specification for the job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   environmentId: string;
@@ -10986,45 +10986,45 @@ model CommandJob extends JobBase {
    * Environment variables included in the job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentVariables?: Record<string>;
 
   /**
    * Mapping of input data bindings used in the job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   inputs?: Record<JobInput>;
 
   /**
    * Command Job limit.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   limits?: CommandJobLimits;
 
   /**
    * Mapping of output data bindings used in the job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   outputs?: Record<JobOutput>;
 
   /**
    * Input parameters.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   parameters?: Record<unknown>;
 
   /**
    * Queue settings for the job
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   queueSettings?: QueueSettings;
 
   /**
    * Compute Resource configuration for the job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   resources?: JobResourceConfiguration;
 
   /**
@@ -11041,7 +11041,7 @@ model DistributionConfiguration {
   /**
    * [Required] Specifies the type of distribution framework.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   distributionType: DistributionType;
 }
 
@@ -11110,7 +11110,7 @@ model CreateMonitorAction extends ScheduleActionBase {
   /**
    * [Required] Defines the monitor.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   monitorDefinition: MonitorDefinition;
 
   /**
@@ -11124,26 +11124,26 @@ model MonitorDefinition {
   /**
    * The monitor's notification settings.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   alertNotificationSetting?: MonitoringAlertNotificationSettingsBase;
 
   /**
    * [Required] The ARM resource ID of the compute resource to run the monitoring job on.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   computeConfiguration: MonitorComputeConfigurationBase;
 
   /**
    * The ARM resource ID of either the model or deployment targeted by this monitor.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   monitoringTarget?: MonitoringTarget;
 
   /**
    * [Required] The signals to monitor.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   signals: Record<MonitoringSignalBase>;
 }
 
@@ -11155,7 +11155,7 @@ model MonitorComputeConfigurationBase {
   /**
    * [Required] Specifies the type of signal to monitor.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   computeType: MonitorComputeType;
 }
 
@@ -11166,19 +11166,19 @@ model MonitoringTarget {
   /**
    * The ARM resource ID of either the deployment targeted by this monitor.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   deploymentId?: string;
 
   /**
    * The ARM resource ID of either the model targeted by this monitor.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   modelId?: string;
 
   /**
    * [Required] The machine learning task type of the model.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   taskType: ModelTaskType;
 }
 
@@ -11188,7 +11188,7 @@ model MonitoringSignalBase {
   /**
    * The current notification mode for this signal.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   mode?: MonitoringNotificationMode;
 
   /**
@@ -11200,7 +11200,7 @@ model MonitoringSignalBase {
   /**
    * [Required] Specifies the type of signal to monitor.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   signalType: MonitoringSignalType;
 }
 
@@ -11225,13 +11225,13 @@ model CsvExportSummary extends ExportSummary {
   /**
    * The container name to which the labels will be exported.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   containerName?: string;
 
   /**
    * The output path where the labels will be exported.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   snapshotPath?: string;
 
   /**
@@ -11306,7 +11306,7 @@ model CustomMetricThreshold {
   /**
    * [Required] The user-defined metric to calculate.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   metric: string;
@@ -11314,7 +11314,7 @@ model CustomMetricThreshold {
   /**
    * The threshold value. If null, a default value will be set depending on the selected metric.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   threshold?: MonitoringThreshold;
 }
 
@@ -11343,7 +11343,7 @@ model CustomMonitoringSignal extends MonitoringSignalBase {
   /**
    * [Required] ARM resource ID of the component resource used to calculate the custom metrics.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   componentId: string;
@@ -11352,27 +11352,27 @@ model CustomMonitoringSignal extends MonitoringSignalBase {
    * Monitoring assets to take as input. Key is the component input port name, value is the data asset.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   inputAssets?: Record<MonitoringInputDataBase>;
 
   /**
    * Extra component parameters to take as input. Key is the component literal input port name, value is the parameter value.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   inputs?: Record<JobInput>;
 
   /**
    * [Required] A list of metrics to calculate and their associated thresholds.
    */
-  @visibility("read", "create")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   metricThresholds: CustomMetricThreshold[];
 
   /**
    * [Required] A list of metrics to calculate and their associated thresholds.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   workspaceConnection: MonitoringWorkspaceConnection;
 
   /**
@@ -11390,31 +11390,31 @@ model MonitoringInputDataBase {
    * Mapping of column names to special uses.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   columns?: Record<string>;
 
   /**
    * The context metadata of the data source.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   dataContext?: string;
 
   /**
    * [Required] Specifies the type of signal to monitor.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   inputDataType: MonitoringInputDataType;
 
   /**
    * [Required] Specifies the type of job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   jobInputType: JobInputType;
 
   /**
    * [Required] Input Asset URI.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   uri: string;
@@ -11429,7 +11429,7 @@ model MonitoringWorkspaceConnection {
    * Key is workspace connection property path, name is environment variable key.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentVariables?: Record<string>;
 
   /**
@@ -11437,7 +11437,7 @@ model MonitoringWorkspaceConnection {
    * Key is workspace connection property path, name is secret key.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   secrets?: Record<string>;
 }
 
@@ -11500,39 +11500,39 @@ model DataDriftMonitoringSignal extends MonitoringSignalBase {
   /**
    * The data segment used for scoping on a subset of the data population.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   dataSegment?: MonitoringDataSegment;
 
   /**
    * A dictionary that maps feature names to their respective data types.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   featureDataTypeOverride?: Record<MonitoringFeatureDataType>;
 
   /**
    * The feature filter which identifies which feature to calculate drift over.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   features?: MonitoringFeatureFilterBase;
 
   /**
    * [Required] A list of metrics to calculate and their associated thresholds.
    */
-  @visibility("read", "create")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   metricThresholds: DataDriftMetricThresholdBase[];
 
   /**
    * [Required] The data which drift will be calculated for.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   productionData: MonitoringInputDataBase;
 
   /**
    * [Required] The data to calculate drift against.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   referenceData: MonitoringInputDataBase;
 
   /**
@@ -11546,13 +11546,13 @@ model MonitoringDataSegment {
   /**
    * The feature to segment the data on.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   feature?: string;
 
   /**
    * Filters for only the specified values of the given segmented feature.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   values?: string[];
 }
 
@@ -11585,7 +11585,7 @@ model DataImportSource {
   /**
    * [Required] Specifies the type of data.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   sourceType: DataImportSourceType;
 }
 
@@ -11615,32 +11615,32 @@ model DataQualityMonitoringSignal extends MonitoringSignalBase {
    * A dictionary that maps feature names to their respective data types.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   featureDataTypeOverride?: Record<MonitoringFeatureDataType>;
 
   /**
    * The features to calculate drift over.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   features?: MonitoringFeatureFilterBase;
 
   /**
    * [Required] A list of metrics to calculate and their associated thresholds.
    */
-  @visibility("read", "create")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   metricThresholds: DataQualityMetricThresholdBase[];
 
   /**
    * [Required] The data produced by the production service which drift will be calculated for.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   productionData: MonitoringInputDataBase;
 
   /**
    * [Required] The data to calculate drift against.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   referenceData: MonitoringInputDataBase;
 
   /**
@@ -11664,7 +11664,7 @@ model DatabaseSource extends DataImportSource {
   /**
    * SQL StoredProcedure parameters
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   storedProcedureParams?: Record<string>[];
 
   /**
@@ -11683,7 +11683,7 @@ model DatasetExportSummary extends ExportSummary {
   /**
    * The unique name of the labeled data asset.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   labeledAssetName?: string;
 
   /**
@@ -11706,7 +11706,7 @@ model EmailMonitoringAlertNotificationSettings
   /**
    * Configuration for notification.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   emailNotificationSetting?: NotificationSetting;
 
   /**
@@ -11721,7 +11721,7 @@ model EndpointScheduleAction extends ScheduleActionBase {
    * [Required] Defines Schedule action definition details.
    * <see href="TBD" />
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   endpointInvocationDefinition: Record<unknown>;
 
   /**
@@ -11735,20 +11735,20 @@ model FeatureAttributionDriftMonitoringSignal extends MonitoringSignalBase {
   /**
    * [Required] A list of metrics to calculate and their associated thresholds.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   metricThreshold: FeatureAttributionMetricThreshold;
 
   /**
    * [Required] The data which drift will be calculated for.
    */
-  @visibility("read", "create")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   productionData: MonitoringInputDataBase[];
 
   /**
    * [Required] The data to calculate drift against.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   referenceData: MonitoringInputDataBase;
 
   /**
@@ -11762,13 +11762,13 @@ model FeatureAttributionMetricThreshold {
   /**
    * [Required] The feature attribution metric to calculate.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   metric: FeatureAttributionMetric;
 
   /**
    * The threshold value. If null, a default value will be set depending on the selected metric.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   threshold?: MonitoringThreshold;
 }
 
@@ -11777,7 +11777,7 @@ model FeatureSubset extends MonitoringFeatureFilterBase {
   /**
    * [Required] The list of features to include.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   features: string[];
 
   /**
@@ -11941,14 +11941,14 @@ model GenerationSafetyQualityMetricThreshold {
   /**
    * [Required] Gets or sets the feature attribution metric to calculate.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   metric: GenerationSafetyQualityMetric;
 
   /**
    * Gets or sets the threshold value.
    * If null, a default value will be set depending on the selected metric.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   threshold?: MonitoringThreshold;
 }
 
@@ -11959,27 +11959,27 @@ model GenerationSafetyQualityMonitoringSignal extends MonitoringSignalBase {
   /**
    * [Required] Gets or sets the metrics to calculate and the corresponding thresholds.
    */
-  @visibility("read", "create")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   metricThresholds: GenerationSafetyQualityMetricThreshold[];
 
   /**
    * Gets or sets the target data for computing metrics.
    */
-  @visibility("read", "create")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   productionData?: MonitoringInputDataBase[];
 
   /**
    * [Required] The sample rate of the target data, should be greater than 0 and at most 1.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   samplingRate: float64;
 
   /**
    * Gets or sets the workspace connection ID used to connect to the content generation endpoint.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   workspaceConnectionId?: string;
 
   /**
@@ -11995,14 +11995,14 @@ model GenerationTokenStatisticsMetricThreshold {
   /**
    * [Required] Gets or sets the feature attribution metric to calculate.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   metric: GenerationTokenStatisticsMetric;
 
   /**
    * Gets or sets the threshold value.
    * If null, a default value will be set depending on the selected metric.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   threshold?: MonitoringThreshold;
 }
 
@@ -12013,20 +12013,20 @@ model GenerationTokenStatisticsSignal extends MonitoringSignalBase {
   /**
    * [Required] Gets or sets the metrics to calculate and the corresponding thresholds.
    */
-  @visibility("read", "create")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   metricThresholds: GenerationTokenStatisticsMetricThreshold[];
 
   /**
    * Gets or sets the target data for computing metrics.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   productionData?: MonitoringInputDataBase;
 
   /**
    * [Required] The sample rate of the target data, should be greater than 0 and at most 1.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   samplingRate: float64;
 
   /**
@@ -12050,13 +12050,13 @@ model HdfsDatastore extends Datastore {
   /**
    * The TLS cert of the HDFS server. Needs to be a base64 encoded string. Required if "Https" protocol is selected.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   hdfsServerCertificate?: string;
 
   /**
    * [Required] IP Address or DNS HostName.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   nameNodeAddress: string;
@@ -12064,7 +12064,7 @@ model HdfsDatastore extends Datastore {
   /**
    * Protocol used to communicate with the storage account (Https/Http).
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   protocol?: string = "http";
 
   /**
@@ -12102,7 +12102,7 @@ model ImageClassificationBase extends ImageVertical {
   /**
    * Search space for sampling different combinations of models and their hyperparameters.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   searchSpace?: ImageModelDistributionSettingsClassification[];
 }
 
@@ -12637,7 +12637,7 @@ model ImageObjectDetectionBase extends ImageVertical {
   /**
    * Search space for sampling different combinations of models and their hyperparameters.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   searchSpace?: ImageModelDistributionSettingsObjectDetection[];
 }
 
@@ -12865,7 +12865,7 @@ model ImportDataAction extends ScheduleActionBase {
   /**
    * [Required] Defines Schedule action definition details.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   dataImportDefinition: DataImport;
 
   /**
@@ -12879,7 +12879,7 @@ model JobScheduleAction extends ScheduleActionBase {
   /**
    * [Required] Defines Schedule action definition details.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   jobDefinition: JobBase;
 
   /**
@@ -12893,7 +12893,7 @@ model KerberosCredentials {
   /**
    * [Required] IP Address or DNS HostName.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   kerberosKdcAddress: string;
@@ -12901,7 +12901,7 @@ model KerberosCredentials {
   /**
    * [Required] Kerberos Username
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   kerberosPrincipal: string;
@@ -12909,7 +12909,7 @@ model KerberosCredentials {
   /**
    * [Required] Domain over which a Kerberos authentication server has the authority to authenticate a user, host or service.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   kerberosRealm: string;
@@ -12922,7 +12922,7 @@ model KerberosKeytabCredentials extends DatastoreCredentials {
   /**
    * [Required] Keytab secrets.
    */
-  @visibility("create", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   secrets: KerberosKeytabSecrets;
 
   /**
@@ -12951,7 +12951,7 @@ model KerberosPasswordCredentials extends DatastoreCredentials {
   /**
    * [Required] Kerberos password secrets.
    */
-  @visibility("create", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   secrets: KerberosPasswordSecrets;
 
   /**
@@ -12995,7 +12995,7 @@ model LabelingJobImageProperties extends LabelingJobMediaProperties {
   /**
    * Annotation type of image labeling job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   annotationType?: ImageAnnotationType;
 
   /**
@@ -13011,7 +13011,7 @@ model LabelingJobTextProperties extends LabelingJobMediaProperties {
   /**
    * Annotation type of text labeling job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   annotationType?: TextAnnotationType;
 
   /**
@@ -13036,7 +13036,7 @@ model OneLakeArtifact {
   /**
    * [Required] OneLake artifact name
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   artifactName: string;
@@ -13081,7 +13081,7 @@ model MLAssistConfigurationEnabled extends MLAssistConfiguration {
   /**
    * [Required] AML compute binding used in inferencing.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   inferencingComputeBinding: string;
@@ -13089,7 +13089,7 @@ model MLAssistConfigurationEnabled extends MLAssistConfiguration {
   /**
    * [Required] AML compute binding used in training.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   trainingComputeBinding: string;
@@ -13117,7 +13117,7 @@ model MLTableData extends DataVersionBase {
   /**
    * Uris referenced in the MLTable definition (required for lineage)
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   referencedUris?: string[];
 
   /**
@@ -13159,7 +13159,7 @@ model ManagedIdentity extends IdentityConfiguration {
    * Specifies a user-assigned identity by client ID. For system-assigned, do not set this field.
    */
   #suppress "@azure-tools/typespec-azure-core/no-format"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @format("uuid")
   clientId?: string;
 
@@ -13167,14 +13167,14 @@ model ManagedIdentity extends IdentityConfiguration {
    * Specifies a user-assigned identity by object ID. For system-assigned, do not set this field.
    */
   #suppress "@azure-tools/typespec-azure-core/no-format"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @format("uuid")
   objectId?: string;
 
   /**
    * Specifies a user-assigned identity by ARM resource ID. For system-assigned, do not set this field.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   resourceId?: string;
 
   /**
@@ -13210,26 +13210,26 @@ model ModelPerformanceSignal extends MonitoringSignalBase {
   /**
    * The data segment.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   dataSegment?: MonitoringDataSegment;
 
   /**
    * [Required] A list of metrics to calculate and their associated thresholds.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   metricThreshold: ModelPerformanceMetricThresholdBase;
 
   /**
    * [Required] The data produced by the production service which drift will be calculated for.
    */
-  @visibility("read", "create")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   productionData: MonitoringInputDataBase[];
 
   /**
    * [Required] The data to calculate drift against.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   referenceData: MonitoringInputDataBase;
 
   /**
@@ -13245,13 +13245,13 @@ model MonitorServerlessSparkCompute extends MonitorComputeConfigurationBase {
   /**
    * [Required] The identity scheme leveraged to by the spark jobs running on serverless Spark.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   computeIdentity: MonitorComputeIdentityBase;
 
   /**
    * [Required] The instance type running the Spark job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   instanceType: string;
@@ -13259,7 +13259,7 @@ model MonitorServerlessSparkCompute extends MonitorComputeConfigurationBase {
   /**
    * [Required] The Spark runtime version.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   runtimeVersion: string;
@@ -13277,7 +13277,7 @@ model Mpi extends DistributionConfiguration {
   /**
    * Number of processes per MPI node.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   processCountPerInstance?: int32;
 
   /**
@@ -13424,7 +13424,7 @@ model NlpVertical {
   /**
    * Search space for sampling different combinations of models and their hyperparameters.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   searchSpace?: NlpParameterSubspace[];
 
   /**
@@ -13501,7 +13501,7 @@ model NumericalDataQualityMetricThreshold
   /**
    * [Required] The numerical data quality metric to calculate.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   metric: NumericalDataQualityMetric;
 
   /**
@@ -13516,7 +13516,7 @@ model NumericalPredictionDriftMetricThreshold
   /**
    * [Required] The numerical prediction drift metric to calculate.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   metric: NumericalPredictionDriftMetric;
 
   /**
@@ -13549,19 +13549,19 @@ model OneLakeDatastore extends Datastore {
   /**
    * [Required] OneLake artifact backing the datastore.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   artifact: OneLakeArtifact;
 
   /**
    * OneLake endpoint to use for the datastore.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   endpoint?: string;
 
   /**
    * [Required] OneLake workspace name.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   oneLakeWorkspaceName: string;
@@ -13569,7 +13569,7 @@ model OneLakeDatastore extends Datastore {
   /**
    * Indicates which identity to use to authenticate service data access to customer's storage.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   serviceDataAccessAuthIdentity?: ServiceDataAccessAuthIdentity;
 
   /**
@@ -13656,33 +13656,33 @@ model PipelineJob extends JobBase {
    * Inputs for the pipeline job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   inputs?: Record<JobInput>;
 
   /**
    * Jobs construct the Pipeline Job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   jobs?: Record<Record<unknown>>;
 
   /**
    * Outputs for the pipeline job
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   outputs?: Record<JobOutput>;
 
   /**
    * Pipeline settings, for things like ContinueRunOnStepFailure etc.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   settings?: Record<unknown>;
 
   /**
    * ARM resource ID of source job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   sourceJobId?: string;
 
   /**
@@ -13696,26 +13696,26 @@ model PredictionDriftMonitoringSignal extends MonitoringSignalBase {
   /**
    * [Required] A list of metrics to calculate and their associated thresholds.
    */
-  @visibility("read", "create")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   metricThresholds: PredictionDriftMetricThresholdBase[];
 
   /**
    * [Required] The type of the model monitored.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   modelType: MonitoringModelType;
 
   /**
    * [Required] The data which drift will be calculated for.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   productionData: MonitoringInputDataBase;
 
   /**
    * [Required] The data to calculate drift against.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   referenceData: MonitoringInputDataBase;
 
   /**
@@ -13848,7 +13848,7 @@ model RegressionModelPerformanceMetricThreshold
   /**
    * [Required] The regression model performance metric to calculate.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   metric: RegressionModelPerformanceMetric;
 
   /**
@@ -13877,7 +13877,7 @@ model SasDatastoreCredentials extends DatastoreCredentials {
   /**
    * [Required] Storage container secrets.
    */
-  @visibility("create", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   secrets: SasDatastoreSecrets;
 
   /**
@@ -13925,7 +13925,7 @@ model ServicePrincipalDatastoreCredentials extends DatastoreCredentials {
   /**
    * [Required] Service principal secrets.
    */
-  @visibility("create", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   secrets: ServicePrincipalDatastoreSecrets;
 
   /**
@@ -13963,19 +13963,19 @@ model SparkJob extends JobBase {
   /**
    * Archive files used in the job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   archives?: string[];
 
   /**
    * Arguments for the job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   args?: string;
 
   /**
    * [Required] ARM resource ID of the code asset.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   codeId: string;
@@ -13984,63 +13984,63 @@ model SparkJob extends JobBase {
    * Spark configured properties.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   conf?: Record<string>;
 
   /**
    * [Required] The entry to execute on startup of the job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   entry: SparkJobEntry;
 
   /**
    * The ARM resource ID of the Environment specification for the job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentId?: string;
 
   /**
    * Files used in the job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   files?: string[];
 
   /**
    * Mapping of input data bindings used in the job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   inputs?: Record<JobInput>;
 
   /**
    * Jar files used in the job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   jars?: string[];
 
   /**
    * Mapping of output data bindings used in the job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   outputs?: Record<JobOutput>;
 
   /**
    * Python files used in the job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   pyFiles?: string[];
 
   /**
    * Queue settings for the job
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   queueSettings?: QueueSettings;
 
   /**
    * Compute Resource configuration for the job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   resources?: SparkResourceConfiguration;
 
   /**
@@ -14057,7 +14057,7 @@ model SparkJobEntry {
   /**
    * [Required] Type of the job's entry point.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   sparkJobEntryType: SparkJobEntryType;
 }
 
@@ -14066,13 +14066,13 @@ model SparkResourceConfiguration {
   /**
    * Optional type of VM used as supported by the compute target.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   instanceType?: string;
 
   /**
    * Version of spark runtime used for the job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   runtimeVersion?: string = "3.1";
 }
 
@@ -14081,7 +14081,7 @@ model SparkJobPythonEntry extends SparkJobEntry {
   /**
    * [Required] Relative python file path for job entry point.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   file: string;
@@ -14097,7 +14097,7 @@ model SparkJobScalaEntry extends SparkJobEntry {
   /**
    * [Required] Scala class name used as entry point.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   className: string;
@@ -14115,20 +14115,20 @@ model StaticInputData extends MonitoringInputDataBase {
   /**
    * The ARM resource ID of the component resource used to preprocess the data.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   preprocessingComponentId?: string;
 
   /**
    * [Required] The end date of the data window.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   windowEnd: utcDateTime;
 
   /**
    * [Required] The start date of the data window.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   windowStart: utcDateTime;
 
@@ -14151,13 +14151,13 @@ model SweepJob extends JobBase {
    * Mapping of input data bindings used in the job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   inputs?: Record<JobInput>;
 
   /**
    * Sweep Job limit.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   limits?: SweepJobLimits;
 
   /**
@@ -14169,13 +14169,13 @@ model SweepJob extends JobBase {
    * Mapping of output data bindings used in the job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   outputs?: Record<JobOutput>;
 
   /**
    * Queue settings for the job
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   queueSettings?: QueueSettings;
 
   /**
@@ -14231,13 +14231,13 @@ model TrialComponent {
   /**
    * ARM resource ID of the code asset.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   codeId?: string;
 
   /**
    * [Required] The command to execute on startup of the job. eg. "python train.py"
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   command: string;
@@ -14245,7 +14245,7 @@ model TrialComponent {
   /**
    * Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   distribution?: DistributionConfiguration;
 
   /**
@@ -14259,13 +14259,13 @@ model TrialComponent {
    * Environment variables included in the job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentVariables?: Record<string>;
 
   /**
    * Compute Resource configuration for the job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   resources?: JobResourceConfiguration;
 }
 
@@ -14304,13 +14304,13 @@ model TensorFlow extends DistributionConfiguration {
   /**
    * Number of parameter server tasks.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   parameterServerCount?: int32;
 
   /**
    * Number of workers. If not specified, will default to the instance count.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   workerCount?: int32;
 
   /**
@@ -14348,7 +14348,7 @@ model TextClassificationMultilabel extends AutoMLVertical {
    * Primary metric for Text-Classification-Multilabel task.
    * Currently only Accuracy is supported as primary metric, hence user need not set it explicitly.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   primaryMetric?: ClassificationMultilabelPrimaryMetrics;
 
   /**
@@ -14369,7 +14369,7 @@ model TextNer extends AutoMLVertical {
    * Primary metric for Text-NER task.
    * Only 'Accuracy' is supported for Text-NER, so user need not set this explicitly.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   primaryMetric?: ClassificationPrimaryMetrics;
 
   /**
@@ -14383,7 +14383,7 @@ model TopNFeaturesByAttribution extends MonitoringFeatureFilterBase {
   /**
    * The number of top features to include.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   top?: int32 = 10;
 
   /**
@@ -14399,19 +14399,19 @@ model TrailingInputData extends MonitoringInputDataBase {
   /**
    * The ARM resource ID of the component resource used to preprocess the data.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   preprocessingComponentId?: string;
 
   /**
    * [Required] The time offset between the end of the data window and the monitor's current run time.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   windowOffset: duration;
 
   /**
    * [Required] The size of the trailing data window.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   windowSize: duration;
 
   /**
@@ -14779,7 +14779,7 @@ model ServiceTagDestination {
   /**
    * Optional, if provided, the ServiceTag property will be ignored.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   addressPrefixes?: string[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"

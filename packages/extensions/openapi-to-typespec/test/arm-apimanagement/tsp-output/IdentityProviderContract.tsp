@@ -62,7 +62,7 @@ interface IdentityProviderContracts {
    * Updates an existing IdentityProvider configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   @operationId("IdentityProvider_Update")
   update is ArmCustomPatchSync<
     IdentityProviderContract,

@@ -190,7 +190,7 @@ model Salmon extends Fish {
 }
 
 model ReadonlyObj {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   size?: int32;

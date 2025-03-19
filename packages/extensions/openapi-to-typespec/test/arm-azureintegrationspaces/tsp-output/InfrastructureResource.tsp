@@ -40,7 +40,7 @@ interface InfrastructureResources {
   /**
    * Update a InfrastructureResource
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   patch is ArmCustomPatchSync<
     InfrastructureResource,
     PatchModel = InfrastructureResourceUpdate

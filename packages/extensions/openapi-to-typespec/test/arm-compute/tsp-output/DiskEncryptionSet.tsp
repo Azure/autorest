@@ -54,7 +54,7 @@ interface DiskEncryptionSets {
    * Updates (patches) a disk encryption set.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     DiskEncryptionSet,
     PatchModel = DiskEncryptionSetUpdate,

@@ -196,13 +196,13 @@ model InstallationModel {
   /**
    * The date when the installation was made inactivate by the PNS.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastActiveOn?: string;
 
   /**
    * Date in W3C format of last update to this installation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastUpdate?: string;
 
   /**
@@ -218,7 +218,7 @@ model InstallationModel {
   /**
    * This is true if the PNS expired the channel.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   expiredPushChannel?: boolean;
 
   /**

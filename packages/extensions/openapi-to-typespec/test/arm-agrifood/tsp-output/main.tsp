@@ -32,9 +32,7 @@ using TypeSpec.Versioning;
  * APIs documentation for Microsoft Azure Data Manager for Agriculture Service.
  */
 @armProviderNamespace
-@service({
-  title: "Azure AgFoodPlatform RP Service",
-})
+@service(#{ title: "Azure AgFoodPlatform RP Service" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
 namespace Microsoft.AgFoodPlatform;

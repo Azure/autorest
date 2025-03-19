@@ -22,9 +22,7 @@ using Azure.Core;
  * Test Service.
  */
 @useAuth(AadOauth2Auth<["https://cnt-prod.loadtesting.azure.com/.default"]>)
-@service({
-  title: "Load Testing Service",
-})
+@service(#{ title: "Load Testing Service" })
 @versioned(Versions)
 @server(
   "https://{Endpoint}",

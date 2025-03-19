@@ -57,7 +57,7 @@ interface DelegationSettings {
   /**
    * Update Delegation settings.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     PortalDelegationSettings,
     PatchModel = PortalDelegationSettings,

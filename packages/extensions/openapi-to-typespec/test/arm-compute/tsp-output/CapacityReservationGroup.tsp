@@ -48,7 +48,7 @@ interface CapacityReservationGroups {
   /**
    * The operation to update a capacity reservation group. When updating a capacity reservation group, only tags may be modified.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     CapacityReservationGroup,
     PatchModel = CapacityReservationGroupUpdate

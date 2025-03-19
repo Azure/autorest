@@ -40,7 +40,7 @@ interface Associations {
   /**
    * Update a Association
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Association, PatchModel = AssociationUpdate>;
 
   /**

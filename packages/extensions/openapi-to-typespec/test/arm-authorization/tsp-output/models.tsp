@@ -326,7 +326,7 @@ model DenyAssignmentProperties {
   /**
    * An array of permissions that are denied by the deny assignment.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   permissions?: DenyAssignmentPermission[];
 
   /**
@@ -432,7 +432,7 @@ model AuthorizationProviderResourceType {
   /**
    * The resource type operations.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   operations?: ProviderOperation[];
 }
 
@@ -481,7 +481,7 @@ model RoleAssignmentProperties {
   /**
    * The role assignment scope.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   scope?: string;
 
   /**
@@ -515,27 +515,27 @@ model RoleAssignmentProperties {
   /**
    * Time it was created
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdOn?: utcDateTime;
 
   /**
    * Time it was updated
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updatedOn?: utcDateTime;
 
   /**
    * Id of the user who created the assignment
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdBy?: string;
 
   /**
    * Id of the user who updated the assignment
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   updatedBy?: string;
 
   /**
@@ -609,7 +609,7 @@ model RoleDefinitionProperties {
   /**
    * Role definition permissions.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   permissions?: Permission[];
 
   /**
@@ -625,19 +625,19 @@ model EligibleChildResource {
   /**
    * The resource scope Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The resource name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The resource type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 }
 
@@ -944,7 +944,7 @@ model RoleAssignmentScheduleRequestProperties {
   /**
    * The role assignment schedule request scope.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   scope?: string;
 
   /**
@@ -960,7 +960,7 @@ model RoleAssignmentScheduleRequestProperties {
   /**
    * The principal type of the assigned principal ID.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   principalType?: PrincipalType;
 
   /**
@@ -971,13 +971,13 @@ model RoleAssignmentScheduleRequestProperties {
   /**
    * The status of the role assignment schedule request.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: RoleManagementScheduleStatus;
 
   /**
    * The approvalId of the role assignment schedule request.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   approvalId?: string;
 
   /**
@@ -1023,20 +1023,20 @@ model RoleAssignmentScheduleRequestProperties {
   /**
    * DateTime when role assignment schedule request was created
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdOn?: utcDateTime;
 
   /**
    * Id of the user who created this request
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   requestorId?: string;
 
   /**
    * Additional properties of principal, scope and role definition
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   expandedProperties?: ExpandedProperties;
 }
 
@@ -1252,7 +1252,7 @@ model RoleEligibilityScheduleRequestProperties {
   /**
    * The role eligibility schedule request scope.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   scope?: string;
 
   /**
@@ -1268,7 +1268,7 @@ model RoleEligibilityScheduleRequestProperties {
   /**
    * The principal type of the assigned principal ID.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   principalType?: PrincipalType;
 
   /**
@@ -1279,13 +1279,13 @@ model RoleEligibilityScheduleRequestProperties {
   /**
    * The status of the role eligibility schedule request.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: RoleManagementScheduleStatus;
 
   /**
    * The approvalId of the role eligibility schedule request.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   approvalId?: string;
 
   /**
@@ -1326,20 +1326,20 @@ model RoleEligibilityScheduleRequestProperties {
   /**
    * DateTime when role eligibility schedule request was created
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdOn?: utcDateTime;
 
   /**
    * Id of the user who created this request
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   requestorId?: string;
 
   /**
    * Additional properties of principal, scope and role definition
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   expandedProperties?: ExpandedProperties;
 }
 
@@ -1425,13 +1425,13 @@ model RoleManagementPolicyProperties {
   /**
    * The name of the entity last modified it
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastModifiedBy?: Principal;
 
   /**
    * The last modified date time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime?: utcDateTime;
 
@@ -1443,13 +1443,13 @@ model RoleManagementPolicyProperties {
   /**
    * The readonly computed rule applied to the policy.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   effectiveRules?: RoleManagementPolicyRule[];
 
   /**
    * Additional properties of scope
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   policyProperties?: PolicyProperties;
 }
 
@@ -1517,7 +1517,7 @@ model PolicyProperties {
    * Details of the resource scope
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @Azure.ResourceManager.Private.conditionalClientFlatten
   scope?: PolicyPropertiesScope;
 }
@@ -1565,13 +1565,13 @@ model RoleManagementPolicyAssignmentProperties {
   /**
    * The readonly computed rule applied to the policy.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   effectiveRules?: RoleManagementPolicyRule[];
 
   /**
    * Additional properties of scope, role definition and policy
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   policyAssignmentProperties?: PolicyAssignmentProperties;
 }
 
@@ -1653,7 +1653,7 @@ model PolicyAssignmentPropertiesPolicy {
   /**
    * The name of the entity last modified it
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastModifiedBy?: Principal;
 
   /**
@@ -1690,13 +1690,13 @@ model ValidationResponseErrorInfo {
   /**
    * Error code indicating why validation failed
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   code?: string;
 
   /**
    * Message indicating why validation failed
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 }
 
@@ -1707,7 +1707,7 @@ model ValidationResponse {
   /**
    * Whether or not validation succeeded
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isValid?: boolean;
 
   /**
@@ -1783,7 +1783,7 @@ model ApprovalSettings {
   /**
    * The approval stages of the request.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   approvalStages?: ApprovalStage[];
 }
 

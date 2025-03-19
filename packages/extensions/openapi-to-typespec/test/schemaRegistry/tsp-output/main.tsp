@@ -19,9 +19,7 @@ using TypeSpec.Versioning;
  * Azure Schema Registry is as a central schema repository, with support for
  * versioning, management, compatibility checking, and RBAC.
  */
-@service({
-  title: "Azure Schema Registry",
-})
+@service(#{ title: "Azure Schema Registry" })
 @versioned(Versions)
 @server(
   "https://{endpoint}",

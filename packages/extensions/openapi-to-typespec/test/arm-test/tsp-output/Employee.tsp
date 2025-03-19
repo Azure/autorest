@@ -36,7 +36,7 @@ interface Employees {
   /**
    * Update a Employee
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Employee, PatchModel = EmployeeUpdate>;
 
   /**

@@ -31,9 +31,7 @@ using Azure.Core;
     "Ocp-Apim-Subscription-Key"
   >
 )
-@service({
-  title: "QnA Maker",
-})
+@service(#{ title: "QnA Maker" })
 @versioned(Versions)
 @server(
   "{Endpoint}/language",

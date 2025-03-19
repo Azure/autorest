@@ -1304,7 +1304,7 @@ model ImageReference {
    * the node. This read-only field differs from 'version' only if the value
    * specified for 'version' when the pool was created was 'latest'.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   exactVersion?: string;
 }
 
@@ -1661,75 +1661,75 @@ model Certificate {
    * The X.509 thumbprint of the Certificate. This is a sequence of up to 40 hex
    * digits.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   thumbprint?: string;
 
   /**
    * The algorithm used to derive the thumbprint.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   thumbprintAlgorithm?: string;
 
   /**
    * The URL of the Certificate.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   url?: string;
 
   /**
    * The state of the Certificate.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: CertificateState;
 
   /**
    * The time at which the Certificate entered its current state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   stateTransitionTime?: utcDateTime;
 
   /**
    * This property is not set if the Certificate is in its initial active state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   previousState?: CertificateState;
 
   /**
    * This property is not set if the Certificate is in its initial Active state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   previousStateTransitionTime?: utcDateTime;
 
   /**
    * The public part of the Certificate as a base-64 encoded .cer file.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   publicData?: string;
 
   /**
    * This property is set only if the Certificate is in the DeleteFailed state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   deleteCertificateError?: DeleteCertificateError;
 
   /**
    * The base64-encoded contents of the Certificate. The maximum size is 10KB.
    */
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   data?: string;
 
   /**
    * The format of the Certificate data.
    */
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   certificateFormat?: CertificateFormat;
 
   /**
    * This must be omitted if the Certificate format is cer.
    */
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   password?: string;
 }
 
@@ -1874,19 +1874,19 @@ model BatchJobSchedule {
   /**
    * A string that uniquely identifies the schedule within the Account.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   id?: string;
 
   /**
    * The display name for the schedule.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   displayName?: string;
 
   /**
    * The URL of the Job Schedule.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   url?: string;
 
   /**
@@ -1895,7 +1895,7 @@ model BatchJobSchedule {
    * Update Job Schedule request to specify that your changes should take effect
    * only if nobody else has modified the schedule in the meantime.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   eTag?: string;
 
   /**
@@ -1903,40 +1903,40 @@ model BatchJobSchedule {
    * specification or recurrence information, changed. It does not factor in
    * job-level changes such as new Jobs being created or Jobs changing state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModified?: utcDateTime;
 
   /**
    * The creation time of the Job Schedule.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   creationTime?: utcDateTime;
 
   /**
    * The state of the Job Schedule.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: JobScheduleState;
 
   /**
    * The time at which the Job Schedule entered the current state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   stateTransitionTime?: utcDateTime;
 
   /**
    * This property is not present if the Job Schedule is in its initial active state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   previousState?: JobScheduleState;
 
   /**
    * This property is not present if the Job Schedule is in its initial active state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   previousStateTransitionTime?: utcDateTime;
 
@@ -1955,7 +1955,7 @@ model BatchJobSchedule {
    * Contains information about Jobs that have been and will be run under a Job
    * Schedule.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   executionInfo?: JobScheduleExecutionInformation;
 
   /**
@@ -1967,7 +1967,7 @@ model BatchJobSchedule {
   /**
    * Resource usage statistics for a Job Schedule.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   stats?: JobScheduleStatistics;
 }
 
@@ -4116,26 +4116,26 @@ model BatchJob {
    * The ID is case-preserving and case-insensitive (that is, you may not have two
    * IDs within an Account that differ only by case).
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   id?: string;
 
   /**
    * The display name for the Job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   displayName?: string;
 
   /**
    * Whether Tasks in the Job can define dependencies on each other. The default is
    * false.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   usesTaskDependencies?: boolean;
 
   /**
    * The URL of the Job.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   url?: string;
 
   /**
@@ -4144,7 +4144,7 @@ model BatchJob {
    * to specify that your changes should take effect only if nobody else has
    * modified the Job in the meantime.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   eTag?: string;
 
   /**
@@ -4152,40 +4152,40 @@ model BatchJob {
    * priority, changed. It does not factor in task-level changes such as adding new
    * Tasks or Tasks changing state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModified?: utcDateTime;
 
   /**
    * The creation time of the Job.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   creationTime?: utcDateTime;
 
   /**
    * The state of the Job.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: JobState;
 
   /**
    * The time at which the Job entered its current state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   stateTransitionTime?: utcDateTime;
 
   /**
    * This property is not set if the Job is in its initial Active state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   previousState?: JobState;
 
   /**
    * This property is not set if the Job is in its initial Active state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   previousStateTransitionTime?: utcDateTime;
 
@@ -4240,28 +4240,28 @@ model BatchJob {
    * duplicate data. The best practice for long running Tasks is to use some form of
    * checkpointing.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   jobManagerTask?: JobManagerTask;
 
   /**
    * The Job Preparation Task is a special Task run on each Compute Node before any
    * other Task of the Job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   jobPreparationTask?: JobPreparationTask;
 
   /**
    * The Job Release Task is a special Task run at the end of the Job on each
    * Compute Node that has run any other Task of the Job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   jobReleaseTask?: JobReleaseTask;
 
   /**
    * Individual Tasks can override an environment setting specified here by
    * specifying the same setting name with a different value.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   commonEnvironmentSettings?: EnvironmentSetting[];
 
   /**
@@ -4280,13 +4280,13 @@ model BatchJob {
    * count, or if there was an error starting the Task, for example due to a
    * resource file download error. The default is noaction.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   onTaskFailure?: OnTaskFailure;
 
   /**
    * The network configuration for the Job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   networkConfiguration?: JobNetworkConfiguration;
 
   /**
@@ -4298,7 +4298,7 @@ model BatchJob {
   /**
    * Contains information about the execution of a Job in the Azure Batch service.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   executionInfo?: JobExecutionInformation;
 
   /**
@@ -4307,7 +4307,7 @@ model BatchJob {
    * may not be immediately available. The Batch service performs periodic roll-up
    * of statistics. The typical delay is about 30 minutes.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   stats?: JobStatistics;
 }
 
@@ -4811,20 +4811,20 @@ model BatchPool {
    * case-preserving and case-insensitive (that is, you may not have two IDs within
    * an Account that differ only by case).
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   id?: string;
 
   /**
    * The display name need not be unique and can contain any Unicode characters up
    * to a maximum length of 1024.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   displayName?: string;
 
   /**
    * The URL of the Pool.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   url?: string;
 
   /**
@@ -4833,7 +4833,7 @@ model BatchPool {
    * to specify that your changes should take effect only if nobody else has
    * modified the Pool in the meantime.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   eTag?: string;
 
   /**
@@ -4841,40 +4841,40 @@ model BatchPool {
    * targetDedicatedNodes or enableAutoscale settings, changed. It does not factor
    * in node-level changes such as a Compute Node changing state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModified?: utcDateTime;
 
   /**
    * The creation time of the Pool.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   creationTime?: utcDateTime;
 
   /**
    * The current state of the Pool.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: PoolState;
 
   /**
    * The time at which the Pool entered its current state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   stateTransitionTime?: utcDateTime;
 
   /**
    * Whether the Pool is resizing.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   allocationState?: AllocationState;
 
   /**
    * The time at which the Pool entered its current allocation state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   allocationStateTransitionTime?: utcDateTime;
 
@@ -4883,7 +4883,7 @@ model BatchPool {
    * a VM size for Compute Nodes in an Azure Batch Pool
    * (https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes).
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   vmSize?: string;
 
   /**
@@ -4892,53 +4892,53 @@ model BatchPool {
    * Batch Account was created with its poolAllocationMode property set to
    * 'UserSubscription'.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   cloudServiceConfiguration?: CloudServiceConfiguration;
 
   /**
    * This property and cloudServiceConfiguration are mutually exclusive and one of
    * the properties must be specified.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   virtualMachineConfiguration?: VirtualMachineConfiguration;
 
   /**
    * This is the timeout for the most recent resize operation. (The initial sizing
    * when the Pool is created counts as a resize.) The default value is 15 minutes.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   resizeTimeout?: duration;
 
   /**
    * This property is set only if one or more errors occurred during the last Pool
    * resize, and only when the Pool allocationState is Steady.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resizeErrors?: ResizeError[];
 
   /**
    * The number of dedicated Compute Nodes currently in the Pool.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   currentDedicatedNodes?: int32;
 
   /**
    * Spot/Low-priority Compute Nodes which have been preempted are included in this
    * count.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   currentLowPriorityNodes?: int32;
 
   /**
    * The desired number of dedicated Compute Nodes in the Pool.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   targetDedicatedNodes?: int32;
 
   /**
    * The desired number of Spot/Low-priority Compute Nodes in the Pool.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   targetLowPriorityNodes?: int32;
 
   /**
@@ -4946,28 +4946,28 @@ model BatchPool {
    * be specified. If true, the autoScaleFormula property is required and the Pool
    * automatically resizes according to the formula. The default value is false.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   enableAutoScale?: boolean;
 
   /**
    * This property is set only if the Pool automatically scales, i.e.
    * enableAutoScale is true.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   autoScaleFormula?: string;
 
   /**
    * This property is set only if the Pool automatically scales, i.e.
    * enableAutoScale is true.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   autoScaleEvaluationInterval?: duration;
 
   /**
    * This property is set only if the Pool automatically scales, i.e.
    * enableAutoScale is true.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   autoScaleRun?: AutoScaleRun;
 
   /**
@@ -4975,13 +4975,13 @@ model BatchPool {
    * Specifying this value can reduce the chance of the requested number of Compute
    * Nodes to be allocated in the Pool.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   enableInterNodeCommunication?: boolean;
 
   /**
    * The network configuration for a Pool.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   networkConfiguration?: NetworkConfiguration;
 
   /**
@@ -5024,26 +5024,26 @@ model BatchPool {
    * application licenses. If a license is requested which is not supported, Pool
    * creation will fail.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   applicationLicenses?: string[];
 
   /**
    * The default value is 1. The maximum value is the smaller of 4 times the number
    * of cores of the vmSize of the pool or 256.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   taskSlotsPerNode?: int32;
 
   /**
    * If not specified, the default is spread.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   taskSchedulingPolicy?: TaskSchedulingPolicy;
 
   /**
    * The list of user Accounts to be created on each Compute Node in the Pool.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   userAccounts?: UserAccount[];
 
   /**
@@ -5057,13 +5057,13 @@ model BatchPool {
    * may not be immediately available. The Batch service performs periodic roll-up
    * of statistics. The typical delay is about 30 minutes.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   stats?: PoolStatistics;
 
   /**
    * This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   mountConfiguration?: MountConfiguration[];
 
   /**
@@ -5071,7 +5071,7 @@ model BatchPool {
    * dictionary key references will be ARM resource ids in the form:
    * '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   identity?: BatchPoolIdentity;
 }
 
@@ -5174,13 +5174,13 @@ model UserAssignedIdentity {
   /**
    * The client id of the user assigned identity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   clientId?: string;
 
   /**
    * The principal id of the user assigned identity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   principalId?: string;
 }
 
@@ -5348,20 +5348,20 @@ model BatchTask {
    * The ID can contain any combination of alphanumeric characters including hyphens
    * and underscores, and cannot contain more than 64 characters.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   id?: string;
 
   /**
    * The display name need not be unique and can contain any Unicode characters up
    * to a maximum length of 1024.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   displayName?: string;
 
   /**
    * The URL of the Task.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   url?: string;
 
   /**
@@ -5370,52 +5370,52 @@ model BatchTask {
    * to specify that your changes should take effect only if nobody else has
    * modified the Task in the meantime.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   eTag?: string;
 
   /**
    * The last modified time of the Task.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModified?: utcDateTime;
 
   /**
    * The creation time of the Task.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   creationTime?: utcDateTime;
 
   /**
    * How the Batch service should respond when the Task completes.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   exitConditions?: ExitConditions;
 
   /**
    * The state of the Task.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: TaskState;
 
   /**
    * The time at which the Task entered its current state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   stateTransitionTime?: utcDateTime;
 
   /**
    * This property is not set if the Task is in its initial Active state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   previousState?: TaskState;
 
   /**
    * This property is not set if the Task is in its initial Active state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   previousStateTransitionTime?: utcDateTime;
 
@@ -5431,7 +5431,7 @@ model BatchTask {
    * the Batch provided environment variable
    * (https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables).
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   commandLine?: string;
 
   /**
@@ -5445,7 +5445,7 @@ model BatchTask {
    * AZ_BATCH_NODE_ROOT_DIR might not be reflected to the host disk, meaning that
    * Batch file APIs will not be able to access those files.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   containerSettings?: TaskContainerSettings;
 
   /**
@@ -5456,27 +5456,27 @@ model BatchTask {
    * the collection of ResourceFiles must be reduced in size. This can be achieved
    * using .zip files, Application Packages, or Docker Containers.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   resourceFiles?: ResourceFile[];
 
   /**
    * For multi-instance Tasks, the files will only be uploaded from the Compute Node
    * on which the primary Task is executed.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   outputFiles?: OutputFile[];
 
   /**
    * A list of environment variable settings for the Task.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentSettings?: EnvironmentSetting[];
 
   /**
    * A locality hint that can be used by the Batch service to select a Compute Node
    * on which to start a Task.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   affinityInfo?: AffinityInformation;
 
   /**
@@ -5489,25 +5489,25 @@ model BatchTask {
    * node has enough free scheduling slots available. For multi-instance Tasks, this
    * must be 1.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   requiredSlots?: int32;
 
   /**
    * If omitted, the Task runs as a non-administrative user unique to the Task.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   userIdentity?: UserIdentity;
 
   /**
    * Information about the execution of a Task.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   executionInfo?: TaskExecutionInformation;
 
   /**
    * Information about the Compute Node on which a Task ran.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nodeInfo?: ComputeNodeInformation;
 
   /**
@@ -5516,13 +5516,13 @@ model BatchTask {
    * code) the entire multi-instance Task fails. The multi-instance Task is then
    * terminated and retried, up to its retry limit.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   multiInstanceSettings?: MultiInstanceSettings;
 
   /**
    * Resource usage statistics for a Task.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   stats?: TaskStatistics;
 
   /**
@@ -5530,7 +5530,7 @@ model BatchTask {
    * completed successfully. If any of those Tasks fail and exhaust their retry
    * counts, this Task will never be scheduled.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   dependsOn?: TaskDependencies;
 
   /**
@@ -5541,7 +5541,7 @@ model BatchTask {
    * because the package has been deleted or because download failed, the Task
    * fails.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   applicationPackageReferences?: ApplicationPackageReference[];
 
   /**
@@ -5553,7 +5553,7 @@ model BatchTask {
    * can request Job permissions in order to add other Tasks to the Job, or check
    * the status of the Job or of other Tasks under the Job.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   authenticationTokenSettings?: AuthenticationTokenSettings;
 }
 
