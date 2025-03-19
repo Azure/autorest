@@ -145,25 +145,25 @@ model Resource {
   /**
    * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: Azure.Core.armResourceIdentifier;
 
   /**
    * The name of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
 
@@ -191,13 +191,13 @@ model DataManagerForAgricultureExtensionProperties {
   /**
    * Target ResourceType of the Data Manager For Agriculture Extension.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetResourceType?: string;
 
   /**
    * Data Manager For Agriculture Extension ID.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(100)
   @minLength(2)
   @pattern("^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$")
@@ -206,7 +206,7 @@ model DataManagerForAgricultureExtensionProperties {
   /**
    * Data Manager For Agriculture Extension name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(100)
   @minLength(2)
   farmBeatsExtensionName?: string;
@@ -214,7 +214,7 @@ model DataManagerForAgricultureExtensionProperties {
   /**
    * Data Manager For Agriculture Extension version.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(100)
   @minLength(2)
   @pattern("^([1-9]|10).\\d$")
@@ -223,7 +223,7 @@ model DataManagerForAgricultureExtensionProperties {
   /**
    * Publisher ID.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(100)
   @minLength(2)
   publisherId?: string;
@@ -231,7 +231,7 @@ model DataManagerForAgricultureExtensionProperties {
   /**
    * Textual description.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(500)
   @minLength(2)
   description?: string;
@@ -239,7 +239,7 @@ model DataManagerForAgricultureExtensionProperties {
   /**
    * Category of the extension. e.g. weather/sensor/satellite.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(100)
   @minLength(2)
   extensionCategory?: string;
@@ -247,13 +247,13 @@ model DataManagerForAgricultureExtensionProperties {
   /**
    * Data Manager For Agriculture Extension auth link.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   extensionAuthLink?: string;
 
   /**
    * Data Manager For Agriculture Extension api docs link.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   extensionApiDocsLink?: string;
 
   /**
@@ -262,8 +262,8 @@ model DataManagerForAgricultureExtensionProperties {
    * Information for weather category per api included are apisSupported,
    * customParameters, PlatformParameters and Units supported.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   detailedInformation?: DetailedInformation[];
 }
 
@@ -337,7 +337,7 @@ model Identity {
    * The principal ID of resource identity. The value must be an UUID.
    */
   #suppress "@azure-tools/typespec-azure-core/no-format"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @format("uuid")
   principalId?: string;
 
@@ -345,7 +345,7 @@ model Identity {
    * The tenant ID of resource. The value must be an UUID.
    */
   #suppress "@azure-tools/typespec-azure-core/no-format"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @format("uuid")
   tenantId?: string;
 
@@ -362,13 +362,13 @@ model DataManagerForAgricultureProperties {
   /**
    * Uri of the Data Manager For Agriculture instance.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   instanceUri?: url;
 
   /**
    * Data Manager For Agriculture instance provisioning state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
@@ -384,7 +384,7 @@ model DataManagerForAgricultureProperties {
   /**
    * Private endpoints.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnection[];
 }
 
@@ -400,7 +400,7 @@ model SensorIntegration {
   /**
    * Sensor integration instance provisioning state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
@@ -416,7 +416,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * The group ids for the private endpoint resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   groupIds?: string[];
 
   /**
@@ -432,7 +432,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * The provisioning state of the private endpoint connection resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: PrivateEndpointConnectionProvisioningState;
 }
 
@@ -443,7 +443,7 @@ model PrivateEndpoint {
   /**
    * The ARM identifier for private endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
@@ -589,40 +589,40 @@ model ExtensionProperties {
   /**
    * Extension Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$")
   extensionId?: string;
 
   /**
    * Extension category. e.g. weather/sensor/satellite.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   extensionCategory?: string;
 
   /**
    * Installed extension version.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^([1-9]|10).\\d$")
   installedExtensionVersion?: string;
 
   /**
    * Extension auth link.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   extensionAuthLink?: string;
 
   /**
    * Extension api docs link.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   extensionApiDocsLink?: string;
 
   /**
    * Additional Api Properties.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   additionalApiProperties?: Record<ApiProperties>;
 }
 
@@ -664,13 +664,13 @@ model PrivateLinkResourceProperties {
   /**
    * The private link resource group id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   groupId?: string;
 
   /**
    * The private link resource required member names.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   requiredMembers?: string[];
 
   /**
@@ -689,7 +689,7 @@ model SolutionProperties {
   /**
    * Partner Id of the Solution.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   partnerId?: string;
 
   /**
@@ -763,20 +763,20 @@ model DataManagerForAgricultureSolutionProperties {
   /**
    * Solution Partner Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   partnerId?: string;
 
   /**
    * Solution Partner Tenant Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   partnerTenantId?: string;
 
   /**
    * Gets scope of the Data manager For Agriculture data access that's required for processing solution request to partner.
    * Example: For gdd they might need weatherScope and satelliteScope.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dataAccessScopes?: string[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -786,45 +786,45 @@ model DataManagerForAgricultureSolutionProperties {
    * Gets api-version Swagger Document Dictionary to capture all api-versions of swagger exposed by partner to Data Manager For Agriculture.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   openApiSpecsDictionary?: Record<unknown>;
 
   /**
    * Application id of the multi tenant application to be used by partner to access Data Manager For Agriculture data.
    */
   #suppress "@azure-tools/typespec-azure-core/no-format"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @format("uuid")
   accessFBApplicationId?: string;
 
   /**
    * Application id of the SaaS multi tenant application.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   saaSApplicationId?: string;
 
   /**
    * List of ActionIds needed to make the SaaS multi tenant application access relevant fb data.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   actionIds?: string[];
 
   /**
    * Role Id of the SaaS multi tenant application to access relevant fb data.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   roleId?: string;
 
   /**
    * Role Name of the SaaS multi tenant application to access relevant fb data.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   roleName?: string;
 
   /**
    * Application name of the multi tenant application to be used by partner to access Data Manager For Agriculture Data.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   accessFBApplicationName?: string;
 }
 

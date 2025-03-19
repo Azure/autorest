@@ -18,9 +18,7 @@ using TypeSpec.Versioning;
 /**
  * Test Infrastructure for AutoRest
  */
-@service({
-  title: "AutoRest Url Test Service",
-})
+@service(#{ title: "AutoRest Url Test Service" })
 @server(
   "{$host}",
   "Test Infrastructure for AutoRest",

@@ -99,7 +99,7 @@ interface IssueContracts {
    * Updates an existing issue for an API.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   @operationId("ApiIssue_Update")
   update is IssueContractOps.CustomPatchSync<
     IssueContract,

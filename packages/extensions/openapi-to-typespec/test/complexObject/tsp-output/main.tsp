@@ -18,9 +18,7 @@ using TypeSpec.Versioning;
 /**
  * Some cool documentation.
  */
-@service({
-  title: "Complex Model Client",
-})
+@service(#{ title: "Complex Model Client" })
 @versioned(Versions)
 @server(
   "{$host}",

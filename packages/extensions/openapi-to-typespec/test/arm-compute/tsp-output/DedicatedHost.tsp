@@ -58,7 +58,7 @@ interface DedicatedHosts {
   /**
    * Update a dedicated host .
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     DedicatedHost,
     PatchModel = DedicatedHostUpdate,

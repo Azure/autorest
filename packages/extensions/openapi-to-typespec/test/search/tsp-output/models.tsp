@@ -841,33 +841,33 @@ model ErrorDetail {
   /**
    * The error code.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   code?: string;
 
   /**
    * The error message.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 
   /**
    * The error target.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   target?: string;
 
   /**
    * The error details.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   details?: ErrorDetail[];
 
   /**
    * The error additional info.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   additionalInfo?: ErrorAdditionalInfo[];
 }
 
@@ -878,13 +878,13 @@ model ErrorAdditionalInfo {
   /**
    * The additional info type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * The additional info.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   info?: Record<unknown>;
 }
 
@@ -899,14 +899,14 @@ model SearchDocumentsResult {
    * parameters, or if the query can't return all the requested documents in a
    * single response.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   `@odata.count`?: int64;
 
   /**
    * A value indicating the percentage of the index that was included in the query,
    * or null if minimumCoverage was not specified in the request.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   `@search.coverage`?: float64;
 
   /**
@@ -914,20 +914,20 @@ model SearchDocumentsResult {
    * buckets for each faceted field; null if the query did not include any facet
    * expressions.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   `@search.facets`?: Record<FacetResult[]>;
 
   /**
    * The answers query results for the search operation; null if the answers query
    * parameter was not specified or set to 'none'.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   `@search.answers`?: QueryAnswerResult[];
 
   /**
    * Debug information that applies to the search results as a whole.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   `@search.debug`?: DebugInfo;
 
   @doc("""
@@ -936,13 +936,13 @@ model SearchDocumentsResult {
     @odata.nextLink to formulate another POST Search request to get the next part
     of the search response.
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   `@search.nextPageParameters`?: SearchRequest;
 
   /**
    * The sequence of results returned by the query.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   value: SearchResult[];
@@ -953,25 +953,25 @@ model SearchDocumentsResult {
    * Search request to get the next part of the search response. Make sure to use
    * the same verb (GET or POST) as the request that produced this response.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   `@odata.nextLink`?: string;
 
   /**
    * Reason that a partial response was returned for a semantic ranking request.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   `@search.semanticPartialResponseReason`?: SemanticErrorReason;
 
   /**
    * Type of partial response that was returned for a semantic ranking request.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   `@search.semanticPartialResponseType`?: SemanticSearchResultsType;
 
   /**
    * Type of query rewrite that was used to retrieve documents.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   `@search.semanticQueryRewritesResultType`?: SemanticQueryRewritesResultType;
 }
 
@@ -987,7 +987,7 @@ model FacetResult {
    * The approximate count of documents falling within the bucket described by this
    * facet.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   count?: int64;
 
   /**
@@ -995,7 +995,7 @@ model FacetResult {
    * collection of buckets for each faceted field; null if the query did not contain
    * any nested facets.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   `@search.facets`?: Record<FacetResult[]>;
 }
 
@@ -1011,26 +1011,26 @@ model QueryAnswerResult {
    * The score value represents how relevant the answer is to the query relative to
    * other answers returned for the query.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   score?: float64;
 
   /**
    * The key of the document the answer was extracted from.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   key?: string;
 
   /**
    * The text passage extracted from the document contents as the answer.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   text?: string;
 
   /**
    * Same text passage as in the Text property with highlighted text phrases most
    * relevant to the query.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   highlights?: string;
 }
 
@@ -1042,7 +1042,7 @@ model DebugInfo {
   /**
    * Contains debugging information specific to query rewrites.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   queryRewrites?: QueryRewritesDebugInfo;
 }
 
@@ -1053,13 +1053,13 @@ model QueryRewritesDebugInfo {
   /**
    * List of query rewrites generated for the text query.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   text?: QueryRewritesValuesDebugInfo;
 
   /**
    * List of query rewrites generated for the vectorizable text queries.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vectors?: QueryRewritesValuesDebugInfo[];
 }
 
@@ -1071,13 +1071,13 @@ model QueryRewritesValuesDebugInfo {
    * The input text to the generative query rewriting model. There may be cases
    * where the user query and the input to the generative model are not identical.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   inputQuery?: string;
 
   /**
    * List of query rewrites.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   rewrites?: string[];
 }
 
@@ -1413,7 +1413,7 @@ model SearchResult {
    * The relevance score of the document compared to other documents returned by the
    * query.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   `@search.score`: float64;
 
   /**
@@ -1421,7 +1421,7 @@ model SearchResult {
    * Search results are sorted by the RerankerScore first and then by the Score.
    * RerankerScore is only returned for queries of type 'semantic'.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   `@search.rerankerScore`?: float64;
 
   /**
@@ -1429,7 +1429,7 @@ model SearchResult {
    * organized by each applicable field; null if hit highlighting was not enabled
    * for the query.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   `@search.highlights`?: Record<string[]>;
 
   /**
@@ -1437,14 +1437,14 @@ model SearchResult {
    * the search query. They are often used as document summary. Captions are only
    * returned for queries of type 'semantic'.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   `@search.captions`?: QueryCaptionResult[];
 
   /**
    * Contains debugging information that can be used to further explore your search
    * results.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   `@search.documentDebugInfo`?: DocumentDebugInfo[];
 }
 
@@ -1460,14 +1460,14 @@ model QueryCaptionResult {
    * A representative text passage extracted from the document most relevant to the
    * search query.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   text?: string;
 
   /**
    * Same text passage as in the Text property with highlighted phrases most
    * relevant to the query.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   highlights?: string;
 }
 
@@ -1479,13 +1479,13 @@ model DocumentDebugInfo {
   /**
    * Contains debugging information specific to semantic ranking requests.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   semantic?: SemanticDebugInfo;
 
   /**
    * Contains debugging information specific to vector and hybrid search.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vectors?: VectorsDebugInfo;
 }
 
@@ -1494,27 +1494,27 @@ model SemanticDebugInfo {
    * The title field that was sent to the semantic enrichment process, as well as
    * how it was used
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   titleField?: QueryResultDocumentSemanticField;
 
   /**
    * The content fields that were sent to the semantic enrichment process, as well
    * as how they were used
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   contentFields?: QueryResultDocumentSemanticField[];
 
   /**
    * The keyword fields that were sent to the semantic enrichment process, as well
    * as how they were used
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   keywordFields?: QueryResultDocumentSemanticField[];
 
   /**
    * The raw concatenated strings that were sent to the semantic enrichment process.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   rerankerInput?: QueryResultDocumentRerankerInput;
 }
 
@@ -1526,14 +1526,14 @@ model QueryResultDocumentSemanticField {
   /**
    * The name of the field that was sent to the semantic enrichment process
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The way the field was used for the semantic enrichment process (fully used,
    * partially used, or unused)
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: SemanticFieldState;
 }
 
@@ -1544,21 +1544,21 @@ model QueryResultDocumentRerankerInput {
   /**
    * The raw string for the title field that was used for semantic enrichment.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   title?: string;
 
   /**
    * The raw concatenated strings for the content fields that were used for semantic
    * enrichment.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   content?: string;
 
   /**
    * The raw concatenated strings for the keyword fields that were used for semantic
    * enrichment.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   keywords?: string;
 }
 
@@ -1567,7 +1567,7 @@ model VectorsDebugInfo {
    * The breakdown of subscores of the document prior to the chosen result set
    * fusion/combination method such as RRF.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   subscores?: QueryResultDocumentSubscores;
 }
 
@@ -1580,17 +1580,17 @@ model QueryResultDocumentSubscores {
   /**
    * The BM25 or Classic score for the text portion of the query.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   text?: TextResult;
 
   @doc("The vector similarity and @search.score values for each vector query.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vectors?: Record<SingleVectorFieldResult>[];
 
   /**
    * The BM25 or Classic score for the text portion of the query.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   documentBoost?: float64;
 }
 
@@ -1601,7 +1601,7 @@ model TextResult {
   /**
    * The BM25 or Classic score for the text portion of the query.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   searchScore?: float64;
 }
 
@@ -1614,7 +1614,7 @@ model SingleVectorFieldResult {
     The @search.score value that is calculated from the vector similarity score.
     This is the score that's visible in a pure single-field single-vector query.
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   searchScore?: float64;
 
   /**
@@ -1622,7 +1622,7 @@ model SingleVectorFieldResult {
    * definition of similarity metric, not the 'distance' version. For example,
    * cosine similarity instead of cosine distance.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vectorSimilarity?: float64;
 }
 
@@ -1633,7 +1633,7 @@ model SuggestDocumentsResult {
   /**
    * The sequence of results returned by the query.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   value: SuggestResult[];
@@ -1642,7 +1642,7 @@ model SuggestDocumentsResult {
    * A value indicating the percentage of the index that was included in the query,
    * or null if minimumCoverage was not set in the request.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   `@search.coverage`?: float64;
 }
 
@@ -1656,7 +1656,7 @@ model SuggestResult {
   /**
    * The text of the suggestion result.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   `@search.text`: string;
 }
 
@@ -1771,7 +1771,7 @@ model IndexDocumentsResult {
   /**
    * The list of status information for each document in the indexing request.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   value: IndexingResult[];
@@ -1784,21 +1784,21 @@ model IndexingResult {
   /**
    * The key of a document that was in the indexing request.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   key: string;
 
   /**
    * The error message explaining why the indexing operation failed for the document
    * identified by the key; null if indexing succeeded.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errorMessage?: string;
 
   /**
    * A value indicating whether the indexing operation succeeded for the document
    * identified by the key.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status: boolean;
 
   /**
@@ -1808,7 +1808,7 @@ model IndexingResult {
    * conflict, 422 when the index is temporarily unavailable, or 503 for when the
    * service is too busy.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   statusCode: int32;
 }
 
@@ -1821,13 +1821,13 @@ model AutocompleteResult {
    * autocomplete request, or null if minimumCoverage was not specified in the
    * request.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   `@search.coverage`?: float64;
 
   /**
    * The list of returned Autocompleted items.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   value: AutocompleteItem[];
@@ -1840,13 +1840,13 @@ model AutocompleteItem {
   /**
    * The completed term.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   text: string;
 
   /**
    * The query along with the completed term.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   queryPlusText: string;
 }
 

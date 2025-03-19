@@ -42,7 +42,7 @@ interface CloudServices {
   /**
    * Update a cloud service.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     CloudService,
     PatchModel = CloudServiceUpdate,

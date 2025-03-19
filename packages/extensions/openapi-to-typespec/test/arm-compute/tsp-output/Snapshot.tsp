@@ -25,7 +25,7 @@ model Snapshot is Azure.ResourceManager.TrackedResource<SnapshotProperties> {
    * Unused. Always Null.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managedBy?: string;
 
   /**
@@ -66,7 +66,7 @@ interface Snapshots {
    * Updates (patches) a snapshot.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Snapshot,
     PatchModel = SnapshotUpdate,

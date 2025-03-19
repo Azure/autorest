@@ -55,7 +55,7 @@ interface Images {
   /**
    * Update an image.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Image,
     PatchModel = ImageUpdate,

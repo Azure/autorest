@@ -26,9 +26,7 @@ using Azure.Core;
     "Authorization"
   >
 )
-@service({
-  title: "Azure Batch Service",
-})
+@service(#{ title: "Azure Batch Service" })
 @versioned(Versions)
 @server(
   "{batchUrl}",

@@ -31,7 +31,7 @@ using Azure.Core;
     "Ocp-Apim-Subscription-Key"
   >
 )
-@service({
+@service(#{
   title: "Microsoft Cognitive Language Service - Question Answering - Authoring",
 })
 @versioned(Versions)

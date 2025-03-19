@@ -91,7 +91,7 @@ model AccountProperties {
   /**
    * The Playwright testing dashboard URI for the account resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dashboardUri?: url;
 
   /**
@@ -112,7 +112,7 @@ model AccountProperties {
   /**
    * The status of the last operation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -123,25 +123,25 @@ model Resource {
   /**
    * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The name of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
 
@@ -157,7 +157,7 @@ model QuotaProperties {
   /**
    * The status of the last operation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -168,46 +168,46 @@ model FreeTrialProperties {
   /**
    * The playwright account id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   accountId: string;
 
   /**
    * The free-trial createdAt utcDateTime.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt: utcDateTime;
 
   /**
    * The free-trial expiryAt utcDateTime.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiryAt: utcDateTime;
 
   /**
    * The free-trial allocated limit value eg. allocated free minutes.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   allocatedValue: int32;
 
   /**
    * The free-trial used value eg. used free minutes.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   usedValue: int32;
 
   /**
    * The free-trial percentage used.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxValue(100)
   percentageUsed: decimal;
 
   /**
    * The free-trial state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state: FreeTrialState;
 }
 

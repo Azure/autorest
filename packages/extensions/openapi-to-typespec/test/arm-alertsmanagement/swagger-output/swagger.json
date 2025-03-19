@@ -619,6 +619,9 @@
           "Alerts"
         ],
         "description": "Change the state of an alert.",
+        "consumes": [
+          "text/plain"
+        ],
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"

@@ -29,7 +29,7 @@ model BlobServiceProperties
    * Sku name and tier.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sku?: Sku;
 }
 

@@ -34,9 +34,7 @@ using TypeSpec.Versioning;
  * discover incidents and establish a logic flow for root cause analysis.
  */
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
-@service({
-  title: "Anomaly Detector Client",
-})
+@service(#{ title: "Anomaly Detector Client" })
 @versioned(Versions)
 @server(
   "{Endpoint}/anomalydetector/{ApiVersion}",

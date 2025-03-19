@@ -40,7 +40,7 @@ interface BusinessProcesses {
   /**
    * Update a BusinessProcess
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   patch is ArmCustomPatchSync<
     BusinessProcess,
     PatchModel = BusinessProcessUpdate

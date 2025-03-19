@@ -19,9 +19,7 @@ using TypeSpec.Versioning;
  * The Notification Hubs client performs operations to register and query devices,
  * and send notifications
  */
-@service({
-  title: "NotificationHubsClient",
-})
+@service(#{ title: "NotificationHubsClient" })
 @versioned(Versions)
 @server(
   "{namespaceBaseUrl}",

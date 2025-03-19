@@ -29,9 +29,7 @@ using TypeSpec.Versioning;
  * The azure integration spaces resource provider.
  */
 @armProviderNamespace
-@service({
-  title: "Azure Integration Spaces resource management API.",
-})
+@service(#{ title: "Azure Integration Spaces resource management API." })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.IntegrationSpaces;

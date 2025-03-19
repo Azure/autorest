@@ -43,7 +43,7 @@ interface DataProducts {
   /**
    * Update data product resource.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<DataProduct, PatchModel = DataProductUpdate>;
 
   /**

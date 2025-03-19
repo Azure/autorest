@@ -54,9 +54,7 @@ using TypeSpec.Versioning;
  * These APIs allow end users to operate on Azure Machine Learning Workspace resources.
  */
 @armProviderNamespace
-@service({
-  title: "Azure Machine Learning Services",
-})
+@service(#{ title: "Azure Machine Learning Services" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Azure.ResourceManager.MachineLearning;

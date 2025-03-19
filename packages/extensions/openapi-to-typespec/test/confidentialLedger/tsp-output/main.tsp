@@ -19,7 +19,7 @@ using TypeSpec.Versioning;
  * The ConfidentialLedgerClient writes and retrieves ledger entries against the
  * Confidential Ledger service.
  */
-@service({
+@service(#{
   title: "Microsoft Cognitive Language Service - Analyze Text Authoring",
 })
 @versioned(Versions)

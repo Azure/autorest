@@ -90,7 +90,7 @@ interface DiagnosticContracts {
    * Updates the details of the Diagnostic for an API specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   @operationId("ApiDiagnostic_Update")
   update is DiagnosticContractOps.CustomPatchSync<
     DiagnosticContract,
@@ -201,7 +201,7 @@ interface Diagnostic {
   /**
    * Updates the details of the Diagnostic specified by its identifier.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is DiagnosticOps.CustomPatchSync<
     DiagnosticContract,
     PatchModel = DiagnosticContract,

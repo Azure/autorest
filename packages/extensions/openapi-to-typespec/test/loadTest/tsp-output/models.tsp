@@ -512,13 +512,13 @@ model Test {
   /**
    * The input artifacts for the test.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   inputArtifacts?: TestInputArtifacts;
 
   /**
    * Unique test name as identifier.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(50)
   @minLength(2)
   testId?: string;
@@ -554,27 +554,27 @@ model Test {
   /**
    * The creation datetime(ISO 8601 literal format).
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
   /**
    * The user that created.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdBy?: string;
 
   /**
    * The last Modified datetime(ISO 8601 literal format).
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime?: utcDateTime;
 
   /**
    * The user that last modified.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastModifiedBy?: string;
 }
 
@@ -629,13 +629,13 @@ model PassFailMetric {
   /**
    * The actual value of the client metric for the test run.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   actualValue?: float64;
 
   /**
    * Outcome of the test run.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   result?: PFResult;
 }
 
@@ -757,7 +757,7 @@ model TestInputArtifacts {
   /**
    * Additional supported files for the test run
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   additionalFileInfo?: FileInfo[];
 }
 
@@ -857,33 +857,33 @@ model TestAppComponents {
   /**
    * Test identifier
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testId?: string;
 
   /**
    * The creation datetime(ISO 8601 literal format).
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
   /**
    * The user that created.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdBy?: string;
 
   /**
    * The last Modified datetime(ISO 8601 literal format).
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime?: utcDateTime;
 
   /**
    * The user that last modified.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastModifiedBy?: string;
 }
 
@@ -896,7 +896,7 @@ model AppComponent {
    * fully qualified resource Id e.g
    * subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceId?: string;
 
   /**
@@ -917,13 +917,13 @@ model AppComponent {
   /**
    * Resource group name of the Azure resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceGroup?: string;
 
   /**
    * Subscription Id of the Azure resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   subscriptionId?: string;
 
   /**
@@ -939,7 +939,7 @@ model TestServerMetricConfig {
   /**
    * Test identifier
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testId?: string;
 
   /**
@@ -952,27 +952,27 @@ model TestServerMetricConfig {
   /**
    * The creation datetime(ISO 8601 literal format).
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
   /**
    * The user that created.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdBy?: string;
 
   /**
    * The last Modified datetime(ISO 8601 literal format).
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime?: utcDateTime;
 
   /**
    * The user that last modified.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastModifiedBy?: string;
 }
 
@@ -985,7 +985,7 @@ model ResourceMetric {
   /**
    * Unique name for metric.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
@@ -1055,13 +1055,13 @@ model TestRun {
   /**
    * Error details if there is any failure in load test run
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errorDetails?: ErrorDetails[];
 
   /**
    * Test run statistics.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testRunStatistics?: Record<TestRunStatistics>;
 
   /**
@@ -1072,25 +1072,25 @@ model TestRun {
   /**
    * Collection of test run artifacts
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testArtifacts?: TestRunArtifacts;
 
   /**
    * Test result for pass/Fail criteria used during the test run.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testResult?: PFTestResult;
 
   /**
    * Number of virtual users, for which test has been run.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   virtualUsers?: int32;
 
   /**
    * Unique test run name as identifier
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testRunId?: string;
 
   /**
@@ -1116,72 +1116,72 @@ model TestRun {
   /**
    * The test run status.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: Status;
 
   /**
    * The test run start DateTime(ISO 8601 literal format).
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDateTime?: utcDateTime;
 
   /**
    * The test run end DateTime(ISO 8601 literal format).
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endDateTime?: utcDateTime;
 
   /**
    * Test run initiated time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   executedDateTime?: utcDateTime;
 
   /**
    * Portal url.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   portalUrl?: string;
 
   /**
    * Test run duration in milliseconds.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   duration?: int64;
 
   /**
    * Subnet ID on which the load test instances should run.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   subnetId?: string;
 
   /**
    * The creation datetime(ISO 8601 literal format).
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
   /**
    * The user that created.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdBy?: string;
 
   /**
    * The last Modified datetime(ISO 8601 literal format).
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime?: utcDateTime;
 
   /**
    * The user that last modified.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastModifiedBy?: string;
 }
 
@@ -1192,7 +1192,7 @@ model ErrorDetails {
   /**
    * Error details in case test run was not successfully run.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 }
 
@@ -1203,85 +1203,85 @@ model TestRunStatistics {
   /**
    * Transaction name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   transaction?: string;
 
   /**
    * Sampler count.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sampleCount?: float64;
 
   /**
    * Error count.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errorCount?: float64;
 
   /**
    * Error percentage.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errorPct?: float64;
 
   /**
    * Mean response time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   meanResTime?: float64;
 
   /**
    * Median response time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   medianResTime?: float64;
 
   /**
    * Max response time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   maxResTime?: float64;
 
   /**
    * Minimum response time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   minResTime?: float64;
 
   /**
    * 90 percentile response time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   pct1ResTime?: float64;
 
   /**
    * 95 percentile response time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   pct2ResTime?: float64;
 
   /**
    * 99 percentile response time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   pct3ResTime?: float64;
 
   /**
    * Throughput.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   throughput?: float64;
 
   /**
    * Received network bytes.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   receivedKBytesPerSec?: float64;
 
   /**
    * Send network bytes.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sentKBytesPerSec?: float64;
 }
 
@@ -1292,7 +1292,7 @@ model TestRunArtifacts {
   /**
    * The input artifacts for the test run.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   inputArtifacts?: TestRunInputArtifacts;
 
   /**
@@ -1328,7 +1328,7 @@ model TestRunInputArtifacts {
   /**
    * Additional supported files for the test run
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   additionalFileInfo?: FileInfo[];
 }
 
@@ -1556,33 +1556,33 @@ model TestRunAppComponents {
   /**
    * Test run identifier
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testRunId?: string;
 
   /**
    * The creation datetime(ISO 8601 literal format).
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
   /**
    * The user that created.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdBy?: string;
 
   /**
    * The last Modified datetime(ISO 8601 literal format).
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime?: utcDateTime;
 
   /**
    * The user that last modified.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastModifiedBy?: string;
 }
 
@@ -1593,7 +1593,7 @@ model TestRunServerMetricConfig {
   /**
    * Test run identifier
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testRunId?: string;
 
   /**
@@ -1606,26 +1606,26 @@ model TestRunServerMetricConfig {
   /**
    * The creation datetime(ISO 8601 literal format).
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
   /**
    * The user that created.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdBy?: string;
 
   /**
    * The last Modified datetime(ISO 8601 literal format).
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime?: utcDateTime;
 
   /**
    * The user that last modified.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastModifiedBy?: string;
 }

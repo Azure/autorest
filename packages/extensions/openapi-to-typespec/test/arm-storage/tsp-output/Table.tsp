@@ -48,7 +48,7 @@ interface Tables {
    * Creates a new table with the specified table name, under the specified account.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   @operationId("Table_Update")
   update is ArmCustomPatchSync<Table, PatchModel = Table>;
 

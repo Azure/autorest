@@ -25,9 +25,7 @@ using TypeSpec.Versioning;
  * Azure Playwright testing management service
  */
 @armProviderNamespace
-@service({
-  title: "Microsoft AzurePlaywrightService Management API",
-})
+@service(#{ title: "Microsoft AzurePlaywrightService Management API" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.AzurePlaywrightService;

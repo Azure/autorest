@@ -618,19 +618,19 @@ model Error {
   /**
    * The error code.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   code?: string;
 
   /**
    * The error message.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 
   /**
    * The key vault server error.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   innererror?: Error;
 }
 
@@ -642,7 +642,7 @@ model KeyVaultError {
   /**
    * The key vault server error.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   error?: Error;
 }
 
@@ -781,7 +781,7 @@ model CertificateAttributes extends Attributes {
    * softDelete data retention days. Value should be >=7 and <=90 when softDelete
    * enabled, otherwise 0.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   recoverableDays?: int32;
 
   /**
@@ -790,7 +790,7 @@ model CertificateAttributes extends Attributes {
    * permanently deleted by a privileged user; otherwise, only the system can purge
    * the certificate, at the end of the retention interval.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   recoveryLevel?: DeletionRecoveryLevel;
 }
 
@@ -820,7 +820,7 @@ model Attributes {
   /**
    * Creation time in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   created?: utcDateTime;
@@ -828,7 +828,7 @@ model Attributes {
   /**
    * Last updated time in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updated?: utcDateTime;
@@ -849,7 +849,7 @@ model DeletedCertificateBundle extends CertificateBundle {
   /**
    * The time when the certificate is scheduled to be purged, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
@@ -857,7 +857,7 @@ model DeletedCertificateBundle extends CertificateBundle {
   /**
    * The time when the certificate was deleted, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
@@ -870,31 +870,31 @@ model CertificateBundle {
   /**
    * The certificate id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The key id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   kid?: string;
 
   /**
    * The secret id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sid?: string;
 
   /**
    * Thumbprint of the certificate.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   x5t?: bytes;
 
   /**
    * The management policy.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   policy?: CertificatePolicy;
 
   /**
@@ -926,7 +926,7 @@ model CertificatePolicy {
   /**
    * The certificate id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
@@ -1126,7 +1126,7 @@ model Contacts {
   /**
    * Identifier for the contacts collection.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
@@ -1267,7 +1267,7 @@ model IssuerAttributes {
   /**
    * Creation time in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   created?: utcDateTime;
@@ -1275,7 +1275,7 @@ model IssuerAttributes {
   /**
    * Last updated time in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updated?: utcDateTime;
@@ -1288,7 +1288,7 @@ model IssuerBundle {
   /**
    * Identifier for the issuer object.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
@@ -1364,7 +1364,7 @@ model CertificateOperation {
   /**
    * The certificate id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
@@ -1498,7 +1498,7 @@ model BackupCertificateResult {
   /**
    * The backup blob containing the backed up certificate.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: bytes;
 }
 
@@ -1531,7 +1531,7 @@ model DeletedCertificateItem extends CertificateItem {
   /**
    * The time when the certificate is scheduled to be purged, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
@@ -1539,7 +1539,7 @@ model DeletedCertificateItem extends CertificateItem {
   /**
    * The time when the certificate was deleted, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
@@ -1596,7 +1596,7 @@ model KeyAttributes extends Attributes {
    * softDelete data retention days. Value should be >=7 and <=90 when softDelete
    * enabled, otherwise 0.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   recoverableDays?: int32;
 
   /**
@@ -1605,7 +1605,7 @@ model KeyAttributes extends Attributes {
    * a privileged user; otherwise, only the system can purge the key, at the end of
    * the retention interval.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   recoveryLevel?: DeletionRecoveryLevel;
 
   /**
@@ -1660,7 +1660,7 @@ model KeyBundle {
    * True if the key's lifetime is managed by key vault. If this is a key backing a
    * certificate, then managed will be true.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managed?: boolean;
 
   /**
@@ -1795,7 +1795,7 @@ model DeletedKeyBundle extends KeyBundle {
   /**
    * The time when the key is scheduled to be purged, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
@@ -1803,7 +1803,7 @@ model DeletedKeyBundle extends KeyBundle {
   /**
    * The time when the key was deleted, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
@@ -1863,7 +1863,7 @@ model KeyItem {
    * True if the key's lifetime is managed by key vault. If this is a key backing a
    * certificate, then managed will be true.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managed?: boolean;
 }
 
@@ -1874,7 +1874,7 @@ model BackupKeyResult {
   /**
    * The backup blob containing the backed up key.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: bytes;
 }
 
@@ -1925,19 +1925,19 @@ model KeyOperationResult {
   /**
    * Key identifier
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   kid?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: bytes;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   iv?: bytes;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tag?: bytes;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   aad?: bytes;
 }
 
@@ -1982,7 +1982,7 @@ model KeyVerifyResult {
   /**
    * True if the signature is verified, otherwise false.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: boolean;
 }
 
@@ -2014,7 +2014,7 @@ model KeyReleaseResult {
   /**
    * A signed object containing the released key.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: string;
 }
 
@@ -2037,7 +2037,7 @@ model DeletedKeyItem extends KeyItem {
   /**
    * The time when the key is scheduled to be purged, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
@@ -2045,7 +2045,7 @@ model DeletedKeyItem extends KeyItem {
   /**
    * The time when the key was deleted, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
@@ -2058,7 +2058,7 @@ model KeyRotationPolicy {
   /**
    * The key policy id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
@@ -2132,7 +2132,7 @@ model KeyRotationPolicyAttributes {
   /**
    * The key rotation policy created time in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   created?: utcDateTime;
@@ -2140,7 +2140,7 @@ model KeyRotationPolicyAttributes {
   /**
    * The key rotation policy's last updated time in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updated?: utcDateTime;
@@ -2175,19 +2175,19 @@ model RoleDefinition {
   /**
    * The role definition ID.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The role definition name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The role definition type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: RoleDefinitionType;
 
   /**
@@ -2275,19 +2275,19 @@ model RoleAssignment {
   /**
    * The role assignment ID.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The role assignment name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The role assignment type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
@@ -2381,7 +2381,7 @@ model SecretAttributes extends Attributes {
    * softDelete data retention days. Value should be >=7 and <=90 when softDelete
    * enabled, otherwise 0.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   recoverableDays?: int32;
 
   /**
@@ -2390,7 +2390,7 @@ model SecretAttributes extends Attributes {
    * deleted by a privileged user; otherwise, only the system can purge the secret,
    * at the end of the retention interval.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   recoveryLevel?: DeletionRecoveryLevel;
 }
 
@@ -2427,14 +2427,14 @@ model SecretBundle {
    * If this is a secret backing a KV certificate, then this field specifies the
    * corresponding key backing the KV certificate.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   kid?: string;
 
   /**
    * True if the secret's lifetime is managed by key vault. If this is a secret
    * backing a certificate, then managed will be true.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managed?: boolean;
 }
 
@@ -2452,7 +2452,7 @@ model DeletedSecretBundle extends SecretBundle {
   /**
    * The time when the secret is scheduled to be purged, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
@@ -2460,7 +2460,7 @@ model DeletedSecretBundle extends SecretBundle {
   /**
    * The time when the secret was deleted, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
@@ -2519,7 +2519,7 @@ model SecretItem {
    * True if the secret's lifetime is managed by key vault. If this is a key backing
    * a certificate, then managed will be true.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managed?: boolean;
 }
 
@@ -2541,7 +2541,7 @@ model DeletedSecretItem extends SecretItem {
   /**
    * The time when the secret is scheduled to be purged, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
@@ -2549,7 +2549,7 @@ model DeletedSecretItem extends SecretItem {
   /**
    * The time when the secret was deleted, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
@@ -2562,7 +2562,7 @@ model BackupSecretResult {
   /**
    * The backup blob containing the backed up secret.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: bytes;
 }
 
@@ -2708,7 +2708,7 @@ model SettingsListResult {
    * A response message containing a list of account settings with their associated
    * value.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: Setting[];
 }
 
@@ -2724,25 +2724,25 @@ model StorageAccountItem {
   /**
    * Storage identifier.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * Storage account resource Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceId?: string;
 
   /**
    * The storage account management attributes.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   attributes?: StorageAccountAttributes;
 
   /**
    * Application specific metadata in the form of key-value pairs.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tags?: Record<string>;
 }
 
@@ -2758,7 +2758,7 @@ model StorageAccountAttributes {
   /**
    * Creation time in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   created?: utcDateTime;
@@ -2766,7 +2766,7 @@ model StorageAccountAttributes {
   /**
    * Last updated time in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updated?: utcDateTime;
@@ -2775,7 +2775,7 @@ model StorageAccountAttributes {
    * softDelete data retention days. Value should be >=7 and <=90 when softDelete
    * enabled, otherwise 0.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   recoverableDays?: int32;
 
   /**
@@ -2784,7 +2784,7 @@ model StorageAccountAttributes {
    * permanently deleted by a privileged user; otherwise, only the system can purge
    * the storage account, at the end of the retention interval.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   recoveryLevel?: DeletionRecoveryLevel;
 }
 
@@ -2808,7 +2808,7 @@ model DeletedStorageAccountItem extends StorageAccountItem {
   /**
    * The time when the storage account is scheduled to be purged, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
@@ -2816,7 +2816,7 @@ model DeletedStorageAccountItem extends StorageAccountItem {
   /**
    * The time when the storage account was deleted, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
@@ -2837,7 +2837,7 @@ model DeletedStorageBundle extends StorageBundle {
   /**
    * The time when the storage account is scheduled to be purged, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
@@ -2845,7 +2845,7 @@ model DeletedStorageBundle extends StorageBundle {
   /**
    * The time when the storage account was deleted, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
@@ -2859,43 +2859,43 @@ model StorageBundle {
   /**
    * The storage account id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The storage account resource id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceId?: string;
 
   /**
    * The current active storage account key name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   activeKeyName?: string;
 
   /**
    * whether keyvault should manage the storage account for the user.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   autoRegenerateKey?: boolean;
 
   /**
    * The key regeneration time duration specified in ISO-8601 format.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   regenerationPeriod?: string;
 
   /**
    * The storage account attributes.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   attributes?: StorageAccountAttributes;
 
   /**
    * Application specific metadata in the form of key-value pairs
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tags?: Record<string>;
 }
 
@@ -2906,7 +2906,7 @@ model BackupStorageResult {
   /**
    * The backup blob containing the backed up storage account.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: bytes;
 }
 
@@ -3007,25 +3007,25 @@ model SasDefinitionItem {
   /**
    * The storage SAS identifier.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The storage account SAS definition secret id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sid?: string;
 
   /**
    * The SAS definition management attributes.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   attributes?: SasDefinitionAttributes;
 
   /**
    * Application specific metadata in the form of key-value pairs.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tags?: Record<string>;
 }
 
@@ -3041,7 +3041,7 @@ model SasDefinitionAttributes {
   /**
    * Creation time in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   created?: utcDateTime;
@@ -3049,7 +3049,7 @@ model SasDefinitionAttributes {
   /**
    * Last updated time in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updated?: utcDateTime;
@@ -3058,7 +3058,7 @@ model SasDefinitionAttributes {
    * softDelete data retention days. Value should be >=7 and <=90 when softDelete
    * enabled, otherwise 0.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   recoverableDays?: int32;
 
   /**
@@ -3067,7 +3067,7 @@ model SasDefinitionAttributes {
    * permanently deleted by a privileged user; otherwise, only the system can purge
    * the SAS definition, at the end of the retention interval.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   recoveryLevel?: DeletionRecoveryLevel;
 }
 
@@ -3092,7 +3092,7 @@ model DeletedSasDefinitionItem extends SasDefinitionItem {
   /**
    * The time when the SAS definition is scheduled to be purged, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
@@ -3100,7 +3100,7 @@ model DeletedSasDefinitionItem extends SasDefinitionItem {
   /**
    * The time when the SAS definition was deleted, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
@@ -3121,7 +3121,7 @@ model DeletedSasDefinitionBundle extends SasDefinitionBundle {
   /**
    * The time when the SAS definition is scheduled to be purged, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
@@ -3129,7 +3129,7 @@ model DeletedSasDefinitionBundle extends SasDefinitionBundle {
   /**
    * The time when the SAS definition was deleted, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
@@ -3143,44 +3143,44 @@ model SasDefinitionBundle {
   /**
    * The SAS definition id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * Storage account SAS definition secret id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sid?: string;
 
   /**
    * The SAS definition token template signed with an arbitrary key.  Tokens created
    * according to the SAS definition will have the same properties as the template.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   templateUri?: string;
 
   /**
    * The type of SAS token the SAS definition will create.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sasType?: SasTokenType;
 
   /**
    * The validity period of SAS tokens created according to the SAS definition.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   validityPeriod?: string;
 
   /**
    * The SAS definition attributes.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   attributes?: SasDefinitionAttributes;
 
   /**
    * Application specific metadata in the form of key-value pairs
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tags?: Record<string>;
 }
 
@@ -3253,7 +3253,7 @@ model PendingCertificateSigningRequestResult {
   /**
    * The pending certificate signing request as Base64 encoded string.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: string;
 }
 

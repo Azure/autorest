@@ -1295,7 +1295,7 @@ model ApiEntityBaseContract {
   /**
    * Indicates if API revision is accessible via the gateway.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isOnline?: boolean;
 
   /**
@@ -1438,19 +1438,19 @@ model Resource {
   /**
    * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The name of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 }
 
@@ -1471,7 +1471,7 @@ model ErrorResponseBody {
   /**
    * The list of invalid fields send in request, in case of validation error.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["message", "target"])
+  @OpenAPI.extension("x-ms-identifiers", #["message", "target"])
   details?: ErrorFieldContract[];
 }
 
@@ -1612,13 +1612,13 @@ model ApiRevisionContract {
   /**
    * Identifier of the API Revision.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   apiId?: string;
 
   /**
    * Revision number of API.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(100)
   @minLength(1)
   apiRevision?: string;
@@ -1626,40 +1626,40 @@ model ApiRevisionContract {
   /**
    * The time the API Revision was created. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
   /**
    * The time the API Revision were updated. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updatedDateTime?: utcDateTime;
 
   /**
    * Description of the API Revision.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(256)
   description?: string;
 
   /**
    * Gateway URL for accessing the non-current API Revision.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   privateUrl?: string;
 
   /**
    * Indicates if API revision is the current api revision.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isOnline?: boolean;
 
   /**
    * Indicates if API revision is accessible via the gateway.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isCurrent?: boolean;
 }
 
@@ -1676,14 +1676,14 @@ model ApiReleaseContractProperties {
   /**
    * The time the API was released. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
   /**
    * The time the API release was updated.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updatedDateTime?: utcDateTime;
 
@@ -1726,7 +1726,7 @@ model OperationEntityBaseContract {
   /**
    * Collection of URL template parameters.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name", "type"])
+  @OpenAPI.extension("x-ms-identifiers", #["name", "type"])
   templateParameters?: ParameterContract[];
 
   /**
@@ -1743,7 +1743,7 @@ model OperationEntityBaseContract {
   /**
    * Array of Operation responses.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   responses?: ResponseContract[];
 
   /**
@@ -1840,19 +1840,19 @@ model RequestContract {
   /**
    * Collection of operation request query parameters.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name", "type"])
+  @OpenAPI.extension("x-ms-identifiers", #["name", "type"])
   queryParameters?: ParameterContract[];
 
   /**
    * Collection of operation request headers.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name", "type"])
+  @OpenAPI.extension("x-ms-identifiers", #["name", "type"])
   headers?: ParameterContract[];
 
   /**
    * Collection of operation request representations.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   representations?: RepresentationContract[];
 }
 
@@ -1878,7 +1878,7 @@ model RepresentationContract {
   /**
    * Collection of form parameters. Required if 'contentType' value is either 'application/x-www-form-urlencoded' or 'multipart/form-data'..
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name", "type"])
+  @OpenAPI.extension("x-ms-identifiers", #["name", "type"])
   formParameters?: ParameterContract[];
 
   /**
@@ -1905,13 +1905,13 @@ model ResponseContract {
   /**
    * Collection of operation response representations.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   representations?: RepresentationContract[];
 
   /**
    * Collection of operation response headers.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name", "type"])
+  @OpenAPI.extension("x-ms-identifiers", #["name", "type"])
   headers?: ParameterContract[];
 }
 
@@ -2192,13 +2192,13 @@ model DataMasking {
   /**
    * Masking settings for Url query parameters
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   queryParams?: DataMaskingEntity[];
 
   /**
    * Masking settings for headers
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   headers?: DataMaskingEntity[];
 }
 
@@ -2488,43 +2488,43 @@ model OperationTagResourceContractProperties {
   /**
    * Operation name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * API Name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   apiName?: string;
 
   /**
    * API Revision.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   apiRevision?: string;
 
   /**
    * API Version.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   apiVersion?: string;
 
   /**
    * Operation Description.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   description?: string;
 
   /**
    * A Valid HTTP Operation Method. Typical Http Methods like GET, PUT, POST but not limited by only them.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   method?: string;
 
   /**
    * Relative URL template identifying the target resource for this operation. May include parameters. Example: /customers/{cid}/orders/{oid}/?date={date}
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   urlTemplate?: string;
 }
 
@@ -2711,7 +2711,7 @@ model AuthorizationServerContractBaseProperties {
   /**
    * Additional parameters required by the token endpoint of this authorization server represented as an array of JSON objects with name and value string properties, i.e. {"name" : "name value", "value": "a value"}.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   tokenBodyParameters?: TokenBodyParameterContract[];
 
   /**
@@ -2939,7 +2939,7 @@ model BackendServiceFabricClusterProperties {
   /**
    * Server X509 Certificate Names Collection
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   serverX509Names?: X509CertificateName[];
 }
 
@@ -3365,7 +3365,7 @@ model ConnectivityCheckRequestProtocolConfigurationHttpConfiguration {
   /**
    * List of headers to be included in the request.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   headers?: HttpHeader[];
 }
 
@@ -3391,43 +3391,43 @@ model ConnectivityCheckResponse {
   /**
    * List of hops between the source and the destination.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hops?: ConnectivityHop[];
 
   /**
    * The connection status.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   connectionStatus?: ConnectionStatus;
 
   /**
    * Average latency in milliseconds.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   avgLatencyInMs?: int64;
 
   /**
    * Minimum latency in milliseconds.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   minLatencyInMs?: int64;
 
   /**
    * Maximum latency in milliseconds.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   maxLatencyInMs?: int64;
 
   /**
    * Total number of probes sent.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   probesSent?: int64;
 
   /**
    * Number of failed probes.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   probesFailed?: int64;
 }
 
@@ -3438,38 +3438,38 @@ model ConnectivityHop {
   /**
    * The type of the hop.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * The ID of the hop.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The IP address of the hop.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   address?: string;
 
   /**
    * The ID of the resource corresponding to this hop.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceId?: string;
 
   /**
    * List of next hop identifiers.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nextHopIds?: string[];
 
   /**
    * List of issues.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   issues?: ConnectivityIssue[];
 }
 
@@ -3480,26 +3480,26 @@ model ConnectivityIssue {
   /**
    * The origin of the issue.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   origin?: Origin;
 
   /**
    * The severity of the issue.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   severity?: Severity;
 
   /**
    * The type of issue.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: IssueType;
 
   /**
    * Provides additional context on the issue.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   context?: Record<string>[];
 }
 
@@ -3565,19 +3565,19 @@ model ResourceSkuResult {
   /**
    * The type of resource the SKU applies to.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceType?: string;
 
   /**
    * Specifies API Management SKU.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sku?: ResourceSku;
 
   /**
    * Specifies the number of API Management units.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   capacity?: ResourceSkuCapacity;
 }
 
@@ -3588,25 +3588,25 @@ model ResourceSkuCapacity {
   /**
    * The minimum capacity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   minimum?: int32;
 
   /**
    * The maximum capacity that can be set.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   maximum?: int32;
 
   /**
    * The default capacity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   default?: int32;
 
   /**
    * The scale type applicable to the sku.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   scaleType?: ResourceSkuCapacityScaleType;
 }
 
@@ -3678,74 +3678,74 @@ model ApiManagementServiceBaseProperties {
   /**
    * The current provisioning state of the API Management service which can be one of the following: Created/Activating/Succeeded/Updating/Failed/Stopped/Terminating/TerminationFailed/Deleted.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
    * The provisioning state of the API Management service, which is targeted by the long running operation started on the service.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetProvisioningState?: string;
 
   /**
    * Creation UTC date of the API Management service.The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAtUtc?: utcDateTime;
 
   /**
    * Gateway URL of the API Management service.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   gatewayUrl?: string;
 
   /**
    * Gateway URL of the API Management service in the Default Region.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   gatewayRegionalUrl?: string;
 
   /**
    * Publisher portal endpoint Url of the API Management service.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   portalUrl?: string;
 
   /**
    * Management API endpoint URL of the API Management service.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managementApiUrl?: string;
 
   /**
    * SCM endpoint URL of the API Management service.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   scmUrl?: string;
 
   /**
    * DEveloper Portal endpoint URL of the API Management service.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   developerPortalUrl?: string;
 
   /**
    * Custom hostname configuration of the API Management service.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["hostName", "type"])
+  @OpenAPI.extension("x-ms-identifiers", #["hostName", "type"])
   hostnameConfigurations?: HostnameConfiguration[];
 
   /**
    * Public Static Load Balanced IP addresses of the API Management service in Primary region. Available only for Basic, Standard, Premium and Isolated SKU.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   publicIPAddresses?: string[];
 
   /**
    * Private Static Load Balanced IP addresses of the API Management service in Primary region which is deployed in an Internal Virtual Network. Available only for Basic, Standard, Premium and Isolated SKU.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   privateIPAddresses?: string[];
 
   /**
@@ -3766,7 +3766,7 @@ model ApiManagementServiceBaseProperties {
   /**
    * Additional datacenter locations of the API Management service.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["location", "sku"])
+  @OpenAPI.extension("x-ms-identifiers", #["location", "sku"])
   additionalLocations?: AdditionalLocation[];
 
   /**
@@ -3778,7 +3778,7 @@ model ApiManagementServiceBaseProperties {
   /**
    * List of Certificates that need to be installed in the API Management service. Max supported certificates that can be installed is 10.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["certificate/thumbprint"])
+  @OpenAPI.extension("x-ms-identifiers", #["certificate/thumbprint"])
   certificates?: CertificateConfiguration[];
 
   /**
@@ -3814,7 +3814,7 @@ model ApiManagementServiceBaseProperties {
   /**
    * Compute Platform Version running the service in this location.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   platformVersion?: PlatformVersion;
 }
 
@@ -3907,14 +3907,14 @@ model VirtualNetworkConfiguration {
    * The virtual network ID. This is typically a GUID. Expect a null GUID by default.
    */
   #suppress "@azure-tools/typespec-azure-core/no-format"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @format("uuid")
   vnetid?: string;
 
   /**
    * The name of the subnet.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   subnetname?: string;
 
   /**
@@ -3946,13 +3946,13 @@ model AdditionalLocation {
   /**
    * Public Static Load Balanced IP addresses of the API Management service in the additional location. Available only for Basic, Standard, Premium and Isolated SKU.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   publicIPAddresses?: string[];
 
   /**
    * Private Static Load Balanced IP addresses of the API Management service which is deployed in an Internal Virtual Network in a particular additional location. Available only for Basic, Standard, Premium and Isolated SKU.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   privateIPAddresses?: string[];
 
   /**
@@ -3968,7 +3968,7 @@ model AdditionalLocation {
   /**
    * Gateway URL of the API Management service in the Region.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   gatewayRegionalUrl?: string;
 
   /**
@@ -3979,7 +3979,7 @@ model AdditionalLocation {
   /**
    * Compute Platform Version running the service.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   platformVersion?: PlatformVersion;
 }
 
@@ -4077,13 +4077,13 @@ model PrivateEndpointConnectionWrapperProperties {
   /**
    * The provisioning state of the private endpoint connection resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
    * All the Group ids.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   groupIds?: string[];
 }
 
@@ -4092,7 +4092,7 @@ model PrivateEndpointConnectionWrapperProperties {
  */
 model ArmIdWrapper {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
@@ -4129,7 +4129,7 @@ model ApiManagementServiceIdentity {
    * The principal id of the identity.
    */
   #suppress "@azure-tools/typespec-azure-core/no-format"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @format("uuid")
   principalId?: string;
 
@@ -4137,7 +4137,7 @@ model ApiManagementServiceIdentity {
    * The client tenant id of the identity.
    */
   #suppress "@azure-tools/typespec-azure-core/no-format"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @format("uuid")
   tenantId?: string;
 
@@ -4171,19 +4171,19 @@ model ApimResource {
   /**
    * Resource ID.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * Resource name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Resource type for API Management resource is set to Microsoft.ApiManagement.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
@@ -4218,7 +4218,7 @@ model ApiManagementServiceUpdateParameters extends ApimResource {
   /**
    * ETag of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
@@ -4273,13 +4273,13 @@ model ApiManagementServiceNameAvailabilityResult {
   /**
    * True if the name is available and can be used to create a new API Management service; otherwise false.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nameAvailable?: boolean;
 
   /**
    * If reason == invalid, provide the user with the reason why the given name is invalid, and provide the resource naming requirements so that the user can select a valid name. If reason == AlreadyExists, explain that <resourceName> is already in use, and direct them to select a different name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 
   /**
@@ -4295,7 +4295,7 @@ model ApiManagementServiceGetDomainOwnershipIdentifierResult {
   /**
    * The domain ownership identifier value.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   domainOwnershipIdentifier?: string;
 }
 
@@ -4340,13 +4340,13 @@ model EmailTemplateContractProperties {
   /**
    * Whether the template is the default template provided by API Management or has been edited.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isDefault?: boolean;
 
   /**
    * Email Template Parameter values.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["title"])
+  @OpenAPI.extension("x-ms-identifiers", #["title"])
   parameters?: EmailTemplateParametersContractProperties[];
 }
 
@@ -4420,7 +4420,7 @@ model EmailTemplateUpdateParameterProperties {
   /**
    * Email Template Parameter values.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["title"])
+  @OpenAPI.extension("x-ms-identifiers", #["title"])
   parameters?: EmailTemplateParametersContractProperties[];
 }
 
@@ -4617,7 +4617,7 @@ model GroupContractProperties {
   /**
    * true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   builtIn?: boolean;
 
   /**
@@ -4744,8 +4744,8 @@ model UserContractProperties extends UserEntityBaseParameters {
   /**
    * Collection of groups user is part of.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["displayName"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["displayName"])
   groups?: GroupContractProperties[];
 }
 
@@ -5166,7 +5166,7 @@ model NetworkStatusContract {
   /**
    * Gets the list of Connectivity Status to the Resources on which the service depends upon.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name", "resourceType"])
+  @OpenAPI.extension("x-ms-identifiers", #["name", "resourceType"])
   connectivityStatus: ConnectivityStatusContract[];
 }
 
@@ -5383,13 +5383,13 @@ model OutboundEnvironmentEndpointList {
    */
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   value: OutboundEnvironmentEndpoint[];
 
   /**
    * Link to next page of resources.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nextLink?: string;
 }
 
@@ -5405,7 +5405,7 @@ model OutboundEnvironmentEndpoint {
   /**
    * The endpoints that the Api Management Service reaches the service at.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["domainName"])
+  @OpenAPI.extension("x-ms-identifiers", #["domainName"])
   endpoints?: EndpointDependency[];
 }
 
@@ -5421,7 +5421,7 @@ model EndpointDependency {
   /**
    * The Ports used when connecting to DomainName.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["region", "port"])
+  @OpenAPI.extension("x-ms-identifiers", #["region", "port"])
   endpointDetails?: EndpointDetail[];
 }
 
@@ -5475,13 +5475,13 @@ model PolicyDescriptionContractProperties {
   /**
    * Policy description.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   description?: string;
 
   /**
    * Binary OR value of the Snippet scope.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   scope?: int64;
 }
 
@@ -5497,14 +5497,14 @@ model PortalRevisionContractProperties {
   /**
    * Portal revision publishing status details.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(2000)
   statusDetails?: string;
 
   /**
    * Status of the portal's revision.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: PortalRevisionStatus;
 
   /**
@@ -5515,14 +5515,14 @@ model PortalRevisionContractProperties {
   /**
    * Portal's revision creation date and time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
   /**
    * Last updated date and time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updatedDateTime?: utcDateTime;
 }
@@ -5722,7 +5722,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * The provisioning state of the private endpoint connection resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: PrivateEndpointConnectionProvisioningState;
 }
 
@@ -5733,7 +5733,7 @@ model PrivateEndpoint {
   /**
    * The ARM identifier for Private Endpoint
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
@@ -5780,13 +5780,13 @@ model PrivateLinkResourceProperties {
   /**
    * The private link resource group id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   groupId?: string;
 
   /**
    * The private link resource required member names.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   requiredMembers?: string[];
 
   /**
@@ -5858,7 +5858,7 @@ model SubscriptionContractProperties {
    * Subscription creation date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
    *
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDate?: utcDateTime;
 
@@ -5922,7 +5922,7 @@ model QuotaCounterListResult {
   /**
    * Quota counter values.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["counterKey", "periodKey"])
+  @OpenAPI.extension("x-ms-identifiers", #["counterKey", "periodKey"])
   value?: QuotaCounterContract[];
 
   /**
@@ -6019,7 +6019,7 @@ model RegionContract {
   /**
    * Region name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
@@ -6082,13 +6082,13 @@ model ReportRecordContract {
   /**
    * User identifier path. /users/{userId}
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   userId?: string;
 
   /**
    * Product identifier path. /products/{productId}
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   productId?: string;
 
   /**
@@ -6191,7 +6191,7 @@ model RequestReportListResult {
    * Page values.
    */
   @items
-  @OpenAPI.extension("x-ms-identifiers", ["url"])
+  @OpenAPI.extension("x-ms-identifiers", #["url"])
   value?: RequestReportRecordContract[];
 
   /**
@@ -6217,13 +6217,13 @@ model RequestReportRecordContract {
   /**
    * Product identifier path. /products/{productId}
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   productId?: string;
 
   /**
    * User identifier path. /users/{userId}
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   userId?: string;
 
   /**
@@ -6350,83 +6350,83 @@ model ApiManagementSku {
   /**
    * The type of resource the SKU applies to.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceType?: string;
 
   /**
    * The name of SKU.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Specifies the tier of virtual machines in a scale set.<br /><br /> Possible Values:<br /><br /> **Standard**<br /><br /> **Basic**
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tier?: string;
 
   /**
    * The Size of the SKU.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   size?: string;
 
   /**
    * The Family of this particular SKU.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   family?: string;
 
   /**
    * The Kind of resources that are supported in this SKU.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   kind?: string;
 
   /**
    * Specifies the number of virtual machines in the scale set.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   capacity?: ApiManagementSkuCapacity;
 
   /**
    * The set of locations that the SKU is available.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   locations?: string[];
 
   /**
    * A list of locations and availability zones in those locations where the SKU is available.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["location"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["location"])
   locationInfo?: ApiManagementSkuLocationInfo[];
 
   /**
    * The api versions that support this SKU.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   apiVersions?: string[];
 
   /**
    * Metadata for retrieving price info.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["meterID"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["meterID"])
   costs?: ApiManagementSkuCosts[];
 
   /**
    * A name value pair to describe the capability.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   capabilities?: ApiManagementSkuCapabilities[];
 
   /**
    * The restrictions because of which SKU cannot be used. This is empty if there are no restrictions.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   restrictions?: ApiManagementSkuRestrictions[];
 }
 
@@ -6437,25 +6437,25 @@ model ApiManagementSkuCapacity {
   /**
    * The minimum capacity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   minimum?: int32;
 
   /**
    * The maximum capacity that can be set.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   maximum?: int32;
 
   /**
    * The default capacity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   default?: int32;
 
   /**
    * The scale type applicable to the sku.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   scaleType?: ApiManagementSkuCapacityScaleType;
 }
 
@@ -6464,20 +6464,20 @@ model ApiManagementSkuLocationInfo {
   /**
    * Location of the SKU
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   location?: string;
 
   /**
    * List of availability zones where the SKU is supported.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   zones?: string[];
 
   /**
    * Details of capabilities available to a SKU in specific zones.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   zoneDetails?: ApiManagementSkuZoneDetails[];
 }
 
@@ -6488,14 +6488,14 @@ model ApiManagementSkuZoneDetails {
   /**
    * The set of zones that the SKU is available in with the specified capabilities.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string[];
 
   /**
    * A list of capabilities that are available for the SKU in the specified list of zones.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   capabilities?: ApiManagementSkuCapabilities[];
 }
 
@@ -6506,13 +6506,13 @@ model ApiManagementSkuCapabilities {
   /**
    * An invariant to describe the feature.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * An invariant if the feature is measured by quantity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: string;
 }
 
@@ -6523,19 +6523,19 @@ model ApiManagementSkuCosts {
   /**
    * Used for querying price from commerce.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   meterID?: string;
 
   /**
    * The multiplier is needed to extend the base metered cost.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   quantity?: int64;
 
   /**
    * An invariant to show the extended unit.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   extendedUnit?: string;
 }
 
@@ -6546,25 +6546,25 @@ model ApiManagementSkuRestrictions {
   /**
    * The type of restrictions.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: ApiManagementSkuRestrictionsType;
 
   /**
    * The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   values?: string[];
 
   /**
    * The information about the restriction where the SKU cannot be used.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   restrictionInfo?: ApiManagementSkuRestrictionInfo;
 
   /**
    * The reason for restriction.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reasonCode?: ApiManagementSkuRestrictionsReasonCode;
 }
 
@@ -6573,13 +6573,13 @@ model ApiManagementSkuRestrictionInfo {
   /**
    * Locations where the SKU is restricted
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   locations?: string[];
 
   /**
    * List of availability zones where the SKU is restricted.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   zones?: string[];
 }
 
@@ -6930,8 +6930,8 @@ model OperationResultContractProperties {
   /**
    * This property if only provided as part of the TenantConfiguration_Validate operation. It contains the log the entities which will be updated/created/deleted as part of the TenantConfiguration_Deploy operation.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["objectKey"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["objectKey"])
   actionLog?: OperationResultLogItemContract[];
 }
 

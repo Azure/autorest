@@ -39,7 +39,7 @@ interface DataTypes {
   /**
    * Update data type resource.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<DataType, PatchModel = DataTypeUpdate>;
 
   /**

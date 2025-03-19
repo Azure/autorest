@@ -40,7 +40,7 @@ interface EncryptionScopes {
   /**
    * Update encryption scope properties as specified in the request body. Update fails if the specified encryption scope does not already exist.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   patch is ArmCustomPatchSync<EncryptionScope, PatchModel = EncryptionScope>;
 
   /**

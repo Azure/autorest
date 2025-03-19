@@ -60,7 +60,7 @@ interface GalleryApplicationVersions {
   /**
    * Update a gallery Application Version.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     GalleryApplicationVersion,
     PatchModel = GalleryApplicationVersionUpdate,

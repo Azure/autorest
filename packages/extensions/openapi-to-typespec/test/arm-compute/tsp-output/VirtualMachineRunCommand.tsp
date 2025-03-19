@@ -88,7 +88,7 @@ interface VirtualMachineRunCommands {
   /**
    * The operation to update the run command.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is VirtualMachineRunCommandOps.CustomPatchAsync<
     VirtualMachineRunCommand,
     PatchModel = VirtualMachineRunCommandUpdate,
@@ -195,7 +195,7 @@ interface VirtualMachineScaleSetVMRunCommands {
    * The operation to update the VMSS VM run command.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   @operationId("VirtualMachineScaleSetVMRunCommands_Update")
   update is VirtualMachineScaleSetVMRunCommandOps.CustomPatchAsync<
     VirtualMachineRunCommand,

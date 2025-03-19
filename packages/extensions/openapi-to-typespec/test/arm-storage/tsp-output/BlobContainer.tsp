@@ -40,7 +40,7 @@ interface BlobContainers {
   /**
    * Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn't already exist.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<BlobContainer, PatchModel = BlobContainer>;
 
   /**

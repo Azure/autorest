@@ -61,7 +61,7 @@ interface OpenidConnectProviderContracts {
    * Updates the specific OpenID Connect Provider.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   @operationId("OpenIdConnectProvider_Update")
   update is ArmCustomPatchSync<
     OpenidConnectProviderContract,

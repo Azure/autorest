@@ -52,7 +52,7 @@ interface VirtualMachineExtensions {
   /**
    * The operation to update the extension.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     VirtualMachineExtension,
     PatchModel = VirtualMachineExtensionUpdate,

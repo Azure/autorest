@@ -19,9 +19,7 @@ using TypeSpec.Versioning;
  * The key vault client performs cryptographic key operations and vault operations
  * against the Key Vault service.
  */
-@service({
-  title: "Azure Keyvault Service",
-})
+@service(#{ title: "Azure Keyvault Service" })
 @versioned(Versions)
 @server(
   "{vaultBaseUrl}",

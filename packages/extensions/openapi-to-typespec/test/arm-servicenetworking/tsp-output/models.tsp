@@ -32,25 +32,25 @@ model TrafficControllerProperties {
   /**
    * Configuration Endpoints.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationEndpoints?: string[];
 
   /**
    * Frontends References List
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   frontends?: ResourceId[];
 
   /**
    * Associations References List
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   associations?: ResourceId[];
 
   /**
    * The status of the last operation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -71,25 +71,25 @@ model Resource {
   /**
    * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The name of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
 
@@ -120,7 +120,7 @@ model AssociationProperties {
   /**
    * Provisioning State of Traffic Controller Association Resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -181,13 +181,13 @@ model FrontendProperties {
   /**
    * The Fully Qualified Domain Name of the DNS record associated to a Traffic Controller frontend.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fqdn?: string;
 
   /**
    * Provisioning State of Traffic Controller Frontend Resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

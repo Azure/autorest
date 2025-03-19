@@ -78,7 +78,10 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
   if (!isParameter(element)) {
     const visibility = getPropertyVisibility(element);
     if (visibility.length) {
-      decorators.push({ name: "visibility", arguments: visibility });
+      decorators.push({
+        name: "visibility",
+        arguments: visibility.map((v) => ({ value: v, options: { unwrap: true } })),
+      });
     }
   }
 
@@ -166,7 +169,13 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
   if (!isParameter(element) && element.extensions?.["x-ms-identifiers"]?.length >= 0) {
     decorators.push({
       name: "OpenAPI.extension",
-      arguments: ["x-ms-identifiers", element.extensions!["x-ms-identifiers"]],
+      arguments: [
+        { value: "x-ms-identifiers", options: { unwrap: false } },
+        {
+          value: `#[${element.extensions!["x-ms-identifiers"].map((v: any) => `"${v}"`).join(", ")}]`,
+          options: { unwrap: true },
+        },
+      ],
       //namespace: "TypeSpec.OpenAPI",
       //module: "@typespec/openapi",
     });
@@ -229,20 +238,20 @@ function isParameter(schema: Parameter | Property): schema is Parameter {
 export function getPropertyVisibility(property: Property): string[] {
   const xmsMutability = property.extensions?.["x-ms-mutability"];
   if (!xmsMutability) {
-    return property.readOnly ? ["read"] : [];
+    return property.readOnly ? ["Lifecycle.Read"] : [];
   }
 
   const visibility: string[] = [];
 
   if (Array.isArray(xmsMutability)) {
     if (xmsMutability.includes("read")) {
-      visibility.push("read");
+      visibility.push("Lifecycle.Read");
     }
     if (xmsMutability.includes("create")) {
-      visibility.push("create");
+      visibility.push("Lifecycle.Create");
     }
     if (xmsMutability.includes("update")) {
-      visibility.push("update");
+      visibility.push("Lifecycle.Update");
     }
   }
 
@@ -257,7 +266,7 @@ function getUnixTimeSchemaDecorators(schema: Schema, decorators: TypespecDecorat
   decorators.push({
     name: "encode",
     arguments: [
-      { value: `"unixTimestamp"`, options: { unwrap: false } },
+      { value: "unixTimestamp", options: { unwrap: false } },
       { value: "int32", options: { unwrap: true } },
     ],
   });
@@ -403,7 +412,7 @@ function getArgumentValue(argument: DecoratorArgument | string | number | string
   } else {
     let value = argument.value;
     if (!argument.options?.unwrap) {
-      value = `${argument.value}`;
+      value = `"${argument.value}"`;
     }
 
     return value;

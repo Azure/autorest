@@ -507,7 +507,9 @@ function convertResourceUpdateOperation(
       }
 
       buildSuppressionsForArmOperation(armOperation, asyncNames, syncNames);
-      armOperation.decorators = [{ name: "parameterVisibility", arguments: [] }];
+      armOperation.decorators = [
+        { name: "patch", arguments: [{ value: "#{ implicitOptionality: false }", options: { unwrap: true } }] },
+      ];
       return [armOperation as TspArmResourceLifeCycleOperation];
     }
   }

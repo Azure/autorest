@@ -432,7 +432,7 @@ model ManagedResource extends Resource {
   /**
    * Resource location
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   location: string;
@@ -451,19 +451,19 @@ model Resource {
   /**
    * Azure resource Id
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * Azure resource type
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Azure resource name
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 }
 
@@ -606,13 +606,13 @@ model AlertProperties {
   /**
    * Information specific to the monitor service that gives more contextual details about the alert.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   context?: Record<unknown>;
 
   /**
    * Config which would be used for displaying the data in portal.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   egressConfig?: Record<unknown>;
 }
 
@@ -623,25 +623,25 @@ model Essentials {
   /**
    * Severity of alert Sev0 being highest and Sev4 being lowest.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   severity?: Severity;
 
   /**
    * The type of signal the alert is based on, which could be metrics, logs or activity logs.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   signalType?: SignalType;
 
   /**
    * Alert object state, which can be modified by the user.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   alertState?: AlertState;
 
   /**
    * Condition of the rule at the monitor service. It represents whether the underlying conditions have crossed the defined alert rule thresholds.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   monitorCondition?: MonitorCondition;
 
   /**
@@ -667,58 +667,58 @@ model Essentials {
   /**
    * Monitor service on which the rule(monitor) is set.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   monitorService?: MonitorService;
 
   /**
    * Rule(monitor) which fired alert instance. Depending on the monitor service,  this would be ARM id or name of the rule.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   alertRule?: string;
 
   /**
    * Unique Id created by monitor service for each alert instance. This could be used to track the issue at the monitor service, in case of Nagios, Zabbix, SCOM etc.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceCreatedId?: string;
 
   /**
    * Unique Id of the smart group
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   smartGroupId?: string;
 
   /**
    * Verbose reason describing the reason why this alert instance is added to a smart group
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   smartGroupingReason?: string;
 
   /**
    * Creation time(ISO-8601 format) of alert instance.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDateTime?: utcDateTime;
 
   /**
    * Last modification time(ISO-8601 format) of alert instance.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime?: utcDateTime;
 
   /**
    * Resolved time(ISO-8601 format) of alert instance. This will be updated when monitor service resolves the alert instance because the rule condition is no longer met.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   monitorConditionResolvedDateTime?: utcDateTime;
 
   /**
    * User who last modified the alert, in case of monitor service updates user would be 'system', otherwise name of the user.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastModifiedUserName?: string;
 
   /**
@@ -760,7 +760,7 @@ model AlertModificationProperties {
   /**
    * Unique Id of the alert for which the history is being retrieved
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   alertId?: string;
 
   /**
@@ -888,33 +888,33 @@ model SmartGroupProperties {
   /**
    * Smart group state
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   smartGroupState?: SmartGroupState;
 
   /**
    * Severity of smart group is the highest(Sev0 >... > Sev4) severity of all the alerts in the group.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   severity?: Severity;
 
   /**
    * Creation time of smart group. Date-Time in ISO-8601 format.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDateTime?: utcDateTime;
 
   /**
    * Last updated time of smart group. Date-Time in ISO-8601 format.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime?: utcDateTime;
 
   /**
    * Last modified by user name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastModifiedUserName?: string;
 
   /**
@@ -1027,7 +1027,7 @@ model SmartGroupModificationProperties {
   /**
    * Unique Id of the smartGroup for which the history is being retrieved
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   smartGroupId?: string;
 
   /**

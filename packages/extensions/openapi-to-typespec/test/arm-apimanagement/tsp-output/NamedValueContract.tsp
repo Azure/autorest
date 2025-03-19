@@ -66,7 +66,7 @@ interface NamedValueContracts {
    * Updates the specific named value.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   @operationId("NamedValue_Update")
   update is ArmCustomPatchAsync<
     NamedValueContract,

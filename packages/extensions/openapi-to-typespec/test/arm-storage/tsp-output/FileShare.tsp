@@ -63,7 +63,7 @@ interface FileShares {
   /**
    * Updates share properties as specified in request body. Properties not mentioned in the request will not be changed. Update fails if the specified share does not already exist.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<FileShare, PatchModel = FileShare>;
 
   /**

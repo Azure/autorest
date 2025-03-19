@@ -165,121 +165,121 @@ model DataProductProperties {
   /**
    * The resource GUID property of the data product resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceGuid?: string;
 
   /**
    * Latest provisioning state  of data product.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * Data product publisher name.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   publisher: string;
 
   /**
    * Product name of data product.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   product: string;
 
   /**
    * Major version of data product.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   majorVersion: string;
 
   /**
    * List of name or email associated with data product resource deployment.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   owners?: string[];
 
   /**
    * Flag to enable or disable redundancy for data product.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   redundancy?: ControlState;
 
   /**
    * Purview account url for data product to connect to.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   purviewAccount?: string;
 
   /**
    * Purview collection url for data product to connect to.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   purviewCollection?: string;
 
   /**
    * Flag to enable or disable private link for data product resource.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   privateLinksEnabled?: ControlState;
 
   /**
    * Flag to enable or disable public access of data product resource.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   publicNetworkAccess?: ControlState;
 
   /**
    * Flag to enable customer managed key encryption for data product.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   customerManagedKeyEncryptionEnabled?: ControlState;
 
   /**
    * Customer managed encryption key details for data product.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   customerEncryptionKey?: EncryptionKeyDetails;
 
   /**
    * Network rule set for data product.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   networkacls?: DataProductNetworkAcls;
 
   /**
    * Managed resource group configuration.
    */
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
 
   /**
    * List of available minor versions of the data product resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   availableMinorVersions?: string[];
 
   /**
    * Current configured minor version of the data product resource.
    */
-  @visibility("read", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   currentMinorVersion?: string;
 
   /**
    * Documentation link for the data product based on definition file.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   documentation?: string;
 
   /**
    * Resource links which exposed to the customer to query the data.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   consumptionEndpoints?: ConsumptionEndpointsProperties;
 
   /**
    * Key vault url.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   keyVaultUrl?: string;
 }
 
@@ -315,7 +315,7 @@ model DataProductNetworkAcls {
   /**
    * IP rule with specific IP or IP range in CIDR format.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   ipRules: IPRules[];
 
   /**
@@ -386,13 +386,13 @@ model ConsumptionEndpointsProperties {
   /**
    * Ingestion url to upload the data.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ingestionUrl?: string;
 
   /**
    * Resource Id of ingestion endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ingestionResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Storage/storageAccounts";
@@ -402,13 +402,13 @@ model ConsumptionEndpointsProperties {
   /**
    * Url to consume file type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fileAccessUrl?: string;
 
   /**
    * Resource Id of file access endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fileAccessResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Storage/storageAccounts";
@@ -418,13 +418,13 @@ model ConsumptionEndpointsProperties {
   /**
    * Url to consume the processed data.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   queryUrl?: string;
 
   /**
    * Resource Id of query endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   queryResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Kusto/clusters";
@@ -439,14 +439,14 @@ model ManagedServiceIdentity {
   /**
    * The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @format("uuid")
   principalId?: string;
 
   /**
    * The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @format("uuid")
   tenantId?: string;
 
@@ -468,25 +468,25 @@ model Resource {
   /**
    * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The name of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
 
@@ -497,13 +497,13 @@ model DataProductsCatalogProperties {
   /**
    * The data catalog provisioning state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * The data product publisher information.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   publishers: PublisherInformation[];
 }
 
@@ -519,7 +519,7 @@ model PublisherInformation {
   /**
    * Data product information.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   dataProducts: DataProductInformation[];
 }
 
@@ -540,7 +540,7 @@ model DataProductInformation {
   /**
    * Version information of data product.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   dataProductVersions: DataProductVersion[];
 }
 
@@ -581,31 +581,31 @@ model DataProductUpdateProperties {
   /**
    * List of name or email associated with data product resource deployment.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   owners?: string[];
 
   /**
    * Purview account url for data product to connect to.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   purviewAccount?: string;
 
   /**
    * Purview collection url for data product to connect to.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   purviewCollection?: string;
 
   /**
    * Flag to enable or disable private link for data product resource.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   privateLinksEnabled?: ControlState;
 
   /**
    * Current configured minor version of the data product resource.
    */
-  @visibility("read", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   currentMinorVersion?: string;
 }
 
@@ -691,43 +691,43 @@ model DataTypeProperties {
   /**
    * Latest provisioning state  of data product.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * State of data type.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   state?: DataTypeState;
 
   /**
    * Reason for the state of data type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   stateReason?: string;
 
   /**
    * Field for storage output retention in days.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   storageOutputRetention?: int32;
 
   /**
    * Field for database cache retention in days.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   databaseCacheRetention?: int32;
 
   /**
    * Field for database data retention in days.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   databaseRetention?: int32;
 
   /**
    * Url for data visualization.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   visualizationUrl?: string;
 }
 
@@ -748,25 +748,25 @@ model DataTypeUpdateProperties {
   /**
    * State of data type.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   state?: DataTypeState;
 
   /**
    * Field for storage output retention in days.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   storageOutputRetention?: int32;
 
   /**
    * Field for database cache retention in days.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   databaseCacheRetention?: int32;
 
   /**
    * Field for database data retention in days.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   databaseRetention?: int32;
 }
 
@@ -848,7 +848,7 @@ model ListRoleAssignments {
   /**
    * list of role assignments
    */
-  @OpenAPI.extension("x-ms-identifiers", ["roleAssignmentId"])
+  @OpenAPI.extension("x-ms-identifiers", #["roleAssignmentId"])
   roleAssignmentResponse: RoleAssignmentDetail[];
 }
 

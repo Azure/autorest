@@ -50,7 +50,7 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
    * Update machine learning workspaces connections under the specified workspace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   @operationId("WorkspaceConnections_Update")
   update is ArmCustomPatchSync<
     WorkspaceConnectionPropertiesV2BasicResource,

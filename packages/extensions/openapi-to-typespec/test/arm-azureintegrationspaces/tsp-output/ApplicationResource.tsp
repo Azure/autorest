@@ -40,7 +40,7 @@ interface ApplicationResources {
   /**
    * Update a ApplicationResource
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   patch is ArmCustomPatchSync<
     ApplicationResource,
     PatchModel = ApplicationResourceUpdate

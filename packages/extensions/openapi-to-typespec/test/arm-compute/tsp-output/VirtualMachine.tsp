@@ -32,7 +32,7 @@ model VirtualMachine
    * The virtual machine child extension resources.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resources?: VirtualMachineExtension[];
 
   /**
@@ -77,7 +77,7 @@ interface VirtualMachines {
   /**
    * The operation to update a virtual machine.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     VirtualMachine,
     PatchModel = VirtualMachineUpdate,

@@ -67,7 +67,7 @@ interface UserContracts {
    * Updates the details of the user specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   @operationId("User_Update")
   update is ArmCustomPatchSync<
     UserContract,

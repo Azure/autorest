@@ -61,7 +61,7 @@ interface LoggerContracts {
    * Updates an existing logger.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   @operationId("Logger_Update")
   update is ArmCustomPatchSync<
     LoggerContract,

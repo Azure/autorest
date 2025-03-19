@@ -39,7 +39,7 @@ interface Devices {
   /**
    * Update a Device. Use '.unassigned' or '.default' for the device group and product names to move a device to the catalog level.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<Device, PatchModel = DeviceUpdate>;
 
   /**

@@ -66,9 +66,7 @@ using TypeSpec.Versioning;
  * Compute Client
  */
 @armProviderNamespace
-@service({
-  title: "Azure Compute resource management API.",
-})
+@service(#{ title: "Azure Compute resource management API." })
 @versioned(Versions)
 // FIXME: Common type version not set. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)

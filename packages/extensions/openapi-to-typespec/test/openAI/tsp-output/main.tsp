@@ -23,9 +23,7 @@ using Azure.Core;
 @useAuth(
   AadOauth2Auth<["api.read"]> | ApiKeyAuth<ApiKeyLocation.header, "api-key">
 )
-@service({
-  title: "OpenAI",
-})
+@service(#{ title: "OpenAI" })
 @versioned(Versions)
 @server(
   "https://{endpoint}/openai",

@@ -50,7 +50,7 @@ interface ComputeResources {
    * Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   @operationId("Compute_Update")
   update is ArmCustomPatchAsync<
     ComputeResource,
