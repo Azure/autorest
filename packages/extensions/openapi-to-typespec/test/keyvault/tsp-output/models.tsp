@@ -589,14 +589,14 @@ model FullBackupOperation {
   /**
    * The start time of the backup operation in UTC
    */
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * The end time of the backup operation in UTC
    */
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
@@ -682,14 +682,14 @@ model RestoreOperation {
   /**
    * The start time of the restore operation
    */
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * The end time of the restore operation
    */
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 }
@@ -730,14 +730,14 @@ model SelectiveKeyRestoreOperation {
   /**
    * The start time of the restore operation
    */
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * The end time of the restore operation
    */
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 }
@@ -806,14 +806,14 @@ model Attributes {
   /**
    * Not before date in UTC.
    */
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   nbf?: utcDateTime;
 
   /**
    * Expiry date in UTC.
    */
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   exp?: utcDateTime;
 
@@ -821,7 +821,7 @@ model Attributes {
    * Creation time in UTC.
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   created?: utcDateTime;
 
@@ -829,7 +829,7 @@ model Attributes {
    * Last updated time in UTC.
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updated?: utcDateTime;
 }
@@ -850,7 +850,7 @@ model DeletedCertificateBundle extends CertificateBundle {
    * The time when the certificate is scheduled to be purged, in UTC
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
 
@@ -858,7 +858,7 @@ model DeletedCertificateBundle extends CertificateBundle {
    * The time when the certificate was deleted, in UTC
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
 }
@@ -1268,7 +1268,7 @@ model IssuerAttributes {
    * Creation time in UTC.
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   created?: utcDateTime;
 
@@ -1276,7 +1276,7 @@ model IssuerAttributes {
    * Last updated time in UTC.
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updated?: utcDateTime;
 }
@@ -1532,7 +1532,7 @@ model DeletedCertificateItem extends CertificateItem {
    * The time when the certificate is scheduled to be purged, in UTC
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
 
@@ -1540,7 +1540,7 @@ model DeletedCertificateItem extends CertificateItem {
    * The time when the certificate was deleted, in UTC
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
 }
@@ -1796,7 +1796,7 @@ model DeletedKeyBundle extends KeyBundle {
    * The time when the key is scheduled to be purged, in UTC
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
 
@@ -1804,7 +1804,7 @@ model DeletedKeyBundle extends KeyBundle {
    * The time when the key was deleted, in UTC
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
 }
@@ -2038,7 +2038,7 @@ model DeletedKeyItem extends KeyItem {
    * The time when the key is scheduled to be purged, in UTC
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
 
@@ -2046,7 +2046,7 @@ model DeletedKeyItem extends KeyItem {
    * The time when the key was deleted, in UTC
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
 }
@@ -2133,7 +2133,7 @@ model KeyRotationPolicyAttributes {
    * The key rotation policy created time in UTC.
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   created?: utcDateTime;
 
@@ -2141,7 +2141,7 @@ model KeyRotationPolicyAttributes {
    * The key rotation policy's last updated time in UTC.
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updated?: utcDateTime;
 }
@@ -2453,7 +2453,7 @@ model DeletedSecretBundle extends SecretBundle {
    * The time when the secret is scheduled to be purged, in UTC
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
 
@@ -2461,7 +2461,7 @@ model DeletedSecretBundle extends SecretBundle {
    * The time when the secret was deleted, in UTC
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
 }
@@ -2542,7 +2542,7 @@ model DeletedSecretItem extends SecretItem {
    * The time when the secret is scheduled to be purged, in UTC
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
 
@@ -2550,7 +2550,7 @@ model DeletedSecretItem extends SecretItem {
    * The time when the secret was deleted, in UTC
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
 }
@@ -2759,7 +2759,7 @@ model StorageAccountAttributes {
    * Creation time in UTC.
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   created?: utcDateTime;
 
@@ -2767,7 +2767,7 @@ model StorageAccountAttributes {
    * Last updated time in UTC.
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updated?: utcDateTime;
 
@@ -2809,7 +2809,7 @@ model DeletedStorageAccountItem extends StorageAccountItem {
    * The time when the storage account is scheduled to be purged, in UTC
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
 
@@ -2817,7 +2817,7 @@ model DeletedStorageAccountItem extends StorageAccountItem {
    * The time when the storage account was deleted, in UTC
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
 }
@@ -2838,7 +2838,7 @@ model DeletedStorageBundle extends StorageBundle {
    * The time when the storage account is scheduled to be purged, in UTC
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
 
@@ -2846,7 +2846,7 @@ model DeletedStorageBundle extends StorageBundle {
    * The time when the storage account was deleted, in UTC
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
 }
@@ -3042,7 +3042,7 @@ model SasDefinitionAttributes {
    * Creation time in UTC.
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   created?: utcDateTime;
 
@@ -3050,7 +3050,7 @@ model SasDefinitionAttributes {
    * Last updated time in UTC.
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updated?: utcDateTime;
 
@@ -3093,7 +3093,7 @@ model DeletedSasDefinitionItem extends SasDefinitionItem {
    * The time when the SAS definition is scheduled to be purged, in UTC
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
 
@@ -3101,7 +3101,7 @@ model DeletedSasDefinitionItem extends SasDefinitionItem {
    * The time when the SAS definition was deleted, in UTC
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
 }
@@ -3122,7 +3122,7 @@ model DeletedSasDefinitionBundle extends SasDefinitionBundle {
    * The time when the SAS definition is scheduled to be purged, in UTC
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
 
@@ -3130,7 +3130,7 @@ model DeletedSasDefinitionBundle extends SasDefinitionBundle {
    * The time when the SAS definition was deleted, in UTC
    */
   @visibility(Lifecycle.Read)
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
 }

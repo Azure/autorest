@@ -266,7 +266,7 @@ function getUnixTimeSchemaDecorators(schema: Schema, decorators: TypespecDecorat
   decorators.push({
     name: "encode",
     arguments: [
-      { value: `"unixTimestamp"`, options: { unwrap: false } },
+      { value: "unixTimestamp", options: { unwrap: false } },
       { value: "int32", options: { unwrap: true } },
     ],
   });

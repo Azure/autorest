@@ -463,7 +463,7 @@ interface pathsOperationGroup {
       /**
        * Unix time encoded value
        */
-      @encode("", unixTimestamp, "", int32)
+      @encode("unixTimestamp", int32)
       @path
       unixTimeUrlPath: utcDateTime;
     },

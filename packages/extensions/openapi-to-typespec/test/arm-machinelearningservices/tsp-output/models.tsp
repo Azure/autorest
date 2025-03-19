@@ -6565,14 +6565,14 @@ model EndpointAuthToken {
   /**
    * Access token expiry time (UTC).
    */
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiryTimeUtc?: utcDateTime;
 
   /**
    * Refresh access token after time (UTC).
    */
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   refreshAfterTimeUtc?: utcDateTime;
 

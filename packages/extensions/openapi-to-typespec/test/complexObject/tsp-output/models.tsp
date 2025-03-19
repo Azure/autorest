@@ -81,7 +81,7 @@ model Attributes {
   /**
    * Not before date in seconds since 1970-01-01T00:00:00Z.
    */
-  @encode("", unixTimestamp, "", int32)
+  @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   nbf?: utcDateTime;
 }
