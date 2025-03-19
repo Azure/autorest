@@ -1,6 +1,14 @@
 # Change Log - @autorest/openapi-to-typespec
 
-This log was last generated on Wed, 05 Mar 2025 05:42:51 GMT and should not be manually modified.
+This log was last generated on Wed, 19 Mar 2025 07:53:48 GMT and should not be manually modified.
+
+## 0.10.13
+Wed, 19 Mar 2025 07:53:48 GMT
+
+### Patches
+
+- Fix bugs: 1) uuid, 2) paged model, 3) operation response
+- Upgrade compiler version to 0.67
 
 ## 0.10.12
 Wed, 05 Mar 2025 05:42:51 GMT
