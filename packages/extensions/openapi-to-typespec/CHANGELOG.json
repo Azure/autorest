@@ -2,6 +2,18 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.10.14",
+      "tag": "@autorest/openapi-to-typespec_v0.10.14",
+      "date": "Tue, 08 Apr 2025 03:08:44 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Move some dependencies to devDependencies and move real dependencies to dependencies"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.10.13",
       "tag": "@autorest/openapi-to-typespec_v0.10.13",
       "date": "Wed, 19 Mar 2025 07:53:48 GMT",
