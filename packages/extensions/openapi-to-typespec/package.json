@@ -41,11 +41,10 @@
   "homepage": "https://github.com/Azure/autorest#readme",
   "dependencies": {
     "@azure-tools/codegen": "~2.10.0",
+    "@azure-tools/openapi": "~3.6.0",
     "@autorest/extension-base": "~3.6.0",
     "@autorest/codemodel": "~4.20.0",
     "@typespec/prettier-plugin-typespec": "^0.67.1",
-    "@typespec/openapi": "^0.67.1",
-    "@typespec/openapi3": "^0.67.1",
     "prettier": "~3.1.0",
     "lodash": "~4.17.20",
     "pluralize": "^8.0.0",
@@ -68,6 +67,8 @@
     "@typespec/versioning": "^0.67.1",
     "@typespec/xml": "^0.67.1",
     "@typespec/streams": "^0.67.1",
+    "@typespec/openapi": "^0.67.1",
+    "@typespec/openapi3": "^0.67.1",
     "@azure-tools/typespec-autorest": "^0.53.0",
     "@azure-tools/typespec-client-generator-core": "^0.53.0",
     "@azure-tools/typespec-azure-rulesets": "^0.53.0",
@@ -86,7 +87,6 @@
     "ts-loader": "~9.5.1",
     "@types/lodash": "~4.14.168",
     "@types/pluralize": "^0.0.30",
-    "@azure-tools/openapi": "~3.6.0",
     "copyfiles": "2.4.1"
   }
 }
