@@ -1,6 +1,13 @@
 # Change Log - @autorest/openapi-to-typespec
 
-This log was last generated on Wed, 19 Mar 2025 07:53:48 GMT and should not be manually modified.
+This log was last generated on Tue, 08 Apr 2025 03:08:44 GMT and should not be manually modified.
+
+## 0.10.14
+Tue, 08 Apr 2025 03:08:44 GMT
+
+### Patches
+
+- Move some dependencies to devDependencies and move real dependencies to dependencies
 
 ## 0.10.13
 Wed, 19 Mar 2025 07:53:48 GMT
