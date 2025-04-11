@@ -1,6 +1,13 @@
 # Change Log - @autorest/openapi-to-typespec
 
-This log was last generated on Tue, 08 Apr 2025 03:08:44 GMT and should not be manually modified.
+This log was last generated on Fri, 11 Apr 2025 05:58:52 GMT and should not be manually modified.
+
+## 0.11.0
+Fri, 11 Apr 2025 05:58:52 GMT
+
+### Minor changes
+
+- Upgrade TypeSpec to 1.0.0-rc.0
 
 ## 0.10.14
 Tue, 08 Apr 2025 03:08:44 GMT
