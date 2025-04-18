@@ -504,7 +504,7 @@
             "maxLength": 24
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
             "description": "The parameters to provide for the created account.",
             "required": true,
@@ -610,7 +610,7 @@
             "maxLength": 24
           },
           {
-            "name": "properties",
+            "name": "parameters",
             "in": "body",
             "description": "The parameters to provide for the updated account.",
             "required": true,
@@ -891,7 +891,7 @@
             "maxLength": 24
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
             "description": "The properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
             "required": true,
@@ -1109,7 +1109,7 @@
             "maxLength": 63
           },
           {
-            "name": "resource",
+            "name": "blobContainer",
             "in": "body",
             "description": "Properties of the blob container to create.",
             "required": true,
@@ -1185,7 +1185,7 @@
             "maxLength": 63
           },
           {
-            "name": "properties",
+            "name": "blobContainer",
             "in": "body",
             "description": "Properties to update for the blob container.",
             "required": true,
@@ -1306,7 +1306,7 @@
             "maxLength": 63
           },
           {
-            "name": "body",
+            "name": "LegalHold",
             "in": "body",
             "description": "The LegalHold property that will be clear from a blob container.",
             "required": true,
@@ -1443,7 +1443,7 @@
             "x-ms-client-name": "If-Match"
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
             "description": "The ImmutabilityPolicy Properties that will be created or updated to a blob container.",
             "required": true,
@@ -1855,7 +1855,7 @@
             "maxLength": 63
           },
           {
-            "name": "body",
+            "name": "LegalHold",
             "in": "body",
             "description": "The LegalHold property that will be set to a blob container.",
             "required": true,
@@ -2077,7 +2077,7 @@
             "maxLength": 63
           },
           {
-            "name": "resource",
+            "name": "encryptionScope",
             "in": "body",
             "description": "Encryption scope properties to be used for the create or update.",
             "required": true,
@@ -2150,7 +2150,7 @@
             "maxLength": 63
           },
           {
-            "name": "properties",
+            "name": "encryptionScope",
             "in": "body",
             "description": "Encryption scope properties to be used for the update.",
             "required": true,
@@ -2380,7 +2380,7 @@
             "maxLength": 24
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
             "description": "The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules.",
             "required": true,
@@ -2609,7 +2609,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "fileShare",
             "in": "body",
             "description": "Properties of the file share to create.",
             "required": true,
@@ -2685,7 +2685,7 @@
             "maxLength": 63
           },
           {
-            "name": "properties",
+            "name": "fileShare",
             "in": "body",
             "description": "Properties to update for the file share.",
             "required": true,
@@ -2899,7 +2899,7 @@
             "maxLength": 63
           },
           {
-            "name": "body",
+            "name": "deletedShare",
             "in": "body",
             "description": "",
             "required": true,
@@ -3157,7 +3157,7 @@
             }
           },
           {
-            "name": "resource",
+            "name": "properties",
             "in": "body",
             "description": "The blob inventory policy set to a storage account.",
             "required": true,
@@ -3286,7 +3286,7 @@
             "maxLength": 24
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "description": "The parameters to provide to list SAS credentials for the storage account.",
             "required": true,
@@ -3404,7 +3404,7 @@
             "maxLength": 24
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "description": "The parameters to provide to list service SAS credentials.",
             "required": true,
@@ -3573,7 +3573,7 @@
             "maxLength": 64
           },
           {
-            "name": "resource",
+            "name": "properties",
             "in": "body",
             "description": "The local user associated with a storage account.",
             "required": true,
@@ -3888,7 +3888,7 @@
             }
           },
           {
-            "name": "resource",
+            "name": "properties",
             "in": "body",
             "description": "The ManagementPolicy set to a storage account.",
             "required": true,
@@ -4142,7 +4142,7 @@
             "minLength": 1
           },
           {
-            "name": "resource",
+            "name": "properties",
             "in": "body",
             "description": "The object replication policy set to a storage account. A unique policy ID will be created if absent.",
             "required": true,
@@ -4370,7 +4370,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "properties",
             "in": "body",
             "description": "The private endpoint connection properties.",
             "required": true,
@@ -4622,7 +4622,7 @@
             "maxLength": 24
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
             "description": "The properties of a storage account’s Queue service, only properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules can be specified.",
             "required": true,
@@ -4810,7 +4810,7 @@
             "pattern": "^[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]$"
           },
           {
-            "name": "resource",
+            "name": "queue",
             "in": "body",
             "description": "Queue properties and metadata to be created with",
             "required": true,
@@ -4878,7 +4878,7 @@
             "pattern": "^[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]$"
           },
           {
-            "name": "properties",
+            "name": "queue",
             "in": "body",
             "description": "Queue properties and metadata to be created with",
             "required": true,
@@ -4988,7 +4988,7 @@
             "maxLength": 24
           },
           {
-            "name": "body",
+            "name": "regenerateKey",
             "in": "body",
             "description": "Specifies name of the key which should be regenerated -- key1, key2, kerb1, kerb2.",
             "required": true,
@@ -5048,7 +5048,7 @@
             "maxLength": 24
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "description": "The parameters to provide for restore blob ranges.",
             "required": true,
@@ -5262,7 +5262,7 @@
             "maxLength": 24
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
             "description": "The properties of a storage account’s Table service, only properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules can be specified.",
             "required": true,
@@ -5436,7 +5436,7 @@
             "pattern": "^[A-Za-z][A-Za-z0-9]{2,62}$"
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
             "description": "The parameters to provide to create a table.",
             "required": true,
@@ -5501,7 +5501,7 @@
             "pattern": "^[A-Za-z][A-Za-z0-9]{2,62}$"
           },
           {
-            "name": "properties",
+            "name": "parameters",
             "in": "body",
             "description": "The parameters to provide to create a table.",
             "required": true,
@@ -5675,33 +5675,40 @@
       "properties": {
         "signedServices": {
           "$ref": "#/definitions/Services",
-          "description": "The signed services accessible with the account SAS. Possible values include: Blob (b), Queue (q), Table (t), File (f)."
+          "description": "The signed services accessible with the account SAS. Possible values include: Blob (b), Queue (q), Table (t), File (f).",
+          "x-ms-client-name": "services"
         },
         "signedResourceTypes": {
           "$ref": "#/definitions/SignedResourceTypes",
-          "description": "The signed resource types that are accessible with the account SAS. Service (s): Access to service-level APIs; Container (c): Access to container-level APIs; Object (o): Access to object-level APIs for blobs, queue messages, table entities, and files."
+          "description": "The signed resource types that are accessible with the account SAS. Service (s): Access to service-level APIs; Container (c): Access to container-level APIs; Object (o): Access to object-level APIs for blobs, queue messages, table entities, and files.",
+          "x-ms-client-name": "resourceTypes"
         },
         "signedPermission": {
           "$ref": "#/definitions/Permissions",
-          "description": "The signed permissions for the account SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p)."
+          "description": "The signed permissions for the account SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p).",
+          "x-ms-client-name": "permissions"
         },
         "signedIp": {
           "type": "string",
-          "description": "An IP address or a range of IP addresses from which to accept requests."
+          "description": "An IP address or a range of IP addresses from which to accept requests.",
+          "x-ms-client-name": "IPAddressOrRange"
         },
         "signedProtocol": {
           "$ref": "#/definitions/HttpProtocol",
-          "description": "The protocol permitted for a request made with the account SAS."
+          "description": "The protocol permitted for a request made with the account SAS.",
+          "x-ms-client-name": "protocols"
         },
         "signedStart": {
           "type": "string",
           "format": "date-time",
-          "description": "The time at which the SAS becomes valid."
+          "description": "The time at which the SAS becomes valid.",
+          "x-ms-client-name": "sharedAccessStartTime"
         },
         "signedExpiry": {
           "type": "string",
           "format": "date-time",
-          "description": "The time at which the shared access signature becomes invalid."
+          "description": "The time at which the shared access signature becomes invalid.",
+          "x-ms-client-name": "sharedAccessExpiryTime"
         },
         "keyToSign": {
           "type": "string",
@@ -6106,7 +6113,8 @@
         "timetoRestore": {
           "type": "string",
           "format": "date-time",
-          "description": "Restore blob to the specified time."
+          "description": "Restore blob to the specified time.",
+          "x-ms-client-name": "timeToRestore"
         },
         "blobRanges": {
           "type": "array",
@@ -6783,11 +6791,13 @@
         },
         "keyvaultproperties": {
           "$ref": "#/definitions/KeyVaultProperties",
-          "description": "Properties provided by key vault."
+          "description": "Properties provided by key vault.",
+          "x-ms-client-name": "keyVaultProperties"
         },
         "identity": {
           "$ref": "#/definitions/EncryptionIdentity",
-          "description": "The identity to be used with service-side encryption at rest."
+          "description": "The identity to be used with service-side encryption at rest.",
+          "x-ms-client-name": "encryptionIdentity"
         }
       }
     },
@@ -6797,11 +6807,13 @@
       "properties": {
         "userAssignedIdentity": {
           "type": "string",
-          "description": "Resource identifier of the UserAssigned identity to be associated with server-side encryption on the storage account."
+          "description": "Resource identifier of the UserAssigned identity to be associated with server-side encryption on the storage account.",
+          "x-ms-client-name": "encryptionUserAssignedIdentity"
         },
         "federatedIdentityClientId": {
           "type": "string",
-          "description": "ClientId of the multi-tenant application to be used in conjunction with the user-assigned identity for cross-tenant customer-managed-keys server-side encryption on the storage account."
+          "description": "ClientId of the multi-tenant application to be used in conjunction with the user-assigned identity for cross-tenant customer-managed-keys server-side encryption on the storage account.",
+          "x-ms-client-name": "encryptionFederatedIdentityClientId"
         }
       }
     },
@@ -7365,7 +7377,8 @@
       "properties": {
         "value": {
           "type": "string",
-          "description": "Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed."
+          "description": "Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed.",
+          "x-ms-client-name": "IPAddressOrRange"
         },
         "action": {
           "type": "string",
@@ -7681,15 +7694,18 @@
       "properties": {
         "keyname": {
           "type": "string",
-          "description": "The name of KeyVault key."
+          "description": "The name of KeyVault key.",
+          "x-ms-client-name": "keyName"
         },
         "keyversion": {
           "type": "string",
-          "description": "The version of KeyVault key."
+          "description": "The version of KeyVault key.",
+          "x-ms-client-name": "keyVersion"
         },
         "keyvaulturi": {
           "type": "string",
-          "description": "The Uri of KeyVault."
+          "description": "The Uri of KeyVault.",
+          "x-ms-client-name": "keyVaultUri"
         },
         "currentVersionedKeyIdentifier": {
           "type": "string",
@@ -8159,7 +8175,8 @@
         "properties": {
           "$ref": "#/definitions/ListQueueProperties",
           "description": "List Queue resource properties.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-client-name": "queueProperties"
         }
       },
       "allOf": [
@@ -9039,8 +9056,7 @@
             "value": "Failed"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "PrivateEndpointServiceConnectionStatus": {
       "type": "string",
@@ -9548,50 +9564,61 @@
         },
         "signedResource": {
           "$ref": "#/definitions/SignedResource",
-          "description": "The signed services accessible with the service SAS. Possible values include: Blob (b), Container (c), File (f), Share (s)."
+          "description": "The signed services accessible with the service SAS. Possible values include: Blob (b), Container (c), File (f), Share (s).",
+          "x-ms-client-name": "resource"
         },
         "signedPermission": {
           "$ref": "#/definitions/Permissions",
-          "description": "The signed permissions for the service SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p)."
+          "description": "The signed permissions for the service SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p).",
+          "x-ms-client-name": "permissions"
         },
         "signedIp": {
           "type": "string",
-          "description": "An IP address or a range of IP addresses from which to accept requests."
+          "description": "An IP address or a range of IP addresses from which to accept requests.",
+          "x-ms-client-name": "IPAddressOrRange"
         },
         "signedProtocol": {
           "$ref": "#/definitions/HttpProtocol",
-          "description": "The protocol permitted for a request made with the account SAS."
+          "description": "The protocol permitted for a request made with the account SAS.",
+          "x-ms-client-name": "protocols"
         },
         "signedStart": {
           "type": "string",
           "format": "date-time",
-          "description": "The time at which the SAS becomes valid."
+          "description": "The time at which the SAS becomes valid.",
+          "x-ms-client-name": "sharedAccessStartTime"
         },
         "signedExpiry": {
           "type": "string",
           "format": "date-time",
-          "description": "The time at which the shared access signature becomes invalid."
+          "description": "The time at which the shared access signature becomes invalid.",
+          "x-ms-client-name": "sharedAccessExpiryTime"
         },
         "signedIdentifier": {
           "type": "string",
           "description": "A unique value up to 64 characters in length that correlates to an access policy specified for the container, queue, or table.",
-          "maxLength": 64
+          "maxLength": 64,
+          "x-ms-client-name": "identifier"
         },
         "startPk": {
           "type": "string",
-          "description": "The start of partition key."
+          "description": "The start of partition key.",
+          "x-ms-client-name": "partitionKeyStart"
         },
         "endPk": {
           "type": "string",
-          "description": "The end of partition key."
+          "description": "The end of partition key.",
+          "x-ms-client-name": "partitionKeyEnd"
         },
         "startRk": {
           "type": "string",
-          "description": "The start of row key."
+          "description": "The start of row key.",
+          "x-ms-client-name": "rowKeyStart"
         },
         "endRk": {
           "type": "string",
-          "description": "The end of row key."
+          "description": "The end of row key.",
+          "x-ms-client-name": "rowKeyEnd"
         },
         "keyToSign": {
           "type": "string",
@@ -9599,23 +9626,28 @@
         },
         "rscc": {
           "type": "string",
-          "description": "The response header override for cache control."
+          "description": "The response header override for cache control.",
+          "x-ms-client-name": "cacheControl"
         },
         "rscd": {
           "type": "string",
-          "description": "The response header override for content disposition."
+          "description": "The response header override for content disposition.",
+          "x-ms-client-name": "contentDisposition"
         },
         "rsce": {
           "type": "string",
-          "description": "The response header override for content encoding."
+          "description": "The response header override for content encoding.",
+          "x-ms-client-name": "contentEncoding"
         },
         "rscl": {
           "type": "string",
-          "description": "The response header override for content language."
+          "description": "The response header override for content language.",
+          "x-ms-client-name": "contentLanguage"
         },
         "rsct": {
           "type": "string",
-          "description": "The response header override for content type."
+          "description": "The response header override for content type.",
+          "x-ms-client-name": "contentType"
         }
       },
       "required": [
@@ -9801,8 +9833,7 @@
             "value": "Failed"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "SkuInformation": {
       "type": "object",
@@ -9983,8 +10014,7 @@
             "value": "NetworkSourceDeleted"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "StorageAccount": {
       "type": "object",
@@ -10256,24 +10286,29 @@
         },
         "supportsHttpsTrafficOnly": {
           "type": "boolean",
-          "description": "Allows https traffic only to storage service if sets to true."
+          "description": "Allows https traffic only to storage service if sets to true.",
+          "x-ms-client-name": "enableHttpsTrafficOnly"
         },
         "networkAcls": {
           "$ref": "#/definitions/NetworkRuleSet",
           "description": "Network rule set",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "networkRuleSet"
         },
         "isSftpEnabled": {
           "type": "boolean",
-          "description": "Enables Secure File Transfer Protocol, if set to true"
+          "description": "Enables Secure File Transfer Protocol, if set to true",
+          "x-ms-client-name": "IsSftpEnabled"
         },
         "isLocalUserEnabled": {
           "type": "boolean",
-          "description": "Enables local users feature, if set to true"
+          "description": "Enables local users feature, if set to true",
+          "x-ms-client-name": "IsLocalUserEnabled"
         },
         "isHnsEnabled": {
           "type": "boolean",
-          "description": "Account HierarchicalNamespace enabled if sets to true."
+          "description": "Account HierarchicalNamespace enabled if sets to true.",
+          "x-ms-client-name": "IsHnsEnabled"
         },
         "geoReplicationStats": {
           "$ref": "#/definitions/GeoReplicationStats",
@@ -10320,7 +10355,8 @@
         },
         "isNfsV3Enabled": {
           "type": "boolean",
-          "description": "NFS 3.0 protocol support enabled if set to true."
+          "description": "NFS 3.0 protocol support enabled if set to true.",
+          "x-ms-client-name": "enableNfsV3"
         },
         "allowCrossTenantReplication": {
           "type": "boolean",
@@ -10382,19 +10418,23 @@
         },
         "supportsHttpsTrafficOnly": {
           "type": "boolean",
-          "description": "Allows https traffic only to storage service if sets to true."
+          "description": "Allows https traffic only to storage service if sets to true.",
+          "x-ms-client-name": "enableHttpsTrafficOnly"
         },
         "isSftpEnabled": {
           "type": "boolean",
-          "description": "Enables Secure File Transfer Protocol, if set to true"
+          "description": "Enables Secure File Transfer Protocol, if set to true",
+          "x-ms-client-name": "IsSftpEnabled"
         },
         "isLocalUserEnabled": {
           "type": "boolean",
-          "description": "Enables local users feature, if set to true"
+          "description": "Enables local users feature, if set to true",
+          "x-ms-client-name": "IsLocalUserEnabled"
         },
         "networkAcls": {
           "$ref": "#/definitions/NetworkRuleSet",
-          "description": "Network rule set"
+          "description": "Network rule set",
+          "x-ms-client-name": "networkRuleSet"
         },
         "largeFileSharesState": {
           "$ref": "#/definitions/LargeFileSharesState",
@@ -10830,7 +10870,8 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}."
+          "description": "Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}.",
+          "x-ms-client-name": "virtualNetworkResourceId"
         },
         "action": {
           "type": "string",

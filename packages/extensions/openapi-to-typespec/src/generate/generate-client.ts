@@ -43,12 +43,7 @@ export function generateArmResourceClientDecorator(resource: TspArmResource): st
   const definitions: string[] = [];
 
   const formalOperationGroupName = pluralize(resource.name);
-  let targetName = formalOperationGroupName;
-
-  if (resource.name === formalOperationGroupName) {
-    targetName = `${formalOperationGroupName}OperationGroup}`;
-    definitions.push(`@@clientName(${formalOperationGroupName}OperationGroup, "${formalOperationGroupName}")`);
-  }
+  const targetName = formalOperationGroupName;
 
   if (resource.clientDecorators && resource.clientDecorators.length > 0)
     definitions.push(generateAugmentedDecorators(resource.name, resource.clientDecorators));

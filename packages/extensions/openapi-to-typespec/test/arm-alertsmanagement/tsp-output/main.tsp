@@ -12,6 +12,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
+import "./back-compatible.tsp";
 import "./AlertProcessingRule.tsp";
 import "./Alert.tsp";
 import "./SmartGroup.tsp";

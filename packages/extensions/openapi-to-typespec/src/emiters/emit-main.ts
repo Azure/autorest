@@ -62,21 +62,29 @@ function getServiceInformation(program: TypespecProgram) {
 }
 
 function getArmServiceInformation(program: TypespecProgram, metadata: Metadata) {
+  const { isFullCompatible } = getOptions();
   const imports = [
     `import "@typespec/rest";`,
     `import "@typespec/versioning";`,
     `import "@azure-tools/typespec-azure-core";`,
     `import "@azure-tools/typespec-azure-resource-manager";`,
     `import "./models.tsp";`,
-    ...getArmResourceImports(program, metadata),
-    ``,
-    `using TypeSpec.Rest;`,
-    `using TypeSpec.Http;`,
-    `using Azure.ResourceManager.Foundations;`,
-    `using Azure.Core;`,
-    `using Azure.ResourceManager;`,
-    `using TypeSpec.Versioning;`,
   ];
+  if (isFullCompatible) {
+    imports.push(`import "./back-compatible.tsp";`);
+  }
+  imports.push(
+    ...[
+      ...getArmResourceImports(program, metadata),
+      ``,
+      `using TypeSpec.Rest;`,
+      `using TypeSpec.Http;`,
+      `using Azure.ResourceManager.Foundations;`,
+      `using Azure.Core;`,
+      `using Azure.ResourceManager;`,
+      `using TypeSpec.Versioning;`,
+    ],
+  );
   const content = generateServiceInformation(program);
 
   return [...imports, content].join("\n");
