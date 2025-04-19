@@ -1,4 +1,3 @@
-import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
@@ -413,21 +412,16 @@ using Azure.ResourceManager.ApiManagement;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PortalRevisionContract.properties);
 
-@@clientName(PortalSigninSettingsOperationGroup, "PortalSigninSettings");
 @@clientName(SignInSettings.createOrUpdate::parameters.resource, "parameters");
 @@clientName(SignInSettings.update::parameters.properties, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PortalSigninSettings.properties);
 
-@@clientName(PortalSignupSettingsOperationGroup, "PortalSignupSettings");
 @@clientName(SignUpSettings.createOrUpdate::parameters.resource, "parameters");
 @@clientName(SignUpSettings.update::parameters.properties, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PortalSignupSettings.properties);
 
-@@clientName(PortalDelegationSettingsOperationGroup,
-  "PortalDelegationSettings"
-);
 @@clientName(DelegationSettings.createOrUpdate::parameters.resource,
   "parameters"
 );

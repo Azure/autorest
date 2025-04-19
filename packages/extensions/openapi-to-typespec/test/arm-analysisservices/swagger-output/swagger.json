@@ -306,7 +306,7 @@
             "pattern": "^[a-z][a-z0-9]*$"
           },
           {
-            "name": "resource",
+            "name": "serverParameters",
             "in": "body",
             "description": "Contains the information used to provision the Analysis Services server.",
             "required": true,
@@ -400,7 +400,7 @@
             "pattern": "^[a-z][a-z0-9]*$"
           },
           {
-            "name": "properties",
+            "name": "serverUpdateParameters",
             "in": "body",
             "description": "Request object that contains the updated information for the server.",
             "required": true,
@@ -1126,8 +1126,7 @@
             "value": "Scaling"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "ServerAdministrators": {
       "type": "object",
@@ -1280,8 +1279,7 @@
             "value": "Scaling"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "TypeSpec.Http.OkResponse": {
       "type": "object",

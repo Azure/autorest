@@ -630,7 +630,7 @@
             "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
           },
           {
-            "name": "resource",
+            "name": "request",
             "in": "body",
             "description": "Data Manager For Agriculture resource create or update request object.",
             "required": true,
@@ -692,7 +692,7 @@
             "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
           },
           {
-            "name": "properties",
+            "name": "request",
             "in": "body",
             "description": "Request object.",
             "required": true,
@@ -953,7 +953,7 @@
             "maxLength": 63
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "description": "Body must be valid DataConnector request.",
             "required": true,
@@ -1226,7 +1226,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "requestBody",
             "in": "body",
             "description": "Extension resource request body.",
             "required": true,
@@ -1448,7 +1448,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "request",
             "in": "body",
             "description": "Request object.",
             "required": true,
@@ -1903,7 +1903,7 @@
             "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
           },
           {
-            "name": "resource",
+            "name": "requestBody",
             "in": "body",
             "description": "Solution resource request body.",
             "required": true,
@@ -2259,7 +2259,8 @@
         },
         "$skipToken": {
           "type": "string",
-          "description": "Token used in retrieving the next page. If null, there are no additional pages."
+          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "x-ms-client-name": "skipToken"
         }
       },
       "required": [
@@ -2358,7 +2359,8 @@
         },
         "$skipToken": {
           "type": "string",
-          "description": "Token used in retrieving the next page. If null, there are no additional pages."
+          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "x-ms-client-name": "skipToken"
         }
       },
       "required": [
@@ -2432,7 +2434,8 @@
         },
         "$skipToken": {
           "type": "string",
-          "description": "Token used in retrieving the next page. If null, there are no additional pages."
+          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "x-ms-client-name": "skipToken"
         }
       },
       "required": [
@@ -2634,7 +2637,8 @@
         },
         "$skipToken": {
           "type": "string",
-          "description": "Token used in retrieving the next page. If null, there are no additional pages."
+          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "x-ms-client-name": "skipToken"
         }
       },
       "required": [
@@ -2872,8 +2876,7 @@
             "value": "Failed"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "PrivateEndpointServiceConnectionStatus": {
       "type": "string",
@@ -3015,8 +3018,7 @@
             "value": "Running"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "PublicNetworkAccess": {
       "type": "string",
@@ -3098,7 +3100,8 @@
         },
         "$skipToken": {
           "type": "string",
-          "description": "Token used in retrieving the next page. If null, there are no additional pages."
+          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "x-ms-client-name": "skipToken"
         }
       },
       "required": [

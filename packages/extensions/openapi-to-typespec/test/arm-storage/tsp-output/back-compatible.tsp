@@ -1,4 +1,3 @@
-import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
@@ -157,7 +156,6 @@ using Microsoft.Storage;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(EncryptionScope.properties);
 
-@@clientName(BlobServicePropertiesOperationGroup, "BlobServiceProperties");
 @@clientName(BlobServices.setServiceProperties::parameters.resource,
   "parameters"
 );
@@ -177,7 +175,6 @@ using Microsoft.Storage;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ImmutabilityPolicy.properties);
 
-@@clientName(FileServicePropertiesOperationGroup, "FileServiceProperties");
 @@clientName(FileServices.setServiceProperties::parameters.resource,
   "parameters"
 );
@@ -190,7 +187,6 @@ using Microsoft.Storage;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(FileShare.properties);
 
-@@clientName(QueueServicePropertiesOperationGroup, "QueueServiceProperties");
 @@clientName(QueueServices.setServiceProperties::parameters.resource,
   "parameters"
 );
@@ -202,7 +198,6 @@ using Microsoft.Storage;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(StorageQueue.properties);
 
-@@clientName(TableServicePropertiesOperationGroup, "TableServiceProperties");
 @@clientName(TableServices.setServiceProperties::parameters.resource,
   "parameters"
 );

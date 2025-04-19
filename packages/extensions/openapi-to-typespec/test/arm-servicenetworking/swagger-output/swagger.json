@@ -1210,8 +1210,7 @@
             "value": "Canceled"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "ResourceId": {
       "type": "object",

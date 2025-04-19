@@ -21,10 +21,12 @@ export async function emitClient(filePath: string, program: TypespecProgram): Pr
 }
 
 function generateClient(program: TypespecProgram) {
-  const { isArm } = getOptions();
+  const { isArm, isFullCompatible } = getOptions();
   const { models } = program;
   const { modules, namespaces: namespacesSet } = getClientImports(program);
-  const imports = [...new Set<string>([`import "./main.tsp";`, ...modules])].join("\n");
+  const imports = (
+    isFullCompatible ? [...new Set<string>([...modules])] : [...new Set<string>([`import "./main.tsp";`, ...modules])]
+  ).join("\n");
 
   const namespaces = [...new Set<string>([...namespacesSet, `using ${getNamespace(program)};`])].join("\n");
   const objects = models.objects

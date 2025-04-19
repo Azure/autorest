@@ -3100,8 +3100,7 @@
             "value": "Accepted"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "SaveOrGetBusinessProcessDevelopmentArtifactResponse": {
       "type": "object",
@@ -3299,7 +3298,8 @@
       "properties": {
         "$schema": {
           "type": "string",
-          "description": "The tracking definition schema uri."
+          "description": "The tracking definition schema uri.",
+          "x-ms-client-name": "schema"
         },
         "businessProcess": {
           "$ref": "#/definitions/BusinessProcessReference",

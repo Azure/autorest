@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/openapi-to-typespec",
+      "comment": "File structure for brownfield services",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/openapi-to-typespec"
+}

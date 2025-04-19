@@ -1653,7 +1653,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "alertProcessingRule",
             "in": "body",
             "description": "Alert processing rule to be created/updated.",
             "required": true,
@@ -1707,7 +1707,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "alertProcessingRulePatch",
             "in": "body",
             "description": "Parameters supplied to the operation.",
             "required": true,
