@@ -2,6 +2,23 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.11.0",
+      "tag": "@autorest/openapi-to-typespec_v0.11.0",
+      "date": "Sat, 19 Apr 2025 07:27:04 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "File structure for brownfield services"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Upgrade TypeSpec to 1.0.0-rc.0"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.10.14",
       "tag": "@autorest/openapi-to-typespec_v0.10.14",
       "date": "Tue, 08 Apr 2025 03:08:44 GMT",
