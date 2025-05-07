@@ -471,6 +471,21 @@ union ObjectType {
 }
 
 /**
+ * The type of identity that created the resource.
+ */
+union CreatedByType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  User: "User",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Application: "Application",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ManagedIdentity: "ManagedIdentity",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Key: "Key",
+}
+
+/**
  * The provider for the encryption scope. Possible values (case-insensitive):  Microsoft.Storage, Microsoft.KeyVault.
  */
 union EncryptionScopeSource {
@@ -688,6 +703,15 @@ union LeaseShareAction {
 }
 
 /**
+ * The SKU tier. This is based on the SKU name.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum SkuTier {
+  Standard,
+  Premium,
+}
+
+/**
  * Gets the reason that a storage account name could not be used. The Reason element is only returned if NameAvailable is false.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
@@ -781,6 +805,58 @@ enum PublicAccess {
   Container,
   Blob,
   None,
+}
+
+/**
+ * Storage REST API operation definition.
+ */
+model Operation {
+  /**
+   * Operation name: {provider}/{resource}/{operation}
+   */
+  name?: string;
+
+  /**
+   * Display metadata associated with the operation.
+   */
+  display?: OperationDisplay;
+
+  /**
+   * The origin of operations.
+   */
+  origin?: string;
+
+  /**
+   * Properties of operation, include metric specifications.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: OperationProperties;
+}
+
+/**
+ * Display metadata associated with the operation.
+ */
+model OperationDisplay {
+  /**
+   * Service provider: Microsoft Storage.
+   */
+  provider?: string;
+
+  /**
+   * Resource on which the operation is performed etc.
+   */
+  resource?: string;
+
+  /**
+   * Type of operation: get, read, delete, etc.
+   */
+  operation?: string;
+
+  /**
+   * Description of the operation.
+   */
+  description?: string;
 }
 
 /**
@@ -1103,6 +1179,23 @@ model Identity {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   userAssignedIdentities?: Record<UserAssignedIdentity>;
+}
+
+/**
+ * UserAssignedIdentity for the resource.
+ */
+model UserAssignedIdentity {
+  /**
+   * The principal ID of the identity.
+   */
+  @visibility(Lifecycle.Read)
+  principalId?: string;
+
+  /**
+   * The client ID of the identity.
+   */
+  @visibility(Lifecycle.Read)
+  clientId?: string;
 }
 
 /**
@@ -2028,29 +2121,6 @@ model PrivateLinkServiceConnectionState {
 }
 
 /**
- * Common fields that are returned in the response for all Azure Resource Manager resources
- */
-model Resource {
-  /**
-   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The name of the resource
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-}
-
-/**
  * Blob restore status.
  */
 model BlobRestoreStatus {
@@ -2319,6 +2389,17 @@ model DeletedAccountProperties {
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletionTime?: utcDateTime;
+}
+
+/**
+ * An error response from the storage resource provider.
+ */
+@error
+model ErrorResponse {
+  /**
+   * Azure Storage Resource Provider error response body.
+   */
+  error?: ErrorResponseBody;
 }
 
 /**
@@ -3897,18 +3978,6 @@ model ImmutableStorageWithVersioning {
    */
   @visibility(Lifecycle.Read)
   migrationState?: MigrationState;
-}
-
-/**
- * The resource model definition for an Azure Resource Manager resource with an etag.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model AzureEntityResource extends Resource {
-  /**
-   * Resource Etag.
-   */
-  @visibility(Lifecycle.Read)
-  etag?: string;
 }
 
 /**

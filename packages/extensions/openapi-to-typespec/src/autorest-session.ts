@@ -5,6 +5,8 @@ let _session: Session<CodeModel>;
 let _armCommonTypeVersion: ArmCommonTypeVersion | undefined;
 let _userSetArmCommonTypeVersion: string;
 
+const commonTypeModels: string[] = [];
+
 export function setSession(session: Session<CodeModel>): void {
   _session = session;
 }
@@ -14,7 +16,21 @@ export function getSession(): Session<CodeModel> {
 }
 
 export function setArmCommonTypeVersion(version: string): void {
-  _userSetArmCommonTypeVersion = version;
+  if (_userSetArmCommonTypeVersion === undefined) {
+    _userSetArmCommonTypeVersion = version;
+  }
+}
+
+export function setArmCommonTypeModel(model: string): void {
+  if (!commonTypeModels.includes(model)) {
+    commonTypeModels.push(model);
+  }
+}
+
+export function isCommonTypeModel(model: string): boolean {
+  const lowerCaseModel = model.toLowerCase();
+  const lowerCaseCommonTypeModels = commonTypeModels.map((m) => m.toLowerCase());
+  return lowerCaseCommonTypeModels.includes(lowerCaseModel);
 }
 
 export type ArmCommonTypeVersion = "v3" | "v4" | "v5" | "v6";

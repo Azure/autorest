@@ -25,7 +25,7 @@ model DataProduct
   /**
    * The managed service identities assigned to this resource.
    */
-  identity?: ManagedServiceIdentity;
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
 @armResourceOperations

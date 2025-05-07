@@ -11,6 +11,17 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.AgFoodPlatform;
 
 /**
+ * The reason why the given name is not available.
+ */
+union CheckNameAvailabilityReason {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Invalid: "Invalid",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  AlreadyExists: "AlreadyExists",
+}
+
+/**
  * Enum for different types of AuthCredentials supported.
  */
 union AuthCredentialsKind {
@@ -19,6 +30,21 @@ union AuthCredentialsKind {
   OAuthClientCredentials: "OAuthClientCredentials",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ApiKeyAuthCredentials: "ApiKeyAuthCredentials",
+}
+
+/**
+ * The type of identity that created the resource.
+ */
+union CreatedByType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  User: "User",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Application: "Application",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ManagedIdentity: "ManagedIdentity",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Key: "Key",
 }
 
 /**
@@ -53,67 +79,25 @@ union PublicNetworkAccess {
 }
 
 /**
- * The private endpoint connection status.
+ * The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is "user,system"
  */
-union PrivateEndpointServiceConnectionStatus {
+union Origin {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Pending: "Pending",
+  user: "user",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Approved: "Approved",
+  system: "system",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Rejected: "Rejected",
+  `user,system`: "user,system",
 }
 
 /**
- * The current provisioning state.
+ * Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-union PrivateEndpointConnectionProvisioningState {
+union ActionType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Failed: "Failed",
-}
-
-/**
- * The check availability request body.
- */
-model CheckNameAvailabilityRequest {
-  /**
-   * The name of the resource for which availability needs to be checked.
-   */
-  name?: string;
-
-  /**
-   * The resource type.
-   */
-  type?: string;
-}
-
-/**
- * The check availability result.
- */
-model CheckNameAvailabilityResponse {
-  /**
-   * Indicates if the resource name is available.
-   */
-  nameAvailable?: boolean;
-
-  /**
-   * The reason why the given name is not available.
-   */
-  reason?: CheckNameAvailabilityReason;
-
-  /**
-   * Detailed reason why the given name is available.
-   */
-  message?: string;
+  Internal: "Internal",
 }
 
 /**
@@ -136,35 +120,6 @@ model AuthCredentials {
    * Enum for different types of AuthCredentials supported.
    */
   kind: AuthCredentialsKind;
-}
-
-/**
- * Common fields that are returned in the response for all Azure Resource Manager resources
- */
-model Resource {
-  /**
-   * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-   */
-  @visibility(Lifecycle.Read)
-  id?: Azure.Core.armResourceIdentifier;
-
-  /**
-   * The name of the resource
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
-   */
-  @visibility(Lifecycle.Read)
-  systemData?: SystemData;
 }
 
 /**
@@ -330,32 +285,6 @@ model UnitSystemsInfo {
 }
 
 /**
- * Identity for the resource.
- */
-model Identity {
-  /**
-   * The principal ID of resource identity. The value must be an UUID.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
-  @visibility(Lifecycle.Read)
-  @format("uuid")
-  principalId?: string;
-
-  /**
-   * The tenant ID of resource. The value must be an UUID.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
-  @visibility(Lifecycle.Read)
-  @format("uuid")
-  tenantId?: string;
-
-  /**
-   * The identity type.
-   */
-  type?: "SystemAssigned";
-}
-
-/**
  * Data Manager For Agriculture ARM Resource properties.
  */
 model DataManagerForAgricultureProperties {
@@ -406,65 +335,7 @@ model SensorIntegration {
   /**
    * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
    */
-  provisioningInfo?: ErrorResponse;
-}
-
-/**
- * Properties of the private endpoint connection.
- */
-model PrivateEndpointConnectionProperties {
-  /**
-   * The group ids for the private endpoint resource.
-   */
-  @visibility(Lifecycle.Read)
-  groupIds?: string[];
-
-  /**
-   * The private endpoint resource.
-   */
-  privateEndpoint?: PrivateEndpoint;
-
-  /**
-   * A collection of information about the state of the connection between service consumer and provider.
-   */
-  privateLinkServiceConnectionState: PrivateLinkServiceConnectionState;
-
-  /**
-   * The provisioning state of the private endpoint connection resource.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: PrivateEndpointConnectionProvisioningState;
-}
-
-/**
- * The private endpoint resource.
- */
-model PrivateEndpoint {
-  /**
-   * The ARM identifier for private endpoint.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-}
-
-/**
- * A collection of information about the state of the connection between service consumer and provider.
- */
-model PrivateLinkServiceConnectionState {
-  /**
-   * Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service.
-   */
-  status?: PrivateEndpointServiceConnectionStatus;
-
-  /**
-   * The reason for approval/rejection of the connection.
-   */
-  description?: string;
-
-  /**
-   * A message indicating if changes on the service provider require any updates on the consumer.
-   */
-  actionsRequired?: string;
+  provisioningInfo?: Azure.ResourceManager.CommonTypes.ErrorResponse;
 }
 
 /**
@@ -479,7 +350,7 @@ model DataManagerForAgricultureUpdateRequestModel {
   /**
    * Identity for the resource.
    */
-  identity?: Identity;
+  identity?: Azure.ResourceManager.CommonTypes.Identity;
 
   /**
    * Data Manager For Agriculture ARM Resource properties.
@@ -637,46 +508,32 @@ model ExtensionListResponse is Azure.Core.Page<Extension> {
 }
 
 /**
- * List of private endpoint connections associated with the specified resource.
+ * Localized display information for this particular operation.
  */
-model PrivateEndpointConnectionListResult {
+model OperationDisplay {
   /**
-   * Array of private endpoint connections.
-   */
-  value?: PrivateEndpointConnection[];
-}
-
-/**
- * A list of private link resources.
- */
-model PrivateLinkResourceListResult {
-  /**
-   * Array of private link resources
-   */
-  value?: PrivateLinkResource[];
-}
-
-/**
- * Properties of a private link resource.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-model PrivateLinkResourceProperties {
-  /**
-   * The private link resource group id.
+   * The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
    */
   @visibility(Lifecycle.Read)
-  groupId?: string;
+  provider?: string;
 
   /**
-   * The private link resource required member names.
+   * The localized friendly name of the resource type related to this operation. E.g. "Virtual Machines" or "Job Schedule Collections".
    */
   @visibility(Lifecycle.Read)
-  requiredMembers?: string[];
+  resource?: string;
 
   /**
-   * The private link resource private link DNS zone name.
+   * The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine", "Restart Virtual Machine".
    */
-  requiredZoneNames?: string[];
+  @visibility(Lifecycle.Read)
+  operation?: string;
+
+  /**
+   * The short, localized friendly description of the operation; suitable for tool tips and detailed views.
+   */
+  @visibility(Lifecycle.Read)
+  description?: string;
 }
 
 /**

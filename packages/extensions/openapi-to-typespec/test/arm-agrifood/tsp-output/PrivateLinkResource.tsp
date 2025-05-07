@@ -37,7 +37,7 @@ interface PrivateLinkResources {
    */
   listByResource is ArmResourceListByParent<
     PrivateLinkResource,
-    Response = ArmResponse<PrivateLinkResourceListResult>
+    Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateLinkResourceListResultV5>
   >;
 }
 

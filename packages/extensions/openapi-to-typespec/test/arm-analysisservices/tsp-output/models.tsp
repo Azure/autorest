@@ -75,6 +75,19 @@ union ProvisioningState {
 }
 
 /**
+ * The name of the Azure pricing tier to which the SKU applies.
+ */
+union SkuTier {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Development: "Development",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Basic: "Basic",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Standard: "Standard",
+}
+
+/**
  * The managed mode of the server (0 = not managed, 1 = managed).
  */
 union ManagedMode {
@@ -133,6 +146,28 @@ model AnalysisServicesServerProperties
    * The SKU of the Analysis Services resource.
    */
   sku?: ResourceSku;
+}
+
+/**
+ * Represents the SKU name and Azure pricing tier for Analysis Services resource.
+ */
+model ResourceSku {
+  /**
+   * Name of the SKU level.
+   */
+  name: string;
+
+  /**
+   * The name of the Azure pricing tier to which the SKU applies.
+   */
+  tier?: SkuTier;
+
+  /**
+   * The number of instances in the read only query pool.
+   */
+  @maxValue(8)
+  @minValue(1)
+  capacity?: int32 = 1;
 }
 
 /**
@@ -286,6 +321,89 @@ model Resource {
 }
 
 /**
+ * Describes the format of Error response.
+ */
+@error
+model ErrorResponse {
+  /**
+   * The error object
+   */
+  error?: ErrorDetail;
+}
+
+/**
+ * The error detail.
+ */
+model ErrorDetail {
+  /**
+   * The error code.
+   */
+  @visibility(Lifecycle.Read)
+  code?: string;
+
+  /**
+   * The error message.
+   */
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  /**
+   * The error target.
+   */
+  @visibility(Lifecycle.Read)
+  target?: string;
+
+  /**
+   * The error sub code
+   */
+  @visibility(Lifecycle.Read)
+  subCode?: int32;
+
+  /**
+   * The http status code
+   */
+  @visibility(Lifecycle.Read)
+  httpStatusCode?: int32;
+
+  /**
+   * the timestamp for the error.
+   */
+  @visibility(Lifecycle.Read)
+  timeStamp?: string;
+
+  /**
+   * The error details.
+   */
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["message", "target"])
+  details?: ErrorDetail[];
+
+  /**
+   * The error additional info.
+   */
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  additionalInfo?: ErrorAdditionalInfo[];
+}
+
+/**
+ * The resource management error additional info.
+ */
+model ErrorAdditionalInfo {
+  /**
+   * The additional info type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The additional info.
+   */
+  @visibility(Lifecycle.Read)
+  info?: Record<unknown>;
+}
+
+/**
  * Provision request specification
  */
 model AnalysisServicesServerUpdateParameters {
@@ -414,6 +532,62 @@ model CheckServerNameAvailabilityResult {
    * The detailed message of the request unavailability.
    */
   message?: string;
+}
+
+/**
+ * A Consumption REST API operation.
+ */
+model Operation {
+  /**
+   * Operation name: {provider}/{resource}/{operation}.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The object that represents the operation.
+   */
+  display?: OperationDisplay;
+
+  /**
+   * The origin
+   */
+  @visibility(Lifecycle.Read)
+  origin?: string;
+
+  /**
+   * Additional properties to expose performance metrics to shoebox.
+   */
+  properties?: OperationProperties;
+}
+
+/**
+ * The object that represents the operation.
+ */
+model OperationDisplay {
+  /**
+   * Service provider: Microsoft.Consumption.
+   */
+  @visibility(Lifecycle.Read)
+  provider?: string;
+
+  /**
+   * Resource on which the operation is performed: UsageDetail, etc.
+   */
+  @visibility(Lifecycle.Read)
+  resource?: string;
+
+  /**
+   * Operation type: Read, write, delete, etc.
+   */
+  @visibility(Lifecycle.Read)
+  operation?: string;
+
+  /**
+   * Description of the operation object.
+   */
+  @visibility(Lifecycle.Read)
+  description?: string;
 }
 
 /**

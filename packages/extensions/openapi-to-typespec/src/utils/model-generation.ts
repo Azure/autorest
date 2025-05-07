@@ -1,3 +1,4 @@
+import { getArmCommonTypeVersion, isCommonTypeModel } from "../autorest-session";
 import { generateParameter } from "../generate/generate-parameter";
 import { TypespecObjectProperty, TypespecSpreadStatement, TypespecTemplateModel } from "../interfaces";
 import { getOptions } from "../options";
@@ -30,7 +31,9 @@ export function getModelPropertyDeclarations(property: TypespecObjectProperty): 
     definitions.push(...generateSuppressions(property.suppressions));
   }
   definitions.push(
-    `"${property.name}"${getOptionalOperator(property)}: ${getFullyQualifiedName(property.type)}${defaultValue};`,
+    `"${property.name}"${getOptionalOperator(property)}: ${getArmCommonTypeModelName(
+      getFullyQualifiedName(property.type),
+    )}${defaultValue};`,
   );
   return definitions;
 }
@@ -47,7 +50,14 @@ export function generateTemplateModel(templateModel: TypespecTemplateModel): str
   return `${templateModel.name}${
     templateModel.namedArguments
       ? `<${Object.keys(templateModel.namedArguments)
-          .map((k) => `${k} = ${templateModel.namedArguments![k]}`)
+          .map(
+            (k) =>
+              `${k} = ${
+                templateModel.name === "ResourceNameParameter"
+                  ? templateModel.namedArguments![k]
+                  : getArmCommonTypeModelName(templateModel.namedArguments![k])
+              }`,
+          )
           .join(",")}>`
       : ""
   }${
@@ -56,7 +66,7 @@ export function generateTemplateModel(templateModel: TypespecTemplateModel): str
           .map((a) =>
             a.kind === "template"
               ? generateTemplateModel(a as TypespecTemplateModel)
-              : `${a.name}${
+              : `${getArmCommonTypeModelName(a.name)}${
                   a.additionalProperties ? ` & { ${generateAdditionalProperties(a.additionalProperties)} }` : ""
                 }`,
           )
@@ -71,4 +81,65 @@ export function generateTemplateModel(templateModel: TypespecTemplateModel): str
 
 export function generateAdditionalProperties(properties: TypespecObjectProperty[]): string {
   return properties.map((p) => getModelPropertyDeclarations(p).join("\n")).join(";");
+}
+
+const commonTypeMapping: Record<string, string> = {
+  Resource: "Azure.ResourceManager.CommonTypes.Resource",
+  TrackedResource: "Azure.ResourceManager.CommonTypes.TrackedResource",
+  ProxyResource: "Azure.ResourceManager.CommonTypes.ProxyResource",
+  Sku: "Azure.ResourceManager.CommonTypes.Sku",
+  OperationListResult: "Azure.ResourceManager.CommonTypes.OperationListResult",
+  Operation: "Azure.ResourceManager.CommonTypes.Operation",
+  OperationDisplay: "Azure.ResourceManager.CommonTypes.OperationDisplay",
+  OperationStatusResult: "Azure.ResourceManager.CommonTypes.OperationStatusResult",
+  locationData: "Azure.ResourceManager.CommonTypes.LocationData",
+  ErrorDetail: "Azure.ResourceManager.CommonTypes.ErrorDetail",
+  ErrorAdditionalInfo: "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo",
+  Identity: "Azure.ResourceManager.CommonTypes.Identity",
+  systemData: "Azure.ResourceManager.CommonTypes.SystemData",
+  Plan: "Azure.ResourceManager.CommonTypes.Plan",
+  encryptionProperties: "Azure.ResourceManager.CommonTypes.EncryptionProperties",
+  KeyVaultProperties: "Azure.ResourceManager.CommonTypes.KeyVaultProperties",
+  ResourceModelWithAllowedPropertySet: "Azure.ResourceManager.CommonTypes.ResourceModelWithAllowedPropertySet",
+  CheckNameAvailabilityRequest: "Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest",
+  CheckNameAvailabilityResponse: "Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse",
+  ErrorResponse: "Azure.ResourceManager.CommonTypes.ErrorResponse",
+  SkuTier: "Azure.ResourceManager.CommonTypes.SkuTier",
+  PrivateEndpoint: "Azure.ResourceManager.CommonTypes.PrivateEndpoint",
+  PrivateLinkResource: "Azure.ResourceManager.CommonTypes.PrivateLinkResource",
+  PrivateEndpointConnection: "Azure.ResourceManager.CommonTypes.PrivateEndpointConnection",
+  PrivateEndpointConnectionProperties: "Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties",
+  PrivateLinkServiceConnectionState: "Azure.ResourceManager.CommonTypes.PrivateLinkServiceConnectionState",
+  PrivateLinkResourceProperties: "Azure.ResourceManager.CommonTypes.PrivateLinkResourceProperties",
+  PrivateEndpointServiceConnectionStatus: "Azure.ResourceManager.CommonTypes.PrivateEndpointServiceConnectionStatus",
+  PrivateEndpointConnectionProvisioningState:
+    "Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProvisioningState",
+  ManagedServiceIdentity: "Azure.ResourceManager.CommonTypes.ManagedServiceIdentity",
+  UserAssignedIdentities: "Azure.ResourceManager.CommonTypes.UserAssignedIdentities",
+  SystemAssignedServiceIdentity: "Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity",
+  UserAssignedIdentity: "Azure.ResourceManager.CommonTypes.UserAssignedIdentity",
+  ManagedServiceIdentityType: "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType",
+  SystemAssignedServiceIdentityType: "Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityType",
+};
+export function getArmCommonTypeModelName(model: string): string {
+  if (!isCommonTypeModel(model)) {
+    return model;
+  }
+
+  const version = getArmCommonTypeVersion();
+  if (model === "PrivateEndpointConnectionListResult") {
+    if (["v3", "v4", "v5"].includes(version)) {
+      return "Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionListResultV5";
+    } else {
+      return "Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionListResult";
+    }
+  } else if (model === "PrivateLinkResourceListResult") {
+    if (["v3", "v4", "v5"].includes(version)) {
+      return "Azure.ResourceManager.CommonTypes.PrivateLinkResourceListResultV5";
+    } else {
+      return "Azure.ResourceManager.CommonTypes.PrivateLinkResourceListResult";
+    }
+  }
+
+  return commonTypeMapping[model] || model;
 }

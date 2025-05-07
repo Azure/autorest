@@ -1,7 +1,7 @@
 import { readFileSync } from "fs";
 import { join } from "path";
 import { CodeModel, isObjectSchema, ObjectSchema, Operation, SchemaResponse } from "@autorest/codemodel";
-import { getArmCommonTypeVersion, getSession } from "../autorest-session";
+import { getArmCommonTypeVersion, getSession, isCommonTypeModel } from "../autorest-session";
 import { TypespecObject, TspArmResource, TypespecEnum } from "../interfaces";
 import { getSkipList } from "./type-mapping";
 export interface _ArmResourceOperation {
@@ -157,37 +157,8 @@ export function isResourceSchema(schema: ObjectSchema): schema is ArmResourceSch
   return Boolean((schema as ArmResourceSchema).resourceMetadata);
 }
 
-const _ArmCoreTypes = [
-  "ResourceProvisioningState",
-  "OperationListResult",
-  "Origin",
-  "OperationDisplay",
-  "OperationStatusResult",
-  "ErrorDetail",
-  "ErrorAdditionalInfo",
-  "SystemData",
-  "Operation",
-  "ErrorResponse",
-];
-
-const _ArmCoreCustomTypes = [
-  "TrackedResource",
-  "ProxyResource",
-  "ExtensionResource",
-  "ManagedIdentityProperties",
-  "UserAssignedIdentity",
-  "ManagedSystemAssignedIdentity",
-  "ManagedSystemIdentityProperties",
-  "EntityTag",
-  "ResourcePlan",
-  "ResourceSku",
-];
-
 export function filterArmModels(codeModel: CodeModel, objects: TypespecObject[]): TypespecObject[] {
-  const filtered = [..._ArmCoreTypes];
-  if (getArmCommonTypeVersion()) {
-    filtered.push(..._ArmCoreCustomTypes);
-  }
+  const filtered: string[] = [];
   for (const operationGroup of codeModel.operationGroups) {
     for (const operation of operationGroup.operations) {
       if (operation.requests?.[0].protocol?.http?.path.match(/^\/providers\/[^/]+\/operations$/)) {
@@ -203,23 +174,9 @@ export function filterArmModels(codeModel: CodeModel, objects: TypespecObject[])
     ...(codeModel.schemas.objects?.filter((o) => isResourceSchema(o)).map((o) => o.language.default.name) ?? []),
   );
   filtered.push(...getSkipList());
-  return objects.filter((o) => !filtered.includes(o.name));
+  return objects.filter((o) => !filtered.includes(o.name) && !isCommonTypeModel(o.name));
 }
 
-const _ArmCoreEnums = [
-  "CreatedByType",
-  "Origin",
-  "ActionType",
-  "CheckNameAvailabilityRequest",
-  "CheckNameAvailabilityReason",
-];
-
-const _ArmCoreCustomEnums = ["ManagedIdentityType", "ManagedSystemIdentityType", "SkuTier"];
-
 export function filterArmEnums(enums: TypespecEnum[]): TypespecEnum[] {
-  const filtered = [..._ArmCoreEnums];
-  if (getArmCommonTypeVersion()) {
-    filtered.push(..._ArmCoreCustomEnums);
-  }
-  return enums.filter((e) => !filtered.includes(e.name));
+  return enums.filter((e) => !isCommonTypeModel(e.name));
 }

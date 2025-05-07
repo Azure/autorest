@@ -42,7 +42,7 @@ interface PrivateEndpointConnections {
   @operationId("PrivateEndpointConnection_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | ArmAcceptedLroResponse,
+    Response = ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection> | ArmAcceptedLroResponse,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -64,7 +64,7 @@ interface PrivateEndpointConnections {
   @operationId("PrivateEndpointConnection_ListByService")
   listByService is ArmResourceListByParent<
     PrivateEndpointConnection,
-    Response = ArmResponse<PrivateEndpointConnectionListResult>
+    Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionListResultV5>
   >;
 }
 

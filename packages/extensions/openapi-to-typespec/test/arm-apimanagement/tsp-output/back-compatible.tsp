@@ -9,6 +9,9 @@ using Azure.ResourceManager.ApiManagement;
 );
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(ErrorResponse.error);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ApiCreateOrUpdateParameter.properties);
 
 @@clientName(ApiCreateOrUpdateProperties.apiType, "soapApiType");

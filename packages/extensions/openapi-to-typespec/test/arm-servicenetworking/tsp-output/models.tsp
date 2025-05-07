@@ -9,6 +9,24 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.ServiceNetworking;
 
+/**
+ * The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is "user,system"
+ */
+union Origin {
+  string,
+  user: "user",
+  system: "system",
+  `user,system`: "user,system",
+}
+
+/**
+ * Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
+ */
+union ActionType {
+  string,
+  Internal: "Internal",
+}
+
 union ProvisioningState {
   string,
   Provisioning: "Provisioning",
@@ -20,9 +38,49 @@ union ProvisioningState {
   Canceled: "Canceled",
 }
 
+/**
+ * The type of identity that created the resource.
+ */
+union CreatedByType {
+  string,
+  User: "User",
+  Application: "Application",
+  ManagedIdentity: "ManagedIdentity",
+  Key: "Key",
+}
+
 union AssociationType {
   string,
   subnets: "subnets",
+}
+
+/**
+ * Localized display information for this particular operation.
+ */
+model OperationDisplay {
+  /**
+   * The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
+   */
+  @visibility(Lifecycle.Read)
+  provider?: string;
+
+  /**
+   * The localized friendly name of the resource type related to this operation. E.g. "Virtual Machines" or "Job Schedule Collections".
+   */
+  @visibility(Lifecycle.Read)
+  resource?: string;
+
+  /**
+   * The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine", "Restart Virtual Machine".
+   */
+  @visibility(Lifecycle.Read)
+  operation?: string;
+
+  /**
+   * The short, localized friendly description of the operation; suitable for tool tips and detailed views.
+   */
+  @visibility(Lifecycle.Read)
+  description?: string;
 }
 
 /**
@@ -62,35 +120,6 @@ model ResourceId {
    * Resource ID of child resource.
    */
   id: string;
-}
-
-/**
- * Common fields that are returned in the response for all Azure Resource Manager resources
- */
-model Resource {
-  /**
-   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The name of the resource
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
-   */
-  @visibility(Lifecycle.Read)
-  systemData?: SystemData;
 }
 
 /**

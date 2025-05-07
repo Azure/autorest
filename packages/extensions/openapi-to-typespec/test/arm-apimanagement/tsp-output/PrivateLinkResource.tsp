@@ -41,7 +41,7 @@ interface PrivateLinkResources {
   @operationId("PrivateEndpointConnection_ListPrivateLinkResources")
   listPrivateLinkResources is ArmResourceListByParent<
     PrivateLinkResource,
-    Response = ArmResponse<PrivateLinkResourceListResult>
+    Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateLinkResourceListResultV5>
   >;
 }
 

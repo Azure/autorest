@@ -1778,7 +1778,7 @@
       "description": "Action to be applied.",
       "properties": {
         "actionType": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ActionType",
+          "$ref": "#/definitions/ActionType",
           "description": "Action that should be applied."
         }
       },
@@ -1795,6 +1795,28 @@
           "type": "boolean",
           "description": "Value indicating whether alert is suppressed."
         }
+      }
+    },
+    "ActionType": {
+      "type": "string",
+      "description": "Action that should be applied.",
+      "enum": [
+        "AddActionGroups",
+        "RemoveAllActionGroups"
+      ],
+      "x-ms-enum": {
+        "name": "ActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AddActionGroups",
+            "value": "AddActionGroups"
+          },
+          {
+            "name": "RemoveAllActionGroups",
+            "value": "RemoveAllActionGroups"
+          }
+        ]
       }
     },
     "AddActionGroups": {
@@ -2166,24 +2188,6 @@
           },
           "x-ms-identifiers": []
         }
-      }
-    },
-    "Azure.ResourceManager.CommonTypes.ActionType": {
-      "type": "string",
-      "description": "Extensible enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
-      "enum": [
-        "Internal"
-      ],
-      "x-ms-enum": {
-        "name": "ActionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Internal",
-            "value": "Internal",
-            "description": "Actions are for internal-only APIs."
-          }
-        ]
       }
     },
     "Condition": {

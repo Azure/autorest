@@ -4,6 +4,10 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Storage;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(Operation.properties);
+@@clientName(Operation.properties, "operationProperties");
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(StorageAccountCreateParameters.properties);
 
 @@clientName(StorageAccountPropertiesCreateParameters.networkAcls,
