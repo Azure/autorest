@@ -6654,7 +6654,8 @@ model RegistryPrivateEndpointConnectionProperties {
  * The PE network resource that is linked to this PE connection.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model PrivateEndpointResource extends PrivateEndpoint {
+model PrivateEndpointResource
+  extends Azure.ResourceManager.CommonTypes.PrivateEndpoint {
   /**
    * The subnetId that the private endpoint is connected to.
    */
@@ -6828,7 +6829,8 @@ model PartialRegistryPartialTrackedResource {
  * Managed service identity (system assigned and/or user assigned identities)
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model RegistryPartialManagedServiceIdentity extends ManagedServiceIdentity {}
+model RegistryPartialManagedServiceIdentity
+  extends Azure.ResourceManager.CommonTypes.ManagedServiceIdentity {}
 
 /**
  * The List Aml user feature operation response.
@@ -7849,7 +7851,7 @@ model PrivateLinkResourceListResult {
  * A private link resource
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model PrivateLinkResource extends Resource {
+model PrivateLinkResource extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Managed service identity (system assigned and/or user assigned identities)
    */

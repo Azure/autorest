@@ -2753,7 +2753,8 @@ model TokenBodyParameterContract {
  * External OAuth authorization server settings.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model AuthorizationServerUpdateContract extends Resource {
+model AuthorizationServerUpdateContract
+  extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Properties of the External OAuth authorization server update Contract.
    */
@@ -3069,7 +3070,8 @@ model BackendUpdateParameterProperties extends BackendBaseParameters {
  * Reconnect request parameters.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model BackendReconnectContract extends Resource {
+model BackendReconnectContract
+  extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Reconnect request properties.
    */
@@ -4545,7 +4547,7 @@ model GatewayApiData extends ApiContract {}
  * Association entity details.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model AssociationContract extends Resource {
+model AssociationContract extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Association entity contract properties.
    */
@@ -4846,7 +4848,8 @@ model IdentityProviderBaseParameters {
  * Identity Provider details.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model IdentityProviderCreateContract extends Resource {
+model IdentityProviderCreateContract
+  extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Identity Provider contract properties.
    */
@@ -5031,7 +5034,8 @@ model NamedValueEntityBaseParameters {
  * NamedValue details.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model NamedValueCreateContract extends Resource {
+model NamedValueCreateContract
+  extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * NamedValue entity contract properties for PUT operation.
    */
@@ -5236,7 +5240,7 @@ model RecipientsContractProperties {
  * Recipient User details.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model RecipientUserContract extends Resource {
+model RecipientUserContract extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Recipient User entity contract properties.
    */
@@ -5259,7 +5263,8 @@ model RecipientUsersContractProperties {
  * Recipient Email details.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model RecipientEmailContract extends Resource {
+model RecipientEmailContract
+  extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Recipient Email contract properties.
    */
@@ -5438,7 +5443,8 @@ model PolicyDescriptionListResult {
  * Policy description details.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model PolicyDescriptionContract extends Resource {
+model PolicyDescriptionContract
+  extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Policy description contract properties.
    */
@@ -5525,7 +5531,8 @@ model PortalSettingsListResult {
  * Portal Settings for the Developer Portal.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model PortalSettingsContract extends Resource {
+model PortalSettingsContract
+  extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Portal Settings contract properties.
    */
@@ -6782,7 +6789,8 @@ model DeployConfigurationParameterProperties {
  * Long Running Git Operation Results.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model OperationResultContract extends Resource {
+model OperationResultContract
+  extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Properties of the Operation Contract.
    */
@@ -6888,7 +6896,8 @@ model SaveConfigurationParameterProperties {
  * Result of Tenant Configuration Sync State.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model TenantConfigurationSyncStateContract extends Resource {
+model TenantConfigurationSyncStateContract
+  extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Properties returned Tenant Configuration Sync State check.
    */

@@ -3170,7 +3170,7 @@ model PrivateLinkResourceListResult {
  * A private link resource
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model PrivateLinkResource extends Resource {
+model PrivateLinkResource extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Resource properties.
    */
@@ -4486,7 +4486,7 @@ model FileShareItem extends AzureEntityResource {
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model ListQueue extends Resource {
+model ListQueue extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * List Queue resource properties.
    */
