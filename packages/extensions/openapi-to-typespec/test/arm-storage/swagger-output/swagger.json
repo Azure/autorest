@@ -5884,22 +5884,6 @@
         "body"
       ]
     },
-    "AzureEntityResource": {
-      "type": "object",
-      "description": "The resource model definition for an Azure Resource Manager resource with an etag.",
-      "properties": {
-        "etag": {
-          "type": "string",
-          "description": "Resource Etag.",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
     "AzureFilesIdentityBasedAuthentication": {
       "type": "object",
       "description": "Settings for Azure Files identity based authentication.",
@@ -7142,22 +7126,6 @@
         }
       ]
     },
-    "FileShareItem": {
-      "type": "object",
-      "description": "The file share properties be listed out.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FileShareProperties",
-          "description": "The file share properties be listed out.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureEntityResource"
-        }
-      ]
-    },
     "FileShareItems": {
       "type": "object",
       "description": "Response schema. Contains list of shares returned, and if paging is requested or required, a URL to next page of shares.",
@@ -7417,7 +7385,7 @@
           "type": "object",
           "description": "Gets or sets a list of key value pairs that describe the set of User Assigned identities that will be used with this storage account. The key is the ARM resource identifier of the identity. Only 1 User Assigned identity is permitted here.",
           "additionalProperties": {
-            "$ref": "../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentity"
+            "$ref": "#/definitions/UserAssignedIdentity"
           }
         }
       },
@@ -8132,22 +8100,6 @@
         }
       }
     },
-    "ListContainerItem": {
-      "type": "object",
-      "description": "The blob container properties be listed out.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ContainerProperties",
-          "description": "The blob container properties be listed out.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureEntityResource"
-        }
-      ]
-    },
     "ListContainerItems": {
       "type": "object",
       "description": "Response schema. Contains list of blobs returned, and if paging is requested or required, a URL to next page of containers.",
@@ -8168,34 +8120,6 @@
       "required": [
         "value"
       ]
-    },
-    "ListQueue": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ListQueueProperties",
-          "description": "List Queue resource properties.",
-          "x-ms-client-flatten": true,
-          "x-ms-client-name": "queueProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
-    "ListQueueProperties": {
-      "type": "object",
-      "properties": {
-        "metadata": {
-          "type": "object",
-          "description": "A name-value pair that represents queue metadata.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
     },
     "ListQueueResource": {
       "type": "object",
@@ -9097,7 +9021,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
     },
@@ -9308,27 +9232,6 @@
             "value": "NotAvailableForSubscription"
           }
         ]
-      }
-    },
-    "Resource": {
-      "type": "object",
-      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        }
       }
     },
     "ResourceAccessRule": {
@@ -9799,7 +9702,7 @@
           "description": "The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType."
         },
         "tier": {
-          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/SkuTier",
+          "$ref": "#/definitions/SkuTier",
           "description": "The SKU tier. This is based on the SKU name.",
           "readOnly": true
         }
@@ -9844,7 +9747,7 @@
           "description": "The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType."
         },
         "tier": {
-          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/SkuTier",
+          "$ref": "#/definitions/SkuTier",
           "description": "The SKU tier. This is based on the SKU name.",
           "readOnly": true
         },
@@ -9938,6 +9841,18 @@
             "value": "Standard_RAGZRS"
           }
         ]
+      }
+    },
+    "SkuTier": {
+      "type": "string",
+      "description": "The SKU tier. This is based on the SKU name.",
+      "enum": [
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "SkuTier",
+        "modelAsString": false
       }
     },
     "SmbSetting": {
@@ -10862,6 +10777,22 @@
       "x-ms-enum": {
         "name": "UsageUnit",
         "modelAsString": false
+      }
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "description": "UserAssignedIdentity for the resource.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of the identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client ID of the identity.",
+          "readOnly": true
+        }
       }
     },
     "VirtualNetworkRule": {

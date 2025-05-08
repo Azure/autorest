@@ -7,7 +7,7 @@ import { AutoRestExtension, AutorestExtensionHost, Session, startSession } from 
 import { serialize } from "@azure-tools/codegen";
 import { OpenAPI3Document } from "@azure-tools/openapi";
 import { Metadata } from "utils/resource-discovery";
-import { setArmCommonTypeVersion, setSession } from "./autorest-session";
+import { addArmCommonTypeModel, setArmCommonTypeVersion, setSession } from "./autorest-session";
 import { emitArmResources } from "./emiters/emit-arm-resources";
 import { emitClient } from "./emiters/emit-client";
 import { emitLegacy } from "./emiters/emit-legacy";
@@ -86,10 +86,14 @@ export async function processDetector(host: AutorestExtensionHost) {
     for (const v of Object.values(session.model.components.schemas)) {
       if (v["x-ms-metadata"]?.originalLocations) {
         for (const p of v["x-ms-metadata"].originalLocations) {
-          const result = p.match(/\/common-types\/resource-management\/(v\d)\//);
-          if (result) {
-            setArmCommonTypeVersion(result[1]);
-            return;
+          const versionResult = p.match(/\/common-types\/resource-management\/(v\d)\//);
+          if (versionResult) {
+            setArmCommonTypeVersion(versionResult[1]);
+          }
+
+          const typeResult = p.match(/\/common-types\/resource-management\/(v\d)\/.*\/components\/schemas\/(.*)/);
+          if (typeResult) {
+            addArmCommonTypeModel(typeResult[2]);
           }
         }
       }

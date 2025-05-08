@@ -1,7 +1,7 @@
 import { TypespecObject } from "../interfaces";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
-import { getModelPropertiesDeclarations } from "../utils/model-generation";
+import { getArmCommonTypeModelName, getModelPropertiesDeclarations } from "../utils/model-generation";
 import { generateSuppressions } from "../utils/suppressions";
 
 export function generateObject(typespecObject: TypespecObject) {
@@ -20,7 +20,7 @@ export function generateObject(typespecObject: TypespecObject) {
 
   if (typespecObject.extendedParents?.length) {
     const firstParent = typespecObject.extendedParents[0];
-    definitions.push(`model ${typespecObject.name} extends ${firstParent} {`);
+    definitions.push(`model ${typespecObject.name} extends ${getArmCommonTypeModelName(firstParent)} {`);
   } else if (typespecObject.alias) {
     const { alias, params } = typespecObject.alias;
 

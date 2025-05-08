@@ -363,7 +363,7 @@
             "description": "The request body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/CheckNameAvailabilityRequest"
             }
           }
         ],
@@ -371,7 +371,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/CheckNameAvailabilityResponse"
             }
           },
           "default": {
@@ -1342,7 +1342,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -1461,7 +1461,7 @@
           "200": {
             "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -2091,62 +2091,6 @@
         ]
       }
     },
-    "Azure.ResourceManager.CommonTypes.CheckNameAvailabilityReason": {
-      "type": "string",
-      "description": "Possible reasons for a name not being available.",
-      "enum": [
-        "Invalid",
-        "AlreadyExists"
-      ],
-      "x-ms-enum": {
-        "name": "CheckNameAvailabilityReason",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Invalid",
-            "value": "Invalid",
-            "description": "Name is invalid."
-          },
-          {
-            "name": "AlreadyExists",
-            "value": "AlreadyExists",
-            "description": "Name already exists."
-          }
-        ]
-      }
-    },
-    "CheckNameAvailabilityRequest": {
-      "type": "object",
-      "description": "The check availability request body.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the resource for which availability needs to be checked."
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource type."
-        }
-      }
-    },
-    "CheckNameAvailabilityResponse": {
-      "type": "object",
-      "description": "The check availability result.",
-      "properties": {
-        "nameAvailable": {
-          "type": "boolean",
-          "description": "Indicates if the resource name is available."
-        },
-        "reason": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.CheckNameAvailabilityReason",
-          "description": "The reason why the given name is not available."
-        },
-        "message": {
-          "type": "string",
-          "description": "Detailed reason why the given name is available."
-        }
-      }
-    },
     "DataConnector": {
       "type": "object",
       "description": "DataConnector Model.",
@@ -2215,7 +2159,7 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "#/definitions/Identity",
+          "$ref": "../../common-types/resource-management/v4/types.json#/definitions/Identity",
           "description": "Identity for the resource."
         }
       },
@@ -2532,7 +2476,7 @@
           "description": "Geo-location where the resource lives."
         },
         "identity": {
-          "$ref": "#/definitions/Identity",
+          "$ref": "../../common-types/resource-management/v4/types.json#/definitions/Identity",
           "description": "Identity for the resource."
         },
         "properties": {
@@ -2686,34 +2630,6 @@
         }
       }
     },
-    "Identity": {
-      "type": "object",
-      "description": "Identity for the resource.",
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "format": "uuid",
-          "description": "The principal ID of resource identity. The value must be an UUID.",
-          "readOnly": true
-        },
-        "tenantId": {
-          "type": "string",
-          "format": "uuid",
-          "description": "The tenant ID of resource. The value must be an UUID.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The identity type.",
-          "enum": [
-            "SystemAssigned"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      }
-    },
     "KeyVaultProperties": {
       "type": "object",
       "description": "Properties of the key vault.",
@@ -2776,23 +2692,12 @@
       ],
       "x-ms-discriminator-value": "OAuthClientCredentials"
     },
-    "PrivateEndpoint": {
-      "type": "object",
-      "description": "The private endpoint resource.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ARM identifier for private endpoint.",
-          "readOnly": true
-        }
-      }
-    },
     "PrivateEndpointConnection": {
       "type": "object",
       "description": "The private endpoint connection resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "$ref": "../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
@@ -2803,114 +2708,12 @@
         }
       ]
     },
-    "PrivateEndpointConnectionListResult": {
-      "type": "object",
-      "description": "List of private endpoint connections associated with the specified resource.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Array of private endpoint connections.",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
-          }
-        }
-      }
-    },
-    "PrivateEndpointConnectionProperties": {
-      "type": "object",
-      "description": "Properties of the private endpoint connection.",
-      "properties": {
-        "groupIds": {
-          "type": "array",
-          "description": "The group ids for the private endpoint resource.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpoint",
-          "description": "The private endpoint resource."
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
-          "description": "A collection of information about the state of the connection between service consumer and provider."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
-          "description": "The provisioning state of the private endpoint connection resource.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "privateLinkServiceConnectionState"
-      ]
-    },
-    "PrivateEndpointConnectionProvisioningState": {
-      "type": "string",
-      "description": "The current provisioning state.",
-      "enum": [
-        "Succeeded",
-        "Creating",
-        "Deleting",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "PrivateEndpointConnectionProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded"
-          },
-          {
-            "name": "Creating",
-            "value": "Creating"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed"
-          }
-        ]
-      }
-    },
-    "PrivateEndpointServiceConnectionStatus": {
-      "type": "string",
-      "description": "The private endpoint connection status.",
-      "enum": [
-        "Pending",
-        "Approved",
-        "Rejected"
-      ],
-      "x-ms-enum": {
-        "name": "PrivateEndpointServiceConnectionStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Pending",
-            "value": "Pending"
-          },
-          {
-            "name": "Approved",
-            "value": "Approved"
-          },
-          {
-            "name": "Rejected",
-            "value": "Rejected"
-          }
-        ]
-      }
-    },
     "PrivateLinkResource": {
       "type": "object",
       "description": "A private link resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "$ref": "../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateLinkResourceProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
@@ -2923,58 +2726,14 @@
     },
     "PrivateLinkResourceListResult": {
       "type": "object",
-      "description": "A list of private link resources.",
+      "description": "A list of private link resources for versions before v6.\n\nThis model represents the standard `PrivateLinkResourceListResult` envelope for versions v3, v4, and v5. It has been deprecated for v6 and beyond.\n\nNote: This is only intended for use with versions before v6. Do not use this if you are already on CommonTypes.Version.v6 or beyond.\n\nIf you are migrating to v6 or above, use `PrivateLinkResourceListResult` directly.",
       "properties": {
         "value": {
           "type": "array",
           "description": "Array of private link resources",
           "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
+            "$ref": "../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateLinkResource"
           }
-        }
-      }
-    },
-    "PrivateLinkResourceProperties": {
-      "type": "object",
-      "description": "Properties of a private link resource.",
-      "properties": {
-        "groupId": {
-          "type": "string",
-          "description": "The private link resource group id.",
-          "readOnly": true
-        },
-        "requiredMembers": {
-          "type": "array",
-          "description": "The private link resource required member names.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "requiredZoneNames": {
-          "type": "array",
-          "description": "The private link resource private link DNS zone name.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "PrivateLinkServiceConnectionState": {
-      "type": "object",
-      "description": "A collection of information about the state of the connection between service consumer and provider.",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
-          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
-        },
-        "description": {
-          "type": "string",
-          "description": "The reason for approval/rejection of the connection."
-        },
-        "actionsRequired": {
-          "type": "string",
-          "description": "A message indicating if changes on the service provider require any updates on the consumer."
         }
       }
     },

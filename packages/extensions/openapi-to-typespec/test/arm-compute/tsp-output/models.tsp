@@ -1755,6 +1755,21 @@ union CloudServiceSlotType {
 }
 
 /**
+ * The type of identity that created the resource.
+ */
+union CreatedByType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  User: "User",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Application: "Application",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ManagedIdentity: "ManagedIdentity",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Key: "Key",
+}
+
+/**
  * Specifies the sku of an Availability Set. Use 'Aligned' for virtual machines with managed disks and 'Classic' for virtual machines with unmanaged disks. Default value is 'Classic'.
  */
 union AvailabilitySetSkuTypes {
@@ -7972,6 +7987,29 @@ model DiskRestorePointReplicationStatus {
 }
 
 /**
+ * The resource model definition for an Azure Resource Manager proxy resource. It will not have tags and a location
+ */
+model ProxyResource {
+  /**
+   * Resource Id
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Resource name
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Resource type
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
+
+/**
  * Update Restore Point collection parameters.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
@@ -9845,6 +9883,93 @@ model SnapshotList is Azure.Core.Page<Snapshot>;
  * The List Resource Skus operation response.
  */
 model ResourceSkusResult is Azure.Core.Page<ResourceSku>;
+
+/**
+ * Describes an available Compute SKU.
+ */
+model ResourceSku {
+  /**
+   * The type of resource the SKU applies to.
+   */
+  @visibility(Lifecycle.Read)
+  resourceType?: string;
+
+  /**
+   * The name of SKU.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Specifies the tier of virtual machines in a scale set.<br /><br /> Possible Values:<br /><br /> **Standard**<br /><br /> **Basic**
+   */
+  @visibility(Lifecycle.Read)
+  tier?: string;
+
+  /**
+   * The Size of the SKU.
+   */
+  @visibility(Lifecycle.Read)
+  size?: string;
+
+  /**
+   * The Family of this particular SKU.
+   */
+  @visibility(Lifecycle.Read)
+  family?: string;
+
+  /**
+   * The Kind of resources that are supported in this SKU.
+   */
+  @visibility(Lifecycle.Read)
+  kind?: string;
+
+  /**
+   * Specifies the number of virtual machines in the scale set.
+   */
+  @visibility(Lifecycle.Read)
+  capacity?: ResourceSkuCapacity;
+
+  /**
+   * The set of locations that the SKU is available.
+   */
+  @visibility(Lifecycle.Read)
+  locations?: string[];
+
+  /**
+   * A list of locations and availability zones in those locations where the SKU is available.
+   */
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["location"])
+  locationInfo?: ResourceSkuLocationInfo[];
+
+  /**
+   * The api versions that support this SKU.
+   */
+  @visibility(Lifecycle.Read)
+  apiVersions?: string[];
+
+  /**
+   * Metadata for retrieving price info.
+   */
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  costs?: ResourceSkuCosts[];
+
+  /**
+   * A name value pair to describe the capability.
+   */
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  capabilities?: ResourceSkuCapabilities[];
+
+  /**
+   * The restrictions because of which SKU cannot be used. This is empty if there are no restrictions.
+   */
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  restrictions?: ResourceSkuRestrictions[];
+}
 
 /**
  * Describes scaling information of a SKU.
@@ -11965,6 +12090,43 @@ model CloudServiceVaultAndSecretReference {
    * Secret URL which contains the protected settings of the extension
    */
   secretUrl?: string;
+}
+
+/**
+ * Metadata pertaining to creation and last modification of the resource.
+ */
+model SystemData {
+  /**
+   * The identity that created the resource.
+   */
+  createdBy?: string;
+
+  /**
+   * The type of identity that created the resource.
+   */
+  createdByType?: CreatedByType;
+
+  /**
+   * The timestamp of resource creation (UTC).
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdAt?: utcDateTime;
+
+  /**
+   * The identity that last modified the resource.
+   */
+  lastModifiedBy?: string;
+
+  /**
+   * The type of identity that last modified the resource.
+   */
+  lastModifiedByType?: CreatedByType;
+
+  /**
+   * The timestamp of resource last modification (UTC)
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastModifiedAt?: utcDateTime;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"

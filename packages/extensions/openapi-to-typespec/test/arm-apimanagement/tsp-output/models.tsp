@@ -492,6 +492,19 @@ union Method {
 }
 
 /**
+ * The origin of the issue.
+ */
+union Origin {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Local: "Local",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Inbound: "Inbound",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Outbound: "Outbound",
+}
+
+/**
  * The severity of the issue.
  */
 union Severity {
@@ -740,19 +753,6 @@ union VirtualNetworkType {
 }
 
 /**
- * The private endpoint connection status.
- */
-union PrivateEndpointServiceConnectionStatus {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Pending: "Pending",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Approved: "Approved",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Rejected: "Rejected",
-}
-
-/**
  * The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the service.
  */
 union ApimIdentityType {
@@ -765,6 +765,21 @@ union ApimIdentityType {
   `SystemAssigned, UserAssigned`: "SystemAssigned, UserAssigned",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   None: "None",
+}
+
+/**
+ * The type of identity that created the resource.
+ */
+union CreatedByType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  User: "User",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Application: "Application",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ManagedIdentity: "ManagedIdentity",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Key: "Key",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -962,22 +977,6 @@ union PortalRevisionStatus {
    * Portal's revision publishing failed.
    */
   failed: "failed",
-}
-
-/**
- * The current provisioning state.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-union PrivateEndpointConnectionProvisioningState {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Failed: "Failed",
 }
 
 /**
@@ -1432,26 +1431,16 @@ model ApiLicenseInformation {
 }
 
 /**
- * Common fields that are returned in the response for all Azure Resource Manager resources
+ * Error Response.
  */
-model Resource {
+@error
+model ErrorResponse {
   /**
-   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+   * Properties of the Error Response.
    */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The name of the resource
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  error?: ErrorResponseBody;
 }
 
 /**
@@ -2764,7 +2753,8 @@ model TokenBodyParameterContract {
  * External OAuth authorization server settings.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model AuthorizationServerUpdateContract extends Resource {
+model AuthorizationServerUpdateContract
+  extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Properties of the External OAuth authorization server update Contract.
    */
@@ -3080,7 +3070,8 @@ model BackendUpdateParameterProperties extends BackendBaseParameters {
  * Reconnect request parameters.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model BackendReconnectContract extends Resource {
+model BackendReconnectContract
+  extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Reconnect request properties.
    */
@@ -3582,6 +3573,16 @@ model ResourceSkuResult {
 }
 
 /**
+ * Describes an available API Management SKU.
+ */
+model ResourceSku {
+  /**
+   * Name of the Sku.
+   */
+  name?: SkuType;
+}
+
+/**
  * Describes scaling information of a SKU.
  */
 model ResourceSkuCapacity {
@@ -4072,7 +4073,7 @@ model PrivateEndpointConnectionWrapperProperties {
   /**
    * A collection of information about the state of the connection between service consumer and provider.
    */
-  privateLinkServiceConnectionState: PrivateLinkServiceConnectionState;
+  privateLinkServiceConnectionState: Azure.ResourceManager.CommonTypes.PrivateLinkServiceConnectionState;
 
   /**
    * The provisioning state of the private endpoint connection resource.
@@ -4094,26 +4095,6 @@ model ArmIdWrapper {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility(Lifecycle.Read)
   id?: string;
-}
-
-/**
- * A collection of information about the state of the connection between service consumer and provider.
- */
-model PrivateLinkServiceConnectionState {
-  /**
-   * Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service.
-   */
-  status?: PrivateEndpointServiceConnectionStatus;
-
-  /**
-   * The reason for approval/rejection of the connection.
-   */
-  description?: string;
-
-  /**
-   * A message indicating if changes on the service provider require any updates on the consumer.
-   */
-  actionsRequired?: string;
 }
 
 /**
@@ -4566,7 +4547,7 @@ model GatewayApiData extends ApiContract {}
  * Association entity details.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model AssociationContract extends Resource {
+model AssociationContract extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Association entity contract properties.
    */
@@ -4867,7 +4848,8 @@ model IdentityProviderBaseParameters {
  * Identity Provider details.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model IdentityProviderCreateContract extends Resource {
+model IdentityProviderCreateContract
+  extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Identity Provider contract properties.
    */
@@ -5052,7 +5034,8 @@ model NamedValueEntityBaseParameters {
  * NamedValue details.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model NamedValueCreateContract extends Resource {
+model NamedValueCreateContract
+  extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * NamedValue entity contract properties for PUT operation.
    */
@@ -5257,7 +5240,7 @@ model RecipientsContractProperties {
  * Recipient User details.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model RecipientUserContract extends Resource {
+model RecipientUserContract extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Recipient User entity contract properties.
    */
@@ -5280,7 +5263,8 @@ model RecipientUsersContractProperties {
  * Recipient Email details.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model RecipientEmailContract extends Resource {
+model RecipientEmailContract
+  extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Recipient Email contract properties.
    */
@@ -5459,7 +5443,8 @@ model PolicyDescriptionListResult {
  * Policy description details.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model PolicyDescriptionContract extends Resource {
+model PolicyDescriptionContract
+  extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Policy description contract properties.
    */
@@ -5546,7 +5531,8 @@ model PortalSettingsListResult {
  * Portal Settings for the Developer Portal.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model PortalSettingsContract extends Resource {
+model PortalSettingsContract
+  extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Portal Settings contract properties.
    */
@@ -5694,50 +5680,6 @@ model PortalSettingValidationKeyContract {
 }
 
 /**
- * List of private endpoint connection associated with the specified storage account
- */
-@pagedResult
-model PrivateEndpointConnectionListResult {
-  /**
-   * Array of private endpoint connections
-   */
-  @items
-  value?: PrivateEndpointConnection[];
-}
-
-/**
- * Properties of the PrivateEndpointConnectProperties.
- */
-model PrivateEndpointConnectionProperties {
-  /**
-   * The resource of private end point.
-   */
-  privateEndpoint?: PrivateEndpoint;
-
-  /**
-   * A collection of information about the state of the connection between service consumer and provider.
-   */
-  privateLinkServiceConnectionState: PrivateLinkServiceConnectionState;
-
-  /**
-   * The provisioning state of the private endpoint connection resource.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: PrivateEndpointConnectionProvisioningState;
-}
-
-/**
- * The Private Endpoint resource.
- */
-model PrivateEndpoint {
-  /**
-   * The ARM identifier for Private Endpoint
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-}
-
-/**
  * A request to approve or reject a private endpoint connection
  */
 model PrivateEndpointConnectionRequest {
@@ -5759,40 +5701,7 @@ model PrivateEndpointConnectionRequestProperties {
   /**
    * A collection of information about the state of the connection between service consumer and provider.
    */
-  privateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
-}
-
-/**
- * A list of private link resources
- */
-model PrivateLinkResourceListResult {
-  /**
-   * Array of private link resources
-   */
-  value?: PrivateLinkResource[];
-}
-
-/**
- * Properties of a private link resource.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-model PrivateLinkResourceProperties {
-  /**
-   * The private link resource group id.
-   */
-  @visibility(Lifecycle.Read)
-  groupId?: string;
-
-  /**
-   * The private link resource required member names.
-   */
-  @visibility(Lifecycle.Read)
-  requiredMembers?: string[];
-
-  /**
-   * The private link resource Private link DNS zone name.
-   */
-  requiredZoneNames?: string[];
+  privateLinkServiceConnectionState?: Azure.ResourceManager.CommonTypes.PrivateLinkServiceConnectionState;
 }
 
 /**
@@ -6880,7 +6789,8 @@ model DeployConfigurationParameterProperties {
  * Long Running Git Operation Results.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model OperationResultContract extends Resource {
+model OperationResultContract
+  extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Properties of the Operation Contract.
    */
@@ -6986,7 +6896,8 @@ model SaveConfigurationParameterProperties {
  * Result of Tenant Configuration Sync State.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model TenantConfigurationSyncStateContract extends Resource {
+model TenantConfigurationSyncStateContract
+  extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Properties returned Tenant Configuration Sync State check.
    */

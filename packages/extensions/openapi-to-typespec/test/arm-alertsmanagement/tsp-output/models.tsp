@@ -67,6 +67,32 @@ union RecurrenceType {
   Monthly: "Monthly",
 }
 
+/**
+ * Action that should be applied.
+ */
+union ActionType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  AddActionGroups: "AddActionGroups",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  RemoveAllActionGroups: "RemoveAllActionGroups",
+}
+
+/**
+ * The type of identity that created the resource.
+ */
+union CreatedByType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  User: "User",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Application: "Application",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ManagedIdentity: "ManagedIdentity",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Key: "Key",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union Identifier {
   string,
@@ -529,6 +555,51 @@ model PatchProperties {
    * Indicates if the given alert processing rule is enabled or disabled.
    */
   enabled?: boolean;
+}
+
+/**
+ * Operation provided by provider
+ */
+model Operation {
+  /**
+   * Name of the operation
+   */
+  name?: string;
+
+  /**
+   * Properties of the operation
+   */
+  display?: OperationDisplay;
+
+  /**
+   * Origin of the operation
+   */
+  origin?: string;
+}
+
+/**
+ * Properties of the operation
+ */
+model OperationDisplay {
+  /**
+   * Provider name
+   */
+  provider?: string;
+
+  /**
+   * Resource name
+   */
+  resource?: string;
+
+  /**
+   * Operation name
+   */
+  operation?: string;
+
+  /**
+   * Description of the operation
+   */
+  description?: string;
 }
 
 /**

@@ -95,18 +95,18 @@ union Status {
 }
 
 /**
- * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
+ * The type of identity that created the resource.
  */
-union ManagedServiceIdentityType {
+union CreatedByType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  None: "None",
+  User: "User",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  SystemAssigned: "SystemAssigned",
+  Application: "Application",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  UserAssigned: "UserAssigned",
+  ManagedIdentity: "ManagedIdentity",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  `SystemAssigned,UserAssigned`: "SystemAssigned,UserAssigned",
+  Key: "Key",
 }
 
 /**
@@ -3670,97 +3670,6 @@ model ResourceName {
  */
 model PaginatedComputeResourcesList is Azure.Core.Page<ComputeResource>;
 
-/**
- * Managed service identity (system assigned and/or user assigned identities)
- */
-model ManagedServiceIdentity {
-  /**
-   * The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
-  @visibility(Lifecycle.Read)
-  @format("uuid")
-  principalId?: string;
-
-  /**
-   * The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
-  @visibility(Lifecycle.Read)
-  @format("uuid")
-  tenantId?: string;
-
-  /**
-   * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
-   */
-  type: ManagedServiceIdentityType;
-
-  /**
-   * The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  userAssignedIdentities?: Record<UserAssignedIdentity>;
-}
-
-/**
- * The resource model definition representing SKU
- */
-model Sku {
-  /**
-   * The name of the SKU. Ex - P3. It is typically a letter+number code
-   */
-  name: string;
-
-  /**
-   * This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.
-   */
-  tier?: SkuTier;
-
-  /**
-   * The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code.
-   */
-  size?: string;
-
-  /**
-   * If the service has different generations of hardware, for the same SKU, then that can be captured here.
-   */
-  family?: string;
-
-  /**
-   * If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted.
-   */
-  capacity?: int32;
-}
-
-/**
- * Common fields that are returned in the response for all Azure Resource Manager resources
- */
-model Resource {
-  /**
-   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The name of the resource
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
-   */
-  @visibility(Lifecycle.Read)
-  systemData?: SystemData;
-}
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ComputeResourceSchema {
   /**
@@ -4976,7 +4885,7 @@ model PartialManagedServiceIdentity {
   /**
    * Managed service identity (system assigned and/or user assigned identities)
    */
-  type?: ManagedServiceIdentityType;
+  type?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType;
 
   /**
    * The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.
@@ -6448,7 +6357,7 @@ model PartialSku {
   /**
    * This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.
    */
-  tier?: SkuTier;
+  tier?: Azure.ResourceManager.CommonTypes.SkuTier;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -6537,7 +6446,7 @@ model SkuSetting {
   /**
    * This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.
    */
-  tier?: SkuTier;
+  tier?: Azure.ResourceManager.CommonTypes.SkuTier;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -6745,22 +6654,12 @@ model RegistryPrivateEndpointConnectionProperties {
  * The PE network resource that is linked to this PE connection.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model PrivateEndpointResource extends PrivateEndpoint {
+model PrivateEndpointResource
+  extends Azure.ResourceManager.CommonTypes.PrivateEndpoint {
   /**
    * The subnetId that the private endpoint is connected to.
    */
   subnetArmId?: string;
-}
-
-/**
- * The Private Endpoint resource.
- */
-model PrivateEndpoint {
-  /**
-   * The ARM identifier for Private Endpoint
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
 }
 
 /**
@@ -6930,7 +6829,8 @@ model PartialRegistryPartialTrackedResource {
  * Managed service identity (system assigned and/or user assigned identities)
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model RegistryPartialManagedServiceIdentity extends ManagedServiceIdentity {}
+model RegistryPartialManagedServiceIdentity
+  extends Azure.ResourceManager.CommonTypes.ManagedServiceIdentity {}
 
 /**
  * The List Aml user feature operation response.
@@ -6980,6 +6880,32 @@ model AmlOperation {
    * The intended executor of the operation: user/system
    */
   origin?: string;
+}
+
+/**
+ * Display name of operation
+ */
+model OperationDisplay {
+  /**
+   * Gets or sets the description for the operation.
+   */
+  description?: string;
+
+  /**
+   * Gets or sets the operation that users can perform.
+   */
+  operation?: string;
+
+  /**
+   * Gets or sets the resource provider name:
+   * Microsoft.MachineLearningExperimentation
+   */
+  provider?: string;
+
+  /**
+   * Gets or sets the resource on which the operation is performed.
+   */
+  resource?: string;
 }
 
 /**
@@ -7464,7 +7390,7 @@ model WorkspaceUpdateParameters {
   /**
    * Managed service identity (system assigned and/or user assigned identities)
    */
-  identity?: ManagedServiceIdentity;
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   /**
    * The properties that the machine learning workspace will be updated with.
@@ -7476,7 +7402,7 @@ model WorkspaceUpdateParameters {
   /**
    * Optional. This field is required to be implemented by the RP because AML is supporting more than one tier
    */
-  sku?: Sku;
+  sku?: Azure.ResourceManager.CommonTypes.Sku;
 
   /**
    * The resource tags for the machine learning workspace.
@@ -7925,11 +7851,11 @@ model PrivateLinkResourceListResult {
  * A private link resource
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model PrivateLinkResource extends Resource {
+model PrivateLinkResource extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Managed service identity (system assigned and/or user assigned identities)
    */
-  identity?: ManagedServiceIdentity;
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   /**
    * Same as workspace location.
@@ -7946,7 +7872,7 @@ model PrivateLinkResource extends Resource {
   /**
    * Optional. This field is required to be implemented by the RP because AML is supporting more than one tier
    */
-  sku?: Sku;
+  sku?: Azure.ResourceManager.CommonTypes.Sku;
 
   /**
    * Dictionary of <string>
@@ -13143,7 +13069,7 @@ model ManagedComputeIdentity extends MonitorComputeIdentityBase {
   /**
    * Managed service identity (system assigned and/or user assigned identities)
    */
-  identity?: ManagedServiceIdentity;
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   /**
    * [Required] Monitor compute identity type enum.

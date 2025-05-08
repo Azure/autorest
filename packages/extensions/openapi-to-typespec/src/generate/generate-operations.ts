@@ -8,6 +8,7 @@ import { getOptions } from "../options";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs, generateSummary } from "../utils/docs";
 import { generateLroHeaders } from "../utils/lro";
+import { getArmCommonTypeModelName } from "../utils/model-generation";
 import { generateSuppressions } from "../utils/suppressions";
 import { generateExamples, getGeneratedOperationId } from "./generate-arm-resource";
 import { generateParameter } from "./generate-parameter";
@@ -83,14 +84,14 @@ export function generateProviderAction(operation: TspArmProviderActionOperation)
   const templateParameters = [];
 
   if (operation.request) {
-    templateParameters.push(`Request = ${operation.request.type}`);
+    templateParameters.push(`Request = ${getArmCommonTypeModelName(operation.request.type)}`);
   }
 
   if (operation.response) {
     if (operation.response.endsWith("[]")) {
-      templateParameters.push(`Response = {@bodyRoot _: ${operation.response}}`);
+      templateParameters.push(`Response = {@bodyRoot _: ${getArmCommonTypeModelName(operation.response)}}`);
     } else {
-      templateParameters.push(`Response = ${operation.response}`);
+      templateParameters.push(`Response = ${getArmCommonTypeModelName(operation.response)}`);
     }
   }
 

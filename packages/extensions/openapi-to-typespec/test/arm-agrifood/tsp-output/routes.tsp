@@ -22,8 +22,8 @@ interface CheckNameAvailabilityOperationGroup {
   @operationId("CheckNameAvailability_CheckNameAvailability")
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<
-    Request = CheckNameAvailabilityRequest,
-    Response = CheckNameAvailabilityResponse,
+    Request = Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
+    Response = Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse,
     Scope = SubscriptionActionScope,
     Parameters = {}
   >;
