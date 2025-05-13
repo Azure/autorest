@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/core",
+      "comment": "Only treat \"$ref\" as reference if value is string (part 2)",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/core"
+}
