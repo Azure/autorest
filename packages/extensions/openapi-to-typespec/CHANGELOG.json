@@ -2,18 +2,6 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
-      "version": "0.11.1",
-      "tag": "@autorest/openapi-to-typespec_v0.11.1",
-      "date": "Tue, 13 May 2025 03:24:17 GMT",
-      "comments": {
-        "patch": [
-          {
-            "comment": "Change common type replacement logic"
-          }
-        ]
-      }
-    },
-    {
       "version": "0.11.0",
       "tag": "@autorest/openapi-to-typespec_v0.11.0",
       "date": "Sat, 19 Apr 2025 07:27:04 GMT",
