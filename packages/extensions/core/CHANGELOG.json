@@ -2,6 +2,18 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.10.5",
+      "tag": "@autorest/core_v3.10.5",
+      "date": "Tue, 13 May 2025 03:26:36 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "[deduplication] Only treat \"$ref\" as reference if value is string (part 2)"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.10.4",
       "tag": "@autorest/core_v3.10.4",
       "date": "Fri, 14 Mar 2025 16:49:52 GMT",

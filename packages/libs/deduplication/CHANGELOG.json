@@ -2,6 +2,18 @@
   "name": "@azure-tools/deduplication",
   "entries": [
     {
+      "version": "3.2.3",
+      "tag": "@azure-tools/deduplication_v3.2.3",
+      "date": "Tue, 13 May 2025 03:24:17 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Only treat \"$ref\" as reference if value is string (part 2)"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.2.2",
       "tag": "@azure-tools/deduplication_v3.2.2",
       "date": "Fri, 14 Mar 2025 06:11:23 GMT",

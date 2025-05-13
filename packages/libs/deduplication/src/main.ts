@@ -420,7 +420,7 @@ export class Deduplicator {
 
       if (value && typeof value === "object") {
         const ref = value.$ref;
-        if (ref) {
+        if (ref && typeof ref === "string") {
           // see if this object has a $ref
           const newRef = this.refs[ref];
           if (newRef) {
