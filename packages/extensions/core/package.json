@@ -49,7 +49,7 @@
     "@azure-tools/async-io": "~3.0.0",
     "@azure-tools/codegen": "~2.10.0",
     "@azure-tools/datastore": "~4.8.0",
-    "@azure-tools/deduplication": "~3.2.2",
+    "@azure-tools/deduplication": "~3.2.3",
     "@azure-tools/extension": "~3.7.1",
     "@azure-tools/json": "~1.3.0",
     "@azure-tools/jsonschema": "~1.3.0",

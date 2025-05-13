@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/deduplication
 
-This log was last generated on Fri, 14 Mar 2025 06:11:23 GMT and should not be manually modified.
+This log was last generated on Tue, 13 May 2025 03:24:17 GMT and should not be manually modified.
+
+## 3.2.3
+Tue, 13 May 2025 03:24:17 GMT
+
+### Patches
+
+- Only treat "$ref" as reference if value is string (part 2)
 
 ## 3.2.2
 Fri, 14 Mar 2025 06:11:23 GMT
