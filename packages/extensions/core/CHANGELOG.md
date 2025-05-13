@@ -360,7 +360,7 @@ Fri, 09 Apr 2021 19:53:22 GMT
 
 ### Minor changes
 
-- **Added** Semantic validator plugin
+- **Added** Semantic validator plugin 
 - **Feature** Add sourcemap support for errors providing original location of problem
 - **Added** support for emitting statistics of the specs and resuting model
 
@@ -506,7 +506,7 @@ Tue, 4 Feb 2020 00:00:00 GMT
 
 - rebuild to pick up latest data-store to fix the caching filename size
 - OAI2-to-OAI3 converter update in perks.
-- TransformerViaPointer was turning null into {}
+- TransformerViaPointer was turning null into {} 
 - rebuild to fix NPM publishing problem.
 - remove additionalProperties: false so v2 generators don't choke.
 - rebuild to pick up perks change to fix multibyte utf8 over byte boundary problem
