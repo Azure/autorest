@@ -8,7 +8,7 @@
       "comments": {
         "patch": [
           {
-            "comment": "Only treat \"$ref\" as reference if value is string (part 2)"
+            "comment": "[deduplication] Only treat \"$ref\" as reference if value is string (part 2)"
           }
         ]
       }
