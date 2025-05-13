@@ -12,10 +12,10 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Use Node.js 16.x
+      - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: 22.x
       - run: |
           LABEL_NAME=Publish
           LABEL_URL=https://api.github.com/repos/Azure/autorest/issues/$PR_NUMBER/labels

@@ -78,12 +78,12 @@ extends:
         jobs:
           - template: /eng/pipelines/templates/regression-tests.yaml
             parameters:
-              name: node18
-              nodeVersion: 18.x
-          - template: /eng/pipelines/templates/regression-tests.yaml
-            parameters:
               name: node20
               nodeVersion: 20.x
+          - template: /eng/pipelines/templates/regression-tests.yaml
+            parameters:
+              name: node22
+              nodeVersion: 22.x
 
       - stage: smoketests
         displayName: Smoke Tests
@@ -95,5 +95,5 @@ extends:
         jobs:
           - template: /eng/pipelines/templates/smoke-tests.yaml
             parameters:
-              name: node20
-              nodeVersion: 20.x
+              name: node22
+              nodeVersion: 22.x
