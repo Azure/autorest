@@ -15,7 +15,6 @@
     "build": "tsc -p tsconfig.build.json",
     "lint:fix": "eslint ./src --fix --ext .ts",
     "lint": "eslint ./src --ext .ts --max-warnings=0",
-    "prepare": "npm run build",
     "test": "echo codemodel: No Tests.",
     "test:ci": "echo codemodel: No Tests.",
     "clean": "rimraf ./dist ./temp"
@@ -53,7 +52,7 @@
     "typescript": "~5.8.3"
   },
   "dependencies": {
-    "@azure-tools/codegen": "~2.10.0",
+    "@azure-tools/codegen": "workspace:~2.10.0",
     "js-yaml": "~4.1.0"
   },
   "publishConfig": {

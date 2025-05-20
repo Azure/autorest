@@ -16,7 +16,6 @@
     "build": "tsc -p tsconfig.build.json",
     "lint:fix": "eslint ./src --fix --ext .ts",
     "lint": "eslint ./src --ext .ts --max-warnings=0",
-    "prepare": "npm run build",
     "test": "jest --watchAll --coverage=false",
     "test:ci": "jest --ci",
     "clean": "rimraf ./dist ./temp"
@@ -53,11 +52,11 @@
     "typescript": "~5.8.3"
   },
   "dependencies": {
-    "@azure-tools/codegen": "~2.10.0",
-    "@azure-tools/json": "~1.3.0",
+    "@azure-tools/codegen": "workspace:~2.10.0",
+    "@azure-tools/json": "workspace:~1.3.0",
     "@azure-tools/tasks": "~3.0.0",
     "@azure-tools/uri": "~3.1.1",
-    "@azure-tools/yaml": "~1.2.0",
+    "@azure-tools/yaml": "workspace:~1.2.0",
     "@azure/logger": "^1.2.0",
     "lodash": "~4.17.20",
     "jsonpath-plus": "~10.3.0",

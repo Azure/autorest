@@ -13,7 +13,6 @@
     "build": "npm run -s before-build && tsc -p tsconfig.build.json",
     "lint:fix": "eslint ./src --fix --ext .ts",
     "lint": "eslint ./src --ext .ts --max-warnings=0",
-    "prepare": "npm run build",
     "test": "jest --coverage=false --watch",
     "test:unit:ci": "jest --ci",
     "test:e2e": "jest --forceExit --runInBand --config ./jest.e2e.config.js",
@@ -39,7 +38,7 @@
   "homepage": "https://github.com/Azure/autorest/tree/main/packages/libs/extension",
   "readme": "https://github.com/Azure/autorest/tree/main/packages/libs/extension/readme.md",
   "dependencies": {
-    "@autorest/system-requirements": "~1.1.0",
+    "@autorest/system-requirements": "workspace:~1.1.0",
     "@azure-tools/async-io": "~3.0.0",
     "@azure-tools/tasks": "~3.0.0",
     "@azure/logger": "^1.2.0",

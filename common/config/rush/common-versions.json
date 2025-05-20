@@ -37,6 +37,5 @@
     // "typescript": [
     //   "~2.4.0"
     // ]
-    "@cadl-lang/compiler": ["^0.40.0"]
   }
 }
