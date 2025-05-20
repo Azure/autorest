@@ -52,8 +52,8 @@
     "typescript": "~5.8.3"
   },
   "dependencies": {
-    "@azure-tools/codegen": "~2.10.0",
-    "@azure-tools/datastore": "~4.8.0",
+    "@azure-tools/codegen": "workspace:~2.10.0",
+    "@azure-tools/datastore": "workspace:~4.8.0",
     "@azure-tools/object-comparison": "~3.0.0",
     "@azure-tools/tasks": "~3.0.0",
     "compare-versions": "^6.1.1",
