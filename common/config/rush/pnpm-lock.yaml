@@ -962,8 +962,8 @@ importers:
         specifier: ~1.2.9
         version: 1.2.9
       npm:
-        specifier: ~11.4.0
-        version: 11.4.0
+        specifier: ~8.12.1
+        version: 8.12.2
       npm-package-arg:
         specifier: ^12.0.2
         version: 12.0.2
@@ -6698,30 +6698,29 @@ packages:
     dependencies:
       path-key: 3.1.1
 
-  /npm@11.4.0:
-    resolution: {integrity: sha512-dZCRoh7oBdnIQrz+KHjWYmxIoWpcpzweEzj6g3mVGr/C0nPsStEu3mS9KUI3xnGbO8xRgRjRr/6KOJhf5dKXcw==}
-    engines: {node: ^20.17.0 || >=22.9.0}
+  /npm@8.12.2:
+    resolution: {integrity: sha512-TArexqro9wpl/6wz6t6YdYhOoiy/UArqiSsSsqI7fieEhQEswDQSJcgt/LuCDjl6mfCDi0So7S2UZ979qLYRPg==}
+    engines: {node: ^12.13.0 || ^14.15.0 || >=16}
     hasBin: true
     dev: false
     bundledDependencies:
       - '@isaacs/string-locale-compare'
       - '@npmcli/arborist'
+      - '@npmcli/ci-detect'
       - '@npmcli/config'
       - '@npmcli/fs'
       - '@npmcli/map-workspaces'
       - '@npmcli/package-json'
-      - '@npmcli/promise-spawn'
-      - '@npmcli/redact'
       - '@npmcli/run-script'
-      - '@sigstore/tuf'
       - abbrev
       - archy
       - cacache
       - chalk
-      - ci-info
+      - chownr
       - cli-columns
+      - cli-table3
+      - columnify
       - fastest-levenshtein
-      - fs-minipass
       - glob
       - graceful-fs
       - hosted-git-info
@@ -6733,6 +6732,7 @@ packages:
       - libnpmdiff
       - libnpmexec
       - libnpmfund
+      - libnpmhook
       - libnpmorg
       - libnpmpack
       - libnpmpublish
@@ -6740,13 +6740,13 @@ packages:
       - libnpmteam
       - libnpmversion
       - make-fetch-happen
-      - minimatch
       - minipass
       - minipass-pipeline
+      - mkdirp
+      - mkdirp-infer-owner
       - ms
       - node-gyp
       - nopt
-      - normalize-package-data
       - npm-audit-report
       - npm-install-checks
       - npm-package-arg
@@ -6754,22 +6754,26 @@ packages:
       - npm-profile
       - npm-registry-fetch
       - npm-user-validate
-      - p-map
+      - npmlog
+      - opener
       - pacote
       - parse-conflict-json
       - proc-log
       - qrcode-terminal
       - read
+      - read-package-json
+      - read-package-json-fast
+      - readdir-scoped-modules
+      - rimraf
       - semver
-      - spdx-expression-parse
       - ssri
-      - supports-color
       - tar
       - text-table
       - tiny-relative-date
       - treeverse
       - validate-npm-package-name
       - which
+      - write-file-atomic
 
   /object-inspect@1.13.4:
     resolution: {integrity: sha512-W67iLl4J2EXEGTbfeHCffrjDfitvLANg0UlX3wFUUSTx92KXRFegMHUVgSqE+wvhAbi4WqjGg9czysTV2Epbew==}

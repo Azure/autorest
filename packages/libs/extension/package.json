@@ -48,7 +48,7 @@
     "rimraf": "^6.0.1",
     "semver": "^7.7.2",
     "yarn": "1.22.17",
-    "npm": "~11.4.0"
+    "npm": "~8.12.1"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
