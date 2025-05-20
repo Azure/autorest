@@ -40,12 +40,6 @@
       "shouldPublish": true
     },
     {
-      "packageName": "@autorest/fixer",
-      "projectFolder": "packages/tools/fixer",
-      "reviewCategory": "production",
-      "shouldPublish": true
-    },
-    {
       "packageName": "@autorest/schemas",
       "projectFolder": "packages/libs/autorest-schemas",
       "reviewCategory": "production",
@@ -150,12 +144,6 @@
     {
       "packageName": "@autorest/modelerfour",
       "projectFolder": "packages/extensions/modelerfour",
-      "reviewCategory": "production",
-      "shouldPublish": true
-    },
-    {
-      "packageName": "@autorest/cadl",
-      "projectFolder": "packages/extensions/cadl",
       "reviewCategory": "production",
       "shouldPublish": true
     },
