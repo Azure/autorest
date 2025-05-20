@@ -42,7 +42,7 @@
     "@autorest/system-requirements": "~1.1.0",
     "@azure-tools/async-io": "~3.0.0",
     "@azure-tools/tasks": "~3.0.0",
-    "@azure/logger": "^1.0.2",
+    "@azure/logger": "^1.2.0",
     "command-exists": "~1.2.9",
     "npm-package-arg": "^9.0.0",
     "npm": "~8.12.1",

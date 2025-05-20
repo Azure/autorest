@@ -153,8 +153,8 @@ dependencies:
     specifier: ^2.7.0
     version: 2.7.3
   '@types/semver':
-    specifier: 5.5.0
-    version: 5.5.0
+    specifier: 7.7.0
+    version: 7.7.0
   '@types/source-map-support':
     specifier: ^0.5.3
     version: 0.5.10
@@ -309,8 +309,8 @@ dependencies:
     specifier: 5.2.1
     version: 5.2.1
   semver:
-    specifier: ^7.3.5
-    version: 7.5.4
+    specifier: ^7.7.2
+    version: 7.7.2
   source-map:
     specifier: ^0.8.0-beta.0
     version: 0.8.0-beta.0
@@ -345,8 +345,8 @@ dependencies:
     specifier: ~0.53.0
     version: 0.53.1
   untildify:
-    specifier: ^4.0.0
-    version: 4.0.0
+    specifier: ^5.0.0
+    version: 5.0.0
   vscode-jsonrpc:
     specifier: ^3.5.0
     version: 3.6.2
@@ -558,6 +558,16 @@ packages:
     engines: {node: '>=14.0.0'}
     dependencies:
       tslib: 2.6.2
+    dev: false
+
+  /@azure/logger@1.2.0:
+    resolution: {integrity: sha512-0hKEzLhpw+ZTAfNJyRrn6s+V0nDWzXk9OjBr2TiGIu0OfMr5s2V4FpKLTAK3Ca5r5OKLbf4hkOGDPyiRjie/jA==}
+    engines: {node: '>=18.0.0'}
+    dependencies:
+      '@typespec/ts-http-runtime': 0.2.2
+      tslib: 2.6.2
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /@babel/code-frame@7.16.7:
@@ -1559,6 +1569,24 @@ packages:
     resolution: {integrity: sha512-4JQNk+3mVzK3xh2rqd6RB4J46qUR19azEHBneZyTZM+c456qOrbbM/5xcR8huNCCcbVt7+UmizG6GuUvPvKUYg==}
     dev: false
 
+  /@jsep-plugin/assignment@1.3.0(jsep@1.4.0):
+    resolution: {integrity: sha512-VVgV+CXrhbMI3aSusQyclHkenWSAm95WaiKrMxRFam3JSUiIaQjoMIw2sEs/OX4XifnqeQUN4DYbJjlA8EfktQ==}
+    engines: {node: '>= 10.16.0'}
+    peerDependencies:
+      jsep: ^0.4.0||^1.0.0
+    dependencies:
+      jsep: 1.4.0
+    dev: false
+
+  /@jsep-plugin/regex@1.0.4(jsep@1.4.0):
+    resolution: {integrity: sha512-q7qL4Mgjs1vByCaTnDFcBnV9HS7GVPJX5vyVoCgZHNSC9rjwIlmbXG5sUuorR5ndfHAIlJ8pVStxvjXHbNvtUg==}
+    engines: {node: '>= 10.16.0'}
+    peerDependencies:
+      jsep: ^0.4.0||^1.0.0
+    dependencies:
+      jsep: 1.4.0
+    dev: false
+
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -1852,10 +1880,6 @@ packages:
     resolution: {integrity: sha512-+68kP9yzs4LMp7VNh8gdzMSPZFL44MLGqiHWvttYJe+6qnuVr4Ek9wSBQoveqY/r+LwjCcU29kNVkidwim+kYA==}
     dev: false
 
-  /@types/semver@5.5.0:
-    resolution: {integrity: sha512-41qEJgBH/TWgo5NFSvBCJ1qkoi3Q6ONSF2avrHq1LVEZfYpdHmj0y9SuTK+u9ZhG1sYQKBL1AWXKyLWP4RaUoQ==}
-    dev: false
-
   /@types/semver@7.7.0:
     resolution: {integrity: sha512-k107IF4+Xr7UHjwDc7Cfd6PRQfbdkiRabXGRjo07b4WyPahFBZCZ1sE+BNxYIJPPg73UkfOsVOLwqVc/6ETrIA==}
     dev: false
@@ -2049,7 +2073,7 @@ packages:
       mustache: 4.2.0
       picocolors: 1.1.1
       prettier: 3.5.3
-      semver: 7.7.1
+      semver: 7.7.2
       tar: 7.4.3
       temporal-polyfill: 0.2.5
       vscode-languageserver: 9.0.1
@@ -2139,6 +2163,17 @@ packages:
       '@typespec/compiler': ^1.0.0-rc.0
     dependencies:
       '@typespec/compiler': 1.0.0-rc.0(@types/node@22.15.19)
+    dev: false
+
+  /@typespec/ts-http-runtime@0.2.2:
+    resolution: {integrity: sha512-Gz/Sm64+Sq/vklJu1tt9t+4R2lvnud8NbTD/ZfpZtMiUX7YeVpCA8j6NSW8ptwcoLL+NmYANwqP8DV0q/bwl2w==}
+    engines: {node: '>=18.0.0'}
+    dependencies:
+      http-proxy-agent: 7.0.0
+      https-proxy-agent: 7.0.2
+      tslib: 2.6.2
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /@typespec/versioning@0.68.0(@typespec/compiler@1.0.0-rc.0):
@@ -2868,7 +2903,7 @@ packages:
   /builtins@5.0.1:
     resolution: {integrity: sha512-qwVpFEHNfhYJIzNRBvd2C1kyo6jz3ZSMPyyuR47OPdiKWlbYnZNyDWuyR175qDnAJLiCo5fBBqPb3RiXgWlkOQ==}
     dependencies:
-      semver: 7.6.3
+      semver: 7.7.2
     dev: false
 
   /cacache@12.0.4:
@@ -6073,7 +6108,7 @@ packages:
       jest-resolve: 26.6.2
       natural-compare: 1.4.0
       pretty-format: 26.6.2
-      semver: 7.5.4
+      semver: 7.7.2
     dev: false
 
   /jest-snapshot@29.7.0:
@@ -6222,6 +6257,11 @@ packages:
       argparse: 2.0.1
     dev: false
 
+  /jsep@1.4.0:
+    resolution: {integrity: sha512-B7qPcEVE3NVkmSJbaYxvv4cHkVW7DQsZz13pUMrfS8z8Q/BuShN+gcTXrUlPiGqM2/t/EEaI030bpxMqY8gMlw==}
+    engines: {node: '>= 10.16.0'}
+    dev: false
+
   /jsesc@0.5.0:
     resolution: {integrity: sha512-uZz5UnB7u4T9LvwmFqXii7pZSouaRPorGs5who1Ip7VO0wxanFvBL7GkM6dTHlgX+jhBApRetaWpnDabOeTcnA==}
     hasBin: true
@@ -6293,6 +6333,16 @@ packages:
   /jsonparse@1.3.1:
     resolution: {integrity: sha512-POQXvpdL69+CluYsillJ7SUhKvytYjW9vG/GKpnf+xP8UWgYEM/RaMzHHofbALDiKbbP1W8UEYmgGl39WkPZsg==}
     engines: {'0': node >= 0.2.0}
+    dev: false
+
+  /jsonpath-plus@10.3.0:
+    resolution: {integrity: sha512-8TNmfeTCk2Le33A3vRRwtuworG/L5RrgMvdjhKZxvyShO+mBu2fP50OWUjRLNtvw344DdDarFh9buFAZs5ujeA==}
+    engines: {node: '>=18.0.0'}
+    hasBin: true
+    dependencies:
+      '@jsep-plugin/assignment': 1.3.0(jsep@1.4.0)
+      '@jsep-plugin/regex': 1.0.4(jsep@1.4.0)
+      jsep: 1.4.0
     dev: false
 
   /jsonpath-plus@6.0.1:
@@ -6445,13 +6495,6 @@ packages:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
     dependencies:
       yallist: 3.1.1
-    dev: false
-
-  /lru-cache@6.0.0:
-    resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
-    engines: {node: '>=10'}
-    dependencies:
-      yallist: 4.0.0
     dev: false
 
   /lru-cache@7.18.3:
@@ -6913,7 +6956,7 @@ packages:
       make-fetch-happen: 13.0.0
       nopt: 7.2.0
       proc-log: 3.0.0
-      semver: 7.5.4
+      semver: 7.7.2
       tar: 6.2.0
       which: 4.0.0
     transitivePeerDependencies:
@@ -6994,7 +7037,7 @@ packages:
     dependencies:
       hosted-git-info: 5.2.1
       proc-log: 2.0.1
-      semver: 7.5.4
+      semver: 7.7.2
       validate-npm-package-name: 4.0.0
     dev: false
 
@@ -8026,26 +8069,6 @@ packages:
 
   /semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
-    hasBin: true
-    dev: false
-
-  /semver@7.5.4:
-    resolution: {integrity: sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==}
-    engines: {node: '>=10'}
-    hasBin: true
-    dependencies:
-      lru-cache: 6.0.0
-    dev: false
-
-  /semver@7.6.3:
-    resolution: {integrity: sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==}
-    engines: {node: '>=10'}
-    hasBin: true
-    dev: false
-
-  /semver@7.7.1:
-    resolution: {integrity: sha512-hlq8tAfn0m/61p4BVRcPzIGr6LKiMwo4VM6dGi6pt4qcRkmNzTcWq6eCEjEh+qXjkMDvPlOFFSGwQjoEa6gyMA==}
-    engines: {node: '>=10'}
     hasBin: true
     dev: false
 
@@ -9924,12 +9947,12 @@ packages:
     dev: false
 
   file:projects/common.tgz(prettier@3.5.3)(ts-node@10.9.1):
-    resolution: {integrity: sha512-yoZdwtR9oTvYIbM4hVjTSRhh69IxiPP3ep3tN0vgfyh0A8l3XJMkVfoGqOtp1Uvj5QyB2lT1mxInRsNQp42D7w==, tarball: file:projects/common.tgz}
+    resolution: {integrity: sha512-1P48PP149S7zodcI5YjxYnYtA8+Ejh4/3UELDBTBr6paalE7fOuKbr8BD/KA6/ckRZn0UWZjgm84NALSJiBPjQ==, tarball: file:projects/common.tgz}
     id: file:projects/common.tgz
     name: '@rush-temp/common'
     version: 0.0.0
     dependencies:
-      '@azure/logger': 1.0.4
+      '@azure/logger': 1.2.0
       '@types/cli-progress': 3.9.2
       '@types/jest': 29.5.14
       '@types/node': 22.15.19
@@ -10111,14 +10134,14 @@ packages:
     dev: false
 
   file:projects/datastore.tgz(prettier@3.5.3)(ts-node@10.9.1):
-    resolution: {integrity: sha512-xCMUrF2iK67RZBnq4GVTb4hW6UExj6CE8QRpTGLEcSg2Wr4ulIgOUUuG/OwS3sgCUW0hU74N2ngoGywATaauSw==, tarball: file:projects/datastore.tgz}
+    resolution: {integrity: sha512-WewDTZa0vtj8FEAXa6P+B4+BgRI9udgUVb1BA7a6R7DKmEJKQ9+pel0tlWAoBdwv0nVO+t/AJ4vM9lOUPhRxGA==, tarball: file:projects/datastore.tgz}
     id: file:projects/datastore.tgz
     name: '@rush-temp/datastore'
     version: 0.0.0
     dependencies:
       '@azure-tools/tasks': 3.0.255
       '@azure-tools/uri': 3.1.1
-      '@azure/logger': 1.0.4
+      '@azure/logger': 1.2.0
       '@types/jest': 29.5.14
       '@types/lodash': 4.17.16
       '@types/node': 22.15.19
@@ -10131,7 +10154,7 @@ packages:
       eslint-plugin-prettier: 5.4.0(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn: 49.0.0(eslint@8.57.1)
       jest: 29.7.0(@types/node@22.15.19)(ts-node@10.9.1)
-      jsonpath-plus: 6.0.1
+      jsonpath-plus: 10.3.0
       lodash: 4.17.21
       rimraf: 6.0.1
       source-map: 0.8.0-beta.0
@@ -10215,14 +10238,14 @@ packages:
     dev: false
 
   file:projects/extension.tgz(prettier@3.5.3)(ts-node@10.9.1):
-    resolution: {integrity: sha512-Xp3bxihBBYDl2wrFn57MdALSNT8iEDPs/fVU+w/anGWxF9N14AI79sgmWT4iULhhPcdqeJt0C7COr0n1vtdH9A==, tarball: file:projects/extension.tgz}
+    resolution: {integrity: sha512-V21RNTVkskkwKkNYdFL+jEttsPkhNuMkupkayhdo5Wnj0DSbYqYbDLyaBoiKcVgGPTkSROkB7iL+xWUj1CFeIg==, tarball: file:projects/extension.tgz}
     id: file:projects/extension.tgz
     name: '@rush-temp/extension'
     version: 0.0.0
     dependencies:
       '@azure-tools/async-io': 3.0.254
       '@azure-tools/tasks': 3.0.255
-      '@azure/logger': 1.0.4
+      '@azure/logger': 1.2.0
       '@types/command-exists': 1.2.3
       '@types/jest': 29.5.14
       '@types/node': 22.15.19
@@ -10553,12 +10576,12 @@ packages:
     dev: false
 
   file:projects/system-requirements.tgz(prettier@3.5.3)(ts-node@10.9.1):
-    resolution: {integrity: sha512-DeMuvnbY4io7UINKKX+jJrMpEOMgILU+wsKkKilASREHANcSiZEopkQhPM3AZVoa0SABkt8pNVX2bXqka+GfIQ==, tarball: file:projects/system-requirements.tgz}
+    resolution: {integrity: sha512-YNTps44gsHbRTaM4dSS2Ntyb6yaPxrTY4lmj3MOS6Tz+HQIxawkkOmeXVGCcEivuARW8yaGRSjUVV+NmyEbZHQ==, tarball: file:projects/system-requirements.tgz}
     id: file:projects/system-requirements.tgz
     name: '@rush-temp/system-requirements'
     version: 0.0.0
     dependencies:
-      '@azure/logger': 1.0.4
+      '@azure/logger': 1.2.0
       '@types/command-exists': 1.2.3
       '@types/jest': 29.5.14
       '@types/node': 22.15.19

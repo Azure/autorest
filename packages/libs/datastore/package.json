@@ -58,9 +58,9 @@
     "@azure-tools/tasks": "~3.0.0",
     "@azure-tools/uri": "~3.1.1",
     "@azure-tools/yaml": "~1.2.0",
-    "@azure/logger": "^1.0.2",
+    "@azure/logger": "^1.2.0",
     "lodash": "~4.17.20",
-    "jsonpath-plus": "~6.0.1",
+    "jsonpath-plus": "~10.3.0",
     "source-map": "^0.8.0-beta.0"
   }
 }

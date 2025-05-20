@@ -35,7 +35,7 @@
   "homepage": "https://github.com/Azure/autorest/tree/main/packages/libs/system-requirements",
   "readme": "https://github.com/Azure/autorest/tree/main/packages/libs/system-requirements/readme.md",
   "dependencies": {
-    "@azure/logger": "^1.0.2",
+    "@azure/logger": "^1.2.0",
     "command-exists": "~1.2.9",
     "semver": "^7.7.2"
   },
