@@ -5,8 +5,17 @@ import { execSync } from "child_process";
 console.log("Running chronus publish process...");
 
 try {
+  // Check for pnpm
+  const hasPnpm = execSync("command -v pnpm || echo 'not found'").toString().trim() !== 'not found';
+  
   // Create a releases using chronus
-  execSync(`pnpm chronus version`, { stdio: "inherit" });
+  if (hasPnpm) {
+    execSync(`pnpm chronus version`, { stdio: "inherit" });
+  } else {
+    console.log("pnpm not found, trying with npx...");
+    execSync(`npx @chronus/chronus version`, { stdio: "inherit" });
+  }
+  
   const stdout = execSync(`git status --porcelain`).toString();
 
   if (stdout.trim() !== "") {

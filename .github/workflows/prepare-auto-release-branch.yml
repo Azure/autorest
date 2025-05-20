@@ -32,24 +32,13 @@ jobs:
           version: 8.10.5
           run_install: false
 
-      - run: pnpm install
-        name: Install dependencies
+      - name: Install dependencies
+        run: pnpm install
         
       - name: Create release branch
         run: |
           git config user.name "Auto Chronus Bot"
           git config user.email "chronus@github.com"
-          pnpm chronus version
-          
-          # Push changes if any
-          if [[ -n "$(git status --porcelain)" ]]; then
-            git add -A
-            git commit -m "Bump versions"
-            git push origin HEAD:publish/auto-release --force
-            echo "Changes pushed to publish/auto-release branch"
-            echo "Link to create PR: https://github.com/Azure/autorest/pull/new/publish/auto-release"
-          else
-            echo "No changes to publish"
-          fi
+          node ./eng/scripts/publish.js
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
