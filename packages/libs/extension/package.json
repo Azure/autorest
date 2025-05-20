@@ -13,7 +13,6 @@
     "build": "npm run -s before-build && tsc -p tsconfig.build.json",
     "lint:fix": "eslint ./src --fix --ext .ts",
     "lint": "eslint ./src --ext .ts --max-warnings=0",
-    "prepare": "npm run build",
     "test": "jest --coverage=false --watch",
     "test:unit:ci": "jest --ci",
     "test:e2e": "jest --forceExit --runInBand --config ./jest.e2e.config.js",

@@ -1439,6 +1439,9 @@ importers:
       rimraf:
         specifier: ^6.0.1
         version: 6.0.1
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
 
   ../../packages/testing/test-utils:
     dependencies:
@@ -1464,6 +1467,9 @@ importers:
       '@types/jest':
         specifier: ^29.5.14
         version: 29.5.14
+      '@types/node':
+        specifier: ~22.15.19
+        version: 22.15.19
       eslint:
         specifier: ^8.28.0
         version: 8.57.1
@@ -1479,6 +1485,9 @@ importers:
       rimraf:
         specifier: ^6.0.1
         version: 6.0.1
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
 
   ../../packages/tools/compare:
     dependencies:

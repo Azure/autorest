@@ -41,6 +41,7 @@
     "eslint-plugin-unicorn": "~49.0.0",
     "eslint-plugin-import": "~2.31.0",
     "eslint": "^8.28.0",
-    "rimraf": "^6.0.1"
+    "rimraf": "^6.0.1",
+    "typescript": "~5.8.3"
   }
 }

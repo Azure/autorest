@@ -16,7 +16,6 @@
     "build": "tsc -p tsconfig.build.json",
     "lint:fix": "eslint  . --fix --ext .ts",
     "lint": "eslint  . --ext .ts",
-    "prepare": "npm run build",
     "test": "jest --watchAll --coverage=false",
     "test:ci": "jest --ci",
     "clean": "rimraf ./dist ./temp"
