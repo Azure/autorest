@@ -342,8 +342,8 @@ dependencies:
     specifier: ~5.8.3
     version: 5.8.3
   typescript-json-schema:
-    specifier: ~0.53.0
-    version: 0.53.1
+    specifier: ~0.65.1
+    version: 0.65.1
   untildify:
     specifier: ^4.0.0
     version: 4.0.0
@@ -1822,8 +1822,10 @@ packages:
       form-data: 4.0.0
     dev: false
 
-  /@types/node@16.18.61:
-    resolution: {integrity: sha512-k0N7BqGhJoJzdh6MuQg1V1ragJiXTh8VUBAZTWjJ9cUq23SG0F0xavOwZbhiP4J3y20xd6jxKx+xNUhkMAi76Q==}
+  /@types/node@18.19.101:
+    resolution: {integrity: sha512-Ykg7fcE3+cOQlLUv2Ds3zil6DVjriGQaSN/kEpl5HQ3DIGM6W0F2n9+GkWV4bRt7KjLymgzNdTnSKCbFUUJ7Kw==}
+    dependencies:
+      undici-types: 5.26.5
     dev: false
 
   /@types/node@22.15.19:
@@ -7458,8 +7460,8 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /path-equal@1.1.2:
-    resolution: {integrity: sha512-p5kxPPwCdbf5AdXzT1bUBJomhgBlEjRBavYNr1XUpMFIE4Hnf2roueCMXudZK5tnaAu1tTmp3GPzqwJK45IHEA==}
+  /path-equal@1.2.5:
+    resolution: {integrity: sha512-i73IctDr3F2W+bsOWDyyVm/lqsXO47aY9nsFZUjTT/aljSbkxHxxCoyZ9UUrM8jK0JVod+An+rl48RCsvWM+9g==}
     dev: false
 
   /path-exists@4.0.0:
@@ -8940,7 +8942,7 @@ packages:
       code-block-writer: 11.0.3
     dev: false
 
-  /ts-node@10.9.1(@types/node@16.18.61)(typescript@4.6.4):
+  /ts-node@10.9.1(@types/node@18.19.101)(typescript@5.5.4):
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -8959,14 +8961,14 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 16.18.61
+      '@types/node': 18.19.101
       acorn: 8.11.2
       acorn-walk: 8.3.0
       arg: 4.1.3
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 4.6.4
+      typescript: 5.5.4
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     dev: false
@@ -9101,26 +9103,26 @@ packages:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
     dev: false
 
-  /typescript-json-schema@0.53.1:
-    resolution: {integrity: sha512-Hg+RnOKUd38MOzC0rDft03a8xvwO+gCcj1F77smw2tCoZYQpFoLtrXWBGdvCX+REliko5WYel2kux17HPFqjLQ==}
+  /typescript-json-schema@0.65.1:
+    resolution: {integrity: sha512-tuGH7ff2jPaUYi6as3lHyHcKpSmXIqN7/mu50x3HlYn0EHzLpmt3nplZ7EuhUkO0eqDRc9GqWNkfjgBPIS9kxg==}
     hasBin: true
     dependencies:
       '@types/json-schema': 7.0.15
-      '@types/node': 16.18.61
+      '@types/node': 18.19.101
       glob: 7.1.7
-      path-equal: 1.1.2
+      path-equal: 1.2.5
       safe-stable-stringify: 2.4.3
-      ts-node: 10.9.1(@types/node@16.18.61)(typescript@4.6.4)
-      typescript: 4.6.4
+      ts-node: 10.9.1(@types/node@18.19.101)(typescript@5.5.4)
+      typescript: 5.5.4
       yargs: 17.2.1
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
     dev: false
 
-  /typescript@4.6.4:
-    resolution: {integrity: sha512-9ia/jWHIEbo49HfjrLGfKbZSuWo9iTMwXO+Ca3pRsSpbsMbc7/IU8NKdCZVRRBafVPGnoJeFL76ZOAA84I9fEg==}
-    engines: {node: '>=4.2.0'}
+  /typescript@5.5.4:
+    resolution: {integrity: sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q==}
+    engines: {node: '>=14.17'}
     hasBin: true
     dev: false
 
@@ -9143,6 +9145,10 @@ packages:
   /unc-path-regex@0.1.2:
     resolution: {integrity: sha512-eXL4nmJT7oCpkZsHZUOJo8hcX3GbsiDOa0Qu9F646fi8dT3XuSVopVqAcEiVzSKKH7UoDti23wNX3qGFxcW5Qg==}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /undici-types@5.26.5:
+    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
     dev: false
 
   /undici-types@6.21.0:
@@ -9898,7 +9904,7 @@ packages:
     dev: false
 
   file:projects/codemodel.tgz(jest@29.7.0)(prettier@3.5.3):
-    resolution: {integrity: sha512-0o3zX6Vct/ZrtDpto6/rxuIhJZLzt2xBPikX2N6KgkkPNKD/sMxtaFqIYV2LTVDnCzGtJjXNOJLiCNUXXyuOwA==, tarball: file:projects/codemodel.tgz}
+    resolution: {integrity: sha512-xShnAlYW04BvjmoX8dCNTx4kpzLfWIfcpfrb64nTc6P9iQIvyPsV4TvHn4y8eZitcjtc+36Rd5AYNH3C2GvQJg==, tarball: file:projects/codemodel.tgz}
     id: file:projects/codemodel.tgz
     name: '@rush-temp/codemodel'
     version: 0.0.0
@@ -9918,7 +9924,7 @@ packages:
       rimraf: 6.0.1
       ts-morph: 13.0.3
       typescript: 5.8.3
-      typescript-json-schema: 0.53.1
+      typescript-json-schema: 0.65.1
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'

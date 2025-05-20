@@ -416,42 +416,42 @@
     },
     "SchemaType": {
       "description": "possible schema types that indicate the type of schema.",
+      "type": "string",
       "enum": [
-        "any",
-        "any-object",
-        "arm-id",
         "array",
-        "binary",
-        "boolean",
-        "byte-array",
-        "char",
-        "choice",
-        "conditional",
-        "constant",
-        "credential",
-        "date",
-        "date-time",
         "dictionary",
-        "duration",
-        "flag",
-        "group",
+        "boolean",
         "integer",
-        "not",
         "number",
         "object",
-        "odata-query",
-        "or",
-        "sealed-choice",
-        "sealed-conditional",
         "string",
-        "time",
         "unixtime",
-        "unknown",
-        "uri",
+        "byte-array",
+        "binary",
+        "char",
+        "date",
+        "time",
+        "date-time",
+        "duration",
         "uuid",
-        "xor"
-      ],
-      "type": "string"
+        "uri",
+        "arm-id",
+        "credential",
+        "odata-query",
+        "any",
+        "any-object",
+        "choice",
+        "sealed-choice",
+        "conditional",
+        "sealed-conditional",
+        "flag",
+        "constant",
+        "or",
+        "xor",
+        "not",
+        "unknown",
+        "group"
+      ]
     },
     "CompoundSchemaTypes": {
       "description": "Compound schemas are used to construct complex objects or offer choices of a set of schemas.\n\n(ie, allOf, anyOf, oneOf )",
@@ -723,12 +723,12 @@
       ]
     },
     "ImplementationLocation": {
+      "type": "string",
       "enum": [
+        "Method",
         "Client",
-        "Context",
-        "Method"
-      ],
-      "type": "string"
+        "Context"
+      ]
     },
     "Parameter": {
       "description": "a definition of an discrete input for an operation",
@@ -806,9 +806,7 @@
         "binary": {
           "description": "indicates that this response is a binary stream",
           "type": "boolean",
-          "enum": [
-            true
-          ]
+          "const": true
         }
       },
       "defaultProperties": [],
@@ -1602,12 +1600,12 @@
       ]
     },
     "SchemaContext": {
+      "type": "string",
       "enum": [
-        "exception",
         "input",
-        "output"
-      ],
-      "type": "string"
+        "output",
+        "exception"
+      ]
     },
     "SchemaUsage": {
       "type": "object",
@@ -2263,9 +2261,7 @@
       "properties": {
         "in": {
           "type": "string",
-          "enum": [
-            "header"
-          ]
+          "const": "header"
         },
         "name": {
           "type": "string"
@@ -2358,46 +2354,44 @@
     },
     "HttpMethod": {
       "description": "standard HTTP protocol methods",
+      "type": "string",
       "enum": [
-        "delete",
         "get",
-        "head",
-        "options",
-        "patch",
-        "post",
         "put",
+        "post",
+        "delete",
+        "options",
+        "head",
+        "patch",
         "trace"
-      ],
-      "type": "string"
+      ]
     },
     "ParameterLocation": {
       "description": "the location that this parameter is placed in the http request",
+      "type": "string",
       "enum": [
-        "body",
-        "cookie",
-        "header",
-        "none",
-        "path",
         "query",
+        "header",
+        "cookie",
+        "path",
+        "body",
         "uri",
-        "virtual"
-      ],
-      "type": "string"
+        "virtual",
+        "none"
+      ]
     },
     "Scheme": {
       "type": "string",
-      "enum": [
-        "bearer"
-      ]
+      "const": "bearer"
     },
     "SecurityType": {
+      "type": "string",
       "enum": [
         "apiKey",
         "http",
         "oauth2",
         "openIdConnect"
-      ],
-      "type": "string"
+      ]
     },
     "AuthorizationCodeOAuthFlow": {
       "type": "object",
@@ -2435,18 +2429,14 @@
       "properties": {
         "scheme": {
           "type": "string",
-          "enum": [
-            "bearer"
-          ]
+          "const": "bearer"
         },
         "bearerFormat": {
           "type": "string"
         },
         "type": {
           "type": "string",
-          "enum": [
-            "http"
-          ]
+          "const": "http"
         },
         "description": {
           "type": "string"
@@ -2526,9 +2516,7 @@
         },
         "type": {
           "type": "string",
-          "enum": [
-            "http"
-          ]
+          "const": "http"
         },
         "extensions": {
           "$ref": "#/definitions/Record<string,any>",
@@ -2580,9 +2568,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "apiKey"
-          ]
+          "const": "apiKey"
         },
         "name": {
           "type": "string"
@@ -2611,9 +2597,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "openIdConnect"
-          ]
+          "const": "openIdConnect"
         },
         "openIdConnectUrl": {
           "description": "an URI",
@@ -2668,20 +2652,20 @@
     },
     "SerializationStyle": {
       "description": "The Serialization Style used for the parameter.\n\nDescribes how the parameter value will be serialized depending on the type of the parameter value.",
+      "type": "string",
       "enum": [
-        "binary",
-        "deepObject",
-        "form",
-        "json",
-        "label",
         "matrix",
-        "pipeDelimited",
+        "label",
         "simple",
+        "form",
         "spaceDelimited",
-        "tabDelimited",
-        "xml"
-      ],
-      "type": "string"
+        "pipeDelimited",
+        "deepObject",
+        "json",
+        "xml",
+        "binary",
+        "tabDelimited"
+      ]
     },
     "QueryEncodingStyle": {
       "enum": [
@@ -2703,9 +2687,7 @@
     "Default": {
       "description": "A catch-all for all un-handled response codes.",
       "type": "string",
-      "enum": [
-        "default"
-      ]
+      "const": "default"
     },
     "StatusCode": {
       "enum": [
@@ -2882,9 +2864,7 @@
       "properties": {
         "binary": {
           "type": "boolean",
-          "enum": [
-            true
-          ]
+          "const": true
         }
       },
       "defaultProperties": [],
@@ -2909,9 +2889,7 @@
         "multipart": {
           "description": "indicates that the HTTP Request should be a multipart request\n\nie, that it has multiple requests in a single request.",
           "type": "boolean",
-          "enum": [
-            true
-          ]
+          "const": true
         }
       },
       "defaultProperties": [],
@@ -2962,72 +2940,7 @@
           "description": "the possible HTTP status codes that this response MUST match one of.",
           "type": "array",
           "items": {
-            "enum": [
-              100,
-              101,
-              102,
-              103,
-              200,
-              201,
-              202,
-              203,
-              204,
-              205,
-              206,
-              207,
-              208,
-              226,
-              300,
-              301,
-              302,
-              303,
-              304,
-              305,
-              306,
-              307,
-              308,
-              400,
-              401,
-              402,
-              403,
-              404,
-              405,
-              406,
-              407,
-              408,
-              409,
-              410,
-              411,
-              412,
-              413,
-              414,
-              415,
-              416,
-              417,
-              418,
-              421,
-              422,
-              423,
-              424,
-              425,
-              426,
-              428,
-              429,
-              431,
-              451,
-              500,
-              501,
-              502,
-              503,
-              504,
-              505,
-              506,
-              507,
-              508,
-              510,
-              511,
-              "default"
-            ]
+            "$ref": "#/definitions/StatusCode"
           }
         },
         "knownMediaType": {
@@ -3073,9 +2986,7 @@
         "binary": {
           "description": "binary responses",
           "type": "boolean",
-          "enum": [
-            true
-          ]
+          "const": true
         }
       },
       "defaultProperties": [],
@@ -3235,6 +3146,18 @@
         "type"
       ]
     },
+    "KnownMediaType": {
+      "type": "string",
+      "enum": [
+        "json",
+        "xml",
+        "form",
+        "binary",
+        "multipart",
+        "text",
+        "unknown"
+      ]
+    },
     "Record<string,ComplexSchema>": {
       "type": "object",
       "defaultProperties": [],
@@ -3248,18 +3171,6 @@
       "additionalProperties": {
         "type": "string"
       }
-    },
-    "KnownMediaType": {
-      "enum": [
-        "binary",
-        "form",
-        "json",
-        "multipart",
-        "text",
-        "unknown",
-        "xml"
-      ],
-      "type": "string"
     }
   },
   "description": "the model that contains all the information required to generate a service api",

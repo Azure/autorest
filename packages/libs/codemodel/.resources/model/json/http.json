@@ -72,18 +72,14 @@
       "properties": {
         "scheme": {
           "type": "string",
-          "enum": [
-            "bearer"
-          ]
+          "const": "bearer"
         },
         "bearerFormat": {
           "type": "string"
         },
         "type": {
           "type": "string",
-          "enum": [
-            "http"
-          ]
+          "const": "http"
         },
         "description": {
           "type": "string"
@@ -163,9 +159,7 @@
         },
         "type": {
           "type": "string",
-          "enum": [
-            "http"
-          ]
+          "const": "http"
         },
         "extensions": {
           "$ref": "./master.json#/definitions/Record<string,any>",
@@ -217,9 +211,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "apiKey"
-          ]
+          "const": "apiKey"
         },
         "name": {
           "type": "string"
@@ -248,9 +240,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "openIdConnect"
-          ]
+          "const": "openIdConnect"
         },
         "openIdConnectUrl": {
           "description": "an URI",
@@ -410,9 +400,7 @@
       "properties": {
         "binary": {
           "type": "boolean",
-          "enum": [
-            true
-          ]
+          "const": true
         }
       },
       "defaultProperties": [],
@@ -437,9 +425,7 @@
         "multipart": {
           "description": "indicates that the HTTP Request should be a multipart request\n\nie, that it has multiple requests in a single request.",
           "type": "boolean",
-          "enum": [
-            true
-          ]
+          "const": true
         }
       },
       "defaultProperties": [],
@@ -490,72 +476,7 @@
           "description": "the possible HTTP status codes that this response MUST match one of.",
           "type": "array",
           "items": {
-            "enum": [
-              100,
-              101,
-              102,
-              103,
-              200,
-              201,
-              202,
-              203,
-              204,
-              205,
-              206,
-              207,
-              208,
-              226,
-              300,
-              301,
-              302,
-              303,
-              304,
-              305,
-              306,
-              307,
-              308,
-              400,
-              401,
-              402,
-              403,
-              404,
-              405,
-              406,
-              407,
-              408,
-              409,
-              410,
-              411,
-              412,
-              413,
-              414,
-              415,
-              416,
-              417,
-              418,
-              421,
-              422,
-              423,
-              424,
-              425,
-              426,
-              428,
-              429,
-              431,
-              451,
-              500,
-              501,
-              502,
-              503,
-              504,
-              505,
-              506,
-              507,
-              508,
-              510,
-              511,
-              "default"
-            ]
+            "$ref": "./enums.json#/definitions/StatusCode"
           }
         },
         "knownMediaType": {
@@ -601,9 +522,7 @@
         "binary": {
           "description": "binary responses",
           "type": "boolean",
-          "enum": [
-            true
-          ]
+          "const": true
         }
       },
       "defaultProperties": [],
