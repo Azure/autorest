@@ -1424,12 +1424,24 @@ importers:
       '@types/source-map-support':
         specifier: ^0.5.3
         version: 0.5.10
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^8.32.1
+        version: 8.32.1(@typescript-eslint/parser@8.32.1)(eslint@8.57.1)(typescript@5.8.3)
+      '@typescript-eslint/parser':
+        specifier: ^8.32.1
+        version: 8.32.1(eslint@8.57.1)(typescript@5.8.3)
       eslint:
         specifier: ^8.28.0
         version: 8.57.1
       eslint-plugin-import:
         specifier: ~2.31.0
         version: 2.31.0(eslint@8.57.1)
+      eslint-plugin-jest:
+        specifier: ~28.11.0
+        version: 28.11.0(@typescript-eslint/eslint-plugin@8.32.1)(eslint@8.57.1)(jest@29.7.0)(typescript@5.8.3)
+      eslint-plugin-node:
+        specifier: ~11.1.0
+        version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
         version: 5.4.0(eslint@8.57.1)(prettier@3.5.3)
@@ -1470,12 +1482,24 @@ importers:
       '@types/node':
         specifier: ~22.15.19
         version: 22.15.19
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^8.32.1
+        version: 8.32.1(@typescript-eslint/parser@8.32.1)(eslint@8.57.1)(typescript@5.8.3)
+      '@typescript-eslint/parser':
+        specifier: ^8.32.1
+        version: 8.32.1(eslint@8.57.1)(typescript@5.8.3)
       eslint:
         specifier: ^8.28.0
         version: 8.57.1
       eslint-plugin-import:
         specifier: ~2.31.0
         version: 2.31.0(eslint@8.57.1)
+      eslint-plugin-jest:
+        specifier: ~28.11.0
+        version: 28.11.0(@typescript-eslint/eslint-plugin@8.32.1)(eslint@8.57.1)(jest@29.7.0)(typescript@5.8.3)
+      eslint-plugin-node:
+        specifier: ~11.1.0
+        version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
         version: 5.4.0(eslint@8.57.1)(prettier@3.5.3)
