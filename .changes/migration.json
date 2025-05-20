@@ -1,0 +1,5 @@
+{
+  "packageName": "autorest",
+  "comment": "Migrate from rush to pnpm",
+  "type": "patch"
+}

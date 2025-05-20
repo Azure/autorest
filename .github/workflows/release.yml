@@ -1,0 +1,73 @@
+name: Publish
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches:
+      - main
+    paths:
+      - 'packages/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/release.yml'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: npm
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Needed for changelog generation
+
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          registry-url: "https://registry.npmjs.org"
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 8.10.5
+          run_install: false
+
+      - run: pnpm install
+        name: Install dependencies
+
+      - run: pnpm run build
+        name: Build
+
+      - run: pnpm run test
+        name: Test
+
+      - run: |
+          git status --porcelain
+          git diff --no-ext-diff --quiet --exit-code
+        name: Check not out of date generated files
+
+      - run: pnpm chronus pack --pack-destination ./artifacts
+        name: Pack
+
+      # Have to use npm as pnpm doesn't respect access.
+      - run: pnpm chronus publish "./artifacts/*.tgz" --access public --engine npm --report-summary ./publish-summary.json
+        name: Publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - run: |
+          echo "Publish summary:"
+          cat ./publish-summary.json
+        name: Log publish summary
+
+      - run: pnpm chronus-github create-releases --repo Azure/autorest --publish-summary ./publish-summary.json
+        name: Create github releases
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
