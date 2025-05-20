@@ -544,9 +544,7 @@
         "binary": {
           "description": "indicates that this response is a binary stream",
           "type": "boolean",
-          "enum": [
-            true
-          ]
+          "const": true
         }
       },
       "defaultProperties": [],
@@ -894,9 +892,7 @@
       "properties": {
         "in": {
           "type": "string",
-          "enum": [
-            "header"
-          ]
+          "const": "header"
         },
         "name": {
           "type": "string"
@@ -986,6 +982,15 @@
           "$ref": "./http.json#/definitions/SecurityScheme"
         }
       ]
+    },
+    "Scheme": {
+      "type": "string",
+      "const": "bearer"
+    },
+    "Default": {
+      "description": "A catch-all for all un-handled response codes.",
+      "type": "string",
+      "const": "default"
     },
     "Record<string,any>": {
       "type": "object",

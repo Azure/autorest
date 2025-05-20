@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 import addFormats from "ajv-formats";
 import { JsonSchemaValidator } from "./json-schema-validator";
 

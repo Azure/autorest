@@ -40,6 +40,7 @@ export class Session<TInputModel> {
     this.context = {
       $config: options.configuration,
       $lib: {
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
         path: require("path"),
       },
     };

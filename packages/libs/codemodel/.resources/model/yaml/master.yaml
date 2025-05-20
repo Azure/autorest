@@ -68,8 +68,7 @@ definitions:
       binary:
         type: boolean
         description: indicates that this response is a binary stream
-        enum:
-          - true
+        const: true
     required:
       - binary
       - language
@@ -119,6 +118,10 @@ definitions:
       extensions:
         description: additional metadata extensions dictionary
         $ref: ./master.yaml#/definitions/Record<string,any>
+  Default:
+    type: string
+    description: A catch-all for all un-handled response codes.
+    const: default
   Deprecation:
     type: object
     description: Represent information about a deprecation
@@ -245,8 +248,7 @@ definitions:
         type: string
       in:
         type: string
-        enum:
-          - header
+        const: header
     required:
       - in
       - name
@@ -594,6 +596,9 @@ definitions:
         description: contexts in which the schema is used
         items:
           $ref: ./schemas.yaml#/definitions/SchemaContext
+  Scheme:
+    type: string
+    const: bearer
   Security:
     type: object
     description: The security information for the API surface

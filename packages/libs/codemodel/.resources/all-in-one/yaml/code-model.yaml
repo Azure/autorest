@@ -24,8 +24,7 @@ definitions:
         type: string
       type:
         type: string
-        enum:
-          - apiKey
+        const: apiKey
       description:
         type: string
       in:
@@ -198,16 +197,14 @@ definitions:
     properties:
       type:
         type: string
-        enum:
-          - http
+        const: http
       description:
         type: string
       bearerFormat:
         type: string
       scheme:
         type: string
-        enum:
-          - bearer
+        const: bearer
       extensions:
         description: additional metadata extensions dictionary
         $ref: '#/definitions/Record<string,any>'
@@ -224,8 +221,7 @@ definitions:
       binary:
         type: boolean
         description: indicates that this response is a binary stream
-        enum:
-          - true
+        const: true
     required:
       - binary
       - language
@@ -555,8 +551,7 @@ definitions:
   Default:
     type: string
     description: A catch-all for all un-handled response codes.
-    enum:
-      - default
+    const: default
   Deprecation:
     type: object
     description: Represent information about a deprecation
@@ -716,8 +711,7 @@ definitions:
     properties:
       binary:
         type: boolean
-        enum:
-          - true
+        const: true
     required:
       - binary
       - knownMediaType
@@ -734,8 +728,7 @@ definitions:
       binary:
         type: boolean
         description: binary responses
-        enum:
-          - true
+        const: true
     required:
       - binary
       - statusCodes
@@ -760,13 +753,13 @@ definitions:
     type: string
     description: standard HTTP protocol methods
     enum:
-      - delete
       - get
-      - head
-      - options
-      - patch
-      - post
       - put
+      - post
+      - delete
+      - options
+      - head
+      - patch
       - trace
   HttpModel:
     type: object
@@ -792,8 +785,7 @@ definitions:
           indicates that the HTTP Request should be a multipart request
 
           ie, that it has multiple requests in a single request.
-        enum:
-          - true
+        const: true
     required:
       - knownMediaType
       - mediaTypes
@@ -886,71 +878,7 @@ definitions:
         type: array
         description: the possible HTTP status codes that this response MUST match one of.
         items:
-          enum:
-            - 100
-            - 101
-            - 102
-            - 103
-            - 200
-            - 201
-            - 202
-            - 203
-            - 204
-            - 205
-            - 206
-            - 207
-            - 208
-            - 226
-            - 300
-            - 301
-            - 302
-            - 303
-            - 304
-            - 305
-            - 306
-            - 307
-            - 308
-            - 400
-            - 401
-            - 402
-            - 403
-            - 404
-            - 405
-            - 406
-            - 407
-            - 408
-            - 409
-            - 410
-            - 411
-            - 412
-            - 413
-            - 414
-            - 415
-            - 416
-            - 417
-            - 418
-            - 421
-            - 422
-            - 423
-            - 424
-            - 425
-            - 426
-            - 428
-            - 429
-            - 431
-            - 451
-            - 500
-            - 501
-            - 502
-            - 503
-            - 504
-            - 505
-            - 506
-            - 507
-            - 508
-            - 510
-            - 511
-            - default
+          $ref: '#/definitions/StatusCode'
     required:
       - statusCodes
   HttpWithBodyRequest:
@@ -976,9 +904,9 @@ definitions:
   ImplementationLocation:
     type: string
     enum:
+      - Method
       - Client
       - Context
-      - Method
   ImplicitOAuthFlow:
     type: object
     additionalProperties: false
@@ -1035,8 +963,7 @@ definitions:
         type: string
       in:
         type: string
-        enum:
-          - header
+        const: header
     required:
       - in
       - name
@@ -1044,13 +971,13 @@ definitions:
   KnownMediaType:
     type: string
     enum:
-      - binary
-      - form
       - json
+      - xml
+      - form
+      - binary
       - multipart
       - text
       - unknown
-      - xml
   Language:
     type: object
     description: the bare-minimum fields for per-language metadata on a given aspect
@@ -1140,8 +1067,7 @@ definitions:
     properties:
       type:
         type: string
-        enum:
-          - http
+        const: http
       description:
         type: string
       scheme:
@@ -1280,8 +1206,7 @@ definitions:
     properties:
       type:
         type: string
-        enum:
-          - openIdConnect
+        const: openIdConnect
       description:
         type: string
       openIdConnectUrl:
@@ -1434,14 +1359,14 @@ definitions:
     type: string
     description: the location that this parameter is placed in the http request
     enum:
-      - body
-      - cookie
-      - header
-      - none
-      - path
       - query
+      - header
+      - cookie
+      - path
+      - body
       - uri
       - virtual
+      - none
   PasswordOAuthFlow:
     type: object
     additionalProperties: false
@@ -1658,9 +1583,9 @@ definitions:
   SchemaContext:
     type: string
     enum:
-      - exception
       - input
       - output
+      - exception
   SchemaResponse:
     type: object
     description: a response that should be deserialized into a result of type(schema)
@@ -1682,39 +1607,39 @@ definitions:
     type: string
     description: possible schema types that indicate the type of schema.
     enum:
-      - any
-      - any-object
-      - arm-id
       - array
-      - binary
-      - boolean
-      - byte-array
-      - char
-      - choice
-      - conditional
-      - constant
-      - credential
-      - date
-      - date-time
       - dictionary
-      - duration
-      - flag
-      - group
+      - boolean
       - integer
-      - not
       - number
       - object
-      - odata-query
-      - or
-      - sealed-choice
-      - sealed-conditional
       - string
-      - time
       - unixtime
-      - unknown
-      - uri
+      - byte-array
+      - binary
+      - char
+      - date
+      - time
+      - date-time
+      - duration
       - uuid
+      - uri
+      - arm-id
+      - credential
+      - odata-query
+      - any
+      - any-object
+      - choice
+      - sealed-choice
+      - conditional
+      - sealed-conditional
+      - flag
+      - constant
+      - or
       - xor
+      - not
+      - unknown
+      - group
   SchemaUsage:
     type: object
     additionalProperties: false
@@ -1893,8 +1818,7 @@ definitions:
           $ref: '#/definitions/XorSchema'
   Scheme:
     type: string
-    enum:
-      - bearer
+    const: bearer
   SealedChoiceSchema:
     type: object
     description: a schema that represents a choice of several values (ie, an 'enum')
@@ -2002,17 +1926,17 @@ definitions:
 
       Describes how the parameter value will be serialized depending on the type of the parameter value.
     enum:
-      - binary
-      - deepObject
-      - form
-      - json
-      - label
       - matrix
-      - pipeDelimited
+      - label
       - simple
+      - form
       - spaceDelimited
-      - tabDelimited
+      - pipeDelimited
+      - deepObject
+      - json
       - xml
+      - binary
+      - tabDelimited
   StatusCode:
     enum:
       - 100

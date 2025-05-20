@@ -1,50 +1,45 @@
 $schema: http://json-schema.org/draft-07/schema#
 definitions:
-  Default:
-    type: string
-    description: A catch-all for all un-handled response codes.
-    enum:
-      - default
   HttpMethod:
     type: string
     description: standard HTTP protocol methods
     enum:
-      - delete
       - get
-      - head
-      - options
-      - patch
-      - post
       - put
+      - post
+      - delete
+      - options
+      - head
+      - patch
       - trace
   ImplementationLocation:
     type: string
     enum:
+      - Method
       - Client
       - Context
-      - Method
   KnownMediaType:
     type: string
     enum:
-      - binary
-      - form
       - json
+      - xml
+      - form
+      - binary
       - multipart
       - text
       - unknown
-      - xml
   ParameterLocation:
     type: string
     description: the location that this parameter is placed in the http request
     enum:
-      - body
-      - cookie
-      - header
-      - none
-      - path
       - query
+      - header
+      - cookie
+      - path
+      - body
       - uri
       - virtual
+      - none
   PathEncodingStyle:
     type: string
     enum:
@@ -61,50 +56,46 @@ definitions:
   SchemaContext:
     type: string
     enum:
-      - exception
       - input
       - output
+      - exception
   SchemaType:
     type: string
     description: possible schema types that indicate the type of schema.
     enum:
-      - any
-      - any-object
-      - arm-id
       - array
-      - binary
-      - boolean
-      - byte-array
-      - char
-      - choice
-      - conditional
-      - constant
-      - credential
-      - date
-      - date-time
       - dictionary
-      - duration
-      - flag
-      - group
+      - boolean
       - integer
-      - not
       - number
       - object
-      - odata-query
-      - or
-      - sealed-choice
-      - sealed-conditional
       - string
-      - time
       - unixtime
-      - unknown
-      - uri
+      - byte-array
+      - binary
+      - char
+      - date
+      - time
+      - date-time
+      - duration
       - uuid
+      - uri
+      - arm-id
+      - credential
+      - odata-query
+      - any
+      - any-object
+      - choice
+      - sealed-choice
+      - conditional
+      - sealed-conditional
+      - flag
+      - constant
+      - or
       - xor
-  Scheme:
-    type: string
-    enum:
-      - bearer
+      - not
+      - unknown
+      - group
   SecurityType:
     type: string
     enum:
@@ -119,17 +110,17 @@ definitions:
 
       Describes how the parameter value will be serialized depending on the type of the parameter value.
     enum:
-      - binary
-      - deepObject
-      - form
-      - json
-      - label
       - matrix
-      - pipeDelimited
+      - label
       - simple
+      - form
       - spaceDelimited
-      - tabDelimited
+      - pipeDelimited
+      - deepObject
+      - json
       - xml
+      - binary
+      - tabDelimited
   StatusCode:
     enum:
       - 100

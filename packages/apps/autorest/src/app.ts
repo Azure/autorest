@@ -14,7 +14,7 @@ import { loadConfig, resolveCoreVersion } from "./utils";
 const cwd = process.cwd();
 
 const isDebuggerEnabled =
-  // eslint-disable-next-line node/no-unsupported-features/node-builtins
+  // eslint-disable-next-line node/no-unsupported-features/node-builtins, @typescript-eslint/no-require-imports
   !!require("inspector").url() || (globalThis as any).v8debug || /--debug|--inspect/.test(process.execArgv.join(" "));
 const launchCore = isDebuggerEnabled ? runCoreWithRequire : runCoreOutOfProc;
 

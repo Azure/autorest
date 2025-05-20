@@ -35,26 +35,26 @@
   "homepage": "https://github.com/Azure/autorest/tree/main/packages/libs/system-requirements",
   "readme": "https://github.com/Azure/autorest/tree/main/packages/libs/system-requirements/readme.md",
   "dependencies": {
-    "@azure/logger": "^1.0.2",
+    "@azure/logger": "^1.2.0",
     "command-exists": "~1.2.9",
-    "semver": "^7.3.5"
+    "semver": "^7.7.2"
   },
   "devDependencies": {
-    "@types/jest": "^29.2.3",
+    "@types/jest": "^29.5.14",
     "@types/command-exists": "~1.2.0",
-    "@types/node": "~20.9.0",
-    "@types/semver": "5.5.0",
-    "@typescript-eslint/eslint-plugin": "^6.11.0",
-    "@typescript-eslint/parser": "^6.11.0",
-    "eslint-plugin-jest": "~27.6.0",
+    "@types/node": "~22.15.19",
+    "@types/semver": "7.7.0",
+    "@typescript-eslint/eslint-plugin": "^8.32.1",
+    "@typescript-eslint/parser": "^8.32.1",
+    "eslint-plugin-jest": "~28.11.0",
     "eslint-plugin-node": "~11.1.0",
-    "eslint-plugin-prettier": "~5.0.1",
+    "eslint-plugin-prettier": "~5.4.0",
     "eslint-plugin-unicorn": "~49.0.0",
-    "eslint-plugin-import": "~2.29.0",
+    "eslint-plugin-import": "~2.31.0",
     "eslint": "^8.28.0",
-    "rimraf": "^5.0.5",
+    "rimraf": "^6.0.1",
     "jest": "^29.3.1",
     "source-map-support": "^0.5.19",
-    "typescript": "~5.2.2"
+    "typescript": "~5.8.3"
   }
 }

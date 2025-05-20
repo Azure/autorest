@@ -35,12 +35,12 @@
     "source-map-support": "^0.5.19"
   },
   "devDependencies": {
-    "@types/node": "~20.9.0",
+    "@types/node": "~22.15.19",
     "@types/source-map-support": "^0.5.3",
-    "eslint-plugin-prettier": "~5.0.1",
+    "eslint-plugin-prettier": "~5.4.0",
     "eslint-plugin-unicorn": "~49.0.0",
-    "eslint-plugin-import": "~2.29.0",
+    "eslint-plugin-import": "~2.31.0",
     "eslint": "^8.28.0",
-    "rimraf": "^5.0.5"
+    "rimraf": "^6.0.1"
   }
 }
