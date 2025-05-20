@@ -8,28 +8,31 @@
 //    node common/scripts/install-run-rush.js install
 //
 // For more information, see: https://rushjs.io/pages/maintainer/setup_new_repo/
+//
+// Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+// See the @microsoft/rush package's LICENSE file for details.
 
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 657147:
-/*!*********************!*\
-  !*** external "fs" ***!
-  \*********************/
-/***/ ((module) => {
-
-module.exports = require("fs");
-
-/***/ }),
-
-/***/ 371017:
+/***/ 16928:
 /*!***********************!*\
   !*** external "path" ***!
   \***********************/
 /***/ ((module) => {
 
 module.exports = require("path");
+
+/***/ }),
+
+/***/ 179896:
+/*!*********************!*\
+  !*** external "fs" ***!
+  \*********************/
+/***/ ((module) => {
+
+module.exports = require("fs");
 
 /***/ })
 
@@ -102,15 +105,15 @@ module.exports = require("path");
 /******/
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
 (() => {
 /*!************************************************!*\
   !*** ./lib-esnext/scripts/install-run-rush.js ***!
   \************************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! path */ 371017);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! path */ 16928);
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! fs */ 657147);
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! fs */ 179896);
 /* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_1__);
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
@@ -137,8 +140,8 @@ function _getRushVersion(logger) {
         return rushJsonMatches[1];
     }
     catch (e) {
-        throw new Error(`Unable to determine the required version of Rush from rush.json (${rushJsonFolder}). ` +
-            "The 'rushVersion' field is either not assigned in rush.json or was specified " +
+        throw new Error(`Unable to determine the required version of Rush from ${RUSH_JSON_FILENAME} (${rushJsonFolder}). ` +
+            `The 'rushVersion' field is either not assigned in ${RUSH_JSON_FILENAME} or was specified ` +
             'using an unexpected syntax.');
     }
 }
@@ -197,7 +200,7 @@ function _run() {
     }
     runWithErrorAndStatusCode(logger, () => {
         const version = _getRushVersion(logger);
-        logger.info(`The rush.json configuration requests Rush version ${version}`);
+        logger.info(`The ${RUSH_JSON_FILENAME} configuration requests Rush version ${version}`);
         const lockFilePath = process.env[INSTALL_RUN_RUSH_LOCKFILE_PATH_VARIABLE];
         if (lockFilePath) {
             logger.info(`Found ${INSTALL_RUN_RUSH_LOCKFILE_PATH_VARIABLE}="${lockFilePath}", installing with lockfile.`);
