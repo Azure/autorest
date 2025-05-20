@@ -1,6 +1,13 @@
 # Change Log - @autorest/core
 
-This log was last generated on Tue, 13 May 2025 03:26:36 GMT and should not be manually modified.
+This log was last generated on Tue, 20 May 2025 18:08:56 GMT and should not be manually modified.
+
+## 3.10.6
+Tue, 20 May 2025 18:08:56 GMT
+
+### Patches
+
+- Update dependencies
 
 ## 3.10.5
 Tue, 13 May 2025 03:26:36 GMT

@@ -2,6 +2,18 @@
   "name": "@autorest/system-requirements",
   "entries": [
     {
+      "version": "1.1.1",
+      "tag": "@autorest/system-requirements_v1.1.1",
+      "date": "Tue, 20 May 2025 18:08:56 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update dependencies"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.1.0",
       "tag": "@autorest/system-requirements_v1.1.0",
       "date": "Thu, 16 Nov 2023 16:00:04 GMT",

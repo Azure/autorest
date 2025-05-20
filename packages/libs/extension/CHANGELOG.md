@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/extension
 
-This log was last generated on Tue, 28 Nov 2023 19:02:52 GMT and should not be manually modified.
+This log was last generated on Tue, 20 May 2025 18:08:56 GMT and should not be manually modified.
+
+## 3.7.2
+Tue, 20 May 2025 18:08:56 GMT
+
+### Patches
+
+- Update dependencies
 
 ## 3.7.1
 Tue, 28 Nov 2023 19:02:52 GMT
