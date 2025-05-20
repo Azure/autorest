@@ -49,11 +49,8 @@ export interface MappingTreeArray<T> extends ReadonlyArray<MappingTreeItem<T>> {
   __push__(value: ProxyValue<T>): MappingTreeItem<T>;
 }
 
-export type MappingTreeItem<T> = T extends Array<any>
-  ? MappingTreeArray<T[number]>
-  : T extends {}
-    ? MappingTreeObject<T>
-    : T;
+export type MappingTreeItem<T> =
+  T extends Array<any> ? MappingTreeArray<T[number]> : T extends {} ? MappingTreeObject<T> : T;
 
 /**
  * Create a proxy tree
