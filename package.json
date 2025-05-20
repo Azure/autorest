@@ -1,0 +1,31 @@
+{
+  "name": "autorest-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "packageManager": "pnpm@8.10.5",
+  "scripts": {
+    "build": "pnpm -r --workspace-concurrency=Infinity build",
+    "watch": "tsc --build ./tsconfig.ws.json --watch",
+    "clean": "pnpm -r run clean && rimraf **/node_modules",
+    "test": "pnpm -r run test",
+    "test:ci": "pnpm -r run test:ci",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "change": "pnpm chronus change",
+    "version": "pnpm chronus version"
+  },
+  "devDependencies": {
+    "@actions/github": "^6.0.0",
+    "@chronus/chronus": "^1.0.1",
+    "@chronus/github": "^1.0.1",
+    "@chronus/github-pr-commenter": "^1.0.1",
+    "eslint": "^8.43.0",
+    "prettier": "^2.8.8",
+    "prettier-plugin-organize-imports": "^3.2.3",
+    "rimraf": "^5.0.1",
+    "typescript": "^5.1.3"
+  }
+}

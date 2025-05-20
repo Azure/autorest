@@ -1,0 +1,20 @@
+{
+  "$schema": "https://unpkg.com/@chronus/chronus@latest/schemas/config.schema.json",
+  "versionSequence": "loose",
+  "changesDir": "./.changes",
+  "changesetIgnorePaths": ["**/*.md"],
+  "packages": {
+    "*": {
+      "changeFileNamingStyle": "short"
+    },
+    "autorest": {
+      "skipMajorBump": true
+    },
+    "@autorest/core": {
+      "skipMajorBump": true
+    },
+    "@autorest/modelerfour": {
+      "skipMajorBump": true
+    }
+  }
+}

@@ -4,6 +4,7 @@
 
     { "path": "packages/extensions/core/tsconfig.build.json" },
     { "path": "packages/extensions/modelerfour/tsconfig.build.json" },
+    { "path": "packages/extensions/openapi-to-typespec/tsconfig.build.json" },
 
     { "path": "packages/libs/codegen/tsconfig.build.json" },
     { "path": "packages/libs/codemodel/tsconfig.build.json" },
@@ -17,8 +18,14 @@
     { "path": "packages/libs/jsonschema/tsconfig.build.json" },
     { "path": "packages/libs/oai2-to-oai3/tsconfig.build.json" },
     { "path": "packages/libs/openapi/tsconfig.build.json" },
+    { "path": "packages/libs/autorest-schemas/tsconfig.build.json" },
     { "path": "packages/libs/system-requirements/tsconfig.build.json" },
-    { "path": "packages/libs/yaml/tsconfig.build.json" }
+    { "path": "packages/libs/yaml/tsconfig.build.json" },
+
+    { "path": "packages/testing/test-utils/tsconfig.build.json" },
+    { "path": "packages/testing/test-public-packages/tsconfig.build.json" },
+    
+    { "path": "packages/tools/compare/tsconfig.build.json" }
   ],
   "files": []
 }

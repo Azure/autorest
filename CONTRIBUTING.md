@@ -1,6 +1,6 @@
 # Developping autorest
 
-Branch `publish/auto-release` should be automatically updated with the latest changelog. Give it 5min after merging a PR or check the status of the [Release action](https://github.com/Azure/autorest/actions/workflows/release.yml)
+Branch `publish/auto-release` should be automatically updated with the latest changelog. Give it 5min after merging a PR or check the status of the [Release action](https://github.com/Azure/autorest/actions/workflows/prepare-auto-release-branch.yml)
 
 Then go to https://github.com/Azure/autorest/pull/new/publish/auto-release and create this PR.
 
@@ -10,6 +10,7 @@ Then go to https://github.com/Azure/autorest/pull/new/publish/auto-release and c
   - **On windows**: Make sure to choose to install the native build dependencies in the setup
   - Alternatively follow instruction here https://github.com/nodejs/node-gyp
 - `python` 3.x
+- `pnpm` 8.10.5 or later
 
 Optional recommendation:
 
@@ -21,25 +22,20 @@ Optional recommendation:
 
 ## First build
 
-1. Install [rush.js](https://rushjs.io/pages/intro/get_started/) using
+1. Install dependencies
 
 ```bash
-npm install -g @microsoft/rush
+pnpm install
 ```
 
-2. Install dependencies
+2. Build
 
 ```bash
-rush update
-```
+pnpm build
 
-3. Build
-
-```bash
-rush build
-
-# or to do a force rebuild.
-rush rebuild
+# or to do a force rebuild for a specific package
+cd packages/<type>/<package>/
+pnpm build
 ```
 
 ## Run in watch mode
@@ -48,9 +44,10 @@ When working on autorest it is recommended to have the compiler run in watch mod
 
 ```bash
 # Run for all packages.
-rush watch
+pnpm watch
 # Run for a specific package.
-npm run watch
+cd packages/<type>/<package>/
+pnpm watch
 ```
 
 ## Test
@@ -62,7 +59,7 @@ To run the test on the built product you have 2 options:
 1. Run all the tests using
 
 ```bash
-rush test:ci
+pnpm test:ci
 ```
 
 2. Run individual project tests(Recommended when working on test)
@@ -72,10 +69,10 @@ rush test:ci
 cd packages/<type>/<package>/
 
 # Run test in interactive mode
-npm test
+pnpm test
 
-# Alternatively you can run them once with coverage(Same as rush test:ci)
-npm run test:ci
+# Alternatively you can run them once with coverage(Same as pnpm test:ci)
+pnpm test:ci
 ```
 
 ## Other commands
@@ -84,18 +81,20 @@ npm run test:ci
 
 ```bash
 # Run for all packages.
-rush lint
+pnpm lint
 # Run for a specific package.
-npm run lint
+cd packages/<type>/<package>/
+pnpm lint
 ```
 
 - Cleaning
 
 ```bash
 # Run for all packages.
-rush clean
+pnpm clean
 # Run for a specific package.
-npm run clean
+cd packages/<type>/<package>/
+pnpm clean
 ```
 
 ## Use your local changes
@@ -124,10 +123,10 @@ node <path-to-repo>/packages/apps/autorest/entrypoints/app.js
 
 Steps to do before making a pull request:
 
-1. Run `rush change` and describe the change and if it should be a `major`, `minor` or `patch` version.
+1. Run `pnpm change` to document changes and whether they should be a `major`, `minor` or `patch` version.
 
    - `major`: If there is a breaking change.(Except `autorest`, `@autorest/core` and `@autorest/modelefour` packages which should use minor bump for that.)
    - `minor`: If there is a new feature but not breaking(Except `autorest`, `@autorest/core` and `@autorest/modelefour` packages)
    - `patch`: For any bug fix.
 
-2. Run `rush format` to ensure the code is formatted correctly.
+2. Run `pnpm format` to ensure the code is formatted correctly.

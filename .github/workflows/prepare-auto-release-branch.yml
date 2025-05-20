@@ -18,17 +18,38 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Needed for changelog
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22.x
+          node-version: 20.x
 
-      - run: node common/scripts/install-run-rush.js install
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 8.10.5
+          run_install: false
+
+      - run: pnpm install
         name: Install dependencies
-
+        
       - name: Create release branch
-        run: node ./eng/scripts/publish.mjs
-
-      - run: node common/scripts/install-run-rush.js update
-        name: Regen lock file
+        run: |
+          git config user.name "Auto Chronus Bot"
+          git config user.email "chronus@github.com"
+          pnpm chronus version
+          
+          # Push changes if any
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git add -A
+            git commit -m "Bump versions"
+            git push origin HEAD:publish/auto-release --force
+            echo "Changes pushed to publish/auto-release branch"
+            echo "Link to create PR: https://github.com/Azure/autorest/pull/new/publish/auto-release"
+          else
+            echo "No changes to publish"
+          fi
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
