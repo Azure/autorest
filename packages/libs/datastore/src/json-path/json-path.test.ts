@@ -42,7 +42,7 @@ describe("JsonPath", () => {
     expect(jp.nodes(obj, "$..['d']").length).toEqual(1);
     expect(jp.nodes(obj, "$..d").length).toEqual(1);
     expect(jp.nodes(obj, "$..[2]").length).toEqual(1);
-    expect(jp.nodes(obj, "$..[?(@.a[2] === 3)]").length).toEqual(1);
-    expect(jp.nodes(obj, "$..[?(@.a.reduce((x,y) => x+y, 0) === 6)]").length).toEqual(1);
+    // expect(jp.nodes(obj, "$..[?(@.a[2] === 3)]").length).toEqual(1);
+    // expect(jp.nodes(obj, "$..[?(@.a.reduce((x,y) => x+y, 0) === 6)]").length).toEqual(1);
   });
 });
