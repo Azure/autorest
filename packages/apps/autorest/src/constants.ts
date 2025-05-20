@@ -21,4 +21,5 @@ export const AppRoot = resolveAppRoot();
 /**
  * Version of this package(autorest).
  */
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 export const VERSION = require("../package.json").version;

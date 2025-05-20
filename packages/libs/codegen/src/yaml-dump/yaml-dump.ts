@@ -12,6 +12,7 @@
 /*eslint-disable no-use-before-define*/
 
 import common from "./common";
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const { DEFAULT_SCHEMA, YAMLException } = require("js-yaml");
 
 const _toString = Object.prototype.toString;

@@ -6,6 +6,7 @@ import { getOptions } from "../options";
 import { formatTypespecFile } from "../utils/format";
 import { getMainImports } from "../utils/imports";
 import { Metadata } from "../utils/resource-discovery";
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const packageInfo = require("../../package.json");
 
 export async function emitMain(

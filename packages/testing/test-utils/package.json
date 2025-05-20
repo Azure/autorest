@@ -40,9 +40,9 @@
   "devDependencies": {
     "@types/jest": "^29.5.14",
     "eslint-plugin-prettier": "~5.4.0",
-    "eslint-plugin-unicorn": "~59.0.1",
+    "eslint-plugin-unicorn": "~49.0.0",
     "eslint-plugin-import": "~2.31.0",
-    "eslint": "^9.27.0",
+    "eslint": "^8.28.0",
     "rimraf": "^6.0.1"
   }
 }
