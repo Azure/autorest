@@ -1342,7 +1342,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+              "$ref": "../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -1582,7 +1582,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceListResult"
+              "$ref": "../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -2723,19 +2723,6 @@
           "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "PrivateLinkResourceListResult": {
-      "type": "object",
-      "description": "A list of private link resources for versions before v6.\n\nThis model represents the standard `PrivateLinkResourceListResult` envelope for versions v3, v4, and v5. It has been deprecated for v6 and beyond.\n\nNote: This is only intended for use with versions before v6. Do not use this if you are already on CommonTypes.Version.v6 or beyond.\n\nIf you are migrating to v6 or above, use `PrivateLinkResourceListResult` directly.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Array of private link resources",
-          "items": {
-            "$ref": "../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateLinkResource"
-          }
-        }
-      }
     },
     "ProvisioningState": {
       "type": "string",
