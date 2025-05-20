@@ -68,11 +68,6 @@ pipeline:
     # output-artifact: openapi-document
 ```
 
-```yaml $(cadl)
-use-extension:
-  "@autorest/cadl": latest
-```
-
 ## Configuration for `--apply-transforms-in-place`
 
 ```yaml $(apply-transforms-in-place)

@@ -154,12 +154,6 @@
       "shouldPublish": true
     },
     {
-      "packageName": "@autorest/cadl",
-      "projectFolder": "packages/extensions/cadl",
-      "reviewCategory": "production",
-      "shouldPublish": true
-    },
-    {
       "packageName": "@autorest/openapi-to-typespec",
       "projectFolder": "packages/extensions/openapi-to-typespec",
       "reviewCategory": "production",
