@@ -1,6 +1,6 @@
 {
   "name": "@autorest/compare",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Compares the output between two AutoRest runs to check for material differences.",
   "main": "dist/index.js",
   "bin": {
@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/Azure/autorest.compare#readme",
   "dependencies": {
-    "autorest": "workspace:~3.7.1",
+    "autorest": "workspace:~3.7.2",
     "chalk": "^4.1.0",
     "diff": "^5.1.0",
     "js-yaml": "~4.1.0",

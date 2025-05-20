@@ -3,6 +3,7 @@ import { execSync } from "child_process";
 const branchName = "publish/auto-release";
 
 execSync(`node common/scripts/install-run-rush.js publish --apply`);
+execSync(`node common/scripts/install-run-rush.js update`);
 const stdout = execSync(`git status --porcelain`).toString();
 
 if (stdout.trim() !== "") {
