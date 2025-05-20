@@ -4,6 +4,10 @@ The **AutoRest** tool generates client libraries for accessing RESTful web servi
 
 [Release notes](./docs/releases)
 
+## Project Migration Notice
+
+> **Note:** This project has been migrated from Rush to PNPM for package management. See the [CONTRIBUTING.md](./CONTRIBUTING.md) file for updated build and development instructions.
+
 ## Packages
 
 | Name                                            | Changelog                       | Latest                                                       | Next                                                              |

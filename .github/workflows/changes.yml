@@ -1,0 +1,40 @@
+name: Check Changes
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  pull-requests: write
+
+jobs:
+  changes:
+    if: ${{ github.actor != 'dependabot[bot]' && !startsWith(github.head_ref, 'publish/') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 ## Needed for changelog
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 8.10.5
+          run_install: false
+
+      - run: pnpm install
+        name: Install dependencies
+
+      - name: Create PR Comment
+        run: pnpm chronus-github get-pr-comment --out ./comment-out/comment.json
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: comment
+          path: comment-out/
+          retention-days: 1 # Only need for the next workflow so don't need to waste storage
+
+      - run: pnpm chronus verify
+        name: Verify changes
