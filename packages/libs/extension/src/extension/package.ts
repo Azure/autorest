@@ -10,7 +10,7 @@ import { Extension } from "./extension";
 export class Package {
   /* @internal */ public constructor(
     public resolvedInfo: any,
-    /* @internal */ public packageMetadata: pacote.ManifestResult,
+    /* @internal */ public packageMetadata: pacote.AbbreviatedManifest & pacote.ManifestResult,
     /* @internal */ public extensionManager: ExtensionManager,
   ) {}
 
@@ -30,9 +30,9 @@ export class Package {
   public get source(): string {
     // work around bug that npm doesn't programatically handle exact versions.
     if (this.resolvedInfo.type === "version" && this.resolvedInfo.registry === true) {
-      return this.packageMetadata._spec + "*";
+      return this.packageMetadata._id + "*";
     }
-    return this.packageMetadata._spec as any;
+    return this.packageMetadata._id as any;
   }
 
   public async install(force = false): Promise<Extension> {
