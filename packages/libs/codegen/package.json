@@ -39,7 +39,7 @@
     "@types/jest": "^29.5.14",
     "@types/js-yaml": "~4.0.0",
     "@types/node": "~22.15.19",
-    "@types/semver": "5.5.0",
+    "@types/semver": "7.7.0",
     "@typescript-eslint/eslint-plugin": "^8.32.1",
     "@typescript-eslint/parser": "^8.32.1",
     "eslint-plugin-jest": "~28.11.0",
@@ -57,6 +57,6 @@
   "dependencies": {
     "@azure-tools/async-io": "~3.0.0",
     "js-yaml": "~4.1.0",
-    "semver": "^7.3.5"
+    "semver": "^7.7.2"
   }
 }

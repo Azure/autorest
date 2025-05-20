@@ -1856,6 +1856,10 @@ packages:
     resolution: {integrity: sha512-41qEJgBH/TWgo5NFSvBCJ1qkoi3Q6ONSF2avrHq1LVEZfYpdHmj0y9SuTK+u9ZhG1sYQKBL1AWXKyLWP4RaUoQ==}
     dev: false
 
+  /@types/semver@7.7.0:
+    resolution: {integrity: sha512-k107IF4+Xr7UHjwDc7Cfd6PRQfbdkiRabXGRjo07b4WyPahFBZCZ1sE+BNxYIJPPg73UkfOsVOLwqVc/6ETrIA==}
+    dev: false
+
   /@types/source-map-support@0.5.10:
     resolution: {integrity: sha512-tgVP2H469x9zq34Z0m/fgPewGhg/MLClalNOiPIzQlXrSS2YrKu/xCdSCKnEDwkFha51VKEKB6A9wW26/ZNwzA==}
     dependencies:
@@ -9198,6 +9202,11 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
+  /untildify@5.0.0:
+    resolution: {integrity: sha512-bOgQLUnd2G5rhzaTvh1VCI9Fo6bC5cLTpH17T5aFfamyXFYDbbdzN6IXdeoc3jBS7T9hNTmJtYUzJCJ2Xlc9gA==}
+    engines: {node: '>=16'}
+    dev: false
+
   /update-browserslist-db@1.1.3(browserslist@4.24.5):
     resolution: {integrity: sha512-UxhIZQ+QInVdunkDAaiazvvT/+fXL5Osr0JZlJulepYu6Jd7qJtDZjlur0emRlT71EN3ScPoE7gvsuIKKNavKw==}
     hasBin: true
@@ -9737,7 +9746,7 @@ packages:
     dev: false
 
   file:projects/autorest.tgz(ts-node@10.9.1):
-    resolution: {integrity: sha512-jpqwpimD7jesmBPXE9HkAeIfZZ75VqJVd+H59eeKc/8NxX9BW6FOZEX8ir8uPvOe3K98CL3J80k6rwouuBWG8Q==, tarball: file:projects/autorest.tgz}
+    resolution: {integrity: sha512-sicC/yMzpPxQLNSq5z8rzOKL4CncomLH5Io+jrwDiNJk8bOPgQIjX/my2KV7WqHOEMf/kVFvvFkXLlHBO/fjcQ==, tarball: file:projects/autorest.tgz}
     id: file:projects/autorest.tgz
     name: '@rush-temp/autorest'
     version: 0.0.0
@@ -9748,7 +9757,7 @@ packages:
       '@types/commonmark': 0.27.9
       '@types/jest': 29.5.14
       '@types/node': 22.15.19
-      '@types/semver': 5.5.0
+      '@types/semver': 7.7.0
       '@types/source-map-support': 0.5.10
       '@types/webpack': 5.28.5(webpack-cli@6.0.1)
       '@typescript-eslint/eslint-plugin': 8.32.1(@typescript-eslint/parser@8.32.1)(eslint@8.57.1)(typescript@5.8.3)
@@ -9767,13 +9776,13 @@ packages:
       prettier: 3.5.3
       rimraf: 6.0.1
       safe-buffer: 5.2.1
-      semver: 7.5.4
+      semver: 7.7.2
       source-map: 0.8.0-beta.0
       source-map-support: 0.5.21
       ts-jest: 29.3.4(jest@29.7.0)(typescript@5.8.3)
       ts-loader: 9.5.2(typescript@5.8.3)(webpack@5.99.8)
       typescript: 5.8.3
-      untildify: 4.0.0
+      untildify: 5.0.0
       webpack: 5.99.8(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.99.8)
     transitivePeerDependencies:
@@ -9842,7 +9851,7 @@ packages:
     dev: false
 
   file:projects/codegen.tgz(prettier@3.5.3)(ts-node@10.9.1):
-    resolution: {integrity: sha512-RMKIvbuCdoNFrzvt9qpqoir8JCquISC0I7ruGV6fGa96NJzQGmxcAtwmuRVYglTyaRG+Vs7M300EjzIhLDxDQQ==, tarball: file:projects/codegen.tgz}
+    resolution: {integrity: sha512-9Q1BJ0XKS0/DN8BoPo08tgjjaBZ8Pv9hoaHHt/bjTDaK1J0HYL7aQbTAJWCXsoHtS1sFwac0TtZv/ch3QJzVMQ==, tarball: file:projects/codegen.tgz}
     id: file:projects/codegen.tgz
     name: '@rush-temp/codegen'
     version: 0.0.0
@@ -9851,7 +9860,7 @@ packages:
       '@types/jest': 29.5.14
       '@types/js-yaml': 4.0.9
       '@types/node': 22.15.19
-      '@types/semver': 5.5.0
+      '@types/semver': 7.7.0
       '@typescript-eslint/eslint-plugin': 8.32.1(@typescript-eslint/parser@8.32.1)(eslint@8.57.1)(typescript@5.8.3)
       '@typescript-eslint/parser': 8.32.1(eslint@8.57.1)(typescript@5.8.3)
       eslint: 8.57.1
@@ -9863,7 +9872,7 @@ packages:
       jest: 29.7.0(@types/node@22.15.19)(ts-node@10.9.1)
       js-yaml: 4.1.0
       rimraf: 6.0.1
-      semver: 7.5.4
+      semver: 7.7.2
       source-map-support: 0.5.21
       ts-jest: 29.3.4(jest@29.7.0)(typescript@5.8.3)
       typescript: 5.8.3
@@ -9995,7 +10004,7 @@ packages:
     dev: false
 
   file:projects/configuration.tgz(prettier@3.5.3)(ts-node@10.9.1):
-    resolution: {integrity: sha512-zW+bDQVruaDFYrCdoLWGSDLG9vAH0zuyxCe+s92hbYUDa7iXNil7drUL93qXNIjw6ITdcjz6bpwQQd6lz0ycqw==, tarball: file:projects/configuration.tgz}
+    resolution: {integrity: sha512-BcA4Dr9ruINP0OBQ46Y+zjglbmKJ7jto0BFtPbZrI/WiZTPgK/bmlPpdlKUdP4r0B97j2zOm/Ho9IogptYrj4A==, tarball: file:projects/configuration.tgz}
     id: file:projects/configuration.tgz
     name: '@rush-temp/configuration'
     version: 0.0.0
@@ -10020,7 +10029,7 @@ packages:
       rimraf: 6.0.1
       ts-jest: 29.3.4(jest@29.7.0)(typescript@5.8.3)
       typescript: 5.8.3
-      untildify: 4.0.0
+      untildify: 5.0.0
     transitivePeerDependencies:
       - '@babel/core'
       - '@jest/transform'
@@ -10206,7 +10215,7 @@ packages:
     dev: false
 
   file:projects/extension.tgz(prettier@3.5.3)(ts-node@10.9.1):
-    resolution: {integrity: sha512-HThMk02tZ+C+yi09/1ehsQkRvGC2cejKt1OhzizrnhBO9yIUFI73OIzeXMGHjYC/fQ355CH6PM0zksNO+OZQZw==, tarball: file:projects/extension.tgz}
+    resolution: {integrity: sha512-Xp3bxihBBYDl2wrFn57MdALSNT8iEDPs/fVU+w/anGWxF9N14AI79sgmWT4iULhhPcdqeJt0C7COr0n1vtdH9A==, tarball: file:projects/extension.tgz}
     id: file:projects/extension.tgz
     name: '@rush-temp/extension'
     version: 0.0.0
@@ -10219,7 +10228,7 @@ packages:
       '@types/node': 22.15.19
       '@types/npm-package-arg': 6.1.4
       '@types/pacote': 11.1.3
-      '@types/semver': 5.5.0
+      '@types/semver': 7.7.0
       '@typescript-eslint/eslint-plugin': 8.32.1(@typescript-eslint/parser@8.32.1)(eslint@8.57.1)(typescript@5.8.3)
       '@typescript-eslint/parser': 8.32.1(eslint@8.57.1)(typescript@5.8.3)
       command-exists: 1.2.9
@@ -10236,7 +10245,7 @@ packages:
       npm-package-arg: 9.1.2
       pacote: 9.5.12
       rimraf: 6.0.1
-      semver: 7.5.4
+      semver: 7.7.2
       source-map-support: 0.5.21
       typescript: 5.8.3
       yarn: 1.22.17
@@ -10544,7 +10553,7 @@ packages:
     dev: false
 
   file:projects/system-requirements.tgz(prettier@3.5.3)(ts-node@10.9.1):
-    resolution: {integrity: sha512-gWMpaYOqy87LaAsh+eyWZOGPWa5Y0INFsW/+bwSEIrpn3Wag8KwABvDDN1Q0GxBVtbqKW6oW/co9ky28zdHczQ==, tarball: file:projects/system-requirements.tgz}
+    resolution: {integrity: sha512-DeMuvnbY4io7UINKKX+jJrMpEOMgILU+wsKkKilASREHANcSiZEopkQhPM3AZVoa0SABkt8pNVX2bXqka+GfIQ==, tarball: file:projects/system-requirements.tgz}
     id: file:projects/system-requirements.tgz
     name: '@rush-temp/system-requirements'
     version: 0.0.0
@@ -10553,7 +10562,7 @@ packages:
       '@types/command-exists': 1.2.3
       '@types/jest': 29.5.14
       '@types/node': 22.15.19
-      '@types/semver': 5.5.0
+      '@types/semver': 7.7.0
       '@typescript-eslint/eslint-plugin': 8.32.1(@typescript-eslint/parser@8.32.1)(eslint@8.57.1)(typescript@5.8.3)
       '@typescript-eslint/parser': 8.32.1(eslint@8.57.1)(typescript@5.8.3)
       command-exists: 1.2.9
@@ -10565,7 +10574,7 @@ packages:
       eslint-plugin-unicorn: 49.0.0(eslint@8.57.1)
       jest: 29.7.0(@types/node@22.15.19)(ts-node@10.9.1)
       rimraf: 6.0.1
-      semver: 7.5.4
+      semver: 7.7.2
       source-map-support: 0.5.21
       typescript: 5.8.3
     transitivePeerDependencies:

@@ -56,6 +56,6 @@
     "@azure-tools/yaml": "~1.2.0",
     "commonmark": "^0.31.2",
     "lodash": "~4.17.20",
-    "untildify": "^4.0.0"
+    "untildify": "^5.0.0"
   }
 }

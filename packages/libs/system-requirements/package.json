@@ -37,13 +37,13 @@
   "dependencies": {
     "@azure/logger": "^1.0.2",
     "command-exists": "~1.2.9",
-    "semver": "^7.3.5"
+    "semver": "^7.7.2"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
     "@types/command-exists": "~1.2.0",
     "@types/node": "~22.15.19",
-    "@types/semver": "5.5.0",
+    "@types/semver": "7.7.0",
     "@typescript-eslint/eslint-plugin": "^8.32.1",
     "@typescript-eslint/parser": "^8.32.1",
     "eslint-plugin-jest": "~28.11.0",
