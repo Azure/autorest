@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/datastore",
+      "comment": "Fix json path query not applying when json path query result in some eval errors",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@azure-tools/datastore"
+}

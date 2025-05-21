@@ -62,8 +62,7 @@ export async function generateSwagger(folder: string) {
 
   const { path: root } = await resolveProject(__dirname);
   const path = join(root, "test", folder, "tsp-output");
-  const command =
-    "tsp compile . --emit=@azure-tools/typespec-autorest --option @azure-tools/typespec-autorest.output-file=./swagger-output/swagger.json";
+  const command = `tsp compile . --emit=@azure-tools/typespec-autorest --option @azure-tools/typespec-autorest.emitter-output-dir="{project-root}/../swagger-output" --option @azure-tools/typespec-autorest.output-file=swagger.json`;
   execSync(command, { cwd: path, stdio: "inherit" });
 }
 
@@ -88,6 +87,8 @@ async function generate(root: string, path: string, debug = false, isFullCompati
     resolve(root, "packages/apps/autorest/entrypoints/app.js"),
     "--openapi-to-typespec",
     inputFile,
+    `--version=${resolve(root, "packages/extensions/core")}`,
+    `--use=${resolve(root, "packages/extensions/modelerfour")}`,
     "--use=.",
     `--output-folder=${dirname(path)}`,
     "--src-path=tsp-output",
