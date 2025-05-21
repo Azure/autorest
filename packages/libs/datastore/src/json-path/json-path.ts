@@ -22,19 +22,6 @@ interface JsonPathResult {
   pointer: string;
 }
 
-// Override the vm used in jsonpath to use our safeEval and ignore errors.
-const safeEval = createSandbox();
-JSONPath.prototype.vm = {
-  runInNewContext: (code: string, context: Record<string, any>) => {
-    try {
-      return safeEval(code, context);
-    } catch (e) {
-      // We just ignore javascript errors.
-      return false;
-    }
-  },
-};
-
 export function parse(jsonPath: string): JsonPath {
   return (JSONPath as any as JSONPathExt).toPathArray(jsonPath).slice(1);
 }
@@ -44,7 +31,7 @@ export function paths<T>(obj: T, jsonQuery: string): Array<JsonPath> {
 }
 
 function run(obj: any, query: string): JsonPathResult[] {
-  return JSONPath({ path: query, json: obj as any, resultType: "all" });
+  return JSONPath({ path: query, json: obj as any, resultType: "all", ignoreEvalErrors: true });
 }
 
 export function nodes<T>(obj: T, query: string): Array<{ path: JsonPath; value: any }> {
