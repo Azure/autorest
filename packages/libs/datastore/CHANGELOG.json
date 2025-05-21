@@ -2,6 +2,18 @@
   "name": "@azure-tools/datastore",
   "entries": [
     {
+      "version": "4.8.2",
+      "tag": "@azure-tools/datastore_v4.8.2",
+      "date": "Wed, 21 May 2025 20:59:20 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix json path query not applying when json path query result in some eval errors"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.8.1",
       "tag": "@azure-tools/datastore_v4.8.1",
       "date": "Tue, 20 May 2025 18:08:56 GMT",
