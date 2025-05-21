@@ -17,7 +17,7 @@ importers:
         specifier: workspace:~1.12.2
         version: link:../../libs/configuration
       '@autorest/core':
-        specifier: workspace:~3.10.6
+        specifier: workspace:~3.10.7
         version: link:../../extensions/core
       '@azure-tools/async-io':
         specifier: ~3.0.0
@@ -146,7 +146,7 @@ importers:
         specifier: workspace:~2.10.1
         version: link:../../libs/codegen
       '@azure-tools/datastore':
-        specifier: workspace:~4.8.1
+        specifier: workspace:~4.8.2
         version: link:../../libs/datastore
       '@azure-tools/deduplication':
         specifier: workspace:~3.2.4
@@ -308,7 +308,7 @@ importers:
         specifier: workspace:~2.10.1
         version: link:../../libs/codegen
       '@azure-tools/datastore':
-        specifier: workspace:~4.8.1
+        specifier: workspace:~4.8.2
         version: link:../../libs/datastore
       '@azure-tools/openapi':
         specifier: workspace:~3.6.1
@@ -658,7 +658,7 @@ importers:
   ../../packages/libs/common:
     dependencies:
       '@azure-tools/datastore':
-        specifier: workspace:~4.8.1
+        specifier: workspace:~4.8.2
         version: link:../datastore
       '@azure-tools/json':
         specifier: workspace:~1.3.1
@@ -728,7 +728,7 @@ importers:
         specifier: ~3.0.0
         version: 3.0.254
       '@azure-tools/datastore':
-        specifier: workspace:~4.8.1
+        specifier: workspace:~4.8.2
         version: link:../datastore
       '@azure-tools/extension':
         specifier: workspace:~3.7.2
@@ -886,7 +886,7 @@ importers:
         specifier: workspace:~2.10.1
         version: link:../codegen
       '@azure-tools/datastore':
-        specifier: workspace:~4.8.1
+        specifier: workspace:~4.8.2
         version: link:../datastore
       '@azure-tools/object-comparison':
         specifier: ~3.0.0
@@ -1174,7 +1174,7 @@ importers:
   ../../packages/libs/oai2-to-oai3:
     dependencies:
       '@azure-tools/datastore':
-        specifier: workspace:~4.8.1
+        specifier: workspace:~4.8.2
         version: link:../datastore
       '@azure-tools/json':
         specifier: workspace:~1.3.1
@@ -1409,7 +1409,7 @@ importers:
   ../../packages/testing/test-public-packages:
     dependencies:
       '@autorest/core':
-        specifier: workspace:~3.10.6
+        specifier: workspace:~3.10.7
         version: link:../../extensions/core
       autorest:
         specifier: workspace:~3.7.2
@@ -1461,7 +1461,7 @@ importers:
         specifier: workspace:~1.6.1
         version: link:../../libs/common
       '@azure-tools/datastore':
-        specifier: workspace:~4.8.1
+        specifier: workspace:~4.8.2
         version: link:../../libs/datastore
       '@azure-tools/tasks':
         specifier: ~3.0.0

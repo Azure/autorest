@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "@azure-tools/codegen": "workspace:~2.10.1",
-    "@azure-tools/datastore": "workspace:~4.8.1",
+    "@azure-tools/datastore": "workspace:~4.8.2",
     "@azure-tools/object-comparison": "~3.0.0",
     "@azure-tools/tasks": "~3.0.0",
     "compare-versions": "^6.1.1",

@@ -1,6 +1,13 @@
 # Change Log - @autorest/core
 
-This log was last generated on Tue, 20 May 2025 18:08:56 GMT and should not be manually modified.
+This log was last generated on Wed, 21 May 2025 20:59:20 GMT and should not be manually modified.
+
+## 3.10.7
+Wed, 21 May 2025 20:59:20 GMT
+
+### Patches
+
+- Fix directive not applying when json path query result in some eval errors
 
 ## 3.10.6
 Tue, 20 May 2025 18:08:56 GMT

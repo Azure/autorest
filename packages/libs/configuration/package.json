@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "@autorest/common": "workspace:~1.6.1",
-    "@azure-tools/datastore": "workspace:~4.8.1",
+    "@azure-tools/datastore": "workspace:~4.8.2",
     "@azure-tools/extension": "workspace:~3.7.2",
     "@azure-tools/uri": "~3.1.1",
     "@azure-tools/async-io": "~3.0.0",
