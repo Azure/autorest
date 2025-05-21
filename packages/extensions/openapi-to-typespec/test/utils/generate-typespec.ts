@@ -87,6 +87,8 @@ async function generate(root: string, path: string, debug = false, isFullCompati
     resolve(root, "packages/apps/autorest/entrypoints/app.js"),
     "--openapi-to-typespec",
     inputFile,
+    `--version=${resolve(root, "packages/extensions/core")}`,
+    `--use=${resolve(root, "packages/extensions/modelerfour")}`,
     "--use=.",
     `--output-folder=${dirname(path)}`,
     "--src-path=tsp-output",
