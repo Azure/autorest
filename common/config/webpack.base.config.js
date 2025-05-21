@@ -13,7 +13,7 @@ module.exports = {
     filename: "[name].js",
     devtoolModuleFilenameTemplate: "../../[resource-path]",
   },
-  externals: [/node-gyp/],
+  externals: ["node-gyp/bin/node-gyp.js"],
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".json"],
   },
