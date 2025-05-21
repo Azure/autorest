@@ -62,8 +62,7 @@ export async function generateSwagger(folder: string) {
 
   const { path: root } = await resolveProject(__dirname);
   const path = join(root, "test", folder, "tsp-output");
-  const command =
-    "tsp compile . --emit=@azure-tools/typespec-autorest --option @azure-tools/typespec-autorest.output-file=./swagger-output/swagger.json";
+  const command = `tsp compile . --emit=@azure-tools/typespec-autorest --option @azure-tools/typespec-autorest.emitter-output-dir="{project-root}/../swagger-output" --option @azure-tools/typespec-autorest.output-file=swagger.json`;
   execSync(command, { cwd: path, stdio: "inherit" });
 }
 
