@@ -1,13 +1,6 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Tue, 20 May 2025 18:08:56 GMT and should not be manually modified.
-
-## 1.12.2
-Tue, 20 May 2025 18:08:56 GMT
-
-### Patches
-
-- Update dependencies
+This log was last generated on Wed, 28 Feb 2024 18:02:21 GMT and should not be manually modified.
 
 ## 1.12.1
 Wed, 28 Feb 2024 18:02:21 GMT

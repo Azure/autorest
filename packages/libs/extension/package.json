@@ -1,6 +1,6 @@
 {
   "name": "@azure-tools/extension",
-  "version": "3.7.2",
+  "version": "3.7.1",
   "description": "Yarn-Based extension aquisition (for Azure Open Source Projects)",
   "engines": {
     "node": ">=12.0.0"
@@ -38,7 +38,7 @@
   "homepage": "https://github.com/Azure/autorest/tree/main/packages/libs/extension",
   "readme": "https://github.com/Azure/autorest/tree/main/packages/libs/extension/readme.md",
   "dependencies": {
-    "@autorest/system-requirements": "workspace:~1.1.1",
+    "@autorest/system-requirements": "workspace:~1.1.0",
     "@azure-tools/async-io": "~3.0.0",
     "@azure-tools/tasks": "~3.0.0",
     "@azure/logger": "^1.2.0",

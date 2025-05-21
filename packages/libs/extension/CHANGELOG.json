@@ -2,23 +2,6 @@
   "name": "@azure-tools/extension",
   "entries": [
     {
-      "version": "3.7.2",
-      "tag": "@azure-tools/extension_v3.7.2",
-      "date": "Tue, 20 May 2025 18:08:56 GMT",
-      "comments": {
-        "patch": [
-          {
-            "comment": "Update dependencies"
-          }
-        ],
-        "dependency": [
-          {
-            "comment": "Updating dependency \"@autorest/system-requirements\" from `~1.1.0` to `1.1.1`"
-          }
-        ]
-      }
-    },
-    {
       "version": "3.7.1",
       "tag": "@azure-tools/extension_v3.7.1",
       "date": "Tue, 28 Nov 2023 19:02:52 GMT",

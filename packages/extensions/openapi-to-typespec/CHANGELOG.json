@@ -2,38 +2,6 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
-      "version": "0.11.1",
-      "tag": "@autorest/openapi-to-typespec_v0.11.1",
-      "date": "Tue, 20 May 2025 18:08:56 GMT",
-      "comments": {
-        "patch": [
-          {
-            "comment": "Change common type replacement logic"
-          },
-          {
-            "comment": "Update dependencies"
-          }
-        ],
-        "dependency": [
-          {
-            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.10.0` to `2.10.1`"
-          },
-          {
-            "comment": "Updating dependency \"@azure-tools/openapi\" from `~3.6.0` to `3.6.1`"
-          },
-          {
-            "comment": "Updating dependency \"@autorest/extension-base\" from `~3.6.0` to `3.6.1`"
-          },
-          {
-            "comment": "Updating dependency \"@autorest/codemodel\" from `~4.20.0` to `4.20.1`"
-          },
-          {
-            "comment": "Updating dependency \"autorest\" from `~3.7.1` to `3.7.2`"
-          }
-        ]
-      }
-    },
-    {
       "version": "0.11.0",
       "tag": "@autorest/openapi-to-typespec_v0.11.0",
       "date": "Sat, 19 Apr 2025 07:27:04 GMT",

@@ -1,13 +1,6 @@
 # Change Log - @autorest/codemodel
 
-This log was last generated on Tue, 20 May 2025 18:08:56 GMT and should not be manually modified.
-
-## 4.20.1
-Tue, 20 May 2025 18:08:56 GMT
-
-### Patches
-
-- Update dependencies
+This log was last generated on Thu, 16 Nov 2023 16:00:04 GMT and should not be manually modified.
 
 ## 4.20.0
 Thu, 16 Nov 2023 16:00:04 GMT

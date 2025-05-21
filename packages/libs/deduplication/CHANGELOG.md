@@ -1,13 +1,6 @@
 # Change Log - @azure-tools/deduplication
 
-This log was last generated on Tue, 20 May 2025 18:08:56 GMT and should not be manually modified.
-
-## 3.2.4
-Tue, 20 May 2025 18:08:56 GMT
-
-### Patches
-
-- Update dependencies
+This log was last generated on Tue, 13 May 2025 03:24:17 GMT and should not be manually modified.
 
 ## 3.2.3
 Tue, 13 May 2025 03:24:17 GMT
