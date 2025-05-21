@@ -42,7 +42,35 @@ describe("JsonPath", () => {
     expect(jp.nodes(obj, "$..['d']").length).toEqual(1);
     expect(jp.nodes(obj, "$..d").length).toEqual(1);
     expect(jp.nodes(obj, "$..[2]").length).toEqual(1);
-    // expect(jp.nodes(obj, "$..[?(@.a[2] === 3)]").length).toEqual(1);
+    expect(jp.nodes(obj, "$..[?(@.a[2] === 3)]").length).toEqual(1);
     // expect(jp.nodes(obj, "$..[?(@.a.reduce((x,y) => x+y, 0) === 6)]").length).toEqual(1);
+  });
+
+  it("doesn't crash on null values", () => {
+    const obj = {
+      a: "a",
+      paths: {
+        "/test": {
+          get: {
+            parameters: [
+              {
+                name: "$orderby",
+                description: "May be used to expand the participants.",
+                in: "query",
+                required: false,
+                type: "string",
+              },
+            ],
+            responses: {
+              "200": {
+                "x-custom": null,
+                description: "OK. The request has succeeded.",
+              },
+            },
+          },
+        },
+      },
+    };
+    expect(jp.nodes(obj, "$..[?(@.name=='$orderby')]").length).toEqual(1);
   });
 });
