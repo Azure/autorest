@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/datastore
 
-This log was last generated on Tue, 20 May 2025 18:08:56 GMT and should not be manually modified.
+This log was last generated on Wed, 21 May 2025 20:59:20 GMT and should not be manually modified.
+
+## 4.8.2
+Wed, 21 May 2025 20:59:20 GMT
+
+### Patches
+
+- Fix json path query not applying when json path query result in some eval errors
 
 ## 4.8.1
 Tue, 20 May 2025 18:08:56 GMT

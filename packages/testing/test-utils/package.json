@@ -31,7 +31,7 @@
   "homepage": "https://github.com/Azure/autorest#readme",
   "dependencies": {
     "@autorest/common": "workspace:~1.6.1",
-    "@azure-tools/datastore": "workspace:~4.8.1",
+    "@azure-tools/datastore": "workspace:~4.8.2",
     "@azure-tools/tasks": "~3.0.0",
     "expect": "~29.7.0",
     "jest-snapshot": "~29.7.0",
