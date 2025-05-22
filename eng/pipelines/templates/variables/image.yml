@@ -1,15 +1,15 @@
 variables:
   - name: LINUXPOOL
-    value: azsdk-pool-mms-ubuntu-2004-general
+    value: azsdk-pool
   - name: WINDOWSPOOL
-    value: azsdk-pool-mms-win-2022-general
+    value: azsdk-pool
 
   - name: LINUXVMIMAGE
-    value: azsdk-pool-mms-ubuntu-2004-1espt
+    value: ubuntu-24.04
   - name: LINUXNEXTVMIMAGE
-    value: azsdk-pool-mms-ubuntu-2204-1espt
+    value: ubuntu-24.04
   - name: WINDOWSVMIMAGE
-    value: azsdk-pool-mms-win-2022-1espt
+    value: windows-2022
 
   # Values required for pool.os field in 1es pipeline templates
   - name: LINUXOS
