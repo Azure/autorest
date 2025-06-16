@@ -1,6 +1,13 @@
 # Change Log - @autorest/schemas
 
-This log was last generated on Mon, 31 Jul 2023 14:56:21 GMT and should not be manually modified.
+This log was last generated on Mon, 16 Jun 2025 19:35:57 GMT and should not be manually modified.
+
+## 1.3.6
+Mon, 16 Jun 2025 19:35:57 GMT
+
+### Patches
+
+- Relax `api-version` in `x-ms-examples` min length to 1
 
 ## 1.3.5
 Mon, 31 Jul 2023 14:56:21 GMT

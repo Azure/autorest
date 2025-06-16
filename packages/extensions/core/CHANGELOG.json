@@ -2,6 +2,23 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.10.8",
+      "tag": "@autorest/core_v3.10.8",
+      "date": "Mon, 16 Jun 2025 19:35:57 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Relax `api-version` in `x-ms-examples` min length to 1"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/schemas\" from `~1.3.5` to `1.3.6`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.10.7",
       "tag": "@autorest/core_v3.10.7",
       "date": "Wed, 21 May 2025 20:59:20 GMT",
