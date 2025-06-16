@@ -1,6 +1,13 @@
 # Change Log - @autorest/core
 
-This log was last generated on Wed, 21 May 2025 20:59:20 GMT and should not be manually modified.
+This log was last generated on Mon, 16 Jun 2025 19:35:57 GMT and should not be manually modified.
+
+## 3.10.8
+Mon, 16 Jun 2025 19:35:57 GMT
+
+### Patches
+
+- Relax `api-version` in `x-ms-examples` min length to 1
 
 ## 3.10.7
 Wed, 21 May 2025 20:59:20 GMT

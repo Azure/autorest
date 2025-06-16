@@ -46,7 +46,7 @@
       "api-version": {
         "type": "string",
         "description": "An example of the api-version used in the request.",
-        "minLength": 3
+        "minLength": 1
       },
       "subcriptionId": {
         "type": "string",
