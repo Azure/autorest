@@ -1939,8 +1939,7 @@
           "description": "Modification details",
           "items": {
             "$ref": "#/definitions/AlertModificationItem"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -1976,8 +1975,7 @@
           "description": "Conditions on which alerts will be filtered.",
           "items": {
             "$ref": "#/definitions/Condition"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "schedule": {
           "$ref": "#/definitions/Schedule",
@@ -1988,8 +1986,7 @@
           "description": "Actions to be applied.",
           "items": {
             "$ref": "#/definitions/Action"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "description": {
           "type": "string",
@@ -2158,8 +2155,7 @@
           "description": "List of the items",
           "items": {
             "$ref": "#/definitions/AlertsSummaryGroupItem"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -2185,8 +2181,7 @@
           "description": "List of the items",
           "items": {
             "$ref": "#/definitions/AlertsSummaryGroupItem"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -2604,8 +2599,7 @@
           "description": "Array of operations",
           "items": {
             "$ref": "#/definitions/MonitorServiceDetails"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2806,8 +2800,7 @@
           "description": "List of recurrences.",
           "items": {
             "$ref": "#/definitions/Recurrence"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -2982,8 +2975,7 @@
           "description": "Modification details",
           "items": {
             "$ref": "#/definitions/SmartGroupModificationItem"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -3032,56 +3024,49 @@
           "description": "Summary of target resources in the smart group",
           "items": {
             "$ref": "#/definitions/SmartGroupAggregatedProperty"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "resourceTypes": {
           "type": "array",
           "description": "Summary of target resource types in the smart group",
           "items": {
             "$ref": "#/definitions/SmartGroupAggregatedProperty"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "resourceGroups": {
           "type": "array",
           "description": "Summary of target resource groups in the smart group",
           "items": {
             "$ref": "#/definitions/SmartGroupAggregatedProperty"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "monitorServices": {
           "type": "array",
           "description": "Summary of monitorServices in the smart group",
           "items": {
             "$ref": "#/definitions/SmartGroupAggregatedProperty"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "monitorConditions": {
           "type": "array",
           "description": "Summary of monitorConditions in the smart group",
           "items": {
             "$ref": "#/definitions/SmartGroupAggregatedProperty"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "alertStates": {
           "type": "array",
           "description": "Summary of alertStates in the smart group",
           "items": {
             "$ref": "#/definitions/SmartGroupAggregatedProperty"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "alertSeverities": {
           "type": "array",
           "description": "Summary of alertSeverities in the smart group",
           "items": {
             "$ref": "#/definitions/SmartGroupAggregatedProperty"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",

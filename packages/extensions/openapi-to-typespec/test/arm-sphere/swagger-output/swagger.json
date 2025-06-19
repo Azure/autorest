@@ -4181,8 +4181,7 @@
           "description": "The DeviceInsight items on this page",
           "items": {
             "$ref": "#/definitions/DeviceInsight"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
