@@ -56,9 +56,6 @@ export async function processConverter(host: AutorestExtensionHost) {
   await emitPackage(getFilePath(session, "package.json"), programDetails);
   await emitTypespecConfig(getFilePath(session, "tspconfig.yaml"), programDetails);
   await emitClient(getFilePath(session, isFullCompatible ? "back-compatible.tsp" : "client.tsp"), programDetails);
-  if (metadata && Object.keys(metadata.Resources).find((key) => metadata!.Resources[key].length > 1)) {
-    await emitLegacy(getFilePath(session, "legacy.tsp"));
-  }
 }
 
 function getOutuptDirectory(session: Session<CodeModel>) {

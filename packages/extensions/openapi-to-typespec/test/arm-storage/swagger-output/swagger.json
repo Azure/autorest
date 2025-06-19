@@ -6080,8 +6080,7 @@
           "description": "The storage account blob inventory policy rules. The rule is applied when it is enabled.",
           "items": {
             "$ref": "#/definitions/BlobInventoryPolicyRule"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -6105,8 +6104,7 @@
           "description": "Blob ranges to restore.",
           "items": {
             "$ref": "#/definitions/BlobRestoreRange"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -6454,8 +6452,7 @@
           "description": "The List of CORS rules. You can include up to five CorsRule elements in the request.",
           "items": {
             "$ref": "#/definitions/CorsRule"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -7464,8 +7461,7 @@
           "items": {
             "$ref": "#/definitions/UpdateHistoryProperty"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       }
     },
@@ -8066,8 +8062,7 @@
           "description": "The list of LegalHold tags of a blob container.",
           "items": {
             "$ref": "#/definitions/TagProperty"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "protectedAppendWritesHistory": {
           "$ref": "#/definitions/ProtectedAppendWritesHistory",
@@ -8225,8 +8220,7 @@
           "description": "Optional, local user ssh authorized keys for SFTP.",
           "items": {
             "$ref": "#/definitions/SshPublicKey"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "sharedKey": {
           "type": "string",
@@ -8244,8 +8238,7 @@
           "description": "The permission scopes of the local user.",
           "items": {
             "$ref": "#/definitions/PermissionScope"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "homeDirectory": {
           "type": "string",
@@ -8256,8 +8249,7 @@
           "description": "Optional, local user ssh authorized keys for SFTP.",
           "items": {
             "$ref": "#/definitions/SshPublicKey"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "sid": {
           "type": "string",
@@ -8406,8 +8398,7 @@
           "description": "An array of blob index tag based filters, there can be at most 10 tag filters",
           "items": {
             "$ref": "#/definitions/TagFilter"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -8469,8 +8460,7 @@
           "description": "The Storage Account ManagementPolicies Rules. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts.",
           "items": {
             "$ref": "#/definitions/ManagementPolicyRule"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -8647,8 +8637,7 @@
           "description": "Sets the resource access rules",
           "items": {
             "$ref": "#/definitions/ResourceAccessRule"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "virtualNetworkRules": {
           "type": "array",
@@ -8662,8 +8651,7 @@
           "description": "Sets the IP ACL rules",
           "items": {
             "$ref": "#/definitions/IPRule"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "defaultAction": {
           "type": "string",
@@ -8757,8 +8745,7 @@
           "description": "The storage account object replication rules.",
           "items": {
             "$ref": "#/definitions/ObjectReplicationPolicyRule"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -9775,16 +9762,14 @@
           "items": {
             "$ref": "#/definitions/SKUCapability"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "restrictions": {
           "type": "array",
           "description": "The restrictions because of which SKU cannot be used. This is empty if there are no restrictions.",
           "items": {
             "$ref": "#/definitions/Restriction"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -10052,8 +10037,7 @@
           "items": {
             "$ref": "#/definitions/StorageAccountKey"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       }
     },
@@ -10493,8 +10477,7 @@
           "items": {
             "$ref": "#/definitions/SkuInformation"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       }
     },
@@ -10742,8 +10725,7 @@
           "description": "Gets or sets the list of Storage Resource Usages.",
           "items": {
             "$ref": "#/definitions/Usage"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },

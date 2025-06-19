@@ -669,8 +669,7 @@
           "description": "Error message for the current timestamp",
           "items": {
             "$ref": "#/definitions/ErrorResponse"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -700,8 +699,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AnomalyInterpretation"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -742,8 +740,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -791,8 +788,7 @@
           "description": "Time series data points. Points should be sorted by timestamp in ascending\norder to match the change point detection result.",
           "items": {
             "$ref": "#/definitions/TimeSeriesPoint"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "granularity": {
           "$ref": "#/definitions/TimeGranularity",
@@ -883,8 +879,7 @@
           "description": "Time series data points. Points should be sorted by timestamp in ascending\norder to match the anomaly detection result. If the data is not sorted\ncorrectly or there is duplicated timestamp, the API will not work. In such\ncase, an error message will be returned.",
           "items": {
             "$ref": "#/definitions/TimeSeriesPoint"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "granularity": {
           "$ref": "#/definitions/TimeGranularity",
@@ -972,8 +967,7 @@
           "description": "Detection result for each timestamp.",
           "items": {
             "$ref": "#/definitions/AnomalyState"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -995,15 +989,13 @@
           "description": "Error message when detection is failed.",
           "items": {
             "$ref": "#/definitions/ErrorResponse"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "variableStates": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VariableState"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "setupInfo": {
           "$ref": "#/definitions/DetectionRequest",
@@ -1040,8 +1032,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VariableState"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -1285,8 +1276,7 @@
           "description": "variables",
           "items": {
             "$ref": "#/definitions/VariableValues"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "topContributorCount": {
           "type": "integer",
@@ -1306,15 +1296,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VariableState"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "results": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/AnomalyState"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -1392,8 +1380,7 @@
           "description": "Error messages when failed to create a model.",
           "items": {
             "$ref": "#/definitions/ErrorResponse"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "diagnosticsInfo": {
           "$ref": "#/definitions/DiagnosticsInfo",
@@ -1415,8 +1402,7 @@
           "description": "List of models",
           "items": {
             "$ref": "#/definitions/ModelSnapshot"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "currentCount": {
           "type": "integer",
@@ -1535,8 +1521,7 @@
           "description": "The ModelSnapshot items on this page",
           "items": {
             "$ref": "#/definitions/ModelSnapshot"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",

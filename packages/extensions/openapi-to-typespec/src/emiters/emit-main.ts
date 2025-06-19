@@ -105,10 +105,6 @@ function getArmResourceImports(program: TypespecProgram, metadata: Metadata): st
     imports.push(`import "./routes.tsp";`);
   }
 
-  if (Object.keys(metadata.Resources).find((key) => metadata.Resources[key].length > 1)) {
-    imports.push(`import "./legacy.tsp";`);
-  }
-
   return imports;
 }
 
