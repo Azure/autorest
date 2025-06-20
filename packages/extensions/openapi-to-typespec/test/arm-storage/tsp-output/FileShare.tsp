@@ -123,13 +123,7 @@ interface FileShares {
    */
   lease is ArmResourceActionSync<
     FileShare,
-    {
-      /**
-       * Lease Share request body.
-       */
-      @bodyRoot
-      parameters?: LeaseShareRequest;
-    },
+    LeaseShareRequest,
     ArmResponse<LeaseShareResponse>,
     Parameters = {
       /**
@@ -137,7 +131,8 @@ interface FileShares {
        */
       @header
       `x-ms-snapshot`?: string;
-    }
+    },
+    OptionalRequestBody = true
   >;
 }
 
@@ -154,3 +149,4 @@ interface FileShares {
   "Properties to update for the file share."
 );
 @@doc(FileShares.restore::parameters.body, "");
+@@doc(FileShares.lease::parameters.body, "Lease Share request body.");

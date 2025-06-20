@@ -158,14 +158,9 @@ interface VirtualMachineScaleSetVMS {
   @operationId("VirtualMachineScaleSetVMs_Reimage")
   reimage is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
-    {
-      /**
-       * Parameters for the Reimaging Virtual machine in ScaleSet.
-       */
-      @bodyRoot
-      vmScaleSetVMReimageInput?: VirtualMachineScaleSetVMReimageParameters;
-    },
-    OkResponse
+    VirtualMachineScaleSetVMReimageParameters,
+    OkResponse,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -309,6 +304,9 @@ interface VirtualMachineScaleSetVMS {
 );
 @@doc(VirtualMachineScaleSetVMS.update::parameters.resource,
   "Parameters supplied to the Update Virtual Machine Scale Sets VM operation."
+);
+@@doc(VirtualMachineScaleSetVMS.reimage::parameters.body,
+  "Parameters for the Reimaging Virtual machine in ScaleSet."
 );
 @@doc(VirtualMachineScaleSetVMS.runCommand::parameters.body,
   "Parameters supplied to the Run command operation."

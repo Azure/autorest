@@ -247,14 +247,9 @@ interface VirtualMachines {
    */
   reimage is ArmResourceActionAsync<
     VirtualMachine,
-    {
-      /**
-       * Parameters supplied to the Reimage Virtual Machine operation.
-       */
-      @bodyRoot
-      parameters?: VirtualMachineReimageParameters;
-    },
-    OkResponse
+    VirtualMachineReimageParameters,
+    OkResponse,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -334,6 +329,9 @@ interface VirtualMachines {
 );
 @@doc(VirtualMachines.capture::parameters.body,
   "Parameters supplied to the Capture Virtual Machine operation."
+);
+@@doc(VirtualMachines.reimage::parameters.body,
+  "Parameters supplied to the Reimage Virtual Machine operation."
 );
 @@doc(VirtualMachines.installPatches::parameters.body,
   "Input for InstallPatches as directly received by the API"

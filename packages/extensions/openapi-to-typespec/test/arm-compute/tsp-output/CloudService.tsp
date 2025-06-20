@@ -43,10 +43,11 @@ interface CloudServices {
    * Update a cloud service.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     CloudService,
     PatchModel = CloudServiceUpdate,
-    Response = ArmResponse<CloudService>
+    Response = ArmResponse<CloudService>,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -95,14 +96,9 @@ interface CloudServices {
    */
   restart is ArmResourceActionAsync<
     CloudService,
-    {
-      /**
-       * List of cloud service role instance names.
-       */
-      @bodyRoot
-      parameters?: RoleInstances;
-    },
-    OkResponse
+    RoleInstances,
+    OkResponse,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -110,14 +106,9 @@ interface CloudServices {
    */
   reimage is ArmResourceActionAsync<
     CloudService,
-    {
-      /**
-       * List of cloud service role instance names.
-       */
-      @bodyRoot
-      parameters?: RoleInstances;
-    },
-    OkResponse
+    RoleInstances,
+    OkResponse,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -125,14 +116,9 @@ interface CloudServices {
    */
   rebuild is ArmResourceActionAsync<
     CloudService,
-    {
-      /**
-       * List of cloud service role instance names.
-       */
-      @bodyRoot
-      parameters?: RoleInstances;
-    },
-    OkResponse
+    RoleInstances,
+    OkResponse,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -141,14 +127,9 @@ interface CloudServices {
   @action("delete")
   deleteInstances is ArmResourceActionAsync<
     CloudService,
-    {
-      /**
-       * List of cloud service role instance names.
-       */
-      @bodyRoot
-      parameters?: RoleInstances;
-    },
-    OkResponse
+    RoleInstances,
+    OkResponse,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -160,13 +141,7 @@ interface CloudServices {
   @operationId("CloudServicesUpdateDomain_WalkUpdateDomain")
   walkUpdateDomain is ArmResourceActionAsync<
     CloudService,
-    {
-      /**
-       * The update domain object.
-       */
-      @bodyRoot
-      parameters?: UpdateDomain;
-    },
+    UpdateDomain,
     OkResponse,
     Parameters = {
       /**
@@ -174,7 +149,8 @@ interface CloudServices {
        */
       @path
       updateDomain: int32;
-    }
+    },
+    OptionalRequestBody = true
   >;
 
   /**
@@ -217,3 +193,18 @@ interface CloudServices {
   "The cloud service object."
 );
 @@doc(CloudServices.update::parameters.properties, "The cloud service object.");
+@@doc(CloudServices.restart::parameters.body,
+  "List of cloud service role instance names."
+);
+@@doc(CloudServices.reimage::parameters.body,
+  "List of cloud service role instance names."
+);
+@@doc(CloudServices.rebuild::parameters.body,
+  "List of cloud service role instance names."
+);
+@@doc(CloudServices.deleteInstances::parameters.body,
+  "List of cloud service role instance names."
+);
+@@doc(CloudServices.walkUpdateDomain::parameters.body,
+  "The update domain object."
+);

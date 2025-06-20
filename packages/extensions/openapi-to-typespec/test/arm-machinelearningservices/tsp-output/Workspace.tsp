@@ -127,14 +127,9 @@ interface Workspaces {
    */
   diagnose is ArmResourceActionAsync<
     Workspace,
-    {
-      /**
-       * The parameter of diagnosing workspace health
-       */
-      @bodyRoot
-      body?: DiagnoseWorkspaceParameters;
-    },
-    ArmResponse<DiagnoseResponseResult>
+    DiagnoseWorkspaceParameters,
+    ArmResponse<DiagnoseResponseResult>,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -222,14 +217,9 @@ interface Workspaces {
   @operationId("ManagedNetworkProvisions_ProvisionManagedNetwork")
   provisionManagedNetwork is ArmResourceActionAsync<
     Workspace,
-    {
-      /**
-       * Managed Network Provisioning Options for a machine learning workspace.
-       */
-      @bodyRoot
-      body?: ManagedNetworkProvisionOptions;
-    },
-    ArmResponse<ManagedNetworkProvisionStatus>
+    ManagedNetworkProvisionOptions,
+    ArmResponse<ManagedNetworkProvisionStatus>,
+    OptionalRequestBody = true
   >;
 }
 
@@ -240,4 +230,10 @@ interface Workspaces {
 );
 @@doc(Workspaces.update::parameters.properties,
   "The parameters for updating a machine learning workspace."
+);
+@@doc(Workspaces.diagnose::parameters.body,
+  "The parameter of diagnosing workspace health"
+);
+@@doc(Workspaces.provisionManagedNetwork::parameters.body,
+  "Managed Network Provisioning Options for a machine learning workspace."
 );

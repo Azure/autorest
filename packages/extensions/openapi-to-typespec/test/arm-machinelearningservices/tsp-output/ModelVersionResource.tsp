@@ -49,7 +49,8 @@ interface ModelVersionResources {
 */
 @operationId("RegistryModelVersions_Get")
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-get is ModelVersionResourceOps.Read<ModelVersionResource>;
+get is ModelVersionResourceOps.Read<ModelVersionResource
+        >;
 
 
 /**
@@ -57,7 +58,8 @@ get is ModelVersionResourceOps.Read<ModelVersionResource>;
 */
 @operationId("RegistryModelVersions_CreateOrUpdate")
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-createOrUpdate is ModelVersionResourceOps.CreateOrUpdateAsync<ModelVersionResource>;
+createOrUpdate is ModelVersionResourceOps.CreateOrUpdateAsync<ModelVersionResource
+        >;
 
 
 /**
@@ -66,7 +68,8 @@ createOrUpdate is ModelVersionResourceOps.CreateOrUpdateAsync<ModelVersionResour
 @operationId("RegistryModelVersions_Delete")
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-delete is ModelVersionResourceOps.DeleteWithoutOkAsync<ModelVersionResource, Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse>;
+delete is ModelVersionResourceOps.DeleteWithoutOkAsync<ModelVersionResource, Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+        >;
 
 
 /**
@@ -108,7 +111,8 @@ list is ModelVersionResourceOps.List<ModelVersionResource, Parameters = { /**
 * View type for including/excluding (for example) archived entities.
 */
 @query("listViewType")
-"listViewType"?: ListViewType }, Response = ArmResponse<ModelVersionResourceArmPaginatedResult>>;
+"listViewType"?: ListViewType }, Response = ArmResponse<ModelVersionResourceArmPaginatedResult>
+        >;
 
 
 /**
@@ -153,19 +157,22 @@ interface ModelVersions {
 /**
 * Get version.
 */
-get is ModelVersionOps.Read<ModelVersionResource>;
+get is ModelVersionOps.Read<ModelVersionResource
+        >;
 
 
 /**
 * Create or update version.
 */
-createOrUpdate is ModelVersionOps.CreateOrUpdateSync<ModelVersionResource>;
+createOrUpdate is ModelVersionOps.CreateOrUpdateSync<ModelVersionResource
+        >;
 
 
 /**
 * Delete version.
 */
-delete is ModelVersionOps.DeleteSync<ModelVersionResource>;
+delete is ModelVersionOps.DeleteSync<ModelVersionResource
+        >;
 
 
 /**
@@ -220,7 +227,8 @@ list is ModelVersionOps.List<ModelVersionResource, Parameters = { /**
 * Model stage
 */
 @query("stage")
-"stage"?: string }, Response = ArmResponse<ModelVersionResourceArmPaginatedResult>>;
+"stage"?: string }, Response = ArmResponse<ModelVersionResourceArmPaginatedResult>
+        >;
 
 
 /**

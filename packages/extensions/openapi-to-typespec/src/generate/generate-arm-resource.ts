@@ -9,6 +9,7 @@ import {
   TypespecDataType,
   TspArmResourceOperationGroup,
   TspArmOperationType,
+  TspArmResourceOperation,
 } from "../interfaces";
 import { getOptions } from "../options";
 import { generateAugmentedDecorators, generateDecorators } from "../utils/decorators";
@@ -137,7 +138,9 @@ function generateArmResourceOperationGroup(operationGroup: TspArmResourceOperati
 
     const operationKind = operationGroup.isLegacy
       ? `${operationGroup.legacyOperationGroup!.interfaceName}.${getLegacyOperationKind(operation.kind)}`
-      : operation.kind;
+      : isPatchWithOptionalBody(operation)
+        ? `Azure.ResourceManager.Legacy.${operation.kind.replace("Arm", "")}`
+        : operation.kind;
     if (operation.kind === "ArmResourceActionSync" || operation.kind === "ArmResourceActionAsync") {
       definitions.push(
         `${operation.name} is ${operationKind}<${operation.resource}, ${generateArmRequest(
@@ -148,7 +151,7 @@ function generateArmResourceOperationGroup(operationGroup: TspArmResourceOperati
             : ""
         }${operation.parameters ? `, Parameters = { ${generateParameters(operation.parameters)} }` : ""}${
           operation.lroHeaders ? `, LroHeaders = ${generateLroHeaders(operation.lroHeaders)}` : ""
-        }>;`,
+        }${operation.optionalRequestBody === true ? `, OptionalRequestBody = true` : ""}>;`,
       );
     } else if (operation.kind === "ArmResourceActionAsyncBase") {
       definitions.push(
@@ -156,7 +159,7 @@ function generateArmResourceOperationGroup(operationGroup: TspArmResourceOperati
           operation.request,
         )}, ${generateArmResponse(operation.response)}, BaseParameters = ${operation.baseParameters![0]}${
           operation.parameters ? `, Parameters = { ${generateParameters(operation.parameters)} }` : ""
-        }>;`,
+        }${operation.optionalRequestBody === true ? `, OptionalRequestBody = true` : ""}>;`,
       );
     } else {
       definitions.push(
@@ -168,7 +171,8 @@ function generateArmResourceOperationGroup(operationGroup: TspArmResourceOperati
             : ""
         }${operation.parameters ? `, Parameters = { ${generateParameters(operation.parameters)} }` : ""}${
           operation.response ? `, Response = ${generateArmResponse(operation.response)}` : ""
-        }${operation.lroHeaders ? `, LroHeaders = ${generateLroHeaders(operation.lroHeaders)}` : ""}>;`,
+        }${operation.lroHeaders ? `, LroHeaders = ${generateLroHeaders(operation.lroHeaders)}` : ""}
+        ${isPatchWithOptionalBody(operation) ? `, OptionalRequestBody = true` : ""}>;`,
       );
     }
     definitions.push("\n");
@@ -176,6 +180,13 @@ function generateArmResourceOperationGroup(operationGroup: TspArmResourceOperati
 
   definitions.push("}");
   return definitions.join("\n");
+}
+
+function isPatchWithOptionalBody(operation: TspArmResourceOperation): boolean {
+  return (
+    (operation.kind === "ArmCustomPatchAsync" || operation.kind === "ArmCustomPatchSync") &&
+    operation.optionalRequestBody === true
+  );
 }
 
 function getLegacyOperationKind(kind: TspArmOperationType): string {
