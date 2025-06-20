@@ -2,6 +2,21 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.11.2",
+      "tag": "@autorest/openapi-to-typespec_v0.11.2",
+      "date": "Fri, 20 Jun 2025 08:03:50 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Remove customized legacy operations"
+          },
+          {
+            "comment": "Support optional body"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.11.1",
       "tag": "@autorest/openapi-to-typespec_v0.11.1",
       "date": "Tue, 20 May 2025 18:08:56 GMT",
