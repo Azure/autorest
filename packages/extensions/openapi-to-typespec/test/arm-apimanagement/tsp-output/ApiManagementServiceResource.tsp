@@ -210,14 +210,9 @@ interface ApiManagementServiceResources {
   @operationId("ApiManagementService_ApplyNetworkConfigurationUpdates")
   applyNetworkConfigurationUpdates is ArmResourceActionAsync<
     ApiManagementServiceResource,
-    {
-      /**
-       * Parameters supplied to the Apply Network Configuration operation. If the parameters are empty, all the regions in which the Api Management service is deployed will be updated sequentially without incurring downtime in the region.
-       */
-      @bodyRoot
-      parameters?: ApiManagementServiceApplyNetworkConfigurationParameters;
-    },
-    ArmResponse<ApiManagementServiceResource>
+    ApiManagementServiceApplyNetworkConfigurationParameters,
+    ArmResponse<ApiManagementServiceResource>,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -799,6 +794,9 @@ interface ApiManagementServiceResources {
 );
 @@doc(ApiManagementServiceResources.backup::parameters.body,
   "Parameters supplied to the ApiManagementService_Backup operation."
+);
+@@doc(ApiManagementServiceResources.applyNetworkConfigurationUpdates::parameters.body,
+  "Parameters supplied to the Apply Network Configuration operation. If the parameters are empty, all the regions in which the Api Management service is deployed will be updated sequentially without incurring downtime in the region."
 );
 @@doc(ApiManagementServiceResources.quotaByCounterKeysUpdate::parameters.body,
   "The value of the quota counter to be applied to all quota counter periods."

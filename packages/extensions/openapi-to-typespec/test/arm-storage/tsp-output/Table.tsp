@@ -50,7 +50,11 @@ interface Tables {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
   @operationId("Table_Update")
-  update is ArmCustomPatchSync<Table, PatchModel = Table>;
+  update is Azure.ResourceManager.Legacy.CustomPatchSync<
+    Table,
+    PatchModel = Table,
+    OptionalRequestBody = true
+  >;
 
   /**
    * Deletes the table with the specified table name, under the specified account if it exists.

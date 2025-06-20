@@ -52,9 +52,10 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
   @operationId("WorkspaceConnections_Update")
-  update is ArmCustomPatchSync<
+  update is Azure.ResourceManager.Legacy.CustomPatchSync<
     WorkspaceConnectionPropertiesV2BasicResource,
-    PatchModel = WorkspaceConnectionUpdateParameter
+    PatchModel = WorkspaceConnectionUpdateParameter,
+    OptionalRequestBody = true
   >;
 
   /**

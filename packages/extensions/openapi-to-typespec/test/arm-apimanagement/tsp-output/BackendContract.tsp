@@ -127,14 +127,9 @@ interface BackendContracts {
   @operationId("Backend_Reconnect")
   reconnect is ArmResourceActionSync<
     BackendContract,
-    {
-      /**
-       * Reconnect request parameters.
-       */
-      @bodyRoot
-      parameters?: BackendReconnectContract;
-    },
-    AcceptedResponse
+    BackendReconnectContract,
+    AcceptedResponse,
+    OptionalRequestBody = true
   >;
 }
 
@@ -148,3 +143,6 @@ interface BackendContracts {
   "Create parameters."
 );
 @@doc(BackendContracts.update::parameters.properties, "Update parameters.");
+@@doc(BackendContracts.reconnect::parameters.body,
+  "Reconnect request parameters."
+);

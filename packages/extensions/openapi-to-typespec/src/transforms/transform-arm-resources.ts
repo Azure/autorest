@@ -443,6 +443,7 @@ function convertResourceUpdateOperation(
       } else {
         armOperation.patchModel = bodyParam.schema.language.default.name;
       }
+      if (bodyParam?.required === false) armOperation.optionalRequestBody = true;
 
       buildBodyDecorator(
         bodyParam,
@@ -795,7 +796,7 @@ function buildRequestForAction(
   }
 
   const bodyType = getTypespecType(bodyParam.schema, getSession().model);
-  if (bodyParam.required !== templateRequired || isTypespecType(bodyType)) {
+  if (isTypespecType(bodyType)) {
     armOperation.request = {
       kind: "parameter",
       type: bodyType,
@@ -808,8 +809,10 @@ function buildRequestForAction(
     };
     return;
   }
-
   armOperation.request = { kind: "object", name: bodyType };
+  if (bodyParam.required !== templateRequired) {
+    armOperation.optionalRequestBody = true;
+  }
   buildBodyDecorator(bodyParam, armOperation, resourceMetadata, templateName, templateDoc);
 }
 

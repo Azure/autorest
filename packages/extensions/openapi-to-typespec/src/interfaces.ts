@@ -266,6 +266,7 @@ export interface TspArmResourceOperationBase
   examples?: Record<string, Record<string, unknown>>;
   augmentedDecorators?: string[];
   patchModel?: string;
+  optionalRequestBody?: boolean;
 }
 
 export interface TspArmResourceActionOperation extends TspArmResourceOperationBase {

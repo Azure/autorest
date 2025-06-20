@@ -117,13 +117,7 @@ interface VirtualMachineScaleSets {
    */
   deallocate is ArmResourceActionAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * A list of virtual machine instance IDs from the VM scale set.
-       */
-      @bodyRoot
-      vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
-    },
+    VirtualMachineScaleSetVMInstanceIDs,
     OkResponse,
     Parameters = {
       /**
@@ -131,7 +125,8 @@ interface VirtualMachineScaleSets {
        */
       @query("hibernate")
       hibernate?: boolean;
-    }
+    },
+    OptionalRequestBody = true
   >;
 
   /**
@@ -192,13 +187,7 @@ interface VirtualMachineScaleSets {
   @action("poweroff")
   powerOff is ArmResourceActionAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * A list of virtual machine instance IDs from the VM scale set.
-       */
-      @bodyRoot
-      vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
-    },
+    VirtualMachineScaleSetVMInstanceIDs,
     OkResponse,
     Parameters = {
       /**
@@ -206,7 +195,8 @@ interface VirtualMachineScaleSets {
        */
       @query("skipShutdown")
       skipShutdown?: boolean;
-    }
+    },
+    OptionalRequestBody = true
   >;
 
   /**
@@ -214,14 +204,9 @@ interface VirtualMachineScaleSets {
    */
   restart is ArmResourceActionAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * A list of virtual machine instance IDs from the VM scale set.
-       */
-      @bodyRoot
-      vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
-    },
-    OkResponse
+    VirtualMachineScaleSetVMInstanceIDs,
+    OkResponse,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -229,14 +214,9 @@ interface VirtualMachineScaleSets {
    */
   start is ArmResourceActionAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * A list of virtual machine instance IDs from the VM scale set.
-       */
-      @bodyRoot
-      vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
-    },
-    OkResponse
+    VirtualMachineScaleSetVMInstanceIDs,
+    OkResponse,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -249,14 +229,9 @@ interface VirtualMachineScaleSets {
    */
   redeploy is ArmResourceActionAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * A list of virtual machine instance IDs from the VM scale set.
-       */
-      @bodyRoot
-      vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
-    },
-    OkResponse
+    VirtualMachineScaleSetVMInstanceIDs,
+    OkResponse,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -264,14 +239,9 @@ interface VirtualMachineScaleSets {
    */
   performMaintenance is ArmResourceActionAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * A list of virtual machine instance IDs from the VM scale set.
-       */
-      @bodyRoot
-      vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
-    },
-    OkResponse
+    VirtualMachineScaleSetVMInstanceIDs,
+    OkResponse,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -289,14 +259,9 @@ interface VirtualMachineScaleSets {
    */
   reimage is ArmResourceActionAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * Parameters for Reimaging VM ScaleSet.
-       */
-      @bodyRoot
-      vmScaleSetReimageInput?: VirtualMachineScaleSetReimageParameters;
-    },
-    OkResponse
+    VirtualMachineScaleSetReimageParameters,
+    OkResponse,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -305,14 +270,9 @@ interface VirtualMachineScaleSets {
   @action("reimageall")
   reimageAll is ArmResourceActionAsync<
     VirtualMachineScaleSet,
-    {
-      /**
-       * A list of virtual machine instance IDs from the VM scale set.
-       */
-      @bodyRoot
-      vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
-    },
-    OkResponse
+    VirtualMachineScaleSetVMInstanceIDs,
+    OkResponse,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -403,10 +363,34 @@ interface VirtualMachineScaleSets {
 @@doc(VirtualMachineScaleSets.update::parameters.properties,
   "The scale set object."
 );
+@@doc(VirtualMachineScaleSets.deallocate::parameters.body,
+  "A list of virtual machine instance IDs from the VM scale set."
+);
 @@doc(VirtualMachineScaleSets.deleteInstances::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
+@@doc(VirtualMachineScaleSets.powerOff::parameters.body,
+  "A list of virtual machine instance IDs from the VM scale set."
+);
+@@doc(VirtualMachineScaleSets.restart::parameters.body,
+  "A list of virtual machine instance IDs from the VM scale set."
+);
+@@doc(VirtualMachineScaleSets.start::parameters.body,
+  "A list of virtual machine instance IDs from the VM scale set."
+);
+@@doc(VirtualMachineScaleSets.redeploy::parameters.body,
+  "A list of virtual machine instance IDs from the VM scale set."
+);
+@@doc(VirtualMachineScaleSets.performMaintenance::parameters.body,
+  "A list of virtual machine instance IDs from the VM scale set."
+);
 @@doc(VirtualMachineScaleSets.updateInstances::parameters.body,
+  "A list of virtual machine instance IDs from the VM scale set."
+);
+@@doc(VirtualMachineScaleSets.reimage::parameters.body,
+  "Parameters for Reimaging VM ScaleSet."
+);
+@@doc(VirtualMachineScaleSets.reimageAll::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
 @@doc(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,

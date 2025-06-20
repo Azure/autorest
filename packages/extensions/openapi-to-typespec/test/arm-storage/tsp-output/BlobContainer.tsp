@@ -98,14 +98,9 @@ interface BlobContainers {
    */
   lease is ArmResourceActionSync<
     BlobContainer,
-    {
-      /**
-       * Lease Container request body.
-       */
-      @bodyRoot
-      parameters?: LeaseContainerRequest;
-    },
-    ArmResponse<LeaseContainerResponse>
+    LeaseContainerRequest,
+    ArmResponse<LeaseContainerResponse>,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -133,3 +128,4 @@ interface BlobContainers {
 @@doc(BlobContainers.clearLegalHold::parameters.body,
   "The LegalHold property that will be clear from a blob container."
 );
+@@doc(BlobContainers.lease::parameters.body, "Lease Container request body.");

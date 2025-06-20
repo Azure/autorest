@@ -217,10 +217,7 @@ interface GatewayContracts {
   @operationId("GatewayApi_CreateOrUpdate")
   gatewayApiCreateOrUpdate is ArmResourceActionSync<
     GatewayContract,
-    {
-      @bodyRoot
-      parameters?: AssociationContract;
-    },
+    AssociationContract,
     ArmResponse<GatewayApiData> | ArmResourceCreatedSyncResponse<GatewayApiData>,
     Parameters = {
       /**
@@ -230,7 +227,8 @@ interface GatewayContracts {
       @minLength(1)
       @path
       apiId: string;
-    }
+    },
+    OptionalRequestBody = true
   >;
 
   /**
@@ -266,3 +264,4 @@ interface GatewayContracts {
 @@doc(GatewayContracts.update::parameters.properties, "");
 @@doc(GatewayContracts.regenerateKey::parameters.body, "");
 @@doc(GatewayContracts.generateToken::parameters.body, "");
+@@doc(GatewayContracts.gatewayApiCreateOrUpdate::parameters.body, "");

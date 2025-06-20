@@ -10,7 +10,6 @@ import { Metadata } from "utils/resource-discovery";
 import { addArmCommonTypeModel, setArmCommonTypeVersion, setSession } from "./autorest-session";
 import { emitArmResources } from "./emiters/emit-arm-resources";
 import { emitClient } from "./emiters/emit-client";
-import { emitLegacy } from "./emiters/emit-legacy";
 import { emitMain } from "./emiters/emit-main";
 
 import { emitModels } from "./emiters/emit-models";
@@ -48,22 +47,22 @@ export async function processConverter(host: AutorestExtensionHost) {
   markResources(codeModel);
   const programDetails = getModel(codeModel);
   if (isArm) {
-    await emitArmResources(programDetails, metadata!, getOutuptDirectory(session));
+    await emitArmResources(programDetails, metadata!, getOutputDirectory(session));
   }
   await emitModels(getFilePath(session, "models.tsp"), programDetails);
-  await emitRoutes(programDetails, getOutuptDirectory(session));
-  await emitMain(programDetails, metadata, getOutuptDirectory(session));
+  await emitRoutes(programDetails, getOutputDirectory(session));
+  await emitMain(programDetails, metadata, getOutputDirectory(session));
   await emitPackage(getFilePath(session, "package.json"), programDetails);
   await emitTypespecConfig(getFilePath(session, "tspconfig.yaml"), programDetails);
   await emitClient(getFilePath(session, isFullCompatible ? "back-compatible.tsp" : "client.tsp"), programDetails);
 }
 
-function getOutuptDirectory(session: Session<CodeModel>) {
+function getOutputDirectory(session: Session<CodeModel>) {
   return session.configuration["src-path"] ?? "";
 }
 
 function getFilePath(session: Session<CodeModel>, fileName: string) {
-  return join(getOutuptDirectory(session), fileName);
+  return join(getOutputDirectory(session), fileName);
 }
 
 async function main() {
