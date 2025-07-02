@@ -47,8 +47,6 @@ interface ModelVersionResources {
 /**
 * Get version.
 */
-@operationId("RegistryModelVersions_Get")
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 get is ModelVersionResourceOps.Read<ModelVersionResource
         >;
 
@@ -56,8 +54,6 @@ get is ModelVersionResourceOps.Read<ModelVersionResource
 /**
 * Create or update version.
 */
-@operationId("RegistryModelVersions_CreateOrUpdate")
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 createOrUpdate is ModelVersionResourceOps.CreateOrUpdateAsync<ModelVersionResource
         >;
 
@@ -65,8 +61,6 @@ createOrUpdate is ModelVersionResourceOps.CreateOrUpdateAsync<ModelVersionResour
 /**
 * Delete version.
 */
-@operationId("RegistryModelVersions_Delete")
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
 delete is ModelVersionResourceOps.DeleteWithoutOkAsync<ModelVersionResource, Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
         >;
@@ -75,8 +69,6 @@ delete is ModelVersionResourceOps.DeleteWithoutOkAsync<ModelVersionResource, Res
 /**
 * List versions.
 */
-@operationId("RegistryModelVersions_List")
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 list is ModelVersionResourceOps.List<ModelVersionResource, Parameters = { /**
 * Continuation token for pagination.
 */
@@ -118,8 +110,6 @@ list is ModelVersionResourceOps.List<ModelVersionResource, Parameters = { /**
 /**
 * Model Version Package operation.
 */
-@operationId("RegistryModelVersions_Package")
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 package is ModelVersionResourceOps.ActionAsync<ModelVersionResource, PackageRequest, ArmResponse<PackageResponse>>;
 
 
@@ -127,8 +117,6 @@ package is ModelVersionResourceOps.ActionAsync<ModelVersionResource, PackageRequ
 * Generate a storage location and credential for the client to upload a model asset to.
 */
 @action("startPendingUpload")
-@operationId("RegistryModelVersions_CreateOrGetStartPendingUpload")
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 createOrGetStartPendingUpload is ModelVersionResourceOps.ActionSync<ModelVersionResource, PendingUploadRequestDto, ArmResponse<PendingUploadResponseDto>>;
 
 

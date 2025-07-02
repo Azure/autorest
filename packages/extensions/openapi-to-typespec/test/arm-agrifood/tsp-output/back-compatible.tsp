@@ -19,11 +19,29 @@ using Microsoft.AgFoodPlatform;
 
 @@clientName(DataConnectors.createOrUpdate::parameters.resource, "body");
 
+@@clientLocation(DataManagerForAgricultures.get,
+  "DataManagerForAgricultureResources"
+);
+@@clientLocation(DataManagerForAgricultures.createOrUpdate,
+  "DataManagerForAgricultureResources"
+);
 @@clientName(DataManagerForAgricultures.createOrUpdate::parameters.resource,
   "request"
 );
+@@clientLocation(DataManagerForAgricultures.update,
+  "DataManagerForAgricultureResources"
+);
 @@clientName(DataManagerForAgricultures.update::parameters.properties,
   "request"
+);
+@@clientLocation(DataManagerForAgricultures.delete,
+  "DataManagerForAgricultureResources"
+);
+@@clientLocation(DataManagerForAgricultures.listByResourceGroup,
+  "DataManagerForAgricultureResources"
+);
+@@clientLocation(DataManagerForAgricultures.listBySubscription,
+  "DataManagerForAgricultureResources"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(DataManagerForAgriculture.properties);
@@ -42,3 +60,16 @@ using Microsoft.AgFoodPlatform;
 @@flattenProperty(PrivateLinkResource.properties);
 
 @@clientName(Solutions.createOrUpdate::parameters.resource, "requestBody");
+
+@@clientLocation(DataManagerForAgricultureSolutions.get,
+  "SolutionsDiscoverability"
+);
+@@clientLocation(DataManagerForAgricultureSolutions.list,
+  "SolutionsDiscoverability"
+);
+
+@@clientLocation(CheckNameAvailabilityOperationGroup.checkNameAvailability,
+  "CheckNameAvailability"
+);
+
+@@clientLocation(OperationResultsOperationGroup.get, "OperationResults");

@@ -24,12 +24,22 @@ export function getTSPOperationGroupName(resourceMetadata: ArmResource): string 
   return operationGroupName;
 }
 
+export function getSwaggerOperationGroupName(operationId: string): string {
+  const splittedOperationId = operationId.split("_");
+  return splittedOperationId.length === 2 ? splittedOperationId[0] : "";
+}
+
 function isExistingOperationGroupName(operationGroupName: string): boolean {
   const codeModel = getSession().model;
   return (
     codeModel.schemas.objects?.find((o) => o.language.default.name === operationGroupName) !== undefined ||
     Array.from(operationGroupNameCache.values()).find((v) => v === operationGroupName) !== undefined
   );
+}
+
+export function getSwaggerOperationName(operationId: string): string {
+  const splittedOperationId = operationId.split("_");
+  return splittedOperationId.length === 2 ? splittedOperationId[1] : operationId;
 }
 
 export function getTSPNonResourceOperationGroupName(name: string): string {

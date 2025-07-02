@@ -30,16 +30,12 @@ interface OutboundRuleBasicResources {
   /**
    * Gets an outbound rule from the managed network of a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagedNetworkSettingsRule_Get")
   get is ArmResourceRead<OutboundRuleBasicResource>;
 
   /**
    * Creates or updates an outbound rule in the managed network of a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("ManagedNetworkSettingsRule_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     OutboundRuleBasicResource,
     Response = ArmResourceUpdatedResponse<OutboundRuleBasicResource> | ArmAcceptedLroResponse,
@@ -49,9 +45,7 @@ interface OutboundRuleBasicResources {
   /**
    * Deletes an outbound rule from the managed network of a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("ManagedNetworkSettingsRule_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     OutboundRuleBasicResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -60,8 +54,6 @@ interface OutboundRuleBasicResources {
   /**
    * Lists the managed network outbound rules for a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagedNetworkSettingsRule_List")
   list is ArmResourceListByParent<OutboundRuleBasicResource>;
 }
 

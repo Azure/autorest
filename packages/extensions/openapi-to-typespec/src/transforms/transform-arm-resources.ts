@@ -30,7 +30,11 @@ import { getOperationClientDecorators, getPropertyDecorators } from "../utils/de
 import { generateDocsContent } from "../utils/docs";
 import { getEnvelopeProperty, getEnvelopeAugmentedDecorator } from "../utils/envelope-property";
 import { getLogger } from "../utils/logger";
-import { getTSPOperationGroupName } from "../utils/operation-group";
+import {
+  getSwaggerOperationGroupName,
+  getSwaggerOperationName,
+  getTSPOperationGroupName,
+} from "../utils/operation-group";
 import {
   ArmResource,
   ArmResourceSchema,
@@ -50,6 +54,7 @@ import {
 import { getFullyQualifiedName, getTemplateResponses, NamesOfResponseTemplate } from "../utils/type-mapping";
 import { getTypespecType, isTypespecType, transformObjectProperty } from "./transform-object";
 import { transformParameter } from "./transform-operations";
+import { Case } from "change-case-all";
 
 const logger = () => getLogger("transform-arm-resources");
 
@@ -935,10 +940,11 @@ function buildNewArmOperation(
   kind: TspArmOperationType,
 ): TspArmResourceOperationBase {
   const { baseParameters, parameters } = buildOperationParameters(swaggerOperation, resourceMetadata);
-  return {
+  const interfaceName = getTSPOperationGroupName(resourceMetadata);
+  const armOperation: TspArmResourceOperationBase = {
     doc: operation.Description,
     kind,
-    name: getOperationName(getTSPOperationGroupName(resourceMetadata), operation.OperationID),
+    name: getOperationName(interfaceName, operation.OperationID),
     resource: resourceMetadata.SwaggerModelName,
     baseParameters: baseParameters.length > 0 ? baseParameters : undefined,
     parameters: parameters.length > 0 ? parameters : undefined,
@@ -946,6 +952,29 @@ function buildNewArmOperation(
     examples: swaggerOperation.extensions?.["x-ms-examples"],
     clientDecorators: getOperationClientDecorators(swaggerOperation),
   };
+
+  const swaggerOperationGroupName = getSwaggerOperationGroupName(operation.OperationID);
+  if (swaggerOperationGroupName !== Case.pascal(interfaceName)) {
+    armOperation.clientDecorators!.push({
+      name: "clientLocation",
+      module: "@azure-tools/typespec-client-generator-core",
+      namespace: "Azure.ClientGenerator.Core",
+      arguments: [swaggerOperationGroupName],
+    });
+  }
+
+  const swaggerOperationName = getSwaggerOperationName(operation.OperationID);
+  const test = Case.pascal("moveSAS");
+  if (swaggerOperationName !== Case.pascal(armOperation.name)) {
+    armOperation.clientDecorators!.push({
+      name: "clientName",
+      module: "@azure-tools/typespec-client-generator-core",
+      namespace: "Azure.ClientGenerator.Core",
+      arguments: [swaggerOperationName],
+    });
+  }
+
+  return armOperation;
 }
 
 function buildSuppressionsForArmOperation(

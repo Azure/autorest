@@ -30,22 +30,16 @@ interface LoggerContracts {
   /**
    * Gets the details of the logger specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Logger_Get")
   get is ArmResourceRead<LoggerContract>;
 
   /**
    * Gets the entity state (Etag) version of the logger specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Logger_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<LoggerContract>;
 
   /**
    * Creates or Updates a logger.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Logger_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     LoggerContract,
     Parameters = {
@@ -60,9 +54,7 @@ interface LoggerContracts {
   /**
    * Updates an existing logger.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
-  @operationId("Logger_Update")
   update is ArmCustomPatchSync<
     LoggerContract,
     PatchModel = LoggerUpdateContract,
@@ -78,8 +70,6 @@ interface LoggerContracts {
   /**
    * Deletes the specified logger.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Logger_Delete")
   delete is ArmResourceDeleteSync<
     LoggerContract,
     Parameters = {
@@ -94,8 +84,6 @@ interface LoggerContracts {
   /**
    * Lists a collection of loggers in the specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Logger_ListByService")
   listByService is ArmResourceListByParent<
     LoggerContract,
     Parameters = {

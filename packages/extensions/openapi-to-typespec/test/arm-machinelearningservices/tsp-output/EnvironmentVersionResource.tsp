@@ -59,23 +59,17 @@ interface EnvironmentVersionResources {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RegistryEnvironmentVersions_Get")
   get is EnvironmentVersionResourceOps.Read<EnvironmentVersionResource>;
 
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RegistryEnvironmentVersions_CreateOrUpdate")
   createOrUpdate is EnvironmentVersionResourceOps.CreateOrUpdateAsync<EnvironmentVersionResource>;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("RegistryEnvironmentVersions_Delete")
   delete is EnvironmentVersionResourceOps.DeleteWithoutOkAsync<
     EnvironmentVersionResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -84,8 +78,6 @@ interface EnvironmentVersionResources {
   /**
    * List versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RegistryEnvironmentVersions_List")
   list is EnvironmentVersionResourceOps.List<
     EnvironmentVersionResource,
     Parameters = {

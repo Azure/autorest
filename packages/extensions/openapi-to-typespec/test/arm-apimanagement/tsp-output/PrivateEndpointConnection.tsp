@@ -30,16 +30,12 @@ interface PrivateEndpointConnections {
   /**
    * Gets the details of the Private Endpoint Connection specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateEndpointConnection_GetByName")
   getByName is ArmResourceRead<PrivateEndpointConnection>;
 
   /**
    * Creates a new Private Endpoint Connection or updates an existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("PrivateEndpointConnection_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
     Response = ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection> | ArmAcceptedLroResponse,
@@ -49,9 +45,7 @@ interface PrivateEndpointConnections {
   /**
    * Deletes the specified Private Endpoint Connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("PrivateEndpointConnection_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -60,8 +54,6 @@ interface PrivateEndpointConnections {
   /**
    * Lists all private endpoint connections of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateEndpointConnection_ListByService")
   listByService is ArmResourceListByParent<
     PrivateEndpointConnection,
     Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionListResultV5>

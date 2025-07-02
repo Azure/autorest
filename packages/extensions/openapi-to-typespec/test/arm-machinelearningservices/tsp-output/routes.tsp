@@ -4,12 +4,10 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 
@@ -18,8 +16,6 @@ interface UsagesOperationGroup {
   /**
    * Gets the current usage information as well as limits for AML resources for given subscription and location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Usages_List")
   @autoRoute
   @get
   @action("usages")
@@ -35,8 +31,6 @@ interface VirtualMachineSizesOperationGroup {
   /**
    * Returns supported VM Sizes in a location
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineSizes_List")
   @autoRoute
   @get
   @action("vmSizes")
@@ -52,8 +46,6 @@ interface QuotasOperationGroup {
   /**
    * Update quota for each VM family in workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Quotas_Update")
   @autoRoute
   @action("updateQuotas")
   update is ArmProviderActionSync<
@@ -65,8 +57,6 @@ interface QuotasOperationGroup {
   /**
    * Gets the currently assigned Workspace Quotas based on VMFamily.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Quotas_List")
   @autoRoute
   @get
   @action("quotas")

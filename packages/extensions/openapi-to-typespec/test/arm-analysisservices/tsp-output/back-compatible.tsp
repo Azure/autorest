@@ -10,3 +10,6 @@ using Azure.ResourceManager.Analysis;
 @@clientName(Servers.update::parameters.properties, "serverUpdateParameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(AnalysisServicesServer.properties);
+
+@@clientLocation(ServersOperationGroup.listSkusForNew, "Servers");
+@@clientLocation(ServersOperationGroup.checkNameAvailability, "Servers");

@@ -3261,7 +3261,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listAccountSas": {
       "post": {
-        "operationId": "StorageAccounts_ListAccountSAS",
+        "operationId": "StorageAccounts_ListAccountSas",
         "tags": [
           "StorageAccounts"
         ],
@@ -3307,11 +3307,6 @@
             "schema": {
               "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "StorageAccountListAccountSAS": {
-            "$ref": "./examples/StorageAccountListAccountSAS.json"
           }
         }
       }
@@ -3379,7 +3374,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listServiceSas": {
       "post": {
-        "operationId": "StorageAccounts_ListServiceSAS",
+        "operationId": "StorageAccounts_ListServiceSas",
         "tags": [
           "StorageAccounts"
         ],
@@ -3425,11 +3420,6 @@
             "schema": {
               "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "StorageAccountListServiceSAS": {
-            "$ref": "./examples/StorageAccountListServiceSAS.json"
           }
         }
       }

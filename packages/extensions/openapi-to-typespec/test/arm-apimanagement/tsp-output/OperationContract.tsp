@@ -30,22 +30,16 @@ interface OperationContracts {
   /**
    * Gets the details of the API Operation specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiOperation_Get")
   get is ArmResourceRead<OperationContract>;
 
   /**
    * Gets the entity state (Etag) version of the API operation specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiOperation_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<OperationContract>;
 
   /**
    * Creates a new operation in the API or updates an existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiOperation_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     OperationContract,
     Parameters = {
@@ -60,9 +54,7 @@ interface OperationContracts {
   /**
    * Updates the details of the operation in the API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
-  @operationId("ApiOperation_Update")
   update is ArmCustomPatchSync<
     OperationContract,
     PatchModel = OperationUpdateContract,
@@ -78,8 +70,6 @@ interface OperationContracts {
   /**
    * Deletes the specified operation in the API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiOperation_Delete")
   delete is ArmResourceDeleteSync<
     OperationContract,
     Parameters = {
@@ -94,8 +84,6 @@ interface OperationContracts {
   /**
    * Lists a collection of the operations for the specified API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiOperation_ListByApi")
   listByApi is ArmResourceListByParent<
     OperationContract,
     Parameters = {

@@ -53,23 +53,17 @@ interface DataContainerResources {
   /**
    * Get container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RegistryDataContainers_Get")
   get is DataContainerResourceOps.Read<DataContainerResource>;
 
   /**
    * Create or update container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RegistryDataContainers_CreateOrUpdate")
   createOrUpdate is DataContainerResourceOps.CreateOrUpdateAsync<DataContainerResource>;
 
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("RegistryDataContainers_Delete")
   delete is DataContainerResourceOps.DeleteWithoutOkAsync<
     DataContainerResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -78,8 +72,6 @@ interface DataContainerResources {
   /**
    * List Data containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RegistryDataContainers_List")
   list is DataContainerResourceOps.List<
     DataContainerResource,
     Parameters = {

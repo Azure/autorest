@@ -135,10 +135,8 @@ interface CloudServices {
   /**
    * Updates the role instances in the specified update domain.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @put
   @action("{updateDomain}")
-  @operationId("CloudServicesUpdateDomain_WalkUpdateDomain")
   walkUpdateDomain is ArmResourceActionAsync<
     CloudService,
     UpdateDomain,
@@ -156,10 +154,8 @@ interface CloudServices {
   /**
    * Gets the specified update domain of a cloud service. Use nextLink property in the response to get the next page of update domains. Do this till nextLink is null to fetch all the update domains.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("{updateDomain}")
-  @operationId("CloudServicesUpdateDomain_GetUpdateDomain")
   getUpdateDomain is ArmResourceActionSync<
     CloudService,
     void,
@@ -176,10 +172,8 @@ interface CloudServices {
   /**
    * Gets a list of all update domains in a cloud service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("updateDomains")
-  @operationId("CloudServicesUpdateDomain_ListUpdateDomains")
   listUpdateDomains is ArmResourceActionSync<
     CloudService,
     void,

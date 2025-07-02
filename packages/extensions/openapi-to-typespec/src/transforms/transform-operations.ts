@@ -25,11 +25,15 @@ import {
 } from "../interfaces";
 import { transformDataType } from "../model";
 import { getOptions } from "../options";
-import { createOperationIdDecorator, getOperationClientDecorators, getPropertyDecorators } from "../utils/decorators";
+import { getOperationClientDecorators, getPropertyDecorators } from "../utils/decorators";
 import { getLogger } from "../utils/logger";
 import { getLanguageMetadata } from "../utils/metadata";
 import { generateAdditionalProperties, generateTemplateModel } from "../utils/model-generation";
-import { getTSPNonResourceOperationGroupName } from "../utils/operation-group";
+import {
+  getSwaggerOperationGroupName,
+  getSwaggerOperationName,
+  getTSPNonResourceOperationGroupName,
+} from "../utils/operation-group";
 import { transformSchemaResponse } from "../utils/response";
 import { isConstantSchema, isResponseSchema } from "../utils/schemas";
 import { getSuppressionWithCode, SuppressionCode } from "../utils/suppressions";
@@ -138,18 +142,27 @@ export function transformRequest(
   }
 
   const resource = operation.language.default.resource;
-  let decorators: TypespecDecorator[] | undefined = undefined;
-  if (
-    groupName &&
-    operation.operationId &&
-    operation.operationId !== `${Case.pascal(groupName)}_${Case.pascal(name)}`
-  ) {
-    const decorator = createOperationIdDecorator(operation.operationId!);
-    if (isFullCompatible) {
-      decorator.suppressionCode = "@azure-tools/typespec-azure-core/no-openapi";
-      decorator.suppressionMessage = "non-standard operations";
-    }
-    decorators = [decorator];
+  const decorators: TypespecDecorator[] = [];
+  const clientDecorators: TypespecDecorator[] = [];
+
+  const swaggerOperationGroupName = getSwaggerOperationGroupName(operation.operationId ?? "");
+  if (swaggerOperationGroupName !== Case.pascal(groupName ?? "")) {
+    clientDecorators.push({
+      name: "clientLocation",
+      module: "@azure-tools/typespec-client-generator-core",
+      namespace: "Azure.ClientGenerator.Core",
+      arguments: [swaggerOperationGroupName],
+    });
+  }
+
+  const swaggerOperationName = getSwaggerOperationName(operation.operationId ?? "");
+  if (swaggerOperationName !== Case.pascal(name)) {
+    clientDecorators.push({
+      name: "clientName",
+      module: "@azure-tools/typespec-client-generator-core",
+      namespace: "Azure.ClientGenerator.Core",
+      arguments: [swaggerOperationName],
+    });
   }
 
   if (isArm) {
@@ -158,7 +171,6 @@ export function transformRequest(
       const action = getActionForPrviderTemplate(route);
       if (action !== undefined) {
         const isLongRunning = operation.extensions?.["x-ms-long-running-operation"] ?? false;
-        decorators ??= [];
         decorators.push({
           name: "autoRoute",
           module: "@typespec/rest",
@@ -204,6 +216,7 @@ export function transformRequest(
           suppressions,
           examples: operation.extensions?.["x-ms-examples"],
           operationId: operation.operationId,
+          clientDecorators,
         };
       }
     }
@@ -214,7 +227,7 @@ export function transformRequest(
     doc,
     summary,
     parameters,
-    clientDecorators: getOperationClientDecorators(operation),
+    clientDecorators: clientDecorators.concat(getOperationClientDecorators(operation)),
     verb: transformVerb(requests?.[0].protocol),
     route: transformRoute(requests?.[0].protocol),
     responses: transformedResponses,

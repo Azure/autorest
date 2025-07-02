@@ -30,22 +30,16 @@ interface AuthorizationServerContracts {
   /**
    * Gets the details of the authorization server specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AuthorizationServer_Get")
   get is ArmResourceRead<AuthorizationServerContract>;
 
   /**
    * Gets the entity state (Etag) version of the authorizationServer specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AuthorizationServer_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<AuthorizationServerContract>;
 
   /**
    * Creates new authorization server or updates an existing authorization server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AuthorizationServer_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     AuthorizationServerContract,
     Parameters = {
@@ -60,9 +54,7 @@ interface AuthorizationServerContracts {
   /**
    * Updates the details of the authorization server specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
-  @operationId("AuthorizationServer_Update")
   update is ArmCustomPatchSync<
     AuthorizationServerContract,
     PatchModel = AuthorizationServerUpdateContract,
@@ -78,8 +70,6 @@ interface AuthorizationServerContracts {
   /**
    * Deletes specific authorization server instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AuthorizationServer_Delete")
   delete is ArmResourceDeleteSync<
     AuthorizationServerContract,
     Parameters = {
@@ -94,8 +84,6 @@ interface AuthorizationServerContracts {
   /**
    * Lists a collection of authorization servers defined within a service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AuthorizationServer_ListByService")
   listByService is ArmResourceListByParent<
     AuthorizationServerContract,
     Parameters = {
@@ -123,8 +111,6 @@ interface AuthorizationServerContracts {
   /**
    * Gets the client secret details of the authorization server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AuthorizationServer_ListSecrets")
   listSecrets is ArmResourceActionSync<
     AuthorizationServerContract,
     void,

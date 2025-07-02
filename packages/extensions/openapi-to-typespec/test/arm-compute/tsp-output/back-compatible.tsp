@@ -156,6 +156,9 @@ using Microsoft.Compute;
 @@clientName(VirtualMachineScaleSets.deleteInstances::parameters.body,
   "vmInstanceIDs"
 );
+@@clientName(VirtualMachineScaleSets.getOSUpgradeHistory,
+  "GetOSUpgradeHistory"
+);
 @@clientName(VirtualMachineScaleSets.powerOff::parameters.body,
   "vmInstanceIDs"
 );
@@ -182,6 +185,16 @@ using Microsoft.Compute;
 @@clientName(VirtualMachineScaleSets.setOrchestrationServiceState::parameters.body,
   "parameters"
 );
+@@clientLocation(VirtualMachineScaleSets.cancel,
+  "VirtualMachineScaleSetRollingUpgrades"
+);
+@@clientLocation(VirtualMachineScaleSets.startOSUpgrade,
+  "VirtualMachineScaleSetRollingUpgrades"
+);
+@@clientName(VirtualMachineScaleSets.startOSUpgrade, "StartOSUpgrade");
+@@clientLocation(VirtualMachineScaleSets.startExtensionUpgrade,
+  "VirtualMachineScaleSetRollingUpgrades"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VirtualMachineScaleSet.properties);
 
@@ -203,23 +216,79 @@ using Microsoft.Compute;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VirtualMachineExtension.properties);
 
+@@clientLocation(RollingUpgradeStatusInfos.getLatest,
+  "VirtualMachineScaleSetRollingUpgrades"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RollingUpgradeStatusInfo.properties);
 
+@@clientLocation(VirtualMachineScaleSetVMExtensions.get,
+  "VirtualMachineScaleSetVMExtensions"
+);
+@@clientLocation(VirtualMachineScaleSetVMExtensions.createOrUpdate,
+  "VirtualMachineScaleSetVMExtensions"
+);
 @@clientName(VirtualMachineScaleSetVMExtensions.createOrUpdate::parameters.resource,
   "extensionParameters"
+);
+@@clientLocation(VirtualMachineScaleSetVMExtensions.update,
+  "VirtualMachineScaleSetVMExtensions"
 );
 @@clientName(VirtualMachineScaleSetVMExtensions.update::parameters.properties,
   "extensionParameters"
 );
+@@clientLocation(VirtualMachineScaleSetVMExtensions.delete,
+  "VirtualMachineScaleSetVMExtensions"
+);
+@@clientLocation(VirtualMachineScaleSetVMExtensions.list,
+  "VirtualMachineScaleSetVMExtensions"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VirtualMachineScaleSetVMExtension.properties);
 
+@@clientLocation(VirtualMachineScaleSetVMS.get, "VirtualMachineScaleSetVMs");
+@@clientLocation(VirtualMachineScaleSetVMS.update, "VirtualMachineScaleSetVMs");
 @@clientName(VirtualMachineScaleSetVMS.update::parameters.resource,
   "parameters"
 );
+@@clientLocation(VirtualMachineScaleSetVMS.delete, "VirtualMachineScaleSetVMs");
+@@clientLocation(VirtualMachineScaleSetVMS.list, "VirtualMachineScaleSetVMs");
+@@clientLocation(VirtualMachineScaleSetVMS.reimage,
+  "VirtualMachineScaleSetVMs"
+);
 @@clientName(VirtualMachineScaleSetVMS.reimage::parameters.body,
   "vmScaleSetVMReimageInput"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.reimageAll,
+  "VirtualMachineScaleSetVMs"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.deallocate,
+  "VirtualMachineScaleSetVMs"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.getInstanceView,
+  "VirtualMachineScaleSetVMs"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.powerOff,
+  "VirtualMachineScaleSetVMs"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.restart,
+  "VirtualMachineScaleSetVMs"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.start, "VirtualMachineScaleSetVMs");
+@@clientLocation(VirtualMachineScaleSetVMS.redeploy,
+  "VirtualMachineScaleSetVMs"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.retrieveBootDiagnosticsData,
+  "VirtualMachineScaleSetVMs"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.performMaintenance,
+  "VirtualMachineScaleSetVMs"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.simulateEviction,
+  "VirtualMachineScaleSetVMs"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.runCommand,
+  "VirtualMachineScaleSetVMs"
 );
 @@clientName(VirtualMachineScaleSetVMS.runCommand::parameters.body,
   "parameters"
@@ -269,8 +338,15 @@ using Microsoft.Compute;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(DedicatedHost.properties);
 
+@@clientLocation(SshPublicKeyResources.get, "SshPublicKeys");
+@@clientLocation(SshPublicKeyResources.create, "SshPublicKeys");
 @@clientName(SshPublicKeyResources.create::parameters.resource, "parameters");
+@@clientLocation(SshPublicKeyResources.update, "SshPublicKeys");
 @@clientName(SshPublicKeyResources.update::parameters.properties, "parameters");
+@@clientLocation(SshPublicKeyResources.delete, "SshPublicKeys");
+@@clientLocation(SshPublicKeyResources.listByResourceGroup, "SshPublicKeys");
+@@clientLocation(SshPublicKeyResources.listBySubscription, "SshPublicKeys");
+@@clientLocation(SshPublicKeyResources.generateKeyPair, "SshPublicKeys");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(SshPublicKeyResource.properties);
 
@@ -314,11 +390,26 @@ using Microsoft.Compute;
 @@clientName(VirtualMachineRunCommands.update::parameters.properties,
   "runCommand"
 );
+@@clientLocation(VirtualMachineScaleSetVMRunCommands.get,
+  "VirtualMachineScaleSetVMRunCommands"
+);
+@@clientLocation(VirtualMachineScaleSetVMRunCommands.createOrUpdate,
+  "VirtualMachineScaleSetVMRunCommands"
+);
 @@clientName(VirtualMachineScaleSetVMRunCommands.createOrUpdate::parameters.resource,
   "runCommand"
 );
+@@clientLocation(VirtualMachineScaleSetVMRunCommands.update,
+  "VirtualMachineScaleSetVMRunCommands"
+);
 @@clientName(VirtualMachineScaleSetVMRunCommands.update::parameters.properties,
   "runCommand"
+);
+@@clientLocation(VirtualMachineScaleSetVMRunCommands.delete,
+  "VirtualMachineScaleSetVMRunCommands"
+);
+@@clientLocation(VirtualMachineScaleSetVMRunCommands.list,
+  "VirtualMachineScaleSetVMRunCommands"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VirtualMachineRunCommand.properties);
@@ -334,8 +425,20 @@ using Microsoft.Compute;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(DiskAccess.properties);
 
+@@clientLocation(PrivateEndpointConnections.getAPrivateEndpointConnection,
+  "DiskAccesses"
+);
+@@clientLocation(PrivateEndpointConnections.updateAPrivateEndpointConnection,
+  "DiskAccesses"
+);
 @@clientName(PrivateEndpointConnections.updateAPrivateEndpointConnection::parameters.resource,
   "privateEndpointConnection"
+);
+@@clientLocation(PrivateEndpointConnections.deleteAPrivateEndpointConnection,
+  "DiskAccesses"
+);
+@@clientLocation(PrivateEndpointConnections.listPrivateEndpointConnections,
+  "DiskAccesses"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PrivateEndpointConnection.properties);
@@ -349,7 +452,11 @@ using Microsoft.Compute;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(DiskEncryptionSet.properties);
 
+@@clientLocation(DiskRestorePoints.get, "DiskRestorePoint");
+@@clientLocation(DiskRestorePoints.listByRestorePoint, "DiskRestorePoint");
+@@clientLocation(DiskRestorePoints.grantAccess, "DiskRestorePoint");
 @@clientName(DiskRestorePoints.grantAccess::parameters.body, "grantAccessData");
+@@clientLocation(DiskRestorePoints.revokeAccess, "DiskRestorePoint");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(DiskRestorePoint.properties);
 
@@ -361,6 +468,10 @@ using Microsoft.Compute;
 
 @@clientName(Galleries.createOrUpdate::parameters.resource, "gallery");
 @@clientName(Galleries.update::parameters.properties, "gallery");
+@@clientLocation(Galleries.gallerySharingProfileUpdate,
+  "GallerySharingProfile"
+);
+@@clientName(Galleries.gallerySharingProfileUpdate, "Update");
 @@clientName(Galleries.gallerySharingProfileUpdate::parameters.body,
   "sharingUpdate"
 );
@@ -423,12 +534,86 @@ using Microsoft.Compute;
 @@clientName(CloudServices.reimage::parameters.body, "parameters");
 @@clientName(CloudServices.rebuild::parameters.body, "parameters");
 @@clientName(CloudServices.deleteInstances::parameters.body, "parameters");
+@@clientLocation(CloudServices.walkUpdateDomain, "CloudServicesUpdateDomain");
 @@clientName(CloudServices.walkUpdateDomain::parameters.body, "parameters");
+@@clientLocation(CloudServices.getUpdateDomain, "CloudServicesUpdateDomain");
+@@clientLocation(CloudServices.listUpdateDomains, "CloudServicesUpdateDomain");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(CloudService.properties);
 
+@@clientLocation(OSVersions.getOSVersion, "CloudServiceOperatingSystems");
+@@clientName(OSVersions.getOSVersion, "GetOSVersion");
+@@clientLocation(OSVersions.listOSVersions, "CloudServiceOperatingSystems");
+@@clientName(OSVersions.listOSVersions, "ListOSVersions");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(OSVersion.properties);
 
+@@clientLocation(OSFamilies.getOSFamily, "CloudServiceOperatingSystems");
+@@clientName(OSFamilies.getOSFamily, "GetOSFamily");
+@@clientLocation(OSFamilies.listOSFamilies, "CloudServiceOperatingSystems");
+@@clientName(OSFamilies.listOSFamilies, "ListOSFamilies");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(OSFamily.properties);
+
+@@clientLocation(UsageOperationGroup.list, "Usage");
+
+@@clientLocation(VirtualMachineSizesOperationGroup.list, "VirtualMachineSizes");
+
+@@clientLocation(VirtualMachineScaleSetsOperationGroup.listByLocation,
+  "VirtualMachineScaleSets"
+);
+
+@@clientLocation(VirtualMachinesOperationGroup.listByLocation,
+  "VirtualMachines"
+);
+
+@@clientLocation(VirtualMachineImagesOperationGroup.get,
+  "VirtualMachineImages"
+);
+@@clientLocation(VirtualMachineImagesOperationGroup.list,
+  "VirtualMachineImages"
+);
+@@clientLocation(VirtualMachineImagesOperationGroup.listOffers,
+  "VirtualMachineImages"
+);
+@@clientLocation(VirtualMachineImagesOperationGroup.listPublishers,
+  "VirtualMachineImages"
+);
+@@clientLocation(VirtualMachineImagesOperationGroup.listSkus,
+  "VirtualMachineImages"
+);
+@@clientLocation(VirtualMachineImagesOperationGroup.listByEdgeZone,
+  "VirtualMachineImages"
+);
+
+@@clientLocation(VirtualMachineImagesEdgeZoneOperationGroup.get,
+  "VirtualMachineImagesEdgeZone"
+);
+@@clientLocation(VirtualMachineImagesEdgeZoneOperationGroup.list,
+  "VirtualMachineImagesEdgeZone"
+);
+@@clientLocation(VirtualMachineImagesEdgeZoneOperationGroup.listOffers,
+  "VirtualMachineImagesEdgeZone"
+);
+@@clientLocation(VirtualMachineImagesEdgeZoneOperationGroup.listPublishers,
+  "VirtualMachineImagesEdgeZone"
+);
+@@clientLocation(VirtualMachineImagesEdgeZoneOperationGroup.listSkus,
+  "VirtualMachineImagesEdgeZone"
+);
+
+@@clientLocation(LogAnalyticsOperationGroup.exportRequestRateByInterval,
+  "LogAnalytics"
+);
+@@clientLocation(LogAnalyticsOperationGroup.exportThrottledRequests,
+  "LogAnalytics"
+);
+
+@@clientLocation(VirtualMachineRunCommandsOperationGroup.list,
+  "VirtualMachineRunCommands"
+);
+@@clientLocation(VirtualMachineRunCommandsOperationGroup.get,
+  "VirtualMachineRunCommands"
+);
+
+@@clientLocation(ResourceSkusOperationGroup.list, "ResourceSkus");

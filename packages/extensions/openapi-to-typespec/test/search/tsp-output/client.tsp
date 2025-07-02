@@ -59,3 +59,13 @@ using Azure.Search;
 
 @@clientName(AutocompleteRequest.search, "searchText");
 @@clientName(AutocompleteRequest.fuzzy, "useFuzzyMatching");
+
+@@clientLocation(DocumentsOperationGroup.count, "Documents");
+@@clientLocation(DocumentsOperationGroup.searchGet, "Documents");
+@@clientLocation(DocumentsOperationGroup.searchPost, "Documents");
+@@clientLocation(DocumentsOperationGroup.get, "Documents");
+@@clientLocation(DocumentsOperationGroup.suggestGet, "Documents");
+@@clientLocation(DocumentsOperationGroup.suggestPost, "Documents");
+@@clientLocation(DocumentsOperationGroup.index, "Documents");
+@@clientLocation(DocumentsOperationGroup.autocompleteGet, "Documents");
+@@clientLocation(DocumentsOperationGroup.autocompletePost, "Documents");

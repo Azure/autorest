@@ -59,23 +59,17 @@ interface DataVersionBaseResources {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RegistryDataVersions_Get")
   get is DataVersionBaseResourceOps.Read<DataVersionBaseResource>;
 
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RegistryDataVersions_CreateOrUpdate")
   createOrUpdate is DataVersionBaseResourceOps.CreateOrUpdateAsync<DataVersionBaseResource>;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("RegistryDataVersions_Delete")
   delete is DataVersionBaseResourceOps.DeleteWithoutOkAsync<
     DataVersionBaseResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -84,8 +78,6 @@ interface DataVersionBaseResources {
   /**
    * List data versions in the data container
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RegistryDataVersions_List")
   list is DataVersionBaseResourceOps.List<
     DataVersionBaseResource,
     Parameters = {
@@ -126,9 +118,7 @@ interface DataVersionBaseResources {
   /**
    * Generate a storage location and credential for the client to upload a data asset to.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("startPendingUpload")
-  @operationId("RegistryDataVersions_CreateOrGetStartPendingUpload")
   createOrGetStartPendingUpload is DataVersionBaseResourceOps.ActionSync<
     DataVersionBaseResource,
     PendingUploadRequestDto,

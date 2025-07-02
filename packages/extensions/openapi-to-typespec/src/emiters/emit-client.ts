@@ -3,6 +3,7 @@ import {
   generateArmResourceClientDecorator,
   generateEnumClientDecorator,
   generateObjectClientDecorator,
+  generateOperationGroupClientDecorator,
 } from "../generate/generate-client";
 import { TypespecProgram } from "../interfaces";
 import { getOptions } from "../options";
@@ -41,13 +42,18 @@ function generateClient(program: TypespecProgram) {
         .join("\n\n")
     : "";
 
+  const operationGroups = program.operationGroups
+    .map(generateOperationGroupClientDecorator)
+    .filter((r) => r !== "")
+    .join("\n\n");
+
   const enums = models.enums
     .map(generateEnumClientDecorator)
     .filter((r) => r !== "")
     .join("\n\n");
 
-  if (objects === "" && armResources === "" && enums === "") {
+  if (objects === "" && armResources === "" && enums === "" && operationGroups === "") {
     return "";
   }
-  return [imports, "\n", namespaces, "\n", objects, "\n", armResources, "\n", enums].join("\n");
+  return [imports, "\n", namespaces, "\n", objects, "\n", armResources, "\n", operationGroups, "\n", enums].join("\n");
 }

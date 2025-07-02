@@ -1,5 +1,5 @@
 import pluralize from "pluralize";
-import { TspArmResource, TypespecObject, TypespecEnum, TypespecOperation } from "../interfaces";
+import { TspArmResource, TypespecObject, TypespecEnum, TypespecOperation, TypespecOperationGroup } from "../interfaces";
 import { generateAugmentedDecorators } from "../utils/decorators";
 
 export function generateObjectClientDecorator(typespecObject: TypespecObject) {
@@ -39,23 +39,40 @@ export function generateOperationClientDecorator(operation: TypespecOperation) {
   return definitions.join("\n");
 }
 
-export function generateArmResourceClientDecorator(resource: TspArmResource): string {
+export function generateOperationGroupClientDecorator(operationGroup: TypespecOperationGroup) {
   const definitions: string[] = [];
 
-  const formalOperationGroupName = pluralize(resource.name);
-  const targetName = formalOperationGroupName;
+  definitions.push(generateAugmentedDecorators(operationGroup.name, operationGroup.clientDecorators));
+
+  for (const operation of operationGroup.operations) {
+    const decorators = generateAugmentedDecorators(
+      `${operationGroup.name}.${operation.name}`,
+      operation.clientDecorators,
+    );
+    decorators && definitions.push(decorators);
+  }
+
+  return definitions.join("\n");
+}
+
+export function generateArmResourceClientDecorator(resource: TspArmResource): string {
+  const definitions: string[] = [];
 
   if (resource.clientDecorators && resource.clientDecorators.length > 0)
     definitions.push(generateAugmentedDecorators(resource.name, resource.clientDecorators));
 
-  for (const op of resource.resourceOperationGroups.flatMap((g) => g.resourceOperations)) {
-    if (op.clientDecorators && op.clientDecorators.length > 0)
-      definitions.push(generateAugmentedDecorators(`${targetName}.${op.name}`, op.clientDecorators));
+  for (const group of resource.resourceOperationGroups) {
+    const interfaceName = group.interfaceName;
+    for (const op of group.resourceOperations) {
+      if (op.clientDecorators && op.clientDecorators.length > 0) {
+        definitions.push(generateAugmentedDecorators(`${interfaceName}.${op.name}`, op.clientDecorators));
+      }
+    }
   }
 
   for (const property of resource.properties) {
     if (property.kind !== "property") continue;
-    const decorators = generateAugmentedDecorators(`${targetName}.${property.name}`, property.clientDecorators);
+    const decorators = generateAugmentedDecorators(`${resource.name}.${property.name}`, property.clientDecorators);
     decorators && definitions.push(decorators);
   }
 

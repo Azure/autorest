@@ -34,24 +34,18 @@ interface DataManagerForAgricultures {
   /**
    * Get DataManagerForAgriculture resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DataManagerForAgricultureResources_Get")
   get is ArmResourceRead<DataManagerForAgriculture>;
 
   /**
    * Create or update Data Manager For Agriculture resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DataManagerForAgricultureResources_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<DataManagerForAgriculture>;
 
   /**
    * Update a Data Manager For Agriculture resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
-  @operationId("DataManagerForAgricultureResources_Update")
   update is ArmCustomPatchAsync<
     DataManagerForAgriculture,
     PatchModel = DataManagerForAgricultureUpdateRequestModel,
@@ -64,15 +58,11 @@ interface DataManagerForAgricultures {
   /**
    * Delete a Data Manager For Agriculture resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DataManagerForAgricultureResources_Delete")
   delete is ArmResourceDeleteSync<DataManagerForAgriculture>;
 
   /**
    * Lists the DataManagerForAgriculture instances for a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DataManagerForAgricultureResources_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     DataManagerForAgriculture,
     Parameters = {
@@ -97,8 +87,6 @@ interface DataManagerForAgricultures {
   /**
    * Lists the DataManagerForAgriculture instances for a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DataManagerForAgricultureResources_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     DataManagerForAgriculture,
     Parameters = {

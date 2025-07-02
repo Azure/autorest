@@ -30,22 +30,16 @@ interface ProductContracts {
   /**
    * Gets the details of the product specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Product_Get")
   get is ArmResourceRead<ProductContract>;
 
   /**
    * Gets the entity state (Etag) version of the product specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Product_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<ProductContract>;
 
   /**
    * Creates or Updates a product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Product_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ProductContract,
     Parameters = {
@@ -60,9 +54,7 @@ interface ProductContracts {
   /**
    * Update existing product details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
-  @operationId("Product_Update")
   update is ArmCustomPatchSync<
     ProductContract,
     PatchModel = ProductUpdateParameters,
@@ -78,8 +70,6 @@ interface ProductContracts {
   /**
    * Delete product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Product_Delete")
   delete is ArmResourceDeleteSync<
     ProductContract,
     Parameters = {
@@ -100,8 +90,6 @@ interface ProductContracts {
   /**
    * Lists a collection of products in the specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Product_ListByService")
   listByService is ArmResourceListByParent<
     ProductContract,
     Parameters = {
@@ -141,10 +129,8 @@ interface ProductContracts {
   /**
    * Lists a collection of the APIs associated with a product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("apis")
-  @operationId("ProductApi_ListByProduct")
   listByProduct is ArmResourceActionSync<
     ProductContract,
     void,
@@ -174,10 +160,8 @@ interface ProductContracts {
   /**
    * Checks that API entity specified by identifier is associated with the Product entity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
   @action("{apiId}")
-  @operationId("ProductApi_CheckEntityExists")
   checkEntityExists is ArmResourceActionSync<
     ProductContract,
     void,
@@ -197,10 +181,8 @@ interface ProductContracts {
   /**
    * Adds an API to the specified product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @put
   @action("{apiId}")
-  @operationId("ProductApi_CreateOrUpdate")
   productApiCreateOrUpdate is ArmResourceActionSync<
     ProductContract,
     void,
@@ -220,10 +202,8 @@ interface ProductContracts {
   /**
    * Deletes the specified API from the specified product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @delete
   @action("{apiId}")
-  @operationId("ProductApi_Delete")
   productApiDelete is ArmResourceActionSync<
     ProductContract,
     void,
@@ -243,10 +223,8 @@ interface ProductContracts {
   /**
    * Lists the collection of developer groups associated with the specified product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("groups")
-  @operationId("ProductGroup_ListByProduct")
   productGroupListByProduct is ArmResourceActionSync<
     ProductContract,
     void,
@@ -276,10 +254,8 @@ interface ProductContracts {
   /**
    * Checks that Group entity specified by identifier is associated with the Product entity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
   @action("{groupId}")
-  @operationId("ProductGroup_CheckEntityExists")
   productGroupCheckEntityExists is ArmResourceActionSync<
     ProductContract,
     void,
@@ -298,10 +274,8 @@ interface ProductContracts {
   /**
    * Adds the association between the specified developer group with the specified product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @put
   @action("{groupId}")
-  @operationId("ProductGroup_CreateOrUpdate")
   productGroupCreateOrUpdate is ArmResourceActionSync<
     ProductContract,
     void,
@@ -320,10 +294,8 @@ interface ProductContracts {
   /**
    * Deletes the association between the specified group and product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @delete
   @action("{groupId}")
-  @operationId("ProductGroup_Delete")
   productGroupDelete is ArmResourceActionSync<
     ProductContract,
     void,
@@ -342,10 +314,8 @@ interface ProductContracts {
   /**
    * Lists the collection of subscriptions to the specified product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("subscriptions")
-  @operationId("ProductSubscriptions_List")
   list is ArmResourceActionSync<
     ProductContract,
     void,

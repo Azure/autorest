@@ -30,23 +30,17 @@ interface GlobalSchemaContracts {
   /**
    * Gets the details of the Schema specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GlobalSchema_Get")
   get is ArmResourceRead<GlobalSchemaContract>;
 
   /**
    * Gets the entity state (Etag) version of the Schema specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GlobalSchema_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<GlobalSchemaContract>;
 
   /**
    * Creates new or updates existing specified Schema of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("GlobalSchema_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     GlobalSchemaContract,
     Parameters = {
@@ -65,8 +59,6 @@ interface GlobalSchemaContracts {
   /**
    * Deletes specific Schema.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GlobalSchema_Delete")
   delete is ArmResourceDeleteSync<
     GlobalSchemaContract,
     Parameters = {
@@ -81,8 +73,6 @@ interface GlobalSchemaContracts {
   /**
    * Lists a collection of schemas registered with service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GlobalSchema_ListByService")
   listByService is ArmResourceListByParent<
     GlobalSchemaContract,
     Parameters = {

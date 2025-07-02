@@ -127,9 +127,7 @@ interface StorageAccounts {
   /**
    * List SAS credentials of a storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("ListAccountSas")
-  @operationId("StorageAccounts_ListAccountSAS")
   listAccountSAS is ArmResourceActionSync<
     StorageAccount,
     AccountSasParameters,
@@ -139,9 +137,7 @@ interface StorageAccounts {
   /**
    * List service SAS credentials of a specific resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("ListServiceSas")
-  @operationId("StorageAccounts_ListServiceSAS")
   listServiceSAS is ArmResourceActionSync<
     StorageAccount,
     ServiceSasParameters,
@@ -212,10 +208,8 @@ interface StorageAccounts {
   /**
    * Gets the private link resources that need to be created for a storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("privateLinkResources")
-  @operationId("PrivateLinkResources_ListByStorageAccount")
   listByStorageAccount is ArmResourceActionSync<
     StorageAccount,
     void,

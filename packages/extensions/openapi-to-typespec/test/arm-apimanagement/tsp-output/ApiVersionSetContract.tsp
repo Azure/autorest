@@ -30,22 +30,16 @@ interface ApiVersionSetContracts {
   /**
    * Gets the details of the Api Version Set specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiVersionSet_Get")
   get is ArmResourceRead<ApiVersionSetContract>;
 
   /**
    * Gets the entity state (Etag) version of the Api Version Set specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiVersionSet_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<ApiVersionSetContract>;
 
   /**
    * Creates or Updates a Api Version Set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiVersionSet_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ApiVersionSetContract,
     Parameters = {
@@ -60,9 +54,7 @@ interface ApiVersionSetContracts {
   /**
    * Updates the details of the Api VersionSet specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
-  @operationId("ApiVersionSet_Update")
   update is ArmCustomPatchSync<
     ApiVersionSetContract,
     PatchModel = ApiVersionSetUpdateParameters,
@@ -78,8 +70,6 @@ interface ApiVersionSetContracts {
   /**
    * Deletes specific Api Version Set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiVersionSet_Delete")
   delete is ArmResourceDeleteSync<
     ApiVersionSetContract,
     Parameters = {
@@ -94,8 +84,6 @@ interface ApiVersionSetContracts {
   /**
    * Lists a collection of API Version Sets in the specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiVersionSet_ListByService")
   listByService is ArmResourceListByParent<
     ApiVersionSetContract,
     Parameters = {

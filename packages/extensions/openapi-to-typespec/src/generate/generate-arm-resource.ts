@@ -124,14 +124,6 @@ function generateArmResourceOperationGroup(operationGroup: TspArmResourceOperati
     definitions.push(generateDocs(operation));
     const decorators = generateDecorators(operation.decorators);
     decorators && definitions.push(decorators);
-    if (
-      isFullCompatible &&
-      operation.operationId &&
-      operation.operationId !== getGeneratedOperationId(operationGroup.interfaceName, operation.name)
-    ) {
-      definitions.push(`@operationId("${operation.operationId}")`);
-      definitions.push(`#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"`);
-    }
     if (isFullCompatible && operation.suppressions) {
       definitions.push(...generateSuppressions(operation.suppressions));
     }

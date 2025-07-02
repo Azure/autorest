@@ -171,10 +171,8 @@ interface VirtualMachineScaleSets {
   /**
    * Gets list of OS upgrades on a VM scale set instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("osUpgradeHistory")
-  @operationId("VirtualMachineScaleSets_GetOSUpgradeHistory")
   getOSUpgradeHistory is ArmResourceActionSync<
     VirtualMachineScaleSet,
     void,
@@ -324,16 +322,12 @@ interface VirtualMachineScaleSets {
   /**
    * Cancels the current virtual machine scale set rolling upgrade.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineScaleSetRollingUpgrades_Cancel")
   cancel is ArmResourceActionAsync<VirtualMachineScaleSet, void, OkResponse>;
 
   /**
    * Starts a rolling upgrade to move all virtual machine scale set instances to the latest available Platform Image OS version. Instances which are already running the latest available OS version are not affected.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("osRollingUpgrade")
-  @operationId("VirtualMachineScaleSetRollingUpgrades_StartOSUpgrade")
   startOSUpgrade is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     void,
@@ -343,9 +337,7 @@ interface VirtualMachineScaleSets {
   /**
    * Starts a rolling upgrade to move all extensions for all virtual machine scale set instances to the latest available extension version. Instances which are already running the latest extension versions are not affected.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("extensionRollingUpgrade")
-  @operationId("VirtualMachineScaleSetRollingUpgrades_StartExtensionUpgrade")
   startExtensionUpgrade is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     void,
