@@ -222,7 +222,6 @@ function convertExternalResourceForExtension(armResource: ArmResource): TspExter
 
 function convertLegacyOperationGroup(armResource: ArmResource): TspArmResourceLegacyOperationGroup {
   const pathParameters = getPathParameters(armResource);
-  //const lastParameter = pathParameters.pop();
 
   const isExtensionResource = isExtensionScopeType(armResource.ScopeType);
   let externalProviderFound: boolean = false;
@@ -271,12 +270,6 @@ function convertLegacyOperationGroup(armResource: ArmResource): TspArmResourceLe
     }
   }
 
-  // const resourceTypeParameter = `KeysOf<ResourceNameParameter<
-  //   Resource = ${armResource.SwaggerModelName},
-  //   KeyName = "${lastParameter!.keyName}",
-  //   SegmentName = "${lastParameter!.segmentName}",
-  //   NamePattern = "${lastParameter!.pattern}"
-  // >>`;
   const interfaceName = `${singular(getTSPOperationGroupName(armResource))}Ops`;
   return isExtensionResource
     ? {
