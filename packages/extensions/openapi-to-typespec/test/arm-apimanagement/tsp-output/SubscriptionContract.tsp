@@ -33,19 +33,22 @@ interface SubscriptionContractOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = ApiManagementServiceResource,
-          KeyName = "serviceName",
-          SegmentName = "service",
-          NamePattern = "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
-        >>,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        serviceName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = SubscriptionContract,
-        KeyName = "sid",
-        SegmentName = "subscriptions",
-        NamePattern = "^[^*#&+:<>?]+$"
-      >>
+      {
+        /** Subscription entity Identifier. The entity represents the association between a user and a product in API Management. */
+        @path
+        @segment("subscriptions")
+        @key
+        @pattern("^[^*#&+:<>?]+$")
+        sid: string,
+      }
     > {}
 
 @armResourceOperations
@@ -212,25 +215,28 @@ interface UserSubscriptionOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = ApiManagementServiceResource,
-          KeyName = "serviceName",
-          SegmentName = "service",
-          NamePattern = "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
-        >>,
-        ...KeysOf<ResourceNameParameter<
-          Resource = UserContract,
-          KeyName = "userId",
-          SegmentName = "users",
-          NamePattern = ""
-        >>,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        serviceName: string,
+
+        /** User identifier. Must be unique in the current API Management service instance. */
+        @path
+        @segment("users")
+        @key
+        userId: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = SubscriptionContract,
-        KeyName = "sid",
-        SegmentName = "subscriptions",
-        NamePattern = "^[^*#&+:<>?]+$"
-      >>
+      {
+        /** Subscription entity Identifier. The entity represents the association between a user and a product in API Management. */
+        @path
+        @segment("subscriptions")
+        @key
+        @pattern("^[^*#&+:<>?]+$")
+        sid: string,
+      }
     > {}
 
 @armResourceOperations

@@ -1,0 +1,75 @@
+{
+  "operationId": "GroupQuotaSubscriptionAllocationRequest_Update",
+  "parameters": {
+    "allocateQuotaRequest": {
+      "properties": {
+        "value": [
+          {
+            "properties": {
+              "limit": 110,
+              "resourceName": "standardddv4family"
+            }
+          },
+          {
+            "properties": {
+              "limit": 110,
+              "resourceName": "standardav2family"
+            }
+          }
+        ]
+      }
+    },
+    "api-version": "2025-03-01",
+    "groupQuotaName": "groupquota1",
+    "location": "westus",
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
+    "resourceProviderName": "Microsoft.Compute",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "westus",
+        "type": "Microsoft.Quota/groupQuotas/quotaAllocations",
+        "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/quotaAllocations/westus",
+        "properties": {
+          "nextLink": "https://yourLinkHere.com",
+          "provisioningState": "Succeeded",
+          "value": [
+            {
+              "properties": {
+                "name": {
+                  "localizedValue": "standard DDv4 Family vCPUs",
+                  "value": "standardddv4family"
+                },
+                "limit": 25,
+                "resourceName": "standardddv4family",
+                "shareableQuota": 15
+              }
+            },
+            {
+              "properties": {
+                "name": {
+                  "localizedValue": "standard Av2 Family vCPUs",
+                  "value": "standardav2family"
+                },
+                "limit": 30,
+                "resourceName": "standardav2family",
+                "shareableQuota": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus",
+        "Operation-Location": "https://contoso.com/operationstatus",
+        "location": "https://contoso.com/operationstatus",
+        "retry-after": "30"
+      }
+    }
+  },
+  "title": "SubscriptionQuotaAllocation_Patch_Request_ForCompute"
+}

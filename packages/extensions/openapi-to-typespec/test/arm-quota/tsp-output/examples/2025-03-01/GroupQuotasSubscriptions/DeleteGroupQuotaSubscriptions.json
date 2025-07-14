@@ -1,0 +1,21 @@
+{
+  "operationId": "GroupQuotaSubscriptions_Delete",
+  "parameters": {
+    "api-version": "2025-03-01",
+    "groupQuotaName": "groupquota1",
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus",
+        "Operation-Location": "https://contoso.com/operationstatus",
+        "location": "https://contoso.com/operationstatus",
+        "retry-after": "30"
+      }
+    },
+    "204": {}
+  },
+  "title": "GroupQuotaSubscriptions_Delete_Subscriptions"
+}

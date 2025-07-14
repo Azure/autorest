@@ -1,0 +1,374 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "VirtualNetworks",
+            "type": "Microsoft.Quota/usages",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/providers/Microsoft.Quota/usages/",
+            "properties": {
+              "name": {
+                "localizedValue": "Virtual Networks",
+                "value": "VirtualNetworks"
+              },
+              "isQuotaApplicable": false,
+              "properties": {},
+              "unit": "Count",
+              "usages": {
+                "value": 10
+              }
+            }
+          },
+          {
+            "name": "StaticPublicIPAddresses",
+            "type": "Microsoft.Quota/usages",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/providers/Microsoft.Quota/usages/",
+            "properties": {
+              "name": {
+                "localizedValue": "Static Public IP Addresses",
+                "value": "StaticPublicIPAddresses"
+              },
+              "isQuotaApplicable": false,
+              "properties": {},
+              "unit": "Count",
+              "usages": {
+                "value": 10
+              }
+            }
+          },
+          {
+            "name": "NetworkSecurityGroups",
+            "type": "Microsoft.Quota/usages",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/providers/Microsoft.Quota/usages/",
+            "properties": {
+              "name": {
+                "localizedValue": "Network Security Groups",
+                "value": "NetworkSecurityGroups"
+              },
+              "isQuotaApplicable": false,
+              "properties": {},
+              "unit": "Count",
+              "usages": {
+                "value": 10
+              }
+            }
+          },
+          {
+            "name": "PublicIPAddresses",
+            "type": "Microsoft.Quota/usages",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/providers/Microsoft.Quota/usages/",
+            "properties": {
+              "name": {
+                "localizedValue": "Public IP Addresses - Basic",
+                "value": "PublicIPAddresses"
+              },
+              "isQuotaApplicable": true,
+              "properties": {},
+              "resourceType": "PublicIpAddresses",
+              "unit": "Count",
+              "usages": {
+                "value": 10
+              }
+            }
+          },
+          {
+            "name": "PublicIpPrefixes",
+            "type": "Microsoft.Quota/usages",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/providers/Microsoft.Quota/usages/",
+            "properties": {
+              "name": {
+                "localizedValue": "Public Ip Prefixes",
+                "value": "PublicIpPrefixes"
+              },
+              "isQuotaApplicable": false,
+              "properties": {},
+              "unit": "Count",
+              "usages": {
+                "value": 10
+              }
+            }
+          },
+          {
+            "name": "NatGateways",
+            "type": "Microsoft.Quota/usages",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/providers/Microsoft.Quota/usages/",
+            "properties": {
+              "name": {
+                "localizedValue": "Nat Gateways",
+                "value": "NatGateways"
+              },
+              "isQuotaApplicable": false,
+              "properties": {},
+              "unit": "Count",
+              "usages": {
+                "value": 10
+              }
+            }
+          },
+          {
+            "name": "NetworkInterfaces",
+            "type": "Microsoft.Quota/usages",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/providers/Microsoft.Quota/usages/",
+            "properties": {
+              "name": {
+                "localizedValue": "Network Interfaces",
+                "value": "NetworkInterfaces"
+              },
+              "isQuotaApplicable": false,
+              "properties": {},
+              "unit": "Count",
+              "usages": {
+                "value": 10
+              }
+            }
+          },
+          {
+            "name": "PrivateEndpoints",
+            "type": "Microsoft.Quota/usages",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/providers/Microsoft.Quota/usages/",
+            "properties": {
+              "name": {
+                "localizedValue": "Private Endpoints",
+                "value": "PrivateEndpoints"
+              },
+              "isQuotaApplicable": false,
+              "properties": {},
+              "unit": "Count",
+              "usages": {
+                "value": 10
+              }
+            }
+          },
+          {
+            "name": "PrivateEndpointRedirectMaps",
+            "type": "Microsoft.Quota/usages",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/providers/Microsoft.Quota/usages/",
+            "properties": {
+              "name": {
+                "localizedValue": "Private Endpoint Redirect Maps",
+                "value": "PrivateEndpointRedirectMaps"
+              },
+              "isQuotaApplicable": false,
+              "properties": {},
+              "unit": "Count",
+              "usages": {
+                "value": 10
+              }
+            }
+          },
+          {
+            "name": "LoadBalancers",
+            "type": "Microsoft.Quota/usages",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/providers/Microsoft.Quota/usages/",
+            "properties": {
+              "name": {
+                "localizedValue": "Load Balancers",
+                "value": "LoadBalancers"
+              },
+              "isQuotaApplicable": false,
+              "properties": {},
+              "unit": "Count",
+              "usages": {
+                "value": 10
+              }
+            }
+          },
+          {
+            "name": "PrivateLinkServices",
+            "type": "Microsoft.Quota/usages",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/providers/Microsoft.Quota/usages/",
+            "properties": {
+              "name": {
+                "localizedValue": "Private Link Services",
+                "value": "PrivateLinkServices"
+              },
+              "isQuotaApplicable": false,
+              "properties": {},
+              "unit": "Count",
+              "usages": {
+                "value": 10
+              }
+            }
+          },
+          {
+            "name": "ApplicationGateways",
+            "type": "Microsoft.Quota/usages",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/providers/Microsoft.Quota/usages/",
+            "properties": {
+              "name": {
+                "localizedValue": "Application Gateways",
+                "value": "ApplicationGateways"
+              },
+              "isQuotaApplicable": false,
+              "properties": {},
+              "unit": "Count",
+              "usages": {
+                "value": 10
+              }
+            }
+          },
+          {
+            "name": "RouteTables",
+            "type": "Microsoft.Quota/usages",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/providers/Microsoft.Quota/usages/",
+            "properties": {
+              "name": {
+                "localizedValue": "Route Tables",
+                "value": "RouteTables"
+              },
+              "isQuotaApplicable": false,
+              "properties": {},
+              "unit": "Count",
+              "usages": {
+                "value": 10
+              }
+            }
+          },
+          {
+            "name": "RouteFilters",
+            "type": "Microsoft.Quota/usages",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/providers/Microsoft.Quota/usages/",
+            "properties": {
+              "name": {
+                "localizedValue": "Route Filters",
+                "value": "RouteFilters"
+              },
+              "isQuotaApplicable": false,
+              "properties": {},
+              "unit": "Count",
+              "usages": {
+                "value": 10
+              }
+            }
+          },
+          {
+            "name": "NetworkWatchers",
+            "type": "Microsoft.Quota/usages",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/providers/Microsoft.Quota/usages/",
+            "properties": {
+              "name": {
+                "localizedValue": "Network Watchers",
+                "value": "NetworkWatchers"
+              },
+              "isQuotaApplicable": false,
+              "properties": {},
+              "unit": "Count",
+              "usages": {
+                "value": 10
+              }
+            }
+          },
+          {
+            "name": "PacketCaptures",
+            "type": "Microsoft.Quota/usages",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/providers/Microsoft.Quota/usages/",
+            "properties": {
+              "name": {
+                "localizedValue": "Packet Captures",
+                "value": "PacketCaptures"
+              },
+              "isQuotaApplicable": false,
+              "properties": {},
+              "unit": "Count",
+              "usages": {
+                "value": 10
+              }
+            }
+          },
+          {
+            "name": "ApplicationSecurityGroups",
+            "type": "Microsoft.Quota/usages",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/providers/Microsoft.Quota/usages/",
+            "properties": {
+              "name": {
+                "localizedValue": "Application Security Groups.",
+                "value": "ApplicationSecurityGroups"
+              },
+              "isQuotaApplicable": false,
+              "properties": {},
+              "unit": "Count",
+              "usages": {
+                "value": 10
+              }
+            }
+          },
+          {
+            "name": "StandardSkuLoadBalancers",
+            "type": "Microsoft.Quota/usages",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/providers/Microsoft.Quota/usages/",
+            "properties": {
+              "name": {
+                "localizedValue": "Standard Sku Load Balancers",
+                "value": "StandardSkuLoadBalancers"
+              },
+              "isQuotaApplicable": false,
+              "properties": {},
+              "unit": "Count",
+              "usages": {
+                "value": 10
+              }
+            }
+          },
+          {
+            "name": "StandardSkuPublicIpAddresses",
+            "type": "Microsoft.Quota/usages",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/providers/Microsoft.Quota/usages/",
+            "properties": {
+              "name": {
+                "localizedValue": "Public IP Addresses - Standard",
+                "value": "StandardSkuPublicIpAddresses"
+              },
+              "isQuotaApplicable": true,
+              "resourceType": "PublicIpAddresses",
+              "unit": "Count",
+              "usages": {
+                "value": 10
+              }
+            }
+          },
+          {
+            "name": "DnsServersPerVirtualNetwork",
+            "type": "Microsoft.Quota/usages",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/providers/Microsoft.Quota/usages/",
+            "properties": {
+              "name": {
+                "localizedValue": "DNS servers per Virtual Network",
+                "value": "DnsServersPerVirtualNetwork"
+              },
+              "isQuotaApplicable": false,
+              "properties": {},
+              "unit": "Count",
+              "usages": {
+                "value": 10
+              }
+            }
+          },
+          {
+            "name": "MinPublicIpInterNetworkPrefixLength",
+            "type": "Microsoft.Quota/usages",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/providers/Microsoft.Quota/usages/",
+            "properties": {
+              "name": {
+                "localizedValue": "Min Public Ip InterNetwork Prefix Length",
+                "value": "MinPublicIpInterNetworkPrefixLength"
+              },
+              "isQuotaApplicable": true,
+              "properties": {},
+              "unit": "Count",
+              "usages": {
+                "value": 10
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Usages_List",
+  "title": "Quotas_listUsagesForNetwork"
+}

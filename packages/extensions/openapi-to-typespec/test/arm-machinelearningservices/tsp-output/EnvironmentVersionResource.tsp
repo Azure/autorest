@@ -33,25 +33,28 @@ interface EnvironmentVersionResourceOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = Registry,
-          KeyName = "registryName",
-          SegmentName = "registries",
-          NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$"
-        >>,
-        ...KeysOf<ResourceNameParameter<
-          Resource = EnvironmentContainerResource,
-          KeyName = "environmentName",
-          SegmentName = "environments",
-          NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-        >>,
+
+        /** Name of Azure Machine Learning registry. This is case-insensitive */
+        @path
+        @segment("registries")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
+        registryName: string,
+
+        /** Container name. This is case-sensitive. */
+        @path
+        @segment("environments")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+        environmentName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = EnvironmentVersionResource,
-        KeyName = "version",
-        SegmentName = "versions",
-        NamePattern = ""
-      >>
+      {
+        /** Version identifier. This is case-sensitive. */
+        @path
+        @segment("versions")
+        @key
+        version: string,
+      }
     > {}
 
 @armResourceOperations
@@ -130,25 +133,27 @@ interface EnvironmentVersionOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = Workspace,
-          KeyName = "workspaceName",
-          SegmentName = "workspaces",
-          NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-        >>,
-        ...KeysOf<ResourceNameParameter<
-          Resource = EnvironmentContainerResource,
-          KeyName = "name",
-          SegmentName = "environments",
-          NamePattern = ""
-        >>,
+
+        /** Name of Azure Machine Learning workspace. */
+        @path
+        @segment("workspaces")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        workspaceName: string,
+
+        /** Container name. This is case-sensitive. */
+        @path
+        @segment("environments")
+        @key
+        name: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = EnvironmentVersionResource,
-        KeyName = "version",
-        SegmentName = "versions",
-        NamePattern = ""
-      >>
+      {
+        /** Version identifier. This is case-sensitive. */
+        @path
+        @segment("versions")
+        @key
+        version: string,
+      }
     > {}
 
 @armResourceOperations

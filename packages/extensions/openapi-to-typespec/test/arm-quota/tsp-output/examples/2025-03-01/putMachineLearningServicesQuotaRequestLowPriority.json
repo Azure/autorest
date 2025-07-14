@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "createQuotaRequest": {
+      "properties": {
+        "name": {
+          "value": "TotalLowPriorityCores"
+        },
+        "limit": {
+          "limitObjectType": "LimitValue",
+          "value": 10
+        },
+        "resourceType": "lowPriority"
+      }
+    },
+    "resourceName": "TotalLowPriorityCores",
+    "scope": "subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.MachineLearningServices/locations/eastus"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TotalLowPriorityCores",
+        "type": "Microsoft.Quota/quotas",
+        "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.MachineLearningServices/locations/eastus/providers/Microsoft.Quota/quotas/TotalLowPriorityCores",
+        "properties": {
+          "name": {
+            "value": "TotalLowPriorityCores"
+          },
+          "limit": {
+            "limitObjectType": "LimitValue",
+            "value": 10
+          },
+          "resourceType": "lowPriority"
+        }
+      },
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotaRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605?api-version=2023-02-01"
+      }
+    },
+    "202": {
+      "headers": {
+        "Retry-After": "30",
+        "location": "https://management.azure.com/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/operationsStatus/2B5C8515-37D8-4B6A-879B-CD641A2CF605?api-version=2023-02-01"
+      }
+    }
+  },
+  "operationId": "Quota_CreateOrUpdate",
+  "title": "Quotas_Request_ForMachineLearningServices_LowPriorityResource"
+}

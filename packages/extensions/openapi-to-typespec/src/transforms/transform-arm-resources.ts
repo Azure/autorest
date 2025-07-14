@@ -178,7 +178,8 @@ function getTspOperationGroups(armSchema: ArmResourceSchema): TspArmResourceOper
     // action operation
     tspOperations.push(...convertResourceActionOperations(resourceMetadata, operations));
 
-    const externalResource = resourceMetadata.ScopeType === "Extension" ? convertExternalResourceForExtension(resourceMetadata) : undefined;
+    const externalResource =
+      resourceMetadata.ScopeType === "Extension" ? convertExternalResourceForExtension(resourceMetadata) : undefined;
 
     if (armSchema.resourceMetadata.length === 1) {
       return [
@@ -186,11 +187,11 @@ function getTspOperationGroups(armSchema: ArmResourceSchema): TspArmResourceOper
           isLegacy: false,
           interfaceName,
           resourceOperations: tspOperations,
-          externalResource
+          externalResource,
         },
       ];
     }
-    
+
     operationGroups.push({
       isLegacy: true,
       interfaceName,
@@ -240,36 +241,30 @@ function convertLegacyOperationGroup(armResource: ArmResource): TspArmResourceLe
     } else if (parameter.segmentName === "providers") {
       if (isExtensionResource) {
         if (externalProviderFound === false) {
-          targetParentParameters.push(`/** the provider namespace */ @path @segment("providers") @key providerNamespace: "${parameter.keyName}"`);          
+          targetParentParameters.push(
+            `/** the provider namespace */ @path @segment("providers") @key providerNamespace: "${parameter.keyName}"`,
+          );
           externalProviderFound = true;
-        }
-        else {
+        } else {
           instanceParameters.push(`...Extension.ExtensionProviderNamespace<${armResource.Name}>`);
           extensionParentParameters.push(`...Extension.ExtensionProviderNamespace<${armResource.Name}>`);
           instanceProviderFound = true;
         }
-      }
-      else {
+      } else {
         targetParentParameters.push("...Azure.ResourceManager.Legacy.Provider");
         instanceProviderFound = true;
       }
     } else {
-      const resourceNameParameter = buildResourceNameParameterForSegment(
-        parameter.segmentName,
-        parameter.keyName,
-        parameter.pattern,
-      ) ?? `/** ${parameter.segmentName} */\n@path @segment("${parameter.segmentName}") @key ${parameter.pattern ? `@pattern("${parameter.pattern}")` : ""} ${parameter.keyName}: string`;
+      const resourceNameParameter = `/** ${parameter.description} */\n@path @segment("${parameter.segmentName}") @key ${parameter.pattern ? `@pattern("${parameter.pattern}")` : ""} ${parameter.keyName}: string`;
       if (instanceProviderFound && isExtensionResource) {
         instanceParameters.push(resourceNameParameter);
         if (i !== pathParameters.length - 1) {
           extensionParentParameters.push(resourceNameParameter);
         }
-      }
-      else {
+      } else {
         if (i !== pathParameters.length - 1) {
           targetParentParameters.push(resourceNameParameter);
-        }
-        else {
+        } else {
           instanceParameters.push(resourceNameParameter);
         }
       }
@@ -283,18 +278,20 @@ function convertLegacyOperationGroup(armResource: ArmResource): TspArmResourceLe
   //   NamePattern = "${lastParameter!.pattern}"
   // >>`;
   const interfaceName = `${singular(getTSPOperationGroupName(armResource))}Ops`;
-  return isExtensionResource ? {
-    type: "Extension",
-    interfaceName,
-    targetParentParameters,
-    instanceParameters,
-    extensionParentParameters
-  } : {
-    type: "Normal",
-    interfaceName,
-    targetParentParameters,
-    instanceParameters,
-  };
+  return isExtensionResource
+    ? {
+        type: "Extension",
+        interfaceName,
+        targetParentParameters,
+        instanceParameters,
+        extensionParentParameters,
+      }
+    : {
+        type: "Normal",
+        interfaceName,
+        targetParentParameters,
+        instanceParameters,
+      };
 }
 
 function buildResourceNameParameterForSegment(
@@ -1007,13 +1004,11 @@ function buildNewArmOperation(
     armOperation.baseParameters = undefined;
     armOperation.targetResource = "Extension.ScopeParameter";
     armOperation.extensionResource = armOperation.resource;
-  }
-  else if (resourceMetadata.ScopeType === "ManagementGroup") {
+  } else if (resourceMetadata.ScopeType === "ManagementGroup") {
     armOperation.baseParameters = undefined;
     armOperation.targetResource = "Extension.ManagementGroup";
     armOperation.extensionResource = armOperation.resource;
-  }
-  else if (resourceMetadata.ScopeType === "Extension") {
+  } else if (resourceMetadata.ScopeType === "Extension") {
     armOperation.baseParameters = undefined;
   }
   return armOperation;
@@ -1087,12 +1082,19 @@ function getOperationName(interfaceName: string, operationId: string): string {
   return operationName;
 }
 
-function getPathParameters(resource: ArmResource): { segmentName: string; keyName: string; pattern: string, description: string | undefined }[] {
+function getPathParameters(
+  resource: ArmResource,
+): { segmentName: string; keyName: string; pattern: string; description: string | undefined }[] {
   const pathParameters = [];
   const pathSegments = resource.GetOperation!.Path.split("/").filter((s) => s !== "");
 
   if (pathSegments[1] === "providers" && pathSegments[0].startsWith("{") && pathSegments[0].endsWith("}")) {
-    pathParameters.push({keyName: pathSegments[0].replace("{", "").replace("}", ""), segmentName: "", pattern: "", description: undefined});
+    pathParameters.push({
+      keyName: pathSegments[0].replace("{", "").replace("}", ""),
+      segmentName: "",
+      pattern: "",
+      description: undefined,
+    });
     pathSegments.shift();
   }
   for (let i = 0; i + 1 < pathSegments.length; i += 2) {
@@ -1107,7 +1109,12 @@ function getPathParameters(resource: ArmResource): { segmentName: string; keyNam
         ? escapeRegex(parameter.schema.pattern)
         : "";
 
-    pathParameters.push({ segmentName: pathSegments[i], keyName, pattern, description: parameter?.language.default.description });
+    pathParameters.push({
+      segmentName: pathSegments[i],
+      keyName,
+      pattern,
+      description: parameter?.language.default.description,
+    });
   }
   return pathParameters;
 }

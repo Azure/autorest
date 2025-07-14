@@ -1,12 +1,6 @@
 import { Operation } from "@autorest/codemodel";
 import { lastWordToSingular } from "../utils/strings";
-import {
-  ManagementGroupPath,
-  ProvidersSegment,
-  ResourceGroupPath,
-  SubscriptionPath,
-  TenantPath,
-} from "./constants";
+import { ManagementGroupPath, ProvidersSegment, ResourceGroupPath, SubscriptionPath, TenantPath } from "./constants";
 import { getResourceDataSchema, OperationSet } from "./operation-set";
 import { getPagingItemType } from "./resource-equivalent";
 import { getResourceType, getScopePath, isScopedSegment, pathIncludes } from "./utils";

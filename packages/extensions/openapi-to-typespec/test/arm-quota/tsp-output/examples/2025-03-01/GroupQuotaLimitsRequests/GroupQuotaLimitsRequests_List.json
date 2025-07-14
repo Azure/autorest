@@ -1,0 +1,63 @@
+{
+  "operationId": "GroupQuotaLimitsRequest_List",
+  "parameters": {
+    "$filter": "location eq westus",
+    "api-version": "2025-03-01",
+    "groupQuotaName": "groupquota1",
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
+    "resourceName": "standardav2family",
+    "resourceProviderName": "Microsoft.Compute"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://yourLinkHere.com",
+        "value": [
+          {
+            "name": "requestId1",
+            "type": "Microsoft.Quota/groupQuotas/groupQuotaLimitsRequests",
+            "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/groupQuotaLimitsRequests/requestId1",
+            "properties": {
+              "faultCode": "ResourceNotAvailableForOffer",
+              "provisioningState": "Failed",
+              "requestSubmitTime": "2023-11-18T00:12:34.004Z",
+              "requestedResource": {
+                "properties": {
+                  "name": {
+                    "localizedValue": "standard DDv4 Family vCPUs",
+                    "value": "standardddv4family"
+                  },
+                  "comments": "Contoso requires more quota.",
+                  "limit": 100,
+                  "region": "westus"
+                }
+              }
+            }
+          },
+          {
+            "name": "requestId2",
+            "type": "Microsoft.Quota/groupQuotas/groupQuotaLimitsRequests",
+            "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/groupQuotaLimitsRequests/requestId2",
+            "properties": {
+              "faultCode": "",
+              "provisioningState": "Succeeded",
+              "requestSubmitTime": "2023-11-17T00:57:43.410Z",
+              "requestedResource": {
+                "properties": {
+                  "name": {
+                    "localizedValue": "standardav2family",
+                    "value": "standardav2family"
+                  },
+                  "comments": "Contoso requires more quota.",
+                  "limit": 150,
+                  "region": "westus"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "title": "GroupQuotaLimitsRequest_List"
+}

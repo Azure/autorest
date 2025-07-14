@@ -1,0 +1,14 @@
+{
+  "parameters": {
+    "api-version": "2024-04-05",
+    "guestConfigurationAssignmentName": "SecureProtocol",
+    "resourceGroupName": "myResourceGroupName",
+    "subscriptionId": "mySubscriptionId",
+    "vmName": "myVMName"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "GuestConfigurationAssignments_Delete",
+  "title": "Delete an guest configuration assignment"
+}

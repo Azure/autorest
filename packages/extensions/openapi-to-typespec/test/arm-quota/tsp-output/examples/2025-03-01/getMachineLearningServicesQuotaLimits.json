@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.MachineLearningServices/locations/eastus"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "standardDv2Family",
+            "type": "Microsoft.Quota/Quotas",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.MachineLearningServices/locations/eastus/providers/Microsoft.Quota/Quotas/standardDv2Family",
+            "properties": {
+              "name": {
+                "localizedValue": "Standard Dv2 Family vCPUs",
+                "value": "standardDv2Family"
+              },
+              "limit": {
+                "limitObjectType": "LimitValue",
+                "value": 10
+              },
+              "resourceType": "dedicated",
+              "unit": "Count"
+            }
+          },
+          {
+            "name": "totalLowPriorityCores",
+            "type": "Microsoft.Quota/Quotas",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.MachineLearningServices/locations/eastus/providers/Microsoft.Quota/Quotas/totalLowPriorityCores",
+            "properties": {
+              "name": {
+                "localizedValue": "Total Regional Low-priority vCPUs",
+                "value": "totalLowPriorityCores"
+              },
+              "limit": {
+                "limitObjectType": "LimitValue",
+                "value": 10
+              },
+              "resourceType": "lowPriority",
+              "unit": "Count"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Quota_List",
+  "title": "Quotas_listQuotaLimitsMachineLearningServices"
+}

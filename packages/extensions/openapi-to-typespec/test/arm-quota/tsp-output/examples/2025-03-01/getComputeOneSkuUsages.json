@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "resourceName": "standardNDSFamily",
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "standardNDSFamily",
+        "type": "Microsoft.Quota/Usages",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/Usages/standardNDSFamily",
+        "properties": {
+          "name": {
+            "localizedValue": "Standard NDS Family vCPUs",
+            "value": "standardNDSFamily"
+          },
+          "isQuotaApplicable": true,
+          "unit": "Count",
+          "usages": {
+            "usagesType": "Individual",
+            "value": 10
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Usages_Get",
+  "title": "Quotas_UsagesRequest_ForCompute"
+}

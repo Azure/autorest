@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2024-04-05"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Microsoft.GuestConfiguration/guestConfigurationAssignments/write",
+            "display": {
+              "description": "Create new guest configuration assignment.",
+              "operation": "Microsoft.GuestConfiguration/guestConfigurationAssignments/write",
+              "provider": "Microsoft Guest Configuration",
+              "resource": "Microsoft.GuestConfiguration/guestConfigurationAssignments"
+            },
+            "properties": null
+          },
+          {
+            "name": "Microsoft.GuestConfiguration/register/action",
+            "display": {
+              "description": "Registers the subscription for the Microsoft.GuestConfiguration resource provider.",
+              "operation": "Registers the feature for Microsoft.GuestConfiguration.",
+              "provider": "Microsoft Guest Configuration",
+              "resource": "Register"
+            },
+            "properties": null
+          },
+          {
+            "name": "Microsoft.GuestConfiguration/guestConfigurationAssignments/read",
+            "display": {
+              "description": "Get guest configuration assignment.",
+              "operation": "Microsoft.GuestConfiguration/guestConfigurationAssignments/read",
+              "provider": "Microsoft Guest Configuration",
+              "resource": "Microsoft.GuestConfiguration/guestConfigurationAssignments"
+            },
+            "properties": null
+          },
+          {
+            "name": "Microsoft.GuestConfiguration/guestConfigurationAssignments/reports/read",
+            "display": {
+              "description": "Get guest configuration assignment report.",
+              "operation": "Microsoft.GuestConfiguration/guestConfigurationAssignments/reports/read",
+              "provider": "Microsoft Guest Configuration",
+              "resource": "Microsoft.GuestConfiguration/guestConfigurationAssignments"
+            },
+            "properties": null
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Operations_List",
+  "title": "Lists all of the available GuestConfiguration REST API operations"
+}

@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "resourceName": "MinPublicIpInterNetworkPrefixLength",
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "MinPublicIpInterNetworkPrefixLength",
+        "type": "Microsoft.Quota/Quotas",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/providers/Microsoft.Quota/Quotas/MinPublicIpInterNetworkPrefixLength",
+        "properties": {
+          "name": {
+            "localizedValue": "Min Public Ip InterNetwork Prefix Length",
+            "value": "MinPublicIpInterNetworkPrefixLength"
+          },
+          "isQuotaApplicable": true,
+          "limit": {
+            "limitObjectType": "LimitValue",
+            "value": 10
+          },
+          "resourceType": "MinPublicIpInterNetworkPrefixLength",
+          "unit": "Count"
+        }
+      }
+    }
+  },
+  "operationId": "Quota_Get",
+  "title": "Quotas_UsagesRequest_ForNetwork"
+}

@@ -1,0 +1,24 @@
+{
+  "operationId": "GroupQuotaSubscriptionRequests_Get",
+  "parameters": {
+    "api-version": "2025-03-01",
+    "groupQuotaName": "groupquota1",
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
+    "requestId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "11111111-1111-1111-1111-111111111111",
+        "type": "Microsoft.Quota/groupQuotas/SubscriptionRequest",
+        "id": "/subscriptions/11111111-1111-1111-1111-111111111111",
+        "properties": {
+          "provisioningState": "Accepted",
+          "requestSubmitTime": "2023-11-17T00:56:45.009Z",
+          "subscriptionId": "11111111-1111-1111-1111-111111111111"
+        }
+      }
+    }
+  },
+  "title": "GroupQuotaSubscriptionRequests_Get"
+}

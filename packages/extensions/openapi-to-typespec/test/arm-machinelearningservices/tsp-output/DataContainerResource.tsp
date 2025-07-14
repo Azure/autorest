@@ -33,19 +33,21 @@ interface DataContainerResourceOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = Registry,
-          KeyName = "registryName",
-          SegmentName = "registries",
-          NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$"
-        >>,
+
+        /** Name of Azure Machine Learning registry. This is case-insensitive */
+        @path
+        @segment("registries")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
+        registryName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = DataContainerResource,
-        KeyName = "name",
-        SegmentName = "data",
-        NamePattern = ""
-      >>
+      {
+        /** Container name. */
+        @path
+        @segment("data")
+        @key
+        name: string,
+      }
     > {}
 
 @armResourceOperations
@@ -106,19 +108,21 @@ interface DataContainerOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = Workspace,
-          KeyName = "workspaceName",
-          SegmentName = "workspaces",
-          NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-        >>,
+
+        /** Name of Azure Machine Learning workspace. */
+        @path
+        @segment("workspaces")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        workspaceName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = DataContainerResource,
-        KeyName = "name",
-        SegmentName = "data",
-        NamePattern = ""
-      >>
+      {
+        /** Container name. */
+        @path
+        @segment("data")
+        @key
+        name: string,
+      }
     > {}
 
 @armResourceOperations

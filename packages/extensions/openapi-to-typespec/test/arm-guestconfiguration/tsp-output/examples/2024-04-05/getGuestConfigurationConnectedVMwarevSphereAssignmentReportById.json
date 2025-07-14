@@ -1,0 +1,97 @@
+{
+  "parameters": {
+    "api-version": "2024-04-05",
+    "guestConfigurationAssignmentName": "AuditSecureProtocol",
+    "reportId": "7367cbb8-ae99-47d0-a33b-a283564d2cb1",
+    "resourceGroupName": "myResourceGroupName",
+    "subscriptionId": "mySubscriptionid",
+    "vmName": "myvm"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "7367cbb8-ae99-47d0-a33b-a283564d2cb1",
+        "id": "/subscriptions/mysubscriptionid/resourceGroups/myResourceGroupName/providers/Microsoft.Connectedvmwarevsphere/virtualmachines/myvm/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/AuditSecureProtocol/reports/7367cbb8-ae99-47d0-a33b-a283564d2cb1",
+        "properties": {
+          "assignment": {
+            "name": "AuditSecureProtocol",
+            "configuration": {
+              "name": "AuditSecureProtocol",
+              "version": "1.0.0.0"
+            }
+          },
+          "complianceStatus": "Compliant",
+          "endTime": "2018-08-29T22:14:13Z",
+          "reportId": "7367cbb8-ae99-47d0-a33b-a283564d2cb1",
+          "startTime": "2018-08-29T22:13:53Z",
+          "vm": {
+            "id": "/subscriptions/mysubscriptionid/resourceGroups/myResourceGroupName/providers/Microsoft.Connectedvmwarevsphere/virtualmachines/myvm",
+            "uuid": "vmuuid"
+          },
+          "details": {
+            "complianceStatus": "Compliant",
+            "endTime": "2018-08-29T22:14:13Z",
+            "jobId": "7367cbb8-ae99-47d0-a33b-a283564d2cb1",
+            "operationType": "Consistency",
+            "resources": [
+              {
+                "complianceStatus": "Compliant",
+                "properties": {
+                  "ConfigurationName": "IsWebServerSecure",
+                  "DependsOn": null,
+                  "IsSingleInstance": "Yes",
+                  "ModuleName": "SecureProtocolWebServer",
+                  "ModuleVersion": "1.0.0.3",
+                  "Protocols": [
+                    {
+                      "Ensure": "Absent",
+                      "Protocol": "SSL 2.0"
+                    },
+                    {
+                      "Ensure": "Absent",
+                      "Protocol": "SSL 3.0"
+                    },
+                    {
+                      "Ensure": "Absent",
+                      "Protocol": "TLS 1.0"
+                    },
+                    {
+                      "Ensure": "Absent",
+                      "Protocol": "PCT 1.0"
+                    },
+                    {
+                      "Ensure": "Absent",
+                      "Protocol": "Multi-Protocol Unified Hello"
+                    },
+                    {
+                      "Ensure": "Absent",
+                      "Protocol": "TLS 1.1"
+                    },
+                    {
+                      "Ensure": "Absent",
+                      "Protocol": "TLS 1.2"
+                    }
+                  ],
+                  "PsDscRunAsCredential": null,
+                  "Reasons": null,
+                  "ResourceId": "[SecureWebServer]s1",
+                  "SourceInfo": null
+                },
+                "reasons": [
+                  {
+                    "code": "DSC::RESOURCE::SUCCESS",
+                    "phrase": "Operation successful."
+                  }
+                ]
+              }
+            ],
+            "startTime": "2018-08-29T22:13:53Z"
+          }
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "GuestConfigurationConnectedVMwarevSphereAssignmentsReports_Get",
+  "title": "Get a guest configuration assignment report by Id for a virtual machine"
+}

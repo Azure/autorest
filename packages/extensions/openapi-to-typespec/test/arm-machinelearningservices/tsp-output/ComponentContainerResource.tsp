@@ -33,19 +33,22 @@ interface ComponentContainerResourceOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = Registry,
-          KeyName = "registryName",
-          SegmentName = "registries",
-          NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$"
-        >>,
+
+        /** Name of Azure Machine Learning registry. This is case-insensitive */
+        @path
+        @segment("registries")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
+        registryName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = ComponentContainerResource,
-        KeyName = "componentName",
-        SegmentName = "components",
-        NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-      >>
+      {
+        /** Container name. */
+        @path
+        @segment("components")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+        componentName: string,
+      }
     > {}
 
 @armResourceOperations
@@ -100,19 +103,21 @@ interface ComponentContainerOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = Workspace,
-          KeyName = "workspaceName",
-          SegmentName = "workspaces",
-          NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-        >>,
+
+        /** Name of Azure Machine Learning workspace. */
+        @path
+        @segment("workspaces")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        workspaceName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = ComponentContainerResource,
-        KeyName = "name",
-        SegmentName = "components",
-        NamePattern = ""
-      >>
+      {
+        /** Container name. */
+        @path
+        @segment("components")
+        @key
+        name: string,
+      }
     > {}
 
 @armResourceOperations

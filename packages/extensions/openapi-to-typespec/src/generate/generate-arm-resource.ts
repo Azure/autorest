@@ -118,8 +118,8 @@ function generateArmResourceOperationGroup(operationGroup: TspArmResourceOperati
     definitions.push(
       `alias ${operationGroup.externalResource.aliasName} = Extension.ExternalResource<"${operationGroup.externalResource.targetNamespace}"
       , "${operationGroup.externalResource.resourceType}", "${operationGroup.externalResource.resourceParameterName}">;
-      `
-    )
+      `,
+    );
   }
 
   definitions.push("@armResourceOperations");
@@ -199,7 +199,7 @@ function getOperationKind(operation: TspArmResourceOperation): string {
   if (operation.targetResource) return `Extension.${getExtensionOperationKind(operation.kind)}`;
   if (isPatchWithOptionalBody(operation)) return `Azure.ResourceManager.Legacy.${operation.kind.replace("Arm", "")}`;
   return operation.kind;
-} 
+}
 
 function getExtensionOperationKind(kind: TspArmOperationType): string {
   switch (kind) {

@@ -134,7 +134,7 @@
         "IsTenantResource": false,
         "IsSubscriptionResource": false,
         "IsManagementGroupResource": false,
-        "IsExtensionResource": false,
+        "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
       }
     ]

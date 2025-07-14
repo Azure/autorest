@@ -1,0 +1,35 @@
+{
+  "operationId": "GroupQuotas_Update",
+  "parameters": {
+    "GroupQuotasPatchRequestBody": {
+      "properties": {
+        "displayName": "UpdatedGroupQuota1"
+      }
+    },
+    "api-version": "2025-03-01",
+    "groupQuotaName": "groupquota1",
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "groupquota1",
+        "type": "Microsoft.Quota/groupQuotas",
+        "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1",
+        "properties": {
+          "displayName": "UpdatedGroupQuota1",
+          "provisioningState": "Accepted"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus",
+        "Operation-Location": "https://contoso.com/operationstatus",
+        "location": "https://contoso.com/operationstatus",
+        "retry-after": "30"
+      }
+    }
+  },
+  "title": "GroupQuotas_Patch_Request_ForCompute"
+}

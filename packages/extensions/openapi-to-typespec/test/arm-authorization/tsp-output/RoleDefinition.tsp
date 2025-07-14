@@ -29,82 +29,34 @@ interface RoleDefinitions {
   /**
    * Get role definition by name (GUID).
    */
-  get is ArmResourceRead<
-    RoleDefinition,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * The scope of the role definition.
-       */
-      @path
-      scope: string;
-
-      /**
-       * The ID of the role definition.
-       */
-      @path
-      roleDefinitionId: string;
-    }
-  >;
+  get is Extension.Read<Extension.ScopeParameter, RoleDefinition>;
 
   /**
    * Creates or updates a role definition.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is Extension.CreateOrReplaceSync<
+    Extension.ScopeParameter,
     RoleDefinition,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * The scope of the role definition.
-       */
-      @path
-      scope: string;
-
-      /**
-       * The ID of the role definition.
-       */
-      @path
-      roleDefinitionId: string;
-    },
     Response = ArmResourceCreatedSyncResponse<RoleDefinition>
   >;
 
   /**
    * Deletes a role definition.
    */
-  delete is ArmResourceDeleteSync<
+  delete is Extension.DeleteSync<
+    Extension.ScopeParameter,
     RoleDefinition,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * The scope of the role definition.
-       */
-      @path
-      scope: string;
-
-      /**
-       * The ID of the role definition to delete.
-       */
-      @path
-      roleDefinitionId: string;
-    },
     Response = ArmResponse<RoleDefinition> | ArmDeletedNoContentResponse
   >;
 
   /**
    * Get all role definitions that are applicable at scope and above.
    */
-  list is ArmResourceListByParent<
+  list is Extension.ListByTarget<
+    Extension.ScopeParameter,
     RoleDefinition,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
-      /**
-       * The scope of the role definition.
-       */
-      @path
-      scope: string;
-
       /**
        * The filter to apply on the operation. Use atScopeAndBelow filter to search below the given scope as well.
        */
