@@ -1,16 +1,11 @@
-import { ArraySchema, isObjectSchema, Operation, SchemaResponse } from "@autorest/codemodel";
-import { isArraySchema, isResponseSchema } from "../utils/schemas";
+import { Operation } from "@autorest/codemodel";
 import { lastWordToSingular } from "../utils/strings";
 import {
   ManagementGroupPath,
-  ManagementGroupScopePrefix,
   ProvidersSegment,
   ResourceGroupPath,
-  ResourceGroupScopePrefix,
   SubscriptionPath,
-  SubscriptionScopePrefix,
   TenantPath,
-  TenantScopePrefix,
 } from "./constants";
 import { getResourceDataSchema, OperationSet } from "./operation-set";
 import { getPagingItemType } from "./resource-equivalent";
@@ -152,6 +147,7 @@ export function getParents(requestPath: string, operationSets: OperationSet[]): 
 
   if (segments[segments.length - 2] === "providers") segments = segments.slice(0, -2);
   const parentPath = segments.join("/");
+  if (parentPath === ManagementGroupPath) return ["ManagementGroupResource"];
   if (parentPath === ResourceGroupPath) return ["ResourceGroupResource"];
   if (parentPath === SubscriptionPath) return ["SubscriptionResource"];
   if (parentPath === TenantPath) return ["TenantResource"];

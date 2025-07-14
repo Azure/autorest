@@ -1,8 +1,6 @@
-import { readFileSync } from "fs";
-import { join } from "path";
 import { CodeModel, isObjectSchema, ObjectSchema, Operation, SchemaResponse } from "@autorest/codemodel";
-import { getArmCommonTypeVersion, getSession, isCommonTypeModel } from "../autorest-session";
-import { TypespecObject, TspArmResource, TypespecEnum } from "../interfaces";
+import { getSession, isCommonTypeModel } from "../autorest-session";
+import { TypespecObject, TypespecEnum } from "../interfaces";
 import { getSkipList } from "./type-mapping";
 export interface _ArmResourceOperation {
   Name: string;
@@ -48,11 +46,15 @@ export interface ArmResource {
   IsTenantResource: boolean;
   IsSubscriptionResource: boolean;
   IsManagementGroupResource: boolean;
-  IsExtensionResource: boolean;
+  ScopeType: ScopeType;
   IsSingletonResource: boolean;
 }
 
-let metadataCache: Metadata | undefined;
+export type ScopeType = "NA" | "Scope" | "Tenant" | "Subscription" | "ResourceGroup" | "ManagementGroup" | "Extension";
+
+export function isExtensionScopeType(scopeType: ScopeType): boolean {
+  return ["Scope", "Tenant", "Subscription", "ManagementGroup", "Extension"].includes(scopeType);
+}
 
 export interface OperationWithResourceOperationFlag extends Operation {
   isResourceOperation?: boolean;

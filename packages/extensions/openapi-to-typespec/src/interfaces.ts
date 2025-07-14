@@ -267,6 +267,8 @@ export interface TspArmResourceOperationBase
   augmentedDecorators?: string[];
   patchModel?: string;
   optionalRequestBody?: boolean;
+  targetResource?: string;
+  extensionResource?: string;
 }
 
 export interface TspArmResourceActionOperation extends TspArmResourceOperationBase {
@@ -355,10 +357,23 @@ export interface TspArmResourceOperationGroup {
   interfaceName: string;
   resourceOperations: TspArmResourceOperation[];
   legacyOperationGroup?: TspArmResourceLegacyOperationGroup;
+  externalResource?: TspExternalResource;
 }
 
 export interface TspArmResourceLegacyOperationGroup {
+  type: "Normal" | "Extension";
   interfaceName: string;
-  parentParameters: string[];
-  resourceTypeParameter: string;
+  targetParentParameters: string[];
+  instanceParameters: string[];
+  extensionParentParameters?: string[];
+}
+
+export interface TspExternalResource {
+  aliasName: string;
+  targetNamespace: string;
+  resourceType: string;
+  resourceParameterName: string;
+  namePattern?: string;
+  nameType?: string;
+  description?: string;
 }

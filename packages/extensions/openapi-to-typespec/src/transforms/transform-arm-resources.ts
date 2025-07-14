@@ -1,6 +1,6 @@
 import { Operation, Parameter, Property, SchemaType } from "@autorest/codemodel";
 import _ from "lodash";
-import { singular } from "pluralize";
+import pluralize, { singular } from "pluralize";
 import { getSession } from "../autorest-session";
 import { getDataTypes } from "../data-types";
 import {
@@ -22,6 +22,7 @@ import {
   TspArmResourceLegacyOperationGroup,
   TspArmResourceOperationGroup,
   TypespecSpreadStatement,
+  TspExternalResource,
 } from "../interfaces";
 import { transformDataType } from "../model";
 import { getOptions, updateOptions } from "../options";
@@ -36,6 +37,7 @@ import {
   ArmResourceSchema,
   _ArmResourceOperation,
   getResourceOperations,
+  isExtensionScopeType,
   isResourceSchema,
 } from "../utils/resource-discovery";
 import { isStringSchema } from "../utils/schemas";
@@ -100,7 +102,7 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
   const armResourceOperationGroups = getTspOperationGroups(schema);
 
   const decorators = buildResourceDecorators(schema);
-  if (schema.resourceMetadata[0].IsExtensionResource) {
+  if (schema.resourceMetadata[0].ScopeType === "Scope") {
     decorators.push({ name: "extensionResource" });
   }
 
@@ -176,16 +178,19 @@ function getTspOperationGroups(armSchema: ArmResourceSchema): TspArmResourceOper
     // action operation
     tspOperations.push(...convertResourceActionOperations(resourceMetadata, operations));
 
+    const externalResource = resourceMetadata.ScopeType === "Extension" ? convertExternalResourceForExtension(resourceMetadata) : undefined;
+
     if (armSchema.resourceMetadata.length === 1) {
       return [
         {
           isLegacy: false,
           interfaceName,
           resourceOperations: tspOperations,
+          externalResource
         },
       ];
     }
-
+    
     operationGroups.push({
       isLegacy: true,
       interfaceName,
@@ -197,47 +202,98 @@ function getTspOperationGroups(armSchema: ArmResourceSchema): TspArmResourceOper
   return operationGroups;
 }
 
+// TO-DO: add NamePattern, NameType, and Description
+function convertExternalResourceForExtension(armResource: ArmResource): TspExternalResource {
+  const pathSegments = armResource.GetOperation!.Path.split("/").filter((s) => s !== "");
+  const providerIndex = pathSegments.indexOf("providers");
+  if (providerIndex === -1 || providerIndex + 3 >= pathSegments.length) {
+    logger().error(`Invalid path for external resource: ${armResource.GetOperation!.Path}`);
+  }
+  const resourceType = pathSegments[providerIndex + 2];
+  const aliasName = `${singular(resourceType)}ExternalResource`;
+  return {
+    aliasName,
+    targetNamespace: pathSegments[providerIndex + 1],
+    resourceType,
+    resourceParameterName: pathSegments[providerIndex + 3],
+  };
+}
+
 function convertLegacyOperationGroup(armResource: ArmResource): TspArmResourceLegacyOperationGroup {
   const pathParameters = getPathParameters(armResource);
-  const lastParameter = pathParameters.pop();
+  //const lastParameter = pathParameters.pop();
 
-  const parentParameters: string[] = ["...ApiVersionParameter"];
-  for (const parameter of pathParameters) {
+  const isExtensionResource = isExtensionScopeType(armResource.ScopeType);
+  let externalProviderFound: boolean = false;
+  let instanceProviderFound: boolean = false;
+  const targetParentParameters: string[] = ["...ApiVersionParameter"];
+  const instanceParameters: string[] = [];
+  const extensionParentParameters: string[] = [];
+  for (let i = 0; i < pathParameters.length; i++) {
+    const parameter = pathParameters[i];
     if (parameter.keyName === "subscriptionId") {
-      parentParameters.push("...SubscriptionIdParameter");
+      targetParentParameters.push("...SubscriptionIdParameter");
     } else if (parameter.keyName === "resourceGroupName") {
-      parentParameters.push("...ResourceGroupParameter");
+      targetParentParameters.push("...ResourceGroupParameter");
     } else if (parameter.keyName === "location") {
-      parentParameters.push("...LocationParameter");
+      targetParentParameters.push("...LocationParameter");
     } else if (parameter.segmentName === "providers") {
-      parentParameters.push("...Azure.ResourceManager.Legacy.Provider");
+      if (isExtensionResource) {
+        if (externalProviderFound === false) {
+          targetParentParameters.push(`/** the provider namespace */ @path @segment("providers") @key providerNamespace: "${parameter.keyName}"`);          
+          externalProviderFound = true;
+        }
+        else {
+          instanceParameters.push(`...Extension.ExtensionProviderNamespace<${armResource.Name}>`);
+          extensionParentParameters.push(`...Extension.ExtensionProviderNamespace<${armResource.Name}>`);
+          instanceProviderFound = true;
+        }
+      }
+      else {
+        targetParentParameters.push("...Azure.ResourceManager.Legacy.Provider");
+        instanceProviderFound = true;
+      }
     } else {
       const resourceNameParameter = buildResourceNameParameterForSegment(
         parameter.segmentName,
         parameter.keyName,
         parameter.pattern,
-      );
-      if (resourceNameParameter) {
-        parentParameters.push(resourceNameParameter);
-      } else {
-        parentParameters.push(
-          `/** ${parameter.segmentName} */\n@path @segment("${parameter.segmentName}") ${parameter.keyName}: string`,
-        );
+      ) ?? `/** ${parameter.segmentName} */\n@path @segment("${parameter.segmentName}") @key ${parameter.pattern ? `@pattern("${parameter.pattern}")` : ""} ${parameter.keyName}: string`;
+      if (instanceProviderFound && isExtensionResource) {
+        instanceParameters.push(resourceNameParameter);
+        if (i !== pathParameters.length - 1) {
+          extensionParentParameters.push(resourceNameParameter);
+        }
+      }
+      else {
+        if (i !== pathParameters.length - 1) {
+          targetParentParameters.push(resourceNameParameter);
+        }
+        else {
+          instanceParameters.push(resourceNameParameter);
+        }
       }
     }
   }
 
-  const resourceTypeParameter = `KeysOf<ResourceNameParameter<
-    Resource = ${armResource.SwaggerModelName},
-    KeyName = "${lastParameter!.keyName}",
-    SegmentName = "${lastParameter!.segmentName}",
-    NamePattern = "${lastParameter!.pattern}"
-  >>`;
+  // const resourceTypeParameter = `KeysOf<ResourceNameParameter<
+  //   Resource = ${armResource.SwaggerModelName},
+  //   KeyName = "${lastParameter!.keyName}",
+  //   SegmentName = "${lastParameter!.segmentName}",
+  //   NamePattern = "${lastParameter!.pattern}"
+  // >>`;
   const interfaceName = `${singular(getTSPOperationGroupName(armResource))}Ops`;
-  return {
+  return isExtensionResource ? {
+    type: "Extension",
     interfaceName,
-    parentParameters,
-    resourceTypeParameter,
+    targetParentParameters,
+    instanceParameters,
+    extensionParentParameters
+  } : {
+    type: "Normal",
+    interfaceName,
+    targetParentParameters,
+    instanceParameters,
   };
 }
 
@@ -935,7 +991,7 @@ function buildNewArmOperation(
   kind: TspArmOperationType,
 ): TspArmResourceOperationBase {
   const { baseParameters, parameters } = buildOperationParameters(swaggerOperation, resourceMetadata);
-  return {
+  const armOperation: TspArmResourceOperationBase = {
     doc: operation.Description,
     kind,
     name: getOperationName(getTSPOperationGroupName(resourceMetadata), operation.OperationID),
@@ -946,6 +1002,21 @@ function buildNewArmOperation(
     examples: swaggerOperation.extensions?.["x-ms-examples"],
     clientDecorators: getOperationClientDecorators(swaggerOperation),
   };
+
+  if (resourceMetadata.ScopeType === "Scope") {
+    armOperation.baseParameters = undefined;
+    armOperation.targetResource = "Extension.ScopeParameter";
+    armOperation.extensionResource = armOperation.resource;
+  }
+  else if (resourceMetadata.ScopeType === "ManagementGroup") {
+    armOperation.baseParameters = undefined;
+    armOperation.targetResource = "Extension.ManagementGroup";
+    armOperation.extensionResource = armOperation.resource;
+  }
+  else if (resourceMetadata.ScopeType === "Extension") {
+    armOperation.baseParameters = undefined;
+  }
+  return armOperation;
 }
 
 function buildSuppressionsForArmOperation(
@@ -1016,9 +1087,14 @@ function getOperationName(interfaceName: string, operationId: string): string {
   return operationName;
 }
 
-function getPathParameters(resource: ArmResource): { segmentName: string; keyName: string; pattern: string }[] {
+function getPathParameters(resource: ArmResource): { segmentName: string; keyName: string; pattern: string, description: string | undefined }[] {
   const pathParameters = [];
   const pathSegments = resource.GetOperation!.Path.split("/").filter((s) => s !== "");
+
+  if (pathSegments[1] === "providers" && pathSegments[0].startsWith("{") && pathSegments[0].endsWith("}")) {
+    pathParameters.push({keyName: pathSegments[0].replace("{", "").replace("}", ""), segmentName: "", pattern: "", description: undefined});
+    pathSegments.shift();
+  }
   for (let i = 0; i + 1 < pathSegments.length; i += 2) {
     const operation = getSession()
       .model.operationGroups.flatMap((og) => og.operations)
@@ -1031,7 +1107,7 @@ function getPathParameters(resource: ArmResource): { segmentName: string; keyNam
         ? escapeRegex(parameter.schema.pattern)
         : "";
 
-    pathParameters.push({ segmentName: pathSegments[i], keyName, pattern });
+    pathParameters.push({ segmentName: pathSegments[i], keyName, pattern, description: parameter?.language.default.description });
   }
   return pathParameters;
 }
@@ -1058,9 +1134,7 @@ function buildOperationParameters(
 
   // By default we don't need any base parameters.
   const parameterTemplate: string[] = [];
-  if (resource.IsExtensionResource) {
-    parameterTemplate.push(getFullyQualifiedName("ExtensionBaseParameters"));
-  } else if (resource.IsTenantResource) {
+  if (resource.IsTenantResource) {
     parameterTemplate.push(getFullyQualifiedName("TenantBaseParameters"));
   } else if (resource.IsSubscriptionResource) {
     parameterTemplate.push(getFullyQualifiedName("SubscriptionBaseParameters"));
@@ -1105,7 +1179,7 @@ function getParentResource(schema: ArmResourceSchema): TspArmResource | undefine
 }
 
 function getResourceKind(schema: ArmResourceSchema): ArmResourceKind {
-  if (schema.resourceMetadata[0].IsExtensionResource) {
+  if (schema.resourceMetadata[0].ScopeType === "Scope") {
     return "ExtensionResource";
   }
 

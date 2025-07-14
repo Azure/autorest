@@ -107,11 +107,19 @@ function generateArmResourceOperationGroup(operationGroup: TspArmResourceOperati
     definitions.push(
       `interface ${
         operationGroup.legacyOperationGroup!.interfaceName
-      } extends Azure.ResourceManager.Legacy.LegacyOperations<{${operationGroup.legacyOperationGroup!.parentParameters.join(
+      } extends Azure.ResourceManager.Legacy.${operationGroup.legacyOperationGroup?.type === "Normal" ? "LegacyOperations" : "ExtensionOperations"}<{${operationGroup.legacyOperationGroup!.targetParentParameters.join(
         ";",
-      )}}, ${operationGroup.legacyOperationGroup!.resourceTypeParameter}> {}`,
+      )}}, ${operationGroup.legacyOperationGroup?.type === "Normal" ? "" : `{${operationGroup.legacyOperationGroup!.extensionParentParameters!.join(";")}},`}{${operationGroup.legacyOperationGroup!.instanceParameters.join(";")}}> {}`,
     );
     definitions.push("\n");
+  }
+
+  if (operationGroup.externalResource) {
+    definitions.push(
+      `alias ${operationGroup.externalResource.aliasName} = Extension.ExternalResource<"${operationGroup.externalResource.targetNamespace}"
+      , "${operationGroup.externalResource.resourceType}", "${operationGroup.externalResource.resourceParameterName}">;
+      `
+    )
   }
 
   definitions.push("@armResourceOperations");
@@ -138,12 +146,10 @@ function generateArmResourceOperationGroup(operationGroup: TspArmResourceOperati
 
     const operationKind = operationGroup.isLegacy
       ? `${operationGroup.legacyOperationGroup!.interfaceName}.${getLegacyOperationKind(operation.kind)}`
-      : isPatchWithOptionalBody(operation)
-        ? `Azure.ResourceManager.Legacy.${operation.kind.replace("Arm", "")}`
-        : operation.kind;
+      : getOperationKind(operation);
     if (operation.kind === "ArmResourceActionSync" || operation.kind === "ArmResourceActionAsync") {
       definitions.push(
-        `${operation.name} is ${operationKind}<${operation.resource}, ${generateArmRequest(
+        `${operation.name} is ${operationKind}<${operation.targetResource ? `${operation.targetResource}, ` : ""}${operation.resource}, ${generateArmRequest(
           operation.request,
         )}, ${generateArmResponse(operation.response)}${
           operation.baseParameters && !operationGroup.isLegacy
@@ -155,7 +161,7 @@ function generateArmResourceOperationGroup(operationGroup: TspArmResourceOperati
       );
     } else if (operation.kind === "ArmResourceActionAsyncBase") {
       definitions.push(
-        `${operation.name} is ${operationKind}<${operation.resource}, ${generateArmRequest(
+        `${operation.name} is ${operationKind}<${operation.targetResource ? `${operation.targetResource}, ` : ""}${operation.resource}, ${generateArmRequest(
           operation.request,
         )}, ${generateArmResponse(operation.response)}, BaseParameters = ${operation.baseParameters![0]}${
           operation.parameters ? `, Parameters = { ${generateParameters(operation.parameters)} }` : ""
@@ -163,7 +169,7 @@ function generateArmResourceOperationGroup(operationGroup: TspArmResourceOperati
       );
     } else {
       definitions.push(
-        `${operation.name} is ${operationKind}<${operation.resource}${
+        `${operation.name} is ${operationKind}<${operation.targetResource ? `${operation.targetResource}, ` : ""}${operation.resource}${
           operation.patchModel ? `, PatchModel = ${operation.patchModel}` : ""
         }${
           operation.baseParameters && !operationGroup.isLegacy
@@ -187,6 +193,49 @@ function isPatchWithOptionalBody(operation: TspArmResourceOperation): boolean {
     (operation.kind === "ArmCustomPatchAsync" || operation.kind === "ArmCustomPatchSync") &&
     operation.optionalRequestBody === true
   );
+}
+
+function getOperationKind(operation: TspArmResourceOperation): string {
+  if (operation.targetResource) return `Extension.${getExtensionOperationKind(operation.kind)}`;
+  if (isPatchWithOptionalBody(operation)) return `Azure.ResourceManager.Legacy.${operation.kind.replace("Arm", "")}`;
+  return operation.kind;
+} 
+
+function getExtensionOperationKind(kind: TspArmOperationType): string {
+  switch (kind) {
+    case "ArmResourceRead":
+      return "Read";
+    case "ArmResourceCheckExistence":
+      return "CheckExistence";
+    case "ArmResourceCreateOrReplaceSync":
+      return "CreateOrReplaceSync";
+    case "ArmResourceCreateOrReplaceAsync":
+      return "CreateOrReplaceAsync";
+    case "ArmResourcePatchSync":
+      return "CustomPatchSync";
+    case "ArmResourcePatchAsync":
+      return "CustomPatchAsync";
+    case "ArmCustomPatchSync":
+      return "CustomPatchSync";
+    case "ArmCustomPatchAsync":
+      return "CustomPatchAsync";
+    case "ArmResourceDeleteSync":
+      return "DeleteSync";
+    case "ArmResourceDeleteWithoutOkAsync":
+      return "DeleteWithoutOkAsync";
+    case "ArmResourceActionSync":
+      return "ActionSync";
+    case "ArmResourceActionAsync":
+      return "ActionAsync";
+    case "ArmResourceActionAsyncBase":
+      return "ActionAsyncBase";
+    case "ArmResourceListByParent":
+      return "ListByTarget";
+    case "ArmListBySubscription":
+      return "List";
+    case "ArmResourceListAtScope":
+      return "List";
+  }
 }
 
 function getLegacyOperationKind(kind: TspArmOperationType): string {
