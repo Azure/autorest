@@ -1,0 +1,14 @@
+{
+  "parameters": {
+    "api-version": "2024-04-05",
+    "guestConfigurationAssignmentName": "SecureProtocol",
+    "machineName": "myMachineName",
+    "resourceGroupName": "myResourceGroupName",
+    "subscriptionId": "mySubscriptionId"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "GuestConfigurationHCRPAssignments_Delete",
+  "title": "Delete an guest configuration assignment"
+}

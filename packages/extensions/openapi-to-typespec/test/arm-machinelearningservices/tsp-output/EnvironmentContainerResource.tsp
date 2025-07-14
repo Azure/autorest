@@ -33,19 +33,22 @@ interface EnvironmentContainerResourceOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = Registry,
-          KeyName = "registryName",
-          SegmentName = "registries",
-          NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$"
-        >>,
+
+        /** Name of Azure Machine Learning registry. This is case-insensitive */
+        @path
+        @segment("registries")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
+        registryName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = EnvironmentContainerResource,
-        KeyName = "environmentName",
-        SegmentName = "environments",
-        NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-      >>
+      {
+        /** Container name. This is case-sensitive. */
+        @path
+        @segment("environments")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+        environmentName: string,
+      }
     > {}
 
 @armResourceOperations
@@ -106,19 +109,21 @@ interface EnvironmentContainerOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = Workspace,
-          KeyName = "workspaceName",
-          SegmentName = "workspaces",
-          NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-        >>,
+
+        /** Name of Azure Machine Learning workspace. */
+        @path
+        @segment("workspaces")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        workspaceName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = EnvironmentContainerResource,
-        KeyName = "name",
-        SegmentName = "environments",
-        NamePattern = ""
-      >>
+      {
+        /** Container name. This is case-sensitive. */
+        @path
+        @segment("environments")
+        @key
+        name: string,
+      }
     > {}
 
 @armResourceOperations

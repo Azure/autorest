@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "id": "2B5C8515-37D8-4B6A-879B-CD641A2CF605",
+    "scope": "subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "2B5C8515-37D8-4B6A-879B-CD641A2CF605",
+        "type": "Microsoft.Quota/quotaRequests",
+        "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotaRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605",
+        "properties": {
+          "message": "Request completed",
+          "provisioningState": "Succeeded",
+          "requestSubmitTime": "2019-08-19T19:23:17.904Z",
+          "value": [
+            {
+              "name": {
+                "localizedValue": "Standard NC Promo Family vCPUs",
+                "value": "standardNCPromoFamily"
+              },
+              "limit": {
+                "limitObjectType": "LimitValue",
+                "value": 50
+              },
+              "message": "Request completed",
+              "provisioningState": "Succeeded",
+              "unit": "Count"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "QuotaRequestStatus_Get",
+  "title": "QuotaRequestStatus"
+}

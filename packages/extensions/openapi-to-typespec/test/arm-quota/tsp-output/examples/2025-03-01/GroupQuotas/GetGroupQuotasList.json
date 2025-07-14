@@ -1,0 +1,26 @@
+{
+  "operationId": "GroupQuotas_List",
+  "parameters": {
+    "api-version": "2025-03-01",
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://yourLinkHere.com",
+        "value": [
+          {
+            "name": "groupquota1",
+            "type": "Microsoft.Quota/groupQuotas",
+            "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1",
+            "properties": {
+              "displayName": "GroupQuota1",
+              "provisioningState": "Accepted"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "title": "GroupQuotas_List_Request_ForCompute"
+}

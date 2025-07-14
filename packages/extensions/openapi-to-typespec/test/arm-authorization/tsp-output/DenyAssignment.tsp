@@ -29,30 +29,14 @@ interface DenyAssignments {
   /**
    * Get the specified deny assignment.
    */
-  get is ArmResourceRead<
-    DenyAssignment,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * The scope of the deny assignment.
-       */
-      @path
-      scope: string;
-
-      /**
-       * The ID of the deny assignment to get.
-       */
-      @path
-      denyAssignmentId: string;
-    }
-  >;
+  get is Extension.Read<Extension.ScopeParameter, DenyAssignment>;
 
   /**
    * Gets deny assignments for a resource.
    */
-  listForResource is ArmResourceListByParent<
+  listForResource is Extension.ListByTarget<
+    Extension.ScopeParameter,
     DenyAssignment,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
       ...SubscriptionIdParameter;
       ...ResourceGroupParameter;

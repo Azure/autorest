@@ -1,0 +1,98 @@
+{
+  "operationId": "GroupQuotaLimitsRequest_Update",
+  "parameters": {
+    "api-version": "2025-03-01",
+    "groupQuotaName": "groupquota1",
+    "groupQuotaRequest": {
+      "properties": {
+        "value": [
+          {
+            "properties": {
+              "comment": "Contoso requires more quota.",
+              "limit": 110,
+              "resourceName": "standardddv4family"
+            }
+          },
+          {
+            "properties": {
+              "comment": "Contoso requires more quota.",
+              "limit": 110,
+              "resourceName": "standardav2family"
+            }
+          }
+        ]
+      }
+    },
+    "location": "westus",
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
+    "resourceProviderName": "Microsoft.Compute"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "westus",
+        "type": "Microsoft.Quota/groupQuotas/groupQuotaLimits",
+        "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/groupQuotaLimits/westus",
+        "properties": {
+          "nextLink": "https://yourLinkHere.com",
+          "provisioningState": "Succeeded",
+          "value": [
+            {
+              "properties": {
+                "name": {
+                  "localizedValue": "standard DDv4 Family vCPUs",
+                  "value": "standardddv4family"
+                },
+                "allocatedToSubscriptions": {
+                  "value": [
+                    {
+                      "quotaAllocated": 20,
+                      "subscriptionId": "00000000-0000-0000-0000-000000000000"
+                    },
+                    {
+                      "quotaAllocated": 30,
+                      "subscriptionId": "A000000-0000-0000-0000-000000000000"
+                    }
+                  ]
+                },
+                "availableLimit": 50,
+                "limit": 100,
+                "resourceName": "standardddv4family",
+                "unit": "count"
+              }
+            },
+            {
+              "properties": {
+                "name": {
+                  "localizedValue": "Standard AV2 Family vCPUs",
+                  "value": "standardav2family"
+                },
+                "allocatedToSubscriptions": {
+                  "value": [
+                    {
+                      "quotaAllocated": 20,
+                      "subscriptionId": "00000000-0000-0000-0000-000000000000"
+                    }
+                  ]
+                },
+                "availableLimit": 80,
+                "limit": 100,
+                "resourceName": "standardav2family",
+                "unit": "count"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus",
+        "Operation-Location": "https://contoso.com/operationstatus",
+        "location": "https://contoso.com/operationstatus",
+        "retry-after": "30"
+      }
+    }
+  },
+  "title": "GroupQuotaLimitsRequests_Update"
+}

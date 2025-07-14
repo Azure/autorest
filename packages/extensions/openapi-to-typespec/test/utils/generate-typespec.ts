@@ -13,7 +13,9 @@ const brownFieldProjects = [
   "arm-azureintegrationspaces",
   "arm-compute",
   "arm-dns",
+  "arm-guestconfiguration",
   "arm-machinelearningservices",
+  "arm-quota",
   "arm-storage",
 ];
 

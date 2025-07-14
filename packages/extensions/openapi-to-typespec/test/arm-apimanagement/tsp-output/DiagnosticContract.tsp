@@ -33,25 +33,28 @@ interface DiagnosticContractOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = ApiManagementServiceResource,
-          KeyName = "serviceName",
-          SegmentName = "service",
-          NamePattern = "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
-        >>,
-        ...KeysOf<ResourceNameParameter<
-          Resource = ApiContract,
-          KeyName = "apiId",
-          SegmentName = "apis",
-          NamePattern = ""
-        >>,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        serviceName: string,
+
+        /** API identifier. Must be unique in the current API Management service instance. */
+        @path
+        @segment("apis")
+        @key
+        apiId: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = DiagnosticContract,
-        KeyName = "diagnosticId",
-        SegmentName = "diagnostics",
-        NamePattern = "^[^*#&+:<>?]+$"
-      >>
+      {
+        /** Diagnostic identifier. Must be unique in the current API Management service instance. */
+        @path
+        @segment("diagnostics")
+        @key
+        @pattern("^[^*#&+:<>?]+$")
+        diagnosticId: string,
+      }
     > {}
 
 @armResourceOperations
@@ -157,19 +160,22 @@ interface DiagnosticOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = ApiManagementServiceResource,
-          KeyName = "serviceName",
-          SegmentName = "service",
-          NamePattern = "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
-        >>,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        serviceName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = DiagnosticContract,
-        KeyName = "diagnosticId",
-        SegmentName = "diagnostics",
-        NamePattern = "^[^*#&+:<>?]+$"
-      >>
+      {
+        /** Diagnostic identifier. Must be unique in the current API Management service instance. */
+        @path
+        @segment("diagnostics")
+        @key
+        @pattern("^[^*#&+:<>?]+$")
+        diagnosticId: string,
+      }
     > {}
 
 @armResourceOperations

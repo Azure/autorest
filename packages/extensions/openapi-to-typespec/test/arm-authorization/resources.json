@@ -82,7 +82,7 @@
         "IsTenantResource": false,
         "IsSubscriptionResource": false,
         "IsManagementGroupResource": false,
-        "IsExtensionResource": true,
+        "ScopeType": "Scope",
         "IsSingletonResource": false
       }
     ],
@@ -129,7 +129,7 @@
         "IsTenantResource": true,
         "IsSubscriptionResource": false,
         "IsManagementGroupResource": false,
-        "IsExtensionResource": false,
+        "ScopeType": "Tenant",
         "IsSingletonResource": false
       }
     ],
@@ -203,7 +203,7 @@
         "IsTenantResource": false,
         "IsSubscriptionResource": false,
         "IsManagementGroupResource": false,
-        "IsExtensionResource": true,
+        "ScopeType": "Scope",
         "IsSingletonResource": false
       }
     ],
@@ -277,7 +277,7 @@
         "IsTenantResource": false,
         "IsSubscriptionResource": false,
         "IsManagementGroupResource": false,
-        "IsExtensionResource": true,
+        "ScopeType": "Scope",
         "IsSingletonResource": false
       }
     ],
@@ -324,7 +324,7 @@
         "IsTenantResource": false,
         "IsSubscriptionResource": false,
         "IsManagementGroupResource": false,
-        "IsExtensionResource": true,
+        "ScopeType": "Scope",
         "IsSingletonResource": false
       }
     ],
@@ -371,7 +371,7 @@
         "IsTenantResource": false,
         "IsSubscriptionResource": false,
         "IsManagementGroupResource": false,
-        "IsExtensionResource": true,
+        "ScopeType": "Scope",
         "IsSingletonResource": false
       }
     ],
@@ -455,7 +455,7 @@
         "IsTenantResource": false,
         "IsSubscriptionResource": false,
         "IsManagementGroupResource": false,
-        "IsExtensionResource": true,
+        "ScopeType": "Scope",
         "IsSingletonResource": false
       }
     ],
@@ -502,7 +502,7 @@
         "IsTenantResource": false,
         "IsSubscriptionResource": false,
         "IsManagementGroupResource": false,
-        "IsExtensionResource": true,
+        "ScopeType": "Scope",
         "IsSingletonResource": false
       }
     ],
@@ -549,7 +549,7 @@
         "IsTenantResource": false,
         "IsSubscriptionResource": false,
         "IsManagementGroupResource": false,
-        "IsExtensionResource": true,
+        "ScopeType": "Scope",
         "IsSingletonResource": false
       }
     ],
@@ -633,7 +633,7 @@
         "IsTenantResource": false,
         "IsSubscriptionResource": false,
         "IsManagementGroupResource": false,
-        "IsExtensionResource": true,
+        "ScopeType": "Scope",
         "IsSingletonResource": false
       }
     ],
@@ -689,7 +689,7 @@
         "IsTenantResource": false,
         "IsSubscriptionResource": false,
         "IsManagementGroupResource": false,
-        "IsExtensionResource": true,
+        "ScopeType": "Scope",
         "IsSingletonResource": false
       }
     ],
@@ -754,7 +754,7 @@
         "IsTenantResource": false,
         "IsSubscriptionResource": false,
         "IsManagementGroupResource": false,
-        "IsExtensionResource": true,
+        "ScopeType": "Scope",
         "IsSingletonResource": false
       }
     ]

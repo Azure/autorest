@@ -29,60 +29,24 @@ interface RoleManagementPolicies {
   /**
    * Get the specified role management policy for a resource scope
    */
-  get is ArmResourceRead<
-    RoleManagementPolicy,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * The scope of the role management policy.
-       */
-      @path
-      scope: string;
-
-      /**
-       * The name (guid) of the role management policy to get.
-       */
-      @path
-      roleManagementPolicyName: string;
-    }
-  >;
+  get is Extension.Read<Extension.ScopeParameter, RoleManagementPolicy>;
 
   /**
    * Update a role management policy
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is Extension.CustomPatchSync<
+    Extension.ScopeParameter,
     RoleManagementPolicy,
-    PatchModel = RoleManagementPolicy,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * The scope of the role management policy to upsert.
-       */
-      @path
-      scope: string;
-
-      /**
-       * The name (guid) of the role management policy to upsert.
-       */
-      @path
-      roleManagementPolicyName: string;
-    }
+    PatchModel = RoleManagementPolicy
   >;
 
   /**
    * Gets role management policies for a resource scope.
    */
-  listForScope is ArmResourceListByParent<
-    RoleManagementPolicy,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * The scope of the role management policy.
-       */
-      @path
-      scope: string;
-    }
+  listForScope is Extension.ListByTarget<
+    Extension.ScopeParameter,
+    RoleManagementPolicy
   >;
 }
 

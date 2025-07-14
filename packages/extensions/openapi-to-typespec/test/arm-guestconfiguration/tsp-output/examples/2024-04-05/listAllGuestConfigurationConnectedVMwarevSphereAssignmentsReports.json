@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "api-version": "2024-04-05",
+    "guestConfigurationAssignmentName": "AuditSecureProtocol",
+    "resourceGroupName": "myResourceGroupName",
+    "subscriptionId": "mySubscriptionid",
+    "vmName": "myVMName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "7367cbb8-ae99-47d0-a33b-a283564d2cb1",
+            "id": "/subscriptions/mysubscriptionid/resourceGroups/myResourceGroupName/providers/Microsoft.Connectedvmwarevsphere/virtualmachines/myvm/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/AuditSecureProtocol/reports/7367cbb8-ae99-47d0-a33b-a283564d2cb1",
+            "properties": {
+              "assignment": {
+                "name": "AuditSecureProtocol",
+                "configuration": {
+                  "name": "AuditSecureProtocol"
+                }
+              },
+              "complianceStatus": "Compliant",
+              "endTime": "2018-08-29T22:14:13Z",
+              "reportId": "7367cbb8-ae99-47d0-a33b-a283564d2cb1",
+              "startTime": "2018-08-29T22:13:53Z",
+              "vm": {
+                "id": "/subscriptions/mysubscriptionid/resourceGroups/myResourceGroupName/providers/Microsoft.Connectedvmwarevsphere/virtualmachines/myvm",
+                "uuid": "vmuuid"
+              },
+              "details": null
+            }
+          },
+          {
+            "name": "41ee2caf-48f9-4999-a793-82ec7c6beb2c",
+            "id": "/subscriptions/mysubscriptionid/resourceGroups/myResourceGroupName/providers/Microsoft.Connectedvmwarevsphere/virtualmachines/myvm/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/AuditSecureProtocol/reports/41ee2caf-48f9-4999-a793-82ec7c6beb2c",
+            "properties": {
+              "assignment": {
+                "name": "AuditSecureProtocol",
+                "configuration": {
+                  "name": "AuditSecureProtocol"
+                }
+              },
+              "complianceStatus": "Compliant",
+              "endTime": "2018-08-29T20:14:13Z",
+              "reportId": "41ee2caf-48f9-4999-a793-82ec7c6beb2c",
+              "startTime": "2018-08-29T20:13:53Z",
+              "vm": {
+                "id": "/subscriptions/mysubscriptionid/resourceGroups/myResourceGroupName/providers/Microsoft.Connectedvmwarevsphere/virtualmachines/myvm",
+                "uuid": "vmuuid"
+              },
+              "details": null
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "GuestConfigurationConnectedVMwarevSphereAssignmentsReports_List",
+  "title": "List all guest configuration assignments for a virtual machine"
+}

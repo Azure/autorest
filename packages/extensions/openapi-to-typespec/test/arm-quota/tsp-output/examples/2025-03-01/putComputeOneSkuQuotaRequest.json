@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "createQuotaRequest": {
+      "properties": {
+        "name": {
+          "value": "standardFSv2Family"
+        },
+        "limit": {
+          "limitObjectType": "LimitValue",
+          "value": 10
+        }
+      }
+    },
+    "resourceName": "standardFSv2Family",
+    "scope": "subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "standardFSv2Family",
+        "type": "Microsoft.Quota/quotas",
+        "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotas/standardFSv2Family",
+        "properties": {
+          "name": {
+            "value": "standardFSv2Family"
+          },
+          "limit": {
+            "limitObjectType": "LimitValue",
+            "value": 10
+          }
+        }
+      },
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotaRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605?api-version=2023-02-01"
+      }
+    },
+    "202": {
+      "headers": {
+        "Retry-After": "30",
+        "location": "https://management.azure.com/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/operationsStatus/2B5C8515-37D8-4B6A-879B-CD641A2CF605?api-version=2023-02-01"
+      }
+    }
+  },
+  "operationId": "Quota_CreateOrUpdate",
+  "title": "Quotas_Put_Request_ForCompute"
+}

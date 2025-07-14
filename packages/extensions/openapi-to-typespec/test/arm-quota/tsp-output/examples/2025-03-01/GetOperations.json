@@ -1,0 +1,159 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Microsoft.Quota/quotas/read",
+            "display": {
+              "description": "Get the current Service limit or quota of the specified resource",
+              "operation": "Get resource Quota limit",
+              "provider": "Microsoft.Quota",
+              "resource": "Resource Quota limit"
+            }
+          },
+          {
+            "name": "Microsoft.Quota/quotas/write",
+            "display": {
+              "description": "Creates the service limit or quota request for the specified resource",
+              "operation": "Creates resource Quota limit request",
+              "provider": "Microsoft.Quota",
+              "resource": "Resource Quota limit"
+            }
+          },
+          {
+            "name": "Microsoft.Quota/quotaRequests/read",
+            "display": {
+              "description": "Get any service limit request for the specified resource",
+              "operation": "Get Quota limit request",
+              "provider": "Microsoft.Quota",
+              "resource": "Resource Quota limit request"
+            }
+          },
+          {
+            "name": "Microsoft.Quota/usages/read",
+            "display": {
+              "description": "Get the usages for resource providers",
+              "operation": "Get the usages for providers",
+              "provider": "Microsoft.Quota",
+              "resource": "usages information"
+            }
+          },
+          {
+            "name": "Microsoft.Quota/operations/read",
+            "display": {
+              "description": "Get the Operations supported by Microsoft.Quota",
+              "operation": "Get the Operations supported by Microsoft.Quota",
+              "provider": "Microsoft.Quota",
+              "resource": "Read Operation"
+            }
+          },
+          {
+            "name": "Microsoft.Quota/register/action",
+            "display": {
+              "description": "Register the subscription with Microsoft.Quota Resource Provider",
+              "operation": "Register the subscription with Microsoft.Quota Resource Provider",
+              "provider": "Microsoft.Quota",
+              "resource": "Subscription registration with Resource provider"
+            }
+          },
+          {
+            "name": "Microsoft.Quota/groupQuotas/read",
+            "display": {
+              "description": "Get the GroupQuota",
+              "operation": "Get GroupQuota resource",
+              "provider": "Microsoft.Quota",
+              "resource": "GroupQuota resource"
+            }
+          },
+          {
+            "name": "Microsoft.Quota/groupQuotas/write",
+            "display": {
+              "description": "Creates the GroupQuota resource",
+              "operation": "Creates GroupQuota resource",
+              "provider": "Microsoft.Quota",
+              "resource": "GroupQuota Resource"
+            }
+          },
+          {
+            "name": "Microsoft.Quota/groupQuotas/subscriptions/read",
+            "display": {
+              "description": "Get the GroupQuota subscriptions",
+              "operation": "Get GroupQuota subscriptions",
+              "provider": "Microsoft.Quota",
+              "resource": "Subscriptions added to GroupQuota resource"
+            }
+          },
+          {
+            "name": "Microsoft.Quota/groupQuotas/subscriptions/write",
+            "display": {
+              "description": "Add Subscriptions to GroupQuota resource",
+              "operation": "Adds subscription to GroupQuota resource",
+              "provider": "Creates request to add subscription to GroupQuota resource",
+              "resource": "Subscriptions added to GroupQuota resource"
+            }
+          },
+          {
+            "name": "Microsoft.Quota/groupQuotas/groupQuotaLimits/read",
+            "display": {
+              "description": "Get the current GroupQuota of the specified resource",
+              "operation": "Get GroupQuota resource Quota limit",
+              "provider": "Microsoft.Quota",
+              "resource": "GroupQuota Resource Quota limit"
+            }
+          },
+          {
+            "name": "Microsoft.Quota/groupQuotas/groupQuotaLimits/write",
+            "display": {
+              "description": "Creates the GroupQuota request for the specified resource",
+              "operation": "Creates GroupQuota resource Quota limit request",
+              "provider": "Microsoft.Quota",
+              "resource": "GroupQuota Resource Quota limit"
+            }
+          },
+          {
+            "name": "Microsoft.Quota/groupQuotas/groupQuotaRequests/read",
+            "display": {
+              "description": "Get the GroupQuota request status for the specific request",
+              "operation": "Get GroupQuota request status",
+              "provider": "Microsoft.Quota",
+              "resource": "GroupQuota request"
+            }
+          },
+          {
+            "name": "Microsoft.Quota/groupQuotas/quotaAllocations/read",
+            "display": {
+              "description": "Get the current GroupQuota to Subscription Quota allocation",
+              "operation": "Get GroupQuota to Subscription Quota allocation",
+              "provider": "Microsoft.Quota",
+              "resource": "GroupQuota to Subscription Quota allocation"
+            }
+          },
+          {
+            "name": "Microsoft.Quota/groupQuotas/quotaAllocations/write",
+            "display": {
+              "description": "Creates the GroupQuota to subscription Quota limit request for the specified resource",
+              "operation": "Creates GroupQuota to subscription Quota limit request",
+              "provider": "Microsoft.Quota",
+              "resource": "GroupQuota to Subscription Quota allocation"
+            }
+          },
+          {
+            "name": "Microsoft.Quota/groupQuotas/quotaAllocationRequests/read",
+            "display": {
+              "description": "Get the GroupQuota to Subscription Quota allocation request status for the specific request",
+              "operation": "Get GroupQuota to Subscription Quota allocation request status",
+              "provider": "Microsoft.Quota",
+              "resource": "GroupQuota to Subscription Quota allocation request"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "QuotaOperation_List",
+  "title": "GetOperations"
+}

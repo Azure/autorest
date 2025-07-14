@@ -20,7 +20,7 @@ import {
   setResourceDataSchema,
 } from "./operation-set";
 import { getPagingItemType, isTrackedResource } from "./resource-equivalent";
-import { getResourceKey, getResourceKeySegment, getResourceType, isScopedPath, isSingleton } from "./utils";
+import { getExtensionResourceType, getResourceKey, getResourceKeySegment, getResourceType, isSingleton } from "./utils";
 
 const logger = () => getLogger("parse-metadata");
 
@@ -119,7 +119,7 @@ export function parseMetadata(codeModel: CodeModel, configuration: Record<string
             IsTenantResource: false,
             IsSubscriptionResource: false,
             IsManagementGroupResource: false,
-            IsExtensionResource: false,
+            ScopeType: "NA",
             IsSingletonResource: false,
           },
         ];
@@ -217,7 +217,7 @@ function buildResource(
     IsTenantResource: isTenantResource,
     IsSubscriptionResource: isSubscriptionResource,
     IsManagementGroupResource: isManagementGroupResource,
-    IsExtensionResource: isScopedPath(set.RequestPath),
+    ScopeType: getExtensionResourceType(set.RequestPath),
     IsSingletonResource: isSingleton(set),
   };
 }

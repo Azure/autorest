@@ -29,22 +29,10 @@ interface RoleAssignments {
   /**
    * Get a role assignment by scope and name.
    */
-  get is ArmResourceRead<
+  get is Extension.Read<
+    Extension.ScopeParameter,
     RoleAssignment,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
-      /**
-       * The scope of the operation or resource. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
-       */
-      @path
-      scope: string;
-
-      /**
-       * The name of the role assignment. It can be any valid GUID.
-       */
-      @path
-      roleAssignmentName: string;
-
       /**
        * Tenant ID for cross-tenant request
        */
@@ -56,43 +44,18 @@ interface RoleAssignments {
   /**
    * Create or update a role assignment by scope and name.
    */
-  create is ArmResourceCreateOrReplaceSync<
-    RoleAssignment,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * The scope of the operation or resource. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
-       */
-      @path
-      scope: string;
-
-      /**
-       * The name of the role assignment. It can be any valid GUID.
-       */
-      @path
-      roleAssignmentName: string;
-    }
+  create is Extension.CreateOrReplaceSync<
+    Extension.ScopeParameter,
+    RoleAssignment
   >;
 
   /**
    * Delete a role assignment by scope and name.
    */
-  delete is ArmResourceDeleteSync<
+  delete is Extension.DeleteSync<
+    Extension.ScopeParameter,
     RoleAssignment,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
-      /**
-       * The scope of the operation or resource. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
-       */
-      @path
-      scope: string;
-
-      /**
-       * The name of the role assignment. It can be any valid GUID.
-       */
-      @path
-      roleAssignmentName: string;
-
       /**
        * Tenant ID for cross-tenant request
        */
@@ -105,16 +68,10 @@ interface RoleAssignments {
   /**
    * List all role assignments that apply to a scope.
    */
-  listForScope is ArmResourceListByParent<
+  listForScope is Extension.ListByTarget<
+    Extension.ScopeParameter,
     RoleAssignment,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
-      /**
-       * The scope of the operation or resource. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
-       */
-      @path
-      scope: string;
-
       /**
        * The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal.
        */

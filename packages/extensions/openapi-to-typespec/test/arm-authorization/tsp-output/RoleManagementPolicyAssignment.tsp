@@ -29,60 +29,27 @@ interface RoleManagementPolicyAssignments {
   /**
    * Get the specified role management policy assignment for a resource scope
    */
-  get is ArmResourceRead<
-    RoleManagementPolicyAssignment,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * The scope of the role management policy.
-       */
-      @path
-      scope: string;
-
-      /**
-       * The name of format {guid_guid} the role management policy assignment to get.
-       */
-      @path
-      roleManagementPolicyAssignmentName: string;
-    }
+  get is Extension.Read<
+    Extension.ScopeParameter,
+    RoleManagementPolicyAssignment
   >;
 
   /**
    * Create a role management policy assignment
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  create is ArmResourceCreateOrReplaceSync<
+  create is Extension.CreateOrReplaceSync<
+    Extension.ScopeParameter,
     RoleManagementPolicyAssignment,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * The scope of the role management policy assignment to upsert.
-       */
-      @path
-      scope: string;
-
-      /**
-       * The name of format {guid_guid} the role management policy assignment to upsert.
-       */
-      @path
-      roleManagementPolicyAssignmentName: string;
-    },
     Response = ArmResourceCreatedSyncResponse<RoleManagementPolicyAssignment>
   >;
 
   /**
    * Gets role management assignment policies for a resource scope.
    */
-  listForScope is ArmResourceListByParent<
-    RoleManagementPolicyAssignment,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
-    Parameters = {
-      /**
-       * The scope of the role management policy.
-       */
-      @path
-      scope: string;
-    }
+  listForScope is Extension.ListByTarget<
+    Extension.ScopeParameter,
+    RoleManagementPolicyAssignment
   >;
 }
 

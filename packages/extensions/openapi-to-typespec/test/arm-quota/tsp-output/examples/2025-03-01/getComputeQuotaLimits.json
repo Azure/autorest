@@ -1,0 +1,221 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "",
+        "value": [
+          {
+            "name": "standardFSv2Family",
+            "type": "Microsoft.Quota/Quotas",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/Quotas/standardFSv2Family",
+            "properties": {
+              "name": {
+                "localizedValue": "Standard FSv2 Family vCPUs",
+                "value": "standardFSv2Family"
+              },
+              "isQuotaApplicable": true,
+              "limit": {
+                "limitObjectType": "LimitValue",
+                "value": 10
+              },
+              "unit": "Count"
+            }
+          },
+          {
+            "name": "standardNDSFamily",
+            "type": "Microsoft.Quota/Quotas",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/Quotas/standardNDSFamily",
+            "properties": {
+              "name": {
+                "localizedValue": "Standard NDS Family vCPUs",
+                "value": "standardNDSFamily"
+              },
+              "isQuotaApplicable": true,
+              "limit": {
+                "limitObjectType": "LimitValue",
+                "value": 10
+              },
+              "unit": "Count"
+            }
+          },
+          {
+            "name": "standardNCSv2Family",
+            "type": "Microsoft.Quota/Quotas",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/Quotas/standardNCSv2Family",
+            "properties": {
+              "name": {
+                "localizedValue": "Standard NCSv2 Family vCPUs",
+                "value": "standardNCSv2Family"
+              },
+              "isQuotaApplicable": true,
+              "limit": {
+                "limitObjectType": "LimitValue",
+                "value": 10
+              },
+              "unit": "Count"
+            }
+          },
+          {
+            "name": "standardNCSv3Family",
+            "type": "Microsoft.Quota/Quotas",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/Quotas/standardNCSv3Family",
+            "properties": {
+              "name": {
+                "localizedValue": "Standard NCSv3 Family vCPUs",
+                "value": "standardNCSv3Family"
+              },
+              "isQuotaApplicable": true,
+              "limit": {
+                "limitObjectType": "LimitValue",
+                "value": 10
+              },
+              "unit": "Count"
+            }
+          },
+          {
+            "name": "standardLSv2Family",
+            "type": "Microsoft.Quota/Quotas",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/Quotas/standardLSv2Family",
+            "properties": {
+              "name": {
+                "localizedValue": "Standard LSv2 Family vCPUs",
+                "value": "standardLSv2Family"
+              },
+              "isQuotaApplicable": true,
+              "limit": {
+                "limitObjectType": "LimitValue",
+                "value": 10
+              },
+              "unit": "Count"
+            }
+          },
+          {
+            "name": "standardPBSFamily",
+            "type": "Microsoft.Quota/Quotas",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/Quotas/standardPBSFamily",
+            "properties": {
+              "name": {
+                "localizedValue": "Standard PBS Family vCPUs",
+                "value": "standardPBSFamily"
+              },
+              "isQuotaApplicable": true,
+              "limit": {
+                "limitObjectType": "LimitValue",
+                "value": 10
+              },
+              "unit": "Count"
+            }
+          },
+          {
+            "name": "standardEIv3Family",
+            "type": "Microsoft.Quota/Quotas",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/Quotas/standardEIv3Family",
+            "properties": {
+              "name": {
+                "localizedValue": "Standard EIv3 Family vCPUs",
+                "value": "standardEIv3Family"
+              },
+              "isQuotaApplicable": true,
+              "limit": {
+                "limitObjectType": "LimitValue",
+                "value": 10
+              },
+              "unit": "Count"
+            }
+          },
+          {
+            "name": "standardEISv3Family",
+            "type": "Microsoft.Quota/Quotas",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/Quotas/standardEISv3Family",
+            "properties": {
+              "name": {
+                "localizedValue": "Standard EISv3 Family vCPUs",
+                "value": "standardEISv3Family"
+              },
+              "isQuotaApplicable": true,
+              "limit": {
+                "limitObjectType": "LimitValue",
+                "value": 10
+              },
+              "unit": "Count"
+            }
+          },
+          {
+            "name": "standardDCSFamily",
+            "type": "Microsoft.Quota/Quotas",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/Quotas/standardDCSFamily",
+            "properties": {
+              "name": {
+                "localizedValue": "Standard DCS Family vCPUs",
+                "value": "standardDCSFamily"
+              },
+              "isQuotaApplicable": true,
+              "limit": {
+                "limitObjectType": "LimitValue",
+                "value": 10
+              },
+              "unit": "Count"
+            }
+          },
+          {
+            "name": "standardNVSv2Family",
+            "type": "Microsoft.Quota/Quotas",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/Quotas/standardNVSv2Family",
+            "properties": {
+              "name": {
+                "localizedValue": "Standard NVSv2 Family vCPUs",
+                "value": "standardNVSv2Family"
+              },
+              "isQuotaApplicable": true,
+              "limit": {
+                "limitObjectType": "LimitValue",
+                "value": 10
+              },
+              "unit": "Count"
+            }
+          },
+          {
+            "name": "standardMSv2Family",
+            "type": "Microsoft.Quota/Quotas",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/Quotas/standardMSv2Family",
+            "properties": {
+              "name": {
+                "localizedValue": "Standard MSv2 Family vCPUs",
+                "value": "standardMSv2Family"
+              },
+              "isQuotaApplicable": true,
+              "limit": {
+                "limitObjectType": "LimitValue",
+                "value": 10
+              },
+              "unit": "Count"
+            }
+          },
+          {
+            "name": "availabilitySets",
+            "type": "Microsoft.Quota/Quotas",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/Quotas/availabilitySets",
+            "properties": {
+              "name": {
+                "localizedValue": "Availability Sets",
+                "value": "availabilitySets"
+              },
+              "isQuotaApplicable": false,
+              "limit": {
+                "limitObjectType": "LimitValue",
+                "value": 10
+              },
+              "unit": "Count"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Quota_List",
+  "title": "Quotas_listQuotaLimitsForCompute"
+}
