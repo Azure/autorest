@@ -1,6 +1,13 @@
 # Change Log - @autorest/openapi-to-typespec
 
-This log was last generated on Fri, 20 Jun 2025 08:03:50 GMT and should not be manually modified.
+This log was last generated on Mon, 14 Jul 2025 20:56:49 GMT and should not be manually modified.
+
+## 0.11.3
+Mon, 14 Jul 2025 20:56:49 GMT
+
+### Patches
+
+- Support extension resource
 
 ## 0.11.2
 Fri, 20 Jun 2025 08:03:50 GMT
