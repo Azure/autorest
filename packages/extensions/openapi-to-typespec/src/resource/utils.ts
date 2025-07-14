@@ -71,11 +71,11 @@ export function getExtensionResourceType(path: string): ScopeType {
   if (index < 0) return "NA";
 
   const pathBeforeProviders = path.substring(0, index).toLowerCase();
-  if (path.startsWith(ManagementGroupScopePrefix.toLowerCase())) return "ManagementGroup";
+  if (path.toLowerCase().startsWith(ManagementGroupScopePrefix.toLowerCase())) return "ManagementGroup";
   if (pathBeforeProviders.includes(ProvidersSegment)) return "Extension";
-  if (path.startsWith(ResourceGroupScopePrefix.toLowerCase())) return "ResourceGroup";
-  if (path.startsWith(SubscriptionScopePrefix.toLowerCase())) return "Subscription";
-  if (path.startsWith(ProvidersSegment)) return "Tenant";
+  if (path.toLowerCase().startsWith(ResourceGroupScopePrefix.toLowerCase())) return "ResourceGroup";
+  if (path.toLowerCase().startsWith(SubscriptionScopePrefix.toLowerCase())) return "Subscription";
+  if (path.toLowerCase().startsWith(ProvidersSegment)) return "Tenant";
   return "NA";
 }
 
