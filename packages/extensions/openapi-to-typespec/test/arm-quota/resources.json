@@ -1,0 +1,538 @@
+{
+  "Resources": {
+    "GroupQuotasEntity": [
+      {
+        "Name": "GroupQuotasEntity",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}",
+          "Method": "GET",
+          "OperationID": "GroupQuotas_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets the GroupQuotas for the name passed. It will return the GroupQuotas properties only. The details on group quota can be access from the group quota APIs."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}",
+          "Method": "PUT",
+          "OperationID": "GroupQuotas_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates a new GroupQuota for the name passed. A RequestId will be returned by the Service. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}",
+          "Method": "PATCH",
+          "OperationID": "GroupQuotas_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Updates the GroupQuotas for the name passed. A GroupQuotas RequestId will be returned by the Service. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked. \n Any change in the filters will be applicable to the future quota assignments, existing quota allocated to subscriptions from the GroupQuotas remains unchanged."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}",
+          "Method": "DELETE",
+          "OperationID": "GroupQuotas_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes the GroupQuotas for the name passed. All the remaining shareQuota in the GroupQuotas will be lost."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas",
+            "Method": "GET",
+            "OperationID": "GroupQuotas_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists GroupQuotas for the scope passed. It will return the GroupQuotas QuotaEntity properties only.The details on group quota can be access from the group quota APIs."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [
+          {
+            "Name": "List",
+            "Path": "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/groupQuotaRequests",
+            "Method": "GET",
+            "OperationID": "GroupQuotaLimitsRequest_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Get API to check the status of a GroupQuota request by requestId."
+          }
+        ],
+        "Parents": [
+          "ManagementGroupResource"
+        ],
+        "SwaggerModelName": "GroupQuotasEntity",
+        "ResourceType": "Microsoft.Quota/groupQuotas",
+        "ResourceKey": "groupQuotaName",
+        "ResourceKeySegment": "groupQuotas",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": true,
+        "ScopeType": "ManagementGroup",
+        "IsSingletonResource": false
+      }
+    ],
+    "GroupQuotaSubscriptionId": [
+      {
+        "Name": "GroupQuotaSubscriptionId",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/subscriptions/{subscriptionId}",
+          "Method": "GET",
+          "OperationID": "GroupQuotaSubscriptions_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Returns the subscriptionIds along with its provisioning state for being associated with the GroupQuota. If the subscription is not a member of GroupQuota, it will return 404, else 200."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/subscriptions/{subscriptionId}",
+          "Method": "PUT",
+          "OperationID": "GroupQuotaSubscriptions_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Adds a subscription to GroupQuotas. The subscriptions will be validated based on the additionalAttributes defined in the GroupQuota. The additionalAttributes works as filter for the subscriptions, which can be included in the GroupQuotas. The request's TenantId is validated against the subscription's TenantId."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/subscriptions/{subscriptionId}",
+          "Method": "PATCH",
+          "OperationID": "GroupQuotaSubscriptions_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Updates the GroupQuotas with the subscription to add to the subscriptions list. The subscriptions will be validated if additionalAttributes are defined in the GroupQuota. The request's TenantId is validated against the subscription's TenantId."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/subscriptions/{subscriptionId}",
+          "Method": "DELETE",
+          "OperationID": "GroupQuotaSubscriptions_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Removes the subscription from GroupQuotas. The request's TenantId is validated against the subscription's TenantId."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/subscriptions",
+            "Method": "GET",
+            "OperationID": "GroupQuotaSubscriptions_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Returns a list of the subscriptionIds associated with the GroupQuotas."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "GroupQuotasEntity"
+        ],
+        "SwaggerModelName": "GroupQuotaSubscriptionId",
+        "ResourceType": "Microsoft.Quota/groupQuotas/subscriptions",
+        "ResourceKey": "subscriptionId",
+        "ResourceKeySegment": "subscriptions",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "ManagementGroup",
+        "IsSingletonResource": false
+      }
+    ],
+    "GroupQuotaSubscriptionRequestStatus": [
+      {
+        "Name": "GroupQuotaSubscriptionRequestStatus",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/subscriptionRequests/{requestId}",
+          "Method": "GET",
+          "OperationID": "GroupQuotaSubscriptionRequests_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get API to check the status of a subscriptionIds request by requestId.  Use the polling API - OperationsStatus URI specified in Azure-AsyncOperation header field, with retry-after duration in seconds to check the intermediate status. This API provides the finals status with the request details and status."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/subscriptionRequests",
+            "Method": "GET",
+            "OperationID": "GroupQuotaSubscriptionRequests_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "List API to check the status of a subscriptionId requests by requestId. Request history is maintained for 1 year."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "GroupQuotasEntity"
+        ],
+        "SwaggerModelName": "GroupQuotaSubscriptionRequestStatus",
+        "ResourceType": "Microsoft.Quota/groupQuotas/subscriptionRequests",
+        "ResourceKey": "requestId",
+        "ResourceKeySegment": "subscriptionRequests",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "ManagementGroup",
+        "IsSingletonResource": false
+      }
+    ],
+    "GroupQuotaLimitList": [
+      {
+        "Name": "GroupQuotaLimitList",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/groupQuotaLimits/{location}",
+          "Method": "GET",
+          "OperationID": "GroupQuotaLimits_List",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets the GroupQuotaLimits for the specified resource provider and location for resource names passed in $filter=resourceName eq {SKU}."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/groupQuotaLimits/{location}",
+          "Method": "PATCH",
+          "OperationID": "GroupQuotaLimitsRequest_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create the GroupQuota requests for a specific ResourceProvider/Location/Resource. The resourceName properties are specified in the request body. Only 1 resource quota can be requested. Please note that patch request creates a new groupQuota request.\nUse the polling API - OperationsStatus URI specified in Azure-AsyncOperation header field, with retry-after duration in seconds to check the intermediate status. This API provides the finals status with the request details and status."
+        },
+        "ListOperations": [],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "GroupQuotasEntity"
+        ],
+        "SwaggerModelName": "GroupQuotaLimitList",
+        "ResourceType": "Microsoft.Quota/groupQuotas/resourceProviders/groupQuotaLimits",
+        "ResourceKey": "location",
+        "ResourceKeySegment": "groupQuotaLimits",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "ManagementGroup",
+        "IsSingletonResource": false
+      }
+    ],
+    "SubmittedResourceRequestStatus": [
+      {
+        "Name": "SubmittedResourceRequestStatus",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaRequests/{requestId}",
+          "Method": "GET",
+          "OperationID": "GroupQuotaLimitsRequest_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get API to check the status of a GroupQuota request by requestId."
+        },
+        "ListOperations": [],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "GroupQuotasEntity"
+        ],
+        "SwaggerModelName": "SubmittedResourceRequestStatus",
+        "ResourceType": "Microsoft.Quota/groupQuotas/groupQuotaRequests",
+        "ResourceKey": "requestId",
+        "ResourceKeySegment": "groupQuotaRequests",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "ManagementGroup",
+        "IsSingletonResource": false
+      }
+    ],
+    "SubscriptionQuotaAllocationsList": [
+      {
+        "Name": "SubscriptionQuotaAllocationsList",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/quotaAllocations/{location}",
+          "Method": "GET",
+          "OperationID": "GroupQuotaSubscriptionAllocation_List",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets all the quota allocated to a subscription for the specified resource provider and location for resource names passed in $filter=resourceName eq {SKU}. This will include the GroupQuota and total quota allocated to the subscription. Only the Group quota allocated to the subscription can be allocated back to the MG Group Quota."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/quotaAllocations/{location}",
+          "Method": "PATCH",
+          "OperationID": "GroupQuotaSubscriptionAllocationRequest_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Request to assign quota from group quota to a specific Subscription. The assign GroupQuota to subscriptions or reduce the quota allocated to subscription to give back the unused quota ( quota >= usages) to the groupQuota. So, this API can be used to assign Quota to subscriptions and assign back unused quota to group quota, which can be assigned to another subscriptions in the GroupQuota. User can collect unused quotas from multiple subscriptions within the groupQuota and assign the groupQuota to the subscription, where it's needed."
+        },
+        "ListOperations": [],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "ManagementGroupResource"
+        ],
+        "SwaggerModelName": "SubscriptionQuotaAllocationsList",
+        "ResourceType": "Microsoft.Quota/groupQuotas/resourceProviders/quotaAllocations",
+        "ResourceKey": "location",
+        "ResourceKeySegment": "quotaAllocations",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": true,
+        "ScopeType": "ManagementGroup",
+        "IsSingletonResource": false
+      }
+    ],
+    "QuotaAllocationRequestStatus": [
+      {
+        "Name": "QuotaAllocationRequestStatus",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/quotaAllocationRequests/{allocationId}",
+          "Method": "GET",
+          "OperationID": "GroupQuotaSubscriptionAllocationRequest_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get the quota allocation request status for the subscriptionId by allocationId."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/quotaAllocationRequests",
+            "Method": "GET",
+            "OperationID": "GroupQuotaSubscriptionAllocationRequest_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Get all the quotaAllocationRequests for a resourceProvider/location. The filter paramter for location is required."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "ManagementGroupResource"
+        ],
+        "SwaggerModelName": "QuotaAllocationRequestStatus",
+        "ResourceType": "Microsoft.Quota/groupQuotas/resourceProviders/quotaAllocationRequests",
+        "ResourceKey": "allocationId",
+        "ResourceKeySegment": "quotaAllocationRequests",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": true,
+        "ScopeType": "ManagementGroup",
+        "IsSingletonResource": false
+      }
+    ],
+    "CurrentUsagesBase": [
+      {
+        "Name": "CurrentUsagesBase",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/{scope}/providers/Microsoft.Quota/usages/{resourceName}",
+          "Method": "GET",
+          "OperationID": "Usages_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get the current usage of a resource."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/{scope}/providers/Microsoft.Quota/usages",
+            "Method": "GET",
+            "OperationID": "Usages_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Get a list of current usage for all resources for the scope specified."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "ArmResource"
+        ],
+        "SwaggerModelName": "CurrentUsagesBase",
+        "ResourceType": "Microsoft.Quota/usages",
+        "ResourceKey": "resourceName",
+        "ResourceKeySegment": "usages",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "Scope",
+        "IsSingletonResource": false
+      }
+    ],
+    "CurrentQuotaLimitBase": [
+      {
+        "Name": "CurrentQuotaLimitBase",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/{scope}/providers/Microsoft.Quota/quotas/{resourceName}",
+          "Method": "GET",
+          "OperationID": "Quota_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get the quota limit of a resource. The response can be used to determine the remaining quota to calculate a new quota limit that can be submitted with a PUT request."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/{scope}/providers/Microsoft.Quota/quotas/{resourceName}",
+          "Method": "PUT",
+          "OperationID": "Quota_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create or update the quota limit for the specified resource with the requested value. To update the quota, follow these steps:\n1. Use the GET operation for quotas and usages to determine how much quota remains for the specific resource and to calculate the new quota limit. These steps are detailed in [this example](https://techcommunity.microsoft.com/t5/azure-governance-and-management/using-the-new-quota-rest-api/ba-p/2183670).\n2. Use this PUT operation to update the quota limit. Please check the URI in location header for the detailed status of the request."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/{scope}/providers/Microsoft.Quota/quotas/{resourceName}",
+          "Method": "PATCH",
+          "OperationID": "Quota_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Update the quota limit for a specific resource to the specified value:\n1. Use the Usages-GET and Quota-GET operations to determine the remaining quota for the specific resource and to calculate the new quota limit. These steps are detailed in [this example](https://techcommunity.microsoft.com/t5/azure-governance-and-management/using-the-new-quota-rest-api/ba-p/2183670).\n2. Use this PUT operation to update the quota limit. Please check the URI in location header for the detailed status of the request."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/{scope}/providers/Microsoft.Quota/quotas",
+            "Method": "GET",
+            "OperationID": "Quota_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Get a list of current quota limits of all resources for the specified scope. The response from this GET operation can be leveraged to submit requests to update a quota."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "ArmResource"
+        ],
+        "SwaggerModelName": "CurrentQuotaLimitBase",
+        "ResourceType": "Microsoft.Quota/quotas",
+        "ResourceKey": "resourceName",
+        "ResourceKeySegment": "quotas",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "Scope",
+        "IsSingletonResource": false
+      }
+    ],
+    "QuotaRequestDetails": [
+      {
+        "Name": "QuotaRequestDetail",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/{scope}/providers/Microsoft.Quota/quotaRequests/{id}",
+          "Method": "GET",
+          "OperationID": "QuotaRequestStatus_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get the quota request details and status by quota request ID for the resources of the resource provider at a specific location. The quota request ID **id** is returned in the response of the PUT operation."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/{scope}/providers/Microsoft.Quota/quotaRequests",
+            "Method": "GET",
+            "OperationID": "QuotaRequestStatus_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "For the specified scope, get the current quota requests for a one year period ending at the time is made. Use the **oData** filter to select quota requests."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "ArmResource"
+        ],
+        "SwaggerModelName": "QuotaRequestDetails",
+        "ResourceType": "Microsoft.Quota/quotaRequests",
+        "ResourceKey": "id",
+        "ResourceKeySegment": "quotaRequests",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "Scope",
+        "IsSingletonResource": false
+      }
+    ]
+  },
+  "RenameMapping": {},
+  "OverrideOperationName": {}
+}

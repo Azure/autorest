@@ -1,3 +1,4 @@
+import { ScopeType } from "../utils/resource-discovery";
 import { isConstantSchema } from "../utils/schemas";
 import {
   ManagementGroupPath,
@@ -61,6 +62,21 @@ export function isScopedSegment(path: string): boolean {
 
 export function isScopedPath(path: string): boolean {
   return isScopedSegment(getScopePath(path));
+}
+
+export function getExtensionResourceType(path: string): ScopeType {
+  if (isScopedPath(path)) return "Scope";
+
+  const index = path.lastIndexOf(ProvidersSegment);
+  if (index < 0) return "NA";
+
+  const pathBeforeProviders = path.substring(0, index).toLowerCase();
+  if (path.toLowerCase().startsWith(ManagementGroupScopePrefix.toLowerCase())) return "ManagementGroup";
+  if (pathBeforeProviders.includes(ProvidersSegment)) return "Extension";
+  if (path.toLowerCase().startsWith(ResourceGroupScopePrefix.toLowerCase())) return "ResourceGroup";
+  if (path.toLowerCase().startsWith(SubscriptionScopePrefix.toLowerCase())) return "Subscription";
+  if (path.toLowerCase().startsWith(ProvidersSegment)) return "Tenant";
+  return "NA";
 }
 
 export function isSingleton(set: OperationSet): boolean {

@@ -1,0 +1,96 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "scope": "subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/microsoft.Quota/resourceProviders/Microsoft.Compute/locations/eastus/quotaRequests?api-version=2021-03-15&amp;$top=3",
+        "value": [
+          {
+            "name": "2B5C8515-37D8-4B6A-879B-CD641A2CF605",
+            "type": "Microsoft.Quota/quotaRequests",
+            "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotaRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605",
+            "properties": {
+              "message": "Request completed",
+              "provisioningState": "Success",
+              "requestSubmitTime": "2019-08-19T19:23:17.904Z",
+              "value": [
+                {
+                  "name": {
+                    "localizedValue": "Standard NC Promo Family vCPUs",
+                    "value": "standardNCPromoFamily"
+                  },
+                  "limit": {
+                    "limitObjectType": "LimitValue",
+                    "value": 50
+                  },
+                  "message": "Request completed",
+                  "provisioningState": "Success",
+                  "subRequestId": "AD07450A-DE86-4FD3-859B-107BEF218C4C"
+                }
+              ]
+            }
+          },
+          {
+            "name": "7E73A85C-83BB-4DE4-903F-076F1A2B91D6",
+            "type": "Microsoft.Quota/quotaRequests",
+            "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotaRequests/7E73A85C-83BB-4DE4-903F-076F1A2B91D6",
+            "properties": {
+              "message": "Request completed",
+              "provisioningState": "Succeeded",
+              "requestSubmitTime": "2019-08-18T19:23:17.904Z",
+              "value": [
+                {
+                  "name": {
+                    "localizedValue": "Standard NV Promo Family vCPUs",
+                    "value": "standardNVPromoFamily"
+                  },
+                  "limit": {
+                    "limitObjectType": "LimitValue",
+                    "value": 150
+                  },
+                  "message": "Request completed",
+                  "provisioningState": "Succeeded",
+                  "subRequestId": "AD07450A-DE86-4FD3-859B-107BEF218C4C"
+                }
+              ]
+            }
+          },
+          {
+            "name": "5E460077-AB53-4802-8997-A6940E0B7649",
+            "type": "Microsoft.Quota/quotaRequests",
+            "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotaRequests/5E460077-AB53-4802-8997-A6940E0B7649",
+            "properties": {
+              "error": {
+                "code": "ResourceNotAvailableForOffer",
+                "message": "The resource is currently unavailable in the location for the offer type."
+              },
+              "message": "The resource is currently unavailable in the location for the offer type.",
+              "provisioningState": "Failed",
+              "requestSubmitTime": "2019-08-17T19:23:17.904Z",
+              "value": [
+                {
+                  "name": {
+                    "localizedValue": "Standard HBS Family vCPUs",
+                    "value": "standardHBSFamily"
+                  },
+                  "limit": {
+                    "limitObjectType": "LimitValue",
+                    "value": 52
+                  },
+                  "message": "Request failed, please contact support.",
+                  "provisioningState": "Failed",
+                  "subRequestId": "AD07450A-DE86-4FD3-859B-107BEF218C4C"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "QuotaRequestStatus_List",
+  "title": "QuotaRequestHistory"
+}

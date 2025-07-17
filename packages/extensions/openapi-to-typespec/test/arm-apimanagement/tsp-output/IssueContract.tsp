@@ -33,25 +33,28 @@ interface IssueContractOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = ApiManagementServiceResource,
-          KeyName = "serviceName",
-          SegmentName = "service",
-          NamePattern = "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
-        >>,
-        ...KeysOf<ResourceNameParameter<
-          Resource = ApiContract,
-          KeyName = "apiId",
-          SegmentName = "apis",
-          NamePattern = ""
-        >>,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        serviceName: string,
+
+        /** API identifier. Must be unique in the current API Management service instance. */
+        @path
+        @segment("apis")
+        @key
+        apiId: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = IssueContract,
-        KeyName = "issueId",
-        SegmentName = "issues",
-        NamePattern = "^[^*#&+:<>?]+$"
-      >>
+      {
+        /** Issue identifier. Must be unique in the current API Management service instance. */
+        @path
+        @segment("issues")
+        @key
+        @pattern("^[^*#&+:<>?]+$")
+        issueId: string,
+      }
     > {}
 
 @armResourceOperations
@@ -160,19 +163,22 @@ interface IssueOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = ApiManagementServiceResource,
-          KeyName = "serviceName",
-          SegmentName = "service",
-          NamePattern = "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
-        >>,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        serviceName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = IssueContract,
-        KeyName = "issueId",
-        SegmentName = "issues",
-        NamePattern = "^[^*#&+:<>?]+$"
-      >>
+      {
+        /** Issue identifier. Must be unique in the current API Management service instance. */
+        @path
+        @segment("issues")
+        @key
+        @pattern("^[^*#&+:<>?]+$")
+        issueId: string,
+      }
     > {}
 
 @armResourceOperations

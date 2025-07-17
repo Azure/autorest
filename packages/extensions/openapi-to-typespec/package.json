@@ -1,6 +1,6 @@
 {
   "name": "@autorest/openapi-to-typespec",
-  "version": "0.11.2",
+  "version": "0.11.3",
   "description": "Autorest plugin to scaffold a Typespec definition from an OpenAPI document",
   "main": "dist/main.js",
   "typings": "dist/main.d.ts",
@@ -50,11 +50,11 @@
     "prettier": "~3.5.3"
   },
   "devDependencies": {
-    "@azure-tools/typespec-autorest": "^0.57.0",
+    "@azure-tools/typespec-autorest": "^0.57.1",
     "@azure-tools/typespec-azure-core": "^0.57.0",
-    "@azure-tools/typespec-azure-resource-manager": "^0.57.0",
+    "@azure-tools/typespec-azure-resource-manager": "^0.57.2",
     "@azure-tools/typespec-azure-rulesets": "^0.57.0",
-    "@azure-tools/typespec-client-generator-core": "^0.57.0",
+    "@azure-tools/typespec-client-generator-core": "^0.57.2",
     "@types/fs-extra": "^9.0.13",
     "@types/lodash": "~4.17.16",
     "@types/node": "~22.15.19",

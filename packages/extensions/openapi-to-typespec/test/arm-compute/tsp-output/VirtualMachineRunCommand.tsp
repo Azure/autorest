@@ -33,19 +33,20 @@ interface VirtualMachineRunCommandOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = VirtualMachine,
-          KeyName = "vmName",
-          SegmentName = "virtualMachines",
-          NamePattern = ""
-        >>,
+
+        /** The name of the virtual machine containing the run command. */
+        @path
+        @segment("virtualMachines")
+        @key
+        vmName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = VirtualMachineRunCommand,
-        KeyName = "runCommandName",
-        SegmentName = "runCommands",
-        NamePattern = ""
-      >>
+      {
+        /** The name of the virtual machine run command. */
+        @path
+        @segment("runCommands")
+        @key
+        runCommandName: string,
+      }
     > {}
 
 @armResourceOperations
@@ -129,25 +130,26 @@ interface VirtualMachineScaleSetVMRunCommandOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = VirtualMachineScaleSet,
-          KeyName = "vmScaleSetName",
-          SegmentName = "virtualMachineScaleSets",
-          NamePattern = ""
-        >>,
-        ...KeysOf<ResourceNameParameter<
-          Resource = VirtualMachineScaleSetVM,
-          KeyName = "instanceId",
-          SegmentName = "virtualMachines",
-          NamePattern = ""
-        >>,
+
+        /** The name of the VM scale set. */
+        @path
+        @segment("virtualMachineScaleSets")
+        @key
+        vmScaleSetName: string,
+
+        /** The instance ID of the virtual machine. */
+        @path
+        @segment("virtualMachines")
+        @key
+        instanceId: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = VirtualMachineRunCommand,
-        KeyName = "runCommandName",
-        SegmentName = "runCommands",
-        NamePattern = ""
-      >>
+      {
+        /** The name of the virtual machine run command. */
+        @path
+        @segment("runCommands")
+        @key
+        runCommandName: string,
+      }
     > {}
 
 @armResourceOperations

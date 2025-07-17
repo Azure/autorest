@@ -24,22 +24,10 @@ model ModelVersionResource is Azure.ResourceManager.ProxyResource<ModelVersion, 
 
 
 @armResourceOperations
-interface ModelVersionResourceOps extends Azure.ResourceManager.Legacy.LegacyOperations<{...ApiVersionParameter;...SubscriptionIdParameter;...ResourceGroupParameter;...Azure.ResourceManager.Legacy.Provider;...KeysOf<ResourceNameParameter<
-    Resource = Registry,
-    KeyName = "registryName",
-    SegmentName = "registries",
-    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$"
-  >>;...KeysOf<ResourceNameParameter<
-    Resource = ModelContainerResource,
-    KeyName = "modelName",
-    SegmentName = "models",
-    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-  >>}, KeysOf<ResourceNameParameter<
-    Resource = ModelVersionResource,
-    KeyName = "version",
-    SegmentName = "versions",
-    NamePattern = ""
-  >>> {}
+interface ModelVersionResourceOps extends Azure.ResourceManager.Legacy.LegacyOperations<{...ApiVersionParameter;...SubscriptionIdParameter;...ResourceGroupParameter;...Azure.ResourceManager.Legacy.Provider;/** Name of Azure Machine Learning registry. This is case-insensitive */
+@path @segment("registries") @key @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$") registryName: string;/** Container name. This is case-sensitive. */
+@path @segment("models") @key @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$") modelName: string}, {/** Version identifier. This is case-sensitive. */
+@path @segment("versions") @key  version: string}> {}
 
 
 @armResourceOperations
@@ -122,22 +110,10 @@ createOrGetStartPendingUpload is ModelVersionResourceOps.ActionSync<ModelVersion
 
 }
 @armResourceOperations
-interface ModelVersionOps extends Azure.ResourceManager.Legacy.LegacyOperations<{...ApiVersionParameter;...SubscriptionIdParameter;...ResourceGroupParameter;...Azure.ResourceManager.Legacy.Provider;...KeysOf<ResourceNameParameter<
-    Resource = Workspace,
-    KeyName = "workspaceName",
-    SegmentName = "workspaces",
-    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-  >>;...KeysOf<ResourceNameParameter<
-    Resource = ModelContainerResource,
-    KeyName = "name",
-    SegmentName = "models",
-    NamePattern = ""
-  >>}, KeysOf<ResourceNameParameter<
-    Resource = ModelVersionResource,
-    KeyName = "version",
-    SegmentName = "versions",
-    NamePattern = ""
-  >>> {}
+interface ModelVersionOps extends Azure.ResourceManager.Legacy.LegacyOperations<{...ApiVersionParameter;...SubscriptionIdParameter;...ResourceGroupParameter;...Azure.ResourceManager.Legacy.Provider;/** Name of Azure Machine Learning workspace. */
+@path @segment("workspaces") @key @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$") workspaceName: string;/** Container name. This is case-sensitive. */
+@path @segment("models") @key  name: string}, {/** Version identifier. This is case-sensitive. */
+@path @segment("versions") @key  version: string}> {}
 
 
 @armResourceOperations

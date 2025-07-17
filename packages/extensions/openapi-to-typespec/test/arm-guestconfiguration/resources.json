@@ -1,0 +1,402 @@
+{
+  "Resources": {
+    "GuestConfigurationAssignment": [
+      {
+        "Name": "GuestConfigurationAssignment",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}",
+          "Method": "GET",
+          "OperationID": "GuestConfigurationAssignments_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get information about a guest configuration assignment"
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}",
+          "Method": "PUT",
+          "OperationID": "GuestConfigurationAssignments_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates an association between a VM and guest configuration"
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}",
+          "Method": "PUT",
+          "OperationID": "GuestConfigurationAssignments_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates an association between a VM and guest configuration"
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}",
+          "Method": "DELETE",
+          "OperationID": "GuestConfigurationAssignments_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a guest configuration assignment"
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments",
+            "Method": "GET",
+            "OperationID": "GuestConfigurationAssignments_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "List all guest configuration assignments for a virtual machine."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [
+          {
+            "Name": "_",
+            "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments",
+            "Method": "GET",
+            "OperationID": "GuestConfigurationAssignments_SubscriptionList",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "SubscriptionList",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "List all guest configuration assignments for a subscription."
+          }
+        ],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [
+          {
+            "Name": "List",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports",
+            "Method": "GET",
+            "OperationID": "GuestConfigurationAssignmentReports_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "List all reports for the guest configuration assignment, latest report first."
+          },
+          {
+            "Name": "Get",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports/{reportId}",
+            "Method": "GET",
+            "OperationID": "GuestConfigurationAssignmentReports_Get",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Get a report for the guest configuration assignment, by reportId."
+          }
+        ],
+        "Parents": [
+          "ResourceGroupResource"
+        ],
+        "SwaggerModelName": "GuestConfigurationAssignment",
+        "ResourceType": "Microsoft.GuestConfiguration/guestConfigurationAssignments",
+        "ResourceKey": "guestConfigurationAssignmentName",
+        "ResourceKeySegment": "guestConfigurationAssignments",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "Extension",
+        "IsSingletonResource": false
+      },
+      {
+        "Name": "GuestConfigurationAssignment",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}",
+          "Method": "GET",
+          "OperationID": "GuestConfigurationHCRPAssignments_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get information about a guest configuration assignment"
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}",
+          "Method": "PUT",
+          "OperationID": "GuestConfigurationHCRPAssignments_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates an association between a ARC machine and guest configuration"
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}",
+          "Method": "PUT",
+          "OperationID": "GuestConfigurationHCRPAssignments_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates an association between a ARC machine and guest configuration"
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}",
+          "Method": "DELETE",
+          "OperationID": "GuestConfigurationHCRPAssignments_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a guest configuration assignment"
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments",
+            "Method": "GET",
+            "OperationID": "GuestConfigurationHCRPAssignments_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "List all guest configuration assignments for an ARC machine."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [
+          {
+            "Name": "List",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports",
+            "Method": "GET",
+            "OperationID": "GuestConfigurationHCRPAssignmentReports_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "List all reports for the guest configuration assignment, latest report first."
+          },
+          {
+            "Name": "Get",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports/{reportId}",
+            "Method": "GET",
+            "OperationID": "GuestConfigurationHCRPAssignmentReports_Get",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Get a report for the guest configuration assignment, by reportId."
+          }
+        ],
+        "Parents": [
+          "ResourceGroupResource"
+        ],
+        "SwaggerModelName": "GuestConfigurationAssignment",
+        "ResourceType": "Microsoft.GuestConfiguration/guestConfigurationAssignments",
+        "ResourceKey": "guestConfigurationAssignmentName",
+        "ResourceKeySegment": "guestConfigurationAssignments",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "Extension",
+        "IsSingletonResource": false
+      },
+      {
+        "Name": "GuestConfigurationAssignment",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}",
+          "Method": "GET",
+          "OperationID": "GuestConfigurationAssignmentsVMSS_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get information about a guest configuration assignment for VMSS"
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}",
+          "Method": "PUT",
+          "OperationID": "GuestConfigurationAssignmentsVMSS_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates an association between a VMSS and guest configuration"
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}",
+          "Method": "PUT",
+          "OperationID": "GuestConfigurationAssignmentsVMSS_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates an association between a VMSS and guest configuration"
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}",
+          "Method": "DELETE",
+          "OperationID": "GuestConfigurationAssignmentsVMSS_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a guest configuration assignment for VMSS"
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments",
+            "Method": "GET",
+            "OperationID": "GuestConfigurationAssignmentsVMSS_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "List all guest configuration assignments for VMSS."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [
+          {
+            "Name": "List",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}/reports",
+            "Method": "GET",
+            "OperationID": "GuestConfigurationAssignmentReportsVMSS_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "List all reports for the VMSS guest configuration assignment, latest report first."
+          },
+          {
+            "Name": "Get",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}/reports/{id}",
+            "Method": "GET",
+            "OperationID": "GuestConfigurationAssignmentReportsVMSS_Get",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Get a report for the VMSS guest configuration assignment, by reportId."
+          }
+        ],
+        "Parents": [
+          "ResourceGroupResource"
+        ],
+        "SwaggerModelName": "GuestConfigurationAssignment",
+        "ResourceType": "Microsoft.GuestConfiguration/guestConfigurationAssignments",
+        "ResourceKey": "name",
+        "ResourceKeySegment": "guestConfigurationAssignments",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "Extension",
+        "IsSingletonResource": false
+      },
+      {
+        "Name": "GuestConfigurationAssignment",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}",
+          "Method": "GET",
+          "OperationID": "GuestConfigurationConnectedVMwarevSphereAssignments_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get information about a guest configuration assignment"
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}",
+          "Method": "PUT",
+          "OperationID": "GuestConfigurationConnectedVMwarevSphereAssignments_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates an association between a Connected VM Sphere machine and guest configuration"
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}",
+          "Method": "PUT",
+          "OperationID": "GuestConfigurationConnectedVMwarevSphereAssignments_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates an association between a Connected VM Sphere machine and guest configuration"
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}",
+          "Method": "DELETE",
+          "OperationID": "GuestConfigurationConnectedVMwarevSphereAssignments_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a guest configuration assignment"
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments",
+            "Method": "GET",
+            "OperationID": "GuestConfigurationConnectedVMwarevSphereAssignments_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "List all guest configuration assignments for an ARC machine."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [
+          {
+            "Name": "List",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports",
+            "Method": "GET",
+            "OperationID": "GuestConfigurationConnectedVMwarevSphereAssignmentsReports_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "List all reports for the guest configuration assignment, latest report first."
+          },
+          {
+            "Name": "Get",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports/{reportId}",
+            "Method": "GET",
+            "OperationID": "GuestConfigurationConnectedVMwarevSphereAssignmentsReports_Get",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Get a report for the guest configuration assignment, by reportId."
+          }
+        ],
+        "Parents": [
+          "ResourceGroupResource"
+        ],
+        "SwaggerModelName": "GuestConfigurationAssignment",
+        "ResourceType": "Microsoft.GuestConfiguration/guestConfigurationAssignments",
+        "ResourceKey": "guestConfigurationAssignmentName",
+        "ResourceKeySegment": "guestConfigurationAssignments",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "Extension",
+        "IsSingletonResource": false
+      }
+    ]
+  },
+  "RenameMapping": {},
+  "OverrideOperationName": {}
+}

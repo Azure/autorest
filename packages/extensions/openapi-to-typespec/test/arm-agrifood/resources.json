@@ -70,7 +70,7 @@
         "IsTenantResource": false,
         "IsSubscriptionResource": false,
         "IsManagementGroupResource": false,
-        "IsExtensionResource": false,
+        "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
       }
     ],
@@ -117,7 +117,7 @@
         "IsTenantResource": true,
         "IsSubscriptionResource": false,
         "IsManagementGroupResource": false,
-        "IsExtensionResource": false,
+        "ScopeType": "Tenant",
         "IsSingletonResource": false
       }
     ],
@@ -205,7 +205,7 @@
         "IsTenantResource": false,
         "IsSubscriptionResource": false,
         "IsManagementGroupResource": false,
-        "IsExtensionResource": false,
+        "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
       }
     ],
@@ -279,7 +279,7 @@
         "IsTenantResource": false,
         "IsSubscriptionResource": false,
         "IsManagementGroupResource": false,
-        "IsExtensionResource": false,
+        "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
       }
     ],
@@ -353,7 +353,7 @@
         "IsTenantResource": false,
         "IsSubscriptionResource": false,
         "IsManagementGroupResource": false,
-        "IsExtensionResource": false,
+        "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
       }
     ],
@@ -400,7 +400,7 @@
         "IsTenantResource": false,
         "IsSubscriptionResource": false,
         "IsManagementGroupResource": false,
-        "IsExtensionResource": false,
+        "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
       }
     ],
@@ -474,7 +474,7 @@
         "IsTenantResource": false,
         "IsSubscriptionResource": false,
         "IsManagementGroupResource": false,
-        "IsExtensionResource": false,
+        "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
       }
     ],
@@ -521,7 +521,7 @@
         "IsTenantResource": true,
         "IsSubscriptionResource": false,
         "IsManagementGroupResource": false,
-        "IsExtensionResource": false,
+        "ScopeType": "Tenant",
         "IsSingletonResource": false
       }
     ]

@@ -84,7 +84,7 @@
         "IsTenantResource": false,
         "IsSubscriptionResource": false,
         "IsManagementGroupResource": false,
-        "IsExtensionResource": false,
+        "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
       }
     ],
@@ -150,7 +150,7 @@
         "IsTenantResource": false,
         "IsSubscriptionResource": true,
         "IsManagementGroupResource": false,
-        "IsExtensionResource": false,
+        "ScopeType": "Subscription",
         "IsSingletonResource": false
       }
     ],
@@ -216,7 +216,7 @@
         "IsTenantResource": false,
         "IsSubscriptionResource": true,
         "IsManagementGroupResource": false,
-        "IsExtensionResource": false,
+        "ScopeType": "Subscription",
         "IsSingletonResource": false
       }
     ]

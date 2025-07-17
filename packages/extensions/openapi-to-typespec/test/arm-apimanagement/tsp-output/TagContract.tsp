@@ -33,31 +33,35 @@ interface TagContractOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = ApiManagementServiceResource,
-          KeyName = "serviceName",
-          SegmentName = "service",
-          NamePattern = "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
-        >>,
-        ...KeysOf<ResourceNameParameter<
-          Resource = ApiContract,
-          KeyName = "apiId",
-          SegmentName = "apis",
-          NamePattern = "^[^*#&+:<>?]+$"
-        >>,
-        ...KeysOf<ResourceNameParameter<
-          Resource = OperationContract,
-          KeyName = "operationId",
-          SegmentName = "operations",
-          NamePattern = ""
-        >>,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        serviceName: string,
+
+        /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
+        @path
+        @segment("apis")
+        @key
+        @pattern("^[^*#&+:<>?]+$")
+        apiId: string,
+
+        /** Operation identifier within an API. Must be unique in the current API Management service instance. */
+        @path
+        @segment("operations")
+        @key
+        operationId: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = TagContract,
-        KeyName = "tagId",
-        SegmentName = "tags",
-        NamePattern = "^[^*#&+:<>?]+$"
-      >>
+      {
+        /** Tag identifier. Must be unique in the current API Management service instance. */
+        @path
+        @segment("tags")
+        @key
+        @pattern("^[^*#&+:<>?]+$")
+        tagId: string,
+      }
     > {}
 
 @armResourceOperations
@@ -118,25 +122,29 @@ interface TagOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = ApiManagementServiceResource,
-          KeyName = "serviceName",
-          SegmentName = "service",
-          NamePattern = "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
-        >>,
-        ...KeysOf<ResourceNameParameter<
-          Resource = ApiContract,
-          KeyName = "apiId",
-          SegmentName = "apis",
-          NamePattern = "^[^*#&+:<>?]+$"
-        >>,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        serviceName: string,
+
+        /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
+        @path
+        @segment("apis")
+        @key
+        @pattern("^[^*#&+:<>?]+$")
+        apiId: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = TagContract,
-        KeyName = "tagId",
-        SegmentName = "tags",
-        NamePattern = "^[^*#&+:<>?]+$"
-      >>
+      {
+        /** Tag identifier. Must be unique in the current API Management service instance. */
+        @path
+        @segment("tags")
+        @key
+        @pattern("^[^*#&+:<>?]+$")
+        tagId: string,
+      }
     > {}
 
 @armResourceOperations
@@ -197,25 +205,28 @@ interface TagContractOperationGroupOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = ApiManagementServiceResource,
-          KeyName = "serviceName",
-          SegmentName = "service",
-          NamePattern = "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
-        >>,
-        ...KeysOf<ResourceNameParameter<
-          Resource = ProductContract,
-          KeyName = "productId",
-          SegmentName = "products",
-          NamePattern = ""
-        >>,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        serviceName: string,
+
+        /** Product identifier. Must be unique in the current API Management service instance. */
+        @path
+        @segment("products")
+        @key
+        productId: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = TagContract,
-        KeyName = "tagId",
-        SegmentName = "tags",
-        NamePattern = "^[^*#&+:<>?]+$"
-      >>
+      {
+        /** Tag identifier. Must be unique in the current API Management service instance. */
+        @path
+        @segment("tags")
+        @key
+        @pattern("^[^*#&+:<>?]+$")
+        tagId: string,
+      }
     > {}
 
 @armResourceOperations
@@ -276,19 +287,22 @@ interface TagContractOperationGroupOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = ApiManagementServiceResource,
-          KeyName = "serviceName",
-          SegmentName = "service",
-          NamePattern = "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
-        >>,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        serviceName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = TagContract,
-        KeyName = "tagId",
-        SegmentName = "tags",
-        NamePattern = "^[^*#&+:<>?]+$"
-      >>
+      {
+        /** Tag identifier. Must be unique in the current API Management service instance. */
+        @path
+        @segment("tags")
+        @key
+        @pattern("^[^*#&+:<>?]+$")
+        tagId: string,
+      }
     > {}
 
 @armResourceOperations
