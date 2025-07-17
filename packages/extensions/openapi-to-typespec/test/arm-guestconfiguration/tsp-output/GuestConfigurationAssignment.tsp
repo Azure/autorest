@@ -98,8 +98,6 @@ interface GuestConfigurationAssignments {
   /**
    * List all reports for the guest configuration assignment, latest report first.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GuestConfigurationAssignmentReports_List")
   @get
   @action("reports")
   guestConfigurationAssignmentReportsList is GuestConfigurationAssignmentOps.ActionSync<
@@ -111,8 +109,6 @@ interface GuestConfigurationAssignments {
   /**
    * Get a report for the guest configuration assignment, by reportId.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GuestConfigurationAssignmentReports_Get")
   @get
   @action("{reportId}")
   guestConfigurationAssignmentReportsGet is GuestConfigurationAssignmentOps.ActionSync<
@@ -194,8 +190,6 @@ interface GuestConfigurationHCRPAssignments {
   /**
    * List all reports for the guest configuration assignment, latest report first.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GuestConfigurationHCRPAssignmentReports_List")
   @get
   @action("reports")
   guestConfigurationHCRPAssignmentReportsList is GuestConfigurationHCRPAssignmentOps.ActionSync<
@@ -207,8 +201,6 @@ interface GuestConfigurationHCRPAssignments {
   /**
    * Get a report for the guest configuration assignment, by reportId.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GuestConfigurationHCRPAssignmentReports_Get")
   @get
   @action("{reportId}")
   guestConfigurationHCRPAssignmentReportsGet is GuestConfigurationHCRPAssignmentOps.ActionSync<
@@ -289,8 +281,6 @@ interface GuestConfigurationAssignmentsVMSS {
   /**
    * List all reports for the VMSS guest configuration assignment, latest report first.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GuestConfigurationAssignmentReportsVMSS_List")
   @get
   @action("reports")
   guestConfigurationAssignmentReportsVMSSList is GuestConfigurationAssignmentsVMSSOps.ActionSync<
@@ -302,8 +292,6 @@ interface GuestConfigurationAssignmentsVMSS {
   /**
    * Get a report for the VMSS guest configuration assignment, by reportId.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GuestConfigurationAssignmentReportsVMSS_Get")
   @get
   @action("{id}")
   guestConfigurationAssignmentReportsVMSSGet is GuestConfigurationAssignmentsVMSSOps.ActionSync<
@@ -383,8 +371,6 @@ interface GuestConfigurationConnectedVMwarevSphereAssignments {
   /**
    * List all reports for the guest configuration assignment, latest report first.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GuestConfigurationConnectedVMwarevSphereAssignmentsReports_List")
   @get
   @action("reports")
   guestConfigurationConnectedVMwarevSphereAssignmentsReportsList is GuestConfigurationConnectedVMwarevSphereAssignmentOps.ActionSync<
@@ -396,8 +382,6 @@ interface GuestConfigurationConnectedVMwarevSphereAssignments {
   /**
    * Get a report for the guest configuration assignment, by reportId.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GuestConfigurationConnectedVMwarevSphereAssignmentsReports_Get")
   @get
   @action("{reportId}")
   guestConfigurationConnectedVMwarevSphereAssignmentsReportsGet is GuestConfigurationConnectedVMwarevSphereAssignmentOps.ActionSync<

@@ -30,22 +30,16 @@ interface IssueCommentContracts {
   /**
    * Gets the details of the issue Comment for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiIssueComment_Get")
   get is ArmResourceRead<IssueCommentContract>;
 
   /**
    * Gets the entity state (Etag) version of the issue Comment for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiIssueComment_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<IssueCommentContract>;
 
   /**
    * Creates a new Comment for the Issue in an API or updates an existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiIssueComment_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IssueCommentContract,
     Parameters = {
@@ -60,8 +54,6 @@ interface IssueCommentContracts {
   /**
    * Deletes the specified comment from an Issue.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiIssueComment_Delete")
   delete is ArmResourceDeleteSync<
     IssueCommentContract,
     Parameters = {
@@ -76,8 +68,6 @@ interface IssueCommentContracts {
   /**
    * Lists all comments for the Issue associated with the specified API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiIssueComment_ListByService")
   listByService is ArmResourceListByParent<
     IssueCommentContract,
     Parameters = {

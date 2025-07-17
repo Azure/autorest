@@ -37,22 +37,16 @@ interface BatchEndpointTrackedResources {
   /**
    * Gets a batch inference endpoint by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BatchEndpoints_Get")
   get is ArmResourceRead<BatchEndpointTrackedResource>;
 
   /**
    * Creates a batch inference endpoint (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BatchEndpoints_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<BatchEndpointTrackedResource>;
 
   /**
    * Update a batch inference endpoint (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BatchEndpoints_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     BatchEndpointTrackedResource,
@@ -62,9 +56,7 @@ interface BatchEndpointTrackedResources {
   /**
    * Delete Batch Inference Endpoint (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("BatchEndpoints_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     BatchEndpointTrackedResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -73,8 +65,6 @@ interface BatchEndpointTrackedResources {
   /**
    * Lists Batch inference endpoint in the workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BatchEndpoints_List")
   list is ArmResourceListByParent<
     BatchEndpointTrackedResource,
     Parameters = {
@@ -96,8 +86,6 @@ interface BatchEndpointTrackedResources {
   /**
    * Lists batch Inference Endpoint keys.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BatchEndpoints_ListKeys")
   @action("listkeys")
   listKeys is ArmResourceActionSync<
     BatchEndpointTrackedResource,

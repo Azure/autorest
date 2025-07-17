@@ -30,22 +30,16 @@ interface CacheContracts {
   /**
    * Gets the details of the Cache specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Cache_Get")
   get is ArmResourceRead<CacheContract>;
 
   /**
    * Gets the entity state (Etag) version of the Cache specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Cache_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<CacheContract>;
 
   /**
    * Creates or updates an External Cache to be used in Api Management instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Cache_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     CacheContract,
     Parameters = {
@@ -60,8 +54,6 @@ interface CacheContracts {
   /**
    * Updates the details of the cache specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Cache_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     CacheContract,
@@ -78,8 +70,6 @@ interface CacheContracts {
   /**
    * Deletes specific Cache.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Cache_Delete")
   delete is ArmResourceDeleteSync<
     CacheContract,
     Parameters = {
@@ -94,8 +84,6 @@ interface CacheContracts {
   /**
    * Lists a collection of all external Caches in the specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Cache_ListByService")
   listByService is ArmResourceListByParent<
     CacheContract,
     Parameters = {

@@ -31,22 +31,16 @@ interface IdentityProviderContracts {
   /**
    * Gets the configuration details of the identity Provider configured in specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IdentityProvider_Get")
   get is ArmResourceRead<IdentityProviderContract>;
 
   /**
    * Gets the entity state (Etag) version of the identityProvider specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IdentityProvider_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<IdentityProviderContract>;
 
   /**
    * Creates or Updates the IdentityProvider configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IdentityProvider_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IdentityProviderContract,
     Parameters = {
@@ -61,8 +55,6 @@ interface IdentityProviderContracts {
   /**
    * Updates an existing IdentityProvider configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IdentityProvider_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     IdentityProviderContract,
@@ -79,8 +71,6 @@ interface IdentityProviderContracts {
   /**
    * Deletes the specified identity provider configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IdentityProvider_Delete")
   delete is ArmResourceDeleteSync<
     IdentityProviderContract,
     Parameters = {
@@ -95,8 +85,6 @@ interface IdentityProviderContracts {
   /**
    * Lists a collection of Identity Provider configured in the specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IdentityProvider_ListByService")
   listByService is ArmResourceListByParent<
     IdentityProviderContract,
     Response = ArmResponse<IdentityProviderList>
@@ -105,8 +93,6 @@ interface IdentityProviderContracts {
   /**
    * Gets the client secret details of the Identity Provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IdentityProvider_ListSecrets")
   listSecrets is ArmResourceActionSync<
     IdentityProviderContract,
     void,

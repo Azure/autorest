@@ -1059,7 +1059,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AssociationProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1163,7 +1164,8 @@
         },
         "properties": {
           "$ref": "#/definitions/AssociationUpdateProperties",
-          "description": "The updatable properties of the Association."
+          "description": "The updatable properties of the Association.",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -1187,7 +1189,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/FrontendProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1311,7 +1314,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/TrafficControllerProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [

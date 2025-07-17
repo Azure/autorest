@@ -29,30 +29,23 @@ interface Frontends {
   /**
    * Get a Frontend
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FrontendsInterface_Get")
   get is ArmResourceRead<Frontend>;
 
   /**
    * Create a Frontend
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FrontendsInterface_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Frontend>;
 
   /**
    * Update a Frontend
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FrontendsInterface_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Frontend, PatchModel = FrontendUpdate>;
 
   /**
    * Delete a Frontend
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FrontendsInterface_Delete")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Frontend,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -61,8 +54,6 @@ interface Frontends {
   /**
    * List Frontend resources by TrafficController
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FrontendsInterface_ListByTrafficController")
   listByTrafficController is ArmResourceListByParent<Frontend>;
 }
 

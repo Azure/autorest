@@ -30,22 +30,16 @@ interface GroupContracts {
   /**
    * Gets the details of the group specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Group_Get")
   get is ArmResourceRead<GroupContract>;
 
   /**
    * Gets the entity state (Etag) version of the group specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Group_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<GroupContract>;
 
   /**
    * Creates or Updates a group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Group_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GroupContract,
     Parameters = {
@@ -60,8 +54,6 @@ interface GroupContracts {
   /**
    * Updates the details of the group specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Group_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     GroupContract,
@@ -78,8 +70,6 @@ interface GroupContracts {
   /**
    * Deletes specific group of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Group_Delete")
   delete is ArmResourceDeleteSync<
     GroupContract,
     Parameters = {
@@ -94,8 +84,6 @@ interface GroupContracts {
   /**
    * Lists a collection of groups defined within a service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Group_ListByService")
   listByService is ArmResourceListByParent<
     GroupContract,
     Parameters = {
@@ -123,8 +111,6 @@ interface GroupContracts {
   /**
    * Lists a collection of user entities associated with the group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GroupUser_List")
   @get
   @action("users")
   list is ArmResourceActionSync<
@@ -156,8 +142,6 @@ interface GroupContracts {
   /**
    * Checks that user entity specified by identifier is associated with the group entity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GroupUser_CheckEntityExists")
   @head
   @action("{userId}")
   checkEntityExists is ArmResourceActionSync<
@@ -178,8 +162,6 @@ interface GroupContracts {
   /**
    * Add existing user to existing group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GroupUser_Create")
   @put
   @action("{userId}")
   create is ArmResourceActionSync<
@@ -200,8 +182,6 @@ interface GroupContracts {
   /**
    * Remove existing user from existing group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GroupUser_Delete")
   @delete
   @action("{userId}")
   groupUserDelete is ArmResourceActionSync<

@@ -56,23 +56,17 @@ interface EnvironmentContainerResources {
   /**
    * Get container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RegistryEnvironmentContainers_Get")
   get is EnvironmentContainerResourceOps.Read<EnvironmentContainerResource>;
 
   /**
    * Create or update container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RegistryEnvironmentContainers_CreateOrUpdate")
   createOrUpdate is EnvironmentContainerResourceOps.CreateOrUpdateAsync<EnvironmentContainerResource>;
 
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("RegistryEnvironmentContainers_Delete")
   delete is EnvironmentContainerResourceOps.DeleteWithoutOkAsync<
     EnvironmentContainerResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -81,8 +75,6 @@ interface EnvironmentContainerResources {
   /**
    * List environment containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RegistryEnvironmentContainers_List")
   list is EnvironmentContainerResourceOps.List<
     EnvironmentContainerResource,
     Parameters = {

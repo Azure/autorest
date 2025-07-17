@@ -30,22 +30,16 @@ interface TagDescriptionContracts {
   /**
    * Get Tag description in scope of API
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiTagDescription_Get")
   get is ArmResourceRead<TagDescriptionContract>;
 
   /**
    * Gets the entity state version of the tag specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiTagDescription_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<TagDescriptionContract>;
 
   /**
    * Create/Update tag description in scope of the Api.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiTagDescription_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     TagDescriptionContract,
     Parameters = {
@@ -60,8 +54,6 @@ interface TagDescriptionContracts {
   /**
    * Delete tag description for the Api.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiTagDescription_Delete")
   delete is ArmResourceDeleteSync<
     TagDescriptionContract,
     Parameters = {
@@ -76,8 +68,6 @@ interface TagDescriptionContracts {
   /**
    * Lists all Tags descriptions in scope of API. Model similar to swagger - tagDescription is defined on API level but tag may be assigned to the Operations
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiTagDescription_ListByService")
   listByService is ArmResourceListByParent<
     TagDescriptionContract,
     Parameters = {

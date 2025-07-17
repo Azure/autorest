@@ -95,8 +95,6 @@ interface Galleries {
   /**
    * Update sharing profile of a gallery.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GallerySharingProfile_Update")
   @action("share")
   gallerySharingProfileUpdate is ArmResourceActionAsync<
     Gallery,

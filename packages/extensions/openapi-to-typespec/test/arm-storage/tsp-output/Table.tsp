@@ -29,16 +29,12 @@ interface Tables {
   /**
    * Gets the table with the specified table name, under the specified account if it exists.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Table_Get")
   get is ArmResourceRead<Table>;
 
   /**
    * Creates a new table with the specified table name, under the specified account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("Table_Create")
   create is ArmResourceCreateOrReplaceSync<
     Table,
     Response = ArmResourceUpdatedResponse<Table>
@@ -47,8 +43,6 @@ interface Tables {
   /**
    * Creates a new table with the specified table name, under the specified account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Table_Update")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchSync<
     Table,
@@ -59,9 +53,7 @@ interface Tables {
   /**
    * Deletes the table with the specified table name, under the specified account if it exists.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("Table_Delete")
   delete is ArmResourceDeleteSync<
     Table,
     Response = ArmDeletedNoContentResponse
@@ -70,8 +62,6 @@ interface Tables {
   /**
    * Gets a list of all the tables under the specified storage account
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Table_List")
   list is ArmResourceListByParent<
     Table,
     Response = ArmResponse<ListTableResource>

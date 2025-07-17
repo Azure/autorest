@@ -31,15 +31,11 @@ interface TenantSettingsContracts {
   /**
    * Get tenant settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TenantSettings_Get")
   get is ArmResourceRead<TenantSettingsContract>;
 
   /**
    * Public settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TenantSettings_ListByService")
   listByService is ArmResourceListByParent<
     TenantSettingsContract,
     Parameters = {

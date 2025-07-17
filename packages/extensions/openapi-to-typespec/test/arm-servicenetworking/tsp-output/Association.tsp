@@ -30,30 +30,23 @@ interface Associations {
   /**
    * Get a Association
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AssociationsInterface_Get")
   get is ArmResourceRead<Association>;
 
   /**
    * Create a Association
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AssociationsInterface_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Association>;
 
   /**
    * Update a Association
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AssociationsInterface_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Association, PatchModel = AssociationUpdate>;
 
   /**
    * Delete a Association
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AssociationsInterface_Delete")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Association,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -62,8 +55,6 @@ interface Associations {
   /**
    * List Association resources by TrafficController
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AssociationsInterface_ListByTrafficController")
   listByTrafficController is ArmResourceListByParent<Association>;
 }
 

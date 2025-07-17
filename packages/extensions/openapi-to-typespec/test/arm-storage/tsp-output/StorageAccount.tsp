@@ -208,8 +208,6 @@ interface StorageAccounts {
   /**
    * Gets the private link resources that need to be created for a storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateLinkResources_ListByStorageAccount")
   @get
   @action("privateLinkResources")
   listByStorageAccount is ArmResourceActionSync<

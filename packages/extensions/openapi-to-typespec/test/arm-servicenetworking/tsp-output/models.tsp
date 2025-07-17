@@ -14,8 +14,11 @@ namespace Microsoft.ServiceNetworking;
  */
 union Origin {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   user: "user",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   system: "system",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `user,system`: "user,system",
 }
 
@@ -24,17 +27,26 @@ union Origin {
  */
 union ActionType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Internal: "Internal",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ProvisioningState {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Provisioning: "Provisioning",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Updating: "Updating",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Deleting: "Deleting",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Accepted: "Accepted",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Succeeded: "Succeeded",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Canceled: "Canceled",
 }
 
@@ -43,14 +55,20 @@ union ProvisioningState {
  */
 union CreatedByType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   User: "User",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Application: "Application",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ManagedIdentity: "ManagedIdentity",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Key: "Key",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union AssociationType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   subnets: "subnets",
 }
 
@@ -129,6 +147,7 @@ model TrafficControllerUpdate {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 
@@ -170,11 +189,14 @@ model AssociationUpdate {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 
   /**
    * The updatable properties of the Association.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AssociationUpdateProperties;
 }
 
@@ -227,5 +249,6 @@ model FrontendUpdate {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }

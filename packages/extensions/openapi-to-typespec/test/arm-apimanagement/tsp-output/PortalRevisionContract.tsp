@@ -30,23 +30,17 @@ interface PortalRevisionContracts {
   /**
    * Gets the developer portal's revision specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PortalRevision_Get")
   get is ArmResourceRead<PortalRevisionContract>;
 
   /**
    * Gets the developer portal revision specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PortalRevision_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<PortalRevisionContract>;
 
   /**
    * Creates a new developer portal's revision by running the portal's publishing. The `isCurrent` property indicates if the revision is publicly accessible.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("PortalRevision_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PortalRevisionContract,
     Response = ArmResourceCreatedResponse<
@@ -58,8 +52,6 @@ interface PortalRevisionContracts {
   /**
    * Updates the description of specified portal revision or makes it current.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PortalRevision_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     PortalRevisionContract,
@@ -76,8 +68,6 @@ interface PortalRevisionContracts {
   /**
    * Lists developer portal's revisions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PortalRevision_ListByService")
   listByService is ArmResourceListByParent<
     PortalRevisionContract,
     Parameters = {

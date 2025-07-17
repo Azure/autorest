@@ -30,22 +30,16 @@ interface BackendContracts {
   /**
    * Gets the details of the backend specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Backend_Get")
   get is ArmResourceRead<BackendContract>;
 
   /**
    * Gets the entity state (Etag) version of the backend specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Backend_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<BackendContract>;
 
   /**
    * Creates or Updates a backend.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Backend_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     BackendContract,
     Parameters = {
@@ -60,8 +54,6 @@ interface BackendContracts {
   /**
    * Updates an existing backend.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Backend_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     BackendContract,
@@ -78,8 +70,6 @@ interface BackendContracts {
   /**
    * Deletes the specified backend.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Backend_Delete")
   delete is ArmResourceDeleteSync<
     BackendContract,
     Parameters = {
@@ -94,8 +84,6 @@ interface BackendContracts {
   /**
    * Lists a collection of backends in the specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Backend_ListByService")
   listByService is ArmResourceListByParent<
     BackendContract,
     Parameters = {
@@ -123,8 +111,6 @@ interface BackendContracts {
   /**
    * Notifies the APIM proxy to create a new connection to the backend after the specified timeout. If no timeout was specified, timeout of 2 minutes is used.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Backend_Reconnect")
   reconnect is ArmResourceActionSync<
     BackendContract,
     BackendReconnectContract,

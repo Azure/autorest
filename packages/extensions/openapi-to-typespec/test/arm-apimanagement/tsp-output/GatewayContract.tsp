@@ -30,22 +30,16 @@ interface GatewayContracts {
   /**
    * Gets the details of the Gateway specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Gateway_Get")
   get is ArmResourceRead<GatewayContract>;
 
   /**
    * Gets the entity state (Etag) version of the Gateway specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Gateway_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<GatewayContract>;
 
   /**
    * Creates or updates a Gateway to be used in Api Management instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Gateway_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GatewayContract,
     Parameters = {
@@ -60,8 +54,6 @@ interface GatewayContracts {
   /**
    * Updates the details of the gateway specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Gateway_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     GatewayContract,
@@ -78,8 +70,6 @@ interface GatewayContracts {
   /**
    * Deletes specific Gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Gateway_Delete")
   delete is ArmResourceDeleteSync<
     GatewayContract,
     Parameters = {
@@ -94,8 +84,6 @@ interface GatewayContracts {
   /**
    * Lists a collection of gateways registered with service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Gateway_ListByService")
   listByService is ArmResourceListByParent<
     GatewayContract,
     Parameters = {
@@ -123,8 +111,6 @@ interface GatewayContracts {
   /**
    * Retrieves gateway keys.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Gateway_ListKeys")
   listKeys is ArmResourceActionSync<
     GatewayContract,
     void,
@@ -134,8 +120,6 @@ interface GatewayContracts {
   /**
    * Regenerates specified gateway key invalidating any tokens created with it.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Gateway_RegenerateKey")
   regenerateKey is ArmResourceActionSync<
     GatewayContract,
     GatewayKeyRegenerationRequestContract,
@@ -145,8 +129,6 @@ interface GatewayContracts {
   /**
    * Gets the Shared Access Authorization Token for the gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Gateway_GenerateToken")
   generateToken is ArmResourceActionSync<
     GatewayContract,
     GatewayTokenRequestContract,
@@ -156,8 +138,6 @@ interface GatewayContracts {
   /**
    * Lists a collection of the APIs associated with a gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GatewayApi_ListByService")
   @get
   @action("apis")
   gatewayApiListByService is ArmResourceActionSync<
@@ -189,8 +169,6 @@ interface GatewayContracts {
   /**
    * Checks that API entity specified by identifier is associated with the Gateway entity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GatewayApi_GetEntityTag")
   @head
   @action("{apiId}")
   gatewayApiGetEntityTag is ArmResourceActionSync<
@@ -211,8 +189,6 @@ interface GatewayContracts {
   /**
    * Adds an API to the specified Gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GatewayApi_CreateOrUpdate")
   @put
   @action("{apiId}")
   gatewayApiCreateOrUpdate is ArmResourceActionSync<
@@ -234,8 +210,6 @@ interface GatewayContracts {
   /**
    * Deletes the specified API from the specified Gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GatewayApi_Delete")
   @delete
   @action("{apiId}")
   gatewayApiDelete is ArmResourceActionSync<

@@ -17,6 +17,7 @@ const brownFieldProjects = [
   "arm-machinelearningservices",
   "arm-quota",
   "arm-storage",
+  "arm-servicenetworking", // To generate back-compatible.tsp so that it could generate correct operationId
 ];
 
 export async function generateTypespec(repoRoot: string, folder: string, debug = false) {
@@ -98,6 +99,7 @@ async function generate(root: string, path: string, debug = false, isFullCompati
     ...(isFullCompatible ? ["--openapi-to-typespec.isFullCompatible"] : []),
     ...(overrideGuess ? ["--guessResourceKey=false"] : ["--guessResourceKey=true"]),
     "--openapi-to-typespec.isTest",
+    "--openapi-to-typespec.removeOperationId",
   ];
   const spawn = spawnSync("node", args, { stdio: "inherit" });
 

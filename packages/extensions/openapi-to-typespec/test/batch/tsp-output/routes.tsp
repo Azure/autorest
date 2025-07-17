@@ -1,11 +1,9 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
-import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Azure.Batch;
 
@@ -18,7 +16,6 @@ interface ApplicationOperationGroup {
    * API.
    */
   @summary("Lists all of the applications available in the specified Account.")
-  @operationId("Application_List")
   list is Azure.Core.ResourceList<
     Application,
     {
@@ -72,7 +69,6 @@ interface ApplicationOperationGroup {
    * API.
    */
   @summary("Gets information about the specified Application.")
-  @operationId("Application_Get")
   get is Azure.Core.ResourceRead<
     Application,
     {
@@ -123,7 +119,6 @@ interface PoolOperationGroup {
     Lists the usage metrics, aggregated by Pool across individual time intervals,
     for the specified Account.
     """)
-  @operationId("Pool_ListUsageMetrics")
   listUsageMetrics is Azure.Core.ResourceList<
     PoolUsageMetrics,
     {
@@ -199,7 +194,6 @@ interface PoolOperationGroup {
    * periodic roll-up of statistics. The typical delay is about 30 minutes.
    */
   @summary("Gets lifetime summary statistics for all of the Pools in the specified Account.")
-  @operationId("Pool_GetAllLifetimeStatistics")
   @route("/lifetimepoolstats")
   @get
   getAllLifetimeStatistics is Azure.Core.Foundations.Operation<
@@ -242,7 +236,6 @@ interface PoolOperationGroup {
    * to Microsoft Support engineers.
    */
   @summary("Adds a Pool to the specified Account.")
-  @operationId("Pool_Add")
   @route("/pools")
   @post
   add is Azure.Core.Foundations.Operation<
@@ -289,7 +282,6 @@ interface PoolOperationGroup {
    * Lists all of the Pools in the specified Account.
    */
   @summary("Lists all of the Pools in the specified Account.")
-  @operationId("Pool_List")
   @route("/pools")
   @get
   list is Azure.Core.Foundations.Operation<
@@ -369,7 +361,6 @@ interface PoolOperationGroup {
    * error code PoolBeingDeleted.
    */
   @summary("Deletes a Pool from the specified Account.")
-  @operationId("Pool_Delete")
   @route("/pools/{poolId}")
   @delete
   delete is Azure.Core.Foundations.Operation<
@@ -447,7 +438,6 @@ interface PoolOperationGroup {
   /**
    * Gets basic properties of a Pool.
    */
-  @operationId("Pool_Exists")
   @route("/pools/{poolId}")
   @head
   exists is Azure.Core.Foundations.Operation<
@@ -525,7 +515,6 @@ interface PoolOperationGroup {
   /**
    * Gets information about the specified Pool.
    */
-  @operationId("Pool_Get")
   @route("/pools/{poolId}")
   @get
   get is Azure.Core.Foundations.Operation<
@@ -618,7 +607,6 @@ interface PoolOperationGroup {
    * a StartTask element, then the Pool keeps the existing StartTask.
    */
   @summary("Updates the properties of the specified Pool.")
-  @operationId("Pool_Patch")
   @route("/pools/{poolId}")
   @patch
   patch is Azure.Core.Foundations.Operation<
@@ -703,7 +691,6 @@ interface PoolOperationGroup {
    * Disables automatic scaling for a Pool.
    */
   @summary("Disables automatic scaling for a Pool.")
-  @operationId("Pool_DisableAutoScale")
   @route("/pools/{poolId}/disableautoscale")
   @post
   disableAutoScale is Azure.Core.Foundations.Operation<
@@ -755,7 +742,6 @@ interface PoolOperationGroup {
    * more than once every 30 seconds.
    */
   @summary("Enables automatic scaling for a Pool.")
-  @operationId("Pool_EnableAutoScale")
   @route("/pools/{poolId}/enableautoscale")
   @post
   enableAutoScale is Azure.Core.Foundations.Operation<
@@ -842,7 +828,6 @@ interface PoolOperationGroup {
    * scaling enabled in order to evaluate a formula.
    */
   @summary("Gets the result of evaluating an automatic scaling formula on the Pool.")
-  @operationId("Pool_EvaluateAutoScale")
   @route("/pools/{poolId}/evaluateautoscale")
   @post
   evaluateAutoScale is Azure.Core.Foundations.Operation<
@@ -901,7 +886,6 @@ interface PoolOperationGroup {
    * Nodes, use the Pool remove Compute Nodes API instead.
    */
   @summary("Changes the number of Compute Nodes that are assigned to a Pool.")
-  @operationId("Pool_Resize")
   @route("/pools/{poolId}/resize")
   @post
   resize is Azure.Core.Foundations.Operation<
@@ -992,7 +976,6 @@ interface PoolOperationGroup {
    * be used to halt the initial sizing of the Pool when it is created.
    */
   @summary("Stops an ongoing resize operation on the Pool.")
-  @operationId("Pool_StopResize")
   @route("/pools/{poolId}/stopresize")
   @post
   stopResize is Azure.Core.Foundations.Operation<
@@ -1073,7 +1056,6 @@ interface PoolOperationGroup {
    * with this request, then the Batch service will remove the existing StartTask.
    */
   @summary("Updates the properties of the specified Pool.")
-  @operationId("Pool_UpdateProperties")
   @route("/pools/{poolId}/updateproperties")
   @post
   updateProperties is Azure.Core.Foundations.Operation<
@@ -1128,7 +1110,6 @@ interface PoolOperationGroup {
    * Each request may remove up to 100 nodes.
    */
   @summary("Removes Compute Nodes from the specified Pool.")
-  @operationId("Pool_RemoveNodes")
   @route("/pools/{poolId}/removenodes")
   @post
   removeNodes is Azure.Core.Foundations.Operation<
@@ -1215,7 +1196,6 @@ interface AccountOperationGroup {
    * Lists all Virtual Machine Images supported by the Azure Batch service.
    */
   @summary("Lists all Virtual Machine Images supported by the Azure Batch service.")
-  @operationId("Account_ListSupportedImages")
   listSupportedImages is Azure.Core.ResourceList<
     ImageInformation,
     {
@@ -1273,7 +1253,6 @@ interface AccountOperationGroup {
    * numbers returned may not always be up to date. If you need exact node counts,
    * use a list query.
    */
-  @operationId("Account_ListPoolNodeCounts")
   listPoolNodeCounts is Azure.Core.ResourceList<
     PoolNodeCounts,
     {
@@ -1334,7 +1313,6 @@ interface JobOperationGroup {
    * periodic roll-up of statistics. The typical delay is about 30 minutes.
    */
   @summary("Gets lifetime summary statistics for all of the Jobs in the specified Account.")
-  @operationId("Job_GetAllLifetimeStatistics")
   @route("/lifetimejobstats")
   @get
   getAllLifetimeStatistics is Azure.Core.Foundations.Operation<
@@ -1382,7 +1360,6 @@ interface JobOperationGroup {
    * that the Job is being deleted.
    */
   @summary("Deletes a Job.")
-  @operationId("Job_Delete")
   @route("/jobs/{jobId}")
   @delete
   delete is Azure.Core.Foundations.Operation<
@@ -1461,7 +1438,6 @@ interface JobOperationGroup {
    * Gets information about the specified Job.
    */
   @summary("Gets information about the specified Job.")
-  @operationId("Job_Get")
   @route("/jobs/{jobId}")
   @get
   get is Azure.Core.Foundations.Operation<
@@ -1554,7 +1530,6 @@ interface JobOperationGroup {
    * element, then the Job keeps the existing constraints.
    */
   @summary("Updates the properties of the specified Job.")
-  @operationId("Job_Patch")
   @route("/jobs/{jobId}")
   @patch
   patch is Azure.Core.Foundations.Operation<
@@ -1641,7 +1616,6 @@ interface JobOperationGroup {
    * with this request, then the Batch service will remove the existing constraints.
    */
   @summary("Updates the properties of the specified Job.")
-  @operationId("Job_Update")
   @route("/jobs/{jobId}")
   @put
   update is Azure.Core.Foundations.Operation<
@@ -1733,7 +1707,6 @@ interface JobOperationGroup {
    * the request fails with status code 409.
    */
   @summary("Disables the specified Job, preventing new Tasks from running.")
-  @operationId("Job_Disable")
   @route("/jobs/{jobId}/disable")
   @post
   disable is Azure.Core.Foundations.Operation<
@@ -1823,7 +1796,6 @@ interface JobOperationGroup {
    * than 180 days ago, those Tasks will not run.
    */
   @summary("Enables the specified Job, allowing new Tasks to run.")
-  @operationId("Job_Enable")
   @route("/jobs/{jobId}/enable")
   @post
   enable is Azure.Core.Foundations.Operation<
@@ -1907,7 +1879,6 @@ interface JobOperationGroup {
    * Tasks cannot be added and any remaining active Tasks will not be scheduled.
    */
   @summary("Terminates the specified Job, marking it as completed.")
-  @operationId("Job_Terminate")
   @route("/jobs/{jobId}/terminate")
   @post
   terminate is Azure.Core.Foundations.Operation<
@@ -2000,7 +1971,6 @@ interface JobOperationGroup {
    * engineers.
    */
   @summary("Adds a Job to the specified Account.")
-  @operationId("Job_Add")
   @route("/jobs")
   @post
   add is Azure.Core.Foundations.Operation<
@@ -2047,7 +2017,6 @@ interface JobOperationGroup {
    * Lists all of the Jobs in the specified Account.
    */
   @summary("Lists all of the Jobs in the specified Account.")
-  @operationId("Job_List")
   @route("/jobs")
   @get
   list is Azure.Core.Foundations.Operation<
@@ -2116,7 +2085,6 @@ interface JobOperationGroup {
    * Lists the Jobs that have been created under the specified Job Schedule.
    */
   @summary("Lists the Jobs that have been created under the specified Job Schedule.")
-  @operationId("Job_ListFromJobSchedule")
   @route("/jobschedules/{jobScheduleId}/jobs")
   @get
   listFromJobSchedule is Azure.Core.Foundations.Operation<
@@ -2199,7 +2167,6 @@ interface JobOperationGroup {
     Lists the execution status of the Job Preparation and Job Release Task for the
     specified Job across the Compute Nodes where the Job has run.
     """)
-  @operationId("Job_ListPreparationAndReleaseTaskStatus")
   @route("/jobs/{jobId}/jobpreparationandreleasetaskstatus")
   @get
   listPreparationAndReleaseTaskStatus is Azure.Core.Foundations.Operation<
@@ -2271,7 +2238,6 @@ interface JobOperationGroup {
    * up to date. If you need exact task counts, use a list query.
    */
   @summary("Gets the Task counts for the specified Job.")
-  @operationId("Job_GetTaskCounts")
   @route("/jobs/{jobId}/taskcounts")
   @get
   getTaskCounts is Azure.Core.Foundations.Operation<
@@ -2320,7 +2286,6 @@ interface CertificateOperationGroup {
    * Adds a Certificate to the specified Account.
    */
   @summary("Adds a Certificate to the specified Account.")
-  @operationId("Certificate_Add")
   @route("/certificates")
   @post
   add is Azure.Core.Foundations.Operation<
@@ -2367,7 +2332,6 @@ interface CertificateOperationGroup {
    * Lists all of the Certificates that have been added to the specified Account.
    */
   @summary("Lists all of the Certificates that have been added to the specified Account.")
-  @operationId("Certificate_List")
   @route("/certificates")
   @get
   list is Azure.Core.Foundations.Operation<
@@ -2436,7 +2400,6 @@ interface CertificateOperationGroup {
    * then you can try again to delete the Certificate.
    */
   @summary("Cancels a failed deletion of a Certificate from the specified Account.")
-  @operationId("Certificate_CancelDeletion")
   @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete")
   @post
   cancelDeletion is Azure.Core.Foundations.Operation<
@@ -2497,7 +2460,6 @@ interface CertificateOperationGroup {
    * active if you decide that you want to continue using the Certificate.
    */
   @summary("Deletes a Certificate from the specified Account.")
-  @operationId("Certificate_Delete")
   @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
   @delete
   delete is Azure.Core.Foundations.Operation<
@@ -2549,7 +2511,6 @@ interface CertificateOperationGroup {
   /**
    * Gets information about the specified Certificate.
    */
-  @operationId("Certificate_Get")
   @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
   @get
   get is Azure.Core.Foundations.Operation<
@@ -2610,7 +2571,6 @@ interface FileOperationGroup {
    * Deletes the specified Task file from the Compute Node where the Task ran.
    */
   @summary("Deletes the specified Task file from the Compute Node where the Task ran.")
-  @operationId("File_DeleteFromTask")
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
   @delete
   deleteFromTask is Azure.Core.Foundations.Operation<
@@ -2677,7 +2637,6 @@ interface FileOperationGroup {
   /**
    * Returns the content of the specified Task file.
    */
-  @operationId("File_GetFromTask")
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
   @get
   getFromTask is Azure.Core.Foundations.Operation<
@@ -2758,7 +2717,6 @@ interface FileOperationGroup {
   /**
    * Gets the properties of the specified Task file.
    */
-  @operationId("File_GetPropertiesFromTask")
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
   @head
   getPropertiesFromTask is Azure.Core.Foundations.Operation<
@@ -2833,7 +2791,6 @@ interface FileOperationGroup {
    * Deletes the specified file from the Compute Node.
    */
   @summary("Deletes the specified file from the Compute Node.")
-  @operationId("File_DeleteFromComputeNode")
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
   @delete
   deleteFromComputeNode is Azure.Core.Foundations.Operation<
@@ -2900,7 +2857,6 @@ interface FileOperationGroup {
   /**
    * Returns the content of the specified Compute Node file.
    */
-  @operationId("File_GetFromComputeNode")
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
   @get
   getFromComputeNode is Azure.Core.Foundations.Operation<
@@ -2981,7 +2937,6 @@ interface FileOperationGroup {
   /**
    * Gets the properties of the specified Compute Node file.
    */
-  @operationId("File_GetPropertiesFromComputeNode")
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
   @head
   getPropertiesFromComputeNode is Azure.Core.Foundations.Operation<
@@ -3056,7 +3011,6 @@ interface FileOperationGroup {
    * Lists the files in a Task's directory on its Compute Node.
    */
   @summary("Lists the files in a Task's directory on its Compute Node.")
-  @operationId("File_ListFromTask")
   @route("/jobs/{jobId}/tasks/{taskId}/files")
   @get
   listFromTask is Azure.Core.Foundations.Operation<
@@ -3132,7 +3086,6 @@ interface FileOperationGroup {
    * Lists all of the files in Task directories on the specified Compute Node.
    */
   @summary("Lists all of the files in Task directories on the specified Compute Node.")
-  @operationId("File_ListFromComputeNode")
   @route("/pools/{poolId}/nodes/{nodeId}/files")
   @get
   listFromComputeNode is Azure.Core.Foundations.Operation<
@@ -3209,7 +3162,6 @@ interface JobScheduleOperationGroup {
    * Checks the specified Job Schedule exists.
    */
   @summary("Checks the specified Job Schedule exists.")
-  @operationId("JobSchedule_Exists")
   @route("/jobschedules/{jobScheduleId}")
   @head
   exists is Azure.Core.Foundations.Operation<
@@ -3292,7 +3244,6 @@ interface JobScheduleOperationGroup {
    * though they are still counted towards Account lifetime statistics.
    */
   @summary("Deletes a Job Schedule from the specified Account.")
-  @operationId("JobSchedule_Delete")
   @route("/jobschedules/{jobScheduleId}")
   @delete
   delete is Azure.Core.Foundations.Operation<
@@ -3370,7 +3321,6 @@ interface JobScheduleOperationGroup {
   /**
    * Gets information about the specified Job Schedule.
    */
-  @operationId("JobSchedule_Get")
   @route("/jobschedules/{jobScheduleId}")
   @get
   get is Azure.Core.Foundations.Operation<
@@ -3465,7 +3415,6 @@ interface JobScheduleOperationGroup {
    * running Jobs are unaffected.
    */
   @summary("Updates the properties of the specified Job Schedule.")
-  @operationId("JobSchedule_Patch")
   @route("/jobschedules/{jobScheduleId}")
   @patch
   patch is Azure.Core.Foundations.Operation<
@@ -3554,7 +3503,6 @@ interface JobScheduleOperationGroup {
    * running Jobs are unaffected.
    */
   @summary("Updates the properties of the specified Job Schedule.")
-  @operationId("JobSchedule_Update")
   @route("/jobschedules/{jobScheduleId}")
   @put
   update is Azure.Core.Foundations.Operation<
@@ -3639,7 +3587,6 @@ interface JobScheduleOperationGroup {
    * No new Jobs will be created until the Job Schedule is enabled again.
    */
   @summary("Disables a Job Schedule.")
-  @operationId("JobSchedule_Disable")
   @route("/jobschedules/{jobScheduleId}/disable")
   @post
   disable is Azure.Core.Foundations.Operation<
@@ -3718,7 +3665,6 @@ interface JobScheduleOperationGroup {
    * Enables a Job Schedule.
    */
   @summary("Enables a Job Schedule.")
-  @operationId("JobSchedule_Enable")
   @route("/jobschedules/{jobScheduleId}/enable")
   @post
   enable is Azure.Core.Foundations.Operation<
@@ -3797,7 +3743,6 @@ interface JobScheduleOperationGroup {
    * Terminates a Job Schedule.
    */
   @summary("Terminates a Job Schedule.")
-  @operationId("JobSchedule_Terminate")
   @route("/jobschedules/{jobScheduleId}/terminate")
   @post
   terminate is Azure.Core.Foundations.Operation<
@@ -3876,7 +3821,6 @@ interface JobScheduleOperationGroup {
    * Adds a Job Schedule to the specified Account.
    */
   @summary("Adds a Job Schedule to the specified Account.")
-  @operationId("JobSchedule_Add")
   @route("/jobschedules")
   @post
   add is Azure.Core.Foundations.Operation<
@@ -3923,7 +3867,6 @@ interface JobScheduleOperationGroup {
    * Lists all of the Job Schedules in the specified Account.
    */
   @summary("Lists all of the Job Schedules in the specified Account.")
-  @operationId("JobSchedule_List")
   @route("/jobschedules")
   @get
   list is Azure.Core.Foundations.Operation<
@@ -3996,7 +3939,6 @@ interface TaskOperationGroup {
    * the Batch service and left in whatever state it was in at that time.
    */
   @summary("Adds a Task to the specified Job.")
-  @operationId("Task_Add")
   @route("/jobs/{jobId}/tasks")
   @post
   add is Azure.Core.Foundations.Operation<
@@ -4051,7 +3993,6 @@ interface TaskOperationGroup {
    * information about subtasks.
    */
   @summary("Lists all of the Tasks that are associated with the specified Job.")
-  @operationId("Task_List")
   @route("/jobs/{jobId}/tasks")
   @get
   list is Azure.Core.Foundations.Operation<
@@ -4139,7 +4080,6 @@ interface TaskOperationGroup {
    * service and left in whatever state it was in at that time.
    */
   @summary("Adds a collection of Tasks to the specified Job.")
-  @operationId("Task_AddCollection")
   @route("/jobs/{jobId}/addtaskcollection")
   @post
   addCollection is Azure.Core.Foundations.Operation<
@@ -4196,7 +4136,6 @@ interface TaskOperationGroup {
    * background.
    */
   @summary("Deletes a Task from the specified Job.")
-  @operationId("Task_Delete")
   @route("/jobs/{jobId}/tasks/{taskId}")
   @delete
   delete is Azure.Core.Foundations.Operation<
@@ -4283,7 +4222,6 @@ interface TaskOperationGroup {
    * information about subtasks.
    */
   @summary("Gets information about the specified Task.")
-  @operationId("Task_Get")
   @route("/jobs/{jobId}/tasks/{taskId}")
   @get
   get is Azure.Core.Foundations.Operation<
@@ -4379,7 +4317,6 @@ interface TaskOperationGroup {
   /**
    * Updates the properties of the specified Task.
    */
-  @operationId("Task_Update")
   @route("/jobs/{jobId}/tasks/{taskId}")
   @put
   update is Azure.Core.Foundations.Operation<
@@ -4473,7 +4410,6 @@ interface TaskOperationGroup {
     Lists all of the subtasks that are associated with the specified multi-instance
     Task.
     """)
-  @operationId("Task_ListSubtasks")
   @route("/jobs/{jobId}/tasks/{taskId}/subtasksinfo")
   @get
   listSubtasks is Azure.Core.Foundations.Operation<
@@ -4534,7 +4470,6 @@ interface TaskOperationGroup {
    * primary task; subtasks are then terminated asynchronously in the background.
    */
   @summary("Terminates the specified Task.")
-  @operationId("Task_Terminate")
   @route("/jobs/{jobId}/tasks/{taskId}/terminate")
   @post
   terminate is Azure.Core.Foundations.Operation<
@@ -4628,7 +4563,6 @@ interface TaskOperationGroup {
     Reactivates a Task, allowing it to run again even if its retry count has been
     exhausted.
     """)
-  @operationId("Task_Reactivate")
   @route("/jobs/{jobId}/tasks/{taskId}/reactivate")
   @post
   reactivate is Azure.Core.Foundations.Operation<
@@ -4716,7 +4650,6 @@ interface ComputeNodeOperationGroup {
    * running state.
    */
   @summary("Adds a user Account to the specified Compute Node.")
-  @operationId("ComputeNode_AddUser")
   @route("/pools/{poolId}/nodes/{nodeId}/users")
   @post
   addUser is Azure.Core.Foundations.Operation<
@@ -4776,7 +4709,6 @@ interface ComputeNodeOperationGroup {
    * running state.
    */
   @summary("Deletes a user Account from the specified Compute Node.")
-  @operationId("ComputeNode_DeleteUser")
   @route("/pools/{poolId}/nodes/{nodeId}/users/{userName}")
   @delete
   deleteUser is Azure.Core.Foundations.Operation<
@@ -4841,7 +4773,6 @@ interface ComputeNodeOperationGroup {
     Updates the password and expiration time of a user Account on the specified
     Compute Node.
     """)
-  @operationId("ComputeNode_UpdateUser")
   @route("/pools/{poolId}/nodes/{nodeId}/users/{userName}")
   @put
   updateUser is Azure.Core.Foundations.Operation<
@@ -4906,7 +4837,6 @@ interface ComputeNodeOperationGroup {
    * Gets information about the specified Compute Node.
    */
   @summary("Gets information about the specified Compute Node.")
-  @operationId("ComputeNode_Get")
   @route("/pools/{poolId}/nodes/{nodeId}")
   @get
   get is Azure.Core.Foundations.Operation<
@@ -4965,7 +4895,6 @@ interface ComputeNodeOperationGroup {
    * You can restart a Compute Node only if it is in an idle or running state.
    */
   @summary("Restarts the specified Compute Node.")
-  @operationId("ComputeNode_Reboot")
   @route("/pools/{poolId}/nodes/{nodeId}/reboot")
   @post
   reboot is Azure.Core.Foundations.Operation<
@@ -5026,7 +4955,6 @@ interface ComputeNodeOperationGroup {
    * cloud service configuration property.
    */
   @summary("Reinstalls the operating system on the specified Compute Node.")
-  @operationId("ComputeNode_Reimage")
   @route("/pools/{poolId}/nodes/{nodeId}/reimage")
   @post
   reimage is Azure.Core.Foundations.Operation<
@@ -5086,7 +5014,6 @@ interface ComputeNodeOperationGroup {
    * scheduling state is enabled.
    */
   @summary("Disables Task scheduling on the specified Compute Node.")
-  @operationId("ComputeNode_DisableScheduling")
   @route("/pools/{poolId}/nodes/{nodeId}/disablescheduling")
   @post
   disableScheduling is Azure.Core.Foundations.Operation<
@@ -5146,7 +5073,6 @@ interface ComputeNodeOperationGroup {
    * state is disabled
    */
   @summary("Enables Task scheduling on the specified Compute Node.")
-  @operationId("ComputeNode_EnableScheduling")
   @route("/pools/{poolId}/nodes/{nodeId}/enablescheduling")
   @post
   enableScheduling is Azure.Core.Foundations.Operation<
@@ -5203,7 +5129,6 @@ interface ComputeNodeOperationGroup {
    * API.
    */
   @summary("Gets the settings required for remote login to a Compute Node.")
-  @operationId("ComputeNode_GetRemoteLoginSettings")
   @route("/pools/{poolId}/nodes/{nodeId}/remoteloginsettings")
   @get
   getRemoteLoginSettings is Azure.Core.Foundations.Operation<
@@ -5259,7 +5184,6 @@ interface ComputeNodeOperationGroup {
    * configuration, see the GetRemoteLoginSettings API.
    */
   @summary("Gets the Remote Desktop Protocol file for the specified Compute Node.")
-  @operationId("ComputeNode_GetRemoteDesktop")
   @route("/pools/{poolId}/nodes/{nodeId}/rdp")
   @get
   getRemoteDesktop is Azure.Core.Foundations.Operation<
@@ -5319,7 +5243,6 @@ interface ComputeNodeOperationGroup {
     Upload Azure Batch service log files from the specified Compute Node to Azure
     Blob Storage.
     """)
-  @operationId("ComputeNode_UploadBatchServiceLogs")
   uploadBatchServiceLogs is Azure.Core.ResourceCreateWithServiceProvidedName<
     UploadBatchServiceLogsResult,
     {
@@ -5360,7 +5283,6 @@ interface ComputeNodeOperationGroup {
    * Lists the Compute Nodes in the specified Pool.
    */
   @summary("Lists the Compute Nodes in the specified Pool.")
-  @operationId("ComputeNode_List")
   @route("/pools/{poolId}/nodes")
   @get
   list is Azure.Core.Foundations.Operation<
@@ -5431,7 +5353,6 @@ interface ComputeNodeExtensionOperationGroup {
    * Gets information about the specified Compute Node Extension.
    */
   @summary("Gets information about the specified Compute Node Extension.")
-  @operationId("ComputeNodeExtension_Get")
   @route("/pools/{poolId}/nodes/{nodeId}/extensions/{extensionName}")
   @get
   get is Azure.Core.Foundations.Operation<
@@ -5497,7 +5418,6 @@ interface ComputeNodeExtensionOperationGroup {
    * Lists the Compute Nodes Extensions in the specified Pool.
    */
   @summary("Lists the Compute Nodes Extensions in the specified Pool.")
-  @operationId("ComputeNodeExtension_List")
   @route("/pools/{poolId}/nodes/{nodeId}/extensions")
   @get
   list is Azure.Core.Foundations.Operation<

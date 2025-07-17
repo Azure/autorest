@@ -28,22 +28,16 @@ interface TrafficControllers {
   /**
    * Get a TrafficController
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TrafficControllerInterface_Get")
   get is ArmResourceRead<TrafficController>;
 
   /**
    * Create a TrafficController
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TrafficControllerInterface_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<TrafficController>;
 
   /**
    * Update a TrafficController
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TrafficControllerInterface_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     TrafficController,
@@ -53,8 +47,7 @@ interface TrafficControllers {
   /**
    * Delete a TrafficController
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TrafficControllerInterface_Delete")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     TrafficController,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -63,15 +56,11 @@ interface TrafficControllers {
   /**
    * List TrafficController resources by resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TrafficControllerInterface_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<TrafficController>;
 
   /**
    * List TrafficController resources by subscription ID
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TrafficControllerInterface_ListBySubscription")
   listBySubscription is ArmListBySubscription<TrafficController>;
 }
 

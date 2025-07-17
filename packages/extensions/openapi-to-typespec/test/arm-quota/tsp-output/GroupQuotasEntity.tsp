@@ -28,15 +28,11 @@ interface GroupQuotasEntities {
   /**
    * Gets the GroupQuotas for the name passed. It will return the GroupQuotas properties only. The details on group quota can be access from the group quota APIs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GroupQuotas_Get")
   get is Extension.Read<Extension.ManagementGroup, GroupQuotasEntity>;
 
   /**
    * Creates a new GroupQuota for the name passed. A RequestId will be returned by the Service. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GroupQuotas_CreateOrUpdate")
   createOrUpdate is Extension.CreateOrReplaceAsync<
     Extension.ManagementGroup,
     GroupQuotasEntity,
@@ -50,8 +46,6 @@ interface GroupQuotasEntities {
    * Updates the GroupQuotas for the name passed. A GroupQuotas RequestId will be returned by the Service. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked.
    *  Any change in the filters will be applicable to the future quota assignments, existing quota allocated to subscriptions from the GroupQuotas remains unchanged.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GroupQuotas_Update")
   @patch(#{ implicitOptionality: false })
   update is Extension.CustomPatchAsync<
     Extension.ManagementGroup,
@@ -63,8 +57,6 @@ interface GroupQuotasEntities {
   /**
    * Deletes the GroupQuotas for the name passed. All the remaining shareQuota in the GroupQuotas will be lost.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GroupQuotas_Delete")
   delete is Extension.DeleteWithoutOkAsync<
     Extension.ManagementGroup,
     GroupQuotasEntity
@@ -73,8 +65,6 @@ interface GroupQuotasEntities {
   /**
    * Lists GroupQuotas for the scope passed. It will return the GroupQuotas QuotaEntity properties only.The details on group quota can be access from the group quota APIs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GroupQuotas_List")
   list is Extension.ListByTarget<
     Extension.ManagementGroup,
     GroupQuotasEntity,
@@ -84,8 +74,6 @@ interface GroupQuotasEntities {
   /**
    * Get API to check the status of a GroupQuota request by requestId.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GroupQuotaLimitsRequest_List")
   @get
   @action("groupQuotaRequests")
   groupQuotaLimitsRequestList is Extension.ActionSync<

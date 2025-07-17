@@ -37,22 +37,16 @@ interface BatchDeploymentTrackedResources {
   /**
    * Gets a batch inference deployment by id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BatchDeployments_Get")
   get is ArmResourceRead<BatchDeploymentTrackedResource>;
 
   /**
    * Creates/updates a batch inference deployment (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BatchDeployments_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<BatchDeploymentTrackedResource>;
 
   /**
    * Update a batch inference deployment (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BatchDeployments_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     BatchDeploymentTrackedResource,
@@ -62,9 +56,7 @@ interface BatchDeploymentTrackedResources {
   /**
    * Delete Batch Inference deployment (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("BatchDeployments_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     BatchDeploymentTrackedResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -73,8 +65,6 @@ interface BatchDeploymentTrackedResources {
   /**
    * Lists Batch inference deployments in the workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BatchDeployments_List")
   list is ArmResourceListByParent<
     BatchDeploymentTrackedResource,
     Parameters = {

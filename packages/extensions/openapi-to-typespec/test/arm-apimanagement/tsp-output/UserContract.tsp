@@ -30,22 +30,16 @@ interface UserContracts {
   /**
    * Gets the details of the user specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("User_Get")
   get is ArmResourceRead<UserContract>;
 
   /**
    * Gets the entity state (Etag) version of the user specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("User_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<UserContract>;
 
   /**
    * Creates or Updates a user.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("User_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     UserContract,
     Parameters = {
@@ -66,8 +60,6 @@ interface UserContracts {
   /**
    * Updates the details of the user specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("User_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     UserContract,
@@ -84,8 +76,6 @@ interface UserContracts {
   /**
    * Deletes specific user.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("User_Delete")
   delete is ArmResourceDeleteSync<
     UserContract,
     Parameters = {
@@ -118,8 +108,6 @@ interface UserContracts {
   /**
    * Lists a collection of registered users in the specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("User_ListByService")
   listByService is ArmResourceListByParent<
     UserContract,
     Parameters = {
@@ -153,8 +141,6 @@ interface UserContracts {
   /**
    * Retrieves a redirection URL containing an authentication token for signing a given user into the developer portal.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("User_GenerateSsoUrl")
   generateSsoUrl is ArmResourceActionSync<
     UserContract,
     void,
@@ -164,8 +150,6 @@ interface UserContracts {
   /**
    * Gets the Shared Access Authorization Token for the User.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("User_GetSharedAccessToken")
   @action("token")
   getSharedAccessToken is ArmResourceActionSync<
     UserContract,
@@ -176,8 +160,6 @@ interface UserContracts {
   /**
    * Lists all user groups.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("UserGroup_List")
   @get
   @action("groups")
   list is ArmResourceActionSync<
@@ -209,8 +191,6 @@ interface UserContracts {
   /**
    * List of all user identities.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("UserIdentities_List")
   @get
   @action("identities")
   userIdentitiesList is ArmResourceActionSync<
@@ -222,8 +202,6 @@ interface UserContracts {
   /**
    * Sends confirmation
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("UserConfirmationPassword_Send")
   send is ArmResourceActionSync<
     UserContract,
     void,

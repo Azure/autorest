@@ -1,11 +1,9 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
-import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Azure.LoadTesting;
 
@@ -14,7 +12,6 @@ interface LoadTestAdministrationOperationGroup {
    * Create a new test or update an existing test.
    */
   @summary("Create a new test or update an existing test.")
-  @operationId("LoadTestAdministration_CreateOrUpdateTest")
   @route("/tests/{testId}")
   @patch
   createOrUpdateTest is Azure.Core.Foundations.Operation<
@@ -42,7 +39,6 @@ interface LoadTestAdministrationOperationGroup {
    * Delete a test by its name.
    */
   @summary("Delete a test by its name.")
-  @operationId("LoadTestAdministration_DeleteTest")
   @route("/tests/{testId}")
   @delete
   deleteTest is Azure.Core.Foundations.Operation<
@@ -64,7 +60,6 @@ interface LoadTestAdministrationOperationGroup {
    * Get load test details by test name
    */
   @summary("Get load test details by test name")
-  @operationId("LoadTestAdministration_GetTest")
   @route("/tests/{testId}")
   @get
   getTest is Azure.Core.Foundations.Operation<
@@ -90,7 +85,6 @@ interface LoadTestAdministrationOperationGroup {
     Get all load tests by the fully qualified resource Id e.g
     subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
     """)
-  @operationId("LoadTestAdministration_ListTests")
   @route("/tests")
   @get
   listTests is Azure.Core.Foundations.Operation<
@@ -143,7 +137,6 @@ interface LoadTestAdministrationOperationGroup {
     Existing file with same name for the given test will be overwritten. File
     should be provided in the request body as application/octet-stream.
     """)
-  @operationId("LoadTestAdministration_UploadTestFile")
   @route("/tests/{testId}/files/{fileName}")
   @put
   uploadTestFile is Azure.Core.Foundations.Operation<
@@ -183,7 +176,6 @@ interface LoadTestAdministrationOperationGroup {
    * Get test file by the file name.
    */
   @summary("Get test file by the file name.")
-  @operationId("LoadTestAdministration_GetTestFile")
   @route("/tests/{testId}/files/{fileName}")
   @get
   getTestFile is Azure.Core.Foundations.Operation<
@@ -211,7 +203,6 @@ interface LoadTestAdministrationOperationGroup {
    * Delete file by the file name for a test
    */
   @summary("Delete file by the file name for a test")
-  @operationId("LoadTestAdministration_DeleteTestFile")
   @route("/tests/{testId}/files/{fileName}")
   @delete
   deleteTestFile is Azure.Core.Foundations.Operation<
@@ -239,7 +230,6 @@ interface LoadTestAdministrationOperationGroup {
    * Get all test files.
    */
   @summary("Get all test files.")
-  @operationId("LoadTestAdministration_ListTestFiles")
   @route("/tests/{testId}/files")
   @get
   listTestFiles is Azure.Core.Foundations.Operation<
@@ -261,7 +251,6 @@ interface LoadTestAdministrationOperationGroup {
    * Associate an app component (collection of azure resources) to a test
    */
   @summary("Associate an app component (collection of azure resources) to a test")
-  @operationId("LoadTestAdministration_CreateOrUpdateAppComponents")
   @route("/tests/{testId}/app-components")
   @patch
   createOrUpdateAppComponents is Azure.Core.Foundations.Operation<
@@ -289,7 +278,6 @@ interface LoadTestAdministrationOperationGroup {
    * Get associated app component (collection of azure resources) for the given test.
    */
   @summary("Get associated app component (collection of azure resources) for the given test.")
-  @operationId("LoadTestAdministration_GetAppComponents")
   @route("/tests/{testId}/app-components")
   @get
   getAppComponents is Azure.Core.Foundations.Operation<
@@ -311,7 +299,6 @@ interface LoadTestAdministrationOperationGroup {
    * Configure server metrics for a test
    */
   @summary("Configure server metrics for a test")
-  @operationId("LoadTestAdministration_CreateOrUpdateServerMetricsConfig")
   @route("/tests/{testId}/server-metrics-config")
   @patch
   createOrUpdateServerMetricsConfig is Azure.Core.Foundations.Operation<
@@ -339,7 +326,6 @@ interface LoadTestAdministrationOperationGroup {
    * List server metrics configuration for the given test.
    */
   @summary("List server metrics configuration for the given test.")
-  @operationId("LoadTestAdministration_GetServerMetricsConfig")
   @route("/tests/{testId}/server-metrics-config")
   @get
   getServerMetricsConfig is Azure.Core.Foundations.Operation<
@@ -363,7 +349,6 @@ interface LoadTestRunOperationGroup {
    * Create and start a new test run with the given name.
    */
   @summary("Create and start a new test run with the given name.")
-  @operationId("LoadTestRun_CreateOrUpdateTestRun")
   @route("/test-runs/{testRunId}")
   @patch
   createOrUpdateTestRun is Azure.Core.Foundations.Operation<
@@ -400,7 +385,6 @@ interface LoadTestRunOperationGroup {
    * Get test run details by name.
    */
   @summary("Get test run details by name.")
-  @operationId("LoadTestRun_GetTestRun")
   @route("/test-runs/{testRunId}")
   @get
   getTestRun is Azure.Core.Foundations.Operation<
@@ -422,7 +406,6 @@ interface LoadTestRunOperationGroup {
    * Delete a test run by its name.
    */
   @summary("Delete a test run by its name.")
-  @operationId("LoadTestRun_DeleteTestRun")
   @route("/test-runs/{testRunId}")
   @delete
   deleteTestRun is Azure.Core.Foundations.Operation<
@@ -444,7 +427,6 @@ interface LoadTestRunOperationGroup {
    * Get test run file by file name.
    */
   @summary("Get test run file by file name.")
-  @operationId("LoadTestRun_GetTestRunFile")
   @route("/test-runs/{testRunId}/files/{fileName}")
   @get
   getTestRunFile is Azure.Core.Foundations.Operation<
@@ -472,7 +454,6 @@ interface LoadTestRunOperationGroup {
    * Get all test runs with given filters
    */
   @summary("Get all test runs with given filters")
-  @operationId("LoadTestRun_ListTestRuns")
   @route("/test-runs")
   @get
   listTestRuns is Azure.Core.Foundations.Operation<
@@ -529,7 +510,6 @@ interface LoadTestRunOperationGroup {
    * Stop test run by name.
    */
   @summary("Stop test run by name.")
-  @operationId("LoadTestRun_StopTestRun")
   @route("/test-runs/{testRunId}:stop")
   @post
   stopTestRun is Azure.Core.Foundations.Operation<
@@ -551,7 +531,6 @@ interface LoadTestRunOperationGroup {
    * List the metric namespaces for a load test run.
    */
   @summary("List the metric namespaces for a load test run.")
-  @operationId("LoadTestRun_ListMetricNamespaces")
   @route("/test-runs/{testRunId}/metric-namespaces")
   @get
   listMetricNamespaces is Azure.Core.Foundations.Operation<
@@ -573,7 +552,6 @@ interface LoadTestRunOperationGroup {
    * List the metric definitions for a load test run.
    */
   @summary("List the metric definitions for a load test run.")
-  @operationId("LoadTestRun_ListMetricDefinitions")
   @route("/test-runs/{testRunId}/metric-definitions")
   @get
   listMetricDefinitions is Azure.Core.Foundations.Operation<
@@ -601,7 +579,6 @@ interface LoadTestRunOperationGroup {
    * List the metric values for a load test run.
    */
   @summary("List the metric values for a load test run.")
-  @operationId("LoadTestRun_ListMetrics")
   @route("/test-runs/{testRunId}/metrics")
   @post
   listMetrics is Azure.Core.Foundations.Operation<
@@ -660,7 +637,6 @@ interface LoadTestRunOperationGroup {
    * List the dimension values for the given metric dimension name.
    */
   @summary("List the dimension values for the given metric dimension name.")
-  @operationId("LoadTestRun_ListMetricDimensionValues")
   listMetricDimensionValues is Azure.Core.ResourceList<
     string,
     {
@@ -697,7 +673,6 @@ interface LoadTestRunOperationGroup {
    * Associate an app component (collection of azure resources) to a test run
    */
   @summary("Associate an app component (collection of azure resources) to a test run")
-  @operationId("LoadTestRun_CreateOrUpdateAppComponents")
   @route("/test-runs/{testRunId}/app-components")
   @patch
   createOrUpdateAppComponents is Azure.Core.Foundations.Operation<
@@ -729,7 +704,6 @@ interface LoadTestRunOperationGroup {
     Get associated app component (collection of azure resources) for the given test
     run.
     """)
-  @operationId("LoadTestRun_GetAppComponents")
   @route("/test-runs/{testRunId}/app-components")
   @get
   getAppComponents is Azure.Core.Foundations.Operation<
@@ -751,7 +725,6 @@ interface LoadTestRunOperationGroup {
    * Configure server metrics for a test run
    */
   @summary("Configure server metrics for a test run")
-  @operationId("LoadTestRun_CreateOrUpdateServerMetricsConfig")
   @route("/test-runs/{testRunId}/server-metrics-config")
   @patch
   createOrUpdateServerMetricsConfig is Azure.Core.Foundations.Operation<
@@ -779,7 +752,6 @@ interface LoadTestRunOperationGroup {
    * List server metrics configuration for the given test run.
    */
   @summary("List server metrics configuration for the given test run.")
-  @operationId("LoadTestRun_GetServerMetricsConfig")
   @route("/test-runs/{testRunId}/server-metrics-config")
   @get
   getServerMetricsConfig is Azure.Core.Foundations.Operation<
