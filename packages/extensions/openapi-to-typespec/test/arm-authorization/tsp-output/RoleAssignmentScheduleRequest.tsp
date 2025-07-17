@@ -29,6 +29,8 @@ interface RoleAssignmentScheduleRequests {
   /**
    * Get the specified role assignment schedule request.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RoleAssignmentScheduleRequests_Get")
   get is Extension.Read<
     Extension.ScopeParameter,
     RoleAssignmentScheduleRequest
@@ -37,7 +39,9 @@ interface RoleAssignmentScheduleRequests {
   /**
    * Creates a role assignment schedule request.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("RoleAssignmentScheduleRequests_Create")
   create is Extension.CreateOrReplaceSync<
     Extension.ScopeParameter,
     RoleAssignmentScheduleRequest,
@@ -47,6 +51,8 @@ interface RoleAssignmentScheduleRequests {
   /**
    * Gets role assignment schedule requests for a scope.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RoleAssignmentScheduleRequests_ListForScope")
   listForScope is Extension.ListByTarget<
     Extension.ScopeParameter,
     RoleAssignmentScheduleRequest,
@@ -62,6 +68,8 @@ interface RoleAssignmentScheduleRequests {
   /**
    * Cancels a pending role assignment schedule request.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RoleAssignmentScheduleRequests_Cancel")
   cancel is Extension.ActionSync<
     Extension.ScopeParameter,
     RoleAssignmentScheduleRequest,
@@ -72,6 +80,8 @@ interface RoleAssignmentScheduleRequests {
   /**
    * Validates a new role assignment schedule request.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RoleAssignmentScheduleRequests_Validate")
   validate is Extension.ActionSync<
     Extension.ScopeParameter,
     RoleAssignmentScheduleRequest,

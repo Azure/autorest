@@ -32,13 +32,17 @@ interface PrivateEndpointConnections {
   /**
    * Called by end-users to get a PE connection.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PrivateEndpointConnections_Get")
   get is ArmResourceRead<PrivateEndpointConnection>;
 
   /**
    * Called by end-users to approve or reject a PE connection.
    * This method must validate and forward the call to NRP.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("PrivateEndpointConnections_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PrivateEndpointConnection,
     Response = ArmResourceUpdatedResponse<PrivateEndpointConnection>
@@ -47,11 +51,15 @@ interface PrivateEndpointConnections {
   /**
    * Called by end-users to delete a PE connection.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PrivateEndpointConnections_Delete")
   delete is ArmResourceDeleteSync<PrivateEndpointConnection>;
 
   /**
    * Called by end-users to get all PE connections.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PrivateEndpointConnections_List")
   list is ArmResourceListByParent<
     PrivateEndpointConnection,
     Response = ArmResponse<PrivateEndpointConnectionListResult>

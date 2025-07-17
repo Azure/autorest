@@ -37,7 +37,9 @@ interface Workspaces {
   /**
    * Creates or updates a workspace with the specified parameters.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("Workspaces_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Workspace,
     Response = ArmResourceUpdatedResponse<Workspace> | ArmAcceptedLroResponse,
@@ -72,6 +74,8 @@ interface Workspaces {
   /**
    * Lists all the available machine learning workspaces under the specified resource group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Workspaces_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     Workspace,
     Parameters = {
@@ -92,6 +96,8 @@ interface Workspaces {
   /**
    * Lists all the available machine learning workspaces under the specified subscription.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Workspaces_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     Workspace,
     Parameters = {
@@ -112,6 +118,8 @@ interface Workspaces {
   /**
    * Lists all enabled features for a workspace
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WorkspaceFeatures_List")
   @get
   @action("features")
   list is ArmResourceActionSync<
@@ -133,6 +141,8 @@ interface Workspaces {
   /**
    * Lists all the keys associated with this workspace. This includes keys for the storage account, app insights and password for container registry.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Workspaces_ListKeys")
   listKeys is ArmResourceActionSync<
     Workspace,
     void,
@@ -142,6 +152,8 @@ interface Workspaces {
   /**
    * Get Azure Machine Learning Workspace notebook access token
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Workspaces_ListNotebookAccessToken")
   listNotebookAccessToken is ArmResourceActionSync<
     Workspace,
     void,
@@ -151,6 +163,8 @@ interface Workspaces {
   /**
    * Lists keys of Azure Machine Learning Workspaces notebook.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Workspaces_ListNotebookKeys")
   listNotebookKeys is ArmResourceActionSync<
     Workspace,
     void,
@@ -160,6 +174,8 @@ interface Workspaces {
   /**
    * Lists keys of Azure Machine Learning Workspace's storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Workspaces_ListStorageAccountKeys")
   listStorageAccountKeys is ArmResourceActionSync<
     Workspace,
     void,
@@ -169,6 +185,8 @@ interface Workspaces {
   /**
    * Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Workspaces_ListOutboundNetworkDependenciesEndpoints")
   @get
   @action("outboundNetworkDependenciesEndpoints")
   listOutboundNetworkDependenciesEndpoints is ArmResourceActionSync<
@@ -180,6 +198,8 @@ interface Workspaces {
   /**
    * Prepare Azure Machine Learning Workspace's notebook resource
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Workspaces_PrepareNotebook")
   prepareNotebook is ArmResourceActionAsync<
     Workspace,
     void,
@@ -189,6 +209,8 @@ interface Workspaces {
   /**
    * Resync all the keys associated with this workspace.This includes keys for the storage account, app insights and password for container registry
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Workspaces_ResyncKeys")
   resyncKeys is ArmResourceActionAsync<Workspace, void, OkResponse>;
 
   /**
@@ -198,6 +220,8 @@ interface Workspaces {
    * Other RPs, such as Azure Storage, have multiple - one for Blobs, other for Queues, etc.
    * Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds".
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PrivateLinkResources_List")
   @get
   @action("privateLinkResources")
   privateLinkResourcesList is ArmResourceActionSync<
@@ -209,6 +233,8 @@ interface Workspaces {
   /**
    * Provisions the managed network of a machine learning workspace.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ManagedNetworkProvisions_ProvisionManagedNetwork")
   provisionManagedNetwork is ArmResourceActionAsync<
     Workspace,
     ManagedNetworkProvisionOptions,

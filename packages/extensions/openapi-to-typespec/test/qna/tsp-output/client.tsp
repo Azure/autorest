@@ -30,6 +30,10 @@ using Azure.Language.QnAMaker;
 @@clientLocation(QuestionAnsweringOperationGroup.getAnswers,
   "QuestionAnswering"
 );
+@@clientName(QuestionAnsweringOperationGroup.getAnswers, "GetAnswers");
 @@clientLocation(QuestionAnsweringOperationGroup.getAnswersFromText,
   "QuestionAnswering"
+);
+@@clientName(QuestionAnsweringOperationGroup.getAnswersFromText,
+  "GetAnswersFromText"
 );

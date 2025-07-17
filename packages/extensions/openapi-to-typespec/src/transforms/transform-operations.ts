@@ -9,8 +9,7 @@ import {
   Response,
   Schema,
 } from "@autorest/codemodel";
-import { Case } from "change-case-all";
-import _ from "lodash";
+import _, { capitalize } from "lodash";
 import { OperationWithResourceOperationFlag } from "utils/resource-discovery";
 import { getDataTypes } from "../data-types";
 import {
@@ -146,7 +145,7 @@ export function transformRequest(
   const clientDecorators: TypespecDecorator[] = [];
 
   const swaggerOperationGroupName = getSwaggerOperationGroupName(operation.operationId ?? "");
-  if (swaggerOperationGroupName !== Case.pascal(groupName ?? "")) {
+  if (swaggerOperationGroupName !== capitalize(groupName ?? "")) {
     clientDecorators.push({
       name: "clientLocation",
       module: "@azure-tools/typespec-client-generator-core",
@@ -156,12 +155,23 @@ export function transformRequest(
   }
 
   const swaggerOperationName = getSwaggerOperationName(operation.operationId ?? "");
-  if (swaggerOperationName !== Case.pascal(name)) {
+  if (swaggerOperationName !== capitalize(name)) {
     clientDecorators.push({
       name: "clientName",
       module: "@azure-tools/typespec-client-generator-core",
       namespace: "Azure.ClientGenerator.Core",
       arguments: [swaggerOperationName],
+    });
+  }
+
+  if (`${capitalize(swaggerOperationGroupName)}_${capitalize(swaggerOperationName)}` !== operation.operationId && isFullCompatible) {
+    decorators.push({
+      name: "operationId",
+      arguments: [operation.operationId!],
+      module: "@typespec/openapi",
+      namespace: "TypeSpec.OpenAPI",
+      suppressionCode: "@azure-tools/typespec-azure-core/no-openapi",
+      suppressionMessage: "non-standard operations",
     });
   }
 

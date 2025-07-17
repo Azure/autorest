@@ -33,17 +33,23 @@ interface FeaturestoreEntityContainers {
   /**
    * Get container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("FeaturestoreEntityContainers_GetEntity")
   getEntity is ArmResourceRead<FeaturestoreEntityContainer>;
 
   /**
    * Create or update container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("FeaturestoreEntityContainers_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<FeaturestoreEntityContainer>;
 
   /**
    * Delete container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("FeaturestoreEntityContainers_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     FeaturestoreEntityContainer,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -52,6 +58,8 @@ interface FeaturestoreEntityContainers {
   /**
    * List featurestore entity containers.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("FeaturestoreEntityContainers_List")
   list is ArmResourceListByParent<
     FeaturestoreEntityContainer,
     Parameters = {

@@ -30,6 +30,8 @@ interface DeletedAccounts {
   /**
    * Get properties of specified deleted account resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("DeletedAccounts_Get")
   get is ArmResourceRead<
     DeletedAccount,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters

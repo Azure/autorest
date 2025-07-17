@@ -35,6 +35,8 @@ interface Applications {
   /**
    * Create a Application
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Applications_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Application>;
 
   /**
@@ -51,6 +53,8 @@ interface Applications {
   /**
    * List Application resources by Space
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Applications_ListBySpace")
   listBySpace is ArmResourceListByParent<
     Application,
     Parameters = {
@@ -104,6 +108,8 @@ interface Applications {
   /**
    * The delete business process development artifact action.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Applications_DeleteBusinessProcessDevelopmentArtifact")
   deleteBusinessProcessDevelopmentArtifact is ArmResourceActionSync<
     Application,
     GetOrDeleteBusinessProcessDevelopmentArtifactRequest,
@@ -113,6 +119,8 @@ interface Applications {
   /**
    * The get business process development artifact action.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Applications_GetBusinessProcessDevelopmentArtifact")
   getBusinessProcessDevelopmentArtifact is ArmResourceActionSync<
     Application,
     GetOrDeleteBusinessProcessDevelopmentArtifactRequest,
@@ -122,6 +130,8 @@ interface Applications {
   /**
    * The list business process development artifacts action.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Applications_ListBusinessProcessDevelopmentArtifacts")
   listBusinessProcessDevelopmentArtifacts is ArmResourceActionSync<
     Application,
     void,
@@ -131,6 +141,8 @@ interface Applications {
   /**
    * The save business process development artifact action.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Applications_SaveBusinessProcessDevelopmentArtifact")
   saveBusinessProcessDevelopmentArtifact is ArmResourceActionSync<
     Application,
     SaveOrValidateBusinessProcessDevelopmentArtifactRequest,
@@ -140,6 +152,8 @@ interface Applications {
   /**
    * The validate business process development artifact action.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Applications_ValidateBusinessProcessDevelopmentArtifact")
   validateBusinessProcessDevelopmentArtifact is ArmResourceActionSync<
     Application,
     SaveOrValidateBusinessProcessDevelopmentArtifactRequest,

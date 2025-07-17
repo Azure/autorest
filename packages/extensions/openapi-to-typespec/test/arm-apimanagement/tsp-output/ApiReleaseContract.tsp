@@ -30,16 +30,22 @@ interface ApiReleaseContracts {
   /**
    * Returns the details of an API release.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiRelease_Get")
   get is ArmResourceRead<ApiReleaseContract>;
 
   /**
    * Returns the etag of an API release.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiRelease_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<ApiReleaseContract>;
 
   /**
    * Creates a new Release for the API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiRelease_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ApiReleaseContract,
     Parameters = {
@@ -70,6 +76,8 @@ interface ApiReleaseContracts {
   /**
    * Deletes the specified release in the API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiRelease_Delete")
   delete is ArmResourceDeleteSync<
     ApiReleaseContract,
     Parameters = {
@@ -84,6 +92,8 @@ interface ApiReleaseContracts {
   /**
    * Lists all releases of an API. An API release is created when making an API Revision current. Releases are also used to rollback to previous revisions. Results will be paged and can be constrained by the $top and $skip parameters.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiRelease_ListByService")
   listByService is ArmResourceListByParent<
     ApiReleaseContract,
     Parameters = {

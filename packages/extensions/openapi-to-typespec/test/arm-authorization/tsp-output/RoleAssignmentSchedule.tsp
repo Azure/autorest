@@ -29,11 +29,15 @@ interface RoleAssignmentSchedules {
   /**
    * Get the specified role assignment schedule for a resource scope
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RoleAssignmentSchedules_Get")
   get is Extension.Read<Extension.ScopeParameter, RoleAssignmentSchedule>;
 
   /**
    * Gets role assignment schedules for a resource scope.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RoleAssignmentSchedules_ListForScope")
   listForScope is Extension.ListByTarget<
     Extension.ScopeParameter,
     RoleAssignmentSchedule,

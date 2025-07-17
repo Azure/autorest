@@ -29,12 +29,16 @@ interface RoleDefinitions {
   /**
    * Get role definition by name (GUID).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RoleDefinitions_Get")
   get is Extension.Read<Extension.ScopeParameter, RoleDefinition>;
 
   /**
    * Creates or updates a role definition.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("RoleDefinitions_CreateOrUpdate")
   createOrUpdate is Extension.CreateOrReplaceSync<
     Extension.ScopeParameter,
     RoleDefinition,
@@ -44,6 +48,8 @@ interface RoleDefinitions {
   /**
    * Deletes a role definition.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RoleDefinitions_Delete")
   delete is Extension.DeleteSync<
     Extension.ScopeParameter,
     RoleDefinition,
@@ -53,6 +59,8 @@ interface RoleDefinitions {
   /**
    * Get all role definitions that are applicable at scope and above.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RoleDefinitions_List")
   list is Extension.ListByTarget<
     Extension.ScopeParameter,
     RoleDefinition,

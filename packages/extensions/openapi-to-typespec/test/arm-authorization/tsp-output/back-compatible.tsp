@@ -85,6 +85,9 @@ using Azure.ResourceManager.Authorization;
 
 @@clientName(PolicyAssignmentPropertiesPolicy.id, "policyId");
 
+@@clientLocation(DenyAssignments.get, "DenyAssignments");
+@@clientLocation(DenyAssignments.listForResource, "DenyAssignments");
+@@clientName(DenyAssignments.listForResource, "ListForResource");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(DenyAssignment.properties);
 
@@ -95,24 +98,62 @@ using Azure.ResourceManager.Authorization;
   "ProviderOperationsMetadata"
 );
 
+@@clientLocation(RoleAssignments.get, "RoleAssignments");
+@@clientLocation(RoleAssignments.create, "RoleAssignments");
 @@clientName(RoleAssignments.create::parameters.resource, "parameters");
+@@clientLocation(RoleAssignments.delete, "RoleAssignments");
+@@clientLocation(RoleAssignments.listForScope, "RoleAssignments");
+@@clientName(RoleAssignments.listForScope, "ListForScope");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleAssignment.properties);
 
+@@clientLocation(RoleDefinitions.get, "RoleDefinitions");
+@@clientLocation(RoleDefinitions.createOrUpdate, "RoleDefinitions");
+@@clientName(RoleDefinitions.createOrUpdate, "CreateOrUpdate");
 @@clientName(RoleDefinitions.createOrUpdate::parameters.resource,
   "roleDefinition"
 );
+@@clientLocation(RoleDefinitions.delete, "RoleDefinitions");
+@@clientLocation(RoleDefinitions.list, "RoleDefinitions");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleDefinition.properties);
 
+@@clientLocation(RoleAssignmentSchedules.get, "RoleAssignmentSchedules");
+@@clientLocation(RoleAssignmentSchedules.listForScope,
+  "RoleAssignmentSchedules"
+);
+@@clientName(RoleAssignmentSchedules.listForScope, "ListForScope");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleAssignmentSchedule.properties);
 
+@@clientLocation(RoleAssignmentScheduleInstances.get,
+  "RoleAssignmentScheduleInstances"
+);
+@@clientLocation(RoleAssignmentScheduleInstances.listForScope,
+  "RoleAssignmentScheduleInstances"
+);
+@@clientName(RoleAssignmentScheduleInstances.listForScope, "ListForScope");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleAssignmentScheduleInstance.properties);
 
+@@clientLocation(RoleAssignmentScheduleRequests.get,
+  "RoleAssignmentScheduleRequests"
+);
+@@clientLocation(RoleAssignmentScheduleRequests.create,
+  "RoleAssignmentScheduleRequests"
+);
 @@clientName(RoleAssignmentScheduleRequests.create::parameters.resource,
   "parameters"
+);
+@@clientLocation(RoleAssignmentScheduleRequests.listForScope,
+  "RoleAssignmentScheduleRequests"
+);
+@@clientName(RoleAssignmentScheduleRequests.listForScope, "ListForScope");
+@@clientLocation(RoleAssignmentScheduleRequests.cancel,
+  "RoleAssignmentScheduleRequests"
+);
+@@clientLocation(RoleAssignmentScheduleRequests.validate,
+  "RoleAssignmentScheduleRequests"
 );
 @@clientName(RoleAssignmentScheduleRequests.validate::parameters.body,
   "parameters"
@@ -120,14 +161,42 @@ using Azure.ResourceManager.Authorization;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleAssignmentScheduleRequest.properties);
 
+@@clientLocation(RoleEligibilitySchedules.get, "RoleEligibilitySchedules");
+@@clientLocation(RoleEligibilitySchedules.listForScope,
+  "RoleEligibilitySchedules"
+);
+@@clientName(RoleEligibilitySchedules.listForScope, "ListForScope");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleEligibilitySchedule.properties);
 
+@@clientLocation(RoleEligibilityScheduleInstances.get,
+  "RoleEligibilityScheduleInstances"
+);
+@@clientLocation(RoleEligibilityScheduleInstances.listForScope,
+  "RoleEligibilityScheduleInstances"
+);
+@@clientName(RoleEligibilityScheduleInstances.listForScope, "ListForScope");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleEligibilityScheduleInstance.properties);
 
+@@clientLocation(RoleEligibilityScheduleRequests.get,
+  "RoleEligibilityScheduleRequests"
+);
+@@clientLocation(RoleEligibilityScheduleRequests.create,
+  "RoleEligibilityScheduleRequests"
+);
 @@clientName(RoleEligibilityScheduleRequests.create::parameters.resource,
   "parameters"
+);
+@@clientLocation(RoleEligibilityScheduleRequests.listForScope,
+  "RoleEligibilityScheduleRequests"
+);
+@@clientName(RoleEligibilityScheduleRequests.listForScope, "ListForScope");
+@@clientLocation(RoleEligibilityScheduleRequests.cancel,
+  "RoleEligibilityScheduleRequests"
+);
+@@clientLocation(RoleEligibilityScheduleRequests.validate,
+  "RoleEligibilityScheduleRequests"
 );
 @@clientName(RoleEligibilityScheduleRequests.validate::parameters.body,
   "parameters"
@@ -135,15 +204,29 @@ using Azure.ResourceManager.Authorization;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleEligibilityScheduleRequest.properties);
 
+@@clientLocation(RoleManagementPolicies.get, "RoleManagementPolicies");
+@@clientLocation(RoleManagementPolicies.update, "RoleManagementPolicies");
 @@clientName(RoleManagementPolicies.update::parameters.properties,
   "parameters"
 );
+@@clientLocation(RoleManagementPolicies.listForScope, "RoleManagementPolicies");
+@@clientName(RoleManagementPolicies.listForScope, "ListForScope");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleManagementPolicy.properties);
 
+@@clientLocation(RoleManagementPolicyAssignments.get,
+  "RoleManagementPolicyAssignments"
+);
+@@clientLocation(RoleManagementPolicyAssignments.create,
+  "RoleManagementPolicyAssignments"
+);
 @@clientName(RoleManagementPolicyAssignments.create::parameters.resource,
   "parameters"
 );
+@@clientLocation(RoleManagementPolicyAssignments.listForScope,
+  "RoleManagementPolicyAssignments"
+);
+@@clientName(RoleManagementPolicyAssignments.listForScope, "ListForScope");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleManagementPolicyAssignment.properties);
 
@@ -154,6 +237,7 @@ using Azure.ResourceManager.Authorization;
 @@clientLocation(GlobalAdministratorOperationGroup.elevateAccess,
   "GlobalAdministrator"
 );
+@@clientName(GlobalAdministratorOperationGroup.elevateAccess, "ElevateAccess");
 
 @@clientLocation(AzurePermissionsForResourceGroupOperationGroup.list,
   "AzurePermissionsForResourceGroup"

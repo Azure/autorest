@@ -19,10 +19,15 @@ export function updateOptions() {
     isAzureSpec: getIsAzureSpec(session),
     namespace: getNamespace(session),
     guessResourceKey: getGuessResourceKey(session),
+    removeOperationId: getRemoveOperationId(session),
     isArm: getIsArm(session),
     isFullCompatible: getIsFullCompatible(session),
     isTest: getIsTest(session),
   };
+}
+
+function getRemoveOperationId(session: Session<CodeModel>) {
+  return session.configuration["removeOperationId"] ?? false;
 }
 
 export function getGuessResourceKey(session: Session<CodeModel>) {

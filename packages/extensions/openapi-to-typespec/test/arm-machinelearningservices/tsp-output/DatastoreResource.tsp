@@ -35,6 +35,8 @@ interface DatastoreResources {
   /**
    * Create or update datastore.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Datastores_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DatastoreResource,
     Parameters = {
@@ -105,6 +107,8 @@ interface DatastoreResources {
   /**
    * Get datastore secrets.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Datastores_ListSecrets")
   listSecrets is ArmResourceActionSync<
     DatastoreResource,
     void,

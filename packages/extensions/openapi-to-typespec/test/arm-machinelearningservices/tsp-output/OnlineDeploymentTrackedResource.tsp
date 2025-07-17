@@ -37,11 +37,15 @@ interface OnlineDeploymentTrackedResources {
   /**
    * Get Inference Deployment Deployment.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("OnlineDeployments_Get")
   get is ArmResourceRead<OnlineDeploymentTrackedResource>;
 
   /**
    * Create or update Inference Endpoint Deployment (asynchronous).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("OnlineDeployments_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<OnlineDeploymentTrackedResource>;
 
   /**
@@ -56,7 +60,9 @@ interface OnlineDeploymentTrackedResources {
   /**
    * Delete Inference Endpoint Deployment (asynchronous).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("OnlineDeployments_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     OnlineDeploymentTrackedResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -65,6 +71,8 @@ interface OnlineDeploymentTrackedResources {
   /**
    * List Inference Endpoint Deployments.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("OnlineDeployments_List")
   list is ArmResourceListByParent<
     OnlineDeploymentTrackedResource,
     Parameters = {
@@ -92,6 +100,8 @@ interface OnlineDeploymentTrackedResources {
   /**
    * Polls an Endpoint operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("OnlineDeployments_GetLogs")
   getLogs is ArmResourceActionSync<
     OnlineDeploymentTrackedResource,
     DeploymentLogsRequest,
@@ -101,6 +111,8 @@ interface OnlineDeploymentTrackedResources {
   /**
    * List Inference Endpoint Deployment Skus.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("OnlineDeployments_ListSkus")
   @get
   @action("skus")
   listSkus is ArmResourceActionSync<

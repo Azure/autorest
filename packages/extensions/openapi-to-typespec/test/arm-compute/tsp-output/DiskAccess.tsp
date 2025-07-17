@@ -34,13 +34,17 @@ interface DiskAccesses {
   /**
    * Gets information about a disk access resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("DiskAccesses_Get")
   get is ArmResourceRead<DiskAccess>;
 
   /**
    * Creates or updates a disk access resource
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @operationId("DiskAccesses_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DiskAccess,
     Response = ArmResourceUpdatedResponse<DiskAccess> | (ArmAcceptedLroResponse & {
@@ -67,7 +71,9 @@ interface DiskAccesses {
   /**
    * Deletes a disk access resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("DiskAccesses_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     DiskAccess,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -76,6 +82,8 @@ interface DiskAccesses {
   /**
    * Lists all the disk access resources under a resource group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("DiskAccesses_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     DiskAccess,
     Response = ArmResponse<DiskAccessList>
@@ -84,6 +92,8 @@ interface DiskAccesses {
   /**
    * Lists all the disk access resources under a subscription.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("DiskAccesses_List")
   list is ArmListBySubscription<
     DiskAccess,
     Response = ArmResponse<DiskAccessList>
@@ -92,6 +102,8 @@ interface DiskAccesses {
   /**
    * Gets the private link resources possible under disk access resource
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("DiskAccesses_GetPrivateLinkResources")
   @get
   @action("privateLinkResources")
   getPrivateLinkResources is ArmResourceActionSync<

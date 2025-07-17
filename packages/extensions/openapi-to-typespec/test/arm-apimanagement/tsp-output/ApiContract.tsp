@@ -35,12 +35,16 @@ interface ApiContracts {
   /**
    * Gets the entity state (Etag) version of the API specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Api_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<ApiContract>;
 
   /**
    * Creates new or updates existing specified API of the API Management service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("Api_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ApiContract,
     Parameters = {
@@ -95,6 +99,8 @@ interface ApiContracts {
   /**
    * Lists all APIs of the API Management service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Api_ListByService")
   listByService is ArmResourceListByParent<
     ApiContract,
     Parameters = {
@@ -134,6 +140,8 @@ interface ApiContracts {
   /**
    * Lists all revisions of an API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiRevision_ListByService")
   @get
   @action("revisions")
   apiRevisionListByService is ArmResourceActionSync<
@@ -165,6 +173,8 @@ interface ApiContracts {
   /**
    * Lists all Products, which the API is part of.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiProduct_ListByApis")
   @get
   @action("products")
   listByApis is ArmResourceActionSync<
@@ -196,6 +206,8 @@ interface ApiContracts {
   /**
    * Lists a collection of operations associated with tags.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Operation_ListByTags")
   @get
   @action("operationsByTags")
   listByTags is ArmResourceActionSync<

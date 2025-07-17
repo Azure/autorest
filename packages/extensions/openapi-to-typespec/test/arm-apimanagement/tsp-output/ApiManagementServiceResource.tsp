@@ -46,12 +46,16 @@ interface ApiManagementServiceResources {
   /**
    * Gets an API Management service resource description.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiManagementService_Get")
   get is ArmResourceRead<ApiManagementServiceResource>;
 
   /**
    * Creates or updates an API Management service. This is long running operation and could take several minutes to complete.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("ApiManagementService_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ApiManagementServiceResource,
     Response = ArmResourceUpdatedResponse<ApiManagementServiceResource> | ArmResourceCreatedResponse<
@@ -72,8 +76,10 @@ interface ApiManagementServiceResources {
   /**
    * Deletes an existing API Management service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("ApiManagementService_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ApiManagementServiceResource,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
@@ -85,16 +91,22 @@ interface ApiManagementServiceResources {
   /**
    * List all API Management services within a resource group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiManagementService_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<ApiManagementServiceResource>;
 
   /**
    * Lists all API Management services within an Azure subscription.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiManagementService_List")
   list is ArmListBySubscription<ApiManagementServiceResource>;
 
   /**
    * Lists a collection of apis associated with tags.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Api_ListByTags")
   @get
   @action("apisByTags")
   listByTags is ArmResourceActionSync<
@@ -132,6 +144,8 @@ interface ApiManagementServiceResources {
   /**
    * Performs a connectivity check between the API Management service and a given destination, and returns metrics for the connection, as well as errors encountered while trying to establish it.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PerformConnectivityCheckAsync")
   @action("connectivityCheck")
   performConnectivityCheckAsync is ArmResourceActionAsync<
     ApiManagementServiceResource,
@@ -142,6 +156,8 @@ interface ApiManagementServiceResources {
   /**
    * Gets all available SKU for a given API Management service
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiManagementServiceSkus_ListAvailableServiceSkus")
   @get
   @action("skus")
   listAvailableServiceSkus is ArmResourceActionSync<
@@ -153,6 +169,8 @@ interface ApiManagementServiceResources {
   /**
    * Restores a backup of an API Management service created using the ApiManagementService_Backup operation on the current service. This is a long running operation and could take several minutes to complete.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiManagementService_Restore")
   restore is ArmResourceActionAsync<
     ApiManagementServiceResource,
     ApiManagementServiceBackupRestoreParameters,
@@ -162,6 +180,8 @@ interface ApiManagementServiceResources {
   /**
    * Creates a backup of the API Management service to the given Azure Storage Account. This is long running operation and could take several minutes to complete.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiManagementService_Backup")
   backup is ArmResourceActionAsync<
     ApiManagementServiceResource,
     ApiManagementServiceBackupRestoreParameters,
@@ -171,6 +191,8 @@ interface ApiManagementServiceResources {
   /**
    * Gets the Single-Sign-On token for the API Management Service which is valid for 5 Minutes.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiManagementService_GetSsoToken")
   @action("getssotoken")
   getSsoToken is ArmResourceActionSync<
     ApiManagementServiceResource,
@@ -181,6 +203,8 @@ interface ApiManagementServiceResources {
   /**
    * Updates the Microsoft.ApiManagement resource running in the Virtual network to pick the updated DNS changes.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiManagementService_ApplyNetworkConfigurationUpdates")
   @action("applynetworkconfigurationupdates")
   applyNetworkConfigurationUpdates is ArmResourceActionAsync<
     ApiManagementServiceResource,
@@ -192,6 +216,8 @@ interface ApiManagementServiceResources {
   /**
    * Gets the Connectivity Status to the external resources on which the Api Management service depends from inside the Cloud Service. This also returns the DNS Servers as visible to the CloudService.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("NetworkStatus_ListByService")
   @get
   @action("networkstatus")
   listByService is ArmResourceActionSync<
@@ -203,6 +229,8 @@ interface ApiManagementServiceResources {
   /**
    * Gets the Connectivity Status to the external resources on which the Api Management service depends from inside the Cloud Service. This also returns the DNS Servers as visible to the CloudService.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("NetworkStatus_ListByLocation")
   @get
   @action("networkstatus")
   listByLocation is ArmResourceActionSync<
@@ -222,6 +250,8 @@ interface ApiManagementServiceResources {
   /**
    * Gets the network endpoints of all outbound dependencies of a ApiManagement service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("OutboundNetworkDependenciesEndpoints_ListByService")
   @get
   @action("outboundNetworkDependenciesEndpoints")
   outboundNetworkDependenciesEndpointsListByService is ArmResourceActionSync<
@@ -233,6 +263,8 @@ interface ApiManagementServiceResources {
   /**
    * Lists all policy descriptions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PolicyDescription_ListByService")
   @get
   @action("policyDescriptions")
   policyDescriptionListByService is ArmResourceActionSync<
@@ -251,6 +283,8 @@ interface ApiManagementServiceResources {
   /**
    * Lists a collection of portalsettings defined within a service instance..
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PortalSettings_ListByService")
   @get
   @action("portalsettings")
   portalSettingsListByService is ArmResourceActionSync<
@@ -262,6 +296,8 @@ interface ApiManagementServiceResources {
   /**
    * Lists a collection of products associated with tags.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Product_ListByTags")
   @get
   @action("productsByTags")
   productListByTags is ArmResourceActionSync<
@@ -299,6 +335,8 @@ interface ApiManagementServiceResources {
   /**
    * Lists a collection of current quota counter periods associated with the counter-key configured in the policy on the specified service instance. The api does not support paging yet.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("QuotaByCounterKeys_ListByService")
   @get
   @action("{quotaCounterKey}")
   quotaByCounterKeysListByService is ArmResourceActionSync<
@@ -315,6 +353,8 @@ interface ApiManagementServiceResources {
   /**
    * Updates all the quota counter values specified with the existing quota counter key to a value in the specified service instance. This should be used for reset of the quota counter values.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("QuotaByCounterKeys_Update")
   @patch
   @action("{quotaCounterKey}")
   quotaByCounterKeysUpdate is ArmResourceActionSync<
@@ -331,6 +371,8 @@ interface ApiManagementServiceResources {
   /**
    * Gets the value of the quota counter associated with the counter-key in the policy for the specific period in service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("QuotaByPeriodKeys_Get")
   @get
   @action("{quotaPeriodKey}")
   quotaByPeriodKeysGet is ArmResourceActionSync<
@@ -353,6 +395,8 @@ interface ApiManagementServiceResources {
   /**
    * Updates an existing quota counter value in the specified service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("QuotaByPeriodKeys_Update")
   @patch
   @action("{quotaPeriodKey}")
   quotaByPeriodKeysUpdate is ArmResourceActionSync<
@@ -375,6 +419,8 @@ interface ApiManagementServiceResources {
   /**
    * Lists all azure regions in which the service exists.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Region_ListByService")
   @get
   @action("regions")
   regionListByService is ArmResourceActionSync<
@@ -386,6 +432,8 @@ interface ApiManagementServiceResources {
   /**
    * Lists report records by API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Reports_ListByApi")
   @get
   @action("byApi")
   listByApi is ArmResourceActionSync<
@@ -423,6 +471,8 @@ interface ApiManagementServiceResources {
   /**
    * Lists report records by User.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Reports_ListByUser")
   @get
   @action("byUser")
   listByUser is ArmResourceActionSync<
@@ -460,6 +510,8 @@ interface ApiManagementServiceResources {
   /**
    * Lists report records by API Operations.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Reports_ListByOperation")
   @get
   @action("byOperation")
   listByOperation is ArmResourceActionSync<
@@ -497,6 +549,8 @@ interface ApiManagementServiceResources {
   /**
    * Lists report records by Product.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Reports_ListByProduct")
   @get
   @action("byProduct")
   listByProduct is ArmResourceActionSync<
@@ -534,6 +588,8 @@ interface ApiManagementServiceResources {
   /**
    * Lists report records by geography.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Reports_ListByGeo")
   @get
   @action("byGeo")
   listByGeo is ArmResourceActionSync<
@@ -565,6 +621,8 @@ interface ApiManagementServiceResources {
   /**
    * Lists report records by subscription.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Reports_ListBySubscription")
   @get
   @action("bySubscription")
   listBySubscription is ArmResourceActionSync<
@@ -602,6 +660,8 @@ interface ApiManagementServiceResources {
   /**
    * Lists report records by Time.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Reports_ListByTime")
   @get
   @action("byTime")
   listByTime is ArmResourceActionSync<
@@ -645,6 +705,8 @@ interface ApiManagementServiceResources {
   /**
    * Lists report records by Request.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Reports_ListByRequest")
   @get
   @action("byRequest")
   listByRequest is ArmResourceActionSync<
@@ -676,6 +738,8 @@ interface ApiManagementServiceResources {
   /**
    * Lists a collection of resources associated with tags.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("TagResource_ListByService")
   @get
   @action("tagResources")
   tagResourceListByService is ArmResourceActionSync<

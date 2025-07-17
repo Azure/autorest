@@ -30,17 +30,23 @@ interface SchemaContracts {
   /**
    * Get the schema configuration at the API level.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiSchema_Get")
   get is ArmResourceRead<SchemaContract>;
 
   /**
    * Gets the entity state (Etag) version of the schema specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiSchema_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<SchemaContract>;
 
   /**
    * Creates or updates schema configuration for the API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("ApiSchema_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SchemaContract,
     Parameters = {
@@ -59,6 +65,8 @@ interface SchemaContracts {
   /**
    * Deletes the schema configuration at the Api.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiSchema_Delete")
   delete is ArmResourceDeleteSync<
     SchemaContract,
     Parameters = {
@@ -79,6 +87,8 @@ interface SchemaContracts {
   /**
    * Get the schema configuration at the API level.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiSchema_ListByApi")
   listByApi is ArmResourceListByParent<
     SchemaContract,
     Parameters = {

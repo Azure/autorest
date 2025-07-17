@@ -35,7 +35,9 @@ interface Extensions {
   /**
    * Install or Update extension. Additional Api Properties are merged patch and if the extension is updated to a new version then the obsolete entries will be auto deleted from Additional Api Properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("Extensions_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     Extension,
     Response = ArmResourceCreatedSyncResponse<Extension>
@@ -49,6 +51,8 @@ interface Extensions {
   /**
    * Get installed extensions details.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Extensions_ListByDataManagerForAgriculture")
   listByDataManagerForAgriculture is ArmResourceListByParent<
     Extension,
     Parameters = {

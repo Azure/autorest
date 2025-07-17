@@ -30,11 +30,15 @@ interface SharedGalleryImageVersions {
   /**
    * Get a shared gallery image version by subscription id or tenant id.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("SharedGalleryImageVersions_Get")
   get is ArmResourceRead<SharedGalleryImageVersion>;
 
   /**
    * List shared gallery image versions by subscription id or tenant id.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("SharedGalleryImageVersions_List")
   list is ArmResourceListByParent<
     SharedGalleryImageVersion,
     Parameters = {

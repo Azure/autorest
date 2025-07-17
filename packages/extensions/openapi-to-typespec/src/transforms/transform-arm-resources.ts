@@ -1,5 +1,5 @@
 import { Operation, Parameter, Property, SchemaType } from "@autorest/codemodel";
-import _ from "lodash";
+import _, { capitalize } from "lodash";
 import pluralize, { singular } from "pluralize";
 import { getSession } from "../autorest-session";
 import { getDataTypes } from "../data-types";
@@ -1000,7 +1000,7 @@ function buildNewArmOperation(
   };
 
   const swaggerOperationGroupName = getSwaggerOperationGroupName(operation.OperationID);
-  if (swaggerOperationGroupName !== Case.pascal(interfaceName)) {
+  if (swaggerOperationGroupName !== capitalize(interfaceName)) {
     armOperation.clientDecorators!.push({
       name: "clientLocation",
       module: "@azure-tools/typespec-client-generator-core",
@@ -1010,12 +1010,24 @@ function buildNewArmOperation(
   }
 
   const swaggerOperationName = getSwaggerOperationName(operation.OperationID);
-  if (swaggerOperationName !== Case.pascal(armOperation.name)) {
+  if (swaggerOperationName !== capitalize(armOperation.name)) {
     armOperation.clientDecorators!.push({
       name: "clientName",
       module: "@azure-tools/typespec-client-generator-core",
       namespace: "Azure.ClientGenerator.Core",
       arguments: [swaggerOperationName],
+    });
+  }
+
+  if (`${capitalize(swaggerOperationGroupName)}_${capitalize(swaggerOperationName)}` !== operation.OperationID && getOptions().isFullCompatible) {
+    armOperation.decorators = armOperation.decorators ?? [];
+    armOperation.decorators.push({
+      name: "operationId",
+      arguments: [operation.OperationID],
+      module: "@typespec/openapi",
+      namespace: "TypeSpec.OpenAPI",
+      suppressionCode: "@azure-tools/typespec-azure-core/no-openapi",
+      suppressionMessage: "non-standard operations",
     });
   }
 

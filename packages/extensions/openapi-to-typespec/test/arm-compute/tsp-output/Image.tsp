@@ -47,6 +47,8 @@ interface Images {
   /**
    * Create or update an image.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Images_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Image,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
@@ -74,6 +76,8 @@ interface Images {
   /**
    * Gets the list of images under a resource group. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Images_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<Image>;
 
   /**

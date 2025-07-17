@@ -30,16 +30,22 @@ interface GatewayHostnameConfigurationContracts {
   /**
    * Get details of a hostname configuration
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("GatewayHostnameConfiguration_Get")
   get is ArmResourceRead<GatewayHostnameConfigurationContract>;
 
   /**
    * Checks that hostname configuration entity specified by identifier exists for specified Gateway entity.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("GatewayHostnameConfiguration_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<GatewayHostnameConfigurationContract>;
 
   /**
    * Creates of updates hostname configuration for a Gateway.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("GatewayHostnameConfiguration_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GatewayHostnameConfigurationContract,
     Parameters = {
@@ -54,6 +60,8 @@ interface GatewayHostnameConfigurationContracts {
   /**
    * Deletes the specified hostname configuration from the specified Gateway.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("GatewayHostnameConfiguration_Delete")
   delete is ArmResourceDeleteSync<
     GatewayHostnameConfigurationContract,
     Parameters = {
@@ -68,6 +76,8 @@ interface GatewayHostnameConfigurationContracts {
   /**
    * Lists the collection of hostname configurations for the specified gateway.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("GatewayHostnameConfiguration_ListByService")
   listByService is ArmResourceListByParent<
     GatewayHostnameConfigurationContract,
     Parameters = {

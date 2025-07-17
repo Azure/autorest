@@ -11,6 +11,7 @@ export interface TypespecOptions {
   isAzureSpec: boolean;
   namespace?: string;
   guessResourceKey: boolean;
+  removeOperationId: boolean;
   isArm: boolean;
   isFullCompatible: boolean;
   isTest: boolean;

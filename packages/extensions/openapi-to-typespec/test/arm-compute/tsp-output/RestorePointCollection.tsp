@@ -28,6 +28,8 @@ interface RestorePointCollections {
   /**
    * The operation to get the restore point collection.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RestorePointCollections_Get")
   get is ArmResourceRead<
     RestorePointCollection,
     Parameters = {
@@ -42,6 +44,8 @@ interface RestorePointCollections {
   /**
    * The operation to create or update the restore point collection. Please refer to https://aka.ms/RestorePoints for more details. When updating a restore point collection, only tags may be modified.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RestorePointCollections_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<RestorePointCollection>;
 
   /**
@@ -56,7 +60,9 @@ interface RestorePointCollections {
   /**
    * The operation to delete the restore point collection. This operation will also delete all the contained restore points.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("RestorePointCollections_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     RestorePointCollection,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -65,11 +71,15 @@ interface RestorePointCollections {
   /**
    * Gets the list of restore point collections in a resource group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RestorePointCollections_List")
   list is ArmResourceListByParent<RestorePointCollection>;
 
   /**
    * Gets the list of restore point collections in the subscription. Use nextLink property in the response to get the next page of restore point collections. Do this till nextLink is not null to fetch all the restore point collections.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RestorePointCollections_ListAll")
   listAll is ArmListBySubscription<RestorePointCollection>;
 }
 

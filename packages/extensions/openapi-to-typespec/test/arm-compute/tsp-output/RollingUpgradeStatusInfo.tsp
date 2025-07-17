@@ -31,6 +31,8 @@ interface RollingUpgradeStatusInfos {
   /**
    * Gets the status of the latest virtual machine scale set rolling upgrade.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineScaleSetRollingUpgrades_GetLatest")
   getLatest is ArmResourceRead<RollingUpgradeStatusInfo>;
 }
 

@@ -29,6 +29,8 @@ interface RoleManagementPolicyAssignments {
   /**
    * Get the specified role management policy assignment for a resource scope
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RoleManagementPolicyAssignments_Get")
   get is Extension.Read<
     Extension.ScopeParameter,
     RoleManagementPolicyAssignment
@@ -37,7 +39,9 @@ interface RoleManagementPolicyAssignments {
   /**
    * Create a role management policy assignment
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("RoleManagementPolicyAssignments_Create")
   create is Extension.CreateOrReplaceSync<
     Extension.ScopeParameter,
     RoleManagementPolicyAssignment,
@@ -47,6 +51,8 @@ interface RoleManagementPolicyAssignments {
   /**
    * Gets role management assignment policies for a resource scope.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RoleManagementPolicyAssignments_ListForScope")
   listForScope is Extension.ListByTarget<
     Extension.ScopeParameter,
     RoleManagementPolicyAssignment

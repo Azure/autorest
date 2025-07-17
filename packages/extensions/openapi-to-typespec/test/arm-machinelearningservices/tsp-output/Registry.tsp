@@ -40,6 +40,8 @@ interface Registries {
   /**
    * Create or update registry
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Registries_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Registry>;
 
   /**
@@ -71,6 +73,8 @@ interface Registries {
   /**
    * List registries by subscription
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Registries_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     Registry,
     Response = ArmResponse<RegistryTrackedResourceArmPaginatedResult>
@@ -79,6 +83,8 @@ interface Registries {
   /**
    * Remove regions from registry
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Registries_RemoveRegions")
   removeRegions is ArmResourceActionAsync<
     Registry,
     Registry,

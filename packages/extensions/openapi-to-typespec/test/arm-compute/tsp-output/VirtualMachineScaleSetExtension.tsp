@@ -30,6 +30,8 @@ interface VirtualMachineScaleSetExtensions {
   /**
    * The operation to get the extension.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineScaleSetExtensions_Get")
   get is ArmResourceRead<
     VirtualMachineScaleSetExtension,
     Parameters = {
@@ -44,6 +46,8 @@ interface VirtualMachineScaleSetExtensions {
   /**
    * The operation to create or update an extension.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineScaleSetExtensions_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualMachineScaleSetExtension,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
@@ -62,7 +66,9 @@ interface VirtualMachineScaleSetExtensions {
   /**
    * The operation to delete the extension.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("VirtualMachineScaleSetExtensions_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachineScaleSetExtension,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -71,6 +77,8 @@ interface VirtualMachineScaleSetExtensions {
   /**
    * Gets a list of all extensions in a VM scale set.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineScaleSetExtensions_List")
   list is ArmResourceListByParent<VirtualMachineScaleSetExtension>;
 }
 

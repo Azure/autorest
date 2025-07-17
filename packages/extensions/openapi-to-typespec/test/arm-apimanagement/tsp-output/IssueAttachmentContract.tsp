@@ -30,16 +30,22 @@ interface IssueAttachmentContracts {
   /**
    * Gets the details of the issue Attachment for an API specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiIssueAttachment_Get")
   get is ArmResourceRead<IssueAttachmentContract>;
 
   /**
    * Gets the entity state (Etag) version of the issue Attachment for an API specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiIssueAttachment_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<IssueAttachmentContract>;
 
   /**
    * Creates a new Attachment for the Issue in an API or updates an existing one.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiIssueAttachment_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IssueAttachmentContract,
     Parameters = {
@@ -54,6 +60,8 @@ interface IssueAttachmentContracts {
   /**
    * Deletes the specified comment from an Issue.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiIssueAttachment_Delete")
   delete is ArmResourceDeleteSync<
     IssueAttachmentContract,
     Parameters = {
@@ -68,6 +76,8 @@ interface IssueAttachmentContracts {
   /**
    * Lists all attachments for the Issue associated with the specified API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiIssueAttachment_ListByService")
   listByService is ArmResourceListByParent<
     IssueAttachmentContract,
     Parameters = {

@@ -35,6 +35,8 @@ interface Solutions {
   /**
    * Install Or Update Solution.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Solutions_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Solution>;
 
   /**

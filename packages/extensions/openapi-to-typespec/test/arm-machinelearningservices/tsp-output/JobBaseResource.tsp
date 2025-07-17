@@ -34,6 +34,8 @@ interface JobBaseResources {
   /**
    * Creates and executes a Job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Jobs_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<JobBaseResource>;
 
   /**

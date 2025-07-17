@@ -29,6 +29,8 @@ interface RoleEligibilityScheduleRequests {
   /**
    * Get the specified role eligibility schedule request.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RoleEligibilityScheduleRequests_Get")
   get is Extension.Read<
     Extension.ScopeParameter,
     RoleEligibilityScheduleRequest
@@ -37,7 +39,9 @@ interface RoleEligibilityScheduleRequests {
   /**
    * Creates a role eligibility schedule request.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("RoleEligibilityScheduleRequests_Create")
   create is Extension.CreateOrReplaceSync<
     Extension.ScopeParameter,
     RoleEligibilityScheduleRequest,
@@ -47,6 +51,8 @@ interface RoleEligibilityScheduleRequests {
   /**
    * Gets role eligibility schedule requests for a scope.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RoleEligibilityScheduleRequests_ListForScope")
   listForScope is Extension.ListByTarget<
     Extension.ScopeParameter,
     RoleEligibilityScheduleRequest,
@@ -62,6 +68,8 @@ interface RoleEligibilityScheduleRequests {
   /**
    * Cancels a pending role eligibility schedule request.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RoleEligibilityScheduleRequests_Cancel")
   cancel is Extension.ActionSync<
     Extension.ScopeParameter,
     RoleEligibilityScheduleRequest,
@@ -72,6 +80,8 @@ interface RoleEligibilityScheduleRequests {
   /**
    * Validates a new role eligibility schedule request.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RoleEligibilityScheduleRequests_Validate")
   validate is Extension.ActionSync<
     Extension.ScopeParameter,
     RoleEligibilityScheduleRequest,

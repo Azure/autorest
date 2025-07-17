@@ -30,6 +30,8 @@ interface RestorePoints {
   /**
    * The operation to get the restore point.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RestorePoints_Get")
   get is ArmResourceRead<
     RestorePoint,
     Parameters = {
@@ -44,7 +46,9 @@ interface RestorePoints {
   /**
    * The operation to create the restore point. Updating properties of an existing restore point is not allowed
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("RestorePoints_Create")
   create is ArmResourceCreateOrReplaceAsync<
     RestorePoint,
     Response = ArmResourceCreatedResponse<
@@ -56,7 +60,9 @@ interface RestorePoints {
   /**
    * The operation to delete the restore point.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("RestorePoints_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     RestorePoint,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse

@@ -54,6 +54,8 @@ interface StorageAccounts {
   /**
    * Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("StorageAccounts_GetProperties")
   getProperties is ArmResourceRead<
     StorageAccount,
     Parameters = {
@@ -68,7 +70,9 @@ interface StorageAccounts {
   /**
    * Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("StorageAccounts_Create")
   create is ArmResourceCreateOrReplaceAsync<
     StorageAccount,
     Response = ArmResourceUpdatedResponse<StorageAccount> | ArmAcceptedLroResponse,
@@ -87,21 +91,29 @@ interface StorageAccounts {
   /**
    * Deletes a storage account in Microsoft Azure.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("StorageAccounts_Delete")
   delete is ArmResourceDeleteSync<StorageAccount>;
 
   /**
    * Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("StorageAccounts_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<StorageAccount>;
 
   /**
    * Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("StorageAccounts_List")
   list is ArmListBySubscription<StorageAccount>;
 
   /**
    * Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("StorageAccounts_ListKeys")
   listKeys is ArmResourceActionSync<
     StorageAccount,
     void,
@@ -118,6 +130,8 @@ interface StorageAccounts {
   /**
    * Regenerates one of the access keys or Kerberos keys for the specified storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("StorageAccounts_RegenerateKey")
   regenerateKey is ArmResourceActionSync<
     StorageAccount,
     StorageAccountRegenerateKeyParameters,
@@ -127,6 +141,8 @@ interface StorageAccounts {
   /**
    * List SAS credentials of a storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("StorageAccounts_ListAccountSAS")
   @action("ListAccountSas")
   listAccountSAS is ArmResourceActionSync<
     StorageAccount,
@@ -137,6 +153,8 @@ interface StorageAccounts {
   /**
    * List service SAS credentials of a specific resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("StorageAccounts_ListServiceSAS")
   @action("ListServiceSas")
   listServiceSAS is ArmResourceActionSync<
     StorageAccount,
@@ -147,6 +165,8 @@ interface StorageAccounts {
   /**
    * A failover request can be triggered for a storage account in the event a primary endpoint becomes unavailable for any reason. The failover occurs from the storage account's primary cluster to the secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover and the account is converted to LRS. In the case of a Planned Failover, the primary and secondary clusters are swapped after failover and the account remains geo-replicated. Failover should continue to be used in the event of availability issues as Planned failover is only available while the primary and secondary endpoints are available. The primary use case of a Planned Failover is disaster recovery testing drills. This type of failover is invoked by setting FailoverType parameter to 'Planned'. Learn more about the failover options here- https://learn.microsoft.com/en-us/azure/storage/common/storage-disaster-recovery-guidance
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("StorageAccounts_Failover")
   failover is ArmResourceActionAsync<
     StorageAccount,
     void,
@@ -163,6 +183,8 @@ interface StorageAccounts {
   /**
    * Live Migration of storage account to enable Hns
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("StorageAccounts_HierarchicalNamespaceMigration")
   @action("hnsonmigration")
   hierarchicalNamespaceMigration is ArmResourceActionAsync<
     StorageAccount,
@@ -180,6 +202,8 @@ interface StorageAccounts {
   /**
    * Abort live Migration of storage account to enable Hns
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("StorageAccounts_AbortHierarchicalNamespaceMigration")
   @action("aborthnsonmigration")
   abortHierarchicalNamespaceMigration is ArmResourceActionAsync<
     StorageAccount,
@@ -190,6 +214,8 @@ interface StorageAccounts {
   /**
    * Restore blobs in the specified blob ranges
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("StorageAccounts_RestoreBlobRanges")
   restoreBlobRanges is ArmResourceActionAsync<
     StorageAccount,
     BlobRestoreParameters,
@@ -199,6 +225,8 @@ interface StorageAccounts {
   /**
    * Revoke user delegation keys.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("StorageAccounts_RevokeUserDelegationKeys")
   revokeUserDelegationKeys is ArmResourceActionSync<
     StorageAccount,
     void,
@@ -208,6 +236,8 @@ interface StorageAccounts {
   /**
    * Gets the private link resources that need to be created for a storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PrivateLinkResources_ListByStorageAccount")
   @get
   @action("privateLinkResources")
   listByStorageAccount is ArmResourceActionSync<

@@ -29,6 +29,8 @@ interface RoleAssignmentScheduleInstances {
   /**
    * Gets the specified role assignment schedule instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RoleAssignmentScheduleInstances_Get")
   get is Extension.Read<
     Extension.ScopeParameter,
     RoleAssignmentScheduleInstance
@@ -37,6 +39,8 @@ interface RoleAssignmentScheduleInstances {
   /**
    * Gets role assignment schedule instances of a role assignment schedule.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RoleAssignmentScheduleInstances_ListForScope")
   listForScope is Extension.ListByTarget<
     Extension.ScopeParameter,
     RoleAssignmentScheduleInstance,

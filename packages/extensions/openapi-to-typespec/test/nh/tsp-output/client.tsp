@@ -137,3 +137,20 @@ using NotificationHubsClient;
 @@clientName(WindowsTemplateRegistrationContentModelWnsHeadersItem.Value,
   "value"
 );
+
+@@clientName(deleteNotificationHub, "DeleteNotificationHub");
+@@clientName(getNotificationHub, "GetNotificationHub");
+@@clientName(createOrUpdateNotificationHub, "CreateOrUpdateNotificationHub");
+@@clientName(getRegistrationsByTag, "GetRegistrationsByTag");
+@@clientName(createRegistrationId, "CreateRegistrationId");
+@@clientName(getRegistrations, "GetRegistrations");
+@@clientName(createRegistration, "CreateRegistration");
+@@clientName(deleteRegistration, "DeleteRegistration");
+@@clientName(getRegistration, "GetRegistration");
+@@clientName(createOrUpdateRegistration, "CreateOrUpdateRegistration");
+@@clientName(deleteInstallation, "DeleteInstallation");
+@@clientName(getInstallation, "GetInstallation");
+@@clientName(patchInstallation, "PatchInstallation");
+@@clientName(createOrUpdateInstallation, "CreateOrUpdateInstallation");
+@@clientName(sendMessage, "SendMessage");
+@@clientName(sendMessage, "SendMessage");

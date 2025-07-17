@@ -29,6 +29,8 @@ interface RoleAssignments {
   /**
    * Get a role assignment by scope and name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RoleAssignments_Get")
   get is Extension.Read<
     Extension.ScopeParameter,
     RoleAssignment,
@@ -44,6 +46,8 @@ interface RoleAssignments {
   /**
    * Create or update a role assignment by scope and name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RoleAssignments_Create")
   create is Extension.CreateOrReplaceSync<
     Extension.ScopeParameter,
     RoleAssignment
@@ -52,6 +56,8 @@ interface RoleAssignments {
   /**
    * Delete a role assignment by scope and name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RoleAssignments_Delete")
   delete is Extension.DeleteSync<
     Extension.ScopeParameter,
     RoleAssignment,
@@ -68,6 +74,8 @@ interface RoleAssignments {
   /**
    * List all role assignments that apply to a scope.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RoleAssignments_ListForScope")
   listForScope is Extension.ListByTarget<
     Extension.ScopeParameter,
     RoleAssignment,

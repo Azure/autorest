@@ -37,6 +37,8 @@ interface ComputeResources {
   /**
    * Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation. If your intent is to create a new compute, do a GET first to verify that it does not exist yet.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Compute_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ComputeResource,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
@@ -86,6 +88,8 @@ interface ComputeResources {
   /**
    * Updates the custom services list. The list of custom services provided shall be overwritten
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Compute_UpdateCustomServices")
   @action("customServices")
   updateCustomServices is ArmResourceActionSync<
     ComputeResource,
@@ -96,6 +100,8 @@ interface ComputeResources {
   /**
    * Get the details (e.g IP address, port etc) of all the compute nodes in the compute.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Compute_ListNodes")
   listNodes is ArmResourceActionSync<
     ComputeResource,
     void,
@@ -105,6 +111,8 @@ interface ComputeResources {
   /**
    * Gets secrets related to Machine Learning compute (storage keys, service credentials, etc).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Compute_ListKeys")
   listKeys is ArmResourceActionSync<
     ComputeResource,
     void,
@@ -144,6 +152,8 @@ interface ComputeResources {
   /**
    * Updates the idle shutdown setting of a compute instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Compute_UpdateIdleShutdownSetting")
   updateIdleShutdownSetting is ArmResourceActionSync<
     ComputeResource,
     IdleShutdownSetting,

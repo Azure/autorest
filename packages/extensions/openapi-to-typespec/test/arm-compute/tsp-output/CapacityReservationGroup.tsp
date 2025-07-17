@@ -29,6 +29,8 @@ interface CapacityReservationGroups {
   /**
    * The operation that retrieves information about a capacity reservation group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CapacityReservationGroups_Get")
   get is ArmResourceRead<
     CapacityReservationGroup,
     Parameters = {
@@ -43,6 +45,8 @@ interface CapacityReservationGroups {
   /**
    * The operation to create or update a capacity reservation group. When updating a capacity reservation group, only tags may be modified. Please refer to https://aka.ms/CapacityReservation for more details.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CapacityReservationGroups_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<CapacityReservationGroup>;
 
   /**
@@ -57,11 +61,15 @@ interface CapacityReservationGroups {
   /**
    * The operation to delete a capacity reservation group. This operation is allowed only if all the associated resources are disassociated from the reservation group and all capacity reservations under the reservation group have also been deleted. Please refer to https://aka.ms/CapacityReservation for more details.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CapacityReservationGroups_Delete")
   delete is ArmResourceDeleteSync<CapacityReservationGroup>;
 
   /**
    * Lists all of the capacity reservation groups in the specified resource group. Use the nextLink property in the response to get the next page of capacity reservation groups.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CapacityReservationGroups_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     CapacityReservationGroup,
     Parameters = {
@@ -76,6 +84,8 @@ interface CapacityReservationGroups {
   /**
    * Lists all of the capacity reservation groups in the subscription. Use the nextLink property in the response to get the next page of capacity reservation groups.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CapacityReservationGroups_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     CapacityReservationGroup,
     Parameters = {

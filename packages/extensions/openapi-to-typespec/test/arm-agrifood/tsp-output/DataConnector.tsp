@@ -31,21 +31,29 @@ interface DataConnectors {
   /**
    * Get specific Data Connector resource by DataConnectorName.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("DataConnectors_Get")
   get is ArmResourceRead<DataConnector>;
 
   /**
    * Create or update Data Connector For MADMA resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("DataConnectors_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<DataConnector>;
 
   /**
    * Delete a Data Connectors with given dataConnector name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("DataConnectors_Delete")
   delete is ArmResourceDeleteSync<DataConnector>;
 
   /**
    * Lists the Data Connector Credentials for MADMA instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("DataConnectors_List")
   list is ArmResourceListByParent<
     DataConnector,
     Parameters = {

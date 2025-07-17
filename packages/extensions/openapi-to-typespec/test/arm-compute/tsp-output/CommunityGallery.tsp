@@ -30,6 +30,8 @@ interface CommunityGalleries {
   /**
    * Get a community gallery by gallery public name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CommunityGalleries_Get")
   get is ArmResourceRead<
     CommunityGallery,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters

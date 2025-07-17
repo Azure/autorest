@@ -47,8 +47,10 @@ interface Galleries {
   /**
    * Create or update a Shared Image Gallery.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @operationId("Galleries_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Gallery,
     Response = ArmResourceUpdatedResponse<Gallery> | ArmResourceCreatedResponse<
@@ -82,6 +84,8 @@ interface Galleries {
   /**
    * List galleries under a resource group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Galleries_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     Gallery,
     Response = ArmResponse<GalleryList>
@@ -95,6 +99,8 @@ interface Galleries {
   /**
    * Update sharing profile of a gallery.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("GallerySharingProfile_Update")
   @action("share")
   gallerySharingProfileUpdate is ArmResourceActionAsync<
     Gallery,

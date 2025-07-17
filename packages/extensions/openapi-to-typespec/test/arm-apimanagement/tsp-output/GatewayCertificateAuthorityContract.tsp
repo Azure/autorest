@@ -30,16 +30,22 @@ interface GatewayCertificateAuthorityContracts {
   /**
    * Get assigned Gateway Certificate Authority details.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("GatewayCertificateAuthority_Get")
   get is ArmResourceRead<GatewayCertificateAuthorityContract>;
 
   /**
    * Checks if Certificate entity is assigned to Gateway entity as Certificate Authority.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("GatewayCertificateAuthority_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<GatewayCertificateAuthorityContract>;
 
   /**
    * Assign Certificate entity to Gateway entity as Certificate Authority.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("GatewayCertificateAuthority_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GatewayCertificateAuthorityContract,
     Parameters = {
@@ -54,6 +60,8 @@ interface GatewayCertificateAuthorityContracts {
   /**
    * Remove relationship between Certificate Authority and Gateway entity.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("GatewayCertificateAuthority_Delete")
   delete is ArmResourceDeleteSync<
     GatewayCertificateAuthorityContract,
     Parameters = {
@@ -68,6 +76,8 @@ interface GatewayCertificateAuthorityContracts {
   /**
    * Lists the collection of Certificate Authorities for the specified Gateway entity.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("GatewayCertificateAuthority_ListByService")
   listByService is ArmResourceListByParent<
     GatewayCertificateAuthorityContract,
     Parameters = {

@@ -36,6 +36,8 @@ interface CloudServiceRoleInstances {
   /**
    * Gets a role instance from a cloud service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CloudServiceRoleInstances_Get")
   get is ArmResourceRead<
     RoleInstance,
     Parameters = {
@@ -50,7 +52,9 @@ interface CloudServiceRoleInstances {
   /**
    * Deletes a role instance from a cloud service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("CloudServiceRoleInstances_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     RoleInstance,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -59,6 +63,8 @@ interface CloudServiceRoleInstances {
   /**
    * Gets the list of all role instances in a cloud service. Use nextLink property in the response to get the next page of role instances. Do this till nextLink is null to fetch all the role instances.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CloudServiceRoleInstances_List")
   list is ArmResourceListByParent<
     RoleInstance,
     Parameters = {
@@ -73,6 +79,8 @@ interface CloudServiceRoleInstances {
   /**
    * Retrieves information about the run-time state of a role instance in a cloud service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CloudServiceRoleInstances_GetInstanceView")
   @get
   @action("instanceView")
   getInstanceView is ArmResourceActionSync<
@@ -84,21 +92,29 @@ interface CloudServiceRoleInstances {
   /**
    * The Reboot Role Instance asynchronous operation requests a reboot of a role instance in the cloud service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CloudServiceRoleInstances_Restart")
   restart is ArmResourceActionAsync<RoleInstance, void, OkResponse>;
 
   /**
    * The Reimage Role Instance asynchronous operation reinstalls the operating system on instances of web roles or worker roles.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CloudServiceRoleInstances_Reimage")
   reimage is ArmResourceActionAsync<RoleInstance, void, OkResponse>;
 
   /**
    * The Rebuild Role Instance asynchronous operation reinstalls the operating system on instances of web roles or worker roles and initializes the storage resources that are used by them. If you do not want to initialize storage resources, you can use Reimage Role Instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CloudServiceRoleInstances_Rebuild")
   rebuild is ArmResourceActionAsync<RoleInstance, void, OkResponse>;
 
   /**
    * Gets a remote desktop file for a role instance in a cloud service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CloudServiceRoleInstances_GetRemoteDesktopFile")
   @get
   @action("remoteDesktopFile")
   getRemoteDesktopFile is ArmResourceActionSync<RoleInstance, void, OkResponse>;

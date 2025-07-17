@@ -1,4 +1,3 @@
-import pluralize from "pluralize";
 import { TspArmResource, TypespecObject, TypespecEnum, TypespecOperation, TypespecOperationGroup } from "../interfaces";
 import { generateAugmentedDecorators } from "../utils/decorators";
 
@@ -46,7 +45,7 @@ export function generateOperationGroupClientDecorator(operationGroup: TypespecOp
 
   for (const operation of operationGroup.operations) {
     const decorators = generateAugmentedDecorators(
-      `${operationGroup.name}.${operation.name}`,
+      `${operationGroup.name ? `${operationGroup.name}.` : ""}${operation.name}`,
       operation.clientDecorators,
     );
     decorators && definitions.push(decorators);

@@ -28,6 +28,8 @@ interface Alerts {
   /**
    * Get information related to a specific alert
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Alerts_GetById")
   getById is ArmResourceRead<
     Alert,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
@@ -36,6 +38,8 @@ interface Alerts {
   /**
    * List all existing alerts, where the results can be filtered on the basis of multiple parameters (e.g. time range). The results can then be sorted on the basis specific fields, with the default being lastModifiedDateTime.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Alerts_GetAll")
   getAll is ArmResourceListByParent<
     Alert,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
@@ -148,6 +152,8 @@ interface Alerts {
   /**
    * Change the state of an alert.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Alerts_ChangeState")
   @action("changestate")
   changeState is ArmResourceActionSync<
     Alert,
@@ -172,6 +178,8 @@ interface Alerts {
   /**
    * Get the history of an alert, which captures any monitor condition changes (Fired/Resolved) and alert state changes (New/Acknowledged/Closed).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Alerts_GetHistory")
   @get
   @action("history")
   getHistory is ArmResourceActionSync<

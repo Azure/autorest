@@ -56,17 +56,23 @@ interface ModelContainerResources {
   /**
    * Get container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RegistryModelContainers_Get")
   get is ModelContainerResourceOps.Read<ModelContainerResource>;
 
   /**
    * Create or update model container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RegistryModelContainers_CreateOrUpdate")
   createOrUpdate is ModelContainerResourceOps.CreateOrUpdateAsync<ModelContainerResource>;
 
   /**
    * Delete container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("RegistryModelContainers_Delete")
   delete is ModelContainerResourceOps.DeleteWithoutOkAsync<
     ModelContainerResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -75,6 +81,8 @@ interface ModelContainerResources {
   /**
    * List model containers.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RegistryModelContainers_List")
   list is ModelContainerResourceOps.List<
     ModelContainerResource,
     Parameters = {
@@ -123,21 +131,29 @@ interface ModelContainers {
   /**
    * Get container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ModelContainers_Get")
   get is ModelContainerOps.Read<ModelContainerResource>;
 
   /**
    * Create or update container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ModelContainers_CreateOrUpdate")
   createOrUpdate is ModelContainerOps.CreateOrUpdateSync<ModelContainerResource>;
 
   /**
    * Delete container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ModelContainers_Delete")
   delete is ModelContainerOps.DeleteSync<ModelContainerResource>;
 
   /**
    * List model containers.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ModelContainers_List")
   list is ModelContainerOps.List<
     ModelContainerResource,
     Parameters = {

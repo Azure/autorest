@@ -6,15 +6,132 @@ using Microsoft.GuestConfiguration;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Operation.properties);
 
+@@clientLocation(GuestConfigurationAssignments.get,
+  "GuestConfigurationAssignments"
+);
+@@clientLocation(GuestConfigurationAssignments.createOrUpdate,
+  "GuestConfigurationAssignments"
+);
+@@clientName(GuestConfigurationAssignments.createOrUpdate, "CreateOrUpdate");
 @@clientName(GuestConfigurationAssignments.createOrUpdate::parameters.resource,
   "parameters"
+);
+@@clientLocation(GuestConfigurationAssignments.delete,
+  "GuestConfigurationAssignments"
+);
+@@clientLocation(GuestConfigurationAssignments.list,
+  "GuestConfigurationAssignments"
+);
+@@clientLocation(GuestConfigurationAssignments.subscriptionList,
+  "GuestConfigurationAssignments"
+);
+@@clientName(GuestConfigurationAssignments.subscriptionList,
+  "SubscriptionList"
+);
+@@clientLocation(GuestConfigurationAssignments.guestConfigurationAssignmentReportsList,
+  "GuestConfigurationAssignmentReports"
+);
+@@clientName(GuestConfigurationAssignments.guestConfigurationAssignmentReportsList,
+  "List"
+);
+@@clientLocation(GuestConfigurationAssignments.guestConfigurationAssignmentReportsGet,
+  "GuestConfigurationAssignmentReports"
+);
+@@clientName(GuestConfigurationAssignments.guestConfigurationAssignmentReportsGet,
+  "Get"
+);
+@@clientLocation(GuestConfigurationHCRPAssignments.get,
+  "GuestConfigurationHCRPAssignments"
+);
+@@clientLocation(GuestConfigurationHCRPAssignments.createOrUpdate,
+  "GuestConfigurationHCRPAssignments"
+);
+@@clientName(GuestConfigurationHCRPAssignments.createOrUpdate,
+  "CreateOrUpdate"
 );
 @@clientName(GuestConfigurationHCRPAssignments.createOrUpdate::parameters.resource,
   "parameters"
 );
+@@clientLocation(GuestConfigurationHCRPAssignments.delete,
+  "GuestConfigurationHCRPAssignments"
+);
+@@clientLocation(GuestConfigurationHCRPAssignments.list,
+  "GuestConfigurationHCRPAssignments"
+);
+@@clientLocation(GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsList,
+  "GuestConfigurationHCRPAssignmentReports"
+);
+@@clientName(GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsList,
+  "List"
+);
+@@clientLocation(GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsGet,
+  "GuestConfigurationHCRPAssignmentReports"
+);
+@@clientName(GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsGet,
+  "Get"
+);
+@@clientLocation(GuestConfigurationAssignmentsVMSS.get,
+  "GuestConfigurationAssignmentsVMSS"
+);
+@@clientLocation(GuestConfigurationAssignmentsVMSS.createOrUpdate,
+  "GuestConfigurationAssignmentsVMSS"
+);
+@@clientName(GuestConfigurationAssignmentsVMSS.createOrUpdate,
+  "CreateOrUpdate"
+);
 @@clientName(GuestConfigurationAssignmentsVMSS.createOrUpdate::parameters.resource,
   "parameters"
+);
+@@clientLocation(GuestConfigurationAssignmentsVMSS.delete,
+  "GuestConfigurationAssignmentsVMSS"
+);
+@@clientLocation(GuestConfigurationAssignmentsVMSS.list,
+  "GuestConfigurationAssignmentsVMSS"
+);
+@@clientLocation(GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSList,
+  "GuestConfigurationAssignmentReportsVMSS"
+);
+@@clientName(GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSList,
+  "List"
+);
+@@clientLocation(GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSGet,
+  "GuestConfigurationAssignmentReportsVMSS"
+);
+@@clientName(GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSGet,
+  "Get"
+);
+@@clientLocation(GuestConfigurationConnectedVMwarevSphereAssignments.get,
+  "GuestConfigurationConnectedVMwarevSphereAssignments"
+);
+@@clientLocation(GuestConfigurationConnectedVMwarevSphereAssignments.createOrUpdate,
+  "GuestConfigurationConnectedVMwarevSphereAssignments"
+);
+@@clientName(GuestConfigurationConnectedVMwarevSphereAssignments.createOrUpdate,
+  "CreateOrUpdate"
 );
 @@clientName(GuestConfigurationConnectedVMwarevSphereAssignments.createOrUpdate::parameters.resource,
   "parameters"
 );
+@@clientLocation(GuestConfigurationConnectedVMwarevSphereAssignments.delete,
+  "GuestConfigurationConnectedVMwarevSphereAssignments"
+);
+@@clientLocation(GuestConfigurationConnectedVMwarevSphereAssignments.list,
+  "GuestConfigurationConnectedVMwarevSphereAssignments"
+);
+@@clientLocation(GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsList,
+  "GuestConfigurationConnectedVMwarevSphereAssignmentsReports"
+);
+@@clientName(GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsList,
+  "List"
+);
+@@clientLocation(GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsGet,
+  "GuestConfigurationConnectedVMwarevSphereAssignmentsReports"
+);
+@@clientName(GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsGet,
+  "Get"
+);
+
+@@clientLocation(GuestConfigurationAssignmentsOperationGroup.rGList,
+  "GuestConfigurationAssignments"
+);
+@@clientName(GuestConfigurationAssignmentsOperationGroup.rGList, "RGList");

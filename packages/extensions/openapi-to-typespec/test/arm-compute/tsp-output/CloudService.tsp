@@ -29,11 +29,15 @@ interface CloudServices {
   /**
    * Display information about a cloud service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CloudServices_Get")
   get is ArmResourceRead<CloudService>;
 
   /**
    * Create or update a cloud service. Please note some properties can be set only during cloud service creation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CloudServices_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CloudService,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
@@ -53,7 +57,9 @@ interface CloudServices {
   /**
    * Deletes a cloud service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("CloudServices_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     CloudService,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -62,16 +68,22 @@ interface CloudServices {
   /**
    * Gets a list of all cloud services under a resource group. Use nextLink property in the response to get the next page of Cloud Services. Do this till nextLink is null to fetch all the Cloud Services.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CloudServices_List")
   list is ArmResourceListByParent<CloudService>;
 
   /**
    * Gets a list of all cloud services in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of Cloud Services. Do this till nextLink is null to fetch all the Cloud Services.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CloudServices_ListAll")
   listAll is ArmListBySubscription<CloudService>;
 
   /**
    * Gets the status of a cloud service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CloudServices_GetInstanceView")
   @get
   @action("instanceView")
   getInstanceView is ArmResourceActionSync<
@@ -83,17 +95,23 @@ interface CloudServices {
   /**
    * Starts the cloud service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CloudServices_Start")
   start is ArmResourceActionAsync<CloudService, void, OkResponse>;
 
   /**
    * Power off the cloud service. Note that resources are still attached and you are getting charged for the resources.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CloudServices_PowerOff")
   @action("poweroff")
   powerOff is ArmResourceActionAsync<CloudService, void, OkResponse>;
 
   /**
    * Restarts one or more role instances in a cloud service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CloudServices_Restart")
   restart is ArmResourceActionAsync<
     CloudService,
     RoleInstances,
@@ -104,6 +122,8 @@ interface CloudServices {
   /**
    * Reimage asynchronous operation reinstalls the operating system on instances of web roles or worker roles.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CloudServices_Reimage")
   reimage is ArmResourceActionAsync<
     CloudService,
     RoleInstances,
@@ -114,6 +134,8 @@ interface CloudServices {
   /**
    * Rebuild Role Instances reinstalls the operating system on instances of web roles or worker roles and initializes the storage resources that are used by them. If you do not want to initialize storage resources, you can use Reimage Role Instances.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CloudServices_Rebuild")
   rebuild is ArmResourceActionAsync<
     CloudService,
     RoleInstances,
@@ -124,6 +146,8 @@ interface CloudServices {
   /**
    * Deletes role instances in a cloud service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CloudServices_DeleteInstances")
   @action("delete")
   deleteInstances is ArmResourceActionAsync<
     CloudService,
@@ -135,6 +159,8 @@ interface CloudServices {
   /**
    * Updates the role instances in the specified update domain.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CloudServicesUpdateDomain_WalkUpdateDomain")
   @put
   @action("{updateDomain}")
   walkUpdateDomain is ArmResourceActionAsync<
@@ -154,6 +180,8 @@ interface CloudServices {
   /**
    * Gets the specified update domain of a cloud service. Use nextLink property in the response to get the next page of update domains. Do this till nextLink is null to fetch all the update domains.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CloudServicesUpdateDomain_GetUpdateDomain")
   @get
   @action("{updateDomain}")
   getUpdateDomain is ArmResourceActionSync<
@@ -172,6 +200,8 @@ interface CloudServices {
   /**
    * Gets a list of all update domains in a cloud service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CloudServicesUpdateDomain_ListUpdateDomains")
   @get
   @action("updateDomains")
   listUpdateDomains is ArmResourceActionSync<

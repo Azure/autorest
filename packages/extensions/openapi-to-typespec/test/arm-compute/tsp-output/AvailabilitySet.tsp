@@ -34,12 +34,16 @@ interface AvailabilitySets {
   /**
    * Retrieves information about an availability set.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AvailabilitySets_Get")
   get is ArmResourceRead<AvailabilitySet>;
 
   /**
    * Create or update an availability set.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("AvailabilitySets_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     AvailabilitySet,
     Response = ArmResourceUpdatedResponse<AvailabilitySet>
@@ -57,16 +61,22 @@ interface AvailabilitySets {
   /**
    * Delete an availability set.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AvailabilitySets_Delete")
   delete is ArmResourceDeleteSync<AvailabilitySet>;
 
   /**
    * Lists all availability sets in a resource group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AvailabilitySets_List")
   list is ArmResourceListByParent<AvailabilitySet>;
 
   /**
    * Lists all availability sets in a subscription.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AvailabilitySets_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     AvailabilitySet,
     Parameters = {
@@ -81,6 +91,8 @@ interface AvailabilitySets {
   /**
    * Lists all available virtual machine sizes that can be used to create a new virtual machine in an existing availability set.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AvailabilitySets_ListAvailableSizes")
   @get
   @action("vmSizes")
   listAvailableSizes is ArmResourceActionSync<

@@ -35,11 +35,15 @@ interface BackendContracts {
   /**
    * Gets the entity state (Etag) version of the backend specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Backend_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<BackendContract>;
 
   /**
    * Creates or Updates a backend.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Backend_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     BackendContract,
     Parameters = {
@@ -84,6 +88,8 @@ interface BackendContracts {
   /**
    * Lists a collection of backends in the specified service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Backend_ListByService")
   listByService is ArmResourceListByParent<
     BackendContract,
     Parameters = {

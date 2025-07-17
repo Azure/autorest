@@ -62,6 +62,8 @@ interface IssueContracts {
   /**
    * Gets the details of the Issue for an API specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiIssue_Get")
   get is IssueContractOps.Read<
     IssueContract,
     Parameters = {
@@ -76,11 +78,15 @@ interface IssueContracts {
   /**
    * Gets the entity state (Etag) version of the Issue for an API specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiIssue_GetEntityTag")
   getEntityTag is IssueContractOps.CheckExistence<IssueContract>;
 
   /**
    * Creates a new Issue for an API or updates an existing one.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiIssue_CreateOrUpdate")
   createOrUpdate is IssueContractOps.CreateOrUpdateSync<
     IssueContract,
     Parameters = {
@@ -111,6 +117,8 @@ interface IssueContracts {
   /**
    * Deletes the specified Issue from an API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiIssue_Delete")
   delete is IssueContractOps.DeleteSync<
     IssueContract,
     Parameters = {
@@ -125,6 +133,8 @@ interface IssueContracts {
   /**
    * Lists all issues associated with the specified API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiIssue_ListByService")
   listByService is IssueContractOps.List<
     IssueContract,
     Parameters = {
@@ -191,6 +201,8 @@ interface Issue {
   /**
    * Lists a collection of issues in the specified service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Issue_ListByService")
   listByService is IssueOps.List<
     IssueContract,
     Parameters = {

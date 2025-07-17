@@ -31,12 +31,16 @@ interface BlobInventoryPolicies {
   /**
    * Gets the blob inventory policy associated with the specified storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("BlobInventoryPolicies_Get")
   get is ArmResourceRead<BlobInventoryPolicy>;
 
   /**
    * Sets the blob inventory policy to the specified storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("BlobInventoryPolicies_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     BlobInventoryPolicy,
     Response = ArmResourceUpdatedResponse<BlobInventoryPolicy>
@@ -45,11 +49,15 @@ interface BlobInventoryPolicies {
   /**
    * Deletes the blob inventory policy associated with the specified storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("BlobInventoryPolicies_Delete")
   delete is ArmResourceDeleteSync<BlobInventoryPolicy>;
 
   /**
    * Gets the blob inventory policy associated with the specified storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("BlobInventoryPolicies_List")
   list is ArmResourceListByParent<
     BlobInventoryPolicy,
     Response = ArmResponse<ListBlobInventoryPolicy>

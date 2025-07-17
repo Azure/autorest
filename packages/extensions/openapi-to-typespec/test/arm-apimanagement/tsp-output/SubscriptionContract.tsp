@@ -61,11 +61,15 @@ interface SubscriptionContracts {
   /**
    * Gets the entity state (Etag) version of the apimanagement subscription specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Subscription_GetEntityTag")
   getEntityTag is SubscriptionContractOps.CheckExistence<SubscriptionContract>;
 
   /**
    * Creates or updates the subscription of specified user to the specified product.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Subscription_CreateOrUpdate")
   createOrUpdate is SubscriptionContractOps.CreateOrUpdateSync<
     SubscriptionContract,
     Parameters = {
@@ -165,6 +169,8 @@ interface SubscriptionContracts {
   /**
    * Regenerates primary key of existing subscription of the API Management service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Subscription_RegeneratePrimaryKey")
   regeneratePrimaryKey is SubscriptionContractOps.ActionSync<
     SubscriptionContract,
     void,
@@ -174,6 +180,8 @@ interface SubscriptionContracts {
   /**
    * Regenerates secondary key of existing subscription of the API Management service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Subscription_RegenerateSecondaryKey")
   regenerateSecondaryKey is SubscriptionContractOps.ActionSync<
     SubscriptionContract,
     void,
@@ -183,6 +191,8 @@ interface SubscriptionContracts {
   /**
    * Gets the specified Subscription keys.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Subscription_ListSecrets")
   listSecrets is SubscriptionContractOps.ActionSync<
     SubscriptionContract,
     void,
@@ -226,11 +236,15 @@ interface UserSubscription {
   /**
    * Gets the specified Subscription entity associated with a particular user.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("UserSubscription_Get")
   get is UserSubscriptionOps.Read<SubscriptionContract>;
 
   /**
    * Lists the collection of subscriptions of the specified user.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("UserSubscription_List")
   list is UserSubscriptionOps.List<
     SubscriptionContract,
     Parameters = {

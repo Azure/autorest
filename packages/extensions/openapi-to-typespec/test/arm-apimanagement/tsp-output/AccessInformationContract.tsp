@@ -31,17 +31,23 @@ interface AccessInformationContracts {
   /**
    * Get tenant access information details without secrets.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("TenantAccess_Get")
   get is ArmResourceRead<AccessInformationContract>;
 
   /**
    * Tenant access metadata
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("TenantAccess_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<AccessInformationContract>;
 
   /**
    * Update tenant access information details.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("TenantAccess_Create")
   create is ArmResourceCreateOrReplaceSync<
     AccessInformationContract,
     Parameters = {
@@ -73,6 +79,8 @@ interface AccessInformationContracts {
   /**
    * Returns list of access infos - for Git and Management endpoints.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("TenantAccess_ListByService")
   listByService is ArmResourceListByParent<
     AccessInformationContract,
     Parameters = {
@@ -87,6 +95,8 @@ interface AccessInformationContracts {
   /**
    * Regenerate primary access key
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("TenantAccess_RegeneratePrimaryKey")
   regeneratePrimaryKey is ArmResourceActionSync<
     AccessInformationContract,
     void,
@@ -96,6 +106,8 @@ interface AccessInformationContracts {
   /**
    * Regenerate secondary access key
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("TenantAccess_RegenerateSecondaryKey")
   regenerateSecondaryKey is ArmResourceActionSync<
     AccessInformationContract,
     void,
@@ -105,6 +117,8 @@ interface AccessInformationContracts {
   /**
    * Get tenant access information details.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("TenantAccess_ListSecrets")
   listSecrets is ArmResourceActionSync<
     AccessInformationContract,
     void,
@@ -114,6 +128,8 @@ interface AccessInformationContracts {
   /**
    * Regenerate primary access key for GIT.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("TenantAccessGit_RegeneratePrimaryKey")
   @action("regeneratePrimaryKey")
   tenantAccessGitRegeneratePrimaryKey is ArmResourceActionSync<
     AccessInformationContract,
@@ -124,6 +140,8 @@ interface AccessInformationContracts {
   /**
    * Regenerate secondary access key for GIT.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("TenantAccessGit_RegenerateSecondaryKey")
   @action("regenerateSecondaryKey")
   tenantAccessGitRegenerateSecondaryKey is ArmResourceActionSync<
     AccessInformationContract,
@@ -134,6 +152,8 @@ interface AccessInformationContracts {
   /**
    * This operation applies changes from the specified Git branch to the configuration database. This is a long running operation and could take several minutes to complete.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("TenantConfiguration_Deploy")
   deploy is ArmResourceActionAsync<
     AccessInformationContract,
     DeployConfigurationParameters,
@@ -150,6 +170,8 @@ interface AccessInformationContracts {
   /**
    * This operation creates a commit with the current configuration snapshot to the specified branch in the repository. This is a long running operation and could take several minutes to complete.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("TenantConfiguration_Save")
   save is ArmResourceActionAsync<
     AccessInformationContract,
     SaveConfigurationParameter,
@@ -166,6 +188,8 @@ interface AccessInformationContracts {
   /**
    * This operation validates the changes in the specified Git branch. This is a long running operation and could take several minutes to complete.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("TenantConfiguration_Validate")
   validate is ArmResourceActionAsync<
     AccessInformationContract,
     DeployConfigurationParameters,
@@ -182,6 +206,8 @@ interface AccessInformationContracts {
   /**
    * Gets the status of the most recent synchronization between the configuration database and the Git repository.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("TenantConfiguration_GetSyncState")
   @get
   @action("syncState")
   getSyncState is ArmResourceActionSync<

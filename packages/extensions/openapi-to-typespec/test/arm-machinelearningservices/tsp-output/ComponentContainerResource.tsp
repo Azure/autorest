@@ -56,17 +56,23 @@ interface ComponentContainerResources {
   /**
    * Get container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RegistryComponentContainers_Get")
   get is ComponentContainerResourceOps.Read<ComponentContainerResource>;
 
   /**
    * Create or update container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RegistryComponentContainers_CreateOrUpdate")
   createOrUpdate is ComponentContainerResourceOps.CreateOrUpdateAsync<ComponentContainerResource>;
 
   /**
    * Delete container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("RegistryComponentContainers_Delete")
   delete is ComponentContainerResourceOps.DeleteWithoutOkAsync<
     ComponentContainerResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -75,6 +81,8 @@ interface ComponentContainerResources {
   /**
    * List containers.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RegistryComponentContainers_List")
   list is ComponentContainerResourceOps.List<
     ComponentContainerResource,
     Parameters = {
@@ -117,21 +125,29 @@ interface ComponentContainers {
   /**
    * Get container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ComponentContainers_Get")
   get is ComponentContainerOps.Read<ComponentContainerResource>;
 
   /**
    * Create or update container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ComponentContainers_CreateOrUpdate")
   createOrUpdate is ComponentContainerOps.CreateOrUpdateSync<ComponentContainerResource>;
 
   /**
    * Delete container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ComponentContainers_Delete")
   delete is ComponentContainerOps.DeleteSync<ComponentContainerResource>;
 
   /**
    * List component containers.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ComponentContainers_List")
   list is ComponentContainerOps.List<
     ComponentContainerResource,
     Parameters = {

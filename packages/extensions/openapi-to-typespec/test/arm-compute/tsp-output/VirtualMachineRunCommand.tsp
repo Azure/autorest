@@ -54,6 +54,8 @@ interface VirtualMachineRunCommands {
   /**
    * The operation to get the run command.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineRunCommands_GetByVirtualMachine")
   getByVirtualMachine is VirtualMachineRunCommandOps.Read<
     VirtualMachineRunCommand,
     Parameters = {
@@ -72,6 +74,8 @@ interface VirtualMachineRunCommands {
   /**
    * The operation to create or update the run command.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineRunCommands_CreateOrUpdate")
   createOrUpdate is VirtualMachineRunCommandOps.CreateOrUpdateAsync<
     VirtualMachineRunCommand,
     Response = ArmResourceUpdatedResponse<VirtualMachineRunCommand & {
@@ -102,7 +106,9 @@ interface VirtualMachineRunCommands {
   /**
    * The operation to delete the run command.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("VirtualMachineRunCommands_Delete")
   delete is VirtualMachineRunCommandOps.DeleteWithoutOkAsync<
     VirtualMachineRunCommand,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -111,6 +117,8 @@ interface VirtualMachineRunCommands {
   /**
    * The operation to get all run commands of a Virtual Machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineRunCommands_ListByVirtualMachine")
   listByVirtualMachine is VirtualMachineRunCommandOps.List<
     VirtualMachineRunCommand,
     Parameters = {
@@ -157,6 +165,8 @@ interface VirtualMachineScaleSetVMRunCommands {
   /**
    * The operation to get the VMSS VM run command.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineScaleSetVMRunCommands_Get")
   get is VirtualMachineScaleSetVMRunCommandOps.Read<
     VirtualMachineRunCommand,
     Parameters = {
@@ -175,6 +185,8 @@ interface VirtualMachineScaleSetVMRunCommands {
   /**
    * The operation to create or update the VMSS VM run command.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineScaleSetVMRunCommands_CreateOrUpdate")
   createOrUpdate is VirtualMachineScaleSetVMRunCommandOps.CreateOrUpdateAsync<
     VirtualMachineRunCommand,
     Response = ArmResourceUpdatedResponse<VirtualMachineRunCommand & {
@@ -205,7 +217,9 @@ interface VirtualMachineScaleSetVMRunCommands {
   /**
    * The operation to delete the VMSS VM run command.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("VirtualMachineScaleSetVMRunCommands_Delete")
   delete is VirtualMachineScaleSetVMRunCommandOps.DeleteWithoutOkAsync<
     VirtualMachineRunCommand,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -214,6 +228,8 @@ interface VirtualMachineScaleSetVMRunCommands {
   /**
    * The operation to get all run commands of an instance in Virtual Machine Scaleset.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineScaleSetVMRunCommands_List")
   list is VirtualMachineScaleSetVMRunCommandOps.List<
     VirtualMachineRunCommand,
     Parameters = {

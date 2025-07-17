@@ -4,10 +4,12 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.AgFoodPlatform;
 
@@ -16,6 +18,8 @@ interface CheckNameAvailabilityOperationGroup {
   /**
    * Checks the name availability of the resource with requested resource name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CheckNameAvailability_CheckNameAvailability")
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<
     Request = Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
@@ -30,6 +34,8 @@ interface OperationResultsOperationGroup {
   /**
    * Get operationResults for a Data Manager For Agriculture resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("OperationResults_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/locations/{locations}/operationResults/{operationResultsId}")
   @get
   get(

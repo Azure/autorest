@@ -33,17 +33,23 @@ interface FeaturestoreEntityVersions {
   /**
    * Get version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("FeaturestoreEntityVersions_Get")
   get is ArmResourceRead<FeaturestoreEntityVersion>;
 
   /**
    * Create or update version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("FeaturestoreEntityVersions_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<FeaturestoreEntityVersion>;
 
   /**
    * Delete version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("FeaturestoreEntityVersions_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     FeaturestoreEntityVersion,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -52,6 +58,8 @@ interface FeaturestoreEntityVersions {
   /**
    * List versions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("FeaturestoreEntityVersions_List")
   list is ArmResourceListByParent<
     FeaturestoreEntityVersion,
     Parameters = {

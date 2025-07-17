@@ -35,11 +35,15 @@ interface CertificateContracts {
   /**
    * Gets the entity state (Etag) version of the certificate specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Certificate_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<CertificateContract>;
 
   /**
    * Creates or updates the certificate being used for authentication with the backend.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Certificate_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     CertificateContract,
     Parameters = {
@@ -68,6 +72,8 @@ interface CertificateContracts {
   /**
    * Lists a collection of all certificates in the specified service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Certificate_ListByService")
   listByService is ArmResourceListByParent<
     CertificateContract,
     Parameters = {
@@ -101,6 +107,8 @@ interface CertificateContracts {
   /**
    * From KeyVault, Refresh the certificate being used for authentication with the backend.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Certificate_RefreshSecret")
   refreshSecret is ArmResourceActionSync<
     CertificateContract,
     void,
