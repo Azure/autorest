@@ -60,6 +60,8 @@ interface AuthorizationServerContracts {
   /**
    * Updates the details of the authorization server specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AuthorizationServer_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     AuthorizationServerContract,

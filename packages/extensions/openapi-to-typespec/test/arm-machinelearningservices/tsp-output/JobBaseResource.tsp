@@ -43,6 +43,8 @@ interface JobBaseResources {
   /**
    * Updates a Job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Jobs_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     JobBaseResource,

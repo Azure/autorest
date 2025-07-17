@@ -560,9 +560,10 @@ function convertResourceUpdateOperation(
       }
 
       buildSuppressionsForArmOperation(armOperation, asyncNames, syncNames);
-      armOperation.decorators = [
+      armOperation.decorators = armOperation.decorators ?? [];
+      armOperation.decorators.push(
         { name: "patch", arguments: [{ value: "#{ implicitOptionality: false }", options: { unwrap: true } }] },
-      ];
+      );
       return [armOperation as TspArmResourceLifeCycleOperation];
     }
   }
@@ -1021,7 +1022,10 @@ function buildNewArmOperation(
     });
   }
 
-  if (`${capitalize(swaggerOperationGroupName)}_${capitalize(swaggerOperationName)}` !== operation.OperationID && isFullCompatible || (removeOperationId === false && `${capitalize(interfaceName ?? "")}_${capitalize(armOperation.name)}` !== operation.OperationID)) {
+  const operationIdFromClient = `${capitalize(swaggerOperationGroupName) ? `${capitalize(swaggerOperationGroupName)}_` : ""}${capitalize(swaggerOperationName)}`;
+  const operationIdFromMain = `${capitalize(interfaceName) ? `${capitalize(interfaceName)}_` : ""}${capitalize(armOperation.name)}`;
+
+  if (operationIdFromClient !== operation.OperationID && isFullCompatible || (removeOperationId === false && operationIdFromMain !== operation.OperationID)) {
     armOperation.decorators = armOperation.decorators ?? [];
     armOperation.decorators.push({
       name: "operationId",

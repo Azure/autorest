@@ -1,18 +1,15 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
-import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace NotificationHubsClient;
 
 /**
  * Deletes a notification hub.
  */
-@operationId("DeleteNotificationHub")
 @route("/{hubName}")
 @delete
 op deleteNotificationHub is Azure.Core.Foundations.Operation<
@@ -41,7 +38,6 @@ op deleteNotificationHub is Azure.Core.Foundations.Operation<
 /**
  * Retrieves information about a notification hub.
  */
-@operationId("GetNotificationHub")
 @route("/{hubName}")
 @get
 op getNotificationHub is Azure.Core.Foundations.Operation<
@@ -73,7 +69,6 @@ op getNotificationHub is Azure.Core.Foundations.Operation<
 /**
  * Create or update a notification hub.
  */
-@operationId("CreateOrUpdateNotificationHub")
 @route("/{hubName}")
 @put
 op createOrUpdateNotificationHub is Azure.Core.Foundations.Operation<
@@ -114,7 +109,6 @@ op createOrUpdateNotificationHub is Azure.Core.Foundations.Operation<
 /**
  * Retrieves all registrations with a specific tag.
  */
-@operationId("GetRegistrationsByTag")
 @route("/{hubName}/tags/{tag}/registrations")
 @get
 op getRegistrationsByTag is Azure.Core.Foundations.Operation<
@@ -165,7 +159,6 @@ op getRegistrationsByTag is Azure.Core.Foundations.Operation<
 /**
  * Create a registration ID
  */
-@operationId("CreateRegistrationId")
 @route("/{hubName}/registrationIDs")
 @post
 op createRegistrationId is Azure.Core.Foundations.Operation<
@@ -194,7 +187,6 @@ op createRegistrationId is Azure.Core.Foundations.Operation<
 /**
  * Get registrations by the specified criteria
  */
-@operationId("GetRegistrations")
 @route("/{hubName}/registrations")
 @get
 op getRegistrations is Azure.Core.Foundations.Operation<
@@ -245,7 +237,6 @@ op getRegistrations is Azure.Core.Foundations.Operation<
 /**
  * Creates a registration
  */
-@operationId("CreateRegistration")
 @route("/{hubName}/registrations")
 @post
 op createRegistration is Azure.Core.Foundations.Operation<
@@ -277,7 +268,6 @@ op createRegistration is Azure.Core.Foundations.Operation<
 /**
  * Deletes a registration
  */
-@operationId("DeleteRegistration")
 @route("/{hubName}/registrations/{registrationId}")
 @delete
 op deleteRegistration is Azure.Core.Foundations.Operation<
@@ -318,7 +308,6 @@ op deleteRegistration is Azure.Core.Foundations.Operation<
 /**
  * Get a registration by registration ID
  */
-@operationId("GetRegistration")
 @route("/{hubName}/registrations/{registrationId}")
 @get
 op getRegistration is Azure.Core.Foundations.Operation<
@@ -356,7 +345,6 @@ op getRegistration is Azure.Core.Foundations.Operation<
 /**
  * Create or update a registration
  */
-@operationId("CreateOrUpdateRegistration")
 @route("/{hubName}/registrations/{registrationId}")
 @put
 op createOrUpdateRegistration is Azure.Core.Foundations.Operation<
@@ -398,7 +386,6 @@ op createOrUpdateRegistration is Azure.Core.Foundations.Operation<
  * Delete an installation by ID
  */
 @summary("Delete Installation")
-@operationId("DeleteInstallation")
 @route("/{hubName}/installations/{installationId}")
 @delete
 op deleteInstallation is Azure.Core.Foundations.Operation<
@@ -433,7 +420,6 @@ op deleteInstallation is Azure.Core.Foundations.Operation<
 /**
  * Get an Installation by Installation ID
  */
-@operationId("GetInstallation")
 op getInstallation is Azure.Core.ResourceRead<
   InstallationModel,
   {
@@ -457,7 +443,6 @@ op getInstallation is Azure.Core.ResourceRead<
  * Azure Notification Hubs supports partial updates to an installation using the
  * JSON-Patch standard in [RFC6902](https://tools.ietf.org/html/rfc6902).
  */
-@operationId("PatchInstallation")
 op patchInstallation is Azure.Core.ResourceCreateOrUpdate<
   InstallationModel,
   {
@@ -480,7 +465,6 @@ op patchInstallation is Azure.Core.ResourceCreateOrUpdate<
 /**
  * Creates or overwrites an installation.
  */
-@operationId("CreateOrUpdateInstallation")
 op createOrUpdateInstallation is Azure.Core.ResourceCreateOrReplace<
   InstallationModel,
   {
@@ -503,7 +487,6 @@ op createOrUpdateInstallation is Azure.Core.ResourceCreateOrReplace<
 /**
  * Sends a notification to the specified targets.
  */
-@operationId("SendMessage")
 @route("/{hubName}/messages")
 @post
 op sendMessage is Azure.Core.Foundations.Operation<
@@ -622,7 +605,6 @@ op sendMessage is Azure.Core.Foundations.Operation<
 /**
  * Sends a notification to the specified targets.
  */
-@operationId("SendMessage")
 @route("/{hubName}/messages")
 @post
 op sendMessage is Azure.Core.Foundations.Operation<

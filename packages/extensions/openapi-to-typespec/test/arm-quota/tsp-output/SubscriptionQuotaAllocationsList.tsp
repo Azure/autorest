@@ -38,6 +38,8 @@ interface SubscriptionQuotaAllocationsLists {
   /**
    * Request to assign quota from group quota to a specific Subscription. The assign GroupQuota to subscriptions or reduce the quota allocated to subscription to give back the unused quota ( quota >= usages) to the groupQuota. So, this API can be used to assign Quota to subscriptions and assign back unused quota to group quota, which can be assigned to another subscriptions in the GroupQuota. User can collect unused quotas from multiple subscriptions within the groupQuota and assign the groupQuota to the subscription, where it's needed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("GroupQuotaSubscriptionAllocationRequest_Update")
   @patch(#{ implicitOptionality: false })
   update is Extension.CustomPatchAsync<
     Extension.ManagementGroup,

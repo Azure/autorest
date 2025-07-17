@@ -360,6 +360,8 @@ interface TagContractOperationGroup {
   /**
    * Updates the details of the tag specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Tag_Update")
   @patch(#{ implicitOptionality: false })
   update is TagContractOperationGroupOps.CustomPatchSync<
     TagContract,

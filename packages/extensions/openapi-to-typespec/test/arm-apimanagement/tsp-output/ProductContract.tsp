@@ -60,6 +60,8 @@ interface ProductContracts {
   /**
    * Update existing product details.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Product_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     ProductContract,

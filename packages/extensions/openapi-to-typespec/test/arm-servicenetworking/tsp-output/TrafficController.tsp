@@ -42,6 +42,8 @@ interface TrafficControllers {
   /**
    * Update a TrafficController
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("TrafficControllerInterface_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     TrafficController,

@@ -60,6 +60,8 @@ interface OperationContracts {
   /**
    * Updates the details of the operation in the API specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiOperation_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     OperationContract,

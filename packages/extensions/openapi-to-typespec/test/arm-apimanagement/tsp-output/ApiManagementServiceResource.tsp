@@ -67,6 +67,8 @@ interface ApiManagementServiceResources {
   /**
    * Updates an existing API Management service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiManagementService_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ApiManagementServiceResource,

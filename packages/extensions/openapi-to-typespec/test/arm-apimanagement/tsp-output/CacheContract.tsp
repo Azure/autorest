@@ -60,6 +60,8 @@ interface CacheContracts {
   /**
    * Updates the details of the cache specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Cache_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     CacheContract,

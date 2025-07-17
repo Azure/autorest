@@ -60,6 +60,8 @@ interface GatewayContracts {
   /**
    * Updates the details of the gateway specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Gateway_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     GatewayContract,

@@ -48,7 +48,9 @@ interface DataManagerForAgricultures {
   /**
    * Update a Data Manager For Agriculture resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @operationId("DataManagerForAgricultureResources_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     DataManagerForAgriculture,

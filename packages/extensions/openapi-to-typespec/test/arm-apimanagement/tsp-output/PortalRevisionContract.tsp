@@ -58,6 +58,8 @@ interface PortalRevisionContracts {
   /**
    * Updates the description of specified portal revision or makes it current.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PortalRevision_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     PortalRevisionContract,

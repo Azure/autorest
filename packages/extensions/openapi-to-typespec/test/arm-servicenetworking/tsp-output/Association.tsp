@@ -44,6 +44,8 @@ interface Associations {
   /**
    * Update a Association
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AssociationsInterface_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Association, PatchModel = AssociationUpdate>;
 

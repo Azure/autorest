@@ -51,6 +51,8 @@ interface OnlineEndpointTrackedResources {
   /**
    * Update Online Endpoint (asynchronous).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("OnlineEndpoints_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     OnlineEndpointTrackedResource,

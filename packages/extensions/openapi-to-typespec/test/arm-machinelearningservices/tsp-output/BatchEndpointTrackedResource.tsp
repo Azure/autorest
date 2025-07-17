@@ -51,6 +51,8 @@ interface BatchEndpointTrackedResources {
   /**
    * Update a batch inference endpoint (asynchronous).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("BatchEndpoints_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     BatchEndpointTrackedResource,

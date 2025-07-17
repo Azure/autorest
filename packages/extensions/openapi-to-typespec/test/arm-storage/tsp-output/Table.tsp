@@ -47,6 +47,8 @@ interface Tables {
   /**
    * Creates a new table with the specified table name, under the specified account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Table_Update")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchSync<
     Table,

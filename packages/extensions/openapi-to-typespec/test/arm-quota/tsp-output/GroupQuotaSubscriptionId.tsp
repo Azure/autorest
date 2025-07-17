@@ -53,6 +53,8 @@ interface GroupQuotaSubscriptionIds {
   /**
    * Updates the GroupQuotas with the subscription to add to the subscriptions list. The subscriptions will be validated if additionalAttributes are defined in the GroupQuota. The request's TenantId is validated against the subscription's TenantId.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("GroupQuotaSubscriptions_Update")
   @patch(#{ implicitOptionality: false })
   update is Extension.CustomPatchAsync<
     Extension.ManagementGroup,

@@ -51,6 +51,8 @@ interface OnlineDeploymentTrackedResources {
   /**
    * Update Online Deployment (asynchronous).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("OnlineDeployments_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     OnlineDeploymentTrackedResource,

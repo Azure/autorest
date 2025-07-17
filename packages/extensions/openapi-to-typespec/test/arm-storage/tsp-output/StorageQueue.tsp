@@ -45,6 +45,8 @@ interface StorageQueues {
   /**
    * Creates a new queue with the specified queue name, under the specified account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Queue_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<StorageQueue, PatchModel = StorageQueue>;
 

@@ -60,6 +60,8 @@ interface GroupContracts {
   /**
    * Updates the details of the group specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Group_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     GroupContract,

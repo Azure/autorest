@@ -60,6 +60,8 @@ interface ApiReleaseContracts {
   /**
    * Updates the details of the release of the API specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiRelease_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     ApiReleaseContract,

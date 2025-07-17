@@ -165,7 +165,10 @@ export function transformRequest(
     });
   }
 
-  if (`${capitalize(swaggerOperationGroupName)}_${capitalize(swaggerOperationName)}` !== operation.operationId || (removeOperationId === false && `${capitalize(groupName ?? "")}_${capitalize(name)}` !== operation.operationId)) {
+  const operationIdFromClient = `${capitalize(swaggerOperationGroupName) ? `${capitalize(swaggerOperationGroupName)}_` : ""}${capitalize(swaggerOperationName)}`;
+  const operationIdFromMain = `${capitalize(groupName ?? "") ? `${capitalize(groupName!)}_` : ""}${capitalize(name)}`;
+
+  if (operationIdFromClient !== operation.operationId || (removeOperationId === false && operationIdFromMain !== operation.operationId)) {
     decorators.push({
       name: "operationId",
       arguments: [operation.operationId!],

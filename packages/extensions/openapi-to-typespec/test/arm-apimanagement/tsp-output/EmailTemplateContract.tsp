@@ -61,6 +61,8 @@ interface EmailTemplateContracts {
   /**
    * Updates API Management email template
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("EmailTemplate_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     EmailTemplateContract,

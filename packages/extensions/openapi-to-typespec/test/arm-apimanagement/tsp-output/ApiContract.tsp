@@ -65,6 +65,8 @@ interface ApiContracts {
   /**
    * Updates the specified API of the API Management service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Api_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     ApiContract,

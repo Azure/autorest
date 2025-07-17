@@ -38,6 +38,8 @@ interface GroupQuotaLimitLists {
    * Create the GroupQuota requests for a specific ResourceProvider/Location/Resource. The resourceName properties are specified in the request body. Only 1 resource quota can be requested. Please note that patch request creates a new groupQuota request.
    * Use the polling API - OperationsStatus URI specified in Azure-AsyncOperation header field, with retry-after duration in seconds to check the intermediate status. This API provides the finals status with the request details and status.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("GroupQuotaLimitsRequest_Update")
   @patch(#{ implicitOptionality: false })
   update is Extension.CustomPatchAsync<
     Extension.ManagementGroup,

@@ -60,6 +60,8 @@ interface ApiVersionSetContracts {
   /**
    * Updates the details of the Api VersionSet specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiVersionSet_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     ApiVersionSetContract,

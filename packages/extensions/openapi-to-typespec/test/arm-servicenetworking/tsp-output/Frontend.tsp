@@ -43,6 +43,8 @@ interface Frontends {
   /**
    * Update a Frontend
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("FrontendsInterface_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Frontend, PatchModel = FrontendUpdate>;
 

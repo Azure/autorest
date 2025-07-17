@@ -60,6 +60,8 @@ interface BackendContracts {
   /**
    * Updates an existing backend.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Backend_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     BackendContract,

@@ -292,7 +292,7 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "TrafficControllers_Update",
+        "operationId": "TrafficControllerInterface_Update",
         "tags": [
           "TrafficControllers"
         ],
@@ -337,6 +337,11 @@
             "schema": {
               "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Traffic Controller": {
+            "$ref": "./examples/TrafficControllerPatch.json"
           }
         }
       },
@@ -592,7 +597,7 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "Associations_Update",
+        "operationId": "AssociationsInterface_Update",
         "tags": [
           "Associations"
         ],
@@ -645,6 +650,11 @@
             "schema": {
               "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Update Association": {
+            "$ref": "./examples/AssociationPatch.json"
           }
         }
       },
@@ -908,7 +918,7 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "Frontends_Update",
+        "operationId": "FrontendsInterface_Update",
         "tags": [
           "Frontends"
         ],
@@ -961,6 +971,11 @@
             "schema": {
               "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Update Frontend": {
+            "$ref": "./examples/FrontendPatch.json"
           }
         }
       },
