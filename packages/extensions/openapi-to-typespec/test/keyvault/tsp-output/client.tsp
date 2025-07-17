@@ -166,48 +166,6 @@ using Azure.Keyvault;
   "sasDefinitionAttributes"
 );
 
-@@clientName(fullBackup, "FullBackup");
-@@clientName(fullBackupStatus, "FullBackupStatus");
-@@clientName(fullRestoreOperation, "FullRestoreOperation");
-@@clientName(restoreStatus, "RestoreStatus");
-@@clientName(selectiveKeyRestoreOperation, "SelectiveKeyRestoreOperation");
-@@clientName(getCertificates, "GetCertificates");
-@@clientName(deleteCertificate, "DeleteCertificate");
-@@clientName(setCertificateContacts, "SetCertificateContacts");
-@@clientName(getCertificateContacts, "GetCertificateContacts");
-@@clientName(deleteCertificateContacts, "DeleteCertificateContacts");
-@@clientName(getCertificateIssuers, "GetCertificateIssuers");
-@@clientName(setCertificateIssuer, "SetCertificateIssuer");
-@@clientName(updateCertificateIssuer, "UpdateCertificateIssuer");
-@@clientName(getCertificateIssuer, "GetCertificateIssuer");
-@@clientName(deleteCertificateIssuer, "DeleteCertificateIssuer");
-@@clientName(createCertificate, "CreateCertificate");
-@@clientName(importCertificate, "ImportCertificate");
-@@clientName(getCertificateVersions, "GetCertificateVersions");
-@@clientName(getCertificatePolicy, "GetCertificatePolicy");
-@@clientName(updateCertificatePolicy, "UpdateCertificatePolicy");
-@@clientName(updateCertificate, "UpdateCertificate");
-@@clientName(getCertificate, "GetCertificate");
-@@clientName(updateCertificateOperation, "UpdateCertificateOperation");
-@@clientName(getCertificateOperation, "GetCertificateOperation");
-@@clientName(deleteCertificateOperation, "DeleteCertificateOperation");
-@@clientName(mergeCertificate, "MergeCertificate");
-@@clientName(backupCertificate, "BackupCertificate");
-@@clientName(restoreCertificate, "RestoreCertificate");
-@@clientName(getDeletedCertificates, "GetDeletedCertificates");
-@@clientName(getDeletedCertificate, "GetDeletedCertificate");
-@@clientName(purgeDeletedCertificate, "PurgeDeletedCertificate");
-@@clientName(recoverDeletedCertificate, "RecoverDeletedCertificate");
-@@clientName(createKey, "CreateKey");
-@@clientName(rotateKey, "RotateKey");
-@@clientName(importKey, "ImportKey");
-@@clientName(deleteKey, "DeleteKey");
-@@clientName(updateKey, "UpdateKey");
-@@clientName(getKey, "GetKey");
-@@clientName(getKeyVersions, "GetKeyVersions");
-@@clientName(getKeys, "GetKeys");
-@@clientName(backupKey, "BackupKey");
-@@clientName(restoreKey, "RestoreKey");
 @@clientName(encrypt, "encrypt");
 @@clientName(decrypt, "decrypt");
 @@clientName(sign, "sign");
@@ -215,54 +173,11 @@ using Azure.Keyvault;
 @@clientName(wrapKey, "wrapKey");
 @@clientName(unwrapKey, "unwrapKey");
 @@clientName(release, "release");
-@@clientName(getDeletedKeys, "GetDeletedKeys");
-@@clientName(getDeletedKey, "GetDeletedKey");
-@@clientName(purgeDeletedKey, "PurgeDeletedKey");
-@@clientName(recoverDeletedKey, "RecoverDeletedKey");
-@@clientName(getKeyRotationPolicy, "GetKeyRotationPolicy");
-@@clientName(updateKeyRotationPolicy, "UpdateKeyRotationPolicy");
-@@clientName(getRandomBytes, "GetRandomBytes");
-@@clientName(setSecret, "SetSecret");
-@@clientName(deleteSecret, "DeleteSecret");
-@@clientName(updateSecret, "UpdateSecret");
-@@clientName(getSecret, "GetSecret");
-@@clientName(getSecrets, "GetSecrets");
-@@clientName(getSecretVersions, "GetSecretVersions");
-@@clientName(getDeletedSecrets, "GetDeletedSecrets");
-@@clientName(getDeletedSecret, "GetDeletedSecret");
-@@clientName(purgeDeletedSecret, "PurgeDeletedSecret");
-@@clientName(recoverDeletedSecret, "RecoverDeletedSecret");
-@@clientName(backupSecret, "BackupSecret");
-@@clientName(restoreSecret, "RestoreSecret");
-@@clientName(updateSettings, "UpdateSettings");
-@@clientName(getSettingValue, "GetSettingValue");
-@@clientName(getSettings, "GetSettings");
-@@clientName(getStorageAccounts, "GetStorageAccounts");
-@@clientName(getDeletedStorageAccounts, "GetDeletedStorageAccounts");
-@@clientName(getDeletedStorageAccount, "GetDeletedStorageAccount");
-@@clientName(purgeDeletedStorageAccount, "PurgeDeletedStorageAccount");
-@@clientName(recoverDeletedStorageAccount, "RecoverDeletedStorageAccount");
-@@clientName(backupStorageAccount, "BackupStorageAccount");
-@@clientName(restoreStorageAccount, "RestoreStorageAccount");
-@@clientName(deleteStorageAccount, "DeleteStorageAccount");
-@@clientName(getStorageAccount, "GetStorageAccount");
-@@clientName(setStorageAccount, "SetStorageAccount");
-@@clientName(updateStorageAccount, "UpdateStorageAccount");
-@@clientName(regenerateStorageAccountKey, "RegenerateStorageAccountKey");
-@@clientName(getSasDefinitions, "GetSasDefinitions");
-@@clientName(getDeletedSasDefinitions, "GetDeletedSasDefinitions");
-@@clientName(getDeletedSasDefinition, "GetDeletedSasDefinition");
-@@clientName(recoverDeletedSasDefinition, "RecoverDeletedSasDefinition");
-@@clientName(deleteSasDefinition, "DeleteSasDefinition");
-@@clientName(getSasDefinition, "GetSasDefinition");
-@@clientName(setSasDefinition, "SetSasDefinition");
-@@clientName(updateSasDefinition, "UpdateSasDefinition");
 
 @@clientLocation(RoleDefinitionsOperationGroup.delete, "RoleDefinitions");
 @@clientLocation(RoleDefinitionsOperationGroup.createOrUpdate,
   "RoleDefinitions"
 );
-@@clientName(RoleDefinitionsOperationGroup.createOrUpdate, "CreateOrUpdate");
 @@clientLocation(RoleDefinitionsOperationGroup.get, "RoleDefinitions");
 @@clientLocation(RoleDefinitionsOperationGroup.list, "RoleDefinitions");
 
@@ -270,21 +185,15 @@ using Azure.Keyvault;
 @@clientLocation(RoleAssignmentsOperationGroup.create, "RoleAssignments");
 @@clientLocation(RoleAssignmentsOperationGroup.get, "RoleAssignments");
 @@clientLocation(RoleAssignmentsOperationGroup.listForScope, "RoleAssignments");
-@@clientName(RoleAssignmentsOperationGroup.listForScope, "ListForScope");
 
 @@clientLocation(HSMSecurityDomainOperationGroup.downloadPending,
   "HSMSecurityDomain"
-);
-@@clientName(HSMSecurityDomainOperationGroup.downloadPending,
-  "DownloadPending"
 );
 @@clientLocation(HSMSecurityDomainOperationGroup.download, "HSMSecurityDomain");
 @@clientLocation(HSMSecurityDomainOperationGroup.transferKey,
   "HSMSecurityDomain"
 );
-@@clientName(HSMSecurityDomainOperationGroup.transferKey, "TransferKey");
 @@clientLocation(HSMSecurityDomainOperationGroup.upload, "HSMSecurityDomain");
 @@clientLocation(HSMSecurityDomainOperationGroup.uploadPending,
   "HSMSecurityDomain"
 );
-@@clientName(HSMSecurityDomainOperationGroup.uploadPending, "UploadPending");

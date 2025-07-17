@@ -30,8 +30,6 @@ interface VirtualMachineExtensionImages {
   /**
    * Gets a virtual machine extension image.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineExtensionImages_Get")
   get is ArmResourceRead<
     VirtualMachineExtensionImage,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
@@ -40,8 +38,6 @@ interface VirtualMachineExtensionImages {
   /**
    * Gets a list of virtual machine extension image types.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineExtensionImages_ListTypes")
   listTypes is ArmResourceListByParent<
     VirtualMachineExtensionImage,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,

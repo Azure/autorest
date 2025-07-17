@@ -1,9 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
+import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace AnomalyDetectorClient;
 
@@ -14,6 +16,7 @@ namespace AnomalyDetectorClient;
  * user an overall status of the time series.
  */
 @summary("Detect anomalies for the entire series in batch.")
+@operationId("DetectEntireSeries")
 @route("/timeseries/entire/detect")
 @post
 op detectEntireSeries is Azure.Core.Foundations.Operation<
@@ -28,6 +31,7 @@ op detectEntireSeries is Azure.Core.Foundations.Operation<
  * real-time monitoring of business metrics.
  */
 @summary("Detect anomaly status of the latest point in time series.")
+@operationId("DetectLastPoint")
 @route("/timeseries/last/detect")
 @post
 op detectLastPoint is Azure.Core.Foundations.Operation<
@@ -39,6 +43,7 @@ op detectLastPoint is Azure.Core.Foundations.Operation<
  * Evaluate change point score of every series point
  */
 @summary("Detect change point for the entire series")
+@operationId("DetectChangePoint")
 @route("/timeseries/changepoint/detect")
 @post
 op detectChangePoint is Azure.Core.Foundations.Operation<
@@ -51,6 +56,7 @@ op detectChangePoint is Azure.Core.Foundations.Operation<
  * DetectAnomalyAsync api
  */
 @summary("Get Multivariate Anomaly Detection Result")
+@operationId("GetDetectionResult")
 op getDetectionResult is Azure.Core.ResourceRead<DetectionResult>;
 
 /**
@@ -62,6 +68,7 @@ op getDetectionResult is Azure.Core.ResourceRead<DetectionResult>;
  * column is value.
  */
 @summary("Train a Multivariate Anomaly Detection Model")
+@operationId("TrainMultivariateModel")
 @route("/multivariate/models")
 @post
 op trainMultivariateModel is Azure.Core.Foundations.Operation<ModelInfo, void>;
@@ -70,6 +77,7 @@ op trainMultivariateModel is Azure.Core.Foundations.Operation<ModelInfo, void>;
  * List models of a subscription
  */
 @summary("List Multivariate Models")
+@operationId("ListMultivariateModel")
 op listMultivariateModel is Azure.Core.ResourceList<
   ModelSnapshot,
   {
@@ -93,6 +101,7 @@ op listMultivariateModel is Azure.Core.ResourceList<
  * Delete an existing multivariate model according to the modelId
  */
 @summary("Delete Multivariate Model")
+@operationId("DeleteMultivariateModel")
 @route("/multivariate/models/{modelId}")
 @delete
 op deleteMultivariateModel is Azure.Core.Foundations.Operation<
@@ -112,6 +121,7 @@ op deleteMultivariateModel is Azure.Core.Foundations.Operation<
  * and variables used in the model.
  */
 @summary("Get Multivariate Model")
+@operationId("GetMultivariateModel")
 op getMultivariateModel is Azure.Core.ResourceRead<Model>;
 
 /**
@@ -125,6 +135,7 @@ op getMultivariateModel is Azure.Core.ResourceRead<Model>;
  * second column is value.
  */
 @summary("Detect Multivariate Anomaly")
+@operationId("DetectAnomaly")
 @route("/multivariate/models/{modelId}/entire/detect")
 @post
 op detectAnomaly is Azure.Core.Foundations.Operation<
@@ -149,6 +160,7 @@ op detectAnomaly is Azure.Core.Foundations.Operation<
  * Synchronized API for anomaly detection.
  */
 @summary("Detect anomalies in the last a few points of the request body")
+@operationId("LastDetectAnomaly")
 @route("/multivariate/models/{modelId}/last/detect")
 @post
 op lastDetectAnomaly is Azure.Core.Foundations.Operation<

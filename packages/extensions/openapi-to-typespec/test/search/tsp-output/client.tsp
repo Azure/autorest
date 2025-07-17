@@ -62,16 +62,10 @@ using Azure.Search;
 
 @@clientLocation(DocumentsOperationGroup.count, "Documents");
 @@clientLocation(DocumentsOperationGroup.searchGet, "Documents");
-@@clientName(DocumentsOperationGroup.searchGet, "SearchGet");
 @@clientLocation(DocumentsOperationGroup.searchPost, "Documents");
-@@clientName(DocumentsOperationGroup.searchPost, "SearchPost");
 @@clientLocation(DocumentsOperationGroup.get, "Documents");
 @@clientLocation(DocumentsOperationGroup.suggestGet, "Documents");
-@@clientName(DocumentsOperationGroup.suggestGet, "SuggestGet");
 @@clientLocation(DocumentsOperationGroup.suggestPost, "Documents");
-@@clientName(DocumentsOperationGroup.suggestPost, "SuggestPost");
 @@clientLocation(DocumentsOperationGroup.index, "Documents");
 @@clientLocation(DocumentsOperationGroup.autocompleteGet, "Documents");
-@@clientName(DocumentsOperationGroup.autocompleteGet, "AutocompleteGet");
 @@clientLocation(DocumentsOperationGroup.autocompletePost, "Documents");
-@@clientName(DocumentsOperationGroup.autocompletePost, "AutocompletePost");

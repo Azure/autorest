@@ -30,8 +30,6 @@ interface GalleryImageVersions {
   /**
    * Retrieves information about a gallery image version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GalleryImageVersions_Get")
   get is ArmResourceRead<
     GalleryImageVersion,
     Parameters = {
@@ -46,10 +44,8 @@ interface GalleryImageVersions {
   /**
    * Create or update a gallery image version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  @operationId("GalleryImageVersions_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     GalleryImageVersion,
     Response = ArmResourceUpdatedResponse<GalleryImageVersion> | ArmResourceCreatedResponse<
@@ -74,9 +70,7 @@ interface GalleryImageVersions {
   /**
    * Delete a gallery image version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("GalleryImageVersions_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     GalleryImageVersion,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -85,8 +79,6 @@ interface GalleryImageVersions {
   /**
    * List gallery image versions in a gallery image definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GalleryImageVersions_ListByGalleryImage")
   listByGalleryImage is ArmResourceListByParent<
     GalleryImageVersion,
     Response = ArmResponse<GalleryImageVersionList>

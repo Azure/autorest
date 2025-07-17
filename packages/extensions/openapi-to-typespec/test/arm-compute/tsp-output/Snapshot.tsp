@@ -51,10 +51,8 @@ interface Snapshots {
   /**
    * Creates or updates a snapshot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  @operationId("Snapshots_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Snapshot,
     Response = ArmResourceUpdatedResponse<Snapshot> | (ArmAcceptedLroResponse & {
@@ -90,8 +88,6 @@ interface Snapshots {
   /**
    * Lists snapshots under a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Snapshots_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     Snapshot,
     Response = ArmResponse<SnapshotList>
@@ -105,8 +101,6 @@ interface Snapshots {
   /**
    * Grants access to a snapshot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Snapshots_GrantAccess")
   @action("beginGetAccess")
   grantAccess is ArmResourceActionAsync<
     Snapshot,
@@ -117,8 +111,6 @@ interface Snapshots {
   /**
    * Revokes access to a snapshot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Snapshots_RevokeAccess")
   @action("endGetAccess")
   revokeAccess is ArmResourceActionAsync<Snapshot, void, OkResponse>;
 }

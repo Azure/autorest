@@ -30,6 +30,8 @@ interface CacheContracts {
   /**
    * Gets the details of the Cache specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Cache_Get")
   get is ArmResourceRead<CacheContract>;
 
   /**
@@ -74,6 +76,8 @@ interface CacheContracts {
   /**
    * Deletes specific Cache.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Cache_Delete")
   delete is ArmResourceDeleteSync<
     CacheContract,
     Parameters = {

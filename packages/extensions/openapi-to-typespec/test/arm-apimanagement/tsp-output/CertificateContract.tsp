@@ -30,6 +30,8 @@ interface CertificateContracts {
   /**
    * Gets the details of the certificate specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Certificate_Get")
   get is ArmResourceRead<CertificateContract>;
 
   /**
@@ -58,6 +60,8 @@ interface CertificateContracts {
   /**
    * Deletes specific certificate.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Certificate_Delete")
   delete is ArmResourceDeleteSync<
     CertificateContract,
     Parameters = {

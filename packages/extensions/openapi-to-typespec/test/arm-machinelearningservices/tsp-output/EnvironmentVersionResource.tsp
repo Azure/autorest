@@ -161,29 +161,21 @@ interface EnvironmentVersions {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("EnvironmentVersions_Get")
   get is EnvironmentVersionOps.Read<EnvironmentVersionResource>;
 
   /**
    * Creates or updates an EnvironmentVersion.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("EnvironmentVersions_CreateOrUpdate")
   createOrUpdate is EnvironmentVersionOps.CreateOrUpdateSync<EnvironmentVersionResource>;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("EnvironmentVersions_Delete")
   delete is EnvironmentVersionOps.DeleteSync<EnvironmentVersionResource>;
 
   /**
    * List versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("EnvironmentVersions_List")
   list is EnvironmentVersionOps.List<
     EnvironmentVersionResource,
     Parameters = {

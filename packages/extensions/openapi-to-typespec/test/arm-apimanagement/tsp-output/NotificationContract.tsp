@@ -31,6 +31,8 @@ interface NotificationContracts {
   /**
    * Gets the details of the Notification specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Notification_Get")
   get is ArmResourceRead<NotificationContract>;
 
   // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.

@@ -36,8 +36,6 @@ interface DedicatedHosts {
   /**
    * Retrieves information about a dedicated host.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DedicatedHosts_Get")
   get is ArmResourceRead<
     DedicatedHost,
     Parameters = {
@@ -52,8 +50,6 @@ interface DedicatedHosts {
   /**
    * Create or update a dedicated host .
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DedicatedHosts_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DedicatedHost,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
@@ -72,9 +68,7 @@ interface DedicatedHosts {
   /**
    * Delete a dedicated host.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("DedicatedHosts_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     DedicatedHost,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -83,15 +77,11 @@ interface DedicatedHosts {
   /**
    * Lists all of the dedicated hosts in the specified dedicated host group. Use the nextLink property in the response to get the next page of dedicated hosts.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DedicatedHosts_ListByHostGroup")
   listByHostGroup is ArmResourceListByParent<DedicatedHost>;
 
   /**
    * Restart the dedicated host. The operation will complete successfully once the dedicated host has restarted and is running. To determine the health of VMs deployed on the dedicated host after the restart check the Resource Health Center in the Azure Portal. Please refer to https://docs.microsoft.com/azure/service-health/resource-health-overview for more details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DedicatedHosts_Restart")
   restart is ArmResourceActionAsyncBase<
     DedicatedHost,
     void,
@@ -102,8 +92,6 @@ interface DedicatedHosts {
   /**
    * Lists all available dedicated host sizes to which the specified dedicated host can be resized. NOTE: The dedicated host sizes provided can be used to only scale up the existing dedicated host.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DedicatedHosts_ListAvailableSizes")
   @get
   @action("hostSizes")
   listAvailableSizes is ArmResourceActionSync<

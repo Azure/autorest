@@ -30,6 +30,8 @@ interface DatastoreResources {
   /**
    * Get datastore.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Datastores_Get")
   get is ArmResourceRead<DatastoreResource>;
 
   /**
@@ -51,11 +53,15 @@ interface DatastoreResources {
   /**
    * Delete datastore.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Datastores_Delete")
   delete is ArmResourceDeleteSync<DatastoreResource>;
 
   /**
    * List datastores.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Datastores_List")
   list is ArmResourceListByParent<
     DatastoreResource,
     Parameters = {

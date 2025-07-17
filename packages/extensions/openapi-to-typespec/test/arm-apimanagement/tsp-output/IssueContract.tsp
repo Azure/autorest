@@ -201,8 +201,6 @@ interface Issue {
   /**
    * Lists a collection of issues in the specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Issue_ListByService")
   listByService is IssueOps.List<
     IssueContract,
     Parameters = {

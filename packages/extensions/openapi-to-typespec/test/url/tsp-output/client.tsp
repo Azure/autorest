@@ -57,17 +57,12 @@ using AutoRestUrlTestService;
 @@clientLocation(pathsOperationGroup.byteNull, "paths");
 @@clientName(pathsOperationGroup.byteNull, "byteNull");
 @@clientLocation(pathsOperationGroup.dateValid, "paths");
-@@clientName(pathsOperationGroup.dateValid, "DateValid");
 @@clientLocation(pathsOperationGroup.dateNull, "paths");
-@@clientName(pathsOperationGroup.dateNull, "DateNull");
 @@clientLocation(pathsOperationGroup.dateTimeValid, "paths");
-@@clientName(pathsOperationGroup.dateTimeValid, "DateTimeValid");
 @@clientLocation(pathsOperationGroup.dateTimeNull, "paths");
-@@clientName(pathsOperationGroup.dateTimeNull, "DateTimeNull");
 @@clientLocation(pathsOperationGroup.base64Url, "paths");
 @@clientName(pathsOperationGroup.base64Url, "base64Url");
 @@clientLocation(pathsOperationGroup.arrayCsvInPath, "paths");
-@@clientName(pathsOperationGroup.arrayCsvInPath, "ArrayCsvInPath");
 @@clientLocation(pathsOperationGroup.unixTimeUrl, "paths");
 @@clientName(pathsOperationGroup.unixTimeUrl, "unixTimeUrl");
 
@@ -132,33 +127,18 @@ using AutoRestUrlTestService;
 @@clientLocation(queriesOperationGroup.byteNull, "queries");
 @@clientName(queriesOperationGroup.byteNull, "byteNull");
 @@clientLocation(queriesOperationGroup.dateValid, "queries");
-@@clientName(queriesOperationGroup.dateValid, "DateValid");
 @@clientLocation(queriesOperationGroup.dateNull, "queries");
-@@clientName(queriesOperationGroup.dateNull, "DateNull");
 @@clientLocation(queriesOperationGroup.dateTimeValid, "queries");
-@@clientName(queriesOperationGroup.dateTimeValid, "DateTimeValid");
 @@clientLocation(queriesOperationGroup.dateTimeNull, "queries");
-@@clientName(queriesOperationGroup.dateTimeNull, "DateTimeNull");
 @@clientLocation(queriesOperationGroup.arrayStringCsvValid, "queries");
-@@clientName(queriesOperationGroup.arrayStringCsvValid, "ArrayStringCsvValid");
 @@clientLocation(queriesOperationGroup.arrayStringCsvNull, "queries");
-@@clientName(queriesOperationGroup.arrayStringCsvNull, "ArrayStringCsvNull");
 @@clientLocation(queriesOperationGroup.arrayStringCsvEmpty, "queries");
-@@clientName(queriesOperationGroup.arrayStringCsvEmpty, "ArrayStringCsvEmpty");
 @@clientLocation(queriesOperationGroup.arrayStringNoCollectionFormatEmpty,
   "queries"
 );
-@@clientName(queriesOperationGroup.arrayStringNoCollectionFormatEmpty,
-  "ArrayStringNoCollectionFormatEmpty"
-);
 @@clientLocation(queriesOperationGroup.arrayStringSsvValid, "queries");
-@@clientName(queriesOperationGroup.arrayStringSsvValid, "ArrayStringSsvValid");
 @@clientLocation(queriesOperationGroup.arrayStringTsvValid, "queries");
-@@clientName(queriesOperationGroup.arrayStringTsvValid, "ArrayStringTsvValid");
 @@clientLocation(queriesOperationGroup.arrayStringPipesValid, "queries");
-@@clientName(queriesOperationGroup.arrayStringPipesValid,
-  "ArrayStringPipesValid"
-);
 
 @@clientLocation(pathItemsOperationGroup.getAllWithValues, "pathItems");
 @@clientName(pathItemsOperationGroup.getAllWithValues, "getAllWithValues");

@@ -30,17 +30,13 @@ interface GalleryApplications {
   /**
    * Retrieves information about a gallery Application Definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GalleryApplications_Get")
   get is ArmResourceRead<GalleryApplication>;
 
   /**
    * Create or update a gallery Application Definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  @operationId("GalleryApplications_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     GalleryApplication,
     Response = ArmResourceUpdatedResponse<GalleryApplication> | ArmResourceCreatedResponse<
@@ -65,9 +61,7 @@ interface GalleryApplications {
   /**
    * Delete a gallery Application.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("GalleryApplications_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     GalleryApplication,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -76,8 +70,6 @@ interface GalleryApplications {
   /**
    * List gallery Application Definitions in a gallery.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GalleryApplications_ListByGallery")
   listByGallery is ArmResourceListByParent<
     GalleryApplication,
     Response = ArmResponse<GalleryApplicationList>

@@ -56,6 +56,8 @@ interface SubscriptionContracts {
   /**
    * Gets the specified Subscription entity.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Subscription_Get")
   get is SubscriptionContractOps.Read<SubscriptionContract>;
 
   /**
@@ -128,6 +130,8 @@ interface SubscriptionContracts {
   /**
    * Deletes the specified subscription.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Subscription_Delete")
   delete is SubscriptionContractOps.DeleteSync<
     SubscriptionContract,
     Parameters = {
@@ -142,6 +146,8 @@ interface SubscriptionContracts {
   /**
    * Lists all subscriptions of the API Management service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Subscription_List")
   list is SubscriptionContractOps.List<
     SubscriptionContract,
     Parameters = {
@@ -236,15 +242,11 @@ interface UserSubscription {
   /**
    * Gets the specified Subscription entity associated with a particular user.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("UserSubscription_Get")
   get is UserSubscriptionOps.Read<SubscriptionContract>;
 
   /**
    * Lists the collection of subscriptions of the specified user.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("UserSubscription_List")
   list is UserSubscriptionOps.List<
     SubscriptionContract,
     Parameters = {

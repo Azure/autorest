@@ -30,15 +30,11 @@ interface EncryptionScopes {
   /**
    * Returns the properties for the specified encryption scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("EncryptionScopes_Get")
   get is ArmResourceRead<EncryptionScope>;
 
   /**
    * Synchronously creates or updates an encryption scope under the specified storage account. If an encryption scope is already created and a subsequent request is issued with different properties, the encryption scope properties will be updated per the specified request.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("EncryptionScopes_Put")
   put is ArmResourceCreateOrReplaceSync<EncryptionScope>;
 
   /**
@@ -50,8 +46,6 @@ interface EncryptionScopes {
   /**
    * Lists all the encryption scopes available under the specified storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("EncryptionScopes_List")
   list is ArmResourceListByParent<
     EncryptionScope,
     Parameters = {

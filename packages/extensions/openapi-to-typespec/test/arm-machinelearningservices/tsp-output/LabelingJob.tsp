@@ -30,8 +30,6 @@ interface LabelingJobs {
   /**
    * Gets a labeling job by name/id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LabelingJobs_Get")
   get is ArmResourceRead<
     LabelingJob,
     Parameters = {
@@ -52,22 +50,16 @@ interface LabelingJobs {
   /**
    * Creates or updates a labeling job (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LabelingJobs_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<LabelingJob>;
 
   /**
    * Delete a labeling job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LabelingJobs_Delete")
   delete is ArmResourceDeleteSync<LabelingJob>;
 
   /**
    * Lists labeling jobs in the workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LabelingJobs_List")
   list is ArmResourceListByParent<
     LabelingJob,
     Parameters = {
@@ -89,8 +81,6 @@ interface LabelingJobs {
   /**
    * Export labels from a labeling job (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LabelingJobs_ExportLabels")
   exportLabels is ArmResourceActionAsync<
     LabelingJob,
     ExportSummary,
@@ -100,15 +90,11 @@ interface LabelingJobs {
   /**
    * Pause a labeling job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LabelingJobs_Pause")
   pause is ArmResourceActionSync<LabelingJob, void, OkResponse>;
 
   /**
    * Resume a labeling job (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LabelingJobs_Resume")
   resume is ArmResourceActionAsync<LabelingJob, void, OkResponse>;
 }
 

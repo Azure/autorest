@@ -29,6 +29,8 @@ interface JobBaseResources {
   /**
    * Gets a Job by name/id.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Jobs_Get")
   get is ArmResourceRead<JobBaseResource>;
 
   /**
@@ -50,7 +52,9 @@ interface JobBaseResources {
   /**
    * Deletes a Job (asynchronous).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("Jobs_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     JobBaseResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -59,6 +63,8 @@ interface JobBaseResources {
   /**
    * Lists Jobs in the workspace.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Jobs_List")
   list is ArmResourceListByParent<
     JobBaseResource,
     Parameters = {
@@ -110,6 +116,8 @@ interface JobBaseResources {
   /**
    * Cancels a Job (asynchronous).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Jobs_Cancel")
   cancel is ArmResourceActionAsync<JobBaseResource, void, OkResponse>;
 }
 

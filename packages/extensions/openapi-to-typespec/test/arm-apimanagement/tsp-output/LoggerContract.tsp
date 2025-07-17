@@ -30,6 +30,8 @@ interface LoggerContracts {
   /**
    * Gets the details of the logger specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Logger_Get")
   get is ArmResourceRead<LoggerContract>;
 
   /**
@@ -74,6 +76,8 @@ interface LoggerContracts {
   /**
    * Deletes the specified logger.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Logger_Delete")
   delete is ArmResourceDeleteSync<
     LoggerContract,
     Parameters = {

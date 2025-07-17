@@ -38,16 +38,12 @@ interface BlobServices {
   /**
    * Gets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BlobServices_GetServiceProperties")
   getServiceProperties is ArmResourceRead<BlobServiceProperties>;
 
   /**
    * Sets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("BlobServices_SetServiceProperties")
   setServiceProperties is ArmResourceCreateOrReplaceSync<
     BlobServiceProperties,
     Response = ArmResourceUpdatedResponse<BlobServiceProperties>
@@ -56,8 +52,6 @@ interface BlobServices {
   /**
    * List blob services of storage account. It returns a collection of one object named default.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BlobServices_List")
   list is ArmResourceListByParent<
     BlobServiceProperties,
     Response = ArmResponse<BlobServiceItems>

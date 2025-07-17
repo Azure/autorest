@@ -131,29 +131,21 @@ interface EnvironmentContainers {
   /**
    * Get container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("EnvironmentContainers_Get")
   get is EnvironmentContainerOps.Read<EnvironmentContainerResource>;
 
   /**
    * Create or update container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("EnvironmentContainers_CreateOrUpdate")
   createOrUpdate is EnvironmentContainerOps.CreateOrUpdateSync<EnvironmentContainerResource>;
 
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("EnvironmentContainers_Delete")
   delete is EnvironmentContainerOps.DeleteSync<EnvironmentContainerResource>;
 
   /**
    * List environment containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("EnvironmentContainers_List")
   list is EnvironmentContainerOps.List<
     EnvironmentContainerResource,
     Parameters = {

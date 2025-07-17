@@ -29,11 +29,15 @@ interface Frontends {
   /**
    * Get a Frontend
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("FrontendsInterface_Get")
   get is ArmResourceRead<Frontend>;
 
   /**
    * Create a Frontend
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("FrontendsInterface_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Frontend>;
 
   /**
@@ -45,6 +49,8 @@ interface Frontends {
   /**
    * Delete a Frontend
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("FrontendsInterface_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     Frontend,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -53,6 +59,8 @@ interface Frontends {
   /**
    * List Frontend resources by TrafficController
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("FrontendsInterface_ListByTrafficController")
   listByTrafficController is ArmResourceListByParent<Frontend>;
 }
 

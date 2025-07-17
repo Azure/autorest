@@ -29,8 +29,6 @@ interface DataManagerForAgricultureExtensions {
   /**
    * Get Data Manager For Agriculture extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DataManagerForAgricultureExtensions_Get")
   get is ArmResourceRead<
     DataManagerForAgricultureExtension,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
@@ -39,8 +37,6 @@ interface DataManagerForAgricultureExtensions {
   /**
    * Get list of Data Manager For Agriculture extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DataManagerForAgricultureExtensions_List")
   list is ArmResourceListByParent<
     DataManagerForAgricultureExtension,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,

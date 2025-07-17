@@ -30,6 +30,8 @@ interface BackendContracts {
   /**
    * Gets the details of the backend specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Backend_Get")
   get is ArmResourceRead<BackendContract>;
 
   /**
@@ -74,6 +76,8 @@ interface BackendContracts {
   /**
    * Deletes the specified backend.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Backend_Delete")
   delete is ArmResourceDeleteSync<
     BackendContract,
     Parameters = {
@@ -117,6 +121,8 @@ interface BackendContracts {
   /**
    * Notifies the APIM proxy to create a new connection to the backend after the specified timeout. If no timeout was specified, timeout of 2 minutes is used.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Backend_Reconnect")
   reconnect is ArmResourceActionSync<
     BackendContract,
     BackendReconnectContract,

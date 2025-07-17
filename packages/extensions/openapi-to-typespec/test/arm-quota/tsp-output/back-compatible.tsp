@@ -32,7 +32,6 @@ using Microsoft.Quota;
 
 @@clientLocation(GroupQuotasEntities.get, "GroupQuotas");
 @@clientLocation(GroupQuotasEntities.createOrUpdate, "GroupQuotas");
-@@clientName(GroupQuotasEntities.createOrUpdate, "CreateOrUpdate");
 @@clientName(GroupQuotasEntities.createOrUpdate::parameters.resource,
   "GroupQuotaPutRequestBody"
 );
@@ -51,7 +50,6 @@ using Microsoft.Quota;
 @@clientLocation(GroupQuotaSubscriptionIds.createOrUpdate,
   "GroupQuotaSubscriptions"
 );
-@@clientName(GroupQuotaSubscriptionIds.createOrUpdate, "CreateOrUpdate");
 @@clientLocation(GroupQuotaSubscriptionIds.update, "GroupQuotaSubscriptions");
 @@clientLocation(GroupQuotaSubscriptionIds.delete, "GroupQuotaSubscriptions");
 @@clientLocation(GroupQuotaSubscriptionIds.list, "GroupQuotaSubscriptions");
@@ -97,7 +95,6 @@ using Microsoft.Quota;
 
 @@clientLocation(CurrentQuotaLimitBases.get, "Quota");
 @@clientLocation(CurrentQuotaLimitBases.createOrUpdate, "Quota");
-@@clientName(CurrentQuotaLimitBases.createOrUpdate, "CreateOrUpdate");
 @@clientName(CurrentQuotaLimitBases.createOrUpdate::parameters.resource,
   "createQuotaRequest"
 );
@@ -107,7 +104,5 @@ using Microsoft.Quota;
 );
 @@clientLocation(CurrentQuotaLimitBases.list, "Quota");
 
-@@clientLocation(QuotaRequestStatus.get, "QuotaRequestStatus");
-@@clientLocation(QuotaRequestStatus.list, "QuotaRequestStatus");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(QuotaRequestDetails.properties);

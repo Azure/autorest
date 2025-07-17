@@ -30,16 +30,12 @@ interface PrivateEndpointConnections {
   /**
    * Gets the specified private endpoint connection associated with the storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateEndpointConnections_Get")
   get is ArmResourceRead<PrivateEndpointConnection>;
 
   /**
    * Update the state of specified private endpoint connection associated with the storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("PrivateEndpointConnections_Put")
   put is ArmResourceCreateOrReplaceSync<
     PrivateEndpointConnection,
     Response = ArmResourceUpdatedResponse<PrivateEndpointConnection>
@@ -48,15 +44,11 @@ interface PrivateEndpointConnections {
   /**
    * Deletes the specified private endpoint connection associated with the storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateEndpointConnections_Delete")
   delete is ArmResourceDeleteSync<PrivateEndpointConnection>;
 
   /**
    * List all the private endpoint connections associated with the storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateEndpointConnections_List")
   list is ArmResourceListByParent<
     PrivateEndpointConnection,
     Response = ArmResponse<PrivateEndpointConnectionListResult>

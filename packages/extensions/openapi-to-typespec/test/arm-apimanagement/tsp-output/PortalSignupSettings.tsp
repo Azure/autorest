@@ -31,23 +31,17 @@ interface SignUpSettings {
   /**
    * Get Sign Up Settings for the Portal
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SignUpSettings_Get")
   get is ArmResourceRead<PortalSignupSettings>;
 
   /**
    * Gets the entity state (Etag) version of the SignUpSettings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SignUpSettings_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<PortalSignupSettings>;
 
   /**
    * Create or Update Sign-Up settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("SignUpSettings_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PortalSignupSettings,
     Parameters = {

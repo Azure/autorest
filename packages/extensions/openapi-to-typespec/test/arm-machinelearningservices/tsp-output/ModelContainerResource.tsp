@@ -131,29 +131,21 @@ interface ModelContainers {
   /**
    * Get container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ModelContainers_Get")
   get is ModelContainerOps.Read<ModelContainerResource>;
 
   /**
    * Create or update container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ModelContainers_CreateOrUpdate")
   createOrUpdate is ModelContainerOps.CreateOrUpdateSync<ModelContainerResource>;
 
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ModelContainers_Delete")
   delete is ModelContainerOps.DeleteSync<ModelContainerResource>;
 
   /**
    * List model containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ModelContainers_List")
   list is ModelContainerOps.List<
     ModelContainerResource,
     Parameters = {

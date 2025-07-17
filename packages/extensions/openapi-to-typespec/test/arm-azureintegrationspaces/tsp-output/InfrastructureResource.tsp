@@ -30,15 +30,11 @@ interface InfrastructureResources {
   /**
    * Get a InfrastructureResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("InfrastructureResources_Get")
   get is ArmResourceRead<InfrastructureResource>;
 
   /**
    * Create a InfrastructureResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("InfrastructureResources_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<InfrastructureResource>;
 
   /**
@@ -53,15 +49,11 @@ interface InfrastructureResources {
   /**
    * Delete a InfrastructureResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("InfrastructureResources_Delete")
   delete is ArmResourceDeleteSync<InfrastructureResource>;
 
   /**
    * List InfrastructureResource resources by Space
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("InfrastructureResources_ListBySpace")
   listBySpace is ArmResourceListByParent<
     InfrastructureResource,
     Parameters = {

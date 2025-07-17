@@ -31,16 +31,12 @@ interface TableServices {
   /**
    * Gets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TableServices_GetServiceProperties")
   getServiceProperties is ArmResourceRead<TableServiceProperties>;
 
   /**
    * Sets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("TableServices_SetServiceProperties")
   setServiceProperties is ArmResourceCreateOrReplaceSync<
     TableServiceProperties,
     Response = ArmResourceUpdatedResponse<TableServiceProperties>
@@ -49,8 +45,6 @@ interface TableServices {
   /**
    * List all table services for the storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TableServices_List")
   list is ArmResourceListByParent<
     TableServiceProperties,
     Response = ArmResponse<ListTableServices>

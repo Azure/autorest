@@ -30,6 +30,8 @@ interface ApiContracts {
   /**
    * Gets the details of the API specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Api_Get")
   get is ArmResourceRead<ApiContract>;
 
   /**
@@ -79,6 +81,8 @@ interface ApiContracts {
   /**
    * Deletes the specified API of the API Management service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Api_Delete")
   delete is ArmResourceDeleteSync<
     ApiContract,
     Parameters = {

@@ -30,6 +30,8 @@ interface GatewayContracts {
   /**
    * Gets the details of the Gateway specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Gateway_Get")
   get is ArmResourceRead<GatewayContract>;
 
   /**
@@ -74,6 +76,8 @@ interface GatewayContracts {
   /**
    * Deletes specific Gateway.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Gateway_Delete")
   delete is ArmResourceDeleteSync<
     GatewayContract,
     Parameters = {

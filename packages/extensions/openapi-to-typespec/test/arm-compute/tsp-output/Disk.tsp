@@ -60,10 +60,8 @@ interface Disks {
   /**
    * Creates or updates a disk.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  @operationId("Disks_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Disk,
     Response = ArmResourceUpdatedResponse<Disk> | (ArmAcceptedLroResponse & {
@@ -99,8 +97,6 @@ interface Disks {
   /**
    * Lists all the disks under a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Disks_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     Disk,
     Response = ArmResponse<DiskList>
@@ -114,8 +110,6 @@ interface Disks {
   /**
    * Grants access to a disk.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Disks_GrantAccess")
   @action("beginGetAccess")
   grantAccess is ArmResourceActionAsync<
     Disk,
@@ -126,8 +120,6 @@ interface Disks {
   /**
    * Revokes access to a disk.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Disks_RevokeAccess")
   @action("endGetAccess")
   revokeAccess is ArmResourceActionAsync<Disk, void, OkResponse>;
 }

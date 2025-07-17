@@ -30,8 +30,6 @@ interface SharedGalleries {
   /**
    * Get a shared gallery by subscription id or tenant id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SharedGalleries_Get")
   get is ArmResourceRead<
     SharedGallery,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
@@ -40,8 +38,6 @@ interface SharedGalleries {
   /**
    * List shared galleries by subscription id or tenant id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SharedGalleries_List")
   list is ArmResourceListByParent<
     SharedGallery,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,

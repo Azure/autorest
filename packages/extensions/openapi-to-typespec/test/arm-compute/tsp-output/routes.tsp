@@ -18,6 +18,8 @@ interface UsageOperationGroup {
   /**
    * Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Usage_List")
   @autoRoute
   @get
   @action("usages")

@@ -29,8 +29,6 @@ interface FileShares {
   /**
    * Gets properties of a specified share.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FileShares_Get")
   get is ArmResourceRead<
     FileShare,
     Parameters = {
@@ -51,8 +49,6 @@ interface FileShares {
   /**
    * Creates a new share under the specified account as described by request body. The share resource includes metadata and properties for that share. It does not include a list of the files contained by the share.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FileShares_Create")
   create is ArmResourceCreateOrReplaceSync<
     FileShare,
     Parameters = {
@@ -73,8 +69,6 @@ interface FileShares {
   /**
    * Deletes specified share under its account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FileShares_Delete")
   delete is ArmResourceDeleteSync<
     FileShare,
     Parameters = {
@@ -95,8 +89,6 @@ interface FileShares {
   /**
    * Lists all shares.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FileShares_List")
   list is ArmResourceListByParent<
     FileShare,
     Parameters = {
@@ -124,15 +116,11 @@ interface FileShares {
   /**
    * Restore a file share within a valid retention days if share soft delete is enabled
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FileShares_Restore")
   restore is ArmResourceActionSync<FileShare, DeletedShare, OkResponse>;
 
   /**
    * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FileShares_Lease")
   lease is ArmResourceActionSync<
     FileShare,
     LeaseShareRequest,

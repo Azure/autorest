@@ -55,8 +55,6 @@ interface VirtualMachines {
   /**
    * Retrieves information about the model view or the instance view of a virtual machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_Get")
   get is ArmResourceRead<
     VirtualMachine,
     Parameters = {
@@ -71,8 +69,6 @@ interface VirtualMachines {
   /**
    * The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualMachine,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
@@ -91,9 +87,7 @@ interface VirtualMachines {
   /**
    * The operation to delete a virtual machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("VirtualMachines_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachine,
     Parameters = {
@@ -109,8 +103,6 @@ interface VirtualMachines {
   /**
    * Lists all of the virtual machines in the specified resource group. Use the nextLink property in the response to get the next page of virtual machines.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_List")
   list is ArmResourceListByParent<
     VirtualMachine,
     Parameters = {
@@ -131,8 +123,6 @@ interface VirtualMachines {
   /**
    * Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_ListAll")
   listAll is ArmListBySubscription<
     VirtualMachine,
     Parameters = {
@@ -159,8 +149,6 @@ interface VirtualMachines {
   /**
    * Captures the VM by copying virtual hard disks of the VM and outputs a template that can be used to create similar VMs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_Capture")
   capture is ArmResourceActionAsync<
     VirtualMachine,
     VirtualMachineCaptureParameters,
@@ -170,8 +158,6 @@ interface VirtualMachines {
   /**
    * Retrieves information about the run-time state of a virtual machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_InstanceView")
   @get
   instanceView is ArmResourceActionSync<
     VirtualMachine,
@@ -182,8 +168,6 @@ interface VirtualMachines {
   /**
    * Converts virtual machine disks from blob-based to managed disks. Virtual machine must be stop-deallocated before invoking this operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_ConvertToManagedDisks")
   convertToManagedDisks is ArmResourceActionAsync<
     VirtualMachine,
     void,
@@ -193,8 +177,6 @@ interface VirtualMachines {
   /**
    * Shuts down the virtual machine and releases the compute resources. You are not billed for the compute resources that this virtual machine uses.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_Deallocate")
   deallocate is ArmResourceActionAsync<
     VirtualMachine,
     void,
@@ -211,15 +193,11 @@ interface VirtualMachines {
   /**
    * Sets the OS state of the virtual machine to generalized. It is recommended to sysprep the virtual machine before performing this operation. For Windows, please refer to [Create a managed image of a generalized VM in Azure](https://docs.microsoft.com/azure/virtual-machines/windows/capture-image-resource). For Linux, please refer to [How to create an image of a virtual machine or VHD](https://docs.microsoft.com/azure/virtual-machines/linux/capture-image).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_Generalize")
   generalize is ArmResourceActionSync<VirtualMachine, void, OkResponse>;
 
   /**
    * Lists all available virtual machine sizes to which the specified virtual machine can be resized.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_ListAvailableSizes")
   @get
   @action("vmSizes")
   listAvailableSizes is ArmResourceActionSync<
@@ -231,8 +209,6 @@ interface VirtualMachines {
   /**
    * The operation to power off (stop) a virtual machine. The virtual machine can be restarted with the same provisioned resources. You are still charged for this virtual machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_PowerOff")
   powerOff is ArmResourceActionAsync<
     VirtualMachine,
     void,
@@ -249,36 +225,26 @@ interface VirtualMachines {
   /**
    * The operation to reapply a virtual machine's state.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_Reapply")
   reapply is ArmResourceActionAsync<VirtualMachine, void, OkResponse>;
 
   /**
    * The operation to restart a virtual machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_Restart")
   restart is ArmResourceActionAsync<VirtualMachine, void, OkResponse>;
 
   /**
    * The operation to start a virtual machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_Start")
   start is ArmResourceActionAsync<VirtualMachine, void, OkResponse>;
 
   /**
    * Shuts down the virtual machine, moves it to a new node, and powers it back on.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_Redeploy")
   redeploy is ArmResourceActionAsync<VirtualMachine, void, OkResponse>;
 
   /**
    * Reimages (upgrade the operating system) a virtual machine which don't have a ephemeral OS disk, for virtual machines who have a ephemeral OS disk the virtual machine is reset to initial state. NOTE: The retaining of old OS disk depends on the value of deleteOption of OS disk. If deleteOption is detach, the old OS disk will be preserved after reimage. If deleteOption is delete, the old OS disk will be deleted after reimage. The deleteOption of the OS disk should be updated accordingly before performing the reimage.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_Reimage")
   reimage is ArmResourceActionAsync<
     VirtualMachine,
     VirtualMachineReimageParameters,
@@ -289,8 +255,6 @@ interface VirtualMachines {
   /**
    * The operation to retrieve SAS URIs for a virtual machine's boot diagnostic logs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_RetrieveBootDiagnosticsData")
   retrieveBootDiagnosticsData is ArmResourceActionSync<
     VirtualMachine,
     void,
@@ -307,8 +271,6 @@ interface VirtualMachines {
   /**
    * The operation to perform maintenance on a virtual machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_PerformMaintenance")
   performMaintenance is ArmResourceActionAsync<
     VirtualMachine,
     void,
@@ -318,8 +280,6 @@ interface VirtualMachines {
   /**
    * The operation to simulate the eviction of spot virtual machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_SimulateEviction")
   simulateEviction is ArmResourceActionSync<
     VirtualMachine,
     void,
@@ -329,8 +289,6 @@ interface VirtualMachines {
   /**
    * Assess patches on the VM.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_AssessPatches")
   assessPatches is ArmResourceActionAsync<
     VirtualMachine,
     void,
@@ -340,8 +298,6 @@ interface VirtualMachines {
   /**
    * Installs patches on the VM.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_InstallPatches")
   installPatches is ArmResourceActionAsync<
     VirtualMachine,
     VirtualMachineInstallPatchesParameters,
@@ -351,8 +307,6 @@ interface VirtualMachines {
   /**
    * Run command on the VM.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_RunCommand")
   runCommand is ArmResourceActionAsync<
     VirtualMachine,
     RunCommandInput,

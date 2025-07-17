@@ -30,6 +30,8 @@ interface GroupContracts {
   /**
    * Gets the details of the group specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Group_Get")
   get is ArmResourceRead<GroupContract>;
 
   /**
@@ -74,6 +76,8 @@ interface GroupContracts {
   /**
    * Deletes specific group of the API Management service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Group_Delete")
   delete is ArmResourceDeleteSync<
     GroupContract,
     Parameters = {

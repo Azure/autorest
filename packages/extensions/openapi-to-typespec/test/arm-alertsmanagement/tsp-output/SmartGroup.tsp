@@ -28,8 +28,6 @@ interface SmartGroups {
   /**
    * Get information related to a specific Smart Group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SmartGroups_GetById")
   getById is ArmResourceRead<
     SmartGroup,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
@@ -38,8 +36,6 @@ interface SmartGroups {
   /**
    * List all the Smart Groups within a specified subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SmartGroups_GetAll")
   getAll is ArmResourceListByParent<
     SmartGroup,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
@@ -116,8 +112,6 @@ interface SmartGroups {
   /**
    * Change the state of a Smart Group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SmartGroups_ChangeState")
   changeState is ArmResourceActionSync<
     SmartGroup,
     void,
@@ -135,8 +129,6 @@ interface SmartGroups {
   /**
    * Get the history a smart group, which captures any Smart Group state changes (New/Acknowledged/Closed) .
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SmartGroups_GetHistory")
   @get
   @action("history")
   getHistory is ArmResourceActionSync<

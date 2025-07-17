@@ -28,8 +28,6 @@ interface Servers {
   /**
    * Gets details about the specified Analysis Services server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Servers_GetDetails")
   getDetails is ArmResourceRead<AnalysisServicesServer>;
 
   /**
@@ -74,8 +72,6 @@ interface Servers {
   /**
    * Gets all the Analysis Services servers for the given resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Servers_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     AnalysisServicesServer,
     Response = ArmResponse<AnalysisServicesServers>
@@ -102,8 +98,6 @@ interface Servers {
   /**
    * Lists eligible SKUs for an Analysis Services resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Servers_ListSkusForExisting")
   @get
   @action("skus")
   listSkusForExisting is ArmResourceActionSync<
@@ -115,8 +109,6 @@ interface Servers {
   /**
    * Return the gateway status of the specified Analysis Services server instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Servers_ListGatewayStatus")
   listGatewayStatus is ArmResourceActionSync<
     AnalysisServicesServer,
     void,
@@ -126,8 +118,6 @@ interface Servers {
   /**
    * Dissociates a Unified Gateway associated with the server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Servers_DissociateGateway")
   dissociateGateway is ArmResourceActionSync<
     AnalysisServicesServer,
     void,

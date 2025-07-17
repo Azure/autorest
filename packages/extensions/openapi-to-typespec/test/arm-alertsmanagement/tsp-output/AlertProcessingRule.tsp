@@ -28,15 +28,11 @@ interface AlertProcessingRules {
   /**
    * Get an alert processing rule by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AlertProcessingRules_GetByName")
   getByName is ArmResourceRead<AlertProcessingRule>;
 
   /**
    * Create or update an alert processing rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AlertProcessingRules_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<AlertProcessingRule>;
 
   /**
@@ -48,15 +44,11 @@ interface AlertProcessingRules {
   /**
    * Delete an alert processing rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AlertProcessingRules_Delete")
   delete is ArmResourceDeleteSync<AlertProcessingRule>;
 
   /**
    * List all alert processing rules in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AlertProcessingRules_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     AlertProcessingRule,
     Response = ArmResponse<AlertProcessingRulesList>
@@ -65,8 +57,6 @@ interface AlertProcessingRules {
   /**
    * List all alert processing rules in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AlertProcessingRules_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     AlertProcessingRule,
     Response = ArmResponse<AlertProcessingRulesList>

@@ -30,15 +30,11 @@ interface BusinessProcessVersions {
   /**
    * Get a BusinessProcessVersion
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BusinessProcessVersions_Get")
   get is ArmResourceRead<BusinessProcessVersion>;
 
   /**
    * List BusinessProcessVersion resources by BusinessProcess
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BusinessProcessVersions_ListByBusinessProcess")
   listByBusinessProcess is ArmResourceListByParent<
     BusinessProcessVersion,
     Parameters = {

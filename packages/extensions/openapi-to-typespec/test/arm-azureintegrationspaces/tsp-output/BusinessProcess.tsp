@@ -30,15 +30,11 @@ interface BusinessProcesses {
   /**
    * Get a BusinessProcess
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BusinessProcesses_Get")
   get is ArmResourceRead<BusinessProcess>;
 
   /**
    * Create a BusinessProcess
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BusinessProcesses_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<BusinessProcess>;
 
   /**
@@ -53,15 +49,11 @@ interface BusinessProcesses {
   /**
    * Delete a BusinessProcess
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BusinessProcesses_Delete")
   delete is ArmResourceDeleteSync<BusinessProcess>;
 
   /**
    * List BusinessProcess resources by Application
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BusinessProcesses_ListByApplication")
   listByApplication is ArmResourceListByParent<
     BusinessProcess,
     Parameters = {

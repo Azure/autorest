@@ -29,8 +29,6 @@ interface ProximityPlacementGroups {
   /**
    * Retrieves information about a proximity placement group .
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProximityPlacementGroups_Get")
   get is ArmResourceRead<
     ProximityPlacementGroup,
     Parameters = {
@@ -45,8 +43,6 @@ interface ProximityPlacementGroups {
   /**
    * Create or update a proximity placement group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProximityPlacementGroups_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<ProximityPlacementGroup>;
 
   /**
@@ -61,9 +57,7 @@ interface ProximityPlacementGroups {
   /**
    * Delete a proximity placement group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("ProximityPlacementGroups_Delete")
   delete is ArmResourceDeleteSync<
     ProximityPlacementGroup,
     Response = ArmDeletedResponse
@@ -72,15 +66,11 @@ interface ProximityPlacementGroups {
   /**
    * Lists all proximity placement groups in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProximityPlacementGroups_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<ProximityPlacementGroup>;
 
   /**
    * Lists all proximity placement groups in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProximityPlacementGroups_ListBySubscription")
   listBySubscription is ArmListBySubscription<ProximityPlacementGroup>;
 }
 

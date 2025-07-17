@@ -133,8 +133,6 @@ interface ModelVersions {
 /**
 * Get version.
 */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("ModelVersions_Get")
 get is ModelVersionOps.Read<ModelVersionResource
         >;
 
@@ -142,8 +140,6 @@ get is ModelVersionOps.Read<ModelVersionResource
 /**
 * Create or update version.
 */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("ModelVersions_CreateOrUpdate")
 createOrUpdate is ModelVersionOps.CreateOrUpdateSync<ModelVersionResource
         >;
 
@@ -151,8 +147,6 @@ createOrUpdate is ModelVersionOps.CreateOrUpdateSync<ModelVersionResource
 /**
 * Delete version.
 */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("ModelVersions_Delete")
 delete is ModelVersionOps.DeleteSync<ModelVersionResource
         >;
 
@@ -160,8 +154,6 @@ delete is ModelVersionOps.DeleteSync<ModelVersionResource
 /**
 * List model versions.
 */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("ModelVersions_List")
 list is ModelVersionOps.List<ModelVersionResource, Parameters = { /**
 * Continuation token for pagination.
 */
@@ -218,8 +210,6 @@ list is ModelVersionOps.List<ModelVersionResource, Parameters = { /**
 /**
 * Model Version Package operation.
 */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("ModelVersions_Package")
 package is ModelVersionOps.ActionAsync<ModelVersionResource, PackageRequest, ArmResponse<PackageResponse>>;
 
 

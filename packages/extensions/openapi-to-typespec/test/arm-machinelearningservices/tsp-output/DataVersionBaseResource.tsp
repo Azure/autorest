@@ -173,29 +173,21 @@ interface DataVersions {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DataVersions_Get")
   get is DataVersionOps.Read<DataVersionBaseResource>;
 
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DataVersions_CreateOrUpdate")
   createOrUpdate is DataVersionOps.CreateOrUpdateSync<DataVersionBaseResource>;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DataVersions_Delete")
   delete is DataVersionOps.DeleteSync<DataVersionBaseResource>;
 
   /**
    * List data versions in the data container
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DataVersions_List")
   list is DataVersionOps.List<
     DataVersionBaseResource,
     Parameters = {

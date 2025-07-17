@@ -155,29 +155,21 @@ interface ComponentVersions {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ComponentVersions_Get")
   get is ComponentVersionOps.Read<ComponentVersionResource>;
 
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ComponentVersions_CreateOrUpdate")
   createOrUpdate is ComponentVersionOps.CreateOrUpdateSync<ComponentVersionResource>;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ComponentVersions_Delete")
   delete is ComponentVersionOps.DeleteSync<ComponentVersionResource>;
 
   /**
    * List component versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ComponentVersions_List")
   list is ComponentVersionOps.List<
     ComponentVersionResource,
     Parameters = {

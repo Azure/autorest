@@ -361,7 +361,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}/arraydefaults": {
       "get": {
-        "operationId": "ArrayDefaults_ListByResourceGroup",
+        "operationId": "ArrayDefault_ListByResourceGroup",
         "tags": [
           "ArrayDefaults"
         ],
@@ -406,7 +406,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}/arraydefaults/{name}": {
       "get": {
-        "operationId": "ArrayDefaults_Get",
+        "operationId": "ArrayDefault_Get",
         "tags": [
           "ArrayDefaults"
         ],

@@ -125,29 +125,21 @@ interface ComponentContainers {
   /**
    * Get container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ComponentContainers_Get")
   get is ComponentContainerOps.Read<ComponentContainerResource>;
 
   /**
    * Create or update container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ComponentContainers_CreateOrUpdate")
   createOrUpdate is ComponentContainerOps.CreateOrUpdateSync<ComponentContainerResource>;
 
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ComponentContainers_Delete")
   delete is ComponentContainerOps.DeleteSync<ComponentContainerResource>;
 
   /**
    * List component containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ComponentContainers_List")
   list is ComponentContainerOps.List<
     ComponentContainerResource,
     Parameters = {

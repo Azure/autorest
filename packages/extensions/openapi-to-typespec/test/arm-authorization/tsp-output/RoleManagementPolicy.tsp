@@ -29,8 +29,6 @@ interface RoleManagementPolicies {
   /**
    * Get the specified role management policy for a resource scope
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RoleManagementPolicies_Get")
   get is Extension.Read<Extension.ScopeParameter, RoleManagementPolicy>;
 
   /**
@@ -46,8 +44,6 @@ interface RoleManagementPolicies {
   /**
    * Gets role management policies for a resource scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RoleManagementPolicies_ListForScope")
   listForScope is Extension.ListByTarget<
     Extension.ScopeParameter,
     RoleManagementPolicy

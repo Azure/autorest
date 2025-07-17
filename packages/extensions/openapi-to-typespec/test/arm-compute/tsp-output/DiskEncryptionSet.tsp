@@ -34,17 +34,13 @@ interface DiskEncryptionSets {
   /**
    * Gets information about a disk encryption set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DiskEncryptionSets_Get")
   get is ArmResourceRead<DiskEncryptionSet>;
 
   /**
    * Creates or updates a disk encryption set
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  @operationId("DiskEncryptionSets_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DiskEncryptionSet,
     Response = ArmResourceUpdatedResponse<DiskEncryptionSet> | (ArmAcceptedLroResponse & {
@@ -71,9 +67,7 @@ interface DiskEncryptionSets {
   /**
    * Deletes a disk encryption set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("DiskEncryptionSets_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     DiskEncryptionSet,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -82,8 +76,6 @@ interface DiskEncryptionSets {
   /**
    * Lists all the disk encryption sets under a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DiskEncryptionSets_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     DiskEncryptionSet,
     Response = ArmResponse<DiskEncryptionSetList>
@@ -92,8 +84,6 @@ interface DiskEncryptionSets {
   /**
    * Lists all the disk encryption sets under a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DiskEncryptionSets_List")
   list is ArmListBySubscription<
     DiskEncryptionSet,
     Response = ArmResponse<DiskEncryptionSetList>
@@ -102,8 +92,6 @@ interface DiskEncryptionSets {
   /**
    * Lists all resources that are encrypted with this disk encryption set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DiskEncryptionSets_ListAssociatedResources")
   @get
   @action("associatedResources")
   listAssociatedResources is ArmResourceActionSync<

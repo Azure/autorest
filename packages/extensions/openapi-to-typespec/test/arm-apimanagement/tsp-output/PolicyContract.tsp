@@ -165,8 +165,6 @@ interface ApiPolicy {
   /**
    * Get the policy configuration at the API level.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiPolicy_Get")
   get is ApiPolicyOps.Read<
     PolicyContract,
     Parameters = {
@@ -181,15 +179,11 @@ interface ApiPolicy {
   /**
    * Gets the entity state (Etag) version of the API policy specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiPolicy_GetEntityTag")
   getEntityTag is ApiPolicyOps.CheckExistence<PolicyContract>;
 
   /**
    * Creates or updates policy configuration for the API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiPolicy_CreateOrUpdate")
   createOrUpdate is ApiPolicyOps.CreateOrUpdateSync<
     PolicyContract,
     Parameters = {
@@ -204,8 +198,6 @@ interface ApiPolicy {
   /**
    * Deletes the policy configuration at the Api.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiPolicy_Delete")
   delete is ApiPolicyOps.DeleteSync<
     PolicyContract,
     Parameters = {
@@ -220,8 +212,6 @@ interface ApiPolicy {
   /**
    * Get the policy configuration at the API level.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiPolicy_ListByApi")
   listByApi is ApiPolicyOps.List<PolicyContract>;
 }
 @armResourceOperations
@@ -268,15 +258,11 @@ interface Policy {
   /**
    * Gets the entity state (Etag) version of the Global policy definition in the Api Management service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Policy_GetEntityTag")
   getEntityTag is PolicyOps.CheckExistence<PolicyContract>;
 
   /**
    * Creates or updates the global policy configuration of the Api Management service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Policy_CreateOrUpdate")
   createOrUpdate is PolicyOps.CreateOrUpdateSync<
     PolicyContract,
     Parameters = {
@@ -305,8 +291,6 @@ interface Policy {
   /**
    * Lists all the Global Policy definitions of the Api Management service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Policy_ListByService")
   listByService is PolicyOps.List<PolicyContract>;
 }
 @armResourceOperations
@@ -345,8 +329,6 @@ interface ProductPolicy {
   /**
    * Get the policy configuration at the Product level.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductPolicy_Get")
   get is ProductPolicyOps.Read<
     PolicyContract,
     Parameters = {
@@ -361,15 +343,11 @@ interface ProductPolicy {
   /**
    * Get the ETag of the policy configuration at the Product level.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductPolicy_GetEntityTag")
   getEntityTag is ProductPolicyOps.CheckExistence<PolicyContract>;
 
   /**
    * Creates or updates policy configuration for the Product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductPolicy_CreateOrUpdate")
   createOrUpdate is ProductPolicyOps.CreateOrUpdateSync<
     PolicyContract,
     Parameters = {
@@ -384,8 +362,6 @@ interface ProductPolicy {
   /**
    * Deletes the policy configuration at the Product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductPolicy_Delete")
   delete is ProductPolicyOps.DeleteSync<
     PolicyContract,
     Parameters = {
@@ -400,8 +376,6 @@ interface ProductPolicy {
   /**
    * Get the policy configuration at the Product level.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductPolicy_ListByProduct")
   listByProduct is ProductPolicyOps.List<PolicyContract>;
 }
 

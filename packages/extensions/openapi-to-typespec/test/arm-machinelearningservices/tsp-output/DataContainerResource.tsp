@@ -130,29 +130,21 @@ interface DataContainers {
   /**
    * Get container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DataContainers_Get")
   get is DataContainerOps.Read<DataContainerResource>;
 
   /**
    * Create or update container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DataContainers_CreateOrUpdate")
   createOrUpdate is DataContainerOps.CreateOrUpdateSync<DataContainerResource>;
 
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DataContainers_Delete")
   delete is DataContainerOps.DeleteSync<DataContainerResource>;
 
   /**
    * List data containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DataContainers_List")
   list is DataContainerOps.List<
     DataContainerResource,
     Parameters = {

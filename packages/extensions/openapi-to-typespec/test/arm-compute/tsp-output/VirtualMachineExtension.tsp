@@ -30,8 +30,6 @@ interface VirtualMachineExtensions {
   /**
    * The operation to get the extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineExtensions_Get")
   get is ArmResourceRead<
     VirtualMachineExtension,
     Parameters = {
@@ -46,8 +44,6 @@ interface VirtualMachineExtensions {
   /**
    * The operation to create or update the extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineExtensions_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualMachineExtension,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
@@ -66,9 +62,7 @@ interface VirtualMachineExtensions {
   /**
    * The operation to delete the extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("VirtualMachineExtensions_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachineExtension,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -77,8 +71,6 @@ interface VirtualMachineExtensions {
   /**
    * The operation to get all extensions of a Virtual Machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineExtensions_List")
   list is ArmResourceListByParent<
     VirtualMachineExtension,
     Parameters = {

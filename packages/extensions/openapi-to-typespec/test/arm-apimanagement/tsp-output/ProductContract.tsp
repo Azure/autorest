@@ -30,6 +30,8 @@ interface ProductContracts {
   /**
    * Gets the details of the product specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Product_Get")
   get is ArmResourceRead<ProductContract>;
 
   /**
@@ -74,6 +76,8 @@ interface ProductContracts {
   /**
    * Delete product.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Product_Delete")
   delete is ArmResourceDeleteSync<
     ProductContract,
     Parameters = {

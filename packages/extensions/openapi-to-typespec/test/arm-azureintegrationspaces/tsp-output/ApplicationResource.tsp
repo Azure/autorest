@@ -30,15 +30,11 @@ interface ApplicationResources {
   /**
    * Get a ApplicationResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApplicationResources_Get")
   get is ArmResourceRead<ApplicationResource>;
 
   /**
    * Create a ApplicationResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApplicationResources_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<ApplicationResource>;
 
   /**
@@ -53,15 +49,11 @@ interface ApplicationResources {
   /**
    * Delete a ApplicationResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApplicationResources_Delete")
   delete is ArmResourceDeleteSync<ApplicationResource>;
 
   /**
    * List ApplicationResource resources by Application
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApplicationResources_ListByApplication")
   listByApplication is ArmResourceListByParent<
     ApplicationResource,
     Parameters = {

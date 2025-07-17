@@ -18,6 +18,8 @@ interface UsagesOperationGroup {
   /**
    * Gets the current usage information as well as limits for AML resources for given subscription and location.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Usages_List")
   @autoRoute
   @get
   @action("usages")
@@ -50,6 +52,8 @@ interface QuotasOperationGroup {
   /**
    * Update quota for each VM family in workspace.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Quotas_Update")
   @autoRoute
   @action("updateQuotas")
   update is ArmProviderActionSync<
@@ -61,6 +65,8 @@ interface QuotasOperationGroup {
   /**
    * Gets the currently assigned Workspace Quotas based on VMFamily.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Quotas_List")
   @autoRoute
   @get
   @action("quotas")

@@ -162,37 +162,27 @@ interface Tag {
   /**
    * Get tag associated with the API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Tag_GetByApi")
   getByApi is TagOps.Read<TagContract>;
 
   /**
    * Gets the entity state version of the tag specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Tag_GetEntityStateByApi")
   getEntityStateByApi is TagOps.CheckExistence<TagContract>;
 
   // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
    * Assign tag to the Api.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Tag_AssignToApi")
   assignToApi is TagOps.CreateOrUpdateSync<TagContract>;
 
   /**
    * Detach the tag from the Api.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Tag_DetachFromApi")
   detachFromApi is TagOps.DeleteSync<TagContract>;
 
   /**
    * Lists all Tags associated with the API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Tag_ListByApi")
   listByApi is TagOps.List<
     TagContract,
     Parameters = {
@@ -340,6 +330,8 @@ interface TagContractOperationGroup {
   /**
    * Gets the details of the tag specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Tag_Get")
   get is TagContractOperationGroupOps.Read<TagContract>;
 
   /**
@@ -384,6 +376,8 @@ interface TagContractOperationGroup {
   /**
    * Deletes specific tag of the API Management service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Tag_Delete")
   delete is TagContractOperationGroupOps.DeleteSync<
     TagContract,
     Parameters = {

@@ -31,16 +31,12 @@ interface QueueServices {
   /**
    * Gets the properties of a storage account’s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("QueueServices_GetServiceProperties")
   getServiceProperties is ArmResourceRead<QueueServiceProperties>;
 
   /**
    * Sets the properties of a storage account’s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("QueueServices_SetServiceProperties")
   setServiceProperties is ArmResourceCreateOrReplaceSync<
     QueueServiceProperties,
     Response = ArmResourceUpdatedResponse<QueueServiceProperties>
@@ -49,8 +45,6 @@ interface QueueServices {
   /**
    * List all queue services for the storage account
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("QueueServices_List")
   list is ArmResourceListByParent<
     QueueServiceProperties,
     Response = ArmResponse<ListQueueServices>

@@ -125,29 +125,21 @@ interface CodeContainers {
   /**
    * Get container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CodeContainers_Get")
   get is CodeContainerOps.Read<CodeContainerResource>;
 
   /**
    * Create or update container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CodeContainers_CreateOrUpdate")
   createOrUpdate is CodeContainerOps.CreateOrUpdateSync<CodeContainerResource>;
 
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CodeContainers_Delete")
   delete is CodeContainerOps.DeleteSync<CodeContainerResource>;
 
   /**
    * List containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CodeContainers_List")
   list is CodeContainerOps.List<
     CodeContainerResource,
     Parameters = {

@@ -71,7 +71,6 @@ using AutoRestPagingTestService;
   "getMultiplePagesFragmentWithGroupingNextLink"
 );
 @@clientLocation(PagingOperationGroup.getMultiplePagesLRO, "Paging");
-@@clientName(PagingOperationGroup.getMultiplePagesLRO, "GetMultiplePagesLRO");
 @@clientLocation(PagingOperationGroup.appendApiVersion, "Paging");
 @@clientName(PagingOperationGroup.appendApiVersion, "appendApiVersion");
 @@clientLocation(PagingOperationGroup.replaceApiVersion, "Paging");

@@ -29,6 +29,8 @@ interface CurrentQuotaLimitBases {
   /**
    * Get the quota limit of a resource. The response can be used to determine the remaining quota to calculate a new quota limit that can be submitted with a PUT request.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Quota_Get")
   get is Extension.Read<Extension.ScopeParameter, CurrentQuotaLimitBase>;
 
   /**
@@ -60,6 +62,8 @@ interface CurrentQuotaLimitBases {
   /**
    * Get a list of current quota limits of all resources for the specified scope. The response from this GET operation can be leveraged to submit requests to update a quota.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Quota_List")
   list is Extension.ListByTarget<
     Extension.ScopeParameter,
     CurrentQuotaLimitBase,

@@ -91,7 +91,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceNetworking/trafficControllers": {
       "get": {
-        "operationId": "TrafficControllers_ListBySubscription",
+        "operationId": "TrafficControllerInterface_ListBySubscription",
         "tags": [
           "TrafficControllers"
         ],
@@ -118,6 +118,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get Traffic Controllers List": {
+            "$ref": "./examples/TrafficControllersGetList.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -125,7 +130,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers": {
       "get": {
-        "operationId": "TrafficControllers_ListByResourceGroup",
+        "operationId": "TrafficControllerInterface_ListByResourceGroup",
         "tags": [
           "TrafficControllers"
         ],
@@ -155,6 +160,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get Traffic Controllers": {
+            "$ref": "./examples/TrafficControllersGet.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -162,7 +172,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}": {
       "get": {
-        "operationId": "TrafficControllers_Get",
+        "operationId": "TrafficControllerInterface_Get",
         "tags": [
           "TrafficControllers"
         ],
@@ -199,10 +209,15 @@
               "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Traffic Controller": {
+            "$ref": "./examples/TrafficControllerGet.json"
+          }
         }
       },
       "put": {
-        "operationId": "TrafficControllers_CreateOrUpdate",
+        "operationId": "TrafficControllerInterface_CreateOrUpdate",
         "tags": [
           "TrafficControllers"
         ],
@@ -266,6 +281,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Put Traffic Controller": {
+            "$ref": "./examples/TrafficControllerPut.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -321,7 +341,7 @@
         }
       },
       "delete": {
-        "operationId": "TrafficControllers_Delete",
+        "operationId": "TrafficControllerInterface_Delete",
         "tags": [
           "TrafficControllers"
         ],
@@ -373,6 +393,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete Traffic Controller": {
+            "$ref": "./examples/TrafficControllerDelete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -381,7 +406,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/associations": {
       "get": {
-        "operationId": "Associations_ListByTrafficController",
+        "operationId": "AssociationsInterface_ListByTrafficController",
         "tags": [
           "Associations"
         ],
@@ -419,6 +444,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get Associations": {
+            "$ref": "./examples/AssociationsGet.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -426,7 +456,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/associations/{associationName}": {
       "get": {
-        "operationId": "Associations_Get",
+        "operationId": "AssociationsInterface_Get",
         "tags": [
           "Associations"
         ],
@@ -471,10 +501,15 @@
               "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Association": {
+            "$ref": "./examples/AssociationGet.json"
+          }
         }
       },
       "put": {
-        "operationId": "Associations_CreateOrUpdate",
+        "operationId": "AssociationsInterface_CreateOrUpdate",
         "tags": [
           "Associations"
         ],
@@ -546,6 +581,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Put Association": {
+            "$ref": "./examples/AssociationPut.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -609,7 +649,7 @@
         }
       },
       "delete": {
-        "operationId": "Associations_Delete",
+        "operationId": "AssociationsInterface_Delete",
         "tags": [
           "Associations"
         ],
@@ -669,6 +709,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete Association": {
+            "$ref": "./examples/AssociationDelete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -677,7 +722,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/frontends": {
       "get": {
-        "operationId": "Frontends_ListByTrafficController",
+        "operationId": "FrontendsInterface_ListByTrafficController",
         "tags": [
           "Frontends"
         ],
@@ -715,6 +760,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get Frontends": {
+            "$ref": "./examples/FrontendsGet.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -722,7 +772,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/frontends/{frontendName}": {
       "get": {
-        "operationId": "Frontends_Get",
+        "operationId": "FrontendsInterface_Get",
         "tags": [
           "Frontends"
         ],
@@ -767,10 +817,15 @@
               "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Frontend": {
+            "$ref": "./examples/FrontendGet.json"
+          }
         }
       },
       "put": {
-        "operationId": "Frontends_CreateOrUpdate",
+        "operationId": "FrontendsInterface_CreateOrUpdate",
         "tags": [
           "Frontends"
         ],
@@ -842,6 +897,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Put Frontend": {
+            "$ref": "./examples/FrontendPut.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -905,7 +965,7 @@
         }
       },
       "delete": {
-        "operationId": "Frontends_Delete",
+        "operationId": "FrontendsInterface_Delete",
         "tags": [
           "Frontends"
         ],
@@ -963,6 +1023,11 @@
             "schema": {
               "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Frontend": {
+            "$ref": "./examples/FrontendDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {

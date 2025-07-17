@@ -29,8 +29,6 @@ interface RoleEligibilityScheduleInstances {
   /**
    * Gets the specified role eligibility schedule instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RoleEligibilityScheduleInstances_Get")
   get is Extension.Read<
     Extension.ScopeParameter,
     RoleEligibilityScheduleInstance
@@ -39,8 +37,6 @@ interface RoleEligibilityScheduleInstances {
   /**
    * Gets role eligibility schedule instances of a role eligibility schedule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RoleEligibilityScheduleInstances_ListForScope")
   listForScope is Extension.ListByTarget<
     Extension.ScopeParameter,
     RoleEligibilityScheduleInstance,

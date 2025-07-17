@@ -161,29 +161,21 @@ interface CodeVersions {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CodeVersions_Get")
   get is CodeVersionOps.Read<CodeVersionResource>;
 
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CodeVersions_CreateOrUpdate")
   createOrUpdate is CodeVersionOps.CreateOrUpdateSync<CodeVersionResource>;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CodeVersions_Delete")
   delete is CodeVersionOps.DeleteSync<CodeVersionResource>;
 
   /**
    * List versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CodeVersions_List")
   list is CodeVersionOps.List<
     CodeVersionResource,
     Parameters = {
@@ -223,8 +215,6 @@ interface CodeVersions {
   /**
    * Generate a storage location and credential for the client to upload a code asset to.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CodeVersions_CreateOrGetStartPendingUpload")
   @action("startPendingUpload")
   createOrGetStartPendingUpload is CodeVersionOps.ActionSync<
     CodeVersionResource,

@@ -32,8 +32,6 @@ interface Spaces {
   /**
    * Create a Space
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Spaces_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Space>;
 
   /**
@@ -50,8 +48,6 @@ interface Spaces {
   /**
    * List Space resources by resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Spaces_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     Space,
     Parameters = {
@@ -105,8 +101,6 @@ interface Spaces {
   /**
    * List Space resources by subscription ID
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Spaces_ListBySubscription")
   listBySubscription is ArmListBySubscription<Space>;
 }
 

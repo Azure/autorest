@@ -29,11 +29,15 @@ interface ArrayDefaults {
   /**
    * Get a Resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ArrayDefault_Get")
   get is ArmResourceRead<ArrayDefault>;
 
   /**
    * List resources by resource group
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ArrayDefault_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<ArrayDefault>;
 }
 

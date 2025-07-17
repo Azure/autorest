@@ -29,8 +29,6 @@ interface DedicatedHostGroups {
   /**
    * Retrieves information about a dedicated host group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DedicatedHostGroups_Get")
   get is ArmResourceRead<
     DedicatedHostGroup,
     Parameters = {
@@ -45,8 +43,6 @@ interface DedicatedHostGroups {
   /**
    * Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596)
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DedicatedHostGroups_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<DedicatedHostGroup>;
 
   /**
@@ -61,22 +57,16 @@ interface DedicatedHostGroups {
   /**
    * Delete a dedicated host group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DedicatedHostGroups_Delete")
   delete is ArmResourceDeleteSync<DedicatedHostGroup>;
 
   /**
    * Lists all of the dedicated host groups in the specified resource group. Use the nextLink property in the response to get the next page of dedicated host groups.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DedicatedHostGroups_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<DedicatedHostGroup>;
 
   /**
    * Lists all of the dedicated host groups in the subscription. Use the nextLink property in the response to get the next page of dedicated host groups.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DedicatedHostGroups_ListBySubscription")
   listBySubscription is ArmListBySubscription<DedicatedHostGroup>;
 }
 

@@ -31,16 +31,12 @@ interface ManagementPolicies {
   /**
    * Gets the managementpolicy associated with the specified storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagementPolicies_Get")
   get is ArmResourceRead<ManagementPolicy>;
 
   /**
    * Sets the managementpolicy to the specified storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("ManagementPolicies_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ManagementPolicy,
     Response = ArmResourceUpdatedResponse<ManagementPolicy>
@@ -49,8 +45,6 @@ interface ManagementPolicies {
   /**
    * Deletes the managementpolicy associated with the specified storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagementPolicies_Delete")
   delete is ArmResourceDeleteSync<ManagementPolicy>;
 }
 

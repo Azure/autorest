@@ -38,8 +38,6 @@ interface CapacityReservations {
   /**
    * The operation that retrieves information about the capacity reservation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CapacityReservations_Get")
   get is ArmResourceRead<
     CapacityReservation,
     Parameters = {
@@ -54,8 +52,6 @@ interface CapacityReservations {
   /**
    * The operation to create or update a capacity reservation. Please note some properties can be set only during capacity reservation creation. Please refer to https://aka.ms/CapacityReservation for more details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CapacityReservations_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CapacityReservation,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
@@ -73,9 +69,7 @@ interface CapacityReservations {
   /**
    * The operation to delete a capacity reservation. This operation is allowed only when all the associated resources are disassociated from the capacity reservation. Please refer to https://aka.ms/CapacityReservation for more details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("CapacityReservations_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     CapacityReservation,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -84,8 +78,6 @@ interface CapacityReservations {
   /**
    * Lists all of the capacity reservations in the specified capacity reservation group. Use the nextLink property in the response to get the next page of capacity reservations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CapacityReservations_ListByCapacityReservationGroup")
   listByCapacityReservationGroup is ArmResourceListByParent<CapacityReservation>;
 }
 

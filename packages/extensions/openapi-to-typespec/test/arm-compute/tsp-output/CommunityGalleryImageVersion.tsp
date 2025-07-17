@@ -30,15 +30,11 @@ interface CommunityGalleryImageVersions {
   /**
    * Get a community gallery image version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CommunityGalleryImageVersions_Get")
   get is ArmResourceRead<CommunityGalleryImageVersion>;
 
   /**
    * List community gallery image versions inside an image.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CommunityGalleryImageVersions_List")
   list is ArmResourceListByParent<
     CommunityGalleryImageVersion,
     Response = ArmResponse<CommunityGalleryImageVersionList>

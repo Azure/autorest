@@ -9,7 +9,7 @@ import {
   Response,
   Schema,
 } from "@autorest/codemodel";
-import _, { capitalize } from "lodash";
+import _ from "lodash";
 import { OperationWithResourceOperationFlag } from "utils/resource-discovery";
 import { getDataTypes } from "../data-types";
 import {
@@ -37,6 +37,7 @@ import { transformSchemaResponse } from "../utils/response";
 import { isConstantSchema, isResponseSchema } from "../utils/schemas";
 import { getSuppressionWithCode, SuppressionCode } from "../utils/suppressions";
 import { getDefaultValue } from "../utils/values";
+import { capitalize } from "@azure-tools/codegen";
 
 export function transformOperationGroup(
   { language, operations }: OperationGroup,
@@ -115,7 +116,7 @@ export function transformRequest(
   codeModel: CodeModel,
   groupName: string | undefined = undefined,
 ): TypespecOperation | TspArmProviderActionOperation {
-  const { isFullCompatible, isArm } = getOptions();
+  const { isFullCompatible, isArm, removeOperationId } = getOptions();
   const { language, responses, requests } = operation;
   const name = _.lowerFirst(language.default.name);
   const doc = language.default.description;
@@ -164,14 +165,14 @@ export function transformRequest(
     });
   }
 
-  if (`${capitalize(swaggerOperationGroupName)}_${capitalize(swaggerOperationName)}` !== operation.operationId && isFullCompatible) {
+  if (`${capitalize(swaggerOperationGroupName)}_${capitalize(swaggerOperationName)}` !== operation.operationId || (removeOperationId === false && `${capitalize(groupName ?? "")}_${capitalize(name)}` !== operation.operationId)) {
     decorators.push({
       name: "operationId",
       arguments: [operation.operationId!],
       module: "@typespec/openapi",
       namespace: "TypeSpec.OpenAPI",
-      suppressionCode: "@azure-tools/typespec-azure-core/no-openapi",
-      suppressionMessage: "non-standard operations",
+      suppressionCode: isFullCompatible ? "@azure-tools/typespec-azure-core/no-openapi" : undefined,
+      suppressionMessage: isFullCompatible ? "non-standard operations" : undefined,
     });
   }
 

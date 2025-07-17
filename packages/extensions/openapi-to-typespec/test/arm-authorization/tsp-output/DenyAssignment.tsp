@@ -29,15 +29,11 @@ interface DenyAssignments {
   /**
    * Get the specified deny assignment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DenyAssignments_Get")
   get is Extension.Read<Extension.ScopeParameter, DenyAssignment>;
 
   /**
    * Gets deny assignments for a resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DenyAssignments_ListForResource")
   listForResource is Extension.ListByTarget<
     Extension.ScopeParameter,
     DenyAssignment,

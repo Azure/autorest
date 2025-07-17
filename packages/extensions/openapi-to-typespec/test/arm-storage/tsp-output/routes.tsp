@@ -18,6 +18,8 @@ interface SkusOperationGroup {
   /**
    * Lists the available SKUs supported by Microsoft.Storage for given subscription.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Skus_List")
   @autoRoute
   @get
   @action("skus")

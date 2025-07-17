@@ -1,9 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
+import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.Language.Authoring;
 
@@ -12,6 +14,7 @@ namespace Azure.Language.Authoring;
  * consortium members.
  */
 @summary("Gets the constitution used for governance.")
+@operationId("GetConstitution")
 @route("/app/governance/constitution")
 @get
 op getConstitution is Azure.Core.Foundations.Operation<{}, Constitution>;
@@ -20,6 +23,7 @@ op getConstitution is Azure.Core.Foundations.Operation<{}, Constitution>;
  * Consortium members can manage the Confidential Ledger.
  */
 @summary("Lists the consortium members.")
+@operationId("ListConsortiumMembers")
 op listConsortiumMembers is Azure.Core.ResourceList<ConsortiumMember>;
 
 /**
@@ -27,12 +31,14 @@ op listConsortiumMembers is Azure.Core.ResourceList<ConsortiumMember>;
  * of a node and its enclave.
  */
 @summary("Gets quotes for all nodes of the Confidential Ledger.")
+@operationId("GetEnclaveQuotes")
 op getEnclaveQuotes is Azure.Core.ResourceRead<ConfidentialLedgerEnclaves>;
 
 /**
  * Collection ids are user-created collections of ledger entries
  */
 @summary("Retrieves a list of collection ids present in the Confidential Ledger")
+@operationId("ListCollections")
 op listCollections is Azure.Core.ResourceList<Collection>;
 
 /**
@@ -40,6 +46,7 @@ op listCollections is Azure.Core.ResourceList<Collection>;
  * default) collection will be returned.
  */
 @summary("Gets ledger entries from a collection corresponding to a range.")
+@operationId("ListLedgerEntries")
 @route("/app/transactions")
 @get
 op listLedgerEntries is Azure.Core.Foundations.Operation<
@@ -69,6 +76,7 @@ op listLedgerEntries is Azure.Core.Foundations.Operation<
  * A collection id may optionally be specified.
  */
 @summary("Writes a ledger entry.")
+@operationId("CreateLedgerEntry")
 op createLedgerEntry is Azure.Core.ResourceCreateWithServiceProvidedName<
   LedgerWriteResult,
   {
@@ -93,6 +101,7 @@ op createLedgerEntry is Azure.Core.ResourceCreateWithServiceProvidedName<
   optionally be specified to indicate the collection from which to fetch the
   value.
   """)
+@operationId("GetLedgerEntry")
 @route("/app/transactions/{transactionId}")
 @get
 op getLedgerEntry is Azure.Core.Foundations.Operation<
@@ -116,18 +125,21 @@ op getLedgerEntry is Azure.Core.Foundations.Operation<
  * Gets a receipt certifying ledger contents at a particular transaction id.
  */
 @summary("Gets a receipt certifying ledger contents at a particular transaction id.")
+@operationId("GetReceipt")
 op getReceipt is Azure.Core.ResourceRead<TransactionReceipt>;
 
 /**
  * Gets the status of an entry identified by a transaction id.
  */
 @summary("Gets the status of an entry identified by a transaction id.")
+@operationId("GetTransactionStatus")
 op getTransactionStatus is Azure.Core.ResourceRead<TransactionStatus>;
 
 /**
  * A collection id may optionally be specified.
  */
 @summary("Gets the current value available in the ledger.")
+@operationId("GetCurrentLedgerEntry")
 @route("/app/transactions/current")
 @get
 op getCurrentLedgerEntry is Azure.Core.Foundations.Operation<
@@ -145,6 +157,7 @@ op getCurrentLedgerEntry is Azure.Core.Foundations.Operation<
  * Deletes a user from the Confidential Ledger.
  */
 @summary("Deletes a user from the Confidential Ledger.")
+@operationId("DeleteUser")
 @route("/app/users/{userId}")
 @delete
 op deleteUser is Azure.Core.Foundations.Operation<
@@ -162,6 +175,7 @@ op deleteUser is Azure.Core.Foundations.Operation<
  * Gets a user.
  */
 @summary("Gets a user.")
+@operationId("GetUser")
 @route("/app/users/{userId}")
 @get
 op getUser is Azure.Core.Foundations.Operation<
@@ -179,6 +193,7 @@ op getUser is Azure.Core.Foundations.Operation<
  * A JSON merge patch is applied for existing users
  */
 @summary("Adds a user or updates a user's fields.")
+@operationId("CreateOrUpdateUser")
 @route("/app/users/{userId}")
 @patch
 op createOrUpdateUser is Azure.Core.Foundations.Operation<

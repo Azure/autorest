@@ -30,23 +30,17 @@ interface FeaturesetVersions {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FeaturesetVersions_Get")
   get is ArmResourceRead<FeaturesetVersion>;
 
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FeaturesetVersions_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<FeaturesetVersion>;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("FeaturesetVersions_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     FeaturesetVersion,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -55,8 +49,6 @@ interface FeaturesetVersions {
   /**
    * List versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FeaturesetVersions_List")
   list is ArmResourceListByParent<
     FeaturesetVersion,
     Parameters = {
@@ -114,8 +106,6 @@ interface FeaturesetVersions {
   /**
    * Backfill.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FeaturesetVersions_Backfill")
   backfill is ArmResourceActionAsync<
     FeaturesetVersion,
     FeaturesetVersionBackfillRequest,
@@ -125,8 +115,6 @@ interface FeaturesetVersions {
   /**
    * List materialization Jobs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FeaturesetVersions_ListMaterializationJobs")
   listMaterializationJobs is ArmResourceActionSync<
     FeaturesetVersion,
     void,

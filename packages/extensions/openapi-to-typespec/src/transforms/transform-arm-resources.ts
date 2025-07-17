@@ -1,5 +1,5 @@
 import { Operation, Parameter, Property, SchemaType } from "@autorest/codemodel";
-import _, { capitalize } from "lodash";
+import _ from "lodash";
 import pluralize, { singular } from "pluralize";
 import { getSession } from "../autorest-session";
 import { getDataTypes } from "../data-types";
@@ -57,6 +57,7 @@ import { getFullyQualifiedName, getTemplateResponses, NamesOfResponseTemplate } 
 import { getTypespecType, isTypespecType, transformObjectProperty } from "./transform-object";
 import { transformParameter } from "./transform-operations";
 import { Case } from "change-case-all";
+import { capitalize } from "@azure-tools/codegen";
 
 const logger = () => getLogger("transform-arm-resources");
 
@@ -985,6 +986,7 @@ function buildNewArmOperation(
   swaggerOperation: Operation,
   kind: TspArmOperationType,
 ): TspArmResourceOperationBase {
+  const { removeOperationId, isFullCompatible } = getOptions();
   const { baseParameters, parameters } = buildOperationParameters(swaggerOperation, resourceMetadata);
   const interfaceName = getTSPOperationGroupName(resourceMetadata);
   const armOperation: TspArmResourceOperationBase = {
@@ -1019,7 +1021,7 @@ function buildNewArmOperation(
     });
   }
 
-  if (`${capitalize(swaggerOperationGroupName)}_${capitalize(swaggerOperationName)}` !== operation.OperationID && getOptions().isFullCompatible) {
+  if (`${capitalize(swaggerOperationGroupName)}_${capitalize(swaggerOperationName)}` !== operation.OperationID && isFullCompatible || (removeOperationId === false && `${capitalize(interfaceName ?? "")}_${capitalize(armOperation.name)}` !== operation.OperationID)) {
     armOperation.decorators = armOperation.decorators ?? [];
     armOperation.decorators.push({
       name: "operationId",
