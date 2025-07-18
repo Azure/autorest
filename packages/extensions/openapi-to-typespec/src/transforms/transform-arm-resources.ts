@@ -1,4 +1,6 @@
 import { Operation, Parameter, Property, SchemaType } from "@autorest/codemodel";
+import { capitalize } from "@azure-tools/codegen";
+import { Case } from "change-case-all";
 import _ from "lodash";
 import pluralize, { singular } from "pluralize";
 import { getSession } from "../autorest-session";
@@ -56,8 +58,6 @@ import {
 import { getFullyQualifiedName, getTemplateResponses, NamesOfResponseTemplate } from "../utils/type-mapping";
 import { getTypespecType, isTypespecType, transformObjectProperty } from "./transform-object";
 import { transformParameter } from "./transform-operations";
-import { Case } from "change-case-all";
-import { capitalize } from "@azure-tools/codegen";
 
 const logger = () => getLogger("transform-arm-resources");
 

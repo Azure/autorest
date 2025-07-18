@@ -9,6 +9,7 @@ import {
   Response,
   Schema,
 } from "@autorest/codemodel";
+import { capitalize } from "@azure-tools/codegen";
 import _ from "lodash";
 import { OperationWithResourceOperationFlag } from "utils/resource-discovery";
 import { getDataTypes } from "../data-types";
@@ -37,7 +38,6 @@ import { transformSchemaResponse } from "../utils/response";
 import { isConstantSchema, isResponseSchema } from "../utils/schemas";
 import { getSuppressionWithCode, SuppressionCode } from "../utils/suppressions";
 import { getDefaultValue } from "../utils/values";
-import { capitalize } from "@azure-tools/codegen";
 
 export function transformOperationGroup(
   { language, operations }: OperationGroup,
