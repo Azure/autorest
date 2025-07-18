@@ -1,6 +1,13 @@
 # Change Log - @autorest/openapi-to-typespec
 
-This log was last generated on Mon, 14 Jul 2025 20:56:49 GMT and should not be manually modified.
+This log was last generated on Fri, 18 Jul 2025 06:00:25 GMT and should not be manually modified.
+
+## 0.11.4
+Fri, 18 Jul 2025 06:00:25 GMT
+
+### Patches
+
+- Replace operationId to clientLocation and clientName
 
 ## 0.11.3
 Mon, 14 Jul 2025 20:56:49 GMT
