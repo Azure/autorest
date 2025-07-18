@@ -31,22 +31,16 @@ interface EmailTemplateContracts {
   /**
    * Gets the details of the email template specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("EmailTemplate_Get")
   get is ArmResourceRead<EmailTemplateContract>;
 
   /**
    * Gets the entity state (Etag) version of the email template specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("EmailTemplate_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<EmailTemplateContract>;
 
   /**
    * Updates an Email Template.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("EmailTemplate_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     EmailTemplateContract,
     Parameters = {
@@ -61,9 +55,7 @@ interface EmailTemplateContracts {
   /**
    * Updates API Management email template
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
-  @operationId("EmailTemplate_Update")
   update is ArmCustomPatchSync<
     EmailTemplateContract,
     PatchModel = EmailTemplateUpdateParameters,
@@ -79,8 +71,6 @@ interface EmailTemplateContracts {
   /**
    * Reset the Email Template to default template provided by the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("EmailTemplate_Delete")
   delete is ArmResourceDeleteSync<
     EmailTemplateContract,
     Parameters = {
@@ -95,8 +85,6 @@ interface EmailTemplateContracts {
   /**
    * Gets all email templates
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("EmailTemplate_ListByService")
   listByService is ArmResourceListByParent<
     EmailTemplateContract,
     Parameters = {

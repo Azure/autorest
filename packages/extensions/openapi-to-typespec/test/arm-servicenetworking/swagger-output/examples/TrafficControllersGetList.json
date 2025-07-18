@@ -1,0 +1,41 @@
+{
+  "operationId": "TrafficControllerInterface_ListBySubscription",
+  "parameters": {
+    "api-version": "2023-11-01",
+    "subscriptionId": "subid"
+  },
+  "title": "Get Traffic Controllers List",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "tc1",
+            "type": "Microsoft.ServiceNetworking/trafficControllers",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1",
+            "location": "NorthCentralUS",
+            "properties": {
+              "associations": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/association/as1"
+                }
+              ],
+              "configurationEndpoints": [
+                "abc.trafficcontroller.azure.net"
+              ],
+              "frontends": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/frontends/fe1"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            },
+            "tags": {
+              "key1": "value1"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

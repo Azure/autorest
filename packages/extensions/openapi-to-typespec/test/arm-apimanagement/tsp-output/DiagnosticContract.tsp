@@ -62,22 +62,16 @@ interface DiagnosticContracts {
   /**
    * Gets the details of the Diagnostic for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiDiagnostic_Get")
   get is DiagnosticContractOps.Read<DiagnosticContract>;
 
   /**
    * Gets the entity state (Etag) version of the Diagnostic for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiDiagnostic_GetEntityTag")
   getEntityTag is DiagnosticContractOps.CheckExistence<DiagnosticContract>;
 
   /**
    * Creates a new Diagnostic for an API or updates an existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiDiagnostic_CreateOrUpdate")
   createOrUpdate is DiagnosticContractOps.CreateOrUpdateSync<
     DiagnosticContract,
     Parameters = {
@@ -92,9 +86,7 @@ interface DiagnosticContracts {
   /**
    * Updates the details of the Diagnostic for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
-  @operationId("ApiDiagnostic_Update")
   update is DiagnosticContractOps.CustomPatchSync<
     DiagnosticContract,
     PatchModel = DiagnosticContract,
@@ -110,8 +102,6 @@ interface DiagnosticContracts {
   /**
    * Deletes the specified Diagnostic from an API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiDiagnostic_Delete")
   delete is DiagnosticContractOps.DeleteSync<
     DiagnosticContract,
     Parameters = {
@@ -126,8 +116,6 @@ interface DiagnosticContracts {
   /**
    * Lists all diagnostics of an API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiDiagnostic_ListByService")
   listByService is DiagnosticContractOps.List<
     DiagnosticContract,
     Parameters = {

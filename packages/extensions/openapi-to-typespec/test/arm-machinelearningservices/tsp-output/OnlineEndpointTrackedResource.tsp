@@ -37,23 +37,17 @@ interface OnlineEndpointTrackedResources {
   /**
    * Get Online Endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OnlineEndpoints_Get")
   get is ArmResourceRead<OnlineEndpointTrackedResource>;
 
   /**
    * Create or update Online Endpoint (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OnlineEndpoints_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<OnlineEndpointTrackedResource>;
 
   /**
    * Update Online Endpoint (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
-  @operationId("OnlineEndpoints_Update")
   update is ArmCustomPatchAsync<
     OnlineEndpointTrackedResource,
     PatchModel = PartialMinimalTrackedResourceWithIdentity
@@ -62,9 +56,7 @@ interface OnlineEndpointTrackedResources {
   /**
    * Delete Online Endpoint (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("OnlineEndpoints_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     OnlineEndpointTrackedResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -73,8 +65,6 @@ interface OnlineEndpointTrackedResources {
   /**
    * List Online Endpoints.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OnlineEndpoints_List")
   list is ArmResourceListByParent<
     OnlineEndpointTrackedResource,
     Parameters = {
@@ -126,8 +116,6 @@ interface OnlineEndpointTrackedResources {
   /**
    * List EndpointAuthKeys for an Endpoint using Key-based authentication.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OnlineEndpoints_ListKeys")
   listKeys is ArmResourceActionSync<
     OnlineEndpointTrackedResource,
     void,
@@ -137,8 +125,6 @@ interface OnlineEndpointTrackedResources {
   /**
    * Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OnlineEndpoints_RegenerateKeys")
   regenerateKeys is ArmResourceActionAsync<
     OnlineEndpointTrackedResource,
     RegenerateEndpointKeysRequest,
@@ -148,9 +134,7 @@ interface OnlineEndpointTrackedResources {
   /**
    * Retrieve a valid AML token for an Endpoint using AMLToken-based authentication.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("token")
-  @operationId("OnlineEndpoints_GetToken")
   getToken is ArmResourceActionSync<
     OnlineEndpointTrackedResource,
     void,

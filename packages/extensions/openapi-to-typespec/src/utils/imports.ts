@@ -90,6 +90,13 @@ export function getClientImports(program: TypespecProgram) {
     addImports(resource.propertiesPropertyClientDecorator);
   }
 
+  for (const og of program.operationGroups.flatMap((og) => og.operations)) {
+    for (const decorator of og.clientDecorators ?? []) {
+      decorator.module && modules.add(`import "${decorator.module}";`);
+      decorator.namespace && namespaces.add(`using ${decorator.namespace};`);
+    }
+  }
+
   return {
     modules: [...modules],
     namespaces: [...namespaces],

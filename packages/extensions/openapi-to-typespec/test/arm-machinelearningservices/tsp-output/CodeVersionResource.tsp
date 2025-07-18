@@ -62,23 +62,17 @@ interface CodeVersionResources {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RegistryCodeVersions_Get")
   get is CodeVersionResourceOps.Read<CodeVersionResource>;
 
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RegistryCodeVersions_CreateOrUpdate")
   createOrUpdate is CodeVersionResourceOps.CreateOrUpdateAsync<CodeVersionResource>;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("RegistryCodeVersions_Delete")
   delete is CodeVersionResourceOps.DeleteWithoutOkAsync<
     CodeVersionResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -87,8 +81,6 @@ interface CodeVersionResources {
   /**
    * List versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RegistryCodeVersions_List")
   list is CodeVersionResourceOps.List<
     CodeVersionResource,
     Parameters = {
@@ -116,9 +108,7 @@ interface CodeVersionResources {
   /**
    * Generate a storage location and credential for the client to upload a code asset to.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("startPendingUpload")
-  @operationId("RegistryCodeVersions_CreateOrGetStartPendingUpload")
   createOrGetStartPendingUpload is CodeVersionResourceOps.ActionSync<
     CodeVersionResource,
     PendingUploadRequestDto,

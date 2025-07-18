@@ -8,3 +8,7 @@ using ComplexModelClient;
 @@clientName(Product.display_name, "displayName");
 
 @@clientName(Attributes.nbf, "notBefore");
+
+@@clientName(list, "list");
+@@clientName(create, "create");
+@@clientName(update, "update");

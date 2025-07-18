@@ -192,15 +192,6 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
   return decorators;
 }
 
-export function createOperationIdDecorator(operationId: string): TypespecDecorator {
-  return {
-    name: "operationId",
-    module: "@typespec/openapi",
-    namespace: "TypeSpec.OpenAPI",
-    arguments: [operationId],
-  };
-}
-
 export function getPropertyClientDecorators(element: Property): TypespecDecorator[] {
   const { isFullCompatible } = getOptions();
   const decorators: TypespecDecorator[] = [];

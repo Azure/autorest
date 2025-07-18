@@ -11,6 +11,7 @@ export interface TypespecOptions {
   isAzureSpec: boolean;
   namespace?: string;
   guessResourceKey: boolean;
+  removeOperationId: boolean;
   isArm: boolean;
   isFullCompatible: boolean;
   isTest: boolean;
@@ -36,13 +37,13 @@ export interface WithDecorators {
   augmentDecorators?: TypespecDecorator[];
 }
 
-export interface TypespecOperationGroup extends WithDoc, WithSuppressDirectives {
+export interface TypespecOperationGroup extends WithDoc, WithSuppressDirectives, WithDecorators {
   name: string;
   operations: (TypespecOperation | TspArmProviderActionOperation)[];
 }
 
 export type Extension = "Pageable" | "LRO";
-export interface TypespecOperation extends WithDoc, WithSummary, WithFixMe {
+export interface TypespecOperation extends WithDoc, WithSummary, WithFixMe, WithDecorators {
   name: string;
   verb: "get" | "post" | "put" | "delete";
   route: string;
@@ -54,7 +55,6 @@ export interface TypespecOperation extends WithDoc, WithSummary, WithFixMe {
   operationId?: string;
   examples?: Record<string, Record<string, unknown>>;
   clientDecorators?: TypespecDecorator[];
-  decorators?: TypespecDecorator[];
 }
 
 export type ResourceKind =
@@ -325,7 +325,7 @@ export type TspArmOperationType =
   | "ArmResourceListAtScope";
 
 // TO-DO: consolidate with other templates
-export interface TspArmProviderActionOperation extends WithDoc, WithSummary, WithSuppressDirectives {
+export interface TspArmProviderActionOperation extends WithDoc, WithSummary, WithSuppressDirectives, WithDecorators {
   kind: "ArmProviderActionAsync" | "ArmProviderActionSync";
   name: string;
   action?: string;

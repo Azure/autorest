@@ -30,15 +30,11 @@ interface PrivateLinkResources {
   /**
    * Gets the private link resources
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateEndpointConnection_GetPrivateLinkResource")
   getPrivateLinkResource is ArmResourceRead<PrivateLinkResource>;
 
   /**
    * Gets the private link resources
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateEndpointConnection_ListPrivateLinkResources")
   listPrivateLinkResources is ArmResourceListByParent<
     PrivateLinkResource,
     Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateLinkResourceListResultV5>

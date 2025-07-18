@@ -28,8 +28,6 @@ interface QuotaAllocationRequestStatuses {
   /**
    * Get the quota allocation request status for the subscriptionId by allocationId.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GroupQuotaSubscriptionAllocationRequest_Get")
   get is Extension.Read<
     Extension.ManagementGroup,
     QuotaAllocationRequestStatus
@@ -38,8 +36,6 @@ interface QuotaAllocationRequestStatuses {
   /**
    * Get all the quotaAllocationRequests for a resourceProvider/location. The filter paramter for location is required.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GroupQuotaSubscriptionAllocationRequest_List")
   list is Extension.ListByTarget<
     Extension.ManagementGroup,
     QuotaAllocationRequestStatus,

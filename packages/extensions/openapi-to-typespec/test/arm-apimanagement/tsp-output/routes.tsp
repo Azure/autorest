@@ -4,12 +4,10 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 
@@ -18,8 +16,6 @@ interface ApiExportOperationGroup {
   /**
    * Gets the details of the API specified by its identifier in the format specified to the Storage Blob with SAS Key valid for 5 minutes.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiExport_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}")
   @get
   get(
@@ -65,8 +61,6 @@ interface DeletedServicesOperationGroup {
   /**
    * Lists all soft-deleted services available for undelete for the given subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DeletedServices_ListBySubscription")
   @autoRoute
   @get
   @action("deletedservices")
@@ -82,8 +76,6 @@ interface ApiManagementServiceOperationGroup {
   /**
    * Checks availability and correctness of a name for an API Management service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiManagementService_CheckNameAvailability")
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<
     Request = ApiManagementServiceCheckNameAvailabilityParameters,
@@ -94,8 +86,6 @@ interface ApiManagementServiceOperationGroup {
   /**
    * Get the custom domain ownership identifier for an API Management service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiManagementService_GetDomainOwnershipIdentifier")
   @autoRoute
   getDomainOwnershipIdentifier is ArmProviderActionSync<
     Response = ApiManagementServiceGetDomainOwnershipIdentifierResult,
@@ -109,8 +99,6 @@ interface ApiManagementSkusOperationGroup {
   /**
    * Gets the list of Microsoft.ApiManagement SKUs available for your Subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiManagementSkus_List")
   @autoRoute
   @get
   @action("skus")

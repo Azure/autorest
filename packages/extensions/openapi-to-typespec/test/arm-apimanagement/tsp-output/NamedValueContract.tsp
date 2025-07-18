@@ -30,23 +30,17 @@ interface NamedValueContracts {
   /**
    * Gets the details of the named value specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("NamedValue_Get")
   get is ArmResourceRead<NamedValueContract>;
 
   /**
    * Gets the entity state (Etag) version of the named value specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("NamedValue_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<NamedValueContract>;
 
   /**
    * Creates or updates named value.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("NamedValue_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     NamedValueContract,
     Parameters = {
@@ -65,9 +59,7 @@ interface NamedValueContracts {
   /**
    * Updates the specific named value.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
-  @operationId("NamedValue_Update")
   update is ArmCustomPatchAsync<
     NamedValueContract,
     PatchModel = NamedValueUpdateParameters,
@@ -83,8 +75,6 @@ interface NamedValueContracts {
   /**
    * Deletes specific named value from the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("NamedValue_Delete")
   delete is ArmResourceDeleteSync<
     NamedValueContract,
     Parameters = {
@@ -99,8 +89,6 @@ interface NamedValueContracts {
   /**
    * Lists a collection of named values defined within a service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("NamedValue_ListByService")
   listByService is ArmResourceListByParent<
     NamedValueContract,
     Parameters = {
@@ -134,8 +122,6 @@ interface NamedValueContracts {
   /**
    * Gets the secret of the named value specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("NamedValue_ListValue")
   listValue is ArmResourceActionSync<
     NamedValueContract,
     void,
@@ -145,8 +131,6 @@ interface NamedValueContracts {
   /**
    * Refresh the secret of the named value specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("NamedValue_RefreshSecret")
   refreshSecret is ArmResourceActionAsync<
     NamedValueContract,
     void,

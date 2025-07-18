@@ -121,6 +121,7 @@ using Microsoft.Storage;
 @@clientName(StorageAccounts.listAccountSAS::parameters.body, "parameters");
 @@clientName(StorageAccounts.listServiceSAS::parameters.body, "parameters");
 @@clientName(StorageAccounts.restoreBlobRanges::parameters.body, "parameters");
+@@clientLocation(StorageAccounts.listByStorageAccount, "PrivateLinkResources");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(StorageAccount.properties);
 
@@ -143,15 +144,33 @@ using Microsoft.Storage;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(BlobInventoryPolicy.properties);
 
+@@clientLocation(ObjectReplicationPolicyOperationGroup.get,
+  "ObjectReplicationPolicies"
+);
+@@clientLocation(ObjectReplicationPolicyOperationGroup.createOrUpdate,
+  "ObjectReplicationPolicies"
+);
 @@clientName(ObjectReplicationPolicyOperationGroup.createOrUpdate::parameters.resource,
   "properties"
+);
+@@clientLocation(ObjectReplicationPolicyOperationGroup.delete,
+  "ObjectReplicationPolicies"
+);
+@@clientLocation(ObjectReplicationPolicyOperationGroup.list,
+  "ObjectReplicationPolicies"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ObjectReplicationPolicy.properties);
 
+@@clientLocation(LocalUserOperationGroup.get, "LocalUsers");
+@@clientLocation(LocalUserOperationGroup.createOrUpdate, "LocalUsers");
 @@clientName(LocalUserOperationGroup.createOrUpdate::parameters.resource,
   "properties"
 );
+@@clientLocation(LocalUserOperationGroup.delete, "LocalUsers");
+@@clientLocation(LocalUserOperationGroup.list, "LocalUsers");
+@@clientLocation(LocalUserOperationGroup.listKeys, "LocalUsers");
+@@clientLocation(LocalUserOperationGroup.regeneratePassword, "LocalUsers");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(LocalUser.properties);
 
@@ -174,8 +193,19 @@ using Microsoft.Storage;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(BlobContainer.properties);
 
+@@clientLocation(ImmutabilityPolicies.getImmutabilityPolicy, "BlobContainers");
+@@clientLocation(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy,
+  "BlobContainers"
+);
 @@clientName(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
   "parameters"
+);
+@@clientLocation(ImmutabilityPolicies.deleteImmutabilityPolicy,
+  "BlobContainers"
+);
+@@clientLocation(ImmutabilityPolicies.lockImmutabilityPolicy, "BlobContainers");
+@@clientLocation(ImmutabilityPolicies.extendImmutabilityPolicy,
+  "BlobContainers"
 );
 @@clientName(ImmutabilityPolicies.extendImmutabilityPolicy::parameters.body,
   "parameters"
@@ -202,8 +232,13 @@ using Microsoft.Storage;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(QueueServiceProperties.properties);
 
+@@clientLocation(StorageQueues.get, "Queue");
+@@clientLocation(StorageQueues.create, "Queue");
 @@clientName(StorageQueues.create::parameters.resource, "queue");
+@@clientLocation(StorageQueues.update, "Queue");
 @@clientName(StorageQueues.update::parameters.properties, "queue");
+@@clientLocation(StorageQueues.delete, "Queue");
+@@clientLocation(StorageQueues.list, "Queue");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(StorageQueue.properties);
 
@@ -213,7 +248,22 @@ using Microsoft.Storage;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(TableServiceProperties.properties);
 
+@@clientLocation(Tables.get, "Table");
+@@clientLocation(Tables.create, "Table");
 @@clientName(Tables.create::parameters.resource, "parameters");
+@@clientLocation(Tables.update, "Table");
 @@clientName(Tables.update::parameters.properties, "parameters");
+@@clientLocation(Tables.delete, "Table");
+@@clientLocation(Tables.list, "Table");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Table.properties);
+
+@@clientLocation(SkusOperationGroup.list, "Skus");
+
+@@clientLocation(StorageAccountsOperationGroup.checkNameAvailability,
+  "StorageAccounts"
+);
+
+@@clientLocation(DeletedAccountsOperationGroup.list, "DeletedAccounts");
+
+@@clientLocation(UsagesOperationGroup.listByLocation, "Usages");

@@ -30,23 +30,17 @@ interface ContentItemContracts {
   /**
    * Returns the developer portal's content item specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContentItem_Get")
   get is ArmResourceRead<ContentItemContract>;
 
   /**
    * Returns the entity state (ETag) version of the developer portal's content item specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContentItem_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<ContentItemContract>;
 
   // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
    * Creates a new developer portal's content item specified by the provided content type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContentItem_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ContentItemContract,
     Parameters = {
@@ -61,8 +55,6 @@ interface ContentItemContracts {
   /**
    * Removes the specified developer portal's content item.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContentItem_Delete")
   delete is ArmResourceDeleteSync<
     ContentItemContract,
     Parameters = {
@@ -77,8 +69,6 @@ interface ContentItemContracts {
   /**
    * Lists developer portal's content items specified by the provided content type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContentItem_ListByService")
   listByService is ArmResourceListByParent<ContentItemContract>;
 }
 

@@ -1,4 +1,6 @@
 import { Operation, Parameter, Property, SchemaType } from "@autorest/codemodel";
+import { capitalize } from "@azure-tools/codegen";
+import { Case } from "change-case-all";
 import _ from "lodash";
 import pluralize, { singular } from "pluralize";
 import { getSession } from "../autorest-session";
@@ -31,7 +33,11 @@ import { getOperationClientDecorators, getPropertyDecorators } from "../utils/de
 import { generateDocsContent } from "../utils/docs";
 import { getEnvelopeProperty, getEnvelopeAugmentedDecorator } from "../utils/envelope-property";
 import { getLogger } from "../utils/logger";
-import { getTSPOperationGroupName } from "../utils/operation-group";
+import {
+  getSwaggerOperationGroupName,
+  getSwaggerOperationName,
+  getTSPOperationGroupName,
+} from "../utils/operation-group";
 import {
   ArmResource,
   ArmResourceSchema,
@@ -554,9 +560,11 @@ function convertResourceUpdateOperation(
       }
 
       buildSuppressionsForArmOperation(armOperation, asyncNames, syncNames);
-      armOperation.decorators = [
-        { name: "patch", arguments: [{ value: "#{ implicitOptionality: false }", options: { unwrap: true } }] },
-      ];
+      armOperation.decorators = armOperation.decorators ?? [];
+      armOperation.decorators.push({
+        name: "patch",
+        arguments: [{ value: "#{ implicitOptionality: false }", options: { unwrap: true } }],
+      });
       return [armOperation as TspArmResourceLifeCycleOperation];
     }
   }
@@ -980,11 +988,13 @@ function buildNewArmOperation(
   swaggerOperation: Operation,
   kind: TspArmOperationType,
 ): TspArmResourceOperationBase {
+  const { removeOperationId, isFullCompatible } = getOptions();
   const { baseParameters, parameters } = buildOperationParameters(swaggerOperation, resourceMetadata);
+  const interfaceName = getTSPOperationGroupName(resourceMetadata);
   const armOperation: TspArmResourceOperationBase = {
     doc: operation.Description,
     kind,
-    name: getOperationName(getTSPOperationGroupName(resourceMetadata), operation.OperationID),
+    name: getOperationName(interfaceName, operation.OperationID),
     resource: resourceMetadata.SwaggerModelName,
     baseParameters: baseParameters.length > 0 ? baseParameters : undefined,
     parameters: parameters.length > 0 ? parameters : undefined,
@@ -992,6 +1002,44 @@ function buildNewArmOperation(
     examples: swaggerOperation.extensions?.["x-ms-examples"],
     clientDecorators: getOperationClientDecorators(swaggerOperation),
   };
+
+  const swaggerOperationGroupName = getSwaggerOperationGroupName(operation.OperationID);
+  if (swaggerOperationGroupName !== capitalize(interfaceName)) {
+    armOperation.clientDecorators!.push({
+      name: "clientLocation",
+      module: "@azure-tools/typespec-client-generator-core",
+      namespace: "Azure.ClientGenerator.Core",
+      arguments: [swaggerOperationGroupName],
+    });
+  }
+
+  const swaggerOperationName = getSwaggerOperationName(operation.OperationID);
+  if (swaggerOperationName !== capitalize(armOperation.name)) {
+    armOperation.clientDecorators!.push({
+      name: "clientName",
+      module: "@azure-tools/typespec-client-generator-core",
+      namespace: "Azure.ClientGenerator.Core",
+      arguments: [swaggerOperationName],
+    });
+  }
+
+  const operationIdFromClient = `${capitalize(swaggerOperationGroupName) ? `${capitalize(swaggerOperationGroupName)}_` : ""}${capitalize(swaggerOperationName)}`;
+  const operationIdFromMain = `${capitalize(interfaceName) ? `${capitalize(interfaceName)}_` : ""}${capitalize(armOperation.name)}`;
+
+  if (
+    (operationIdFromClient !== operation.OperationID && isFullCompatible) ||
+    (removeOperationId === false && operationIdFromMain !== operation.OperationID)
+  ) {
+    armOperation.decorators = armOperation.decorators ?? [];
+    armOperation.decorators.push({
+      name: "operationId",
+      arguments: [operation.OperationID],
+      module: "@typespec/openapi",
+      namespace: "TypeSpec.OpenAPI",
+      suppressionCode: "@azure-tools/typespec-azure-core/no-openapi",
+      suppressionMessage: "non-standard operations",
+    });
+  }
 
   if (resourceMetadata.ScopeType === "Scope") {
     armOperation.baseParameters = undefined;

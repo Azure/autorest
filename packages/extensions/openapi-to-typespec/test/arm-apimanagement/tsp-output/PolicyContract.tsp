@@ -69,8 +69,6 @@ interface PolicyContracts {
   /**
    * Get the policy configuration at the API Operation level.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiOperationPolicy_Get")
   get is PolicyContractOps.Read<
     PolicyContract,
     Parameters = {
@@ -85,15 +83,11 @@ interface PolicyContracts {
   /**
    * Gets the entity state (Etag) version of the API operation policy specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiOperationPolicy_GetEntityTag")
   getEntityTag is PolicyContractOps.CheckExistence<PolicyContract>;
 
   /**
    * Creates or updates policy configuration for the API Operation level.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiOperationPolicy_CreateOrUpdate")
   createOrUpdate is PolicyContractOps.CreateOrUpdateSync<
     PolicyContract,
     Parameters = {
@@ -108,8 +102,6 @@ interface PolicyContracts {
   /**
    * Deletes the policy configuration at the Api Operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiOperationPolicy_Delete")
   delete is PolicyContractOps.DeleteSync<
     PolicyContract,
     Parameters = {
@@ -124,8 +116,6 @@ interface PolicyContracts {
   /**
    * Get the list of policy configuration at the API Operation level.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiOperationPolicy_ListByOperation")
   listByOperation is PolicyContractOps.List<PolicyContract>;
 }
 @armResourceOperations

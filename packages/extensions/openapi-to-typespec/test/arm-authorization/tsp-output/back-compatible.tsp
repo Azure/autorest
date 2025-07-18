@@ -88,6 +88,13 @@ using Azure.ResourceManager.Authorization;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(DenyAssignment.properties);
 
+@@clientLocation(ProviderOperationsMetadataOperationGroup.get,
+  "ProviderOperationsMetadata"
+);
+@@clientLocation(ProviderOperationsMetadataOperationGroup.list,
+  "ProviderOperationsMetadata"
+);
+
 @@clientName(RoleAssignments.create::parameters.resource, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleAssignment.properties);
@@ -139,3 +146,23 @@ using Azure.ResourceManager.Authorization;
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleManagementPolicyAssignment.properties);
+
+@@clientLocation(ClassicAdministratorsOperationGroup.list,
+  "ClassicAdministrators"
+);
+
+@@clientLocation(GlobalAdministratorOperationGroup.elevateAccess,
+  "GlobalAdministrator"
+);
+
+@@clientLocation(AzurePermissionsForResourceGroupOperationGroup.list,
+  "AzurePermissionsForResourceGroup"
+);
+
+@@clientLocation(AzurePermissionsForResourceOperationGroup.list,
+  "AzurePermissionsForResource"
+);
+
+@@clientLocation(EligibleChildResourcesOperationGroup.get,
+  "EligibleChildResources"
+);

@@ -1,11 +1,9 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
-import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace AzureSchemaRegistry;
 
@@ -14,7 +12,6 @@ interface SchemaGroupsOperationGroup {
    * Gets the list of schema groups user is authorized to access.
    */
   @summary("Get list of schema groups.")
-  @operationId("SchemaGroups_List")
   @route("/$schemaGroups")
   @get
   list is Azure.Core.Foundations.Operation<{}, SchemaGroups>;
@@ -27,7 +24,6 @@ interface SchemaOperationGroup {
    * serialization of schema requested.
    */
   @summary("Get a registered schema by its unique ID reference.")
-  @operationId("Schema_GetById")
   @route("/$schemaGroups/$schemas/{id}")
   @get
   getById is Azure.Core.Foundations.Operation<
@@ -45,7 +41,6 @@ interface SchemaOperationGroup {
    * Gets the list of all versions of one schema.
    */
   @summary("Get list schema versions.")
-  @operationId("Schema_GetVersions")
   @route("/$schemaGroups/{groupName}/schemas/{schemaName}/versions")
   @get
   getVersions is Azure.Core.Foundations.Operation<
@@ -72,7 +67,6 @@ interface SchemaOperationGroup {
    * Gets one specific version of one schema.
    */
   @summary("Get specific schema versions.")
-  @operationId("Schema_GetSchemaVersion")
   @route("/$schemaGroups/{groupName}/schemas/{schemaName}/versions/{schemaVersion}")
   @get
   getSchemaVersion is Azure.Core.Foundations.Operation<
@@ -106,7 +100,6 @@ interface SchemaOperationGroup {
    * as matched by schema content comparison.
    */
   @summary("Get ID for existing schema.")
-  @operationId("Schema_QueryIdByContent")
   @route("/$schemaGroups/{groupName}/schemas/{schemaName}:get-id")
   @post
   queryIdByContent is Azure.Core.Foundations.Operation<
@@ -142,7 +135,6 @@ interface SchemaOperationGroup {
    *
    */
   @summary("Register new schema")
-  @operationId("Schema_Register")
   @route("/$schemaGroups/{groupName}/schemas/{schemaName}")
   @put
   register is Azure.Core.Foundations.Operation<

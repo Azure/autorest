@@ -62,23 +62,17 @@ interface ComponentVersionResources {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RegistryComponentVersions_Get")
   get is ComponentVersionResourceOps.Read<ComponentVersionResource>;
 
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RegistryComponentVersions_CreateOrUpdate")
   createOrUpdate is ComponentVersionResourceOps.CreateOrUpdateAsync<ComponentVersionResource>;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("RegistryComponentVersions_Delete")
   delete is ComponentVersionResourceOps.DeleteWithoutOkAsync<
     ComponentVersionResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -87,8 +81,6 @@ interface ComponentVersionResources {
   /**
    * List versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RegistryComponentVersions_List")
   list is ComponentVersionResourceOps.List<
     ComponentVersionResource,
     Parameters = {

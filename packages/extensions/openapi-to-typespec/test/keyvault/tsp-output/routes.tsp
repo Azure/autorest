@@ -960,6 +960,7 @@ op restoreKey is Azure.Core.Foundations.Operation<
   Encrypts an arbitrary sequence of bytes using an encryption key that is stored
   in a key vault.
   """)
+@operationId("encrypt")
 @route("/keys/{key-name}/{key-version}/encrypt")
 @post
 op encrypt is Azure.Core.Foundations.Operation<
@@ -999,6 +1000,7 @@ op encrypt is Azure.Core.Foundations.Operation<
  * for more information.
  */
 @summary("Decrypts a single block of encrypted data.")
+@operationId("decrypt")
 @route("/keys/{key-name}/{key-version}/decrypt")
 @post
 op decrypt is Azure.Core.Foundations.Operation<
@@ -1030,6 +1032,7 @@ op decrypt is Azure.Core.Foundations.Operation<
  * operation requires the keys/sign permission.
  */
 @summary("Creates a signature from a digest using the specified key.")
+@operationId("sign")
 @route("/keys/{key-name}/{key-version}/sign")
 @post
 op sign is Azure.Core.Foundations.Operation<
@@ -1064,6 +1067,7 @@ op sign is Azure.Core.Foundations.Operation<
  * the keys/verify permission.
  */
 @summary("Verifies a signature using a specified key.")
+@operationId("verify")
 @route("/keys/{key-name}/{key-version}/verify")
 @post
 op verify is Azure.Core.Foundations.Operation<
@@ -1099,6 +1103,7 @@ op verify is Azure.Core.Foundations.Operation<
  * public key material. This operation requires the keys/wrapKey permission.
  */
 @summary("Wraps a symmetric key using a specified key.")
+@operationId("wrapKey")
 @route("/keys/{key-name}/{key-version}/wrapkey")
 @post
 op wrapKey is Azure.Core.Foundations.Operation<
@@ -1135,6 +1140,7 @@ op wrapKey is Azure.Core.Foundations.Operation<
   Unwraps a symmetric key using the specified key that was initially used for
   wrapping that key.
   """)
+@operationId("unwrapKey")
 @route("/keys/{key-name}/{key-version}/unwrapkey")
 @post
 op unwrapKey is Azure.Core.Foundations.Operation<
@@ -1165,6 +1171,7 @@ op unwrapKey is Azure.Core.Foundations.Operation<
  * be marked exportable. This operation requires the keys/release permission.
  */
 @summary("Releases a key.")
+@operationId("release")
 @route("/keys/{key-name}/{key-version}/release")
 @post
 op release is Azure.Core.Foundations.Operation<
@@ -2115,7 +2122,6 @@ interface RoleDefinitionsOperationGroup {
   /**
    * Deletes a custom role definition.
    */
-  @operationId("RoleDefinitions_Delete")
   @route("/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}")
   @delete
   delete is Azure.Core.Foundations.Operation<
@@ -2138,7 +2144,6 @@ interface RoleDefinitionsOperationGroup {
   /**
    * Creates or updates a custom role definition.
    */
-  @operationId("RoleDefinitions_CreateOrUpdate")
   @route("/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}")
   @put
   createOrUpdate is Azure.Core.Foundations.Operation<
@@ -2168,7 +2173,6 @@ interface RoleDefinitionsOperationGroup {
   /**
    * Get the specified role definition.
    */
-  @operationId("RoleDefinitions_Get")
   @route("/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}")
   @get
   get is Azure.Core.Foundations.Operation<
@@ -2191,7 +2195,6 @@ interface RoleDefinitionsOperationGroup {
   /**
    * Get all role definitions that are applicable at scope and above.
    */
-  @operationId("RoleDefinitions_List")
   @route("/{scope}/providers/Microsoft.Authorization/roleDefinitions")
   @get
   list is Azure.Core.Foundations.Operation<
@@ -2217,7 +2220,6 @@ interface RoleAssignmentsOperationGroup {
   /**
    * Deletes a role assignment.
    */
-  @operationId("RoleAssignments_Delete")
   @route("/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}")
   @delete
   delete is Azure.Core.Foundations.Operation<
@@ -2240,7 +2242,6 @@ interface RoleAssignmentsOperationGroup {
   /**
    * Creates a role assignment.
    */
-  @operationId("RoleAssignments_Create")
   @route("/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}")
   @put
   create is Azure.Core.Foundations.Operation<
@@ -2269,7 +2270,6 @@ interface RoleAssignmentsOperationGroup {
   /**
    * Get the specified role assignment.
    */
-  @operationId("RoleAssignments_Get")
   @route("/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}")
   @get
   get is Azure.Core.Foundations.Operation<
@@ -2292,7 +2292,6 @@ interface RoleAssignmentsOperationGroup {
   /**
    * Gets role assignments for a scope.
    */
-  @operationId("RoleAssignments_ListForScope")
   @route("/{scope}/providers/Microsoft.Authorization/roleAssignments")
   @get
   listForScope is Azure.Core.Foundations.Operation<
@@ -2319,7 +2318,6 @@ interface HSMSecurityDomainOperationGroup {
   /**
    * Retrieves the Security Domain download operation status
    */
-  @operationId("HSMSecurityDomain_DownloadPending")
   @route("/securitydomain/download/pending")
   @get
   downloadPending is Azure.Core.Foundations.Operation<
@@ -2331,7 +2329,6 @@ interface HSMSecurityDomainOperationGroup {
    * Retrieves the Security Domain from the managed HSM. Calling this endpoint can
    * be used to activate a provisioned managed HSM resource.
    */
-  @operationId("HSMSecurityDomain_Download")
   @route("/securitydomain/download")
   @post
   download is Azure.Core.Foundations.Operation<
@@ -2342,7 +2339,6 @@ interface HSMSecurityDomainOperationGroup {
   /**
    * Retrieve Security Domain transfer key
    */
-  @operationId("HSMSecurityDomain_TransferKey")
   @route("/securitydomain/upload")
   @get
   transferKey is Azure.Core.Foundations.Operation<{}, TransferKey>;
@@ -2350,7 +2346,6 @@ interface HSMSecurityDomainOperationGroup {
   /**
    * Restore the provided Security Domain.
    */
-  @operationId("HSMSecurityDomain_Upload")
   @route("/securitydomain/upload")
   @post
   upload is Azure.Core.Foundations.Operation<
@@ -2361,7 +2356,6 @@ interface HSMSecurityDomainOperationGroup {
   /**
    * Get Security Domain upload operation status
    */
-  @operationId("HSMSecurityDomain_UploadPending")
   @route("/securitydomain/upload/pending")
   @get
   uploadPending is Azure.Core.Foundations.Operation<

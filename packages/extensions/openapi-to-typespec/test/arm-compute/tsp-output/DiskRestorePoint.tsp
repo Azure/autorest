@@ -30,15 +30,11 @@ interface DiskRestorePoints {
   /**
    * Get disk restorePoint resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DiskRestorePoint_Get")
   get is ArmResourceRead<DiskRestorePoint>;
 
   /**
    * Lists diskRestorePoints under a vmRestorePoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DiskRestorePoint_ListByRestorePoint")
   listByRestorePoint is ArmResourceListByParent<
     DiskRestorePoint,
     Response = ArmResponse<DiskRestorePointList>
@@ -47,9 +43,7 @@ interface DiskRestorePoints {
   /**
    * Grants access to a diskRestorePoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("beginGetAccess")
-  @operationId("DiskRestorePoint_GrantAccess")
   grantAccess is ArmResourceActionAsync<
     DiskRestorePoint,
     GrantAccessData,
@@ -59,9 +53,7 @@ interface DiskRestorePoints {
   /**
    * Revokes access to a diskRestorePoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("endGetAccess")
-  @operationId("DiskRestorePoint_RevokeAccess")
   revokeAccess is ArmResourceActionAsync<DiskRestorePoint, void, OkResponse>;
 }
 

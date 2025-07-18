@@ -30,23 +30,17 @@ interface ApiContracts {
   /**
    * Gets the details of the API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Api_Get")
   get is ArmResourceRead<ApiContract>;
 
   /**
    * Gets the entity state (Etag) version of the API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Api_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<ApiContract>;
 
   /**
    * Creates new or updates existing specified API of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("Api_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ApiContract,
     Parameters = {
@@ -65,9 +59,7 @@ interface ApiContracts {
   /**
    * Updates the specified API of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
-  @operationId("Api_Update")
   update is ArmCustomPatchSync<
     ApiContract,
     PatchModel = ApiUpdateContract,
@@ -83,8 +75,6 @@ interface ApiContracts {
   /**
    * Deletes the specified API of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Api_Delete")
   delete is ArmResourceDeleteSync<
     ApiContract,
     Parameters = {
@@ -105,8 +95,6 @@ interface ApiContracts {
   /**
    * Lists all APIs of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Api_ListByService")
   listByService is ArmResourceListByParent<
     ApiContract,
     Parameters = {
@@ -146,10 +134,8 @@ interface ApiContracts {
   /**
    * Lists all revisions of an API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("revisions")
-  @operationId("ApiRevision_ListByService")
   apiRevisionListByService is ArmResourceActionSync<
     ApiContract,
     void,
@@ -179,10 +165,8 @@ interface ApiContracts {
   /**
    * Lists all Products, which the API is part of.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("products")
-  @operationId("ApiProduct_ListByApis")
   listByApis is ArmResourceActionSync<
     ApiContract,
     void,
@@ -212,10 +196,8 @@ interface ApiContracts {
   /**
    * Lists a collection of operations associated with tags.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("operationsByTags")
-  @operationId("Operation_ListByTags")
   listByTags is ArmResourceActionSync<
     ApiContract,
     void,

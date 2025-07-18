@@ -112,10 +112,8 @@ interface Workspaces {
   /**
    * Lists all enabled features for a workspace
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("features")
-  @operationId("WorkspaceFeatures_List")
   list is ArmResourceActionSync<
     Workspace,
     void,
@@ -200,10 +198,8 @@ interface Workspaces {
    * Other RPs, such as Azure Storage, have multiple - one for Blobs, other for Queues, etc.
    * Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds".
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("privateLinkResources")
-  @operationId("PrivateLinkResources_List")
   privateLinkResourcesList is ArmResourceActionSync<
     Workspace,
     void,
@@ -213,8 +209,6 @@ interface Workspaces {
   /**
    * Provisions the managed network of a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagedNetworkProvisions_ProvisionManagedNetwork")
   provisionManagedNetwork is ArmResourceActionAsync<
     Workspace,
     ManagedNetworkProvisionOptions,

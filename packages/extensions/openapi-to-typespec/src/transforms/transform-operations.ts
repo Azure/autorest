@@ -9,7 +9,7 @@ import {
   Response,
   Schema,
 } from "@autorest/codemodel";
-import { Case } from "change-case-all";
+import { capitalize } from "@azure-tools/codegen";
 import _ from "lodash";
 import { OperationWithResourceOperationFlag } from "utils/resource-discovery";
 import { getDataTypes } from "../data-types";
@@ -25,11 +25,15 @@ import {
 } from "../interfaces";
 import { transformDataType } from "../model";
 import { getOptions } from "../options";
-import { createOperationIdDecorator, getOperationClientDecorators, getPropertyDecorators } from "../utils/decorators";
+import { getOperationClientDecorators, getPropertyDecorators } from "../utils/decorators";
 import { getLogger } from "../utils/logger";
 import { getLanguageMetadata } from "../utils/metadata";
 import { generateAdditionalProperties, generateTemplateModel } from "../utils/model-generation";
-import { getTSPNonResourceOperationGroupName } from "../utils/operation-group";
+import {
+  getSwaggerOperationGroupName,
+  getSwaggerOperationName,
+  getTSPNonResourceOperationGroupName,
+} from "../utils/operation-group";
 import { transformSchemaResponse } from "../utils/response";
 import { isConstantSchema, isResponseSchema } from "../utils/schemas";
 import { getSuppressionWithCode, SuppressionCode } from "../utils/suppressions";
@@ -112,7 +116,7 @@ export function transformRequest(
   codeModel: CodeModel,
   groupName: string | undefined = undefined,
 ): TypespecOperation | TspArmProviderActionOperation {
-  const { isFullCompatible, isArm } = getOptions();
+  const { isFullCompatible, isArm, removeOperationId } = getOptions();
   const { language, responses, requests } = operation;
   const name = _.lowerFirst(language.default.name);
   const doc = language.default.description;
@@ -138,18 +142,44 @@ export function transformRequest(
   }
 
   const resource = operation.language.default.resource;
-  let decorators: TypespecDecorator[] | undefined = undefined;
+  const decorators: TypespecDecorator[] = [];
+  const clientDecorators: TypespecDecorator[] = [];
+
+  const swaggerOperationGroupName = getSwaggerOperationGroupName(operation.operationId ?? "");
+  if (swaggerOperationGroupName !== capitalize(groupName ?? "")) {
+    clientDecorators.push({
+      name: "clientLocation",
+      module: "@azure-tools/typespec-client-generator-core",
+      namespace: "Azure.ClientGenerator.Core",
+      arguments: [swaggerOperationGroupName],
+    });
+  }
+
+  const swaggerOperationName = getSwaggerOperationName(operation.operationId ?? "");
+  if (swaggerOperationName !== capitalize(name)) {
+    clientDecorators.push({
+      name: "clientName",
+      module: "@azure-tools/typespec-client-generator-core",
+      namespace: "Azure.ClientGenerator.Core",
+      arguments: [swaggerOperationName],
+    });
+  }
+
+  const operationIdFromClient = `${capitalize(swaggerOperationGroupName) ? `${capitalize(swaggerOperationGroupName)}_` : ""}${capitalize(swaggerOperationName)}`;
+  const operationIdFromMain = `${capitalize(groupName ?? "") ? `${capitalize(groupName!)}_` : ""}${capitalize(name)}`;
+
   if (
-    groupName &&
-    operation.operationId &&
-    operation.operationId !== `${Case.pascal(groupName)}_${Case.pascal(name)}`
+    operationIdFromClient !== operation.operationId ||
+    (removeOperationId === false && operationIdFromMain !== operation.operationId)
   ) {
-    const decorator = createOperationIdDecorator(operation.operationId!);
-    if (isFullCompatible) {
-      decorator.suppressionCode = "@azure-tools/typespec-azure-core/no-openapi";
-      decorator.suppressionMessage = "non-standard operations";
-    }
-    decorators = [decorator];
+    decorators.push({
+      name: "operationId",
+      arguments: [operation.operationId!],
+      module: "@typespec/openapi",
+      namespace: "TypeSpec.OpenAPI",
+      suppressionCode: isFullCompatible ? "@azure-tools/typespec-azure-core/no-openapi" : undefined,
+      suppressionMessage: isFullCompatible ? "non-standard operations" : undefined,
+    });
   }
 
   if (isArm) {
@@ -158,7 +188,6 @@ export function transformRequest(
       const action = getActionForPrviderTemplate(route);
       if (action !== undefined) {
         const isLongRunning = operation.extensions?.["x-ms-long-running-operation"] ?? false;
-        decorators ??= [];
         decorators.push({
           name: "autoRoute",
           module: "@typespec/rest",
@@ -204,6 +233,7 @@ export function transformRequest(
           suppressions,
           examples: operation.extensions?.["x-ms-examples"],
           operationId: operation.operationId,
+          clientDecorators,
         };
       }
     }
@@ -214,7 +244,7 @@ export function transformRequest(
     doc,
     summary,
     parameters,
-    clientDecorators: getOperationClientDecorators(operation),
+    clientDecorators: clientDecorators.concat(getOperationClientDecorators(operation)),
     verb: transformVerb(requests?.[0].protocol),
     route: transformRoute(requests?.[0].protocol),
     responses: transformedResponses,

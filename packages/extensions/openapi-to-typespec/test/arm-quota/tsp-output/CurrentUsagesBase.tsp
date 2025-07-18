@@ -29,15 +29,11 @@ interface CurrentUsagesBases {
   /**
    * Get the current usage of a resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Usages_Get")
   get is Extension.Read<Extension.ScopeParameter, CurrentUsagesBase>;
 
   /**
    * Get a list of current usage for all resources for the scope specified.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Usages_List")
   list is Extension.ListByTarget<
     Extension.ScopeParameter,
     CurrentUsagesBase,

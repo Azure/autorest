@@ -30,22 +30,16 @@ interface OpenidConnectProviderContracts {
   /**
    * Gets specific OpenID Connect Provider without secrets.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OpenIdConnectProvider_Get")
   get is ArmResourceRead<OpenidConnectProviderContract>;
 
   /**
    * Gets the entity state (Etag) version of the openIdConnectProvider specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OpenIdConnectProvider_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<OpenidConnectProviderContract>;
 
   /**
    * Creates or updates the OpenID Connect Provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OpenIdConnectProvider_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     OpenidConnectProviderContract,
     Parameters = {
@@ -60,9 +54,7 @@ interface OpenidConnectProviderContracts {
   /**
    * Updates the specific OpenID Connect Provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
-  @operationId("OpenIdConnectProvider_Update")
   update is ArmCustomPatchSync<
     OpenidConnectProviderContract,
     PatchModel = OpenidConnectProviderUpdateContract,
@@ -78,8 +70,6 @@ interface OpenidConnectProviderContracts {
   /**
    * Deletes specific OpenID Connect Provider of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OpenIdConnectProvider_Delete")
   delete is ArmResourceDeleteSync<
     OpenidConnectProviderContract,
     Parameters = {
@@ -94,8 +84,6 @@ interface OpenidConnectProviderContracts {
   /**
    * Lists of all the OpenId Connect Providers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OpenIdConnectProvider_ListByService")
   listByService is ArmResourceListByParent<
     OpenidConnectProviderContract,
     Parameters = {
@@ -123,8 +111,6 @@ interface OpenidConnectProviderContracts {
   /**
    * Gets the client secret details of the OpenID Connect Provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OpenIdConnectProvider_ListSecrets")
   listSecrets is ArmResourceActionSync<
     OpenidConnectProviderContract,
     void,

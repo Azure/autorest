@@ -165,3 +165,35 @@ using Azure.Keyvault;
 @@clientName(SasDefinitionUpdateParameters.attributes,
   "sasDefinitionAttributes"
 );
+
+@@clientName(encrypt, "encrypt");
+@@clientName(decrypt, "decrypt");
+@@clientName(sign, "sign");
+@@clientName(verify, "verify");
+@@clientName(wrapKey, "wrapKey");
+@@clientName(unwrapKey, "unwrapKey");
+@@clientName(release, "release");
+
+@@clientLocation(RoleDefinitionsOperationGroup.delete, "RoleDefinitions");
+@@clientLocation(RoleDefinitionsOperationGroup.createOrUpdate,
+  "RoleDefinitions"
+);
+@@clientLocation(RoleDefinitionsOperationGroup.get, "RoleDefinitions");
+@@clientLocation(RoleDefinitionsOperationGroup.list, "RoleDefinitions");
+
+@@clientLocation(RoleAssignmentsOperationGroup.delete, "RoleAssignments");
+@@clientLocation(RoleAssignmentsOperationGroup.create, "RoleAssignments");
+@@clientLocation(RoleAssignmentsOperationGroup.get, "RoleAssignments");
+@@clientLocation(RoleAssignmentsOperationGroup.listForScope, "RoleAssignments");
+
+@@clientLocation(HSMSecurityDomainOperationGroup.downloadPending,
+  "HSMSecurityDomain"
+);
+@@clientLocation(HSMSecurityDomainOperationGroup.download, "HSMSecurityDomain");
+@@clientLocation(HSMSecurityDomainOperationGroup.transferKey,
+  "HSMSecurityDomain"
+);
+@@clientLocation(HSMSecurityDomainOperationGroup.upload, "HSMSecurityDomain");
+@@clientLocation(HSMSecurityDomainOperationGroup.uploadPending,
+  "HSMSecurityDomain"
+);

@@ -46,3 +46,9 @@ using Azure.AI.OpenAI;
 @@clientName(Paths13PiqocDeploymentsDeploymentIdEmbeddingsPostRequestbodyContentApplicationJsonSchema.input_type,
   "inputType"
 );
+
+@@clientLocation(completionsOperationGroup.create, "completions");
+@@clientName(completionsOperationGroup.create, "create");
+
+@@clientLocation(embeddingsOperationGroup.create, "embeddings");
+@@clientName(embeddingsOperationGroup.create, "create");

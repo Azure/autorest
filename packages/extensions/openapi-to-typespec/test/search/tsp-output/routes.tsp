@@ -1,11 +1,9 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
-import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Azure.Search;
 
@@ -13,7 +11,6 @@ interface DocumentsOperationGroup {
   /**
    * Queries the number of documents in the index.
    */
-  @operationId("Documents_Count")
   @route("/docs/$count")
   @get
   count is Azure.Core.Foundations.Operation<
@@ -31,7 +28,6 @@ interface DocumentsOperationGroup {
   /**
    * Searches for documents in the index.
    */
-  @operationId("Documents_SearchGet")
   @route("/docs")
   @get
   searchGet is Azure.Core.Foundations.Operation<
@@ -300,7 +296,6 @@ interface DocumentsOperationGroup {
   /**
    * Searches for documents in the index.
    */
-  @operationId("Documents_SearchPost")
   @route("/docs/search.post.search")
   @post
   searchPost is Azure.Core.Foundations.Operation<
@@ -324,7 +319,6 @@ interface DocumentsOperationGroup {
   /**
    * Retrieves a document from the index.
    */
-  @operationId("Documents_Get")
   @route("/docs('{key}')")
   @get
   get is Azure.Core.Foundations.Operation<
@@ -355,7 +349,6 @@ interface DocumentsOperationGroup {
   /**
    * Suggests documents in the index that match the given partial query text.
    */
-  @operationId("Documents_SuggestGet")
   @route("/docs/search.suggest")
   @get
   suggestGet is Azure.Core.Foundations.Operation<
@@ -459,7 +452,6 @@ interface DocumentsOperationGroup {
   /**
    * Suggests documents in the index that match the given partial query text.
    */
-  @operationId("Documents_SuggestPost")
   @route("/docs/search.post.suggest")
   @post
   suggestPost is Azure.Core.Foundations.Operation<
@@ -483,7 +475,6 @@ interface DocumentsOperationGroup {
   /**
    * Sends a batch of document write actions to the index.
    */
-  @operationId("Documents_Index")
   @route("/docs/search.index")
   @post
   index is Azure.Core.Foundations.Operation<
@@ -508,7 +499,6 @@ interface DocumentsOperationGroup {
    * Autocompletes incomplete query terms based on input text and matching terms in
    * the index.
    */
-  @operationId("Documents_AutocompleteGet")
   @route("/docs/search.autocomplete")
   @get
   autocompleteGet is Azure.Core.Foundations.Operation<
@@ -602,7 +592,6 @@ interface DocumentsOperationGroup {
    * Autocompletes incomplete query terms based on input text and matching terms in
    * the index.
    */
-  @operationId("Documents_AutocompletePost")
   @route("/docs/search.post.autocomplete")
   @post
   autocompletePost is Azure.Core.Foundations.Operation<
