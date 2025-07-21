@@ -265,7 +265,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Employee"
         },
         "x-ms-long-running-operation": true
       },

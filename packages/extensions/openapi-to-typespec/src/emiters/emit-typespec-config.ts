@@ -42,6 +42,7 @@ options:
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/${swaggerName}"
+    emit-lro-options: "all"
     examples-dir: "{project-root}/examples"${
       isFullCompatible
         ? `
