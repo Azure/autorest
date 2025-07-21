@@ -299,7 +299,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Catalog"
         },
         "x-ms-long-running-operation": true
       },
@@ -940,7 +941,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Image"
         },
         "x-ms-long-running-operation": true
       },
@@ -1547,7 +1549,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Product"
         },
         "x-ms-long-running-operation": true
       },
@@ -1627,7 +1630,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Product"
         },
         "x-ms-long-running-operation": true
       },
@@ -2000,7 +2004,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/DeviceGroup"
         },
         "x-ms-long-running-operation": true
       },
@@ -2088,7 +2093,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/DeviceGroup"
         },
         "x-ms-long-running-operation": true
       },
@@ -2583,7 +2589,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Deployment"
         },
         "x-ms-long-running-operation": true
       },
@@ -2905,7 +2912,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Device"
         },
         "x-ms-long-running-operation": true
       },
@@ -3001,7 +3009,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Device"
         },
         "x-ms-long-running-operation": true
       },
@@ -3186,7 +3195,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CSignedCapabilityImageResponse%3E"
         },
         "x-ms-long-running-operation": true
       }

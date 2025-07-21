@@ -814,7 +814,8 @@ function convertResourceActionOperations(
           ];
           const _202Response = responses.find((r) => r.name === asyncNames._202Name);
           if (_202Response && armOperation.lroHeaders === "Azure-AsyncOperation") {
-            _202Response.arguments!.push({
+            _202Response.arguments = _202Response.arguments ?? [];
+            _202Response.arguments.push({
               kind: "object",
               name: "ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader",
             });

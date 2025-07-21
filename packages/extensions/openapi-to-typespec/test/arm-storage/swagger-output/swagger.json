@@ -765,7 +765,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -1814,7 +1815,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -2254,7 +2256,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -2991,7 +2994,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -5091,7 +5095,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CBlobRestoreStatus%3E"
         },
         "x-ms-long-running-operation": true
       }
