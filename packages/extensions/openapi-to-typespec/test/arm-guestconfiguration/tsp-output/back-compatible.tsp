@@ -68,5 +68,5 @@ using Microsoft.GuestConfiguration;
 );
 
 @@clientLocation(GuestConfigurationAssignmentsOperationGroup.rGList,
-  "GuestConfigurationAssignments"
+  GuestConfigurationAssignments
 );

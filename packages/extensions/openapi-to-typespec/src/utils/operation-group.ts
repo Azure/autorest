@@ -33,7 +33,7 @@ function isExistingOperationGroupName(operationGroupName: string): boolean {
   const codeModel = getSession().model;
   return (
     codeModel.schemas.objects?.find((o) => o.language.default.name === operationGroupName) !== undefined ||
-    Array.from(operationGroupNameCache.values()).find((v) => v === operationGroupName) !== undefined
+    isInterfaceName(operationGroupName)
   );
 }
 
@@ -42,12 +42,23 @@ export function getSwaggerOperationName(operationId: string): string {
   return splittedOperationId.length === 2 ? splittedOperationId[1] : operationId;
 }
 
+const nonResourceOperationGroupNameCache: Set<string> = new Set<string>();
 export function getTSPNonResourceOperationGroupName(name: string): string {
   const operationGroupName = `${name}OperationGroup`;
   if (!isExistingOperationGroupName(operationGroupName)) {
+    nonResourceOperationGroupNameCache.add(operationGroupName);
     return operationGroupName;
   }
 
   // Arm resource operation group name cannot be ended with "Operations"
-  return getOptions().isArm ? `${name}NonResourceOperationGroup` : `${name}Operations`;
+  const groupName = getOptions().isArm ? `${name}NonResourceOperationGroup` : `${name}Operations`;
+  nonResourceOperationGroupNameCache.add(groupName);
+  return groupName;
+}
+
+export function isInterfaceName(name: string): boolean {
+  return (
+    Array.from(operationGroupNameCache.values()).find((v) => v === name) !== undefined ||
+    nonResourceOperationGroupNameCache.has(name)
+  );
 }
