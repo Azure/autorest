@@ -72,7 +72,8 @@ interface StorageAccounts {
   create is ArmResourceCreateOrReplaceAsync<
     StorageAccount,
     Response = ArmResourceUpdatedResponse<StorageAccount> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = StorageAccount> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

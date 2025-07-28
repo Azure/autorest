@@ -46,7 +46,8 @@ interface VirtualMachineScaleSetExtensions {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualMachineScaleSetExtension,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineScaleSetExtension> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

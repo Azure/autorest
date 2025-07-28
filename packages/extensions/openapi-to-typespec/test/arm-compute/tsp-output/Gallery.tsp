@@ -53,7 +53,8 @@ interface Galleries {
     Gallery,
     Response = ArmResourceUpdatedResponse<Gallery> | ArmResourceCreatedResponse<
       Gallery,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = Gallery> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | (ArmAcceptedLroResponse & {
       @bodyRoot
       _: Gallery;

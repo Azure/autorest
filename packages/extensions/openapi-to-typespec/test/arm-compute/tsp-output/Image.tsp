@@ -49,7 +49,8 @@ interface Images {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Image,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = Image> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

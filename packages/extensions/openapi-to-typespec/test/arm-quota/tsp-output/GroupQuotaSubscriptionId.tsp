@@ -41,7 +41,8 @@ interface GroupQuotaSubscriptionIds {
     GroupQuotaSubscriptionId,
     Response = ArmResourceUpdatedResponse<GroupQuotaSubscriptionId> | ArmResourceCreatedResponse<
       LROResponse,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = GroupQuotaSubscriptionId> &
+        Azure.Core.Foundations.RetryAfterHeader
     >
   >;
 

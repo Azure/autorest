@@ -305,7 +305,11 @@ export interface TspArmResourceListOperation extends TspArmResourceOperationBase
   kind: "ArmResourceListByParent" | "ArmListBySubscription" | "ArmResourceListAtScope";
 }
 
-export type TspLroHeaders = "Azure-AsyncOperation" | "Location";
+export interface TspLroHeaders {
+  type: "Azure-AsyncOperation" | "Location";
+  finalResult?: string;
+}
+
 export type TspArmOperationType =
   | "ArmResourceRead"
   | "ArmResourceCheckExistence"

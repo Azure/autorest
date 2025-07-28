@@ -39,7 +39,8 @@ interface Servers {
     AnalysisServicesServer,
     Response = ArmResourceUpdatedResponse<AnalysisServicesServer> | ArmResourceCreatedResponse<
       AnalysisServicesServer,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = AnalysisServicesServer> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | (ArmAcceptedLroResponse & {
       @bodyRoot
       _: AnalysisServicesServer;

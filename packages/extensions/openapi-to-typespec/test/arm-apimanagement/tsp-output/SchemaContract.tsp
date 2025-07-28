@@ -52,7 +52,8 @@ interface SchemaContracts {
     },
     Response = ArmResourceUpdatedResponse<SchemaContract> | ArmResourceCreatedResponse<
       SchemaContract,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = SchemaContract> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | ArmAcceptedLroResponse
   >;
 

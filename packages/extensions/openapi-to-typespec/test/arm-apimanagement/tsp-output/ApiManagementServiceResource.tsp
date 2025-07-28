@@ -56,7 +56,8 @@ interface ApiManagementServiceResources {
     ApiManagementServiceResource,
     Response = ArmResourceUpdatedResponse<ApiManagementServiceResource> | ArmResourceCreatedResponse<
       ApiManagementServiceResource,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = ApiManagementServiceResource> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | ArmAcceptedLroResponse
   >;
 

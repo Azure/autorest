@@ -52,7 +52,8 @@ interface NamedValueContracts {
     },
     Response = ArmResourceUpdatedResponse<NamedValueContract> | ArmResourceCreatedResponse<
       NamedValueContract,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = NamedValueContract> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | ArmAcceptedLroResponse
   >;
 

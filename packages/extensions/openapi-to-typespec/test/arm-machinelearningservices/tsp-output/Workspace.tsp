@@ -41,7 +41,8 @@ interface Workspaces {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Workspace,
     Response = ArmResourceUpdatedResponse<Workspace> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = Workspace> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

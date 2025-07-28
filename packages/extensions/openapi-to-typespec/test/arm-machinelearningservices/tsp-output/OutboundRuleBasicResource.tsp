@@ -39,7 +39,8 @@ interface OutboundRuleBasicResources {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     OutboundRuleBasicResource,
     Response = ArmResourceUpdatedResponse<OutboundRuleBasicResource> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = OutboundRuleBasicResource> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

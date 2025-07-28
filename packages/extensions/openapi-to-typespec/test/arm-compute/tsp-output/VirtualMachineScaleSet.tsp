@@ -70,7 +70,8 @@ interface VirtualMachineScaleSets {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualMachineScaleSet,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineScaleSet> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

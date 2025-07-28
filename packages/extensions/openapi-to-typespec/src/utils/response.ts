@@ -1,9 +1,9 @@
-import { ArraySchema, ObjectSchema, SchemaResponse } from "@autorest/codemodel";
+import { ArraySchema, ObjectSchema, Operation, SchemaResponse } from "@autorest/codemodel";
 import { getSession } from "../autorest-session";
 import { getDataTypes } from "../data-types";
 import { TypespecModel, TypespecObjectProperty } from "../interfaces";
 import { getOptions } from "../options";
-import { isArraySchema } from "./schemas";
+import { isArraySchema, isResponseSchema } from "./schemas";
 import { isResourceListResult } from "./type-mapping";
 
 export function transformSchemaResponse(response: SchemaResponse): TypespecModel {
@@ -49,4 +49,10 @@ export function transformSchemaResponse(response: SchemaResponse): TypespecModel
   } else responseTypeName = response.schema.language.default.name;
 
   return { kind: "object", name: responseTypeName, additionalProperties };
+}
+
+export function get200ResponseName(operation: Operation): string | undefined {
+  const _200Response = operation.responses?.find((r) => r.protocol.http?.statusCodes[0] === "200");
+  if (!_200Response || !isResponseSchema(_200Response)) return undefined;
+  return _200Response.schema.language.default.name;
 }
