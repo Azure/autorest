@@ -11,5 +11,5 @@ using Azure.ResourceManager.Analysis;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(AnalysisServicesServer.properties);
 
-@@clientLocation(ServersOperationGroup.listSkusForNew, "Servers");
-@@clientLocation(ServersOperationGroup.checkNameAvailability, "Servers");
+@@clientLocation(ServersOperationGroup.listSkusForNew, Servers);
+@@clientLocation(ServersOperationGroup.checkNameAvailability, Servers);

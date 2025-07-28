@@ -16,5 +16,5 @@ using Azure.ResourceManager.AlertsManagement;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(SmartGroup.properties);
 
-@@clientLocation(AlertsOperationGroup.metaData, "Alerts");
-@@clientLocation(AlertsOperationGroup.getSummary, "Alerts");
+@@clientLocation(AlertsOperationGroup.metaData, Alerts);
+@@clientLocation(AlertsOperationGroup.getSummary, Alerts);

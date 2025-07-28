@@ -392,19 +392,19 @@ using Microsoft.Compute;
 @@flattenProperty(DiskAccess.properties);
 
 @@clientLocation(PrivateEndpointConnections.getAPrivateEndpointConnection,
-  "DiskAccesses"
+  DiskAccesses
 );
 @@clientLocation(PrivateEndpointConnections.updateAPrivateEndpointConnection,
-  "DiskAccesses"
+  DiskAccesses
 );
 @@clientName(PrivateEndpointConnections.updateAPrivateEndpointConnection::parameters.resource,
   "privateEndpointConnection"
 );
 @@clientLocation(PrivateEndpointConnections.deleteAPrivateEndpointConnection,
-  "DiskAccesses"
+  DiskAccesses
 );
 @@clientLocation(PrivateEndpointConnections.listPrivateEndpointConnections,
-  "DiskAccesses"
+  DiskAccesses
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PrivateEndpointConnection.properties);
@@ -522,12 +522,10 @@ using Microsoft.Compute;
 @@clientLocation(VirtualMachineSizesOperationGroup.list, "VirtualMachineSizes");
 
 @@clientLocation(VirtualMachineScaleSetsOperationGroup.listByLocation,
-  "VirtualMachineScaleSets"
+  VirtualMachineScaleSets
 );
 
-@@clientLocation(VirtualMachinesOperationGroup.listByLocation,
-  "VirtualMachines"
-);
+@@clientLocation(VirtualMachinesOperationGroup.listByLocation, VirtualMachines);
 
 @@clientLocation(VirtualMachineImagesOperationGroup.get,
   "VirtualMachineImages"
@@ -572,10 +570,10 @@ using Microsoft.Compute;
 );
 
 @@clientLocation(VirtualMachineRunCommandsOperationGroup.list,
-  "VirtualMachineRunCommands"
+  VirtualMachineRunCommands
 );
 @@clientLocation(VirtualMachineRunCommandsOperationGroup.get,
-  "VirtualMachineRunCommands"
+  VirtualMachineRunCommands
 );
 
 @@clientLocation(ResourceSkusOperationGroup.list, "ResourceSkus");

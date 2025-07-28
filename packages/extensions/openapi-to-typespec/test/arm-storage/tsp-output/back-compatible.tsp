@@ -193,20 +193,16 @@ using Microsoft.Storage;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(BlobContainer.properties);
 
-@@clientLocation(ImmutabilityPolicies.getImmutabilityPolicy, "BlobContainers");
+@@clientLocation(ImmutabilityPolicies.getImmutabilityPolicy, BlobContainers);
 @@clientLocation(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy,
-  "BlobContainers"
+  BlobContainers
 );
 @@clientName(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
   "parameters"
 );
-@@clientLocation(ImmutabilityPolicies.deleteImmutabilityPolicy,
-  "BlobContainers"
-);
-@@clientLocation(ImmutabilityPolicies.lockImmutabilityPolicy, "BlobContainers");
-@@clientLocation(ImmutabilityPolicies.extendImmutabilityPolicy,
-  "BlobContainers"
-);
+@@clientLocation(ImmutabilityPolicies.deleteImmutabilityPolicy, BlobContainers);
+@@clientLocation(ImmutabilityPolicies.lockImmutabilityPolicy, BlobContainers);
+@@clientLocation(ImmutabilityPolicies.extendImmutabilityPolicy, BlobContainers);
 @@clientName(ImmutabilityPolicies.extendImmutabilityPolicy::parameters.body,
   "parameters"
 );
@@ -261,9 +257,9 @@ using Microsoft.Storage;
 @@clientLocation(SkusOperationGroup.list, "Skus");
 
 @@clientLocation(StorageAccountsOperationGroup.checkNameAvailability,
-  "StorageAccounts"
+  StorageAccounts
 );
 
-@@clientLocation(DeletedAccountsOperationGroup.list, "DeletedAccounts");
+@@clientLocation(DeletedAccountsOperationGroup.list, DeletedAccounts);
 
 @@clientLocation(UsagesOperationGroup.listByLocation, "Usages");

@@ -10,6 +10,7 @@ import { isListOperation, transformOperationGroup } from "./transforms/transform
 import { transformServiceInformation } from "./transforms/transform-service-information";
 import { ArmResourceSchema, filterArmEnums, filterArmModels, isResourceSchema } from "./utils/resource-discovery";
 import { isChoiceSchema } from "./utils/schemas";
+import { isInterfaceName } from "./utils/operation-group";
 
 const models: Map<CodeModel, TypespecProgram> = new Map();
 
@@ -65,6 +66,23 @@ function transformModel(codeModel: CodeModel): TypespecProgram {
     const typespecOperationGroup = transformOperationGroup(og, codeModel);
     if (typespecOperationGroup.operations.length > 0) {
       typespecOperationGroups.push(typespecOperationGroup);
+    }
+  }
+
+  // post processing for clientLocation decorators
+  for (const armResource of armResources) {
+    for (const resourceOperation of armResource.resourceOperationGroups.flatMap((g) => g.resourceOperations)) {
+      const clientLocation = resourceOperation.clientDecorators?.find((d) => d.name === "clientLocation");
+      if (clientLocation && clientLocation.arguments![0] && isInterfaceName(clientLocation.arguments![0] as string)) {
+        clientLocation.arguments = [{ value: clientLocation.arguments![0] as string, options: { unwrap: true } }];
+      }
+    }
+  }
+
+  for (const resourceOperation of typespecOperationGroups.flatMap((g) => g.operations)) {
+    const clientLocation = resourceOperation.clientDecorators?.find((d) => d.name === "clientLocation");
+    if (clientLocation && clientLocation.arguments![0] && isInterfaceName(clientLocation.arguments![0] as string)) {
+      clientLocation.arguments = [{ value: clientLocation.arguments![0] as string, options: { unwrap: true } }];
     }
   }
 

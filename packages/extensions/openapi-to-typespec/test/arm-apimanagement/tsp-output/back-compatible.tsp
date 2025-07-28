@@ -238,28 +238,28 @@ using Azure.ResourceManager.ApiManagement;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PolicyContract.properties);
 
-@@clientLocation(TagContracts.getByOperation, "Tag");
-@@clientLocation(TagContracts.getEntityStateByOperation, "Tag");
-@@clientLocation(TagContracts.assignToOperation, "Tag");
-@@clientLocation(TagContracts.detachFromOperation, "Tag");
-@@clientLocation(TagContracts.listByOperation, "Tag");
-@@clientLocation(TagContractOperationGroup.getByProduct, "Tag");
-@@clientLocation(TagContractOperationGroup.getEntityStateByProduct, "Tag");
-@@clientLocation(TagContractOperationGroup.assignToProduct, "Tag");
-@@clientLocation(TagContractOperationGroup.detachFromProduct, "Tag");
-@@clientLocation(TagContractOperationGroup.listByProduct, "Tag");
-@@clientLocation(TagContractOperationGroup.get, "Tag");
-@@clientLocation(TagContractOperationGroup.getEntityState, "Tag");
-@@clientLocation(TagContractOperationGroup.createOrUpdate, "Tag");
+@@clientLocation(TagContracts.getByOperation, Tag);
+@@clientLocation(TagContracts.getEntityStateByOperation, Tag);
+@@clientLocation(TagContracts.assignToOperation, Tag);
+@@clientLocation(TagContracts.detachFromOperation, Tag);
+@@clientLocation(TagContracts.listByOperation, Tag);
+@@clientLocation(TagContractOperationGroup.getByProduct, Tag);
+@@clientLocation(TagContractOperationGroup.getEntityStateByProduct, Tag);
+@@clientLocation(TagContractOperationGroup.assignToProduct, Tag);
+@@clientLocation(TagContractOperationGroup.detachFromProduct, Tag);
+@@clientLocation(TagContractOperationGroup.listByProduct, Tag);
+@@clientLocation(TagContractOperationGroup.get, Tag);
+@@clientLocation(TagContractOperationGroup.getEntityState, Tag);
+@@clientLocation(TagContractOperationGroup.createOrUpdate, Tag);
 @@clientName(TagContractOperationGroup.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(TagContractOperationGroup.update, "Tag");
+@@clientLocation(TagContractOperationGroup.update, Tag);
 @@clientName(TagContractOperationGroup.update::parameters.properties,
   "parameters"
 );
-@@clientLocation(TagContractOperationGroup.delete, "Tag");
-@@clientLocation(TagContractOperationGroup.listByService, "Tag");
+@@clientLocation(TagContractOperationGroup.delete, Tag);
+@@clientLocation(TagContractOperationGroup.listByService, Tag);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(TagContract.properties);
 
