@@ -1,8 +1,7 @@
 import { Operation, Parameter, Property, SchemaType } from "@autorest/codemodel";
 import { capitalize } from "@azure-tools/codegen";
-import { Case } from "change-case-all";
 import _ from "lodash";
-import pluralize, { singular } from "pluralize";
+import { singular } from "pluralize";
 import { getSession } from "../autorest-session";
 import { getDataTypes } from "../data-types";
 import {
@@ -46,6 +45,7 @@ import {
   isExtensionScopeType,
   isResourceSchema,
 } from "../utils/resource-discovery";
+import { get200ResponseName } from "../utils/response";
 import { isStringSchema } from "../utils/schemas";
 import { escapeRegex } from "../utils/strings";
 import {
@@ -391,7 +391,13 @@ function convertResourceCreateOrReplaceOperation(
 
     const finalStateVia =
       swaggerOperation.extensions?.["x-ms-long-running-operation-options"]?.["final-state-via"] ?? "location";
-    armOperation.lroHeaders = isLongRunning && finalStateVia === "location" ? "Location" : undefined;
+    const finalResult = get200ResponseName(swaggerOperation);
+    if (isLongRunning && finalStateVia === "location") {
+      armOperation.lroHeaders = {
+        type: "Location",
+        finalResult: finalResult,
+      };
+    }
 
     buildBodyDecorator(bodyParam, armOperation, resourceMetadata, "resource", "Resource create parameters.");
 
@@ -448,7 +454,7 @@ function convertResourceCreateOrReplaceOperation(
       if (_201Response) {
         _201Response.arguments!.push({
           kind: "object",
-          name: "ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader",
+          name: `ArmLroLocationHeader${finalResult ? `<FinalResult = ${finalResult}>` : ""} & Azure.Core.Foundations.RetryAfterHeader`,
         }); //TO-DO: do it in a better way
         armOperation.lroHeaders = undefined;
       }
@@ -483,8 +489,13 @@ function convertResourceUpdateOperation(
 
       const finalStateVia =
         swaggerOperation.extensions?.["x-ms-long-running-operation-options"]?.["final-state-via"] ?? "location";
-      armOperation.lroHeaders =
-        isLongRunning && finalStateVia === "azure-async-operation" ? "Azure-AsyncOperation" : undefined;
+      const finalResult = get200ResponseName(swaggerOperation);
+      if (isLongRunning && finalStateVia === "azure-async-operation") {
+        armOperation.lroHeaders = {
+          type: "Azure-AsyncOperation",
+          finalResult: finalResult,
+        };
+      }
 
       const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
       if (!bodyParam) {
@@ -553,7 +564,10 @@ function convertResourceUpdateOperation(
         );
         if (_202response) {
           _202response.arguments = [
-            { kind: "object", name: "ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader" },
+            {
+              kind: "object",
+              name: `ArmAsyncOperationHeader${finalResult ? `<FinalResult = ${finalResult}>` : ""} & Azure.Core.Foundations.RetryAfterHeader`,
+            },
           ]; //TO-DO: do it in a better way
           armOperation.lroHeaders = undefined;
         }
@@ -590,8 +604,13 @@ function convertResourceDeleteOperation(
 
     const finalStateVia =
       swaggerOperation.extensions?.["x-ms-long-running-operation-options"]?.["final-state-via"] ?? "location";
-    armOperation.lroHeaders =
-      isLongRunning && finalStateVia === "azure-async-operation" ? "Azure-AsyncOperation" : undefined;
+    const finalResult = get200ResponseName(swaggerOperation);
+    if (isLongRunning && finalStateVia === "azure-async-operation") {
+      armOperation.lroHeaders = {
+        type: "Azure-AsyncOperation",
+        finalResult: finalResult,
+      };
+    }
 
     if (armOperation.lroHeaders && isFullCompatible) {
       armOperation.suppressions = armOperation.suppressions ?? [];
@@ -648,7 +667,10 @@ function convertResourceDeleteOperation(
       );
       if (_202response) {
         _202response.arguments = [
-          { kind: "object", name: "ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader" },
+          {
+            kind: "object",
+            name: `ArmAsyncOperationHeader${finalResult ? `<FinalResult = ${finalResult}>` : ""} & Azure.Core.Foundations.RetryAfterHeader`,
+          },
         ]; //TO-DO: do it in a better way
         armOperation.lroHeaders = undefined;
       }
@@ -758,8 +780,13 @@ function convertResourceActionOperations(
 
       const finalStateVia =
         swaggerOperation.extensions?.["x-ms-long-running-operation-options"]?.["final-state-via"] ?? "location";
-      armOperation.lroHeaders =
-        isLongRunning && finalStateVia === "azure-async-operation" ? "Azure-AsyncOperation" : undefined;
+      const finalResult = get200ResponseName(swaggerOperation);
+      if (isLongRunning && finalStateVia === "azure-async-operation") {
+        armOperation.lroHeaders = {
+          type: "Azure-AsyncOperation",
+          finalResult: finalResult,
+        };
+      }
 
       buildRequestForAction(
         armOperation,
@@ -813,11 +840,11 @@ function convertResourceActionOperations(
             `${getFullyQualifiedName("DefaultBaseParameters")}<${armOperation.resource}>`,
           ];
           const _202Response = responses.find((r) => r.name === asyncNames._202Name);
-          if (_202Response && armOperation.lroHeaders === "Azure-AsyncOperation") {
+          if (_202Response && armOperation.lroHeaders?.type === "Azure-AsyncOperation") {
             _202Response.arguments = _202Response.arguments ?? [];
             _202Response.arguments.push({
               kind: "object",
-              name: "ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader",
+              name: `ArmAsyncOperationHeader${finalResult ? `<FinalResult = ${finalResult}>` : ""} & Azure.Core.Foundations.RetryAfterHeader`,
             });
           }
         }

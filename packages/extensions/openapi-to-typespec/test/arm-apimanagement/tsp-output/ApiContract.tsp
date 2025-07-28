@@ -52,7 +52,8 @@ interface ApiContracts {
     },
     Response = ArmResourceUpdatedResponse<ApiContract> | ArmResourceCreatedResponse<
       ApiContract,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = ApiContract> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | ArmAcceptedLroResponse
   >;
 

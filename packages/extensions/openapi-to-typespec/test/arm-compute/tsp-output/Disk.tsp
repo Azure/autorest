@@ -68,7 +68,8 @@ interface Disks {
       @bodyRoot
       _: Disk;
     }),
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = Disk> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

@@ -92,7 +92,8 @@ interface VirtualMachineScaleSetVMS {
       @bodyRoot
       _: VirtualMachineScaleSetVM;
     }),
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineScaleSetVM> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

@@ -41,7 +41,8 @@ interface GalleryImages {
     GalleryImage,
     Response = ArmResourceUpdatedResponse<GalleryImage> | ArmResourceCreatedResponse<
       GalleryImage,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = GalleryImage> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | (ArmAcceptedLroResponse & {
       @bodyRoot
       _: GalleryImage;

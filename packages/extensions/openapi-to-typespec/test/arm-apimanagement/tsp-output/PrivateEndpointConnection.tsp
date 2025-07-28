@@ -39,7 +39,8 @@ interface PrivateEndpointConnections {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
     Response = ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

@@ -59,7 +59,8 @@ interface Snapshots {
       @bodyRoot
       _: Snapshot;
     }),
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = Snapshot> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

@@ -22,6 +22,7 @@ import {
   TspArmProviderActionOperation,
   TypespecDecorator,
   TypespecTemplateModel,
+  TspLroHeaders,
 } from "../interfaces";
 import { transformDataType } from "../model";
 import { getOptions } from "../options";
@@ -103,7 +104,7 @@ function transformOperation(
       return [];
     }
   }
-  return (operation.requests ?? []).map((r) => transformRequest(r, operation, codeModel, groupName));
+  return [transformRequest(operation, codeModel, groupName)];
 }
 
 export function isListOperation(operation: Operation): boolean {
@@ -111,7 +112,6 @@ export function isListOperation(operation: Operation): boolean {
 }
 
 export function transformRequest(
-  _request: Request,
   operation: Operation,
   codeModel: CodeModel,
   groupName: string | undefined = undefined,
@@ -201,8 +201,10 @@ export function transformRequest(
         const response = transformedResponses.find((r) => r[0] === "200")?.[1] ?? undefined;
         const finalStateVia =
           operation.extensions?.["x-ms-long-running-operation-options"]?.["final-state-via"] ?? "location";
-        const lroHeaders =
-          isLongRunning && finalStateVia === "azure-async-operation" ? "Azure-AsyncOperation" : undefined;
+        const lroHeaders: TspLroHeaders | undefined =
+          isLongRunning && finalStateVia === "azure-async-operation"
+            ? { type: "Azure-AsyncOperation", finalResult: response }
+            : undefined;
         const suppressions =
           isFullCompatible && lroHeaders ? [getSuppressionWithCode(SuppressionCode.LroLocationHeader)] : undefined;
         return {

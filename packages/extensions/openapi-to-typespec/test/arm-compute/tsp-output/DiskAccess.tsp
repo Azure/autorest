@@ -47,7 +47,8 @@ interface DiskAccesses {
       @bodyRoot
       _: DiskAccess;
     }),
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = DiskAccess> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

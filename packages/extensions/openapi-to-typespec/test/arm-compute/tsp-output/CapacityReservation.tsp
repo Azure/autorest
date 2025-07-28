@@ -54,7 +54,8 @@ interface CapacityReservations {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CapacityReservation,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = CapacityReservation> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

@@ -452,7 +452,7 @@ interface LogAnalyticsOperationGroup {
     Response = LogAnalyticsOperationResult,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = LogAnalyticsOperationResult> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
   /**
@@ -466,7 +466,7 @@ interface LogAnalyticsOperationGroup {
     Response = LogAnalyticsOperationResult,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = LogAnalyticsOperationResult> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 }

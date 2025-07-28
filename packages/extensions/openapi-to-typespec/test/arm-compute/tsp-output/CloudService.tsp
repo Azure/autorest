@@ -36,7 +36,8 @@ interface CloudServices {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CloudService,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = CloudService> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

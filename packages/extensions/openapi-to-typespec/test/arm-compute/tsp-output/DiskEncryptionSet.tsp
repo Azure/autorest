@@ -47,7 +47,8 @@ interface DiskEncryptionSets {
       @bodyRoot
       _: DiskEncryptionSet;
     }),
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = DiskEncryptionSet> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

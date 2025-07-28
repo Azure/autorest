@@ -38,10 +38,10 @@ export function hasLROExtension(operation: Operation) {
 }
 
 export function generateLroHeaders(lroHeaders: TspLroHeaders): string {
-  if (lroHeaders === "Azure-AsyncOperation") {
-    return "ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader";
-  } else if (lroHeaders === "Location") {
-    return "ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader";
+  if (lroHeaders.type === "Azure-AsyncOperation") {
+    return `ArmAsyncOperationHeader${lroHeaders.finalResult ? `<FinalResult = ${lroHeaders.finalResult}>` : ""} & Azure.Core.Foundations.RetryAfterHeader`;
+  } else if (lroHeaders.type === "Location") {
+    return `ArmLroLocationHeader${lroHeaders.finalResult ? `<FinalResult = ${lroHeaders.finalResult}>` : ""} & Azure.Core.Foundations.RetryAfterHeader`;
   }
   throw new Error(`Unknown LRO header: ${lroHeaders}`);
 }

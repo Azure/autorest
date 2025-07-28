@@ -71,7 +71,8 @@ interface VirtualMachines {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualMachine,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachine> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

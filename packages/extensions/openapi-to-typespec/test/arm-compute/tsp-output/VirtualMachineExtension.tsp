@@ -46,7 +46,8 @@ interface VirtualMachineExtensions {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualMachineExtension,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineExtension> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

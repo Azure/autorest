@@ -39,7 +39,8 @@ interface ComputeResources {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ComputeResource,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = ComputeResource> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

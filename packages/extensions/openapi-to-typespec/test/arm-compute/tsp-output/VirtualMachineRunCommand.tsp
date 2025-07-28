@@ -82,7 +82,8 @@ interface VirtualMachineRunCommands {
         @header
         contentType: "application/json" | "text/json";
       },
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = VirtualMachineRunCommand> &
+        Azure.Core.Foundations.RetryAfterHeader
     >
   >;
 
@@ -185,7 +186,8 @@ interface VirtualMachineScaleSetVMRunCommands {
         @header
         contentType: "application/json" | "text/json";
       },
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = VirtualMachineRunCommand> &
+        Azure.Core.Foundations.RetryAfterHeader
     >
   >;
 
