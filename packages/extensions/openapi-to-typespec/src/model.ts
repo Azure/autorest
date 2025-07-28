@@ -8,9 +8,9 @@ import { transformEnum } from "./transforms/transform-choices";
 import { getTypespecType, transformObject } from "./transforms/transform-object";
 import { isListOperation, transformOperationGroup } from "./transforms/transform-operations";
 import { transformServiceInformation } from "./transforms/transform-service-information";
+import { isInterfaceName } from "./utils/operation-group";
 import { ArmResourceSchema, filterArmEnums, filterArmModels, isResourceSchema } from "./utils/resource-discovery";
 import { isChoiceSchema } from "./utils/schemas";
-import { isInterfaceName } from "./utils/operation-group";
 
 const models: Map<CodeModel, TypespecProgram> = new Map();
 
