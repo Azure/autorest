@@ -2,6 +2,24 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.11.5",
+      "tag": "@autorest/openapi-to-typespec_v0.11.5",
+      "date": "Mon, 28 Jul 2025 10:00:14 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add emit-lro-options"
+          },
+          {
+            "comment": "Fix clientLocation issue"
+          },
+          {
+            "comment": "Add finalResult"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.11.4",
       "tag": "@autorest/openapi-to-typespec_v0.11.4",
       "date": "Fri, 18 Jul 2025 06:00:25 GMT",
