@@ -79,36 +79,26 @@ enum Versions {
   /**
    * The 2023-07-01 API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2023_07_01: "2023-07-01",
 
   /**
    * The 2023-04-02 API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2023_04_02: "2023-04-02",
 
   /**
    * The 2021-07-01 API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2021_07_01: "2021-07-01",
 
   /**
    * The 2022-03-03 API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2022_03_03: "2022-03-03",
 
   /**
    * The 2022-09-04 API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2022_09_04: "2022-09-04",
 }
 

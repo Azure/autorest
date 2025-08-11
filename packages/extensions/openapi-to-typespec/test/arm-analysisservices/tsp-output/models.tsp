@@ -429,12 +429,11 @@ model AnalysisServicesServerUpdateParameters {
 /**
  * An array of Analysis Services resources.
  */
-@pagedResult
 model AnalysisServicesServers {
   /**
    * An array of Analysis Services resources.
    */
-  @items
+  @pageItems
   value: AnalysisServicesServer[];
 }
 
@@ -456,6 +455,7 @@ model SkuEnumerationForExistingResourceResult {
   /**
    * The collection of available SKUs for existing resources.
    */
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["sku/name"])
   value?: SkuDetailsForExistingResource[];
 }

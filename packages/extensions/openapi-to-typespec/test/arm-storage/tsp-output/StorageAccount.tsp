@@ -103,6 +103,7 @@ interface StorageAccounts {
   /**
    * Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account.
    */
+  @list
   listKeys is ArmResourceActionSync<
     StorageAccount,
     void,
@@ -119,6 +120,7 @@ interface StorageAccounts {
   /**
    * Regenerates one of the access keys or Kerberos keys for the specified storage account.
    */
+  @list
   regenerateKey is ArmResourceActionSync<
     StorageAccount,
     StorageAccountRegenerateKeyParameters,
@@ -209,6 +211,7 @@ interface StorageAccounts {
   /**
    * Gets the private link resources that need to be created for a storage account.
    */
+  @list
   @get
   @action("privateLinkResources")
   listByStorageAccount is ArmResourceActionSync<

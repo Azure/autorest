@@ -561,24 +561,22 @@ model ErrorResponseError {
 /**
  * The response of the list guest configuration assignment operation.
  */
-@pagedResult
 model GuestConfigurationAssignmentList {
   /**
    * Result of the list guest configuration assignment operation.
    */
-  @items
+  @pageItems
   value?: GuestConfigurationAssignment[];
 }
 
 /**
  * List of guest configuration assignment reports.
  */
-@pagedResult
 model GuestConfigurationAssignmentReportList {
   /**
    * List of reports for the guest configuration. Report contains information such as compliance status, reason and more.
    */
-  @items
+  @pageItems
   value?: GuestConfigurationAssignmentReport[];
 }
 

@@ -5,7 +5,6 @@ import {
   Parameter,
   ParameterLocation,
   Protocols,
-  Request,
   Response,
   Schema,
 } from "@autorest/codemodel";
@@ -18,7 +17,6 @@ import {
   TypespecOperationGroup,
   TypespecParameter,
   TypespecParameterLocation,
-  Extension,
   TspArmProviderActionOperation,
   TypespecDecorator,
   TypespecTemplateModel,
@@ -28,7 +26,6 @@ import { transformDataType } from "../model";
 import { getOptions } from "../options";
 import { getOperationClientDecorators, getPropertyDecorators } from "../utils/decorators";
 import { getLogger } from "../utils/logger";
-import { getLanguageMetadata } from "../utils/metadata";
 import { generateAdditionalProperties, generateTemplateModel } from "../utils/model-generation";
 import {
   getSwaggerOperationGroupName,
@@ -121,7 +118,6 @@ export function transformRequest(
   const name = _.lowerFirst(language.default.name);
   const doc = language.default.description;
   const summary = language.default.summary;
-  const { paging } = getLanguageMetadata(operation.language);
   const transformedResponses = transformResponses(responses ?? []);
   const visitedParameter: Set<Parameter> = new Set();
   let parameters = (operation.parameters ?? [])
@@ -134,12 +130,6 @@ export function transformRequest(
       .filter((p) => filterOperationParameters(p, visitedParameter))
       .map((v) => transformParameter(v, codeModel)),
   ];
-
-  const extensions: Extension[] = [];
-
-  if (paging) {
-    extensions.push("Pageable");
-  }
 
   const resource = operation.language.default.resource;
   const decorators: TypespecDecorator[] = [];

@@ -947,13 +947,12 @@ model Dimension {
 /**
  * The response from the List Storage SKUs operation.
  */
-@pagedResult
 model StorageSkuListResult {
   /**
    * Get the list result of storage SKUs and their properties.
    */
   @visibility(Lifecycle.Read)
-  @items
+  @pageItems
   value?: SkuInformation[];
 }
 
@@ -2420,13 +2419,12 @@ model ErrorResponseBody {
 /**
  * The response from the ListKeys operation.
  */
-@pagedResult
 model StorageAccountListKeysResult {
   /**
    * Gets the list of storage account keys and their properties for the specified storage account.
    */
   @visibility(Lifecycle.Read)
-  @items
+  @pageItems
   keys?: StorageAccountKey[];
 }
 
@@ -2473,12 +2471,11 @@ model StorageAccountRegenerateKeyParameters {
 /**
  * The response from the List Usages operation.
  */
-@pagedResult
 model UsageListResult {
   /**
    * Gets or sets the list of Storage Resource Usages.
    */
-  @items
+  @pageItems
   value?: Usage[];
 }
 
@@ -3134,25 +3131,23 @@ model CloudErrorBody {
 /**
  * List of blob inventory policies returned.
  */
-@pagedResult
 model ListBlobInventoryPolicy {
   /**
    * List of blob inventory policies.
    */
   @visibility(Lifecycle.Read)
-  @items
+  @pageItems
   value?: BlobInventoryPolicy[];
 }
 
 /**
  * List of private endpoint connection associated with the specified storage account
  */
-@pagedResult
 model PrivateEndpointConnectionListResult {
   /**
    * Array of private endpoint connections
    */
-  @items
+  @pageItems
   value?: PrivateEndpointConnection[];
 }
 
@@ -3163,6 +3158,7 @@ model PrivateLinkResourceListResult {
   /**
    * Array of private link resources
    */
+  @pageItems
   value?: PrivateLinkResource[];
 }
 
@@ -3204,12 +3200,11 @@ model PrivateLinkResourceProperties {
 /**
  * List storage account object replication policies.
  */
-@pagedResult
 model ObjectReplicationPolicies {
   /**
    * The replication policy between two storage accounts.
    */
-  @items
+  @pageItems
   value?: ObjectReplicationPolicy[];
 }
 
@@ -3290,12 +3285,11 @@ model ObjectReplicationPolicyFilter {
 /**
  * List storage account local users.
  */
-@pagedResult
 model LocalUsers {
   /**
    * The local users associated with the storage account.
    */
-  @items
+  @pageItems
   value?: LocalUser[];
 }
 
@@ -3463,13 +3457,12 @@ model EncryptionScopeKeyVaultProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-@pagedResult
 model BlobServiceItems {
   /**
    * List of blob services returned.
    */
   @visibility(Lifecycle.Read)
-  @items
+  @pageItems
   value?: BlobServiceProperties[];
 }
 
@@ -4052,6 +4045,7 @@ model FileServiceItems {
    * List of file services returned.
    */
   @visibility(Lifecycle.Read)
+  @pageItems
   value?: FileServiceProperties[];
 }
 
@@ -4346,6 +4340,7 @@ model ListQueueServices {
    * List of queue services returned.
    */
   @visibility(Lifecycle.Read)
+  @pageItems
   value?: QueueServiceProperties[];
 }
 
@@ -4387,6 +4382,7 @@ model ListTableServices {
    * List of table services returned.
    */
   @visibility(Lifecycle.Read)
+  @pageItems
   value?: TableServiceProperties[];
 }
 

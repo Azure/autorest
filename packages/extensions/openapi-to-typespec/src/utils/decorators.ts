@@ -21,15 +21,6 @@ import { escapeRegex } from "./strings";
 export function getModelDecorators(model: ObjectSchema): TypespecDecorator[] {
   const decorators: TypespecDecorator[] = [];
 
-  const paging = model.language.default.paging ?? {};
-  if (paging.isPageable) {
-    decorators.push({
-      name: "pagedResult",
-      module: "@azure-tools/typespec-azure-core",
-      namespace: "Azure.Core",
-    });
-  }
-
   const ownDiscriminator = getOwnDiscriminator(model);
 
   if (ownDiscriminator) {
@@ -90,7 +81,7 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
   }
 
   if (paging.isValue) {
-    decorators.push({ name: "items" });
+    decorators.push({ name: "pageItems", module: "@azure-tools/typespec-azure-core", namespace: "Azure.Core" });
   }
 
   if (element.schema.type === SchemaType.Credential) {

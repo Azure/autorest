@@ -101,6 +101,7 @@ interface OnlineDeploymentTrackedResources {
   /**
    * List Inference Endpoint Deployment Skus.
    */
+  @list
   @get
   @action("skus")
   listSkus is ArmResourceActionSync<

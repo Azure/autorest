@@ -111,6 +111,7 @@ interface GroupContracts {
   /**
    * Lists a collection of user entities associated with the group.
    */
+  @list
   @get
   @action("users")
   list is ArmResourceActionSync<

@@ -67,6 +67,7 @@ interface Products {
   /**
    * Generates default device groups for the product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
    */
+  @list
   generateDefaultDeviceGroups is ArmResourceActionSync<
     Product,
     void,

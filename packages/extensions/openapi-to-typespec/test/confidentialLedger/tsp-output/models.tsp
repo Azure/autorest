@@ -85,9 +85,8 @@ model ConfidentialLedgerErrorBody {
 /**
  * List of members in the consortium.
  */
-@pagedResult
 model Consortium {
-  @items
+  @pageItems
   members: ConsortiumMember[];
 
   /**
@@ -161,9 +160,8 @@ model EnclaveQuote {
 /**
  * Paginated collections returned in response to a query.
  */
-@pagedResult
 model PagedCollections {
-  @items
+  @pageItems
   collections: Collection[];
 
   /**
@@ -186,7 +184,6 @@ model Collection {
 /**
  * Paginated ledger entries returned in response to a query.
  */
-@pagedResult
 model PagedLedgerEntries {
   /**
    * State of a ledger query.
@@ -202,7 +199,7 @@ model PagedLedgerEntries {
   /**
    * Array of ledger entries.
    */
-  @items
+  @pageItems
   entries: LedgerEntry[];
 }
 

@@ -99,6 +99,7 @@ interface Servers {
   /**
    * Lists eligible SKUs for an Analysis Services resource.
    */
+  @list
   @get
   @action("skus")
   listSkusForExisting is ArmResourceActionSync<

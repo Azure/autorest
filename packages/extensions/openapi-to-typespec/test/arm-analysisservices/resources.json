@@ -49,7 +49,7 @@
             "PagingMetadata": {
               "Method": "ListByResourceGroup",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Gets all the Analysis Services servers for the given resource group."
           }
@@ -65,7 +65,7 @@
             "PagingMetadata": {
               "Method": "List",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Lists all the Analysis Services servers for the given subscription."
           }
@@ -100,7 +100,7 @@
             "PagingMetadata": {
               "Method": "ListSkusForExisting",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Lists eligible SKUs for an Analysis Services resource."
           },

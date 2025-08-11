@@ -82,7 +82,7 @@
             "PagingMetadata": {
               "Method": "ListKeys",
               "ItemName": "keys",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account."
           },
@@ -95,7 +95,7 @@
             "PagingMetadata": {
               "Method": "RegenerateKey",
               "ItemName": "keys",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Regenerates one of the access keys or Kerberos keys for the specified storage account."
           },
@@ -171,7 +171,7 @@
             "PagingMetadata": {
               "Method": "ListByStorageAccount",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Gets the private link resources that need to be created for a storage account."
           }
@@ -333,7 +333,7 @@
             "PagingMetadata": {
               "Method": "List",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Gets the blob inventory policy associated with the specified storage account."
           }
@@ -407,7 +407,7 @@
             "PagingMetadata": {
               "Method": "List",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "List all the private endpoint connections associated with the storage account."
           }
@@ -481,7 +481,7 @@
             "PagingMetadata": {
               "Method": "List",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "List the object replication policies associated with the storage account."
           }
@@ -555,7 +555,7 @@
             "PagingMetadata": {
               "Method": "List",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "List the local users associated with the storage account."
           }
@@ -704,7 +704,7 @@
             "PagingMetadata": {
               "Method": "List",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "List blob services of storage account. It returns a collection of one object named default."
           }
@@ -959,7 +959,7 @@
             "PagingMetadata": {
               "Method": "List",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "List all file services in storage accounts"
           }
@@ -1117,7 +1117,7 @@
             "PagingMetadata": {
               "Method": "List",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "List all queue services for the storage account"
           }
@@ -1256,7 +1256,7 @@
             "PagingMetadata": {
               "Method": "List",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "List all table services for the storage account."
           }

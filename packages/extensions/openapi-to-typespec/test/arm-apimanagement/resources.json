@@ -347,7 +347,7 @@
             "PagingMetadata": {
               "Method": "ListByOperation",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Get the list of policy configuration at the API Operation level."
           }
@@ -428,7 +428,7 @@
             "PagingMetadata": {
               "Method": "ListByApi",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Get the policy configuration at the API level."
           }
@@ -509,7 +509,7 @@
             "PagingMetadata": {
               "Method": "ListByService",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Lists all the Global Policy definitions of the Api Management service."
           }
@@ -590,7 +590,7 @@
             "PagingMetadata": {
               "Method": "ListByProduct",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Get the policy configuration at the Product level."
           }
@@ -2362,7 +2362,7 @@
             "PagingMetadata": {
               "Method": "ListByService",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Gets the Connectivity Status to the external resources on which the Api Management service depends from inside the Cloud Service. This also returns the DNS Servers as visible to the CloudService."
           },
@@ -2384,7 +2384,7 @@
             "PagingMetadata": {
               "Method": "ListByService",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Gets the network endpoints of all outbound dependencies of a ApiManagement service."
           },
@@ -2397,7 +2397,7 @@
             "PagingMetadata": {
               "Method": "ListByService",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Lists all policy descriptions."
           },
@@ -2410,7 +2410,7 @@
             "PagingMetadata": {
               "Method": "ListByService",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Lists a collection of portalsettings defined within a service instance.."
           },
@@ -2436,7 +2436,7 @@
             "PagingMetadata": {
               "Method": "ListByService",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Lists a collection of current quota counter periods associated with the counter-key configured in the policy on the specified service instance. The api does not support paging yet."
           },
@@ -2449,7 +2449,7 @@
             "PagingMetadata": {
               "Method": "Update",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Updates all the quota counter values specified with the existing quota counter key to a value in the specified service instance. This should be used for reset of the quota counter values."
           },
@@ -2584,7 +2584,7 @@
             "PagingMetadata": {
               "Method": "ListByRequest",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Lists report records by Request."
           },
@@ -3478,7 +3478,7 @@
             "PagingMetadata": {
               "Method": "ListByNotification",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Gets the list of the Notification Recipient User subscribed to the notification."
           },
@@ -3518,7 +3518,7 @@
             "PagingMetadata": {
               "Method": "ListByNotification",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Gets the list of the Notification Recipient Emails subscribed to a notification."
           },
@@ -3971,7 +3971,7 @@
             "PagingMetadata": {
               "Method": "ListByService",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Lists all private endpoint connections of the API Management service instance."
           }
@@ -4018,7 +4018,7 @@
             "PagingMetadata": {
               "Method": "ListPrivateLinkResources",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Gets the private link resources"
           }

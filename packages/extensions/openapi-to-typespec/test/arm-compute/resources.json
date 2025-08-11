@@ -433,7 +433,7 @@
             "PagingMetadata": {
               "Method": "List",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "The operation to get all extensions of an instance in Virtual Machine Scaleset."
           }
@@ -625,7 +625,7 @@
             "PagingMetadata": {
               "Method": "RunCommand",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Run command on a virtual machine in a VM scale set."
           }
@@ -694,7 +694,7 @@
             "PagingMetadata": {
               "Method": "List",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "The operation to get all extensions of a Virtual Machine."
           }
@@ -846,7 +846,7 @@
             "PagingMetadata": {
               "Method": "ListAvailableSizes",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Lists all available virtual machine sizes to which the specified virtual machine can be resized."
           },
@@ -958,7 +958,7 @@
             "PagingMetadata": {
               "Method": "RunCommand",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Run command on the VM."
           }
@@ -1000,7 +1000,7 @@
             "PagingMetadata": {
               "Method": "ListTypes",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Gets a list of virtual machine extension image types."
           },
@@ -1013,7 +1013,7 @@
             "PagingMetadata": {
               "Method": "ListVersions",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Gets a list of virtual machine extension image versions."
           }
@@ -1120,7 +1120,7 @@
             "PagingMetadata": {
               "Method": "ListAvailableSizes",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Lists all available virtual machine sizes that can be used to create a new virtual machine in an existing availability set."
           }
@@ -1393,7 +1393,7 @@
             "PagingMetadata": {
               "Method": "ListAvailableSizes",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Lists all available dedicated host sizes to which the specified dedicated host can be resized. NOTE: The dedicated host sizes provided can be used to only scale up the existing dedicated host."
           }
@@ -2244,7 +2244,7 @@
             "PagingMetadata": {
               "Method": "GetPrivateLinkResources",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Gets the private link resources possible under disk access resource"
           }

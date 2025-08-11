@@ -4,6 +4,7 @@ import {
   isObjectSchema,
   ObjectSchema,
   Operation,
+  Schema,
   SchemaResponse,
 } from "@autorest/codemodel";
 import { isArmIdSchema, isArraySchema, isDictionarySchema, isResponseSchema, isStringSchema } from "../utils/schemas";
@@ -44,7 +45,7 @@ export function isTrackedResource(schema: ObjectSchema): boolean {
   return isLocationFound && isTagsFound;
 }
 
-export function getPagingItemType(operation: Operation): string | undefined {
+export function getPagingItemType(operation: Operation, markPaging: boolean = false): string | undefined {
   const response = operation.responses?.find((r) => isResponseSchema(r));
   if (response === undefined) return undefined;
 
@@ -54,13 +55,50 @@ export function getPagingItemType(operation: Operation): string | undefined {
   }
 
   const schemaResponse = response as SchemaResponse;
-  if (isArraySchema(schemaResponse.schema)) return schemaResponse.schema.elementType.language.default.name;
+  if (isArraySchema(schemaResponse.schema)) {
+    return schemaResponse.schema.elementType.language.default.name;
+  }
   if (isObjectSchema(schemaResponse.schema)) {
     const responseSchema = schemaResponse.schema.properties?.find(
       (p) => p.serializedName === itemName && isArraySchema(p.schema),
     );
     if (!responseSchema) return undefined;
+
+    markPaging && markPagination(schemaResponse.schema, operation);
     return (responseSchema.schema as ArraySchema).elementType.language.default.name;
   }
   return undefined;
+}
+
+function markPagination(schema: Schema, operation: Operation) {
+  schema.language.default.paging = {
+    ...schema.language.default.paging,
+    isPageable: true,
+  };
+
+  if (!isObjectSchema(schema)) return;
+
+  let itemName = "value";
+  if (operation.extensions?.["x-ms-pageable"]?.itemName) {
+    itemName = operation.extensions?.["x-ms-pageable"]?.itemName;
+  }
+  let nextLinkName = null;
+  if (operation.extensions?.["x-ms-pageable"]?.nextLinkName) {
+    nextLinkName = operation.extensions?.["x-ms-pageable"]?.nextLinkName;
+  }
+  for (const property of schema.properties ?? []) {
+    if (property.serializedName === nextLinkName) {
+      property.language.default.paging = {
+        ...property.language.default.paging,
+        isNextLink: true,
+      };
+    }
+
+    if (property.serializedName === itemName) {
+      property.language.default.paging = {
+        ...property.language.default.paging,
+        isValue: true,
+      };
+    }
+  }
 }

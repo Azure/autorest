@@ -98,6 +98,7 @@ interface GuestConfigurationAssignments {
   /**
    * List all reports for the guest configuration assignment, latest report first.
    */
+  @list
   @get
   @action("reports")
   guestConfigurationAssignmentReportsList is GuestConfigurationAssignmentOps.ActionSync<
@@ -190,6 +191,7 @@ interface GuestConfigurationHCRPAssignments {
   /**
    * List all reports for the guest configuration assignment, latest report first.
    */
+  @list
   @get
   @action("reports")
   guestConfigurationHCRPAssignmentReportsList is GuestConfigurationHCRPAssignmentOps.ActionSync<
@@ -281,6 +283,7 @@ interface GuestConfigurationAssignmentsVMSS {
   /**
    * List all reports for the VMSS guest configuration assignment, latest report first.
    */
+  @list
   @get
   @action("reports")
   guestConfigurationAssignmentReportsVMSSList is GuestConfigurationAssignmentsVMSSOps.ActionSync<
@@ -371,6 +374,7 @@ interface GuestConfigurationConnectedVMwarevSphereAssignments {
   /**
    * List all reports for the guest configuration assignment, latest report first.
    */
+  @list
   @get
   @action("reports")
   guestConfigurationConnectedVMwarevSphereAssignmentsReportsList is GuestConfigurationConnectedVMwarevSphereAssignmentOps.ActionSync<

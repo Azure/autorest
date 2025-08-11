@@ -93,6 +93,7 @@ interface DiskAccesses {
   /**
    * Gets the private link resources possible under disk access resource
    */
+  @list
   @get
   @action("privateLinkResources")
   getPrivateLinkResources is ArmResourceActionSync<

@@ -115,6 +115,7 @@ interface FeaturesetVersions {
   /**
    * List materialization Jobs.
    */
+  @list
   listMaterializationJobs is ArmResourceActionSync<
     FeaturesetVersion,
     void,

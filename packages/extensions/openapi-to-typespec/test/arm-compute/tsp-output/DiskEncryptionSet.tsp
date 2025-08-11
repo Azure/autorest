@@ -93,6 +93,7 @@ interface DiskEncryptionSets {
   /**
    * Lists all resources that are encrypted with this disk encryption set.
    */
+  @list
   @get
   @action("associatedResources")
   listAssociatedResources is ArmResourceActionSync<
