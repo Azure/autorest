@@ -1080,6 +1080,13 @@ function buildNewArmOperation(
   } else if (resourceMetadata.ScopeType === "Extension") {
     armOperation.baseParameters = undefined;
   }
+
+  if (operation.PagingMetadata && !armOperation.kind.includes("List")) {
+    armOperation.decorators = armOperation.decorators ?? [];
+    armOperation.decorators.push({
+      name: "list",
+    });
+  }
   return armOperation;
 }
 

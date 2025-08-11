@@ -173,6 +173,7 @@ interface CloudServices {
   /**
    * Gets a list of all update domains in a cloud service.
    */
+  @list
   @get
   @action("updateDomains")
   listUpdateDomains is ArmResourceActionSync<

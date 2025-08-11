@@ -257,6 +257,7 @@ interface VirtualMachineScaleSetVMS {
   /**
    * Run command on a virtual machine in a VM scale set.
    */
+  @list
   runCommand is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
     RunCommandInput,

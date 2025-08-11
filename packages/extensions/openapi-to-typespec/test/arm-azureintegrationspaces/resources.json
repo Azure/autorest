@@ -174,7 +174,7 @@
             "PagingMetadata": {
               "Method": "ListBusinessProcessDevelopmentArtifacts",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "The list business process development artifacts action."
           },

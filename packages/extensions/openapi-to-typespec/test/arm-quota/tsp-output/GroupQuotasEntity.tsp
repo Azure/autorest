@@ -75,6 +75,7 @@ interface GroupQuotasEntities {
   /**
    * Get API to check the status of a GroupQuota request by requestId.
    */
+  @list
   @get
   @action("groupQuotaRequests")
   groupQuotaLimitsRequestList is Extension.ActionSync<

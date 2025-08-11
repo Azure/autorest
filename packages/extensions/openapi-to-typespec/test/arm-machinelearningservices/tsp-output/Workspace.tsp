@@ -113,6 +113,7 @@ interface Workspaces {
   /**
    * Lists all enabled features for a workspace
    */
+  @list
   @get
   @action("features")
   list is ArmResourceActionSync<
@@ -170,6 +171,7 @@ interface Workspaces {
   /**
    * Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically.
    */
+  @list
   @get
   @action("outboundNetworkDependenciesEndpoints")
   listOutboundNetworkDependenciesEndpoints is ArmResourceActionSync<
@@ -199,6 +201,7 @@ interface Workspaces {
    * Other RPs, such as Azure Storage, have multiple - one for Blobs, other for Queues, etc.
    * Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds".
    */
+  @list
   @get
   @action("privateLinkResources")
   privateLinkResourcesList is ArmResourceActionSync<

@@ -96,6 +96,7 @@ interface ApiManagementServiceResources {
   /**
    * Lists a collection of apis associated with tags.
    */
+  @list
   @get
   @action("apisByTags")
   listByTags is ArmResourceActionSync<
@@ -143,6 +144,7 @@ interface ApiManagementServiceResources {
   /**
    * Gets all available SKU for a given API Management service
    */
+  @list
   @get
   @action("skus")
   listAvailableServiceSkus is ArmResourceActionSync<
@@ -193,6 +195,7 @@ interface ApiManagementServiceResources {
   /**
    * Gets the Connectivity Status to the external resources on which the Api Management service depends from inside the Cloud Service. This also returns the DNS Servers as visible to the CloudService.
    */
+  @list
   @get
   @action("networkstatus")
   listByService is ArmResourceActionSync<
@@ -223,6 +226,7 @@ interface ApiManagementServiceResources {
   /**
    * Gets the network endpoints of all outbound dependencies of a ApiManagement service.
    */
+  @list
   @get
   @action("outboundNetworkDependenciesEndpoints")
   outboundNetworkDependenciesEndpointsListByService is ArmResourceActionSync<
@@ -234,6 +238,7 @@ interface ApiManagementServiceResources {
   /**
    * Lists all policy descriptions.
    */
+  @list
   @get
   @action("policyDescriptions")
   policyDescriptionListByService is ArmResourceActionSync<
@@ -252,6 +257,7 @@ interface ApiManagementServiceResources {
   /**
    * Lists a collection of portalsettings defined within a service instance..
    */
+  @list
   @get
   @action("portalsettings")
   portalSettingsListByService is ArmResourceActionSync<
@@ -263,6 +269,7 @@ interface ApiManagementServiceResources {
   /**
    * Lists a collection of products associated with tags.
    */
+  @list
   @get
   @action("productsByTags")
   productListByTags is ArmResourceActionSync<
@@ -300,6 +307,7 @@ interface ApiManagementServiceResources {
   /**
    * Lists a collection of current quota counter periods associated with the counter-key configured in the policy on the specified service instance. The api does not support paging yet.
    */
+  @list
   @get
   @action("{quotaCounterKey}")
   quotaByCounterKeysListByService is ArmResourceActionSync<
@@ -316,6 +324,7 @@ interface ApiManagementServiceResources {
   /**
    * Updates all the quota counter values specified with the existing quota counter key to a value in the specified service instance. This should be used for reset of the quota counter values.
    */
+  @list
   @patch
   @action("{quotaCounterKey}")
   quotaByCounterKeysUpdate is ArmResourceActionSync<
@@ -376,6 +385,7 @@ interface ApiManagementServiceResources {
   /**
    * Lists all azure regions in which the service exists.
    */
+  @list
   @get
   @action("regions")
   regionListByService is ArmResourceActionSync<
@@ -387,6 +397,7 @@ interface ApiManagementServiceResources {
   /**
    * Lists report records by API.
    */
+  @list
   @get
   @action("byApi")
   listByApi is ArmResourceActionSync<
@@ -424,6 +435,7 @@ interface ApiManagementServiceResources {
   /**
    * Lists report records by User.
    */
+  @list
   @get
   @action("byUser")
   listByUser is ArmResourceActionSync<
@@ -461,6 +473,7 @@ interface ApiManagementServiceResources {
   /**
    * Lists report records by API Operations.
    */
+  @list
   @get
   @action("byOperation")
   listByOperation is ArmResourceActionSync<
@@ -498,6 +511,7 @@ interface ApiManagementServiceResources {
   /**
    * Lists report records by Product.
    */
+  @list
   @get
   @action("byProduct")
   listByProduct is ArmResourceActionSync<
@@ -535,6 +549,7 @@ interface ApiManagementServiceResources {
   /**
    * Lists report records by geography.
    */
+  @list
   @get
   @action("byGeo")
   listByGeo is ArmResourceActionSync<
@@ -566,6 +581,7 @@ interface ApiManagementServiceResources {
   /**
    * Lists report records by subscription.
    */
+  @list
   @get
   @action("bySubscription")
   listBySubscription is ArmResourceActionSync<
@@ -603,6 +619,7 @@ interface ApiManagementServiceResources {
   /**
    * Lists report records by Time.
    */
+  @list
   @get
   @action("byTime")
   listByTime is ArmResourceActionSync<
@@ -646,6 +663,7 @@ interface ApiManagementServiceResources {
   /**
    * Lists report records by Request.
    */
+  @list
   @get
   @action("byRequest")
   listByRequest is ArmResourceActionSync<
@@ -677,6 +695,7 @@ interface ApiManagementServiceResources {
   /**
    * Lists a collection of resources associated with tags.
    */
+  @list
   @get
   @action("tagResources")
   tagResourceListByService is ArmResourceActionSync<

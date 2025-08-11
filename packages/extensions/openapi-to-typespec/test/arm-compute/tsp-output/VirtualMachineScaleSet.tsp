@@ -161,6 +161,7 @@ interface VirtualMachineScaleSets {
   /**
    * Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.
    */
+  @list
   @get
   @action("skus")
   listSkus is ArmResourceActionSync<
@@ -172,6 +173,7 @@ interface VirtualMachineScaleSets {
   /**
    * Gets list of OS upgrades on a VM scale set instance.
    */
+  @list
   @get
   @action("osUpgradeHistory")
   getOSUpgradeHistory is ArmResourceActionSync<

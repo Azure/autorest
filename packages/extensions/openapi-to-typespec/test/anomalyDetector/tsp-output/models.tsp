@@ -674,12 +674,11 @@ model ModelState {
 /**
  * Response of listing models.
  */
-@pagedResult
 model ModelList {
   /**
    * List of models
    */
-  @items
+  @pageItems
   models: ModelSnapshot[];
 
   /**

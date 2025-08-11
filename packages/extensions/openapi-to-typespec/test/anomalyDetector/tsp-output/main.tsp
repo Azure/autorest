@@ -58,6 +58,5 @@ enum Versions {
   /**
    * The v1.1-preview.1 API version.
    */
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v1_1_preview_1: "v1.1-preview.1",
 }

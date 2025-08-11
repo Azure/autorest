@@ -129,6 +129,7 @@ interface ProductContracts {
   /**
    * Lists a collection of the APIs associated with a product.
    */
+  @list
   @get
   @action("apis")
   listByProduct is ArmResourceActionSync<
@@ -223,6 +224,7 @@ interface ProductContracts {
   /**
    * Lists the collection of developer groups associated with the specified product.
    */
+  @list
   @get
   @action("groups")
   productGroupListByProduct is ArmResourceActionSync<
@@ -314,6 +316,7 @@ interface ProductContracts {
   /**
    * Lists the collection of subscriptions to the specified product.
    */
+  @list
   @get
   @action("subscriptions")
   list is ArmResourceActionSync<
