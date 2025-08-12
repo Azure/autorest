@@ -1,6 +1,13 @@
 # Change Log - @autorest/openapi-to-typespec
 
-This log was last generated on Mon, 28 Jul 2025 10:00:14 GMT and should not be manually modified.
+This log was last generated on Mon, 11 Aug 2025 10:30:03 GMT and should not be manually modified.
+
+## 0.11.6
+Mon, 11 Aug 2025 10:30:03 GMT
+
+### Patches
+
+- Remove useDependency and apply core paging
 
 ## 0.11.5
 Mon, 28 Jul 2025 10:00:14 GMT
