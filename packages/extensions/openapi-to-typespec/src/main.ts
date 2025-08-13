@@ -42,7 +42,7 @@ export async function processConverter(host: AutorestExtensionHost) {
     pretransformArmResources(codeModel, metadata);
     pretransformRename(codeModel, metadata);
   }
-  markPagination(codeModel);
+  markPagination(codeModel); // TO-Delete
   markErrorModels(codeModel);
   markResources(codeModel);
   const programDetails = getModel(codeModel);

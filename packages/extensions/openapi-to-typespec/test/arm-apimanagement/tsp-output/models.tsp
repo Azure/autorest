@@ -5361,21 +5361,8 @@ model OpenidConnectProviderUpdateContractProperties {
 /**
  * Collection of Outbound Environment Endpoints
  */
-model OutboundEnvironmentEndpointList {
-  /**
-   * Collection of resources.
-   */
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @key
-  @OpenAPI.extension("x-ms-identifiers", #[])
-  value: OutboundEnvironmentEndpoint[];
-
-  /**
-   * Link to next page of resources.
-   */
-  @visibility(Lifecycle.Read)
-  nextLink?: string;
-}
+model OutboundEnvironmentEndpointList
+  is Azure.Core.Page<OutboundEnvironmentEndpoint>;
 
 /**
  * Endpoints accessed for a common purpose that the Api Management Service requires outbound network access to.
@@ -5431,6 +5418,7 @@ model PolicyDescriptionListResult {
   /**
    * Descriptions of APIM policies.
    */
+  @pageItems
   value?: PolicyDescriptionContract[];
 
   /**
@@ -5519,6 +5507,7 @@ model PortalSettingsListResult {
   /**
    * Descriptions of APIM policies.
    */
+  @pageItems
   value?: PortalSettingsContract[];
 
   /**
@@ -5827,22 +5816,11 @@ model SubscriptionContractProperties {
 /**
  * Paged Quota Counter list representation.
  */
-model QuotaCounterListResult {
-  /**
-   * Quota counter values.
-   */
-  @OpenAPI.extension("x-ms-identifiers", #["counterKey", "periodKey"])
-  value?: QuotaCounterContract[];
-
+model QuotaCounterListResult is Azure.Core.Page<QuotaCounterContract> {
   /**
    * Total record count number across all pages.
    */
   count?: int64;
-
-  /**
-   * Next page link if any.
-   */
-  nextLink?: string;
 }
 
 /**
@@ -6094,12 +6072,11 @@ model ReportRecordContract {
 /**
  * Paged Report records list representation.
  */
-@pagedResult
 model RequestReportListResult {
   /**
    * Page values.
    */
-  @items
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["url"])
   value?: RequestReportRecordContract[];
 

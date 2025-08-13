@@ -122,6 +122,7 @@ interface Applications {
   /**
    * The list business process development artifacts action.
    */
+  @list
   listBusinessProcessDevelopmentArtifacts is ArmResourceActionSync<
     Application,
     void,

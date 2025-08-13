@@ -199,6 +199,7 @@ interface VirtualMachines {
   /**
    * Lists all available virtual machine sizes to which the specified virtual machine can be resized.
    */
+  @list
   @get
   @action("vmSizes")
   listAvailableSizes is ArmResourceActionSync<
@@ -308,6 +309,7 @@ interface VirtualMachines {
   /**
    * Run command on the VM.
    */
+  @list
   runCommand is ArmResourceActionAsync<
     VirtualMachine,
     RunCommandInput,

@@ -332,7 +332,7 @@
             "PagingMetadata": {
               "Method": "ListByResource",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Get list of Private endpoint connections."
           }
@@ -379,7 +379,7 @@
             "PagingMetadata": {
               "Method": "ListByResource",
               "ItemName": "value",
-              "NextLinkName": "nextLink"
+              "NextLinkName": null
             },
             "Description": "Get list of Private link resources."
           }

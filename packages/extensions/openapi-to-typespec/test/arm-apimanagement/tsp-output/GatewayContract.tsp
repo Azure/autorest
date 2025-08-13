@@ -138,6 +138,7 @@ interface GatewayContracts {
   /**
    * Lists a collection of the APIs associated with a gateway.
    */
+  @list
   @get
   @action("apis")
   gatewayApiListByService is ArmResourceActionSync<

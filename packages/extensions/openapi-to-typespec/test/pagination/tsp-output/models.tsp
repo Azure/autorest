@@ -37,27 +37,24 @@ model ProductProperties {
   name?: string;
 }
 
-@pagedResult
 model ProductResult {
-  @items
+  @pageItems
   values?: Product[];
 
   @nextLink
   nextLink?: string;
 }
 
-@pagedResult
 model OdataProductResult {
-  @items
+  @pageItems
   values?: Product[];
 
   @nextLink
   `odata.nextLink`?: string;
 }
 
-@pagedResult
 model ProductResultValueWithXMSClientName {
-  @items
+  @pageItems
   values?: Product[];
 
   @nextLink

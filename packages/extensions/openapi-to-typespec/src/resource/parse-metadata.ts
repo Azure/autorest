@@ -224,9 +224,10 @@ function buildResource(
 
 function buildResourceOperationFromOperation(operation: Operation, operationName: string): _ArmResourceOperation {
   let pagingMetadata: _ArmPagingMetadata | null = null;
-  if (operationName === "GetAll" || getPagingItemType(operation) !== undefined) {
+  const pagingItemType = getPagingItemType(operation, true);
+  if (operationName === "GetAll" || pagingItemType !== undefined) {
     let itemName = "value";
-    let nextLinkName = "nextLink";
+    let nextLinkName = null;
     if (operation.extensions?.["x-ms-pageable"]?.itemName) {
       itemName = operation.extensions?.["x-ms-pageable"]?.itemName;
     }

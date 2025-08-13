@@ -114,9 +114,6 @@ export function transformObject(schema: ObjectSchema, codeModel: CodeModel): Typ
       }
     }
   }
-  if (isFullCompatible) {
-    const provisioningProperty = properties.find((p) => p.name === "provisioningState");
-  }
 
   if (isFullCompatible && !doc) suppressions.push(getSuppressionWithCode(SuppressionCode.DocumentRequired));
   const updatedVisited: TypespecObject = {

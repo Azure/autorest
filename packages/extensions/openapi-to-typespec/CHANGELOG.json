@@ -2,6 +2,18 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.11.6",
+      "tag": "@autorest/openapi-to-typespec_v0.11.6",
+      "date": "Mon, 11 Aug 2025 10:30:03 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Remove useDependency and apply core paging"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.11.5",
       "tag": "@autorest/openapi-to-typespec_v0.11.5",
       "date": "Mon, 28 Jul 2025 10:00:14 GMT",

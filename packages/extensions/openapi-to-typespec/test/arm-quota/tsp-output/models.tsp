@@ -221,23 +221,12 @@ model GroupQuotaSubscriptionRequestStatusProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model GroupQuotaLimitListProperties {
+model GroupQuotaLimitListProperties is Azure.Core.Page<GroupQuotaLimit> {
   /**
    * Request status.
    */
   @visibility(Lifecycle.Read)
   provisioningState?: RequestState;
-
-  /**
-   * List of Group Quota Limit details.
-   */
-  value?: GroupQuotaLimit[];
-
-  /**
-   * The URL to use for getting the next set of results.
-   */
-  @visibility(Lifecycle.Read)
-  nextLink?: string;
 }
 
 /**
@@ -431,23 +420,13 @@ model SubmittedResourceRequestStatusList
   is Azure.Core.Page<SubmittedResourceRequestStatus>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model SubscriptionQuotaAllocationsListProperties {
+model SubscriptionQuotaAllocationsListProperties
+  is Azure.Core.Page<SubscriptionQuotaAllocations> {
   /**
    * Request status.
    */
   @visibility(Lifecycle.Read)
   provisioningState?: RequestState;
-
-  /**
-   * Subscription quota list.
-   */
-  value?: SubscriptionQuotaAllocations[];
-
-  /**
-   * The URL to use for getting the next set of results.
-   */
-  @visibility(Lifecycle.Read)
-  nextLink?: string;
 }
 
 /**
@@ -911,19 +890,8 @@ model OperationDisplay {
 /**
  * List of Allocated Group Quota to the subscriptions.
  */
-model SubscriptionQuotaAllocationRequestList {
-  /**
-   * Allocated Group Quota to subscriptions.
-   */
-  @OpenAPI.extension("x-ms-identifiers", #[])
-  value?: QuotaAllocationRequestStatus[];
-
-  /**
-   * The URL to use for getting the next set of results.
-   */
-  @visibility(Lifecycle.Read)
-  nextLink?: string;
-}
+model SubscriptionQuotaAllocationRequestList
+  is Azure.Core.Page<QuotaAllocationRequestStatus>;
 
 /**
  * MGId the source of group quota.
@@ -943,18 +911,8 @@ model SubscriptionGroupQuotaAssignment {
 /**
  * Subscription quota allocation requests status list.
  */
-model SubscriptionQuotaAllocationsStatusList {
-  /**
-   * Subscription quota allocation status list.
-   */
-  value?: SubmittedResourceRequestStatus[];
-
-  /**
-   * The URL to use for getting the next set of results.
-   */
-  @visibility(Lifecycle.Read)
-  nextLink?: string;
-}
+model SubscriptionQuotaAllocationsStatusList
+  is Azure.Core.Page<SubmittedResourceRequestStatus>;
 
 /**
  * Resource definition with the requested quota.
@@ -981,18 +939,7 @@ model ResourceBaseRequest {
 /**
  * List of resource usages and quotas for GroupQuota.
  */
-model ResourceUsageList {
-  /**
-   * List of resource usages at Group Quotas.
-   */
-  value?: ResourceUsages[];
-
-  /**
-   * The URL to use for getting the next set of results.
-   */
-  @visibility(Lifecycle.Read)
-  nextLink?: string;
-}
+model ResourceUsageList is Azure.Core.Page<ResourceUsages>;
 
 /**
  * Resource details with usages and GroupQuota.
@@ -1075,17 +1022,7 @@ model CommonResourceProperties {
 /**
  * Quota limits request response.
  */
-model QuotaLimitsResponse {
-  /**
-   * List of quota limits with the quota request status.
-   */
-  value?: CurrentQuotaLimitBase[];
-
-  /**
-   * The URI used to fetch the next page of quota limits. When there are no more pages, this is null.
-   */
-  nextLink?: string;
-}
+model QuotaLimitsResponse is Azure.Core.Page<CurrentQuotaLimitBase>;
 
 /**
  * Quota change requests information.

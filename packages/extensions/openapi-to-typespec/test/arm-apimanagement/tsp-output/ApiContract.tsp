@@ -135,6 +135,7 @@ interface ApiContracts {
   /**
    * Lists all revisions of an API.
    */
+  @list
   @get
   @action("revisions")
   apiRevisionListByService is ArmResourceActionSync<
@@ -166,6 +167,7 @@ interface ApiContracts {
   /**
    * Lists all Products, which the API is part of.
    */
+  @list
   @get
   @action("products")
   listByApis is ArmResourceActionSync<
@@ -197,6 +199,7 @@ interface ApiContracts {
   /**
    * Lists a collection of operations associated with tags.
    */
+  @list
   @get
   @action("operationsByTags")
   listByTags is ArmResourceActionSync<

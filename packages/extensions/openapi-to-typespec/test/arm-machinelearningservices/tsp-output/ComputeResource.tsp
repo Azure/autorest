@@ -97,6 +97,7 @@ interface ComputeResources {
   /**
    * Get the details (e.g IP address, port etc) of all the compute nodes in the compute.
    */
+  @list
   listNodes is ArmResourceActionSync<
     ComputeResource,
     void,

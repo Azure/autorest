@@ -1052,12 +1052,11 @@ enum StatusLevelTypes {
 /**
  * The result of listing the applications available in an Account.
  */
-@pagedResult
 model ApplicationListResult {
   /**
    * The list of applications available in the Account.
    */
-  @items
+  @pageItems
   value?: Application[];
 
   /**
@@ -1145,12 +1144,11 @@ model BatchErrorDetail {
 /**
  * The result of a listing the usage metrics for an Account.
  */
-@pagedResult
 model PoolListUsageMetricsResult {
   /**
    * The Pool usage metrics data.
    */
-  @items
+  @pageItems
   value?: PoolUsageMetrics[];
 
   /**
@@ -1200,12 +1198,11 @@ model PoolUsageMetrics {
 /**
  * The result of listing the supported Virtual Machine Images.
  */
-@pagedResult
 model AccountListSupportedImagesResult {
   /**
    * The list of supported Virtual Machine Images.
    */
-  @items
+  @pageItems
   value?: ImageInformation[];
 
   /**
@@ -1311,12 +1308,11 @@ model ImageReference {
 /**
  * The result of listing the Compute Node counts in the Account.
  */
-@pagedResult
 model PoolNodeCountsListResult {
   /**
    * A list of Compute Node counts by Pool.
    */
-  @items
+  @pageItems
   value?: PoolNodeCounts[];
 
   /**
@@ -1775,12 +1771,11 @@ model NameValuePair {
 /**
  * The result of listing the Certificates in the Account.
  */
-@pagedResult
 model CertificateListResult {
   /**
    * The list of Certificates.
    */
-  @items
+  @pageItems
   value?: Certificate[];
 
   /**
@@ -1794,12 +1789,11 @@ model CertificateListResult {
  * The result of listing the files on a Compute Node, or the files associated with
  * a Task on a Compute Node.
  */
-@pagedResult
 model NodeFileListResult {
   /**
    * The list of files.
    */
-  @items
+  @pageItems
   value?: NodeFile[];
 
   /**
@@ -4093,12 +4087,11 @@ model BatchJobScheduleUpdate {
 /**
  * The result of listing the Job Schedules in an Account.
  */
-@pagedResult
 model BatchJobScheduleListResult {
   /**
    * The list of Job Schedules.
    */
-  @items
+  @pageItems
   value?: BatchJobSchedule[];
 
   /**
@@ -4467,12 +4460,11 @@ model BatchJobTerminateParameters {
 /**
  * The result of listing the Jobs in an Account.
  */
-@pagedResult
 model BatchJobListResult {
   /**
    * The list of Jobs.
    */
-  @items
+  @pageItems
   value?: BatchJob[];
 
   /**
@@ -4486,12 +4478,11 @@ model BatchJobListResult {
  * The result of listing the status of the Job Preparation and Job Release Tasks
  * for a Job.
  */
-@pagedResult
 model BatchJobListPreparationAndReleaseTaskStatusResult {
   /**
    * A list of Job Preparation and Job Release Task execution information.
    */
-  @items
+  @pageItems
   value?: JobPreparationAndReleaseTaskExecutionInformation[];
 
   /**
@@ -5187,12 +5178,11 @@ model UserAssignedIdentity {
 /**
  * The result of listing the Pools in an Account.
  */
-@pagedResult
 model BatchPoolListResult {
   /**
    * The list of Pools.
    */
-  @items
+  @pageItems
   value?: BatchPool[];
 
   /**
@@ -5928,12 +5918,11 @@ model TaskIdRange {
 /**
  * The result of listing the Tasks in a Job.
  */
-@pagedResult
 model BatchTaskListResult {
   /**
    * The list of Tasks.
    */
-  @items
+  @pageItems
   value?: BatchTask[];
 
   /**
@@ -6638,12 +6627,11 @@ model UploadBatchServiceLogsResult {
 /**
  * The result of listing the Compute Nodes in a Pool.
  */
-@pagedResult
 model ComputeNodeListResult {
   /**
    * The list of Compute Nodes.
    */
-  @items
+  @pageItems
   value?: ComputeNode[];
 
   /**
@@ -6726,12 +6714,11 @@ model InstanceViewStatus {
 /**
  * The result of listing the Compute Node extensions in a Node.
  */
-@pagedResult
 model NodeVMExtensionList {
   /**
    * The list of Compute Node extensions.
    */
-  @items
+  @pageItems
   value?: NodeVMExtension[];
 
   /**

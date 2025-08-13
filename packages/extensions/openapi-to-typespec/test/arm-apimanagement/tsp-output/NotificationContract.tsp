@@ -74,6 +74,7 @@ interface NotificationContracts {
   /**
    * Gets the list of the Notification Recipient User subscribed to the notification.
    */
+  @list
   @get
   @action("recipientUsers")
   listByNotification is ArmResourceActionSync<
@@ -145,6 +146,7 @@ interface NotificationContracts {
   /**
    * Gets the list of the Notification Recipient Emails subscribed to a notification.
    */
+  @list
   @get
   @action("recipientEmails")
   notificationRecipientEmailListByNotification is ArmResourceActionSync<

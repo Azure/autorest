@@ -93,6 +93,7 @@ interface DedicatedHosts {
   /**
    * Lists all available dedicated host sizes to which the specified dedicated host can be resized. NOTE: The dedicated host sizes provided can be used to only scale up the existing dedicated host.
    */
+  @list
   @get
   @action("hostSizes")
   listAvailableSizes is ArmResourceActionSync<

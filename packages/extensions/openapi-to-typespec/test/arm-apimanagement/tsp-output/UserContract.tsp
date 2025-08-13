@@ -160,6 +160,7 @@ interface UserContracts {
   /**
    * Lists all user groups.
    */
+  @list
   @get
   @action("groups")
   list is ArmResourceActionSync<
@@ -191,6 +192,7 @@ interface UserContracts {
   /**
    * List of all user identities.
    */
+  @list
   @get
   @action("identities")
   userIdentitiesList is ArmResourceActionSync<

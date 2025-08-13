@@ -2172,12 +2172,11 @@ model UsageName {
 /**
  * The List Virtual Machine operation response.
  */
-@pagedResult
 model VirtualMachineSizeListResult {
   /**
    * The list of virtual machine sizes.
    */
-  @items
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   value?: VirtualMachineSize[];
 }
@@ -5095,6 +5094,7 @@ model VirtualMachineScaleSetVMExtensionsListResult {
   /**
    * The list of VMSS VM extensions
    */
+  @pageItems
   value?: VirtualMachineScaleSetVMExtension[];
 }
 
@@ -6102,6 +6102,7 @@ model VirtualMachineExtensionsListResult {
   /**
    * The list of extensions
    */
+  @pageItems
   value?: VirtualMachineExtension[];
 }
 
@@ -7093,17 +7094,8 @@ model VirtualMachineImageResource extends SubResource {
 /**
  * The List VmImages in EdgeZone operation response.
  */
-model VmImagesInEdgeZoneListResult {
-  /**
-   * The list of VMImages in EdgeZone
-   */
-  value?: VirtualMachineImageResource[];
-
-  /**
-   * The URI to fetch the next page of VMImages in EdgeZone. Call ListNext() with this URI to fetch the next page of VmImages.
-   */
-  nextLink?: string;
-}
+model VmImagesInEdgeZoneListResult
+  is Azure.Core.Page<VirtualMachineImageResource>;
 
 /**
  * Describes the properties of a Virtual Machine Extension Image.
@@ -7462,12 +7454,11 @@ model DedicatedHostUpdate extends UpdateResource {
 /**
  * The List Dedicated Host sizes operation response.
  */
-@pagedResult
 model DedicatedHostSizeListResult {
   /**
    * The list of dedicated host sizes.
    */
-  @items
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   value?: string[];
 }
@@ -8387,6 +8378,7 @@ model RunCommandResult {
   /**
    * Run command operation response.
    */
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #[])
   value?: InstanceViewStatus[];
 }
@@ -9303,6 +9295,7 @@ model PrivateLinkResourceListResult {
   /**
    * Array of private link resources
    */
+  @pageItems
   value?: PrivateLinkResource[];
 }
 

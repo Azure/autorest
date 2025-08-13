@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -568,6 +570,7 @@ model ListBusinessProcessDevelopmentArtifactsResponse {
   /**
    * The list of the business process development artifact.
    */
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #[])
   value: SaveOrGetBusinessProcessDevelopmentArtifactResponse[];
 }

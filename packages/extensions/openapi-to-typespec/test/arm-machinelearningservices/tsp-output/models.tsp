@@ -3555,19 +3555,7 @@ model QuotaBaseProperties {
 /**
  * The result of update workspace quota.
  */
-model UpdateWorkspaceQuotasResult {
-  /**
-   * The list of workspace quota update result.
-   */
-  @visibility(Lifecycle.Read)
-  value?: UpdateWorkspaceQuotas[];
-
-  /**
-   * The URI to fetch the next page of workspace quota update result. Call ListNext() with this to fetch the next page of Workspace Quota update result.
-   */
-  @visibility(Lifecycle.Read)
-  nextLink?: string;
-}
+model UpdateWorkspaceQuotasResult is Azure.Core.Page<UpdateWorkspaceQuotas>;
 
 /**
  * The properties for update Quota response.
@@ -3984,13 +3972,12 @@ model TmpfsOptions {
 /**
  * Result of AmlCompute Nodes
  */
-@pagedResult
 model AmlComputeNodesInformation {
   /**
    * The collection of returned AmlCompute nodes details.
    */
   @visibility(Lifecycle.Read)
-  @items
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["nodeId"])
   nodes?: AmlComputeNodeInformation[];
 
@@ -7787,6 +7774,7 @@ model ListStorageAccountKeysResult {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ExternalFqdnResponse {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["/properties/category"])
   value?: FqdnEndpointsPropertyBag[];
 }
@@ -7828,22 +7816,20 @@ model FqdnEndpointDetail {
 /**
  * List of private endpoint connection associated with the specified workspace
  */
-@pagedResult
 model PrivateEndpointConnectionListResult {
   /**
    * Array of private endpoint connections
    */
-  @items
+  @pageItems
   value?: PrivateEndpointConnection[];
 }
 
 /**
  * A list of private link resources
  */
-@pagedResult
 model PrivateLinkResourceListResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @items
+  @pageItems
   value?: PrivateLinkResource[];
 }
 

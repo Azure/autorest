@@ -203,9 +203,6 @@
           "DeletedAccountList": {
             "$ref": "./examples/DeletedAccountList.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },

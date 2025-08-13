@@ -81,6 +81,7 @@ interface AvailabilitySets {
   /**
    * Lists all available virtual machine sizes that can be used to create a new virtual machine in an existing availability set.
    */
+  @list
   @get
   @action("vmSizes")
   listAvailableSizes is ArmResourceActionSync<
