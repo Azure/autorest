@@ -447,7 +447,7 @@ model AssignmentReportResource {
    * Properties of a guest configuration assignment resource.
    */
   @visibility(Lifecycle.Read)
-  properties?: Record<unknown>;
+  properties?: unknown;
 }
 
 /**

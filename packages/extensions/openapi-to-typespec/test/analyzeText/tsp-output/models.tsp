@@ -175,7 +175,7 @@ model ProjectMetadata {
   /**
    * The project settings.
    */
-  settings?: Record<unknown>;
+  settings?: unknown;
 
   /**
    * The new project name.
@@ -293,7 +293,7 @@ model CreateProjectOptions {
   /**
    * The project settings.
    */
-  settings?: Record<unknown>;
+  settings?: unknown;
 
   /**
    * The new project name.

@@ -3521,12 +3521,12 @@ model VirtualMachineScaleSetExtensionProperties {
   /**
    * Json formatted public settings for the extension.
    */
-  settings?: Record<unknown>;
+  settings?: unknown;
 
   /**
    * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
    */
-  protectedSettings?: Record<unknown>;
+  protectedSettings?: unknown;
 
   /**
    * The provisioning state, which only appears in the response.
@@ -3767,12 +3767,12 @@ model VirtualMachineExtensionProperties {
   /**
    * Json formatted public settings for the extension.
    */
-  settings?: Record<unknown>;
+  settings?: unknown;
 
   /**
    * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
    */
-  protectedSettings?: Record<unknown>;
+  protectedSettings?: unknown;
 
   /**
    * The provisioning state, which only appears in the response.
@@ -5070,12 +5070,12 @@ model VirtualMachineExtensionUpdateProperties {
   /**
    * Json formatted public settings for the extension.
    */
-  settings?: Record<unknown>;
+  settings?: unknown;
 
   /**
    * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
    */
-  protectedSettings?: Record<unknown>;
+  protectedSettings?: unknown;
 
   /**
    * Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false.
@@ -6527,14 +6527,14 @@ model VirtualMachineCaptureResult extends SubResource {
    * parameters of the captured virtual machine
    */
   @visibility(Lifecycle.Read)
-  parameters?: Record<unknown>;
+  parameters?: unknown;
 
   /**
    * a list of resource items of the captured virtual machine
    */
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
-  resources?: Record<unknown>[];
+  resources?: unknown[];
 }
 
 /**
@@ -12044,12 +12044,12 @@ model CloudServiceExtensionProperties {
   /**
    * Public settings for the extension. For JSON extensions, this is the JSON settings for the extension. For XML Extension (like RDP), this is the XML setting for the extension.
    */
-  settings?: Record<unknown>;
+  settings?: unknown;
 
   /**
    * Protected settings for the extension which are encrypted before sent to the role instance.
    */
-  protectedSettings?: Record<unknown>;
+  protectedSettings?: unknown;
 
   /**
    * Protected settings for the extension, referenced using KeyVault which are encrypted before sent to the role instance.

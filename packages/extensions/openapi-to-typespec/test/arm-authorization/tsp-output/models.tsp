@@ -465,7 +465,7 @@ model ProviderOperation {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
-  properties?: Record<unknown>;
+  properties?: unknown;
 
   /**
    * The dataAction flag to specify the operation type.

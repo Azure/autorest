@@ -168,7 +168,7 @@ export function generateParameters(parameters: TypespecParameter[]) {
   }
   if (parameters.length === 1 && parameters[0].location === "body") {
     if (parameters[0].type === "unknown") {
-      return "unknown";
+      return "void";
     } else {
       return parameters[0].type;
     }

@@ -2033,15 +2033,11 @@
           "description": "This object contains consistent fields across different monitor services."
         },
         "context": {
-          "type": "object",
           "description": "Information specific to the monitor service that gives more contextual details about the alert.",
-          "additionalProperties": {},
           "readOnly": true
         },
         "egressConfig": {
-          "type": "object",
           "description": "Config which would be used for displaying the data in portal.",
-          "additionalProperties": {},
           "readOnly": true
         }
       }

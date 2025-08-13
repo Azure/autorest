@@ -17,7 +17,7 @@ export function transformServiceInformation(model: CodeModel): ServiceInformatio
   const { isArm } = getOptions();
   return {
     name: model.info.title,
-    doc: model.info.description ?? "// FIXME: (missing-service-description) Add service description",
+    doc: model.info.description ?? "// (missing-service-description) Add service description",
     endpoint: getFirstEndpoint(model),
     endpointParameters: transformEndpointParameters(model),
     versions: getApiVersions(model),
