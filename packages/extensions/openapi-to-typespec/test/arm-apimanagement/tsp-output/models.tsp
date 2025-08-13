@@ -2050,12 +2050,12 @@ model SchemaDocumentProperties {
   /**
    * Types definitions. Used for Swagger/OpenAPI v1 schemas only, null otherwise.
    */
-  definitions?: Record<unknown>;
+  definitions?: unknown;
 
   /**
    * Types definitions. Used for Swagger/OpenAPI v2/v3 schemas only, null otherwise.
    */
-  components?: Record<unknown>;
+  components?: unknown;
 }
 
 /**
@@ -3515,7 +3515,7 @@ model ContentTypeContractProperties {
   /**
    * Content type schema.
    */
-  schema?: Record<unknown>;
+  schema?: unknown;
 
   /**
    * Content type version.
@@ -6209,7 +6209,7 @@ model GlobalSchemaContractProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
-  document?: Record<unknown>;
+  document?: unknown;
 }
 
 /**

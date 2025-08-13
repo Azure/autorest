@@ -3285,10 +3285,7 @@
         "properties": {
           "type": "object",
           "description": "The properties to be collected for event.",
-          "additionalProperties": {
-            "additionalProperties": {},
-            "type": "object"
-          }
+          "additionalProperties": {}
         }
       }
     },

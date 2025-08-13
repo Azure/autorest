@@ -678,13 +678,13 @@ model AlertProperties {
    * Information specific to the monitor service that gives more contextual details about the alert.
    */
   @visibility(Lifecycle.Read)
-  context?: Record<unknown>;
+  context?: unknown;
 
   /**
    * Config which would be used for displaying the data in portal.
    */
   @visibility(Lifecycle.Read)
-  egressConfig?: Record<unknown>;
+  egressConfig?: unknown;
 }
 
 /**

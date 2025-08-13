@@ -560,7 +560,7 @@ model TrackingEventDefinition {
    * The properties to be collected for event.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  properties?: Record<Record<unknown>>;
+  properties?: Record<unknown>;
 }
 
 /**

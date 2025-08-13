@@ -16,13 +16,13 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 /**
- * // FIXME: (missing-service-description) Add service description
+ * // (missing-service-description) Add service description
  */
 @service(#{ title: "Azure Web PubSub Service REST API" })
 @versioned(Versions)
 @server(
   "{endpoint}",
-  "// FIXME: (missing-service-description) Add service description",
+  "// (missing-service-description) Add service description",
   {
     endpoint: string,
   }

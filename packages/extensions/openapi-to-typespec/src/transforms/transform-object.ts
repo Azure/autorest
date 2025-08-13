@@ -311,7 +311,7 @@ export function getTypespecType(schema: Schema, codeModel: CodeModel): string {
   }
 
   if (isAnyObjectSchema(schema)) {
-    return `Record<unknown>`;
+    return `unknown`;
   }
 
   if (isArmIdSchema(schema) || (schema as StringSchema).extensions?.["x-ms-arm-id-details"]) {

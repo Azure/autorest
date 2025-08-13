@@ -4265,7 +4265,7 @@ model ComponentVersion extends AssetBase {
    * <see href="https://docs.microsoft.com/en-us/azure/machine-learning/reference-yaml-component-command" />
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  componentSpec?: Record<unknown>;
+  componentSpec?: unknown;
 
   /**
    * Provisioning state for the component version.
@@ -4878,7 +4878,7 @@ model PartialManagedServiceIdentity {
    * The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  userAssignedIdentities?: Record<Record<unknown>>;
+  userAssignedIdentities?: Record<unknown>;
 }
 
 /**
@@ -5031,7 +5031,7 @@ model ResourceConfiguration {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  properties?: Record<Record<unknown>>;
+  properties?: Record<unknown>;
 }
 
 /**
@@ -7507,7 +7507,7 @@ model WorkspaceConnectionPropertiesV2 {
   /**
    * Any object
    */
-  metadata?: Record<unknown>;
+  metadata?: unknown;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   target?: string;
@@ -8261,7 +8261,7 @@ model AmlComputeProperties {
   /**
    * A property bag containing additional properties.
    */
-  propertyBag?: Record<unknown>;
+  propertyBag?: unknown;
 }
 
 /**
@@ -8869,7 +8869,7 @@ model ComputeInstanceContainer {
    */
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
-  services?: Record<unknown>[];
+  services?: unknown[];
 }
 
 /**
@@ -10384,7 +10384,7 @@ model StackEnsembleSettings {
   /**
    * Optional parameters to pass to the initializer of the meta-learner.
    */
-  stackMetaLearnerKWargs?: Record<unknown>;
+  stackMetaLearnerKWargs?: unknown;
 
   /**
    * Specifies the proportion of the training set (when choosing train and validation type of training) to be reserved for training the meta-learner. Default value is 0.2.
@@ -10516,7 +10516,7 @@ model ColumnTransformer {
    * Different properties to be passed to transformer.
    * Input expected is dictionary of key,value pairs in JSON format.
    */
-  parameters?: Record<unknown>;
+  parameters?: unknown;
 }
 
 /**
@@ -10925,7 +10925,7 @@ model CommandJob extends JobBase {
    * Input parameters.
    */
   @visibility(Lifecycle.Read)
-  parameters?: Record<unknown>;
+  parameters?: unknown;
 
   /**
    * Queue settings for the job
@@ -11634,7 +11634,7 @@ model EndpointScheduleAction extends ScheduleActionBase {
    * <see href="TBD" />
    */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  endpointInvocationDefinition: Record<unknown>;
+  endpointInvocationDefinition: unknown;
 
   /**
    * [Required] Specifies the action type of the schedule
@@ -13576,7 +13576,7 @@ model PipelineJob extends JobBase {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  jobs?: Record<Record<unknown>>;
+  jobs?: Record<unknown>;
 
   /**
    * Outputs for the pipeline job
@@ -13589,7 +13589,7 @@ model PipelineJob extends JobBase {
    * Pipeline settings, for things like ContinueRunOnStepFailure etc.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  settings?: Record<unknown>;
+  settings?: unknown;
 
   /**
    * ARM resource ID of source job.
@@ -14098,7 +14098,7 @@ model SweepJob extends JobBase {
   /**
    * [Required] A dictionary containing each parameter and its distribution. The dictionary key is the name of the parameter
    */
-  searchSpace: Record<unknown>;
+  searchSpace: unknown;
 
   /**
    * [Required] Trial component definition.

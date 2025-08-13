@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Network Analytics resource management API.",
     "version": "2023-11-15",
-    "description": "// FIXME: (missing-service-description) Add service description",
+    "description": "// (missing-service-description) Add service description",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -971,10 +971,7 @@
             "in": "body",
             "description": "The content of the action request",
             "required": true,
-            "schema": {
-              "type": "object",
-              "additionalProperties": {}
-            }
+            "schema": {}
           }
         ],
         "responses": {
@@ -1181,10 +1178,7 @@
             "in": "body",
             "description": "The content of the action request",
             "required": true,
-            "schema": {
-              "type": "object",
-              "additionalProperties": {}
-            }
+            "schema": {}
           }
         ],
         "responses": {
