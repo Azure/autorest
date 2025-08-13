@@ -14,7 +14,6 @@ namespace Microsoft.Compute;
  * Describes a Virtual Machine Extension Image.
  */
 @subscriptionResource
-@parentResource(SubscriptionLocationResource)
 model VirtualMachineExtensionImage
   is Azure.ResourceManager.TrackedResource<VirtualMachineExtensionImageProperties> {
   ...ResourceNameParameter<

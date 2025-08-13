@@ -206,7 +206,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts/{deletedAccountName}": {
       "get": {
         "operationId": "DeletedAccounts_Get",
         "tags": [
@@ -219,9 +219,6 @@
           },
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           },
           {
             "name": "deletedAccountName",

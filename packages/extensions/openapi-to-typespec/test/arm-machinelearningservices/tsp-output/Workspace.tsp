@@ -14,7 +14,10 @@ namespace Azure.ResourceManager.MachineLearning;
  * An object that represents a machine learning workspace.
  */
 model Workspace
-  is Azure.ResourceManager.TrackedResource<WorkspaceProperties, false> {
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
+    WorkspaceProperties,
+    false
+  > {
   ...ResourceNameParameter<
     Resource = Workspace,
     KeyName = "workspaceName",

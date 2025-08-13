@@ -15,7 +15,6 @@ namespace Microsoft.Compute;
  * Specifies information about the Community Gallery that you want to create or update.
  */
 @subscriptionResource
-@parentResource(SubscriptionLocationResource)
 model CommunityGallery is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
     Resource = CommunityGallery,

@@ -67,8 +67,7 @@
         "ResourceKey": "dataConnectorName",
         "ResourceKeySegment": "dataConnectors",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -114,8 +113,7 @@
         "ResourceKey": "dataManagerForAgricultureExtensionId",
         "ResourceKeySegment": "farmBeatsExtensionDefinitions",
         "IsTrackedResource": false,
-        "IsTenantResource": true,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Tenant",
         "IsSingletonResource": false
@@ -202,8 +200,7 @@
         "ResourceKey": "dataManagerForAgricultureResourceName",
         "ResourceKeySegment": "farmBeats",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -276,8 +273,7 @@
         "ResourceKey": "extensionId",
         "ResourceKeySegment": "extensions",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -350,8 +346,7 @@
         "ResourceKey": "privateEndpointConnectionName",
         "ResourceKeySegment": "privateEndpointConnections",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -397,8 +392,7 @@
         "ResourceKey": "subResourceName",
         "ResourceKeySegment": "privateLinkResources",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -471,8 +465,7 @@
         "ResourceKey": "solutionId",
         "ResourceKeySegment": "solutions",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -518,8 +511,7 @@
         "ResourceKey": "dataManagerForAgricultureSolutionId",
         "ResourceKeySegment": "farmBeatsSolutionDefinitions",
         "IsTrackedResource": false,
-        "IsTenantResource": true,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Tenant",
         "IsSingletonResource": false

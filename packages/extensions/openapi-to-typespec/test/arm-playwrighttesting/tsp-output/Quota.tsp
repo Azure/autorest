@@ -14,7 +14,6 @@ namespace Microsoft.AzurePlaywrightService;
  * A quota resource
  */
 @subscriptionResource
-@parentResource(SubscriptionLocationResource)
 model Quota is Azure.ResourceManager.ProxyResource<QuotaProperties> {
   ...ResourceNameParameter<
     Resource = Quota,

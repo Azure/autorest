@@ -270,8 +270,7 @@
         "ResourceKey": "vmScaleSetName",
         "ResourceKeySegment": "virtualMachineScaleSets",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -344,8 +343,7 @@
         "ResourceKey": "vmssExtensionName",
         "ResourceKeySegment": "extensions",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -377,8 +375,7 @@
         "ResourceKey": "latest",
         "ResourceKeySegment": "rollingUpgrades",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": true
@@ -451,8 +448,7 @@
         "ResourceKey": "vmExtensionName",
         "ResourceKeySegment": "extensions",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -638,8 +634,7 @@
         "ResourceKey": "instanceId",
         "ResourceKeySegment": "virtualMachines",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -712,8 +707,7 @@
         "ResourceKey": "vmExtensionName",
         "ResourceKeySegment": "extensions",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": true,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -971,8 +965,7 @@
         "ResourceKey": "vmName",
         "ResourceKeySegment": "virtualMachines",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1031,8 +1024,7 @@
         "ResourceKey": "version",
         "ResourceKeySegment": "versions",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": true,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Subscription",
         "IsSingletonResource": false
@@ -1133,8 +1125,7 @@
         "ResourceKey": "availabilitySetName",
         "ResourceKeySegment": "availabilitySets",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1221,8 +1212,7 @@
         "ResourceKey": "proximityPlacementGroupName",
         "ResourceKeySegment": "proximityPlacementGroups",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1309,8 +1299,7 @@
         "ResourceKey": "hostGroupName",
         "ResourceKeySegment": "hostGroups",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1406,8 +1395,7 @@
         "ResourceKey": "hostName",
         "ResourceKeySegment": "hosts",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1504,8 +1492,7 @@
         "ResourceKey": "sshPublicKeyName",
         "ResourceKeySegment": "sshPublicKeys",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1592,8 +1579,7 @@
         "ResourceKey": "imageName",
         "ResourceKeySegment": "images",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1680,8 +1666,7 @@
         "ResourceKey": "restorePointCollectionName",
         "ResourceKeySegment": "restorePointCollections",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1740,8 +1725,7 @@
         "ResourceKey": "restorePointName",
         "ResourceKeySegment": "restorePoints",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1828,8 +1812,7 @@
         "ResourceKey": "capacityReservationGroupName",
         "ResourceKeySegment": "capacityReservationGroups",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1902,8 +1885,7 @@
         "ResourceKey": "capacityReservationName",
         "ResourceKeySegment": "capacityReservations",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1976,8 +1958,7 @@
         "ResourceKey": "runCommandName",
         "ResourceKeySegment": "runCommands",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -2048,8 +2029,7 @@
         "ResourceKey": "runCommandName",
         "ResourceKeySegment": "runCommands",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -2155,8 +2135,7 @@
         "ResourceKey": "diskName",
         "ResourceKeySegment": "disks",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -2257,8 +2236,7 @@
         "ResourceKey": "diskAccessName",
         "ResourceKeySegment": "diskAccesses",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -2331,8 +2309,7 @@
         "ResourceKey": "privateEndpointConnectionName",
         "ResourceKeySegment": "privateEndpointConnections",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -2433,8 +2410,7 @@
         "ResourceKey": "diskEncryptionSetName",
         "ResourceKeySegment": "diskEncryptionSets",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -2499,8 +2475,7 @@
         "ResourceKey": "diskRestorePointName",
         "ResourceKeySegment": "diskRestorePoints",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -2606,8 +2581,7 @@
         "ResourceKey": "snapshotName",
         "ResourceKeySegment": "snapshots",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -2704,8 +2678,7 @@
         "ResourceKey": "galleryName",
         "ResourceKeySegment": "galleries",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -2778,8 +2751,7 @@
         "ResourceKey": "galleryImageName",
         "ResourceKeySegment": "images",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -2852,8 +2824,7 @@
         "ResourceKey": "galleryImageVersionName",
         "ResourceKeySegment": "versions",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -2926,8 +2897,7 @@
         "ResourceKey": "galleryApplicationName",
         "ResourceKeySegment": "applications",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -3000,8 +2970,7 @@
         "ResourceKey": "galleryApplicationVersionName",
         "ResourceKeySegment": "versions",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -3047,8 +3016,7 @@
         "ResourceKey": "galleryUniqueName",
         "ResourceKeySegment": "sharedGalleries",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": true,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Subscription",
         "IsSingletonResource": false
@@ -3094,8 +3062,7 @@
         "ResourceKey": "galleryImageName",
         "ResourceKeySegment": "images",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Subscription",
         "IsSingletonResource": false
@@ -3141,8 +3108,7 @@
         "ResourceKey": "galleryImageVersionName",
         "ResourceKeySegment": "versions",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Subscription",
         "IsSingletonResource": false
@@ -3174,8 +3140,7 @@
         "ResourceKey": "publicGalleryName",
         "ResourceKeySegment": "communityGalleries",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": true,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Subscription",
         "IsSingletonResource": false
@@ -3221,8 +3186,7 @@
         "ResourceKey": "galleryImageName",
         "ResourceKeySegment": "images",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Subscription",
         "IsSingletonResource": false
@@ -3268,8 +3232,7 @@
         "ResourceKey": "galleryImageVersionName",
         "ResourceKeySegment": "versions",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Subscription",
         "IsSingletonResource": false
@@ -3370,8 +3333,7 @@
         "ResourceKey": "roleInstanceName",
         "ResourceKeySegment": "roleInstances",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": true,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -3417,8 +3379,7 @@
         "ResourceKey": "roleName",
         "ResourceKeySegment": "roles",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -3600,8 +3561,7 @@
         "ResourceKey": "cloudServiceName",
         "ResourceKeySegment": "cloudServices",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -3647,8 +3607,7 @@
         "ResourceKey": "osVersionName",
         "ResourceKeySegment": "cloudServiceOsVersions",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": true,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Subscription",
         "IsSingletonResource": false
@@ -3694,8 +3653,7 @@
         "ResourceKey": "osFamilyName",
         "ResourceKeySegment": "cloudServiceOsFamilies",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": true,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Subscription",
         "IsSingletonResource": false

@@ -15,7 +15,6 @@ namespace Microsoft.Compute;
  * Specifies information about the Shared Gallery that you want to create or update.
  */
 @subscriptionResource
-@parentResource(SubscriptionLocationResource)
 model SharedGallery is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
     Resource = SharedGallery,

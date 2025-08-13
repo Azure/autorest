@@ -43,8 +43,7 @@ export interface ArmResource {
   ResourceKey: string;
   ResourceKeySegment: string;
   IsTrackedResource: boolean;
-  IsTenantResource: boolean;
-  IsSubscriptionResource: boolean;
+  IsTrackedResourceWithOptionalLocation: boolean;
   IsManagementGroupResource: boolean;
   ScopeType: ScopeType;
   IsSingletonResource: boolean;

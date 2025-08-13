@@ -14,6 +14,7 @@ namespace Microsoft.Compute;
 /**
  * Specifies information about the gallery image version that you want to create or update.
  */
+@subscriptionResource
 @parentResource(CommunityGalleryImage)
 model CommunityGalleryImageVersion
   is Azure.ResourceManager.ProxyResource<CommunityGalleryImageVersionProperties> {
@@ -30,13 +31,17 @@ interface CommunityGalleryImageVersions {
   /**
    * Get a community gallery image version.
    */
-  get is ArmResourceRead<CommunityGalleryImageVersion>;
+  get is ArmResourceRead<
+    CommunityGalleryImageVersion,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 
   /**
    * List community gallery image versions inside an image.
    */
   list is ArmResourceListByParent<
     CommunityGalleryImageVersion,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Response = ArmResponse<CommunityGalleryImageVersionList>
   >;
 }

@@ -14,7 +14,6 @@ namespace Azure.ResourceManager.ApiManagement;
  * Deleted API Management Service information.
  */
 @subscriptionResource
-@parentResource(SubscriptionLocationResource)
 model DeletedServiceContract
   is Azure.ResourceManager.ProxyResource<DeletedServiceContractProperties> {
   ...ResourceNameParameter<

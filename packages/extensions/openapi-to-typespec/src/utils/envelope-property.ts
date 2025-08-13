@@ -66,13 +66,20 @@ const knownEnvelopes: Record<string, Envelope> = {
     schema: { name: "string", type: "primitive", schema: (schema) => schema.type === "string" },
     envelopeName: "Azure.ResourceManager.EntityTagProperty",
   },
+  etag: {
+    serializedName: "etag",
+    required: false,
+    isReadOnly: true,
+    schema: { name: "string", type: "primitive", schema: (schema) => schema.type === "string" },
+    envelopeName: "Azure.ResourceManager.Legacy.EntityTagProperty",
+  },
 };
 
 export function getEnvelopeProperty(property: Property): TypespecSpreadStatement | undefined {
   for (const key of Object.keys(knownEnvelopes)) {
     const envelope = knownEnvelopes[key];
     if (
-      property.serializedName.toLowerCase() === envelope.serializedName.toLowerCase() &&
+      property.serializedName === envelope.serializedName &&
       (property.required ?? false) === envelope.required &&
       (property.readOnly ?? false) === envelope.isReadOnly &&
       isEquivalent(property.schema, envelope.schema)

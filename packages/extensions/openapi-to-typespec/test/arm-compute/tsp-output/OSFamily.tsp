@@ -14,7 +14,6 @@ namespace Microsoft.Compute;
  * Describes a cloud service OS family.
  */
 @subscriptionResource
-@parentResource(SubscriptionLocationResource)
 model OSFamily is Azure.ResourceManager.ProxyResource<OSFamilyProperties> {
   ...ResourceNameParameter<
     Resource = OSFamily,

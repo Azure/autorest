@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.MachineLearning;
  */
 @parentResource(Workspace)
 model PrivateEndpointConnection
-  is Azure.ResourceManager.TrackedResource<PrivateEndpointConnectionProperties> {
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<PrivateEndpointConnectionProperties> {
   ...ResourceNameParameter<
     Resource = PrivateEndpointConnection,
     KeyName = "privateEndpointConnectionName",

@@ -14,7 +14,6 @@ namespace Microsoft.Compute;
  * Describes a cloud service OS version.
  */
 @subscriptionResource
-@parentResource(SubscriptionLocationResource)
 model OSVersion is Azure.ResourceManager.ProxyResource<OSVersionProperties> {
   ...ResourceNameParameter<
     Resource = OSVersion,

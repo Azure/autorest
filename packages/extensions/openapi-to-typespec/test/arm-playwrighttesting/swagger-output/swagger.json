@@ -125,7 +125,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/locations/{location}/quotas": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/quotas": {
       "get": {
         "operationId": "Quotas_ListBySubscription",
         "tags": [
@@ -138,9 +138,6 @@
           },
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -167,7 +164,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/locations/{location}/quotas/{name}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/quotas/{name}": {
       "get": {
         "operationId": "Quotas_Get",
         "tags": [
@@ -180,9 +177,6 @@
           },
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           },
           {
             "name": "name",

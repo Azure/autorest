@@ -16,7 +16,7 @@ namespace Microsoft.Compute;
  */
 @parentResource(CloudService)
 model RoleInstance
-  is Azure.ResourceManager.TrackedResource<RoleInstanceProperties> {
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<RoleInstanceProperties> {
   ...ResourceNameParameter<
     Resource = RoleInstance,
     KeyName = "roleInstanceName",

@@ -14,6 +14,7 @@ namespace Microsoft.Compute;
 /**
  * Specifies information about the gallery image version that you want to create or update.
  */
+@subscriptionResource
 @parentResource(SharedGalleryImage)
 model SharedGalleryImageVersion
   is Azure.ResourceManager.ProxyResource<SharedGalleryImageVersionProperties> {
@@ -30,13 +31,17 @@ interface SharedGalleryImageVersions {
   /**
    * Get a shared gallery image version by subscription id or tenant id.
    */
-  get is ArmResourceRead<SharedGalleryImageVersion>;
+  get is ArmResourceRead<
+    SharedGalleryImageVersion,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 
   /**
    * List shared gallery image versions by subscription id or tenant id.
    */
   list is ArmResourceListByParent<
     SharedGalleryImageVersion,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {
       /**
        * The query parameter to decide what shared galleries to fetch when doing listing operations.

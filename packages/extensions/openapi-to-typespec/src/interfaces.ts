@@ -228,7 +228,11 @@ export interface Models {
   armResources: TspArmResource[];
 }
 
-export type ArmResourceKind = "TrackedResource" | "ProxyResource" | "ExtensionResource";
+export type ArmResourceKind =
+  | "TrackedResource"
+  | "ProxyResource"
+  | "ExtensionResource"
+  | "Legacy.TrackedResourceWithOptionalLocation";
 export type ArmResourceOperationKind = "TrackedResourceOperations" | "ProxyResourceOperations";
 
 const FIRST_LEVEL_RESOURCE = [

@@ -14,6 +14,7 @@ namespace Microsoft.Compute;
 /**
  * Specifies information about the gallery image definition that you want to create or update.
  */
+@subscriptionResource
 @parentResource(CommunityGallery)
 model CommunityGalleryImage
   is Azure.ResourceManager.ProxyResource<CommunityGalleryImageProperties> {
@@ -30,13 +31,17 @@ interface CommunityGalleryImages {
   /**
    * Get a community gallery image.
    */
-  get is ArmResourceRead<CommunityGalleryImage>;
+  get is ArmResourceRead<
+    CommunityGalleryImage,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 
   /**
    * List community gallery images inside a gallery.
    */
   list is ArmResourceListByParent<
     CommunityGalleryImage,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Response = ArmResponse<CommunityGalleryImageList>
   >;
 }
