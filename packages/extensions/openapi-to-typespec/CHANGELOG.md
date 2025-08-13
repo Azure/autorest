@@ -1,6 +1,14 @@
 # Change Log - @autorest/openapi-to-typespec
 
-This log was last generated on Mon, 11 Aug 2025 10:30:03 GMT and should not be manually modified.
+This log was last generated on Wed, 13 Aug 2025 10:38:25 GMT and should not be manually modified.
+
+## 0.11.7
+Wed, 13 Aug 2025 10:38:25 GMT
+
+### Patches
+
+- Record<unknown> -> unknown
+- Support optional location and lowe case etag
 
 ## 0.11.6
 Mon, 11 Aug 2025 10:30:03 GMT
