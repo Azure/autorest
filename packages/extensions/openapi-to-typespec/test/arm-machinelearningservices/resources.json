@@ -135,8 +135,7 @@
         "ResourceKey": "computeName",
         "ResourceKeySegment": "computes",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": true,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -209,8 +208,7 @@
         "ResourceKey": "codeName",
         "ResourceKeySegment": "codes",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -281,8 +279,7 @@
         "ResourceKey": "name",
         "ResourceKeySegment": "codes",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -365,8 +362,7 @@
         "ResourceKey": "version",
         "ResourceKeySegment": "versions",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -447,8 +443,7 @@
         "ResourceKey": "version",
         "ResourceKeySegment": "versions",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -521,8 +516,7 @@
         "ResourceKey": "componentName",
         "ResourceKeySegment": "components",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -593,8 +587,7 @@
         "ResourceKey": "name",
         "ResourceKeySegment": "components",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -667,8 +660,7 @@
         "ResourceKey": "version",
         "ResourceKeySegment": "versions",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -739,8 +731,7 @@
         "ResourceKey": "version",
         "ResourceKeySegment": "versions",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -813,8 +804,7 @@
         "ResourceKey": "name",
         "ResourceKeySegment": "data",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -885,8 +875,7 @@
         "ResourceKey": "name",
         "ResourceKeySegment": "data",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -969,8 +958,7 @@
         "ResourceKey": "version",
         "ResourceKeySegment": "versions",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1041,8 +1029,7 @@
         "ResourceKey": "version",
         "ResourceKeySegment": "versions",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1115,8 +1102,7 @@
         "ResourceKey": "environmentName",
         "ResourceKeySegment": "environments",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1187,8 +1173,7 @@
         "ResourceKey": "name",
         "ResourceKeySegment": "environments",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1261,8 +1246,7 @@
         "ResourceKey": "version",
         "ResourceKeySegment": "versions",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1333,8 +1317,7 @@
         "ResourceKey": "version",
         "ResourceKeySegment": "versions",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1407,8 +1390,7 @@
         "ResourceKey": "modelName",
         "ResourceKeySegment": "models",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1479,8 +1461,7 @@
         "ResourceKey": "name",
         "ResourceKeySegment": "models",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1572,8 +1553,7 @@
         "ResourceKey": "version",
         "ResourceKeySegment": "versions",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1654,8 +1634,7 @@
         "ResourceKey": "version",
         "ResourceKeySegment": "versions",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1738,8 +1717,7 @@
         "ResourceKey": "endpointName",
         "ResourceKeySegment": "batchEndpoints",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1812,8 +1790,7 @@
         "ResourceKey": "deploymentName",
         "ResourceKeySegment": "deployments",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1896,8 +1873,7 @@
         "ResourceKey": "name",
         "ResourceKeySegment": "datastores",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1970,8 +1946,7 @@
         "ResourceKey": "name",
         "ResourceKeySegment": "featuresets",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -2017,8 +1992,7 @@
         "ResourceKey": "featureName",
         "ResourceKeySegment": "features",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -2114,8 +2088,7 @@
         "ResourceKey": "version",
         "ResourceKeySegment": "versions",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -2188,8 +2161,7 @@
         "ResourceKey": "name",
         "ResourceKeySegment": "featurestoreEntities",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -2262,8 +2234,7 @@
         "ResourceKey": "version",
         "ResourceKeySegment": "versions",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -2346,8 +2317,7 @@
         "ResourceKey": "id",
         "ResourceKeySegment": "jobs",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -2448,8 +2418,7 @@
         "ResourceKey": "id",
         "ResourceKeySegment": "labelingJobs",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -2550,8 +2519,7 @@
         "ResourceKey": "endpointName",
         "ResourceKeySegment": "onlineEndpoints",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -2647,8 +2615,7 @@
         "ResourceKey": "deploymentName",
         "ResourceKeySegment": "deployments",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -2721,8 +2688,7 @@
         "ResourceKey": "name",
         "ResourceKeySegment": "schedules",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -2819,8 +2785,7 @@
         "ResourceKey": "registryName",
         "ResourceKeySegment": "registries",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -3019,8 +2984,7 @@
         "ResourceKey": "workspaceName",
         "ResourceKeySegment": "workspaces",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": true,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -3103,8 +3067,7 @@
         "ResourceKey": "connectionName",
         "ResourceKeySegment": "connections",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -3177,8 +3140,7 @@
         "ResourceKey": "ruleName",
         "ResourceKeySegment": "outboundRules",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -3251,8 +3213,7 @@
         "ResourceKey": "privateEndpointConnectionName",
         "ResourceKeySegment": "privateEndpointConnections",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": true,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false

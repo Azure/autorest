@@ -14,7 +14,6 @@ namespace Microsoft.Storage;
  * Deleted storage account
  */
 @subscriptionResource
-@parentResource(SubscriptionLocationResource)
 model DeletedAccount
   is Azure.ResourceManager.ProxyResource<DeletedAccountProperties> {
   ...ResourceNameParameter<

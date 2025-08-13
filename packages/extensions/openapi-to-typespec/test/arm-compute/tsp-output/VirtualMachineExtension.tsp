@@ -16,7 +16,7 @@ namespace Microsoft.Compute;
  */
 @parentResource(VirtualMachine)
 model VirtualMachineExtension
-  is Azure.ResourceManager.TrackedResource<VirtualMachineExtensionProperties> {
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<VirtualMachineExtensionProperties> {
   ...ResourceNameParameter<
     Resource = VirtualMachineExtension,
     KeyName = "vmExtensionName",

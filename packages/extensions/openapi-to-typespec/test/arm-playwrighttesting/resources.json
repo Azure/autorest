@@ -81,8 +81,7 @@
         "ResourceKey": "name",
         "ResourceKeySegment": "accounts",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -128,8 +127,7 @@
         "ResourceKey": "name",
         "ResourceKeySegment": "quotas",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": true,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Subscription",
         "IsSingletonResource": false

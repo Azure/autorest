@@ -37,7 +37,7 @@ model ApiManagementServiceResource
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   identity?: ApiManagementServiceIdentity;
 
-  ...Azure.ResourceManager.EntityTagProperty;
+  ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...Azure.ResourceManager.AvailabilityZonesProperty;
 }
 
@@ -730,7 +730,6 @@ interface ApiManagementServiceResources {
 @@doc(ApiManagementServiceResource.name,
   "The name of the API Management service."
 );
-@@encodedName(ApiManagementServiceResource.eTag, "application/json", "etag");
 @@doc(ApiManagementServiceResource.properties,
   "Properties of the API Management service."
 );

@@ -116,8 +116,7 @@ export function parseMetadata(codeModel: CodeModel, configuration: Record<string
             ResourceKey: "",
             ResourceKeySegment: "",
             IsTrackedResource: false,
-            IsTenantResource: false,
-            IsSubscriptionResource: false,
+            IsTrackedResourceWithOptionalLocation: false,
             IsManagementGroupResource: false,
             ScopeType: "NA",
             IsSingletonResource: false,
@@ -168,8 +167,6 @@ function buildResource(
   }
 
   const parents = getParents(set.RequestPath, operationSets);
-  const isTenantResource = parents.length > 0 && parents[0] === "TenantResource";
-  const isSubscriptionResource = parents.length > 0 && parents[0] === "SubscriptionResource";
   const isManagementGroupResource = parents.length > 0 && parents[0] === "ManagementGroupResource";
 
   const operationsFromResourceGroupExtension = [];
@@ -195,6 +192,7 @@ function buildResource(
     }
   }
 
+  const [isStandardTrackedResource, isOptionalLocation] = isTrackedResource(resourceSchema!);
   return {
     Name: lastWordToSingular(resourceSchemaName),
     GetOperation: getOperation,
@@ -213,9 +211,8 @@ function buildResource(
     ResourceType: getResourceType(set.RequestPath),
     ResourceKey: getResourceKey(set.RequestPath),
     ResourceKeySegment: getResourceKeySegment(set.RequestPath),
-    IsTrackedResource: isTrackedResource(resourceSchema!),
-    IsTenantResource: isTenantResource,
-    IsSubscriptionResource: isSubscriptionResource,
+    IsTrackedResource: isStandardTrackedResource,
+    IsTrackedResourceWithOptionalLocation: isStandardTrackedResource && isOptionalLocation,
     IsManagementGroupResource: isManagementGroupResource,
     ScopeType: getExtensionResourceType(set.RequestPath),
     IsSingletonResource: isSingleton(set),

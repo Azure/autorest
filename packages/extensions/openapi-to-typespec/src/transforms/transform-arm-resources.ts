@@ -955,19 +955,13 @@ function getOtherProperties(
 ): (TypespecObjectProperty | TypespecSpreadStatement)[] {
   const knownProperties = ["properties", "name", "id", "type", "systemData"];
   const resourceKind = getResourceKind(schema);
-  if (resourceKind === "TrackedResource") {
+  if (resourceKind === "TrackedResource" || resourceKind === "Legacy.TrackedResourceWithOptionalLocation") {
     knownProperties.push(...["location", "tags"]);
   }
   const otherProperties: (TypespecObjectProperty | TypespecSpreadStatement)[] = [];
   for (const property of schema.properties ?? []) {
     if (!knownProperties.includes(property.serializedName)) {
       const envolopeProperty = getEnvelopeProperty(property);
-      if (envolopeProperty) {
-        const envelopeAugmentedDecorator = getEnvelopeAugmentedDecorator(schema, property);
-        if (envelopeAugmentedDecorator) {
-          augmentDecorators.push(envelopeAugmentedDecorator);
-        }
-      }
       otherProperties.push(
         envolopeProperty ?? {
           ...transformObjectProperty(property, getSession().model),
@@ -1217,9 +1211,9 @@ function buildOperationParameters(
 
   // By default we don't need any base parameters.
   const parameterTemplate: string[] = [];
-  if (resource.IsTenantResource) {
+  if (resource.ScopeType === "Tenant") {
     parameterTemplate.push(getFullyQualifiedName("TenantBaseParameters"));
-  } else if (resource.IsSubscriptionResource) {
+  } else if (resource.ScopeType === "Subscription") {
     parameterTemplate.push(getFullyQualifiedName("SubscriptionBaseParameters"));
   }
 
@@ -1264,6 +1258,10 @@ function getParentResource(schema: ArmResourceSchema): TspArmResource | undefine
 function getResourceKind(schema: ArmResourceSchema): ArmResourceKind {
   if (schema.resourceMetadata[0].ScopeType === "Scope") {
     return "ExtensionResource";
+  }
+
+  if (schema.resourceMetadata[0].IsTrackedResourceWithOptionalLocation) {
+    return "Legacy.TrackedResourceWithOptionalLocation";
   }
 
   if (schema.resourceMetadata[0].IsTrackedResource) {
@@ -1359,11 +1357,11 @@ function buildResourceDecorators(schema: ArmResourceSchema): TypespecDecorator[]
     });
   }
 
-  if (schema.resourceMetadata[0].IsTenantResource) {
+  if (schema.resourceMetadata[0].ScopeType === "Tenant") {
     resourceModelDecorators.push({
       name: "tenantResource",
     });
-  } else if (schema.resourceMetadata[0].IsSubscriptionResource) {
+  } else if (schema.resourceMetadata[0].ScopeType === "Subscription") {
     resourceModelDecorators.push({
       name: "subscriptionResource",
     });
@@ -1397,10 +1395,8 @@ function getSingletonName(schema: ArmResourceSchema): string {
 
 function getLocationParent(schema: ArmResourceSchema): string | undefined {
   if (schema.resourceMetadata[0].GetOperation!.Path.includes("/locations/")) {
-    if (schema.resourceMetadata[0].IsTenantResource) {
+    if (schema.resourceMetadata[0].ScopeType === "Tenant") {
       return "TenantLocationResource";
-    } else if (schema.resourceMetadata[0].IsSubscriptionResource) {
-      return "SubscriptionLocationResource";
     } else if (schema.resourceMetadata[0].Parents?.[0] === "ResourceGroupResource") {
       return "ResourceGroupLocationResource";
     }

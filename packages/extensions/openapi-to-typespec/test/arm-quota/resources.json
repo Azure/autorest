@@ -81,8 +81,7 @@
         "ResourceKey": "groupQuotaName",
         "ResourceKeySegment": "groupQuotas",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": true,
         "ScopeType": "ManagementGroup",
         "IsSingletonResource": false
@@ -155,8 +154,7 @@
         "ResourceKey": "subscriptionId",
         "ResourceKeySegment": "subscriptions",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ManagementGroup",
         "IsSingletonResource": false
@@ -202,8 +200,7 @@
         "ResourceKey": "requestId",
         "ResourceKeySegment": "subscriptionRequests",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ManagementGroup",
         "IsSingletonResource": false
@@ -244,8 +241,7 @@
         "ResourceKey": "location",
         "ResourceKeySegment": "groupQuotaLimits",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ManagementGroup",
         "IsSingletonResource": false
@@ -277,8 +273,7 @@
         "ResourceKey": "requestId",
         "ResourceKeySegment": "groupQuotaRequests",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ManagementGroup",
         "IsSingletonResource": false
@@ -319,8 +314,7 @@
         "ResourceKey": "location",
         "ResourceKeySegment": "quotaAllocations",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": true,
         "ScopeType": "ManagementGroup",
         "IsSingletonResource": false
@@ -366,8 +360,7 @@
         "ResourceKey": "allocationId",
         "ResourceKeySegment": "quotaAllocationRequests",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": true,
         "ScopeType": "ManagementGroup",
         "IsSingletonResource": false
@@ -413,8 +406,7 @@
         "ResourceKey": "resourceName",
         "ResourceKeySegment": "usages",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Scope",
         "IsSingletonResource": false
@@ -478,8 +470,7 @@
         "ResourceKey": "resourceName",
         "ResourceKeySegment": "quotas",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Scope",
         "IsSingletonResource": false
@@ -525,8 +516,7 @@
         "ResourceKey": "id",
         "ResourceKeySegment": "quotaRequests",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Scope",
         "IsSingletonResource": false

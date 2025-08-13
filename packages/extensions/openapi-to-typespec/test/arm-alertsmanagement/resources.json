@@ -81,8 +81,7 @@
         "ResourceKey": "alertProcessingRuleName",
         "ResourceKeySegment": "actionRules",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -147,8 +146,7 @@
         "ResourceKey": "alertId",
         "ResourceKeySegment": "alerts",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": true,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Subscription",
         "IsSingletonResource": false
@@ -213,8 +211,7 @@
         "ResourceKey": "smartGroupId",
         "ResourceKeySegment": "smartGroups",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": true,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Subscription",
         "IsSingletonResource": false

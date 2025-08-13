@@ -81,8 +81,7 @@
         "ResourceKey": "trafficControllerName",
         "ResourceKeySegment": "trafficControllers",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -155,8 +154,7 @@
         "ResourceKey": "associationName",
         "ResourceKeySegment": "associations",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -229,8 +227,7 @@
         "ResourceKey": "frontendName",
         "ResourceKeySegment": "frontends",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false

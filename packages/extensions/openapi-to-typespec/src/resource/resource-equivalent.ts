@@ -28,21 +28,23 @@ export function isResource(schema: ObjectSchema): boolean {
   return idPropertyFound && typePropertyFound && namePropertyFound;
 }
 
-export function isTrackedResource(schema: ObjectSchema): boolean {
-  if (!isResource(schema)) return false;
+export function isTrackedResource(schema: ObjectSchema): [isTrackedResource: boolean, isOptionalLocation: boolean] {
+  if (!isResource(schema)) return [false, false];
 
   let isLocationFound = false;
+  let isOptionalLocation = false;
   let isTagsFound = false;
   for (const property of getAllProperties(schema)) {
     if (property.flattenedNames) continue;
 
     if (property.serializedName === "location" && isStringSchema(property.schema)) {
       isLocationFound = true;
+      isOptionalLocation = property.required !== true;
     } else if (property.serializedName === "tags" && isDictionarySchema(property.schema)) {
       isTagsFound = true;
     }
   }
-  return isLocationFound && isTagsFound;
+  return [isLocationFound && isTagsFound, isLocationFound && isTagsFound && isOptionalLocation];
 }
 
 export function getPagingItemType(operation: Operation, markPaging: boolean = false): string | undefined {

@@ -104,8 +104,7 @@
         "ResourceKey": "guestConfigurationAssignmentName",
         "ResourceKeySegment": "guestConfigurationAssignments",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Extension",
         "IsSingletonResource": false
@@ -199,8 +198,7 @@
         "ResourceKey": "guestConfigurationAssignmentName",
         "ResourceKeySegment": "guestConfigurationAssignments",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Extension",
         "IsSingletonResource": false
@@ -294,8 +292,7 @@
         "ResourceKey": "name",
         "ResourceKeySegment": "guestConfigurationAssignments",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Extension",
         "IsSingletonResource": false
@@ -389,8 +386,7 @@
         "ResourceKey": "guestConfigurationAssignmentName",
         "ResourceKeySegment": "guestConfigurationAssignments",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Extension",
         "IsSingletonResource": false

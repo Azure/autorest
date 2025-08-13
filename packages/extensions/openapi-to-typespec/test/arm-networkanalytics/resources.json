@@ -127,8 +127,7 @@
         "ResourceKey": "dataProductName",
         "ResourceKeySegment": "dataProducts",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -188,8 +187,7 @@
         "ResourceKey": "default",
         "ResourceKeySegment": "dataProductsCatalogs",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": true
@@ -281,8 +279,7 @@
         "ResourceKey": "dataTypeName",
         "ResourceKeySegment": "dataTypes",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false

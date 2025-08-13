@@ -81,8 +81,7 @@
         "ResourceKey": "spaceName",
         "ResourceKeySegment": "spaces",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -205,8 +204,7 @@
         "ResourceKey": "applicationName",
         "ResourceKeySegment": "applications",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -279,8 +277,7 @@
         "ResourceKey": "businessProcessName",
         "ResourceKeySegment": "businessProcesses",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -326,8 +323,7 @@
         "ResourceKey": "businessProcessVersion",
         "ResourceKeySegment": "versions",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -400,8 +396,7 @@
         "ResourceKey": "resourceName",
         "ResourceKeySegment": "resources",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -474,8 +469,7 @@
         "ResourceKey": "infrastructureResourceName",
         "ResourceKeySegment": "infrastructureResources",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false

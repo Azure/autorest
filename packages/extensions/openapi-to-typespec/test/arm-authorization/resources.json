@@ -79,8 +79,7 @@
         "ResourceKey": "denyAssignmentId",
         "ResourceKeySegment": "denyAssignments",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Scope",
         "IsSingletonResource": false
@@ -126,8 +125,7 @@
         "ResourceKey": "resourceProviderNamespace",
         "ResourceKeySegment": "providerOperations",
         "IsTrackedResource": false,
-        "IsTenantResource": true,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Tenant",
         "IsSingletonResource": false
@@ -200,8 +198,7 @@
         "ResourceKey": "roleAssignmentName",
         "ResourceKeySegment": "roleAssignments",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Scope",
         "IsSingletonResource": false
@@ -274,8 +271,7 @@
         "ResourceKey": "roleDefinitionId",
         "ResourceKeySegment": "roleDefinitions",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Scope",
         "IsSingletonResource": false
@@ -321,8 +317,7 @@
         "ResourceKey": "roleAssignmentScheduleName",
         "ResourceKeySegment": "roleAssignmentSchedules",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Scope",
         "IsSingletonResource": false
@@ -368,8 +363,7 @@
         "ResourceKey": "roleAssignmentScheduleInstanceName",
         "ResourceKeySegment": "roleAssignmentScheduleInstances",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Scope",
         "IsSingletonResource": false
@@ -452,8 +446,7 @@
         "ResourceKey": "roleAssignmentScheduleRequestName",
         "ResourceKeySegment": "roleAssignmentScheduleRequests",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Scope",
         "IsSingletonResource": false
@@ -499,8 +492,7 @@
         "ResourceKey": "roleEligibilityScheduleName",
         "ResourceKeySegment": "roleEligibilitySchedules",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Scope",
         "IsSingletonResource": false
@@ -546,8 +538,7 @@
         "ResourceKey": "roleEligibilityScheduleInstanceName",
         "ResourceKeySegment": "roleEligibilityScheduleInstances",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Scope",
         "IsSingletonResource": false
@@ -630,8 +621,7 @@
         "ResourceKey": "roleEligibilityScheduleRequestName",
         "ResourceKeySegment": "roleEligibilityScheduleRequests",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Scope",
         "IsSingletonResource": false
@@ -686,8 +676,7 @@
         "ResourceKey": "roleManagementPolicyName",
         "ResourceKeySegment": "roleManagementPolicies",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Scope",
         "IsSingletonResource": false
@@ -751,8 +740,7 @@
         "ResourceKey": "roleManagementPolicyAssignmentName",
         "ResourceKeySegment": "roleManagementPolicyAssignments",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Scope",
         "IsSingletonResource": false

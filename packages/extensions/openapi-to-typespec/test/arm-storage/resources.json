@@ -184,8 +184,7 @@
         "ResourceKey": "accountName",
         "ResourceKeySegment": "storageAccounts",
         "IsTrackedResource": true,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -217,8 +216,7 @@
         "ResourceKey": "deletedAccountName",
         "ResourceKeySegment": "deletedAccounts",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": true,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "Subscription",
         "IsSingletonResource": false
@@ -277,8 +275,7 @@
         "ResourceKey": "managementPolicyName",
         "ResourceKeySegment": "managementPolicies",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -351,8 +348,7 @@
         "ResourceKey": "blobInventoryPolicyName",
         "ResourceKeySegment": "inventoryPolicies",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -425,8 +421,7 @@
         "ResourceKey": "privateEndpointConnectionName",
         "ResourceKeySegment": "privateEndpointConnections",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -499,8 +494,7 @@
         "ResourceKey": "objectReplicationPolicyId",
         "ResourceKeySegment": "objectReplicationPolicies",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -592,8 +586,7 @@
         "ResourceKey": "username",
         "ResourceKeySegment": "localUsers",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -657,8 +650,7 @@
         "ResourceKey": "encryptionScopeName",
         "ResourceKeySegment": "encryptionScopes",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -722,8 +714,7 @@
         "ResourceKey": "BlobServicesName",
         "ResourceKeySegment": "blobServices",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": true
@@ -833,8 +824,7 @@
         "ResourceKey": "containerName",
         "ResourceKeySegment": "containers",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -912,8 +902,7 @@
         "ResourceKey": "immutabilityPolicyName",
         "ResourceKeySegment": "immutabilityPolicies",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": true
@@ -977,8 +966,7 @@
         "ResourceKey": "FileServicesName",
         "ResourceKeySegment": "fileServices",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": true
@@ -1070,8 +1058,7 @@
         "ResourceKey": "shareName",
         "ResourceKeySegment": "shares",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1135,8 +1122,7 @@
         "ResourceKey": "queueServiceName",
         "ResourceKeySegment": "queueServices",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": true
@@ -1209,8 +1195,7 @@
         "ResourceKey": "queueName",
         "ResourceKeySegment": "queues",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false
@@ -1274,8 +1259,7 @@
         "ResourceKey": "tableServiceName",
         "ResourceKeySegment": "tableServices",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": true
@@ -1348,8 +1332,7 @@
         "ResourceKey": "tableName",
         "ResourceKeySegment": "tables",
         "IsTrackedResource": false,
-        "IsTenantResource": false,
-        "IsSubscriptionResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
         "IsManagementGroupResource": false,
         "ScopeType": "ResourceGroup",
         "IsSingletonResource": false

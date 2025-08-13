@@ -14,6 +14,7 @@ namespace Microsoft.Compute;
 /**
  * Specifies information about the gallery image definition that you want to create or update.
  */
+@subscriptionResource
 @parentResource(SharedGallery)
 model SharedGalleryImage
   is Azure.ResourceManager.ProxyResource<SharedGalleryImageProperties> {
@@ -30,13 +31,17 @@ interface SharedGalleryImages {
   /**
    * Get a shared gallery image by subscription id or tenant id.
    */
-  get is ArmResourceRead<SharedGalleryImage>;
+  get is ArmResourceRead<
+    SharedGalleryImage,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 
   /**
    * List shared gallery images by subscription id or tenant id.
    */
   list is ArmResourceListByParent<
     SharedGalleryImage,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {
       /**
        * The query parameter to decide what shared galleries to fetch when doing listing operations.
