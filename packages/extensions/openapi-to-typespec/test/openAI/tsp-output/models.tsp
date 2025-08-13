@@ -55,7 +55,7 @@ model Paths1Vtxb06DeploymentsDeploymentIdCompletionsPostRequestbodyContentApplic
    * token. As an example, you can pass {"50256" &#58; -100} to prevent the
    * <|endoftext|> token from being generated.
    */
-  logit_bias?: Record<unknown>;
+  logit_bias?: unknown;
 
   /**
    * The ID of the end-user, for use in tracking and rate-limiting.

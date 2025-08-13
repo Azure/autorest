@@ -617,7 +617,7 @@ model UsagesProperties {
   /**
    * Additional properties for the specific resource provider.
    */
-  properties?: Record<unknown>;
+  properties?: unknown;
 }
 
 /**
@@ -751,7 +751,7 @@ model QuotaProperties {
   /**
    * Additional properties for the specific resource provider.
    */
-  properties?: Record<unknown>;
+  properties?: unknown;
 }
 
 /**
@@ -1157,7 +1157,7 @@ model QuotaRequestOneResourceProperties {
   /**
    * Additional properties for the specific resource provider.
    */
-  properties?: Record<unknown>;
+  properties?: unknown;
 }
 
 /**
@@ -1267,5 +1267,5 @@ model QuotaRequestStatusDetails {
   /**
    * Additional properties for the specific resource provider.
    */
-  properties?: Record<unknown>;
+  properties?: unknown;
 }

@@ -3341,13 +3341,13 @@ model VMExtension {
   /**
    * JSON formatted public settings for the extension.
    */
-  settings?: Record<unknown>;
+  settings?: unknown;
 
   /**
    * The extension can contain either protectedSettings or
    * protectedSettingsFromKeyVault or no protected settings at all.
    */
-  protectedSettings?: Record<unknown>;
+  protectedSettings?: unknown;
 
   /**
    * Collection of extension names after which this extension needs to be
