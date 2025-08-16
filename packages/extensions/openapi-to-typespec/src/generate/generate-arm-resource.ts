@@ -61,6 +61,12 @@ function generateArmResourceModel(resource: TspArmResource): string {
   const doc = generateDocs(resource);
   definitions.push(doc);
 
+  if (resource.resourceKind === "PrivateEndpointConnectionResource") {
+    definitions.push(`model PrivateEndpointConnection is PrivateEndpointConnectionResource;`);
+    definitions.push(`alias PrivateEndpointOperations = PrivateEndpoints<PrivateEndpointConnection>;`);
+    return definitions.join("\n");
+  }
+
   const decorators = generateDecorators(resource.decorators);
   decorators && definitions.push(decorators);
 
@@ -91,13 +97,16 @@ function generateArmResourceOperationGroups(resource: TspArmResource): string {
   const definitions: string[] = [];
 
   for (const operationGroup of resource.resourceOperationGroups) {
-    definitions.push(generateArmResourceOperationGroup(operationGroup));
+    definitions.push(generateArmResourceOperationGroup(operationGroup, resource));
   }
 
   return definitions.join("\n");
 }
 
-function generateArmResourceOperationGroup(operationGroup: TspArmResourceOperationGroup): string {
+function generateArmResourceOperationGroup(
+  operationGroup: TspArmResourceOperationGroup,
+  resource: TspArmResource,
+): string {
   const { isFullCompatible } = getOptions();
 
   const definitions: string[] = [];
@@ -138,10 +147,10 @@ function generateArmResourceOperationGroup(operationGroup: TspArmResourceOperati
 
     const operationKind = operationGroup.isLegacy
       ? `${operationGroup.legacyOperationGroup!.interfaceName}.${getLegacyOperationKind(operation.kind)}`
-      : getOperationKind(operation);
+      : getOperationKind(operation, resource);
     if (operation.kind === "ArmResourceActionSync" || operation.kind === "ArmResourceActionAsync") {
       definitions.push(
-        `${operation.name} is ${operationKind}<${operation.targetResource ? `${operation.targetResource}, ` : ""}${operation.resource}, ${generateArmRequest(
+        `${operation.name} is ${operationKind}<${getSpecialParameter(operation, resource)}${operation.resource}, ${generateArmRequest(
           operation.request,
         )}, ${generateArmResponse(operation.response)}${
           operation.baseParameters && !operationGroup.isLegacy
@@ -153,7 +162,7 @@ function generateArmResourceOperationGroup(operationGroup: TspArmResourceOperati
       );
     } else if (operation.kind === "ArmResourceActionAsyncBase") {
       definitions.push(
-        `${operation.name} is ${operationKind}<${operation.targetResource ? `${operation.targetResource}, ` : ""}${operation.resource}, ${generateArmRequest(
+        `${operation.name} is ${operationKind}<${getSpecialParameter(operation, resource)}${operation.resource}, ${generateArmRequest(
           operation.request,
         )}, ${generateArmResponse(operation.response)}, BaseParameters = ${operation.baseParameters![0]}${
           operation.parameters ? `, Parameters = { ${generateParameters(operation.parameters)} }` : ""
@@ -161,7 +170,7 @@ function generateArmResourceOperationGroup(operationGroup: TspArmResourceOperati
       );
     } else {
       definitions.push(
-        `${operation.name} is ${operationKind}<${operation.targetResource ? `${operation.targetResource}, ` : ""}${operation.resource}${
+        `${operation.name} is ${operationKind}<${getSpecialParameter(operation, resource)}${operation.resource}${
           operation.patchModel ? `, PatchModel = ${operation.patchModel}` : ""
         }${
           operation.baseParameters && !operationGroup.isLegacy
@@ -187,13 +196,65 @@ function isPatchWithOptionalBody(operation: TspArmResourceOperation): boolean {
   );
 }
 
-function getOperationKind(operation: TspArmResourceOperation): string {
+// These templates have special parameter as the first parameter
+// - Extension operations
+// - PrivateEndpointConnection operations
+function getSpecialParameter(operation: TspArmResourceOperation, resource: TspArmResource): string {
+  if (operation.targetResource) return `${operation.targetResource}, `;
+  if (resource.resourceKind === "PrivateEndpointConnectionResource") return `${resource.resourceParent!.name}, `;
+  return "";
+}
+
+function getOperationKind(operation: TspArmResourceOperation, resource: TspArmResource): string {
+  if (resource.resourceKind === "PrivateEndpointConnectionResource")
+    return `PrivateEndpointOperations.${getPrivateEndpointConnectionOperationKind(operation.kind)}`;
   if (operation.targetResource) return `Extension.${getExtensionOperationKind(operation.kind)}`;
   if (isPatchWithOptionalBody(operation)) return `Azure.ResourceManager.Legacy.${operation.kind.replace("Arm", "")}`;
   return operation.kind;
 }
 
+function getPrivateEndpointConnectionOperationKind(kind: TspArmOperationType): string {
+  switch (kind) {
+    case "ArmResourceListByParent":
+      return "ListByParent";
+    default:
+      return getOperationBaseKind(kind);
+  }
+}
+
 function getExtensionOperationKind(kind: TspArmOperationType): string {
+  switch (kind) {
+    case "ArmResourceDeleteWithoutOkAsync":
+      return "DeleteWithoutOkAsync";
+    case "ArmResourceListByParent":
+      return "ListByTarget";
+    case "ArmListBySubscription":
+      return "List";
+    case "ArmResourceListAtScope":
+      return "List";
+    default:
+      return getOperationBaseKind(kind);
+  }
+}
+
+function getLegacyOperationKind(kind: TspArmOperationType): string {
+  switch (kind) {
+    case "ArmResourceCreateOrReplaceSync":
+      return "CreateOrUpdateSync";
+    case "ArmResourceCreateOrReplaceAsync":
+      return "CreateOrUpdateAsync";
+    case "ArmResourcePatchSync":
+      return "PatchSync";
+    case "ArmResourcePatchAsync":
+      return "PatchAsync";
+    case "ArmResourceDeleteWithoutOkAsync":
+      return "DeleteWithoutOkAsync";
+    default:
+      return getOperationBaseKind(kind);
+  }
+}
+
+function getOperationBaseKind(kind: TspArmOperationType): string {
   switch (kind) {
     case "ArmResourceRead":
       return "Read";
@@ -214,44 +275,7 @@ function getExtensionOperationKind(kind: TspArmOperationType): string {
     case "ArmResourceDeleteSync":
       return "DeleteSync";
     case "ArmResourceDeleteWithoutOkAsync":
-      return "DeleteWithoutOkAsync";
-    case "ArmResourceActionSync":
-      return "ActionSync";
-    case "ArmResourceActionAsync":
-      return "ActionAsync";
-    case "ArmResourceActionAsyncBase":
-      return "ActionAsyncBase";
-    case "ArmResourceListByParent":
-      return "ListByTarget";
-    case "ArmListBySubscription":
-      return "List";
-    case "ArmResourceListAtScope":
-      return "List";
-  }
-}
-
-function getLegacyOperationKind(kind: TspArmOperationType): string {
-  switch (kind) {
-    case "ArmResourceRead":
-      return "Read";
-    case "ArmResourceCheckExistence":
-      return "CheckExistence";
-    case "ArmResourceCreateOrReplaceSync":
-      return "CreateOrUpdateSync";
-    case "ArmResourceCreateOrReplaceAsync":
-      return "CreateOrUpdateAsync";
-    case "ArmResourcePatchSync":
-      return "PatchSync";
-    case "ArmResourcePatchAsync":
-      return "PatchAsync";
-    case "ArmCustomPatchSync":
-      return "CustomPatchSync";
-    case "ArmCustomPatchAsync":
-      return "CustomPatchAsync";
-    case "ArmResourceDeleteSync":
-      return "DeleteSync";
-    case "ArmResourceDeleteWithoutOkAsync":
-      return "DeleteWithoutOkAsync";
+      return "DeleteAsync";
     case "ArmResourceActionSync":
       return "ActionSync";
     case "ArmResourceActionAsync":
