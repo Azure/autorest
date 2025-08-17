@@ -21,8 +21,7 @@ interface SkusOperationGroup {
   @action("skus")
   list is ArmProviderActionSync<
     Response = StorageSkuListResult,
-    Scope = SubscriptionActionScope,
-    Parameters = {}
+    Scope = SubscriptionActionScope
   >;
 }
 
@@ -35,8 +34,7 @@ interface StorageAccountsOperationGroup {
   checkNameAvailability is ArmProviderActionSync<
     Request = StorageAccountCheckNameAvailabilityParameters,
     Response = CheckNameAvailabilityResult,
-    Scope = SubscriptionActionScope,
-    Parameters = {}
+    Scope = SubscriptionActionScope
   >;
 }
 
@@ -50,8 +48,7 @@ interface DeletedAccountsOperationGroup {
   @action("deletedAccounts")
   list is ArmProviderActionSync<
     Response = ResourceListResult<DeletedAccount>,
-    Scope = SubscriptionActionScope,
-    Parameters = {}
+    Scope = SubscriptionActionScope
   >;
 }
 

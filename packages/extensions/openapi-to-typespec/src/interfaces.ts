@@ -340,7 +340,12 @@ export interface TspArmProviderActionOperation extends WithDoc, WithSummary, Wit
   action?: string;
   response?: string;
   verb?: string;
-  scope?: "TenantActionScope" | "SubscriptionActionScope";
+  scope?:
+    | "TenantActionScope"
+    | "SubscriptionActionScope"
+    | "ExtensionResourceActionScope"
+    | "ExtensionActionScope"
+    | "Extension.ResourceGroup";
   parameters: TypespecParameter[];
   request?: TypespecParameter;
   decorators?: TypespecDecorator[];

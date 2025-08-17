@@ -16,11 +16,11 @@ interface GuestConfigurationAssignmentsOperationGroup {
   /**
    * List all guest configuration assignments for a resource group.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments")
+  @autoRoute
   @get
-  rGList(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-    ...SubscriptionIdParameter,
-  ): ArmResponse<GuestConfigurationAssignmentList> | ErrorResponse;
+  @action("guestConfigurationAssignments")
+  rGList is ArmProviderActionSync<
+    Response = GuestConfigurationAssignmentList,
+    Scope = Extension.ResourceGroup
+  >;
 }
