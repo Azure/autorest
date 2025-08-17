@@ -21,8 +21,7 @@ interface ClassicAdministratorsOperationGroup {
   @action("classicAdministrators")
   list is ArmProviderActionSync<
     Response = ResourceListResult<ClassicAdministrator>,
-    Scope = SubscriptionActionScope,
-    Parameters = {}
+    Scope = SubscriptionActionScope
   >;
 }
 
@@ -40,13 +39,13 @@ interface AzurePermissionsForResourceGroupOperationGroup {
   /**
    * Gets all permissions the caller has for a resource group.
    */
-  @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Authorization/permissions")
+  @autoRoute
   @get
-  list(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-    ...SubscriptionIdParameter,
-  ): ArmResponse<PermissionGetResult> | ErrorResponse;
+  @action("permissions")
+  list is ArmProviderActionSync<
+    Response = PermissionGetResult,
+    Scope = Extension.ResourceGroup
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -54,38 +53,42 @@ interface AzurePermissionsForResourceOperationGroup {
   /**
    * Gets all permissions the caller has for a resource.
    */
-  @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/permissions")
+  @autoRoute
   @get
-  list(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
+  @action("permissions")
+  list is ArmProviderActionSync<
+    Response = PermissionGetResult,
+    Scope = Extension.ResourceGroup,
+    Parameters = {
+      /**
+       * The namespace of the resource provider.
+       */
+      @path
+      @segment("providers")
+      resourceProviderNamespace: string;
 
-    /**
-     * The namespace of the resource provider.
-     */
-    @path
-    resourceProviderNamespace: string,
+      /**
+       * The parent resource identity.
+       */
+      @path
+      @segment("{resourceProviderNamespace}")
+      parentResourcePath: string;
 
-    /**
-     * The parent resource identity.
-     */
-    @path
-    parentResourcePath: string,
+      /**
+       * The resource type of the resource.
+       */
+      @path
+      @segment("{parentResourcePath}")
+      resourceType: string;
 
-    /**
-     * The resource type of the resource.
-     */
-    @path
-    resourceType: string,
-
-    /**
-     * The name of the resource to get the permissions for.
-     */
-    @path
-    resourceName: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<PermissionGetResult> | ErrorResponse;
+      /**
+       * The name of the resource to get the permissions for.
+       */
+      @path
+      @segment("{resourceType}")
+      resourceName: string;
+    }
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -93,21 +96,18 @@ interface EligibleChildResourcesOperationGroup {
   /**
    * Get the child resources of a resource on which user has eligible access
    */
-  @route("/{scope}/providers/Microsoft.Authorization/eligibleChildResources")
+  @autoRoute
   @get
-  get(
-    ...ApiVersionParameter,
-
-    /**
-     * The scope of the role management policy.
-     */
-    @path
-    scope: string,
-
-    /**
-     * The filter to apply on the operation. Use $filter=resourceType+eq+'Subscription' to filter on only resource of type = 'Subscription'. Use $filter=resourceType+eq+'subscription'+or+resourceType+eq+'resourcegroup' to filter on resource of type = 'Subscription' or 'ResourceGroup'
-     */
-    @query("$filter")
-    $filter?: string,
-  ): ArmResponse<ResourceListResult<EligibleChildResource>> | ErrorResponse;
+  @action("eligibleChildResources")
+  get is ArmProviderActionSync<
+    Response = ResourceListResult<EligibleChildResource>,
+    Scope = ExtensionActionScope,
+    Parameters = {
+      /**
+       * The filter to apply on the operation. Use $filter=resourceType+eq+'Subscription' to filter on only resource of type = 'Subscription'. Use $filter=resourceType+eq+'subscription'+or+resourceType+eq+'resourcegroup' to filter on resource of type = 'Subscription' or 'ResourceGroup'
+       */
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
 }

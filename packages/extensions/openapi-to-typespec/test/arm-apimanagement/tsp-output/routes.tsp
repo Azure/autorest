@@ -66,8 +66,7 @@ interface DeletedServicesOperationGroup {
   @action("deletedservices")
   listBySubscription is ArmProviderActionSync<
     Response = ResourceListResult<DeletedServiceContract>,
-    Scope = SubscriptionActionScope,
-    Parameters = {}
+    Scope = SubscriptionActionScope
   >;
 }
 
@@ -80,8 +79,7 @@ interface ApiManagementServiceOperationGroup {
   checkNameAvailability is ArmProviderActionSync<
     Request = ApiManagementServiceCheckNameAvailabilityParameters,
     Response = ApiManagementServiceNameAvailabilityResult,
-    Scope = SubscriptionActionScope,
-    Parameters = {}
+    Scope = SubscriptionActionScope
   >;
   /**
    * Get the custom domain ownership identifier for an API Management service.
@@ -89,8 +87,7 @@ interface ApiManagementServiceOperationGroup {
   @autoRoute
   getDomainOwnershipIdentifier is ArmProviderActionSync<
     Response = ApiManagementServiceGetDomainOwnershipIdentifierResult,
-    Scope = SubscriptionActionScope,
-    Parameters = {}
+    Scope = SubscriptionActionScope
   >;
 }
 
@@ -104,7 +101,6 @@ interface ApiManagementSkusOperationGroup {
   @action("skus")
   list is ArmProviderActionSync<
     Response = ApiManagementSkusResult,
-    Scope = SubscriptionActionScope,
-    Parameters = {}
+    Scope = SubscriptionActionScope
   >;
 }

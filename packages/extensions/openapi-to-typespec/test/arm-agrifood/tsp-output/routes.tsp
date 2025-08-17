@@ -20,8 +20,7 @@ interface CheckNameAvailabilityOperationGroup {
   checkNameAvailability is ArmProviderActionSync<
     Request = Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
     Response = Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse,
-    Scope = SubscriptionActionScope,
-    Parameters = {}
+    Scope = SubscriptionActionScope
   >;
 }
 

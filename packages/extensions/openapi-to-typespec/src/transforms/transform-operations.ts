@@ -174,60 +174,60 @@ export function transformRequest(
 
   if (isArm) {
     const route = transformRoute(requests?.[0].protocol);
-    if (route.startsWith("/subscriptions/{subscriptionId}/providers/") || route.startsWith("/providers/")) {
-      const action = getActionForPrviderTemplate(route);
-      if (action !== undefined) {
-        const isLongRunning = operation.extensions?.["x-ms-long-running-operation"] ?? false;
-        decorators.push({
-          name: "autoRoute",
-          module: "@typespec/rest",
-          namespace: "TypeSpec.Rest",
-        });
+    const action = getActionForPrviderTemplate(route);
+    if (action !== undefined) {
+      const isLongRunning = operation.extensions?.["x-ms-long-running-operation"] ?? false;
+      decorators.push({
+        name: "autoRoute",
+        module: "@typespec/rest",
+        namespace: "TypeSpec.Rest",
+      });
 
-        const verb = transformVerb(requests?.[0].protocol);
+      const verb = transformVerb(requests?.[0].protocol);
 
-        // For Async, there should be a 202 response without body and might be a 200 response with body
-        // For Sync, there might be a 200 response with body
-        const response = transformedResponses.find((r) => r[0] === "200")?.[1] ?? undefined;
-        const finalStateVia =
-          operation.extensions?.["x-ms-long-running-operation-options"]?.["final-state-via"] ?? "location";
-        const lroHeaders: TspLroHeaders | undefined =
-          isLongRunning && finalStateVia === "azure-async-operation"
-            ? { type: "Azure-AsyncOperation", finalResult: response }
-            : undefined;
-        const suppressions =
-          isFullCompatible && lroHeaders ? [getSuppressionWithCode(SuppressionCode.LroLocationHeader)] : undefined;
-        return {
-          kind: isLongRunning ? "ArmProviderActionAsync" : "ArmProviderActionSync",
-          doc,
-          summary,
-          name,
-          verb: verb === "post" ? undefined : verb,
-          action: action === name ? undefined : action,
-          scope: route.startsWith("/providers/") ? undefined : "SubscriptionActionScope",
-          response,
-          parameters: parameters
-            .filter((p) => p.location !== "body")
-            .map((p) => {
-              if (p.location === "path") {
-                const segment = getSegmentForPathParameter(route, p.name);
-                if (p.decorators === undefined) p.decorators = [];
-                p.decorators.push({
-                  name: "segment",
-                  arguments: [segment],
-                });
-              }
-              return p;
-            }),
-          request: parameters.find((p) => p.location === "body"),
-          decorators,
-          lroHeaders,
-          suppressions,
-          examples: operation.extensions?.["x-ms-examples"],
-          operationId: operation.operationId,
-          clientDecorators,
-        };
-      }
+      // For Async, there should be a 202 response without body and might be a 200 response with body
+      // For Sync, there might be a 200 response with body
+      const response = transformedResponses.find((r) => r[0] === "200")?.[1] ?? undefined;
+      const finalStateVia =
+        operation.extensions?.["x-ms-long-running-operation-options"]?.["final-state-via"] ?? "location";
+      const lroHeaders: TspLroHeaders | undefined =
+        isLongRunning && finalStateVia === "azure-async-operation"
+          ? { type: "Azure-AsyncOperation", finalResult: response }
+          : undefined;
+      const suppressions =
+        isFullCompatible && lroHeaders ? [getSuppressionWithCode(SuppressionCode.LroLocationHeader)] : undefined;
+      const scope = getScopeForProviderTemplate(route);
+      return {
+        kind: isLongRunning ? "ArmProviderActionAsync" : "ArmProviderActionSync",
+        doc,
+        summary,
+        name,
+        verb: verb === "post" ? undefined : verb,
+        action: action === name ? undefined : action,
+        scope,
+        response,
+        parameters: parameters
+          .filter((p) => p.location !== "body")
+          .filter((p) => filterParametersByScope(p, scope))
+          .map((p) => {
+            if (p.location === "path") {
+              const segment = getSegmentForPathParameter(route, p.name);
+              if (p.decorators === undefined) p.decorators = [];
+              p.decorators.push({
+                name: "segment",
+                arguments: [segment],
+              });
+            }
+            return p;
+          }),
+        request: parameters.find((p) => p.location === "body"),
+        decorators,
+        lroHeaders,
+        suppressions,
+        examples: operation.extensions?.["x-ms-examples"],
+        operationId: operation.operationId,
+        clientDecorators,
+      };
     }
   }
 
@@ -248,11 +248,71 @@ export function transformRequest(
   };
 }
 
+function filterParametersByScope(p: TypespecParameter, scope: string | undefined): boolean {
+  if (scope === "SubscriptionActionScope") {
+    return p.name !== "subscriptionId";
+  }
+  if (scope === "ExtensionActionScope") {
+    return p.name !== "scope";
+  }
+  if (scope === "ExtensionResourceActionScope") {
+    return p.name !== "resourceUri";
+  }
+  if (scope === "Extension.ResourceGroup") {
+    return p.name !== "resourceGroupName" && p.name !== "subscriptionId";
+  }
+  return true;
+}
+
+function getScopeForProviderTemplate(
+  route: string,
+):
+  | "TenantActionScope"
+  | "SubscriptionActionScope"
+  | "ExtensionResourceActionScope"
+  | "ExtensionActionScope"
+  | "Extension.ResourceGroup"
+  | undefined {
+  if (route.toLowerCase().startsWith("/subscriptions/{subscriptionId}/providers".toLowerCase()))
+    return "SubscriptionActionScope";
+  if (route.toLowerCase().startsWith("/providers".toLowerCase())) return undefined;
+  if (route.toLowerCase().startsWith("/{resourceUri}/providers".toLowerCase())) return "ExtensionResourceActionScope";
+  if (route.toLowerCase().startsWith("/{scope}/providers".toLowerCase())) return "ExtensionActionScope";
+  if (
+    route
+      .toLowerCase()
+      .startsWith("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers".toLowerCase())
+  ) {
+    return "Extension.ResourceGroup";
+  }
+}
+
 function getActionForPrviderTemplate(route: string): string | undefined {
   const segments = route.split("/");
   const lastVariableIndex = segments.findLastIndex((s) => s.match(/^\{\w+\}$/) !== null);
   const lastProviderIndex = segments.findLastIndex((s) => s === "providers");
+
+  if (lastVariableIndex > lastProviderIndex && lastVariableIndex + 1 < segments.length) {
+    return segments.slice(lastVariableIndex + 1).join("/");
+  }
+
   if (lastVariableIndex > lastProviderIndex + 1 && lastVariableIndex !== segments.length - 1) {
+    const segmentsBetween = segments.slice(lastProviderIndex + 2, lastVariableIndex);
+    if (segmentsBetween.length % 2 !== 0) {
+      return undefined;
+    }
+
+    for (let i = 0; i < segmentsBetween.length; i += 2) {
+      if (segmentsBetween[i].match(/^\{\w+\}$/)) {
+        return undefined;
+      }
+    }
+    for (let i = 1; i < segmentsBetween.length; i += 2) {
+      if (!segmentsBetween[i].match(/^\{\w+\}$/)) {
+        return undefined;
+      }
+    }
+
     return segments.slice(lastVariableIndex + 1).join("/");
   }
   if (lastVariableIndex < lastProviderIndex && lastProviderIndex + 1 < segments.length - 1) {

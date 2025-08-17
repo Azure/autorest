@@ -102,7 +102,6 @@ export function generateProviderAction(operation: TspArmProviderActionOperation)
   if (operation.parameters.length > 0) {
     const params: string[] = [];
     for (const parameter of operation.parameters) {
-      if (parameter.name === "subscriptionId") continue;
       if (parameter.name === "location") {
         params.push("...LocationParameter");
       } else {

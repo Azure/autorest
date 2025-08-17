@@ -21,8 +21,7 @@ interface ServersOperationGroup {
   @action("skus")
   listSkusForNew is ArmProviderActionSync<
     Response = SkuEnumerationForNewResourceResult,
-    Scope = SubscriptionActionScope,
-    Parameters = {}
+    Scope = SubscriptionActionScope
   >;
   /**
    * Check the name availability in the target location.
