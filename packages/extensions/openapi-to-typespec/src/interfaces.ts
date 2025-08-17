@@ -232,7 +232,8 @@ export type ArmResourceKind =
   | "TrackedResource"
   | "ProxyResource"
   | "ExtensionResource"
-  | "Legacy.TrackedResourceWithOptionalLocation";
+  | "Legacy.TrackedResourceWithOptionalLocation"
+  | "PrivateEndpointConnectionResource";
 export type ArmResourceOperationKind = "TrackedResourceOperations" | "ProxyResourceOperations";
 
 const FIRST_LEVEL_RESOURCE = [

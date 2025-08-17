@@ -14,29 +14,25 @@ namespace Microsoft.AgFoodPlatform;
 /**
  * The private endpoint connection resource.
  */
-@parentResource(DataManagerForAgriculture)
-model PrivateEndpointConnection
-  is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
-  ...ResourceNameParameter<
-    Resource = PrivateEndpointConnection,
-    KeyName = "privateEndpointConnectionName",
-    SegmentName = "privateEndpointConnections",
-    NamePattern = ""
-  >;
-}
+model PrivateEndpointConnection is PrivateEndpointConnectionResource;
+alias PrivateEndpointOperations = PrivateEndpoints<PrivateEndpointConnection>;
 
 @armResourceOperations
 interface PrivateEndpointConnections {
   /**
    * Get Private endpoint connection object.
    */
-  get is ArmResourceRead<PrivateEndpointConnection>;
+  get is PrivateEndpointOperations.Read<
+    DataManagerForAgriculture,
+    PrivateEndpointConnection
+  >;
 
   /**
    * Approves or Rejects a Private endpoint connection request.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is PrivateEndpointOperations.CreateOrReplaceSync<
+    DataManagerForAgriculture,
     PrivateEndpointConnection,
     Response = ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection>
   >;
@@ -46,7 +42,8 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is PrivateEndpointOperations.DeleteAsync<
+    DataManagerForAgriculture,
     PrivateEndpointConnection,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
@@ -55,13 +52,13 @@ interface PrivateEndpointConnections {
   /**
    * Get list of Private endpoint connections.
    */
-  listByResource is ArmResourceListByParent<
+  listByResource is PrivateEndpointOperations.ListByParent<
+    DataManagerForAgriculture,
     PrivateEndpointConnection,
     Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionListResultV5>
   >;
 }
 
-@@doc(PrivateEndpointConnection.name, "Private endpoint connection name.");
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
 @@doc(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "Request object."

@@ -1387,18 +1387,14 @@
             "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
           },
           {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "Private endpoint connection name.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../common-types/resource-management/v4/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -1441,11 +1437,7 @@
             "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
           },
           {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "Private endpoint connection name.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../common-types/resource-management/v4/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
             "name": "request",
@@ -1453,7 +1445,7 @@
             "description": "Request object.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           }
         ],
@@ -1504,11 +1496,7 @@
             "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
           },
           {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "Private endpoint connection name.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../common-types/resource-management/v4/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
@@ -2338,7 +2326,7 @@
           "type": "array",
           "description": "Private endpoints.",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
           "readOnly": true
         }
@@ -2691,22 +2679,6 @@
         }
       ],
       "x-ms-discriminator-value": "OAuthClientCredentials"
-    },
-    "PrivateEndpointConnection": {
-      "type": "object",
-      "description": "The private endpoint connection resource.",
-      "properties": {
-        "properties": {
-          "$ref": "../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
-        }
-      ]
     },
     "PrivateLinkResource": {
       "type": "object",

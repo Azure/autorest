@@ -2,7 +2,7 @@ import { Operation, Parameter, Property, SchemaType } from "@autorest/codemodel"
 import { capitalize } from "@azure-tools/codegen";
 import _ from "lodash";
 import { singular } from "pluralize";
-import { getSession } from "../autorest-session";
+import { getSession, isCommonTypeModel } from "../autorest-session";
 import { getDataTypes } from "../data-types";
 import {
   ArmResourceKind,
@@ -114,8 +114,10 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
 
   const clientDecorators = buildResourceClientDecorators(schema);
   const keyProperty = buildKeyProperty(schema);
-  const augmentDecorators = buildKeyAugmentDecorators(schema, keyProperty) ?? [];
-  const properties = [keyProperty, ...getOtherProperties(schema, augmentDecorators)];
+  const resourceParent = getParentResource(schema);
+  const resourceKind = getResourceKind(schema, resourceParent);
+  const augmentDecorators = buildKeyAugmentDecorators(schema, keyProperty, resourceKind) ?? [];
+  const properties = [keyProperty, ...getOtherProperties(schema, resourceKind)];
 
   if (propertiesModel) {
     augmentDecorators.push(...buildPropertiesAugmentDecorators(schema, propertiesModel));
@@ -136,9 +138,9 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
     kind: "ArmResource",
     name: schema.resourceMetadata[0].SwaggerModelName,
     fixMe,
-    resourceKind: getResourceKind(schema),
+    resourceKind,
     properties,
-    resourceParent: getParentResource(schema),
+    resourceParent,
     propertiesModelName,
     propertiesPropertyRequired,
     propertiesPropertyDescription,
@@ -951,10 +953,9 @@ function isSameResponse(actual: TypespecTemplateModel, expected: TypespecTemplat
 
 function getOtherProperties(
   schema: ArmResourceSchema,
-  augmentDecorators: TypespecDecorator[],
+  resourceKind: ArmResourceKind,
 ): (TypespecObjectProperty | TypespecSpreadStatement)[] {
   const knownProperties = ["properties", "name", "id", "type", "systemData"];
-  const resourceKind = getResourceKind(schema);
   if (resourceKind === "TrackedResource" || resourceKind === "Legacy.TrackedResourceWithOptionalLocation") {
     knownProperties.push(...["location", "tags"]);
   }
@@ -1255,7 +1256,13 @@ function getParentResource(schema: ArmResourceSchema): TspArmResource | undefine
   }
 }
 
-function getResourceKind(schema: ArmResourceSchema): ArmResourceKind {
+function getResourceKind(schema: ArmResourceSchema, resourceParent: TspArmResource | undefined): ArmResourceKind {
+  if (schema.language.default.name === "PrivateEndpointConnection" && isCommonTypeModel(schema.language.default.name)) {
+    if (resourceParent === undefined) {
+      logger().warning(`PrivateEndpointConnection resource is missing parent resource. Change to normal resource.`);
+    } else return "PrivateEndpointConnectionResource";
+  }
+
   if (schema.resourceMetadata[0].ScopeType === "Scope") {
     return "ExtensionResource";
   }
@@ -1274,6 +1281,7 @@ function getResourceKind(schema: ArmResourceSchema): ArmResourceKind {
 function buildKeyAugmentDecorators(
   schema: ArmResourceSchema,
   keyProperty: TypespecSpreadStatement,
+  resourceKind: ArmResourceKind,
 ): TypespecDecorator[] {
   return (
     keyProperty.decorators
@@ -1283,11 +1291,15 @@ function buildKeyAugmentDecorators(
         d.target = `${schema.resourceMetadata[0].SwaggerModelName}.name`;
         return d;
       }) ?? []
-  ).concat({
-    name: "doc",
-    target: `${schema.resourceMetadata[0].SwaggerModelName}.name`,
-    arguments: [generateDocsContent(keyProperty)],
-  });
+  ).concat(
+    resourceKind !== "PrivateEndpointConnectionResource"
+      ? {
+          name: "doc",
+          target: `${schema.resourceMetadata[0].SwaggerModelName}.name`,
+          arguments: [generateDocsContent(keyProperty)],
+        }
+      : [],
+  );
 }
 
 function buildPropertiesAugmentDecorators(schema: ArmResourceSchema, propertiesModel: Property): TypespecDecorator[] {
