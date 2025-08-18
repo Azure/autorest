@@ -169,8 +169,8 @@ function generateArmResourceOperationGroup(
       );
     } else {
       definitions.push(
-        `${operation.name} is ${operationKind}<${getSpecialParameter(operation, resource)}${operation.resource}${
-          operation.patchModel ? `, PatchModel = ${operation.patchModel}` : ""
+        `${operation.name} is ${operationKind}<${getSpecialParameter(operation, resource)}${operation.resource}${operation.request ? `, Request = ${generateArmRequest(operation.request)}` : ""}${
+          operation.patchModel ? `, PatchModel = ${generateArmRequest(operation.patchModel)}` : ""
         }${
           operation.baseParameters && !operationGroup.isLegacy
             ? `, BaseParameters = ${operation.baseParameters[0]}`
@@ -178,7 +178,7 @@ function generateArmResourceOperationGroup(
         }${operation.parameters ? `, Parameters = { ${generateParameters(operation.parameters)} }` : ""}${
           operation.response ? `, Response = ${generateArmResponse(operation.response)}` : ""
         }${operation.lroHeaders ? `, LroHeaders = ${generateLroHeaders(operation.lroHeaders)}` : ""}
-        ${isPatchWithOptionalBody(operation) ? `, OptionalRequestBody = true` : ""}>;`,
+        ${getAvailableTemplateWithOptionalBody(operation) ? `, OptionalRequestBody = true` : ""}>;`,
       );
     }
     definitions.push("\n");
@@ -188,11 +188,29 @@ function generateArmResourceOperationGroup(
   return definitions.join("\n");
 }
 
-function isPatchWithOptionalBody(operation: TspArmResourceOperation): boolean {
-  return (
-    (operation.kind === "ArmCustomPatchAsync" || operation.kind === "ArmCustomPatchSync") &&
-    operation.optionalRequestBody === true
-  );
+// Only several operation templates accept optional body
+function getAvailableTemplateWithOptionalBody(operation: TspArmResourceOperation): string | undefined {
+  if (operation.optionalRequestBody !== true) return undefined;
+  if (operation.kind === "ArmCustomPatchAsync" || operation.kind === "ArmCustomPatchSync")
+    return `Azure.ResourceManager.Legacy.${operation.kind.replace("Arm", "")}`;
+  if (operation.kind === "ArmResourceCreateOrReplaceAsync" || operation.kind === "ArmResourceCreateOrReplaceSync")
+    return `Azure.ResourceManager.Legacy.${operation.kind.replace("ArmResource", "").replace("CreateOrReplace", "CreateOrUpdate")}`;
+  return undefined;
+}
+
+// Only several operation templates accept request/empty patch body
+function getAvailableTemplateWithRequest(operation: TspArmResourceOperation): string | undefined {
+  if (
+    operation.request !== undefined &&
+    (operation.kind === "ArmResourceCreateOrReplaceAsync" || operation.kind === "ArmResourceCreateOrReplaceSync")
+  )
+    return `Azure.ResourceManager.Legacy.${operation.kind.replace("ArmResource", "").replace("CreateOrReplace", "CreateOrUpdate")}`;
+  if (
+    operation.patchModel?.kind === "void" &&
+    (operation.kind === "ArmCustomPatchAsync" || operation.kind === "ArmCustomPatchSync")
+  )
+    return `Azure.ResourceManager.Legacy.${operation.kind.replace("Arm", "")}`;
+  return undefined;
 }
 
 // These templates have special parameter as the first parameter
@@ -207,9 +225,10 @@ function getSpecialParameter(operation: TspArmResourceOperation, resource: TspAr
 function getOperationKind(operation: TspArmResourceOperation, resource: TspArmResource): string {
   if (resource.resourceKind === "PrivateEndpointConnectionResource")
     return `PrivateEndpointOperations.${getPrivateEndpointConnectionOperationKind(operation.kind)}`;
-  if (operation.targetResource) return `Extension.${getExtensionOperationKind(operation.kind)}`;
-  if (isPatchWithOptionalBody(operation)) return `Azure.ResourceManager.Legacy.${operation.kind.replace("Arm", "")}`;
-  return operation.kind;
+  if (operation.targetResource) return `${getExtensionOperationKind(operation)}`;
+  return (
+    getAvailableTemplateWithOptionalBody(operation) ?? getAvailableTemplateWithRequest(operation) ?? operation.kind
+  );
 }
 
 function getPrivateEndpointConnectionOperationKind(kind: TspArmOperationType): string {
@@ -221,18 +240,31 @@ function getPrivateEndpointConnectionOperationKind(kind: TspArmOperationType): s
   }
 }
 
-function getExtensionOperationKind(kind: TspArmOperationType): string {
-  switch (kind) {
+function getExtensionOperationKind(operation: TspArmResourceOperation): string {
+  if (
+    operation.request &&
+    (operation.kind === "ArmResourceCreateOrReplaceAsync" || operation.kind === "ArmResourceCreateOrReplaceSync")
+  ) {
+    return `Azure.ResourceManager.Legacy.Extension.${operation.kind.replace("ArmResource", "")}`;
+  }
+  if (
+    operation.patchModel?.kind === "void" &&
+    (operation.kind === "ArmCustomPatchAsync" || operation.kind === "ArmCustomPatchSync")
+  ) {
+    return `Azure.ResourceManager.Legacy.Extension.${operation.kind.replace("Arm", "")}`;
+  }
+
+  switch (operation.kind) {
     case "ArmResourceDeleteWithoutOkAsync":
-      return "DeleteWithoutOkAsync";
+      return "Extension.DeleteWithoutOkAsync";
     case "ArmResourceListByParent":
-      return "ListByTarget";
+      return "Extension.ListByTarget";
     case "ArmListBySubscription":
-      return "List";
+      return "Extension.List";
     case "ArmResourceListAtScope":
-      return "List";
+      return "Extension.List";
     default:
-      return getOperationBaseKind(kind);
+      return `Extension.${getOperationBaseKind(operation.kind)}`;
   }
 }
 

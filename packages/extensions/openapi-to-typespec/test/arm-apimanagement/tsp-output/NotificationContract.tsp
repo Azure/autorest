@@ -33,13 +33,13 @@ interface NotificationContracts {
    */
   get is ArmResourceRead<NotificationContract>;
 
-  // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
    * Create or Update API Management publisher notification.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     NotificationContract,
+    Request = void,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.

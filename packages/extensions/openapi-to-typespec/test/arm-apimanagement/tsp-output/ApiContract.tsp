@@ -41,8 +41,9 @@ interface ApiContracts {
    * Creates new or updates existing specified API of the API Management service instance.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ApiContract,
+    Request = ApiCreateOrUpdateParameter,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.

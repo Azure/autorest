@@ -1231,7 +1231,7 @@
             "description": "Extension resource request body.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Extension"
+              "$ref": "#/definitions/ExtensionInstallationRequest"
             }
           }
         ],
@@ -2550,6 +2550,25 @@
           "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "ExtensionInstallationRequest": {
+      "type": "object",
+      "description": "Extension Installation Request Body.",
+      "properties": {
+        "extensionVersion": {
+          "type": "string",
+          "description": "Extension Version.",
+          "minLength": 3,
+          "maxLength": 10
+        },
+        "additionalApiProperties": {
+          "type": "object",
+          "description": "Additional Api Properties.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ApiProperties"
+          }
+        }
+      }
     },
     "ExtensionListResponse": {
       "type": "object",

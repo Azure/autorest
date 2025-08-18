@@ -151,13 +151,7 @@ interface Alerts {
   @action("changestate")
   changeState is ArmResourceActionSync<
     Alert,
-    {
-      /**
-       * reason of change alert state
-       */
-      @bodyRoot
-      comment?: string;
-    },
+    string,
     ArmResponse<Alert>,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {
@@ -166,7 +160,8 @@ interface Alerts {
        */
       @query("newState")
       newState: AlertState;
-    }
+    },
+    OptionalRequestBody = true
   >;
 
   /**
@@ -186,3 +181,4 @@ interface Alerts {
 @@format(Alert.name, "uuid");
 @@doc(Alert.name, "Unique ID of an alert instance.");
 @@doc(Alert.properties, "Alert property bag");
+@@doc(Alerts.changeState::parameters.body, "reason of change alert state");

@@ -32,13 +32,13 @@ interface GroupQuotaSubscriptionIds {
    */
   get is Extension.Read<Extension.ManagementGroup, GroupQuotaSubscriptionId>;
 
-  // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
    * Adds a subscription to GroupQuotas. The subscriptions will be validated based on the additionalAttributes defined in the GroupQuota. The additionalAttributes works as filter for the subscriptions, which can be included in the GroupQuotas. The request's TenantId is validated against the subscription's TenantId.
    */
-  createOrUpdate is Extension.CreateOrReplaceAsync<
+  createOrUpdate is Azure.ResourceManager.Legacy.Extension.CreateOrReplaceAsync<
     Extension.ManagementGroup,
     GroupQuotaSubscriptionId,
+    Request = void,
     Response = ArmResourceUpdatedResponse<GroupQuotaSubscriptionId> | ArmResourceCreatedResponse<
       LROResponse,
       ArmLroLocationHeader<FinalResult = GroupQuotaSubscriptionId> &
@@ -46,15 +46,14 @@ interface GroupQuotaSubscriptionIds {
     >
   >;
 
-  // FIXME: (ArmResourcePatch): ArmResourcePatchSync/ArmResourcePatchAsync should have a body parameter with either properties property or tag property
   /**
    * Updates the GroupQuotas with the subscription to add to the subscriptions list. The subscriptions will be validated if additionalAttributes are defined in the GroupQuota. The request's TenantId is validated against the subscription's TenantId.
    */
   @patch(#{ implicitOptionality: false })
-  update is Extension.CustomPatchAsync<
+  update is Azure.ResourceManager.Legacy.Extension.CustomPatchAsync<
     Extension.ManagementGroup,
     GroupQuotaSubscriptionId,
-    PatchModel = {}
+    PatchModel = void
   >;
 
   /**

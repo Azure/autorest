@@ -41,8 +41,9 @@ interface IdentityProviderContracts {
   /**
    * Creates or Updates the IdentityProvider configuration.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     IdentityProviderContract,
+    Request = IdentityProviderCreateContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.

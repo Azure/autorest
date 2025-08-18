@@ -32,12 +32,12 @@ interface ContentTypeContracts {
    */
   get is ArmResourceRead<ContentTypeContract>;
 
-  // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
    * Creates or updates the developer portal's content type. Content types describe content items' properties, validation rules, and constraints. Custom content types' identifiers need to start with the `c-` prefix. Built-in content types can't be modified.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     ContentTypeContract,
+    Request = void,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.

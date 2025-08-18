@@ -36,8 +36,9 @@ interface Extensions {
    * Install or Update extension. Additional Api Properties are merged patch and if the extension is updated to a new version then the obsolete entries will be auto deleted from Additional Api Properties.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     Extension,
+    Request = ExtensionInstallationRequest,
     Response = ArmResourceCreatedSyncResponse<Extension>
   >;
 

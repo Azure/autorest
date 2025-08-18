@@ -41,8 +41,9 @@ interface EmailTemplateContracts {
   /**
    * Updates an Email Template.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     EmailTemplateContract,
+    Request = EmailTemplateUpdateParameters,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
