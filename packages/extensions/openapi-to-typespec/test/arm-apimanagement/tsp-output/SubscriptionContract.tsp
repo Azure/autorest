@@ -25,31 +25,29 @@ model SubscriptionContract
   >;
 }
 
-@armResourceOperations
-interface SubscriptionContractOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias SubscriptionContractOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** The name of the API Management service. */
-        @path
-        @segment("service")
-        @key
-        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-        serviceName: string,
-      },
-      {
-        /** Subscription entity Identifier. The entity represents the association between a user and a product in API Management. */
-        @path
-        @segment("subscriptions")
-        @key
-        @pattern("^[^*#&+:<>?]+$")
-        sid: string,
-      }
-    > {}
+    /** The name of the API Management service. */
+    @path
+    @segment("service")
+    @key
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    serviceName: string;
+  },
+  {
+    /** Subscription entity Identifier. The entity represents the association between a user and a product in API Management. */
+    @path
+    @segment("subscriptions")
+    @key
+    @pattern("^[^*#&+:<>?]+$")
+    sid: string;
+  }
+>;
 
 @armResourceOperations
 interface SubscriptionContracts {
@@ -189,37 +187,35 @@ interface SubscriptionContracts {
     ArmResponse<SubscriptionKeysContract>
   >;
 }
-@armResourceOperations
-interface UserSubscriptionOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias UserSubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** The name of the API Management service. */
-        @path
-        @segment("service")
-        @key
-        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-        serviceName: string,
+    /** The name of the API Management service. */
+    @path
+    @segment("service")
+    @key
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    serviceName: string;
 
-        /** User identifier. Must be unique in the current API Management service instance. */
-        @path
-        @segment("users")
-        @key
-        userId: string,
-      },
-      {
-        /** Subscription entity Identifier. The entity represents the association between a user and a product in API Management. */
-        @path
-        @segment("subscriptions")
-        @key
-        @pattern("^[^*#&+:<>?]+$")
-        sid: string,
-      }
-    > {}
+    /** User identifier. Must be unique in the current API Management service instance. */
+    @path
+    @segment("users")
+    @key
+    userId: string;
+  },
+  {
+    /** Subscription entity Identifier. The entity represents the association between a user and a product in API Management. */
+    @path
+    @segment("subscriptions")
+    @key
+    @pattern("^[^*#&+:<>?]+$")
+    sid: string;
+  }
+>;
 
 @armResourceOperations
 interface UserSubscription {

@@ -25,31 +25,29 @@ model CodeContainerResource
   >;
 }
 
-@armResourceOperations
-interface CodeContainerResourceOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias CodeContainerResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** Name of Azure Machine Learning registry. This is case-insensitive */
-        @path
-        @segment("registries")
-        @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
-        registryName: string,
-      },
-      {
-        /** Container name. */
-        @path
-        @segment("codes")
-        @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-        codeName: string,
-      }
-    > {}
+    /** Name of Azure Machine Learning registry. This is case-insensitive */
+    @path
+    @segment("registries")
+    @key
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
+    registryName: string;
+  },
+  {
+    /** Container name. */
+    @path
+    @segment("codes")
+    @key
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+    codeName: string;
+  }
+>;
 
 @armResourceOperations
 interface CodeContainerResources {
@@ -87,30 +85,28 @@ interface CodeContainerResources {
     Response = ArmResponse<CodeContainerResourceArmPaginatedResult>
   >;
 }
-@armResourceOperations
-interface CodeContainerOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias CodeContainerOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** Name of Azure Machine Learning workspace. */
-        @path
-        @segment("workspaces")
-        @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-        workspaceName: string,
-      },
-      {
-        /** Container name. This is case-sensitive. */
-        @path
-        @segment("codes")
-        @key
-        name: string,
-      }
-    > {}
+    /** Name of Azure Machine Learning workspace. */
+    @path
+    @segment("workspaces")
+    @key
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    workspaceName: string;
+  },
+  {
+    /** Container name. This is case-sensitive. */
+    @path
+    @segment("codes")
+    @key
+    name: string;
+  }
+>;
 
 @armResourceOperations
 interface CodeContainers {
