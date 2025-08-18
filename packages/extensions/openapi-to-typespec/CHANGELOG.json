@@ -2,6 +2,21 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.11.9",
+      "tag": "@autorest/openapi-to-typespec_v0.11.9",
+      "date": "Mon, 18 Aug 2025 10:08:01 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "legacy operation from interface to alias"
+          },
+          {
+            "comment": "support void for patch operations and request for put operations"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.11.8",
       "tag": "@autorest/openapi-to-typespec_v0.11.8",
       "date": "Sun, 17 Aug 2025 07:09:54 GMT",
