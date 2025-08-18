@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@autorest/openapi-to-typespec",
-      "comment": "Add support for using scope parameter with ArmProviderAction",
+      "comment": "legacy operation from interface to alias",
       "type": "patch"
     }
   ],

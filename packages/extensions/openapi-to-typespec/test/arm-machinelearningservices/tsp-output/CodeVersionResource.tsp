@@ -25,37 +25,35 @@ model CodeVersionResource
   >;
 }
 
-@armResourceOperations
-interface CodeVersionResourceOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias CodeVersionResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** Name of Azure Machine Learning registry. This is case-insensitive */
-        @path
-        @segment("registries")
-        @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
-        registryName: string,
+    /** Name of Azure Machine Learning registry. This is case-insensitive */
+    @path
+    @segment("registries")
+    @key
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
+    registryName: string;
 
-        /** Container name. */
-        @path
-        @segment("codes")
-        @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-        codeName: string,
-      },
-      {
-        /** Version identifier. */
-        @path
-        @segment("versions")
-        @key
-        version: string,
-      }
-    > {}
+    /** Container name. */
+    @path
+    @segment("codes")
+    @key
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+    codeName: string;
+  },
+  {
+    /** Version identifier. */
+    @path
+    @segment("versions")
+    @key
+    version: string;
+  }
+>;
 
 @armResourceOperations
 interface CodeVersionResources {
@@ -115,36 +113,34 @@ interface CodeVersionResources {
     ArmResponse<PendingUploadResponseDto>
   >;
 }
-@armResourceOperations
-interface CodeVersionOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias CodeVersionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** Name of Azure Machine Learning workspace. */
-        @path
-        @segment("workspaces")
-        @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-        workspaceName: string,
+    /** Name of Azure Machine Learning workspace. */
+    @path
+    @segment("workspaces")
+    @key
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    workspaceName: string;
 
-        /** Container name. This is case-sensitive. */
-        @path
-        @segment("codes")
-        @key
-        name: string,
-      },
-      {
-        /** Version identifier. This is case-sensitive. */
-        @path
-        @segment("versions")
-        @key
-        version: string,
-      }
-    > {}
+    /** Container name. This is case-sensitive. */
+    @path
+    @segment("codes")
+    @key
+    name: string;
+  },
+  {
+    /** Version identifier. This is case-sensitive. */
+    @path
+    @segment("versions")
+    @key
+    version: string;
+  }
+>;
 
 @armResourceOperations
 interface CodeVersions {

@@ -26,43 +26,41 @@ model PolicyContract
   >;
 }
 
-@armResourceOperations
-interface PolicyContractOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias PolicyContractOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** The name of the API Management service. */
-        @path
-        @segment("service")
-        @key
-        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-        serviceName: string,
+    /** The name of the API Management service. */
+    @path
+    @segment("service")
+    @key
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    serviceName: string;
 
-        /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
-        @path
-        @segment("apis")
-        @key
-        @pattern("^[^*#&+:<>?]+$")
-        apiId: string,
+    /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
+    @path
+    @segment("apis")
+    @key
+    @pattern("^[^*#&+:<>?]+$")
+    apiId: string;
 
-        /** Operation identifier within an API. Must be unique in the current API Management service instance. */
-        @path
-        @segment("operations")
-        @key
-        operationId: string,
-      },
-      {
-        /** The identifier of the Policy. */
-        @path
-        @segment("policies")
-        @key
-        policyId: string,
-      }
-    > {}
+    /** Operation identifier within an API. Must be unique in the current API Management service instance. */
+    @path
+    @segment("operations")
+    @key
+    operationId: string;
+  },
+  {
+    /** The identifier of the Policy. */
+    @path
+    @segment("policies")
+    @key
+    policyId: string;
+  }
+>;
 
 @armResourceOperations
 interface PolicyContracts {
@@ -118,37 +116,35 @@ interface PolicyContracts {
    */
   listByOperation is PolicyContractOps.List<PolicyContract>;
 }
-@armResourceOperations
-interface ApiPolicyOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias ApiPolicyOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** The name of the API Management service. */
-        @path
-        @segment("service")
-        @key
-        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-        serviceName: string,
+    /** The name of the API Management service. */
+    @path
+    @segment("service")
+    @key
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    serviceName: string;
 
-        /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
-        @path
-        @segment("apis")
-        @key
-        @pattern("^[^*#&+:<>?]+$")
-        apiId: string,
-      },
-      {
-        /** The identifier of the Policy. */
-        @path
-        @segment("policies")
-        @key
-        policyId: string,
-      }
-    > {}
+    /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
+    @path
+    @segment("apis")
+    @key
+    @pattern("^[^*#&+:<>?]+$")
+    apiId: string;
+  },
+  {
+    /** The identifier of the Policy. */
+    @path
+    @segment("policies")
+    @key
+    policyId: string;
+  }
+>;
 
 @armResourceOperations
 interface ApiPolicy {
@@ -204,30 +200,28 @@ interface ApiPolicy {
    */
   listByApi is ApiPolicyOps.List<PolicyContract>;
 }
-@armResourceOperations
-interface PolicyOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias PolicyOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** The name of the API Management service. */
-        @path
-        @segment("service")
-        @key
-        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-        serviceName: string,
-      },
-      {
-        /** The identifier of the Policy. */
-        @path
-        @segment("policies")
-        @key
-        policyId: string,
-      }
-    > {}
+    /** The name of the API Management service. */
+    @path
+    @segment("service")
+    @key
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    serviceName: string;
+  },
+  {
+    /** The identifier of the Policy. */
+    @path
+    @segment("policies")
+    @key
+    policyId: string;
+  }
+>;
 
 @armResourceOperations
 interface Policy {
@@ -283,36 +277,34 @@ interface Policy {
    */
   listByService is PolicyOps.List<PolicyContract>;
 }
-@armResourceOperations
-interface ProductPolicyOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias ProductPolicyOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** The name of the API Management service. */
-        @path
-        @segment("service")
-        @key
-        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-        serviceName: string,
+    /** The name of the API Management service. */
+    @path
+    @segment("service")
+    @key
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    serviceName: string;
 
-        /** Product identifier. Must be unique in the current API Management service instance. */
-        @path
-        @segment("products")
-        @key
-        productId: string,
-      },
-      {
-        /** The identifier of the Policy. */
-        @path
-        @segment("policies")
-        @key
-        policyId: string,
-      }
-    > {}
+    /** Product identifier. Must be unique in the current API Management service instance. */
+    @path
+    @segment("products")
+    @key
+    productId: string;
+  },
+  {
+    /** The identifier of the Policy. */
+    @path
+    @segment("policies")
+    @key
+    policyId: string;
+  }
+>;
 
 @armResourceOperations
 interface ProductPolicy {

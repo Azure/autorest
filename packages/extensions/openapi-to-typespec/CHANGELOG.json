@@ -2,6 +2,21 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.11.8",
+      "tag": "@autorest/openapi-to-typespec_v0.11.8",
+      "date": "Sun, 17 Aug 2025 07:09:54 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Support PrivateEndpointConnection as a resource"
+          },
+          {
+            "comment": "Add support for using scope parameter with ArmProviderAction"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.11.7",
       "tag": "@autorest/openapi-to-typespec_v0.11.7",
       "date": "Wed, 13 Aug 2025 10:38:25 GMT",

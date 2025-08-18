@@ -25,37 +25,35 @@ model DiagnosticContract
   >;
 }
 
-@armResourceOperations
-interface DiagnosticContractOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias DiagnosticContractOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** The name of the API Management service. */
-        @path
-        @segment("service")
-        @key
-        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-        serviceName: string,
+    /** The name of the API Management service. */
+    @path
+    @segment("service")
+    @key
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    serviceName: string;
 
-        /** API identifier. Must be unique in the current API Management service instance. */
-        @path
-        @segment("apis")
-        @key
-        apiId: string,
-      },
-      {
-        /** Diagnostic identifier. Must be unique in the current API Management service instance. */
-        @path
-        @segment("diagnostics")
-        @key
-        @pattern("^[^*#&+:<>?]+$")
-        diagnosticId: string,
-      }
-    > {}
+    /** API identifier. Must be unique in the current API Management service instance. */
+    @path
+    @segment("apis")
+    @key
+    apiId: string;
+  },
+  {
+    /** Diagnostic identifier. Must be unique in the current API Management service instance. */
+    @path
+    @segment("diagnostics")
+    @key
+    @pattern("^[^*#&+:<>?]+$")
+    diagnosticId: string;
+  }
+>;
 
 @armResourceOperations
 interface DiagnosticContracts {
@@ -140,31 +138,29 @@ interface DiagnosticContracts {
     }
   >;
 }
-@armResourceOperations
-interface DiagnosticOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias DiagnosticOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** The name of the API Management service. */
-        @path
-        @segment("service")
-        @key
-        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-        serviceName: string,
-      },
-      {
-        /** Diagnostic identifier. Must be unique in the current API Management service instance. */
-        @path
-        @segment("diagnostics")
-        @key
-        @pattern("^[^*#&+:<>?]+$")
-        diagnosticId: string,
-      }
-    > {}
+    /** The name of the API Management service. */
+    @path
+    @segment("service")
+    @key
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    serviceName: string;
+  },
+  {
+    /** Diagnostic identifier. Must be unique in the current API Management service instance. */
+    @path
+    @segment("diagnostics")
+    @key
+    @pattern("^[^*#&+:<>?]+$")
+    diagnosticId: string;
+  }
+>;
 
 @armResourceOperations
 interface Diagnostic {

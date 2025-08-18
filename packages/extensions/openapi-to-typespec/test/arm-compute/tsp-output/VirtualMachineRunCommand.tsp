@@ -25,29 +25,27 @@ model VirtualMachineRunCommand
   >;
 }
 
-@armResourceOperations
-interface VirtualMachineRunCommandOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias VirtualMachineRunCommandOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** The name of the virtual machine containing the run command. */
-        @path
-        @segment("virtualMachines")
-        @key
-        vmName: string,
-      },
-      {
-        /** The name of the virtual machine run command. */
-        @path
-        @segment("runCommands")
-        @key
-        runCommandName: string,
-      }
-    > {}
+    /** The name of the virtual machine containing the run command. */
+    @path
+    @segment("virtualMachines")
+    @key
+    vmName: string;
+  },
+  {
+    /** The name of the virtual machine run command. */
+    @path
+    @segment("runCommands")
+    @key
+    runCommandName: string;
+  }
+>;
 
 @armResourceOperations
 interface VirtualMachineRunCommands {
@@ -123,35 +121,33 @@ interface VirtualMachineRunCommands {
     }
   >;
 }
-@armResourceOperations
-interface VirtualMachineScaleSetVMRunCommandOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias VirtualMachineScaleSetVMRunCommandOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** The name of the VM scale set. */
-        @path
-        @segment("virtualMachineScaleSets")
-        @key
-        vmScaleSetName: string,
+    /** The name of the VM scale set. */
+    @path
+    @segment("virtualMachineScaleSets")
+    @key
+    vmScaleSetName: string;
 
-        /** The instance ID of the virtual machine. */
-        @path
-        @segment("virtualMachines")
-        @key
-        instanceId: string,
-      },
-      {
-        /** The name of the virtual machine run command. */
-        @path
-        @segment("runCommands")
-        @key
-        runCommandName: string,
-      }
-    > {}
+    /** The instance ID of the virtual machine. */
+    @path
+    @segment("virtualMachines")
+    @key
+    instanceId: string;
+  },
+  {
+    /** The name of the virtual machine run command. */
+    @path
+    @segment("runCommands")
+    @key
+    runCommandName: string;
+  }
+>;
 
 @armResourceOperations
 interface VirtualMachineScaleSetVMRunCommands {

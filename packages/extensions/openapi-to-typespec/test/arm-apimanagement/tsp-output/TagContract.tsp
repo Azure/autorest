@@ -25,44 +25,42 @@ model TagContract
   >;
 }
 
-@armResourceOperations
-interface TagContractOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias TagContractOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** The name of the API Management service. */
-        @path
-        @segment("service")
-        @key
-        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-        serviceName: string,
+    /** The name of the API Management service. */
+    @path
+    @segment("service")
+    @key
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    serviceName: string;
 
-        /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
-        @path
-        @segment("apis")
-        @key
-        @pattern("^[^*#&+:<>?]+$")
-        apiId: string,
+    /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
+    @path
+    @segment("apis")
+    @key
+    @pattern("^[^*#&+:<>?]+$")
+    apiId: string;
 
-        /** Operation identifier within an API. Must be unique in the current API Management service instance. */
-        @path
-        @segment("operations")
-        @key
-        operationId: string,
-      },
-      {
-        /** Tag identifier. Must be unique in the current API Management service instance. */
-        @path
-        @segment("tags")
-        @key
-        @pattern("^[^*#&+:<>?]+$")
-        tagId: string,
-      }
-    > {}
+    /** Operation identifier within an API. Must be unique in the current API Management service instance. */
+    @path
+    @segment("operations")
+    @key
+    operationId: string;
+  },
+  {
+    /** Tag identifier. Must be unique in the current API Management service instance. */
+    @path
+    @segment("tags")
+    @key
+    @pattern("^[^*#&+:<>?]+$")
+    tagId: string;
+  }
+>;
 
 @armResourceOperations
 interface TagContracts {
@@ -116,38 +114,36 @@ interface TagContracts {
     }
   >;
 }
-@armResourceOperations
-interface TagOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias TagOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** The name of the API Management service. */
-        @path
-        @segment("service")
-        @key
-        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-        serviceName: string,
+    /** The name of the API Management service. */
+    @path
+    @segment("service")
+    @key
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    serviceName: string;
 
-        /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
-        @path
-        @segment("apis")
-        @key
-        @pattern("^[^*#&+:<>?]+$")
-        apiId: string,
-      },
-      {
-        /** Tag identifier. Must be unique in the current API Management service instance. */
-        @path
-        @segment("tags")
-        @key
-        @pattern("^[^*#&+:<>?]+$")
-        tagId: string,
-      }
-    > {}
+    /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
+    @path
+    @segment("apis")
+    @key
+    @pattern("^[^*#&+:<>?]+$")
+    apiId: string;
+  },
+  {
+    /** Tag identifier. Must be unique in the current API Management service instance. */
+    @path
+    @segment("tags")
+    @key
+    @pattern("^[^*#&+:<>?]+$")
+    tagId: string;
+  }
+>;
 
 @armResourceOperations
 interface Tag {
@@ -198,37 +194,35 @@ interface Tag {
     }
   >;
 }
-@armResourceOperations
-interface TagContractOperationGroupOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias TagContractOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** The name of the API Management service. */
-        @path
-        @segment("service")
-        @key
-        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-        serviceName: string,
+    /** The name of the API Management service. */
+    @path
+    @segment("service")
+    @key
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    serviceName: string;
 
-        /** Product identifier. Must be unique in the current API Management service instance. */
-        @path
-        @segment("products")
-        @key
-        productId: string,
-      },
-      {
-        /** Tag identifier. Must be unique in the current API Management service instance. */
-        @path
-        @segment("tags")
-        @key
-        @pattern("^[^*#&+:<>?]+$")
-        tagId: string,
-      }
-    > {}
+    /** Product identifier. Must be unique in the current API Management service instance. */
+    @path
+    @segment("products")
+    @key
+    productId: string;
+  },
+  {
+    /** Tag identifier. Must be unique in the current API Management service instance. */
+    @path
+    @segment("tags")
+    @key
+    @pattern("^[^*#&+:<>?]+$")
+    tagId: string;
+  }
+>;
 
 @armResourceOperations
 interface TagContractOperationGroup {
@@ -282,31 +276,29 @@ interface TagContractOperationGroup {
     }
   >;
 }
-@armResourceOperations
-interface TagContractOperationGroupOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias TagContractOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** The name of the API Management service. */
-        @path
-        @segment("service")
-        @key
-        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-        serviceName: string,
-      },
-      {
-        /** Tag identifier. Must be unique in the current API Management service instance. */
-        @path
-        @segment("tags")
-        @key
-        @pattern("^[^*#&+:<>?]+$")
-        tagId: string,
-      }
-    > {}
+    /** The name of the API Management service. */
+    @path
+    @segment("service")
+    @key
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    serviceName: string;
+  },
+  {
+    /** Tag identifier. Must be unique in the current API Management service instance. */
+    @path
+    @segment("tags")
+    @key
+    @pattern("^[^*#&+:<>?]+$")
+    tagId: string;
+  }
+>;
 
 @armResourceOperations
 interface TagContractOperationGroup {

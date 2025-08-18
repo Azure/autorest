@@ -23,40 +23,38 @@ model GuestConfigurationAssignment
   >;
 }
 
-@armResourceOperations
-interface GuestConfigurationAssignmentOps
-  extends Azure.ResourceManager.Legacy.ExtensionOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
+alias GuestConfigurationAssignmentOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
 
-        /** the provider namespace */
-        @path
-        @segment("providers")
-        @key
-        providerNamespace: "Microsoft.Compute",
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Compute";
 
-        /** The name of the virtual machine. */
-        @path
-        @segment("virtualMachines")
-        @key
-        @pattern("^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$")
-        vmName: string,
-      },
-      {
-        ...Extension.ExtensionProviderNamespace<GuestConfigurationAssignment>,
-      },
-      {
-        ...Extension.ExtensionProviderNamespace<GuestConfigurationAssignment>,
+    /** The name of the virtual machine. */
+    @path
+    @segment("virtualMachines")
+    @key
+    @pattern("^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$")
+    vmName: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<GuestConfigurationAssignment>;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<GuestConfigurationAssignment>;
 
-        /** The guest configuration assignment name. */
-        @path
-        @segment("guestConfigurationAssignments")
-        @key
-        guestConfigurationAssignmentName: string,
-      }
-    > {}
+    /** The guest configuration assignment name. */
+    @path
+    @segment("guestConfigurationAssignments")
+    @key
+    guestConfigurationAssignmentName: string;
+  }
+>;
 
 @armResourceOperations
 interface GuestConfigurationAssignments {
@@ -125,39 +123,37 @@ interface GuestConfigurationAssignments {
     }
   >;
 }
-@armResourceOperations
-interface GuestConfigurationHCRPAssignmentOps
-  extends Azure.ResourceManager.Legacy.ExtensionOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
+alias GuestConfigurationHCRPAssignmentOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
 
-        /** the provider namespace */
-        @path
-        @segment("providers")
-        @key
-        providerNamespace: "Microsoft.HybridCompute",
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.HybridCompute";
 
-        /** The name of the ARC machine. */
-        @path
-        @segment("machines")
-        @key
-        machineName: string,
-      },
-      {
-        ...Extension.ExtensionProviderNamespace<GuestConfigurationAssignment>,
-      },
-      {
-        ...Extension.ExtensionProviderNamespace<GuestConfigurationAssignment>,
+    /** The name of the ARC machine. */
+    @path
+    @segment("machines")
+    @key
+    machineName: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<GuestConfigurationAssignment>;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<GuestConfigurationAssignment>;
 
-        /** The guest configuration assignment name. */
-        @path
-        @segment("guestConfigurationAssignments")
-        @key
-        guestConfigurationAssignmentName: string,
-      }
-    > {}
+    /** The guest configuration assignment name. */
+    @path
+    @segment("guestConfigurationAssignments")
+    @key
+    guestConfigurationAssignmentName: string;
+  }
+>;
 
 @armResourceOperations
 interface GuestConfigurationHCRPAssignments {
@@ -218,39 +214,37 @@ interface GuestConfigurationHCRPAssignments {
     }
   >;
 }
-@armResourceOperations
-interface GuestConfigurationAssignmentsVMSSOps
-  extends Azure.ResourceManager.Legacy.ExtensionOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
+alias GuestConfigurationAssignmentsVMSSOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
 
-        /** the provider namespace */
-        @path
-        @segment("providers")
-        @key
-        providerNamespace: "Microsoft.Compute",
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Compute";
 
-        /** The name of the virtual machine scale set. */
-        @path
-        @segment("virtualMachineScaleSets")
-        @key
-        vmssName: string,
-      },
-      {
-        ...Extension.ExtensionProviderNamespace<GuestConfigurationAssignment>,
-      },
-      {
-        ...Extension.ExtensionProviderNamespace<GuestConfigurationAssignment>,
+    /** The name of the virtual machine scale set. */
+    @path
+    @segment("virtualMachineScaleSets")
+    @key
+    vmssName: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<GuestConfigurationAssignment>;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<GuestConfigurationAssignment>;
 
-        /** The guest configuration assignment name. */
-        @path
-        @segment("guestConfigurationAssignments")
-        @key
-        name: string,
-      }
-    > {}
+    /** The guest configuration assignment name. */
+    @path
+    @segment("guestConfigurationAssignments")
+    @key
+    name: string;
+  }
+>;
 
 @armResourceOperations
 interface GuestConfigurationAssignmentsVMSS {
@@ -310,41 +304,39 @@ interface GuestConfigurationAssignmentsVMSS {
     }
   >;
 }
-@armResourceOperations
-interface GuestConfigurationConnectedVMwarevSphereAssignmentOps
-  extends Azure.ResourceManager.Legacy.ExtensionOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
+alias GuestConfigurationConnectedVMwarevSphereAssignmentOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
 
-        /** the provider namespace */
-        @path
-        @segment("providers")
-        @key
-        providerNamespace: "Microsoft.ConnectedVMwarevSphere",
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.ConnectedVMwarevSphere";
 
-        /** The name of the virtual machine. */
-        @path
-        @segment("virtualmachines")
-        @key
-        @pattern("^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$")
-        vmName: string,
-      },
-      {
-        ...Extension.ExtensionProviderNamespace<GuestConfigurationAssignment>,
-      },
-      {
-        ...Extension.ExtensionProviderNamespace<GuestConfigurationAssignment>,
+    /** The name of the virtual machine. */
+    @path
+    @segment("virtualmachines")
+    @key
+    @pattern("^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$")
+    vmName: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<GuestConfigurationAssignment>;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<GuestConfigurationAssignment>;
 
-        /** The guest configuration assignment name. */
-        @path
-        @segment("guestConfigurationAssignments")
-        @key
-        @pattern("^[^<>%&:\\\\?/#]*$")
-        guestConfigurationAssignmentName: string,
-      }
-    > {}
+    /** The guest configuration assignment name. */
+    @path
+    @segment("guestConfigurationAssignments")
+    @key
+    @pattern("^[^<>%&:\\\\?/#]*$")
+    guestConfigurationAssignmentName: string;
+  }
+>;
 
 @armResourceOperations
 interface GuestConfigurationConnectedVMwarevSphereAssignments {

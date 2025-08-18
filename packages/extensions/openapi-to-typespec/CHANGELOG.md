@@ -1,6 +1,14 @@
 # Change Log - @autorest/openapi-to-typespec
 
-This log was last generated on Wed, 13 Aug 2025 10:38:25 GMT and should not be manually modified.
+This log was last generated on Sun, 17 Aug 2025 07:09:54 GMT and should not be manually modified.
+
+## 0.11.8
+Sun, 17 Aug 2025 07:09:54 GMT
+
+### Patches
+
+- Support PrivateEndpointConnection as a resource
+- Add support for using scope parameter with ArmProviderAction
 
 ## 0.11.7
 Wed, 13 Aug 2025 10:38:25 GMT

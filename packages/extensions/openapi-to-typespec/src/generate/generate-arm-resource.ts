@@ -112,13 +112,12 @@ function generateArmResourceOperationGroup(
   const definitions: string[] = [];
 
   if (operationGroup.isLegacy) {
-    definitions.push("@armResourceOperations");
     definitions.push(
-      `interface ${
+      `alias ${
         operationGroup.legacyOperationGroup!.interfaceName
-      } extends Azure.ResourceManager.Legacy.${operationGroup.legacyOperationGroup?.type === "Normal" ? "LegacyOperations" : "ExtensionOperations"}<{${operationGroup.legacyOperationGroup!.targetParentParameters.join(
+      } = Azure.ResourceManager.Legacy.${operationGroup.legacyOperationGroup?.type === "Normal" ? "LegacyOperations" : "ExtensionOperations"}<{${operationGroup.legacyOperationGroup!.targetParentParameters.join(
         ";",
-      )}}, ${operationGroup.legacyOperationGroup?.type === "Normal" ? "" : `{${operationGroup.legacyOperationGroup!.extensionParentParameters!.join(";")}},`}{${operationGroup.legacyOperationGroup!.instanceParameters.join(";")}}> {}`,
+      )}}, ${operationGroup.legacyOperationGroup?.type === "Normal" ? "" : `{${operationGroup.legacyOperationGroup!.extensionParentParameters!.join(";")}},`}{${operationGroup.legacyOperationGroup!.instanceParameters.join(";")}}>;`,
     );
     definitions.push("\n");
   }
