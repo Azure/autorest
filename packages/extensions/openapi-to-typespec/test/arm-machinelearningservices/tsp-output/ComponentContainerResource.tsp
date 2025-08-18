@@ -25,31 +25,29 @@ model ComponentContainerResource
   >;
 }
 
-@armResourceOperations
-interface ComponentContainerResourceOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias ComponentContainerResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** Name of Azure Machine Learning registry. This is case-insensitive */
-        @path
-        @segment("registries")
-        @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
-        registryName: string,
-      },
-      {
-        /** Container name. */
-        @path
-        @segment("components")
-        @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-        componentName: string,
-      }
-    > {}
+    /** Name of Azure Machine Learning registry. This is case-insensitive */
+    @path
+    @segment("registries")
+    @key
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
+    registryName: string;
+  },
+  {
+    /** Container name. */
+    @path
+    @segment("components")
+    @key
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+    componentName: string;
+  }
+>;
 
 @armResourceOperations
 interface ComponentContainerResources {
@@ -87,30 +85,28 @@ interface ComponentContainerResources {
     Response = ArmResponse<ComponentContainerResourceArmPaginatedResult>
   >;
 }
-@armResourceOperations
-interface ComponentContainerOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias ComponentContainerOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** Name of Azure Machine Learning workspace. */
-        @path
-        @segment("workspaces")
-        @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-        workspaceName: string,
-      },
-      {
-        /** Container name. */
-        @path
-        @segment("components")
-        @key
-        name: string,
-      }
-    > {}
+    /** Name of Azure Machine Learning workspace. */
+    @path
+    @segment("workspaces")
+    @key
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    workspaceName: string;
+  },
+  {
+    /** Container name. */
+    @path
+    @segment("components")
+    @key
+    name: string;
+  }
+>;
 
 @armResourceOperations
 interface ComponentContainers {

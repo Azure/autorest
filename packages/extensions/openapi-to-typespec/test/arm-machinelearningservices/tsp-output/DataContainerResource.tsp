@@ -25,30 +25,28 @@ model DataContainerResource
   >;
 }
 
-@armResourceOperations
-interface DataContainerResourceOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias DataContainerResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** Name of Azure Machine Learning registry. This is case-insensitive */
-        @path
-        @segment("registries")
-        @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
-        registryName: string,
-      },
-      {
-        /** Container name. */
-        @path
-        @segment("data")
-        @key
-        name: string,
-      }
-    > {}
+    /** Name of Azure Machine Learning registry. This is case-insensitive */
+    @path
+    @segment("registries")
+    @key
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
+    registryName: string;
+  },
+  {
+    /** Container name. */
+    @path
+    @segment("data")
+    @key
+    name: string;
+  }
+>;
 
 @armResourceOperations
 interface DataContainerResources {
@@ -92,30 +90,28 @@ interface DataContainerResources {
     Response = ArmResponse<DataContainerResourceArmPaginatedResult>
   >;
 }
-@armResourceOperations
-interface DataContainerOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias DataContainerOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** Name of Azure Machine Learning workspace. */
-        @path
-        @segment("workspaces")
-        @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-        workspaceName: string,
-      },
-      {
-        /** Container name. */
-        @path
-        @segment("data")
-        @key
-        name: string,
-      }
-    > {}
+    /** Name of Azure Machine Learning workspace. */
+    @path
+    @segment("workspaces")
+    @key
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    workspaceName: string;
+  },
+  {
+    /** Container name. */
+    @path
+    @segment("data")
+    @key
+    name: string;
+  }
+>;
 
 @armResourceOperations
 interface DataContainers {

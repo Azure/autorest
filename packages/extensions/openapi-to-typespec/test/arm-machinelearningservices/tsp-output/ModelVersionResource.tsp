@@ -23,11 +23,10 @@ model ModelVersionResource is Azure.ResourceManager.ProxyResource<ModelVersion, 
 
 
 
-@armResourceOperations
-interface ModelVersionResourceOps extends Azure.ResourceManager.Legacy.LegacyOperations<{...ApiVersionParameter;...SubscriptionIdParameter;...ResourceGroupParameter;...Azure.ResourceManager.Legacy.Provider;/** Name of Azure Machine Learning registry. This is case-insensitive */
+alias ModelVersionResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<{...ApiVersionParameter;...SubscriptionIdParameter;...ResourceGroupParameter;...Azure.ResourceManager.Legacy.Provider;/** Name of Azure Machine Learning registry. This is case-insensitive */
 @path @segment("registries") @key @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$") registryName: string;/** Container name. This is case-sensitive. */
 @path @segment("models") @key @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$") modelName: string}, {/** Version identifier. This is case-sensitive. */
-@path @segment("versions") @key  version: string}> {}
+@path @segment("versions") @key  version: string}>;
 
 
 @armResourceOperations
@@ -109,11 +108,10 @@ createOrGetStartPendingUpload is ModelVersionResourceOps.ActionSync<ModelVersion
 
 
 }
-@armResourceOperations
-interface ModelVersionOps extends Azure.ResourceManager.Legacy.LegacyOperations<{...ApiVersionParameter;...SubscriptionIdParameter;...ResourceGroupParameter;...Azure.ResourceManager.Legacy.Provider;/** Name of Azure Machine Learning workspace. */
+alias ModelVersionOps = Azure.ResourceManager.Legacy.LegacyOperations<{...ApiVersionParameter;...SubscriptionIdParameter;...ResourceGroupParameter;...Azure.ResourceManager.Legacy.Provider;/** Name of Azure Machine Learning workspace. */
 @path @segment("workspaces") @key @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$") workspaceName: string;/** Container name. This is case-sensitive. */
 @path @segment("models") @key  name: string}, {/** Version identifier. This is case-sensitive. */
-@path @segment("versions") @key  version: string}> {}
+@path @segment("versions") @key  version: string}>;
 
 
 @armResourceOperations

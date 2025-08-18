@@ -25,37 +25,35 @@ model ComponentVersionResource
   >;
 }
 
-@armResourceOperations
-interface ComponentVersionResourceOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias ComponentVersionResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** Name of Azure Machine Learning registry. This is case-insensitive */
-        @path
-        @segment("registries")
-        @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
-        registryName: string,
+    /** Name of Azure Machine Learning registry. This is case-insensitive */
+    @path
+    @segment("registries")
+    @key
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
+    registryName: string;
 
-        /** Container name. */
-        @path
-        @segment("components")
-        @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-        componentName: string,
-      },
-      {
-        /** Version identifier. */
-        @path
-        @segment("versions")
-        @key
-        version: string,
-      }
-    > {}
+    /** Container name. */
+    @path
+    @segment("components")
+    @key
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+    componentName: string;
+  },
+  {
+    /** Version identifier. */
+    @path
+    @segment("versions")
+    @key
+    version: string;
+  }
+>;
 
 @armResourceOperations
 interface ComponentVersionResources {
@@ -111,36 +109,34 @@ interface ComponentVersionResources {
     Response = ArmResponse<ComponentVersionResourceArmPaginatedResult>
   >;
 }
-@armResourceOperations
-interface ComponentVersionOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias ComponentVersionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** Name of Azure Machine Learning workspace. */
-        @path
-        @segment("workspaces")
-        @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-        workspaceName: string,
+    /** Name of Azure Machine Learning workspace. */
+    @path
+    @segment("workspaces")
+    @key
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    workspaceName: string;
 
-        /** Container name. */
-        @path
-        @segment("components")
-        @key
-        name: string,
-      },
-      {
-        /** Version identifier. */
-        @path
-        @segment("versions")
-        @key
-        version: string,
-      }
-    > {}
+    /** Container name. */
+    @path
+    @segment("components")
+    @key
+    name: string;
+  },
+  {
+    /** Version identifier. */
+    @path
+    @segment("versions")
+    @key
+    version: string;
+  }
+>;
 
 @armResourceOperations
 interface ComponentVersions {

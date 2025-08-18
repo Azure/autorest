@@ -25,36 +25,34 @@ model DataVersionBaseResource
   >;
 }
 
-@armResourceOperations
-interface DataVersionBaseResourceOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias DataVersionBaseResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** Name of Azure Machine Learning registry. This is case-insensitive */
-        @path
-        @segment("registries")
-        @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
-        registryName: string,
+    /** Name of Azure Machine Learning registry. This is case-insensitive */
+    @path
+    @segment("registries")
+    @key
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
+    registryName: string;
 
-        /** Container name. */
-        @path
-        @segment("data")
-        @key
-        name: string,
-      },
-      {
-        /** Version identifier. */
-        @path
-        @segment("versions")
-        @key
-        version: string,
-      }
-    > {}
+    /** Container name. */
+    @path
+    @segment("data")
+    @key
+    name: string;
+  },
+  {
+    /** Version identifier. */
+    @path
+    @segment("versions")
+    @key
+    version: string;
+  }
+>;
 
 @armResourceOperations
 interface DataVersionBaseResources {
@@ -127,36 +125,34 @@ interface DataVersionBaseResources {
     ArmResponse<PendingUploadResponseDto>
   >;
 }
-@armResourceOperations
-interface DataVersionOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias DataVersionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** Name of Azure Machine Learning workspace. */
-        @path
-        @segment("workspaces")
-        @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-        workspaceName: string,
+    /** Name of Azure Machine Learning workspace. */
+    @path
+    @segment("workspaces")
+    @key
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    workspaceName: string;
 
-        /** Container name. */
-        @path
-        @segment("data")
-        @key
-        name: string,
-      },
-      {
-        /** Version identifier. */
-        @path
-        @segment("versions")
-        @key
-        version: string,
-      }
-    > {}
+    /** Container name. */
+    @path
+    @segment("data")
+    @key
+    name: string;
+  },
+  {
+    /** Version identifier. */
+    @path
+    @segment("versions")
+    @key
+    version: string;
+  }
+>;
 
 @armResourceOperations
 interface DataVersions {

@@ -25,37 +25,35 @@ model IssueContract
   >;
 }
 
-@armResourceOperations
-interface IssueContractOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias IssueContractOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** The name of the API Management service. */
-        @path
-        @segment("service")
-        @key
-        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-        serviceName: string,
+    /** The name of the API Management service. */
+    @path
+    @segment("service")
+    @key
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    serviceName: string;
 
-        /** API identifier. Must be unique in the current API Management service instance. */
-        @path
-        @segment("apis")
-        @key
-        apiId: string,
-      },
-      {
-        /** Issue identifier. Must be unique in the current API Management service instance. */
-        @path
-        @segment("issues")
-        @key
-        @pattern("^[^*#&+:<>?]+$")
-        issueId: string,
-      }
-    > {}
+    /** API identifier. Must be unique in the current API Management service instance. */
+    @path
+    @segment("apis")
+    @key
+    apiId: string;
+  },
+  {
+    /** Issue identifier. Must be unique in the current API Management service instance. */
+    @path
+    @segment("issues")
+    @key
+    @pattern("^[^*#&+:<>?]+$")
+    issueId: string;
+  }
+>;
 
 @armResourceOperations
 interface IssueContracts {
@@ -155,31 +153,29 @@ interface IssueContracts {
     }
   >;
 }
-@armResourceOperations
-interface IssueOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias IssueOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
 
-        /** The name of the API Management service. */
-        @path
-        @segment("service")
-        @key
-        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-        serviceName: string,
-      },
-      {
-        /** Issue identifier. Must be unique in the current API Management service instance. */
-        @path
-        @segment("issues")
-        @key
-        @pattern("^[^*#&+:<>?]+$")
-        issueId: string,
-      }
-    > {}
+    /** The name of the API Management service. */
+    @path
+    @segment("service")
+    @key
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    serviceName: string;
+  },
+  {
+    /** Issue identifier. Must be unique in the current API Management service instance. */
+    @path
+    @segment("issues")
+    @key
+    @pattern("^[^*#&+:<>?]+$")
+    issueId: string;
+  }
+>;
 
 @armResourceOperations
 interface Issue {
