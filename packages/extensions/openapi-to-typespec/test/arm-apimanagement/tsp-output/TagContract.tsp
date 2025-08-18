@@ -76,11 +76,13 @@ interface TagContracts {
    */
   getEntityStateByOperation is TagContractOps.CheckExistence<TagContract>;
 
-  // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
    * Assign tag to the Operation.
    */
-  assignToOperation is TagContractOps.CreateOrUpdateSync<TagContract>;
+  assignToOperation is TagContractOps.CreateOrUpdateSync<
+    TagContract,
+    Request = void
+  >;
 
   /**
    * Detach the tag from the Operation.
@@ -159,11 +161,10 @@ interface Tag {
    */
   getEntityStateByApi is TagOps.CheckExistence<TagContract>;
 
-  // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
    * Assign tag to the Api.
    */
-  assignToApi is TagOps.CreateOrUpdateSync<TagContract>;
+  assignToApi is TagOps.CreateOrUpdateSync<TagContract, Request = void>;
 
   /**
    * Detach the tag from the Api.
@@ -241,11 +242,13 @@ interface TagContractOperationGroup {
    */
   getEntityStateByProduct is TagContractOperationGroupOps.CheckExistence<TagContract>;
 
-  // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
    * Assign tag to the Product.
    */
-  assignToProduct is TagContractOperationGroupOps.CreateOrUpdateSync<TagContract>;
+  assignToProduct is TagContractOperationGroupOps.CreateOrUpdateSync<
+    TagContract,
+    Request = void
+  >;
 
   /**
    * Detach the tag from the Product.
@@ -322,6 +325,7 @@ interface TagContractOperationGroup {
    */
   createOrUpdate is TagContractOperationGroupOps.CreateOrUpdateSync<
     TagContract,
+    Request = TagCreateUpdateParameters,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.

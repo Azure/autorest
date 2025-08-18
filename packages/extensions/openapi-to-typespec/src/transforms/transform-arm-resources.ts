@@ -385,10 +385,12 @@ function convertResourceCreateOrReplaceOperation(
     );
 
     const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
-    if (!bodyParam) {
-      armOperation.fixMe = [
-        "// FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.",
-      ];
+    if (!bodyParam) armOperation.request = { kind: "void", name: "_" };
+    else {
+      const bodyType = getTypespecType(bodyParam.schema, getSession().model);
+      if (bodyType !== armOperation.resource) {
+        armOperation.request = { kind: "body", name: bodyType };
+      }
     }
 
     const finalStateVia =
@@ -501,12 +503,9 @@ function convertResourceUpdateOperation(
 
       const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
       if (!bodyParam) {
-        armOperation.fixMe = [
-          "// FIXME: (ArmResourcePatch): ArmResourcePatchSync/ArmResourcePatchAsync should have a body parameter with either properties property or tag property",
-        ];
-        armOperation.patchModel = "{}";
+        armOperation.patchModel = { kind: "void", name: "_" };
       } else {
-        armOperation.patchModel = bodyParam.schema.language.default.name;
+        armOperation.patchModel = { kind: "body", name: bodyParam.schema.language.default.name };
       }
       if (bodyParam?.required === false) armOperation.optionalRequestBody = true;
 
@@ -880,19 +879,6 @@ function buildRequestForAction(
   }
 
   const bodyType = getTypespecType(bodyParam.schema, getSession().model);
-  if (isTypespecType(bodyType)) {
-    armOperation.request = {
-      kind: "parameter",
-      type: bodyType,
-      name: bodyParam.language.default.name,
-      isOptional: !bodyParam.required,
-      location: "body",
-      serializedName: "_",
-      decorators: [{ name: "bodyRoot" }],
-      doc: bodyParam.language.default.description,
-    };
-    return;
-  }
   armOperation.request = { kind: "object", name: bodyType };
   if (bodyParam.required !== templateRequired) {
     armOperation.optionalRequestBody = true;

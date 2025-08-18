@@ -37,12 +37,12 @@ interface ContentItemContracts {
    */
   getEntityTag is ArmResourceCheckExistence<ContentItemContract>;
 
-  // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
    * Creates a new developer portal's content item specified by the provided content type.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     ContentItemContract,
+    Request = void,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.

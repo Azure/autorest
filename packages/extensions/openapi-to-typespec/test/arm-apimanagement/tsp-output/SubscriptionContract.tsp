@@ -68,6 +68,7 @@ interface SubscriptionContracts {
    */
   createOrUpdate is SubscriptionContractOps.CreateOrUpdateSync<
     SubscriptionContract,
+    Request = SubscriptionCreateParameters,
     Parameters = {
       /**
        * Notify change in Subscription State.

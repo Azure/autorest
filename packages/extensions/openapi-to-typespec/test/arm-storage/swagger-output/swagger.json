@@ -503,7 +503,7 @@
             "description": "The parameters to provide for the created account.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StorageAccount"
+              "$ref": "#/definitions/StorageAccountCreateParameters"
             }
           }
         ],
@@ -9973,6 +9973,49 @@
         "type"
       ]
     },
+    "StorageAccountCreateParameters": {
+      "type": "object",
+      "description": "The parameters used when creating a storage account.",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Required. Gets or sets the SKU name."
+        },
+        "kind": {
+          "$ref": "#/definitions/Kind",
+          "description": "Required. Indicates the type of storage account."
+        },
+        "location": {
+          "type": "string",
+          "description": "Required. Gets or sets the location of the resource. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update, the request will succeed."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Optional. Set the extended location of the resource. If not set, the storage account will be created in Azure main region. Otherwise it will be created in the specified extended location"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used for viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key with a length no greater than 128 characters and a value with a length no greater than 256 characters.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/StorageAccountPropertiesCreateParameters",
+          "description": "The parameters used to create the storage account.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "sku",
+        "kind",
+        "location"
+      ]
+    },
     "StorageAccountInternetEndpoints": {
       "type": "object",
       "description": "The URIs that are used to perform a retrieval of a public blob, file, web or dfs object via a internet routing endpoint.",
@@ -10279,6 +10322,110 @@
         "storageAccountSkuConversionStatus": {
           "$ref": "#/definitions/StorageAccountSkuConversionStatus",
           "description": "This property is readOnly and is set by server during asynchronous storage account sku conversion operations."
+        },
+        "dnsEndpointType": {
+          "$ref": "#/definitions/DnsEndpointType",
+          "description": "Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts in a single subscription, which creates accounts in an Azure DNS Zone and the endpoint URL will have an alphanumeric DNS Zone identifier."
+        }
+      }
+    },
+    "StorageAccountPropertiesCreateParameters": {
+      "type": "object",
+      "description": "The parameters used to create the storage account.",
+      "properties": {
+        "allowedCopyScope": {
+          "$ref": "#/definitions/AllowedCopyScope",
+          "description": "Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet."
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'."
+        },
+        "sasPolicy": {
+          "$ref": "#/definitions/SasPolicy",
+          "description": "SasPolicy assigned to the storage account."
+        },
+        "keyPolicy": {
+          "$ref": "#/definitions/KeyPolicy",
+          "description": "KeyPolicy assigned to the storage account."
+        },
+        "customDomain": {
+          "$ref": "#/definitions/CustomDomain",
+          "description": "User domain assigned to the storage account. Name is the CNAME source. Only one custom domain is supported per storage account at this time. To clear the existing custom domain, use an empty string for the custom domain name property."
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "Encryption settings to be used for server-side encryption for the storage account."
+        },
+        "networkAcls": {
+          "$ref": "#/definitions/NetworkRuleSet",
+          "description": "Network rule set",
+          "x-ms-client-name": "networkRuleSet"
+        },
+        "accessTier": {
+          "$ref": "#/definitions/AccessTier",
+          "description": "Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier is the default value for premium block blobs storage account type and it cannot be changed for the premium block blobs storage account type."
+        },
+        "azureFilesIdentityBasedAuthentication": {
+          "$ref": "#/definitions/AzureFilesIdentityBasedAuthentication",
+          "description": "Provides the identity based authentication settings for Azure Files."
+        },
+        "supportsHttpsTrafficOnly": {
+          "type": "boolean",
+          "description": "Allows https traffic only to storage service if sets to true. The default value is true since API version 2019-04-01.",
+          "x-ms-client-name": "enableHttpsTrafficOnly"
+        },
+        "isSftpEnabled": {
+          "type": "boolean",
+          "description": "Enables Secure File Transfer Protocol, if set to true",
+          "x-ms-client-name": "IsSftpEnabled"
+        },
+        "isLocalUserEnabled": {
+          "type": "boolean",
+          "description": "Enables local users feature, if set to true",
+          "x-ms-client-name": "IsLocalUserEnabled"
+        },
+        "isHnsEnabled": {
+          "type": "boolean",
+          "description": "Account HierarchicalNamespace enabled if sets to true.",
+          "x-ms-client-name": "IsHnsEnabled"
+        },
+        "largeFileSharesState": {
+          "$ref": "#/definitions/LargeFileSharesState",
+          "description": "Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled."
+        },
+        "routingPreference": {
+          "$ref": "#/definitions/RoutingPreference",
+          "description": "Maintains information about the network routing choice opted by the user for data transfer"
+        },
+        "allowBlobPublicAccess": {
+          "type": "boolean",
+          "description": "Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for this property."
+        },
+        "minimumTlsVersion": {
+          "$ref": "#/definitions/MinimumTlsVersion",
+          "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property."
+        },
+        "allowSharedKeyAccess": {
+          "type": "boolean",
+          "description": "Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is null, which is equivalent to true."
+        },
+        "isNfsV3Enabled": {
+          "type": "boolean",
+          "description": "NFS 3.0 protocol support enabled if set to true.",
+          "x-ms-client-name": "enableNfsV3"
+        },
+        "allowCrossTenantReplication": {
+          "type": "boolean",
+          "description": "Allow or disallow cross AAD tenant object replication. The default interpretation is true for this property."
+        },
+        "defaultToOAuthAuthentication": {
+          "type": "boolean",
+          "description": "A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property."
+        },
+        "immutableStorageWithVersioning": {
+          "$ref": "#/definitions/ImmutableStorageAccount",
+          "description": "The property is immutable and can only be set to true at the account creation time. When set to true, it enables object level immutability for all the new containers in the account by default."
         },
         "dnsEndpointType": {
           "$ref": "#/definitions/DnsEndpointType",

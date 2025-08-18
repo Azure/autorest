@@ -265,12 +265,13 @@ export interface TspArmResourceOperationBase
   resource: string;
   baseParameters?: string[];
   parameters?: TypespecParameter[];
+  request?: TypespecVoidType | TypespecDataType; // In the legacy scenario, put operation could pass in a request to override the resource type
   response?: TypespecTemplateModel[] | TypespecVoidType;
   operationId?: string;
   lroHeaders?: TspLroHeaders;
   examples?: Record<string, Record<string, unknown>>;
   augmentedDecorators?: string[];
-  patchModel?: string;
+  patchModel?: TypespecVoidType | TypespecDataType; // In the legacy scenario, patch operation could pass in a void
   optionalRequestBody?: boolean;
   targetResource?: string;
   extensionResource?: string;

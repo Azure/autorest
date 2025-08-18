@@ -40,8 +40,9 @@ interface GroupContracts {
   /**
    * Creates or Updates a group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     GroupContract,
+    Request = GroupCreateParameters,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.

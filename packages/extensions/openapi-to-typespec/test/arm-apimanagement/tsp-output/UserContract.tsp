@@ -40,8 +40,9 @@ interface UserContracts {
   /**
    * Creates or Updates a user.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     UserContract,
+    Request = UserCreateParameters,
     Parameters = {
       /**
        * Send an Email notification to the User.

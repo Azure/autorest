@@ -41,8 +41,9 @@ interface NamedValueContracts {
    * Creates or updates named value.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     NamedValueContract,
+    Request = NamedValueCreateContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.

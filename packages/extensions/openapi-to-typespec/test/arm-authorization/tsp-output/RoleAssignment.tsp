@@ -44,9 +44,10 @@ interface RoleAssignments {
   /**
    * Create or update a role assignment by scope and name.
    */
-  create is Extension.CreateOrReplaceSync<
+  create is Azure.ResourceManager.Legacy.Extension.CreateOrReplaceSync<
     Extension.ScopeParameter,
-    RoleAssignment
+    RoleAssignment,
+    Request = RoleAssignmentCreateParameters
   >;
 
   /**

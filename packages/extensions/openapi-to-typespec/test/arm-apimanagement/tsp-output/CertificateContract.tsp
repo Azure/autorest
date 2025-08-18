@@ -40,8 +40,9 @@ interface CertificateContracts {
   /**
    * Creates or updates the certificate being used for authentication with the backend.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     CertificateContract,
+    Request = CertificateCreateOrUpdateParameters,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.

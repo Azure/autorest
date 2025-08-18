@@ -40,8 +40,9 @@ interface TagDescriptionContracts {
   /**
    * Create/Update tag description in scope of the Api.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     TagDescriptionContract,
+    Request = TagDescriptionCreateParameters,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.

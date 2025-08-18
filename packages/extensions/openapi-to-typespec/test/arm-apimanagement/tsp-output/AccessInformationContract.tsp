@@ -42,8 +42,9 @@ interface AccessInformationContracts {
    * Update tenant access information details.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  create is ArmResourceCreateOrReplaceSync<
+  create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     AccessInformationContract,
+    Request = AccessInformationCreateParameters,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
