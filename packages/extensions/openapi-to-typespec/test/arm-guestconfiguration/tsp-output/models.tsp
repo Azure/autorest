@@ -714,8 +714,6 @@ model Operation {
   /**
    * Provider, Resource, Operation and description values.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: OperationProperties;
 }
 

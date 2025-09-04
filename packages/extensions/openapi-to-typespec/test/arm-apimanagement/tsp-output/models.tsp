@@ -1438,8 +1438,6 @@ model ErrorResponse {
   /**
    * Properties of the Error Response.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   error?: ErrorResponseBody;
 }
 
@@ -1491,8 +1489,6 @@ model ApiCreateOrUpdateParameter {
   /**
    * API entity create of update properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ApiCreateOrUpdateProperties;
 }
 
@@ -1548,8 +1544,6 @@ model ApiUpdateContract {
   /**
    * Properties of the API entity that can be updated.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ApiContractUpdateProperties;
 }
 
@@ -1911,8 +1905,6 @@ model OperationUpdateContract {
   /**
    * Properties of the API Operation entity that can be updated.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: OperationUpdateContractProperties;
 }
 
@@ -2033,8 +2025,6 @@ model SchemaContractProperties {
   /**
    * Create or update Properties of the API Schema Document.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   document?: SchemaDocumentProperties;
 }
 
@@ -2254,8 +2244,6 @@ model IssueUpdateContract {
   /**
    * Issue entity Update contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: IssueUpdateContractProperties;
 }
 
@@ -2370,8 +2358,6 @@ model TagDescriptionCreateParameters {
   /**
    * Properties supplied to Create TagDescription operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: TagDescriptionBaseProperties;
 }
 
@@ -2615,8 +2601,6 @@ model ApiVersionSetUpdateParameters {
   /**
    * Parameters to update or create an API Version Set Contract.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ApiVersionSetUpdateParametersProperties;
 }
 
@@ -2758,8 +2742,6 @@ model AuthorizationServerUpdateContract
   /**
    * Properties of the External OAuth authorization server update Contract.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AuthorizationServerUpdateContractProperties;
 }
 
@@ -3043,8 +3025,6 @@ model BackendUpdateParameters {
   /**
    * Backend entity update contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: BackendUpdateParameterProperties;
 }
 
@@ -3075,8 +3055,6 @@ model BackendReconnectContract
   /**
    * Reconnect request properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: BackendReconnectProperties;
 }
 
@@ -3127,8 +3105,6 @@ model CacheUpdateParameters {
   /**
    * Cache update properties details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: CacheUpdateProperties;
 }
 
@@ -3244,8 +3220,6 @@ model CertificateCreateOrUpdateParameters {
   /**
    * Certificate create or update properties details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: CertificateCreateOrUpdateProperties;
 }
 
@@ -4056,8 +4030,6 @@ model RemotePrivateEndpointConnectionWrapper {
   /**
    * Resource properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PrivateEndpointConnectionWrapperProperties;
 }
 
@@ -4182,8 +4154,6 @@ model ApiManagementServiceUpdateParameters extends ApimResource {
   /**
    * Properties of the API Management service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ApiManagementServiceUpdateProperties;
 
   /**
@@ -4366,8 +4336,6 @@ model EmailTemplateUpdateParameters {
   /**
    * Email Template Update contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: EmailTemplateUpdateParameterProperties;
 }
 
@@ -4551,8 +4519,6 @@ model AssociationContract extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Association entity contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AssociationContractProperties;
 }
 
@@ -4619,8 +4585,6 @@ model GroupCreateParameters {
   /**
    * Properties supplied to Create Group operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: GroupCreateParametersProperties;
 }
 
@@ -4658,8 +4622,6 @@ model GroupUpdateParameters {
   /**
    * Group entity update contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: GroupUpdateParametersProperties;
 }
 
@@ -4853,8 +4815,6 @@ model IdentityProviderCreateContract
   /**
    * Identity Provider contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: IdentityProviderCreateContractProperties;
 }
 
@@ -4884,8 +4844,6 @@ model IdentityProviderUpdateParameters {
   /**
    * Identity Provider update properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: IdentityProviderUpdateProperties;
 }
 
@@ -4958,8 +4916,6 @@ model LoggerUpdateContract {
   /**
    * Logger entity update contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: LoggerUpdateParameters;
 }
 
@@ -5039,8 +4995,6 @@ model NamedValueCreateContract
   /**
    * NamedValue entity contract properties for PUT operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: NamedValueCreateContractProperties;
 }
 
@@ -5077,8 +5031,6 @@ model NamedValueUpdateParameters {
   /**
    * NamedValue entity Update contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: NamedValueUpdateParameterProperties;
 }
 
@@ -5244,8 +5196,6 @@ model RecipientUserContract extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Recipient User entity contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: RecipientUsersContractProperties;
 }
 
@@ -5268,8 +5218,6 @@ model RecipientEmailContract
   /**
    * Recipient Email contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: RecipientEmailContractProperties;
 }
 
@@ -5322,8 +5270,6 @@ model OpenidConnectProviderUpdateContract {
   /**
    * OpenId Connect Provider Update contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: OpenidConnectProviderUpdateContractProperties;
 }
 
@@ -5436,8 +5382,6 @@ model PolicyDescriptionContract
   /**
    * Policy description contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PolicyDescriptionContractProperties;
 }
 
@@ -5525,8 +5469,6 @@ model PortalSettingsContract
   /**
    * Portal Settings contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PortalSettingsContractProperties;
 }
 
@@ -5700,8 +5642,6 @@ model ProductUpdateParameters {
   /**
    * Product entity Update contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ProductUpdateProperties;
 }
 
@@ -5884,8 +5824,6 @@ model QuotaCounterValueUpdateContract {
   /**
    * Quota counter value details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: QuotaCounterValueContractProperties;
 }
 
@@ -6207,8 +6145,6 @@ model GlobalSchemaContractProperties {
   /**
    * Global Schema document object for json-based schema formats(e.g. json schema).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   document?: unknown;
 }
 
@@ -6476,8 +6412,6 @@ model SubscriptionCreateParameters {
   /**
    * Subscription contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SubscriptionCreateParameterProperties;
 }
 
@@ -6534,8 +6468,6 @@ model SubscriptionUpdateParameters {
   /**
    * Subscription Update contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SubscriptionUpdateParameterProperties;
 }
 
@@ -6620,8 +6552,6 @@ model TagCreateUpdateParameters {
   /**
    * Properties supplied to Create Tag operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: TagContractProperties;
 }
 
@@ -6653,8 +6583,6 @@ model AccessInformationCreateParameters {
   /**
    * Tenant access information update parameter properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AccessInformationCreateParameterProperties;
 }
 
@@ -6690,8 +6618,6 @@ model AccessInformationUpdateParameters {
   /**
    * Tenant access information update parameter properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AccessInformationUpdateParameterProperties;
 }
 
@@ -6742,8 +6668,6 @@ model DeployConfigurationParameters {
   /**
    * Deploy Configuration Parameter contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DeployConfigurationParameterProperties;
 }
 
@@ -6771,8 +6695,6 @@ model OperationResultContract
   /**
    * Properties of the Operation Contract.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: OperationResultContractProperties;
 }
 
@@ -6849,8 +6771,6 @@ model SaveConfigurationParameter {
   /**
    * Properties of the Save Configuration Parameters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SaveConfigurationParameterProperties;
 }
 
@@ -6878,8 +6798,6 @@ model TenantConfigurationSyncStateContract
   /**
    * Properties returned Tenant Configuration Sync State check.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: TenantConfigurationSyncStateContractProperties;
 }
 
@@ -6939,8 +6857,6 @@ model UserCreateParameters {
   /**
    * User entity create contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: UserCreateParameterProperties;
 }
 
@@ -6993,8 +6909,6 @@ model UserUpdateParameters {
   /**
    * User entity update contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: UserUpdateParametersProperties;
 }
 
@@ -7057,8 +6971,6 @@ model UserTokenParameters {
   /**
    * User Token Parameter contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: UserTokenParameterProperties;
 }
 
@@ -7123,7 +7035,5 @@ model QuotaCounterValueContract {
   /**
    * Quota counter Value Properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   value?: QuotaCounterValueContractProperties;
 }

@@ -43,12 +43,7 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/${swaggerName}"
     emit-lro-options: "all"
-    examples-dir: "{project-root}/examples"${
-      isFullCompatible
-        ? `
-    arm-resource-flattening: true`
-        : ""
-    }
+    examples-dir: "{project-root}/examples"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

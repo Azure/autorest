@@ -288,8 +288,6 @@ model ClassicAdministrator {
   /**
    * Properties for the classic administrator.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ClassicAdministratorProperties;
 }
 
@@ -463,8 +461,6 @@ model ProviderOperation {
   /**
    * The operation properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: unknown;
 
   /**
@@ -551,8 +547,6 @@ model RoleAssignmentCreateParameters {
   /**
    * Role assignment properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: RoleAssignmentProperties;
 }
 
@@ -760,22 +754,16 @@ model ExpandedProperties {
   /**
    * Details of the resource scope
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   scope?: ExpandedPropertiesScope;
 
   /**
    * Details of role definition
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   roleDefinition?: ExpandedPropertiesRoleDefinition;
 
   /**
    * Details of the principal
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   principal?: ExpandedPropertiesPrincipal;
 }
 
@@ -993,8 +981,6 @@ model RoleAssignmentScheduleRequestProperties {
   /**
    * Schedule info of the role assignment schedule
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   scheduleInfo?: RoleAssignmentScheduleRequestPropertiesScheduleInfo;
 
   /**
@@ -1053,8 +1039,6 @@ model RoleAssignmentScheduleRequestPropertiesScheduleInfo {
   /**
    * Expiration of the role assignment schedule
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   expiration?: RoleAssignmentScheduleRequestPropertiesScheduleInfoExpiration;
 }
 
@@ -1291,8 +1275,6 @@ model RoleEligibilityScheduleRequestProperties {
   /**
    * Schedule info of the role eligibility schedule
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   scheduleInfo?: RoleEligibilityScheduleRequestPropertiesScheduleInfo;
 
   /**
@@ -1356,8 +1338,6 @@ model RoleEligibilityScheduleRequestPropertiesScheduleInfo {
   /**
    * Expiration of the role eligibility schedule
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   expiration?: RoleEligibilityScheduleRequestPropertiesScheduleInfoExpiration;
 }
 
@@ -1516,9 +1496,7 @@ model PolicyProperties {
   /**
    * Details of the resource scope
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   scope?: PolicyPropertiesScope;
 }
 
@@ -1582,22 +1560,16 @@ model PolicyAssignmentProperties {
   /**
    * Details of the resource scope
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   scope?: PolicyAssignmentPropertiesScope;
 
   /**
    * Details of role definition
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   roleDefinition?: PolicyAssignmentPropertiesRoleDefinition;
 
   /**
    * Details of the policy
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   policy?: PolicyAssignmentPropertiesPolicy;
 }
 

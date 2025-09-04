@@ -22,6 +22,19 @@ model CommunityGallery is Azure.ResourceManager.ProxyResource<{}> {
     SegmentName = "communityGalleries",
     NamePattern = ""
   >;
+
+  /**
+   * Resource location
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  location?: string;
+
+  /**
+   * The identifier information of community gallery.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  identifier?: CommunityGalleryIdentifier;
 }
 
 @armResourceOperations

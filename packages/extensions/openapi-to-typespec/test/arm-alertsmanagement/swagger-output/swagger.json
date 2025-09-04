@@ -1847,8 +1847,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AlertProperties",
-          "description": "Alert property bag",
-          "x-ms-client-flatten": true
+          "description": "Alert property bag"
         }
       },
       "allOf": [
@@ -1949,8 +1948,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AlertProcessingRuleProperties",
-          "description": "Alert processing rule properties.",
-          "x-ms-client-flatten": true
+          "description": "Alert processing rule properties."
         }
       },
       "allOf": [

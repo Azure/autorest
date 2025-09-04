@@ -22,6 +22,7 @@ model FileShare is Azure.ResourceManager.ProxyResource<FileShareProperties> {
     SegmentName = "shares",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
 @armResourceOperations

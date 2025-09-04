@@ -2085,8 +2085,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DataConnectorProperties",
-          "description": "DataConnector Properties.",
-          "x-ms-client-flatten": true
+          "description": "DataConnector Properties."
         },
         "eTag": {
           "type": "string",
@@ -2163,8 +2162,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DataManagerForAgricultureExtensionProperties",
-          "description": "DataManagerForAgricultureExtension properties.",
-          "x-ms-client-flatten": true
+          "description": "DataManagerForAgricultureExtension properties."
         }
       },
       "allOf": [
@@ -2338,8 +2336,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DataManagerForAgricultureSolutionProperties",
-          "description": "DataManagerForAgricultureSolution properties.",
-          "x-ms-client-flatten": true
+          "description": "DataManagerForAgricultureSolution properties."
         }
       },
       "allOf": [
@@ -2804,8 +2801,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SolutionProperties",
-          "description": "Solution resource properties.",
-          "x-ms-client-flatten": true
+          "description": "Solution resource properties."
         },
         "eTag": {
           "type": "string",

@@ -273,9 +273,7 @@ model GroupQuotaDetails {
   /**
    * Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   name?: GroupQuotaDetailsName;
 
   /**
@@ -364,9 +362,7 @@ model SubmittedResourceRequestStatusProperties {
  * The new GroupQuota limit requested.
  */
 model GroupQuotaRequestBase {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: GroupQuotaRequestBaseProperties;
 }
 
@@ -380,9 +376,7 @@ model GroupQuotaRequestBaseProperties {
   /**
    * Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   name?: GroupQuotaRequestBasePropertiesName;
 
   /**
@@ -468,9 +462,7 @@ model SubscriptionQuotaDetails {
   /**
    * Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   name?: SubscriptionQuotaDetailsName;
 }
 
@@ -522,9 +514,7 @@ model QuotaAllocationRequestStatusProperties {
  * The new quota request allocated to subscription.
  */
 model QuotaAllocationRequestBase {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: QuotaAllocationRequestBaseProperties;
 }
 
@@ -538,9 +528,7 @@ model QuotaAllocationRequestBaseProperties {
   /**
    * Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   name?: QuotaAllocationRequestBasePropertiesName;
 
   /**
@@ -959,8 +947,6 @@ model GroupQuotaUsagesBase {
   /**
    * Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   name?: GroupQuotaUsagesBaseName;
 
   /**
@@ -1079,8 +1065,6 @@ model QuotaRequestOneResourceSubmitResponse {
   /**
    * Quota request details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: QuotaRequestOneResourceProperties;
 }
 
@@ -1213,8 +1197,6 @@ model QuotaRequestSubmitResponse202 {
   /**
    * Quota request status.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: QuotaRequestStatusDetails;
 }
 
