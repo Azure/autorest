@@ -21,6 +21,12 @@ model GuestConfigurationAssignment
     SegmentName = "guestConfigurationAssignments",
     NamePattern = ""
   >;
+
+  /**
+   * Region where the VM is located.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  location?: string;
 }
 
 alias GuestConfigurationAssignmentOps = Azure.ResourceManager.Legacy.ExtensionOperations<

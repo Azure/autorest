@@ -477,14 +477,28 @@ using Microsoft.Compute;
 @@flattenProperty(GalleryApplicationVersion.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(SharedGallery.identifier);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(SharedGalleryImage.identifier);
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(SharedGalleryImage.properties);
 
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(SharedGalleryImageVersion.identifier);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(SharedGalleryImageVersion.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(CommunityGallery.identifier);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(CommunityGalleryImage.identifier);
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(CommunityGalleryImage.properties);
 
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(CommunityGalleryImageVersion.identifier);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(CommunityGalleryImageVersion.properties);
 

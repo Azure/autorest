@@ -24,6 +24,7 @@ model ImmutabilityPolicy
     SegmentName = "immutabilityPolicies",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
 @armResourceOperations

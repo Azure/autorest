@@ -829,8 +829,6 @@ model Operation {
   /**
    * Properties of operation, include metric specifications.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: OperationProperties;
 }
 
@@ -1116,8 +1114,6 @@ model StorageAccountCreateParameters {
   /**
    * The parameters used to create the storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StorageAccountPropertiesCreateParameters;
 }
 
@@ -2232,8 +2228,6 @@ model StorageAccountUpdateParameters {
   /**
    * The parameters used when updating a storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StorageAccountPropertiesUpdateParameters;
 
   /**
@@ -3170,8 +3164,6 @@ model PrivateLinkResource extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Resource properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PrivateLinkResourceProperties;
 }
 
@@ -3780,8 +3772,6 @@ model ImmutabilityPolicyProperties {
   /**
    * The properties of an ImmutabilityPolicy of a blob container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ImmutabilityPolicyProperty;
 
   /**
@@ -4462,8 +4452,6 @@ model ListContainerItem extends AzureEntityResource {
   /**
    * The blob container properties be listed out.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ContainerProperties;
 }
 
@@ -4475,8 +4463,6 @@ model FileShareItem extends AzureEntityResource {
   /**
    * The file share properties be listed out.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: FileShareProperties;
 }
 
@@ -4486,8 +4472,6 @@ model ListQueue extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * List Queue resource properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ListQueueProperties;
 }
 

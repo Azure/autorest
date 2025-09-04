@@ -8,7 +8,6 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/TrafficController.json"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
-    arm-resource-flattening: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

@@ -21,6 +21,12 @@ model AnalysisServicesServer
     SegmentName = "servers",
     NamePattern = "^[a-z][a-z0-9]*$"
   >;
+
+  /**
+   * The SKU of the Analysis Services resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  sku: ResourceSku;
 }
 
 @armResourceOperations

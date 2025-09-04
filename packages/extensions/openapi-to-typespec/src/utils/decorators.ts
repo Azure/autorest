@@ -172,14 +172,6 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
     });
   }
 
-  if (element.extensions?.["x-ms-client-flatten"] && isFullCompatible) {
-    decorators.push({
-      name: "Azure.ResourceManager.Private.conditionalClientFlatten",
-      suppressionCode: "@azure-tools/typespec-azure-core/no-private-usage",
-      suppressionMessage: "For backward compatibility",
-    });
-  }
-
   return decorators;
 }
 

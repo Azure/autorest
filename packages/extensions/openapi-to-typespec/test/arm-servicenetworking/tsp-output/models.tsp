@@ -195,8 +195,6 @@ model AssociationUpdate {
   /**
    * The updatable properties of the Association.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AssociationUpdateProperties;
 }
 

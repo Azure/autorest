@@ -421,8 +421,6 @@ model AnalysisServicesServerUpdateParameters {
   /**
    * Properties of the provision operation request.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AnalysisServicesServerMutableProperties;
 }
 

@@ -1,4 +1,4 @@
-import { Operation, Parameter, Property, SchemaType } from "@autorest/codemodel";
+import { getAllProperties, Operation, Parameter, Property, SchemaType } from "@autorest/codemodel";
 import { capitalize } from "@azure-tools/codegen";
 import _ from "lodash";
 import { singular } from "pluralize";
@@ -946,7 +946,7 @@ function getOtherProperties(
     knownProperties.push(...["location", "tags"]);
   }
   const otherProperties: (TypespecObjectProperty | TypespecSpreadStatement)[] = [];
-  for (const property of schema.properties ?? []) {
+  for (const property of getAllProperties(schema)) {
     if (!knownProperties.includes(property.serializedName)) {
       const envolopeProperty = getEnvelopeProperty(property);
       otherProperties.push(

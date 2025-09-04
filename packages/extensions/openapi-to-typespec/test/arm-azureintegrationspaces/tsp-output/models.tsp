@@ -137,8 +137,6 @@ model SpaceUpdate {
   /**
    * The updatable properties of the Space.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SpaceUpdateProperties;
 }
 
@@ -212,8 +210,6 @@ model ApplicationUpdate {
   /**
    * The updatable properties of the Application.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ApplicationUpdateProperties;
 }
 
@@ -350,8 +346,6 @@ model BusinessProcessUpdate {
   /**
    * The updatable properties of the BusinessProcess.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: BusinessProcessUpdateProperties;
 }
 
@@ -608,8 +602,6 @@ model ApplicationResourceUpdate {
   /**
    * The updatable properties of the ApplicationResource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ApplicationResourceUpdateProperties;
 }
 
@@ -676,8 +668,6 @@ model InfrastructureResourceUpdate {
   /**
    * The updatable properties of the InfrastructureResource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: InfrastructureResourceUpdateProperties;
 }
 

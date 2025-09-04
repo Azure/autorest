@@ -801,8 +801,15 @@
           "$ref": "#/definitions/AnalysisServicesServerProperties",
           "description": "Properties of the provision operation request.",
           "x-ms-client-flatten": true
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "The SKU of the Analysis Services resource."
         }
       },
+      "required": [
+        "sku"
+      ],
       "allOf": [
         {
           "$ref": "../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
