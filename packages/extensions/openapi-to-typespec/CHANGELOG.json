@@ -2,6 +2,21 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.11.10",
+      "tag": "@autorest/openapi-to-typespec_v0.11.10",
+      "date": "Thu, 11 Sep 2025 03:35:46 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Upgrade compiler version to 1.4"
+          },
+          {
+            "comment": "Fix the missing properties of resource model. Remove useless conditionalFlattern."
+          }
+        ]
+      }
+    },
+    {
       "version": "0.11.9",
       "tag": "@autorest/openapi-to-typespec_v0.11.9",
       "date": "Mon, 18 Aug 2025 10:08:01 GMT",
