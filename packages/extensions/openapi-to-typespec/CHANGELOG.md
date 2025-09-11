@@ -1,6 +1,14 @@
 # Change Log - @autorest/openapi-to-typespec
 
-This log was last generated on Mon, 18 Aug 2025 10:08:01 GMT and should not be manually modified.
+This log was last generated on Thu, 11 Sep 2025 03:35:46 GMT and should not be manually modified.
+
+## 0.11.10
+Thu, 11 Sep 2025 03:35:46 GMT
+
+### Patches
+
+- Upgrade compiler version to 1.4
+- Fix the missing properties of resource model. Remove useless conditionalFlattern.
 
 ## 0.11.9
 Mon, 18 Aug 2025 10:08:01 GMT
