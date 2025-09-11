@@ -8,19 +8,19 @@ using Azure.ResourceManager.ApiManagement;
   "IsSubscriptionRequired"
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ErrorResponse.error);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ErrorResponse.error);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ApiCreateOrUpdateParameter.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ApiCreateOrUpdateParameter.properties);
 
 @@clientName(ApiCreateOrUpdateProperties.apiType, "soapApiType");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ApiUpdateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ApiUpdateContract.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(OperationUpdateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(OperationUpdateContract.properties);
 
 @@clientName(ProductEntityBaseParameters.subscriptionRequired,
   "IsSubscriptionRequired"
@@ -29,19 +29,19 @@ using Azure.ResourceManager.ApiManagement;
   "IsApprovalRequired"
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SchemaContractProperties.document);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(SchemaContractProperties.document);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(IssueUpdateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(IssueUpdateContract.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(TagDescriptionCreateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(TagDescriptionCreateParameters.properties);
 
 @@clientName(ApiExportResult.format, "exportResultFormat");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ApiVersionSetUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ApiVersionSetUpdateParameters.properties);
 
 @@clientName(AuthorizationServerContractBaseProperties.clientAuthenticationMethod,
   "clientAuthenticationMethods"
@@ -50,46 +50,46 @@ using Azure.ResourceManager.ApiManagement;
   "doesSupportState"
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AuthorizationServerUpdateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(AuthorizationServerUpdateContract.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(BackendUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(BackendUpdateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(BackendReconnectContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(BackendReconnectContract.properties);
 
 @@clientName(CacheContractProperties.resourceId, "resourceUri");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CacheUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(CacheUpdateParameters.properties);
 
 @@clientName(CacheUpdateProperties.resourceId, "resourceUri");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CertificateCreateOrUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(CertificateCreateOrUpdateParameters.properties);
 
 @@clientName(ConnectivityCheckRequestProtocolConfiguration.HTTPConfiguration,
   "httpConfiguration"
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RemotePrivateEndpointConnectionWrapper.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(RemotePrivateEndpointConnectionWrapper.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ApiManagementServiceUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ApiManagementServiceUpdateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(EmailTemplateUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(EmailTemplateUpdateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AssociationContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(AssociationContract.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GroupCreateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(GroupCreateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GroupUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(GroupUpdateParameters.properties);
 
 @@clientName(IdentityProviderBaseParameters.type, "identityProviderType");
 @@clientName(IdentityProviderBaseParameters.signinTenant, "signInTenant");
@@ -100,90 +100,90 @@ using Azure.ResourceManager.ApiManagement;
   "signInPolicyName"
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(IdentityProviderCreateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(IdentityProviderCreateContract.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(IdentityProviderUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(IdentityProviderUpdateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(LoggerUpdateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(LoggerUpdateContract.properties);
 
 @@clientName(NamedValueEntityBaseParameters.secret, "IsSecret");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(NamedValueCreateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(NamedValueCreateContract.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(NamedValueUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(NamedValueUpdateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RecipientUserContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(RecipientUserContract.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RecipientEmailContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(RecipientEmailContract.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(OpenidConnectProviderUpdateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(OpenidConnectProviderUpdateContract.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PolicyDescriptionContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PolicyDescriptionContract.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PortalSettingsContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PortalSettingsContract.properties);
 
 @@clientName(PortalSettingsContractProperties.subscriptions, "IsSubscriptions");
 @@clientName(PortalSettingsContractProperties.userRegistration,
   "IsUserRegistration"
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ProductUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ProductUpdateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(QuotaCounterValueUpdateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(QuotaCounterValueUpdateContract.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GlobalSchemaContractProperties.document);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(GlobalSchemaContractProperties.document);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SubscriptionCreateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(SubscriptionCreateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SubscriptionUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(SubscriptionUpdateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(TagCreateUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(TagCreateUpdateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AccessInformationCreateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(AccessInformationCreateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AccessInformationUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(AccessInformationUpdateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DeployConfigurationParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(DeployConfigurationParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(OperationResultContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(OperationResultContract.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SaveConfigurationParameter.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(SaveConfigurationParameter.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(TenantConfigurationSyncStateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(TenantConfigurationSyncStateContract.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UserCreateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(UserCreateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UserUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(UserUpdateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UserTokenParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(UserTokenParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(QuotaCounterValueContract.value);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(QuotaCounterValueContract.value);
 
 @@clientLocation(ApiContracts.get, "Api");
 @@clientLocation(ApiContracts.getEntityTag, "Api");
@@ -197,8 +197,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientName(ApiContracts.apiRevisionListByService, "ListByService");
 @@clientLocation(ApiContracts.listByApis, "ApiProduct");
 @@clientLocation(ApiContracts.listByTags, "Operation");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ApiContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ApiContract.properties);
 
 @@clientLocation(ApiReleaseContracts.get, "ApiRelease");
 @@clientLocation(ApiReleaseContracts.getEntityTag, "ApiRelease");
@@ -210,8 +210,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientName(ApiReleaseContracts.update::parameters.properties, "parameters");
 @@clientLocation(ApiReleaseContracts.delete, "ApiRelease");
 @@clientLocation(ApiReleaseContracts.listByService, "ApiRelease");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ApiReleaseContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ApiReleaseContract.properties);
 
 @@clientLocation(OperationContracts.get, "ApiOperation");
 @@clientLocation(OperationContracts.getEntityTag, "ApiOperation");
@@ -223,8 +223,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientName(OperationContracts.update::parameters.properties, "parameters");
 @@clientLocation(OperationContracts.delete, "ApiOperation");
 @@clientLocation(OperationContracts.listByApi, "ApiOperation");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(OperationContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(OperationContract.properties);
 
 @@clientLocation(PolicyContracts.get, "ApiOperationPolicy");
 @@clientLocation(PolicyContracts.getEntityTag, "ApiOperationPolicy");
@@ -235,8 +235,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientName(ApiPolicy.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Policy.createOrUpdate::parameters.resource, "parameters");
 @@clientName(ProductPolicy.createOrUpdate::parameters.resource, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PolicyContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PolicyContract.properties);
 
 @@clientLocation(TagContracts.getByOperation, Tag);
 @@clientLocation(TagContracts.getEntityStateByOperation, Tag);
@@ -260,8 +260,8 @@ using Azure.ResourceManager.ApiManagement;
 );
 @@clientLocation(TagContractOperationGroup.delete, Tag);
 @@clientLocation(TagContractOperationGroup.listByService, Tag);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(TagContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(TagContract.properties);
 
 @@clientLocation(ProductContracts.get, "Product");
 @@clientLocation(ProductContracts.getEntityTag, "Product");
@@ -292,8 +292,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(ProductContracts.productGroupDelete, "ProductGroup");
 @@clientName(ProductContracts.productGroupDelete, "Delete");
 @@clientLocation(ProductContracts.list, "ProductSubscriptions");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ProductContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ProductContract.properties);
 
 @@clientLocation(SchemaContracts.get, "ApiSchema");
 @@clientLocation(SchemaContracts.getEntityTag, "ApiSchema");
@@ -301,8 +301,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientName(SchemaContracts.createOrUpdate::parameters.resource, "parameters");
 @@clientLocation(SchemaContracts.delete, "ApiSchema");
 @@clientLocation(SchemaContracts.listByApi, "ApiSchema");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SchemaContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(SchemaContract.properties);
 
 @@clientLocation(DiagnosticContracts.get, "ApiDiagnostic");
 @@clientLocation(DiagnosticContracts.getEntityTag, "ApiDiagnostic");
@@ -316,8 +316,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(DiagnosticContracts.listByService, "ApiDiagnostic");
 @@clientName(Diagnostic.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Diagnostic.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DiagnosticContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(DiagnosticContract.properties);
 
 @@clientLocation(IssueContracts.get, "ApiIssue");
 @@clientLocation(IssueContracts.getEntityTag, "ApiIssue");
@@ -327,8 +327,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientName(IssueContracts.update::parameters.properties, "parameters");
 @@clientLocation(IssueContracts.delete, "ApiIssue");
 @@clientLocation(IssueContracts.listByService, "ApiIssue");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(IssueContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(IssueContract.properties);
 
 @@clientLocation(IssueCommentContracts.get, "ApiIssueComment");
 @@clientLocation(IssueCommentContracts.getEntityTag, "ApiIssueComment");
@@ -338,8 +338,8 @@ using Azure.ResourceManager.ApiManagement;
 );
 @@clientLocation(IssueCommentContracts.delete, "ApiIssueComment");
 @@clientLocation(IssueCommentContracts.listByService, "ApiIssueComment");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(IssueCommentContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(IssueCommentContract.properties);
 
 @@clientLocation(IssueAttachmentContracts.get, "ApiIssueAttachment");
 @@clientLocation(IssueAttachmentContracts.getEntityTag, "ApiIssueAttachment");
@@ -349,8 +349,8 @@ using Azure.ResourceManager.ApiManagement;
 );
 @@clientLocation(IssueAttachmentContracts.delete, "ApiIssueAttachment");
 @@clientLocation(IssueAttachmentContracts.listByService, "ApiIssueAttachment");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(IssueAttachmentContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(IssueAttachmentContract.properties);
 
 @@clientLocation(TagDescriptionContracts.get, "ApiTagDescription");
 @@clientLocation(TagDescriptionContracts.getEntityTag, "ApiTagDescription");
@@ -360,8 +360,8 @@ using Azure.ResourceManager.ApiManagement;
 );
 @@clientLocation(TagDescriptionContracts.delete, "ApiTagDescription");
 @@clientLocation(TagDescriptionContracts.listByService, "ApiTagDescription");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(TagDescriptionContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(TagDescriptionContract.properties);
 
 @@clientLocation(ApiVersionSetContracts.get, "ApiVersionSet");
 @@clientLocation(ApiVersionSetContracts.getEntityTag, "ApiVersionSet");
@@ -375,8 +375,8 @@ using Azure.ResourceManager.ApiManagement;
 );
 @@clientLocation(ApiVersionSetContracts.delete, "ApiVersionSet");
 @@clientLocation(ApiVersionSetContracts.listByService, "ApiVersionSet");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ApiVersionSetContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ApiVersionSetContract.properties);
 
 @@clientLocation(AuthorizationServerContracts.get, "AuthorizationServer");
 @@clientLocation(AuthorizationServerContracts.getEntityTag,
@@ -399,8 +399,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(AuthorizationServerContracts.listSecrets,
   "AuthorizationServer"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AuthorizationServerContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(AuthorizationServerContract.properties);
 
 @@clientLocation(BackendContracts.get, "Backend");
 @@clientLocation(BackendContracts.getEntityTag, "Backend");
@@ -414,8 +414,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(BackendContracts.listByService, "Backend");
 @@clientLocation(BackendContracts.reconnect, "Backend");
 @@clientName(BackendContracts.reconnect::parameters.body, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(BackendContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(BackendContract.properties);
 
 @@clientLocation(CacheContracts.get, "Cache");
 @@clientLocation(CacheContracts.getEntityTag, "Cache");
@@ -425,8 +425,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientName(CacheContracts.update::parameters.properties, "parameters");
 @@clientLocation(CacheContracts.delete, "Cache");
 @@clientLocation(CacheContracts.listByService, "Cache");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CacheContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(CacheContract.properties);
 
 @@clientLocation(CertificateContracts.get, "Certificate");
 @@clientLocation(CertificateContracts.getEntityTag, "Certificate");
@@ -437,28 +437,28 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(CertificateContracts.delete, "Certificate");
 @@clientLocation(CertificateContracts.listByService, "Certificate");
 @@clientLocation(CertificateContracts.refreshSecret, "Certificate");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CertificateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(CertificateContract.properties);
 
 @@clientLocation(ContentTypeContracts.get, "ContentType");
 @@clientLocation(ContentTypeContracts.createOrUpdate, "ContentType");
 @@clientLocation(ContentTypeContracts.delete, "ContentType");
 @@clientLocation(ContentTypeContracts.listByService, "ContentType");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ContentTypeContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ContentTypeContract.properties);
 
 @@clientLocation(ContentItemContracts.get, "ContentItem");
 @@clientLocation(ContentItemContracts.getEntityTag, "ContentItem");
 @@clientLocation(ContentItemContracts.createOrUpdate, "ContentItem");
 @@clientLocation(ContentItemContracts.delete, "ContentItem");
 @@clientLocation(ContentItemContracts.listByService, "ContentItem");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ContentItemContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ContentItemContract.properties);
 
 @@clientLocation(DeletedServiceContracts.getByName, "DeletedServices");
 @@clientLocation(DeletedServiceContracts.purge, "DeletedServices");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DeletedServiceContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(DeletedServiceContract.properties);
 
 @@clientLocation(ApiManagementServiceResources.get, "ApiManagementService");
 @@clientLocation(ApiManagementServiceResources.createOrUpdate,
@@ -567,8 +567,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientName(ApiManagementServiceResources.tagResourceListByService,
   "ListByService"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ApiManagementServiceResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ApiManagementServiceResource.properties);
 
 @@clientLocation(EmailTemplateContracts.get, "EmailTemplate");
 @@clientLocation(EmailTemplateContracts.getEntityTag, "EmailTemplate");
@@ -582,8 +582,8 @@ using Azure.ResourceManager.ApiManagement;
 );
 @@clientLocation(EmailTemplateContracts.delete, "EmailTemplate");
 @@clientLocation(EmailTemplateContracts.listByService, "EmailTemplate");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(EmailTemplateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(EmailTemplateContract.properties);
 
 @@clientLocation(GatewayContracts.get, "Gateway");
 @@clientLocation(GatewayContracts.getEntityTag, "Gateway");
@@ -611,8 +611,8 @@ using Azure.ResourceManager.ApiManagement;
 );
 @@clientLocation(GatewayContracts.gatewayApiDelete, "GatewayApi");
 @@clientName(GatewayContracts.gatewayApiDelete, "Delete");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GatewayContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(GatewayContract.properties);
 
 @@clientLocation(GatewayHostnameConfigurationContracts.get,
   "GatewayHostnameConfiguration"
@@ -632,8 +632,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(GatewayHostnameConfigurationContracts.listByService,
   "GatewayHostnameConfiguration"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GatewayHostnameConfigurationContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(GatewayHostnameConfigurationContract.properties);
 
 @@clientLocation(GatewayCertificateAuthorityContracts.get,
   "GatewayCertificateAuthority"
@@ -653,8 +653,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(GatewayCertificateAuthorityContracts.listByService,
   "GatewayCertificateAuthority"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GatewayCertificateAuthorityContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(GatewayCertificateAuthorityContract.properties);
 
 @@clientLocation(GroupContracts.get, "Group");
 @@clientLocation(GroupContracts.getEntityTag, "Group");
@@ -669,8 +669,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(GroupContracts.create, "GroupUser");
 @@clientLocation(GroupContracts.groupUserDelete, "GroupUser");
 @@clientName(GroupContracts.groupUserDelete, "Delete");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GroupContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(GroupContract.properties);
 
 @@clientLocation(UserContracts.get, "User");
 @@clientLocation(UserContracts.getEntityTag, "User");
@@ -687,8 +687,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(UserContracts.userIdentitiesList, "UserIdentities");
 @@clientName(UserContracts.userIdentitiesList, "List");
 @@clientLocation(UserContracts.send, "UserConfirmationPassword");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UserContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(UserContract.properties);
 
 @@clientLocation(IdentityProviderContracts.get, "IdentityProvider");
 @@clientLocation(IdentityProviderContracts.getEntityTag, "IdentityProvider");
@@ -703,8 +703,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(IdentityProviderContracts.delete, "IdentityProvider");
 @@clientLocation(IdentityProviderContracts.listByService, "IdentityProvider");
 @@clientLocation(IdentityProviderContracts.listSecrets, "IdentityProvider");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(IdentityProviderContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(IdentityProviderContract.properties);
 
 @@clientLocation(LoggerContracts.get, "Logger");
 @@clientLocation(LoggerContracts.getEntityTag, "Logger");
@@ -714,8 +714,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientName(LoggerContracts.update::parameters.properties, "parameters");
 @@clientLocation(LoggerContracts.delete, "Logger");
 @@clientLocation(LoggerContracts.listByService, "Logger");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(LoggerContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(LoggerContract.properties);
 
 @@clientLocation(NamedValueContracts.get, "NamedValue");
 @@clientLocation(NamedValueContracts.getEntityTag, "NamedValue");
@@ -729,8 +729,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(NamedValueContracts.listByService, "NamedValue");
 @@clientLocation(NamedValueContracts.listValue, "NamedValue");
 @@clientLocation(NamedValueContracts.refreshSecret, "NamedValue");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(NamedValueContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(NamedValueContract.properties);
 
 @@clientLocation(NotificationContracts.get, "Notification");
 @@clientLocation(NotificationContracts.createOrUpdate, "Notification");
@@ -770,8 +770,8 @@ using Azure.ResourceManager.ApiManagement;
   "NotificationRecipientEmail"
 );
 @@clientName(NotificationContracts.notificationRecipientEmailDelete, "Delete");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(NotificationContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(NotificationContract.properties);
 
 @@clientLocation(OpenidConnectProviderContracts.get, "OpenIdConnectProvider");
 @@clientLocation(OpenidConnectProviderContracts.getEntityTag,
@@ -798,8 +798,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(OpenidConnectProviderContracts.listSecrets,
   "OpenIdConnectProvider"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(OpenidConnectProviderContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(OpenidConnectProviderContract.properties);
 
 @@clientLocation(PortalRevisionContracts.get, "PortalRevision");
 @@clientLocation(PortalRevisionContracts.getEntityTag, "PortalRevision");
@@ -812,25 +812,25 @@ using Azure.ResourceManager.ApiManagement;
   "parameters"
 );
 @@clientLocation(PortalRevisionContracts.listByService, "PortalRevision");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PortalRevisionContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PortalRevisionContract.properties);
 
 @@clientName(SignInSettings.createOrUpdate::parameters.resource, "parameters");
 @@clientName(SignInSettings.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PortalSigninSettings.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PortalSigninSettings.properties);
 
 @@clientName(SignUpSettings.createOrUpdate::parameters.resource, "parameters");
 @@clientName(SignUpSettings.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PortalSignupSettings.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PortalSignupSettings.properties);
 
 @@clientName(DelegationSettings.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(DelegationSettings.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PortalDelegationSettings.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PortalDelegationSettings.properties);
 
 @@clientLocation(PrivateEndpointConnections.getByName,
   "PrivateEndpointConnection"
@@ -847,8 +847,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(PrivateEndpointConnections.listByService,
   "PrivateEndpointConnection"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateEndpointConnection.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PrivateEndpointConnection.properties);
 
 @@clientLocation(PrivateLinkResources.getPrivateLinkResource,
   "PrivateEndpointConnection"
@@ -856,8 +856,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(PrivateLinkResources.listPrivateLinkResources,
   "PrivateEndpointConnection"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateLinkResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PrivateLinkResource.properties);
 
 @@clientLocation(SubscriptionContracts.get, "Subscription");
 @@clientLocation(SubscriptionContracts.getEntityTag, "Subscription");
@@ -872,8 +872,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(SubscriptionContracts.regeneratePrimaryKey, "Subscription");
 @@clientLocation(SubscriptionContracts.regenerateSecondaryKey, "Subscription");
 @@clientLocation(SubscriptionContracts.listSecrets, "Subscription");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SubscriptionContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(SubscriptionContract.properties);
 
 @@clientLocation(GlobalSchemaContracts.get, "GlobalSchema");
 @@clientLocation(GlobalSchemaContracts.getEntityTag, "GlobalSchema");
@@ -883,13 +883,13 @@ using Azure.ResourceManager.ApiManagement;
 );
 @@clientLocation(GlobalSchemaContracts.delete, "GlobalSchema");
 @@clientLocation(GlobalSchemaContracts.listByService, "GlobalSchema");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GlobalSchemaContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(GlobalSchemaContract.properties);
 
 @@clientLocation(TenantSettingsContracts.get, "TenantSettings");
 @@clientLocation(TenantSettingsContracts.listByService, "TenantSettings");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(TenantSettingsContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(TenantSettingsContract.properties);
 
 @@clientLocation(AccessInformationContracts.get, "TenantAccess");
 @@clientLocation(AccessInformationContracts.getEntityTag, "TenantAccess");
@@ -932,8 +932,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(AccessInformationContracts.getSyncState,
   "TenantConfiguration"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AccessInformationContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(AccessInformationContract.properties);
 
 @@clientLocation(ApiExportOperationGroup.get, "ApiExport");
 

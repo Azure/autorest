@@ -3,25 +3,25 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager.Authorization;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ClassicAdministrator.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ClassicAdministrator.properties);
 
 @@clientName(Principal.type, "principalType");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ProviderOperation.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ProviderOperation.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RoleAssignmentCreateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(RoleAssignmentCreateParameters.properties);
 
 @@clientName(RoleDefinitionProperties.type, "roleType");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ExpandedProperties.scope);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ExpandedProperties.roleDefinition);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ExpandedProperties.principal);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ExpandedProperties.scope);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ExpandedProperties.roleDefinition);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ExpandedProperties.principal);
 
 @@clientName(ExpandedPropertiesScope.id, "scopeId");
 @@clientName(ExpandedPropertiesScope.displayName, "scopeDisplayName");
@@ -37,41 +37,41 @@ using Azure.ResourceManager.Authorization;
 @@clientName(ExpandedPropertiesPrincipal.displayName, "principalDisplayName");
 @@clientName(ExpandedPropertiesPrincipal.type, "principalType");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RoleAssignmentScheduleRequestProperties.scheduleInfo);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(RoleAssignmentScheduleRequestProperties.scheduleInfo);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RoleAssignmentScheduleRequestPropertiesScheduleInfo.expiration
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(RoleAssignmentScheduleRequestPropertiesScheduleInfo.expiration
 );
 
 @@clientName(RoleAssignmentScheduleRequestPropertiesScheduleInfoExpiration.type,
   "expirationType"
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RoleEligibilityScheduleRequestProperties.scheduleInfo);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(RoleEligibilityScheduleRequestProperties.scheduleInfo);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RoleEligibilityScheduleRequestPropertiesScheduleInfo.expiration
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(RoleEligibilityScheduleRequestPropertiesScheduleInfo.expiration
 );
 
 @@clientName(RoleEligibilityScheduleRequestPropertiesScheduleInfoExpiration.type,
   "expirationType"
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PolicyProperties.scope);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PolicyProperties.scope);
 
 @@clientName(PolicyPropertiesScope.id, "scopeId");
 @@clientName(PolicyPropertiesScope.displayName, "scopeDisplayName");
 @@clientName(PolicyPropertiesScope.type, "scopeType");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PolicyAssignmentProperties.scope);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PolicyAssignmentProperties.roleDefinition);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PolicyAssignmentProperties.policy);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PolicyAssignmentProperties.scope);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PolicyAssignmentProperties.roleDefinition);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PolicyAssignmentProperties.policy);
 
 @@clientName(PolicyAssignmentPropertiesScope.id, "scopeId");
 @@clientName(PolicyAssignmentPropertiesScope.displayName, "scopeDisplayName");
@@ -85,8 +85,8 @@ using Azure.ResourceManager.Authorization;
 
 @@clientName(PolicyAssignmentPropertiesPolicy.id, "policyId");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DenyAssignment.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(DenyAssignment.properties);
 
 @@clientLocation(ProviderOperationsMetadataOperationGroup.get,
   "ProviderOperationsMetadata"
@@ -96,20 +96,20 @@ using Azure.ResourceManager.Authorization;
 );
 
 @@clientName(RoleAssignments.create::parameters.resource, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RoleAssignment.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(RoleAssignment.properties);
 
 @@clientName(RoleDefinitions.createOrUpdate::parameters.resource,
   "roleDefinition"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RoleDefinition.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(RoleDefinition.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RoleAssignmentSchedule.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(RoleAssignmentSchedule.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RoleAssignmentScheduleInstance.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(RoleAssignmentScheduleInstance.properties);
 
 @@clientName(RoleAssignmentScheduleRequests.create::parameters.resource,
   "parameters"
@@ -117,14 +117,14 @@ using Azure.ResourceManager.Authorization;
 @@clientName(RoleAssignmentScheduleRequests.validate::parameters.body,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RoleAssignmentScheduleRequest.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(RoleAssignmentScheduleRequest.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RoleEligibilitySchedule.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(RoleEligibilitySchedule.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RoleEligibilityScheduleInstance.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(RoleEligibilityScheduleInstance.properties);
 
 @@clientName(RoleEligibilityScheduleRequests.create::parameters.resource,
   "parameters"
@@ -132,20 +132,20 @@ using Azure.ResourceManager.Authorization;
 @@clientName(RoleEligibilityScheduleRequests.validate::parameters.body,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RoleEligibilityScheduleRequest.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(RoleEligibilityScheduleRequest.properties);
 
 @@clientName(RoleManagementPolicies.update::parameters.properties,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RoleManagementPolicy.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(RoleManagementPolicy.properties);
 
 @@clientName(RoleManagementPolicyAssignments.create::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RoleManagementPolicyAssignment.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(RoleManagementPolicyAssignment.properties);
 
 @@clientLocation(ClassicAdministratorsOperationGroup.list,
   "ClassicAdministrators"
