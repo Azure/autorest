@@ -43,21 +43,21 @@ using Microsoft.AgFoodPlatform;
 @@clientLocation(DataManagerForAgricultures.listBySubscription,
   "DataManagerForAgricultureResources"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DataManagerForAgriculture.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(DataManagerForAgriculture.properties);
 
 @@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "request"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateEndpointConnection.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PrivateEndpointConnection.properties);
 
 @@clientName(Extensions.createOrUpdate::parameters.resource, "requestBody");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Extension.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(Extension.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateLinkResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PrivateLinkResource.properties);
 
 @@clientName(Solutions.createOrUpdate::parameters.resource, "requestBody");
 

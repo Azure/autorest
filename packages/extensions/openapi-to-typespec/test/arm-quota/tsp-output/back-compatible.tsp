@@ -3,32 +3,32 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Quota;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GroupQuotaDetails.name);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(GroupQuotaDetails.name);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GroupQuotaRequestBase.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(GroupQuotaRequestBase.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GroupQuotaRequestBaseProperties.name);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(GroupQuotaRequestBaseProperties.name);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SubscriptionQuotaDetails.name);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(SubscriptionQuotaDetails.name);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(QuotaAllocationRequestBase.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(QuotaAllocationRequestBase.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(QuotaAllocationRequestBaseProperties.name);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(QuotaAllocationRequestBaseProperties.name);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GroupQuotaUsagesBase.name);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(GroupQuotaUsagesBase.name);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(QuotaRequestOneResourceSubmitResponse.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(QuotaRequestOneResourceSubmitResponse.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(QuotaRequestSubmitResponse202.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(QuotaRequestSubmitResponse202.properties);
 
 @@clientLocation(GroupQuotasEntities.get, "GroupQuotas");
 @@clientLocation(GroupQuotasEntities.createOrUpdate, "GroupQuotas");
@@ -87,8 +87,8 @@ using Microsoft.Quota;
 @@clientLocation(QuotaAllocationRequestStatuses.list,
   "GroupQuotaSubscriptionAllocationRequest"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(QuotaAllocationRequestStatus.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(QuotaAllocationRequestStatus.properties);
 
 @@clientLocation(CurrentUsagesBases.get, "Usages");
 @@clientLocation(CurrentUsagesBases.list, "Usages");
@@ -104,5 +104,5 @@ using Microsoft.Quota;
 );
 @@clientLocation(CurrentQuotaLimitBases.list, "Quota");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(QuotaRequestDetails.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(QuotaRequestDetails.properties);

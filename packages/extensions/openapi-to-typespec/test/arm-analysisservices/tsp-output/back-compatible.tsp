@@ -3,13 +3,13 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager.Analysis;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AnalysisServicesServerUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(AnalysisServicesServerUpdateParameters.properties);
 
 @@clientName(Servers.create::parameters.resource, "serverParameters");
 @@clientName(Servers.update::parameters.properties, "serverUpdateParameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AnalysisServicesServer.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(AnalysisServicesServer.properties);
 
 @@clientLocation(ServersOperationGroup.listSkusForNew, Servers);
 @@clientLocation(ServersOperationGroup.checkNameAvailability, Servers);

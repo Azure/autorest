@@ -3,146 +3,150 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Compute;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ComputeOperationValue.display);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ComputeOperationValue.display);
 
 @@clientName(VirtualMachineScaleSetDataDisk.diskIOPSReadWrite,
   "diskIopsReadWrite"
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSetNetworkConfiguration.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(VirtualMachineScaleSetNetworkConfiguration.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSetIPConfiguration.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(VirtualMachineScaleSetIPConfiguration.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSetPublicIPAddressConfiguration.properties
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(VirtualMachineScaleSetPublicIPAddressConfiguration.properties
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSetUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(VirtualMachineScaleSetUpdate.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSetUpdateNetworkConfiguration.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSetUpdateIPConfiguration.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSetUpdatePublicIPAddressConfiguration.properties
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(VirtualMachineScaleSetUpdateNetworkConfiguration.properties
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSetExtensionUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(VirtualMachineScaleSetUpdateIPConfiguration.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSetVMExtensionUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(VirtualMachineScaleSetUpdatePublicIPAddressConfiguration.properties
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(VirtualMachineScaleSetExtensionUpdate.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(VirtualMachineScaleSetVMExtensionUpdate.properties);
 
 @@clientName(DataDisk.diskIOPSReadWrite, "diskIopsReadWrite");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(NetworkInterfaceReference.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(NetworkInterfaceReference.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineNetworkInterfaceConfiguration.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(VirtualMachineNetworkInterfaceConfiguration.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineNetworkInterfaceIPConfiguration.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(VirtualMachineNetworkInterfaceIPConfiguration.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachinePublicIPAddressConfiguration.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(VirtualMachinePublicIPAddressConfiguration.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineExtensionUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(VirtualMachineExtensionUpdate.properties);
 
 @@clientName(VirtualMachineCaptureResult.$schema, "schema");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(VirtualMachineUpdate.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineImage.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(VirtualMachineImage.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AvailabilitySetUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(AvailabilitySetUpdate.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DedicatedHostGroupUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(DedicatedHostGroupUpdate.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DedicatedHostUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(DedicatedHostUpdate.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SshPublicKeyUpdateResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(SshPublicKeyUpdateResource.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ImageUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ImageUpdate.properties);
 
 @@clientName(RestorePointSourceVMStorageProfile.dataDisks, "dataDiskList");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RestorePointCollectionUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(RestorePointCollectionUpdate.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CapacityReservationGroupUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(CapacityReservationGroupUpdate.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CapacityReservationUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(CapacityReservationUpdate.properties);
 
 @@clientName(RunCommandDocumentBase.$schema, "schema");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineRunCommandUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(VirtualMachineRunCommandUpdate.properties);
 
 @@clientName(DiskProperties.diskIOPSReadWrite, "diskIopsReadWrite");
 @@clientName(DiskProperties.diskIOPSReadOnly, "diskIopsReadOnly");
 @@clientName(DiskProperties.LastOwnershipUpdateTime, "lastOwnershipUpdateTime");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DiskUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(DiskUpdate.properties);
 
 @@clientName(DiskUpdateProperties.diskIOPSReadWrite, "diskIopsReadWrite");
 @@clientName(DiskUpdateProperties.diskIOPSReadOnly, "diskIopsReadOnly");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateLinkResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PrivateLinkResource.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DiskEncryptionSetUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(DiskEncryptionSetUpdate.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SnapshotUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(SnapshotUpdate.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GalleryUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(GalleryUpdate.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GalleryImageUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(GalleryImageUpdate.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GalleryImageVersionUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(GalleryImageVersionUpdate.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GalleryApplicationUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(GalleryApplicationUpdate.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GalleryApplicationVersionUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(GalleryApplicationVersionUpdate.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PirSharedGalleryResource.identifier);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PirSharedGalleryResource.identifier);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PirCommunityGalleryResource.identifier);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PirCommunityGalleryResource.identifier);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(LoadBalancerConfiguration.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(LoadBalancerConfiguration.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(LoadBalancerFrontendIpConfiguration.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(LoadBalancerFrontendIpConfiguration.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Extension.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(Extension.properties);
 
 @@clientName(VirtualMachineScaleSets.createOrUpdate::parameters.resource,
   "parameters"
@@ -191,8 +195,8 @@ using Microsoft.Compute;
 @@clientLocation(VirtualMachineScaleSets.startExtensionUpgrade,
   "VirtualMachineScaleSetRollingUpgrades"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSet.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(VirtualMachineScaleSet.properties);
 
 @@clientName(VirtualMachineScaleSetExtensions.createOrUpdate::parameters.resource,
   "extensionParameters"
@@ -200,8 +204,8 @@ using Microsoft.Compute;
 @@clientName(VirtualMachineScaleSetExtensions.update::parameters.properties,
   "extensionParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSetExtension.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(VirtualMachineScaleSetExtension.properties);
 
 @@clientName(VirtualMachineExtensions.createOrUpdate::parameters.resource,
   "extensionParameters"
@@ -209,14 +213,14 @@ using Microsoft.Compute;
 @@clientName(VirtualMachineExtensions.update::parameters.properties,
   "extensionParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineExtension.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(VirtualMachineExtension.properties);
 
 @@clientLocation(RollingUpgradeStatusInfos.getLatest,
   "VirtualMachineScaleSetRollingUpgrades"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RollingUpgradeStatusInfo.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(RollingUpgradeStatusInfo.properties);
 
 @@clientName(VirtualMachineScaleSetVMExtensions.createOrUpdate::parameters.resource,
   "extensionParameters"
@@ -224,8 +228,8 @@ using Microsoft.Compute;
 @@clientName(VirtualMachineScaleSetVMExtensions.update::parameters.properties,
   "extensionParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSetVMExtension.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(VirtualMachineScaleSetVMExtension.properties);
 
 @@clientLocation(VirtualMachineScaleSetVMS.get, "VirtualMachineScaleSetVMs");
 @@clientLocation(VirtualMachineScaleSetVMS.update, "VirtualMachineScaleSetVMs");
@@ -274,8 +278,8 @@ using Microsoft.Compute;
 @@clientName(VirtualMachineScaleSetVMS.runCommand::parameters.body,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSetVM.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(VirtualMachineScaleSetVM.properties);
 
 @@clientName(VirtualMachines.createOrUpdate::parameters.resource, "parameters");
 @@clientName(VirtualMachines.update::parameters.properties, "parameters");
@@ -285,18 +289,18 @@ using Microsoft.Compute;
   "installPatchesInput"
 );
 @@clientName(VirtualMachines.runCommand::parameters.body, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachine.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(VirtualMachine.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineExtensionImage.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(VirtualMachineExtensionImage.properties);
 
 @@clientName(AvailabilitySets.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(AvailabilitySets.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AvailabilitySet.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(AvailabilitySet.properties);
 
 @@clientName(ProximityPlacementGroups.createOrUpdate::parameters.resource,
   "parameters"
@@ -304,20 +308,20 @@ using Microsoft.Compute;
 @@clientName(ProximityPlacementGroups.update::parameters.properties,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ProximityPlacementGroup.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ProximityPlacementGroup.properties);
 
 @@clientName(DedicatedHostGroups.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(DedicatedHostGroups.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DedicatedHostGroup.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(DedicatedHostGroup.properties);
 
 @@clientName(DedicatedHosts.createOrUpdate::parameters.resource, "parameters");
 @@clientName(DedicatedHosts.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DedicatedHost.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(DedicatedHost.properties);
 
 @@clientLocation(SshPublicKeyResources.get, "SshPublicKeys");
 @@clientLocation(SshPublicKeyResources.create, "SshPublicKeys");
@@ -328,13 +332,13 @@ using Microsoft.Compute;
 @@clientLocation(SshPublicKeyResources.listByResourceGroup, "SshPublicKeys");
 @@clientLocation(SshPublicKeyResources.listBySubscription, "SshPublicKeys");
 @@clientLocation(SshPublicKeyResources.generateKeyPair, "SshPublicKeys");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SshPublicKeyResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(SshPublicKeyResource.properties);
 
 @@clientName(Images.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Images.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Image.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(Image.properties);
 
 @@clientName(RestorePointCollections.createOrUpdate::parameters.resource,
   "parameters"
@@ -342,12 +346,12 @@ using Microsoft.Compute;
 @@clientName(RestorePointCollections.update::parameters.properties,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RestorePointCollection.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(RestorePointCollection.properties);
 
 @@clientName(RestorePoints.create::parameters.resource, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RestorePoint.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(RestorePoint.properties);
 
 @@clientName(CapacityReservationGroups.createOrUpdate::parameters.resource,
   "parameters"
@@ -355,15 +359,15 @@ using Microsoft.Compute;
 @@clientName(CapacityReservationGroups.update::parameters.properties,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CapacityReservationGroup.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(CapacityReservationGroup.properties);
 
 @@clientName(CapacityReservations.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(CapacityReservations.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CapacityReservation.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(CapacityReservation.properties);
 
 @@clientName(VirtualMachineRunCommands.createOrUpdate::parameters.resource,
   "runCommand"
@@ -377,19 +381,19 @@ using Microsoft.Compute;
 @@clientName(VirtualMachineScaleSetVMRunCommands.update::parameters.properties,
   "runCommand"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineRunCommand.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(VirtualMachineRunCommand.properties);
 
 @@clientName(Disks.createOrUpdate::parameters.resource, "disk");
 @@clientName(Disks.update::parameters.properties, "disk");
 @@clientName(Disks.grantAccess::parameters.body, "grantAccessData");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Disk.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(Disk.properties);
 
 @@clientName(DiskAccesses.createOrUpdate::parameters.resource, "diskAccess");
 @@clientName(DiskAccesses.update::parameters.properties, "diskAccess");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DiskAccess.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(DiskAccess.properties);
 
 @@clientLocation(PrivateEndpointConnections.getAPrivateEndpointConnection,
   DiskAccesses
@@ -406,8 +410,8 @@ using Microsoft.Compute;
 @@clientLocation(PrivateEndpointConnections.listPrivateEndpointConnections,
   DiskAccesses
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateEndpointConnection.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PrivateEndpointConnection.properties);
 
 @@clientName(DiskEncryptionSets.createOrUpdate::parameters.resource,
   "diskEncryptionSet"
@@ -415,22 +419,22 @@ using Microsoft.Compute;
 @@clientName(DiskEncryptionSets.update::parameters.properties,
   "diskEncryptionSet"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DiskEncryptionSet.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(DiskEncryptionSet.properties);
 
 @@clientLocation(DiskRestorePoints.get, "DiskRestorePoint");
 @@clientLocation(DiskRestorePoints.listByRestorePoint, "DiskRestorePoint");
 @@clientLocation(DiskRestorePoints.grantAccess, "DiskRestorePoint");
 @@clientName(DiskRestorePoints.grantAccess::parameters.body, "grantAccessData");
 @@clientLocation(DiskRestorePoints.revokeAccess, "DiskRestorePoint");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DiskRestorePoint.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(DiskRestorePoint.properties);
 
 @@clientName(Snapshots.createOrUpdate::parameters.resource, "snapshot");
 @@clientName(Snapshots.update::parameters.properties, "snapshot");
 @@clientName(Snapshots.grantAccess::parameters.body, "grantAccessData");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Snapshot.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(Snapshot.properties);
 
 @@clientName(Galleries.createOrUpdate::parameters.resource, "gallery");
 @@clientName(Galleries.update::parameters.properties, "gallery");
@@ -441,13 +445,13 @@ using Microsoft.Compute;
 @@clientName(Galleries.gallerySharingProfileUpdate::parameters.body,
   "sharingUpdate"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Gallery.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(Gallery.properties);
 
 @@clientName(GalleryImages.createOrUpdate::parameters.resource, "galleryImage");
 @@clientName(GalleryImages.update::parameters.properties, "galleryImage");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GalleryImage.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(GalleryImage.properties);
 
 @@clientName(GalleryImageVersions.createOrUpdate::parameters.resource,
   "galleryImageVersion"
@@ -455,8 +459,8 @@ using Microsoft.Compute;
 @@clientName(GalleryImageVersions.update::parameters.properties,
   "galleryImageVersion"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GalleryImageVersion.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(GalleryImageVersion.properties);
 
 @@clientName(GalleryApplications.createOrUpdate::parameters.resource,
   "galleryApplication"
@@ -464,8 +468,8 @@ using Microsoft.Compute;
 @@clientName(GalleryApplications.update::parameters.properties,
   "galleryApplication"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GalleryApplication.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(GalleryApplication.properties);
 
 @@clientName(GalleryApplicationVersions.createOrUpdate::parameters.resource,
   "galleryApplicationVersion"
@@ -473,40 +477,40 @@ using Microsoft.Compute;
 @@clientName(GalleryApplicationVersions.update::parameters.properties,
   "galleryApplicationVersion"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GalleryApplicationVersion.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(GalleryApplicationVersion.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SharedGallery.identifier);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(SharedGallery.identifier);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SharedGalleryImage.identifier);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SharedGalleryImage.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(SharedGalleryImage.identifier);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(SharedGalleryImage.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SharedGalleryImageVersion.identifier);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SharedGalleryImageVersion.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(SharedGalleryImageVersion.identifier);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(SharedGalleryImageVersion.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CommunityGallery.identifier);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(CommunityGallery.identifier);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CommunityGalleryImage.identifier);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CommunityGalleryImage.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(CommunityGalleryImage.identifier);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(CommunityGalleryImage.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CommunityGalleryImageVersion.identifier);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CommunityGalleryImageVersion.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(CommunityGalleryImageVersion.identifier);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(CommunityGalleryImageVersion.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RoleInstance.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(RoleInstance.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CloudServiceRole.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(CloudServiceRole.properties);
 
 @@clientName(CloudServices.createOrUpdate::parameters.resource, "parameters");
 @@clientName(CloudServices.update::parameters.properties, "parameters");
@@ -518,18 +522,18 @@ using Microsoft.Compute;
 @@clientName(CloudServices.walkUpdateDomain::parameters.body, "parameters");
 @@clientLocation(CloudServices.getUpdateDomain, "CloudServicesUpdateDomain");
 @@clientLocation(CloudServices.listUpdateDomains, "CloudServicesUpdateDomain");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CloudService.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(CloudService.properties);
 
 @@clientLocation(OSVersions.getOSVersion, "CloudServiceOperatingSystems");
 @@clientLocation(OSVersions.listOSVersions, "CloudServiceOperatingSystems");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(OSVersion.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(OSVersion.properties);
 
 @@clientLocation(OSFamilies.getOSFamily, "CloudServiceOperatingSystems");
 @@clientLocation(OSFamilies.listOSFamilies, "CloudServiceOperatingSystems");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(OSFamily.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(OSFamily.properties);
 
 @@clientLocation(UsageOperationGroup.list, "Usage");
 

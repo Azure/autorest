@@ -3,8 +3,8 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager.AlertsManagement;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PatchObject.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PatchObject.properties);
 
 @@clientName(AlertProcessingRules.createOrUpdate::parameters.resource,
   "alertProcessingRule"
@@ -15,8 +15,8 @@ using Azure.ResourceManager.AlertsManagement;
 
 @@clientName(Alerts.changeState::parameters.body, "comment");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SmartGroup.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(SmartGroup.properties);
 
 @@clientLocation(AlertsOperationGroup.metaData, Alerts);
 @@clientLocation(AlertsOperationGroup.getSummary, Alerts);

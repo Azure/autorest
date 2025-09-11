@@ -3,12 +3,12 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Storage;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Operation.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(Operation.properties);
 @@clientName(Operation.properties, "operationProperties");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(StorageAccountCreateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(StorageAccountCreateParameters.properties);
 
 @@clientName(StorageAccountPropertiesCreateParameters.networkAcls,
   "networkRuleSet"
@@ -58,8 +58,8 @@ using Microsoft.Storage;
 
 @@clientName(BlobRestoreParameters.timetoRestore, "timeToRestore");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(StorageAccountUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(StorageAccountUpdateParameters.properties);
 
 @@clientName(StorageAccountPropertiesUpdateParameters.supportsHttpsTrafficOnly,
   "enableHttpsTrafficOnly"
@@ -99,20 +99,20 @@ using Microsoft.Storage;
 @@clientName(ServiceSasParameters.rscl, "contentLanguage");
 @@clientName(ServiceSasParameters.rsct, "contentType");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateLinkResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PrivateLinkResource.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ImmutabilityPolicyProperties.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ImmutabilityPolicyProperties.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ListContainerItem.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ListContainerItem.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(FileShareItem.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(FileShareItem.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ListQueue.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ListQueue.properties);
 @@clientName(ListQueue.properties, "queueProperties");
 
 @@clientName(StorageAccounts.create::parameters.resource, "parameters");
@@ -122,27 +122,27 @@ using Microsoft.Storage;
 @@clientName(StorageAccounts.listServiceSAS::parameters.body, "parameters");
 @@clientName(StorageAccounts.restoreBlobRanges::parameters.body, "parameters");
 @@clientLocation(StorageAccounts.listByStorageAccount, "PrivateLinkResources");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(StorageAccount.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(StorageAccount.properties);
 
 @@clientName(PrivateEndpointConnections.put::parameters.resource, "properties");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateEndpointConnection.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PrivateEndpointConnection.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DeletedAccount.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(DeletedAccount.properties);
 
 @@clientName(ManagementPolicies.createOrUpdate::parameters.resource,
   "properties"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ManagementPolicy.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ManagementPolicy.properties);
 
 @@clientName(BlobInventoryPolicies.createOrUpdate::parameters.resource,
   "properties"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(BlobInventoryPolicy.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(BlobInventoryPolicy.properties);
 
 @@clientLocation(ObjectReplicationPolicyOperationGroup.get,
   "ObjectReplicationPolicies"
@@ -159,8 +159,8 @@ using Microsoft.Storage;
 @@clientLocation(ObjectReplicationPolicyOperationGroup.list,
   "ObjectReplicationPolicies"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ObjectReplicationPolicy.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ObjectReplicationPolicy.properties);
 
 @@clientLocation(LocalUserOperationGroup.get, "LocalUsers");
 @@clientLocation(LocalUserOperationGroup.createOrUpdate, "LocalUsers");
@@ -171,27 +171,27 @@ using Microsoft.Storage;
 @@clientLocation(LocalUserOperationGroup.list, "LocalUsers");
 @@clientLocation(LocalUserOperationGroup.listKeys, "LocalUsers");
 @@clientLocation(LocalUserOperationGroup.regeneratePassword, "LocalUsers");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(LocalUser.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(LocalUser.properties);
 
 @@clientName(EncryptionScopes.put::parameters.resource, "encryptionScope");
 @@clientName(EncryptionScopes.patch::parameters.properties, "encryptionScope");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(EncryptionScope.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(EncryptionScope.properties);
 
 @@clientName(BlobServices.setServiceProperties::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(BlobServiceProperties.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(BlobServiceProperties.properties);
 
 @@clientName(BlobContainers.create::parameters.resource, "blobContainer");
 @@clientName(BlobContainers.update::parameters.properties, "blobContainer");
 @@clientName(BlobContainers.setLegalHold::parameters.body, "LegalHold");
 @@clientName(BlobContainers.clearLegalHold::parameters.body, "LegalHold");
 @@clientName(BlobContainers.lease::parameters.body, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(BlobContainer.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(BlobContainer.properties);
 
 @@clientLocation(ImmutabilityPolicies.getImmutabilityPolicy, BlobContainers);
 @@clientLocation(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy,
@@ -206,27 +206,27 @@ using Microsoft.Storage;
 @@clientName(ImmutabilityPolicies.extendImmutabilityPolicy::parameters.body,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ImmutabilityPolicy.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(ImmutabilityPolicy.properties);
 
 @@clientName(FileServices.setServiceProperties::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(FileServiceProperties.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(FileServiceProperties.properties);
 
 @@clientName(FileShares.create::parameters.resource, "fileShare");
 @@clientName(FileShares.update::parameters.properties, "fileShare");
 @@clientName(FileShares.restore::parameters.body, "deletedShare");
 @@clientName(FileShares.lease::parameters.body, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(FileShare.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(FileShare.properties);
 
 @@clientName(QueueServices.setServiceProperties::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(QueueServiceProperties.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(QueueServiceProperties.properties);
 
 @@clientLocation(StorageQueues.get, "Queue");
 @@clientLocation(StorageQueues.create, "Queue");
@@ -235,14 +235,14 @@ using Microsoft.Storage;
 @@clientName(StorageQueues.update::parameters.properties, "queue");
 @@clientLocation(StorageQueues.delete, "Queue");
 @@clientLocation(StorageQueues.list, "Queue");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(StorageQueue.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(StorageQueue.properties);
 
 @@clientName(TableServices.setServiceProperties::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(TableServiceProperties.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(TableServiceProperties.properties);
 
 @@clientLocation(Tables.get, "Table");
 @@clientLocation(Tables.create, "Table");
@@ -251,8 +251,8 @@ using Microsoft.Storage;
 @@clientName(Tables.update::parameters.properties, "parameters");
 @@clientLocation(Tables.delete, "Table");
 @@clientLocation(Tables.list, "Table");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Table.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(Table.properties);
 
 @@clientLocation(SkusOperationGroup.list, "Skus");
 

@@ -181,11 +181,11 @@ export function getPropertyClientDecorators(element: Property): TypespecDecorato
 
   if (element.extensions?.["x-ms-client-flatten"] && isFullCompatible) {
     decorators.push({
-      name: "flattenProperty",
+      name: "Legacy.flattenProperty",
       module: "@azure-tools/typespec-client-generator-core",
       namespace: "Azure.ClientGenerator.Core",
-      suppressionCode: "deprecated",
-      suppressionMessage: "@flattenProperty decorator is not recommended to use.",
+      suppressionCode: "@azure-tools/typespec-azure-core/no-legacy-usage",
+      suppressionMessage: "Property flatten for SDK backward compatibility.",
     });
   }
 
