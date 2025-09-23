@@ -1,6 +1,13 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Tue, 20 May 2025 18:08:56 GMT and should not be manually modified.
+This log was last generated on Tue, 23 Sep 2025 15:37:07 GMT and should not be manually modified.
+
+## 4.27.2
+Tue, 23 Sep 2025 15:37:07 GMT
+
+### Patches
+
+- Fix rfc7231 not getting picked up as a date time type
 
 ## 4.27.1
 Tue, 20 May 2025 18:08:56 GMT
