@@ -654,6 +654,7 @@ export class ModelerFour {
 
       case StringFormat.DateTime:
       case StringFormat.DateTimeRfc1123:
+      case StringFormat.DateTimeRfc7231:
         return this.processDateTimeSchema("", schema);
 
       case StringFormat.Duration:
@@ -1300,6 +1301,7 @@ export class ModelerFour {
 
           case StringFormat.DateTime:
           case StringFormat.DateTimeRfc1123:
+          case StringFormat.DateTimeRfc7231:
             return this.processDateTimeSchema(name, schema);
 
           case StringFormat.Duration:
