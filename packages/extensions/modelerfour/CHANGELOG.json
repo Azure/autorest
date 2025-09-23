@@ -2,6 +2,18 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.27.2",
+      "tag": "@autorest/modelerfour_v4.27.2",
+      "date": "Tue, 23 Sep 2025 15:37:07 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix rfc7231 not getting picked up as a date time type"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.27.1",
       "tag": "@autorest/modelerfour_v4.27.1",
       "date": "Tue, 20 May 2025 18:08:56 GMT",
