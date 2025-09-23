@@ -15,9 +15,15 @@ namespace Microsoft.AgFoodPlatform;
  */
 union CheckNameAvailabilityReason {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Invalid
+   */
   Invalid: "Invalid",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * AlreadyExists
+   */
   AlreadyExists: "AlreadyExists",
 }
 
@@ -26,9 +32,15 @@ union CheckNameAvailabilityReason {
  */
 union AuthCredentialsKind {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * OAuthClientCredentials
+   */
   OAuthClientCredentials: "OAuthClientCredentials",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * ApiKeyAuthCredentials
+   */
   ApiKeyAuthCredentials: "ApiKeyAuthCredentials",
 }
 
@@ -37,13 +49,25 @@ union AuthCredentialsKind {
  */
 union CreatedByType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * User
+   */
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Application
+   */
   Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * ManagedIdentity
+   */
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Key
+   */
   Key: "Key",
 }
 
@@ -53,17 +77,35 @@ union CreatedByType {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 union ProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Creating
+   */
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Updating
+   */
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Deleting
+   */
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Succeeded
+   */
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Failed
+   */
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Running
+   */
   Running: "Running",
 }
 
@@ -72,9 +114,15 @@ union ProvisioningState {
  */
 union PublicNetworkAccess {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Enabled
+   */
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Disabled
+   */
   Disabled: "Disabled",
 }
 
@@ -83,11 +131,20 @@ union PublicNetworkAccess {
  */
 union Origin {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * user
+   */
   user: "user",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * system
+   */
   system: "system",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * user,system
+   */
   `user,system`: "user,system",
 }
 
@@ -96,7 +153,10 @@ union Origin {
  */
 union ActionType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Internal
+   */
   Internal: "Internal",
 }
 

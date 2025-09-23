@@ -5,12 +5,12 @@ interface WithDocs {
   doc?: string | string[];
 }
 
-export function generateDocs({ doc }: WithDocs): string {
-  if (isEmptyDoc(doc)) {
+export function generateDocs({ doc }: WithDocs, defaultValue: string = ""): string {
+  if (isEmptyDoc(doc) && defaultValue.length === 0) {
     return ``;
   }
 
-  const wrapped = lineWrap(doc);
+  const wrapped = lineWrap(doc || defaultValue);
 
   for (let i = 0; i < wrapped.length; i++) {
     if (wrapped[i].includes("@") || wrapped[i].includes("*/")) {

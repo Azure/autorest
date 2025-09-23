@@ -13,16 +13,60 @@ namespace AutoRestPagingTestService;
  */
 union OperationResultStatus {
   string,
+
+  /**
+   * Succeeded
+   */
   Succeeded: "Succeeded",
+
+  /**
+   * Failed
+   */
   Failed: "Failed",
+
+  /**
+   * canceled
+   */
   canceled: "canceled",
+
+  /**
+   * Accepted
+   */
   Accepted: "Accepted",
+
+  /**
+   * Creating
+   */
   Creating: "Creating",
+
+  /**
+   * Created
+   */
   Created: "Created",
+
+  /**
+   * Updating
+   */
   Updating: "Updating",
+
+  /**
+   * Updated
+   */
   Updated: "Updated",
+
+  /**
+   * Deleting
+   */
   Deleting: "Deleting",
+
+  /**
+   * Deleted
+   */
   Deleted: "Deleted",
+
+  /**
+   * OK
+   */
   OK: "OK",
 }
 

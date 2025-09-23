@@ -12,23 +12,95 @@ namespace MicrosoftCognitiveLanguageServiceQuestionAnsweringAuthoring;
  */
 union ErrorCode {
   string,
+
+  /**
+   * InvalidRequest
+   */
   InvalidRequest: "InvalidRequest",
+
+  /**
+   * InvalidArgument
+   */
   InvalidArgument: "InvalidArgument",
+
+  /**
+   * Unauthorized
+   */
   Unauthorized: "Unauthorized",
+
+  /**
+   * Forbidden
+   */
   Forbidden: "Forbidden",
+
+  /**
+   * NotFound
+   */
   NotFound: "NotFound",
+
+  /**
+   * ProjectNotFound
+   */
   ProjectNotFound: "ProjectNotFound",
+
+  /**
+   * OperationNotFound
+   */
   OperationNotFound: "OperationNotFound",
+
+  /**
+   * AzureCognitiveSearchNotFound
+   */
   AzureCognitiveSearchNotFound: "AzureCognitiveSearchNotFound",
+
+  /**
+   * AzureCognitiveSearchIndexNotFound
+   */
   AzureCognitiveSearchIndexNotFound: "AzureCognitiveSearchIndexNotFound",
+
+  /**
+   * TooManyRequests
+   */
   TooManyRequests: "TooManyRequests",
+
+  /**
+   * AzureCognitiveSearchThrottling
+   */
   AzureCognitiveSearchThrottling: "AzureCognitiveSearchThrottling",
+
+  /**
+   * AzureCognitiveSearchIndexLimitReached
+   */
   AzureCognitiveSearchIndexLimitReached: "AzureCognitiveSearchIndexLimitReached",
+
+  /**
+   * InternalServerError
+   */
   InternalServerError: "InternalServerError",
+
+  /**
+   * ServiceUnavailable
+   */
   ServiceUnavailable: "ServiceUnavailable",
+
+  /**
+   * Timeout
+   */
   Timeout: "Timeout",
+
+  /**
+   * QuotaExceeded
+   */
   QuotaExceeded: "QuotaExceeded",
+
+  /**
+   * Conflict
+   */
   Conflict: "Conflict",
+
+  /**
+   * Warning
+   */
   Warning: "Warning",
 }
 
@@ -37,19 +109,75 @@ union ErrorCode {
  */
 union InnerErrorCode {
   string,
+
+  /**
+   * InvalidRequest
+   */
   InvalidRequest: "InvalidRequest",
+
+  /**
+   * InvalidParameterValue
+   */
   InvalidParameterValue: "InvalidParameterValue",
+
+  /**
+   * KnowledgeBaseNotFound
+   */
   KnowledgeBaseNotFound: "KnowledgeBaseNotFound",
+
+  /**
+   * AzureCognitiveSearchNotFound
+   */
   AzureCognitiveSearchNotFound: "AzureCognitiveSearchNotFound",
+
+  /**
+   * AzureCognitiveSearchThrottling
+   */
   AzureCognitiveSearchThrottling: "AzureCognitiveSearchThrottling",
+
+  /**
+   * ExtractionFailure
+   */
   ExtractionFailure: "ExtractionFailure",
+
+  /**
+   * InvalidRequestBodyFormat
+   */
   InvalidRequestBodyFormat: "InvalidRequestBodyFormat",
+
+  /**
+   * EmptyRequest
+   */
   EmptyRequest: "EmptyRequest",
+
+  /**
+   * MissingInputDocuments
+   */
   MissingInputDocuments: "MissingInputDocuments",
+
+  /**
+   * InvalidDocument
+   */
   InvalidDocument: "InvalidDocument",
+
+  /**
+   * ModelVersionIncorrect
+   */
   ModelVersionIncorrect: "ModelVersionIncorrect",
+
+  /**
+   * InvalidDocumentBatch
+   */
   InvalidDocumentBatch: "InvalidDocumentBatch",
+
+  /**
+   * UnsupportedLanguageCode
+   */
   UnsupportedLanguageCode: "UnsupportedLanguageCode",
+
+  /**
+   * InvalidCountryHint
+   */
   InvalidCountryHint: "InvalidCountryHint",
 }
 
@@ -58,12 +186,40 @@ union InnerErrorCode {
  */
 union JobStatus {
   string,
+
+  /**
+   * notStarted
+   */
   notStarted: "notStarted",
+
+  /**
+   * running
+   */
   running: "running",
+
+  /**
+   * succeeded
+   */
   succeeded: "succeeded",
+
+  /**
+   * failed
+   */
   failed: "failed",
+
+  /**
+   * cancelled
+   */
   cancelled: "cancelled",
+
+  /**
+   * cancelling
+   */
   cancelling: "cancelling",
+
+  /**
+   * partiallyCompleted
+   */
   partiallyCompleted: "partiallyCompleted",
 }
 
@@ -90,7 +246,15 @@ union Format {
 
 union AssetKind {
   string,
+
+  /**
+   * qnas
+   */
   qnas: "qnas",
+
+  /**
+   * synonyms
+   */
   synonyms: "synonyms",
 }
 
@@ -99,7 +263,15 @@ union AssetKind {
  */
 union SourceKind {
   string,
+
+  /**
+   * file
+   */
   file: "file",
+
+  /**
+   * url
+   */
   url: "url",
 }
 
@@ -108,6 +280,10 @@ union SourceKind {
  */
 union SourceContentStructureKind {
   string,
+
+  /**
+   * unstructured
+   */
   unstructured: "unstructured",
 }
 
@@ -116,8 +292,20 @@ union SourceContentStructureKind {
  */
 union UpdateOperationKind {
   string,
+
+  /**
+   * add
+   */
   add: "add",
+
+  /**
+   * delete
+   */
   delete: "delete",
+
+  /**
+   * replace
+   */
   replace: "replace",
 }
 

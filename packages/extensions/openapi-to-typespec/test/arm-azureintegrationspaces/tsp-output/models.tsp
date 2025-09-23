@@ -16,11 +16,20 @@ namespace Microsoft.IntegrationSpaces;
  */
 union Origin {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * user
+   */
   user: "user",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * system
+   */
   system: "system",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * user,system
+   */
   `user,system`: "user,system",
 }
 
@@ -29,7 +38,10 @@ union Origin {
  */
 union ActionType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Internal
+   */
   Internal: "Internal",
 }
 
@@ -54,13 +66,24 @@ union ProvisioningState {
    */
   Canceled: "Canceled",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  /**
+   * Provisioning
+   */
   Provisioning: "Provisioning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Updating
+   */
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Deleting
+   */
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Accepted
+   */
   Accepted: "Accepted",
 }
 
@@ -69,13 +92,25 @@ union ProvisioningState {
  */
 union CreatedByType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * User
+   */
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Application
+   */
   Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * ManagedIdentity
+   */
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Key
+   */
   Key: "Key",
 }
 

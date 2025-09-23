@@ -1044,8 +1044,19 @@ enum DisableComputeNodeSchedulingOption {
  * Level code.
  */
 enum StatusLevelTypes {
+  /**
+   * Error
+   */
   Error,
+
+  /**
+   * Info
+   */
   Info,
+
+  /**
+   * Warning
+   */
   Warning,
 }
 

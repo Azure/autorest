@@ -439,7 +439,19 @@
             ],
             "x-ms-enum": {
               "name": "StorageAccountExpand",
-              "modelAsString": false
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "geoReplicationStats",
+                  "value": "geoReplicationStats",
+                  "description": "geoReplicationStats"
+                },
+                {
+                  "name": "blobRestoreStatus",
+                  "value": "blobRestoreStatus",
+                  "description": "blobRestoreStatus"
+                }
+              ]
             }
           }
         ],
@@ -977,7 +989,8 @@
               "values": [
                 {
                   "name": "deleted",
-                  "value": "deleted"
+                  "value": "deleted",
+                  "description": "deleted"
                 }
               ]
             }
@@ -1944,15 +1957,18 @@
               "values": [
                 {
                   "name": "All",
-                  "value": "All"
+                  "value": "All",
+                  "description": "All"
                 },
                 {
                   "name": "Enabled",
-                  "value": "Enabled"
+                  "value": "Enabled",
+                  "description": "Enabled"
                 },
                 {
                   "name": "Disabled",
-                  "value": "Disabled"
+                  "value": "Disabled",
+                  "description": "Disabled"
                 }
               ]
             }
@@ -3083,7 +3099,8 @@
               "values": [
                 {
                   "name": "default",
-                  "value": "default"
+                  "value": "default",
+                  "description": "default"
                 }
               ]
             }
@@ -3149,7 +3166,8 @@
               "values": [
                 {
                   "name": "default",
-                  "value": "default"
+                  "value": "default",
+                  "description": "default"
                 }
               ]
             }
@@ -3230,7 +3248,8 @@
               "values": [
                 {
                   "name": "default",
-                  "value": "default"
+                  "value": "default",
+                  "description": "default"
                 }
               ]
             }
@@ -3814,7 +3833,8 @@
               "values": [
                 {
                   "name": "default",
-                  "value": "default"
+                  "value": "default",
+                  "description": "default"
                 }
               ]
             }
@@ -3880,7 +3900,8 @@
               "values": [
                 {
                   "name": "default",
-                  "value": "default"
+                  "value": "default",
+                  "description": "default"
                 }
               ]
             }
@@ -3976,7 +3997,8 @@
               "values": [
                 {
                   "name": "default",
-                  "value": "default"
+                  "value": "default",
+                  "description": "default"
                 }
               ]
             }
@@ -5617,7 +5639,24 @@
       ],
       "x-ms-enum": {
         "name": "AccessTier",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Hot",
+            "value": "Hot",
+            "description": "Hot"
+          },
+          {
+            "name": "Cool",
+            "value": "Cool",
+            "description": "Cool"
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "Premium"
+          }
+        ]
       }
     },
     "AccountImmutabilityPolicyProperties": {
@@ -5655,15 +5694,18 @@
         "values": [
           {
             "name": "Unlocked",
-            "value": "Unlocked"
+            "value": "Unlocked",
+            "description": "Unlocked"
           },
           {
             "name": "Locked",
-            "value": "Locked"
+            "value": "Locked",
+            "description": "Locked"
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "Disabled"
           }
         ]
       }
@@ -5730,7 +5772,19 @@
       ],
       "x-ms-enum": {
         "name": "AccountStatus",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "available",
+            "value": "available",
+            "description": "available"
+          },
+          {
+            "name": "unavailable",
+            "value": "unavailable",
+            "description": "unavailable"
+          }
+        ]
       }
     },
     "AccountType": {
@@ -5746,11 +5800,13 @@
         "values": [
           {
             "name": "User",
-            "value": "User"
+            "value": "User",
+            "description": "User"
           },
           {
             "name": "Computer",
-            "value": "Computer"
+            "value": "Computer",
+            "description": "Computer"
           }
         ]
       }
@@ -5810,11 +5866,13 @@
         "values": [
           {
             "name": "PrivateLink",
-            "value": "PrivateLink"
+            "value": "PrivateLink",
+            "description": "PrivateLink"
           },
           {
             "name": "AAD",
-            "value": "AAD"
+            "value": "AAD",
+            "description": "AAD"
           }
         ]
       }
@@ -5837,35 +5895,43 @@
         "values": [
           {
             "name": "DELETE",
-            "value": "DELETE"
+            "value": "DELETE",
+            "description": "DELETE"
           },
           {
             "name": "GET",
-            "value": "GET"
+            "value": "GET",
+            "description": "GET"
           },
           {
             "name": "HEAD",
-            "value": "HEAD"
+            "value": "HEAD",
+            "description": "HEAD"
           },
           {
             "name": "MERGE",
-            "value": "MERGE"
+            "value": "MERGE",
+            "description": "MERGE"
           },
           {
             "name": "POST",
-            "value": "POST"
+            "value": "POST",
+            "description": "POST"
           },
           {
             "name": "OPTIONS",
-            "value": "OPTIONS"
+            "value": "OPTIONS",
+            "description": "OPTIONS"
           },
           {
             "name": "PUT",
-            "value": "PUT"
+            "value": "PUT",
+            "description": "PUT"
           },
           {
             "name": "PATCH",
-            "value": "PATCH"
+            "value": "PATCH",
+            "description": "PATCH"
           }
         ]
       }
@@ -6130,15 +6196,18 @@
         "values": [
           {
             "name": "InProgress",
-            "value": "InProgress"
+            "value": "InProgress",
+            "description": "InProgress"
           },
           {
             "name": "Complete",
-            "value": "Complete"
+            "value": "Complete",
+            "description": "Complete"
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Failed"
           }
         ]
       }
@@ -6537,19 +6606,23 @@
         "values": [
           {
             "name": "None",
-            "value": "None"
+            "value": "None",
+            "description": "None"
           },
           {
             "name": "StorageFileDataSmbShareReader",
-            "value": "StorageFileDataSmbShareReader"
+            "value": "StorageFileDataSmbShareReader",
+            "description": "StorageFileDataSmbShareReader"
           },
           {
             "name": "StorageFileDataSmbShareContributor",
-            "value": "StorageFileDataSmbShareContributor"
+            "value": "StorageFileDataSmbShareContributor",
+            "description": "StorageFileDataSmbShareContributor"
           },
           {
             "name": "StorageFileDataSmbShareElevatedContributor",
-            "value": "StorageFileDataSmbShareElevatedContributor"
+            "value": "StorageFileDataSmbShareElevatedContributor",
+            "description": "StorageFileDataSmbShareElevatedContributor"
           }
         ]
       }
@@ -6678,19 +6751,23 @@
         "values": [
           {
             "name": "None",
-            "value": "None"
+            "value": "None",
+            "description": "None"
           },
           {
             "name": "AADDS",
-            "value": "AADDS"
+            "value": "AADDS",
+            "description": "AADDS"
           },
           {
             "name": "AD",
-            "value": "AD"
+            "value": "AD",
+            "description": "AD"
           },
           {
             "name": "AADKERB",
-            "value": "AADKERB"
+            "value": "AADKERB",
+            "description": "AADKERB"
           }
         ]
       }
@@ -6708,11 +6785,13 @@
         "values": [
           {
             "name": "Standard",
-            "value": "Standard"
+            "value": "Standard",
+            "description": "Standard"
           },
           {
             "name": "AzureDnsZone",
-            "value": "AzureDnsZone"
+            "value": "AzureDnsZone",
+            "description": "AzureDnsZone"
           }
         ]
       }
@@ -6730,11 +6809,13 @@
         "values": [
           {
             "name": "SMB",
-            "value": "SMB"
+            "value": "SMB",
+            "description": "SMB"
           },
           {
             "name": "NFS",
-            "value": "NFS"
+            "value": "NFS",
+            "description": "NFS"
           }
         ]
       }
@@ -6761,11 +6842,13 @@
             "values": [
               {
                 "name": "Microsoft.Storage",
-                "value": "Microsoft.Storage"
+                "value": "Microsoft.Storage",
+                "description": "Microsoft.Storage"
               },
               {
                 "name": "Microsoft.Keyvault",
-                "value": "Microsoft.Keyvault"
+                "value": "Microsoft.Keyvault",
+                "description": "Microsoft.Keyvault"
               }
             ]
           }
@@ -6907,11 +6990,13 @@
         "values": [
           {
             "name": "Microsoft.Storage",
-            "value": "Microsoft.Storage"
+            "value": "Microsoft.Storage",
+            "description": "Microsoft.Storage"
           },
           {
             "name": "Microsoft.KeyVault",
-            "value": "Microsoft.KeyVault"
+            "value": "Microsoft.KeyVault",
+            "description": "Microsoft.KeyVault"
           }
         ]
       }
@@ -6929,11 +7014,13 @@
         "values": [
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "Enabled"
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "Disabled"
           }
         ]
       }
@@ -7054,7 +7141,8 @@
         "values": [
           {
             "name": "EdgeZone",
-            "value": "EdgeZone"
+            "value": "EdgeZone",
+            "description": "EdgeZone"
           }
         ]
       }
@@ -7275,11 +7363,13 @@
         "values": [
           {
             "name": "Csv",
-            "value": "Csv"
+            "value": "Csv",
+            "description": "Csv"
           },
           {
             "name": "Parquet",
-            "value": "Parquet"
+            "value": "Parquet",
+            "description": "Parquet"
           }
         ]
       }
@@ -7320,15 +7410,18 @@
         "values": [
           {
             "name": "Live",
-            "value": "Live"
+            "value": "Live",
+            "description": "Live"
           },
           {
             "name": "Bootstrap",
-            "value": "Bootstrap"
+            "value": "Bootstrap",
+            "description": "Bootstrap"
           },
           {
             "name": "Unavailable",
-            "value": "Unavailable"
+            "value": "Unavailable",
+            "description": "Unavailable"
           }
         ]
       }
@@ -7342,7 +7435,19 @@
       ],
       "x-ms-enum": {
         "name": "HttpProtocol",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "https,http",
+            "value": "https,http",
+            "description": "https,http"
+          },
+          {
+            "name": "https",
+            "value": "https",
+            "description": "https"
+          }
+        ]
       }
     },
     "IPRule": {
@@ -7414,19 +7519,23 @@
         "values": [
           {
             "name": "None",
-            "value": "None"
+            "value": "None",
+            "description": "None"
           },
           {
             "name": "SystemAssigned",
-            "value": "SystemAssigned"
+            "value": "SystemAssigned",
+            "description": "SystemAssigned"
           },
           {
             "name": "UserAssigned",
-            "value": "UserAssigned"
+            "value": "UserAssigned",
+            "description": "UserAssigned"
           },
           {
             "name": "SystemAssigned,UserAssigned",
-            "value": "SystemAssigned,UserAssigned"
+            "value": "SystemAssigned,UserAssigned",
+            "description": "SystemAssigned,UserAssigned"
           }
         ]
       }
@@ -7516,11 +7625,13 @@
         "values": [
           {
             "name": "Locked",
-            "value": "Locked"
+            "value": "Locked",
+            "description": "Locked"
           },
           {
             "name": "Unlocked",
-            "value": "Unlocked"
+            "value": "Unlocked",
+            "description": "Unlocked"
           }
         ]
       }
@@ -7539,15 +7650,18 @@
         "values": [
           {
             "name": "put",
-            "value": "put"
+            "value": "put",
+            "description": "put"
           },
           {
             "name": "lock",
-            "value": "lock"
+            "value": "lock",
+            "description": "lock"
           },
           {
             "name": "extend",
-            "value": "extend"
+            "value": "extend",
+            "description": "extend"
           }
         ]
       }
@@ -7599,7 +7713,8 @@
         "values": [
           {
             "name": "Inventory",
-            "value": "Inventory"
+            "value": "Inventory",
+            "description": "Inventory"
           }
         ]
       }
@@ -7627,7 +7742,19 @@
       ],
       "x-ms-enum": {
         "name": "KeyPermission",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Read",
+            "value": "Read",
+            "description": "Read"
+          },
+          {
+            "name": "Full",
+            "value": "Full",
+            "description": "Full"
+          }
+        ]
       }
     },
     "KeyPolicy": {
@@ -7657,11 +7784,13 @@
         "values": [
           {
             "name": "Service",
-            "value": "Service"
+            "value": "Service",
+            "description": "Service"
           },
           {
             "name": "Account",
-            "value": "Account"
+            "value": "Account",
+            "description": "Account"
           }
         ]
       }
@@ -7720,23 +7849,28 @@
         "values": [
           {
             "name": "Storage",
-            "value": "Storage"
+            "value": "Storage",
+            "description": "Storage"
           },
           {
             "name": "StorageV2",
-            "value": "StorageV2"
+            "value": "StorageV2",
+            "description": "StorageV2"
           },
           {
             "name": "BlobStorage",
-            "value": "BlobStorage"
+            "value": "BlobStorage",
+            "description": "BlobStorage"
           },
           {
             "name": "FileStorage",
-            "value": "FileStorage"
+            "value": "FileStorage",
+            "description": "FileStorage"
           },
           {
             "name": "BlockBlobStorage",
-            "value": "BlockBlobStorage"
+            "value": "BlockBlobStorage",
+            "description": "BlockBlobStorage"
           }
         ]
       }
@@ -7754,11 +7888,13 @@
         "values": [
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "Disabled"
           },
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "Enabled"
           }
         ]
       }
@@ -7839,23 +7975,28 @@
         "values": [
           {
             "name": "Acquire",
-            "value": "Acquire"
+            "value": "Acquire",
+            "description": "Acquire"
           },
           {
             "name": "Renew",
-            "value": "Renew"
+            "value": "Renew",
+            "description": "Renew"
           },
           {
             "name": "Change",
-            "value": "Change"
+            "value": "Change",
+            "description": "Change"
           },
           {
             "name": "Release",
-            "value": "Release"
+            "value": "Release",
+            "description": "Release"
           },
           {
             "name": "Break",
-            "value": "Break"
+            "value": "Break",
+            "description": "Break"
           }
         ]
       }
@@ -7887,11 +8028,13 @@
         "values": [
           {
             "name": "Infinite",
-            "value": "Infinite"
+            "value": "Infinite",
+            "description": "Infinite"
           },
           {
             "name": "Fixed",
-            "value": "Fixed"
+            "value": "Fixed",
+            "description": "Fixed"
           }
         ]
       }
@@ -7912,23 +8055,28 @@
         "values": [
           {
             "name": "Acquire",
-            "value": "Acquire"
+            "value": "Acquire",
+            "description": "Acquire"
           },
           {
             "name": "Renew",
-            "value": "Renew"
+            "value": "Renew",
+            "description": "Renew"
           },
           {
             "name": "Change",
-            "value": "Change"
+            "value": "Change",
+            "description": "Change"
           },
           {
             "name": "Release",
-            "value": "Release"
+            "value": "Release",
+            "description": "Release"
           },
           {
             "name": "Break",
-            "value": "Break"
+            "value": "Break",
+            "description": "Break"
           }
         ]
       }
@@ -7994,23 +8142,28 @@
         "values": [
           {
             "name": "Available",
-            "value": "Available"
+            "value": "Available",
+            "description": "Available"
           },
           {
             "name": "Leased",
-            "value": "Leased"
+            "value": "Leased",
+            "description": "Leased"
           },
           {
             "name": "Expired",
-            "value": "Expired"
+            "value": "Expired",
+            "description": "Expired"
           },
           {
             "name": "Breaking",
-            "value": "Breaking"
+            "value": "Breaking",
+            "description": "Breaking"
           },
           {
             "name": "Broken",
-            "value": "Broken"
+            "value": "Broken",
+            "description": "Broken"
           }
         ]
       }
@@ -8028,11 +8181,13 @@
         "values": [
           {
             "name": "Locked",
-            "value": "Locked"
+            "value": "Locked",
+            "description": "Locked"
           },
           {
             "name": "Unlocked",
-            "value": "Unlocked"
+            "value": "Unlocked",
+            "description": "Unlocked"
           }
         ]
       }
@@ -8546,11 +8701,13 @@
         "values": [
           {
             "name": "InProgress",
-            "value": "InProgress"
+            "value": "InProgress",
+            "description": "InProgress"
           },
           {
             "name": "Completed",
-            "value": "Completed"
+            "value": "Completed",
+            "description": "Completed"
           }
         ]
       }
@@ -8569,15 +8726,18 @@
         "values": [
           {
             "name": "TLS1_0",
-            "value": "TLS1_0"
+            "value": "TLS1_0",
+            "description": "TLS1_0"
           },
           {
             "name": "TLS1_1",
-            "value": "TLS1_1"
+            "value": "TLS1_1",
+            "description": "TLS1_1"
           },
           {
             "name": "TLS1_2",
-            "value": "TLS1_2"
+            "value": "TLS1_2",
+            "description": "TLS1_2"
           }
         ]
       }
@@ -8604,7 +8764,8 @@
         "values": [
           {
             "name": "AccessTimeTracking",
-            "value": "AccessTimeTracking"
+            "value": "AccessTimeTracking",
+            "description": "AccessTimeTracking"
           }
         ]
       }
@@ -8629,19 +8790,23 @@
             "values": [
               {
                 "name": "None",
-                "value": "None"
+                "value": "None",
+                "description": "None"
               },
               {
                 "name": "Logging",
-                "value": "Logging"
+                "value": "Logging",
+                "description": "Logging"
               },
               {
                 "name": "Metrics",
-                "value": "Metrics"
+                "value": "Metrics",
+                "description": "Metrics"
               },
               {
                 "name": "AzureServices",
-                "value": "AzureServices"
+                "value": "AzureServices",
+                "description": "AzureServices"
               }
             ]
           }
@@ -8677,7 +8842,19 @@
           ],
           "x-ms-enum": {
             "name": "DefaultAction",
-            "modelAsString": false
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "Allow",
+                "value": "Allow",
+                "description": "Allow"
+              },
+              {
+                "name": "Deny",
+                "value": "Deny",
+                "description": "Deny"
+              }
+            ]
           }
         }
       },
@@ -8806,11 +8983,13 @@
         "values": [
           {
             "name": "Blob",
-            "value": "Blob"
+            "value": "Blob",
+            "description": "Blob"
           },
           {
             "name": "Container",
-            "value": "Container"
+            "value": "Container",
+            "description": "Container"
           }
         ]
       }
@@ -8856,35 +9035,43 @@
         "values": [
           {
             "name": "r",
-            "value": "r"
+            "value": "r",
+            "description": "r"
           },
           {
             "name": "d",
-            "value": "d"
+            "value": "d",
+            "description": "d"
           },
           {
             "name": "w",
-            "value": "w"
+            "value": "w",
+            "description": "w"
           },
           {
             "name": "l",
-            "value": "l"
+            "value": "l",
+            "description": "l"
           },
           {
             "name": "a",
-            "value": "a"
+            "value": "a",
+            "description": "a"
           },
           {
             "name": "c",
-            "value": "c"
+            "value": "c",
+            "description": "c"
           },
           {
             "name": "u",
-            "value": "u"
+            "value": "u",
+            "description": "u"
           },
           {
             "name": "p",
-            "value": "p"
+            "value": "p",
+            "description": "p"
           }
         ]
       }
@@ -8966,19 +9153,23 @@
         "values": [
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Succeeded"
           },
           {
             "name": "Creating",
-            "value": "Creating"
+            "value": "Creating",
+            "description": "Creating"
           },
           {
             "name": "Deleting",
-            "value": "Deleting"
+            "value": "Deleting",
+            "description": "Deleting"
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Failed"
           }
         ]
       }
@@ -8997,15 +9188,18 @@
         "values": [
           {
             "name": "Pending",
-            "value": "Pending"
+            "value": "Pending",
+            "description": "Pending"
           },
           {
             "name": "Approved",
-            "value": "Approved"
+            "value": "Approved",
+            "description": "Approved"
           },
           {
             "name": "Rejected",
-            "value": "Rejected"
+            "value": "Rejected",
+            "description": "Rejected"
           }
         ]
       }
@@ -9119,7 +9313,24 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Creating"
+          },
+          {
+            "name": "ResolvingDNS",
+            "value": "ResolvingDNS",
+            "description": "ResolvingDNS"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          }
+        ]
       }
     },
     "PublicAccess": {
@@ -9132,7 +9343,24 @@
       ],
       "x-ms-enum": {
         "name": "PublicAccess",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Container",
+            "value": "Container",
+            "description": "Container"
+          },
+          {
+            "name": "Blob",
+            "value": "Blob",
+            "description": "Blob"
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          }
+        ]
       }
     },
     "PublicNetworkAccess": {
@@ -9148,11 +9376,13 @@
         "values": [
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "Enabled"
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "Disabled"
           }
         ]
       }
@@ -9210,7 +9440,19 @@
       ],
       "x-ms-enum": {
         "name": "Reason",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "AccountNameInvalid",
+            "value": "AccountNameInvalid",
+            "description": "AccountNameInvalid"
+          },
+          {
+            "name": "AlreadyExists",
+            "value": "AlreadyExists",
+            "description": "AlreadyExists"
+          }
+        ]
       }
     },
     "ReasonCode": {
@@ -9226,11 +9468,13 @@
         "values": [
           {
             "name": "QuotaId",
-            "value": "QuotaId"
+            "value": "QuotaId",
+            "description": "QuotaId"
           },
           {
             "name": "NotAvailableForSubscription",
-            "value": "NotAvailableForSubscription"
+            "value": "NotAvailableForSubscription",
+            "description": "NotAvailableForSubscription"
           }
         ]
       }
@@ -9318,15 +9562,18 @@
         "values": [
           {
             "name": "NoRootSquash",
-            "value": "NoRootSquash"
+            "value": "NoRootSquash",
+            "description": "NoRootSquash"
           },
           {
             "name": "RootSquash",
-            "value": "RootSquash"
+            "value": "RootSquash",
+            "description": "RootSquash"
           },
           {
             "name": "AllSquash",
-            "value": "AllSquash"
+            "value": "AllSquash",
+            "description": "AllSquash"
           }
         ]
       }
@@ -9344,11 +9591,13 @@
         "values": [
           {
             "name": "MicrosoftRouting",
-            "value": "MicrosoftRouting"
+            "value": "MicrosoftRouting",
+            "description": "MicrosoftRouting"
           },
           {
             "name": "InternetRouting",
-            "value": "InternetRouting"
+            "value": "InternetRouting",
+            "description": "InternetRouting"
           }
         ]
       }
@@ -9383,7 +9632,8 @@
         "values": [
           {
             "name": "Lifecycle",
-            "value": "Lifecycle"
+            "value": "Lifecycle",
+            "description": "Lifecycle"
           }
         ]
       }
@@ -9425,7 +9675,8 @@
             "values": [
               {
                 "name": "Log",
-                "value": "Log"
+                "value": "Log",
+                "description": "Log"
               }
             ]
           }
@@ -9449,11 +9700,13 @@
         "values": [
           {
             "name": "Daily",
-            "value": "Daily"
+            "value": "Daily",
+            "description": "Daily"
           },
           {
             "name": "Weekly",
-            "value": "Weekly"
+            "value": "Weekly",
+            "description": "Weekly"
           }
         ]
       }
@@ -9573,19 +9826,23 @@
         "values": [
           {
             "name": "b",
-            "value": "b"
+            "value": "b",
+            "description": "b"
           },
           {
             "name": "q",
-            "value": "q"
+            "value": "q",
+            "description": "q"
           },
           {
             "name": "t",
-            "value": "t"
+            "value": "t",
+            "description": "t"
           },
           {
             "name": "f",
-            "value": "f"
+            "value": "f",
+            "description": "f"
           }
         ]
       }
@@ -9605,19 +9862,23 @@
         "values": [
           {
             "name": "TransactionOptimized",
-            "value": "TransactionOptimized"
+            "value": "TransactionOptimized",
+            "description": "TransactionOptimized"
           },
           {
             "name": "Hot",
-            "value": "Hot"
+            "value": "Hot",
+            "description": "Hot"
           },
           {
             "name": "Cool",
-            "value": "Cool"
+            "value": "Cool",
+            "description": "Cool"
           },
           {
             "name": "Premium",
-            "value": "Premium"
+            "value": "Premium",
+            "description": "Premium"
           }
         ]
       }
@@ -9650,19 +9911,23 @@
         "values": [
           {
             "name": "b",
-            "value": "b"
+            "value": "b",
+            "description": "b"
           },
           {
             "name": "c",
-            "value": "c"
+            "value": "c",
+            "description": "c"
           },
           {
             "name": "f",
-            "value": "f"
+            "value": "f",
+            "description": "f"
           },
           {
             "name": "s",
-            "value": "s"
+            "value": "s",
+            "description": "s"
           }
         ]
       }
@@ -9681,15 +9946,18 @@
         "values": [
           {
             "name": "s",
-            "value": "s"
+            "value": "s",
+            "description": "s"
           },
           {
             "name": "c",
-            "value": "c"
+            "value": "c",
+            "description": "c"
           },
           {
             "name": "o",
-            "value": "o"
+            "value": "o",
+            "description": "o"
           }
         ]
       }
@@ -9726,15 +9994,18 @@
         "values": [
           {
             "name": "InProgress",
-            "value": "InProgress"
+            "value": "InProgress",
+            "description": "InProgress"
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Succeeded"
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Failed"
           }
         ]
       }
@@ -9809,35 +10080,43 @@
         "values": [
           {
             "name": "Standard_LRS",
-            "value": "Standard_LRS"
+            "value": "Standard_LRS",
+            "description": "Standard_LRS"
           },
           {
             "name": "Standard_GRS",
-            "value": "Standard_GRS"
+            "value": "Standard_GRS",
+            "description": "Standard_GRS"
           },
           {
             "name": "Standard_RAGRS",
-            "value": "Standard_RAGRS"
+            "value": "Standard_RAGRS",
+            "description": "Standard_RAGRS"
           },
           {
             "name": "Standard_ZRS",
-            "value": "Standard_ZRS"
+            "value": "Standard_ZRS",
+            "description": "Standard_ZRS"
           },
           {
             "name": "Premium_LRS",
-            "value": "Premium_LRS"
+            "value": "Premium_LRS",
+            "description": "Premium_LRS"
           },
           {
             "name": "Premium_ZRS",
-            "value": "Premium_ZRS"
+            "value": "Premium_ZRS",
+            "description": "Premium_ZRS"
           },
           {
             "name": "Standard_GZRS",
-            "value": "Standard_GZRS"
+            "value": "Standard_GZRS",
+            "description": "Standard_GZRS"
           },
           {
             "name": "Standard_RAGZRS",
-            "value": "Standard_RAGZRS"
+            "value": "Standard_RAGZRS",
+            "description": "Standard_RAGZRS"
           }
         ]
       }
@@ -9851,7 +10130,19 @@
       ],
       "x-ms-enum": {
         "name": "SkuTier",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard"
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "Premium"
+          }
+        ]
       }
     },
     "SmbSetting": {
@@ -9909,23 +10200,28 @@
         "values": [
           {
             "name": "Provisioning",
-            "value": "Provisioning"
+            "value": "Provisioning",
+            "description": "Provisioning"
           },
           {
             "name": "Deprovisioning",
-            "value": "Deprovisioning"
+            "value": "Deprovisioning",
+            "description": "Deprovisioning"
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Succeeded"
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Failed"
           },
           {
             "name": "NetworkSourceDeleted",
-            "value": "NetworkSourceDeleted"
+            "value": "NetworkSourceDeleted",
+            "description": "NetworkSourceDeleted"
           }
         ]
       }
@@ -10919,7 +11215,39 @@
       ],
       "x-ms-enum": {
         "name": "UsageUnit",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Count",
+            "value": "Count",
+            "description": "Count"
+          },
+          {
+            "name": "Bytes",
+            "value": "Bytes",
+            "description": "Bytes"
+          },
+          {
+            "name": "Seconds",
+            "value": "Seconds",
+            "description": "Seconds"
+          },
+          {
+            "name": "Percent",
+            "value": "Percent",
+            "description": "Percent"
+          },
+          {
+            "name": "CountsPerSecond",
+            "value": "CountsPerSecond",
+            "description": "CountsPerSecond"
+          },
+          {
+            "name": "BytesPerSecond",
+            "value": "BytesPerSecond",
+            "description": "BytesPerSecond"
+          }
+        ]
       }
     },
     "UserAssignedIdentity": {

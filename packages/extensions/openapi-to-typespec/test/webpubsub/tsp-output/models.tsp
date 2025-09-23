@@ -10,13 +10,29 @@ namespace AzureWebPubSubServiceRESTAPI;
 
 union WebPubSubClientType {
   string,
+
+  /**
+   * Default
+   */
   Default: "Default",
+
+  /**
+   * MQTT
+   */
   MQTT: "MQTT",
 }
 
 union WebPubSubPermission {
   string,
+
+  /**
+   * sendToGroup
+   */
   sendToGroup: "sendToGroup",
+
+  /**
+   * joinLeaveGroup
+   */
   joinLeaveGroup: "joinLeaveGroup",
 }
 

@@ -10,34 +10,70 @@ namespace NotificationHubsClient;
 
 union MSApiVersionType {
   string,
+
+  /**
+   * 2015-01
+   */
   `2015-01`: "2015-01",
+
+  /**
+   * 2015-04
+   */
   `2015-04`: "2015-04",
+
+  /**
+   * 2015-08
+   */
   `2015-08`: "2015-08",
+
+  /**
+   * 2016-07
+   */
   `2016-07`: "2016-07",
 }
 
 union NotificationHubContentModelType {
   string,
+
+  /**
+   * application/xml
+   */
   `application/xml`: "application/xml",
 }
 
 union NotificationHubDescriptionModelXmlnsI {
   string,
+
+  /**
+   * http://www.w3.org/2001/XMLSchema-instance
+   */
   `http://www.w3.org/2001/XMLSchema-instance`: "http://www.w3.org/2001/XMLSchema-instance",
 }
 
 union NotificationHubDescriptionModelAuthorizationRulesItemIType {
   string,
+
+  /**
+   * http://www.w3.org/2001/XMLSchema-instance
+   */
   `http://www.w3.org/2001/XMLSchema-instance`: "http://www.w3.org/2001/XMLSchema-instance",
 }
 
 union NotificationHubDescriptionModelAuthorizationRulesItemClaimType {
   string,
+
+  /**
+   * SharedAccessAuthorizationRule
+   */
   SharedAccessAuthorizationRule: "SharedAccessAuthorizationRule",
 }
 
 union RegistrationEntryModelXmlnsM {
   string,
+
+  /**
+   * http://schemas.microsoft.com/ado/2007/08/dataservices/metadata
+   */
   `http://schemas.microsoft.com/ado/2007/08/dataservices/metadata`: "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata",
 }
 
@@ -46,79 +82,183 @@ union RegistrationEntryModelXmlnsM {
  */
 union PlatformType {
   string,
+
+  /**
+   * apns
+   */
   apns: "apns",
+
+  /**
+   * wns
+   */
   wns: "wns",
+
+  /**
+   * gcm
+   */
   gcm: "gcm",
+
+  /**
+   * baidu
+   */
   baidu: "baidu",
+
+  /**
+   * adm
+   */
   adm: "adm",
 }
 
 union InstallationPatchType {
   string,
+
+  /**
+   * add
+   */
   add: "add",
+
+  /**
+   * remove
+   */
   remove: "remove",
+
+  /**
+   * replace
+   */
   replace: "replace",
 }
 
 union FormatParameterType {
   string,
+
+  /**
+   * apple
+   */
   apple: "apple",
+
+  /**
+   * baidu
+   */
   baidu: "baidu",
+
+  /**
+   * gcm
+   */
   gcm: "gcm",
+
+  /**
+   * windows
+   */
   windows: "windows",
 }
 
 union RegistrationContentModelType {
   string,
+
+  /**
+   * application/xml
+   */
   `application/xml`: "application/xml",
 }
 
 union AppleRegistrationContentModelXmlnsI {
   string,
+
+  /**
+   * http://www.w3.org/2001/XMLSchema-instance
+   */
   `http://www.w3.org/2001/XMLSchema-instance`: "http://www.w3.org/2001/XMLSchema-instance",
 }
 
 union AppleTemplateRegistrationContentModelXmlnsI {
   string,
+
+  /**
+   * http://www.w3.org/2001/XMLSchema-instance
+   */
   `http://www.w3.org/2001/XMLSchema-instance`: "http://www.w3.org/2001/XMLSchema-instance",
 }
 
 union BaiduRegistrationContentModelXmlnsI {
   string,
+
+  /**
+   * http://www.w3.org/2001/XMLSchema-instance
+   */
   `http://www.w3.org/2001/XMLSchema-instance`: "http://www.w3.org/2001/XMLSchema-instance",
 }
 
 union BaiduTemplateRegistrationContentModelXmlnsI {
   string,
+
+  /**
+   * http://www.w3.org/2001/XMLSchema-instance
+   */
   `http://www.w3.org/2001/XMLSchema-instance`: "http://www.w3.org/2001/XMLSchema-instance",
 }
 
 union GcmRegistrationContentModelXmlnsI {
   string,
+
+  /**
+   * http://www.w3.org/2001/XMLSchema-instance
+   */
   `http://www.w3.org/2001/XMLSchema-instance`: "http://www.w3.org/2001/XMLSchema-instance",
 }
 
 union GcmTemplateRegistrationContentModelXmlnsI {
   string,
+
+  /**
+   * http://www.w3.org/2001/XMLSchema-instance
+   */
   `http://www.w3.org/2001/XMLSchema-instance`: "http://www.w3.org/2001/XMLSchema-instance",
 }
 
 union WindowsRegistrationContentModelXmlnsI {
   string,
+
+  /**
+   * http://www.w3.org/2001/XMLSchema-instance
+   */
   `http://www.w3.org/2001/XMLSchema-instance`: "http://www.w3.org/2001/XMLSchema-instance",
 }
 
 union WindowsTemplateRegistrationContentModelXmlnsI {
   string,
+
+  /**
+   * http://www.w3.org/2001/XMLSchema-instance
+   */
   `http://www.w3.org/2001/XMLSchema-instance`: "http://www.w3.org/2001/XMLSchema-instance",
 }
 
 union ApiVersionType {
   string,
+
+  /**
+   * 2015-01
+   */
   `2015-01`: "2015-01",
+
+  /**
+   * 2015-04
+   */
   `2015-04`: "2015-04",
+
+  /**
+   * 2015-08
+   */
   `2015-08`: "2015-08",
+
+  /**
+   * 2016-07
+   */
   `2016-07`: "2016-07",
+
+  /**
+   * 2020-06
+   */
   `2020-06`: "2020-06",
 }
 

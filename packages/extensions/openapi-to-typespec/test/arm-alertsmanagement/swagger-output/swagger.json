@@ -76,7 +76,8 @@
               "values": [
                 {
                   "name": "MonitorServiceList",
-                  "value": "MonitorServiceList"
+                  "value": "MonitorServiceList",
+                  "description": "MonitorServiceList"
                 }
               ]
             }
@@ -226,59 +227,73 @@
               "values": [
                 {
                   "name": "Application Insights",
-                  "value": "Application Insights"
+                  "value": "Application Insights",
+                  "description": "Application Insights"
                 },
                 {
                   "name": "ActivityLog Administrative",
-                  "value": "ActivityLog Administrative"
+                  "value": "ActivityLog Administrative",
+                  "description": "ActivityLog Administrative"
                 },
                 {
                   "name": "ActivityLog Security",
-                  "value": "ActivityLog Security"
+                  "value": "ActivityLog Security",
+                  "description": "ActivityLog Security"
                 },
                 {
                   "name": "ActivityLog Recommendation",
-                  "value": "ActivityLog Recommendation"
+                  "value": "ActivityLog Recommendation",
+                  "description": "ActivityLog Recommendation"
                 },
                 {
                   "name": "ActivityLog Policy",
-                  "value": "ActivityLog Policy"
+                  "value": "ActivityLog Policy",
+                  "description": "ActivityLog Policy"
                 },
                 {
                   "name": "ActivityLog Autoscale",
-                  "value": "ActivityLog Autoscale"
+                  "value": "ActivityLog Autoscale",
+                  "description": "ActivityLog Autoscale"
                 },
                 {
                   "name": "Log Analytics",
-                  "value": "Log Analytics"
+                  "value": "Log Analytics",
+                  "description": "Log Analytics"
                 },
                 {
                   "name": "Nagios",
-                  "value": "Nagios"
+                  "value": "Nagios",
+                  "description": "Nagios"
                 },
                 {
                   "name": "Platform",
-                  "value": "Platform"
+                  "value": "Platform",
+                  "description": "Platform"
                 },
                 {
                   "name": "SCOM",
-                  "value": "SCOM"
+                  "value": "SCOM",
+                  "description": "SCOM"
                 },
                 {
                   "name": "ServiceHealth",
-                  "value": "ServiceHealth"
+                  "value": "ServiceHealth",
+                  "description": "ServiceHealth"
                 },
                 {
                   "name": "SmartDetector",
-                  "value": "SmartDetector"
+                  "value": "SmartDetector",
+                  "description": "SmartDetector"
                 },
                 {
                   "name": "VM Insights",
-                  "value": "VM Insights"
+                  "value": "VM Insights",
+                  "description": "VM Insights"
                 },
                 {
                   "name": "Zabbix",
-                  "value": "Zabbix"
+                  "value": "Zabbix",
+                  "description": "Zabbix"
                 }
               ]
             }
@@ -299,11 +314,13 @@
               "values": [
                 {
                   "name": "Fired",
-                  "value": "Fired"
+                  "value": "Fired",
+                  "description": "Fired"
                 },
                 {
                   "name": "Resolved",
-                  "value": "Resolved"
+                  "value": "Resolved",
+                  "description": "Resolved"
                 }
               ]
             }
@@ -327,23 +344,28 @@
               "values": [
                 {
                   "name": "Sev0",
-                  "value": "Sev0"
+                  "value": "Sev0",
+                  "description": "Sev0"
                 },
                 {
                   "name": "Sev1",
-                  "value": "Sev1"
+                  "value": "Sev1",
+                  "description": "Sev1"
                 },
                 {
                   "name": "Sev2",
-                  "value": "Sev2"
+                  "value": "Sev2",
+                  "description": "Sev2"
                 },
                 {
                   "name": "Sev3",
-                  "value": "Sev3"
+                  "value": "Sev3",
+                  "description": "Sev3"
                 },
                 {
                   "name": "Sev4",
-                  "value": "Sev4"
+                  "value": "Sev4",
+                  "description": "Sev4"
                 }
               ]
             }
@@ -365,15 +387,18 @@
               "values": [
                 {
                   "name": "New",
-                  "value": "New"
+                  "value": "New",
+                  "description": "New"
                 },
                 {
                   "name": "Acknowledged",
-                  "value": "Acknowledged"
+                  "value": "Acknowledged",
+                  "description": "Acknowledged"
                 },
                 {
                   "name": "Closed",
-                  "value": "Closed"
+                  "value": "Closed",
+                  "description": "Closed"
                 }
               ]
             }
@@ -438,43 +463,53 @@
               "values": [
                 {
                   "name": "name",
-                  "value": "name"
+                  "value": "name",
+                  "description": "name"
                 },
                 {
                   "name": "severity",
-                  "value": "severity"
+                  "value": "severity",
+                  "description": "severity"
                 },
                 {
                   "name": "alertState",
-                  "value": "alertState"
+                  "value": "alertState",
+                  "description": "alertState"
                 },
                 {
                   "name": "monitorCondition",
-                  "value": "monitorCondition"
+                  "value": "monitorCondition",
+                  "description": "monitorCondition"
                 },
                 {
                   "name": "targetResource",
-                  "value": "targetResource"
+                  "value": "targetResource",
+                  "description": "targetResource"
                 },
                 {
                   "name": "targetResourceName",
-                  "value": "targetResourceName"
+                  "value": "targetResourceName",
+                  "description": "targetResourceName"
                 },
                 {
                   "name": "targetResourceGroup",
-                  "value": "targetResourceGroup"
+                  "value": "targetResourceGroup",
+                  "description": "targetResourceGroup"
                 },
                 {
                   "name": "targetResourceType",
-                  "value": "targetResourceType"
+                  "value": "targetResourceType",
+                  "description": "targetResourceType"
                 },
                 {
                   "name": "startDateTime",
-                  "value": "startDateTime"
+                  "value": "startDateTime",
+                  "description": "startDateTime"
                 },
                 {
                   "name": "lastModifiedDateTime",
-                  "value": "lastModifiedDateTime"
+                  "value": "lastModifiedDateTime",
+                  "description": "lastModifiedDateTime"
                 }
               ]
             }
@@ -495,11 +530,13 @@
               "values": [
                 {
                   "name": "asc",
-                  "value": "asc"
+                  "value": "asc",
+                  "description": "asc"
                 },
                 {
                   "name": "desc",
-                  "value": "desc"
+                  "value": "desc",
+                  "description": "desc"
                 }
               ]
             }
@@ -529,19 +566,23 @@
               "values": [
                 {
                   "name": "1h",
-                  "value": "1h"
+                  "value": "1h",
+                  "description": "1h"
                 },
                 {
                   "name": "1d",
-                  "value": "1d"
+                  "value": "1d",
+                  "description": "1d"
                 },
                 {
                   "name": "7d",
-                  "value": "7d"
+                  "value": "7d",
+                  "description": "7d"
                 },
                 {
                   "name": "30d",
-                  "value": "30d"
+                  "value": "30d",
+                  "description": "30d"
                 }
               ]
             }
@@ -654,15 +695,18 @@
               "values": [
                 {
                   "name": "New",
-                  "value": "New"
+                  "value": "New",
+                  "description": "New"
                 },
                 {
                   "name": "Acknowledged",
-                  "value": "Acknowledged"
+                  "value": "Acknowledged",
+                  "description": "Acknowledged"
                 },
                 {
                   "name": "Closed",
-                  "value": "Closed"
+                  "value": "Closed",
+                  "description": "Closed"
                 }
               ]
             }
@@ -763,27 +807,33 @@
               "values": [
                 {
                   "name": "severity",
-                  "value": "severity"
+                  "value": "severity",
+                  "description": "severity"
                 },
                 {
                   "name": "alertState",
-                  "value": "alertState"
+                  "value": "alertState",
+                  "description": "alertState"
                 },
                 {
                   "name": "monitorCondition",
-                  "value": "monitorCondition"
+                  "value": "monitorCondition",
+                  "description": "monitorCondition"
                 },
                 {
                   "name": "monitorService",
-                  "value": "monitorService"
+                  "value": "monitorService",
+                  "description": "monitorService"
                 },
                 {
                   "name": "signalType",
-                  "value": "signalType"
+                  "value": "signalType",
+                  "description": "signalType"
                 },
                 {
                   "name": "alertRule",
-                  "value": "alertRule"
+                  "value": "alertRule",
+                  "description": "alertRule"
                 }
               ]
             }
@@ -844,59 +894,73 @@
               "values": [
                 {
                   "name": "Application Insights",
-                  "value": "Application Insights"
+                  "value": "Application Insights",
+                  "description": "Application Insights"
                 },
                 {
                   "name": "ActivityLog Administrative",
-                  "value": "ActivityLog Administrative"
+                  "value": "ActivityLog Administrative",
+                  "description": "ActivityLog Administrative"
                 },
                 {
                   "name": "ActivityLog Security",
-                  "value": "ActivityLog Security"
+                  "value": "ActivityLog Security",
+                  "description": "ActivityLog Security"
                 },
                 {
                   "name": "ActivityLog Recommendation",
-                  "value": "ActivityLog Recommendation"
+                  "value": "ActivityLog Recommendation",
+                  "description": "ActivityLog Recommendation"
                 },
                 {
                   "name": "ActivityLog Policy",
-                  "value": "ActivityLog Policy"
+                  "value": "ActivityLog Policy",
+                  "description": "ActivityLog Policy"
                 },
                 {
                   "name": "ActivityLog Autoscale",
-                  "value": "ActivityLog Autoscale"
+                  "value": "ActivityLog Autoscale",
+                  "description": "ActivityLog Autoscale"
                 },
                 {
                   "name": "Log Analytics",
-                  "value": "Log Analytics"
+                  "value": "Log Analytics",
+                  "description": "Log Analytics"
                 },
                 {
                   "name": "Nagios",
-                  "value": "Nagios"
+                  "value": "Nagios",
+                  "description": "Nagios"
                 },
                 {
                   "name": "Platform",
-                  "value": "Platform"
+                  "value": "Platform",
+                  "description": "Platform"
                 },
                 {
                   "name": "SCOM",
-                  "value": "SCOM"
+                  "value": "SCOM",
+                  "description": "SCOM"
                 },
                 {
                   "name": "ServiceHealth",
-                  "value": "ServiceHealth"
+                  "value": "ServiceHealth",
+                  "description": "ServiceHealth"
                 },
                 {
                   "name": "SmartDetector",
-                  "value": "SmartDetector"
+                  "value": "SmartDetector",
+                  "description": "SmartDetector"
                 },
                 {
                   "name": "VM Insights",
-                  "value": "VM Insights"
+                  "value": "VM Insights",
+                  "description": "VM Insights"
                 },
                 {
                   "name": "Zabbix",
-                  "value": "Zabbix"
+                  "value": "Zabbix",
+                  "description": "Zabbix"
                 }
               ]
             }
@@ -917,11 +981,13 @@
               "values": [
                 {
                   "name": "Fired",
-                  "value": "Fired"
+                  "value": "Fired",
+                  "description": "Fired"
                 },
                 {
                   "name": "Resolved",
-                  "value": "Resolved"
+                  "value": "Resolved",
+                  "description": "Resolved"
                 }
               ]
             }
@@ -945,23 +1011,28 @@
               "values": [
                 {
                   "name": "Sev0",
-                  "value": "Sev0"
+                  "value": "Sev0",
+                  "description": "Sev0"
                 },
                 {
                   "name": "Sev1",
-                  "value": "Sev1"
+                  "value": "Sev1",
+                  "description": "Sev1"
                 },
                 {
                   "name": "Sev2",
-                  "value": "Sev2"
+                  "value": "Sev2",
+                  "description": "Sev2"
                 },
                 {
                   "name": "Sev3",
-                  "value": "Sev3"
+                  "value": "Sev3",
+                  "description": "Sev3"
                 },
                 {
                   "name": "Sev4",
-                  "value": "Sev4"
+                  "value": "Sev4",
+                  "description": "Sev4"
                 }
               ]
             }
@@ -983,15 +1054,18 @@
               "values": [
                 {
                   "name": "New",
-                  "value": "New"
+                  "value": "New",
+                  "description": "New"
                 },
                 {
                   "name": "Acknowledged",
-                  "value": "Acknowledged"
+                  "value": "Acknowledged",
+                  "description": "Acknowledged"
                 },
                 {
                   "name": "Closed",
-                  "value": "Closed"
+                  "value": "Closed",
+                  "description": "Closed"
                 }
               ]
             }
@@ -1021,19 +1095,23 @@
               "values": [
                 {
                   "name": "1h",
-                  "value": "1h"
+                  "value": "1h",
+                  "description": "1h"
                 },
                 {
                   "name": "1d",
-                  "value": "1d"
+                  "value": "1d",
+                  "description": "1d"
                 },
                 {
                   "name": "7d",
-                  "value": "7d"
+                  "value": "7d",
+                  "description": "7d"
                 },
                 {
                   "name": "30d",
-                  "value": "30d"
+                  "value": "30d",
+                  "description": "30d"
                 }
               ]
             }
@@ -1125,59 +1203,73 @@
               "values": [
                 {
                   "name": "Application Insights",
-                  "value": "Application Insights"
+                  "value": "Application Insights",
+                  "description": "Application Insights"
                 },
                 {
                   "name": "ActivityLog Administrative",
-                  "value": "ActivityLog Administrative"
+                  "value": "ActivityLog Administrative",
+                  "description": "ActivityLog Administrative"
                 },
                 {
                   "name": "ActivityLog Security",
-                  "value": "ActivityLog Security"
+                  "value": "ActivityLog Security",
+                  "description": "ActivityLog Security"
                 },
                 {
                   "name": "ActivityLog Recommendation",
-                  "value": "ActivityLog Recommendation"
+                  "value": "ActivityLog Recommendation",
+                  "description": "ActivityLog Recommendation"
                 },
                 {
                   "name": "ActivityLog Policy",
-                  "value": "ActivityLog Policy"
+                  "value": "ActivityLog Policy",
+                  "description": "ActivityLog Policy"
                 },
                 {
                   "name": "ActivityLog Autoscale",
-                  "value": "ActivityLog Autoscale"
+                  "value": "ActivityLog Autoscale",
+                  "description": "ActivityLog Autoscale"
                 },
                 {
                   "name": "Log Analytics",
-                  "value": "Log Analytics"
+                  "value": "Log Analytics",
+                  "description": "Log Analytics"
                 },
                 {
                   "name": "Nagios",
-                  "value": "Nagios"
+                  "value": "Nagios",
+                  "description": "Nagios"
                 },
                 {
                   "name": "Platform",
-                  "value": "Platform"
+                  "value": "Platform",
+                  "description": "Platform"
                 },
                 {
                   "name": "SCOM",
-                  "value": "SCOM"
+                  "value": "SCOM",
+                  "description": "SCOM"
                 },
                 {
                   "name": "ServiceHealth",
-                  "value": "ServiceHealth"
+                  "value": "ServiceHealth",
+                  "description": "ServiceHealth"
                 },
                 {
                   "name": "SmartDetector",
-                  "value": "SmartDetector"
+                  "value": "SmartDetector",
+                  "description": "SmartDetector"
                 },
                 {
                   "name": "VM Insights",
-                  "value": "VM Insights"
+                  "value": "VM Insights",
+                  "description": "VM Insights"
                 },
                 {
                   "name": "Zabbix",
-                  "value": "Zabbix"
+                  "value": "Zabbix",
+                  "description": "Zabbix"
                 }
               ]
             }
@@ -1198,11 +1290,13 @@
               "values": [
                 {
                   "name": "Fired",
-                  "value": "Fired"
+                  "value": "Fired",
+                  "description": "Fired"
                 },
                 {
                   "name": "Resolved",
-                  "value": "Resolved"
+                  "value": "Resolved",
+                  "description": "Resolved"
                 }
               ]
             }
@@ -1226,23 +1320,28 @@
               "values": [
                 {
                   "name": "Sev0",
-                  "value": "Sev0"
+                  "value": "Sev0",
+                  "description": "Sev0"
                 },
                 {
                   "name": "Sev1",
-                  "value": "Sev1"
+                  "value": "Sev1",
+                  "description": "Sev1"
                 },
                 {
                   "name": "Sev2",
-                  "value": "Sev2"
+                  "value": "Sev2",
+                  "description": "Sev2"
                 },
                 {
                   "name": "Sev3",
-                  "value": "Sev3"
+                  "value": "Sev3",
+                  "description": "Sev3"
                 },
                 {
                   "name": "Sev4",
-                  "value": "Sev4"
+                  "value": "Sev4",
+                  "description": "Sev4"
                 }
               ]
             }
@@ -1264,15 +1363,18 @@
               "values": [
                 {
                   "name": "New",
-                  "value": "New"
+                  "value": "New",
+                  "description": "New"
                 },
                 {
                   "name": "Acknowledged",
-                  "value": "Acknowledged"
+                  "value": "Acknowledged",
+                  "description": "Acknowledged"
                 },
                 {
                   "name": "Closed",
-                  "value": "Closed"
+                  "value": "Closed",
+                  "description": "Closed"
                 }
               ]
             }
@@ -1295,19 +1397,23 @@
               "values": [
                 {
                   "name": "1h",
-                  "value": "1h"
+                  "value": "1h",
+                  "description": "1h"
                 },
                 {
                   "name": "1d",
-                  "value": "1d"
+                  "value": "1d",
+                  "description": "1d"
                 },
                 {
                   "name": "7d",
-                  "value": "7d"
+                  "value": "7d",
+                  "description": "7d"
                 },
                 {
                   "name": "30d",
-                  "value": "30d"
+                  "value": "30d",
+                  "description": "30d"
                 }
               ]
             }
@@ -1339,23 +1445,28 @@
               "values": [
                 {
                   "name": "alertsCount",
-                  "value": "alertsCount"
+                  "value": "alertsCount",
+                  "description": "alertsCount"
                 },
                 {
                   "name": "state",
-                  "value": "state"
+                  "value": "state",
+                  "description": "state"
                 },
                 {
                   "name": "severity",
-                  "value": "severity"
+                  "value": "severity",
+                  "description": "severity"
                 },
                 {
                   "name": "startDateTime",
-                  "value": "startDateTime"
+                  "value": "startDateTime",
+                  "description": "startDateTime"
                 },
                 {
                   "name": "lastModifiedDateTime",
-                  "value": "lastModifiedDateTime"
+                  "value": "lastModifiedDateTime",
+                  "description": "lastModifiedDateTime"
                 }
               ]
             }
@@ -1376,11 +1487,13 @@
               "values": [
                 {
                   "name": "asc",
-                  "value": "asc"
+                  "value": "asc",
+                  "description": "asc"
                 },
                 {
                   "name": "desc",
-                  "value": "desc"
+                  "value": "desc",
+                  "description": "desc"
                 }
               ]
             }
@@ -1483,15 +1596,18 @@
               "values": [
                 {
                   "name": "New",
-                  "value": "New"
+                  "value": "New",
+                  "description": "New"
                 },
                 {
                   "name": "Acknowledged",
-                  "value": "Acknowledged"
+                  "value": "Acknowledged",
+                  "description": "Acknowledged"
                 },
                 {
                   "name": "Closed",
-                  "value": "Closed"
+                  "value": "Closed",
+                  "description": "Closed"
                 }
               ]
             }
@@ -1810,11 +1926,13 @@
         "values": [
           {
             "name": "AddActionGroups",
-            "value": "AddActionGroups"
+            "value": "AddActionGroups",
+            "description": "AddActionGroups"
           },
           {
             "name": "RemoveAllActionGroups",
-            "value": "RemoveAllActionGroups"
+            "value": "RemoveAllActionGroups",
+            "description": "RemoveAllActionGroups"
           }
         ]
       }
@@ -1887,7 +2005,54 @@
       ],
       "x-ms-enum": {
         "name": "AlertModificationEvent",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "AlertCreated",
+            "value": "AlertCreated",
+            "description": "AlertCreated"
+          },
+          {
+            "name": "StateChange",
+            "value": "StateChange",
+            "description": "StateChange"
+          },
+          {
+            "name": "MonitorConditionChange",
+            "value": "MonitorConditionChange",
+            "description": "MonitorConditionChange"
+          },
+          {
+            "name": "SeverityChange",
+            "value": "SeverityChange",
+            "description": "SeverityChange"
+          },
+          {
+            "name": "ActionRuleTriggered",
+            "value": "ActionRuleTriggered",
+            "description": "ActionRuleTriggered"
+          },
+          {
+            "name": "ActionRuleSuppressed",
+            "value": "ActionRuleSuppressed",
+            "description": "ActionRuleSuppressed"
+          },
+          {
+            "name": "ActionsTriggered",
+            "value": "ActionsTriggered",
+            "description": "ActionsTriggered"
+          },
+          {
+            "name": "ActionsSuppressed",
+            "value": "ActionsSuppressed",
+            "description": "ActionsSuppressed"
+          },
+          {
+            "name": "ActionsFailed",
+            "value": "ActionsFailed",
+            "description": "ActionsFailed"
+          }
+        ]
       }
     },
     "AlertModificationItem": {
@@ -2053,15 +2218,18 @@
         "values": [
           {
             "name": "New",
-            "value": "New"
+            "value": "New",
+            "description": "New"
           },
           {
             "name": "Acknowledged",
-            "value": "Acknowledged"
+            "value": "Acknowledged",
+            "description": "Acknowledged"
           },
           {
             "name": "Closed",
-            "value": "Closed"
+            "value": "Closed",
+            "description": "Closed"
           }
         ]
       }
@@ -2228,31 +2396,38 @@
         "values": [
           {
             "name": "Sunday",
-            "value": "Sunday"
+            "value": "Sunday",
+            "description": "Sunday"
           },
           {
             "name": "Monday",
-            "value": "Monday"
+            "value": "Monday",
+            "description": "Monday"
           },
           {
             "name": "Tuesday",
-            "value": "Tuesday"
+            "value": "Tuesday",
+            "description": "Tuesday"
           },
           {
             "name": "Wednesday",
-            "value": "Wednesday"
+            "value": "Wednesday",
+            "description": "Wednesday"
           },
           {
             "name": "Thursday",
-            "value": "Thursday"
+            "value": "Thursday",
+            "description": "Thursday"
           },
           {
             "name": "Friday",
-            "value": "Friday"
+            "value": "Friday",
+            "description": "Friday"
           },
           {
             "name": "Saturday",
-            "value": "Saturday"
+            "value": "Saturday",
+            "description": "Saturday"
           }
         ]
       }
@@ -2377,47 +2552,58 @@
         "values": [
           {
             "name": "Severity",
-            "value": "Severity"
+            "value": "Severity",
+            "description": "Severity"
           },
           {
             "name": "MonitorService",
-            "value": "MonitorService"
+            "value": "MonitorService",
+            "description": "MonitorService"
           },
           {
             "name": "MonitorCondition",
-            "value": "MonitorCondition"
+            "value": "MonitorCondition",
+            "description": "MonitorCondition"
           },
           {
             "name": "SignalType",
-            "value": "SignalType"
+            "value": "SignalType",
+            "description": "SignalType"
           },
           {
             "name": "TargetResourceType",
-            "value": "TargetResourceType"
+            "value": "TargetResourceType",
+            "description": "TargetResourceType"
           },
           {
             "name": "TargetResource",
-            "value": "TargetResource"
+            "value": "TargetResource",
+            "description": "TargetResource"
           },
           {
             "name": "TargetResourceGroup",
-            "value": "TargetResourceGroup"
+            "value": "TargetResourceGroup",
+            "description": "TargetResourceGroup"
           },
           {
             "name": "AlertRuleId",
-            "value": "AlertRuleId"
+            "value": "AlertRuleId",
+            "description": "AlertRuleId"
           },
           {
             "name": "AlertRuleName",
-            "value": "AlertRuleName"
+            "value": "AlertRuleName",
+            "description": "AlertRuleName"
           },
           {
             "name": "Description",
-            "value": "Description"
+            "value": "Description",
+            "description": "Description"
           },
           {
             "name": "AlertContext",
-            "value": "AlertContext"
+            "value": "AlertContext",
+            "description": "AlertContext"
           }
         ]
       }
@@ -2463,7 +2649,8 @@
         "values": [
           {
             "name": "MonitorServiceList",
-            "value": "MonitorServiceList"
+            "value": "MonitorServiceList",
+            "description": "MonitorServiceList"
           }
         ]
       }
@@ -2480,11 +2667,13 @@
         "values": [
           {
             "name": "Fired",
-            "value": "Fired"
+            "value": "Fired",
+            "description": "Fired"
           },
           {
             "name": "Resolved",
-            "value": "Resolved"
+            "value": "Resolved",
+            "description": "Resolved"
           }
         ]
       }
@@ -2513,59 +2702,73 @@
         "values": [
           {
             "name": "Application Insights",
-            "value": "Application Insights"
+            "value": "Application Insights",
+            "description": "Application Insights"
           },
           {
             "name": "ActivityLog Administrative",
-            "value": "ActivityLog Administrative"
+            "value": "ActivityLog Administrative",
+            "description": "ActivityLog Administrative"
           },
           {
             "name": "ActivityLog Security",
-            "value": "ActivityLog Security"
+            "value": "ActivityLog Security",
+            "description": "ActivityLog Security"
           },
           {
             "name": "ActivityLog Recommendation",
-            "value": "ActivityLog Recommendation"
+            "value": "ActivityLog Recommendation",
+            "description": "ActivityLog Recommendation"
           },
           {
             "name": "ActivityLog Policy",
-            "value": "ActivityLog Policy"
+            "value": "ActivityLog Policy",
+            "description": "ActivityLog Policy"
           },
           {
             "name": "ActivityLog Autoscale",
-            "value": "ActivityLog Autoscale"
+            "value": "ActivityLog Autoscale",
+            "description": "ActivityLog Autoscale"
           },
           {
             "name": "Log Analytics",
-            "value": "Log Analytics"
+            "value": "Log Analytics",
+            "description": "Log Analytics"
           },
           {
             "name": "Nagios",
-            "value": "Nagios"
+            "value": "Nagios",
+            "description": "Nagios"
           },
           {
             "name": "Platform",
-            "value": "Platform"
+            "value": "Platform",
+            "description": "Platform"
           },
           {
             "name": "SCOM",
-            "value": "SCOM"
+            "value": "SCOM",
+            "description": "SCOM"
           },
           {
             "name": "ServiceHealth",
-            "value": "ServiceHealth"
+            "value": "ServiceHealth",
+            "description": "ServiceHealth"
           },
           {
             "name": "SmartDetector",
-            "value": "SmartDetector"
+            "value": "SmartDetector",
+            "description": "SmartDetector"
           },
           {
             "name": "VM Insights",
-            "value": "VM Insights"
+            "value": "VM Insights",
+            "description": "VM Insights"
           },
           {
             "name": "Zabbix",
-            "value": "Zabbix"
+            "value": "Zabbix",
+            "description": "Zabbix"
           }
         ]
       }
@@ -2644,19 +2847,23 @@
         "values": [
           {
             "name": "Equals",
-            "value": "Equals"
+            "value": "Equals",
+            "description": "Equals"
           },
           {
             "name": "NotEquals",
-            "value": "NotEquals"
+            "value": "NotEquals",
+            "description": "NotEquals"
           },
           {
             "name": "Contains",
-            "value": "Contains"
+            "value": "Contains",
+            "description": "Contains"
           },
           {
             "name": "DoesNotContain",
-            "value": "DoesNotContain"
+            "value": "DoesNotContain",
+            "description": "DoesNotContain"
           }
         ]
       }
@@ -2727,15 +2934,18 @@
         "values": [
           {
             "name": "Daily",
-            "value": "Daily"
+            "value": "Daily",
+            "description": "Daily"
           },
           {
             "name": "Weekly",
-            "value": "Weekly"
+            "value": "Weekly",
+            "description": "Weekly"
           },
           {
             "name": "Monthly",
-            "value": "Monthly"
+            "value": "Monthly",
+            "description": "Monthly"
           }
         ]
       }
@@ -2813,23 +3023,28 @@
         "values": [
           {
             "name": "Sev0",
-            "value": "Sev0"
+            "value": "Sev0",
+            "description": "Sev0"
           },
           {
             "name": "Sev1",
-            "value": "Sev1"
+            "value": "Sev1",
+            "description": "Sev1"
           },
           {
             "name": "Sev2",
-            "value": "Sev2"
+            "value": "Sev2",
+            "description": "Sev2"
           },
           {
             "name": "Sev3",
-            "value": "Sev3"
+            "value": "Sev3",
+            "description": "Sev3"
           },
           {
             "name": "Sev4",
-            "value": "Sev4"
+            "value": "Sev4",
+            "description": "Sev4"
           }
         ]
       }
@@ -2848,15 +3063,18 @@
         "values": [
           {
             "name": "Metric",
-            "value": "Metric"
+            "value": "Metric",
+            "description": "Metric"
           },
           {
             "name": "Log",
-            "value": "Log"
+            "value": "Log",
+            "description": "Log"
           },
           {
             "name": "Unknown",
-            "value": "Unknown"
+            "value": "Unknown",
+            "description": "Unknown"
           }
         ]
       }
@@ -2918,7 +3136,29 @@
       ],
       "x-ms-enum": {
         "name": "SmartGroupModificationEvent",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "SmartGroupCreated",
+            "value": "SmartGroupCreated",
+            "description": "SmartGroupCreated"
+          },
+          {
+            "name": "StateChange",
+            "value": "StateChange",
+            "description": "StateChange"
+          },
+          {
+            "name": "AlertAdded",
+            "value": "AlertAdded",
+            "description": "AlertAdded"
+          },
+          {
+            "name": "AlertRemoved",
+            "value": "AlertRemoved",
+            "description": "AlertRemoved"
+          }
+        ]
       }
     },
     "SmartGroupModificationItem": {
@@ -3082,15 +3322,18 @@
         "values": [
           {
             "name": "New",
-            "value": "New"
+            "value": "New",
+            "description": "New"
           },
           {
             "name": "Acknowledged",
-            "value": "Acknowledged"
+            "value": "Acknowledged",
+            "description": "Acknowledged"
           },
           {
             "name": "Closed",
-            "value": "Closed"
+            "value": "Closed",
+            "description": "Closed"
           }
         ]
       }
