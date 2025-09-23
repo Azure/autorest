@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/modelerfour",
+      "comment": "Fix rfc7231 not getting picked up as a date time type",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/modelerfour"
+}
