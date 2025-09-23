@@ -1,6 +1,13 @@
 # Change Log - @autorest/openapi-to-typespec
 
-This log was last generated on Thu, 11 Sep 2025 03:35:46 GMT and should not be manually modified.
+This log was last generated on Tue, 23 Sep 2025 06:34:30 GMT and should not be manually modified.
+
+## 0.11.11
+Tue, 23 Sep 2025 06:34:30 GMT
+
+### Patches
+
+- Adding doc for empty enum
 
 ## 0.11.10
 Thu, 11 Sep 2025 03:35:46 GMT
