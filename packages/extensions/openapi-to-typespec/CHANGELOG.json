@@ -2,6 +2,18 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.11.11",
+      "tag": "@autorest/openapi-to-typespec_v0.11.11",
+      "date": "Tue, 23 Sep 2025 06:34:30 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Adding doc for empty enum"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.11.10",
       "tag": "@autorest/openapi-to-typespec_v0.11.10",
       "date": "Thu, 11 Sep 2025 03:35:46 GMT",
