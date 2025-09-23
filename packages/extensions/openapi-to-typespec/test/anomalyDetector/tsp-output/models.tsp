@@ -12,6 +12,9 @@ namespace AnomalyDetectorClient;
  * Anomaly Detector API version (for example, v1.0).
  */
 enum ApiVersion {
+  /**
+   * v1.1-preview.1
+   */
   `v1.1-preview.1`,
 }
 
@@ -21,11 +24,35 @@ enum ApiVersion {
  */
 union ImputeMode {
   string,
+
+  /**
+   * auto
+   */
   auto: "auto",
+
+  /**
+   * previous
+   */
   previous: "previous",
+
+  /**
+   * linear
+   */
   linear: "linear",
+
+  /**
+   * fixed
+   */
   fixed: "fixed",
+
+  /**
+   * zero
+   */
   zero: "zero",
+
+  /**
+   * notFill
+   */
   notFill: "notFill",
 }
 
@@ -34,16 +61,60 @@ union ImputeMode {
  */
 union AnomalyDetectorErrorCodes {
   string,
+
+  /**
+   * InvalidCustomInterval
+   */
   InvalidCustomInterval: "InvalidCustomInterval",
+
+  /**
+   * BadArgument
+   */
   BadArgument: "BadArgument",
+
+  /**
+   * InvalidGranularity
+   */
   InvalidGranularity: "InvalidGranularity",
+
+  /**
+   * InvalidPeriod
+   */
   InvalidPeriod: "InvalidPeriod",
+
+  /**
+   * InvalidModelArgument
+   */
   InvalidModelArgument: "InvalidModelArgument",
+
+  /**
+   * InvalidSeries
+   */
   InvalidSeries: "InvalidSeries",
+
+  /**
+   * InvalidJsonFormat
+   */
   InvalidJsonFormat: "InvalidJsonFormat",
+
+  /**
+   * RequiredGranularity
+   */
   RequiredGranularity: "RequiredGranularity",
+
+  /**
+   * RequiredSeries
+   */
   RequiredSeries: "RequiredSeries",
+
+  /**
+   * InvalidImputeMode
+   */
   InvalidImputeMode: "InvalidImputeMode",
+
+  /**
+   * InvalidImputeFixedValue
+   */
   InvalidImputeFixedValue: "InvalidImputeFixedValue",
 }
 
@@ -54,11 +125,35 @@ union AnomalyDetectorErrorCodes {
  */
 union FillNAMethod {
   string,
+
+  /**
+   * Previous
+   */
   Previous: "Previous",
+
+  /**
+   * Subsequent
+   */
   Subsequent: "Subsequent",
+
+  /**
+   * Linear
+   */
   Linear: "Linear",
+
+  /**
+   * Zero
+   */
   Zero: "Zero",
+
+  /**
+   * Fixed
+   */
   Fixed: "Fixed",
+
+  /**
+   * NotFill
+   */
   NotFill: "NotFill",
 }
 
@@ -69,14 +164,49 @@ union FillNAMethod {
  * series point can be absent.
  */
 enum TimeGranularity {
+  /**
+   * yearly
+   */
   yearly,
+
+  /**
+   * monthly
+   */
   monthly,
+
+  /**
+   * weekly
+   */
   weekly,
+
+  /**
+   * daily
+   */
   daily,
+
+  /**
+   * hourly
+   */
   hourly,
+
+  /**
+   * minutely
+   */
   perMinute: "minutely",
+
+  /**
+   * secondly
+   */
   perSecond: "secondly",
+
+  /**
+   * microsecond
+   */
   microsecond,
+
+  /**
+   * none
+   */
   none,
 }
 
@@ -84,14 +214,36 @@ enum TimeGranularity {
  * Status of detection results. One of CREATED, RUNNING, READY, and FAILED.
  */
 enum DetectionStatus {
+  /**
+   * CREATED
+   */
   CREATED,
+
+  /**
+   * RUNNING
+   */
   RUNNING,
+
+  /**
+   * READY
+   */
   READY,
+
+  /**
+   * FAILED
+   */
   FAILED,
 }
 
 enum DataSchema {
+  /**
+   * OneTable
+   */
   OneTable,
+
+  /**
+   * MultiTable
+   */
   MultiTable,
 }
 
@@ -100,7 +252,14 @@ enum DataSchema {
  * time-range. Either Inner or Outer.
  */
 enum AlignMode {
+  /**
+   * Inner
+   */
   Inner,
+
+  /**
+   * Outer
+   */
   Outer,
 }
 
@@ -108,9 +267,24 @@ enum AlignMode {
  * Model status. One of CREATED, RUNNING, READY, and FAILED.
  */
 enum ModelStatus {
+  /**
+   * CREATED
+   */
   CREATED,
+
+  /**
+   * RUNNING
+   */
   RUNNING,
+
+  /**
+   * READY
+   */
   READY,
+
+  /**
+   * FAILED
+   */
   FAILED,
 }
 

@@ -535,7 +535,19 @@
       ],
       "x-ms-enum": {
         "name": "AlignMode",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Inner",
+            "value": "Inner",
+            "description": "Inner"
+          },
+          {
+            "name": "Outer",
+            "value": "Outer",
+            "description": "Outer"
+          }
+        ]
       }
     },
     "AlignPolicy": {
@@ -593,47 +605,58 @@
         "values": [
           {
             "name": "InvalidCustomInterval",
-            "value": "InvalidCustomInterval"
+            "value": "InvalidCustomInterval",
+            "description": "InvalidCustomInterval"
           },
           {
             "name": "BadArgument",
-            "value": "BadArgument"
+            "value": "BadArgument",
+            "description": "BadArgument"
           },
           {
             "name": "InvalidGranularity",
-            "value": "InvalidGranularity"
+            "value": "InvalidGranularity",
+            "description": "InvalidGranularity"
           },
           {
             "name": "InvalidPeriod",
-            "value": "InvalidPeriod"
+            "value": "InvalidPeriod",
+            "description": "InvalidPeriod"
           },
           {
             "name": "InvalidModelArgument",
-            "value": "InvalidModelArgument"
+            "value": "InvalidModelArgument",
+            "description": "InvalidModelArgument"
           },
           {
             "name": "InvalidSeries",
-            "value": "InvalidSeries"
+            "value": "InvalidSeries",
+            "description": "InvalidSeries"
           },
           {
             "name": "InvalidJsonFormat",
-            "value": "InvalidJsonFormat"
+            "value": "InvalidJsonFormat",
+            "description": "InvalidJsonFormat"
           },
           {
             "name": "RequiredGranularity",
-            "value": "RequiredGranularity"
+            "value": "RequiredGranularity",
+            "description": "RequiredGranularity"
           },
           {
             "name": "RequiredSeries",
-            "value": "RequiredSeries"
+            "value": "RequiredSeries",
+            "description": "RequiredSeries"
           },
           {
             "name": "InvalidImputeMode",
-            "value": "InvalidImputeMode"
+            "value": "InvalidImputeMode",
+            "description": "InvalidImputeMode"
           },
           {
             "name": "InvalidImputeFixedValue",
-            "value": "InvalidImputeFixedValue"
+            "value": "InvalidImputeFixedValue",
+            "description": "InvalidImputeFixedValue"
           }
         ]
       }
@@ -716,7 +739,14 @@
       ],
       "x-ms-enum": {
         "name": "ApiVersion",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "v1.1-preview.1",
+            "value": "v1.1-preview.1",
+            "description": "v1.1-preview.1"
+          }
+        ]
       }
     },
     "Azure.Core.Foundations.Error": {
@@ -867,7 +897,19 @@
       ],
       "x-ms-enum": {
         "name": "DataSchema",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "OneTable",
+            "value": "OneTable",
+            "description": "OneTable"
+          },
+          {
+            "name": "MultiTable",
+            "value": "MultiTable",
+            "description": "MultiTable"
+          }
+        ]
       }
     },
     "DetectRequest": {
@@ -1018,7 +1060,29 @@
       ],
       "x-ms-enum": {
         "name": "DetectionStatus",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "CREATED",
+            "value": "CREATED",
+            "description": "CREATED"
+          },
+          {
+            "name": "RUNNING",
+            "value": "RUNNING",
+            "description": "RUNNING"
+          },
+          {
+            "name": "READY",
+            "value": "READY",
+            "description": "READY"
+          },
+          {
+            "name": "FAILED",
+            "value": "FAILED",
+            "description": "FAILED"
+          }
+        ]
       }
     },
     "DiagnosticsInfo": {
@@ -1143,27 +1207,33 @@
         "values": [
           {
             "name": "Previous",
-            "value": "Previous"
+            "value": "Previous",
+            "description": "Previous"
           },
           {
             "name": "Subsequent",
-            "value": "Subsequent"
+            "value": "Subsequent",
+            "description": "Subsequent"
           },
           {
             "name": "Linear",
-            "value": "Linear"
+            "value": "Linear",
+            "description": "Linear"
           },
           {
             "name": "Zero",
-            "value": "Zero"
+            "value": "Zero",
+            "description": "Zero"
           },
           {
             "name": "Fixed",
-            "value": "Fixed"
+            "value": "Fixed",
+            "description": "Fixed"
           },
           {
             "name": "NotFill",
-            "value": "NotFill"
+            "value": "NotFill",
+            "description": "NotFill"
           }
         ]
       }
@@ -1185,27 +1255,33 @@
         "values": [
           {
             "name": "auto",
-            "value": "auto"
+            "value": "auto",
+            "description": "auto"
           },
           {
             "name": "previous",
-            "value": "previous"
+            "value": "previous",
+            "description": "previous"
           },
           {
             "name": "linear",
-            "value": "linear"
+            "value": "linear",
+            "description": "linear"
           },
           {
             "name": "fixed",
-            "value": "fixed"
+            "value": "fixed",
+            "description": "fixed"
           },
           {
             "name": "zero",
-            "value": "zero"
+            "value": "zero",
+            "description": "zero"
           },
           {
             "name": "notFill",
-            "value": "notFill"
+            "value": "notFill",
+            "description": "notFill"
           }
         ]
       }
@@ -1509,7 +1585,29 @@
       ],
       "x-ms-enum": {
         "name": "ModelStatus",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "CREATED",
+            "value": "CREATED",
+            "description": "CREATED"
+          },
+          {
+            "name": "RUNNING",
+            "value": "RUNNING",
+            "description": "RUNNING"
+          },
+          {
+            "name": "READY",
+            "value": "READY",
+            "description": "READY"
+          },
+          {
+            "name": "FAILED",
+            "value": "FAILED",
+            "description": "FAILED"
+          }
+        ]
       }
     },
     "PagedModelSnapshot": {
@@ -1553,39 +1651,48 @@
         "values": [
           {
             "name": "yearly",
-            "value": "yearly"
+            "value": "yearly",
+            "description": "yearly"
           },
           {
             "name": "monthly",
-            "value": "monthly"
+            "value": "monthly",
+            "description": "monthly"
           },
           {
             "name": "weekly",
-            "value": "weekly"
+            "value": "weekly",
+            "description": "weekly"
           },
           {
             "name": "daily",
-            "value": "daily"
+            "value": "daily",
+            "description": "daily"
           },
           {
             "name": "hourly",
-            "value": "hourly"
+            "value": "hourly",
+            "description": "hourly"
           },
           {
             "name": "perMinute",
-            "value": "minutely"
+            "value": "minutely",
+            "description": "minutely"
           },
           {
             "name": "perSecond",
-            "value": "secondly"
+            "value": "secondly",
+            "description": "secondly"
           },
           {
             "name": "microsecond",
-            "value": "microsecond"
+            "value": "microsecond",
+            "description": "microsecond"
           },
           {
             "name": "none",
-            "value": "none"
+            "value": "none",
+            "description": "none"
           }
         ]
       }

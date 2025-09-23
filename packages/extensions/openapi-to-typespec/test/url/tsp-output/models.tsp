@@ -7,8 +7,19 @@ using TypeSpec.Http;
 namespace AutoRestUrlTestService;
 
 enum UriColor {
+  /**
+   * red color
+   */
   `red color`,
+
+  /**
+   * green color
+   */
   `green color`,
+
+  /**
+   * blue color
+   */
   `blue color`,
 }
 

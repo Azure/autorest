@@ -16,21 +16,45 @@ namespace Microsoft.Storage;
  */
 union SkuName {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Standard_LRS
+   */
   Standard_LRS: "Standard_LRS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Standard_GRS
+   */
   Standard_GRS: "Standard_GRS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Standard_RAGRS
+   */
   Standard_RAGRS: "Standard_RAGRS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Standard_ZRS
+   */
   Standard_ZRS: "Standard_ZRS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Premium_LRS
+   */
   Premium_LRS: "Premium_LRS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Premium_ZRS
+   */
   Premium_ZRS: "Premium_ZRS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Standard_GZRS
+   */
   Standard_GZRS: "Standard_GZRS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Standard_RAGZRS
+   */
   Standard_RAGZRS: "Standard_RAGZRS",
 }
 
@@ -39,15 +63,30 @@ union SkuName {
  */
 union Kind {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Storage
+   */
   Storage: "Storage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * StorageV2
+   */
   StorageV2: "StorageV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * BlobStorage
+   */
   BlobStorage: "BlobStorage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * FileStorage
+   */
   FileStorage: "FileStorage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * BlockBlobStorage
+   */
   BlockBlobStorage: "BlockBlobStorage",
 }
 
@@ -56,9 +95,15 @@ union Kind {
  */
 union ReasonCode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * QuotaId
+   */
   QuotaId: "QuotaId",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * NotAvailableForSubscription
+   */
   NotAvailableForSubscription: "NotAvailableForSubscription",
 }
 
@@ -67,7 +112,10 @@ union ReasonCode {
  */
 union ExtendedLocationTypes {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * EdgeZone
+   */
   EdgeZone: "EdgeZone",
 }
 
@@ -76,13 +124,25 @@ union ExtendedLocationTypes {
  */
 union IdentityType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * None
+   */
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * SystemAssigned
+   */
   SystemAssigned: "SystemAssigned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * UserAssigned
+   */
   UserAssigned: "UserAssigned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * SystemAssigned,UserAssigned
+   */
   `SystemAssigned,UserAssigned`: "SystemAssigned,UserAssigned",
 }
 
@@ -91,9 +151,15 @@ union IdentityType {
  */
 union AllowedCopyScope {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * PrivateLink
+   */
   PrivateLink: "PrivateLink",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * AAD
+   */
   AAD: "AAD",
 }
 
@@ -102,9 +168,15 @@ union AllowedCopyScope {
  */
 union PublicNetworkAccess {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Enabled
+   */
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Disabled
+   */
   Disabled: "Disabled",
 }
 
@@ -113,7 +185,10 @@ union PublicNetworkAccess {
  */
 union ExpirationAction {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Log
+   */
   Log: "Log",
 }
 
@@ -122,9 +197,15 @@ union ExpirationAction {
  */
 union KeyType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Service
+   */
   Service: "Service",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Account
+   */
   Account: "Account",
 }
 
@@ -133,9 +214,15 @@ union KeyType {
  */
 union KeySource {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Microsoft.Storage
+   */
   `Microsoft.Storage`: "Microsoft.Storage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Microsoft.Keyvault
+   */
   `Microsoft.Keyvault`: "Microsoft.Keyvault",
 }
 
@@ -144,13 +231,25 @@ union KeySource {
  */
 union Bypass {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * None
+   */
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Logging
+   */
   Logging: "Logging",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Metrics
+   */
   Metrics: "Metrics",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * AzureServices
+   */
   AzureServices: "AzureServices",
 }
 
@@ -159,15 +258,30 @@ union Bypass {
  */
 union State {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Provisioning
+   */
   Provisioning: "Provisioning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Deprovisioning
+   */
   Deprovisioning: "Deprovisioning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Succeeded
+   */
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Failed
+   */
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * NetworkSourceDeleted
+   */
   NetworkSourceDeleted: "NetworkSourceDeleted",
 }
 
@@ -176,13 +290,25 @@ union State {
  */
 union DirectoryServiceOptions {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * None
+   */
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * AADDS
+   */
   AADDS: "AADDS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * AD
+   */
   AD: "AD",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * AADKERB
+   */
   AADKERB: "AADKERB",
 }
 
@@ -191,9 +317,15 @@ union DirectoryServiceOptions {
  */
 union AccountType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * User
+   */
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Computer
+   */
   Computer: "Computer",
 }
 
@@ -202,13 +334,25 @@ union AccountType {
  */
 union DefaultSharePermission {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * None
+   */
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * StorageFileDataSmbShareReader
+   */
   StorageFileDataSmbShareReader: "StorageFileDataSmbShareReader",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * StorageFileDataSmbShareContributor
+   */
   StorageFileDataSmbShareContributor: "StorageFileDataSmbShareContributor",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * StorageFileDataSmbShareElevatedContributor
+   */
   StorageFileDataSmbShareElevatedContributor: "StorageFileDataSmbShareElevatedContributor",
 }
 
@@ -217,9 +361,15 @@ union DefaultSharePermission {
  */
 union LargeFileSharesState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Disabled
+   */
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Enabled
+   */
   Enabled: "Enabled",
 }
 
@@ -228,9 +378,15 @@ union LargeFileSharesState {
  */
 union RoutingChoice {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * MicrosoftRouting
+   */
   MicrosoftRouting: "MicrosoftRouting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * InternetRouting
+   */
   InternetRouting: "InternetRouting",
 }
 
@@ -239,11 +395,20 @@ union RoutingChoice {
  */
 union MinimumTlsVersion {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * TLS1_0
+   */
   TLS1_0: "TLS1_0",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * TLS1_1
+   */
   TLS1_1: "TLS1_1",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * TLS1_2
+   */
   TLS1_2: "TLS1_2",
 }
 
@@ -252,11 +417,20 @@ union MinimumTlsVersion {
  */
 union AccountImmutabilityPolicyState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Unlocked
+   */
   Unlocked: "Unlocked",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Locked
+   */
   Locked: "Locked",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Disabled
+   */
   Disabled: "Disabled",
 }
 
@@ -265,9 +439,15 @@ union AccountImmutabilityPolicyState {
  */
 union DnsEndpointType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Standard
+   */
   Standard: "Standard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * AzureDnsZone
+   */
   AzureDnsZone: "AzureDnsZone",
 }
 
@@ -276,11 +456,20 @@ union DnsEndpointType {
  */
 union GeoReplicationStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Live
+   */
   Live: "Live",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Bootstrap
+   */
   Bootstrap: "Bootstrap",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Unavailable
+   */
   Unavailable: "Unavailable",
 }
 
@@ -289,11 +478,20 @@ union GeoReplicationStatus {
  */
 union PrivateEndpointServiceConnectionStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Pending
+   */
   Pending: "Pending",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Approved
+   */
   Approved: "Approved",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Rejected
+   */
   Rejected: "Rejected",
 }
 
@@ -303,13 +501,25 @@ union PrivateEndpointServiceConnectionStatus {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 union PrivateEndpointConnectionProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Succeeded
+   */
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Creating
+   */
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Deleting
+   */
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Failed
+   */
   Failed: "Failed",
 }
 
@@ -318,11 +528,20 @@ union PrivateEndpointConnectionProvisioningState {
  */
 union BlobRestoreProgressStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * InProgress
+   */
   InProgress: "InProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Complete
+   */
   Complete: "Complete",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Failed
+   */
   Failed: "Failed",
 }
 
@@ -331,11 +550,20 @@ union BlobRestoreProgressStatus {
  */
 union SkuConversionStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * InProgress
+   */
   InProgress: "InProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Succeeded
+   */
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Failed
+   */
   Failed: "Failed",
 }
 
@@ -344,13 +572,25 @@ union SkuConversionStatus {
  */
 union Services {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * b
+   */
   b: "b",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * q
+   */
   q: "q",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * t
+   */
   t: "t",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * f
+   */
   f: "f",
 }
 
@@ -359,11 +599,20 @@ union Services {
  */
 union SignedResourceTypes {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * s
+   */
   s: "s",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * c
+   */
   c: "c",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * o
+   */
   o: "o",
 }
 
@@ -372,21 +621,45 @@ union SignedResourceTypes {
  */
 union Permissions {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * r
+   */
   r: "r",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * d
+   */
   d: "d",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * w
+   */
   w: "w",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * l
+   */
   l: "l",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * a
+   */
   a: "a",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * c
+   */
   c: "c",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * u
+   */
   u: "u",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * p
+   */
   p: "p",
 }
 
@@ -395,20 +668,35 @@ union Permissions {
  */
 union SignedResource {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * b
+   */
   b: "b",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * c
+   */
   c: "c",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * f
+   */
   f: "f",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * s
+   */
   s: "s",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ManagementPolicyName {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * default
+   */
   default: "default",
 }
 
@@ -417,14 +705,20 @@ union ManagementPolicyName {
  */
 union RuleType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Lifecycle
+   */
   Lifecycle: "Lifecycle",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union BlobInventoryPolicyName {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * default
+   */
   default: "default",
 }
 
@@ -433,7 +727,10 @@ union BlobInventoryPolicyName {
  */
 union InventoryRuleType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Inventory
+   */
   Inventory: "Inventory",
 }
 
@@ -442,9 +739,15 @@ union InventoryRuleType {
  */
 union Format {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Csv
+   */
   Csv: "Csv",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Parquet
+   */
   Parquet: "Parquet",
 }
 
@@ -453,9 +756,15 @@ union Format {
  */
 union Schedule {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Daily
+   */
   Daily: "Daily",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Weekly
+   */
   Weekly: "Weekly",
 }
 
@@ -464,9 +773,15 @@ union Schedule {
  */
 union ObjectType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Blob
+   */
   Blob: "Blob",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Container
+   */
   Container: "Container",
 }
 
@@ -475,13 +790,25 @@ union ObjectType {
  */
 union CreatedByType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * User
+   */
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Application
+   */
   Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * ManagedIdentity
+   */
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Key
+   */
   Key: "Key",
 }
 
@@ -490,9 +817,15 @@ union CreatedByType {
  */
 union EncryptionScopeSource {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Microsoft.Storage
+   */
   `Microsoft.Storage`: "Microsoft.Storage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Microsoft.KeyVault
+   */
   `Microsoft.KeyVault`: "Microsoft.KeyVault",
 }
 
@@ -501,41 +834,80 @@ union EncryptionScopeSource {
  */
 union EncryptionScopeState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Enabled
+   */
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Disabled
+   */
   Disabled: "Disabled",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ListEncryptionScopesInclude {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * All
+   */
   All: "All",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Enabled
+   */
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Disabled
+   */
   Disabled: "Disabled",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union AllowedMethods {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * DELETE
+   */
   DELETE: "DELETE",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * GET
+   */
   GET: "GET",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * HEAD
+   */
   HEAD: "HEAD",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * MERGE
+   */
   MERGE: "MERGE",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * POST
+   */
   POST: "POST",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * OPTIONS
+   */
   OPTIONS: "OPTIONS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * PUT
+   */
   PUT: "PUT",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * PATCH
+   */
   PATCH: "PATCH",
 }
 
@@ -544,14 +916,20 @@ union AllowedMethods {
  */
 union Name {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * AccessTimeTracking
+   */
   AccessTimeTracking: "AccessTimeTracking",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ListContainersInclude {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * deleted
+   */
   deleted: "deleted",
 }
 
@@ -560,9 +938,15 @@ union ListContainersInclude {
  */
 union LeaseStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Locked
+   */
   Locked: "Locked",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Unlocked
+   */
   Unlocked: "Unlocked",
 }
 
@@ -571,15 +955,30 @@ union LeaseStatus {
  */
 union LeaseState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Available
+   */
   Available: "Available",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Leased
+   */
   Leased: "Leased",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Expired
+   */
   Expired: "Expired",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Breaking
+   */
   Breaking: "Breaking",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Broken
+   */
   Broken: "Broken",
 }
 
@@ -588,9 +987,15 @@ union LeaseState {
  */
 union LeaseDuration {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Infinite
+   */
   Infinite: "Infinite",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Fixed
+   */
   Fixed: "Fixed",
 }
 
@@ -599,9 +1004,15 @@ union LeaseDuration {
  */
 union ImmutabilityPolicyState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Locked
+   */
   Locked: "Locked",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Unlocked
+   */
   Unlocked: "Unlocked",
 }
 
@@ -610,11 +1021,20 @@ union ImmutabilityPolicyState {
  */
 union ImmutabilityPolicyUpdateType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * put
+   */
   put: "put",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * lock
+   */
   lock: "lock",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * extend
+   */
   extend: "extend",
 }
 
@@ -623,9 +1043,15 @@ union ImmutabilityPolicyUpdateType {
  */
 union MigrationState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * InProgress
+   */
   InProgress: "InProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Completed
+   */
   Completed: "Completed",
 }
 
@@ -634,15 +1060,30 @@ union MigrationState {
  */
 union LeaseContainerRequestAction {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Acquire
+   */
   Acquire: "Acquire",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Renew
+   */
   Renew: "Renew",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Change
+   */
   Change: "Change",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Release
+   */
   Release: "Release",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Break
+   */
   Break: "Break",
 }
 
@@ -651,9 +1092,15 @@ union LeaseContainerRequestAction {
  */
 union EnabledProtocols {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * SMB
+   */
   SMB: "SMB",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * NFS
+   */
   NFS: "NFS",
 }
 
@@ -662,11 +1109,20 @@ union EnabledProtocols {
  */
 union RootSquashType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * NoRootSquash
+   */
   NoRootSquash: "NoRootSquash",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * RootSquash
+   */
   RootSquash: "RootSquash",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * AllSquash
+   */
   AllSquash: "AllSquash",
 }
 
@@ -675,13 +1131,25 @@ union RootSquashType {
  */
 union ShareAccessTier {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * TransactionOptimized
+   */
   TransactionOptimized: "TransactionOptimized",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Hot
+   */
   Hot: "Hot",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Cool
+   */
   Cool: "Cool",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Premium
+   */
   Premium: "Premium",
 }
 
@@ -690,15 +1158,30 @@ union ShareAccessTier {
  */
 union LeaseShareAction {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Acquire
+   */
   Acquire: "Acquire",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Renew
+   */
   Renew: "Renew",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Change
+   */
   Change: "Change",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Release
+   */
   Release: "Release",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Break
+   */
   Break: "Break",
 }
 
@@ -707,7 +1190,14 @@ union LeaseShareAction {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum SkuTier {
+  /**
+   * Standard
+   */
   Standard,
+
+  /**
+   * Premium
+   */
   Premium,
 }
 
@@ -716,7 +1206,14 @@ enum SkuTier {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum Reason {
+  /**
+   * AccountNameInvalid
+   */
   AccountNameInvalid,
+
+  /**
+   * AlreadyExists
+   */
   AlreadyExists,
 }
 
@@ -725,7 +1222,14 @@ enum Reason {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum DefaultAction {
+  /**
+   * Allow
+   */
   Allow,
+
+  /**
+   * Deny
+   */
   Deny,
 }
 
@@ -734,8 +1238,19 @@ enum DefaultAction {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum AccessTier {
+  /**
+   * Hot
+   */
   Hot,
+
+  /**
+   * Cool
+   */
   Cool,
+
+  /**
+   * Premium
+   */
   Premium,
 }
 
@@ -745,8 +1260,19 @@ enum AccessTier {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 enum ProvisioningState {
+  /**
+   * Creating
+   */
   Creating,
+
+  /**
+   * ResolvingDNS
+   */
   ResolvingDNS,
+
+  /**
+   * Succeeded
+   */
   Succeeded,
 }
 
@@ -755,14 +1281,28 @@ enum ProvisioningState {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum AccountStatus {
+  /**
+   * available
+   */
   available,
+
+  /**
+   * unavailable
+   */
   unavailable,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum StorageAccountExpand {
+  /**
+   * geoReplicationStats
+   */
   geoReplicationStats,
+
+  /**
+   * blobRestoreStatus
+   */
   blobRestoreStatus,
 }
 
@@ -771,7 +1311,14 @@ enum StorageAccountExpand {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum KeyPermission {
+  /**
+   * Read
+   */
   Read,
+
+  /**
+   * Full
+   */
   Full,
 }
 
@@ -780,11 +1327,34 @@ enum KeyPermission {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum UsageUnit {
+  /**
+   * Count
+   */
   Count,
+
+  /**
+   * Bytes
+   */
   Bytes,
+
+  /**
+   * Seconds
+   */
   Seconds,
+
+  /**
+   * Percent
+   */
   Percent,
+
+  /**
+   * CountsPerSecond
+   */
   CountsPerSecond,
+
+  /**
+   * BytesPerSecond
+   */
   BytesPerSecond,
 }
 
@@ -793,7 +1363,14 @@ enum UsageUnit {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum HttpProtocol {
+  /**
+   * https,http
+   */
   `https,http`,
+
+  /**
+   * https
+   */
   https,
 }
 
@@ -802,8 +1379,19 @@ enum HttpProtocol {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum PublicAccess {
+  /**
+   * Container
+   */
   Container,
+
+  /**
+   * Blob
+   */
   Blob,
+
+  /**
+   * None
+   */
   None,
 }
 

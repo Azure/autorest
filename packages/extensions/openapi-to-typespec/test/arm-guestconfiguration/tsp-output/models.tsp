@@ -16,7 +16,10 @@ namespace Microsoft.GuestConfiguration;
  */
 union Kind {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * DSC
+   */
   DSC: "DSC",
 }
 
@@ -25,13 +28,25 @@ union Kind {
  */
 union AssignmentType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Audit
+   */
   Audit: "Audit",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * DeployAndAutoCorrect
+   */
   DeployAndAutoCorrect: "DeployAndAutoCorrect",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * ApplyAndAutoCorrect
+   */
   ApplyAndAutoCorrect: "ApplyAndAutoCorrect",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * ApplyAndMonitor
+   */
   ApplyAndMonitor: "ApplyAndMonitor",
 }
 
@@ -40,11 +55,20 @@ union AssignmentType {
  */
 union ConfigurationMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * ApplyOnly
+   */
   ApplyOnly: "ApplyOnly",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * ApplyAndMonitor
+   */
   ApplyAndMonitor: "ApplyAndMonitor",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * ApplyAndAutoCorrect
+   */
   ApplyAndAutoCorrect: "ApplyAndAutoCorrect",
 }
 
@@ -53,9 +77,15 @@ union ConfigurationMode {
  */
 union ActionAfterReboot {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * ContinueConfiguration
+   */
   ContinueConfiguration: "ContinueConfiguration",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * StopConfiguration
+   */
   StopConfiguration: "StopConfiguration",
 }
 
@@ -64,11 +94,20 @@ union ActionAfterReboot {
  */
 union ComplianceStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Compliant
+   */
   Compliant: "Compliant",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * NonCompliant
+   */
   NonCompliant: "NonCompliant",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Pending
+   */
   Pending: "Pending",
 }
 
@@ -77,9 +116,15 @@ union ComplianceStatus {
  */
 union Type {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Consistency
+   */
   Consistency: "Consistency",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Initial
+   */
   Initial: "Initial",
 }
 
@@ -88,13 +133,25 @@ union Type {
  */
 union ProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Succeeded
+   */
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Failed
+   */
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Canceled
+   */
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Created
+   */
   Created: "Created",
 }
 
@@ -103,13 +160,25 @@ union ProvisioningState {
  */
 union CreatedByType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * User
+   */
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Application
+   */
   Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * ManagedIdentity
+   */
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Key
+   */
   Key: "Key",
 }
 

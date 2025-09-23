@@ -37,23 +37,95 @@ union ProjectKind {
  */
 union ErrorCode {
   string,
+
+  /**
+   * InvalidRequest
+   */
   InvalidRequest: "InvalidRequest",
+
+  /**
+   * InvalidArgument
+   */
   InvalidArgument: "InvalidArgument",
+
+  /**
+   * Unauthorized
+   */
   Unauthorized: "Unauthorized",
+
+  /**
+   * Forbidden
+   */
   Forbidden: "Forbidden",
+
+  /**
+   * NotFound
+   */
   NotFound: "NotFound",
+
+  /**
+   * ProjectNotFound
+   */
   ProjectNotFound: "ProjectNotFound",
+
+  /**
+   * OperationNotFound
+   */
   OperationNotFound: "OperationNotFound",
+
+  /**
+   * AzureCognitiveSearchNotFound
+   */
   AzureCognitiveSearchNotFound: "AzureCognitiveSearchNotFound",
+
+  /**
+   * AzureCognitiveSearchIndexNotFound
+   */
   AzureCognitiveSearchIndexNotFound: "AzureCognitiveSearchIndexNotFound",
+
+  /**
+   * TooManyRequests
+   */
   TooManyRequests: "TooManyRequests",
+
+  /**
+   * AzureCognitiveSearchThrottling
+   */
   AzureCognitiveSearchThrottling: "AzureCognitiveSearchThrottling",
+
+  /**
+   * AzureCognitiveSearchIndexLimitReached
+   */
   AzureCognitiveSearchIndexLimitReached: "AzureCognitiveSearchIndexLimitReached",
+
+  /**
+   * InternalServerError
+   */
   InternalServerError: "InternalServerError",
+
+  /**
+   * ServiceUnavailable
+   */
   ServiceUnavailable: "ServiceUnavailable",
+
+  /**
+   * Timeout
+   */
   Timeout: "Timeout",
+
+  /**
+   * QuotaExceeded
+   */
   QuotaExceeded: "QuotaExceeded",
+
+  /**
+   * Conflict
+   */
   Conflict: "Conflict",
+
+  /**
+   * Warning
+   */
   Warning: "Warning",
 }
 
@@ -62,19 +134,75 @@ union ErrorCode {
  */
 union InnerErrorCode {
   string,
+
+  /**
+   * InvalidRequest
+   */
   InvalidRequest: "InvalidRequest",
+
+  /**
+   * InvalidParameterValue
+   */
   InvalidParameterValue: "InvalidParameterValue",
+
+  /**
+   * KnowledgeBaseNotFound
+   */
   KnowledgeBaseNotFound: "KnowledgeBaseNotFound",
+
+  /**
+   * AzureCognitiveSearchNotFound
+   */
   AzureCognitiveSearchNotFound: "AzureCognitiveSearchNotFound",
+
+  /**
+   * AzureCognitiveSearchThrottling
+   */
   AzureCognitiveSearchThrottling: "AzureCognitiveSearchThrottling",
+
+  /**
+   * ExtractionFailure
+   */
   ExtractionFailure: "ExtractionFailure",
+
+  /**
+   * InvalidRequestBodyFormat
+   */
   InvalidRequestBodyFormat: "InvalidRequestBodyFormat",
+
+  /**
+   * EmptyRequest
+   */
   EmptyRequest: "EmptyRequest",
+
+  /**
+   * MissingInputDocuments
+   */
   MissingInputDocuments: "MissingInputDocuments",
+
+  /**
+   * InvalidDocument
+   */
   InvalidDocument: "InvalidDocument",
+
+  /**
+   * ModelVersionIncorrect
+   */
   ModelVersionIncorrect: "ModelVersionIncorrect",
+
+  /**
+   * InvalidDocumentBatch
+   */
   InvalidDocumentBatch: "InvalidDocumentBatch",
+
+  /**
+   * UnsupportedLanguageCode
+   */
   UnsupportedLanguageCode: "UnsupportedLanguageCode",
+
+  /**
+   * InvalidCountryHint
+   */
   InvalidCountryHint: "InvalidCountryHint",
 }
 
@@ -117,12 +245,40 @@ union EvaluationKind {
 
 union JobStatus {
   string,
+
+  /**
+   * notStarted
+   */
   NotStarted: "notStarted",
+
+  /**
+   * running
+   */
   Running: "running",
+
+  /**
+   * succeeded
+   */
   Succeeded: "succeeded",
+
+  /**
+   * failed
+   */
   Failed: "failed",
+
+  /**
+   * cancelled
+   */
   Cancelled: "cancelled",
+
+  /**
+   * cancelling
+   */
   Cancelling: "cancelling",
+
+  /**
+   * partiallyCompleted
+   */
   PartiallyCompleted: "partiallyCompleted",
 }
 

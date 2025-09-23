@@ -39,10 +39,12 @@ export function generateEnums(typespecEnum: TypespecEnum) {
         ${typespecEnum.choiceType},\n
         ${typespecEnum.members
           .map((m) => {
-            const doc = generateDocs(m);
+            const doc = generateDocs(
+              m,
+              typeof m.value === "string" ? m.value.replace(/^['"]|['"]$/g, "") : m.value.toString(),
+            );
             const kv = `"${m.name}": ${m.value}`;
-            if (doc.length > 0 || !isFullCompatible) return `${doc}${kv}`;
-            else return `${generateSuppressions([getSuppressionWithCode(SuppressionCode.DocumentRequired)])}\n${kv}`;
+            return `${doc}${kv}`;
           })
           .join(", ")}
     }\n\n`
@@ -50,8 +52,12 @@ export function generateEnums(typespecEnum: TypespecEnum) {
     enum ${typespecEnum.name} {
         ${typespecEnum.members
           .map((m) => {
+            const doc = generateDocs(
+              m,
+              typeof m.value === "string" ? m.value.replace(/^['"]|['"]$/g, "") : m.value.toString(),
+            );
             const kv = `"${m.name}"` !== m.value ? `"${m.name}": ${m.value}` : m.value;
-            return `${generateDocs(m)}${kv}`;
+            return `${doc}${kv}`;
           })
           .join(", ")}
     }\n\n`;

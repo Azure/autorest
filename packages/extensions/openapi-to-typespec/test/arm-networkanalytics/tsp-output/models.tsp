@@ -14,8 +14,20 @@ namespace Microsoft.NetworkAnalytics;
  */
 union Origin {
   string,
+
+  /**
+   * user
+   */
   user: "user",
+
+  /**
+   * system
+   */
   system: "system",
+
+  /**
+   * user,system
+   */
   `user,system`: "user,system",
 }
 
@@ -24,6 +36,10 @@ union Origin {
  */
 union ActionType {
   string,
+
+  /**
+   * Internal
+   */
   Internal: "Internal",
 }
 
@@ -108,9 +124,25 @@ union DefaultAction {
  */
 union CreatedByType {
   string,
+
+  /**
+   * User
+   */
   User: "User",
+
+  /**
+   * Application
+   */
   Application: "Application",
+
+  /**
+   * ManagedIdentity
+   */
   ManagedIdentity: "ManagedIdentity",
+
+  /**
+   * Key
+   */
   Key: "Key",
 }
 

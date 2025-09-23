@@ -163,14 +163,50 @@ union JsonWebKeyCurveName {
 
 union KeyUsageType {
   string,
+
+  /**
+   * digitalSignature
+   */
   digitalSignature: "digitalSignature",
+
+  /**
+   * nonRepudiation
+   */
   nonRepudiation: "nonRepudiation",
+
+  /**
+   * keyEncipherment
+   */
   keyEncipherment: "keyEncipherment",
+
+  /**
+   * dataEncipherment
+   */
   dataEncipherment: "dataEncipherment",
+
+  /**
+   * keyAgreement
+   */
   keyAgreement: "keyAgreement",
+
+  /**
+   * keyCertSign
+   */
   keyCertSign: "keyCertSign",
+
+  /**
+   * cRLSign
+   */
   cRLSign: "cRLSign",
+
+  /**
+   * encipherOnly
+   */
   encipherOnly: "encipherOnly",
+
+  /**
+   * decipherOnly
+   */
   decipherOnly: "decipherOnly",
 }
 
@@ -179,13 +215,45 @@ union KeyUsageType {
  */
 union JsonWebKeyOperation {
   string,
+
+  /**
+   * encrypt
+   */
   encrypt: "encrypt",
+
+  /**
+   * decrypt
+   */
   decrypt: "decrypt",
+
+  /**
+   * sign
+   */
   sign: "sign",
+
+  /**
+   * verify
+   */
   verify: "verify",
+
+  /**
+   * wrapKey
+   */
   wrapKey: "wrapKey",
+
+  /**
+   * unwrapKey
+   */
   unwrapKey: "unwrapKey",
+
+  /**
+   * import
+   */
   `import`: "import",
+
+  /**
+   * export
+   */
   export: "export",
 }
 
@@ -194,20 +262,80 @@ union JsonWebKeyOperation {
  */
 union JsonWebKeyEncryptionAlgorithm {
   string,
+
+  /**
+   * RSA-OAEP
+   */
   `RSA-OAEP`: "RSA-OAEP",
+
+  /**
+   * RSA-OAEP-256
+   */
   `RSA-OAEP-256`: "RSA-OAEP-256",
+
+  /**
+   * RSA1_5
+   */
   RSA1_5: "RSA1_5",
+
+  /**
+   * A128GCM
+   */
   A128GCM: "A128GCM",
+
+  /**
+   * A192GCM
+   */
   A192GCM: "A192GCM",
+
+  /**
+   * A256GCM
+   */
   A256GCM: "A256GCM",
+
+  /**
+   * A128KW
+   */
   A128KW: "A128KW",
+
+  /**
+   * A192KW
+   */
   A192KW: "A192KW",
+
+  /**
+   * A256KW
+   */
   A256KW: "A256KW",
+
+  /**
+   * A128CBC
+   */
   A128CBC: "A128CBC",
+
+  /**
+   * A192CBC
+   */
   A192CBC: "A192CBC",
+
+  /**
+   * A256CBC
+   */
   A256CBC: "A256CBC",
+
+  /**
+   * A128CBCPAD
+   */
   A128CBCPAD: "A128CBCPAD",
+
+  /**
+   * A192CBCPAD
+   */
   A192CBCPAD: "A192CBCPAD",
+
+  /**
+   * A256CBCPAD
+   */
   A256CBCPAD: "A256CBCPAD",
 }
 
@@ -295,8 +423,20 @@ union JsonWebKeySignatureAlgorithm {
  */
 union KeyEncryptionAlgorithm {
   string,
+
+  /**
+   * CKM_RSA_AES_KEY_WRAP
+   */
   CKM_RSA_AES_KEY_WRAP: "CKM_RSA_AES_KEY_WRAP",
+
+  /**
+   * RSA_AES_KEY_WRAP_256
+   */
   RSA_AES_KEY_WRAP_256: "RSA_AES_KEY_WRAP_256",
+
+  /**
+   * RSA_AES_KEY_WRAP_384
+   */
   RSA_AES_KEY_WRAP_384: "RSA_AES_KEY_WRAP_384",
 }
 
@@ -305,6 +445,10 @@ union KeyEncryptionAlgorithm {
  */
 union RoleDefinitionType {
   string,
+
+  /**
+   * Microsoft.Authorization/roleDefinitions
+   */
   `Microsoft.Authorization/roleDefinitions`: "Microsoft.Authorization/roleDefinitions",
 }
 
@@ -524,6 +668,10 @@ union RoleScope {
  */
 union SettingTypeEnum {
   string,
+
+  /**
+   * boolean
+   */
   boolean: "boolean",
 }
 
@@ -532,7 +680,15 @@ union SettingTypeEnum {
  */
 union SasTokenType {
   string,
+
+  /**
+   * account
+   */
   account: "account",
+
+  /**
+   * service
+   */
   service: "service",
 }
 
@@ -540,9 +696,24 @@ union SasTokenType {
  * The type of the action.
  */
 enum ActionType {
+  /**
+   * EmailContacts
+   */
   EmailContacts,
+
+  /**
+   * AutoRenew
+   */
   AutoRenew,
+
+  /**
+   * rotate
+   */
   rotate,
+
+  /**
+   * notify
+   */
   notify,
 }
 
@@ -550,8 +721,19 @@ enum ActionType {
  * operation status
  */
 enum OperationStatus {
+  /**
+   * Success
+   */
   Success,
+
+  /**
+   * InProgress
+   */
   InProgress,
+
+  /**
+   * Failed
+   */
   Failed,
 }
 

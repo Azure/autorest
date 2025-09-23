@@ -846,7 +846,19 @@
           ],
           "x-ms-enum": {
             "name": "ConnectionMode",
-            "modelAsString": false
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "All",
+                "value": "All",
+                "description": "All"
+              },
+              {
+                "name": "ReadOnly",
+                "value": "ReadOnly",
+                "description": "ReadOnly"
+              }
+            ]
           }
         },
         "managedMode": {
@@ -1047,11 +1059,13 @@
         "values": [
           {
             "name": "0",
-            "value": 0
+            "value": 0,
+            "description": "0"
           },
           {
             "name": "1",
-            "value": 1
+            "value": 1,
+            "description": "1"
           }
         ]
       }
@@ -1079,51 +1093,63 @@
         "values": [
           {
             "name": "Deleting",
-            "value": "Deleting"
+            "value": "Deleting",
+            "description": "Deleting"
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Succeeded"
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Failed"
           },
           {
             "name": "Paused",
-            "value": "Paused"
+            "value": "Paused",
+            "description": "Paused"
           },
           {
             "name": "Suspended",
-            "value": "Suspended"
+            "value": "Suspended",
+            "description": "Suspended"
           },
           {
             "name": "Provisioning",
-            "value": "Provisioning"
+            "value": "Provisioning",
+            "description": "Provisioning"
           },
           {
             "name": "Updating",
-            "value": "Updating"
+            "value": "Updating",
+            "description": "Updating"
           },
           {
             "name": "Suspending",
-            "value": "Suspending"
+            "value": "Suspending",
+            "description": "Suspending"
           },
           {
             "name": "Pausing",
-            "value": "Pausing"
+            "value": "Pausing",
+            "description": "Pausing"
           },
           {
             "name": "Resuming",
-            "value": "Resuming"
+            "value": "Resuming",
+            "description": "Resuming"
           },
           {
             "name": "Preparing",
-            "value": "Preparing"
+            "value": "Preparing",
+            "description": "Preparing"
           },
           {
             "name": "Scaling",
-            "value": "Scaling"
+            "value": "Scaling",
+            "description": "Scaling"
           }
         ]
       }
@@ -1179,11 +1205,13 @@
         "values": [
           {
             "name": "0",
-            "value": 0
+            "value": 0,
+            "description": "0"
           },
           {
             "name": "1",
-            "value": 1
+            "value": 1,
+            "description": "1"
           }
         ]
       }
@@ -1248,15 +1276,18 @@
         "values": [
           {
             "name": "Development",
-            "value": "Development"
+            "value": "Development",
+            "description": "Development"
           },
           {
             "name": "Basic",
-            "value": "Basic"
+            "value": "Basic",
+            "description": "Basic"
           },
           {
             "name": "Standard",
-            "value": "Standard"
+            "value": "Standard",
+            "description": "Standard"
           }
         ]
       }
@@ -1284,51 +1315,63 @@
         "values": [
           {
             "name": "Deleting",
-            "value": "Deleting"
+            "value": "Deleting",
+            "description": "Deleting"
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Succeeded"
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Failed"
           },
           {
             "name": "Paused",
-            "value": "Paused"
+            "value": "Paused",
+            "description": "Paused"
           },
           {
             "name": "Suspended",
-            "value": "Suspended"
+            "value": "Suspended",
+            "description": "Suspended"
           },
           {
             "name": "Provisioning",
-            "value": "Provisioning"
+            "value": "Provisioning",
+            "description": "Provisioning"
           },
           {
             "name": "Updating",
-            "value": "Updating"
+            "value": "Updating",
+            "description": "Updating"
           },
           {
             "name": "Suspending",
-            "value": "Suspending"
+            "value": "Suspending",
+            "description": "Suspending"
           },
           {
             "name": "Pausing",
-            "value": "Pausing"
+            "value": "Pausing",
+            "description": "Pausing"
           },
           {
             "name": "Resuming",
-            "value": "Resuming"
+            "value": "Resuming",
+            "description": "Resuming"
           },
           {
             "name": "Preparing",
-            "value": "Preparing"
+            "value": "Preparing",
+            "description": "Preparing"
           },
           {
             "name": "Scaling",
-            "value": "Scaling"
+            "value": "Scaling",
+            "description": "Scaling"
           }
         ]
       }

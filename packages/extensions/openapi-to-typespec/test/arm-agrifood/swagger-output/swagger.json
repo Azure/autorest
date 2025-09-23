@@ -2070,11 +2070,13 @@
         "values": [
           {
             "name": "OAuthClientCredentials",
-            "value": "OAuthClientCredentials"
+            "value": "OAuthClientCredentials",
+            "description": "OAuthClientCredentials"
           },
           {
             "name": "ApiKeyAuthCredentials",
-            "value": "ApiKeyAuthCredentials"
+            "value": "ApiKeyAuthCredentials",
+            "description": "ApiKeyAuthCredentials"
           }
         ]
       }
@@ -2729,27 +2731,33 @@
         "values": [
           {
             "name": "Creating",
-            "value": "Creating"
+            "value": "Creating",
+            "description": "Creating"
           },
           {
             "name": "Updating",
-            "value": "Updating"
+            "value": "Updating",
+            "description": "Updating"
           },
           {
             "name": "Deleting",
-            "value": "Deleting"
+            "value": "Deleting",
+            "description": "Deleting"
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Succeeded"
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Failed"
           },
           {
             "name": "Running",
-            "value": "Running"
+            "value": "Running",
+            "description": "Running"
           }
         ]
       }
@@ -2767,11 +2775,13 @@
         "values": [
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "Enabled"
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "Disabled"
           }
         ]
       }
