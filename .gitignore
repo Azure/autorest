@@ -228,3 +228,5 @@ src/*/dist
 src/*/nm
 /nm/
 *.tgz
+
+temp/
