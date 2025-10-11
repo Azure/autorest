@@ -5,8 +5,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.Core;
 using Azure.ResourceManager;
+using Azure.Core;
 using Azure.ResourceManager.Foundations;
 
 namespace Azure.ResourceManager.MachineLearning;
@@ -4729,7 +4729,7 @@ model VirtualMachineSizeListResult {
   /**
    * The list of virtual machine sizes supported by AmlCompute.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value?: VirtualMachineSize[];
 }
 
@@ -4819,7 +4819,7 @@ model EstimatedVMPrices {
   /**
    * The list of estimated prices for using a VM of a particular OS type, tier, etc.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   values: EstimatedVMPrice[];
 }
 
@@ -5047,7 +5047,7 @@ model Compute {
    * Errors during provisioning
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
+  @identifiers(#["/error/code"])
   provisioningErrors?: ErrorResponse[];
 
   /**
@@ -5143,13 +5143,13 @@ model CustomService {
   /**
    * Configuring the endpoints for the container
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   endpoints?: Endpoint[];
 
   /**
    * Configuring the volumes for the container
    */
-  @OpenAPI.extension("x-ms-identifiers", #["source", "target"])
+  @identifiers(#["source", "target"])
   volumes?: VolumeDefinition[];
 }
 
@@ -5307,7 +5307,7 @@ model AmlComputeNodesInformation {
    */
   @visibility(Lifecycle.Read)
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["nodeId"])
+  @identifiers(#["nodeId"])
   nodes?: AmlComputeNodeInformation[];
 
   /**
@@ -5931,7 +5931,7 @@ model PackageRequest {
    * Collection of inputs.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   inputs?: ModelPackageInput[];
 
   /**
@@ -6062,7 +6062,7 @@ model PackageResponse {
    * Collection of inputs.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   inputs?: ModelPackageInput[];
 
   /**
@@ -6898,7 +6898,7 @@ model FeaturestoreEntityVersionProperties extends AssetBase {
   /**
    * Specifies index columns
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   indexColumns?: IndexColumn[];
 
   /**
@@ -7201,7 +7201,7 @@ model LabelingJobProperties extends JobBase {
    * Status messages of the job.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   statusMessages?: StatusMessage[];
 
   /**
@@ -7902,7 +7902,7 @@ model RegistryProperties {
   /**
    * Details of each region the registry is in
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   regionDetails?: RegistryRegionArmDetails[];
 }
 
@@ -8003,7 +8003,7 @@ model RegistryRegionArmDetails {
   /**
    * List of ACR accounts
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   acrDetails?: AcrDetails[];
 
   /**
@@ -8014,7 +8014,7 @@ model RegistryRegionArmDetails {
   /**
    * List of storage accounts
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   storageAccountDetails?: StorageAccountDetails[];
 }
 
@@ -8320,7 +8320,7 @@ model WorkspaceProperties {
    * The list of private endpoint connections in the workspace.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   privateEndpointConnections?: PrivateEndpointConnection[];
 
   /**
@@ -8354,7 +8354,7 @@ model WorkspaceProperties {
   /**
    * The list of shared private link resources in this workspace.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   sharedPrivateLinkResources?: SharedPrivateLinkResource[];
 
   /**
@@ -8920,39 +8920,39 @@ model DiagnoseResponseResult {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DiagnoseResponseResultValue {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["message"])
+  @identifiers(#["message"])
   userDefinedRouteResults?: DiagnoseResult[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["message"])
+  @identifiers(#["message"])
   networkSecurityRuleResults?: DiagnoseResult[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["message"])
+  @identifiers(#["message"])
   resourceLockResults?: DiagnoseResult[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["message"])
+  @identifiers(#["message"])
   dnsResolutionResults?: DiagnoseResult[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["message"])
+  @identifiers(#["message"])
   storageAccountResults?: DiagnoseResult[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["message"])
+  @identifiers(#["message"])
   keyVaultResults?: DiagnoseResult[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["message"])
+  @identifiers(#["message"])
   containerRegistryResults?: DiagnoseResult[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["message"])
+  @identifiers(#["message"])
   applicationInsightsResults?: DiagnoseResult[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["message"])
+  @identifiers(#["message"])
   otherResults?: DiagnoseResult[];
 }
 
@@ -9014,7 +9014,7 @@ model RegistryListCredentialsResult {
   location?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   passwords?: Password[];
 
   /**
@@ -9098,7 +9098,7 @@ model ListStorageAccountKeysResult {
 model ExternalFqdnResponse {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["/properties/category"])
+  @identifiers(#["/properties/category"])
   value?: FqdnEndpointsPropertyBag[];
 }
 
@@ -9116,7 +9116,7 @@ model FqdnEndpoints {
   category?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["domainName"])
+  @identifiers(#["domainName"])
   endpoints?: FqdnEndpoint[];
 }
 
@@ -9126,7 +9126,7 @@ model FqdnEndpoint {
   domainName?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["port"])
+  @identifiers(#["port"])
   endpointDetails?: FqdnEndpointDetail[];
 }
 
@@ -9261,7 +9261,7 @@ model AKSSchemaProperties {
    * System services
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["publicIpAddress"])
+  @identifiers(#["publicIpAddress"])
   systemServices?: SystemService[];
 
   /**
@@ -9553,7 +9553,7 @@ model AmlComputeProperties {
    * Collection of errors encountered by various compute nodes during node setup.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
+  @identifiers(#["/error/code"])
   errors?: ErrorResponse[];
 
   /**
@@ -9710,7 +9710,7 @@ model ComputeInstanceProperties {
   /**
    * List of Custom Services added to the compute.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   customServices?: CustomService[];
 
   /**
@@ -9729,7 +9729,7 @@ model ComputeInstanceProperties {
    * Describes available applications and their endpoints on this ComputeInstance.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["displayName"])
+  @identifiers(#["displayName"])
   applications?: ComputeInstanceApplication[];
 
   /**
@@ -9742,7 +9742,7 @@ model ComputeInstanceProperties {
    * Collection of errors encountered on this ComputeInstance.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
+  @identifiers(#["/error/code"])
   errors?: ErrorResponse[];
 
   /**
@@ -9791,21 +9791,21 @@ model ComputeInstanceProperties {
    * Describes informations of containers on this ComputeInstance.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   containers?: ComputeInstanceContainer[];
 
   /**
    * Describes informations of dataDisks on this ComputeInstance.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dataDisks?: ComputeInstanceDataDisk[];
 
   /**
    * Describes informations of dataMounts on this ComputeInstance.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dataMounts?: ComputeInstanceDataMount[];
 
   /**
@@ -10189,7 +10189,7 @@ model ComputeInstanceContainer {
    * services of this containers.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   services?: unknown[];
 }
 
@@ -11751,7 +11751,7 @@ model TableVertical {
   /**
    * Search space for sampling different combinations of models and their hyperparameters.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   searchSpace?: TableParameterSubspace[];
 
   /**
@@ -12599,7 +12599,7 @@ model CustomMonitoringSignal extends MonitoringSignalBase {
    * [Required] A list of metrics to calculate and their associated thresholds.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   metricThresholds: CustomMetricThreshold[];
 
   /**
@@ -12753,7 +12753,7 @@ model DataDriftMonitoringSignal extends MonitoringSignalBase {
    * [Required] A list of metrics to calculate and their associated thresholds.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   metricThresholds: DataDriftMetricThresholdBase[];
 
   /**
@@ -12861,7 +12861,7 @@ model DataQualityMonitoringSignal extends MonitoringSignalBase {
    * [Required] A list of metrics to calculate and their associated thresholds.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   metricThresholds: DataQualityMetricThresholdBase[];
 
   /**
@@ -12897,7 +12897,7 @@ model DatabaseSource extends DataImportSource {
   /**
    * SQL StoredProcedure parameters
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   storedProcedureParams?: Record<string>[];
 
   /**
@@ -12975,7 +12975,7 @@ model FeatureAttributionDriftMonitoringSignal extends MonitoringSignalBase {
    * [Required] The data which drift will be calculated for.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   productionData: MonitoringInputDataBase[];
 
   /**
@@ -13193,14 +13193,14 @@ model GenerationSafetyQualityMonitoringSignal extends MonitoringSignalBase {
    * [Required] Gets or sets the metrics to calculate and the corresponding thresholds.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   metricThresholds: GenerationSafetyQualityMetricThreshold[];
 
   /**
    * Gets or sets the target data for computing metrics.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   productionData?: MonitoringInputDataBase[];
 
   /**
@@ -13247,7 +13247,7 @@ model GenerationTokenStatisticsSignal extends MonitoringSignalBase {
    * [Required] Gets or sets the metrics to calculate and the corresponding thresholds.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   metricThresholds: GenerationTokenStatisticsMetricThreshold[];
 
   /**
@@ -13335,7 +13335,7 @@ model ImageClassificationBase extends ImageVertical {
   /**
    * Search space for sampling different combinations of models and their hyperparameters.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   searchSpace?: ImageModelDistributionSettingsClassification[];
 }
 
@@ -13870,7 +13870,7 @@ model ImageObjectDetectionBase extends ImageVertical {
   /**
    * Search space for sampling different combinations of models and their hyperparameters.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   searchSpace?: ImageModelDistributionSettingsObjectDetection[];
 }
 
@@ -14456,7 +14456,7 @@ model ModelPerformanceSignal extends MonitoringSignalBase {
    * [Required] The data produced by the production service which drift will be calculated for.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   productionData: MonitoringInputDataBase[];
 
   /**
@@ -14657,7 +14657,7 @@ model NlpVertical {
   /**
    * Search space for sampling different combinations of models and their hyperparameters.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   searchSpace?: NlpParameterSubspace[];
 
   /**
@@ -14930,7 +14930,7 @@ model PredictionDriftMonitoringSignal extends MonitoringSignalBase {
    * [Required] A list of metrics to calculate and their associated thresholds.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   metricThresholds: PredictionDriftMetricThresholdBase[];
 
   /**

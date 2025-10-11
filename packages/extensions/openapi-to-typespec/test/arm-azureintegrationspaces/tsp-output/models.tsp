@@ -600,7 +600,7 @@ model ListBusinessProcessDevelopmentArtifactsResponse {
    * The list of the business process development artifact.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value: SaveOrGetBusinessProcessDevelopmentArtifactResponse[];
 }
 
