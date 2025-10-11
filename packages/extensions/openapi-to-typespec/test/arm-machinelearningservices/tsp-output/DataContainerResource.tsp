@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-/**
- * Azure Resource Manager resource envelope.
- */
+/** Azure Resource Manager resource envelope. */
 @parentResource(Registry)
 model DataContainerResource
   is Azure.ResourceManager.ProxyResource<DataContainer, false> {
@@ -50,40 +48,28 @@ alias DataContainerResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @armResourceOperations
 interface DataContainerResources {
-  /**
-   * Get container.
-   */
+  /** Get container. */
   get is DataContainerResourceOps.Read<DataContainerResource>;
 
-  /**
-   * Create or update container.
-   */
+  /** Create or update container. */
   createOrUpdate is DataContainerResourceOps.CreateOrUpdateAsync<DataContainerResource>;
 
-  /**
-   * Delete container.
-   */
+  /** Delete container. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is DataContainerResourceOps.DeleteWithoutOkAsync<
     DataContainerResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List Data containers.
-   */
+  /** List Data containers. */
   list is DataContainerResourceOps.List<
     DataContainerResource,
     Parameters = {
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
 
-      /**
-       * View type for including/excluding (for example) archived entities.
-       */
+      /** View type for including/excluding (for example) archived entities. */
       @query("listViewType")
       listViewType?: ListViewType;
     },
@@ -115,36 +101,24 @@ alias DataContainerOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @armResourceOperations
 interface DataContainers {
-  /**
-   * Get container.
-   */
+  /** Get container. */
   get is DataContainerOps.Read<DataContainerResource>;
 
-  /**
-   * Create or update container.
-   */
+  /** Create or update container. */
   createOrUpdate is DataContainerOps.CreateOrUpdateSync<DataContainerResource>;
 
-  /**
-   * Delete container.
-   */
+  /** Delete container. */
   delete is DataContainerOps.DeleteSync<DataContainerResource>;
 
-  /**
-   * List data containers.
-   */
+  /** List data containers. */
   list is DataContainerOps.List<
     DataContainerResource,
     Parameters = {
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
 
-      /**
-       * View type for including/excluding (for example) archived entities.
-       */
+      /** View type for including/excluding (for example) archived entities. */
       @query("listViewType")
       listViewType?: ListViewType;
     },

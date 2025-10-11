@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * The Private Endpoint Connection resource.
- */
+/** The Private Endpoint Connection resource. */
 @parentResource(DiskAccess)
 model PrivateEndpointConnection
   is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
@@ -27,14 +25,10 @@ model PrivateEndpointConnection
 
 @armResourceOperations
 interface PrivateEndpointConnections {
-  /**
-   * Gets information about a private endpoint connection under a disk access resource.
-   */
+  /** Gets information about a private endpoint connection under a disk access resource. */
   getAPrivateEndpointConnection is ArmResourceRead<PrivateEndpointConnection>;
 
-  /**
-   * Approve or reject a private endpoint connection under disk access resource, this can't be used to create a new private endpoint connection.
-   */
+  /** Approve or reject a private endpoint connection under disk access resource, this can't be used to create a new private endpoint connection. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   updateAPrivateEndpointConnection is ArmResourceCreateOrReplaceAsync<
@@ -47,18 +41,14 @@ interface PrivateEndpointConnections {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /**
-   * Deletes a private endpoint connection under a disk access resource.
-   */
+  /** Deletes a private endpoint connection under a disk access resource. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   deleteAPrivateEndpointConnection is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List information about private endpoint connections under a disk access resource
-   */
+  /** List information about private endpoint connections under a disk access resource */
   listPrivateEndpointConnections is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 

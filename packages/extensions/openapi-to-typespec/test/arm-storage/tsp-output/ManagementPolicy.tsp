@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
-/**
- * The Get Storage Account ManagementPolicies operation response.
- */
+/** The Get Storage Account ManagementPolicies operation response. */
 @parentResource(StorageAccount)
 model ManagementPolicy
   is Azure.ResourceManager.ProxyResource<ManagementPolicyProperties> {
@@ -28,23 +26,17 @@ model ManagementPolicy
 
 @armResourceOperations
 interface ManagementPolicies {
-  /**
-   * Gets the managementpolicy associated with the specified storage account.
-   */
+  /** Gets the managementpolicy associated with the specified storage account. */
   get is ArmResourceRead<ManagementPolicy>;
 
-  /**
-   * Sets the managementpolicy to the specified storage account.
-   */
+  /** Sets the managementpolicy to the specified storage account. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ManagementPolicy,
     Response = ArmResourceUpdatedResponse<ManagementPolicy>
   >;
 
-  /**
-   * Deletes the managementpolicy associated with the specified storage account.
-   */
+  /** Deletes the managementpolicy associated with the specified storage account. */
   delete is ArmResourceDeleteSync<ManagementPolicy>;
 }
 

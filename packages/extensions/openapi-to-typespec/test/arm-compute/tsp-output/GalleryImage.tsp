@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * Specifies information about the gallery image definition that you want to create or update.
- */
+/** Specifies information about the gallery image definition that you want to create or update. */
 @parentResource(Gallery)
 model GalleryImage
   is Azure.ResourceManager.TrackedResource<GalleryImageProperties> {
@@ -27,14 +25,10 @@ model GalleryImage
 
 @armResourceOperations
 interface GalleryImages {
-  /**
-   * Retrieves information about a gallery image definition.
-   */
+  /** Retrieves information about a gallery image definition. */
   get is ArmResourceRead<GalleryImage>;
 
-  /**
-   * Create or update a gallery image definition.
-   */
+  /** Create or update a gallery image definition. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -49,9 +43,7 @@ interface GalleryImages {
     })
   >;
 
-  /**
-   * Update a gallery image definition.
-   */
+  /** Update a gallery image definition. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     GalleryImage,
@@ -59,18 +51,14 @@ interface GalleryImages {
     Response = ArmResponse<GalleryImage>
   >;
 
-  /**
-   * Delete a gallery image.
-   */
+  /** Delete a gallery image. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     GalleryImage,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List gallery image definitions in a gallery.
-   */
+  /** List gallery image definitions in a gallery. */
   listByGallery is ArmResourceListByParent<
     GalleryImage,
     Response = ArmResponse<GalleryImageList>

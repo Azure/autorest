@@ -20,75 +20,55 @@ namespace ComplexModelClient;
 @get
 op list is Azure.Core.Foundations.Operation<
   {
-    /**
-     * Subscription ID.
-     */
+    /** Subscription ID. */
     @path
     subscriptionId: "123456";
 
-    /**
-     * Resource Group ID.
-     */
+    /** Resource Group ID. */
     @path
     resourceGroupName: string;
   },
   CatalogArray
 >;
 
-/**
- * Resets products.
- */
+/** Resets products. */
 @summary("Create products")
 @operationId("create")
 @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis")
 @post
 op create is Azure.Core.Foundations.Operation<
   {
-    /**
-     * Subscription ID.
-     */
+    /** Subscription ID. */
     @path
     subscriptionId: string;
 
-    /**
-     * Resource Group ID.
-     */
+    /** Resource Group ID. */
     @path
     resourceGroupName: string;
 
-    /**
-     * body Parameter
-     */
+    /** body Parameter */
     @bodyRoot
     bodyParameter: CatalogDictionaryOfArray;
   },
   CatalogDictionary
 >;
 
-/**
- * Resets products.
- */
+/** Resets products. */
 @summary("Update products")
 @operationId("update")
 @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis")
 @put
 op update is Azure.Core.Foundations.Operation<
   {
-    /**
-     * Subscription ID.
-     */
+    /** Subscription ID. */
     @path
     subscriptionId: string;
 
-    /**
-     * Resource Group ID.
-     */
+    /** Resource Group ID. */
     @path
     resourceGroupName: string;
 
-    /**
-     * body Parameter
-     */
+    /** body Parameter */
     @bodyRoot
     bodyParameter: CatalogArrayOfDictionary;
   },

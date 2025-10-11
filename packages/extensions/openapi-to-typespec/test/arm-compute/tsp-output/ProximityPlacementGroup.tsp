@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * Specifies information about the proximity placement group.
- */
+/** Specifies information about the proximity placement group. */
 model ProximityPlacementGroup
   is Azure.ResourceManager.TrackedResource<ProximityPlacementGroupProperties> {
   ...ResourceNameParameter<
@@ -26,51 +24,37 @@ model ProximityPlacementGroup
 
 @armResourceOperations
 interface ProximityPlacementGroups {
-  /**
-   * Retrieves information about a proximity placement group .
-   */
+  /** Retrieves information about a proximity placement group . */
   get is ArmResourceRead<
     ProximityPlacementGroup,
     Parameters = {
-      /**
-       * includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group.
-       */
+      /** includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group. */
       @query("includeColocationStatus")
       includeColocationStatus?: string;
     }
   >;
 
-  /**
-   * Create or update a proximity placement group.
-   */
+  /** Create or update a proximity placement group. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<ProximityPlacementGroup>;
 
-  /**
-   * Update a proximity placement group.
-   */
+  /** Update a proximity placement group. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     ProximityPlacementGroup,
     PatchModel = ProximityPlacementGroupUpdate
   >;
 
-  /**
-   * Delete a proximity placement group.
-   */
+  /** Delete a proximity placement group. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteSync<
     ProximityPlacementGroup,
     Response = ArmDeletedResponse
   >;
 
-  /**
-   * Lists all proximity placement groups in a resource group.
-   */
+  /** Lists all proximity placement groups in a resource group. */
   listByResourceGroup is ArmResourceListByParent<ProximityPlacementGroup>;
 
-  /**
-   * Lists all proximity placement groups in a subscription.
-   */
+  /** Lists all proximity placement groups in a subscription. */
   listBySubscription is ArmListBySubscription<ProximityPlacementGroup>;
 }
 

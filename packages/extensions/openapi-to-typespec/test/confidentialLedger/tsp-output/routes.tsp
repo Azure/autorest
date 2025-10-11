@@ -16,9 +16,7 @@ namespace Azure.Language.Authoring;
 @get
 op getConstitution is Azure.Core.Foundations.Operation<{}, Constitution>;
 
-/**
- * Consortium members can manage the Confidential Ledger.
- */
+/** Consortium members can manage the Confidential Ledger. */
 @summary("Lists the consortium members.")
 op listConsortiumMembers is Azure.Core.ResourceList<ConsortiumMember>;
 
@@ -29,9 +27,7 @@ op listConsortiumMembers is Azure.Core.ResourceList<ConsortiumMember>;
 @summary("Gets quotes for all nodes of the Confidential Ledger.")
 op getEnclaveQuotes is Azure.Core.ResourceRead<ConfidentialLedgerEnclaves>;
 
-/**
- * Collection ids are user-created collections of ledger entries
- */
+/** Collection ids are user-created collections of ledger entries */
 @summary("Retrieves a list of collection ids present in the Confidential Ledger")
 op listCollections is Azure.Core.ResourceList<Collection>;
 
@@ -44,38 +40,28 @@ op listCollections is Azure.Core.ResourceList<Collection>;
 @get
 op listLedgerEntries is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The collection id.
-     */
+    /** The collection id. */
     @query("collectionId")
     collectionId?: string;
 
-    /**
-     * Specify the first transaction ID in a range.
-     */
+    /** Specify the first transaction ID in a range. */
     @query("fromTransactionId")
     fromTransactionId?: string;
 
-    /**
-     * Specify the last transaction ID in a range.
-     */
+    /** Specify the last transaction ID in a range. */
     @query("toTransactionId")
     toTransactionId?: string;
   },
   PagedLedgerEntries
 >;
 
-/**
- * A collection id may optionally be specified.
- */
+/** A collection id may optionally be specified. */
 @summary("Writes a ledger entry.")
 op createLedgerEntry is Azure.Core.ResourceCreateWithServiceProvidedName<
   LedgerWriteResult,
   {
     parameters: {
-      /**
-       * The collection id.
-       */
+      /** The collection id. */
       @query("collectionId")
       collectionId?: string;
     };
@@ -97,101 +83,75 @@ op createLedgerEntry is Azure.Core.ResourceCreateWithServiceProvidedName<
 @get
 op getLedgerEntry is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The collection id.
-     */
+    /** The collection id. */
     @query("collectionId")
     collectionId?: string;
 
-    /**
-     * Identifies a write transaction.
-     */
+    /** Identifies a write transaction. */
     @path
     transactionId: string;
   },
   LedgerQueryResult
 >;
 
-/**
- * Gets a receipt certifying ledger contents at a particular transaction id.
- */
+/** Gets a receipt certifying ledger contents at a particular transaction id. */
 @summary("Gets a receipt certifying ledger contents at a particular transaction id.")
 op getReceipt is Azure.Core.ResourceRead<TransactionReceipt>;
 
-/**
- * Gets the status of an entry identified by a transaction id.
- */
+/** Gets the status of an entry identified by a transaction id. */
 @summary("Gets the status of an entry identified by a transaction id.")
 op getTransactionStatus is Azure.Core.ResourceRead<TransactionStatus>;
 
-/**
- * A collection id may optionally be specified.
- */
+/** A collection id may optionally be specified. */
 @summary("Gets the current value available in the ledger.")
 @route("/app/transactions/current")
 @get
 op getCurrentLedgerEntry is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The collection id.
-     */
+    /** The collection id. */
     @query("collectionId")
     collectionId?: string;
   },
   LedgerEntry
 >;
 
-/**
- * Deletes a user from the Confidential Ledger.
- */
+/** Deletes a user from the Confidential Ledger. */
 @summary("Deletes a user from the Confidential Ledger.")
 @route("/app/users/{userId}")
 @delete
 op deleteUser is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The user id, either an AAD object ID or certificate fingerprint.
-     */
+    /** The user id, either an AAD object ID or certificate fingerprint. */
     @path
     userId: string;
   },
   void
 >;
 
-/**
- * Gets a user.
- */
+/** Gets a user. */
 @summary("Gets a user.")
 @route("/app/users/{userId}")
 @get
 op getUser is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The user id, either an AAD object ID or certificate fingerprint.
-     */
+    /** The user id, either an AAD object ID or certificate fingerprint. */
     @path
     userId: string;
   },
   LedgerUser
 >;
 
-/**
- * A JSON merge patch is applied for existing users
- */
+/** A JSON merge patch is applied for existing users */
 @summary("Adds a user or updates a user's fields.")
 @route("/app/users/{userId}")
 @patch
 op createOrUpdateUser is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The user id, either an AAD object ID or certificate fingerprint.
-     */
+    /** The user id, either an AAD object ID or certificate fingerprint. */
     @path
     userId: string;
 
-    /**
-     * Details about a Confidential Ledger user.
-     */
+    /** Details about a Confidential Ledger user. */
     @bodyRoot
     userDetails: LedgerUser;
   },

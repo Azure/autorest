@@ -11,9 +11,7 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.Authorization;
 // FIXME: ProviderOperationsMetadata has no properties property
-/**
- * Provider Operations metadata
- */
+/** Provider Operations metadata */
 @tenantResource
 model ProviderOperationsMetadata is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
@@ -23,22 +21,16 @@ model ProviderOperationsMetadata is Azure.ResourceManager.ProxyResource<{}> {
     NamePattern = ""
   >;
 
-  /**
-   * The provider display name.
-   */
+  /** The provider display name. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   displayName?: string;
 
-  /**
-   * The provider resource types
-   */
+  /** The provider resource types */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @identifiers(#["name"])
   resourceTypes?: AuthorizationProviderResourceType[];
 
-  /**
-   * The provider operations.
-   */
+  /** The provider operations. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @identifiers(#[])
   operations?: ProviderOperation[];
@@ -46,31 +38,23 @@ model ProviderOperationsMetadata is Azure.ResourceManager.ProxyResource<{}> {
 
 @armResourceOperations
 interface ProviderOperationsMetadataOperationGroup {
-  /**
-   * Gets provider operations metadata for the specified resource provider.
-   */
+  /** Gets provider operations metadata for the specified resource provider. */
   get is ArmResourceRead<
     ProviderOperationsMetadata,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
-      /**
-       * Specifies whether to expand the values.
-       */
+      /** Specifies whether to expand the values. */
       @query("$expand")
       $expand?: string = "resourceTypes";
     }
   >;
 
-  /**
-   * Gets provider operations metadata for all resource providers.
-   */
+  /** Gets provider operations metadata for all resource providers. */
   list is ArmResourceListByParent<
     ProviderOperationsMetadata,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
-      /**
-       * Specifies whether to expand the values.
-       */
+      /** Specifies whether to expand the values. */
       @query("$expand")
       $expand?: string = "resourceTypes";
     }

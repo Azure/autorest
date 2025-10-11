@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AgFoodPlatform;
-/**
- * Data Manager For Agriculture ARM Resource.
- */
+/** Data Manager For Agriculture ARM Resource. */
 model DataManagerForAgriculture
   is Azure.ResourceManager.TrackedResource<DataManagerForAgricultureProperties> {
   ...ResourceNameParameter<
@@ -22,28 +20,20 @@ model DataManagerForAgriculture
     NamePattern = "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
   >;
 
-  /**
-   * Identity for the resource.
-   */
+  /** Identity for the resource. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   identity?: Azure.ResourceManager.CommonTypes.Identity;
 }
 
 @armResourceOperations
 interface DataManagerForAgricultures {
-  /**
-   * Get DataManagerForAgriculture resource.
-   */
+  /** Get DataManagerForAgriculture resource. */
   get is ArmResourceRead<DataManagerForAgriculture>;
 
-  /**
-   * Create or update Data Manager For Agriculture resource.
-   */
+  /** Create or update Data Manager For Agriculture resource. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<DataManagerForAgriculture>;
 
-  /**
-   * Update a Data Manager For Agriculture resource.
-   */
+  /** Update a Data Manager For Agriculture resource. */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -55,14 +45,10 @@ interface DataManagerForAgricultures {
     })
   >;
 
-  /**
-   * Delete a Data Manager For Agriculture resource.
-   */
+  /** Delete a Data Manager For Agriculture resource. */
   delete is ArmResourceDeleteSync<DataManagerForAgriculture>;
 
-  /**
-   * Lists the DataManagerForAgriculture instances for a resource group.
-   */
+  /** Lists the DataManagerForAgriculture instances for a resource group. */
   listByResourceGroup is ArmResourceListByParent<
     DataManagerForAgriculture,
     Parameters = {
@@ -75,18 +61,14 @@ interface DataManagerForAgricultures {
       @query("$maxPageSize")
       $maxPageSize?: int32 = 50;
 
-      /**
-       * Continuation token for getting next set of results.
-       */
+      /** Continuation token for getting next set of results. */
       @query("$skipToken")
       $skipToken?: string;
     },
     Response = ArmResponse<DataManagerForAgricultureListResponse>
   >;
 
-  /**
-   * Lists the DataManagerForAgriculture instances for a subscription.
-   */
+  /** Lists the DataManagerForAgriculture instances for a subscription. */
   listBySubscription is ArmListBySubscription<
     DataManagerForAgriculture,
     Parameters = {
@@ -99,9 +81,7 @@ interface DataManagerForAgricultures {
       @query("$maxPageSize")
       $maxPageSize?: int32 = 50;
 
-      /**
-       * Skip token for getting next set of results.
-       */
+      /** Skip token for getting next set of results. */
       @query("$skipToken")
       $skipToken?: string;
     },

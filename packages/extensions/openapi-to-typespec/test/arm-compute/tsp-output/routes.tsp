@@ -13,9 +13,7 @@ namespace Microsoft.Compute;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface UsageOperationGroup {
-  /**
-   * Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription.
-   */
+  /** Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription. */
   @autoRoute
   @get
   @action("usages")
@@ -28,9 +26,7 @@ interface UsageOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface VirtualMachineSizesOperationGroup {
-  /**
-   * This API is deprecated. Use [Resources Skus](https://docs.microsoft.com/rest/api/compute/resourceskus/list)
-   */
+  /** This API is deprecated. Use [Resources Skus](https://docs.microsoft.com/rest/api/compute/resourceskus/list) */
   @autoRoute
   @get
   @action("vmSizes")
@@ -43,9 +39,7 @@ interface VirtualMachineSizesOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface VirtualMachineScaleSetsOperationGroup {
-  /**
-   * Gets all the VM scale sets under the specified subscription for the specified location.
-   */
+  /** Gets all the VM scale sets under the specified subscription for the specified location. */
   @autoRoute
   @get
   @action("virtualMachineScaleSets")
@@ -58,9 +52,7 @@ interface VirtualMachineScaleSetsOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface VirtualMachinesOperationGroup {
-  /**
-   * Gets all the virtual machines under the specified subscription for the specified location.
-   */
+  /** Gets all the virtual machines under the specified subscription for the specified location. */
   @autoRoute
   @get
   @action("virtualMachines")
@@ -73,45 +65,33 @@ interface VirtualMachinesOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface VirtualMachineImagesOperationGroup {
-  /**
-   * Gets a virtual machine image.
-   */
+  /** Gets a virtual machine image. */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}")
   @get
   get(
     ...ApiVersionParameter,
     ...LocationResourceParameter,
 
-    /**
-     * A valid image publisher.
-     */
+    /** A valid image publisher. */
     @path
     publisherName: string,
 
-    /**
-     * A valid image publisher offer.
-     */
+    /** A valid image publisher offer. */
     @path
     offer: string,
 
-    /**
-     * A valid image SKU.
-     */
+    /** A valid image SKU. */
     @path
     skus: string,
 
-    /**
-     * A valid image SKU version.
-     */
+    /** A valid image SKU version. */
     @path
     version: string,
 
     ...SubscriptionIdParameter,
   ): ArmResponse<VirtualMachineImage> | ErrorResponse;
 
-  /**
-   * Gets a list of all virtual machine image versions for the specified location, publisher, offer, and SKU.
-   */
+  /** Gets a list of all virtual machine image versions for the specified location, publisher, offer, and SKU. */
   @autoRoute
   @get
   @action("versions")
@@ -123,30 +103,22 @@ interface VirtualMachineImagesOperationGroup {
     Parameters = {
       ...LocationParameter;
 
-      /**
-       * A valid image publisher.
-       */
+      /** A valid image publisher. */
       @path
       @segment("publishers")
       publisherName: string;
 
-      /**
-       * A valid image publisher offer.
-       */
+      /** A valid image publisher offer. */
       @path
       @segment("offers")
       offer: string;
 
-      /**
-       * A valid image SKU.
-       */
+      /** A valid image SKU. */
       @path
       @segment("skus")
       skus: string;
 
-      /**
-       * The expand expression to apply on the operation.
-       */
+      /** The expand expression to apply on the operation. */
       @query("$expand")
       $expand?: string;
 
@@ -159,9 +131,7 @@ interface VirtualMachineImagesOperationGroup {
       $orderby?: string;
     }
   >;
-  /**
-   * Gets a list of virtual machine image offers for the specified location and publisher.
-   */
+  /** Gets a list of virtual machine image offers for the specified location and publisher. */
   @autoRoute
   @get
   @action("artifacttypes/vmimage/offers")
@@ -173,17 +143,13 @@ interface VirtualMachineImagesOperationGroup {
     Parameters = {
       ...LocationParameter;
 
-      /**
-       * A valid image publisher.
-       */
+      /** A valid image publisher. */
       @path
       @segment("publishers")
       publisherName: string;
     }
   >;
-  /**
-   * Gets a list of virtual machine image publishers for the specified Azure location.
-   */
+  /** Gets a list of virtual machine image publishers for the specified Azure location. */
   @autoRoute
   @get
   @action("publishers")
@@ -194,9 +160,7 @@ interface VirtualMachineImagesOperationGroup {
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
   >;
-  /**
-   * Gets a list of virtual machine image SKUs for the specified location, publisher, and offer.
-   */
+  /** Gets a list of virtual machine image SKUs for the specified location, publisher, and offer. */
   @autoRoute
   @get
   @action("skus")
@@ -208,24 +172,18 @@ interface VirtualMachineImagesOperationGroup {
     Parameters = {
       ...LocationParameter;
 
-      /**
-       * A valid image publisher.
-       */
+      /** A valid image publisher. */
       @path
       @segment("publishers")
       publisherName: string;
 
-      /**
-       * A valid image publisher offer.
-       */
+      /** A valid image publisher offer. */
       @path
       @segment("offers")
       offer: string;
     }
   >;
-  /**
-   * Gets a list of all virtual machine image versions for the specified edge zone
-   */
+  /** Gets a list of all virtual machine image versions for the specified edge zone */
   @autoRoute
   @get
   @action("vmimages")
@@ -235,9 +193,7 @@ interface VirtualMachineImagesOperationGroup {
     Parameters = {
       ...LocationParameter;
 
-      /**
-       * The name of the edge zone.
-       */
+      /** The name of the edge zone. */
       @path
       @segment("edgeZones")
       edgeZone: string;
@@ -247,51 +203,37 @@ interface VirtualMachineImagesOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface VirtualMachineImagesEdgeZoneOperationGroup {
-  /**
-   * Gets a virtual machine image in an edge zone.
-   */
+  /** Gets a virtual machine image in an edge zone. */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}")
   @get
   get(
     ...ApiVersionParameter,
     ...LocationResourceParameter,
 
-    /**
-     * The name of the edge zone.
-     */
+    /** The name of the edge zone. */
     @path
     edgeZone: string,
 
-    /**
-     * A valid image publisher.
-     */
+    /** A valid image publisher. */
     @path
     publisherName: string,
 
-    /**
-     * A valid image publisher offer.
-     */
+    /** A valid image publisher offer. */
     @path
     offer: string,
 
-    /**
-     * A valid image SKU.
-     */
+    /** A valid image SKU. */
     @path
     skus: string,
 
-    /**
-     * A valid image SKU version.
-     */
+    /** A valid image SKU version. */
     @path
     version: string,
 
     ...SubscriptionIdParameter,
   ): ArmResponse<VirtualMachineImage> | ErrorResponse;
 
-  /**
-   * Gets a list of all virtual machine image versions for the specified location, edge zone, publisher, offer, and SKU.
-   */
+  /** Gets a list of all virtual machine image versions for the specified location, edge zone, publisher, offer, and SKU. */
   @autoRoute
   @get
   @action("versions")
@@ -303,56 +245,40 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
     Parameters = {
       ...LocationParameter;
 
-      /**
-       * The name of the edge zone.
-       */
+      /** The name of the edge zone. */
       @path
       @segment("edgeZones")
       edgeZone: string;
 
-      /**
-       * A valid image publisher.
-       */
+      /** A valid image publisher. */
       @path
       @segment("publishers")
       publisherName: string;
 
-      /**
-       * A valid image publisher offer.
-       */
+      /** A valid image publisher offer. */
       @path
       @segment("offers")
       offer: string;
 
-      /**
-       * A valid image SKU.
-       */
+      /** A valid image SKU. */
       @path
       @segment("skus")
       skus: string;
 
-      /**
-       * The expand expression to apply on the operation.
-       */
+      /** The expand expression to apply on the operation. */
       @query("$expand")
       $expand?: string;
 
-      /**
-       * An integer value specifying the number of images to return that matches supplied values.
-       */
+      /** An integer value specifying the number of images to return that matches supplied values. */
       @query("$top")
       $top?: int32;
 
-      /**
-       * Specifies the order of the results returned. Formatted as an OData query.
-       */
+      /** Specifies the order of the results returned. Formatted as an OData query. */
       @query("$orderby")
       $orderby?: string;
     }
   >;
-  /**
-   * Gets a list of virtual machine image offers for the specified location, edge zone and publisher.
-   */
+  /** Gets a list of virtual machine image offers for the specified location, edge zone and publisher. */
   @autoRoute
   @get
   @action("artifacttypes/vmimage/offers")
@@ -364,24 +290,18 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
     Parameters = {
       ...LocationParameter;
 
-      /**
-       * The name of the edge zone.
-       */
+      /** The name of the edge zone. */
       @path
       @segment("edgeZones")
       edgeZone: string;
 
-      /**
-       * A valid image publisher.
-       */
+      /** A valid image publisher. */
       @path
       @segment("publishers")
       publisherName: string;
     }
   >;
-  /**
-   * Gets a list of virtual machine image publishers for the specified Azure location and edge zone.
-   */
+  /** Gets a list of virtual machine image publishers for the specified Azure location and edge zone. */
   @autoRoute
   @get
   @action("publishers")
@@ -393,17 +313,13 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
     Parameters = {
       ...LocationParameter;
 
-      /**
-       * The name of the edge zone.
-       */
+      /** The name of the edge zone. */
       @path
       @segment("edgeZones")
       edgeZone: string;
     }
   >;
-  /**
-   * Gets a list of virtual machine image SKUs for the specified location, edge zone, publisher, and offer.
-   */
+  /** Gets a list of virtual machine image SKUs for the specified location, edge zone, publisher, and offer. */
   @autoRoute
   @get
   @action("skus")
@@ -415,23 +331,17 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
     Parameters = {
       ...LocationParameter;
 
-      /**
-       * The name of the edge zone.
-       */
+      /** The name of the edge zone. */
       @path
       @segment("edgeZones")
       edgeZone: string;
 
-      /**
-       * A valid image publisher.
-       */
+      /** A valid image publisher. */
       @path
       @segment("publishers")
       publisherName: string;
 
-      /**
-       * A valid image publisher offer.
-       */
+      /** A valid image publisher offer. */
       @path
       @segment("offers")
       offer: string;
@@ -441,9 +351,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface LogAnalyticsOperationGroup {
-  /**
-   * Export logs that show Api requests made by this subscription in the given time window to show throttling activities.
-   */
+  /** Export logs that show Api requests made by this subscription in the given time window to show throttling activities. */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @autoRoute
   @action("logAnalytics/apiAccess/getRequestRateByInterval")
@@ -455,9 +363,7 @@ interface LogAnalyticsOperationGroup {
     LroHeaders = ArmAsyncOperationHeader<FinalResult = LogAnalyticsOperationResult> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
-  /**
-   * Export logs that show total throttled Api requests for this subscription in the given time window.
-   */
+  /** Export logs that show total throttled Api requests for this subscription in the given time window. */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @autoRoute
   @action("logAnalytics/apiAccess/getThrottledRequests")
@@ -473,9 +379,7 @@ interface LogAnalyticsOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface VirtualMachineRunCommandsOperationGroup {
-  /**
-   * Lists all available run commands for a subscription in a location.
-   */
+  /** Lists all available run commands for a subscription in a location. */
   @autoRoute
   @get
   @action("runCommands")
@@ -487,18 +391,14 @@ interface VirtualMachineRunCommandsOperationGroup {
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
   >;
-  /**
-   * Gets specific run command for a subscription in a location.
-   */
+  /** Gets specific run command for a subscription in a location. */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/runCommands/{commandId}")
   @get
   get(
     ...ApiVersionParameter,
     ...LocationResourceParameter,
 
-    /**
-     * The command id.
-     */
+    /** The command id. */
     @path
     commandId: string,
 
@@ -511,9 +411,7 @@ interface VirtualMachineRunCommandsOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface ResourceSkusOperationGroup {
-  /**
-   * Gets the list of Microsoft.Compute SKUs available for your Subscription.
-   */
+  /** Gets the list of Microsoft.Compute SKUs available for your Subscription. */
   @autoRoute
   @get
   @action("skus")
@@ -521,15 +419,11 @@ interface ResourceSkusOperationGroup {
     Response = ResourceSkusResult,
     Scope = SubscriptionActionScope,
     Parameters = {
-      /**
-       * The filter to apply on the operation. Only **location** filter is supported currently.
-       */
+      /** The filter to apply on the operation. Only **location** filter is supported currently. */
       @query("$filter")
       $filter?: string;
 
-      /**
-       * To Include Extended Locations information or not in the response.
-       */
+      /** To Include Extended Locations information or not in the response. */
       @query("includeExtendedLocations")
       includeExtendedLocations?: string;
     }

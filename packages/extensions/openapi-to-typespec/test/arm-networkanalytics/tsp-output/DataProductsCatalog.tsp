@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.NetworkAnalytics;
-/**
- * The data catalog resource.
- */
+/** The data catalog resource. */
 @singleton("default")
 model DataProductsCatalog
   is Azure.ResourceManager.ProxyResource<DataProductsCatalogProperties> {
@@ -26,19 +24,13 @@ model DataProductsCatalog
 
 @armResourceOperations
 interface DataProductsCatalogs {
-  /**
-   * Retrieve data type resource.
-   */
+  /** Retrieve data type resource. */
   get is ArmResourceRead<DataProductsCatalog>;
 
-  /**
-   * List data catalog by resource group.
-   */
+  /** List data catalog by resource group. */
   listByResourceGroup is ArmResourceListByParent<DataProductsCatalog>;
 
-  /**
-   * List data catalog by subscription.
-   */
+  /** List data catalog by subscription. */
   listBySubscription is ArmListBySubscription<DataProductsCatalog>;
 }
 

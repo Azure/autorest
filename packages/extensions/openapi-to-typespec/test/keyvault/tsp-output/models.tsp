@@ -87,39 +87,25 @@ union DeletionRecoveryLevel {
 union JsonWebKeyType {
   string,
 
-  /**
-   * Elliptic Curve.
-   */
+  /** Elliptic Curve. */
   EC: "EC",
 
-  /**
-   * Elliptic Curve with a private key which is stored in the HSM.
-   */
+  /** Elliptic Curve with a private key which is stored in the HSM. */
   `EC-HSM`: "EC-HSM",
 
-  /**
-   * RSA (https://tools.ietf.org/html/rfc3447)
-   */
+  /** RSA (https://tools.ietf.org/html/rfc3447) */
   RSA: "RSA",
 
-  /**
-   * RSA with a private key which is stored in the HSM.
-   */
+  /** RSA with a private key which is stored in the HSM. */
   `RSA-HSM`: "RSA-HSM",
 
-  /**
-   * Octet sequence (used to represent symmetric keys)
-   */
+  /** Octet sequence (used to represent symmetric keys) */
   oct: "oct",
 
-  /**
-   * Octet sequence (used to represent symmetric keys) which is stored the HSM.
-   */
+  /** Octet sequence (used to represent symmetric keys) which is stored the HSM. */
   `oct-HSM`: "oct-HSM",
 
-  /**
-   * Octet key pair (https://tools.ietf.org/html/rfc8037)
-   */
+  /** Octet key pair (https://tools.ietf.org/html/rfc8037) */
   OKP: "OKP",
 
   /**
@@ -129,213 +115,133 @@ union JsonWebKeyType {
   `OKP-HSM`: "OKP-HSM",
 }
 
-/**
- * Elliptic curve name. For valid values, see JsonWebKeyCurveName.
- */
+/** Elliptic curve name. For valid values, see JsonWebKeyCurveName. */
 union JsonWebKeyCurveName {
   string,
 
-  /**
-   * The NIST P-256 elliptic curve, AKA SECG curve SECP256R1.
-   */
+  /** The NIST P-256 elliptic curve, AKA SECG curve SECP256R1. */
   `P-256`: "P-256",
 
-  /**
-   * The NIST P-384 elliptic curve, AKA SECG curve SECP384R1.
-   */
+  /** The NIST P-384 elliptic curve, AKA SECG curve SECP384R1. */
   `P-384`: "P-384",
 
-  /**
-   * The NIST P-521 elliptic curve, AKA SECG curve SECP521R1.
-   */
+  /** The NIST P-521 elliptic curve, AKA SECG curve SECP521R1. */
   `P-521`: "P-521",
 
-  /**
-   * The SECG SECP256K1 elliptic curve.
-   */
+  /** The SECG SECP256K1 elliptic curve. */
   `P-256K`: "P-256K",
 
-  /**
-   * The Ed25519 Edwards curve.
-   */
+  /** The Ed25519 Edwards curve. */
   Ed25519: "Ed25519",
 }
 
 union KeyUsageType {
   string,
 
-  /**
-   * digitalSignature
-   */
+  /** digitalSignature */
   digitalSignature: "digitalSignature",
 
-  /**
-   * nonRepudiation
-   */
+  /** nonRepudiation */
   nonRepudiation: "nonRepudiation",
 
-  /**
-   * keyEncipherment
-   */
+  /** keyEncipherment */
   keyEncipherment: "keyEncipherment",
 
-  /**
-   * dataEncipherment
-   */
+  /** dataEncipherment */
   dataEncipherment: "dataEncipherment",
 
-  /**
-   * keyAgreement
-   */
+  /** keyAgreement */
   keyAgreement: "keyAgreement",
 
-  /**
-   * keyCertSign
-   */
+  /** keyCertSign */
   keyCertSign: "keyCertSign",
 
-  /**
-   * cRLSign
-   */
+  /** cRLSign */
   cRLSign: "cRLSign",
 
-  /**
-   * encipherOnly
-   */
+  /** encipherOnly */
   encipherOnly: "encipherOnly",
 
-  /**
-   * decipherOnly
-   */
+  /** decipherOnly */
   decipherOnly: "decipherOnly",
 }
 
-/**
- * JSON web key operations. For more information, see JsonWebKeyOperation.
- */
+/** JSON web key operations. For more information, see JsonWebKeyOperation. */
 union JsonWebKeyOperation {
   string,
 
-  /**
-   * encrypt
-   */
+  /** encrypt */
   encrypt: "encrypt",
 
-  /**
-   * decrypt
-   */
+  /** decrypt */
   decrypt: "decrypt",
 
-  /**
-   * sign
-   */
+  /** sign */
   sign: "sign",
 
-  /**
-   * verify
-   */
+  /** verify */
   verify: "verify",
 
-  /**
-   * wrapKey
-   */
+  /** wrapKey */
   wrapKey: "wrapKey",
 
-  /**
-   * unwrapKey
-   */
+  /** unwrapKey */
   unwrapKey: "unwrapKey",
 
-  /**
-   * import
-   */
+  /** import */
   `import`: "import",
 
-  /**
-   * export
-   */
+  /** export */
   export: "export",
 }
 
-/**
- * algorithm identifier
- */
+/** algorithm identifier */
 union JsonWebKeyEncryptionAlgorithm {
   string,
 
-  /**
-   * RSA-OAEP
-   */
+  /** RSA-OAEP */
   `RSA-OAEP`: "RSA-OAEP",
 
-  /**
-   * RSA-OAEP-256
-   */
+  /** RSA-OAEP-256 */
   `RSA-OAEP-256`: "RSA-OAEP-256",
 
-  /**
-   * RSA1_5
-   */
+  /** RSA1_5 */
   RSA1_5: "RSA1_5",
 
-  /**
-   * A128GCM
-   */
+  /** A128GCM */
   A128GCM: "A128GCM",
 
-  /**
-   * A192GCM
-   */
+  /** A192GCM */
   A192GCM: "A192GCM",
 
-  /**
-   * A256GCM
-   */
+  /** A256GCM */
   A256GCM: "A256GCM",
 
-  /**
-   * A128KW
-   */
+  /** A128KW */
   A128KW: "A128KW",
 
-  /**
-   * A192KW
-   */
+  /** A192KW */
   A192KW: "A192KW",
 
-  /**
-   * A256KW
-   */
+  /** A256KW */
   A256KW: "A256KW",
 
-  /**
-   * A128CBC
-   */
+  /** A128CBC */
   A128CBC: "A128CBC",
 
-  /**
-   * A192CBC
-   */
+  /** A192CBC */
   A192CBC: "A192CBC",
 
-  /**
-   * A256CBC
-   */
+  /** A256CBC */
   A256CBC: "A256CBC",
 
-  /**
-   * A128CBCPAD
-   */
+  /** A128CBCPAD */
   A128CBCPAD: "A128CBCPAD",
 
-  /**
-   * A192CBCPAD
-   */
+  /** A192CBCPAD */
   A192CBCPAD: "A192CBCPAD",
 
-  /**
-   * A256CBCPAD
-   */
+  /** A256CBCPAD */
   A256CBCPAD: "A256CBCPAD",
 }
 
@@ -382,9 +288,7 @@ union JsonWebKeySignatureAlgorithm {
    */
   RS512: "RS512",
 
-  /**
-   * Reserved
-   */
+  /** Reserved */
   RSNULL: "RSNULL",
 
   /**
@@ -418,412 +322,258 @@ union JsonWebKeySignatureAlgorithm {
   EdDSA: "EdDSA",
 }
 
-/**
- * The encryption algorithm to use to protected the exported key material
- */
+/** The encryption algorithm to use to protected the exported key material */
 union KeyEncryptionAlgorithm {
   string,
 
-  /**
-   * CKM_RSA_AES_KEY_WRAP
-   */
+  /** CKM_RSA_AES_KEY_WRAP */
   CKM_RSA_AES_KEY_WRAP: "CKM_RSA_AES_KEY_WRAP",
 
-  /**
-   * RSA_AES_KEY_WRAP_256
-   */
+  /** RSA_AES_KEY_WRAP_256 */
   RSA_AES_KEY_WRAP_256: "RSA_AES_KEY_WRAP_256",
 
-  /**
-   * RSA_AES_KEY_WRAP_384
-   */
+  /** RSA_AES_KEY_WRAP_384 */
   RSA_AES_KEY_WRAP_384: "RSA_AES_KEY_WRAP_384",
 }
 
-/**
- * The role definition type.
- */
+/** The role definition type. */
 union RoleDefinitionType {
   string,
 
-  /**
-   * Microsoft.Authorization/roleDefinitions
-   */
+  /** Microsoft.Authorization/roleDefinitions */
   `Microsoft.Authorization/roleDefinitions`: "Microsoft.Authorization/roleDefinitions",
 }
 
-/**
- * The role type.
- */
+/** The role type. */
 union RoleType {
   string,
 
-  /**
-   * Built in role.
-   */
+  /** Built in role. */
   BuiltInRole: "AKVBuiltInRole",
 
-  /**
-   * Custom role.
-   */
+  /** Custom role. */
   CustomRole: "CustomRole",
 }
 
-/**
- * Supported permissions for data actions.
- */
+/** Supported permissions for data actions. */
 union DataAction {
   string,
 
-  /**
-   * Read HSM key metadata.
-   */
+  /** Read HSM key metadata. */
   ReadHsmKey: "Microsoft.KeyVault/managedHsm/keys/read/action",
 
-  /**
-   * Update an HSM key.
-   */
+  /** Update an HSM key. */
   WriteHsmKey: "Microsoft.KeyVault/managedHsm/keys/write/action",
 
-  /**
-   * Read deleted HSM key.
-   */
+  /** Read deleted HSM key. */
   ReadDeletedHsmKey: "Microsoft.KeyVault/managedHsm/keys/deletedKeys/read/action",
 
-  /**
-   * Recover deleted HSM key.
-   */
+  /** Recover deleted HSM key. */
   RecoverDeletedHsmKey: "Microsoft.KeyVault/managedHsm/keys/deletedKeys/recover/action",
 
-  /**
-   * Backup HSM keys.
-   */
+  /** Backup HSM keys. */
   BackupHsmKeys: "Microsoft.KeyVault/managedHsm/keys/backup/action",
 
-  /**
-   * Restore HSM keys.
-   */
+  /** Restore HSM keys. */
   RestoreHsmKeys: "Microsoft.KeyVault/managedHsm/keys/restore/action",
 
-  /**
-   * Delete role assignment.
-   */
+  /** Delete role assignment. */
   DeleteRoleAssignment: "Microsoft.KeyVault/managedHsm/roleAssignments/delete/action",
 
-  /**
-   * Get role assignment.
-   */
+  /** Get role assignment. */
   GetRoleAssignment: "Microsoft.KeyVault/managedHsm/roleAssignments/read/action",
 
-  /**
-   * Create or update role assignment.
-   */
+  /** Create or update role assignment. */
   WriteRoleAssignment: "Microsoft.KeyVault/managedHsm/roleAssignments/write/action",
 
-  /**
-   * Get role definition.
-   */
+  /** Get role definition. */
   ReadRoleDefinition: "Microsoft.KeyVault/managedHsm/roleDefinitions/read/action",
 
-  /**
-   * Create or update role definition.
-   */
+  /** Create or update role definition. */
   WriteRoleDefinition: "Microsoft.KeyVault/managedHsm/roleDefinitions/write/action",
 
-  /**
-   * Delete role definition.
-   */
+  /** Delete role definition. */
   DeleteRoleDefinition: "Microsoft.KeyVault/managedHsm/roleDefinitions/delete/action",
 
-  /**
-   * Encrypt using an HSM key.
-   */
+  /** Encrypt using an HSM key. */
   EncryptHsmKey: "Microsoft.KeyVault/managedHsm/keys/encrypt/action",
 
-  /**
-   * Decrypt using an HSM key.
-   */
+  /** Decrypt using an HSM key. */
   DecryptHsmKey: "Microsoft.KeyVault/managedHsm/keys/decrypt/action",
 
-  /**
-   * Wrap using an HSM key.
-   */
+  /** Wrap using an HSM key. */
   WrapHsmKey: "Microsoft.KeyVault/managedHsm/keys/wrap/action",
 
-  /**
-   * Unwrap using an HSM key.
-   */
+  /** Unwrap using an HSM key. */
   UnwrapHsmKey: "Microsoft.KeyVault/managedHsm/keys/unwrap/action",
 
-  /**
-   * Sign using an HSM key.
-   */
+  /** Sign using an HSM key. */
   SignHsmKey: "Microsoft.KeyVault/managedHsm/keys/sign/action",
 
-  /**
-   * Verify using an HSM key.
-   */
+  /** Verify using an HSM key. */
   VerifyHsmKey: "Microsoft.KeyVault/managedHsm/keys/verify/action",
 
-  /**
-   * Create an HSM key.
-   */
+  /** Create an HSM key. */
   CreateHsmKey: "Microsoft.KeyVault/managedHsm/keys/create",
 
-  /**
-   * Delete an HSM key.
-   */
+  /** Delete an HSM key. */
   DeleteHsmKey: "Microsoft.KeyVault/managedHsm/keys/delete",
 
-  /**
-   * Export an HSM key.
-   */
+  /** Export an HSM key. */
   ExportHsmKey: "Microsoft.KeyVault/managedHsm/keys/export/action",
 
-  /**
-   * Release an HSM key using Secure Key Release.
-   */
+  /** Release an HSM key using Secure Key Release. */
   ReleaseKey: "Microsoft.KeyVault/managedHsm/keys/release/action",
 
-  /**
-   * Import an HSM key.
-   */
+  /** Import an HSM key. */
   ImportHsmKey: "Microsoft.KeyVault/managedHsm/keys/import/action",
 
-  /**
-   * Purge a deleted HSM key.
-   */
+  /** Purge a deleted HSM key. */
   PurgeDeletedHsmKey: "Microsoft.KeyVault/managedHsm/keys/deletedKeys/delete",
 
-  /**
-   * Download an HSM security domain.
-   */
+  /** Download an HSM security domain. */
   DownloadHsmSecurityDomain: "Microsoft.KeyVault/managedHsm/securitydomain/download/action",
 
-  /**
-   * Check status of HSM security domain download.
-   */
+  /** Check status of HSM security domain download. */
   DownloadHsmSecurityDomainStatus: "Microsoft.KeyVault/managedHsm/securitydomain/download/read",
 
-  /**
-   * Upload an HSM security domain.
-   */
+  /** Upload an HSM security domain. */
   UploadHsmSecurityDomain: "Microsoft.KeyVault/managedHsm/securitydomain/upload/action",
 
-  /**
-   * Check the status of the HSM security domain exchange file.
-   */
+  /** Check the status of the HSM security domain exchange file. */
   ReadHsmSecurityDomainStatus: "Microsoft.KeyVault/managedHsm/securitydomain/upload/read",
 
-  /**
-   * Download an HSM security domain transfer key.
-   */
+  /** Download an HSM security domain transfer key. */
   ReadHsmSecurityDomainTransferKey: "Microsoft.KeyVault/managedHsm/securitydomain/transferkey/read",
 
-  /**
-   * Start an HSM backup.
-   */
+  /** Start an HSM backup. */
   StartHsmBackup: "Microsoft.KeyVault/managedHsm/backup/start/action",
 
-  /**
-   * Start an HSM restore.
-   */
+  /** Start an HSM restore. */
   StartHsmRestore: "Microsoft.KeyVault/managedHsm/restore/start/action",
 
-  /**
-   * Read an HSM backup status.
-   */
+  /** Read an HSM backup status. */
   ReadHsmBackupStatus: "Microsoft.KeyVault/managedHsm/backup/status/action",
 
-  /**
-   * Read an HSM restore status.
-   */
+  /** Read an HSM restore status. */
   ReadHsmRestoreStatus: "Microsoft.KeyVault/managedHsm/restore/status/action",
 
-  /**
-   * Generate random numbers.
-   */
+  /** Generate random numbers. */
   RandomNumbersGenerate: "Microsoft.KeyVault/managedHsm/rng/action",
 }
 
-/**
- * The role scope.
- */
+/** The role scope. */
 union RoleScope {
   string,
 
-  /**
-   * Global scope
-   */
+  /** Global scope */
   Global: "/",
 
-  /**
-   * Keys scope
-   */
+  /** Keys scope */
   Keys: "/keys",
 }
 
-/**
- * The type specifier of the value.
- */
+/** The type specifier of the value. */
 union SettingTypeEnum {
   string,
 
-  /**
-   * boolean
-   */
+  /** boolean */
   boolean: "boolean",
 }
 
-/**
- * The type of SAS token the SAS definition will create.
- */
+/** The type of SAS token the SAS definition will create. */
 union SasTokenType {
   string,
 
-  /**
-   * account
-   */
+  /** account */
   account: "account",
 
-  /**
-   * service
-   */
+  /** service */
   service: "service",
 }
 
-/**
- * The type of the action.
- */
+/** The type of the action. */
 enum ActionType {
-  /**
-   * EmailContacts
-   */
+  /** EmailContacts */
   EmailContacts,
 
-  /**
-   * AutoRenew
-   */
+  /** AutoRenew */
   AutoRenew,
 
-  /**
-   * rotate
-   */
+  /** rotate */
   rotate,
 
-  /**
-   * notify
-   */
+  /** notify */
   notify,
 }
 
-/**
- * operation status
- */
+/** operation status */
 enum OperationStatus {
-  /**
-   * Success
-   */
+  /** Success */
   Success,
 
-  /**
-   * InProgress
-   */
+  /** InProgress */
   InProgress,
 
-  /**
-   * Failed
-   */
+  /** Failed */
   Failed,
 }
 
 model SASTokenParameter {
-  /**
-   * Azure Blob storage container Uri
-   */
+  /** Azure Blob storage container Uri */
   storageResourceUri: string;
 
-  /**
-   * The SAS token pointing to an Azure Blob storage container
-   */
+  /** The SAS token pointing to an Azure Blob storage container */
   token: string;
 }
 
-/**
- * Full backup operation
- */
+/** Full backup operation */
 model FullBackupOperation {
-  /**
-   * Status of the backup operation.
-   */
+  /** Status of the backup operation. */
   status?: string;
 
-  /**
-   * The status details of backup operation.
-   */
+  /** The status details of backup operation. */
   statusDetails?: string;
 
-  /**
-   * Error encountered, if any, during the full backup operation.
-   */
+  /** Error encountered, if any, during the full backup operation. */
   error?: Error;
 
-  /**
-   * The start time of the backup operation in UTC
-   */
+  /** The start time of the backup operation in UTC */
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
-  /**
-   * The end time of the backup operation in UTC
-   */
+  /** The end time of the backup operation in UTC */
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
-  /**
-   * Identifier for the full backup operation.
-   */
+  /** Identifier for the full backup operation. */
   jobId?: string;
 
-  /**
-   * The Azure blob storage container Uri which contains the full backup
-   */
+  /** The Azure blob storage container Uri which contains the full backup */
   azureStorageBlobContainerUri?: string;
 }
 
-/**
- * The key vault server error.
- */
+/** The key vault server error. */
 model Error {
-  /**
-   * The error code.
-   */
+  /** The error code. */
   @visibility(Lifecycle.Read)
   code?: string;
 
-  /**
-   * The error message.
-   */
+  /** The error message. */
   @visibility(Lifecycle.Read)
   message?: string;
 
-  /**
-   * The key vault server error.
-   */
+  /** The key vault server error. */
   @visibility(Lifecycle.Read)
   innererror?: Error;
 }
 
-/**
- * The key vault error exception.
- */
+/** The key vault error exception. */
 @error
 model KeyVaultError {
-  /**
-   * The key vault server error.
-   */
+  /** The key vault server error. */
   @visibility(Lifecycle.Read)
   error?: Error;
 }
@@ -831,46 +581,30 @@ model KeyVaultError {
 model RestoreOperationParameters {
   sasTokenParameters: SASTokenParameter;
 
-  /**
-   * The Folder name of the blob where the previous successful full backup was stored
-   */
+  /** The Folder name of the blob where the previous successful full backup was stored */
   folderToRestore: string;
 }
 
-/**
- * Restore operation
- */
+/** Restore operation */
 model RestoreOperation {
-  /**
-   * Status of the restore operation.
-   */
+  /** Status of the restore operation. */
   status?: string;
 
-  /**
-   * The status details of restore operation.
-   */
+  /** The status details of restore operation. */
   statusDetails?: string;
 
-  /**
-   * Error encountered, if any, during the restore operation.
-   */
+  /** Error encountered, if any, during the restore operation. */
   error?: Error;
 
-  /**
-   * Identifier for the restore operation.
-   */
+  /** Identifier for the restore operation. */
   jobId?: string;
 
-  /**
-   * The start time of the restore operation
-   */
+  /** The start time of the restore operation */
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
-  /**
-   * The end time of the restore operation
-   */
+  /** The end time of the restore operation */
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
@@ -879,84 +613,54 @@ model RestoreOperation {
 model SelectiveKeyRestoreOperationParameters {
   sasTokenParameters: SASTokenParameter;
 
-  /**
-   * The Folder name of the blob where the previous successful full backup was stored
-   */
+  /** The Folder name of the blob where the previous successful full backup was stored */
   folder: string;
 }
 
-/**
- * Selective Key Restore operation
- */
+/** Selective Key Restore operation */
 model SelectiveKeyRestoreOperation {
-  /**
-   * Status of the restore operation.
-   */
+  /** Status of the restore operation. */
   status?: string;
 
-  /**
-   * The status details of restore operation.
-   */
+  /** The status details of restore operation. */
   statusDetails?: string;
 
-  /**
-   * Error encountered, if any, during the selective key restore operation.
-   */
+  /** Error encountered, if any, during the selective key restore operation. */
   error?: Error;
 
-  /**
-   * Identifier for the selective key restore operation.
-   */
+  /** Identifier for the selective key restore operation. */
   jobId?: string;
 
-  /**
-   * The start time of the restore operation
-   */
+  /** The start time of the restore operation */
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
-  /**
-   * The end time of the restore operation
-   */
+  /** The end time of the restore operation */
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 }
 
-/**
- * The certificate list result.
- */
+/** The certificate list result. */
 model CertificateListResult is Azure.Core.Page<CertificateItem>;
 
-/**
- * The certificate item containing certificate metadata.
- */
+/** The certificate item containing certificate metadata. */
 model CertificateItem {
-  /**
-   * Certificate identifier.
-   */
+  /** Certificate identifier. */
   id?: string;
 
-  /**
-   * The certificate management attributes.
-   */
+  /** The certificate management attributes. */
   attributes?: CertificateAttributes;
 
-  /**
-   * Application specific metadata in the form of key-value pairs.
-   */
+  /** Application specific metadata in the form of key-value pairs. */
   tags?: Record<string>;
 
-  /**
-   * Thumbprint of the certificate.
-   */
+  /** Thumbprint of the certificate. */
   x5t?: bytes;
 }
 
-/**
- * The certificate management attributes.
- */
+/** The certificate management attributes. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model CertificateAttributes extends Attributes {
   /**
@@ -976,40 +680,28 @@ model CertificateAttributes extends Attributes {
   recoveryLevel?: DeletionRecoveryLevel;
 }
 
-/**
- * The object attributes managed by the KeyVault service.
- */
+/** The object attributes managed by the KeyVault service. */
 model Attributes {
-  /**
-   * Determines whether the object is enabled.
-   */
+  /** Determines whether the object is enabled. */
   enabled?: boolean;
 
-  /**
-   * Not before date in UTC.
-   */
+  /** Not before date in UTC. */
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   nbf?: utcDateTime;
 
-  /**
-   * Expiry date in UTC.
-   */
+  /** Expiry date in UTC. */
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   exp?: utcDateTime;
 
-  /**
-   * Creation time in UTC.
-   */
+  /** Creation time in UTC. */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   created?: utcDateTime;
 
-  /**
-   * Last updated time in UTC.
-   */
+  /** Last updated time in UTC. */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
@@ -1028,60 +720,42 @@ model DeletedCertificateBundle extends CertificateBundle {
    */
   recoveryId?: string;
 
-  /**
-   * The time when the certificate is scheduled to be purged, in UTC
-   */
+  /** The time when the certificate is scheduled to be purged, in UTC */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
 
-  /**
-   * The time when the certificate was deleted, in UTC
-   */
+  /** The time when the certificate was deleted, in UTC */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
 }
 
-/**
- * A certificate bundle consists of a certificate (X509) plus its attributes.
- */
+/** A certificate bundle consists of a certificate (X509) plus its attributes. */
 model CertificateBundle {
-  /**
-   * The certificate id.
-   */
+  /** The certificate id. */
   @visibility(Lifecycle.Read)
   id?: string;
 
-  /**
-   * The key id.
-   */
+  /** The key id. */
   @visibility(Lifecycle.Read)
   kid?: string;
 
-  /**
-   * The secret id.
-   */
+  /** The secret id. */
   @visibility(Lifecycle.Read)
   sid?: string;
 
-  /**
-   * Thumbprint of the certificate.
-   */
+  /** Thumbprint of the certificate. */
   @visibility(Lifecycle.Read)
   x5t?: bytes;
 
-  /**
-   * The management policy.
-   */
+  /** The management policy. */
   @visibility(Lifecycle.Read)
   policy?: CertificatePolicy;
 
-  /**
-   * CER contents of x509 certificate.
-   */
+  /** CER contents of x509 certificate. */
   cer?: bytes;
 
   /**
@@ -1090,61 +764,39 @@ model CertificateBundle {
    */
   contentType?: string;
 
-  /**
-   * The certificate attributes.
-   */
+  /** The certificate attributes. */
   attributes?: CertificateAttributes;
 
-  /**
-   * Application specific metadata in the form of key-value pairs
-   */
+  /** Application specific metadata in the form of key-value pairs */
   tags?: Record<string>;
 }
 
-/**
- * Management policy for a certificate.
- */
+/** Management policy for a certificate. */
 model CertificatePolicy {
-  /**
-   * The certificate id.
-   */
+  /** The certificate id. */
   @visibility(Lifecycle.Read)
   id?: string;
 
-  /**
-   * Properties of the key backing a certificate.
-   */
+  /** Properties of the key backing a certificate. */
   key_props?: KeyProperties;
 
-  /**
-   * Properties of the secret backing a certificate.
-   */
+  /** Properties of the secret backing a certificate. */
   secret_props?: SecretProperties;
 
-  /**
-   * Properties of the X509 component of a certificate.
-   */
+  /** Properties of the X509 component of a certificate. */
   x509_props?: X509CertificateProperties;
 
-  /**
-   * Actions that will be performed by Key Vault over the lifetime of a certificate.
-   */
+  /** Actions that will be performed by Key Vault over the lifetime of a certificate. */
   lifetime_actions?: LifetimeAction[];
 
-  /**
-   * Parameters for the issuer of the X509 component of a certificate.
-   */
+  /** Parameters for the issuer of the X509 component of a certificate. */
   issuer?: IssuerParameters;
 
-  /**
-   * The certificate attributes.
-   */
+  /** The certificate attributes. */
   attributes?: CertificateAttributes;
 }
 
-/**
- * Properties of the key pair backing a certificate.
- */
+/** Properties of the key pair backing a certificate. */
 model KeyProperties {
   /**
    * Indicates if the private key can be exported. Release policy must be provided
@@ -1152,84 +804,52 @@ model KeyProperties {
    */
   exportable?: boolean;
 
-  /**
-   * The type of key pair to be used for the certificate.
-   */
+  /** The type of key pair to be used for the certificate. */
   kty?: JsonWebKeyType;
 
-  /**
-   * The key size in bits. For example: 2048, 3072, or 4096 for RSA.
-   */
+  /** The key size in bits. For example: 2048, 3072, or 4096 for RSA. */
   key_size?: int32;
 
-  /**
-   * Indicates if the same key pair will be used on certificate renewal.
-   */
+  /** Indicates if the same key pair will be used on certificate renewal. */
   reuse_key?: boolean;
 
-  /**
-   * Elliptic curve name. For valid values, see JsonWebKeyCurveName.
-   */
+  /** Elliptic curve name. For valid values, see JsonWebKeyCurveName. */
   crv?: JsonWebKeyCurveName;
 }
 
-/**
- * Properties of the key backing a certificate.
- */
+/** Properties of the key backing a certificate. */
 model SecretProperties {
-  /**
-   * The media type (MIME type).
-   */
+  /** The media type (MIME type). */
   contentType?: string;
 }
 
-/**
- * Properties of the X509 component of a certificate.
- */
+/** Properties of the X509 component of a certificate. */
 model X509CertificateProperties {
-  /**
-   * The subject name. Should be a valid X509 distinguished Name.
-   */
+  /** The subject name. Should be a valid X509 distinguished Name. */
   subject?: string;
 
-  /**
-   * The enhanced key usage.
-   */
+  /** The enhanced key usage. */
   ekus?: string[];
 
-  /**
-   * The subject alternative names.
-   */
+  /** The subject alternative names. */
   sans?: SubjectAlternativeNames;
 
-  /**
-   * Defines how the certificate's key may be used.
-   */
+  /** Defines how the certificate's key may be used. */
   key_usage?: KeyUsageType[];
 
-  /**
-   * The duration that the certificate is valid in months.
-   */
+  /** The duration that the certificate is valid in months. */
   validity_months?: int32;
 }
 
-/**
- * The subject alternate names of a X509 object.
- */
+/** The subject alternate names of a X509 object. */
 model SubjectAlternativeNames {
-  /**
-   * Email addresses.
-   */
+  /** Email addresses. */
   emails?: string[];
 
-  /**
-   * Domain names.
-   */
+  /** Domain names. */
   dns_names?: string[];
 
-  /**
-   * User principal names.
-   */
+  /** User principal names. */
   upns?: string[];
 }
 
@@ -1238,24 +858,16 @@ model SubjectAlternativeNames {
  * a certificate.
  */
 model LifetimeAction {
-  /**
-   * The condition that will execute the action.
-   */
+  /** The condition that will execute the action. */
   trigger?: Trigger;
 
-  /**
-   * The action that will be executed.
-   */
+  /** The action that will be executed. */
   action?: Action;
 }
 
-/**
- * A condition to be satisfied for an action to be executed.
- */
+/** A condition to be satisfied for an action to be executed. */
 model Trigger {
-  /**
-   * Percentage of lifetime at which to trigger. Value should be between 1 and 99.
-   */
+  /** Percentage of lifetime at which to trigger. Value should be between 1 and 99. */
   @maxValue(99)
   @minValue(1)
   lifetime_percentage?: int32;
@@ -1268,19 +880,13 @@ model Trigger {
   days_before_expiry?: int32;
 }
 
-/**
- * The action that will be executed.
- */
+/** The action that will be executed. */
 model Action {
-  /**
-   * The type of the action.
-   */
+  /** The type of the action. */
   action_type?: ActionType;
 }
 
-/**
- * Parameters for the issuer of the X509 component of a certificate.
- */
+/** Parameters for the issuer of the X509 component of a certificate. */
 model IssuerParameters {
   /**
    * Name of the referenced issuer object or reserved names; for example, 'Self' or
@@ -1301,257 +907,159 @@ model IssuerParameters {
   cert_transparency?: boolean;
 }
 
-/**
- * The contacts for the vault certificates.
- */
+/** The contacts for the vault certificates. */
 model Contacts {
-  /**
-   * Identifier for the contacts collection.
-   */
+  /** Identifier for the contacts collection. */
   @visibility(Lifecycle.Read)
   id?: string;
 
-  /**
-   * The contact list for the vault certificates.
-   */
+  /** The contact list for the vault certificates. */
   contacts?: Contact[];
 }
 
-/**
- * The contact information for the vault certificates.
- */
+/** The contact information for the vault certificates. */
 model Contact {
-  /**
-   * Email address.
-   */
+  /** Email address. */
   email?: string;
 
-  /**
-   * Name.
-   */
+  /** Name. */
   name?: string;
 
-  /**
-   * Phone number.
-   */
+  /** Phone number. */
   phone?: string;
 }
 
-/**
- * The certificate issuer list result.
- */
+/** The certificate issuer list result. */
 model CertificateIssuerListResult is Azure.Core.Page<CertificateIssuerItem>;
 
-/**
- * The certificate issuer item containing certificate issuer metadata.
- */
+/** The certificate issuer item containing certificate issuer metadata. */
 model CertificateIssuerItem {
-  /**
-   * Certificate Identifier.
-   */
+  /** Certificate Identifier. */
   id?: string;
 
-  /**
-   * The issuer provider.
-   */
+  /** The issuer provider. */
   provider?: string;
 }
 
-/**
- * The certificate issuer set parameters.
- */
+/** The certificate issuer set parameters. */
 model CertificateIssuerSetParameters {
-  /**
-   * The issuer provider.
-   */
+  /** The issuer provider. */
   provider: string;
 
-  /**
-   * The credentials to be used for the issuer.
-   */
+  /** The credentials to be used for the issuer. */
   credentials?: IssuerCredentials;
 
-  /**
-   * Details of the organization as provided to the issuer.
-   */
+  /** Details of the organization as provided to the issuer. */
   org_details?: OrganizationDetails;
 
-  /**
-   * Attributes of the issuer object.
-   */
+  /** Attributes of the issuer object. */
   attributes?: IssuerAttributes;
 }
 
-/**
- * The credentials to be used for the certificate issuer.
- */
+/** The credentials to be used for the certificate issuer. */
 model IssuerCredentials {
-  /**
-   * The user name/account name/account id.
-   */
+  /** The user name/account name/account id. */
   account_id?: string;
 
-  /**
-   * The password/secret/account key.
-   */
+  /** The password/secret/account key. */
   pwd?: string;
 }
 
-/**
- * Details of the organization of the certificate issuer.
- */
+/** Details of the organization of the certificate issuer. */
 model OrganizationDetails {
-  /**
-   * Id of the organization.
-   */
+  /** Id of the organization. */
   id?: string;
 
-  /**
-   * Details of the organization administrator.
-   */
+  /** Details of the organization administrator. */
   admin_details?: AdministratorDetails[];
 }
 
-/**
- * Details of the organization administrator of the certificate issuer.
- */
+/** Details of the organization administrator of the certificate issuer. */
 model AdministratorDetails {
-  /**
-   * First name.
-   */
+  /** First name. */
   first_name?: string;
 
-  /**
-   * Last name.
-   */
+  /** Last name. */
   last_name?: string;
 
-  /**
-   * Email address.
-   */
+  /** Email address. */
   email?: string;
 
-  /**
-   * Phone number.
-   */
+  /** Phone number. */
   phone?: string;
 }
 
-/**
- * The attributes of an issuer managed by the Key Vault service.
- */
+/** The attributes of an issuer managed by the Key Vault service. */
 model IssuerAttributes {
-  /**
-   * Determines whether the issuer is enabled.
-   */
+  /** Determines whether the issuer is enabled. */
   enabled?: boolean;
 
-  /**
-   * Creation time in UTC.
-   */
+  /** Creation time in UTC. */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   created?: utcDateTime;
 
-  /**
-   * Last updated time in UTC.
-   */
+  /** Last updated time in UTC. */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updated?: utcDateTime;
 }
 
-/**
- * The issuer for Key Vault certificate.
- */
+/** The issuer for Key Vault certificate. */
 model IssuerBundle {
-  /**
-   * Identifier for the issuer object.
-   */
+  /** Identifier for the issuer object. */
   @visibility(Lifecycle.Read)
   id?: string;
 
-  /**
-   * The issuer provider.
-   */
+  /** The issuer provider. */
   provider?: string;
 
-  /**
-   * The credentials to be used for the issuer.
-   */
+  /** The credentials to be used for the issuer. */
   credentials?: IssuerCredentials;
 
-  /**
-   * Details of the organization as provided to the issuer.
-   */
+  /** Details of the organization as provided to the issuer. */
   org_details?: OrganizationDetails;
 
-  /**
-   * Attributes of the issuer object.
-   */
+  /** Attributes of the issuer object. */
   attributes?: IssuerAttributes;
 }
 
-/**
- * The certificate issuer update parameters.
- */
+/** The certificate issuer update parameters. */
 model CertificateIssuerUpdateParameters {
-  /**
-   * The issuer provider.
-   */
+  /** The issuer provider. */
   provider?: string;
 
-  /**
-   * The credentials to be used for the issuer.
-   */
+  /** The credentials to be used for the issuer. */
   credentials?: IssuerCredentials;
 
-  /**
-   * Details of the organization as provided to the issuer.
-   */
+  /** Details of the organization as provided to the issuer. */
   org_details?: OrganizationDetails;
 
-  /**
-   * Attributes of the issuer object.
-   */
+  /** Attributes of the issuer object. */
   attributes?: IssuerAttributes;
 }
 
-/**
- * The certificate create parameters.
- */
+/** The certificate create parameters. */
 model CertificateCreateParameters {
-  /**
-   * The management policy for the certificate.
-   */
+  /** The management policy for the certificate. */
   policy?: CertificatePolicy;
 
-  /**
-   * The attributes of the certificate (optional).
-   */
+  /** The attributes of the certificate (optional). */
   attributes?: CertificateAttributes;
 
-  /**
-   * Application specific metadata in the form of key-value pairs.
-   */
+  /** Application specific metadata in the form of key-value pairs. */
   tags?: Record<string>;
 }
 
-/**
- * A certificate operation is returned in case of asynchronous requests.
- */
+/** A certificate operation is returned in case of asynchronous requests. */
 model CertificateOperation {
-  /**
-   * The certificate id.
-   */
+  /** The certificate id. */
   @visibility(Lifecycle.Read)
   id?: string;
 
-  /**
-   * Parameters for the issuer of the X509 component of a certificate.
-   */
+  /** Parameters for the issuer of the X509 component of a certificate. */
   issuer?: IssuerParameters;
 
   /**
@@ -1560,40 +1068,26 @@ model CertificateOperation {
    */
   csr?: bytes;
 
-  /**
-   * Indicates if cancellation was requested on the certificate operation.
-   */
+  /** Indicates if cancellation was requested on the certificate operation. */
   cancellation_requested?: boolean;
 
-  /**
-   * Status of the certificate operation.
-   */
+  /** Status of the certificate operation. */
   status?: string;
 
-  /**
-   * The status details of the certificate operation.
-   */
+  /** The status details of the certificate operation. */
   status_details?: string;
 
-  /**
-   * Error encountered, if any, during the certificate operation.
-   */
+  /** Error encountered, if any, during the certificate operation. */
   error?: Error;
 
-  /**
-   * Location which contains the result of the certificate operation.
-   */
+  /** Location which contains the result of the certificate operation. */
   target?: string;
 
-  /**
-   * Identifier for the certificate operation.
-   */
+  /** Identifier for the certificate operation. */
   request_id?: string;
 }
 
-/**
- * The certificate import parameters.
- */
+/** The certificate import parameters. */
 model CertificateImportParameters {
   /**
    * Base64 encoded representation of the certificate object to import. This
@@ -1607,101 +1101,63 @@ model CertificateImportParameters {
    */
   pwd?: string;
 
-  /**
-   * The management policy for the certificate.
-   */
+  /** The management policy for the certificate. */
   policy?: CertificatePolicy;
 
-  /**
-   * The attributes of the certificate (optional).
-   */
+  /** The attributes of the certificate (optional). */
   attributes?: CertificateAttributes;
 
-  /**
-   * Application specific metadata in the form of key-value pairs.
-   */
+  /** Application specific metadata in the form of key-value pairs. */
   tags?: Record<string>;
 }
 
-/**
- * The certificate update parameters.
- */
+/** The certificate update parameters. */
 model CertificateUpdateParameters {
-  /**
-   * The management policy for the certificate.
-   */
+  /** The management policy for the certificate. */
   policy?: CertificatePolicy;
 
-  /**
-   * The attributes of the certificate (optional).
-   */
+  /** The attributes of the certificate (optional). */
   attributes?: CertificateAttributes;
 
-  /**
-   * Application specific metadata in the form of key-value pairs.
-   */
+  /** Application specific metadata in the form of key-value pairs. */
   tags?: Record<string>;
 }
 
-/**
- * The certificate operation update parameters.
- */
+/** The certificate operation update parameters. */
 model CertificateOperationUpdateParameter {
-  /**
-   * Indicates if cancellation was requested on the certificate operation.
-   */
+  /** Indicates if cancellation was requested on the certificate operation. */
   cancellation_requested: boolean;
 }
 
-/**
- * The certificate merge parameters
- */
+/** The certificate merge parameters */
 model CertificateMergeParameters {
-  /**
-   * The certificate or the certificate chain to merge.
-   */
+  /** The certificate or the certificate chain to merge. */
   x5c: bytes[];
 
-  /**
-   * The attributes of the certificate (optional).
-   */
+  /** The attributes of the certificate (optional). */
   attributes?: CertificateAttributes;
 
-  /**
-   * Application specific metadata in the form of key-value pairs.
-   */
+  /** Application specific metadata in the form of key-value pairs. */
   tags?: Record<string>;
 }
 
-/**
- * The backup certificate result, containing the backup blob.
- */
+/** The backup certificate result, containing the backup blob. */
 model BackupCertificateResult {
-  /**
-   * The backup blob containing the backed up certificate.
-   */
+  /** The backup blob containing the backed up certificate. */
   @visibility(Lifecycle.Read)
   value?: bytes;
 }
 
-/**
- * The certificate restore parameters.
- */
+/** The certificate restore parameters. */
 model CertificateRestoreParameters {
-  /**
-   * The backup blob associated with a certificate bundle.
-   */
+  /** The backup blob associated with a certificate bundle. */
   value: bytes;
 }
 
-/**
- * A list of certificates that have been deleted in this vault.
- */
+/** A list of certificates that have been deleted in this vault. */
 model DeletedCertificateListResult is Azure.Core.Page<DeletedCertificateItem>;
 
-/**
- * The deleted certificate item containing metadata about the deleted certificate.
- */
+/** The deleted certificate item containing metadata about the deleted certificate. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DeletedCertificateItem extends CertificateItem {
   /**
@@ -1710,68 +1166,46 @@ model DeletedCertificateItem extends CertificateItem {
    */
   recoveryId?: string;
 
-  /**
-   * The time when the certificate is scheduled to be purged, in UTC
-   */
+  /** The time when the certificate is scheduled to be purged, in UTC */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
 
-  /**
-   * The time when the certificate was deleted, in UTC
-   */
+  /** The time when the certificate was deleted, in UTC */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
 }
 
-/**
- * The key create parameters.
- */
+/** The key create parameters. */
 model KeyCreateParameters {
-  /**
-   * The type of key to create. For valid values, see JsonWebKeyType.
-   */
+  /** The type of key to create. For valid values, see JsonWebKeyType. */
   kty: JsonWebKeyType;
 
-  /**
-   * The key size in bits. For example: 2048, 3072, or 4096 for RSA.
-   */
+  /** The key size in bits. For example: 2048, 3072, or 4096 for RSA. */
   key_size?: int32;
 
-  /**
-   * The public exponent for a RSA key.
-   */
+  /** The public exponent for a RSA key. */
   public_exponent?: int32;
 
   key_ops?: JsonWebKeyOperation[];
 
-  /**
-   * The attributes of a key managed by the key vault service.
-   */
+  /** The attributes of a key managed by the key vault service. */
   attributes?: KeyAttributes;
 
-  /**
-   * Application specific metadata in the form of key-value pairs.
-   */
+  /** Application specific metadata in the form of key-value pairs. */
   tags?: Record<string>;
 
-  /**
-   * Elliptic curve name. For valid values, see JsonWebKeyCurveName.
-   */
+  /** Elliptic curve name. For valid values, see JsonWebKeyCurveName. */
   crv?: JsonWebKeyCurveName;
 
-  /**
-   * The policy rules under which the key can be exported.
-   */
+  /** The policy rules under which the key can be exported. */
   release_policy?: KeyReleasePolicy;
 }
 
-/**
- * The attributes of a key managed by the key vault service.
- */
+/** The attributes of a key managed by the key vault service. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model KeyAttributes extends Attributes {
   /**
@@ -1797,13 +1231,9 @@ model KeyAttributes extends Attributes {
   exportable?: boolean;
 }
 
-/**
- * The policy rules under which the key can be exported.
- */
+/** The policy rules under which the key can be exported. */
 model KeyReleasePolicy {
-  /**
-   * Content type and version of key release policy
-   */
+  /** Content type and version of key release policy */
   contentType?: string = "application/json; charset=utf-8";
 
   /**
@@ -1819,23 +1249,15 @@ model KeyReleasePolicy {
   data?: bytes;
 }
 
-/**
- * A KeyBundle consisting of a WebKey plus its attributes.
- */
+/** A KeyBundle consisting of a WebKey plus its attributes. */
 model KeyBundle {
-  /**
-   * The Json web key.
-   */
+  /** The Json web key. */
   key?: JsonWebKey;
 
-  /**
-   * The key management attributes.
-   */
+  /** The key management attributes. */
   attributes?: KeyAttributes;
 
-  /**
-   * Application specific metadata in the form of key-value pairs.
-   */
+  /** Application specific metadata in the form of key-value pairs. */
   tags?: Record<string>;
 
   /**
@@ -1845,19 +1267,13 @@ model KeyBundle {
   @visibility(Lifecycle.Read)
   managed?: boolean;
 
-  /**
-   * The policy rules under which the key can be exported.
-   */
+  /** The policy rules under which the key can be exported. */
   release_policy?: KeyReleasePolicy;
 }
 
-/**
- * As of http://tools.ietf.org/html/draft-ietf-jose-json-web-key-18
- */
+/** As of http://tools.ietf.org/html/draft-ietf-jose-json-web-key-18 */
 model JsonWebKey {
-  /**
-   * Key identifier.
-   */
+  /** Key identifier. */
   kid?: string;
 
   /**
@@ -1868,132 +1284,84 @@ model JsonWebKey {
 
   key_ops?: string[];
 
-  /**
-   * RSA modulus.
-   */
+  /** RSA modulus. */
   n?: bytes;
 
-  /**
-   * RSA public exponent.
-   */
+  /** RSA public exponent. */
   e?: bytes;
 
-  /**
-   * RSA private exponent, or the D component of an EC or OKP private key.
-   */
+  /** RSA private exponent, or the D component of an EC or OKP private key. */
   d?: bytes;
 
-  /**
-   * RSA private key parameter.
-   */
+  /** RSA private key parameter. */
   dp?: bytes;
 
-  /**
-   * RSA private key parameter.
-   */
+  /** RSA private key parameter. */
   dq?: bytes;
 
-  /**
-   * RSA private key parameter.
-   */
+  /** RSA private key parameter. */
   qi?: bytes;
 
-  /**
-   * RSA secret prime.
-   */
+  /** RSA secret prime. */
   p?: bytes;
 
-  /**
-   * RSA secret prime, with p < q.
-   */
+  /** RSA secret prime, with p < q. */
   q?: bytes;
 
-  /**
-   * Symmetric key.
-   */
+  /** Symmetric key. */
   k?: bytes;
 
-  /**
-   * Protected Key, used with 'Bring Your Own Key'.
-   */
+  /** Protected Key, used with 'Bring Your Own Key'. */
   key_hsm?: bytes;
 
-  /**
-   * Elliptic curve name. For valid values, see JsonWebKeyCurveName.
-   */
+  /** Elliptic curve name. For valid values, see JsonWebKeyCurveName. */
   crv?: JsonWebKeyCurveName;
 
-  /**
-   * X component of an EC or OKP public key.
-   */
+  /** X component of an EC or OKP public key. */
   x?: bytes;
 
-  /**
-   * Y component of an EC public key.
-   */
+  /** Y component of an EC public key. */
   y?: bytes;
 }
 
-/**
- * The key import parameters.
- */
+/** The key import parameters. */
 model KeyImportParameters {
-  /**
-   * Whether to import as a hardware key (HSM) or software key.
-   */
+  /** Whether to import as a hardware key (HSM) or software key. */
   Hsm?: boolean;
 
-  /**
-   * The Json web key
-   */
+  /** The Json web key */
   key: JsonWebKey;
 
-  /**
-   * The key management attributes.
-   */
+  /** The key management attributes. */
   attributes?: KeyAttributes;
 
-  /**
-   * Application specific metadata in the form of key-value pairs.
-   */
+  /** Application specific metadata in the form of key-value pairs. */
   tags?: Record<string>;
 
-  /**
-   * The policy rules under which the key can be exported.
-   */
+  /** The policy rules under which the key can be exported. */
   release_policy?: KeyReleasePolicy;
 }
 
-/**
- * A DeletedKeyBundle consisting of a WebKey plus its Attributes and deletion info
- */
+/** A DeletedKeyBundle consisting of a WebKey plus its Attributes and deletion info */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DeletedKeyBundle extends KeyBundle {
-  /**
-   * The url of the recovery object, used to identify and recover the deleted key.
-   */
+  /** The url of the recovery object, used to identify and recover the deleted key. */
   recoveryId?: string;
 
-  /**
-   * The time when the key is scheduled to be purged, in UTC
-   */
+  /** The time when the key is scheduled to be purged, in UTC */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
 
-  /**
-   * The time when the key was deleted, in UTC
-   */
+  /** The time when the key was deleted, in UTC */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
 }
 
-/**
- * The key update parameters.
- */
+/** The key update parameters. */
 model KeyUpdateParameters {
   /**
    * Json web key operations. For more information on possible key operations, see
@@ -2001,44 +1369,28 @@ model KeyUpdateParameters {
    */
   key_ops?: JsonWebKeyOperation[];
 
-  /**
-   * The attributes of a key managed by the key vault service.
-   */
+  /** The attributes of a key managed by the key vault service. */
   attributes?: KeyAttributes;
 
-  /**
-   * Application specific metadata in the form of key-value pairs.
-   */
+  /** Application specific metadata in the form of key-value pairs. */
   tags?: Record<string>;
 
-  /**
-   * The policy rules under which the key can be exported.
-   */
+  /** The policy rules under which the key can be exported. */
   release_policy?: KeyReleasePolicy;
 }
 
-/**
- * The key list result.
- */
+/** The key list result. */
 model KeyListResult is Azure.Core.Page<KeyItem>;
 
-/**
- * The key item containing key metadata.
- */
+/** The key item containing key metadata. */
 model KeyItem {
-  /**
-   * Key identifier.
-   */
+  /** Key identifier. */
   kid?: string;
 
-  /**
-   * The key management attributes.
-   */
+  /** The key management attributes. */
   attributes?: KeyAttributes;
 
-  /**
-   * Application specific metadata in the form of key-value pairs.
-   */
+  /** Application specific metadata in the form of key-value pairs. */
   tags?: Record<string>;
 
   /**
@@ -2049,34 +1401,22 @@ model KeyItem {
   managed?: boolean;
 }
 
-/**
- * The backup key result, containing the backup blob.
- */
+/** The backup key result, containing the backup blob. */
 model BackupKeyResult {
-  /**
-   * The backup blob containing the backed up key.
-   */
+  /** The backup blob containing the backed up key. */
   @visibility(Lifecycle.Read)
   value?: bytes;
 }
 
-/**
- * The key restore parameters.
- */
+/** The key restore parameters. */
 model KeyRestoreParameters {
-  /**
-   * The backup blob associated with a key bundle.
-   */
+  /** The backup blob associated with a key bundle. */
   value: bytes;
 }
 
-/**
- * The key operations parameters.
- */
+/** The key operations parameters. */
 model KeyOperationsParameters {
-  /**
-   * algorithm identifier
-   */
+  /** algorithm identifier */
   alg: JsonWebKeyEncryptionAlgorithm;
 
   value: bytes;
@@ -2100,13 +1440,9 @@ model KeyOperationsParameters {
   tag?: bytes;
 }
 
-/**
- * The key operation result.
- */
+/** The key operation result. */
 model KeyOperationResult {
-  /**
-   * Key identifier
-   */
+  /** Key identifier */
   @visibility(Lifecycle.Read)
   kid?: string;
 
@@ -2123,9 +1459,7 @@ model KeyOperationResult {
   aad?: bytes;
 }
 
-/**
- * The key operations parameters.
- */
+/** The key operations parameters. */
 model KeySignParameters {
   /**
    * The signing/verification algorithm identifier. For more information on possible
@@ -2136,9 +1470,7 @@ model KeySignParameters {
   value: bytes;
 }
 
-/**
- * The key verify parameters.
- */
+/** The key verify parameters. */
 model KeyVerifyParameters {
   /**
    * The signing/verification algorithm. For more information on possible algorithm
@@ -2146,63 +1478,41 @@ model KeyVerifyParameters {
    */
   alg: JsonWebKeySignatureAlgorithm;
 
-  /**
-   * The digest used for signing.
-   */
+  /** The digest used for signing. */
   digest: bytes;
 
-  /**
-   * The signature to be verified.
-   */
+  /** The signature to be verified. */
   value: bytes;
 }
 
-/**
- * The key verify result.
- */
+/** The key verify result. */
 model KeyVerifyResult {
-  /**
-   * True if the signature is verified, otherwise false.
-   */
+  /** True if the signature is verified, otherwise false. */
   @visibility(Lifecycle.Read)
   value?: boolean;
 }
 
-/**
- * The release key parameters.
- */
+/** The release key parameters. */
 model KeyReleaseParameters {
-  /**
-   * The attestation assertion for the target of the key release.
-   */
+  /** The attestation assertion for the target of the key release. */
   @minLength(1)
   target: string;
 
-  /**
-   * A client provided nonce for freshness.
-   */
+  /** A client provided nonce for freshness. */
   nonce?: string;
 
-  /**
-   * The encryption algorithm to use to protected the exported key material
-   */
+  /** The encryption algorithm to use to protected the exported key material */
   enc?: KeyEncryptionAlgorithm;
 }
 
-/**
- * The release result, containing the released key.
- */
+/** The release result, containing the released key. */
 model KeyReleaseResult {
-  /**
-   * A signed object containing the released key.
-   */
+  /** A signed object containing the released key. */
   @visibility(Lifecycle.Read)
   value?: string;
 }
 
-/**
- * A list of keys that have been deleted in this vault.
- */
+/** A list of keys that have been deleted in this vault. */
 model DeletedKeyListResult is Azure.Core.Page<DeletedKeyItem>;
 
 /**
@@ -2211,35 +1521,25 @@ model DeletedKeyListResult is Azure.Core.Page<DeletedKeyItem>;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DeletedKeyItem extends KeyItem {
-  /**
-   * The url of the recovery object, used to identify and recover the deleted key.
-   */
+  /** The url of the recovery object, used to identify and recover the deleted key. */
   recoveryId?: string;
 
-  /**
-   * The time when the key is scheduled to be purged, in UTC
-   */
+  /** The time when the key is scheduled to be purged, in UTC */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
 
-  /**
-   * The time when the key was deleted, in UTC
-   */
+  /** The time when the key was deleted, in UTC */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
 }
 
-/**
- * Management policy for a key.
- */
+/** Management policy for a key. */
 model KeyRotationPolicy {
-  /**
-   * The key policy id.
-   */
+  /** The key policy id. */
   @visibility(Lifecycle.Read)
   id?: string;
 
@@ -2251,9 +1551,7 @@ model KeyRotationPolicy {
    */
   lifetimeActions?: LifetimeActions[];
 
-  /**
-   * The key rotation policy attributes.
-   */
+  /** The key rotation policy attributes. */
   attributes?: KeyRotationPolicyAttributes;
 }
 
@@ -2262,20 +1560,14 @@ model KeyRotationPolicy {
  * a key.
  */
 model LifetimeActions {
-  /**
-   * The condition that will execute the action.
-   */
+  /** The condition that will execute the action. */
   trigger?: LifetimeActionsTrigger;
 
-  /**
-   * The action that will be executed.
-   */
+  /** The action that will be executed. */
   action?: LifetimeActionsType;
 }
 
-/**
- * A condition to be satisfied for an action to be executed.
- */
+/** A condition to be satisfied for an action to be executed. */
 model LifetimeActionsTrigger {
   /**
    * Time after creation to attempt to rotate. It only applies to rotate. It will be
@@ -2290,19 +1582,13 @@ model LifetimeActionsTrigger {
   timeBeforeExpiry?: string;
 }
 
-/**
- * The action that will be executed.
- */
+/** The action that will be executed. */
 model LifetimeActionsType {
-  /**
-   * The type of the action.
-   */
+  /** The type of the action. */
   type?: ActionType;
 }
 
-/**
- * The key rotation policy attributes.
- */
+/** The key rotation policy attributes. */
 model KeyRotationPolicyAttributes {
   /**
    * The expiryTime will be applied on the new key version. It should be at least 28
@@ -2311,110 +1597,72 @@ model KeyRotationPolicyAttributes {
    */
   expiryTime?: string;
 
-  /**
-   * The key rotation policy created time in UTC.
-   */
+  /** The key rotation policy created time in UTC. */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   created?: utcDateTime;
 
-  /**
-   * The key rotation policy's last updated time in UTC.
-   */
+  /** The key rotation policy's last updated time in UTC. */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updated?: utcDateTime;
 }
 
-/**
- * The get random bytes request object.
- */
+/** The get random bytes request object. */
 model GetRandomBytesRequest {
-  /**
-   * The requested number of random bytes.
-   */
+  /** The requested number of random bytes. */
   @maxValue(128)
   @minValue(1)
   count: int32;
 }
 
-/**
- * The get random bytes response object containing the bytes.
- */
+/** The get random bytes response object containing the bytes. */
 model RandomBytes {
-  /**
-   * The bytes encoded as a base64url string.
-   */
+  /** The bytes encoded as a base64url string. */
   value: bytes;
 }
 
-/**
- * Role definition.
- */
+/** Role definition. */
 model RoleDefinition {
-  /**
-   * The role definition ID.
-   */
+  /** The role definition ID. */
   @visibility(Lifecycle.Read)
   id?: string;
 
-  /**
-   * The role definition name.
-   */
+  /** The role definition name. */
   @visibility(Lifecycle.Read)
   name?: string;
 
-  /**
-   * The role definition type.
-   */
+  /** The role definition type. */
   @visibility(Lifecycle.Read)
   type?: RoleDefinitionType;
 
-  /**
-   * Role definition properties.
-   */
+  /** Role definition properties. */
   properties?: RoleDefinitionProperties;
 }
 
-/**
- * Role definition properties.
- */
+/** Role definition properties. */
 model RoleDefinitionProperties {
-  /**
-   * The role name.
-   */
+  /** The role name. */
   roleName?: string;
 
-  /**
-   * The role definition description.
-   */
+  /** The role definition description. */
   description?: string;
 
-  /**
-   * The role type.
-   */
+  /** The role type. */
   type?: RoleType;
 
-  /**
-   * Role definition permissions.
-   */
+  /** Role definition permissions. */
   permissions?: Permission[];
 
-  /**
-   * Role definition assignable scopes.
-   */
+  /** Role definition assignable scopes. */
   assignableScopes?: RoleScope[];
 }
 
-/**
- * Role definition permissions.
- */
+/** Role definition permissions. */
 model Permission {
-  /**
-   * Action permissions that are granted.
-   */
+  /** Action permissions that are granted. */
   actions?: string[];
 
   /**
@@ -2423,9 +1671,7 @@ model Permission {
    */
   notActions?: string[];
 
-  /**
-   * Data action permissions that are granted.
-   */
+  /** Data action permissions that are granted. */
   dataActions?: DataAction[];
 
   /**
@@ -2435,86 +1681,54 @@ model Permission {
   notDataActions?: DataAction[];
 }
 
-/**
- * Role definition create parameters.
- */
+/** Role definition create parameters. */
 model RoleDefinitionCreateParameters {
-  /**
-   * Role definition properties.
-   */
+  /** Role definition properties. */
   properties: RoleDefinitionProperties;
 }
 
-/**
- * Role definition list operation result.
- */
+/** Role definition list operation result. */
 model RoleDefinitionListResult is Azure.Core.Page<RoleDefinition>;
 
-/**
- * Role Assignments
- */
+/** Role Assignments */
 model RoleAssignment {
-  /**
-   * The role assignment ID.
-   */
+  /** The role assignment ID. */
   @visibility(Lifecycle.Read)
   id?: string;
 
-  /**
-   * The role assignment name.
-   */
+  /** The role assignment name. */
   @visibility(Lifecycle.Read)
   name?: string;
 
-  /**
-   * The role assignment type.
-   */
+  /** The role assignment type. */
   @visibility(Lifecycle.Read)
   type?: string;
 
-  /**
-   * Role assignment properties.
-   */
+  /** Role assignment properties. */
   properties?: RoleAssignmentPropertiesWithScope;
 }
 
-/**
- * Role assignment properties with scope.
- */
+/** Role assignment properties with scope. */
 model RoleAssignmentPropertiesWithScope {
-  /**
-   * The role scope.
-   */
+  /** The role scope. */
   scope?: RoleScope;
 
-  /**
-   * The role definition ID.
-   */
+  /** The role definition ID. */
   roleDefinitionId?: string;
 
-  /**
-   * The principal ID.
-   */
+  /** The principal ID. */
   principalId?: string;
 }
 
-/**
- * Role assignment create parameters.
- */
+/** Role assignment create parameters. */
 model RoleAssignmentCreateParameters {
-  /**
-   * Role assignment properties.
-   */
+  /** Role assignment properties. */
   properties: RoleAssignmentProperties;
 }
 
-/**
- * Role assignment properties.
- */
+/** Role assignment properties. */
 model RoleAssignmentProperties {
-  /**
-   * The role definition ID used in the role assignment.
-   */
+  /** The role definition ID used in the role assignment. */
   roleDefinitionId: string;
 
   /**
@@ -2524,39 +1738,25 @@ model RoleAssignmentProperties {
   principalId: string;
 }
 
-/**
- * Role assignment list operation result.
- */
+/** Role assignment list operation result. */
 model RoleAssignmentListResult is Azure.Core.Page<RoleAssignment>;
 
-/**
- * The secret set parameters.
- */
+/** The secret set parameters. */
 model SecretSetParameters {
-  /**
-   * The value of the secret.
-   */
+  /** The value of the secret. */
   value: string;
 
-  /**
-   * Application specific metadata in the form of key-value pairs.
-   */
+  /** Application specific metadata in the form of key-value pairs. */
   tags?: Record<string>;
 
-  /**
-   * Type of the secret value such as a password.
-   */
+  /** Type of the secret value such as a password. */
   contentType?: string;
 
-  /**
-   * The secret management attributes.
-   */
+  /** The secret management attributes. */
   attributes?: SecretAttributes;
 }
 
-/**
- * The secret management attributes.
- */
+/** The secret management attributes. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model SecretAttributes extends Attributes {
   /**
@@ -2576,33 +1776,21 @@ model SecretAttributes extends Attributes {
   recoveryLevel?: DeletionRecoveryLevel;
 }
 
-/**
- * A secret consisting of a value, id and its attributes.
- */
+/** A secret consisting of a value, id and its attributes. */
 model SecretBundle {
-  /**
-   * The secret value.
-   */
+  /** The secret value. */
   value?: string;
 
-  /**
-   * The secret id.
-   */
+  /** The secret id. */
   id?: string;
 
-  /**
-   * The content type of the secret.
-   */
+  /** The content type of the secret. */
   contentType?: string;
 
-  /**
-   * The secret management attributes.
-   */
+  /** The secret management attributes. */
   attributes?: SecretAttributes;
 
-  /**
-   * Application specific metadata in the form of key-value pairs.
-   */
+  /** Application specific metadata in the form of key-value pairs. */
   tags?: Record<string>;
 
   /**
@@ -2626,75 +1814,49 @@ model SecretBundle {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DeletedSecretBundle extends SecretBundle {
-  /**
-   * The url of the recovery object, used to identify and recover the deleted secret.
-   */
+  /** The url of the recovery object, used to identify and recover the deleted secret. */
   recoveryId?: string;
 
-  /**
-   * The time when the secret is scheduled to be purged, in UTC
-   */
+  /** The time when the secret is scheduled to be purged, in UTC */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
 
-  /**
-   * The time when the secret was deleted, in UTC
-   */
+  /** The time when the secret was deleted, in UTC */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
 }
 
-/**
- * The secret update parameters.
- */
+/** The secret update parameters. */
 model SecretUpdateParameters {
-  /**
-   * Type of the secret value such as a password.
-   */
+  /** Type of the secret value such as a password. */
   contentType?: string;
 
-  /**
-   * The secret management attributes.
-   */
+  /** The secret management attributes. */
   attributes?: SecretAttributes;
 
-  /**
-   * Application specific metadata in the form of key-value pairs.
-   */
+  /** Application specific metadata in the form of key-value pairs. */
   tags?: Record<string>;
 }
 
-/**
- * The secret list result.
- */
+/** The secret list result. */
 model SecretListResult is Azure.Core.Page<SecretItem>;
 
-/**
- * The secret item containing secret metadata.
- */
+/** The secret item containing secret metadata. */
 model SecretItem {
-  /**
-   * Secret identifier.
-   */
+  /** Secret identifier. */
   id?: string;
 
-  /**
-   * The secret management attributes.
-   */
+  /** The secret management attributes. */
   attributes?: SecretAttributes;
 
-  /**
-   * Application specific metadata in the form of key-value pairs.
-   */
+  /** Application specific metadata in the form of key-value pairs. */
   tags?: Record<string>;
 
-  /**
-   * Type of the secret value such as a password.
-   */
+  /** Type of the secret value such as a password. */
   contentType?: string;
 
   /**
@@ -2705,72 +1867,50 @@ model SecretItem {
   managed?: boolean;
 }
 
-/**
- * The deleted secret list result
- */
+/** The deleted secret list result */
 model DeletedSecretListResult is Azure.Core.Page<DeletedSecretItem>;
 
-/**
- * The deleted secret item containing metadata about the deleted secret.
- */
+/** The deleted secret item containing metadata about the deleted secret. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DeletedSecretItem extends SecretItem {
-  /**
-   * The url of the recovery object, used to identify and recover the deleted secret.
-   */
+  /** The url of the recovery object, used to identify and recover the deleted secret. */
   recoveryId?: string;
 
-  /**
-   * The time when the secret is scheduled to be purged, in UTC
-   */
+  /** The time when the secret is scheduled to be purged, in UTC */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
 
-  /**
-   * The time when the secret was deleted, in UTC
-   */
+  /** The time when the secret was deleted, in UTC */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletedDate?: utcDateTime;
 }
 
-/**
- * The backup secret result, containing the backup blob.
- */
+/** The backup secret result, containing the backup blob. */
 model BackupSecretResult {
-  /**
-   * The backup blob containing the backed up secret.
-   */
+  /** The backup blob containing the backed up secret. */
   @visibility(Lifecycle.Read)
   value?: bytes;
 }
 
-/**
- * The secret restore parameters.
- */
+/** The secret restore parameters. */
 model SecretRestoreParameters {
-  /**
-   * The backup blob associated with a secret bundle.
-   */
+  /** The backup blob associated with a secret bundle. */
   value: bytes;
 }
 
 model SecurityDomainOperationStatus {
-  /**
-   * operation status
-   */
+  /** operation status */
   status?: OperationStatus;
 
   status_details?: string;
 }
 
 model CertificateInfoObject {
-  /**
-   * Certificates needed from customer
-   */
+  /** Certificates needed from customer */
   certificates: SecurityDomainJsonWebKey[];
 
   /**
@@ -2783,9 +1923,7 @@ model CertificateInfoObject {
 }
 
 model SecurityDomainJsonWebKey {
-  /**
-   * Key identifier.
-   */
+  /** Key identifier. */
   kid: string;
 
   /**
@@ -2797,94 +1935,60 @@ model SecurityDomainJsonWebKey {
 
   key_ops: string[];
 
-  /**
-   * RSA modulus.
-   */
+  /** RSA modulus. */
   n: string;
 
-  /**
-   * RSA public exponent.
-   */
+  /** RSA public exponent. */
   e: string;
 
-  /**
-   * X509 certificate chain parameter
-   */
+  /** X509 certificate chain parameter */
   x5c: string[];
 
-  /**
-   * Public Key Use Parameter. This is optional and if present must be enc.
-   */
+  /** Public Key Use Parameter. This is optional and if present must be enc. */
   use?: string;
 
-  /**
-   * X509 certificate SHA1 thumbprint. This is optional.
-   */
+  /** X509 certificate SHA1 thumbprint. This is optional. */
   x5t?: string;
 
-  /**
-   * X509 certificate SHA256 thumbprint.
-   */
+  /** X509 certificate SHA256 thumbprint. */
   `x5t#S256`: string;
 
-  /**
-   * Algorithm intended for use with the key.
-   */
+  /** Algorithm intended for use with the key. */
   alg: string;
 }
 
-/**
- * The Security Domain.
- */
+/** The Security Domain. */
 model SecurityDomainObject {
-  /**
-   * The Security Domain.
-   */
+  /** The Security Domain. */
   value: string;
 }
 
 model TransferKey {
-  /**
-   * Specifies the format of the transfer key
-   */
+  /** Specifies the format of the transfer key */
   key_format?: string = "jwk";
 
-  /**
-   * Specifies the transfer key in JWK format
-   */
+  /** Specifies the transfer key in JWK format */
   transfer_key: SecurityDomainJsonWebKey;
 }
 
-/**
- * The update settings request object.
- */
+/** The update settings request object. */
 model UpdateSettingsRequest {
-  /**
-   * The value of the pool setting.
-   */
+  /** The value of the pool setting. */
   value: string;
 }
 
 model Setting {
-  /**
-   * The account setting to be updated
-   */
+  /** The account setting to be updated */
   name: string;
 
-  /**
-   * The value of the pool setting.
-   */
+  /** The value of the pool setting. */
   value: string;
 
-  /**
-   * The type specifier of the value.
-   */
+  /** The type specifier of the value. */
   type?: SettingTypeEnum;
 }
 
-/**
- * The settings list result.
- */
+/** The settings list result. */
 model SettingsListResult {
   /**
    * A response message containing a list of account settings with their associated
@@ -2894,60 +1998,40 @@ model SettingsListResult {
   value?: Setting[];
 }
 
-/**
- * The storage accounts list result.
- */
+/** The storage accounts list result. */
 model StorageListResult is Azure.Core.Page<StorageAccountItem>;
 
-/**
- * The storage account item containing storage account metadata.
- */
+/** The storage account item containing storage account metadata. */
 model StorageAccountItem {
-  /**
-   * Storage identifier.
-   */
+  /** Storage identifier. */
   @visibility(Lifecycle.Read)
   id?: string;
 
-  /**
-   * Storage account resource Id.
-   */
+  /** Storage account resource Id. */
   @visibility(Lifecycle.Read)
   resourceId?: string;
 
-  /**
-   * The storage account management attributes.
-   */
+  /** The storage account management attributes. */
   @visibility(Lifecycle.Read)
   attributes?: StorageAccountAttributes;
 
-  /**
-   * Application specific metadata in the form of key-value pairs.
-   */
+  /** Application specific metadata in the form of key-value pairs. */
   @visibility(Lifecycle.Read)
   tags?: Record<string>;
 }
 
-/**
- * The storage account management attributes.
- */
+/** The storage account management attributes. */
 model StorageAccountAttributes {
-  /**
-   * the enabled state of the object.
-   */
+  /** the enabled state of the object. */
   enabled?: boolean;
 
-  /**
-   * Creation time in UTC.
-   */
+  /** Creation time in UTC. */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   created?: utcDateTime;
 
-  /**
-   * Last updated time in UTC.
-   */
+  /** Last updated time in UTC. */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
@@ -2970,9 +2054,7 @@ model StorageAccountAttributes {
   recoveryLevel?: DeletionRecoveryLevel;
 }
 
-/**
- * The deleted storage account list result
- */
+/** The deleted storage account list result */
 model DeletedStorageListResult is Azure.Core.Page<DeletedStorageAccountItem>;
 
 /**
@@ -2987,17 +2069,13 @@ model DeletedStorageAccountItem extends StorageAccountItem {
    */
   recoveryId?: string;
 
-  /**
-   * The time when the storage account is scheduled to be purged, in UTC
-   */
+  /** The time when the storage account is scheduled to be purged, in UTC */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
 
-  /**
-   * The time when the storage account was deleted, in UTC
-   */
+  /** The time when the storage account was deleted, in UTC */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
@@ -3016,17 +2094,13 @@ model DeletedStorageBundle extends StorageBundle {
    */
   recoveryId?: string;
 
-  /**
-   * The time when the storage account is scheduled to be purged, in UTC
-   */
+  /** The time when the storage account is scheduled to be purged, in UTC */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
 
-  /**
-   * The time when the storage account was deleted, in UTC
-   */
+  /** The time when the storage account was deleted, in UTC */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
@@ -3038,199 +2112,127 @@ model DeletedStorageBundle extends StorageBundle {
  * attributes.
  */
 model StorageBundle {
-  /**
-   * The storage account id.
-   */
+  /** The storage account id. */
   @visibility(Lifecycle.Read)
   id?: string;
 
-  /**
-   * The storage account resource id.
-   */
+  /** The storage account resource id. */
   @visibility(Lifecycle.Read)
   resourceId?: string;
 
-  /**
-   * The current active storage account key name.
-   */
+  /** The current active storage account key name. */
   @visibility(Lifecycle.Read)
   activeKeyName?: string;
 
-  /**
-   * whether keyvault should manage the storage account for the user.
-   */
+  /** whether keyvault should manage the storage account for the user. */
   @visibility(Lifecycle.Read)
   autoRegenerateKey?: boolean;
 
-  /**
-   * The key regeneration time duration specified in ISO-8601 format.
-   */
+  /** The key regeneration time duration specified in ISO-8601 format. */
   @visibility(Lifecycle.Read)
   regenerationPeriod?: string;
 
-  /**
-   * The storage account attributes.
-   */
+  /** The storage account attributes. */
   @visibility(Lifecycle.Read)
   attributes?: StorageAccountAttributes;
 
-  /**
-   * Application specific metadata in the form of key-value pairs
-   */
+  /** Application specific metadata in the form of key-value pairs */
   @visibility(Lifecycle.Read)
   tags?: Record<string>;
 }
 
-/**
- * The backup storage result, containing the backup blob.
- */
+/** The backup storage result, containing the backup blob. */
 model BackupStorageResult {
-  /**
-   * The backup blob containing the backed up storage account.
-   */
+  /** The backup blob containing the backed up storage account. */
   @visibility(Lifecycle.Read)
   value?: bytes;
 }
 
-/**
- * The secret restore parameters.
- */
+/** The secret restore parameters. */
 model StorageRestoreParameters {
-  /**
-   * The backup blob associated with a storage account.
-   */
+  /** The backup blob associated with a storage account. */
   value: bytes;
 }
 
-/**
- * The storage account create parameters.
- */
+/** The storage account create parameters. */
 model StorageAccountCreateParameters {
-  /**
-   * Storage account resource id.
-   */
+  /** Storage account resource id. */
   resourceId: string;
 
-  /**
-   * Current active storage account key name.
-   */
+  /** Current active storage account key name. */
   activeKeyName: string;
 
-  /**
-   * whether keyvault should manage the storage account for the user.
-   */
+  /** whether keyvault should manage the storage account for the user. */
   autoRegenerateKey: boolean;
 
-  /**
-   * The key regeneration time duration specified in ISO-8601 format.
-   */
+  /** The key regeneration time duration specified in ISO-8601 format. */
   regenerationPeriod?: string;
 
-  /**
-   * The attributes of the storage account.
-   */
+  /** The attributes of the storage account. */
   attributes?: StorageAccountAttributes;
 
-  /**
-   * Application specific metadata in the form of key-value pairs.
-   */
+  /** Application specific metadata in the form of key-value pairs. */
   tags?: Record<string>;
 }
 
-/**
- * The storage account update parameters.
- */
+/** The storage account update parameters. */
 model StorageAccountUpdateParameters {
-  /**
-   * The current active storage account key name.
-   */
+  /** The current active storage account key name. */
   activeKeyName?: string;
 
-  /**
-   * whether keyvault should manage the storage account for the user.
-   */
+  /** whether keyvault should manage the storage account for the user. */
   autoRegenerateKey?: boolean;
 
-  /**
-   * The key regeneration time duration specified in ISO-8601 format.
-   */
+  /** The key regeneration time duration specified in ISO-8601 format. */
   regenerationPeriod?: string;
 
-  /**
-   * The attributes of the storage account.
-   */
+  /** The attributes of the storage account. */
   attributes?: StorageAccountAttributes;
 
-  /**
-   * Application specific metadata in the form of key-value pairs.
-   */
+  /** Application specific metadata in the form of key-value pairs. */
   tags?: Record<string>;
 }
 
-/**
- * The storage account key regenerate parameters.
- */
+/** The storage account key regenerate parameters. */
 model StorageAccountRegenerteKeyParameters {
-  /**
-   * The storage account key name.
-   */
+  /** The storage account key name. */
   keyName: string;
 }
 
-/**
- * The storage account SAS definition list result.
- */
+/** The storage account SAS definition list result. */
 model SasDefinitionListResult is Azure.Core.Page<SasDefinitionItem>;
 
-/**
- * The SAS definition item containing storage SAS definition metadata.
- */
+/** The SAS definition item containing storage SAS definition metadata. */
 model SasDefinitionItem {
-  /**
-   * The storage SAS identifier.
-   */
+  /** The storage SAS identifier. */
   @visibility(Lifecycle.Read)
   id?: string;
 
-  /**
-   * The storage account SAS definition secret id.
-   */
+  /** The storage account SAS definition secret id. */
   @visibility(Lifecycle.Read)
   sid?: string;
 
-  /**
-   * The SAS definition management attributes.
-   */
+  /** The SAS definition management attributes. */
   @visibility(Lifecycle.Read)
   attributes?: SasDefinitionAttributes;
 
-  /**
-   * Application specific metadata in the form of key-value pairs.
-   */
+  /** Application specific metadata in the form of key-value pairs. */
   @visibility(Lifecycle.Read)
   tags?: Record<string>;
 }
 
-/**
- * The SAS definition management attributes.
- */
+/** The SAS definition management attributes. */
 model SasDefinitionAttributes {
-  /**
-   * the enabled state of the object.
-   */
+  /** the enabled state of the object. */
   enabled?: boolean;
 
-  /**
-   * Creation time in UTC.
-   */
+  /** Creation time in UTC. */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   created?: utcDateTime;
 
-  /**
-   * Last updated time in UTC.
-   */
+  /** Last updated time in UTC. */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
@@ -3253,9 +2255,7 @@ model SasDefinitionAttributes {
   recoveryLevel?: DeletionRecoveryLevel;
 }
 
-/**
- * The deleted SAS definition list result
- */
+/** The deleted SAS definition list result */
 model DeletedSasDefinitionListResult
   is Azure.Core.Page<DeletedSasDefinitionItem>;
 
@@ -3271,17 +2271,13 @@ model DeletedSasDefinitionItem extends SasDefinitionItem {
    */
   recoveryId?: string;
 
-  /**
-   * The time when the SAS definition is scheduled to be purged, in UTC
-   */
+  /** The time when the SAS definition is scheduled to be purged, in UTC */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
 
-  /**
-   * The time when the SAS definition was deleted, in UTC
-   */
+  /** The time when the SAS definition was deleted, in UTC */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
@@ -3300,17 +2296,13 @@ model DeletedSasDefinitionBundle extends SasDefinitionBundle {
    */
   recoveryId?: string;
 
-  /**
-   * The time when the SAS definition is scheduled to be purged, in UTC
-   */
+  /** The time when the SAS definition is scheduled to be purged, in UTC */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
 
-  /**
-   * The time when the SAS definition was deleted, in UTC
-   */
+  /** The time when the SAS definition was deleted, in UTC */
   @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
@@ -3322,15 +2314,11 @@ model DeletedSasDefinitionBundle extends SasDefinitionBundle {
  * attributes.
  */
 model SasDefinitionBundle {
-  /**
-   * The SAS definition id.
-   */
+  /** The SAS definition id. */
   @visibility(Lifecycle.Read)
   id?: string;
 
-  /**
-   * Storage account SAS definition secret id.
-   */
+  /** Storage account SAS definition secret id. */
   @visibility(Lifecycle.Read)
   sid?: string;
 
@@ -3341,34 +2329,24 @@ model SasDefinitionBundle {
   @visibility(Lifecycle.Read)
   templateUri?: string;
 
-  /**
-   * The type of SAS token the SAS definition will create.
-   */
+  /** The type of SAS token the SAS definition will create. */
   @visibility(Lifecycle.Read)
   sasType?: SasTokenType;
 
-  /**
-   * The validity period of SAS tokens created according to the SAS definition.
-   */
+  /** The validity period of SAS tokens created according to the SAS definition. */
   @visibility(Lifecycle.Read)
   validityPeriod?: string;
 
-  /**
-   * The SAS definition attributes.
-   */
+  /** The SAS definition attributes. */
   @visibility(Lifecycle.Read)
   attributes?: SasDefinitionAttributes;
 
-  /**
-   * Application specific metadata in the form of key-value pairs
-   */
+  /** Application specific metadata in the form of key-value pairs */
   @visibility(Lifecycle.Read)
   tags?: Record<string>;
 }
 
-/**
- * The SAS definition create parameters.
- */
+/** The SAS definition create parameters. */
 model SasDefinitionCreateParameters {
   /**
    * The SAS definition token template signed with an arbitrary key.  Tokens created
@@ -3376,30 +2354,20 @@ model SasDefinitionCreateParameters {
    */
   templateUri: string;
 
-  /**
-   * The type of SAS token the SAS definition will create.
-   */
+  /** The type of SAS token the SAS definition will create. */
   sasType: SasTokenType;
 
-  /**
-   * The validity period of SAS tokens created according to the SAS definition.
-   */
+  /** The validity period of SAS tokens created according to the SAS definition. */
   validityPeriod: string;
 
-  /**
-   * The attributes of the SAS definition.
-   */
+  /** The attributes of the SAS definition. */
   attributes?: SasDefinitionAttributes;
 
-  /**
-   * Application specific metadata in the form of key-value pairs.
-   */
+  /** Application specific metadata in the form of key-value pairs. */
   tags?: Record<string>;
 }
 
-/**
- * The SAS definition update parameters.
- */
+/** The SAS definition update parameters. */
 model SasDefinitionUpdateParameters {
   /**
    * The SAS definition token template signed with an arbitrary key.  Tokens created
@@ -3407,41 +2375,27 @@ model SasDefinitionUpdateParameters {
    */
   templateUri?: string;
 
-  /**
-   * The type of SAS token the SAS definition will create.
-   */
+  /** The type of SAS token the SAS definition will create. */
   sasType?: SasTokenType;
 
-  /**
-   * The validity period of SAS tokens created according to the SAS definition.
-   */
+  /** The validity period of SAS tokens created according to the SAS definition. */
   validityPeriod?: string;
 
-  /**
-   * The attributes of the SAS definition.
-   */
+  /** The attributes of the SAS definition. */
   attributes?: SasDefinitionAttributes;
 
-  /**
-   * Application specific metadata in the form of key-value pairs.
-   */
+  /** Application specific metadata in the form of key-value pairs. */
   tags?: Record<string>;
 }
 
-/**
- * The pending certificate signing request result.
- */
+/** The pending certificate signing request result. */
 model PendingCertificateSigningRequestResult {
-  /**
-   * The pending certificate signing request as Base64 encoded string.
-   */
+  /** The pending certificate signing request as Base64 encoded string. */
   @visibility(Lifecycle.Read)
   value?: string;
 }
 
-/**
- * The export key parameters.
- */
+/** The export key parameters. */
 model KeyExportParameters {
   /**
    * The export key encryption Json web key. This key MUST be a RSA key that
@@ -3455,28 +2409,18 @@ model KeyExportParameters {
    */
   wrappingKid?: string;
 
-  /**
-   * The encryption algorithm to use to protected the exported key material
-   */
+  /** The encryption algorithm to use to protected the exported key material */
   enc?: KeyEncryptionAlgorithm;
 }
 
-/**
- * Role Assignments filter
- */
+/** Role Assignments filter */
 model RoleAssignmentFilter {
-  /**
-   * Returns role assignment of the specific principal.
-   */
+  /** Returns role assignment of the specific principal. */
   principalId?: string;
 }
 
-/**
- * Role Definitions filter
- */
+/** Role Definitions filter */
 model RoleDefinitionFilter {
-  /**
-   * Returns role definition with the specific name.
-   */
+  /** Returns role definition with the specific name. */
   roleName?: string;
 }

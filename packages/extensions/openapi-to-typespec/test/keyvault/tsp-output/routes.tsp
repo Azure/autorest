@@ -20,16 +20,12 @@ op fullBackup is Azure.Core.Foundations.Operation<
   FullBackupOperation
 >;
 
-/**
- * Returns the status of full backup operation
- */
+/** Returns the status of full backup operation */
 @route("/backup/{jobId}/pending")
 @get
 op fullBackupStatus is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The id returned as part of the backup request
-     */
+    /** The id returned as part of the backup request */
     @path
     jobId: string;
   },
@@ -47,16 +43,12 @@ op fullRestoreOperation is Azure.Core.Foundations.Operation<
   RestoreOperation
 >;
 
-/**
- * Returns the status of restore operation
- */
+/** Returns the status of restore operation */
 @route("/restore/{jobId}/pending")
 @get
 op restoreStatus is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The Job Id returned part of the restore operation
-     */
+    /** The Job Id returned part of the restore operation */
     @path
     jobId: string;
   },
@@ -71,9 +63,7 @@ op restoreStatus is Azure.Core.Foundations.Operation<
 @put
 op selectiveKeyRestoreOperation is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the key to be restored from the user supplied backup
-     */
+    /** The name of the key to be restored from the user supplied backup */
     @path
     keyName: string;
 
@@ -105,9 +95,7 @@ op getCertificates is Azure.Core.Foundations.Operation<
     @query("maxresults")
     maxresults?: int32;
 
-    /**
-     * Specifies whether to include certificates which are not completely provisioned.
-     */
+    /** Specifies whether to include certificates which are not completely provisioned. */
     @query("includePending")
     includePending?: boolean;
   },
@@ -124,9 +112,7 @@ op getCertificates is Azure.Core.Foundations.Operation<
 @delete
 op deleteCertificate is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the certificate.
-     */
+    /** The name of the certificate. */
     @path
     `certificate-name`: string;
   },
@@ -203,9 +189,7 @@ op setCertificateIssuer is Azure.Core.Foundations.Operation<
     @path
     `issuer-name`: string;
 
-    /**
-     * Certificate issuer set parameter.
-     */
+    /** Certificate issuer set parameter. */
     @bodyRoot
     parameter: CertificateIssuerSetParameters;
   },
@@ -222,15 +206,11 @@ op setCertificateIssuer is Azure.Core.Foundations.Operation<
 @patch
 op updateCertificateIssuer is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the issuer.
-     */
+    /** The name of the issuer. */
     @path
     `issuer-name`: string;
 
-    /**
-     * Certificate issuer update parameter.
-     */
+    /** Certificate issuer update parameter. */
     @bodyRoot
     parameter: CertificateIssuerUpdateParameters;
   },
@@ -247,9 +227,7 @@ op updateCertificateIssuer is Azure.Core.Foundations.Operation<
 @get
 op getCertificateIssuer is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the issuer.
-     */
+    /** The name of the issuer. */
     @path
     `issuer-name`: string;
   },
@@ -266,9 +244,7 @@ op getCertificateIssuer is Azure.Core.Foundations.Operation<
 @delete
 op deleteCertificateIssuer is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the issuer.
-     */
+    /** The name of the issuer. */
     @path
     `issuer-name`: string;
   },
@@ -293,9 +269,7 @@ op createCertificate is Azure.Core.Foundations.Operation<
     @path
     `certificate-name`: string;
 
-    /**
-     * The parameters to create a certificate.
-     */
+    /** The parameters to create a certificate. */
     @bodyRoot
     parameters: CertificateCreateParameters;
   },
@@ -323,9 +297,7 @@ op importCertificate is Azure.Core.Foundations.Operation<
     @path
     `certificate-name`: string;
 
-    /**
-     * The parameters to import the certificate.
-     */
+    /** The parameters to import the certificate. */
     @bodyRoot
     parameters: CertificateImportParameters;
   },
@@ -342,9 +314,7 @@ op importCertificate is Azure.Core.Foundations.Operation<
 @get
 op getCertificateVersions is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the certificate.
-     */
+    /** The name of the certificate. */
     @path
     `certificate-name`: string;
 
@@ -370,9 +340,7 @@ op getCertificateVersions is Azure.Core.Foundations.Operation<
 @get
 op getCertificatePolicy is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the certificate in a given key vault.
-     */
+    /** The name of the certificate in a given key vault. */
     @path
     `certificate-name`: string;
   },
@@ -388,15 +356,11 @@ op getCertificatePolicy is Azure.Core.Foundations.Operation<
 @patch
 op updateCertificatePolicy is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the certificate in the given vault.
-     */
+    /** The name of the certificate in the given vault. */
     @path
     `certificate-name`: string;
 
-    /**
-     * The policy for the certificate.
-     */
+    /** The policy for the certificate. */
     @bodyRoot
     certificatePolicy: CertificatePolicy;
   },
@@ -413,21 +377,15 @@ op updateCertificatePolicy is Azure.Core.Foundations.Operation<
 @patch
 op updateCertificate is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the certificate in the given key vault.
-     */
+    /** The name of the certificate in the given key vault. */
     @path
     `certificate-name`: string;
 
-    /**
-     * The version of the certificate.
-     */
+    /** The version of the certificate. */
     @path
     `certificate-version`: string;
 
-    /**
-     * The parameters for certificate update.
-     */
+    /** The parameters for certificate update. */
     @bodyRoot
     parameters: CertificateUpdateParameters;
   },
@@ -443,9 +401,7 @@ op updateCertificate is Azure.Core.Foundations.Operation<
 @get
 op getCertificate is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the certificate in the given vault.
-     */
+    /** The name of the certificate in the given vault. */
     @path
     `certificate-name`: string;
 
@@ -468,15 +424,11 @@ op getCertificate is Azure.Core.Foundations.Operation<
 @patch
 op updateCertificateOperation is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the certificate.
-     */
+    /** The name of the certificate. */
     @path
     `certificate-name`: string;
 
-    /**
-     * The certificate operation response.
-     */
+    /** The certificate operation response. */
     @bodyRoot
     certificateOperation: CertificateOperationUpdateParameter;
   },
@@ -492,9 +444,7 @@ op updateCertificateOperation is Azure.Core.Foundations.Operation<
 @get
 op getCertificateOperation is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the certificate.
-     */
+    /** The name of the certificate. */
     @path
     `certificate-name`: string;
   },
@@ -511,9 +461,7 @@ op getCertificateOperation is Azure.Core.Foundations.Operation<
 @delete
 op deleteCertificateOperation is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the certificate.
-     */
+    /** The name of the certificate. */
     @path
     `certificate-name`: string;
   },
@@ -533,15 +481,11 @@ op deleteCertificateOperation is Azure.Core.Foundations.Operation<
 @post
 op mergeCertificate is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the certificate.
-     */
+    /** The name of the certificate. */
     @path
     `certificate-name`: string;
 
-    /**
-     * The parameters to merge certificate.
-     */
+    /** The parameters to merge certificate. */
     @bodyRoot
     parameters: CertificateMergeParameters;
   },
@@ -558,9 +502,7 @@ op mergeCertificate is Azure.Core.Foundations.Operation<
 @post
 op backupCertificate is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the certificate.
-     */
+    /** The name of the certificate. */
     @path
     `certificate-name`: string;
   },
@@ -603,9 +545,7 @@ op getDeletedCertificates is Azure.Core.Foundations.Operation<
     @query("maxresults")
     maxresults?: int32;
 
-    /**
-     * Specifies whether to include certificates which are not completely provisioned.
-     */
+    /** Specifies whether to include certificates which are not completely provisioned. */
     @query("includePending")
     includePending?: boolean;
   },
@@ -623,9 +563,7 @@ op getDeletedCertificates is Azure.Core.Foundations.Operation<
 @get
 op getDeletedCertificate is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the certificate
-     */
+    /** The name of the certificate */
     @path
     `certificate-name`: string;
   },
@@ -643,9 +581,7 @@ op getDeletedCertificate is Azure.Core.Foundations.Operation<
 @delete
 op purgeDeletedCertificate is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the certificate
-     */
+    /** The name of the certificate */
     @path
     `certificate-name`: string;
   },
@@ -667,9 +603,7 @@ op purgeDeletedCertificate is Azure.Core.Foundations.Operation<
 @post
 op recoverDeletedCertificate is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the deleted certificate
-     */
+    /** The name of the deleted certificate */
     @path
     `certificate-name`: string;
   },
@@ -699,9 +633,7 @@ op createKey is Azure.Core.Foundations.Operation<
     @path
     `key-name`: string;
 
-    /**
-     * The parameters to create a key.
-     */
+    /** The parameters to create a key. */
     @bodyRoot
     parameters: KeyCreateParameters;
   },
@@ -753,9 +685,7 @@ op importKey is Azure.Core.Foundations.Operation<
     @path
     `key-name`: string;
 
-    /**
-     * The parameters to import a key.
-     */
+    /** The parameters to import a key. */
     @bodyRoot
     parameters: KeyImportParameters;
   },
@@ -773,9 +703,7 @@ op importKey is Azure.Core.Foundations.Operation<
 @delete
 op deleteKey is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the key to delete.
-     */
+    /** The name of the key to delete. */
     @path
     `key-name`: string;
   },
@@ -795,21 +723,15 @@ op deleteKey is Azure.Core.Foundations.Operation<
 @patch
 op updateKey is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of key to update.
-     */
+    /** The name of key to update. */
     @path
     `key-name`: string;
 
-    /**
-     * The version of the key to update.
-     */
+    /** The version of the key to update. */
     @path
     `key-version`: string;
 
-    /**
-     * The parameters of the key to update.
-     */
+    /** The parameters of the key to update. */
     @bodyRoot
     parameters: KeyUpdateParameters;
   },
@@ -826,9 +748,7 @@ op updateKey is Azure.Core.Foundations.Operation<
 @get
 op getKey is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the key to get.
-     */
+    /** The name of the key to get. */
     @path
     `key-name`: string;
 
@@ -852,9 +772,7 @@ op getKey is Azure.Core.Foundations.Operation<
 @get
 op getKeyVersions is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the key.
-     */
+    /** The name of the key. */
     @path
     `key-name`: string;
 
@@ -914,9 +832,7 @@ op getKeys is Azure.Core.Foundations.Operation<
 @post
 op backupKey is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the key.
-     */
+    /** The name of the key. */
     @path
     `key-name`: string;
   },
@@ -965,21 +881,15 @@ op restoreKey is Azure.Core.Foundations.Operation<
 @post
 op encrypt is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the key.
-     */
+    /** The name of the key. */
     @path
     `key-name`: string;
 
-    /**
-     * The version of the key.
-     */
+    /** The version of the key. */
     @path
     `key-version`: string;
 
-    /**
-     * The parameters for the encryption operation.
-     */
+    /** The parameters for the encryption operation. */
     @bodyRoot
     parameters: KeyOperationsParameters;
   },
@@ -1005,21 +915,15 @@ op encrypt is Azure.Core.Foundations.Operation<
 @post
 op decrypt is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the key.
-     */
+    /** The name of the key. */
     @path
     `key-name`: string;
 
-    /**
-     * The version of the key.
-     */
+    /** The version of the key. */
     @path
     `key-version`: string;
 
-    /**
-     * The parameters for the decryption operation.
-     */
+    /** The parameters for the decryption operation. */
     @bodyRoot
     parameters: KeyOperationsParameters;
   },
@@ -1037,21 +941,15 @@ op decrypt is Azure.Core.Foundations.Operation<
 @post
 op sign is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the key.
-     */
+    /** The name of the key. */
     @path
     `key-name`: string;
 
-    /**
-     * The version of the key.
-     */
+    /** The version of the key. */
     @path
     `key-version`: string;
 
-    /**
-     * The parameters for the signing operation.
-     */
+    /** The parameters for the signing operation. */
     @bodyRoot
     parameters: KeySignParameters;
   },
@@ -1072,21 +970,15 @@ op sign is Azure.Core.Foundations.Operation<
 @post
 op verify is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the key.
-     */
+    /** The name of the key. */
     @path
     `key-name`: string;
 
-    /**
-     * The version of the key.
-     */
+    /** The version of the key. */
     @path
     `key-version`: string;
 
-    /**
-     * The parameters for verify operations.
-     */
+    /** The parameters for verify operations. */
     @bodyRoot
     parameters: KeyVerifyParameters;
   },
@@ -1108,21 +1000,15 @@ op verify is Azure.Core.Foundations.Operation<
 @post
 op wrapKey is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the key.
-     */
+    /** The name of the key. */
     @path
     `key-name`: string;
 
-    /**
-     * The version of the key.
-     */
+    /** The version of the key. */
     @path
     `key-version`: string;
 
-    /**
-     * The parameters for wrap operation.
-     */
+    /** The parameters for wrap operation. */
     @bodyRoot
     parameters: KeyOperationsParameters;
   },
@@ -1145,21 +1031,15 @@ op wrapKey is Azure.Core.Foundations.Operation<
 @post
 op unwrapKey is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the key.
-     */
+    /** The name of the key. */
     @path
     `key-name`: string;
 
-    /**
-     * The version of the key.
-     */
+    /** The version of the key. */
     @path
     `key-version`: string;
 
-    /**
-     * The parameters for the key operation.
-     */
+    /** The parameters for the key operation. */
     @bodyRoot
     parameters: KeyOperationsParameters;
   },
@@ -1176,21 +1056,15 @@ op unwrapKey is Azure.Core.Foundations.Operation<
 @post
 op release is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the key to get.
-     */
+    /** The name of the key to get. */
     @path
     `key-name`: string;
 
-    /**
-     * Adding the version parameter retrieves a specific version of a key.
-     */
+    /** Adding the version parameter retrieves a specific version of a key. */
     @path
     `key-version`: string;
 
-    /**
-     * The parameters for the key release operation.
-     */
+    /** The parameters for the key release operation. */
     @bodyRoot
     parameters: KeyReleaseParameters;
   },
@@ -1233,9 +1107,7 @@ op getDeletedKeys is Azure.Core.Foundations.Operation<
 @get
 op getDeletedKey is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the key.
-     */
+    /** The name of the key. */
     @path
     `key-name`: string;
   },
@@ -1253,9 +1125,7 @@ op getDeletedKey is Azure.Core.Foundations.Operation<
 @delete
 op purgeDeletedKey is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the key
-     */
+    /** The name of the key */
     @path
     `key-name`: string;
   },
@@ -1274,9 +1144,7 @@ op purgeDeletedKey is Azure.Core.Foundations.Operation<
 @post
 op recoverDeletedKey is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the deleted key.
-     */
+    /** The name of the deleted key. */
     @path
     `key-name`: string;
   },
@@ -1292,9 +1160,7 @@ op recoverDeletedKey is Azure.Core.Foundations.Operation<
 @get
 op getKeyRotationPolicy is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the key in a given key vault.
-     */
+    /** The name of the key in a given key vault. */
     @path
     `key-name`: string;
   },
@@ -1310,24 +1176,18 @@ op getKeyRotationPolicy is Azure.Core.Foundations.Operation<
 @put
 op updateKeyRotationPolicy is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the key in the given vault.
-     */
+    /** The name of the key in the given vault. */
     @path
     `key-name`: string;
 
-    /**
-     * The policy for the key.
-     */
+    /** The policy for the key. */
     @bodyRoot
     keyRotationPolicy: KeyRotationPolicy;
   },
   KeyRotationPolicy
 >;
 
-/**
- * Get the requested number of bytes containing random values from a managed HSM.
- */
+/** Get the requested number of bytes containing random values from a managed HSM. */
 @summary("Get the requested number of bytes containing random values.")
 @route("/rng")
 @post
@@ -1355,9 +1215,7 @@ op setSecret is Azure.Core.Foundations.Operation<
     @path
     `secret-name`: string;
 
-    /**
-     * The parameters for setting the secret.
-     */
+    /** The parameters for setting the secret. */
     @bodyRoot
     parameters: SecretSetParameters;
   },
@@ -1374,9 +1232,7 @@ op setSecret is Azure.Core.Foundations.Operation<
 @delete
 op deleteSecret is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the secret.
-     */
+    /** The name of the secret. */
     @path
     `secret-name`: string;
   },
@@ -1394,21 +1250,15 @@ op deleteSecret is Azure.Core.Foundations.Operation<
 @patch
 op updateSecret is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the secret.
-     */
+    /** The name of the secret. */
     @path
     `secret-name`: string;
 
-    /**
-     * The version of the secret.
-     */
+    /** The version of the secret. */
     @path
     `secret-version`: string;
 
-    /**
-     * The parameters for update secret operation.
-     */
+    /** The parameters for update secret operation. */
     @bodyRoot
     parameters: SecretUpdateParameters;
   },
@@ -1424,9 +1274,7 @@ op updateSecret is Azure.Core.Foundations.Operation<
 @get
 op getSecret is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the secret.
-     */
+    /** The name of the secret. */
     @path
     `secret-name`: string;
 
@@ -1473,9 +1321,7 @@ op getSecrets is Azure.Core.Foundations.Operation<
 @get
 op getSecretVersions is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the secret.
-     */
+    /** The name of the secret. */
     @path
     `secret-name`: string;
 
@@ -1522,9 +1368,7 @@ op getDeletedSecrets is Azure.Core.Foundations.Operation<
 @get
 op getDeletedSecret is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the secret.
-     */
+    /** The name of the secret. */
     @path
     `secret-name`: string;
   },
@@ -1541,9 +1385,7 @@ op getDeletedSecret is Azure.Core.Foundations.Operation<
 @delete
 op purgeDeletedSecret is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the secret.
-     */
+    /** The name of the secret. */
     @path
     `secret-name`: string;
   },
@@ -1560,9 +1402,7 @@ op purgeDeletedSecret is Azure.Core.Foundations.Operation<
 @post
 op recoverDeletedSecret is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the deleted secret.
-     */
+    /** The name of the deleted secret. */
     @path
     `secret-name`: string;
   },
@@ -1579,9 +1419,7 @@ op recoverDeletedSecret is Azure.Core.Foundations.Operation<
 @post
 op backupSecret is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the secret.
-     */
+    /** The name of the secret. */
     @path
     `secret-name`: string;
   },
@@ -1600,9 +1438,7 @@ op restoreSecret is Azure.Core.Foundations.Operation<
   SecretBundle
 >;
 
-/**
- * Description of the pool setting to be updated
- */
+/** Description of the pool setting to be updated */
 @summary("""
   Updates key vault account setting, stores it, then returns the setting name and
   value to the client.
@@ -1611,41 +1447,31 @@ op restoreSecret is Azure.Core.Foundations.Operation<
 @patch
 op updateSettings is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the account setting. Must be a valid settings option.
-     */
+    /** The name of the account setting. Must be a valid settings option. */
     @path
     `setting-name`: string;
 
-    /**
-     * The parameters to update an account setting.
-     */
+    /** The parameters to update an account setting. */
     @bodyRoot
     parameters: UpdateSettingsRequest;
   },
   Setting
 >;
 
-/**
- * Retrieves the value of a specified, value account setting.
- */
+/** Retrieves the value of a specified, value account setting. */
 @summary("Get specified account setting value.")
 @route("/settings/{setting-name}")
 @get
 op getSettingValue is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the account setting. Must be a valid settings option.
-     */
+    /** The name of the account setting. Must be a valid settings option. */
     @path
     `setting-name`: string;
   },
   Setting
 >;
 
-/**
- * Retrieves a list of all the available account settings that can be configured.
- */
+/** Retrieves a list of all the available account settings that can be configured. */
 @summary("List account settings.")
 @route("/settings")
 @get
@@ -1703,9 +1529,7 @@ op getDeletedStorageAccounts is Azure.Core.Foundations.Operation<
 @get
 op getDeletedStorageAccount is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the storage account.
-     */
+    /** The name of the storage account. */
     @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
@@ -1724,9 +1548,7 @@ op getDeletedStorageAccount is Azure.Core.Foundations.Operation<
 @delete
 op purgeDeletedStorageAccount is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the storage account.
-     */
+    /** The name of the storage account. */
     @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
@@ -1744,9 +1566,7 @@ op purgeDeletedStorageAccount is Azure.Core.Foundations.Operation<
 @post
 op recoverDeletedStorageAccount is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the storage account.
-     */
+    /** The name of the storage account. */
     @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
@@ -1763,9 +1583,7 @@ op recoverDeletedStorageAccount is Azure.Core.Foundations.Operation<
 @post
 op backupStorageAccount is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the storage account.
-     */
+    /** The name of the storage account. */
     @path
     `storage-account-name`: string;
   },
@@ -1792,9 +1610,7 @@ op restoreStorageAccount is Azure.Core.Foundations.Operation<
 @delete
 op deleteStorageAccount is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the storage account.
-     */
+    /** The name of the storage account. */
     @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
@@ -1810,9 +1626,7 @@ op deleteStorageAccount is Azure.Core.Foundations.Operation<
 @get
 op getStorageAccount is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the storage account.
-     */
+    /** The name of the storage account. */
     @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
@@ -1837,9 +1651,7 @@ op setStorageAccount is Azure.Core.Foundations.Operation<
     @path
     `storage-account-name`: string;
 
-    /**
-     * The parameters to create a storage account.
-     */
+    /** The parameters to create a storage account. */
     @bodyRoot
     parameters: StorageAccountCreateParameters;
   },
@@ -1854,16 +1666,12 @@ op setStorageAccount is Azure.Core.Foundations.Operation<
 @patch
 op updateStorageAccount is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the storage account.
-     */
+    /** The name of the storage account. */
     @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
 
-    /**
-     * The parameters to update a storage account.
-     */
+    /** The parameters to update a storage account. */
     @bodyRoot
     parameters: StorageAccountUpdateParameters;
   },
@@ -1878,16 +1686,12 @@ op updateStorageAccount is Azure.Core.Foundations.Operation<
 @post
 op regenerateStorageAccountKey is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the storage account.
-     */
+    /** The name of the storage account. */
     @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
 
-    /**
-     * The parameters to regenerate storage account key.
-     */
+    /** The parameters to regenerate storage account key. */
     @bodyRoot
     parameters: StorageAccountRegenerteKeyParameters;
   },
@@ -1902,9 +1706,7 @@ op regenerateStorageAccountKey is Azure.Core.Foundations.Operation<
 @get
 op getSasDefinitions is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the storage account.
-     */
+    /** The name of the storage account. */
     @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
@@ -1931,9 +1733,7 @@ op getSasDefinitions is Azure.Core.Foundations.Operation<
 @get
 op getDeletedSasDefinitions is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the storage account.
-     */
+    /** The name of the storage account. */
     @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
@@ -1960,16 +1760,12 @@ op getDeletedSasDefinitions is Azure.Core.Foundations.Operation<
 @get
 op getDeletedSasDefinition is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the storage account.
-     */
+    /** The name of the storage account. */
     @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
 
-    /**
-     * The name of the SAS definition.
-     */
+    /** The name of the SAS definition. */
     @pattern("^[0-9a-zA-Z]+$")
     @path
     `sas-definition-name`: string;
@@ -1987,16 +1783,12 @@ op getDeletedSasDefinition is Azure.Core.Foundations.Operation<
 @post
 op recoverDeletedSasDefinition is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the storage account.
-     */
+    /** The name of the storage account. */
     @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
 
-    /**
-     * The name of the SAS definition.
-     */
+    /** The name of the SAS definition. */
     @pattern("^[0-9a-zA-Z]+$")
     @path
     `sas-definition-name`: string;
@@ -2012,16 +1804,12 @@ op recoverDeletedSasDefinition is Azure.Core.Foundations.Operation<
 @delete
 op deleteSasDefinition is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the storage account.
-     */
+    /** The name of the storage account. */
     @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
 
-    /**
-     * The name of the SAS definition.
-     */
+    /** The name of the SAS definition. */
     @pattern("^[0-9a-zA-Z]+$")
     @path
     `sas-definition-name`: string;
@@ -2037,16 +1825,12 @@ op deleteSasDefinition is Azure.Core.Foundations.Operation<
 @get
 op getSasDefinition is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the storage account.
-     */
+    /** The name of the storage account. */
     @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
 
-    /**
-     * The name of the SAS definition.
-     */
+    /** The name of the SAS definition. */
     @pattern("^[0-9a-zA-Z]+$")
     @path
     `sas-definition-name`: string;
@@ -2062,9 +1846,7 @@ op getSasDefinition is Azure.Core.Foundations.Operation<
 @put
 op setSasDefinition is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the storage account.
-     */
+    /** The name of the storage account. */
     @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
@@ -2078,9 +1860,7 @@ op setSasDefinition is Azure.Core.Foundations.Operation<
     @path
     `sas-definition-name`: string;
 
-    /**
-     * The parameters to create a SAS definition.
-     */
+    /** The parameters to create a SAS definition. */
     @bodyRoot
     parameters: SasDefinitionCreateParameters;
   },
@@ -2095,23 +1875,17 @@ op setSasDefinition is Azure.Core.Foundations.Operation<
 @patch
 op updateSasDefinition is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the storage account.
-     */
+    /** The name of the storage account. */
     @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
 
-    /**
-     * The name of the SAS definition.
-     */
+    /** The name of the SAS definition. */
     @pattern("^[0-9a-zA-Z]+$")
     @path
     `sas-definition-name`: string;
 
-    /**
-     * The parameters to update a SAS definition.
-     */
+    /** The parameters to update a SAS definition. */
     @bodyRoot
     parameters: SasDefinitionUpdateParameters;
   },
@@ -2119,31 +1893,23 @@ op updateSasDefinition is Azure.Core.Foundations.Operation<
 >;
 
 interface RoleDefinitionsOperationGroup {
-  /**
-   * Deletes a custom role definition.
-   */
+  /** Deletes a custom role definition. */
   @route("/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}")
   @delete
   delete is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The scope of the role definition to delete. Managed HSM only supports '/'.
-       */
+      /** The scope of the role definition to delete. Managed HSM only supports '/'. */
       @path
       scope: string;
 
-      /**
-       * The name (GUID) of the role definition to delete.
-       */
+      /** The name (GUID) of the role definition to delete. */
       @path
       roleDefinitionName: string;
     },
     RoleDefinition
   >;
 
-  /**
-   * Creates or updates a custom role definition.
-   */
+  /** Creates or updates a custom role definition. */
   @route("/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}")
   @put
   createOrUpdate is Azure.Core.Foundations.Operation<
@@ -2155,53 +1921,39 @@ interface RoleDefinitionsOperationGroup {
       @path
       scope: string;
 
-      /**
-       * The name of the role definition to create or update. It can be any valid GUID.
-       */
+      /** The name of the role definition to create or update. It can be any valid GUID. */
       @path
       roleDefinitionName: string;
 
-      /**
-       * Parameters for the role definition.
-       */
+      /** Parameters for the role definition. */
       @bodyRoot
       parameters: RoleDefinitionCreateParameters;
     },
     RoleDefinition
   >;
 
-  /**
-   * Get the specified role definition.
-   */
+  /** Get the specified role definition. */
   @route("/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The scope of the role definition to get. Managed HSM only supports '/'.
-       */
+      /** The scope of the role definition to get. Managed HSM only supports '/'. */
       @path
       scope: string;
 
-      /**
-       * The name of the role definition to get.
-       */
+      /** The name of the role definition to get. */
       @path
       roleDefinitionName: string;
     },
     RoleDefinition
   >;
 
-  /**
-   * Get all role definitions that are applicable at scope and above.
-   */
+  /** Get all role definitions that are applicable at scope and above. */
   @route("/{scope}/providers/Microsoft.Authorization/roleDefinitions")
   @get
   list is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The scope of the role definition.
-       */
+      /** The scope of the role definition. */
       @path
       scope: string;
 
@@ -2217,88 +1969,64 @@ interface RoleDefinitionsOperationGroup {
 }
 
 interface RoleAssignmentsOperationGroup {
-  /**
-   * Deletes a role assignment.
-   */
+  /** Deletes a role assignment. */
   @route("/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}")
   @delete
   delete is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The scope of the role assignment to delete.
-       */
+      /** The scope of the role assignment to delete. */
       @path
       scope: string;
 
-      /**
-       * The name of the role assignment to delete.
-       */
+      /** The name of the role assignment to delete. */
       @path
       roleAssignmentName: string;
     },
     RoleAssignment
   >;
 
-  /**
-   * Creates a role assignment.
-   */
+  /** Creates a role assignment. */
   @route("/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}")
   @put
   create is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The scope of the role assignment to create.
-       */
+      /** The scope of the role assignment to create. */
       @path
       scope: string;
 
-      /**
-       * The name of the role assignment to create. It can be any valid GUID.
-       */
+      /** The name of the role assignment to create. It can be any valid GUID. */
       @path
       roleAssignmentName: string;
 
-      /**
-       * Parameters for the role assignment.
-       */
+      /** Parameters for the role assignment. */
       @bodyRoot
       parameters: RoleAssignmentCreateParameters;
     },
     RoleAssignment
   >;
 
-  /**
-   * Get the specified role assignment.
-   */
+  /** Get the specified role assignment. */
   @route("/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The scope of the role assignment.
-       */
+      /** The scope of the role assignment. */
       @path
       scope: string;
 
-      /**
-       * The name of the role assignment to get.
-       */
+      /** The name of the role assignment to get. */
       @path
       roleAssignmentName: string;
     },
     RoleAssignment
   >;
 
-  /**
-   * Gets role assignments for a scope.
-   */
+  /** Gets role assignments for a scope. */
   @route("/{scope}/providers/Microsoft.Authorization/roleAssignments")
   @get
   listForScope is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The scope of the role assignments.
-       */
+      /** The scope of the role assignments. */
       @path
       scope: string;
 
@@ -2315,9 +2043,7 @@ interface RoleAssignmentsOperationGroup {
 }
 
 interface HSMSecurityDomainOperationGroup {
-  /**
-   * Retrieves the Security Domain download operation status
-   */
+  /** Retrieves the Security Domain download operation status */
   @route("/securitydomain/download/pending")
   @get
   downloadPending is Azure.Core.Foundations.Operation<
@@ -2336,16 +2062,12 @@ interface HSMSecurityDomainOperationGroup {
     SecurityDomainObject
   >;
 
-  /**
-   * Retrieve Security Domain transfer key
-   */
+  /** Retrieve Security Domain transfer key */
   @route("/securitydomain/upload")
   @get
   transferKey is Azure.Core.Foundations.Operation<{}, TransferKey>;
 
-  /**
-   * Restore the provided Security Domain.
-   */
+  /** Restore the provided Security Domain. */
   @route("/securitydomain/upload")
   @post
   upload is Azure.Core.Foundations.Operation<
@@ -2353,9 +2075,7 @@ interface HSMSecurityDomainOperationGroup {
     SecurityDomainOperationStatus
   >;
 
-  /**
-   * Get Security Domain upload operation status
-   */
+  /** Get Security Domain upload operation status */
   @route("/securitydomain/upload/pending")
   @get
   uploadPending is Azure.Core.Foundations.Operation<

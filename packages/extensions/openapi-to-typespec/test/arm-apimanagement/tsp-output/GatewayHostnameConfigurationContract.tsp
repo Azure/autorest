@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * Gateway hostname configuration details.
- */
+/** Gateway hostname configuration details. */
 @parentResource(GatewayContract)
 model GatewayHostnameConfigurationContract
   is Azure.ResourceManager.ProxyResource<GatewayHostnameConfigurationContractProperties> {
@@ -27,66 +25,46 @@ model GatewayHostnameConfigurationContract
 
 @armResourceOperations
 interface GatewayHostnameConfigurationContracts {
-  /**
-   * Get details of a hostname configuration
-   */
+  /** Get details of a hostname configuration */
   get is ArmResourceRead<GatewayHostnameConfigurationContract>;
 
-  /**
-   * Checks that hostname configuration entity specified by identifier exists for specified Gateway entity.
-   */
+  /** Checks that hostname configuration entity specified by identifier exists for specified Gateway entity. */
   getEntityTag is ArmResourceCheckExistence<GatewayHostnameConfigurationContract>;
 
-  /**
-   * Creates of updates hostname configuration for a Gateway.
-   */
+  /** Creates of updates hostname configuration for a Gateway. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GatewayHostnameConfigurationContract,
     Parameters = {
-      /**
-       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
-       */
+      /** ETag of the Entity. Not required when creating an entity, but required when updating an entity. */
       @header
       `If-Match`?: string;
     }
   >;
 
-  /**
-   * Deletes the specified hostname configuration from the specified Gateway.
-   */
+  /** Deletes the specified hostname configuration from the specified Gateway. */
   delete is ArmResourceDeleteSync<
     GatewayHostnameConfigurationContract,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Lists the collection of hostname configurations for the specified gateway.
-   */
+  /** Lists the collection of hostname configurations for the specified gateway. */
   listByService is ArmResourceListByParent<
     GatewayHostnameConfigurationContract,
     Parameters = {
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| hostname | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-       */
+      /** |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| hostname | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br> */
       @query("$filter")
       $filter?: string;
 
-      /**
-       * Number of records to return.
-       */
+      /** Number of records to return. */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      /**
-       * Number of records to skip.
-       */
+      /** Number of records to skip. */
       @query("$skip")
       $skip?: int32;
     }

@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * Cache details.
- */
+/** Cache details. */
 @parentResource(ApiManagementServiceResource)
 model CacheContract
   is Azure.ResourceManager.ProxyResource<CacheContractProperties> {
@@ -27,76 +25,54 @@ model CacheContract
 
 @armResourceOperations
 interface CacheContracts {
-  /**
-   * Gets the details of the Cache specified by its identifier.
-   */
+  /** Gets the details of the Cache specified by its identifier. */
   get is ArmResourceRead<CacheContract>;
 
-  /**
-   * Gets the entity state (Etag) version of the Cache specified by its identifier.
-   */
+  /** Gets the entity state (Etag) version of the Cache specified by its identifier. */
   getEntityTag is ArmResourceCheckExistence<CacheContract>;
 
-  /**
-   * Creates or updates an External Cache to be used in Api Management instance.
-   */
+  /** Creates or updates an External Cache to be used in Api Management instance. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     CacheContract,
     Parameters = {
-      /**
-       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
-       */
+      /** ETag of the Entity. Not required when creating an entity, but required when updating an entity. */
       @header
       `If-Match`?: string;
     }
   >;
 
-  /**
-   * Updates the details of the cache specified by its identifier.
-   */
+  /** Updates the details of the cache specified by its identifier. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     CacheContract,
     PatchModel = CacheUpdateParameters,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Deletes specific Cache.
-   */
+  /** Deletes specific Cache. */
   delete is ArmResourceDeleteSync<
     CacheContract,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Lists a collection of all external Caches in the specified service instance.
-   */
+  /** Lists a collection of all external Caches in the specified service instance. */
   listByService is ArmResourceListByParent<
     CacheContract,
     Parameters = {
-      /**
-       * Number of records to return.
-       */
+      /** Number of records to return. */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      /**
-       * Number of records to skip.
-       */
+      /** Number of records to skip. */
       @query("$skip")
       $skip?: int32;
     }

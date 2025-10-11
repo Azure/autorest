@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-/**
- * Azure Resource Manager resource envelope.
- */
+/** Azure Resource Manager resource envelope. */
 @parentResource(Workspace)
 model Schedule
   is Azure.ResourceManager.ProxyResource<ScheduleProperties, false> {
@@ -27,40 +25,28 @@ model Schedule
 
 @armResourceOperations
 interface Schedules {
-  /**
-   * Get schedule.
-   */
+  /** Get schedule. */
   get is ArmResourceRead<Schedule>;
 
-  /**
-   * Create or update schedule.
-   */
+  /** Create or update schedule. */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Schedule>;
 
-  /**
-   * Delete schedule.
-   */
+  /** Delete schedule. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Schedule,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List schedules in specified workspace.
-   */
+  /** List schedules in specified workspace. */
   list is ArmResourceListByParent<
     Schedule,
     Parameters = {
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
 
-      /**
-       * Status filter for schedule.
-       */
+      /** Status filter for schedule. */
       @query("listViewType")
       listViewType?: ScheduleListViewType;
     },

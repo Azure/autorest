@@ -8,9 +8,7 @@ using TypeSpec.Http;
 namespace AzureSchemaRegistry;
 
 interface SchemaGroupsOperationGroup {
-  /**
-   * Gets the list of schema groups user is authorized to access.
-   */
+  /** Gets the list of schema groups user is authorized to access. */
   @summary("Get list of schema groups.")
   @route("/$schemaGroups")
   @get
@@ -28,18 +26,14 @@ interface SchemaOperationGroup {
   @get
   getById is Azure.Core.Foundations.Operation<
     {
-      /**
-       * References specific schema in registry namespace.
-       */
+      /** References specific schema in registry namespace. */
       @path
       id: string;
     },
     void
   >;
 
-  /**
-   * Gets the list of all versions of one schema.
-   */
+  /** Gets the list of all versions of one schema. */
   @summary("Get list schema versions.")
   @route("/$schemaGroups/{groupName}/schemas/{schemaName}/versions")
   @get
@@ -52,9 +46,7 @@ interface SchemaOperationGroup {
       @path
       groupName: string;
 
-      /**
-       * Name of schema.
-       */
+      /** Name of schema. */
       @maxLength(50)
       @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
       @path
@@ -63,9 +55,7 @@ interface SchemaOperationGroup {
     SchemaVersions
   >;
 
-  /**
-   * Gets one specific version of one schema.
-   */
+  /** Gets one specific version of one schema. */
   @summary("Get specific schema versions.")
   @route("/$schemaGroups/{groupName}/schemas/{schemaName}/versions/{schemaVersion}")
   @get
@@ -78,17 +68,13 @@ interface SchemaOperationGroup {
       @path
       groupName: string;
 
-      /**
-       * Name of schema.
-       */
+      /** Name of schema. */
       @maxLength(50)
       @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
       @path
       schemaName: string;
 
-      /**
-       * Version number of specific schema.
-       */
+      /** Version number of specific schema. */
       @path
       schemaVersion: int32;
     },
@@ -111,17 +97,13 @@ interface SchemaOperationGroup {
       @path
       groupName: string;
 
-      /**
-       * Name of schema.
-       */
+      /** Name of schema. */
       @maxLength(50)
       @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
       @path
       schemaName: string;
 
-      /**
-       * String representation (UTF-8) of the registered schema.
-       */
+      /** String representation (UTF-8) of the registered schema. */
       @bodyRoot
       schemaContent: bytes;
     },
@@ -146,17 +128,13 @@ interface SchemaOperationGroup {
       @path
       groupName: string;
 
-      /**
-       * Name of schema.
-       */
+      /** Name of schema. */
       @maxLength(50)
       @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
       @path
       schemaName: string;
 
-      /**
-       * String representation (UTF-8) of the schema being registered.
-       */
+      /** String representation (UTF-8) of the schema being registered. */
       @bodyRoot
       schemaContent: bytes;
     },

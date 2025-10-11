@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureSphere;
-/**
- * An certificate resource belonging to a catalog resource.
- */
+/** An certificate resource belonging to a catalog resource. */
 @parentResource(Catalog)
 model Certificate
   is Azure.ResourceManager.ProxyResource<CertificateProperties> {
@@ -27,55 +25,39 @@ model Certificate
 
 @armResourceOperations
 interface Certificates {
-  /**
-   * Get a Certificate
-   */
+  /** Get a Certificate */
   get is ArmResourceRead<Certificate>;
 
-  /**
-   * List Certificate resources by Catalog
-   */
+  /** List Certificate resources by Catalog */
   listByCatalog is ArmResourceListByParent<
     Certificate,
     Parameters = {
-      /**
-       * Filter the result list using the given expression
-       */
+      /** Filter the result list using the given expression */
       @query("$filter")
       filter?: string;
 
-      /**
-       * The number of result items to return.
-       */
+      /** The number of result items to return. */
       @query("$top")
       top?: int32;
 
-      /**
-       * The number of result items to skip.
-       */
+      /** The number of result items to skip. */
       @query("$skip")
       skip?: int32;
 
-      /**
-       * The maximum number of result items per page.
-       */
+      /** The maximum number of result items per page. */
       @query("$maxpagesize")
       maxpagesize?: int32;
     }
   >;
 
-  /**
-   * Retrieves cert chain.
-   */
+  /** Retrieves cert chain. */
   retrieveCertChain is ArmResourceActionSync<
     Certificate,
     void,
     ArmResponse<CertificateChainResponse>
   >;
 
-  /**
-   * Gets the proof of possession nonce.
-   */
+  /** Gets the proof of possession nonce. */
   retrieveProofOfPossessionNonce is ArmResourceActionSync<
     Certificate,
     ProofOfPossessionNonceRequest,

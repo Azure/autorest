@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ServiceNetworking;
-/**
- * Concrete tracked resource types can be created by aliasing this type using a specific property type.
- */
+/** Concrete tracked resource types can be created by aliasing this type using a specific property type. */
 model TrafficController
   is Azure.ResourceManager.TrackedResource<TrafficControllerProperties> {
   ...ResourceNameParameter<
@@ -25,42 +23,30 @@ model TrafficController
 
 @armResourceOperations
 interface TrafficControllers {
-  /**
-   * Get a TrafficController
-   */
+  /** Get a TrafficController */
   get is ArmResourceRead<TrafficController>;
 
-  /**
-   * Create a TrafficController
-   */
+  /** Create a TrafficController */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<TrafficController>;
 
-  /**
-   * Update a TrafficController
-   */
+  /** Update a TrafficController */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     TrafficController,
     PatchModel = TrafficControllerUpdate
   >;
 
-  /**
-   * Delete a TrafficController
-   */
+  /** Delete a TrafficController */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     TrafficController,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List TrafficController resources by resource group
-   */
+  /** List TrafficController resources by resource group */
   listByResourceGroup is ArmResourceListByParent<TrafficController>;
 
-  /**
-   * List TrafficController resources by subscription ID
-   */
+  /** List TrafficController resources by subscription ID */
   listBySubscription is ArmListBySubscription<TrafficController>;
 }
 

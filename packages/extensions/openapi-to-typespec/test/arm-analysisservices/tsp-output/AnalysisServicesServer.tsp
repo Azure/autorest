@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.Analysis;
-/**
- * Represents an instance of an Analysis Services resource.
- */
+/** Represents an instance of an Analysis Services resource. */
 model AnalysisServicesServer
   is Azure.ResourceManager.TrackedResource<AnalysisServicesServerProperties> {
   ...ResourceNameParameter<
@@ -22,23 +20,17 @@ model AnalysisServicesServer
     NamePattern = "^[a-z][a-z0-9]*$"
   >;
 
-  /**
-   * The SKU of the Analysis Services resource.
-   */
+  /** The SKU of the Analysis Services resource. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku: ResourceSku;
 }
 
 @armResourceOperations
 interface Servers {
-  /**
-   * Gets details about the specified Analysis Services server.
-   */
+  /** Gets details about the specified Analysis Services server. */
   getDetails is ArmResourceRead<AnalysisServicesServer>;
 
-  /**
-   * Provisions the specified Analysis Services server based on the configuration specified in the request.
-   */
+  /** Provisions the specified Analysis Services server based on the configuration specified in the request. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   create is ArmResourceCreateOrReplaceAsync<
@@ -53,9 +45,7 @@ interface Servers {
     })
   >;
 
-  /**
-   * Updates the current state of the specified Analysis Services server.
-   */
+  /** Updates the current state of the specified Analysis Services server. */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -67,44 +57,32 @@ interface Servers {
     })
   >;
 
-  /**
-   * Deletes the specified Analysis Services server.
-   */
+  /** Deletes the specified Analysis Services server. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     AnalysisServicesServer,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * Gets all the Analysis Services servers for the given resource group.
-   */
+  /** Gets all the Analysis Services servers for the given resource group. */
   listByResourceGroup is ArmResourceListByParent<
     AnalysisServicesServer,
     Response = ArmResponse<AnalysisServicesServers>
   >;
 
-  /**
-   * Lists all the Analysis Services servers for the given subscription.
-   */
+  /** Lists all the Analysis Services servers for the given subscription. */
   list is ArmListBySubscription<
     AnalysisServicesServer,
     Response = ArmResponse<AnalysisServicesServers>
   >;
 
-  /**
-   * Suspends operation of the specified Analysis Services server instance.
-   */
+  /** Suspends operation of the specified Analysis Services server instance. */
   suspend is ArmResourceActionAsync<AnalysisServicesServer, void, OkResponse>;
 
-  /**
-   * Resumes operation of the specified Analysis Services server instance.
-   */
+  /** Resumes operation of the specified Analysis Services server instance. */
   resume is ArmResourceActionAsync<AnalysisServicesServer, void, OkResponse>;
 
-  /**
-   * Lists eligible SKUs for an Analysis Services resource.
-   */
+  /** Lists eligible SKUs for an Analysis Services resource. */
   @list
   @get
   @action("skus")
@@ -114,18 +92,14 @@ interface Servers {
     ArmResponse<SkuEnumerationForExistingResourceResult>
   >;
 
-  /**
-   * Return the gateway status of the specified Analysis Services server instance.
-   */
+  /** Return the gateway status of the specified Analysis Services server instance. */
   listGatewayStatus is ArmResourceActionSync<
     AnalysisServicesServer,
     void,
     ArmResponse<GatewayListStatusLive>
   >;
 
-  /**
-   * Dissociates a Unified Gateway associated with the server.
-   */
+  /** Dissociates a Unified Gateway associated with the server. */
   dissociateGateway is ArmResourceActionSync<
     AnalysisServicesServer,
     void,

@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * Specifies information about the Shared Image Gallery that you want to create or update.
- */
+/** Specifies information about the Shared Image Gallery that you want to create or update. */
 model Gallery is Azure.ResourceManager.TrackedResource<GalleryProperties> {
   ...ResourceNameParameter<
     Resource = Gallery,
@@ -24,29 +22,21 @@ model Gallery is Azure.ResourceManager.TrackedResource<GalleryProperties> {
 
 @armResourceOperations
 interface Galleries {
-  /**
-   * Retrieves information about a Shared Image Gallery.
-   */
+  /** Retrieves information about a Shared Image Gallery. */
   get is ArmResourceRead<
     Gallery,
     Parameters = {
-      /**
-       * The select expression to apply on the operation.
-       */
+      /** The select expression to apply on the operation. */
       @query("$select")
       $select?: SelectPermissions;
 
-      /**
-       * The expand query option to apply on the operation.
-       */
+      /** The expand query option to apply on the operation. */
       @query("$expand")
       $expand?: GalleryExpandParams;
     }
   >;
 
-  /**
-   * Create or update a Shared Image Gallery.
-   */
+  /** Create or update a Shared Image Gallery. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -61,9 +51,7 @@ interface Galleries {
     })
   >;
 
-  /**
-   * Update a Shared Image Gallery.
-   */
+  /** Update a Shared Image Gallery. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Gallery,
@@ -71,31 +59,23 @@ interface Galleries {
     Response = ArmResponse<Gallery>
   >;
 
-  /**
-   * Delete a Shared Image Gallery.
-   */
+  /** Delete a Shared Image Gallery. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Gallery,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List galleries under a resource group.
-   */
+  /** List galleries under a resource group. */
   listByResourceGroup is ArmResourceListByParent<
     Gallery,
     Response = ArmResponse<GalleryList>
   >;
 
-  /**
-   * List galleries under a subscription.
-   */
+  /** List galleries under a subscription. */
   list is ArmListBySubscription<Gallery, Response = ArmResponse<GalleryList>>;
 
-  /**
-   * Update sharing profile of a gallery.
-   */
+  /** Update sharing profile of a gallery. */
   @action("share")
   gallerySharingProfileUpdate is ArmResourceActionAsync<
     Gallery,

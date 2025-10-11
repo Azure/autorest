@@ -15,9 +15,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-/**
- * Test Infrastructure for AutoRest
- */
+/** Test Infrastructure for AutoRest */
 @service(#{ title: "AutoRest Complex Test Service" })
 @versioned(Versions)
 @server(

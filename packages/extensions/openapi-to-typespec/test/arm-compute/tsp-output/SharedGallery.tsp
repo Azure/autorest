@@ -11,9 +11,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 // FIXME: SharedGallery has no properties property
-/**
- * Specifies information about the Shared Gallery that you want to create or update.
- */
+/** Specifies information about the Shared Gallery that you want to create or update. */
 @subscriptionResource
 model SharedGallery is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
@@ -23,40 +21,30 @@ model SharedGallery is Azure.ResourceManager.ProxyResource<{}> {
     NamePattern = ""
   >;
 
-  /**
-   * Resource location
-   */
+  /** Resource location */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   location?: string;
 
-  /**
-   * The identifier information of shared gallery.
-   */
+  /** The identifier information of shared gallery. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   identifier?: SharedGalleryIdentifier;
 }
 
 @armResourceOperations
 interface SharedGalleries {
-  /**
-   * Get a shared gallery by subscription id or tenant id.
-   */
+  /** Get a shared gallery by subscription id or tenant id. */
   get is ArmResourceRead<
     SharedGallery,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
-  /**
-   * List shared galleries by subscription id or tenant id.
-   */
+  /** List shared galleries by subscription id or tenant id. */
   list is ArmResourceListByParent<
     SharedGallery,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {
-      /**
-       * The query parameter to decide what shared galleries to fetch when doing listing operations.
-       */
+      /** The query parameter to decide what shared galleries to fetch when doing listing operations. */
       @query("sharedTo")
       sharedTo?: SharedToValues;
     },

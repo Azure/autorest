@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
-/**
- * The Encryption Scope resource.
- */
+/** The Encryption Scope resource. */
 @parentResource(StorageAccount)
 model EncryptionScope
   is Azure.ResourceManager.ProxyResource<EncryptionScopeProperties> {
@@ -27,45 +25,31 @@ model EncryptionScope
 
 @armResourceOperations
 interface EncryptionScopes {
-  /**
-   * Returns the properties for the specified encryption scope.
-   */
+  /** Returns the properties for the specified encryption scope. */
   get is ArmResourceRead<EncryptionScope>;
 
-  /**
-   * Synchronously creates or updates an encryption scope under the specified storage account. If an encryption scope is already created and a subsequent request is issued with different properties, the encryption scope properties will be updated per the specified request.
-   */
+  /** Synchronously creates or updates an encryption scope under the specified storage account. If an encryption scope is already created and a subsequent request is issued with different properties, the encryption scope properties will be updated per the specified request. */
   put is ArmResourceCreateOrReplaceSync<EncryptionScope>;
 
-  /**
-   * Update encryption scope properties as specified in the request body. Update fails if the specified encryption scope does not already exist.
-   */
+  /** Update encryption scope properties as specified in the request body. Update fails if the specified encryption scope does not already exist. */
   @patch(#{ implicitOptionality: false })
   patch is ArmCustomPatchSync<EncryptionScope, PatchModel = EncryptionScope>;
 
-  /**
-   * Lists all the encryption scopes available under the specified storage account.
-   */
+  /** Lists all the encryption scopes available under the specified storage account. */
   list is ArmResourceListByParent<
     EncryptionScope,
     Parameters = {
-      /**
-       * Optional, specifies the maximum number of encryption scopes that will be included in the list response.
-       */
+      /** Optional, specifies the maximum number of encryption scopes that will be included in the list response. */
       @maxValue(5000)
       @minValue(1)
       @query("$maxpagesize")
       $maxpagesize?: int32;
 
-      /**
-       * Optional. When specified, only encryption scope names starting with the filter will be listed.
-       */
+      /** Optional. When specified, only encryption scope names starting with the filter will be listed. */
       @query("$filter")
       $filter?: string;
 
-      /**
-       * Optional, when specified, will list encryption scopes with the specific state. Defaults to All
-       */
+      /** Optional, when specified, will list encryption scopes with the specific state. Defaults to All */
       @query("$include")
       $include?: ListEncryptionScopesInclude;
     }

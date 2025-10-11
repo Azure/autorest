@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
-/**
- * The properties of a storage account’s Table service.
- */
+/** The properties of a storage account’s Table service. */
 @singleton("default")
 @parentResource(StorageAccount)
 model TableServiceProperties
@@ -28,23 +26,17 @@ model TableServiceProperties
 
 @armResourceOperations
 interface TableServices {
-  /**
-   * Gets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
-   */
+  /** Gets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. */
   getServiceProperties is ArmResourceRead<TableServiceProperties>;
 
-  /**
-   * Sets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
-   */
+  /** Sets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   setServiceProperties is ArmResourceCreateOrReplaceSync<
     TableServiceProperties,
     Response = ArmResourceUpdatedResponse<TableServiceProperties>
   >;
 
-  /**
-   * List all table services for the storage account.
-   */
+  /** List all table services for the storage account. */
   list is ArmResourceListByParent<
     TableServiceProperties,
     Response = ArmResponse<ListTableServices>

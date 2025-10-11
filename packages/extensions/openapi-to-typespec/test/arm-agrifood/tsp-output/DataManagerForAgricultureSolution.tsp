@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AgFoodPlatform;
-/**
- * DataManagerForAgriculture solution resource.
- */
+/** DataManagerForAgriculture solution resource. */
 @tenantResource
 model DataManagerForAgricultureSolution
   is Azure.ResourceManager.ProxyResource<DataManagerForAgricultureSolutionProperties> {
@@ -26,31 +24,23 @@ model DataManagerForAgricultureSolution
 
 @armResourceOperations
 interface DataManagerForAgricultureSolutions {
-  /**
-   * Get Data Manager For Agriculture solution by id.
-   */
+  /** Get Data Manager For Agriculture solution by id. */
   get is ArmResourceRead<
     DataManagerForAgricultureSolution,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
   >;
 
-  /**
-   * Get list of Data Manager For Agriculture solutions.
-   */
+  /** Get list of Data Manager For Agriculture solutions. */
   list is ArmResourceListByParent<
     DataManagerForAgricultureSolution,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
-      /**
-       * Ids of Data Manager For Agriculture Solutions which the customer requests to fetch.
-       */
+      /** Ids of Data Manager For Agriculture Solutions which the customer requests to fetch. */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "farmBeatsSolutionIds", explode: true })
       farmBeatsSolutionIds?: string[];
 
-      /**
-       * Names of Data Manager For Agriculture Solutions which the customer requests to fetch.
-       */
+      /** Names of Data Manager For Agriculture Solutions which the customer requests to fetch. */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "farmBeatsSolutionNames", explode: true })
       farmBeatsSolutionNames?: string[];

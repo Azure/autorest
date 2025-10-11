@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * Portal Revision's contract details.
- */
+/** Portal Revision's contract details. */
 @parentResource(ApiManagementServiceResource)
 model PortalRevisionContract
   is Azure.ResourceManager.ProxyResource<PortalRevisionContractProperties> {
@@ -27,19 +25,13 @@ model PortalRevisionContract
 
 @armResourceOperations
 interface PortalRevisionContracts {
-  /**
-   * Gets the developer portal's revision specified by its identifier.
-   */
+  /** Gets the developer portal's revision specified by its identifier. */
   get is ArmResourceRead<PortalRevisionContract>;
 
-  /**
-   * Gets the developer portal revision specified by its identifier.
-   */
+  /** Gets the developer portal revision specified by its identifier. */
   getEntityTag is ArmResourceCheckExistence<PortalRevisionContract>;
 
-  /**
-   * Creates a new developer portal's revision by running the portal's publishing. The `isCurrent` property indicates if the revision is publicly accessible.
-   */
+  /** Creates a new developer portal's revision by running the portal's publishing. The `isCurrent` property indicates if the revision is publicly accessible. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PortalRevisionContract,
@@ -49,25 +41,19 @@ interface PortalRevisionContracts {
     > | ArmAcceptedLroResponse
   >;
 
-  /**
-   * Updates the description of specified portal revision or makes it current.
-   */
+  /** Updates the description of specified portal revision or makes it current. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     PortalRevisionContract,
     PatchModel = PortalRevisionContract,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Lists developer portal's revisions.
-   */
+  /** Lists developer portal's revisions. */
   listByService is ArmResourceListByParent<
     PortalRevisionContract,
     Parameters = {
@@ -83,16 +69,12 @@ interface PortalRevisionContracts {
       @query("$filter")
       $filter?: string;
 
-      /**
-       * Number of records to return.
-       */
+      /** Number of records to return. */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      /**
-       * Number of records to skip.
-       */
+      /** Number of records to skip. */
       @query("$skip")
       $skip?: int32;
     }

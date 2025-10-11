@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Quota;
-/**
- * List of Group Quota Limit details.
- */
+/** List of Group Quota Limit details. */
 @parentResource(GroupQuotasEntity)
 model GroupQuotaLimitList
   is Azure.ResourceManager.ProxyResource<GroupQuotaLimitListProperties> {
@@ -27,9 +25,7 @@ model GroupQuotaLimitList
 
 @armResourceOperations
 interface GroupQuotaLimitLists {
-  /**
-   * Gets the GroupQuotaLimits for the specified resource provider and location for resource names passed in $filter=resourceName eq {SKU}.
-   */
+  /** Gets the GroupQuotaLimits for the specified resource provider and location for resource names passed in $filter=resourceName eq {SKU}. */
   list is Extension.Read<Extension.ManagementGroup, GroupQuotaLimitList>;
 
   /**

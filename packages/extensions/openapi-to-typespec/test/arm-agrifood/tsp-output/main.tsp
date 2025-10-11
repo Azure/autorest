@@ -29,9 +29,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-/**
- * APIs documentation for Microsoft Azure Data Manager for Agriculture Service.
- */
+/** APIs documentation for Microsoft Azure Data Manager for Agriculture Service. */
 @armProviderNamespace
 @service(#{ title: "Azure AgFoodPlatform RP Service" })
 @versioned(Versions)

@@ -10,9 +10,7 @@ using TypeSpec.OpenAPI;
 namespace Azure.AI.OpenAI;
 
 interface completionsOperationGroup {
-  /**
-   * Create a completion from a chosen model
-   */
+  /** Create a completion from a chosen model */
   @summary("Create a completion from a chosen model")
   @operationId("completions_create")
   @route("/deployments/{deployment-id}/completions")
@@ -30,18 +28,14 @@ interface completionsOperationGroup {
 }
 
 interface embeddingsOperationGroup {
-  /**
-   * Return the embeddings for a given prompt.
-   */
+  /** Return the embeddings for a given prompt. */
   @summary("Return the embeddings for a given prompt.")
   @operationId("embeddings_create")
   @route("/deployments/{deployment-id}/embeddings")
   @post
   create is Azure.Core.Foundations.Operation<
     {
-      /**
-       * deployment id of the model which was deployed
-       */
+      /** deployment id of the model which was deployed */
       @path
       `deployment-id`: string;
 

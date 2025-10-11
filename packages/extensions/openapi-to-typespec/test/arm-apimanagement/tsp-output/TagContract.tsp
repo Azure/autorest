@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * Tag Contract details.
- */
+/** Tag Contract details. */
 @parentResource(OperationContract)
 model TagContract
   is Azure.ResourceManager.ProxyResource<TagContractProperties> {
@@ -64,51 +62,35 @@ alias TagContractOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @armResourceOperations
 interface TagContracts {
-  /**
-   * Get tag associated with the Operation.
-   */
+  /** Get tag associated with the Operation. */
   getByOperation is TagContractOps.Read<TagContract>;
 
-  /**
-   * Gets the entity state version of the tag specified by its identifier.
-   */
+  /** Gets the entity state version of the tag specified by its identifier. */
   getEntityStateByOperation is TagContractOps.CheckExistence<TagContract>;
 
-  /**
-   * Assign tag to the Operation.
-   */
+  /** Assign tag to the Operation. */
   assignToOperation is TagContractOps.CreateOrUpdateSync<
     TagContract,
     Request = void
   >;
 
-  /**
-   * Detach the tag from the Operation.
-   */
+  /** Detach the tag from the Operation. */
   detachFromOperation is TagContractOps.DeleteSync<TagContract>;
 
-  /**
-   * Lists all Tags associated with the Operation.
-   */
+  /** Lists all Tags associated with the Operation. */
   listByOperation is TagContractOps.List<
     TagContract,
     Parameters = {
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-       */
+      /** |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br> */
       @query("$filter")
       $filter?: string;
 
-      /**
-       * Number of records to return.
-       */
+      /** Number of records to return. */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      /**
-       * Number of records to skip.
-       */
+      /** Number of records to skip. */
       @query("$skip")
       $skip?: int32;
     }
@@ -147,48 +129,32 @@ alias TagOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @armResourceOperations
 interface Tag {
-  /**
-   * Get tag associated with the API.
-   */
+  /** Get tag associated with the API. */
   getByApi is TagOps.Read<TagContract>;
 
-  /**
-   * Gets the entity state version of the tag specified by its identifier.
-   */
+  /** Gets the entity state version of the tag specified by its identifier. */
   getEntityStateByApi is TagOps.CheckExistence<TagContract>;
 
-  /**
-   * Assign tag to the Api.
-   */
+  /** Assign tag to the Api. */
   assignToApi is TagOps.CreateOrUpdateSync<TagContract, Request = void>;
 
-  /**
-   * Detach the tag from the Api.
-   */
+  /** Detach the tag from the Api. */
   detachFromApi is TagOps.DeleteSync<TagContract>;
 
-  /**
-   * Lists all Tags associated with the API.
-   */
+  /** Lists all Tags associated with the API. */
   listByApi is TagOps.List<
     TagContract,
     Parameters = {
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-       */
+      /** |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br> */
       @query("$filter")
       $filter?: string;
 
-      /**
-       * Number of records to return.
-       */
+      /** Number of records to return. */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      /**
-       * Number of records to skip.
-       */
+      /** Number of records to skip. */
       @query("$skip")
       $skip?: int32;
     }
@@ -226,51 +192,35 @@ alias TagContractOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperatio
 
 @armResourceOperations
 interface TagContractOperationGroup {
-  /**
-   * Get tag associated with the Product.
-   */
+  /** Get tag associated with the Product. */
   getByProduct is TagContractOperationGroupOps.Read<TagContract>;
 
-  /**
-   * Gets the entity state version of the tag specified by its identifier.
-   */
+  /** Gets the entity state version of the tag specified by its identifier. */
   getEntityStateByProduct is TagContractOperationGroupOps.CheckExistence<TagContract>;
 
-  /**
-   * Assign tag to the Product.
-   */
+  /** Assign tag to the Product. */
   assignToProduct is TagContractOperationGroupOps.CreateOrUpdateSync<
     TagContract,
     Request = void
   >;
 
-  /**
-   * Detach the tag from the Product.
-   */
+  /** Detach the tag from the Product. */
   detachFromProduct is TagContractOperationGroupOps.DeleteSync<TagContract>;
 
-  /**
-   * Lists all Tags associated with the Product.
-   */
+  /** Lists all Tags associated with the Product. */
   listByProduct is TagContractOperationGroupOps.List<
     TagContract,
     Parameters = {
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-       */
+      /** |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br> */
       @query("$filter")
       $filter?: string;
 
-      /**
-       * Number of records to return.
-       */
+      /** Number of records to return. */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      /**
-       * Number of records to skip.
-       */
+      /** Number of records to skip. */
       @query("$skip")
       $skip?: int32;
     }
@@ -302,89 +252,63 @@ alias TagContractOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperatio
 
 @armResourceOperations
 interface TagContractOperationGroup {
-  /**
-   * Gets the details of the tag specified by its identifier.
-   */
+  /** Gets the details of the tag specified by its identifier. */
   get is TagContractOperationGroupOps.Read<TagContract>;
 
-  /**
-   * Gets the entity state version of the tag specified by its identifier.
-   */
+  /** Gets the entity state version of the tag specified by its identifier. */
   getEntityState is TagContractOperationGroupOps.CheckExistence<TagContract>;
 
-  /**
-   * Creates a tag.
-   */
+  /** Creates a tag. */
   createOrUpdate is TagContractOperationGroupOps.CreateOrUpdateSync<
     TagContract,
     Request = TagCreateUpdateParameters,
     Parameters = {
-      /**
-       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
-       */
+      /** ETag of the Entity. Not required when creating an entity, but required when updating an entity. */
       @header
       `If-Match`?: string;
     }
   >;
 
-  /**
-   * Updates the details of the tag specified by its identifier.
-   */
+  /** Updates the details of the tag specified by its identifier. */
   @patch(#{ implicitOptionality: false })
   update is TagContractOperationGroupOps.CustomPatchSync<
     TagContract,
     PatchModel = TagCreateUpdateParameters,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Deletes specific tag of the API Management service instance.
-   */
+  /** Deletes specific tag of the API Management service instance. */
   delete is TagContractOperationGroupOps.DeleteSync<
     TagContract,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Lists a collection of tags defined within a service instance.
-   */
+  /** Lists a collection of tags defined within a service instance. */
   listByService is TagContractOperationGroupOps.List<
     TagContract,
     Parameters = {
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-       */
+      /** |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br> */
       @query("$filter")
       $filter?: string;
 
-      /**
-       * Number of records to return.
-       */
+      /** Number of records to return. */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      /**
-       * Number of records to skip.
-       */
+      /** Number of records to skip. */
       @query("$skip")
       $skip?: int32;
 
-      /**
-       * Scope like 'apis', 'products' or 'apis/{apiId}
-       */
+      /** Scope like 'apis', 'products' or 'apis/{apiId} */
       @query("scope")
       scope?: string;
     }

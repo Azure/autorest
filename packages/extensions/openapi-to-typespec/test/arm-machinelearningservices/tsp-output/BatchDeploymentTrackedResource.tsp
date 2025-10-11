@@ -23,9 +23,7 @@ model BatchDeploymentTrackedResource
   >;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 
-  /**
-   * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
-   */
+  /** Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   kind?: string;
 
@@ -34,55 +32,39 @@ model BatchDeploymentTrackedResource
 
 @armResourceOperations
 interface BatchDeploymentTrackedResources {
-  /**
-   * Gets a batch inference deployment by id.
-   */
+  /** Gets a batch inference deployment by id. */
   get is ArmResourceRead<BatchDeploymentTrackedResource>;
 
-  /**
-   * Creates/updates a batch inference deployment (asynchronous).
-   */
+  /** Creates/updates a batch inference deployment (asynchronous). */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<BatchDeploymentTrackedResource>;
 
-  /**
-   * Update a batch inference deployment (asynchronous).
-   */
+  /** Update a batch inference deployment (asynchronous). */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     BatchDeploymentTrackedResource,
     PatchModel = PartialBatchDeploymentPartialMinimalTrackedResourceWithProperties
   >;
 
-  /**
-   * Delete Batch Inference deployment (asynchronous).
-   */
+  /** Delete Batch Inference deployment (asynchronous). */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     BatchDeploymentTrackedResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * Lists Batch inference deployments in the workspace.
-   */
+  /** Lists Batch inference deployments in the workspace. */
   list is ArmResourceListByParent<
     BatchDeploymentTrackedResource,
     Parameters = {
-      /**
-       * Ordering of list.
-       */
+      /** Ordering of list. */
       @query("$orderBy")
       $orderBy?: string;
 
-      /**
-       * Top of list.
-       */
+      /** Top of list. */
       @query("$top")
       $top?: int32;
 
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
     },

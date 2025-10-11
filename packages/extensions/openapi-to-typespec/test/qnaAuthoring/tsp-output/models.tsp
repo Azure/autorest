@@ -7,228 +7,142 @@ using TypeSpec.Http;
 
 namespace MicrosoftCognitiveLanguageServiceQuestionAnsweringAuthoring;
 
-/**
- * Human-readable error code.
- */
+/** Human-readable error code. */
 union ErrorCode {
   string,
 
-  /**
-   * InvalidRequest
-   */
+  /** InvalidRequest */
   InvalidRequest: "InvalidRequest",
 
-  /**
-   * InvalidArgument
-   */
+  /** InvalidArgument */
   InvalidArgument: "InvalidArgument",
 
-  /**
-   * Unauthorized
-   */
+  /** Unauthorized */
   Unauthorized: "Unauthorized",
 
-  /**
-   * Forbidden
-   */
+  /** Forbidden */
   Forbidden: "Forbidden",
 
-  /**
-   * NotFound
-   */
+  /** NotFound */
   NotFound: "NotFound",
 
-  /**
-   * ProjectNotFound
-   */
+  /** ProjectNotFound */
   ProjectNotFound: "ProjectNotFound",
 
-  /**
-   * OperationNotFound
-   */
+  /** OperationNotFound */
   OperationNotFound: "OperationNotFound",
 
-  /**
-   * AzureCognitiveSearchNotFound
-   */
+  /** AzureCognitiveSearchNotFound */
   AzureCognitiveSearchNotFound: "AzureCognitiveSearchNotFound",
 
-  /**
-   * AzureCognitiveSearchIndexNotFound
-   */
+  /** AzureCognitiveSearchIndexNotFound */
   AzureCognitiveSearchIndexNotFound: "AzureCognitiveSearchIndexNotFound",
 
-  /**
-   * TooManyRequests
-   */
+  /** TooManyRequests */
   TooManyRequests: "TooManyRequests",
 
-  /**
-   * AzureCognitiveSearchThrottling
-   */
+  /** AzureCognitiveSearchThrottling */
   AzureCognitiveSearchThrottling: "AzureCognitiveSearchThrottling",
 
-  /**
-   * AzureCognitiveSearchIndexLimitReached
-   */
+  /** AzureCognitiveSearchIndexLimitReached */
   AzureCognitiveSearchIndexLimitReached: "AzureCognitiveSearchIndexLimitReached",
 
-  /**
-   * InternalServerError
-   */
+  /** InternalServerError */
   InternalServerError: "InternalServerError",
 
-  /**
-   * ServiceUnavailable
-   */
+  /** ServiceUnavailable */
   ServiceUnavailable: "ServiceUnavailable",
 
-  /**
-   * Timeout
-   */
+  /** Timeout */
   Timeout: "Timeout",
 
-  /**
-   * QuotaExceeded
-   */
+  /** QuotaExceeded */
   QuotaExceeded: "QuotaExceeded",
 
-  /**
-   * Conflict
-   */
+  /** Conflict */
   Conflict: "Conflict",
 
-  /**
-   * Warning
-   */
+  /** Warning */
   Warning: "Warning",
 }
 
-/**
- * Human-readable error code.
- */
+/** Human-readable error code. */
 union InnerErrorCode {
   string,
 
-  /**
-   * InvalidRequest
-   */
+  /** InvalidRequest */
   InvalidRequest: "InvalidRequest",
 
-  /**
-   * InvalidParameterValue
-   */
+  /** InvalidParameterValue */
   InvalidParameterValue: "InvalidParameterValue",
 
-  /**
-   * KnowledgeBaseNotFound
-   */
+  /** KnowledgeBaseNotFound */
   KnowledgeBaseNotFound: "KnowledgeBaseNotFound",
 
-  /**
-   * AzureCognitiveSearchNotFound
-   */
+  /** AzureCognitiveSearchNotFound */
   AzureCognitiveSearchNotFound: "AzureCognitiveSearchNotFound",
 
-  /**
-   * AzureCognitiveSearchThrottling
-   */
+  /** AzureCognitiveSearchThrottling */
   AzureCognitiveSearchThrottling: "AzureCognitiveSearchThrottling",
 
-  /**
-   * ExtractionFailure
-   */
+  /** ExtractionFailure */
   ExtractionFailure: "ExtractionFailure",
 
-  /**
-   * InvalidRequestBodyFormat
-   */
+  /** InvalidRequestBodyFormat */
   InvalidRequestBodyFormat: "InvalidRequestBodyFormat",
 
-  /**
-   * EmptyRequest
-   */
+  /** EmptyRequest */
   EmptyRequest: "EmptyRequest",
 
-  /**
-   * MissingInputDocuments
-   */
+  /** MissingInputDocuments */
   MissingInputDocuments: "MissingInputDocuments",
 
-  /**
-   * InvalidDocument
-   */
+  /** InvalidDocument */
   InvalidDocument: "InvalidDocument",
 
-  /**
-   * ModelVersionIncorrect
-   */
+  /** ModelVersionIncorrect */
   ModelVersionIncorrect: "ModelVersionIncorrect",
 
-  /**
-   * InvalidDocumentBatch
-   */
+  /** InvalidDocumentBatch */
   InvalidDocumentBatch: "InvalidDocumentBatch",
 
-  /**
-   * UnsupportedLanguageCode
-   */
+  /** UnsupportedLanguageCode */
   UnsupportedLanguageCode: "UnsupportedLanguageCode",
 
-  /**
-   * InvalidCountryHint
-   */
+  /** InvalidCountryHint */
   InvalidCountryHint: "InvalidCountryHint",
 }
 
-/**
- * Job Status.
- */
+/** Job Status. */
 union JobStatus {
   string,
 
-  /**
-   * notStarted
-   */
+  /** notStarted */
   notStarted: "notStarted",
 
-  /**
-   * running
-   */
+  /** running */
   running: "running",
 
-  /**
-   * succeeded
-   */
+  /** succeeded */
   succeeded: "succeeded",
 
-  /**
-   * failed
-   */
+  /** failed */
   failed: "failed",
 
-  /**
-   * cancelled
-   */
+  /** cancelled */
   cancelled: "cancelled",
 
-  /**
-   * cancelling
-   */
+  /** cancelling */
   cancelling: "cancelling",
 
-  /**
-   * partiallyCompleted
-   */
+  /** partiallyCompleted */
   partiallyCompleted: "partiallyCompleted",
 }
 
 union Format {
   string,
 
-  /**
-   * Export or Import QnA assets in JSON format.
-   */
+  /** Export or Import QnA assets in JSON format. */
   json: "json",
 
   /**
@@ -247,85 +161,55 @@ union Format {
 union AssetKind {
   string,
 
-  /**
-   * qnas
-   */
+  /** qnas */
   qnas: "qnas",
 
-  /**
-   * synonyms
-   */
+  /** synonyms */
   synonyms: "synonyms",
 }
 
-/**
- * Supported source types.
- */
+/** Supported source types. */
 union SourceKind {
   string,
 
-  /**
-   * file
-   */
+  /** file */
   file: "file",
 
-  /**
-   * url
-   */
+  /** url */
   url: "url",
 }
 
-/**
- * Content structure type for sources.
- */
+/** Content structure type for sources. */
 union SourceContentStructureKind {
   string,
 
-  /**
-   * unstructured
-   */
+  /** unstructured */
   unstructured: "unstructured",
 }
 
-/**
- * Update operation type for assets.
- */
+/** Update operation type for assets. */
 union UpdateOperationKind {
   string,
 
-  /**
-   * add
-   */
+  /** add */
   add: "add",
 
-  /**
-   * delete
-   */
+  /** delete */
   delete: "delete",
 
-  /**
-   * replace
-   */
+  /** replace */
   replace: "replace",
 }
 
-/**
- * Collection of projects metadata and global settings.
- */
+/** Collection of projects metadata and global settings. */
 model ProjectsMetadata is Azure.Core.Page<ProjectMetadata>;
 
-/**
- * Represents the project.
- */
+/** Represents the project. */
 model ProjectMetadata {
-  /**
-   * Name of the project.
-   */
+  /** Name of the project. */
   projectName?: string;
 
-  /**
-   * Description of the project.
-   */
+  /** Description of the project. */
   description?: string;
 
   /**
@@ -335,80 +219,52 @@ model ProjectMetadata {
    */
   language?: string;
 
-  /**
-   * Resource enabled for multiple languages across projects or not.
-   */
+  /** Resource enabled for multiple languages across projects or not. */
   multilingualResource?: boolean;
 
-  /**
-   * Configurable settings of the Project.
-   */
+  /** Configurable settings of the Project. */
   settings?: ProjectSettings;
 
-  /**
-   * Project creation date-time.
-   */
+  /** Project creation date-time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
-  /**
-   * Represents the project last modified date-time.
-   */
+  /** Represents the project last modified date-time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime?: utcDateTime;
 
-  /**
-   * Represents the project last deployment date-time.
-   */
+  /** Represents the project last deployment date-time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastDeployedDateTime?: utcDateTime;
 }
 
-/**
- * Configurable settings of the Project.
- */
+/** Configurable settings of the Project. */
 model ProjectSettings {
-  /**
-   * Default Answer response when no good match is found in the knowledge base.
-   */
+  /** Default Answer response when no good match is found in the knowledge base. */
   defaultAnswer?: string;
 }
 
-/**
- * Error response.
- */
+/** Error response. */
 @error
 model ErrorResponse {
-  /**
-   * The error object.
-   */
+  /** The error object. */
   error: Error;
 }
 
-/**
- * The error object.
- */
+/** The error object. */
 model Error {
   ...Record<unknown>;
 
-  /**
-   * One of a server-defined set of error codes.
-   */
+  /** One of a server-defined set of error codes. */
   code: ErrorCode;
 
-  /**
-   * A human-readable representation of the error.
-   */
+  /** A human-readable representation of the error. */
   message: string;
 
-  /**
-   * The target of the error.
-   */
+  /** The target of the error. */
   target?: string;
 
-  /**
-   * An array of details about specific errors that led to this reported error.
-   */
+  /** An array of details about specific errors that led to this reported error. */
   details?: Error[];
 
   /**
@@ -424,24 +280,16 @@ model Error {
  * https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
  */
 model InnerErrorModel {
-  /**
-   * One of a server-defined set of error codes.
-   */
+  /** One of a server-defined set of error codes. */
   code: InnerErrorCode;
 
-  /**
-   * Error message.
-   */
+  /** Error message. */
   message: string;
 
-  /**
-   * Error details.
-   */
+  /** Error details. */
   details?: Record<string>;
 
-  /**
-   * Error target.
-   */
+  /** Error target. */
   target?: string;
 
   /**
@@ -451,13 +299,9 @@ model InnerErrorModel {
   innererror?: InnerErrorModel;
 }
 
-/**
- * Parameters needed to create the project.
- */
+/** Parameters needed to create the project. */
 model CreateProjectOptions {
-  /**
-   * Description of the project.
-   */
+  /** Description of the project. */
   description?: string;
 
   /**
@@ -473,23 +317,17 @@ model CreateProjectOptions {
    */
   multilingualResource?: boolean;
 
-  /**
-   * Configurable settings of the Project.
-   */
+  /** Configurable settings of the Project. */
   settings?: ProjectSettings;
 }
 
-/**
- * Job state represents the job metadata and any errors.
- */
+/** Job state represents the job metadata and any errors. */
 model JobState {
   ...JobMetadata;
   ...Errors;
 }
 
-/**
- * Represents the job metadata.
- */
+/** Represents the job metadata. */
 model JobMetadata {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime: utcDateTime;
@@ -504,114 +342,76 @@ model JobMetadata {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdatedDateTime: utcDateTime;
 
-  /**
-   * Job Status.
-   */
+  /** Job Status. */
   status: JobStatus;
 }
 
-/**
- * Collection of Error types.
- */
+/** Collection of Error types. */
 model Errors {
   errors?: Error[];
 }
 
-/**
- * Export job status, project metadata, and assets.
- */
+/** Export job status, project metadata, and assets. */
 model ExportJobState {
   ...JobState;
   ...ExportJobResultUrl;
 }
 
-/**
- * URL to download the result of the Export Job.
- */
+/** URL to download the result of the Export Job. */
 model ExportJobResultUrl {
-  /**
-   * URL to download the result of the Export Job.
-   */
+  /** URL to download the result of the Export Job. */
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   resultUrl: string;
 }
 
-/**
- * Project assets the needs to be imported.
- */
+/** Project assets the needs to be imported. */
 model ImportJobOptions {
-  /**
-   * Parameters needed to create the project.
-   */
+  /** Parameters needed to create the project. */
   metadata?: CreateProjectOptions;
 
-  /**
-   * All assets for this project.
-   */
+  /** All assets for this project. */
   assets?: Assets;
 
-  /**
-   * Import data File URI.
-   */
+  /** Import data File URI. */
   fileUri?: string;
 }
 
-/**
- * All assets for this project.
- */
+/** All assets for this project. */
 model Assets {
-  /**
-   * Collection of synonyms.
-   */
+  /** Collection of synonyms. */
   synonyms?: WordAlterations[];
 
-  /**
-   * List of QnA records to import.
-   */
+  /** List of QnA records to import. */
   qnas?: ImportQnaRecord[];
 }
 
-/**
- * Collection of word alterations.
- */
+/** Collection of word alterations. */
 model WordAlterations {
-  /**
-   * Collection of word alterations.
-   */
+  /** Collection of word alterations. */
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   alterations: string[];
 }
 
-/**
- * Import QnA Record.
- */
+/** Import QnA Record. */
 model ImportQnaRecord {
   ...RetrieveQnaRecord;
   ...SourceDisplayNameParameter;
 }
 
-/**
- * QnA Record with last updated date-time.
- */
+/** QnA Record with last updated date-time. */
 model RetrieveQnaRecord {
   ...QnaRecord;
   ...LastUpdatedDateTimeParameter;
 }
 
-/**
- * QnA record.
- */
+/** QnA record. */
 model QnaRecord {
-  /**
-   * Unique ID for the QnA.
-   */
+  /** Unique ID for the QnA. */
   id?: int32;
 
-  /**
-   * Answer text.
-   */
+  /** Answer text. */
   @maxLength(25000)
   @minLength(1)
   answer?: string;
@@ -623,9 +423,7 @@ model QnaRecord {
   @maxLength(300)
   source?: string;
 
-  /**
-   * List of questions associated with the answer.
-   */
+  /** List of questions associated with the answer. */
   questions?: string[];
 
   /**
@@ -634,20 +432,14 @@ model QnaRecord {
    */
   metadata?: Record<string>;
 
-  /**
-   * Context of a QnA.
-   */
+  /** Context of a QnA. */
   dialog?: QnaDialog;
 
-  /**
-   * List of Active Learning suggestions for the QnA.
-   */
+  /** List of Active Learning suggestions for the QnA. */
   activeLearningSuggestions?: SuggestedQuestionsCluster[];
 }
 
-/**
- * Dialog associated with QnA Record.
- */
+/** Dialog associated with QnA Record. */
 model QnaDialog {
   /**
    * To mark if a prompt is relevant only with a previous question or not. If true,
@@ -656,41 +448,27 @@ model QnaDialog {
    */
   isContextOnly?: boolean;
 
-  /**
-   * List of prompts associated with the answer.
-   */
+  /** List of prompts associated with the answer. */
   prompts?: QnaPrompt[];
 }
 
-/**
- * Prompt for an answer.
- */
+/** Prompt for an answer. */
 model QnaPrompt {
-  /**
-   * Index of the prompt. It is used for ordering of the prompts.
-   */
+  /** Index of the prompt. It is used for ordering of the prompts. */
   displayOrder?: int32;
 
-  /**
-   * ID of the QnA corresponding to the prompt.
-   */
+  /** ID of the QnA corresponding to the prompt. */
   qnaId?: int32;
 
-  /**
-   * QnA record. Either QnAId or QnA record needs to be present in a Prompt.
-   */
+  /** QnA record. Either QnAId or QnA record needs to be present in a Prompt. */
   qna?: QnaRecord;
 
-  /**
-   * Text displayed to represent a follow up question prompt.
-   */
+  /** Text displayed to represent a follow up question prompt. */
   @maxLength(200)
   displayText?: string;
 }
 
-/**
- * Active Learning suggested questions cluster details.
- */
+/** Active Learning suggested questions cluster details. */
 model SuggestedQuestionsCluster {
   /**
    * Question chosen as the head of suggested questions cluster by Active Learning
@@ -698,24 +476,16 @@ model SuggestedQuestionsCluster {
    */
   clusterHead?: string;
 
-  /**
-   * List of all suggested questions for the QnA.
-   */
+  /** List of all suggested questions for the QnA. */
   suggestedQuestions?: SuggestedQuestion[];
 }
 
-/**
- * Question suggested by the Active Learning feature.
- */
+/** Question suggested by the Active Learning feature. */
 model SuggestedQuestion {
-  /**
-   * Question suggested by the Active Learning feature.
-   */
+  /** Question suggested by the Active Learning feature. */
   question?: string;
 
-  /**
-   * The number of times the question was suggested explicitly by the user.
-   */
+  /** The number of times the question was suggested explicitly by the user. */
   userSuggestedCount?: int32;
 
   /**
@@ -725,72 +495,48 @@ model SuggestedQuestion {
   autoSuggestedCount?: int32;
 }
 
-/**
- * Last updated date-time parameter.
- */
+/** Last updated date-time parameter. */
 model LastUpdatedDateTimeParameter {
-  /**
-   * Date-time when the QnA was last updated.
-   */
+  /** Date-time when the QnA was last updated. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdatedDateTime?: utcDateTime;
 }
 
 model SourceDisplayNameParameter {
-  /**
-   * Friendly name of the Source.
-   */
+  /** Friendly name of the Source. */
   @maxLength(200)
   @minLength(1)
   sourceDisplayName?: string;
 }
 
-/**
- * All deployments of a project.
- */
+/** All deployments of a project. */
 model ProjectDeployments is Azure.Core.Page<ProjectDeployment>;
 
-/**
- * Project deployment details.
- */
+/** Project deployment details. */
 model ProjectDeployment {
-  /**
-   * Name of the deployment.
-   */
+  /** Name of the deployment. */
   deploymentName?: string;
 
-  /**
-   * Represents the project last deployment date-time.
-   */
+  /** Represents the project last deployment date-time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastDeployedDateTime?: utcDateTime;
 }
 
-/**
- * All synonym assets for this project.
- */
+/** All synonym assets for this project. */
 model SynonymAssets is Azure.Core.Page<WordAlterations>;
 
-/**
- * All QnA sources for the project.
- */
+/** All QnA sources for the project. */
 model QnaSources is Azure.Core.Page<QnaSourceRecord>;
 
-/**
- * Custom source record with last updated date-time.
- */
+/** Custom source record with last updated date-time. */
 model QnaSourceRecord {
   ...QnaSourceMetadata;
   ...LastUpdatedDateTimeParameter;
 }
 
-/**
- * Input source file or url details.
- */
+/** Input source file or url details. */
 model QnaSourceMetadata {
-  /**
-   * Friendly name of the Source.
-   */
+  /** Friendly name of the Source. */
   @maxLength(200)
   @minLength(1)
   displayName?: string;
@@ -803,101 +549,63 @@ model QnaSourceMetadata {
   @key
   source: string;
 
-  /**
-   * URI location for the file or url.
-   */
+  /** URI location for the file or url. */
   sourceUri: url;
 
-  /**
-   * Supported source types.
-   */
+  /** Supported source types. */
   sourceKind: SourceKind;
 
-  /**
-   * Content structure type for sources.
-   */
+  /** Content structure type for sources. */
   contentStructureKind?: SourceContentStructureKind;
 }
 
-/**
- * Source to be updated.
- */
+/** Source to be updated. */
 model UpdateSourceRecord {
-  /**
-   * Update operation type for assets.
-   */
+  /** Update operation type for assets. */
   `op`: UpdateOperationKind;
 
-  /**
-   * Update source record.
-   */
+  /** Update source record. */
   value: UpdateQnaSourceRecord;
 }
 
-/**
- * Update source record.
- */
+/** Update source record. */
 model UpdateQnaSourceRecord {
   ...QnaSourceMetadata;
   ...RefreshSourceOptions;
 }
 
-/**
- * Boolean flag used to refresh data from the Source.
- */
+/** Boolean flag used to refresh data from the Source. */
 model RefreshSourceOptions {
-  /**
-   * Boolean flag used to refresh data from the Source.
-   */
+  /** Boolean flag used to refresh data from the Source. */
   refresh?: boolean;
 }
 
-/**
- * All QnA assets for the project.
- */
+/** All QnA assets for the project. */
 model QnaAssets is Azure.Core.Page<RetrieveQnaRecord>;
 
-/**
- * QnA record to be updated.
- */
+/** QnA record to be updated. */
 model UpdateQnaRecord {
-  /**
-   * Update operation type for assets.
-   */
+  /** Update operation type for assets. */
   `op`: UpdateOperationKind;
 
-  /**
-   * QnA record.
-   */
+  /** QnA record. */
   value: QnaRecord;
 }
 
-/**
- * Feedback for Active Learning.
- */
+/** Feedback for Active Learning. */
 model ActiveLearningFeedback {
-  /**
-   * A list of Feedback Records for Active Learning.
-   */
+  /** A list of Feedback Records for Active Learning. */
   records?: FeedbackRecord[];
 }
 
-/**
- * Feedback Record for Active Learning.
- */
+/** Feedback Record for Active Learning. */
 model FeedbackRecord {
-  /**
-   * Unique identifier of the user.
-   */
+  /** Unique identifier of the user. */
   userId?: string;
 
-  /**
-   * User suggested question for the QnA.
-   */
+  /** User suggested question for the QnA. */
   userQuestion?: string;
 
-  /**
-   * Unique ID of the QnA.
-   */
+  /** Unique ID of the QnA. */
   qnaId?: int32;
 }

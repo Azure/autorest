@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-/**
- * Azure Resource Manager resource envelope.
- */
+/** Azure Resource Manager resource envelope. */
 @parentResource(FeaturesetContainer)
 model FeaturesetVersion
   is Azure.ResourceManager.ProxyResource<FeaturesetVersionProperties, false> {
@@ -27,121 +25,85 @@ model FeaturesetVersion
 
 @armResourceOperations
 interface FeaturesetVersions {
-  /**
-   * Get version.
-   */
+  /** Get version. */
   get is ArmResourceRead<FeaturesetVersion>;
 
-  /**
-   * Create or update version.
-   */
+  /** Create or update version. */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<FeaturesetVersion>;
 
-  /**
-   * Delete version.
-   */
+  /** Delete version. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     FeaturesetVersion,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List versions.
-   */
+  /** List versions. */
   list is ArmResourceListByParent<
     FeaturesetVersion,
     Parameters = {
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
 
-      /**
-       * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
-       */
+      /** Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2 */
       @query("tags")
       tags?: string;
 
-      /**
-       * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
-       */
+      /** [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities. */
       @query("listViewType")
       listViewType?: ListViewType;
 
-      /**
-       * page size
-       */
+      /** page size */
       @query("pageSize")
       pageSize?: int32 = 20;
 
-      /**
-       * name for the featureset version
-       */
+      /** name for the featureset version */
       @query("versionName")
       versionName?: string;
 
-      /**
-       * description for the feature set version
-       */
+      /** description for the feature set version */
       @query("description")
       description?: string;
 
-      /**
-       * createdBy user name
-       */
+      /** createdBy user name */
       @query("createdBy")
       createdBy?: string;
 
-      /**
-       * Specifies the featurestore stage
-       */
+      /** Specifies the featurestore stage */
       @query("stage")
       stage?: string;
     },
     Response = ArmResponse<FeaturesetVersionResourceArmPaginatedResult>
   >;
 
-  /**
-   * Backfill.
-   */
+  /** Backfill. */
   backfill is ArmResourceActionAsync<
     FeaturesetVersion,
     FeaturesetVersionBackfillRequest,
     ArmResponse<FeaturesetJob>
   >;
 
-  /**
-   * List materialization Jobs.
-   */
+  /** List materialization Jobs. */
   @list
   listMaterializationJobs is ArmResourceActionSync<
     FeaturesetVersion,
     void,
     ArmResponse<FeaturesetJobArmPaginatedResult>,
     Parameters = {
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
 
-      /**
-       * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
-       */
+      /** Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2 */
       @query("filters")
       filters?: string;
 
-      /**
-       * Start time of the feature window to filter materialization jobs.
-       */
+      /** Start time of the feature window to filter materialization jobs. */
       @query("featureWindowStart")
       featureWindowStart?: string;
 
-      /**
-       * End time of the feature window to filter materialization jobs.
-       */
+      /** End time of the feature window to filter materialization jobs. */
       @query("featureWindowEnd")
       featureWindowEnd?: string;
     }

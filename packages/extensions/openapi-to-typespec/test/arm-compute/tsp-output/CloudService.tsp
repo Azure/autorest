@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * Describes the cloud service.
- */
+/** Describes the cloud service. */
 model CloudService
   is Azure.ResourceManager.TrackedResource<CloudServiceProperties> {
   ...ResourceNameParameter<
@@ -26,23 +24,17 @@ model CloudService
 
 @armResourceOperations
 interface CloudServices {
-  /**
-   * Display information about a cloud service.
-   */
+  /** Display information about a cloud service. */
   get is ArmResourceRead<CloudService>;
 
-  /**
-   * Create or update a cloud service. Please note some properties can be set only during cloud service creation.
-   */
+  /** Create or update a cloud service. Please note some properties can be set only during cloud service creation. */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CloudService,
     LroHeaders = ArmLroLocationHeader<FinalResult = CloudService> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /**
-   * Update a cloud service.
-   */
+  /** Update a cloud service. */
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     CloudService,
@@ -51,28 +43,20 @@ interface CloudServices {
     OptionalRequestBody = true
   >;
 
-  /**
-   * Deletes a cloud service.
-   */
+  /** Deletes a cloud service. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     CloudService,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * Gets a list of all cloud services under a resource group. Use nextLink property in the response to get the next page of Cloud Services. Do this till nextLink is null to fetch all the Cloud Services.
-   */
+  /** Gets a list of all cloud services under a resource group. Use nextLink property in the response to get the next page of Cloud Services. Do this till nextLink is null to fetch all the Cloud Services. */
   list is ArmResourceListByParent<CloudService>;
 
-  /**
-   * Gets a list of all cloud services in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of Cloud Services. Do this till nextLink is null to fetch all the Cloud Services.
-   */
+  /** Gets a list of all cloud services in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of Cloud Services. Do this till nextLink is null to fetch all the Cloud Services. */
   listAll is ArmListBySubscription<CloudService>;
 
-  /**
-   * Gets the status of a cloud service.
-   */
+  /** Gets the status of a cloud service. */
   @get
   @action("instanceView")
   getInstanceView is ArmResourceActionSync<
@@ -81,20 +65,14 @@ interface CloudServices {
     ArmResponse<CloudServiceInstanceView>
   >;
 
-  /**
-   * Starts the cloud service.
-   */
+  /** Starts the cloud service. */
   start is ArmResourceActionAsync<CloudService, void, OkResponse>;
 
-  /**
-   * Power off the cloud service. Note that resources are still attached and you are getting charged for the resources.
-   */
+  /** Power off the cloud service. Note that resources are still attached and you are getting charged for the resources. */
   @action("poweroff")
   powerOff is ArmResourceActionAsync<CloudService, void, OkResponse>;
 
-  /**
-   * Restarts one or more role instances in a cloud service.
-   */
+  /** Restarts one or more role instances in a cloud service. */
   restart is ArmResourceActionAsync<
     CloudService,
     RoleInstances,
@@ -102,9 +80,7 @@ interface CloudServices {
     OptionalRequestBody = true
   >;
 
-  /**
-   * Reimage asynchronous operation reinstalls the operating system on instances of web roles or worker roles.
-   */
+  /** Reimage asynchronous operation reinstalls the operating system on instances of web roles or worker roles. */
   reimage is ArmResourceActionAsync<
     CloudService,
     RoleInstances,
@@ -112,9 +88,7 @@ interface CloudServices {
     OptionalRequestBody = true
   >;
 
-  /**
-   * Rebuild Role Instances reinstalls the operating system on instances of web roles or worker roles and initializes the storage resources that are used by them. If you do not want to initialize storage resources, you can use Reimage Role Instances.
-   */
+  /** Rebuild Role Instances reinstalls the operating system on instances of web roles or worker roles and initializes the storage resources that are used by them. If you do not want to initialize storage resources, you can use Reimage Role Instances. */
   rebuild is ArmResourceActionAsync<
     CloudService,
     RoleInstances,
@@ -122,9 +96,7 @@ interface CloudServices {
     OptionalRequestBody = true
   >;
 
-  /**
-   * Deletes role instances in a cloud service.
-   */
+  /** Deletes role instances in a cloud service. */
   @action("delete")
   deleteInstances is ArmResourceActionAsync<
     CloudService,
@@ -133,9 +105,7 @@ interface CloudServices {
     OptionalRequestBody = true
   >;
 
-  /**
-   * Updates the role instances in the specified update domain.
-   */
+  /** Updates the role instances in the specified update domain. */
   @put
   @action("{updateDomain}")
   walkUpdateDomain is ArmResourceActionAsync<
@@ -143,18 +113,14 @@ interface CloudServices {
     UpdateDomain,
     OkResponse,
     Parameters = {
-      /**
-       * Specifies an integer value that identifies the update domain. Update domains are identified with a zero-based index: the first update domain has an ID of 0, the second has an ID of 1, and so on.
-       */
+      /** Specifies an integer value that identifies the update domain. Update domains are identified with a zero-based index: the first update domain has an ID of 0, the second has an ID of 1, and so on. */
       @path
       updateDomain: int32;
     },
     OptionalRequestBody = true
   >;
 
-  /**
-   * Gets the specified update domain of a cloud service. Use nextLink property in the response to get the next page of update domains. Do this till nextLink is null to fetch all the update domains.
-   */
+  /** Gets the specified update domain of a cloud service. Use nextLink property in the response to get the next page of update domains. Do this till nextLink is null to fetch all the update domains. */
   @get
   @action("{updateDomain}")
   getUpdateDomain is ArmResourceActionSync<
@@ -162,17 +128,13 @@ interface CloudServices {
     void,
     ArmResponse<UpdateDomain>,
     Parameters = {
-      /**
-       * Specifies an integer value that identifies the update domain. Update domains are identified with a zero-based index: the first update domain has an ID of 0, the second has an ID of 1, and so on.
-       */
+      /** Specifies an integer value that identifies the update domain. Update domains are identified with a zero-based index: the first update domain has an ID of 0, the second has an ID of 1, and so on. */
       @path
       updateDomain: int32;
     }
   >;
 
-  /**
-   * Gets a list of all update domains in a cloud service.
-   */
+  /** Gets a list of all update domains in a cloud service. */
   @list
   @get
   @action("updateDomains")

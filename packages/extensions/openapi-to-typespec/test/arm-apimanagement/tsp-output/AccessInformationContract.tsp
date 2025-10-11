@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * Tenant Settings.
- */
+/** Tenant Settings. */
 @parentResource(ApiManagementServiceResource)
 model AccessInformationContract
   is Azure.ResourceManager.ProxyResource<AccessInformationContractProperties> {
@@ -28,93 +26,69 @@ model AccessInformationContract
 
 @armResourceOperations
 interface AccessInformationContracts {
-  /**
-   * Get tenant access information details without secrets.
-   */
+  /** Get tenant access information details without secrets. */
   get is ArmResourceRead<AccessInformationContract>;
 
-  /**
-   * Tenant access metadata
-   */
+  /** Tenant access metadata */
   getEntityTag is ArmResourceCheckExistence<AccessInformationContract>;
 
-  /**
-   * Update tenant access information details.
-   */
+  /** Update tenant access information details. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     AccessInformationContract,
     Request = AccessInformationCreateParameters,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     },
     Response = ArmResourceUpdatedResponse<AccessInformationContract>
   >;
 
-  /**
-   * Update tenant access information details.
-   */
+  /** Update tenant access information details. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     AccessInformationContract,
     PatchModel = AccessInformationUpdateParameters,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Returns list of access infos - for Git and Management endpoints.
-   */
+  /** Returns list of access infos - for Git and Management endpoints. */
   listByService is ArmResourceListByParent<
     AccessInformationContract,
     Parameters = {
-      /**
-       * Not used
-       */
+      /** Not used */
       @query("$filter")
       $filter?: string;
     }
   >;
 
-  /**
-   * Regenerate primary access key
-   */
+  /** Regenerate primary access key */
   regeneratePrimaryKey is ArmResourceActionSync<
     AccessInformationContract,
     void,
     NoContentResponse
   >;
 
-  /**
-   * Regenerate secondary access key
-   */
+  /** Regenerate secondary access key */
   regenerateSecondaryKey is ArmResourceActionSync<
     AccessInformationContract,
     void,
     NoContentResponse
   >;
 
-  /**
-   * Get tenant access information details.
-   */
+  /** Get tenant access information details. */
   listSecrets is ArmResourceActionSync<
     AccessInformationContract,
     void,
     ArmResponse<AccessInformationSecretsContract>
   >;
 
-  /**
-   * Regenerate primary access key for GIT.
-   */
+  /** Regenerate primary access key for GIT. */
   @action("regeneratePrimaryKey")
   tenantAccessGitRegeneratePrimaryKey is ArmResourceActionSync<
     AccessInformationContract,
@@ -122,9 +96,7 @@ interface AccessInformationContracts {
     NoContentResponse
   >;
 
-  /**
-   * Regenerate secondary access key for GIT.
-   */
+  /** Regenerate secondary access key for GIT. */
   @action("regenerateSecondaryKey")
   tenantAccessGitRegenerateSecondaryKey is ArmResourceActionSync<
     AccessInformationContract,
@@ -132,57 +104,43 @@ interface AccessInformationContracts {
     NoContentResponse
   >;
 
-  /**
-   * This operation applies changes from the specified Git branch to the configuration database. This is a long running operation and could take several minutes to complete.
-   */
+  /** This operation applies changes from the specified Git branch to the configuration database. This is a long running operation and could take several minutes to complete. */
   deploy is ArmResourceActionAsync<
     AccessInformationContract,
     DeployConfigurationParameters,
     ArmResponse<OperationResultContract>,
     Parameters = {
-      /**
-       * The identifier of the Git Configuration Operation.
-       */
+      /** The identifier of the Git Configuration Operation. */
       @path
       configurationName: ConfigurationIdName;
     }
   >;
 
-  /**
-   * This operation creates a commit with the current configuration snapshot to the specified branch in the repository. This is a long running operation and could take several minutes to complete.
-   */
+  /** This operation creates a commit with the current configuration snapshot to the specified branch in the repository. This is a long running operation and could take several minutes to complete. */
   save is ArmResourceActionAsync<
     AccessInformationContract,
     SaveConfigurationParameter,
     ArmResponse<OperationResultContract>,
     Parameters = {
-      /**
-       * The identifier of the Git Configuration Operation.
-       */
+      /** The identifier of the Git Configuration Operation. */
       @path
       configurationName: ConfigurationIdName;
     }
   >;
 
-  /**
-   * This operation validates the changes in the specified Git branch. This is a long running operation and could take several minutes to complete.
-   */
+  /** This operation validates the changes in the specified Git branch. This is a long running operation and could take several minutes to complete. */
   validate is ArmResourceActionAsync<
     AccessInformationContract,
     DeployConfigurationParameters,
     ArmResponse<OperationResultContract>,
     Parameters = {
-      /**
-       * The identifier of the Git Configuration Operation.
-       */
+      /** The identifier of the Git Configuration Operation. */
       @path
       configurationName: ConfigurationIdName;
     }
   >;
 
-  /**
-   * Gets the status of the most recent synchronization between the configuration database and the Git repository.
-   */
+  /** Gets the status of the most recent synchronization between the configuration database and the Git repository. */
   @get
   @action("syncState")
   getSyncState is ArmResourceActionSync<
@@ -190,9 +148,7 @@ interface AccessInformationContracts {
     void,
     ArmResponse<TenantConfigurationSyncStateContract>,
     Parameters = {
-      /**
-       * The identifier of the Git Configuration Operation.
-       */
+      /** The identifier of the Git Configuration Operation. */
       @path
       configurationName: ConfigurationIdName;
     }

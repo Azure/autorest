@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * Specifies information about the gallery image version that you want to create or update.
- */
+/** Specifies information about the gallery image version that you want to create or update. */
 @subscriptionResource
 @parentResource(CommunityGalleryImage)
 model CommunityGalleryImageVersion
@@ -25,33 +23,25 @@ model CommunityGalleryImageVersion
     NamePattern = ""
   >;
 
-  /**
-   * Resource location
-   */
+  /** Resource location */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   location?: string;
 
-  /**
-   * The identifier information of community gallery.
-   */
+  /** The identifier information of community gallery. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   identifier?: CommunityGalleryIdentifier;
 }
 
 @armResourceOperations
 interface CommunityGalleryImageVersions {
-  /**
-   * Get a community gallery image version.
-   */
+  /** Get a community gallery image version. */
   get is ArmResourceRead<
     CommunityGalleryImageVersion,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
-  /**
-   * List community gallery image versions inside an image.
-   */
+  /** List community gallery image versions inside an image. */
   list is ArmResourceListByParent<
     CommunityGalleryImageVersion,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,

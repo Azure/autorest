@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
-/**
- * Properties of the table, including Id, resource name, resource type.
- */
+/** Properties of the table, including Id, resource name, resource type. */
 @parentResource(TableServiceProperties)
 model Table is Azure.ResourceManager.ProxyResource<TableProperties> {
   ...ResourceNameParameter<
@@ -26,23 +24,17 @@ model Table is Azure.ResourceManager.ProxyResource<TableProperties> {
 
 @armResourceOperations
 interface Tables {
-  /**
-   * Gets the table with the specified table name, under the specified account if it exists.
-   */
+  /** Gets the table with the specified table name, under the specified account if it exists. */
   get is ArmResourceRead<Table>;
 
-  /**
-   * Creates a new table with the specified table name, under the specified account.
-   */
+  /** Creates a new table with the specified table name, under the specified account. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is ArmResourceCreateOrReplaceSync<
     Table,
     Response = ArmResourceUpdatedResponse<Table>
   >;
 
-  /**
-   * Creates a new table with the specified table name, under the specified account.
-   */
+  /** Creates a new table with the specified table name, under the specified account. */
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchSync<
     Table,
@@ -50,18 +42,14 @@ interface Tables {
     OptionalRequestBody = true
   >;
 
-  /**
-   * Deletes the table with the specified table name, under the specified account if it exists.
-   */
+  /** Deletes the table with the specified table name, under the specified account if it exists. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteSync<
     Table,
     Response = ArmDeletedNoContentResponse
   >;
 
-  /**
-   * Gets a list of all the tables under the specified storage account
-   */
+  /** Gets a list of all the tables under the specified storage account */
   list is ArmResourceListByParent<
     Table,
     Response = ArmResponse<ListTableResource>

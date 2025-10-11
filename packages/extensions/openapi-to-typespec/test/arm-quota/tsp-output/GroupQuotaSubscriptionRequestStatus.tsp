@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Quota;
-/**
- * The new quota limit request status.
- */
+/** The new quota limit request status. */
 @parentResource(GroupQuotasEntity)
 model GroupQuotaSubscriptionRequestStatus
   is Azure.ResourceManager.ProxyResource<GroupQuotaSubscriptionRequestStatusProperties> {
@@ -27,17 +25,13 @@ model GroupQuotaSubscriptionRequestStatus
 
 @armResourceOperations
 interface GroupQuotaSubscriptionRequestStatuses {
-  /**
-   * Get API to check the status of a subscriptionIds request by requestId.  Use the polling API - OperationsStatus URI specified in Azure-AsyncOperation header field, with retry-after duration in seconds to check the intermediate status. This API provides the finals status with the request details and status.
-   */
+  /** Get API to check the status of a subscriptionIds request by requestId.  Use the polling API - OperationsStatus URI specified in Azure-AsyncOperation header field, with retry-after duration in seconds to check the intermediate status. This API provides the finals status with the request details and status. */
   get is Extension.Read<
     Extension.ManagementGroup,
     GroupQuotaSubscriptionRequestStatus
   >;
 
-  /**
-   * List API to check the status of a subscriptionId requests by requestId. Request history is maintained for 1 year.
-   */
+  /** List API to check the status of a subscriptionId requests by requestId. Request history is maintained for 1 year. */
   list is Extension.ListByTarget<
     Extension.ManagementGroup,
     GroupQuotaSubscriptionRequestStatus,

@@ -44,9 +44,7 @@ interface ApplicationOperationGroup {
         @header
         `client-request-id`?: string;
 
-        /**
-         * Whether the server should return the client-request-id in the response.
-         */
+        /** Whether the server should return the client-request-id in the response. */
         @header
         `return-client-request-id`?: boolean;
 
@@ -88,9 +86,7 @@ interface ApplicationOperationGroup {
         @header
         `client-request-id`?: string;
 
-        /**
-         * Whether the server should return the client-request-id in the response.
-         */
+        /** Whether the server should return the client-request-id in the response. */
         @header
         `return-client-request-id`?: boolean;
 
@@ -170,9 +166,7 @@ interface PoolOperationGroup {
         @header
         `client-request-id`?: string;
 
-        /**
-         * Whether the server should return the client-request-id in the response.
-         */
+        /** Whether the server should return the client-request-id in the response. */
         @header
         `return-client-request-id`?: boolean;
 
@@ -213,9 +207,7 @@ interface PoolOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -255,9 +247,7 @@ interface PoolOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -269,18 +259,14 @@ interface PoolOperationGroup {
       @header
       `ocp-date`?: utcDateTime;
 
-      /**
-       * The Pool to be added.
-       */
+      /** The Pool to be added. */
       @bodyRoot
       pool: BatchPool;
     },
     void
   >;
 
-  /**
-   * Lists all of the Pools in the specified Account.
-   */
+  /** Lists all of the Pools in the specified Account. */
   @summary("Lists all of the Pools in the specified Account.")
   @route("/pools")
   @get
@@ -293,15 +279,11 @@ interface PoolOperationGroup {
       @query("$filter")
       $filter?: string;
 
-      /**
-       * An OData $select clause.
-       */
+      /** An OData $select clause. */
       @query("$select")
       $select?: string;
 
-      /**
-       * An OData $expand clause.
-       */
+      /** An OData $expand clause. */
       @query("$expand")
       $expand?: string;
 
@@ -329,9 +311,7 @@ interface PoolOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -365,9 +345,7 @@ interface PoolOperationGroup {
   @delete
   delete is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool to delete.
-       */
+      /** The ID of the Pool to delete. */
       @path
       poolId: string;
 
@@ -386,9 +364,7 @@ interface PoolOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -435,16 +411,12 @@ interface PoolOperationGroup {
     void
   >;
 
-  /**
-   * Gets basic properties of a Pool.
-   */
+  /** Gets basic properties of a Pool. */
   @route("/pools/{poolId}")
   @head
   exists is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool to get.
-       */
+      /** The ID of the Pool to get. */
       @path
       poolId: string;
 
@@ -463,9 +435,7 @@ interface PoolOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -512,28 +482,20 @@ interface PoolOperationGroup {
     void
   >;
 
-  /**
-   * Gets information about the specified Pool.
-   */
+  /** Gets information about the specified Pool. */
   @route("/pools/{poolId}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool to get.
-       */
+      /** The ID of the Pool to get. */
       @path
       poolId: string;
 
-      /**
-       * An OData $select clause.
-       */
+      /** An OData $select clause. */
       @query("$select")
       $select?: string;
 
-      /**
-       * An OData $expand clause.
-       */
+      /** An OData $expand clause. */
       @query("$expand")
       $expand?: string;
 
@@ -552,9 +514,7 @@ interface PoolOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -611,9 +571,7 @@ interface PoolOperationGroup {
   @patch
   patch is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool to update.
-       */
+      /** The ID of the Pool to update. */
       @path
       poolId: string;
 
@@ -632,9 +590,7 @@ interface PoolOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -678,26 +634,20 @@ interface PoolOperationGroup {
       @header
       `If-Unmodified-Since`?: utcDateTime;
 
-      /**
-       * The parameters for the request.
-       */
+      /** The parameters for the request. */
       @bodyRoot
       poolUpdate: BatchPoolUpdate;
     },
     void
   >;
 
-  /**
-   * Disables automatic scaling for a Pool.
-   */
+  /** Disables automatic scaling for a Pool. */
   @summary("Disables automatic scaling for a Pool.")
   @route("/pools/{poolId}/disableautoscale")
   @post
   disableAutoScale is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool on which to disable automatic scaling.
-       */
+      /** The ID of the Pool on which to disable automatic scaling. */
       @path
       poolId: string;
 
@@ -716,9 +666,7 @@ interface PoolOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -746,9 +694,7 @@ interface PoolOperationGroup {
   @post
   enableAutoScale is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool on which to enable automatic scaling.
-       */
+      /** The ID of the Pool on which to enable automatic scaling. */
       @path
       poolId: string;
 
@@ -767,9 +713,7 @@ interface PoolOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -813,9 +757,7 @@ interface PoolOperationGroup {
       @header
       `If-Unmodified-Since`?: utcDateTime;
 
-      /**
-       * The parameters for the request.
-       */
+      /** The parameters for the request. */
       @bodyRoot
       parameters: BatchPoolEnableAutoScaleParameters;
     },
@@ -832,9 +774,7 @@ interface PoolOperationGroup {
   @post
   evaluateAutoScale is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool on which to evaluate the automatic scaling formula.
-       */
+      /** The ID of the Pool on which to evaluate the automatic scaling formula. */
       @path
       poolId: string;
 
@@ -853,9 +793,7 @@ interface PoolOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -867,9 +805,7 @@ interface PoolOperationGroup {
       @header
       `ocp-date`?: utcDateTime;
 
-      /**
-       * The parameters for the request.
-       */
+      /** The parameters for the request. */
       @bodyRoot
       parameters: BatchPoolEvaluateAutoScaleParameters;
     },
@@ -890,9 +826,7 @@ interface PoolOperationGroup {
   @post
   resize is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool to resize.
-       */
+      /** The ID of the Pool to resize. */
       @path
       poolId: string;
 
@@ -911,9 +845,7 @@ interface PoolOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -957,9 +889,7 @@ interface PoolOperationGroup {
       @header
       `If-Unmodified-Since`?: utcDateTime;
 
-      /**
-       * The parameters for the request.
-       */
+      /** The parameters for the request. */
       @bodyRoot
       parameters: BatchPoolResizeParameters;
     },
@@ -980,9 +910,7 @@ interface PoolOperationGroup {
   @post
   stopResize is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool whose resizing you want to stop.
-       */
+      /** The ID of the Pool whose resizing you want to stop. */
       @path
       poolId: string;
 
@@ -1001,9 +929,7 @@ interface PoolOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -1060,9 +986,7 @@ interface PoolOperationGroup {
   @post
   updateProperties is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool to update.
-       */
+      /** The ID of the Pool to update. */
       @path
       poolId: string;
 
@@ -1081,9 +1005,7 @@ interface PoolOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -1095,9 +1017,7 @@ interface PoolOperationGroup {
       @header
       `ocp-date`?: utcDateTime;
 
-      /**
-       * The parameters for the request.
-       */
+      /** The parameters for the request. */
       @bodyRoot
       poolUpdatePropertiesParameter: BatchPool;
     },
@@ -1114,9 +1034,7 @@ interface PoolOperationGroup {
   @post
   removeNodes is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool from which you want to remove Compute Nodes.
-       */
+      /** The ID of the Pool from which you want to remove Compute Nodes. */
       @path
       poolId: string;
 
@@ -1135,9 +1053,7 @@ interface PoolOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -1181,9 +1097,7 @@ interface PoolOperationGroup {
       @header
       `If-Unmodified-Since`?: utcDateTime;
 
-      /**
-       * The parameters for the request.
-       */
+      /** The parameters for the request. */
       @bodyRoot
       parameters: NodeRemoveParameters;
     },
@@ -1192,9 +1106,7 @@ interface PoolOperationGroup {
 }
 
 interface AccountOperationGroup {
-  /**
-   * Lists all Virtual Machine Images supported by the Azure Batch service.
-   */
+  /** Lists all Virtual Machine Images supported by the Azure Batch service. */
   @summary("Lists all Virtual Machine Images supported by the Azure Batch service.")
   listSupportedImages is Azure.Core.ResourceList<
     ImageInformation,
@@ -1231,9 +1143,7 @@ interface AccountOperationGroup {
         @header
         `client-request-id`?: string;
 
-        /**
-         * Whether the server should return the client-request-id in the response.
-         */
+        /** Whether the server should return the client-request-id in the response. */
         @header
         `return-client-request-id`?: boolean;
 
@@ -1264,9 +1174,7 @@ interface AccountOperationGroup {
         @query("$filter")
         $filter?: string;
 
-        /**
-         * The maximum number of items to return in the response.
-         */
+        /** The maximum number of items to return in the response. */
         @maxValue(10)
         @minValue(1)
         @query("maxresults")
@@ -1287,9 +1195,7 @@ interface AccountOperationGroup {
         @header
         `client-request-id`?: string;
 
-        /**
-         * Whether the server should return the client-request-id in the response.
-         */
+        /** Whether the server should return the client-request-id in the response. */
         @header
         `return-client-request-id`?: boolean;
 
@@ -1332,9 +1238,7 @@ interface JobOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -1364,9 +1268,7 @@ interface JobOperationGroup {
   @delete
   delete is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job to delete.
-       */
+      /** The ID of the Job to delete. */
       @path
       jobId: string;
 
@@ -1385,9 +1287,7 @@ interface JobOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -1434,29 +1334,21 @@ interface JobOperationGroup {
     void
   >;
 
-  /**
-   * Gets information about the specified Job.
-   */
+  /** Gets information about the specified Job. */
   @summary("Gets information about the specified Job.")
   @route("/jobs/{jobId}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job.
-       */
+      /** The ID of the Job. */
       @path
       jobId: string;
 
-      /**
-       * An OData $select clause.
-       */
+      /** An OData $select clause. */
       @query("$select")
       $select?: string;
 
-      /**
-       * An OData $expand clause.
-       */
+      /** An OData $expand clause. */
       @query("$expand")
       $expand?: string;
 
@@ -1475,9 +1367,7 @@ interface JobOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -1534,9 +1424,7 @@ interface JobOperationGroup {
   @patch
   patch is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job whose properties you want to update.
-       */
+      /** The ID of the Job whose properties you want to update. */
       @path
       jobId: string;
 
@@ -1555,9 +1443,7 @@ interface JobOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -1601,9 +1487,7 @@ interface JobOperationGroup {
       @header
       `If-Unmodified-Since`?: utcDateTime;
 
-      /**
-       * The parameters for the request.
-       */
+      /** The parameters for the request. */
       @bodyRoot
       jobUpdate: BatchJobUpdate;
     },
@@ -1620,9 +1504,7 @@ interface JobOperationGroup {
   @put
   update is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job whose properties you want to update.
-       */
+      /** The ID of the Job whose properties you want to update. */
       @path
       jobId: string;
 
@@ -1641,9 +1523,7 @@ interface JobOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -1687,9 +1567,7 @@ interface JobOperationGroup {
       @header
       `If-Unmodified-Since`?: utcDateTime;
 
-      /**
-       * The parameters for the request.
-       */
+      /** The parameters for the request. */
       @bodyRoot
       job: BatchJob;
     },
@@ -1711,9 +1589,7 @@ interface JobOperationGroup {
   @post
   disable is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job to disable.
-       */
+      /** The ID of the Job to disable. */
       @path
       jobId: string;
 
@@ -1732,9 +1608,7 @@ interface JobOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -1778,9 +1652,7 @@ interface JobOperationGroup {
       @header
       `If-Unmodified-Since`?: utcDateTime;
 
-      /**
-       * The parameters for the request.
-       */
+      /** The parameters for the request. */
       @bodyRoot
       parameters: BatchJobDisableParameters;
     },
@@ -1800,9 +1672,7 @@ interface JobOperationGroup {
   @post
   enable is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job to enable.
-       */
+      /** The ID of the Job to enable. */
       @path
       jobId: string;
 
@@ -1821,9 +1691,7 @@ interface JobOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -1883,9 +1751,7 @@ interface JobOperationGroup {
   @post
   terminate is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job to terminate.
-       */
+      /** The ID of the Job to terminate. */
       @path
       jobId: string;
 
@@ -1904,9 +1770,7 @@ interface JobOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -1950,9 +1814,7 @@ interface JobOperationGroup {
       @header
       `If-Unmodified-Since`?: utcDateTime;
 
-      /**
-       * The parameters for the request.
-       */
+      /** The parameters for the request. */
       @bodyRoot
       parameters?: BatchJobTerminateParameters;
     },
@@ -1990,9 +1852,7 @@ interface JobOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -2004,18 +1864,14 @@ interface JobOperationGroup {
       @header
       `ocp-date`?: utcDateTime;
 
-      /**
-       * The Job to be added.
-       */
+      /** The Job to be added. */
       @bodyRoot
       job: BatchJob;
     },
     void
   >;
 
-  /**
-   * Lists all of the Jobs in the specified Account.
-   */
+  /** Lists all of the Jobs in the specified Account. */
   @summary("Lists all of the Jobs in the specified Account.")
   @route("/jobs")
   @get
@@ -2028,15 +1884,11 @@ interface JobOperationGroup {
       @query("$filter")
       $filter?: string;
 
-      /**
-       * An OData $select clause.
-       */
+      /** An OData $select clause. */
       @query("$select")
       $select?: string;
 
-      /**
-       * An OData $expand clause.
-       */
+      /** An OData $expand clause. */
       @query("$expand")
       $expand?: string;
 
@@ -2064,9 +1916,7 @@ interface JobOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -2081,17 +1931,13 @@ interface JobOperationGroup {
     BatchJobListResult
   >;
 
-  /**
-   * Lists the Jobs that have been created under the specified Job Schedule.
-   */
+  /** Lists the Jobs that have been created under the specified Job Schedule. */
   @summary("Lists the Jobs that have been created under the specified Job Schedule.")
   @route("/jobschedules/{jobScheduleId}/jobs")
   @get
   listFromJobSchedule is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job Schedule from which you want to get a list of Jobs.
-       */
+      /** The ID of the Job Schedule from which you want to get a list of Jobs. */
       @path
       jobScheduleId: string;
 
@@ -2102,15 +1948,11 @@ interface JobOperationGroup {
       @query("$filter")
       $filter?: string;
 
-      /**
-       * An OData $select clause.
-       */
+      /** An OData $select clause. */
       @query("$select")
       $select?: string;
 
-      /**
-       * An OData $expand clause.
-       */
+      /** An OData $expand clause. */
       @query("$expand")
       $expand?: string;
 
@@ -2138,9 +1980,7 @@ interface JobOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -2171,9 +2011,7 @@ interface JobOperationGroup {
   @get
   listPreparationAndReleaseTaskStatus is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job.
-       */
+      /** The ID of the Job. */
       @path
       jobId: string;
 
@@ -2184,9 +2022,7 @@ interface JobOperationGroup {
       @query("$filter")
       $filter?: string;
 
-      /**
-       * An OData $select clause.
-       */
+      /** An OData $select clause. */
       @query("$select")
       $select?: string;
 
@@ -2214,9 +2050,7 @@ interface JobOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -2242,9 +2076,7 @@ interface JobOperationGroup {
   @get
   getTaskCounts is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job.
-       */
+      /** The ID of the Job. */
       @path
       jobId: string;
 
@@ -2263,9 +2095,7 @@ interface JobOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -2282,9 +2112,7 @@ interface JobOperationGroup {
 }
 
 interface CertificateOperationGroup {
-  /**
-   * Adds a Certificate to the specified Account.
-   */
+  /** Adds a Certificate to the specified Account. */
   @summary("Adds a Certificate to the specified Account.")
   @route("/certificates")
   @post
@@ -2305,9 +2133,7 @@ interface CertificateOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -2319,18 +2145,14 @@ interface CertificateOperationGroup {
       @header
       `ocp-date`?: utcDateTime;
 
-      /**
-       * The Certificate to be added.
-       */
+      /** The Certificate to be added. */
       @bodyRoot
       certificate: Certificate;
     },
     void
   >;
 
-  /**
-   * Lists all of the Certificates that have been added to the specified Account.
-   */
+  /** Lists all of the Certificates that have been added to the specified Account. */
   @summary("Lists all of the Certificates that have been added to the specified Account.")
   @route("/certificates")
   @get
@@ -2343,9 +2165,7 @@ interface CertificateOperationGroup {
       @query("$filter")
       $filter?: string;
 
-      /**
-       * An OData $select clause.
-       */
+      /** An OData $select clause. */
       @query("$select")
       $select?: string;
 
@@ -2373,9 +2193,7 @@ interface CertificateOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -2404,15 +2222,11 @@ interface CertificateOperationGroup {
   @post
   cancelDeletion is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The algorithm used to derive the thumbprint parameter. This must be sha1.
-       */
+      /** The algorithm used to derive the thumbprint parameter. This must be sha1. */
       @path
       thumbprintAlgorithm: string;
 
-      /**
-       * The thumbprint of the Certificate being deleted.
-       */
+      /** The thumbprint of the Certificate being deleted. */
       @path
       thumbprint: string;
 
@@ -2431,9 +2245,7 @@ interface CertificateOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -2464,15 +2276,11 @@ interface CertificateOperationGroup {
   @delete
   delete is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The algorithm used to derive the thumbprint parameter. This must be sha1.
-       */
+      /** The algorithm used to derive the thumbprint parameter. This must be sha1. */
       @path
       thumbprintAlgorithm: string;
 
-      /**
-       * The thumbprint of the Certificate to be deleted.
-       */
+      /** The thumbprint of the Certificate to be deleted. */
       @path
       thumbprint: string;
 
@@ -2491,9 +2299,7 @@ interface CertificateOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -2508,28 +2314,20 @@ interface CertificateOperationGroup {
     void
   >;
 
-  /**
-   * Gets information about the specified Certificate.
-   */
+  /** Gets information about the specified Certificate. */
   @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The algorithm used to derive the thumbprint parameter. This must be sha1.
-       */
+      /** The algorithm used to derive the thumbprint parameter. This must be sha1. */
       @path
       thumbprintAlgorithm: string;
 
-      /**
-       * The thumbprint of the Certificate to get.
-       */
+      /** The thumbprint of the Certificate to get. */
       @path
       thumbprint: string;
 
-      /**
-       * An OData $select clause.
-       */
+      /** An OData $select clause. */
       @query("$select")
       $select?: string;
 
@@ -2548,9 +2346,7 @@ interface CertificateOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -2567,29 +2363,21 @@ interface CertificateOperationGroup {
 }
 
 interface FileOperationGroup {
-  /**
-   * Deletes the specified Task file from the Compute Node where the Task ran.
-   */
+  /** Deletes the specified Task file from the Compute Node where the Task ran. */
   @summary("Deletes the specified Task file from the Compute Node where the Task ran.")
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
   @delete
   deleteFromTask is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job that contains the Task.
-       */
+      /** The ID of the Job that contains the Task. */
       @path
       jobId: string;
 
-      /**
-       * The ID of the Task whose file you want to delete.
-       */
+      /** The ID of the Task whose file you want to delete. */
       @path
       taskId: string;
 
-      /**
-       * The path to the Task file or directory that you want to delete.
-       */
+      /** The path to the Task file or directory that you want to delete. */
       @path
       filePath: string;
 
@@ -2617,9 +2405,7 @@ interface FileOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -2634,28 +2420,20 @@ interface FileOperationGroup {
     void
   >;
 
-  /**
-   * Returns the content of the specified Task file.
-   */
+  /** Returns the content of the specified Task file. */
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
   @get
   getFromTask is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job that contains the Task.
-       */
+      /** The ID of the Job that contains the Task. */
       @path
       jobId: string;
 
-      /**
-       * The ID of the Task whose file you want to retrieve.
-       */
+      /** The ID of the Task whose file you want to retrieve. */
       @path
       taskId: string;
 
-      /**
-       * The path to the Task file that you want to get the content of.
-       */
+      /** The path to the Task file that you want to get the content of. */
       @path
       filePath: string;
 
@@ -2674,9 +2452,7 @@ interface FileOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -2714,28 +2490,20 @@ interface FileOperationGroup {
     void
   >;
 
-  /**
-   * Gets the properties of the specified Task file.
-   */
+  /** Gets the properties of the specified Task file. */
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
   @head
   getPropertiesFromTask is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job that contains the Task.
-       */
+      /** The ID of the Job that contains the Task. */
       @path
       jobId: string;
 
-      /**
-       * The ID of the Task whose file you want to get the properties of.
-       */
+      /** The ID of the Task whose file you want to get the properties of. */
       @path
       taskId: string;
 
-      /**
-       * The path to the Task file that you want to get the properties of.
-       */
+      /** The path to the Task file that you want to get the properties of. */
       @path
       filePath: string;
 
@@ -2754,9 +2522,7 @@ interface FileOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -2787,29 +2553,21 @@ interface FileOperationGroup {
     void
   >;
 
-  /**
-   * Deletes the specified file from the Compute Node.
-   */
+  /** Deletes the specified file from the Compute Node. */
   @summary("Deletes the specified file from the Compute Node.")
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
   @delete
   deleteFromComputeNode is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool that contains the Compute Node.
-       */
+      /** The ID of the Pool that contains the Compute Node. */
       @path
       poolId: string;
 
-      /**
-       * The ID of the Compute Node from which you want to delete the file.
-       */
+      /** The ID of the Compute Node from which you want to delete the file. */
       @path
       nodeId: string;
 
-      /**
-       * The path to the file or directory that you want to delete.
-       */
+      /** The path to the file or directory that you want to delete. */
       @path
       filePath: string;
 
@@ -2837,9 +2595,7 @@ interface FileOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -2854,28 +2610,20 @@ interface FileOperationGroup {
     void
   >;
 
-  /**
-   * Returns the content of the specified Compute Node file.
-   */
+  /** Returns the content of the specified Compute Node file. */
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
   @get
   getFromComputeNode is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool that contains the Compute Node.
-       */
+      /** The ID of the Pool that contains the Compute Node. */
       @path
       poolId: string;
 
-      /**
-       * The ID of the Compute Node that contains the file.
-       */
+      /** The ID of the Compute Node that contains the file. */
       @path
       nodeId: string;
 
-      /**
-       * The path to the Compute Node file that you want to get the content of.
-       */
+      /** The path to the Compute Node file that you want to get the content of. */
       @path
       filePath: string;
 
@@ -2894,9 +2642,7 @@ interface FileOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -2934,28 +2680,20 @@ interface FileOperationGroup {
     void
   >;
 
-  /**
-   * Gets the properties of the specified Compute Node file.
-   */
+  /** Gets the properties of the specified Compute Node file. */
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
   @head
   getPropertiesFromComputeNode is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool that contains the Compute Node.
-       */
+      /** The ID of the Pool that contains the Compute Node. */
       @path
       poolId: string;
 
-      /**
-       * The ID of the Compute Node that contains the file.
-       */
+      /** The ID of the Compute Node that contains the file. */
       @path
       nodeId: string;
 
-      /**
-       * The path to the Compute Node file that you want to get the properties of.
-       */
+      /** The path to the Compute Node file that you want to get the properties of. */
       @path
       filePath: string;
 
@@ -2974,9 +2712,7 @@ interface FileOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -3007,23 +2743,17 @@ interface FileOperationGroup {
     void
   >;
 
-  /**
-   * Lists the files in a Task's directory on its Compute Node.
-   */
+  /** Lists the files in a Task's directory on its Compute Node. */
   @summary("Lists the files in a Task's directory on its Compute Node.")
   @route("/jobs/{jobId}/tasks/{taskId}/files")
   @get
   listFromTask is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job that contains the Task.
-       */
+      /** The ID of the Job that contains the Task. */
       @path
       jobId: string;
 
-      /**
-       * The ID of the Task whose files you want to list.
-       */
+      /** The ID of the Task whose files you want to list. */
       @path
       taskId: string;
 
@@ -3065,9 +2795,7 @@ interface FileOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -3082,23 +2810,17 @@ interface FileOperationGroup {
     NodeFileListResult
   >;
 
-  /**
-   * Lists all of the files in Task directories on the specified Compute Node.
-   */
+  /** Lists all of the files in Task directories on the specified Compute Node. */
   @summary("Lists all of the files in Task directories on the specified Compute Node.")
   @route("/pools/{poolId}/nodes/{nodeId}/files")
   @get
   listFromComputeNode is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool that contains the Compute Node.
-       */
+      /** The ID of the Pool that contains the Compute Node. */
       @path
       poolId: string;
 
-      /**
-       * The ID of the Compute Node whose files you want to list.
-       */
+      /** The ID of the Compute Node whose files you want to list. */
       @path
       nodeId: string;
 
@@ -3109,9 +2831,7 @@ interface FileOperationGroup {
       @query("$filter")
       $filter?: string;
 
-      /**
-       * Whether to list children of a directory.
-       */
+      /** Whether to list children of a directory. */
       @query("recursive")
       recursive?: boolean;
 
@@ -3139,9 +2859,7 @@ interface FileOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -3158,17 +2876,13 @@ interface FileOperationGroup {
 }
 
 interface JobScheduleOperationGroup {
-  /**
-   * Checks the specified Job Schedule exists.
-   */
+  /** Checks the specified Job Schedule exists. */
   @summary("Checks the specified Job Schedule exists.")
   @route("/jobschedules/{jobScheduleId}")
   @head
   exists is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job Schedule which you want to check.
-       */
+      /** The ID of the Job Schedule which you want to check. */
       @path
       jobScheduleId: string;
 
@@ -3187,9 +2901,7 @@ interface JobScheduleOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -3248,9 +2960,7 @@ interface JobScheduleOperationGroup {
   @delete
   delete is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job Schedule to delete.
-       */
+      /** The ID of the Job Schedule to delete. */
       @path
       jobScheduleId: string;
 
@@ -3269,9 +2979,7 @@ interface JobScheduleOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -3318,28 +3026,20 @@ interface JobScheduleOperationGroup {
     void
   >;
 
-  /**
-   * Gets information about the specified Job Schedule.
-   */
+  /** Gets information about the specified Job Schedule. */
   @route("/jobschedules/{jobScheduleId}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job Schedule to get.
-       */
+      /** The ID of the Job Schedule to get. */
       @path
       jobScheduleId: string;
 
-      /**
-       * An OData $select clause.
-       */
+      /** An OData $select clause. */
       @query("$select")
       $select?: string;
 
-      /**
-       * An OData $expand clause.
-       */
+      /** An OData $expand clause. */
       @query("$expand")
       $expand?: string;
 
@@ -3358,9 +3058,7 @@ interface JobScheduleOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -3419,9 +3117,7 @@ interface JobScheduleOperationGroup {
   @patch
   patch is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job Schedule to update.
-       */
+      /** The ID of the Job Schedule to update. */
       @path
       jobScheduleId: string;
 
@@ -3440,9 +3136,7 @@ interface JobScheduleOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -3486,9 +3180,7 @@ interface JobScheduleOperationGroup {
       @header
       `If-Unmodified-Since`?: utcDateTime;
 
-      /**
-       * The parameters for the request.
-       */
+      /** The parameters for the request. */
       @bodyRoot
       jobScheduleUpdate: BatchJobScheduleUpdate;
     },
@@ -3507,9 +3199,7 @@ interface JobScheduleOperationGroup {
   @put
   update is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job Schedule to update.
-       */
+      /** The ID of the Job Schedule to update. */
       @path
       jobScheduleId: string;
 
@@ -3528,9 +3218,7 @@ interface JobScheduleOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -3574,26 +3262,20 @@ interface JobScheduleOperationGroup {
       @header
       `If-Unmodified-Since`?: utcDateTime;
 
-      /**
-       * The parameters for the request.
-       */
+      /** The parameters for the request. */
       @bodyRoot
       jobSchedule: BatchJobSchedule;
     },
     void
   >;
 
-  /**
-   * No new Jobs will be created until the Job Schedule is enabled again.
-   */
+  /** No new Jobs will be created until the Job Schedule is enabled again. */
   @summary("Disables a Job Schedule.")
   @route("/jobschedules/{jobScheduleId}/disable")
   @post
   disable is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job Schedule to disable.
-       */
+      /** The ID of the Job Schedule to disable. */
       @path
       jobScheduleId: string;
 
@@ -3612,9 +3294,7 @@ interface JobScheduleOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -3661,17 +3341,13 @@ interface JobScheduleOperationGroup {
     void
   >;
 
-  /**
-   * Enables a Job Schedule.
-   */
+  /** Enables a Job Schedule. */
   @summary("Enables a Job Schedule.")
   @route("/jobschedules/{jobScheduleId}/enable")
   @post
   enable is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job Schedule to enable.
-       */
+      /** The ID of the Job Schedule to enable. */
       @path
       jobScheduleId: string;
 
@@ -3690,9 +3366,7 @@ interface JobScheduleOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -3739,17 +3413,13 @@ interface JobScheduleOperationGroup {
     void
   >;
 
-  /**
-   * Terminates a Job Schedule.
-   */
+  /** Terminates a Job Schedule. */
   @summary("Terminates a Job Schedule.")
   @route("/jobschedules/{jobScheduleId}/terminate")
   @post
   terminate is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job Schedule to terminates.
-       */
+      /** The ID of the Job Schedule to terminates. */
       @path
       jobScheduleId: string;
 
@@ -3768,9 +3438,7 @@ interface JobScheduleOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -3817,9 +3485,7 @@ interface JobScheduleOperationGroup {
     void
   >;
 
-  /**
-   * Adds a Job Schedule to the specified Account.
-   */
+  /** Adds a Job Schedule to the specified Account. */
   @summary("Adds a Job Schedule to the specified Account.")
   @route("/jobschedules")
   @post
@@ -3840,9 +3506,7 @@ interface JobScheduleOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -3854,18 +3518,14 @@ interface JobScheduleOperationGroup {
       @header
       `ocp-date`?: utcDateTime;
 
-      /**
-       * The Job Schedule to be added.
-       */
+      /** The Job Schedule to be added. */
       @bodyRoot
       jobSchedule: BatchJobSchedule;
     },
     void
   >;
 
-  /**
-   * Lists all of the Job Schedules in the specified Account.
-   */
+  /** Lists all of the Job Schedules in the specified Account. */
   @summary("Lists all of the Job Schedules in the specified Account.")
   @route("/jobschedules")
   @get
@@ -3878,15 +3538,11 @@ interface JobScheduleOperationGroup {
       @query("$filter")
       $filter?: string;
 
-      /**
-       * An OData $select clause.
-       */
+      /** An OData $select clause. */
       @query("$select")
       $select?: string;
 
-      /**
-       * An OData $expand clause.
-       */
+      /** An OData $expand clause. */
       @query("$expand")
       $expand?: string;
 
@@ -3914,9 +3570,7 @@ interface JobScheduleOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -3943,9 +3597,7 @@ interface TaskOperationGroup {
   @post
   add is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job to which the Task is to be added.
-       */
+      /** The ID of the Job to which the Task is to be added. */
       @path
       jobId: string;
 
@@ -3964,9 +3616,7 @@ interface TaskOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -3978,9 +3628,7 @@ interface TaskOperationGroup {
       @header
       `ocp-date`?: utcDateTime;
 
-      /**
-       * The Task to be added.
-       */
+      /** The Task to be added. */
       @bodyRoot
       task: BatchTask;
     },
@@ -3997,9 +3645,7 @@ interface TaskOperationGroup {
   @get
   list is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job.
-       */
+      /** The ID of the Job. */
       @path
       jobId: string;
 
@@ -4010,15 +3656,11 @@ interface TaskOperationGroup {
       @query("$filter")
       $filter?: string;
 
-      /**
-       * An OData $select clause.
-       */
+      /** An OData $select clause. */
       @query("$select")
       $select?: string;
 
-      /**
-       * An OData $expand clause.
-       */
+      /** An OData $expand clause. */
       @query("$expand")
       $expand?: string;
 
@@ -4046,9 +3688,7 @@ interface TaskOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -4084,9 +3724,7 @@ interface TaskOperationGroup {
   @post
   addCollection is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job to which the Task collection is to be added.
-       */
+      /** The ID of the Job to which the Task collection is to be added. */
       @path
       jobId: string;
 
@@ -4105,9 +3743,7 @@ interface TaskOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -4119,9 +3755,7 @@ interface TaskOperationGroup {
       @header
       `ocp-date`?: utcDateTime;
 
-      /**
-       * The Tasks to be added.
-       */
+      /** The Tasks to be added. */
       @bodyRoot
       taskCollection: BatchTaskCollection;
     },
@@ -4140,15 +3774,11 @@ interface TaskOperationGroup {
   @delete
   delete is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job from which to delete the Task.
-       */
+      /** The ID of the Job from which to delete the Task. */
       @path
       jobId: string;
 
-      /**
-       * The ID of the Task to delete.
-       */
+      /** The ID of the Task to delete. */
       @path
       taskId: string;
 
@@ -4167,9 +3797,7 @@ interface TaskOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -4226,27 +3854,19 @@ interface TaskOperationGroup {
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job that contains the Task.
-       */
+      /** The ID of the Job that contains the Task. */
       @path
       jobId: string;
 
-      /**
-       * The ID of the Task to get information about.
-       */
+      /** The ID of the Task to get information about. */
       @path
       taskId: string;
 
-      /**
-       * An OData $select clause.
-       */
+      /** An OData $select clause. */
       @query("$select")
       $select?: string;
 
-      /**
-       * An OData $expand clause.
-       */
+      /** An OData $expand clause. */
       @query("$expand")
       $expand?: string;
 
@@ -4265,9 +3885,7 @@ interface TaskOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -4314,22 +3932,16 @@ interface TaskOperationGroup {
     BatchTask
   >;
 
-  /**
-   * Updates the properties of the specified Task.
-   */
+  /** Updates the properties of the specified Task. */
   @route("/jobs/{jobId}/tasks/{taskId}")
   @put
   update is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job containing the Task.
-       */
+      /** The ID of the Job containing the Task. */
       @path
       jobId: string;
 
-      /**
-       * The ID of the Task to update.
-       */
+      /** The ID of the Task to update. */
       @path
       taskId: string;
 
@@ -4348,9 +3960,7 @@ interface TaskOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -4394,18 +4004,14 @@ interface TaskOperationGroup {
       @header
       `If-Unmodified-Since`?: utcDateTime;
 
-      /**
-       * The parameters for the request.
-       */
+      /** The parameters for the request. */
       @bodyRoot
       task: BatchTask;
     },
     void
   >;
 
-  /**
-   * If the Task is not a multi-instance Task then this returns an empty collection.
-   */
+  /** If the Task is not a multi-instance Task then this returns an empty collection. */
   @summary("""
     Lists all of the subtasks that are associated with the specified multi-instance
     Task.
@@ -4414,21 +4020,15 @@ interface TaskOperationGroup {
   @get
   listSubtasks is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job.
-       */
+      /** The ID of the Job. */
       @path
       jobId: string;
 
-      /**
-       * The ID of the Task.
-       */
+      /** The ID of the Task. */
       @path
       taskId: string;
 
-      /**
-       * An OData $select clause.
-       */
+      /** An OData $select clause. */
       @query("$select")
       $select?: string;
 
@@ -4447,9 +4047,7 @@ interface TaskOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -4474,15 +4072,11 @@ interface TaskOperationGroup {
   @post
   terminate is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job containing the Task.
-       */
+      /** The ID of the Job containing the Task. */
       @path
       jobId: string;
 
-      /**
-       * The ID of the Task to terminate.
-       */
+      /** The ID of the Task to terminate. */
       @path
       taskId: string;
 
@@ -4501,9 +4095,7 @@ interface TaskOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -4567,15 +4159,11 @@ interface TaskOperationGroup {
   @post
   reactivate is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Job containing the Task.
-       */
+      /** The ID of the Job containing the Task. */
       @path
       jobId: string;
 
-      /**
-       * The ID of the Task to reactivate.
-       */
+      /** The ID of the Task to reactivate. */
       @path
       taskId: string;
 
@@ -4594,9 +4182,7 @@ interface TaskOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -4654,15 +4240,11 @@ interface ComputeNodeOperationGroup {
   @post
   addUser is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool that contains the Compute Node.
-       */
+      /** The ID of the Pool that contains the Compute Node. */
       @path
       poolId: string;
 
-      /**
-       * The ID of the machine on which you want to create a user Account.
-       */
+      /** The ID of the machine on which you want to create a user Account. */
       @path
       nodeId: string;
 
@@ -4681,9 +4263,7 @@ interface ComputeNodeOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -4695,9 +4275,7 @@ interface ComputeNodeOperationGroup {
       @header
       `ocp-date`?: utcDateTime;
 
-      /**
-       * The user Account to be created.
-       */
+      /** The user Account to be created. */
       @bodyRoot
       user: ComputeNodeUser;
     },
@@ -4713,21 +4291,15 @@ interface ComputeNodeOperationGroup {
   @delete
   deleteUser is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool that contains the Compute Node.
-       */
+      /** The ID of the Pool that contains the Compute Node. */
       @path
       poolId: string;
 
-      /**
-       * The ID of the machine on which you want to delete a user Account.
-       */
+      /** The ID of the machine on which you want to delete a user Account. */
       @path
       nodeId: string;
 
-      /**
-       * The name of the user Account to delete.
-       */
+      /** The name of the user Account to delete. */
       @path
       userName: string;
 
@@ -4746,9 +4318,7 @@ interface ComputeNodeOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -4777,21 +4347,15 @@ interface ComputeNodeOperationGroup {
   @put
   updateUser is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool that contains the Compute Node.
-       */
+      /** The ID of the Pool that contains the Compute Node. */
       @path
       poolId: string;
 
-      /**
-       * The ID of the machine on which you want to update a user Account.
-       */
+      /** The ID of the machine on which you want to update a user Account. */
       @path
       nodeId: string;
 
-      /**
-       * The name of the user Account to update.
-       */
+      /** The name of the user Account to update. */
       @path
       userName: string;
 
@@ -4810,9 +4374,7 @@ interface ComputeNodeOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -4824,38 +4386,28 @@ interface ComputeNodeOperationGroup {
       @header
       `ocp-date`?: utcDateTime;
 
-      /**
-       * The parameters for the request.
-       */
+      /** The parameters for the request. */
       @bodyRoot
       parameters: NodeUpdateUserParameters;
     },
     void
   >;
 
-  /**
-   * Gets information about the specified Compute Node.
-   */
+  /** Gets information about the specified Compute Node. */
   @summary("Gets information about the specified Compute Node.")
   @route("/pools/{poolId}/nodes/{nodeId}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool that contains the Compute Node.
-       */
+      /** The ID of the Pool that contains the Compute Node. */
       @path
       poolId: string;
 
-      /**
-       * The ID of the Compute Node that you want to get information about.
-       */
+      /** The ID of the Compute Node that you want to get information about. */
       @path
       nodeId: string;
 
-      /**
-       * An OData $select clause.
-       */
+      /** An OData $select clause. */
       @query("$select")
       $select?: string;
 
@@ -4874,9 +4426,7 @@ interface ComputeNodeOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -4891,23 +4441,17 @@ interface ComputeNodeOperationGroup {
     ComputeNode
   >;
 
-  /**
-   * You can restart a Compute Node only if it is in an idle or running state.
-   */
+  /** You can restart a Compute Node only if it is in an idle or running state. */
   @summary("Restarts the specified Compute Node.")
   @route("/pools/{poolId}/nodes/{nodeId}/reboot")
   @post
   reboot is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool that contains the Compute Node.
-       */
+      /** The ID of the Pool that contains the Compute Node. */
       @path
       poolId: string;
 
-      /**
-       * The ID of the Compute Node that you want to restart.
-       */
+      /** The ID of the Compute Node that you want to restart. */
       @path
       nodeId: string;
 
@@ -4926,9 +4470,7 @@ interface ComputeNodeOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -4940,9 +4482,7 @@ interface ComputeNodeOperationGroup {
       @header
       `ocp-date`?: utcDateTime;
 
-      /**
-       * The parameters for the request.
-       */
+      /** The parameters for the request. */
       @bodyRoot
       parameters?: NodeRebootParameters;
     },
@@ -4959,15 +4499,11 @@ interface ComputeNodeOperationGroup {
   @post
   reimage is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool that contains the Compute Node.
-       */
+      /** The ID of the Pool that contains the Compute Node. */
       @path
       poolId: string;
 
-      /**
-       * The ID of the Compute Node that you want to restart.
-       */
+      /** The ID of the Compute Node that you want to restart. */
       @path
       nodeId: string;
 
@@ -4986,9 +4522,7 @@ interface ComputeNodeOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -5000,9 +4534,7 @@ interface ComputeNodeOperationGroup {
       @header
       `ocp-date`?: utcDateTime;
 
-      /**
-       * The parameters for the request.
-       */
+      /** The parameters for the request. */
       @bodyRoot
       parameters?: NodeReimageParameters;
     },
@@ -5018,15 +4550,11 @@ interface ComputeNodeOperationGroup {
   @post
   disableScheduling is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool that contains the Compute Node.
-       */
+      /** The ID of the Pool that contains the Compute Node. */
       @path
       poolId: string;
 
-      /**
-       * The ID of the Compute Node on which you want to disable Task scheduling.
-       */
+      /** The ID of the Compute Node on which you want to disable Task scheduling. */
       @path
       nodeId: string;
 
@@ -5045,9 +4573,7 @@ interface ComputeNodeOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -5059,9 +4585,7 @@ interface ComputeNodeOperationGroup {
       @header
       `ocp-date`?: utcDateTime;
 
-      /**
-       * The parameters for the request.
-       */
+      /** The parameters for the request. */
       @bodyRoot
       parameters?: NodeDisableSchedulingParameters;
     },
@@ -5077,15 +4601,11 @@ interface ComputeNodeOperationGroup {
   @post
   enableScheduling is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool that contains the Compute Node.
-       */
+      /** The ID of the Pool that contains the Compute Node. */
       @path
       poolId: string;
 
-      /**
-       * The ID of the Compute Node on which you want to enable Task scheduling.
-       */
+      /** The ID of the Compute Node on which you want to enable Task scheduling. */
       @path
       nodeId: string;
 
@@ -5104,9 +4624,7 @@ interface ComputeNodeOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -5133,15 +4651,11 @@ interface ComputeNodeOperationGroup {
   @get
   getRemoteLoginSettings is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool that contains the Compute Node.
-       */
+      /** The ID of the Pool that contains the Compute Node. */
       @path
       poolId: string;
 
-      /**
-       * The ID of the Compute Node for which to obtain the remote login settings.
-       */
+      /** The ID of the Compute Node for which to obtain the remote login settings. */
       @path
       nodeId: string;
 
@@ -5160,9 +4674,7 @@ interface ComputeNodeOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -5188,9 +4700,7 @@ interface ComputeNodeOperationGroup {
   @get
   getRemoteDesktop is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool that contains the Compute Node.
-       */
+      /** The ID of the Pool that contains the Compute Node. */
       @path
       poolId: string;
 
@@ -5216,9 +4726,7 @@ interface ComputeNodeOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -5262,9 +4770,7 @@ interface ComputeNodeOperationGroup {
         @header
         `client-request-id`?: string;
 
-        /**
-         * Whether the server should return the client-request-id in the response.
-         */
+        /** Whether the server should return the client-request-id in the response. */
         @header
         `return-client-request-id`?: boolean;
 
@@ -5279,17 +4785,13 @@ interface ComputeNodeOperationGroup {
     }
   >;
 
-  /**
-   * Lists the Compute Nodes in the specified Pool.
-   */
+  /** Lists the Compute Nodes in the specified Pool. */
   @summary("Lists the Compute Nodes in the specified Pool.")
   @route("/pools/{poolId}/nodes")
   @get
   list is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool from which you want to list Compute Nodes.
-       */
+      /** The ID of the Pool from which you want to list Compute Nodes. */
       @path
       poolId: string;
 
@@ -5300,9 +4802,7 @@ interface ComputeNodeOperationGroup {
       @query("$filter")
       $filter?: string;
 
-      /**
-       * An OData $select clause.
-       */
+      /** An OData $select clause. */
       @query("$select")
       $select?: string;
 
@@ -5330,9 +4830,7 @@ interface ComputeNodeOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -5349,23 +4847,17 @@ interface ComputeNodeOperationGroup {
 }
 
 interface ComputeNodeExtensionOperationGroup {
-  /**
-   * Gets information about the specified Compute Node Extension.
-   */
+  /** Gets information about the specified Compute Node Extension. */
   @summary("Gets information about the specified Compute Node Extension.")
   @route("/pools/{poolId}/nodes/{nodeId}/extensions/{extensionName}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool that contains the Compute Node.
-       */
+      /** The ID of the Pool that contains the Compute Node. */
       @path
       poolId: string;
 
-      /**
-       * The ID of the Compute Node that contains the extensions.
-       */
+      /** The ID of the Compute Node that contains the extensions. */
       @path
       nodeId: string;
 
@@ -5376,9 +4868,7 @@ interface ComputeNodeExtensionOperationGroup {
       @path
       extensionName: string;
 
-      /**
-       * An OData $select clause.
-       */
+      /** An OData $select clause. */
       @query("$select")
       $select?: string;
 
@@ -5397,9 +4887,7 @@ interface ComputeNodeExtensionOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 
@@ -5414,29 +4902,21 @@ interface ComputeNodeExtensionOperationGroup {
     NodeVMExtension
   >;
 
-  /**
-   * Lists the Compute Nodes Extensions in the specified Pool.
-   */
+  /** Lists the Compute Nodes Extensions in the specified Pool. */
   @summary("Lists the Compute Nodes Extensions in the specified Pool.")
   @route("/pools/{poolId}/nodes/{nodeId}/extensions")
   @get
   list is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the Pool that contains Compute Node.
-       */
+      /** The ID of the Pool that contains Compute Node. */
       @path
       poolId: string;
 
-      /**
-       * The ID of the Compute Node that you want to list extensions.
-       */
+      /** The ID of the Compute Node that you want to list extensions. */
       @path
       nodeId: string;
 
-      /**
-       * An OData $select clause.
-       */
+      /** An OData $select clause. */
       @query("$select")
       $select?: string;
 
@@ -5464,9 +4944,7 @@ interface ComputeNodeExtensionOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Whether the server should return the client-request-id in the response.
-       */
+      /** Whether the server should return the client-request-id in the response. */
       @header
       `return-client-request-id`?: boolean;
 

@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AgFoodPlatform;
-/**
- * DataConnector Model.
- */
+/** DataConnector Model. */
 @parentResource(DataManagerForAgriculture)
 model DataConnector
   is Azure.ResourceManager.ProxyResource<DataConnectorProperties, false> {
@@ -28,24 +26,16 @@ model DataConnector
 
 @armResourceOperations
 interface DataConnectors {
-  /**
-   * Get specific Data Connector resource by DataConnectorName.
-   */
+  /** Get specific Data Connector resource by DataConnectorName. */
   get is ArmResourceRead<DataConnector>;
 
-  /**
-   * Create or update Data Connector For MADMA resource.
-   */
+  /** Create or update Data Connector For MADMA resource. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<DataConnector>;
 
-  /**
-   * Delete a Data Connectors with given dataConnector name.
-   */
+  /** Delete a Data Connectors with given dataConnector name. */
   delete is ArmResourceDeleteSync<DataConnector>;
 
-  /**
-   * Lists the Data Connector Credentials for MADMA instance.
-   */
+  /** Lists the Data Connector Credentials for MADMA instance. */
   list is ArmResourceListByParent<
     DataConnector,
     Parameters = {
@@ -58,9 +48,7 @@ interface DataConnectors {
       @query("$maxPageSize")
       $maxPageSize?: int32 = 50;
 
-      /**
-       * Continuation token for getting next set of results.
-       */
+      /** Continuation token for getting next set of results. */
       @query("$skipToken")
       $skipToken?: string;
     },

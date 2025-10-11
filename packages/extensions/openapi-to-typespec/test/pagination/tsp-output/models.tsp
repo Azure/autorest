@@ -8,65 +8,41 @@ using Azure.Core;
 
 namespace AutoRestPagingTestService;
 
-/**
- * The status of the request
- */
+/** The status of the request */
 union OperationResultStatus {
   string,
 
-  /**
-   * Succeeded
-   */
+  /** Succeeded */
   Succeeded: "Succeeded",
 
-  /**
-   * Failed
-   */
+  /** Failed */
   Failed: "Failed",
 
-  /**
-   * canceled
-   */
+  /** canceled */
   canceled: "canceled",
 
-  /**
-   * Accepted
-   */
+  /** Accepted */
   Accepted: "Accepted",
 
-  /**
-   * Creating
-   */
+  /** Creating */
   Creating: "Creating",
 
-  /**
-   * Created
-   */
+  /** Created */
   Created: "Created",
 
-  /**
-   * Updating
-   */
+  /** Updating */
   Updating: "Updating",
 
-  /**
-   * Updated
-   */
+  /** Updated */
   Updated: "Updated",
 
-  /**
-   * Deleting
-   */
+  /** Deleting */
   Deleting: "Deleting",
 
-  /**
-   * Deleted
-   */
+  /** Deleted */
   Deleted: "Deleted",
 
-  /**
-   * OK
-   */
+  /** OK */
   OK: "OK",
 }
 
@@ -106,8 +82,6 @@ model ProductResultValueWithXMSClientName {
 }
 
 model OperationResult {
-  /**
-   * The status of the request
-   */
+  /** The status of the request */
   status?: OperationResultStatus;
 }

@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * The status of the latest virtual machine scale set rolling upgrade.
- */
+/** The status of the latest virtual machine scale set rolling upgrade. */
 @singleton("latest")
 @parentResource(VirtualMachineScaleSet)
 model RollingUpgradeStatusInfo
@@ -28,9 +26,7 @@ model RollingUpgradeStatusInfo
 
 @armResourceOperations
 interface RollingUpgradeStatusInfos {
-  /**
-   * Gets the status of the latest virtual machine scale set rolling upgrade.
-   */
+  /** Gets the status of the latest virtual machine scale set rolling upgrade. */
   getLatest is ArmResourceRead<RollingUpgradeStatusInfo>;
 }
 

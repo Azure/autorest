@@ -6,103 +6,65 @@ using TypeSpec.Http;
 
 namespace QnAMakerRuntimeClient;
 
-/**
- * Optional field. Set to OR for using OR as Operation for Strict Filters.
- */
+/** Optional field. Set to OR for using OR as Operation for Strict Filters. */
 union StrictFiltersCompoundOperationType {
   string,
 
-  /**
-   * AND
-   */
+  /** AND */
   AND: "AND",
 
-  /**
-   * OR
-   */
+  /** OR */
   OR: "OR",
 }
 
-/**
- * Human readable error code.
- */
+/** Human readable error code. */
 union ErrorCodeType {
   string,
 
-  /**
-   * BadArgument
-   */
+  /** BadArgument */
   BadArgument: "BadArgument",
 
-  /**
-   * Forbidden
-   */
+  /** Forbidden */
   Forbidden: "Forbidden",
 
-  /**
-   * NotFound
-   */
+  /** NotFound */
   NotFound: "NotFound",
 
-  /**
-   * KbNotFound
-   */
+  /** KbNotFound */
   KbNotFound: "KbNotFound",
 
-  /**
-   * Unauthorized
-   */
+  /** Unauthorized */
   Unauthorized: "Unauthorized",
 
-  /**
-   * Unspecified
-   */
+  /** Unspecified */
   Unspecified: "Unspecified",
 
-  /**
-   * EndpointKeysError
-   */
+  /** EndpointKeysError */
   EndpointKeysError: "EndpointKeysError",
 
-  /**
-   * QuotaExceeded
-   */
+  /** QuotaExceeded */
   QuotaExceeded: "QuotaExceeded",
 
-  /**
-   * QnaRuntimeError
-   */
+  /** QnaRuntimeError */
   QnaRuntimeError: "QnaRuntimeError",
 
-  /**
-   * SKULimitExceeded
-   */
+  /** SKULimitExceeded */
   SKULimitExceeded: "SKULimitExceeded",
 
-  /**
-   * OperationNotFound
-   */
+  /** OperationNotFound */
   OperationNotFound: "OperationNotFound",
 
-  /**
-   * ServiceError
-   */
+  /** ServiceError */
   ServiceError: "ServiceError",
 
-  /**
-   * ValidationFailure
-   */
+  /** ValidationFailure */
   ValidationFailure: "ValidationFailure",
 
-  /**
-   * ExtractionFailure
-   */
+  /** ExtractionFailure */
   ExtractionFailure: "ExtractionFailure",
 }
 
-/**
- * POST body schema to query the knowledgebase.
- */
+/** POST body schema to query the knowledgebase. */
 model QueryDTO {
   /**
    * Exact qnaId to fetch from the knowledgebase, this field takes priority over
@@ -110,14 +72,10 @@ model QueryDTO {
    */
   qnaId?: string;
 
-  /**
-   * User question to query against the knowledge base.
-   */
+  /** User question to query against the knowledge base. */
   question?: string;
 
-  /**
-   * Max number of answers to be returned for the question.
-   */
+  /** Max number of answers to be returned for the question. */
   top?: int32;
 
   /**
@@ -127,136 +85,86 @@ model QueryDTO {
    */
   userId?: string;
 
-  /**
-   * Query against the test index.
-   */
+  /** Query against the test index. */
   isTest?: boolean;
 
-  /**
-   * Threshold for answers returned based on score.
-   */
+  /** Threshold for answers returned based on score. */
   scoreThreshold?: float32;
 
-  /**
-   * Context object with previous QnA's information.
-   */
+  /** Context object with previous QnA's information. */
   context?: QueryDTOContext;
 
-  /**
-   * Optional field. Set to 'QuestionOnly' for using a question only Ranker.
-   */
+  /** Optional field. Set to 'QuestionOnly' for using a question only Ranker. */
   rankerType?: string;
 
-  /**
-   * Find only answers that contain these metadata.
-   */
+  /** Find only answers that contain these metadata. */
   strictFilters?: MetadataDTO[];
 
-  /**
-   * Optional field. Set to OR for using OR as Operation for Strict Filters.
-   */
+  /** Optional field. Set to OR for using OR as Operation for Strict Filters. */
   strictFiltersCompoundOperationType?: StrictFiltersCompoundOperationType;
 }
 
-/**
- * Context object with previous QnA's information.
- */
+/** Context object with previous QnA's information. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model QueryDTOContext extends QueryContextDTO {}
 
-/**
- * Context object with previous QnA's information.
- */
+/** Context object with previous QnA's information. */
 model QueryContextDTO {
-  /**
-   * Previous QnA Id - qnaId of the top result.
-   */
+  /** Previous QnA Id - qnaId of the top result. */
   previousQnaId?: string;
 
-  /**
-   * Previous user query.
-   */
+  /** Previous user query. */
   previousUserQuery?: string;
 }
 
-/**
- * Name - value pair of metadata.
- */
+/** Name - value pair of metadata. */
 model MetadataDTO {
-  /**
-   * Metadata name.
-   */
+  /** Metadata name. */
   @maxLength(100)
   @minLength(1)
   name: string;
 
-  /**
-   * Metadata value.
-   */
+  /** Metadata value. */
   @maxLength(500)
   @minLength(1)
   value: string;
 }
 
-/**
- * Represents List of Question Answers.
- */
+/** Represents List of Question Answers. */
 model QnASearchResultList {
-  /**
-   * Represents Search Result list.
-   */
+  /** Represents Search Result list. */
   answers?: QnASearchResult[];
 }
 
-/**
- * Represents Search Result.
- */
+/** Represents Search Result. */
 model QnASearchResult {
-  /**
-   * List of questions.
-   */
+  /** List of questions. */
   questions?: string[];
 
-  /**
-   * Answer.
-   */
+  /** Answer. */
   answer?: string;
 
-  /**
-   * Search result score.
-   */
+  /** Search result score. */
   score?: float32;
 
-  /**
-   * Id of the QnA result.
-   */
+  /** Id of the QnA result. */
   id?: int32;
 
-  /**
-   * Source of QnA result.
-   */
+  /** Source of QnA result. */
   source?: string;
 
-  /**
-   * List of metadata.
-   */
+  /** List of metadata. */
   metadata?: MetadataDTO[];
 
-  /**
-   * Context object of the QnA
-   */
+  /** Context object of the QnA */
   context?: QnASearchResultContext;
 }
 
-/**
- * Context object of the QnA
- */
+/** Context object of the QnA */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model QnASearchResultContext extends ContextDTO {}
 
-/**
- * Context associated with Qna.
- */
+/** Context associated with Qna. */
 model ContextDTO {
   /**
    * To mark if a prompt is relevant only with a previous question or not.
@@ -265,19 +173,13 @@ model ContextDTO {
    */
   isContextOnly?: boolean;
 
-  /**
-   * List of prompts associated with the answer.
-   */
+  /** List of prompts associated with the answer. */
   prompts?: PromptDTO[];
 }
 
-/**
- * Prompt for an answer.
- */
+/** Prompt for an answer. */
 model PromptDTO {
-  /**
-   * Index of the prompt - used in ordering of the prompts
-   */
+  /** Index of the prompt - used in ordering of the prompts */
   displayOrder?: int32;
 
   /**
@@ -286,36 +188,24 @@ model PromptDTO {
    */
   qnaId?: int32;
 
-  /**
-   * QnADTO - Either QnaId or QnADTO needs to be present in a PromptDTO object
-   */
+  /** QnADTO - Either QnaId or QnADTO needs to be present in a PromptDTO object */
   qna?: PromptDTOQna;
 
-  /**
-   * Text displayed to represent a follow up question prompt
-   */
+  /** Text displayed to represent a follow up question prompt */
   @maxLength(200)
   displayText?: string;
 }
 
-/**
- * QnADTO - Either QnaId or QnADTO needs to be present in a PromptDTO object
- */
+/** QnADTO - Either QnaId or QnADTO needs to be present in a PromptDTO object */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model PromptDTOQna extends QnAdto {}
 
-/**
- * Q-A object.
- */
+/** Q-A object. */
 model QnAdto {
-  /**
-   * Unique id for the Q-A.
-   */
+  /** Unique id for the Q-A. */
   id?: int32;
 
-  /**
-   * Answer text
-   */
+  /** Answer text */
   @maxLength(25000)
   @minLength(1)
   answer: string;
@@ -327,25 +217,17 @@ model QnAdto {
   @maxLength(300)
   source?: string;
 
-  /**
-   * List of questions associated with the answer.
-   */
+  /** List of questions associated with the answer. */
   questions: string[];
 
-  /**
-   * List of metadata associated with the answer.
-   */
+  /** List of metadata associated with the answer. */
   metadata?: MetadataDTO[];
 
-  /**
-   * Context of a QnA
-   */
+  /** Context of a QnA */
   context?: QnAdtoContext;
 }
 
-/**
- * Context of a QnA
- */
+/** Context of a QnA */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model QnAdtoContext extends ContextDTO {}
 
@@ -355,15 +237,11 @@ model QnAdtoContext extends ContextDTO {}
  */
 @error
 model ErrorResponse {
-  /**
-   * The error object.
-   */
+  /** The error object. */
   error?: ErrorResponseError;
 }
 
-/**
- * The error object.
- */
+/** The error object. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ErrorResponseError extends Error {}
 
@@ -372,24 +250,16 @@ model ErrorResponseError extends Error {}
  * https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
  */
 model Error {
-  /**
-   * One of a server-defined set of error codes.
-   */
+  /** One of a server-defined set of error codes. */
   code: ErrorCodeType;
 
-  /**
-   * A human-readable representation of the error.
-   */
+  /** A human-readable representation of the error. */
   message?: string;
 
-  /**
-   * The target of the error.
-   */
+  /** The target of the error. */
   target?: string;
 
-  /**
-   * An array of details about specific errors that led to this reported error.
-   */
+  /** An array of details about specific errors that led to this reported error. */
   details?: Error[];
 
   /**
@@ -405,9 +275,7 @@ model Error {
  * https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
  */
 model InnerErrorModel {
-  /**
-   * A more specific error code than was provided by the containing error.
-   */
+  /** A more specific error code than was provided by the containing error. */
   code?: string;
 
   /**
@@ -417,33 +285,21 @@ model InnerErrorModel {
   innerError?: InnerErrorModel;
 }
 
-/**
- * Active learning feedback records.
- */
+/** Active learning feedback records. */
 model FeedbackRecordsDTO {
-  /**
-   * List of feedback records.
-   */
+  /** List of feedback records. */
   feedbackRecords?: FeedbackRecordDTO[];
 }
 
-/**
- * Active learning feedback record.
- */
+/** Active learning feedback record. */
 model FeedbackRecordDTO {
-  /**
-   * Unique identifier for the user.
-   */
+  /** Unique identifier for the user. */
   userId?: string;
 
-  /**
-   * The suggested question being provided as feedback.
-   */
+  /** The suggested question being provided as feedback. */
   @maxLength(1000)
   userQuestion?: string;
 
-  /**
-   * The qnaId for which the suggested question is provided as feedback.
-   */
+  /** The qnaId for which the suggested question is provided as feedback. */
   qnaId?: int32;
 }

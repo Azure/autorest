@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ServiceNetworking;
-/**
- * Association Subresource of Traffic Controller
- */
+/** Association Subresource of Traffic Controller */
 @parentResource(TrafficController)
 model Association
   is Azure.ResourceManager.TrackedResource<AssociationProperties> {
@@ -27,34 +25,24 @@ model Association
 
 @armResourceOperations
 interface Associations {
-  /**
-   * Get a Association
-   */
+  /** Get a Association */
   get is ArmResourceRead<Association>;
 
-  /**
-   * Create a Association
-   */
+  /** Create a Association */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Association>;
 
-  /**
-   * Update a Association
-   */
+  /** Update a Association */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Association, PatchModel = AssociationUpdate>;
 
-  /**
-   * Delete a Association
-   */
+  /** Delete a Association */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Association,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List Association resources by TrafficController
-   */
+  /** List Association resources by TrafficController */
   listByTrafficController is ArmResourceListByParent<Association>;
 }
 

@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * Describes a virtual machine scale set virtual machine.
- */
+/** Describes a virtual machine scale set virtual machine. */
 @parentResource(VirtualMachineScaleSet)
 model VirtualMachineScaleSetVM
   is Azure.ResourceManager.TrackedResource<VirtualMachineScaleSetVMProperties> {
@@ -24,66 +22,48 @@ model VirtualMachineScaleSetVM
     NamePattern = ""
   >;
 
-  /**
-   * The virtual machine instance ID.
-   */
+  /** The virtual machine instance ID. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   instanceId?: string;
 
-  /**
-   * The virtual machine SKU.
-   */
+  /** The virtual machine SKU. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   sku?: Sku;
 
-  /**
-   * Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
-   */
+  /** Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   plan?: Plan;
 
-  /**
-   * The virtual machine child extension resources.
-   */
+  /** The virtual machine child extension resources. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   resources?: VirtualMachineExtension[];
 
-  /**
-   * The virtual machine zones.
-   */
+  /** The virtual machine zones. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   zones?: string[];
 
-  /**
-   * The identity of the virtual machine, if configured.
-   */
+  /** The identity of the virtual machine, if configured. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   identity?: VirtualMachineIdentity;
 }
 
 @armResourceOperations
 interface VirtualMachineScaleSetVMS {
-  /**
-   * Gets a virtual machine from a VM scale set.
-   */
+  /** Gets a virtual machine from a VM scale set. */
   get is ArmResourceRead<
     VirtualMachineScaleSetVM,
     Parameters = {
-      /**
-       * The expand expression to apply on the operation. 'InstanceView' will retrieve the instance view of the virtual machine. 'UserData' will retrieve the UserData of the virtual machine.
-       */
+      /** The expand expression to apply on the operation. 'InstanceView' will retrieve the instance view of the virtual machine. 'UserData' will retrieve the UserData of the virtual machine. */
       @query("$expand")
       $expand?: InstanceViewTypes;
     }
   >;
 
-  /**
-   * Updates a virtual machine of a VM scale set.
-   */
+  /** Updates a virtual machine of a VM scale set. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   update is ArmResourceCreateOrReplaceAsync<
@@ -96,57 +76,41 @@ interface VirtualMachineScaleSetVMS {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /**
-   * Deletes a virtual machine from a VM scale set.
-   */
+  /** Deletes a virtual machine from a VM scale set. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachineScaleSetVM,
     Parameters = {
-      /**
-       * Optional parameter to force delete a virtual machine from a VM scale set. (Feature in Preview)
-       */
+      /** Optional parameter to force delete a virtual machine from a VM scale set. (Feature in Preview) */
       @query("forceDeletion")
       forceDeletion?: boolean;
     },
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * Gets a list of all virtual machines in a VM scale sets.
-   */
+  /** Gets a list of all virtual machines in a VM scale sets. */
   list is ArmResourceListByParent<
     VirtualMachineScaleSetVM,
     Parameters = {
-      /**
-       * The name of the VM scale set.
-       */
+      /** The name of the VM scale set. */
       @path
       virtualMachineScaleSetName: string;
 
-      /**
-       * The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'.
-       */
+      /** The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'. */
       @query("$filter")
       $filter?: string;
 
-      /**
-       * The list parameters. Allowed values are 'instanceView', 'instanceView/statuses'.
-       */
+      /** The list parameters. Allowed values are 'instanceView', 'instanceView/statuses'. */
       @query("$select")
       $select?: string;
 
-      /**
-       * The expand expression to apply to the operation. Allowed values are 'instanceView'.
-       */
+      /** The expand expression to apply to the operation. Allowed values are 'instanceView'. */
       @query("$expand")
       $expand?: string;
     }
   >;
 
-  /**
-   * Reimages (upgrade the operating system) a specific virtual machine in a VM scale set.
-   */
+  /** Reimages (upgrade the operating system) a specific virtual machine in a VM scale set. */
   reimage is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
     VirtualMachineScaleSetVMReimageParameters,
@@ -154,9 +118,7 @@ interface VirtualMachineScaleSetVMS {
     OptionalRequestBody = true
   >;
 
-  /**
-   * Allows you to re-image all the disks ( including data disks ) in the a VM scale set instance. This operation is only supported for managed disks.
-   */
+  /** Allows you to re-image all the disks ( including data disks ) in the a VM scale set instance. This operation is only supported for managed disks. */
   @action("reimageall")
   reimageAll is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
@@ -164,18 +126,14 @@ interface VirtualMachineScaleSetVMS {
     OkResponse
   >;
 
-  /**
-   * Deallocates a specific virtual machine in a VM scale set. Shuts down the virtual machine and releases the compute resources it uses. You are not billed for the compute resources of this virtual machine once it is deallocated.
-   */
+  /** Deallocates a specific virtual machine in a VM scale set. Shuts down the virtual machine and releases the compute resources it uses. You are not billed for the compute resources of this virtual machine once it is deallocated. */
   deallocate is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
     OkResponse
   >;
 
-  /**
-   * Gets the status of a virtual machine from a VM scale set.
-   */
+  /** Gets the status of a virtual machine from a VM scale set. */
   @get
   @action("instanceView")
   getInstanceView is ArmResourceActionSync<
@@ -184,79 +142,59 @@ interface VirtualMachineScaleSetVMS {
     ArmResponse<VirtualMachineScaleSetVMInstanceView>
   >;
 
-  /**
-   * Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.
-   */
+  /** Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges. */
   @action("poweroff")
   powerOff is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
     OkResponse,
     Parameters = {
-      /**
-       * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
-       */
+      /** The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified */
       @query("skipShutdown")
       skipShutdown?: boolean;
     }
   >;
 
-  /**
-   * Restarts a virtual machine in a VM scale set.
-   */
+  /** Restarts a virtual machine in a VM scale set. */
   restart is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, OkResponse>;
 
-  /**
-   * Starts a virtual machine in a VM scale set.
-   */
+  /** Starts a virtual machine in a VM scale set. */
   start is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, OkResponse>;
 
-  /**
-   * Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.
-   */
+  /** Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on. */
   redeploy is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
     OkResponse
   >;
 
-  /**
-   * The operation to retrieve SAS URIs of boot diagnostic logs for a virtual machine in a VM scale set.
-   */
+  /** The operation to retrieve SAS URIs of boot diagnostic logs for a virtual machine in a VM scale set. */
   retrieveBootDiagnosticsData is ArmResourceActionSync<
     VirtualMachineScaleSetVM,
     void,
     ArmResponse<RetrieveBootDiagnosticsDataResult>,
     Parameters = {
-      /**
-       * Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. **Note:** If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes.
-       */
+      /** Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. **Note:** If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes. */
       @query("sasUriExpirationTimeInMinutes")
       sasUriExpirationTimeInMinutes?: int32;
     }
   >;
 
-  /**
-   * Performs maintenance on a virtual machine in a VM scale set.
-   */
+  /** Performs maintenance on a virtual machine in a VM scale set. */
   performMaintenance is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
     OkResponse
   >;
 
-  /**
-   * The operation to simulate the eviction of spot virtual machine in a VM scale set.
-   */
+  /** The operation to simulate the eviction of spot virtual machine in a VM scale set. */
   simulateEviction is ArmResourceActionSync<
     VirtualMachineScaleSetVM,
     void,
     NoContentResponse
   >;
 
-  /**
-   * Run command on a virtual machine in a VM scale set.
-   */
+  /** Run command on a virtual machine in a VM scale set. */
   @list
   runCommand is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,

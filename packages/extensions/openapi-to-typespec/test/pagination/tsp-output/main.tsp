@@ -15,9 +15,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-/**
- * Long-running Operation for AutoRest
- */
+/** Long-running Operation for AutoRest */
 @service(#{ title: "AutoRest Paging Test Service" })
 @versioned(Versions)
 @server(

@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * Deleted API Management Service information.
- */
+/** Deleted API Management Service information. */
 @subscriptionResource
 model DeletedServiceContract
   is Azure.ResourceManager.ProxyResource<DeletedServiceContractProperties> {
@@ -23,9 +21,7 @@ model DeletedServiceContract
     NamePattern = "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
   >;
 
-  /**
-   * API Management Service Master Location.
-   */
+  /** API Management Service Master Location. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   location?: string;
@@ -33,17 +29,13 @@ model DeletedServiceContract
 
 @armResourceOperations
 interface DeletedServiceContracts {
-  /**
-   * Get soft-deleted Api Management Service by name.
-   */
+  /** Get soft-deleted Api Management Service by name. */
   getByName is ArmResourceRead<
     DeletedServiceContract,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
-  /**
-   * Purges Api Management Service (deletes it with no option to undelete).
-   */
+  /** Purges Api Management Service (deletes it with no option to undelete). */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   purge is ArmResourceDeleteWithoutOkAsync<

@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
-/**
- * The Private Endpoint Connection resource.
- */
+/** The Private Endpoint Connection resource. */
 @parentResource(StorageAccount)
 model PrivateEndpointConnection
   is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
@@ -27,28 +25,20 @@ model PrivateEndpointConnection
 
 @armResourceOperations
 interface PrivateEndpointConnections {
-  /**
-   * Gets the specified private endpoint connection associated with the storage account.
-   */
+  /** Gets the specified private endpoint connection associated with the storage account. */
   get is ArmResourceRead<PrivateEndpointConnection>;
 
-  /**
-   * Update the state of specified private endpoint connection associated with the storage account.
-   */
+  /** Update the state of specified private endpoint connection associated with the storage account. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   put is ArmResourceCreateOrReplaceSync<
     PrivateEndpointConnection,
     Response = ArmResourceUpdatedResponse<PrivateEndpointConnection>
   >;
 
-  /**
-   * Deletes the specified private endpoint connection associated with the storage account.
-   */
+  /** Deletes the specified private endpoint connection associated with the storage account. */
   delete is ArmResourceDeleteSync<PrivateEndpointConnection>;
 
-  /**
-   * List all the private endpoint connections associated with the storage account.
-   */
+  /** List all the private endpoint connections associated with the storage account. */
   list is ArmResourceListByParent<
     PrivateEndpointConnection,
     Response = ArmResponse<PrivateEndpointConnectionListResult>

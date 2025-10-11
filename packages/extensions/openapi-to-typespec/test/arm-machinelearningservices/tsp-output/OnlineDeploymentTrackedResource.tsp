@@ -23,9 +23,7 @@ model OnlineDeploymentTrackedResource
   >;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 
-  /**
-   * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
-   */
+  /** Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   kind?: string;
 
@@ -34,73 +32,53 @@ model OnlineDeploymentTrackedResource
 
 @armResourceOperations
 interface OnlineDeploymentTrackedResources {
-  /**
-   * Get Inference Deployment Deployment.
-   */
+  /** Get Inference Deployment Deployment. */
   get is ArmResourceRead<OnlineDeploymentTrackedResource>;
 
-  /**
-   * Create or update Inference Endpoint Deployment (asynchronous).
-   */
+  /** Create or update Inference Endpoint Deployment (asynchronous). */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<OnlineDeploymentTrackedResource>;
 
-  /**
-   * Update Online Deployment (asynchronous).
-   */
+  /** Update Online Deployment (asynchronous). */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     OnlineDeploymentTrackedResource,
     PatchModel = PartialMinimalTrackedResourceWithSku
   >;
 
-  /**
-   * Delete Inference Endpoint Deployment (asynchronous).
-   */
+  /** Delete Inference Endpoint Deployment (asynchronous). */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     OnlineDeploymentTrackedResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List Inference Endpoint Deployments.
-   */
+  /** List Inference Endpoint Deployments. */
   list is ArmResourceListByParent<
     OnlineDeploymentTrackedResource,
     Parameters = {
-      /**
-       * Ordering of list.
-       */
+      /** Ordering of list. */
       @query("$orderBy")
       $orderBy?: string;
 
-      /**
-       * Top of list.
-       */
+      /** Top of list. */
       @query("$top")
       $top?: int32;
 
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
     },
     Response = ArmResponse<OnlineDeploymentTrackedResourceArmPaginatedResult>
   >;
 
-  /**
-   * Polls an Endpoint operation.
-   */
+  /** Polls an Endpoint operation. */
   getLogs is ArmResourceActionSync<
     OnlineDeploymentTrackedResource,
     DeploymentLogsRequest,
     ArmResponse<DeploymentLogs>
   >;
 
-  /**
-   * List Inference Endpoint Deployment Skus.
-   */
+  /** List Inference Endpoint Deployment Skus. */
   @list
   @get
   @action("skus")
@@ -109,15 +87,11 @@ interface OnlineDeploymentTrackedResources {
     void,
     ArmResponse<SkuResourceArmPaginatedResult>,
     Parameters = {
-      /**
-       * Number of Skus to be retrieved in a page of results.
-       */
+      /** Number of Skus to be retrieved in a page of results. */
       @query("count")
       count?: int32;
 
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
     }

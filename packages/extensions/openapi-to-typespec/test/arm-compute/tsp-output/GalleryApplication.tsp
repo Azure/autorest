@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * Specifies information about the gallery Application Definition that you want to create or update.
- */
+/** Specifies information about the gallery Application Definition that you want to create or update. */
 @parentResource(Gallery)
 model GalleryApplication
   is Azure.ResourceManager.TrackedResource<GalleryApplicationProperties> {
@@ -27,14 +25,10 @@ model GalleryApplication
 
 @armResourceOperations
 interface GalleryApplications {
-  /**
-   * Retrieves information about a gallery Application Definition.
-   */
+  /** Retrieves information about a gallery Application Definition. */
   get is ArmResourceRead<GalleryApplication>;
 
-  /**
-   * Create or update a gallery Application Definition.
-   */
+  /** Create or update a gallery Application Definition. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -49,9 +43,7 @@ interface GalleryApplications {
     })
   >;
 
-  /**
-   * Update a gallery Application Definition.
-   */
+  /** Update a gallery Application Definition. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     GalleryApplication,
@@ -59,18 +51,14 @@ interface GalleryApplications {
     Response = ArmResponse<GalleryApplication>
   >;
 
-  /**
-   * Delete a gallery Application.
-   */
+  /** Delete a gallery Application. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     GalleryApplication,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List gallery Application Definitions in a gallery.
-   */
+  /** List gallery Application Definitions in a gallery. */
   listByGallery is ArmResourceListByParent<
     GalleryApplication,
     Response = ArmResponse<GalleryApplicationList>

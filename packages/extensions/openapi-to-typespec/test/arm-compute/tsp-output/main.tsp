@@ -62,9 +62,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-/**
- * Compute Client
- */
+/** Compute Client */
 @armProviderNamespace
 @service(#{ title: "Azure Compute resource management API." })
 @versioned(Versions)

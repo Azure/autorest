@@ -26,9 +26,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-/**
- * Azure Sphere resource management API.
- */
+/** Azure Sphere resource management API. */
 @armProviderNamespace
 @service(#{ title: "Azure Sphere resource management API." })
 @versioned(Versions)

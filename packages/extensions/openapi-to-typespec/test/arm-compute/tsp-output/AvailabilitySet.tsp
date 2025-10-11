@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Availability sets overview](https://docs.microsoft.com/azure/virtual-machines/availability-set-overview). For more information on Azure planned maintenance, see [Maintenance and updates for Virtual Machines in Azure](https://docs.microsoft.com/azure/virtual-machines/maintenance-and-updates). Currently, a VM can only be added to an availability set at creation time. An existing VM cannot be added to an availability set.
- */
+/** Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Availability sets overview](https://docs.microsoft.com/azure/virtual-machines/availability-set-overview). For more information on Azure planned maintenance, see [Maintenance and updates for Virtual Machines in Azure](https://docs.microsoft.com/azure/virtual-machines/maintenance-and-updates). Currently, a VM can only be added to an availability set at creation time. An existing VM cannot be added to an availability set. */
 model AvailabilitySet
   is Azure.ResourceManager.TrackedResource<AvailabilitySetProperties> {
   ...ResourceNameParameter<
@@ -22,65 +20,47 @@ model AvailabilitySet
     NamePattern = ""
   >;
 
-  /**
-   * Sku of the availability set, only name is required to be set. See AvailabilitySetSkuTypes for possible set of values. Use 'Aligned' for virtual machines with managed disks and 'Classic' for virtual machines with unmanaged disks. Default value is 'Classic'.
-   */
+  /** Sku of the availability set, only name is required to be set. See AvailabilitySetSkuTypes for possible set of values. Use 'Aligned' for virtual machines with managed disks and 'Classic' for virtual machines with unmanaged disks. Default value is 'Classic'. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: Sku;
 }
 
 @armResourceOperations
 interface AvailabilitySets {
-  /**
-   * Retrieves information about an availability set.
-   */
+  /** Retrieves information about an availability set. */
   get is ArmResourceRead<AvailabilitySet>;
 
-  /**
-   * Create or update an availability set.
-   */
+  /** Create or update an availability set. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     AvailabilitySet,
     Response = ArmResourceUpdatedResponse<AvailabilitySet>
   >;
 
-  /**
-   * Update an availability set.
-   */
+  /** Update an availability set. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     AvailabilitySet,
     PatchModel = AvailabilitySetUpdate
   >;
 
-  /**
-   * Delete an availability set.
-   */
+  /** Delete an availability set. */
   delete is ArmResourceDeleteSync<AvailabilitySet>;
 
-  /**
-   * Lists all availability sets in a resource group.
-   */
+  /** Lists all availability sets in a resource group. */
   list is ArmResourceListByParent<AvailabilitySet>;
 
-  /**
-   * Lists all availability sets in a subscription.
-   */
+  /** Lists all availability sets in a subscription. */
   listBySubscription is ArmListBySubscription<
     AvailabilitySet,
     Parameters = {
-      /**
-       * The expand expression to apply to the operation. Allowed values are 'instanceView'.
-       */
+      /** The expand expression to apply to the operation. Allowed values are 'instanceView'. */
       @query("$expand")
       $expand?: string;
     }
   >;
 
-  /**
-   * Lists all available virtual machine sizes that can be used to create a new virtual machine in an existing availability set.
-   */
+  /** Lists all available virtual machine sizes that can be used to create a new virtual machine in an existing availability set. */
   @list
   @get
   @action("vmSizes")

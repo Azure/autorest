@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * Describes a cloud service OS family.
- */
+/** Describes a cloud service OS family. */
 @subscriptionResource
 model OSFamily is Azure.ResourceManager.ProxyResource<OSFamilyProperties> {
   ...ResourceNameParameter<
@@ -22,9 +20,7 @@ model OSFamily is Azure.ResourceManager.ProxyResource<OSFamilyProperties> {
     NamePattern = ""
   >;
 
-  /**
-   * Resource location.
-   */
+  /** Resource location. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   location?: string;
@@ -32,17 +28,13 @@ model OSFamily is Azure.ResourceManager.ProxyResource<OSFamilyProperties> {
 
 @armResourceOperations
 interface OSFamilies {
-  /**
-   * Gets properties of a guest operating system family that can be specified in the XML service configuration (.cscfg) for a cloud service.
-   */
+  /** Gets properties of a guest operating system family that can be specified in the XML service configuration (.cscfg) for a cloud service. */
   getOSFamily is ArmResourceRead<
     OSFamily,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
-  /**
-   * Gets a list of all guest operating system families available to be specified in the XML service configuration (.cscfg) for a cloud service. Use nextLink property in the response to get the next page of OS Families. Do this till nextLink is null to fetch all the OS Families.
-   */
+  /** Gets a list of all guest operating system families available to be specified in the XML service configuration (.cscfg) for a cloud service. Use nextLink property in the response to get the next page of OS Families. Do this till nextLink is null to fetch all the OS Families. */
   listOSFamilies is ArmResourceListByParent<
     OSFamily,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters

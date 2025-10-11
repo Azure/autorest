@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureSphere;
-/**
- * An product resource belonging to a catalog resource.
- */
+/** An product resource belonging to a catalog resource. */
 @parentResource(Catalog)
 model Product is Azure.ResourceManager.ProxyResource<ProductProperties> {
   ...ResourceNameParameter<
@@ -26,47 +24,33 @@ model Product is Azure.ResourceManager.ProxyResource<ProductProperties> {
 
 @armResourceOperations
 interface Products {
-  /**
-   * Get a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
-   */
+  /** Get a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name. */
   get is ArmResourceRead<Product>;
 
-  /**
-   * Create a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
-   */
+  /** Create a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name. */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Product>;
 
-  /**
-   * Update a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
-   */
+  /** Update a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<Product, PatchModel = ProductUpdate>;
 
-  /**
-   * Delete a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name'
-   */
+  /** Delete a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name' */
   delete is ArmResourceDeleteWithoutOkAsync<
     Product,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List Product resources by Catalog
-   */
+  /** List Product resources by Catalog */
   listByCatalog is ArmResourceListByParent<Product>;
 
-  /**
-   * Counts devices in product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
-   */
+  /** Counts devices in product. '.default' and '.unassigned' are system defined values and cannot be used for product name. */
   countDevices is ArmResourceActionSync<
     Product,
     void,
     ArmResponse<CountDeviceResponse>
   >;
 
-  /**
-   * Generates default device groups for the product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
-   */
+  /** Generates default device groups for the product. '.default' and '.unassigned' are system defined values and cannot be used for product name. */
   @list
   generateDefaultDeviceGroups is ArmResourceActionSync<
     Product,

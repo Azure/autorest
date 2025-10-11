@@ -8,13 +8,9 @@ using Azure.Core;
 
 namespace AnomalyDetectorClient;
 
-/**
- * Anomaly Detector API version (for example, v1.0).
- */
+/** Anomaly Detector API version (for example, v1.0). */
 enum ApiVersion {
-  /**
-   * v1.1-preview.1
-   */
+  /** v1.1-preview.1 */
   `v1.1-preview.1`,
 }
 
@@ -25,96 +21,60 @@ enum ApiVersion {
 union ImputeMode {
   string,
 
-  /**
-   * auto
-   */
+  /** auto */
   auto: "auto",
 
-  /**
-   * previous
-   */
+  /** previous */
   previous: "previous",
 
-  /**
-   * linear
-   */
+  /** linear */
   linear: "linear",
 
-  /**
-   * fixed
-   */
+  /** fixed */
   fixed: "fixed",
 
-  /**
-   * zero
-   */
+  /** zero */
   zero: "zero",
 
-  /**
-   * notFill
-   */
+  /** notFill */
   notFill: "notFill",
 }
 
-/**
- * The error code.
- */
+/** The error code. */
 union AnomalyDetectorErrorCodes {
   string,
 
-  /**
-   * InvalidCustomInterval
-   */
+  /** InvalidCustomInterval */
   InvalidCustomInterval: "InvalidCustomInterval",
 
-  /**
-   * BadArgument
-   */
+  /** BadArgument */
   BadArgument: "BadArgument",
 
-  /**
-   * InvalidGranularity
-   */
+  /** InvalidGranularity */
   InvalidGranularity: "InvalidGranularity",
 
-  /**
-   * InvalidPeriod
-   */
+  /** InvalidPeriod */
   InvalidPeriod: "InvalidPeriod",
 
-  /**
-   * InvalidModelArgument
-   */
+  /** InvalidModelArgument */
   InvalidModelArgument: "InvalidModelArgument",
 
-  /**
-   * InvalidSeries
-   */
+  /** InvalidSeries */
   InvalidSeries: "InvalidSeries",
 
-  /**
-   * InvalidJsonFormat
-   */
+  /** InvalidJsonFormat */
   InvalidJsonFormat: "InvalidJsonFormat",
 
-  /**
-   * RequiredGranularity
-   */
+  /** RequiredGranularity */
   RequiredGranularity: "RequiredGranularity",
 
-  /**
-   * RequiredSeries
-   */
+  /** RequiredSeries */
   RequiredSeries: "RequiredSeries",
 
-  /**
-   * InvalidImputeMode
-   */
+  /** InvalidImputeMode */
   InvalidImputeMode: "InvalidImputeMode",
 
-  /**
-   * InvalidImputeFixedValue
-   */
+  /** InvalidImputeFixedValue */
   InvalidImputeFixedValue: "InvalidImputeFixedValue",
 }
 
@@ -126,34 +86,22 @@ union AnomalyDetectorErrorCodes {
 union FillNAMethod {
   string,
 
-  /**
-   * Previous
-   */
+  /** Previous */
   Previous: "Previous",
 
-  /**
-   * Subsequent
-   */
+  /** Subsequent */
   Subsequent: "Subsequent",
 
-  /**
-   * Linear
-   */
+  /** Linear */
   Linear: "Linear",
 
-  /**
-   * Zero
-   */
+  /** Zero */
   Zero: "Zero",
 
-  /**
-   * Fixed
-   */
+  /** Fixed */
   Fixed: "Fixed",
 
-  /**
-   * NotFill
-   */
+  /** NotFill */
   NotFill: "NotFill",
 }
 
@@ -164,86 +112,54 @@ union FillNAMethod {
  * series point can be absent.
  */
 enum TimeGranularity {
-  /**
-   * yearly
-   */
+  /** yearly */
   yearly,
 
-  /**
-   * monthly
-   */
+  /** monthly */
   monthly,
 
-  /**
-   * weekly
-   */
+  /** weekly */
   weekly,
 
-  /**
-   * daily
-   */
+  /** daily */
   daily,
 
-  /**
-   * hourly
-   */
+  /** hourly */
   hourly,
 
-  /**
-   * minutely
-   */
+  /** minutely */
   perMinute: "minutely",
 
-  /**
-   * secondly
-   */
+  /** secondly */
   perSecond: "secondly",
 
-  /**
-   * microsecond
-   */
+  /** microsecond */
   microsecond,
 
-  /**
-   * none
-   */
+  /** none */
   none,
 }
 
-/**
- * Status of detection results. One of CREATED, RUNNING, READY, and FAILED.
- */
+/** Status of detection results. One of CREATED, RUNNING, READY, and FAILED. */
 enum DetectionStatus {
-  /**
-   * CREATED
-   */
+  /** CREATED */
   CREATED,
 
-  /**
-   * RUNNING
-   */
+  /** RUNNING */
   RUNNING,
 
-  /**
-   * READY
-   */
+  /** READY */
   READY,
 
-  /**
-   * FAILED
-   */
+  /** FAILED */
   FAILED,
 }
 
 enum DataSchema {
-  /**
-   * OneTable
-   */
+  /** OneTable */
   OneTable,
 
-  /**
-   * MultiTable
-   */
+  /** MultiTable */
   MultiTable,
 }
 
@@ -252,45 +168,29 @@ enum DataSchema {
  * time-range. Either Inner or Outer.
  */
 enum AlignMode {
-  /**
-   * Inner
-   */
+  /** Inner */
   Inner,
 
-  /**
-   * Outer
-   */
+  /** Outer */
   Outer,
 }
 
-/**
- * Model status. One of CREATED, RUNNING, READY, and FAILED.
- */
+/** Model status. One of CREATED, RUNNING, READY, and FAILED. */
 enum ModelStatus {
-  /**
-   * CREATED
-   */
+  /** CREATED */
   CREATED,
 
-  /**
-   * RUNNING
-   */
+  /** RUNNING */
   RUNNING,
 
-  /**
-   * READY
-   */
+  /** READY */
   READY,
 
-  /**
-   * FAILED
-   */
+  /** FAILED */
   FAILED,
 }
 
-/**
- * The request of entire or last anomaly detection.
- */
+/** The request of entire or last anomaly detection. */
 model DetectRequest {
   /**
    * Time series data points. Points should be sorted by timestamp in ascending
@@ -321,9 +221,7 @@ model DetectRequest {
    */
   period?: int32;
 
-  /**
-   * Optional argument, advanced model parameter, max anomaly ratio in a time series.
-   */
+  /** Optional argument, advanced model parameter, max anomaly ratio in a time series. */
   maxAnomalyRatio?: float32;
 
   /**
@@ -346,25 +244,17 @@ model DetectRequest {
   imputeFixedValue?: float32;
 }
 
-/**
- * The definition of input timeseries points.
- */
+/** The definition of input timeseries points. */
 model TimeSeriesPoint {
-  /**
-   * Optional argument, timestamp of a data point (ISO8601 format).
-   */
+  /** Optional argument, timestamp of a data point (ISO8601 format). */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timestamp?: utcDateTime;
 
-  /**
-   * The measurement of that point, should be float.
-   */
+  /** The measurement of that point, should be float. */
   value: float32;
 }
 
-/**
- * The response of entire anomaly detection.
- */
+/** The response of entire anomaly detection. */
 model EntireDetectResponse {
   /**
    * Frequency extracted from the series, zero means no recurrent pattern has been
@@ -429,25 +319,17 @@ model EntireDetectResponse {
   severity?: float32[];
 }
 
-/**
- * Error information returned by the API.
- */
+/** Error information returned by the API. */
 @error
 model AnomalyDetectorError {
-  /**
-   * The error code.
-   */
+  /** The error code. */
   code?: AnomalyDetectorErrorCodes;
 
-  /**
-   * A message explaining the error reported by the service.
-   */
+  /** A message explaining the error reported by the service. */
   message?: string;
 }
 
-/**
- * The response of last anomaly detection.
- */
+/** The response of last anomaly detection. */
 model LastDetectResponse {
   /**
    * Frequency extracted from the series, zero means no recurrent pattern has been
@@ -457,14 +339,10 @@ model LastDetectResponse {
   @key
   period: int32;
 
-  /**
-   * Suggested input series points needed for detecting the latest point.
-   */
+  /** Suggested input series points needed for detecting the latest point. */
   suggestedWindow: int32;
 
-  /**
-   * Expected value of the latest point.
-   */
+  /** Expected value of the latest point. */
   expectedValue: float32;
 
   /**
@@ -508,9 +386,7 @@ model LastDetectResponse {
   severity?: float32;
 }
 
-/**
- * The request of change point detection.
- */
+/** The request of change point detection. */
 model ChangePointDetectRequest {
   /**
    * Time series data points. Points should be sorted by timestamp in ascending
@@ -551,9 +427,7 @@ model ChangePointDetectRequest {
   threshold?: float32;
 }
 
-/**
- * The response of change point detection.
- */
+/** The response of change point detection. */
 model ChangePointDetectResponse {
   /**
    * Frequency extracted from the series, zero means no recurrent pattern has been
@@ -569,15 +443,11 @@ model ChangePointDetectResponse {
    */
   isChangePoint?: boolean[];
 
-  /**
-   * the change point confidence of each point
-   */
+  /** the change point confidence of each point */
   confidenceScores?: float32[];
 }
 
-/**
- * Detection results for the given resultId.
- */
+/** Detection results for the given resultId. */
 @resource("multivariate/entire/detect/{resultId}")
 model DetectionResult {
   @format("uuid")
@@ -585,85 +455,57 @@ model DetectionResult {
   @key
   resultId: string;
 
-  /**
-   * Multivariate anomaly detection status.
-   */
+  /** Multivariate anomaly detection status. */
   summary: DetectionResultSummary;
 
-  /**
-   * Detection result for each timestamp.
-   */
+  /** Detection result for each timestamp. */
   results: AnomalyState[];
 }
 
-/**
- * Multivariate anomaly detection status.
- */
+/** Multivariate anomaly detection status. */
 model DetectionResultSummary {
-  /**
-   * Status of detection results. One of CREATED, RUNNING, READY, and FAILED.
-   */
+  /** Status of detection results. One of CREATED, RUNNING, READY, and FAILED. */
   status: DetectionStatus;
 
-  /**
-   * Error message when detection is failed.
-   */
+  /** Error message when detection is failed. */
   errors?: ErrorResponse[];
 
   variableStates?: VariableState[];
 
-  /**
-   * Detection request.
-   */
+  /** Detection request. */
   setupInfo: DetectionRequest;
 }
 
 @error
 model ErrorResponse {
-  /**
-   * The error code.
-   */
+  /** The error code. */
   code: string;
 
-  /**
-   * The message explaining the error reported by the service.
-   */
+  /** The message explaining the error reported by the service. */
   message: string;
 }
 
 model VariableState {
-  /**
-   * Variable name.
-   */
+  /** Variable name. */
   variable?: string;
 
-  /**
-   * Proportion of NaN values filled of the variable.
-   */
+  /** Proportion of NaN values filled of the variable. */
   @maxValue(1)
   filledNARatio?: float32;
 
-  /**
-   * Number of effective points counted.
-   */
+  /** Number of effective points counted. */
   effectiveCount?: int32;
 
-  /**
-   * First timestamp of the variable.
-   */
+  /** First timestamp of the variable. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   firstTimestamp?: utcDateTime;
 
-  /**
-   * Last timestamp of the variable.
-   */
+  /** Last timestamp of the variable. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastTimestamp?: utcDateTime;
 }
 
-/**
- * Detection request.
- */
+/** Detection request. */
 model DetectionRequest {
   /**
    * Source link to the input variables. Each variable should be a csv with two
@@ -673,9 +515,7 @@ model DetectionRequest {
    */
   dataSource: string;
 
-  /**
-   * Top contributor count.
-   */
+  /** Top contributor count. */
   topContributorCount: int32;
 
   /**
@@ -694,24 +534,18 @@ model DetectionRequest {
 }
 
 model AnomalyState {
-  /**
-   * timestamp
-   */
+  /** timestamp */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timestamp: utcDateTime;
 
   value?: AnomalyValue;
 
-  /**
-   * Error message for the current timestamp
-   */
+  /** Error message for the current timestamp */
   errors?: ErrorResponse[];
 }
 
 model AnomalyValue {
-  /**
-   * True if an anomaly is detected at the current timestamp.
-   */
+  /** True if an anomaly is detected at the current timestamp. */
   isAnomaly: boolean;
 
   /**
@@ -721,9 +555,7 @@ model AnomalyValue {
   @maxValue(1)
   severity: float32;
 
-  /**
-   * Raw score from the model.
-   */
+  /** Raw score from the model. */
   @maxValue(2)
   score: float32;
 
@@ -737,9 +569,7 @@ model AnomalyInterpretation {
 }
 
 model CorrelationChanges {
-  /**
-   * correlated variables
-   */
+  /** correlated variables */
   changedVariables?: string[];
 }
 
@@ -764,15 +594,11 @@ model ModelInfo {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime: utcDateTime;
 
-  /**
-   * A required field, indicating the end time of training data. Should be date-time.
-   */
+  /** A required field, indicating the end time of training data. Should be date-time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime: utcDateTime;
 
-  /**
-   * An optional field. The name of the model whose maximum length is 24.
-   */
+  /** An optional field. The name of the model whose maximum length is 24. */
   @maxLength(24)
   displayName?: string;
 
@@ -782,30 +608,20 @@ model ModelInfo {
    */
   slidingWindow?: int32;
 
-  /**
-   * An optional field, indicating the manner to align multiple variables.
-   */
+  /** An optional field, indicating the manner to align multiple variables. */
   alignPolicy?: AlignPolicy;
 
-  /**
-   * Model status. One of CREATED, RUNNING, READY, and FAILED.
-   */
+  /** Model status. One of CREATED, RUNNING, READY, and FAILED. */
   status?: ModelStatus;
 
-  /**
-   * Error messages when failed to create a model.
-   */
+  /** Error messages when failed to create a model. */
   errors?: ErrorResponse[];
 
-  /**
-   * Diagnostics Information for inspecting model/variable states.
-   */
+  /** Diagnostics Information for inspecting model/variable states. */
   diagnosticsInfo?: DiagnosticsInfo;
 }
 
-/**
- * An optional field, indicating the manner to align multiple variables.
- */
+/** An optional field, indicating the manner to align multiple variables. */
 model AlignPolicy {
   /**
    * An optional field, indicating how we align different variables to the same
@@ -820,24 +636,18 @@ model AlignPolicy {
    */
   fillNAMethod?: FillNAMethod;
 
-  /**
-   * An optional field. Required when fillNAMethod is Fixed.
-   */
+  /** An optional field. Required when fillNAMethod is Fixed. */
   paddingValue?: float32;
 }
 
-/**
- * Diagnostics Information for inspecting model/variable states.
- */
+/** Diagnostics Information for inspecting model/variable states. */
 model DiagnosticsInfo {
   modelState?: ModelState;
   variableStates?: VariableState[];
 }
 
 model ModelState {
-  /**
-   * Epoch id
-   */
+  /** Epoch id */
   epochIds?: int32[];
 
   trainLosses?: float32[];
@@ -845,90 +655,62 @@ model ModelState {
   latenciesInSeconds?: float32[];
 }
 
-/**
- * Response of listing models.
- */
+/** Response of listing models. */
 model ModelList {
-  /**
-   * List of models
-   */
+  /** List of models */
   @pageItems
   models: ModelSnapshot[];
 
-  /**
-   * Current count of trained multivariate models.
-   */
+  /** Current count of trained multivariate models. */
   currentCount: int32;
 
-  /**
-   * Max number of models that can be trained for this subscription.
-   */
+  /** Max number of models that can be trained for this subscription. */
   maxCount: int32;
 
-  /**
-   * The link to fetch more models.
-   */
+  /** The link to fetch more models. */
   @nextLink
   nextLink?: string;
 }
 
 @resource("multivariate/models")
 model ModelSnapshot {
-  /**
-   * Model identifier.
-   */
+  /** Model identifier. */
   @format("uuid")
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   modelId: string;
 
-  /**
-   * Date and time (UTC) when the model was created.
-   */
+  /** Date and time (UTC) when the model was created. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdTime: utcDateTime;
 
-  /**
-   * Date and time (UTC) when the model was last updated.
-   */
+  /** Date and time (UTC) when the model was last updated. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdatedTime: utcDateTime;
 
-  /**
-   * Model status. One of CREATED, RUNNING, READY, and FAILED.
-   */
+  /** Model status. One of CREATED, RUNNING, READY, and FAILED. */
   status: ModelStatus;
 
   displayName?: string;
 
-  /**
-   * Total number of variables.
-   */
+  /** Total number of variables. */
   variablesCount: int32;
 }
 
-/**
- * Response of getting a model.
- */
+/** Response of getting a model. */
 @resource("multivariate/models/{modelId}")
 model Model {
-  /**
-   * Model identifier.
-   */
+  /** Model identifier. */
   @format("uuid")
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   modelId: string;
 
-  /**
-   * Date and time (UTC) when the model was created.
-   */
+  /** Date and time (UTC) when the model was created. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdTime: utcDateTime;
 
-  /**
-   * Date and time (UTC) when the model was last updated.
-   */
+  /** Date and time (UTC) when the model was last updated. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdatedTime: utcDateTime;
 
@@ -940,31 +722,21 @@ model Model {
 }
 
 model LastDetectionRequest {
-  /**
-   * variables
-   */
+  /** variables */
   variables: VariableValues[];
 
-  /**
-   * Top contributor count.
-   */
+  /** Top contributor count. */
   topContributorCount: int32;
 }
 
 model VariableValues {
-  /**
-   * variable name
-   */
+  /** variable name */
   name: string;
 
-  /**
-   * timestamps
-   */
+  /** timestamps */
   timestamps: string[];
 
-  /**
-   * values
-   */
+  /** values */
   values: float32[];
 }
 

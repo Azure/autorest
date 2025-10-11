@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-/**
- * Azure Resource Manager resource envelope.
- */
+/** Azure Resource Manager resource envelope. */
 @parentResource(FeaturestoreEntityContainer)
 model FeaturestoreEntityVersion
   is Azure.ResourceManager.ProxyResource<
@@ -30,76 +28,52 @@ model FeaturestoreEntityVersion
 
 @armResourceOperations
 interface FeaturestoreEntityVersions {
-  /**
-   * Get version.
-   */
+  /** Get version. */
   get is ArmResourceRead<FeaturestoreEntityVersion>;
 
-  /**
-   * Create or update version.
-   */
+  /** Create or update version. */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<FeaturestoreEntityVersion>;
 
-  /**
-   * Delete version.
-   */
+  /** Delete version. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     FeaturestoreEntityVersion,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List versions.
-   */
+  /** List versions. */
   list is ArmResourceListByParent<
     FeaturestoreEntityVersion,
     Parameters = {
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
 
-      /**
-       * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
-       */
+      /** Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2 */
       @query("tags")
       tags?: string;
 
-      /**
-       * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
-       */
+      /** [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities. */
       @query("listViewType")
       listViewType?: ListViewType;
 
-      /**
-       * page size
-       */
+      /** page size */
       @query("pageSize")
       pageSize?: int32 = 20;
 
-      /**
-       * name for the featurestore entity version
-       */
+      /** name for the featurestore entity version */
       @query("versionName")
       versionName?: string;
 
-      /**
-       * description for the feature entity version
-       */
+      /** description for the feature entity version */
       @query("description")
       description?: string;
 
-      /**
-       * createdBy user name
-       */
+      /** createdBy user name */
       @query("createdBy")
       createdBy?: string;
 
-      /**
-       * Specifies the featurestore stage
-       */
+      /** Specifies the featurestore stage */
       @query("stage")
       stage?: string;
     },

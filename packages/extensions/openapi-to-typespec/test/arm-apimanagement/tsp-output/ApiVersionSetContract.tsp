@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * API Version Set Contract details.
- */
+/** API Version Set Contract details. */
 @parentResource(ApiManagementServiceResource)
 model ApiVersionSetContract
   is Azure.ResourceManager.ProxyResource<ApiVersionSetContractProperties> {
@@ -27,82 +25,58 @@ model ApiVersionSetContract
 
 @armResourceOperations
 interface ApiVersionSetContracts {
-  /**
-   * Gets the details of the Api Version Set specified by its identifier.
-   */
+  /** Gets the details of the Api Version Set specified by its identifier. */
   get is ArmResourceRead<ApiVersionSetContract>;
 
-  /**
-   * Gets the entity state (Etag) version of the Api Version Set specified by its identifier.
-   */
+  /** Gets the entity state (Etag) version of the Api Version Set specified by its identifier. */
   getEntityTag is ArmResourceCheckExistence<ApiVersionSetContract>;
 
-  /**
-   * Creates or Updates a Api Version Set.
-   */
+  /** Creates or Updates a Api Version Set. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ApiVersionSetContract,
     Parameters = {
-      /**
-       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
-       */
+      /** ETag of the Entity. Not required when creating an entity, but required when updating an entity. */
       @header
       `If-Match`?: string;
     }
   >;
 
-  /**
-   * Updates the details of the Api VersionSet specified by its identifier.
-   */
+  /** Updates the details of the Api VersionSet specified by its identifier. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     ApiVersionSetContract,
     PatchModel = ApiVersionSetUpdateParameters,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Deletes specific Api Version Set.
-   */
+  /** Deletes specific Api Version Set. */
   delete is ArmResourceDeleteSync<
     ApiVersionSetContract,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Lists a collection of API Version Sets in the specified service instance.
-   */
+  /** Lists a collection of API Version Sets in the specified service instance. */
   listByService is ArmResourceListByParent<
     ApiVersionSetContract,
     Parameters = {
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>
-       */
+      /** |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br> */
       @query("$filter")
       $filter?: string;
 
-      /**
-       * Number of records to return.
-       */
+      /** Number of records to return. */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      /**
-       * Number of records to skip.
-       */
+      /** Number of records to skip. */
       @query("$skip")
       $skip?: int32;
     }

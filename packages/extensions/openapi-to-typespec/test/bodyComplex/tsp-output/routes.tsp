@@ -10,49 +10,37 @@ using TypeSpec.OpenAPI;
 namespace AutoRestComplexTestService;
 
 interface basicOperationGroup {
-  /**
-   * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
-   */
+  /** Get complex type {id: 2, name: 'abc', color: 'YELLOW'} */
   @operationId("basic_getValid")
   @route("/complex/basic/valid")
   @get
   getValid is Azure.Core.Foundations.Operation<{}, Basic>;
 
-  /**
-   * Please put {id: 2, name: 'abc', color: 'Magenta'}
-   */
+  /** Please put {id: 2, name: 'abc', color: 'Magenta'} */
   @operationId("basic_putValid")
   @route("/complex/basic/valid")
   @put
   putValid is Azure.Core.Foundations.Operation<Basic, void>;
 
-  /**
-   * Get a basic complex type that is invalid for the local strong type
-   */
+  /** Get a basic complex type that is invalid for the local strong type */
   @operationId("basic_getInvalid")
   @route("/complex/basic/invalid")
   @get
   getInvalid is Azure.Core.Foundations.Operation<{}, Basic>;
 
-  /**
-   * Get a basic complex type that is empty
-   */
+  /** Get a basic complex type that is empty */
   @operationId("basic_getEmpty")
   @route("/complex/basic/empty")
   @get
   getEmpty is Azure.Core.Foundations.Operation<{}, Basic>;
 
-  /**
-   * Get a basic complex type whose properties are null
-   */
+  /** Get a basic complex type whose properties are null */
   @operationId("basic_getNull")
   @route("/complex/basic/null")
   @get
   getNull is Azure.Core.Foundations.Operation<{}, Basic>;
 
-  /**
-   * Get a basic complex type while the server doesn't provide a response payload
-   */
+  /** Get a basic complex type while the server doesn't provide a response payload */
   @operationId("basic_getNotProvided")
   @route("/complex/basic/notprovided")
   @get
@@ -60,137 +48,103 @@ interface basicOperationGroup {
 }
 
 interface primitiveOperationGroup {
-  /**
-   * Get complex types with integer properties
-   */
+  /** Get complex types with integer properties */
   @operationId("primitive_getInt")
   @route("/complex/primitive/integer")
   @get
   getInt is Azure.Core.Foundations.Operation<{}, IntWrapper>;
 
-  /**
-   * Put complex types with integer properties
-   */
+  /** Put complex types with integer properties */
   @operationId("primitive_putInt")
   @route("/complex/primitive/integer")
   @put
   putInt is Azure.Core.Foundations.Operation<IntWrapper, void>;
 
-  /**
-   * Get complex types with long properties
-   */
+  /** Get complex types with long properties */
   @operationId("primitive_getLong")
   @route("/complex/primitive/long")
   @get
   getLong is Azure.Core.Foundations.Operation<{}, LongWrapper>;
 
-  /**
-   * Put complex types with long properties
-   */
+  /** Put complex types with long properties */
   @operationId("primitive_putLong")
   @route("/complex/primitive/long")
   @put
   putLong is Azure.Core.Foundations.Operation<LongWrapper, void>;
 
-  /**
-   * Get complex types with float properties
-   */
+  /** Get complex types with float properties */
   @operationId("primitive_getFloat")
   @route("/complex/primitive/float")
   @get
   getFloat is Azure.Core.Foundations.Operation<{}, FloatWrapper>;
 
-  /**
-   * Put complex types with float properties
-   */
+  /** Put complex types with float properties */
   @operationId("primitive_putFloat")
   @route("/complex/primitive/float")
   @put
   putFloat is Azure.Core.Foundations.Operation<FloatWrapper, void>;
 
-  /**
-   * Get complex types with double properties
-   */
+  /** Get complex types with double properties */
   @operationId("primitive_getDouble")
   @route("/complex/primitive/double")
   @get
   getDouble is Azure.Core.Foundations.Operation<{}, DoubleWrapper>;
 
-  /**
-   * Put complex types with double properties
-   */
+  /** Put complex types with double properties */
   @operationId("primitive_putDouble")
   @route("/complex/primitive/double")
   @put
   putDouble is Azure.Core.Foundations.Operation<DoubleWrapper, void>;
 
-  /**
-   * Get complex types with bool properties
-   */
+  /** Get complex types with bool properties */
   @operationId("primitive_getBool")
   @route("/complex/primitive/bool")
   @get
   getBool is Azure.Core.Foundations.Operation<{}, BooleanWrapper>;
 
-  /**
-   * Put complex types with bool properties
-   */
+  /** Put complex types with bool properties */
   @operationId("primitive_putBool")
   @route("/complex/primitive/bool")
   @put
   putBool is Azure.Core.Foundations.Operation<BooleanWrapper, void>;
 
-  /**
-   * Get complex types with string properties
-   */
+  /** Get complex types with string properties */
   @operationId("primitive_getString")
   @route("/complex/primitive/string")
   @get
   getString is Azure.Core.Foundations.Operation<{}, StringWrapper>;
 
-  /**
-   * Put complex types with string properties
-   */
+  /** Put complex types with string properties */
   @operationId("primitive_putString")
   @route("/complex/primitive/string")
   @put
   putString is Azure.Core.Foundations.Operation<StringWrapper, void>;
 
-  /**
-   * Get complex types with date properties
-   */
+  /** Get complex types with date properties */
   @operationId("primitive_getDate")
   @route("/complex/primitive/date")
   @get
   getDate is Azure.Core.Foundations.Operation<{}, DateWrapper>;
 
-  /**
-   * Put complex types with date properties
-   */
+  /** Put complex types with date properties */
   @operationId("primitive_putDate")
   @route("/complex/primitive/date")
   @put
   putDate is Azure.Core.Foundations.Operation<DateWrapper, void>;
 
-  /**
-   * Get complex types with datetime properties
-   */
+  /** Get complex types with datetime properties */
   @operationId("primitive_getDateTime")
   @route("/complex/primitive/datetime")
   @get
   getDateTime is Azure.Core.Foundations.Operation<{}, DatetimeWrapper>;
 
-  /**
-   * Put complex types with datetime properties
-   */
+  /** Put complex types with datetime properties */
   @operationId("primitive_putDateTime")
   @route("/complex/primitive/datetime")
   @put
   putDateTime is Azure.Core.Foundations.Operation<DatetimeWrapper, void>;
 
-  /**
-   * Get complex types with datetimeRfc1123 properties
-   */
+  /** Get complex types with datetimeRfc1123 properties */
   @operationId("primitive_getDateTimeRfc1123")
   @route("/complex/primitive/datetimerfc1123")
   @get
@@ -199,9 +153,7 @@ interface primitiveOperationGroup {
     Datetimerfc1123Wrapper
   >;
 
-  /**
-   * Put complex types with datetimeRfc1123 properties
-   */
+  /** Put complex types with datetimeRfc1123 properties */
   @operationId("primitive_putDateTimeRfc1123")
   @route("/complex/primitive/datetimerfc1123")
   @put
@@ -210,33 +162,25 @@ interface primitiveOperationGroup {
     void
   >;
 
-  /**
-   * Get complex types with duration properties
-   */
+  /** Get complex types with duration properties */
   @operationId("primitive_getDuration")
   @route("/complex/primitive/duration")
   @get
   getDuration is Azure.Core.Foundations.Operation<{}, DurationWrapper>;
 
-  /**
-   * Put complex types with duration properties
-   */
+  /** Put complex types with duration properties */
   @operationId("primitive_putDuration")
   @route("/complex/primitive/duration")
   @put
   putDuration is Azure.Core.Foundations.Operation<DurationWrapper, void>;
 
-  /**
-   * Get complex types with byte properties
-   */
+  /** Get complex types with byte properties */
   @operationId("primitive_getByte")
   @route("/complex/primitive/byte")
   @get
   getByte is Azure.Core.Foundations.Operation<{}, ByteWrapper>;
 
-  /**
-   * Put complex types with byte properties
-   */
+  /** Put complex types with byte properties */
   @operationId("primitive_putByte")
   @route("/complex/primitive/byte")
   @put
@@ -244,33 +188,25 @@ interface primitiveOperationGroup {
 }
 
 interface arrayOperationGroup {
-  /**
-   * Get complex types with array property
-   */
+  /** Get complex types with array property */
   @operationId("array_getValid")
   @route("/complex/array/valid")
   @get
   getValid is Azure.Core.Foundations.Operation<{}, ArrayWrapper>;
 
-  /**
-   * Put complex types with array property
-   */
+  /** Put complex types with array property */
   @operationId("array_putValid")
   @route("/complex/array/valid")
   @put
   putValid is Azure.Core.Foundations.Operation<ArrayWrapper, void>;
 
-  /**
-   * Get complex types with array property which is empty
-   */
+  /** Get complex types with array property which is empty */
   @operationId("array_getEmpty")
   @route("/complex/array/empty")
   @get
   getEmpty is Azure.Core.Foundations.Operation<{}, ArrayWrapper>;
 
-  /**
-   * Put complex types with array property which is empty
-   */
+  /** Put complex types with array property which is empty */
   @operationId("array_putEmpty")
   @route("/complex/array/empty")
   @put
@@ -287,41 +223,31 @@ interface arrayOperationGroup {
 }
 
 interface dictionaryOperationGroup {
-  /**
-   * Get complex types with dictionary property
-   */
+  /** Get complex types with dictionary property */
   @operationId("dictionary_getValid")
   @route("/complex/dictionary/typed/valid")
   @get
   getValid is Azure.Core.Foundations.Operation<{}, DictionaryWrapper>;
 
-  /**
-   * Put complex types with dictionary property
-   */
+  /** Put complex types with dictionary property */
   @operationId("dictionary_putValid")
   @route("/complex/dictionary/typed/valid")
   @put
   putValid is Azure.Core.Foundations.Operation<DictionaryWrapper, void>;
 
-  /**
-   * Get complex types with dictionary property which is empty
-   */
+  /** Get complex types with dictionary property which is empty */
   @operationId("dictionary_getEmpty")
   @route("/complex/dictionary/typed/empty")
   @get
   getEmpty is Azure.Core.Foundations.Operation<{}, DictionaryWrapper>;
 
-  /**
-   * Put complex types with dictionary property which is empty
-   */
+  /** Put complex types with dictionary property which is empty */
   @operationId("dictionary_putEmpty")
   @route("/complex/dictionary/typed/empty")
   @put
   putEmpty is Azure.Core.Foundations.Operation<DictionaryWrapper, void>;
 
-  /**
-   * Get complex types with dictionary property which is null
-   */
+  /** Get complex types with dictionary property which is null */
   @operationId("dictionary_getNull")
   @route("/complex/dictionary/typed/null")
   @get
@@ -338,17 +264,13 @@ interface dictionaryOperationGroup {
 }
 
 interface inheritanceOperationGroup {
-  /**
-   * Get complex types that extend others
-   */
+  /** Get complex types that extend others */
   @operationId("inheritance_getValid")
   @route("/complex/inheritance/valid")
   @get
   getValid is Azure.Core.Foundations.Operation<{}, Siamese>;
 
-  /**
-   * Put complex types that extend others
-   */
+  /** Put complex types that extend others */
   @operationId("inheritance_putValid")
   @route("/complex/inheritance/valid")
   @put
@@ -356,25 +278,19 @@ interface inheritanceOperationGroup {
 }
 
 interface polymorphismOperationGroup {
-  /**
-   * Get complex types that are polymorphic
-   */
+  /** Get complex types that are polymorphic */
   @operationId("polymorphism_getValid")
   @route("/complex/polymorphism/valid")
   @get
   getValid is Azure.Core.Foundations.Operation<{}, Fish>;
 
-  /**
-   * Put complex types that are polymorphic
-   */
+  /** Put complex types that are polymorphic */
   @operationId("polymorphism_putValid")
   @route("/complex/polymorphism/valid")
   @put
   putValid is Azure.Core.Foundations.Operation<Fish, void>;
 
-  /**
-   * Get complex types that are polymorphic, JSON key contains a dot
-   */
+  /** Get complex types that are polymorphic, JSON key contains a dot */
   @operationId("polymorphism_getDotSyntax")
   @route("/complex/polymorphism/dotsyntax")
   @get
@@ -424,9 +340,7 @@ interface polymorphismOperationGroup {
   @put
   putComplicated is Azure.Core.Foundations.Operation<Salmon, void>;
 
-  /**
-   * Put complex types that are polymorphic, omitting the discriminator
-   */
+  /** Put complex types that are polymorphic, omitting the discriminator */
   @operationId("polymorphism_putMissingDiscriminator")
   @route("/complex/polymorphism/missingdiscriminator")
   @put
@@ -443,17 +357,13 @@ interface polymorphismOperationGroup {
 }
 
 interface polymorphicrecursiveOperationGroup {
-  /**
-   * Get complex types that are polymorphic and have recursive references
-   */
+  /** Get complex types that are polymorphic and have recursive references */
   @operationId("polymorphicrecursive_getValid")
   @route("/complex/polymorphicrecursive/valid")
   @get
   getValid is Azure.Core.Foundations.Operation<{}, Fish>;
 
-  /**
-   * Put complex types that are polymorphic and have recursive references
-   */
+  /** Put complex types that are polymorphic and have recursive references */
   @operationId("polymorphicrecursive_putValid")
   @route("/complex/polymorphicrecursive/valid")
   @put
@@ -461,17 +371,13 @@ interface polymorphicrecursiveOperationGroup {
 }
 
 interface readonlypropertyOperationGroup {
-  /**
-   * Get complex types that have readonly properties
-   */
+  /** Get complex types that have readonly properties */
   @operationId("readonlyproperty_getValid")
   @route("/complex/readonlyproperty/valid")
   @get
   getValid is Azure.Core.Foundations.Operation<{}, ReadonlyObj>;
 
-  /**
-   * Put complex types that have readonly properties
-   */
+  /** Put complex types that have readonly properties */
   @operationId("readonlyproperty_putValid")
   @route("/complex/readonlyproperty/valid")
   @put

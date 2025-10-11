@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AgFoodPlatform;
-/**
- * A private link resource.
- */
+/** A private link resource. */
 @parentResource(DataManagerForAgriculture)
 model PrivateLinkResource
   is Azure.ResourceManager.ProxyResource<PrivateLinkResourceProperties> {
@@ -27,14 +25,10 @@ model PrivateLinkResource
 
 @armResourceOperations
 interface PrivateLinkResources {
-  /**
-   * Get Private link resource object.
-   */
+  /** Get Private link resource object. */
   get is ArmResourceRead<PrivateLinkResource>;
 
-  /**
-   * Get list of Private link resources.
-   */
+  /** Get list of Private link resources. */
   listByResource is ArmResourceListByParent<
     PrivateLinkResource,
     Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateLinkResourceListResultV5>

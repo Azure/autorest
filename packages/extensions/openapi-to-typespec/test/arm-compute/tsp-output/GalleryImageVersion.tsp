@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * Specifies information about the gallery image version that you want to create or update.
- */
+/** Specifies information about the gallery image version that you want to create or update. */
 @parentResource(GalleryImage)
 model GalleryImageVersion
   is Azure.ResourceManager.TrackedResource<GalleryImageVersionProperties> {
@@ -27,23 +25,17 @@ model GalleryImageVersion
 
 @armResourceOperations
 interface GalleryImageVersions {
-  /**
-   * Retrieves information about a gallery image version.
-   */
+  /** Retrieves information about a gallery image version. */
   get is ArmResourceRead<
     GalleryImageVersion,
     Parameters = {
-      /**
-       * The expand expression to apply on the operation.
-       */
+      /** The expand expression to apply on the operation. */
       @query("$expand")
       $expand?: ReplicationStatusTypes;
     }
   >;
 
-  /**
-   * Create or update a gallery image version.
-   */
+  /** Create or update a gallery image version. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -58,9 +50,7 @@ interface GalleryImageVersions {
     })
   >;
 
-  /**
-   * Update a gallery image version.
-   */
+  /** Update a gallery image version. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     GalleryImageVersion,
@@ -68,18 +58,14 @@ interface GalleryImageVersions {
     Response = ArmResponse<GalleryImageVersion>
   >;
 
-  /**
-   * Delete a gallery image version.
-   */
+  /** Delete a gallery image version. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     GalleryImageVersion,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List gallery image versions in a gallery image definition.
-   */
+  /** List gallery image versions in a gallery image definition. */
   listByGalleryImage is ArmResourceListByParent<
     GalleryImageVersion,
     Response = ArmResponse<GalleryImageVersionList>

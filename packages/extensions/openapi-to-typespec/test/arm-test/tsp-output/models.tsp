@@ -9,222 +9,140 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Test;
 
-/**
- * The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is "user,system"
- */
+/** The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is "user,system" */
 union Origin {
   string,
 
-  /**
-   * user
-   */
+  /** user */
   user: "user",
 
-  /**
-   * system
-   */
+  /** system */
   system: "system",
 
-  /**
-   * user,system
-   */
+  /** user,system */
   `user,system`: "user,system",
 }
 
-/**
- * Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
- */
+/** Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs. */
 union ActionType {
   string,
 
-  /**
-   * Internal
-   */
+  /** Internal */
   Internal: "Internal",
 }
 
-/**
- * The provisioning state of a resource.
- */
+/** The provisioning state of a resource. */
 union ProvisioningStateTest {
   string,
 
-  /**
-   * Resource has been created.
-   */
+  /** Resource has been created. */
   Succeeded: "Succeeded",
 
-  /**
-   * Resource creation failed.
-   */
+  /** Resource creation failed. */
   Failed: "Failed",
 
-  /**
-   * Resource creation was canceled.
-   */
+  /** Resource creation was canceled. */
   Canceled: "Canceled",
 
-  /**
-   * The resource is being provisioned
-   */
+  /** The resource is being provisioned */
   Provisioning: "Provisioning",
 
-  /**
-   * The resource is updating
-   */
+  /** The resource is updating */
   Updating: "Updating",
 
-  /**
-   * The resource is being deleted
-   */
+  /** The resource is being deleted */
   Deleting: "Deleting",
 
-  /**
-   * The resource create request has been accepted
-   */
+  /** The resource create request has been accepted */
   Accepted: "Accepted",
 }
 
-/**
- * The type of identity that created the resource.
- */
+/** The type of identity that created the resource. */
 union CreatedByType {
   string,
 
-  /**
-   * User
-   */
+  /** User */
   User: "User",
 
-  /**
-   * Application
-   */
+  /** Application */
   Application: "Application",
 
-  /**
-   * ManagedIdentity
-   */
+  /** ManagedIdentity */
   ManagedIdentity: "ManagedIdentity",
 
-  /**
-   * Key
-   */
+  /** Key */
   Key: "Key",
 }
 
-/**
- * Localized display information for this particular operation.
- */
+/** Localized display information for this particular operation. */
 model OperationDisplay {
-  /**
-   * The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
-   */
+  /** The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute". */
   @visibility(Lifecycle.Read)
   provider?: string;
 
-  /**
-   * The localized friendly name of the resource type related to this operation. E.g. "Virtual Machines" or "Job Schedule Collections".
-   */
+  /** The localized friendly name of the resource type related to this operation. E.g. "Virtual Machines" or "Job Schedule Collections". */
   @visibility(Lifecycle.Read)
   resource?: string;
 
-  /**
-   * The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine", "Restart Virtual Machine".
-   */
+  /** The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine", "Restart Virtual Machine". */
   @visibility(Lifecycle.Read)
   operation?: string;
 
-  /**
-   * The short, localized friendly description of the operation; suitable for tool tips and detailed views.
-   */
+  /** The short, localized friendly description of the operation; suitable for tool tips and detailed views. */
   @visibility(Lifecycle.Read)
   description?: string;
 }
 
-/**
- * Employee properties
- */
+/** Employee properties */
 model EmployeeProperties {
-  /**
-   * Age of employee
-   */
+  /** Age of employee */
   age?: int32;
 
-  /**
-   * City of employee
-   */
+  /** City of employee */
   city?: string;
 
-  /**
-   * Profile of employee
-   */
+  /** Profile of employee */
   profile?: bytes;
 
-  /**
-   * The status of the last operation.
-   */
+  /** The status of the last operation. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateTest;
 }
 
-/**
- * The type used for update operations of the Employee.
- */
+/** The type used for update operations of the Employee. */
 model EmployeeUpdate {
-  /**
-   * Resource tags.
-   */
+  /** Resource tags. */
   tags?: Record<string>;
 
-  /**
-   * The updatable properties of the Employee.
-   */
+  /** The updatable properties of the Employee. */
   properties?: EmployeeUpdateProperties;
 }
 
-/**
- * The updatable properties of the Employee.
- */
+/** The updatable properties of the Employee. */
 model EmployeeUpdateProperties {
-  /**
-   * Age of employee
-   */
+  /** Age of employee */
   age?: int32;
 
-  /**
-   * City of employee
-   */
+  /** City of employee */
   city?: string;
 
-  /**
-   * Profile of employee
-   */
+  /** Profile of employee */
   profile?: bytes;
 }
 
-/**
- * Enroll properties
- */
+/** Enroll properties */
 model EnrollProperties {
-  /**
-   * Country of employee
-   */
+  /** Country of employee */
   country?: int32;
 
-  /**
-   * City of employee
-   */
+  /** City of employee */
   city?: string;
 }
 
-/**
- * Resource properties
- */
+/** Resource properties */
 model ArrayDefaultProperties {
   ...Record<unknown>;
 
-  /**
-   * Array of strings
-   */
+  /** Array of strings */
   array?: string[] = #["911", "933"];
 }

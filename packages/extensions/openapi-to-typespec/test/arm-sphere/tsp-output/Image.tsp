@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureSphere;
-/**
- * An image resource belonging to a catalog resource.
- */
+/** An image resource belonging to a catalog resource. */
 @parentResource(Catalog)
 model Image is Azure.ResourceManager.ProxyResource<ImageProperties> {
   ...ResourceNameParameter<
@@ -26,51 +24,35 @@ model Image is Azure.ResourceManager.ProxyResource<ImageProperties> {
 
 @armResourceOperations
 interface Images {
-  /**
-   * Get a Image
-   */
+  /** Get a Image */
   get is ArmResourceRead<Image>;
 
-  /**
-   * Create a Image
-   */
+  /** Create a Image */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Image>;
 
-  /**
-   * Delete a Image
-   */
+  /** Delete a Image */
   delete is ArmResourceDeleteWithoutOkAsync<
     Image,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List Image resources by Catalog
-   */
+  /** List Image resources by Catalog */
   listByCatalog is ArmResourceListByParent<
     Image,
     Parameters = {
-      /**
-       * Filter the result list using the given expression
-       */
+      /** Filter the result list using the given expression */
       @query("$filter")
       filter?: string;
 
-      /**
-       * The number of result items to return.
-       */
+      /** The number of result items to return. */
       @query("$top")
       top?: int32;
 
-      /**
-       * The number of result items to skip.
-       */
+      /** The number of result items to skip. */
       @query("$skip")
       skip?: int32;
 
-      /**
-       * The maximum number of result items per page.
-       */
+      /** The maximum number of result items per page. */
       @query("$maxpagesize")
       maxpagesize?: int32;
     }

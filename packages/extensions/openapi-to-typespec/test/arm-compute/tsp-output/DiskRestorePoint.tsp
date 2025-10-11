@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * Properties of disk restore point
- */
+/** Properties of disk restore point */
 @parentResource(RestorePointCollection)
 model DiskRestorePoint
   is Azure.ResourceManager.ProxyResource<DiskRestorePointProperties> {
@@ -27,22 +25,16 @@ model DiskRestorePoint
 
 @armResourceOperations
 interface DiskRestorePoints {
-  /**
-   * Get disk restorePoint resource
-   */
+  /** Get disk restorePoint resource */
   get is ArmResourceRead<DiskRestorePoint>;
 
-  /**
-   * Lists diskRestorePoints under a vmRestorePoint.
-   */
+  /** Lists diskRestorePoints under a vmRestorePoint. */
   listByRestorePoint is ArmResourceListByParent<
     DiskRestorePoint,
     Response = ArmResponse<DiskRestorePointList>
   >;
 
-  /**
-   * Grants access to a diskRestorePoint.
-   */
+  /** Grants access to a diskRestorePoint. */
   @action("beginGetAccess")
   grantAccess is ArmResourceActionAsync<
     DiskRestorePoint,
@@ -50,9 +42,7 @@ interface DiskRestorePoints {
     ArmResponse<AccessUri>
   >;
 
-  /**
-   * Revokes access to a diskRestorePoint.
-   */
+  /** Revokes access to a diskRestorePoint. */
   @action("endGetAccess")
   revokeAccess is ArmResourceActionAsync<DiskRestorePoint, void, OkResponse>;
 }

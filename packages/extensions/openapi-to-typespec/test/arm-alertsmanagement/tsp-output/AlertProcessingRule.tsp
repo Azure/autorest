@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.AlertsManagement;
-/**
- * Alert processing rule object containing target scopes, conditions and scheduling logic.
- */
+/** Alert processing rule object containing target scopes, conditions and scheduling logic. */
 model AlertProcessingRule
   is Azure.ResourceManager.TrackedResource<AlertProcessingRuleProperties> {
   ...ResourceNameParameter<
@@ -25,38 +23,26 @@ model AlertProcessingRule
 
 @armResourceOperations
 interface AlertProcessingRules {
-  /**
-   * Get an alert processing rule by name.
-   */
+  /** Get an alert processing rule by name. */
   getByName is ArmResourceRead<AlertProcessingRule>;
 
-  /**
-   * Create or update an alert processing rule.
-   */
+  /** Create or update an alert processing rule. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<AlertProcessingRule>;
 
-  /**
-   * Enable, disable, or update tags for an alert processing rule.
-   */
+  /** Enable, disable, or update tags for an alert processing rule. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<AlertProcessingRule, PatchModel = PatchObject>;
 
-  /**
-   * Delete an alert processing rule.
-   */
+  /** Delete an alert processing rule. */
   delete is ArmResourceDeleteSync<AlertProcessingRule>;
 
-  /**
-   * List all alert processing rules in a resource group.
-   */
+  /** List all alert processing rules in a resource group. */
   listByResourceGroup is ArmResourceListByParent<
     AlertProcessingRule,
     Response = ArmResponse<AlertProcessingRulesList>
   >;
 
-  /**
-   * List all alert processing rules in a subscription.
-   */
+  /** List all alert processing rules in a subscription. */
   listBySubscription is ArmListBySubscription<
     AlertProcessingRule,
     Response = ArmResponse<AlertProcessingRulesList>

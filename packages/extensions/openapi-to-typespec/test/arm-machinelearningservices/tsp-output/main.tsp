@@ -50,9 +50,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-/**
- * These APIs allow end users to operate on Azure Machine Learning Workspace resources.
- */
+/** These APIs allow end users to operate on Azure Machine Learning Workspace resources. */
 @armProviderNamespace
 @service(#{ title: "Azure Machine Learning Services" })
 @versioned(Versions)

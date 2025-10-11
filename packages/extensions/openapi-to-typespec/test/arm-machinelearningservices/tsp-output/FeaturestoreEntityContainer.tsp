@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-/**
- * Azure Resource Manager resource envelope.
- */
+/** Azure Resource Manager resource envelope. */
 @parentResource(Workspace)
 model FeaturestoreEntityContainer
   is Azure.ResourceManager.ProxyResource<
@@ -30,64 +28,44 @@ model FeaturestoreEntityContainer
 
 @armResourceOperations
 interface FeaturestoreEntityContainers {
-  /**
-   * Get container.
-   */
+  /** Get container. */
   getEntity is ArmResourceRead<FeaturestoreEntityContainer>;
 
-  /**
-   * Create or update container.
-   */
+  /** Create or update container. */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<FeaturestoreEntityContainer>;
 
-  /**
-   * Delete container.
-   */
+  /** Delete container. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     FeaturestoreEntityContainer,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List featurestore entity containers.
-   */
+  /** List featurestore entity containers. */
   list is ArmResourceListByParent<
     FeaturestoreEntityContainer,
     Parameters = {
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
 
-      /**
-       * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
-       */
+      /** Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2 */
       @query("tags")
       tags?: string;
 
-      /**
-       * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
-       */
+      /** [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities. */
       @query("listViewType")
       listViewType?: ListViewType;
 
-      /**
-       * page size
-       */
+      /** page size */
       @query("pageSize")
       pageSize?: int32 = 20;
 
-      /**
-       * description for the featurestore entity
-       */
+      /** description for the featurestore entity */
       @query("description")
       description?: string;
 
-      /**
-       * createdBy user name
-       */
+      /** createdBy user name */
       @query("createdBy")
       createdBy?: string;
     },

@@ -17,9 +17,7 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-/**
- * Azure OpenAI APIs for completions and search
- */
+/** Azure OpenAI APIs for completions and search */
 @useAuth(
   AadOauth2Auth<["api.read"]> | ApiKeyAuth<ApiKeyLocation.header, "api-key">
 )

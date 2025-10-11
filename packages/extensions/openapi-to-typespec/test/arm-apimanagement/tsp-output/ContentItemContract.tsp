@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * Content type contract details.
- */
+/** Content type contract details. */
 @parentResource(ContentTypeContract)
 model ContentItemContract
   is Azure.ResourceManager.ProxyResource<Record<unknown>> {
@@ -27,48 +25,34 @@ model ContentItemContract
 
 @armResourceOperations
 interface ContentItemContracts {
-  /**
-   * Returns the developer portal's content item specified by its identifier.
-   */
+  /** Returns the developer portal's content item specified by its identifier. */
   get is ArmResourceRead<ContentItemContract>;
 
-  /**
-   * Returns the entity state (ETag) version of the developer portal's content item specified by its identifier.
-   */
+  /** Returns the entity state (ETag) version of the developer portal's content item specified by its identifier. */
   getEntityTag is ArmResourceCheckExistence<ContentItemContract>;
 
-  /**
-   * Creates a new developer portal's content item specified by the provided content type.
-   */
+  /** Creates a new developer portal's content item specified by the provided content type. */
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     ContentItemContract,
     Request = void,
     Parameters = {
-      /**
-       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
-       */
+      /** ETag of the Entity. Not required when creating an entity, but required when updating an entity. */
       @header
       `If-Match`?: string;
     }
   >;
 
-  /**
-   * Removes the specified developer portal's content item.
-   */
+  /** Removes the specified developer portal's content item. */
   delete is ArmResourceDeleteSync<
     ContentItemContract,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Lists developer portal's content items specified by the provided content type.
-   */
+  /** Lists developer portal's content items specified by the provided content type. */
   listByService is ArmResourceListByParent<ContentItemContract>;
 }
 

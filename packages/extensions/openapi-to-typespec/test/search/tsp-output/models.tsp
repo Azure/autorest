@@ -45,9 +45,7 @@ union SemanticErrorMode {
 union QueryAnswerType {
   string,
 
-  /**
-   * Do not return answers for the query.
-   */
+  /** Do not return answers for the query. */
   None: "none",
 
   /**
@@ -70,9 +68,7 @@ union QueryAnswerType {
 union QueryCaptionType {
   string,
 
-  /**
-   * Do not return captions for the query.
-   */
+  /** Do not return captions for the query. */
   None: "none",
 
   /**
@@ -93,14 +89,10 @@ union QueryCaptionType {
 union QueryRewritesType {
   string,
 
-  /**
-   * Do not generate additional query rewrites for this query.
-   */
+  /** Do not generate additional query rewrites for this query. */
   None: "none",
 
-  /**
-   * Generate alternative query terms to increase the recall of a search request.
-   */
+  /** Generate alternative query terms to increase the recall of a search request. */
   Generative: "generative",
 }
 
@@ -112,19 +104,13 @@ union QueryRewritesType {
 union QueryDebugMode {
   string,
 
-  /**
-   * No query debugging information will be returned.
-   */
+  /** No query debugging information will be returned. */
   Disabled: "disabled",
 
-  /**
-   * Allows the user to further explore their reranked results.
-   */
+  /** Allows the user to further explore their reranked results. */
   Semantic: "semantic",
 
-  /**
-   * Allows the user to further explore their hybrid and vector query results.
-   */
+  /** Allows the user to further explore their hybrid and vector query results. */
   Vector: "vector",
 
   /**
@@ -133,388 +119,236 @@ union QueryDebugMode {
    */
   QueryRewrites: "queryRewrites",
 
-  /**
-   * Turn on all debug options.
-   */
+  /** Turn on all debug options. */
   All: "all",
 }
 
-/**
- * The language of the query.
- */
+/** The language of the query. */
 union QueryLanguage {
   string,
 
-  /**
-   * Query language not specified.
-   */
+  /** Query language not specified. */
   None: "none",
 
-  /**
-   * Query language value for English (United States).
-   */
+  /** Query language value for English (United States). */
   EnUs: "en-us",
 
-  /**
-   * Query language value for English (Great Britain).
-   */
+  /** Query language value for English (Great Britain). */
   EnGb: "en-gb",
 
-  /**
-   * Query language value for English (India).
-   */
+  /** Query language value for English (India). */
   EnIn: "en-in",
 
-  /**
-   * Query language value for English (Canada).
-   */
+  /** Query language value for English (Canada). */
   EnCa: "en-ca",
 
-  /**
-   * Query language value for English (Australia).
-   */
+  /** Query language value for English (Australia). */
   EnAu: "en-au",
 
-  /**
-   * Query language value for French (France).
-   */
+  /** Query language value for French (France). */
   FrFr: "fr-fr",
 
-  /**
-   * Query language value for French (Canada).
-   */
+  /** Query language value for French (Canada). */
   FrCa: "fr-ca",
 
-  /**
-   * Query language value for German (Germany).
-   */
+  /** Query language value for German (Germany). */
   DeDe: "de-de",
 
-  /**
-   * Query language value for Spanish (Spain).
-   */
+  /** Query language value for Spanish (Spain). */
   EsEs: "es-es",
 
-  /**
-   * Query language value for Spanish (Mexico).
-   */
+  /** Query language value for Spanish (Mexico). */
   EsMx: "es-mx",
 
-  /**
-   * Query language value for Chinese (China).
-   */
+  /** Query language value for Chinese (China). */
   ZhCn: "zh-cn",
 
-  /**
-   * Query language value for Chinese (Taiwan).
-   */
+  /** Query language value for Chinese (Taiwan). */
   ZhTw: "zh-tw",
 
-  /**
-   * Query language value for Portuguese (Brazil).
-   */
+  /** Query language value for Portuguese (Brazil). */
   PtBr: "pt-br",
 
-  /**
-   * Query language value for Portuguese (Portugal).
-   */
+  /** Query language value for Portuguese (Portugal). */
   PtPt: "pt-pt",
 
-  /**
-   * Query language value for Italian (Italy).
-   */
+  /** Query language value for Italian (Italy). */
   ItIt: "it-it",
 
-  /**
-   * Query language value for Japanese (Japan).
-   */
+  /** Query language value for Japanese (Japan). */
   JaJp: "ja-jp",
 
-  /**
-   * Query language value for Korean (Korea).
-   */
+  /** Query language value for Korean (Korea). */
   KoKr: "ko-kr",
 
-  /**
-   * Query language value for Russian (Russia).
-   */
+  /** Query language value for Russian (Russia). */
   RuRu: "ru-ru",
 
-  /**
-   * Query language value for Czech (Czech Republic).
-   */
+  /** Query language value for Czech (Czech Republic). */
   CsCz: "cs-cz",
 
-  /**
-   * Query language value for Dutch (Belgium).
-   */
+  /** Query language value for Dutch (Belgium). */
   NlBe: "nl-be",
 
-  /**
-   * Query language value for Dutch (Netherlands).
-   */
+  /** Query language value for Dutch (Netherlands). */
   NlNl: "nl-nl",
 
-  /**
-   * Query language value for Hungarian (Hungary).
-   */
+  /** Query language value for Hungarian (Hungary). */
   HuHu: "hu-hu",
 
-  /**
-   * Query language value for Polish (Poland).
-   */
+  /** Query language value for Polish (Poland). */
   PlPl: "pl-pl",
 
-  /**
-   * Query language value for Swedish (Sweden).
-   */
+  /** Query language value for Swedish (Sweden). */
   SvSe: "sv-se",
 
-  /**
-   * Query language value for Turkish (Turkey).
-   */
+  /** Query language value for Turkish (Turkey). */
   TrTr: "tr-tr",
 
-  /**
-   * Query language value for Hindi (India).
-   */
+  /** Query language value for Hindi (India). */
   HiIn: "hi-in",
 
-  /**
-   * Query language value for Arabic (Saudi Arabia).
-   */
+  /** Query language value for Arabic (Saudi Arabia). */
   ArSa: "ar-sa",
 
-  /**
-   * Query language value for Arabic (Egypt).
-   */
+  /** Query language value for Arabic (Egypt). */
   ArEg: "ar-eg",
 
-  /**
-   * Query language value for Arabic (Morocco).
-   */
+  /** Query language value for Arabic (Morocco). */
   ArMa: "ar-ma",
 
-  /**
-   * Query language value for Arabic (Kuwait).
-   */
+  /** Query language value for Arabic (Kuwait). */
   ArKw: "ar-kw",
 
-  /**
-   * Query language value for Arabic (Jordan).
-   */
+  /** Query language value for Arabic (Jordan). */
   ArJo: "ar-jo",
 
-  /**
-   * Query language value for Danish (Denmark).
-   */
+  /** Query language value for Danish (Denmark). */
   DaDk: "da-dk",
 
-  /**
-   * Query language value for Norwegian (Norway).
-   */
+  /** Query language value for Norwegian (Norway). */
   NoNo: "no-no",
 
-  /**
-   * Query language value for Bulgarian (Bulgaria).
-   */
+  /** Query language value for Bulgarian (Bulgaria). */
   BgBg: "bg-bg",
 
-  /**
-   * Query language value for Croatian (Croatia).
-   */
+  /** Query language value for Croatian (Croatia). */
   HrHr: "hr-hr",
 
-  /**
-   * Query language value for Croatian (Bosnia and Herzegovina).
-   */
+  /** Query language value for Croatian (Bosnia and Herzegovina). */
   HrBa: "hr-ba",
 
-  /**
-   * Query language value for Malay (Malaysia).
-   */
+  /** Query language value for Malay (Malaysia). */
   MsMy: "ms-my",
 
-  /**
-   * Query language value for Malay (Brunei Darussalam).
-   */
+  /** Query language value for Malay (Brunei Darussalam). */
   MsBn: "ms-bn",
 
-  /**
-   * Query language value for Slovenian (Slovenia).
-   */
+  /** Query language value for Slovenian (Slovenia). */
   SlSl: "sl-sl",
 
-  /**
-   * Query language value for Tamil (India).
-   */
+  /** Query language value for Tamil (India). */
   TaIn: "ta-in",
 
-  /**
-   * Query language value for Vietnamese (Viet Nam).
-   */
+  /** Query language value for Vietnamese (Viet Nam). */
   ViVn: "vi-vn",
 
-  /**
-   * Query language value for Greek (Greece).
-   */
+  /** Query language value for Greek (Greece). */
   ElGr: "el-gr",
 
-  /**
-   * Query language value for Romanian (Romania).
-   */
+  /** Query language value for Romanian (Romania). */
   RoRo: "ro-ro",
 
-  /**
-   * Query language value for Icelandic (Iceland).
-   */
+  /** Query language value for Icelandic (Iceland). */
   IsIs: "is-is",
 
-  /**
-   * Query language value for Indonesian (Indonesia).
-   */
+  /** Query language value for Indonesian (Indonesia). */
   IdId: "id-id",
 
-  /**
-   * Query language value for Thai (Thailand).
-   */
+  /** Query language value for Thai (Thailand). */
   ThTh: "th-th",
 
-  /**
-   * Query language value for Lithuanian (Lithuania).
-   */
+  /** Query language value for Lithuanian (Lithuania). */
   LtLt: "lt-lt",
 
-  /**
-   * Query language value for Ukrainian (Ukraine).
-   */
+  /** Query language value for Ukrainian (Ukraine). */
   UkUa: "uk-ua",
 
-  /**
-   * Query language value for Latvian (Latvia).
-   */
+  /** Query language value for Latvian (Latvia). */
   LvLv: "lv-lv",
 
-  /**
-   * Query language value for Estonian (Estonia).
-   */
+  /** Query language value for Estonian (Estonia). */
   EtEe: "et-ee",
 
-  /**
-   * Query language value for Catalan.
-   */
+  /** Query language value for Catalan. */
   CaEs: "ca-es",
 
-  /**
-   * Query language value for Finnish (Finland).
-   */
+  /** Query language value for Finnish (Finland). */
   FiFi: "fi-fi",
 
-  /**
-   * Query language value for Serbian (Bosnia and Herzegovina).
-   */
+  /** Query language value for Serbian (Bosnia and Herzegovina). */
   SrBa: "sr-ba",
 
-  /**
-   * Query language value for Serbian (Montenegro).
-   */
+  /** Query language value for Serbian (Montenegro). */
   SrMe: "sr-me",
 
-  /**
-   * Query language value for Serbian (Serbia).
-   */
+  /** Query language value for Serbian (Serbia). */
   SrRs: "sr-rs",
 
-  /**
-   * Query language value for Slovak (Slovakia).
-   */
+  /** Query language value for Slovak (Slovakia). */
   SkSk: "sk-sk",
 
-  /**
-   * Query language value for Norwegian (Norway).
-   */
+  /** Query language value for Norwegian (Norway). */
   NbNo: "nb-no",
 
-  /**
-   * Query language value for Armenian (Armenia).
-   */
+  /** Query language value for Armenian (Armenia). */
   HyAm: "hy-am",
 
-  /**
-   * Query language value for Bengali (India).
-   */
+  /** Query language value for Bengali (India). */
   BnIn: "bn-in",
 
-  /**
-   * Query language value for Basque.
-   */
+  /** Query language value for Basque. */
   EuEs: "eu-es",
 
-  /**
-   * Query language value for Galician.
-   */
+  /** Query language value for Galician. */
   GlEs: "gl-es",
 
-  /**
-   * Query language value for Gujarati (India).
-   */
+  /** Query language value for Gujarati (India). */
   GuIn: "gu-in",
 
-  /**
-   * Query language value for Hebrew (Israel).
-   */
+  /** Query language value for Hebrew (Israel). */
   HeIl: "he-il",
 
-  /**
-   * Query language value for Irish (Ireland).
-   */
+  /** Query language value for Irish (Ireland). */
   GaIe: "ga-ie",
 
-  /**
-   * Query language value for Kannada (India).
-   */
+  /** Query language value for Kannada (India). */
   KnIn: "kn-in",
 
-  /**
-   * Query language value for Malayalam (India).
-   */
+  /** Query language value for Malayalam (India). */
   MlIn: "ml-in",
 
-  /**
-   * Query language value for Marathi (India).
-   */
+  /** Query language value for Marathi (India). */
   MrIn: "mr-in",
 
-  /**
-   * Query language value for Persian (U.A.E.).
-   */
+  /** Query language value for Persian (U.A.E.). */
   FaAe: "fa-ae",
 
-  /**
-   * Query language value for Punjabi (India).
-   */
+  /** Query language value for Punjabi (India). */
   PaIn: "pa-in",
 
-  /**
-   * Query language value for Telugu (India).
-   */
+  /** Query language value for Telugu (India). */
   TeIn: "te-in",
 
-  /**
-   * Query language value for Urdu (Pakistan).
-   */
+  /** Query language value for Urdu (Pakistan). */
   UrPk: "ur-pk",
 }
 
-/**
- * Improve search recall by spell-correcting individual search query terms.
- */
+/** Improve search recall by spell-correcting individual search query terms. */
 union QuerySpellerType {
   string,
 
-  /**
-   * Speller not enabled.
-   */
+  /** Speller not enabled. */
   None: "none",
 
   /**
@@ -524,20 +358,14 @@ union QuerySpellerType {
   Lexicon: "lexicon",
 }
 
-/**
- * The kind of vector query being performed.
- */
+/** The kind of vector query being performed. */
 union VectorQueryKind {
   string,
 
-  /**
-   * Vector query where a raw vector value is provided.
-   */
+  /** Vector query where a raw vector value is provided. */
   Vector: "vector",
 
-  /**
-   * Vector query where a text value that needs to be vectorized is provided.
-   */
+  /** Vector query where a text value that needs to be vectorized is provided. */
   Text: "text",
 
   /**
@@ -553,9 +381,7 @@ union VectorQueryKind {
   ImageBinary: "imageBinary",
 }
 
-/**
- * The kind of vector query being performed.
- */
+/** The kind of vector query being performed. */
 union VectorThresholdKind {
   string,
 
@@ -567,11 +393,11 @@ union VectorThresholdKind {
    */
   VectorSimilarity: "vectorSimilarity",
 
-  @doc("""
-    The results of the vector query will filter based on the '@search.score' value.
-    Note this is the @search.score returned as part of the search response. The
-    threshold direction will be chosen for higher @search.score.
-    """)
+  /**
+   * The results of the vector query will filter based on the '\@search.score' value.
+   * Note this is the \@search.score returned as part of the search response. The
+   * threshold direction will be chosen for higher \@search.score.
+   */
   SearchScore: "searchScore",
 }
 
@@ -589,9 +415,7 @@ union VectorFilterMode {
    */
   PostFilter: "postFilter",
 
-  /**
-   * The filter will be applied before the search query.
-   */
+  /** The filter will be applied before the search query. */
   PreFilter: "preFilter",
 }
 
@@ -617,31 +441,21 @@ union HybridCountAndFacetMode {
   CountAllResults: "countAllResults",
 }
 
-/**
- * The way the field was used for the semantic enrichment process.
- */
+/** The way the field was used for the semantic enrichment process. */
 union SemanticFieldState {
   string,
 
-  /**
-   * The field was fully used for semantic enrichment.
-   */
+  /** The field was fully used for semantic enrichment. */
   Used: "used",
 
-  /**
-   * The field was not used for semantic enrichment.
-   */
+  /** The field was not used for semantic enrichment. */
   Unused: "unused",
 
-  /**
-   * The field was partially used for semantic enrichment.
-   */
+  /** The field was partially used for semantic enrichment. */
   Partial: "partial",
 }
 
-/**
- * Reason that a partial response was returned for a semantic ranking request.
- */
+/** Reason that a partial response was returned for a semantic ranking request. */
 union SemanticErrorReason {
   string,
 
@@ -651,26 +465,18 @@ union SemanticErrorReason {
    */
   MaxWaitExceeded: "maxWaitExceeded",
 
-  /**
-   * The request was throttled. Only the base results were returned.
-   */
+  /** The request was throttled. Only the base results were returned. */
   CapacityOverloaded: "capacityOverloaded",
 
-  /**
-   * At least one step of the semantic process failed.
-   */
+  /** At least one step of the semantic process failed. */
   Transient: "transient",
 }
 
-/**
- * Type of partial response that was returned for a semantic ranking request.
- */
+/** Type of partial response that was returned for a semantic ranking request. */
 union SemanticSearchResultsType {
   string,
 
-  /**
-   * Results without any semantic enrichment or reranking.
-   */
+  /** Results without any semantic enrichment or reranking. */
   BaseResults: "baseResults",
 
   /**
@@ -681,9 +487,7 @@ union SemanticSearchResultsType {
   RerankedResults: "rerankedResults",
 }
 
-/**
- * Type of query rewrite that was used for this request.
- */
+/** Type of query rewrite that was used for this request. */
 union SemanticQueryRewritesResultType {
   string,
 
@@ -749,20 +553,14 @@ enum SearchMode {
  * of search queries.
  */
 enum ScoringStatistics {
-  /**
-   * The scoring statistics will be calculated locally for lower latency.
-   */
+  /** The scoring statistics will be calculated locally for lower latency. */
   Local: "local",
 
-  /**
-   * The scoring statistics will be calculated globally for more consistent scoring.
-   */
+  /** The scoring statistics will be calculated globally for more consistent scoring. */
   Global: "global",
 }
 
-/**
- * The operation to perform on a document in an indexing batch.
- */
+/** The operation to perform on a document in an indexing batch. */
 enum IndexActionType {
   /**
    * Inserts the document into the index if it is new and updates it if it exists.
@@ -830,69 +628,47 @@ enum AutocompleteMode {
  */
 @error
 model ErrorResponse {
-  /**
-   * The error object.
-   */
+  /** The error object. */
   error?: ErrorDetail;
 }
 
-/**
- * The error detail.
- */
+/** The error detail. */
 model ErrorDetail {
-  /**
-   * The error code.
-   */
+  /** The error code. */
   @visibility(Lifecycle.Read)
   code?: string;
 
-  /**
-   * The error message.
-   */
+  /** The error message. */
   @visibility(Lifecycle.Read)
   message?: string;
 
-  /**
-   * The error target.
-   */
+  /** The error target. */
   @visibility(Lifecycle.Read)
   target?: string;
 
-  /**
-   * The error details.
-   */
+  /** The error details. */
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   details?: ErrorDetail[];
 
-  /**
-   * The error additional info.
-   */
+  /** The error additional info. */
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   additionalInfo?: ErrorAdditionalInfo[];
 }
 
-/**
- * The resource management error additional info.
- */
+/** The resource management error additional info. */
 model ErrorAdditionalInfo {
-  /**
-   * The additional info type.
-   */
+  /** The additional info type. */
   @visibility(Lifecycle.Read)
   type?: string;
 
-  /**
-   * The additional info.
-   */
+  /** The additional info. */
   @visibility(Lifecycle.Read)
   info?: unknown;
 }
 
-/**
- * Response containing search results from an index.
- */
+/** Response containing search results from an index. */
 model SearchDocumentsResult {
   /**
    * The total count of results found by the search operation, or null if the count
@@ -926,24 +702,20 @@ model SearchDocumentsResult {
   @visibility(Lifecycle.Read)
   `@search.answers`?: QueryAnswerResult[];
 
-  /**
-   * Debug information that applies to the search results as a whole.
-   */
+  /** Debug information that applies to the search results as a whole. */
   @visibility(Lifecycle.Read)
   `@search.debug`?: DebugInfo;
 
-  @doc("""
-    Continuation JSON payload returned when the query can't return all the
-    requested results in a single response. You can use this JSON along with
-    @odata.nextLink to formulate another POST Search request to get the next part
-    of the search response.
-    """)
+  /**
+   * Continuation JSON payload returned when the query can't return all the
+   * requested results in a single response. You can use this JSON along with
+   * \@odata.nextLink to formulate another POST Search request to get the next part
+   * of the search response.
+   */
   @visibility(Lifecycle.Read)
   `@search.nextPageParameters`?: SearchRequest;
 
-  /**
-   * The sequence of results returned by the query.
-   */
+  /** The sequence of results returned by the query. */
   @visibility(Lifecycle.Read)
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
@@ -958,21 +730,15 @@ model SearchDocumentsResult {
   @visibility(Lifecycle.Read)
   `@odata.nextLink`?: string;
 
-  /**
-   * Reason that a partial response was returned for a semantic ranking request.
-   */
+  /** Reason that a partial response was returned for a semantic ranking request. */
   @visibility(Lifecycle.Read)
   `@search.semanticPartialResponseReason`?: SemanticErrorReason;
 
-  /**
-   * Type of partial response that was returned for a semantic ranking request.
-   */
+  /** Type of partial response that was returned for a semantic ranking request. */
   @visibility(Lifecycle.Read)
   `@search.semanticPartialResponseType`?: SemanticSearchResultsType;
 
-  /**
-   * Type of query rewrite that was used to retrieve documents.
-   */
+  /** Type of query rewrite that was used to retrieve documents. */
   @visibility(Lifecycle.Read)
   `@search.semanticQueryRewritesResultType`?: SemanticQueryRewritesResultType;
 }
@@ -1016,15 +782,11 @@ model QueryAnswerResult {
   @visibility(Lifecycle.Read)
   score?: float64;
 
-  /**
-   * The key of the document the answer was extracted from.
-   */
+  /** The key of the document the answer was extracted from. */
   @visibility(Lifecycle.Read)
   key?: string;
 
-  /**
-   * The text passage extracted from the document contents as the answer.
-   */
+  /** The text passage extracted from the document contents as the answer. */
   @visibility(Lifecycle.Read)
   text?: string;
 
@@ -1041,33 +803,23 @@ model QueryAnswerResult {
  * results.
  */
 model DebugInfo {
-  /**
-   * Contains debugging information specific to query rewrites.
-   */
+  /** Contains debugging information specific to query rewrites. */
   @visibility(Lifecycle.Read)
   queryRewrites?: QueryRewritesDebugInfo;
 }
 
-/**
- * Contains debugging information specific to query rewrites.
- */
+/** Contains debugging information specific to query rewrites. */
 model QueryRewritesDebugInfo {
-  /**
-   * List of query rewrites generated for the text query.
-   */
+  /** List of query rewrites generated for the text query. */
   @visibility(Lifecycle.Read)
   text?: QueryRewritesValuesDebugInfo;
 
-  /**
-   * List of query rewrites generated for the vectorizable text queries.
-   */
+  /** List of query rewrites generated for the vectorizable text queries. */
   @visibility(Lifecycle.Read)
   vectors?: QueryRewritesValuesDebugInfo[];
 }
 
-/**
- * Contains debugging information specific to query rewrites.
- */
+/** Contains debugging information specific to query rewrites. */
 model QueryRewritesValuesDebugInfo {
   /**
    * The input text to the generative query rewriting model. There may be cases
@@ -1076,9 +828,7 @@ model QueryRewritesValuesDebugInfo {
   @visibility(Lifecycle.Read)
   inputQuery?: string;
 
-  /**
-   * List of query rewrites.
-   */
+  /** List of query rewrites. */
   @visibility(Lifecycle.Read)
   rewrites?: string[];
 }
@@ -1102,9 +852,7 @@ model SearchRequest {
    */
   facets?: string[];
 
-  /**
-   * The OData $filter expression to apply to the search query.
-   */
+  /** The OData $filter expression to apply to the search query. */
   filter?: string;
 
   /**
@@ -1209,9 +957,7 @@ model SearchRequest {
    */
   searchMode?: SearchMode;
 
-  /**
-   * A value that specifies the language of the search query.
-   */
+  /** A value that specifies the language of the search query. */
   queryLanguage?: QueryLanguage;
 
   /**
@@ -1288,14 +1034,10 @@ model SearchRequest {
    */
   queryRewrites?: QueryRewritesType;
 
-  /**
-   * The comma-separated list of field names used for semantic ranking.
-   */
+  /** The comma-separated list of field names used for semantic ranking. */
   semanticFields?: string;
 
-  /**
-   * The query parameters for vector and hybrid search queries.
-   */
+  /** The query parameters for vector and hybrid search queries. */
   vectorQueries?: VectorQuery[];
 
   /**
@@ -1304,25 +1046,17 @@ model SearchRequest {
    */
   vectorFilterMode?: VectorFilterMode;
 
-  /**
-   * The query parameters to configure hybrid search behaviors.
-   */
+  /** The query parameters to configure hybrid search behaviors. */
   hybridSearch?: HybridSearch;
 }
 
-/**
- * The query parameters for vector and hybrid search queries.
- */
+/** The query parameters for vector and hybrid search queries. */
 @discriminator("kind")
 model VectorQuery {
-  /**
-   * The kind of vector query being performed.
-   */
+  /** The kind of vector query being performed. */
   kind: VectorQueryKind;
 
-  /**
-   * Number of nearest neighbors to return as top hits.
-   */
+  /** Number of nearest neighbors to return as top hits. */
   k?: int32;
 
   /**
@@ -1371,20 +1105,14 @@ model VectorQuery {
   filterOverride?: string;
 }
 
-/**
- * The threshold used for vector queries.
- */
+/** The threshold used for vector queries. */
 @discriminator("kind")
 model VectorThreshold {
-  /**
-   * The kind of threshold used to filter vector queries
-   */
+  /** The kind of threshold used to filter vector queries */
   kind: VectorThresholdKind;
 }
 
-/**
- * TThe query parameters to configure hybrid search behaviors.
- */
+/** TThe query parameters to configure hybrid search behaviors. */
 model HybridSearch {
   /**
    * Determines the maximum number of documents to be retrieved by the text query
@@ -1405,9 +1133,7 @@ model HybridSearch {
   countAndFacetMode?: HybridCountAndFacetMode;
 }
 
-/**
- * Contains a document found by a search query, plus associated metadata.
- */
+/** Contains a document found by a search query, plus associated metadata. */
 model SearchResult {
   ...Record<unknown>;
 
@@ -1478,15 +1204,11 @@ model QueryCaptionResult {
  * results.
  */
 model DocumentDebugInfo {
-  /**
-   * Contains debugging information specific to semantic ranking requests.
-   */
+  /** Contains debugging information specific to semantic ranking requests. */
   @visibility(Lifecycle.Read)
   semantic?: SemanticDebugInfo;
 
-  /**
-   * Contains debugging information specific to vector and hybrid search.
-   */
+  /** Contains debugging information specific to vector and hybrid search. */
   @visibility(Lifecycle.Read)
   vectors?: VectorsDebugInfo;
 }
@@ -1513,9 +1235,7 @@ model SemanticDebugInfo {
   @visibility(Lifecycle.Read)
   keywordFields?: QueryResultDocumentSemanticField[];
 
-  /**
-   * The raw concatenated strings that were sent to the semantic enrichment process.
-   */
+  /** The raw concatenated strings that were sent to the semantic enrichment process. */
   @visibility(Lifecycle.Read)
   rerankerInput?: QueryResultDocumentRerankerInput;
 }
@@ -1525,9 +1245,7 @@ model SemanticDebugInfo {
  * well as how they were used
  */
 model QueryResultDocumentSemanticField {
-  /**
-   * The name of the field that was sent to the semantic enrichment process
-   */
+  /** The name of the field that was sent to the semantic enrichment process */
   @visibility(Lifecycle.Read)
   name?: string;
 
@@ -1539,13 +1257,9 @@ model QueryResultDocumentSemanticField {
   state?: SemanticFieldState;
 }
 
-/**
- * The raw concatenated strings that were sent to the semantic enrichment process.
- */
+/** The raw concatenated strings that were sent to the semantic enrichment process. */
 model QueryResultDocumentRerankerInput {
-  /**
-   * The raw string for the title field that was used for semantic enrichment.
-   */
+  /** The raw string for the title field that was used for semantic enrichment. */
   @visibility(Lifecycle.Read)
   title?: string;
 
@@ -1579,43 +1293,35 @@ model VectorsDebugInfo {
  * in the same order they were received.
  */
 model QueryResultDocumentSubscores {
-  /**
-   * The BM25 or Classic score for the text portion of the query.
-   */
+  /** The BM25 or Classic score for the text portion of the query. */
   @visibility(Lifecycle.Read)
   text?: TextResult;
 
-  @doc("The vector similarity and @search.score values for each vector query.")
+  /** The vector similarity and \@search.score values for each vector query. */
   @visibility(Lifecycle.Read)
   vectors?: Record<SingleVectorFieldResult>[];
 
-  /**
-   * The BM25 or Classic score for the text portion of the query.
-   */
+  /** The BM25 or Classic score for the text portion of the query. */
   @visibility(Lifecycle.Read)
   documentBoost?: float64;
 }
 
-/**
- * The BM25 or Classic score for the text portion of the query.
- */
+/** The BM25 or Classic score for the text portion of the query. */
 model TextResult {
-  /**
-   * The BM25 or Classic score for the text portion of the query.
-   */
+  /** The BM25 or Classic score for the text portion of the query. */
   @visibility(Lifecycle.Read)
   searchScore?: float64;
 }
 
-@doc("""
-  A single vector field result. Both @search.score and vector similarity values
-  are returned. Vector similarity is related to @search.score by an equation.
-  """)
+/**
+ * A single vector field result. Both \@search.score and vector similarity values
+ * are returned. Vector similarity is related to \@search.score by an equation.
+ */
 model SingleVectorFieldResult {
-  @doc("""
-    The @search.score value that is calculated from the vector similarity score.
-    This is the score that's visible in a pure single-field single-vector query.
-    """)
+  /**
+   * The \@search.score value that is calculated from the vector similarity score.
+   * This is the score that's visible in a pure single-field single-vector query.
+   */
   @visibility(Lifecycle.Read)
   searchScore?: float64;
 
@@ -1628,13 +1334,9 @@ model SingleVectorFieldResult {
   vectorSimilarity?: float64;
 }
 
-/**
- * Response containing suggestion query results from an index.
- */
+/** Response containing suggestion query results from an index. */
 model SuggestDocumentsResult {
-  /**
-   * The sequence of results returned by the query.
-   */
+  /** The sequence of results returned by the query. */
   @visibility(Lifecycle.Read)
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
@@ -1655,9 +1357,7 @@ model SuggestDocumentsResult {
 model SuggestResult {
   ...Record<unknown>;
 
-  /**
-   * The text of the suggestion result.
-   */
+  /** The text of the suggestion result. */
   @visibility(Lifecycle.Read)
   `@search.text`: string;
 }
@@ -1667,9 +1367,7 @@ model SuggestResult {
  * behaviors.
  */
 model SuggestRequest {
-  /**
-   * An OData expression that filters the documents considered for suggestions.
-   */
+  /** An OData expression that filters the documents considered for suggestions. */
   filter?: string;
 
   /**
@@ -1743,25 +1441,17 @@ model SuggestRequest {
   top?: int32;
 }
 
-/**
- * Contains a batch of document write actions to send to the index.
- */
+/** Contains a batch of document write actions to send to the index. */
 model IndexBatch {
-  /**
-   * The actions in the batch.
-   */
+  /** The actions in the batch. */
   value: IndexAction[];
 }
 
-/**
- * Represents an index action that operates on a document.
- */
+/** Represents an index action that operates on a document. */
 model IndexAction {
   ...Record<unknown>;
 
-  /**
-   * The operation to perform on a document in an indexing batch.
-   */
+  /** The operation to perform on a document in an indexing batch. */
   `@search.action`?: IndexActionType;
 }
 
@@ -1770,22 +1460,16 @@ model IndexAction {
  * request.
  */
 model IndexDocumentsResult {
-  /**
-   * The list of status information for each document in the indexing request.
-   */
+  /** The list of status information for each document in the indexing request. */
   @visibility(Lifecycle.Read)
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   value: IndexingResult[];
 }
 
-/**
- * Status of an indexing operation for a single document.
- */
+/** Status of an indexing operation for a single document. */
 model IndexingResult {
-  /**
-   * The key of a document that was in the indexing request.
-   */
+  /** The key of a document that was in the indexing request. */
   @visibility(Lifecycle.Read)
   key: string;
 
@@ -1814,9 +1498,7 @@ model IndexingResult {
   statusCode: int32;
 }
 
-/**
- * The result of Autocomplete query.
- */
+/** The result of Autocomplete query. */
 model AutocompleteResult {
   /**
    * A value indicating the percentage of the index that was considered by the
@@ -1826,39 +1508,27 @@ model AutocompleteResult {
   @visibility(Lifecycle.Read)
   `@search.coverage`?: float64;
 
-  /**
-   * The list of returned Autocompleted items.
-   */
+  /** The list of returned Autocompleted items. */
   @visibility(Lifecycle.Read)
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   value: AutocompleteItem[];
 }
 
-/**
- * The result of Autocomplete requests.
- */
+/** The result of Autocomplete requests. */
 model AutocompleteItem {
-  /**
-   * The completed term.
-   */
+  /** The completed term. */
   @visibility(Lifecycle.Read)
   text: string;
 
-  /**
-   * The query along with the completed term.
-   */
+  /** The query along with the completed term. */
   @visibility(Lifecycle.Read)
   queryPlusText: string;
 }
 
-/**
- * Parameters for fuzzy matching, and other autocomplete query behaviors.
- */
+/** Parameters for fuzzy matching, and other autocomplete query behaviors. */
 model AutocompleteRequest {
-  /**
-   * The search text on which to base autocomplete results.
-   */
+  /** The search text on which to base autocomplete results. */
   search: string;
 
   /**
@@ -1928,14 +1598,10 @@ model AutocompleteRequest {
  * provided.
  */
 model VectorizedQuery extends VectorQuery {
-  /**
-   * The vector representation of a search query.
-   */
+  /** The vector representation of a search query. */
   vector: float32[];
 
-  /**
-   * The kind of vector query being performed.
-   */
+  /** The kind of vector query being performed. */
   kind: "vector";
 }
 
@@ -1944,9 +1610,7 @@ model VectorizedQuery extends VectorQuery {
  * be vectorized is provided.
  */
 model VectorizableTextQuery extends VectorQuery {
-  /**
-   * The text to be vectorized to perform a vector search query.
-   */
+  /** The text to be vectorized to perform a vector search query. */
   text: string;
 
   /**
@@ -1955,9 +1619,7 @@ model VectorizableTextQuery extends VectorQuery {
    */
   queryRewrites?: QueryRewritesType;
 
-  /**
-   * The kind of vector query being performed.
-   */
+  /** The kind of vector query being performed. */
   kind: "text";
 }
 
@@ -1966,14 +1628,10 @@ model VectorizableTextQuery extends VectorQuery {
  * image value that needs to be vectorized is provided.
  */
 model VectorizableImageUrlQuery extends VectorQuery {
-  /**
-   * The URL of an image to be vectorized to perform a vector search query.
-   */
+  /** The URL of an image to be vectorized to perform a vector search query. */
   url?: string;
 
-  /**
-   * The kind of vector query being performed.
-   */
+  /** The kind of vector query being performed. */
   kind: "imageUrl";
 }
 
@@ -1988,9 +1646,7 @@ model VectorizableImageBinaryQuery extends VectorQuery {
    */
   base64Image?: string;
 
-  /**
-   * The kind of vector query being performed.
-   */
+  /** The kind of vector query being performed. */
   kind: "imageBinary";
 }
 
@@ -2009,27 +1665,23 @@ model VectorSimilarityThreshold extends VectorThreshold {
    */
   value: float64;
 
-  /**
-   * The kind of threshold used to filter vector queries
-   */
+  /** The kind of threshold used to filter vector queries */
   kind: "vectorSimilarity";
 }
 
-@doc("""
-  The results of the vector query will filter based on the '@search.score' value.
-  Note this is the @search.score returned as part of the search response. The
-  threshold direction will be chosen for higher @search.score.
-  """)
+/**
+ * The results of the vector query will filter based on the '\@search.score' value.
+ * Note this is the \@search.score returned as part of the search response. The
+ * threshold direction will be chosen for higher \@search.score.
+ */
 model SearchScoreThreshold extends VectorThreshold {
-  @doc("""
-    The threshold will filter based on the '@search.score' value. Note this is the
-    @search.score returned as part of the search response. The threshold direction
-    will be chosen for higher @search.score.
-    """)
+  /**
+   * The threshold will filter based on the '\@search.score' value. Note this is the
+   * \@search.score returned as part of the search response. The threshold direction
+   * will be chosen for higher \@search.score.
+   */
   value: float64;
 
-  /**
-   * The kind of threshold used to filter vector queries
-   */
+  /** The kind of threshold used to filter vector queries */
   kind: "searchScore";
 }

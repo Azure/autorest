@@ -28,23 +28,17 @@ model WorkspaceConnectionPropertiesV2BasicResource
 
 @armResourceOperations
 interface WorkspaceConnectionPropertiesV2BasicResources {
-  /**
-   * Lists machine learning workspaces connections by name.
-   */
+  /** Lists machine learning workspaces connections by name. */
   get is ArmResourceRead<WorkspaceConnectionPropertiesV2BasicResource>;
 
-  /**
-   * Create or update machine learning workspaces connections under the specified workspace.
-   */
+  /** Create or update machine learning workspaces connections under the specified workspace. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is ArmResourceCreateOrReplaceSync<
     WorkspaceConnectionPropertiesV2BasicResource,
     Response = ArmResourceUpdatedResponse<WorkspaceConnectionPropertiesV2BasicResource>
   >;
 
-  /**
-   * Update machine learning workspaces connections under the specified workspace.
-   */
+  /** Update machine learning workspaces connections under the specified workspace. */
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchSync<
     WorkspaceConnectionPropertiesV2BasicResource,
@@ -52,35 +46,25 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
     OptionalRequestBody = true
   >;
 
-  /**
-   * Delete machine learning workspaces connections by name.
-   */
+  /** Delete machine learning workspaces connections by name. */
   delete is ArmResourceDeleteSync<WorkspaceConnectionPropertiesV2BasicResource>;
 
-  /**
-   * Lists all the available machine learning workspaces connections under the specified workspace.
-   */
+  /** Lists all the available machine learning workspaces connections under the specified workspace. */
   list is ArmResourceListByParent<
     WorkspaceConnectionPropertiesV2BasicResource,
     Parameters = {
-      /**
-       * Target of the workspace connection.
-       */
+      /** Target of the workspace connection. */
       @query("target")
       target?: string;
 
-      /**
-       * Category of the workspace connection.
-       */
+      /** Category of the workspace connection. */
       @query("category")
       category?: string;
     },
     Response = ArmResponse<WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult>
   >;
 
-  /**
-   * List all the secrets of a machine learning workspaces connections.
-   */
+  /** List all the secrets of a machine learning workspaces connections. */
   @action("listsecrets")
   listSecrets is ArmResourceActionSync<
     WorkspaceConnectionPropertiesV2BasicResource,

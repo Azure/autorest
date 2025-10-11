@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-/**
- * An object that represents a machine learning workspace.
- */
+/** An object that represents a machine learning workspace. */
 model Workspace
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
     WorkspaceProperties,
@@ -32,14 +30,10 @@ model Workspace
 
 @armResourceOperations
 interface Workspaces {
-  /**
-   * Gets the properties of the specified machine learning workspace.
-   */
+  /** Gets the properties of the specified machine learning workspace. */
   get is ArmResourceRead<Workspace>;
 
-  /**
-   * Creates or updates a workspace with the specified parameters.
-   */
+  /** Creates or updates a workspace with the specified parameters. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Workspace,
@@ -48,74 +42,54 @@ interface Workspaces {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /**
-   * Updates a machine learning workspace with the specified parameters.
-   */
+  /** Updates a machine learning workspace with the specified parameters. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Workspace,
     PatchModel = WorkspaceUpdateParameters
   >;
 
-  /**
-   * Deletes a machine learning workspace.
-   */
+  /** Deletes a machine learning workspace. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Workspace,
     Parameters = {
-      /**
-       * Flag to indicate delete is a purge request.
-       */
+      /** Flag to indicate delete is a purge request. */
       @query("forceToPurge")
       forceToPurge?: boolean;
     },
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * Lists all the available machine learning workspaces under the specified resource group.
-   */
+  /** Lists all the available machine learning workspaces under the specified resource group. */
   listByResourceGroup is ArmResourceListByParent<
     Workspace,
     Parameters = {
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
 
-      /**
-       * Kind of workspace.
-       */
+      /** Kind of workspace. */
       @query("kind")
       kind?: string;
     }
   >;
 
-  /**
-   * Lists all the available machine learning workspaces under the specified subscription.
-   */
+  /** Lists all the available machine learning workspaces under the specified subscription. */
   listBySubscription is ArmListBySubscription<
     Workspace,
     Parameters = {
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
 
-      /**
-       * Kind of workspace.
-       */
+      /** Kind of workspace. */
       @query("kind")
       kind?: string;
     }
   >;
 
-  /**
-   * Lists all enabled features for a workspace
-   */
+  /** Lists all enabled features for a workspace */
   @list
   @get
   @action("features")
@@ -125,9 +99,7 @@ interface Workspaces {
     ArmResponse<ListAmlUserFeatureResult>
   >;
 
-  /**
-   * Diagnose workspace setup issue.
-   */
+  /** Diagnose workspace setup issue. */
   diagnose is ArmResourceActionAsync<
     Workspace,
     DiagnoseWorkspaceParameters,
@@ -135,45 +107,35 @@ interface Workspaces {
     OptionalRequestBody = true
   >;
 
-  /**
-   * Lists all the keys associated with this workspace. This includes keys for the storage account, app insights and password for container registry.
-   */
+  /** Lists all the keys associated with this workspace. This includes keys for the storage account, app insights and password for container registry. */
   listKeys is ArmResourceActionSync<
     Workspace,
     void,
     ArmResponse<ListWorkspaceKeysResult>
   >;
 
-  /**
-   * Get Azure Machine Learning Workspace notebook access token
-   */
+  /** Get Azure Machine Learning Workspace notebook access token */
   listNotebookAccessToken is ArmResourceActionSync<
     Workspace,
     void,
     ArmResponse<NotebookAccessTokenResult>
   >;
 
-  /**
-   * Lists keys of Azure Machine Learning Workspaces notebook.
-   */
+  /** Lists keys of Azure Machine Learning Workspaces notebook. */
   listNotebookKeys is ArmResourceActionSync<
     Workspace,
     void,
     ArmResponse<ListNotebookKeysResult>
   >;
 
-  /**
-   * Lists keys of Azure Machine Learning Workspace's storage account.
-   */
+  /** Lists keys of Azure Machine Learning Workspace's storage account. */
   listStorageAccountKeys is ArmResourceActionSync<
     Workspace,
     void,
     ArmResponse<ListStorageAccountKeysResult>
   >;
 
-  /**
-   * Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically.
-   */
+  /** Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically. */
   @list
   @get
   @action("outboundNetworkDependenciesEndpoints")
@@ -183,18 +145,14 @@ interface Workspaces {
     ArmResponse<ExternalFqdnResponse>
   >;
 
-  /**
-   * Prepare Azure Machine Learning Workspace's notebook resource
-   */
+  /** Prepare Azure Machine Learning Workspace's notebook resource */
   prepareNotebook is ArmResourceActionAsync<
     Workspace,
     void,
     ArmResponse<NotebookResourceInfo>
   >;
 
-  /**
-   * Resync all the keys associated with this workspace.This includes keys for the storage account, app insights and password for container registry
-   */
+  /** Resync all the keys associated with this workspace.This includes keys for the storage account, app insights and password for container registry */
   resyncKeys is ArmResourceActionAsync<Workspace, void, OkResponse>;
 
   /**
@@ -213,9 +171,7 @@ interface Workspaces {
     ArmResponse<PrivateLinkResourceListResult>
   >;
 
-  /**
-   * Provisions the managed network of a machine learning workspace.
-   */
+  /** Provisions the managed network of a machine learning workspace. */
   provisionManagedNetwork is ArmResourceActionAsync<
     Workspace,
     ManagedNetworkProvisionOptions,

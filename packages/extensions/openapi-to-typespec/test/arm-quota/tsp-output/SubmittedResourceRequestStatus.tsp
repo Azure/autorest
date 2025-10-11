@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Quota;
-/**
- * Status of a single GroupQuota request.
- */
+/** Status of a single GroupQuota request. */
 @parentResource(GroupQuotasEntity)
 model SubmittedResourceRequestStatus
   is Azure.ResourceManager.ProxyResource<SubmittedResourceRequestStatusProperties> {
@@ -27,9 +25,7 @@ model SubmittedResourceRequestStatus
 
 @armResourceOperations
 interface SubmittedResourceRequestStatuses {
-  /**
-   * Get API to check the status of a GroupQuota request by requestId.
-   */
+  /** Get API to check the status of a GroupQuota request by requestId. */
   get is Extension.Read<
     Extension.ManagementGroup,
     SubmittedResourceRequestStatus

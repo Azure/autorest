@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.Authorization;
-/**
- * Role management policy
- */
+/** Role management policy */
 @extensionResource
 model RoleManagementPolicyAssignment
   is Azure.ResourceManager.ExtensionResource<RoleManagementPolicyAssignmentProperties> {
@@ -26,17 +24,13 @@ model RoleManagementPolicyAssignment
 
 @armResourceOperations
 interface RoleManagementPolicyAssignments {
-  /**
-   * Get the specified role management policy assignment for a resource scope
-   */
+  /** Get the specified role management policy assignment for a resource scope */
   get is Extension.Read<
     Extension.ScopeParameter,
     RoleManagementPolicyAssignment
   >;
 
-  /**
-   * Create a role management policy assignment
-   */
+  /** Create a role management policy assignment */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is Extension.CreateOrReplaceSync<
     Extension.ScopeParameter,
@@ -44,9 +38,7 @@ interface RoleManagementPolicyAssignments {
     Response = ArmResourceCreatedSyncResponse<RoleManagementPolicyAssignment>
   >;
 
-  /**
-   * Gets role management assignment policies for a resource scope.
-   */
+  /** Gets role management assignment policies for a resource scope. */
   listForScope is Extension.ListByTarget<
     Extension.ScopeParameter,
     RoleManagementPolicyAssignment

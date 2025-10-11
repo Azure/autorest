@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-/**
- * Azure Resource Manager resource envelope.
- */
+/** Azure Resource Manager resource envelope. */
 @parentResource(DataContainerResource)
 model DataVersionBaseResource
   is Azure.ResourceManager.ProxyResource<DataVersionBase, false> {
@@ -56,34 +54,24 @@ alias DataVersionBaseResourceOps = Azure.ResourceManager.Legacy.LegacyOperations
 
 @armResourceOperations
 interface DataVersionBaseResources {
-  /**
-   * Get version.
-   */
+  /** Get version. */
   get is DataVersionBaseResourceOps.Read<DataVersionBaseResource>;
 
-  /**
-   * Create or update version.
-   */
+  /** Create or update version. */
   createOrUpdate is DataVersionBaseResourceOps.CreateOrUpdateAsync<DataVersionBaseResource>;
 
-  /**
-   * Delete version.
-   */
+  /** Delete version. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is DataVersionBaseResourceOps.DeleteWithoutOkAsync<
     DataVersionBaseResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List data versions in the data container
-   */
+  /** List data versions in the data container */
   list is DataVersionBaseResourceOps.List<
     DataVersionBaseResource,
     Parameters = {
-      /**
-       * Please choose OrderBy value from ['createdtime', 'modifiedtime']
-       */
+      /** Please choose OrderBy value from ['createdtime', 'modifiedtime'] */
       @query("$orderBy")
       $orderBy?: string;
 
@@ -94,30 +82,22 @@ interface DataVersionBaseResources {
       @query("$top")
       $top?: int32;
 
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
 
-      /**
-       * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
-       */
+      /** Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2 */
       @query("$tags")
       $tags?: string;
 
-      /**
-       * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
-       */
+      /** [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities. */
       @query("listViewType")
       listViewType?: ListViewType;
     },
     Response = ArmResponse<DataVersionBaseResourceArmPaginatedResult>
   >;
 
-  /**
-   * Generate a storage location and credential for the client to upload a data asset to.
-   */
+  /** Generate a storage location and credential for the client to upload a data asset to. */
   @action("startPendingUpload")
   createOrGetStartPendingUpload is DataVersionBaseResourceOps.ActionSync<
     DataVersionBaseResource,
@@ -156,30 +136,20 @@ alias DataVersionOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @armResourceOperations
 interface DataVersions {
-  /**
-   * Get version.
-   */
+  /** Get version. */
   get is DataVersionOps.Read<DataVersionBaseResource>;
 
-  /**
-   * Create or update version.
-   */
+  /** Create or update version. */
   createOrUpdate is DataVersionOps.CreateOrUpdateSync<DataVersionBaseResource>;
 
-  /**
-   * Delete version.
-   */
+  /** Delete version. */
   delete is DataVersionOps.DeleteSync<DataVersionBaseResource>;
 
-  /**
-   * List data versions in the data container
-   */
+  /** List data versions in the data container */
   list is DataVersionOps.List<
     DataVersionBaseResource,
     Parameters = {
-      /**
-       * Please choose OrderBy value from ['createdtime', 'modifiedtime']
-       */
+      /** Please choose OrderBy value from ['createdtime', 'modifiedtime'] */
       @query("$orderBy")
       $orderBy?: string;
 
@@ -190,27 +160,19 @@ interface DataVersions {
       @query("$top")
       $top?: int32;
 
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
 
-      /**
-       * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
-       */
+      /** Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2 */
       @query("$tags")
       $tags?: string;
 
-      /**
-       * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
-       */
+      /** [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities. */
       @query("listViewType")
       listViewType?: ListViewType;
 
-      /**
-       * data stage
-       */
+      /** data stage */
       @query("stage")
       stage?: string;
     },

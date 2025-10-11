@@ -13,9 +13,7 @@ namespace Microsoft.GuestConfiguration;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface GuestConfigurationAssignmentsOperationGroup {
-  /**
-   * List all guest configuration assignments for a resource group.
-   */
+  /** List all guest configuration assignments for a resource group. */
   @autoRoute
   @get
   @action("guestConfigurationAssignments")

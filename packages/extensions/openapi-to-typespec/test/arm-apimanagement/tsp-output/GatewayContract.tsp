@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * Gateway details.
- */
+/** Gateway details. */
 @parentResource(ApiManagementServiceResource)
 model GatewayContract
   is Azure.ResourceManager.ProxyResource<GatewayContractProperties> {
@@ -27,117 +25,85 @@ model GatewayContract
 
 @armResourceOperations
 interface GatewayContracts {
-  /**
-   * Gets the details of the Gateway specified by its identifier.
-   */
+  /** Gets the details of the Gateway specified by its identifier. */
   get is ArmResourceRead<GatewayContract>;
 
-  /**
-   * Gets the entity state (Etag) version of the Gateway specified by its identifier.
-   */
+  /** Gets the entity state (Etag) version of the Gateway specified by its identifier. */
   getEntityTag is ArmResourceCheckExistence<GatewayContract>;
 
-  /**
-   * Creates or updates a Gateway to be used in Api Management instance.
-   */
+  /** Creates or updates a Gateway to be used in Api Management instance. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GatewayContract,
     Parameters = {
-      /**
-       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
-       */
+      /** ETag of the Entity. Not required when creating an entity, but required when updating an entity. */
       @header
       `If-Match`?: string;
     }
   >;
 
-  /**
-   * Updates the details of the gateway specified by its identifier.
-   */
+  /** Updates the details of the gateway specified by its identifier. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     GatewayContract,
     PatchModel = GatewayContract,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Deletes specific Gateway.
-   */
+  /** Deletes specific Gateway. */
   delete is ArmResourceDeleteSync<
     GatewayContract,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Lists a collection of gateways registered with service instance.
-   */
+  /** Lists a collection of gateways registered with service instance. */
   listByService is ArmResourceListByParent<
     GatewayContract,
     Parameters = {
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| region | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-       */
+      /** |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| region | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br> */
       @query("$filter")
       $filter?: string;
 
-      /**
-       * Number of records to return.
-       */
+      /** Number of records to return. */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      /**
-       * Number of records to skip.
-       */
+      /** Number of records to skip. */
       @query("$skip")
       $skip?: int32;
     }
   >;
 
-  /**
-   * Retrieves gateway keys.
-   */
+  /** Retrieves gateway keys. */
   listKeys is ArmResourceActionSync<
     GatewayContract,
     void,
     ArmResponse<GatewayKeysContract>
   >;
 
-  /**
-   * Regenerates specified gateway key invalidating any tokens created with it.
-   */
+  /** Regenerates specified gateway key invalidating any tokens created with it. */
   regenerateKey is ArmResourceActionSync<
     GatewayContract,
     GatewayKeyRegenerationRequestContract,
     NoContentResponse
   >;
 
-  /**
-   * Gets the Shared Access Authorization Token for the gateway.
-   */
+  /** Gets the Shared Access Authorization Token for the gateway. */
   generateToken is ArmResourceActionSync<
     GatewayContract,
     GatewayTokenRequestContract,
     ArmResponse<GatewayTokenContract>
   >;
 
-  /**
-   * Lists a collection of the APIs associated with a gateway.
-   */
+  /** Lists a collection of the APIs associated with a gateway. */
   @list
   @get
   @action("apis")
@@ -146,30 +112,22 @@ interface GatewayContracts {
     void,
     ArmResponse<ResourceListResult<GatewayApiData>>,
     Parameters = {
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-       */
+      /** |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br> */
       @query("$filter")
       $filter?: string;
 
-      /**
-       * Number of records to return.
-       */
+      /** Number of records to return. */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      /**
-       * Number of records to skip.
-       */
+      /** Number of records to skip. */
       @query("$skip")
       $skip?: int32;
     }
   >;
 
-  /**
-   * Checks that API entity specified by identifier is associated with the Gateway entity.
-   */
+  /** Checks that API entity specified by identifier is associated with the Gateway entity. */
   @head
   @action("{apiId}")
   gatewayApiGetEntityTag is ArmResourceActionSync<
@@ -177,9 +135,7 @@ interface GatewayContracts {
     void,
     OkResponse,
     Parameters = {
-      /**
-       * API identifier. Must be unique in the current API Management service instance.
-       */
+      /** API identifier. Must be unique in the current API Management service instance. */
       @maxLength(80)
       @minLength(1)
       @path
@@ -187,9 +143,7 @@ interface GatewayContracts {
     }
   >;
 
-  /**
-   * Adds an API to the specified Gateway.
-   */
+  /** Adds an API to the specified Gateway. */
   @put
   @action("{apiId}")
   gatewayApiCreateOrUpdate is ArmResourceActionSync<
@@ -197,9 +151,7 @@ interface GatewayContracts {
     AssociationContract,
     ArmResponse<GatewayApiData> | ArmResourceCreatedSyncResponse<GatewayApiData>,
     Parameters = {
-      /**
-       * API identifier. Must be unique in the current API Management service instance.
-       */
+      /** API identifier. Must be unique in the current API Management service instance. */
       @maxLength(80)
       @minLength(1)
       @path
@@ -208,9 +160,7 @@ interface GatewayContracts {
     OptionalRequestBody = true
   >;
 
-  /**
-   * Deletes the specified API from the specified Gateway.
-   */
+  /** Deletes the specified API from the specified Gateway. */
   @delete
   @action("{apiId}")
   gatewayApiDelete is ArmResourceActionSync<
@@ -218,9 +168,7 @@ interface GatewayContracts {
     void,
     OkResponse | NoContentResponse,
     Parameters = {
-      /**
-       * API identifier. Must be unique in the current API Management service instance.
-       */
+      /** API identifier. Must be unique in the current API Management service instance. */
       @maxLength(80)
       @minLength(1)
       @path

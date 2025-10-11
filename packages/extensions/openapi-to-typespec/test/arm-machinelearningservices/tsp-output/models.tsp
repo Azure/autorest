@@ -11,263 +11,167 @@ using Azure.ResourceManager.Foundations;
 
 namespace Azure.ResourceManager.MachineLearning;
 
-/**
- * An enum describing the unit of usage measurement.
- */
+/** An enum describing the unit of usage measurement. */
 union UsageUnit {
   string,
 
-  /**
-   * Count
-   */
+  /** Count */
   Count: "Count",
 }
 
-/**
- * Three lettered code specifying the currency of the VM price. Example: USD
- */
+/** Three lettered code specifying the currency of the VM price. Example: USD */
 union BillingCurrency {
   string,
 
-  /**
-   * USD
-   */
+  /** USD */
   USD: "USD",
 }
 
-/**
- * The unit of time measurement for the specified VM price. Example: OneHour
- */
+/** The unit of time measurement for the specified VM price. Example: OneHour */
 union UnitOfMeasure {
   string,
 
-  /**
-   * OneHour
-   */
+  /** OneHour */
   OneHour: "OneHour",
 }
 
-/**
- * Operating system type used by the VM.
- */
+/** Operating system type used by the VM. */
 union VMPriceOSType {
   string,
 
-  /**
-   * Linux
-   */
+  /** Linux */
   Linux: "Linux",
 
-  /**
-   * Windows
-   */
+  /** Windows */
   Windows: "Windows",
 }
 
-/**
- * The type of the VM.
- */
+/** The type of the VM. */
 union VMTier {
   string,
 
-  /**
-   * Standard
-   */
+  /** Standard */
   Standard: "Standard",
 
-  /**
-   * LowPriority
-   */
+  /** LowPriority */
   LowPriority: "LowPriority",
 
-  /**
-   * Spot
-   */
+  /** Spot */
   Spot: "Spot",
 }
 
-/**
- * An enum describing the unit of quota measurement.
- */
+/** An enum describing the unit of quota measurement. */
 union QuotaUnit {
   string,
 
-  /**
-   * Count
-   */
+  /** Count */
   Count: "Count",
 }
 
-/**
- * Status of update workspace quota.
- */
+/** Status of update workspace quota. */
 union Status {
   string,
 
-  /**
-   * Undefined
-   */
+  /** Undefined */
   Undefined: "Undefined",
 
-  /**
-   * Success
-   */
+  /** Success */
   Success: "Success",
 
-  /**
-   * Failure
-   */
+  /** Failure */
   Failure: "Failure",
 
-  /**
-   * InvalidQuotaBelowClusterMinimum
-   */
+  /** InvalidQuotaBelowClusterMinimum */
   InvalidQuotaBelowClusterMinimum: "InvalidQuotaBelowClusterMinimum",
 
-  /**
-   * InvalidQuotaExceedsSubscriptionLimit
-   */
+  /** InvalidQuotaExceedsSubscriptionLimit */
   InvalidQuotaExceedsSubscriptionLimit: "InvalidQuotaExceedsSubscriptionLimit",
 
-  /**
-   * InvalidVMFamilyName
-   */
+  /** InvalidVMFamilyName */
   InvalidVMFamilyName: "InvalidVMFamilyName",
 
-  /**
-   * OperationNotSupportedForSku
-   */
+  /** OperationNotSupportedForSku */
   OperationNotSupportedForSku: "OperationNotSupportedForSku",
 
-  /**
-   * OperationNotEnabledForRegion
-   */
+  /** OperationNotEnabledForRegion */
   OperationNotEnabledForRegion: "OperationNotEnabledForRegion",
 }
 
-/**
- * The type of identity that created the resource.
- */
+/** The type of identity that created the resource. */
 union CreatedByType {
   string,
 
-  /**
-   * User
-   */
+  /** User */
   User: "User",
 
-  /**
-   * Application
-   */
+  /** Application */
   Application: "Application",
 
-  /**
-   * ManagedIdentity
-   */
+  /** ManagedIdentity */
   ManagedIdentity: "ManagedIdentity",
 
-  /**
-   * Key
-   */
+  /** Key */
   Key: "Key",
 }
 
-/**
- * The type of compute
- */
+/** The type of compute */
 union ComputeType {
   string,
 
-  /**
-   * AKS
-   */
+  /** AKS */
   AKS: "AKS",
 
-  /**
-   * Kubernetes
-   */
+  /** Kubernetes */
   Kubernetes: "Kubernetes",
 
-  /**
-   * AmlCompute
-   */
+  /** AmlCompute */
   AmlCompute: "AmlCompute",
 
-  /**
-   * ComputeInstance
-   */
+  /** ComputeInstance */
   ComputeInstance: "ComputeInstance",
 
-  /**
-   * DataFactory
-   */
+  /** DataFactory */
   DataFactory: "DataFactory",
 
-  /**
-   * VirtualMachine
-   */
+  /** VirtualMachine */
   VirtualMachine: "VirtualMachine",
 
-  /**
-   * HDInsight
-   */
+  /** HDInsight */
   HDInsight: "HDInsight",
 
-  /**
-   * Databricks
-   */
+  /** Databricks */
   Databricks: "Databricks",
 
-  /**
-   * DataLakeAnalytics
-   */
+  /** DataLakeAnalytics */
   DataLakeAnalytics: "DataLakeAnalytics",
 
-  /**
-   * SynapseSpark
-   */
+  /** SynapseSpark */
   SynapseSpark: "SynapseSpark",
 }
 
-/**
- * The provision state of the cluster. Valid values are Unknown, Updating, Provisioning, Succeeded, and Failed.
- */
+/** The provision state of the cluster. Valid values are Unknown, Updating, Provisioning, Succeeded, and Failed. */
 union ProvisioningState {
   string,
 
-  /**
-   * Unknown
-   */
+  /** Unknown */
   Unknown: "Unknown",
 
-  /**
-   * Updating
-   */
+  /** Updating */
   Updating: "Updating",
 
-  /**
-   * Creating
-   */
+  /** Creating */
   Creating: "Creating",
 
-  /**
-   * Deleting
-   */
+  /** Deleting */
   Deleting: "Deleting",
 
-  /**
-   * Succeeded
-   */
+  /** Succeeded */
   Succeeded: "Succeeded",
 
-  /**
-   * Failed
-   */
+  /** Failed */
   Failed: "Failed",
 
-  /**
-   * Canceled
-   */
+  /** Canceled */
   Canceled: "Canceled",
 }
 
@@ -275,166 +179,106 @@ union ProvisioningState {
 union UnderlyingResourceAction {
   string,
 
-  /**
-   * Delete
-   */
+  /** Delete */
   Delete: "Delete",
 
-  /**
-   * Detach
-   */
+  /** Detach */
   Detach: "Detach",
 }
 
-/**
- * Type of the image. Possible values are: docker - For docker images. azureml - For AzureML images
- */
+/** Type of the image. Possible values are: docker - For docker images. azureml - For AzureML images */
 union ImageType {
   string,
 
-  /**
-   * docker
-   */
+  /** docker */
   docker: "docker",
 
-  /**
-   * azureml
-   */
+  /** azureml */
   azureml: "azureml",
 }
 
-/**
- * Type of the Environment Variable. Possible values are: local - For local variable
- */
+/** Type of the Environment Variable. Possible values are: local - For local variable */
 union EnvironmentVariableType {
   string,
 
-  /**
-   * local
-   */
+  /** local */
   local: "local",
 }
 
-/**
- * Protocol over which communication will happen over this endpoint
- */
+/** Protocol over which communication will happen over this endpoint */
 union Protocol {
   string,
 
-  /**
-   * tcp
-   */
+  /** tcp */
   tcp: "tcp",
 
-  /**
-   * udp
-   */
+  /** udp */
   udp: "udp",
 
-  /**
-   * http
-   */
+  /** http */
   http: "http",
 }
 
-/**
- * Type of Volume Definition. Possible Values: bind,volume,tmpfs,npipe
- */
+/** Type of Volume Definition. Possible Values: bind,volume,tmpfs,npipe */
 union VolumeDefinitionType {
   string,
 
-  /**
-   * bind
-   */
+  /** bind */
   bind: "bind",
 
-  /**
-   * volume
-   */
+  /** volume */
   volume: "volume",
 
-  /**
-   * tmpfs
-   */
+  /** tmpfs */
   tmpfs: "tmpfs",
 
-  /**
-   * npipe
-   */
+  /** npipe */
   npipe: "npipe",
 }
 
-/**
- * State of the compute node. Values are idle, running, preparing, unusable, leaving and preempted.
- */
+/** State of the compute node. Values are idle, running, preparing, unusable, leaving and preempted. */
 union NodeState {
   string,
 
-  /**
-   * idle
-   */
+  /** idle */
   idle: "idle",
 
-  /**
-   * running
-   */
+  /** running */
   running: "running",
 
-  /**
-   * preparing
-   */
+  /** preparing */
   preparing: "preparing",
 
-  /**
-   * unusable
-   */
+  /** unusable */
   unusable: "unusable",
 
-  /**
-   * leaving
-   */
+  /** leaving */
   leaving: "leaving",
 
-  /**
-   * preempted
-   */
+  /** preempted */
   preempted: "preempted",
 }
 
-/**
- * Provisioning state of registry asset.
- */
+/** Provisioning state of registry asset. */
 union AssetProvisioningState {
   string,
 
-  /**
-   * Succeeded
-   */
+  /** Succeeded */
   Succeeded: "Succeeded",
 
-  /**
-   * Failed
-   */
+  /** Failed */
   Failed: "Failed",
 
-  /**
-   * Canceled
-   */
+  /** Canceled */
   Canceled: "Canceled",
 
-  /**
-   * Creating
-   */
+  /** Creating */
   Creating: "Creating",
 
-  /**
-   * Updating
-   */
+  /** Updating */
   Updating: "Updating",
 
-  /**
-   * Deleting
-   */
+  /** Deleting */
   Deleting: "Deleting",
 }
 
@@ -442,43 +286,29 @@ union AssetProvisioningState {
 union AutoDeleteCondition {
   string,
 
-  /**
-   * CreatedGreaterThan
-   */
+  /** CreatedGreaterThan */
   CreatedGreaterThan: "CreatedGreaterThan",
 
-  /**
-   * LastAccessedGreaterThan
-   */
+  /** LastAccessedGreaterThan */
   LastAccessedGreaterThan: "LastAccessedGreaterThan",
 }
 
-/**
- * Type of storage to use for the pending upload location
- */
+/** Type of storage to use for the pending upload location */
 union PendingUploadType {
   string,
 
-  /**
-   * None
-   */
+  /** None */
   None: "None",
 
-  /**
-   * TemporaryBlobReference
-   */
+  /** TemporaryBlobReference */
   TemporaryBlobReference: "TemporaryBlobReference",
 }
 
-/**
- * Enum to determine the PendingUpload credentials type.
- */
+/** Enum to determine the PendingUpload credentials type. */
 union PendingUploadCredentialType {
   string,
 
-  /**
-   * SAS
-   */
+  /** SAS */
   SAS: "SAS",
 }
 
@@ -486,307 +316,197 @@ union PendingUploadCredentialType {
 union ListViewType {
   string,
 
-  /**
-   * ActiveOnly
-   */
+  /** ActiveOnly */
   ActiveOnly: "ActiveOnly",
 
-  /**
-   * ArchivedOnly
-   */
+  /** ArchivedOnly */
   ArchivedOnly: "ArchivedOnly",
 
-  /**
-   * All
-   */
+  /** All */
   All: "All",
 }
 
-/**
- * Enum to determine the type of data.
- */
+/** Enum to determine the type of data. */
 union DataType {
   string,
 
-  /**
-   * uri_file
-   */
+  /** uri_file */
   uri_file: "uri_file",
 
-  /**
-   * uri_folder
-   */
+  /** uri_folder */
   uri_folder: "uri_folder",
 
-  /**
-   * mltable
-   */
+  /** mltable */
   mltable: "mltable",
 }
 
-/**
- * Protection level associated with the Intellectual Property.
- */
+/** Protection level associated with the Intellectual Property. */
 union ProtectionLevel {
   string,
 
-  /**
-   * All means Intellectual Property is fully protected.
-   */
+  /** All means Intellectual Property is fully protected. */
   All: "All",
 
-  /**
-   * None means it is not an Intellectual Property.
-   */
+  /** None means it is not an Intellectual Property. */
   None: "None",
 }
 
-/**
- * AutoRebuild setting for the derived image
- */
+/** AutoRebuild setting for the derived image */
 union AutoRebuildSetting {
   string,
 
-  /**
-   * Disabled
-   */
+  /** Disabled */
   Disabled: "Disabled",
 
-  /**
-   * OnBaseImageUpdate
-   */
+  /** OnBaseImageUpdate */
   OnBaseImageUpdate: "OnBaseImageUpdate",
 }
 
-/**
- * Environment type is either user created or curated by Azure ML service
- */
+/** Environment type is either user created or curated by Azure ML service */
 union EnvironmentType {
   string,
 
-  /**
-   * Curated
-   */
+  /** Curated */
   Curated: "Curated",
 
-  /**
-   * UserCreated
-   */
+  /** UserCreated */
   UserCreated: "UserCreated",
 }
 
-/**
- * The type of operating system.
- */
+/** The type of operating system. */
 union OperatingSystemType {
   string,
 
-  /**
-   * Linux
-   */
+  /** Linux */
   Linux: "Linux",
 
-  /**
-   * Windows
-   */
+  /** Windows */
   Windows: "Windows",
 }
 
-/**
- * Base environment type.
- */
+/** Base environment type. */
 union BaseEnvironmentSourceType {
   string,
 
-  /**
-   * EnvironmentAsset
-   */
+  /** EnvironmentAsset */
   EnvironmentAsset: "EnvironmentAsset",
 }
 
-/**
- * Inferencing server type for various targets.
- */
+/** Inferencing server type for various targets. */
 union InferencingServerType {
   string,
 
-  /**
-   * AzureMLOnline
-   */
+  /** AzureMLOnline */
   AzureMLOnline: "AzureMLOnline",
 
-  /**
-   * AzureMLBatch
-   */
+  /** AzureMLBatch */
   AzureMLBatch: "AzureMLBatch",
 
-  /**
-   * Triton
-   */
+  /** Triton */
   Triton: "Triton",
 
-  /**
-   * Custom
-   */
+  /** Custom */
   Custom: "Custom",
 }
 
-/**
- * Type of the inputs.
- */
+/** Type of the inputs. */
 union PackageInputType {
   string,
 
-  /**
-   * UriFile
-   */
+  /** UriFile */
   UriFile: "UriFile",
 
-  /**
-   * UriFolder
-   */
+  /** UriFolder */
   UriFolder: "UriFolder",
 }
 
-/**
- * Mounting type of the model or the inputs
- */
+/** Mounting type of the model or the inputs */
 union PackageInputDeliveryMode {
   string,
 
-  /**
-   * Copy
-   */
+  /** Copy */
   Copy: "Copy",
 
-  /**
-   * Download
-   */
+  /** Download */
   Download: "Download",
 }
 
-/**
- * Input path type for package inputs.
- */
+/** Input path type for package inputs. */
 union InputPathType {
   string,
 
-  /**
-   * Url
-   */
+  /** Url */
   Url: "Url",
 
-  /**
-   * PathId
-   */
+  /** PathId */
   PathId: "PathId",
 
-  /**
-   * PathVersion
-   */
+  /** PathVersion */
   PathVersion: "PathVersion",
 }
 
-/**
- * Package build state returned in package response.
- */
+/** Package build state returned in package response. */
 union PackageBuildState {
   string,
 
-  /**
-   * NotStarted
-   */
+  /** NotStarted */
   NotStarted: "NotStarted",
 
-  /**
-   * Running
-   */
+  /** Running */
   Running: "Running",
 
-  /**
-   * Succeeded
-   */
+  /** Succeeded */
   Succeeded: "Succeeded",
 
-  /**
-   * Failed
-   */
+  /** Failed */
   Failed: "Failed",
 }
 
-/**
- * State of endpoint provisioning.
- */
+/** State of endpoint provisioning. */
 union EndpointProvisioningState {
   string,
 
-  /**
-   * Creating
-   */
+  /** Creating */
   Creating: "Creating",
 
-  /**
-   * Deleting
-   */
+  /** Deleting */
   Deleting: "Deleting",
 
-  /**
-   * Succeeded
-   */
+  /** Succeeded */
   Succeeded: "Succeeded",
 
-  /**
-   * Failed
-   */
+  /** Failed */
   Failed: "Failed",
 
-  /**
-   * Updating
-   */
+  /** Updating */
   Updating: "Updating",
 
-  /**
-   * Canceled
-   */
+  /** Canceled */
   Canceled: "Canceled",
 }
 
-/**
- * Enum to determine endpoint authentication mode.
- */
+/** Enum to determine endpoint authentication mode. */
 union EndpointAuthMode {
   string,
 
-  /**
-   * AMLToken
-   */
+  /** AMLToken */
   AMLToken: "AMLToken",
 
-  /**
-   * Key
-   */
+  /** Key */
   Key: "Key",
 
-  /**
-   * AADToken
-   */
+  /** AADToken */
   AADToken: "AADToken",
 }
 
-/**
- * The enumerated property types for batch deployments.
- */
+/** The enumerated property types for batch deployments. */
 union BatchDeploymentConfigurationType {
   string,
 
-  /**
-   * Model
-   */
+  /** Model */
   Model: "Model",
 
-  /**
-   * PipelineComponent
-   */
+  /** PipelineComponent */
   PipelineComponent: "PipelineComponent",
 }
 
@@ -798,216 +518,136 @@ union BatchDeploymentConfigurationType {
 union BatchLoggingLevel {
   string,
 
-  /**
-   * Info
-   */
+  /** Info */
   Info: "Info",
 
-  /**
-   * Warning
-   */
+  /** Warning */
   Warning: "Warning",
 
-  /**
-   * Debug
-   */
+  /** Debug */
   Debug: "Debug",
 }
 
-/**
- * Enum to determine which reference method to use for an asset.
- */
+/** Enum to determine which reference method to use for an asset. */
 union ReferenceType {
   string,
 
-  /**
-   * Id
-   */
+  /** Id */
   Id: "Id",
 
-  /**
-   * DataPath
-   */
+  /** DataPath */
   DataPath: "DataPath",
 
-  /**
-   * OutputPath
-   */
+  /** OutputPath */
   OutputPath: "OutputPath",
 }
 
-/**
- * Enum to determine how batch inferencing will handle output
- */
+/** Enum to determine how batch inferencing will handle output */
 union BatchOutputAction {
   string,
 
-  /**
-   * SummaryOnly
-   */
+  /** SummaryOnly */
   SummaryOnly: "SummaryOnly",
 
-  /**
-   * AppendRow
-   */
+  /** AppendRow */
   AppendRow: "AppendRow",
 }
 
-/**
- * Possible values for DeploymentProvisioningState.
- */
+/** Possible values for DeploymentProvisioningState. */
 union DeploymentProvisioningState {
   string,
 
-  /**
-   * Creating
-   */
+  /** Creating */
   Creating: "Creating",
 
-  /**
-   * Deleting
-   */
+  /** Deleting */
   Deleting: "Deleting",
 
-  /**
-   * Scaling
-   */
+  /** Scaling */
   Scaling: "Scaling",
 
-  /**
-   * Updating
-   */
+  /** Updating */
   Updating: "Updating",
 
-  /**
-   * Succeeded
-   */
+  /** Succeeded */
   Succeeded: "Succeeded",
 
-  /**
-   * Failed
-   */
+  /** Failed */
   Failed: "Failed",
 
-  /**
-   * Canceled
-   */
+  /** Canceled */
   Canceled: "Canceled",
 }
 
-/**
- * Enum to determine the datastore credentials type.
- */
+/** Enum to determine the datastore credentials type. */
 union CredentialsType {
   string,
 
-  /**
-   * AccountKey
-   */
+  /** AccountKey */
   AccountKey: "AccountKey",
 
-  /**
-   * Certificate
-   */
+  /** Certificate */
   Certificate: "Certificate",
 
-  /**
-   * None
-   */
+  /** None */
   None: "None",
 
-  /**
-   * Sas
-   */
+  /** Sas */
   Sas: "Sas",
 
-  /**
-   * ServicePrincipal
-   */
+  /** ServicePrincipal */
   ServicePrincipal: "ServicePrincipal",
 
-  /**
-   * KerberosKeytab
-   */
+  /** KerberosKeytab */
   KerberosKeytab: "KerberosKeytab",
 
-  /**
-   * KerberosPassword
-   */
+  /** KerberosPassword */
   KerberosPassword: "KerberosPassword",
 }
 
-/**
- * Enum to determine the datastore contents type.
- */
+/** Enum to determine the datastore contents type. */
 union DatastoreType {
   string,
 
-  /**
-   * AzureBlob
-   */
+  /** AzureBlob */
   AzureBlob: "AzureBlob",
 
-  /**
-   * AzureDataLakeGen1
-   */
+  /** AzureDataLakeGen1 */
   AzureDataLakeGen1: "AzureDataLakeGen1",
 
-  /**
-   * AzureDataLakeGen2
-   */
+  /** AzureDataLakeGen2 */
   AzureDataLakeGen2: "AzureDataLakeGen2",
 
-  /**
-   * AzureFile
-   */
+  /** AzureFile */
   AzureFile: "AzureFile",
 
-  /**
-   * Hdfs
-   */
+  /** Hdfs */
   Hdfs: "Hdfs",
 
-  /**
-   * OneLake
-   */
+  /** OneLake */
   OneLake: "OneLake",
 }
 
-/**
- * Enum to determine the datastore secrets type.
- */
+/** Enum to determine the datastore secrets type. */
 union SecretsType {
   string,
 
-  /**
-   * AccountKey
-   */
+  /** AccountKey */
   AccountKey: "AccountKey",
 
-  /**
-   * Certificate
-   */
+  /** Certificate */
   Certificate: "Certificate",
 
-  /**
-   * Sas
-   */
+  /** Sas */
   Sas: "Sas",
 
-  /**
-   * ServicePrincipal
-   */
+  /** ServicePrincipal */
   ServicePrincipal: "ServicePrincipal",
 
-  /**
-   * KerberosPassword
-   */
+  /** KerberosPassword */
   KerberosPassword: "KerberosPassword",
 
-  /**
-   * KerberosKeytab
-   */
+  /** KerberosKeytab */
   KerberosKeytab: "KerberosKeytab",
 }
 
@@ -1015,152 +655,96 @@ union SecretsType {
 union FeatureDataType {
   string,
 
-  /**
-   * String
-   */
+  /** String */
   String: "String",
 
-  /**
-   * Integer
-   */
+  /** Integer */
   Integer: "Integer",
 
-  /**
-   * Long
-   */
+  /** Long */
   Long: "Long",
 
-  /**
-   * Float
-   */
+  /** Float */
   Float: "Float",
 
-  /**
-   * Double
-   */
+  /** Double */
   Double: "Double",
 
-  /**
-   * Binary
-   */
+  /** Binary */
   Binary: "Binary",
 
-  /**
-   * Datetime
-   */
+  /** Datetime */
   Datetime: "Datetime",
 
-  /**
-   * Boolean
-   */
+  /** Boolean */
   Boolean: "Boolean",
 }
 
-/**
- * Enum to determine the email notification type.
- */
+/** Enum to determine the email notification type. */
 union EmailNotificationEnableType {
   string,
 
-  /**
-   * JobCompleted
-   */
+  /** JobCompleted */
   JobCompleted: "JobCompleted",
 
-  /**
-   * JobFailed
-   */
+  /** JobFailed */
   JobFailed: "JobFailed",
 
-  /**
-   * JobCancelled
-   */
+  /** JobCancelled */
   JobCancelled: "JobCancelled",
 }
 
-/**
- * Enum to determine the webhook callback service type.
- */
+/** Enum to determine the webhook callback service type. */
 union WebhookType {
   string,
 
-  /**
-   * AzureDevOps
-   */
+  /** AzureDevOps */
   AzureDevOps: "AzureDevOps",
 }
 
-/**
- * Enum to describe the frequency of a recurrence schedule
- */
+/** Enum to describe the frequency of a recurrence schedule */
 union RecurrenceFrequency {
   string,
 
-  /**
-   * Minute frequency
-   */
+  /** Minute frequency */
   Minute: "Minute",
 
-  /**
-   * Hour frequency
-   */
+  /** Hour frequency */
   Hour: "Hour",
 
-  /**
-   * Day frequency
-   */
+  /** Day frequency */
   Day: "Day",
 
-  /**
-   * Week frequency
-   */
+  /** Week frequency */
   Week: "Week",
 
-  /**
-   * Month frequency
-   */
+  /** Month frequency */
   Month: "Month",
 }
 
-/**
- * Enum of weekday
- */
+/** Enum of weekday */
 union WeekDay {
   string,
 
-  /**
-   * Monday weekday
-   */
+  /** Monday weekday */
   Monday: "Monday",
 
-  /**
-   * Tuesday weekday
-   */
+  /** Tuesday weekday */
   Tuesday: "Tuesday",
 
-  /**
-   * Wednesday weekday
-   */
+  /** Wednesday weekday */
   Wednesday: "Wednesday",
 
-  /**
-   * Thursday weekday
-   */
+  /** Thursday weekday */
   Thursday: "Thursday",
 
-  /**
-   * Friday weekday
-   */
+  /** Friday weekday */
   Friday: "Friday",
 
-  /**
-   * Saturday weekday
-   */
+  /** Saturday weekday */
   Saturday: "Saturday",
 
-  /**
-   * Sunday weekday
-   */
+  /** Sunday weekday */
   Sunday: "Sunday",
 }
 
@@ -1168,14 +752,10 @@ union WeekDay {
 union TriggerType {
   string,
 
-  /**
-   * Recurrence
-   */
+  /** Recurrence */
   Recurrence: "Recurrence",
 
-  /**
-   * Cron
-   */
+  /** Cron */
   Cron: "Cron",
 }
 
@@ -1183,86 +763,54 @@ union TriggerType {
 union MaterializationStoreType {
   string,
 
-  /**
-   * None
-   */
+  /** None */
   None: "None",
 
-  /**
-   * Online
-   */
+  /** Online */
   Online: "Online",
 
-  /**
-   * Offline
-   */
+  /** Offline */
   Offline: "Offline",
 
-  /**
-   * OnlineAndOffline
-   */
+  /** OnlineAndOffline */
   OnlineAndOffline: "OnlineAndOffline",
 }
 
-/**
- * The status of a job.
- */
+/** The status of a job. */
 union JobStatus {
   string,
 
-  /**
-   * Run hasn't started yet.
-   */
+  /** Run hasn't started yet. */
   NotStarted: "NotStarted",
 
-  /**
-   * Run has started. The user has a run ID.
-   */
+  /** Run has started. The user has a run ID. */
   Starting: "Starting",
 
-  /**
-   * (Not used currently) It will be used if ES is creating the compute target.
-   */
+  /** (Not used currently) It will be used if ES is creating the compute target. */
   Provisioning: "Provisioning",
 
-  /**
-   * The run environment is being prepared.
-   */
+  /** The run environment is being prepared. */
   Preparing: "Preparing",
 
-  /**
-   * The job is queued in the compute target. For example, in BatchAI the job is in queued state, while waiting for all required nodes to be ready.
-   */
+  /** The job is queued in the compute target. For example, in BatchAI the job is in queued state, while waiting for all required nodes to be ready. */
   Queued: "Queued",
 
-  /**
-   * The job started to run in the compute target.
-   */
+  /** The job started to run in the compute target. */
   Running: "Running",
 
-  /**
-   * Job is completed in the target. It is in output collection state now.
-   */
+  /** Job is completed in the target. It is in output collection state now. */
   Finalizing: "Finalizing",
 
-  /**
-   * Cancellation has been requested for the job.
-   */
+  /** Cancellation has been requested for the job. */
   CancelRequested: "CancelRequested",
 
-  /**
-   * Job completed successfully. This reflects that both the job itself and output collection states completed successfully
-   */
+  /** Job completed successfully. This reflects that both the job itself and output collection states completed successfully */
   Completed: "Completed",
 
-  /**
-   * Job failed.
-   */
+  /** Job failed. */
   Failed: "Failed",
 
-  /**
-   * Following cancellation request, the job is now successfully canceled.
-   */
+  /** Following cancellation request, the job is now successfully canceled. */
   Canceled: "Canceled",
 
   /**
@@ -1271,19 +819,13 @@ union JobStatus {
    */
   NotResponding: "NotResponding",
 
-  /**
-   * The job is paused by users. Some adjustment to labeling jobs can be made only in paused state.
-   */
+  /** The job is paused by users. Some adjustment to labeling jobs can be made only in paused state. */
   Paused: "Paused",
 
-  /**
-   * Default job status if not mapped to all other statuses
-   */
+  /** Default job status if not mapped to all other statuses */
   Unknown: "Unknown",
 
-  /**
-   * The job is in a scheduled state. Job is not in any active state.
-   */
+  /** The job is in a scheduled state. Job is not in any active state. */
   Scheduled: "Scheduled",
 }
 
@@ -1291,141 +833,91 @@ union JobStatus {
 union FeaturestoreJobType {
   string,
 
-  /**
-   * RecurrentMaterialization
-   */
+  /** RecurrentMaterialization */
   RecurrentMaterialization: "RecurrentMaterialization",
 
-  /**
-   * BackfillMaterialization
-   */
+  /** BackfillMaterialization */
   BackfillMaterialization: "BackfillMaterialization",
 }
 
-/**
- * Enum to determine identity framework.
- */
+/** Enum to determine identity framework. */
 union IdentityConfigurationType {
   string,
 
-  /**
-   * Managed
-   */
+  /** Managed */
   Managed: "Managed",
 
-  /**
-   * AMLToken
-   */
+  /** AMLToken */
   AMLToken: "AMLToken",
 
-  /**
-   * UserIdentity
-   */
+  /** UserIdentity */
   UserIdentity: "UserIdentity",
 }
 
-/**
- * Enum to determine the type of job.
- */
+/** Enum to determine the type of job. */
 union JobType {
   string,
 
-  /**
-   * AutoML
-   */
+  /** AutoML */
   AutoML: "AutoML",
 
-  /**
-   * Command
-   */
+  /** Command */
   Command: "Command",
 
-  /**
-   * Labeling
-   */
+  /** Labeling */
   Labeling: "Labeling",
 
-  /**
-   * Sweep
-   */
+  /** Sweep */
   Sweep: "Sweep",
 
-  /**
-   * Pipeline
-   */
+  /** Pipeline */
   Pipeline: "Pipeline",
 
-  /**
-   * Spark
-   */
+  /** Spark */
   Spark: "Spark",
 }
 
-/**
- * The enumerated types for the nodes value
- */
+/** The enumerated types for the nodes value */
 union NodesValueType {
   string,
 
-  /**
-   * All
-   */
+  /** All */
   All: "All",
 
-  /**
-   * Custom
-   */
+  /** Custom */
   Custom: "Custom",
 }
 
-/**
- * Whether IncrementalDataRefresh is enabled
- */
+/** Whether IncrementalDataRefresh is enabled */
 union IncrementalDataRefresh {
   string,
 
-  /**
-   * Enabled
-   */
+  /** Enabled */
   Enabled: "Enabled",
 
-  /**
-   * Disabled
-   */
+  /** Disabled */
   Disabled: "Disabled",
 }
 
-/**
- * Whether multiSelect is enabled
- */
+/** Whether multiSelect is enabled */
 union MultiSelect {
   string,
 
-  /**
-   * Enabled
-   */
+  /** Enabled */
   Enabled: "Enabled",
 
-  /**
-   * Disabled
-   */
+  /** Disabled */
   Disabled: "Disabled",
 }
 
-/**
- * Media type of data asset.
- */
+/** Media type of data asset. */
 union MediaType {
   string,
 
-  /**
-   * Image
-   */
+  /** Image */
   Image: "Image",
 
-  /**
-   * Text
-   */
+  /** Text */
   Text: "Text",
 }
 
@@ -1433,41 +925,27 @@ union MediaType {
 union MLAssistConfigurationType {
   string,
 
-  /**
-   * Enabled
-   */
+  /** Enabled */
   Enabled: "Enabled",
 
-  /**
-   * Disabled
-   */
+  /** Disabled */
   Disabled: "Disabled",
 }
 
-/**
- * Enum to determine the job provisioning state.
- */
+/** Enum to determine the job provisioning state. */
 union JobProvisioningState {
   string,
 
-  /**
-   * Succeeded
-   */
+  /** Succeeded */
   Succeeded: "Succeeded",
 
-  /**
-   * Failed
-   */
+  /** Failed */
   Failed: "Failed",
 
-  /**
-   * Canceled
-   */
+  /** Canceled */
   Canceled: "Canceled",
 
-  /**
-   * InProgress
-   */
+  /** InProgress */
   InProgress: "InProgress",
 }
 
@@ -1475,63 +953,41 @@ union JobProvisioningState {
 union StatusMessageLevel {
   string,
 
-  /**
-   * Error
-   */
+  /** Error */
   Error: "Error",
 
-  /**
-   * Information
-   */
+  /** Information */
   Information: "Information",
 
-  /**
-   * Warning
-   */
+  /** Warning */
   Warning: "Warning",
 }
 
-/**
- * The format of exported labels.
- */
+/** The format of exported labels. */
 union ExportFormatType {
   string,
 
-  /**
-   * Dataset
-   */
+  /** Dataset */
   Dataset: "Dataset",
 
-  /**
-   * Coco
-   */
+  /** Coco */
   Coco: "Coco",
 
-  /**
-   * CSV
-   */
+  /** CSV */
   CSV: "CSV",
 }
 
-/**
- * Enum to determine endpoint compute type.
- */
+/** Enum to determine endpoint compute type. */
 union EndpointComputeType {
   string,
 
-  /**
-   * Managed
-   */
+  /** Managed */
   Managed: "Managed",
 
-  /**
-   * Kubernetes
-   */
+  /** Kubernetes */
   Kubernetes: "Kubernetes",
 
-  /**
-   * AzureMLCompute
-   */
+  /** AzureMLCompute */
   AzureMLCompute: "AzureMLCompute",
 }
 
@@ -1539,41 +995,27 @@ union EndpointComputeType {
 union OrderString {
   string,
 
-  /**
-   * CreatedAtDesc
-   */
+  /** CreatedAtDesc */
   CreatedAtDesc: "CreatedAtDesc",
 
-  /**
-   * CreatedAtAsc
-   */
+  /** CreatedAtAsc */
   CreatedAtAsc: "CreatedAtAsc",
 
-  /**
-   * UpdatedAtDesc
-   */
+  /** UpdatedAtDesc */
   UpdatedAtDesc: "UpdatedAtDesc",
 
-  /**
-   * UpdatedAtAsc
-   */
+  /** UpdatedAtAsc */
   UpdatedAtAsc: "UpdatedAtAsc",
 }
 
-/**
- * Enum to determine whether PublicNetworkAccess is Enabled or Disabled.
- */
+/** Enum to determine whether PublicNetworkAccess is Enabled or Disabled. */
 union PublicNetworkAccessType {
   string,
 
-  /**
-   * Enabled
-   */
+  /** Enabled */
   Enabled: "Enabled",
 
-  /**
-   * Disabled
-   */
+  /** Disabled */
   Disabled: "Disabled",
 }
 
@@ -1581,14 +1023,10 @@ union PublicNetworkAccessType {
 union DataCollectionMode {
   string,
 
-  /**
-   * Enabled
-   */
+  /** Enabled */
   Enabled: "Enabled",
 
-  /**
-   * Disabled
-   */
+  /** Disabled */
   Disabled: "Disabled",
 }
 
@@ -1596,46 +1034,30 @@ union DataCollectionMode {
 union RollingRateType {
   string,
 
-  /**
-   * Year
-   */
+  /** Year */
   Year: "Year",
 
-  /**
-   * Month
-   */
+  /** Month */
   Month: "Month",
 
-  /**
-   * Day
-   */
+  /** Day */
   Day: "Day",
 
-  /**
-   * Hour
-   */
+  /** Hour */
   Hour: "Hour",
 
-  /**
-   * Minute
-   */
+  /** Minute */
   Minute: "Minute",
 }
 
-/**
- * Enum to determine whether PublicNetworkAccess is Enabled or Disabled for egress of a deployment.
- */
+/** Enum to determine whether PublicNetworkAccess is Enabled or Disabled for egress of a deployment. */
 union EgressPublicNetworkAccessType {
   string,
 
-  /**
-   * Enabled
-   */
+  /** Enabled */
   Enabled: "Enabled",
 
-  /**
-   * Disabled
-   */
+  /** Disabled */
   Disabled: "Disabled",
 }
 
@@ -1643,58 +1065,38 @@ union EgressPublicNetworkAccessType {
 union ScaleType {
   string,
 
-  /**
-   * Default
-   */
+  /** Default */
   Default: "Default",
 
-  /**
-   * TargetUtilization
-   */
+  /** TargetUtilization */
   TargetUtilization: "TargetUtilization",
 }
 
-/**
- * The type of container to retrieve logs from.
- */
+/** The type of container to retrieve logs from. */
 union ContainerType {
   string,
 
-  /**
-   * The container used to download models and score script.
-   */
+  /** The container used to download models and score script. */
   StorageInitializer: "StorageInitializer",
 
-  /**
-   * The container used to serve user's request.
-   */
+  /** The container used to serve user's request. */
   InferenceServer: "InferenceServer",
 
-  /**
-   * The container used to collect payload and custom logging when mdc is enabled.
-   */
+  /** The container used to collect payload and custom logging when mdc is enabled. */
   ModelDataCollector: "ModelDataCollector",
 }
 
-/**
- * Node scaling setting for the compute sku.
- */
+/** Node scaling setting for the compute sku. */
 union SkuScaleType {
   string,
 
-  /**
-   * Automatically scales node count.
-   */
+  /** Automatically scales node count. */
   Automatic: "Automatic",
 
-  /**
-   * Node count scaled upon user request.
-   */
+  /** Node count scaled upon user request. */
   Manual: "Manual",
 
-  /**
-   * Fixed set of nodes.
-   */
+  /** Fixed set of nodes. */
   None: "None",
 }
 
@@ -1702,14 +1104,10 @@ union SkuScaleType {
 union KeyType {
   string,
 
-  /**
-   * Primary
-   */
+  /** Primary */
   Primary: "Primary",
 
-  /**
-   * Secondary
-   */
+  /** Secondary */
   Secondary: "Secondary",
 }
 
@@ -1717,19 +1115,13 @@ union KeyType {
 union ScheduleListViewType {
   string,
 
-  /**
-   * EnabledOnly
-   */
+  /** EnabledOnly */
   EnabledOnly: "EnabledOnly",
 
-  /**
-   * DisabledOnly
-   */
+  /** DisabledOnly */
   DisabledOnly: "DisabledOnly",
 
-  /**
-   * All
-   */
+  /** All */
   All: "All",
 }
 
@@ -1737,24 +1129,16 @@ union ScheduleListViewType {
 union ScheduleActionType {
   string,
 
-  /**
-   * CreateJob
-   */
+  /** CreateJob */
   CreateJob: "CreateJob",
 
-  /**
-   * InvokeBatchEndpoint
-   */
+  /** InvokeBatchEndpoint */
   InvokeBatchEndpoint: "InvokeBatchEndpoint",
 
-  /**
-   * ImportData
-   */
+  /** ImportData */
   ImportData: "ImportData",
 
-  /**
-   * CreateMonitor
-   */
+  /** CreateMonitor */
   CreateMonitor: "CreateMonitor",
 }
 
@@ -1762,989 +1146,625 @@ union ScheduleActionType {
 union ScheduleProvisioningStatus {
   string,
 
-  /**
-   * Creating
-   */
+  /** Creating */
   Creating: "Creating",
 
-  /**
-   * Updating
-   */
+  /** Updating */
   Updating: "Updating",
 
-  /**
-   * Deleting
-   */
+  /** Deleting */
   Deleting: "Deleting",
 
-  /**
-   * Succeeded
-   */
+  /** Succeeded */
   Succeeded: "Succeeded",
 
-  /**
-   * Failed
-   */
+  /** Failed */
   Failed: "Failed",
 
-  /**
-   * Canceled
-   */
+  /** Canceled */
   Canceled: "Canceled",
 }
 
-/**
- * Connection status of the service consumer with the service provider
- */
+/** Connection status of the service consumer with the service provider */
 union EndpointServiceConnectionStatus {
   string,
 
-  /**
-   * Approved
-   */
+  /** Approved */
   Approved: "Approved",
 
-  /**
-   * Pending
-   */
+  /** Pending */
   Pending: "Pending",
 
-  /**
-   * Rejected
-   */
+  /** Rejected */
   Rejected: "Rejected",
 
-  /**
-   * Disconnected
-   */
+  /** Disconnected */
   Disconnected: "Disconnected",
 
-  /**
-   * Timeout
-   */
+  /** Timeout */
   Timeout: "Timeout",
 }
 
-/**
- * Indicates whether or not the encryption is enabled for the workspace.
- */
+/** Indicates whether or not the encryption is enabled for the workspace. */
 union EncryptionStatus {
   string,
 
-  /**
-   * Enabled
-   */
+  /** Enabled */
   Enabled: "Enabled",
 
-  /**
-   * Disabled
-   */
+  /** Disabled */
   Disabled: "Disabled",
 }
 
-/**
- * Isolation mode for the managed network of a machine learning workspace.
- */
+/** Isolation mode for the managed network of a machine learning workspace. */
 union IsolationMode {
   string,
 
-  /**
-   * Disabled
-   */
+  /** Disabled */
   Disabled: "Disabled",
 
-  /**
-   * AllowInternetOutbound
-   */
+  /** AllowInternetOutbound */
   AllowInternetOutbound: "AllowInternetOutbound",
 
-  /**
-   * AllowOnlyApprovedOutbound
-   */
+  /** AllowOnlyApprovedOutbound */
   AllowOnlyApprovedOutbound: "AllowOnlyApprovedOutbound",
 }
 
-/**
- * Category of a managed network Outbound Rule of a machine learning workspace.
- */
+/** Category of a managed network Outbound Rule of a machine learning workspace. */
 union RuleCategory {
   string,
 
-  /**
-   * Required
-   */
+  /** Required */
   Required: "Required",
 
-  /**
-   * Recommended
-   */
+  /** Recommended */
   Recommended: "Recommended",
 
-  /**
-   * UserDefined
-   */
+  /** UserDefined */
   UserDefined: "UserDefined",
 }
 
-/**
- * Type of a managed network Outbound Rule of a machine learning workspace.
- */
+/** Type of a managed network Outbound Rule of a machine learning workspace. */
 union RuleStatus {
   string,
 
-  /**
-   * Inactive
-   */
+  /** Inactive */
   Inactive: "Inactive",
 
-  /**
-   * Active
-   */
+  /** Active */
   Active: "Active",
 }
 
-/**
- * Type of a managed network Outbound Rule of a machine learning workspace.
- */
+/** Type of a managed network Outbound Rule of a machine learning workspace. */
 union RuleType {
   string,
 
-  /**
-   * FQDN
-   */
+  /** FQDN */
   FQDN: "FQDN",
 
-  /**
-   * PrivateEndpoint
-   */
+  /** PrivateEndpoint */
   PrivateEndpoint: "PrivateEndpoint",
 
-  /**
-   * ServiceTag
-   */
+  /** ServiceTag */
   ServiceTag: "ServiceTag",
 }
 
-/**
- * Status for the managed network of a machine learning workspace.
- */
+/** Status for the managed network of a machine learning workspace. */
 union ManagedNetworkStatus {
   string,
 
-  /**
-   * Inactive
-   */
+  /** Inactive */
   Inactive: "Inactive",
 
-  /**
-   * Active
-   */
+  /** Active */
   Active: "Active",
 }
 
-/**
- * The current provisioning state.
- */
+/** The current provisioning state. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 union PrivateEndpointConnectionProvisioningState {
   string,
 
-  /**
-   * Succeeded
-   */
+  /** Succeeded */
   Succeeded: "Succeeded",
 
-  /**
-   * Creating
-   */
+  /** Creating */
   Creating: "Creating",
 
-  /**
-   * Deleting
-   */
+  /** Deleting */
   Deleting: "Deleting",
 
-  /**
-   * Failed
-   */
+  /** Failed */
   Failed: "Failed",
 }
 
-/**
- * Authentication type of the connection target
- */
+/** Authentication type of the connection target */
 union ConnectionAuthType {
   string,
 
-  /**
-   * PAT
-   */
+  /** PAT */
   PAT: "PAT",
 
-  /**
-   * ManagedIdentity
-   */
+  /** ManagedIdentity */
   ManagedIdentity: "ManagedIdentity",
 
-  /**
-   * UsernamePassword
-   */
+  /** UsernamePassword */
   UsernamePassword: "UsernamePassword",
 
-  /**
-   * None
-   */
+  /** None */
   None: "None",
 
-  /**
-   * SAS
-   */
+  /** SAS */
   SAS: "SAS",
 
-  /**
-   * ServicePrincipal
-   */
+  /** ServicePrincipal */
   ServicePrincipal: "ServicePrincipal",
 
-  /**
-   * AccessKey
-   */
+  /** AccessKey */
   AccessKey: "AccessKey",
 
-  /**
-   * ApiKey
-   */
+  /** ApiKey */
   ApiKey: "ApiKey",
 
-  /**
-   * CustomKeys
-   */
+  /** CustomKeys */
   CustomKeys: "CustomKeys",
 }
 
-/**
- * Category of the connection
- */
+/** Category of the connection */
 union ConnectionCategory {
   string,
 
-  /**
-   * PythonFeed
-   */
+  /** PythonFeed */
   PythonFeed: "PythonFeed",
 
-  /**
-   * ContainerRegistry
-   */
+  /** ContainerRegistry */
   ContainerRegistry: "ContainerRegistry",
 
-  /**
-   * Git
-   */
+  /** Git */
   Git: "Git",
 
-  /**
-   * S3
-   */
+  /** S3 */
   S3: "S3",
 
-  /**
-   * Snowflake
-   */
+  /** Snowflake */
   Snowflake: "Snowflake",
 
-  /**
-   * AzureSqlDb
-   */
+  /** AzureSqlDb */
   AzureSqlDb: "AzureSqlDb",
 
-  /**
-   * AzureSynapseAnalytics
-   */
+  /** AzureSynapseAnalytics */
   AzureSynapseAnalytics: "AzureSynapseAnalytics",
 
-  /**
-   * AzureMySqlDb
-   */
+  /** AzureMySqlDb */
   AzureMySqlDb: "AzureMySqlDb",
 
-  /**
-   * AzurePostgresDb
-   */
+  /** AzurePostgresDb */
   AzurePostgresDb: "AzurePostgresDb",
 
-  /**
-   * ADLSGen2
-   */
+  /** ADLSGen2 */
   ADLSGen2: "ADLSGen2",
 
-  /**
-   * Redis
-   */
+  /** Redis */
   Redis: "Redis",
 
-  /**
-   * ApiKey
-   */
+  /** ApiKey */
   ApiKey: "ApiKey",
 
-  /**
-   * AzureOpenAI
-   */
+  /** AzureOpenAI */
   AzureOpenAI: "AzureOpenAI",
 
-  /**
-   * CognitiveSearch
-   */
+  /** CognitiveSearch */
   CognitiveSearch: "CognitiveSearch",
 
-  /**
-   * CognitiveService
-   */
+  /** CognitiveService */
   CognitiveService: "CognitiveService",
 
-  /**
-   * CustomKeys
-   */
+  /** CustomKeys */
   CustomKeys: "CustomKeys",
 }
 
-/**
- * Level of workspace setup error
- */
+/** Level of workspace setup error */
 union DiagnoseResultLevel {
   string,
 
-  /**
-   * Warning
-   */
+  /** Warning */
   Warning: "Warning",
 
-  /**
-   * Error
-   */
+  /** Error */
   Error: "Error",
 
-  /**
-   * Information
-   */
+  /** Information */
   Information: "Information",
 }
 
-/**
- * Intended usage of the cluster
- */
+/** Intended usage of the cluster */
 union ClusterPurpose {
   string,
 
-  /**
-   * FastProd
-   */
+  /** FastProd */
   FastProd: "FastProd",
 
-  /**
-   * DenseProd
-   */
+  /** DenseProd */
   DenseProd: "DenseProd",
 
-  /**
-   * DevTest
-   */
+  /** DevTest */
   DevTest: "DevTest",
 }
 
-/**
- * Enable or disable ssl for scoring
- */
+/** Enable or disable ssl for scoring */
 union SslConfigStatus {
   string,
 
-  /**
-   * Disabled
-   */
+  /** Disabled */
   Disabled: "Disabled",
 
-  /**
-   * Enabled
-   */
+  /** Enabled */
   Enabled: "Enabled",
 
-  /**
-   * Auto
-   */
+  /** Auto */
   Auto: "Auto",
 }
 
-/**
- * Load Balancer Type
- */
+/** Load Balancer Type */
 union LoadBalancerType {
   string,
 
-  /**
-   * PublicIp
-   */
+  /** PublicIp */
   PublicIp: "PublicIp",
 
-  /**
-   * InternalLoadBalancer
-   */
+  /** InternalLoadBalancer */
   InternalLoadBalancer: "InternalLoadBalancer",
 }
 
-/**
- * Compute OS Type
- */
+/** Compute OS Type */
 union OsType {
   string,
 
-  /**
-   * Linux
-   */
+  /** Linux */
   Linux: "Linux",
 
-  /**
-   * Windows
-   */
+  /** Windows */
   Windows: "Windows",
 }
 
-/**
- * Virtual Machine priority
- */
+/** Virtual Machine priority */
 union VmPriority {
   string,
 
-  /**
-   * Dedicated
-   */
+  /** Dedicated */
   Dedicated: "Dedicated",
 
-  /**
-   * LowPriority
-   */
+  /** LowPriority */
   LowPriority: "LowPriority",
 }
 
-/**
- * State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on all nodes of the cluster. Enabled - Indicates that the public ssh port is open on all nodes of the cluster. NotSpecified - Indicates that the public ssh port is closed on all nodes of the cluster if VNet is defined, else is open all public nodes. It can be default only during cluster creation time, after creation it will be either enabled or disabled.
- */
+/** State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on all nodes of the cluster. Enabled - Indicates that the public ssh port is open on all nodes of the cluster. NotSpecified - Indicates that the public ssh port is closed on all nodes of the cluster if VNet is defined, else is open all public nodes. It can be default only during cluster creation time, after creation it will be either enabled or disabled. */
 union RemoteLoginPortPublicAccess {
   string,
 
-  /**
-   * Enabled
-   */
+  /** Enabled */
   Enabled: "Enabled",
 
-  /**
-   * Disabled
-   */
+  /** Disabled */
   Disabled: "Disabled",
 
-  /**
-   * NotSpecified
-   */
+  /** NotSpecified */
   NotSpecified: "NotSpecified",
 }
 
-/**
- * Allocation state of the compute. Possible values are: steady - Indicates that the compute is not resizing. There are no changes to the number of compute nodes in the compute in progress. A compute enters this state when it is created and when no operations are being performed on the compute to change the number of compute nodes. resizing - Indicates that the compute is resizing; that is, compute nodes are being added to or removed from the compute.
- */
+/** Allocation state of the compute. Possible values are: steady - Indicates that the compute is not resizing. There are no changes to the number of compute nodes in the compute in progress. A compute enters this state when it is created and when no operations are being performed on the compute to change the number of compute nodes. resizing - Indicates that the compute is resizing; that is, compute nodes are being added to or removed from the compute. */
 union AllocationState {
   string,
 
-  /**
-   * Steady
-   */
+  /** Steady */
   Steady: "Steady",
 
-  /**
-   * Resizing
-   */
+  /** Resizing */
   Resizing: "Resizing",
 }
 
-/**
- * Policy for sharing applications on this compute instance among users of parent workspace. If Personal, only the creator can access applications on this compute instance. When Shared, any workspace user can access applications on this instance depending on his/her assigned role.
- */
+/** Policy for sharing applications on this compute instance among users of parent workspace. If Personal, only the creator can access applications on this compute instance. When Shared, any workspace user can access applications on this instance depending on his/her assigned role. */
 union ApplicationSharingPolicy {
   string,
 
-  /**
-   * Personal
-   */
+  /** Personal */
   Personal: "Personal",
 
-  /**
-   * Shared
-   */
+  /** Shared */
   Shared: "Shared",
 }
 
-/**
- * Indicates whether mlflow autologger is enabled for notebooks.
- */
+/** Indicates whether mlflow autologger is enabled for notebooks. */
 union MlflowAutologger {
   string,
 
-  /**
-   * Enabled
-   */
+  /** Enabled */
   Enabled: "Enabled",
 
-  /**
-   * Disabled
-   */
+  /** Disabled */
   Disabled: "Disabled",
 }
 
-/**
- * State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on this instance. Enabled - Indicates that the public ssh port is open and accessible according to the VNet/subnet policy if applicable.
- */
+/** State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on this instance. Enabled - Indicates that the public ssh port is open and accessible according to the VNet/subnet policy if applicable. */
 union SshPublicAccess {
   string,
 
-  /**
-   * Enabled
-   */
+  /** Enabled */
   Enabled: "Enabled",
 
-  /**
-   * Disabled
-   */
+  /** Disabled */
   Disabled: "Disabled",
 }
 
-/**
- * Current state of an ComputeInstance.
- */
+/** Current state of an ComputeInstance. */
 union ComputeInstanceState {
   string,
 
-  /**
-   * Creating
-   */
+  /** Creating */
   Creating: "Creating",
 
-  /**
-   * CreateFailed
-   */
+  /** CreateFailed */
   CreateFailed: "CreateFailed",
 
-  /**
-   * Deleting
-   */
+  /** Deleting */
   Deleting: "Deleting",
 
-  /**
-   * Running
-   */
+  /** Running */
   Running: "Running",
 
-  /**
-   * Restarting
-   */
+  /** Restarting */
   Restarting: "Restarting",
 
-  /**
-   * JobRunning
-   */
+  /** JobRunning */
   JobRunning: "JobRunning",
 
-  /**
-   * SettingUp
-   */
+  /** SettingUp */
   SettingUp: "SettingUp",
 
-  /**
-   * SetupFailed
-   */
+  /** SetupFailed */
   SetupFailed: "SetupFailed",
 
-  /**
-   * Starting
-   */
+  /** Starting */
   Starting: "Starting",
 
-  /**
-   * Stopped
-   */
+  /** Stopped */
   Stopped: "Stopped",
 
-  /**
-   * Stopping
-   */
+  /** Stopping */
   Stopping: "Stopping",
 
-  /**
-   * UserSettingUp
-   */
+  /** UserSettingUp */
   UserSettingUp: "UserSettingUp",
 
-  /**
-   * UserSetupFailed
-   */
+  /** UserSetupFailed */
   UserSetupFailed: "UserSetupFailed",
 
-  /**
-   * Unknown
-   */
+  /** Unknown */
   Unknown: "Unknown",
 
-  /**
-   * Unusable
-   */
+  /** Unusable */
   Unusable: "Unusable",
 }
 
-/**
- * The Compute Instance Authorization type. Available values are personal (default).
- */
+/** The Compute Instance Authorization type. Available values are personal (default). */
 union ComputeInstanceAuthorizationType {
   string,
 
-  /**
-   * personal
-   */
+  /** personal */
   personal: "personal",
 }
 
-/**
- * Name of the last operation.
- */
+/** Name of the last operation. */
 union OperationName {
   string,
 
-  /**
-   * Create
-   */
+  /** Create */
   Create: "Create",
 
-  /**
-   * Start
-   */
+  /** Start */
   Start: "Start",
 
-  /**
-   * Stop
-   */
+  /** Stop */
   Stop: "Stop",
 
-  /**
-   * Restart
-   */
+  /** Restart */
   Restart: "Restart",
 
-  /**
-   * Reimage
-   */
+  /** Reimage */
   Reimage: "Reimage",
 
-  /**
-   * Delete
-   */
+  /** Delete */
   Delete: "Delete",
 }
 
-/**
- * Operation status.
- */
+/** Operation status. */
 union OperationStatus {
   string,
 
-  /**
-   * InProgress
-   */
+  /** InProgress */
   InProgress: "InProgress",
 
-  /**
-   * Succeeded
-   */
+  /** Succeeded */
   Succeeded: "Succeeded",
 
-  /**
-   * CreateFailed
-   */
+  /** CreateFailed */
   CreateFailed: "CreateFailed",
 
-  /**
-   * StartFailed
-   */
+  /** StartFailed */
   StartFailed: "StartFailed",
 
-  /**
-   * StopFailed
-   */
+  /** StopFailed */
   StopFailed: "StopFailed",
 
-  /**
-   * RestartFailed
-   */
+  /** RestartFailed */
   RestartFailed: "RestartFailed",
 
-  /**
-   * ReimageFailed
-   */
+  /** ReimageFailed */
   ReimageFailed: "ReimageFailed",
 
-  /**
-   * DeleteFailed
-   */
+  /** DeleteFailed */
   DeleteFailed: "DeleteFailed",
 }
 
-/**
- * Trigger of operation.
- */
+/** Trigger of operation. */
 union OperationTrigger {
   string,
 
-  /**
-   * User
-   */
+  /** User */
   User: "User",
 
-  /**
-   * Schedule
-   */
+  /** Schedule */
   Schedule: "Schedule",
 
-  /**
-   * IdleShutdown
-   */
+  /** IdleShutdown */
   IdleShutdown: "IdleShutdown",
 }
 
-/**
- * The current deployment state of schedule.
- */
+/** The current deployment state of schedule. */
 union ProvisioningStatus {
   string,
 
-  /**
-   * Completed
-   */
+  /** Completed */
   Completed: "Completed",
 
-  /**
-   * Provisioning
-   */
+  /** Provisioning */
   Provisioning: "Provisioning",
 
-  /**
-   * Failed
-   */
+  /** Failed */
   Failed: "Failed",
 }
 
-/**
- * Is the schedule enabled or disabled?
- */
+/** Is the schedule enabled or disabled? */
 union ScheduleStatus {
   string,
 
-  /**
-   * Enabled
-   */
+  /** Enabled */
   Enabled: "Enabled",
 
-  /**
-   * Disabled
-   */
+  /** Disabled */
   Disabled: "Disabled",
 }
 
-/**
- * [Required] The compute power action.
- */
+/** [Required] The compute power action. */
 union ComputePowerAction {
   string,
 
-  /**
-   * Start
-   */
+  /** Start */
   Start: "Start",
 
-  /**
-   * Stop
-   */
+  /** Stop */
   Stop: "Stop",
 }
 
-/**
- * The current deployment state of schedule.
- */
+/** The current deployment state of schedule. */
 union ScheduleProvisioningState {
   string,
 
-  /**
-   * Completed
-   */
+  /** Completed */
   Completed: "Completed",
 
-  /**
-   * Provisioning
-   */
+  /** Provisioning */
   Provisioning: "Provisioning",
 
-  /**
-   * Failed
-   */
+  /** Failed */
   Failed: "Failed",
 }
 
-/**
- * Auto save settings.
- */
+/** Auto save settings. */
 union Autosave {
   string,
 
-  /**
-   * None
-   */
+  /** None */
   None: "None",
 
-  /**
-   * Local
-   */
+  /** Local */
   Local: "Local",
 
-  /**
-   * Remote
-   */
+  /** Remote */
   Remote: "Remote",
 }
 
-/**
- * network of this container.
- */
+/** network of this container. */
 union Network {
   string,
 
-  /**
-   * Bridge
-   */
+  /** Bridge */
   Bridge: "Bridge",
 
-  /**
-   * Host
-   */
+  /** Host */
   Host: "Host",
 }
 
-/**
- * Caching type of Data Disk.
- */
+/** Caching type of Data Disk. */
 union Caching {
   string,
 
-  /**
-   * None
-   */
+  /** None */
   None: "None",
 
-  /**
-   * ReadOnly
-   */
+  /** ReadOnly */
   ReadOnly: "ReadOnly",
 
-  /**
-   * ReadWrite
-   */
+  /** ReadWrite */
   ReadWrite: "ReadWrite",
 }
 
-/**
- * type of this storage account.
- */
+/** type of this storage account. */
 union StorageAccountType {
   string,
 
-  /**
-   * Standard_LRS
-   */
+  /** Standard_LRS */
   Standard_LRS: "Standard_LRS",
 
-  /**
-   * Premium_LRS
-   */
+  /** Premium_LRS */
   Premium_LRS: "Premium_LRS",
 }
 
-/**
- * Data source type.
- */
+/** Data source type. */
 union SourceType {
   string,
 
-  /**
-   * Dataset
-   */
+  /** Dataset */
   Dataset: "Dataset",
 
-  /**
-   * Datastore
-   */
+  /** Datastore */
   Datastore: "Datastore",
 
-  /**
-   * URI
-   */
+  /** URI */
   URI: "URI",
 }
 
-/**
- * Mount Action.
- */
+/** Mount Action. */
 union MountAction {
   string,
 
-  /**
-   * Mount
-   */
+  /** Mount */
   Mount: "Mount",
 
-  /**
-   * Unmount
-   */
+  /** Unmount */
   Unmount: "Unmount",
 }
 
-/**
- * Mount state.
- */
+/** Mount state. */
 union MountState {
   string,
 
-  /**
-   * MountRequested
-   */
+  /** MountRequested */
   MountRequested: "MountRequested",
 
-  /**
-   * Mounted
-   */
+  /** Mounted */
   Mounted: "Mounted",
 
-  /**
-   * MountFailed
-   */
+  /** MountFailed */
   MountFailed: "MountFailed",
 
-  /**
-   * UnmountRequested
-   */
+  /** UnmountRequested */
   UnmountRequested: "UnmountRequested",
 
-  /**
-   * UnmountFailed
-   */
+  /** UnmountFailed */
   UnmountFailed: "UnmountFailed",
 
-  /**
-   * Unmounted
-   */
+  /** Unmounted */
   Unmounted: "Unmounted",
 }
 
@@ -2752,224 +1772,142 @@ union MountState {
 union MonitoringFeatureFilterType {
   string,
 
-  /**
-   * Includes all features.
-   */
+  /** Includes all features. */
   AllFeatures: "AllFeatures",
 
-  /**
-   * Only includes the top contributing features, measured by feature attribution.
-   */
+  /** Only includes the top contributing features, measured by feature attribution. */
   TopNByAttribution: "TopNByAttribution",
 
-  /**
-   * Includes a user-defined subset of features.
-   */
+  /** Includes a user-defined subset of features. */
   FeatureSubset: "FeatureSubset",
 }
 
-/**
- * Monitor compute identity type enum.
- */
+/** Monitor compute identity type enum. */
 union MonitorComputeIdentityType {
   string,
 
-  /**
-   * Authenticates through user's AML token.
-   */
+  /** Authenticates through user's AML token. */
   AmlToken: "AmlToken",
 
-  /**
-   * Authenticates through a user-provided managed identity.
-   */
+  /** Authenticates through a user-provided managed identity. */
   ManagedIdentity: "ManagedIdentity",
 }
 
-/**
- * Enum to determine the input data delivery mode.
- */
+/** Enum to determine the input data delivery mode. */
 union InputDeliveryMode {
   string,
 
-  /**
-   * ReadOnlyMount
-   */
+  /** ReadOnlyMount */
   ReadOnlyMount: "ReadOnlyMount",
 
-  /**
-   * ReadWriteMount
-   */
+  /** ReadWriteMount */
   ReadWriteMount: "ReadWriteMount",
 
-  /**
-   * Download
-   */
+  /** Download */
   Download: "Download",
 
-  /**
-   * Direct
-   */
+  /** Direct */
   Direct: "Direct",
 
-  /**
-   * EvalMount
-   */
+  /** EvalMount */
   EvalMount: "EvalMount",
 
-  /**
-   * EvalDownload
-   */
+  /** EvalDownload */
   EvalDownload: "EvalDownload",
 }
 
-/**
- * Output data delivery mode enums.
- */
+/** Output data delivery mode enums. */
 union OutputDeliveryMode {
   string,
 
-  /**
-   * ReadWriteMount
-   */
+  /** ReadWriteMount */
   ReadWriteMount: "ReadWriteMount",
 
-  /**
-   * Upload
-   */
+  /** Upload */
   Upload: "Upload",
 
-  /**
-   * Direct
-   */
+  /** Direct */
   Direct: "Direct",
 }
 
-/**
- * Enum to determine forecast horizon selection mode.
- */
+/** Enum to determine forecast horizon selection mode. */
 union ForecastHorizonMode {
   string,
 
-  /**
-   * Forecast horizon to be determined automatically.
-   */
+  /** Forecast horizon to be determined automatically. */
   Auto: "Auto",
 
-  /**
-   * Use the custom forecast horizon.
-   */
+  /** Use the custom forecast horizon. */
   Custom: "Custom",
 }
 
-/**
- * Enum to determine the Job Output Type.
- */
+/** Enum to determine the Job Output Type. */
 union JobOutputType {
   string,
 
-  /**
-   * uri_file
-   */
+  /** uri_file */
   uri_file: "uri_file",
 
-  /**
-   * uri_folder
-   */
+  /** uri_folder */
   uri_folder: "uri_folder",
 
-  /**
-   * mltable
-   */
+  /** mltable */
   mltable: "mltable",
 
-  /**
-   * custom_model
-   */
+  /** custom_model */
   custom_model: "custom_model",
 
-  /**
-   * mlflow_model
-   */
+  /** mlflow_model */
   mlflow_model: "mlflow_model",
 
-  /**
-   * triton_model
-   */
+  /** triton_model */
   triton_model: "triton_model",
 }
 
-/**
- * Enum to determine the job tier.
- */
+/** Enum to determine the job tier. */
 union JobTier {
   string,
 
-  /**
-   * Null
-   */
+  /** Null */
   Null: "Null",
 
-  /**
-   * Spot
-   */
+  /** Spot */
   Spot: "Spot",
 
-  /**
-   * Basic
-   */
+  /** Basic */
   Basic: "Basic",
 
-  /**
-   * Standard
-   */
+  /** Standard */
   Standard: "Standard",
 
-  /**
-   * Premium
-   */
+  /** Premium */
   Premium: "Premium",
 }
 
-/**
- * Enum for setting log verbosity.
- */
+/** Enum for setting log verbosity. */
 union LogVerbosity {
   string,
 
-  /**
-   * No logs emitted.
-   */
+  /** No logs emitted. */
   NotSet: "NotSet",
 
-  /**
-   * Debug and above log statements logged.
-   */
+  /** Debug and above log statements logged. */
   Debug: "Debug",
 
-  /**
-   * Info and above log statements logged.
-   */
+  /** Info and above log statements logged. */
   Info: "Info",
 
-  /**
-   * Warning and above log statements logged.
-   */
+  /** Warning and above log statements logged. */
   Warning: "Warning",
 
-  /**
-   * Error and above log statements logged.
-   */
+  /** Error and above log statements logged. */
   Error: "Error",
 
-  /**
-   * Only critical statements logged.
-   */
+  /** Only critical statements logged. */
   Critical: "Critical",
 }
 
-/**
- * AutoMLJob Task type.
- */
+/** AutoMLJob Task type. */
 union TaskType {
   string,
 
@@ -2979,9 +1917,7 @@ union TaskType {
    */
   Classification: "Classification",
 
-  /**
-   * Regression means to predict the value using the input data. Regression models are used to predict a continuous value.
-   */
+  /** Regression means to predict the value using the input data. Regression models are used to predict a continuous value. */
   Regression: "Regression",
 
   /**
@@ -3020,9 +1956,7 @@ union TaskType {
    */
   TextClassification: "TextClassification",
 
-  /**
-   * Multilabel classification task assigns each sample to a group (zero or more) of target labels.
-   */
+  /** Multilabel classification task assigns each sample to a group (zero or more) of target labels. */
   TextClassificationMultilabel: "TextClassificationMultilabel",
 
   /**
@@ -3032,130 +1966,84 @@ union TaskType {
   TextNER: "TextNER",
 }
 
-/**
- * Enum to determine the Job Input Type.
- */
+/** Enum to determine the Job Input Type. */
 union JobInputType {
   string,
 
-  /**
-   * literal
-   */
+  /** literal */
   literal: "literal",
 
-  /**
-   * uri_file
-   */
+  /** uri_file */
   uri_file: "uri_file",
 
-  /**
-   * uri_folder
-   */
+  /** uri_folder */
   uri_folder: "uri_folder",
 
-  /**
-   * mltable
-   */
+  /** mltable */
   mltable: "mltable",
 
-  /**
-   * custom_model
-   */
+  /** custom_model */
   custom_model: "custom_model",
 
-  /**
-   * mlflow_model
-   */
+  /** mlflow_model */
   mlflow_model: "mlflow_model",
 
-  /**
-   * triton_model
-   */
+  /** triton_model */
   triton_model: "triton_model",
 }
 
-/**
- * Determines how N-Cross validations value is determined.
- */
+/** Determines how N-Cross validations value is determined. */
 union NCrossValidationsMode {
   string,
 
-  /**
-   * Determine N-Cross validations value automatically. Supported only for 'Forecasting' AutoML task.
-   */
+  /** Determine N-Cross validations value automatically. Supported only for 'Forecasting' AutoML task. */
   Auto: "Auto",
 
-  /**
-   * Use custom N-Cross validations value.
-   */
+  /** Use custom N-Cross validations value. */
   Custom: "Custom",
 }
 
-/**
- * Forecasting seasonality mode.
- */
+/** Forecasting seasonality mode. */
 union SeasonalityMode {
   string,
 
-  /**
-   * Seasonality to be determined automatically.
-   */
+  /** Seasonality to be determined automatically. */
   Auto: "Auto",
 
-  /**
-   * Use the custom seasonality value.
-   */
+  /** Use the custom seasonality value. */
   Custom: "Custom",
 }
 
-/**
- * Target lags selection modes.
- */
+/** Target lags selection modes. */
 union TargetLagsMode {
   string,
 
-  /**
-   * Target lags to be determined automatically.
-   */
+  /** Target lags to be determined automatically. */
   Auto: "Auto",
 
-  /**
-   * Use the custom target lags.
-   */
+  /** Use the custom target lags. */
   Custom: "Custom",
 }
 
-/**
- * Target rolling windows size mode.
- */
+/** Target rolling windows size mode. */
 union TargetRollingWindowSizeMode {
   string,
 
-  /**
-   * Determine rolling windows size automatically.
-   */
+  /** Determine rolling windows size automatically. */
   Auto: "Auto",
 
-  /**
-   * Use the specified rolling window size.
-   */
+  /** Use the specified rolling window size. */
   Custom: "Custom",
 }
 
-/**
- * Enum to determine the state of mlflow autologger.
- */
+/** Enum to determine the state of mlflow autologger. */
 union MLFlowAutologgerState {
   string,
 
-  /**
-   * Enabled
-   */
+  /** Enabled */
   Enabled: "Enabled",
 
-  /**
-   * Disabled
-   */
+  /** Disabled */
   Disabled: "Disabled",
 }
 
@@ -3163,14 +2051,10 @@ union MLFlowAutologgerState {
 union MonitoringAlertNotificationType {
   string,
 
-  /**
-   * Settings for Azure Monitor based alerting.
-   */
+  /** Settings for Azure Monitor based alerting. */
   AzureMonitor: "AzureMonitor",
 
-  /**
-   * Settings for AML email notifications.
-   */
+  /** Settings for AML email notifications. */
   Email: "Email",
 }
 
@@ -3178,19 +2062,13 @@ union MonitoringAlertNotificationType {
 union ServiceDataAccessAuthIdentity {
   string,
 
-  /**
-   * Do not use any identity for service data access.
-   */
+  /** Do not use any identity for service data access. */
   None: "None",
 
-  /**
-   * Use the system assigned managed identity of the Workspace to authenticate service data access.
-   */
+  /** Use the system assigned managed identity of the Workspace to authenticate service data access. */
   WorkspaceSystemAssignedIdentity: "WorkspaceSystemAssignedIdentity",
 
-  /**
-   * Use the user assigned managed identity of the Workspace to authenticate service data access.
-   */
+  /** Use the user assigned managed identity of the Workspace to authenticate service data access. */
   WorkspaceUserAssignedIdentity: "WorkspaceUserAssignedIdentity",
 }
 
@@ -3198,19 +2076,13 @@ union ServiceDataAccessAuthIdentity {
 union EarlyTerminationPolicyType {
   string,
 
-  /**
-   * Bandit
-   */
+  /** Bandit */
   Bandit: "Bandit",
 
-  /**
-   * MedianStopping
-   */
+  /** MedianStopping */
   MedianStopping: "MedianStopping",
 
-  /**
-   * TruncationSelection
-   */
+  /** TruncationSelection */
   TruncationSelection: "TruncationSelection",
 }
 
@@ -3218,19 +2090,13 @@ union EarlyTerminationPolicyType {
 union SamplingAlgorithmType {
   string,
 
-  /**
-   * Grid
-   */
+  /** Grid */
   Grid: "Grid",
 
-  /**
-   * Random
-   */
+  /** Random */
   Random: "Random",
 
-  /**
-   * Bayesian
-   */
+  /** Bayesian */
   Bayesian: "Bayesian",
 }
 
@@ -3238,19 +2104,13 @@ union SamplingAlgorithmType {
 union CategoricalDataDriftMetric {
   string,
 
-  /**
-   * The Jensen Shannon Distance (JSD) metric.
-   */
+  /** The Jensen Shannon Distance (JSD) metric. */
   JensenShannonDistance: "JensenShannonDistance",
 
-  /**
-   * The Population Stability Index (PSI) metric.
-   */
+  /** The Population Stability Index (PSI) metric. */
   PopulationStabilityIndex: "PopulationStabilityIndex",
 
-  /**
-   * The Pearsons Chi Squared Test metric.
-   */
+  /** The Pearsons Chi Squared Test metric. */
   PearsonsChiSquaredTest: "PearsonsChiSquaredTest",
 }
 
@@ -3258,14 +2118,10 @@ union CategoricalDataDriftMetric {
 union MonitoringFeatureDataType {
   string,
 
-  /**
-   * Used for features of numerical data type.
-   */
+  /** Used for features of numerical data type. */
   Numerical: "Numerical",
 
-  /**
-   * Used for features of categorical data type.
-   */
+  /** Used for features of categorical data type. */
   Categorical: "Categorical",
 }
 
@@ -3273,19 +2129,13 @@ union MonitoringFeatureDataType {
 union CategoricalDataQualityMetric {
   string,
 
-  /**
-   * Calculates the rate of null values.
-   */
+  /** Calculates the rate of null values. */
   NullValueRate: "NullValueRate",
 
-  /**
-   * Calculates the rate of data type errors.
-   */
+  /** Calculates the rate of data type errors. */
   DataTypeErrorRate: "DataTypeErrorRate",
 
-  /**
-   * Calculates the rate values are out of bounds.
-   */
+  /** Calculates the rate values are out of bounds. */
   OutOfBoundsRate: "OutOfBoundsRate",
 }
 
@@ -3293,25 +2143,17 @@ union CategoricalDataQualityMetric {
 union CategoricalPredictionDriftMetric {
   string,
 
-  /**
-   * The Jensen Shannon Distance (JSD) metric.
-   */
+  /** The Jensen Shannon Distance (JSD) metric. */
   JensenShannonDistance: "JensenShannonDistance",
 
-  /**
-   * The Population Stability Index (PSI) metric.
-   */
+  /** The Population Stability Index (PSI) metric. */
   PopulationStabilityIndex: "PopulationStabilityIndex",
 
-  /**
-   * The Pearsons Chi Squared Test metric.
-   */
+  /** The Pearsons Chi Squared Test metric. */
   PearsonsChiSquaredTest: "PearsonsChiSquaredTest",
 }
 
-/**
- * Primary metrics for classification tasks.
- */
+/** Primary metrics for classification tasks. */
 union ClassificationPrimaryMetrics {
   string,
 
@@ -3322,9 +2164,7 @@ union ClassificationPrimaryMetrics {
    */
   AUCWeighted: "AUCWeighted",
 
-  /**
-   * Accuracy is the ratio of predictions that exactly match the true class labels.
-   */
+  /** Accuracy is the ratio of predictions that exactly match the true class labels. */
   Accuracy: "Accuracy",
 
   /**
@@ -3339,15 +2179,11 @@ union ClassificationPrimaryMetrics {
    */
   AveragePrecisionScoreWeighted: "AveragePrecisionScoreWeighted",
 
-  /**
-   * The arithmetic mean of precision for each class, weighted by number of true instances in each class.
-   */
+  /** The arithmetic mean of precision for each class, weighted by number of true instances in each class. */
   PrecisionScoreWeighted: "PrecisionScoreWeighted",
 }
 
-/**
- * Enum for all classification models supported by AutoML.
- */
+/** Enum for all classification models supported by AutoML. */
 union ClassificationModels {
   string,
 
@@ -3371,9 +2207,7 @@ union ClassificationModels {
    */
   MultinomialNaiveBayes: "MultinomialNaiveBayes",
 
-  /**
-   * Naive Bayes classifier for multivariate Bernoulli models.
-   */
+  /** Naive Bayes classifier for multivariate Bernoulli models. */
   BernoulliNaiveBayes: "BernoulliNaiveBayes",
 
   /**
@@ -3408,24 +2242,16 @@ union ClassificationModels {
    */
   RandomForest: "RandomForest",
 
-  /**
-   * Extreme Trees is an ensemble machine learning algorithm that combines the predictions from many decision trees. It is related to the widely used random forest algorithm.
-   */
+  /** Extreme Trees is an ensemble machine learning algorithm that combines the predictions from many decision trees. It is related to the widely used random forest algorithm. */
   ExtremeRandomTrees: "ExtremeRandomTrees",
 
-  /**
-   * LightGBM is a gradient boosting framework that uses tree based learning algorithms.
-   */
+  /** LightGBM is a gradient boosting framework that uses tree based learning algorithms. */
   LightGBM: "LightGBM",
 
-  /**
-   * The technique of transiting week learners into a strong learner is called Boosting. The gradient boosting algorithm process works on this theory of execution.
-   */
+  /** The technique of transiting week learners into a strong learner is called Boosting. The gradient boosting algorithm process works on this theory of execution. */
   GradientBoosting: "GradientBoosting",
 
-  /**
-   * XGBoost: Extreme Gradient Boosting Algorithm. This algorithm is used for structured data where target column values can be divided into distinct class values.
-   */
+  /** XGBoost: Extreme Gradient Boosting Algorithm. This algorithm is used for structured data where target column values can be divided into distinct class values. */
   XGBoostClassifier: "XGBoostClassifier",
 }
 
@@ -3437,145 +2263,91 @@ union ClassificationModels {
 union StackMetaLearnerType {
   string,
 
-  /**
-   * None
-   */
+  /** None */
   None: "None",
 
-  /**
-   * Default meta-learners are LogisticRegression for classification tasks.
-   */
+  /** Default meta-learners are LogisticRegression for classification tasks. */
   LogisticRegression: "LogisticRegression",
 
-  /**
-   * Default meta-learners are LogisticRegression for classification task when CV is on.
-   */
+  /** Default meta-learners are LogisticRegression for classification task when CV is on. */
   LogisticRegressionCV: "LogisticRegressionCV",
 
-  /**
-   * LightGBMClassifier
-   */
+  /** LightGBMClassifier */
   LightGBMClassifier: "LightGBMClassifier",
 
-  /**
-   * Default meta-learners are LogisticRegression for regression task.
-   */
+  /** Default meta-learners are LogisticRegression for regression task. */
   ElasticNet: "ElasticNet",
 
-  /**
-   * Default meta-learners are LogisticRegression for regression task when CV is on.
-   */
+  /** Default meta-learners are LogisticRegression for regression task when CV is on. */
   ElasticNetCV: "ElasticNetCV",
 
-  /**
-   * LightGBMRegressor
-   */
+  /** LightGBMRegressor */
   LightGBMRegressor: "LightGBMRegressor",
 
-  /**
-   * LinearRegression
-   */
+  /** LinearRegression */
   LinearRegression: "LinearRegression",
 }
 
-/**
- * Training mode dictates whether to use distributed training or not
- */
+/** Training mode dictates whether to use distributed training or not */
 union TrainingMode {
   string,
 
-  /**
-   * Auto mode
-   */
+  /** Auto mode */
   Auto: "Auto",
 
-  /**
-   * Distributed training mode
-   */
+  /** Distributed training mode */
   Distributed: "Distributed",
 
-  /**
-   * Non distributed training mode
-   */
+  /** Non distributed training mode */
   NonDistributed: "NonDistributed",
 }
 
-/**
- * Enum for all classification models supported by AutoML.
- */
+/** Enum for all classification models supported by AutoML. */
 union BlockedTransformers {
   string,
 
-  /**
-   * Target encoding for text data.
-   */
+  /** Target encoding for text data. */
   TextTargetEncoder: "TextTargetEncoder",
 
-  /**
-   * Ohe hot encoding creates a binary feature transformation.
-   */
+  /** Ohe hot encoding creates a binary feature transformation. */
   OneHotEncoder: "OneHotEncoder",
 
-  /**
-   * Target encoding for categorical data.
-   */
+  /** Target encoding for categorical data. */
   CatTargetEncoder: "CatTargetEncoder",
 
-  /**
-   * Tf-Idf stands for, term-frequency times inverse document-frequency. This is a common term weighting scheme for identifying information from documents.
-   */
+  /** Tf-Idf stands for, term-frequency times inverse document-frequency. This is a common term weighting scheme for identifying information from documents. */
   TfIdf: "TfIdf",
 
-  /**
-   * Weight of Evidence encoding is a technique used to encode categorical variables. It uses the natural log of the P(1)/P(0) to create weights.
-   */
+  /** Weight of Evidence encoding is a technique used to encode categorical variables. It uses the natural log of the P(1)/P(0) to create weights. */
   WoETargetEncoder: "WoETargetEncoder",
 
-  /**
-   * Label encoder converts labels/categorical variables in a numerical form.
-   */
+  /** Label encoder converts labels/categorical variables in a numerical form. */
   LabelEncoder: "LabelEncoder",
 
-  /**
-   * Word embedding helps represents words or phrases as a vector, or a series of numbers.
-   */
+  /** Word embedding helps represents words or phrases as a vector, or a series of numbers. */
   WordEmbedding: "WordEmbedding",
 
-  /**
-   * Naive Bayes is a classified that is used for classification of discrete features that are categorically distributed.
-   */
+  /** Naive Bayes is a classified that is used for classification of discrete features that are categorically distributed. */
   NaiveBayes: "NaiveBayes",
 
-  /**
-   * Count Vectorizer converts a collection of text documents to a matrix of token counts.
-   */
+  /** Count Vectorizer converts a collection of text documents to a matrix of token counts. */
   CountVectorizer: "CountVectorizer",
 
-  /**
-   * Hashing One Hot Encoder can turn categorical variables into a limited number of new features. This is often used for high-cardinality categorical features.
-   */
+  /** Hashing One Hot Encoder can turn categorical variables into a limited number of new features. This is often used for high-cardinality categorical features. */
   HashOneHotEncoder: "HashOneHotEncoder",
 }
 
-/**
- * Featurization mode - determines data featurization mode.
- */
+/** Featurization mode - determines data featurization mode. */
 union FeaturizationMode {
   string,
 
-  /**
-   * Auto mode, system performs featurization without any custom featurization inputs.
-   */
+  /** Auto mode, system performs featurization without any custom featurization inputs. */
   Auto: "Auto",
 
-  /**
-   * Custom featurization.
-   */
+  /** Custom featurization. */
   Custom: "Custom",
 
-  /**
-   * Featurization off. 'Forecasting' task cannot use this value.
-   */
+  /** Featurization off. 'Forecasting' task cannot use this value. */
   Off: "Off",
 }
 
@@ -3583,19 +2355,13 @@ union FeaturizationMode {
 union ClassificationModelPerformanceMetric {
   string,
 
-  /**
-   * Calculates the accuracy of the model predictions.
-   */
+  /** Calculates the accuracy of the model predictions. */
   Accuracy: "Accuracy",
 
-  /**
-   * Calculates the precision of the model predictions.
-   */
+  /** Calculates the precision of the model predictions. */
   Precision: "Precision",
 
-  /**
-   * Calculates the recall of the model predictions.
-   */
+  /** Calculates the recall of the model predictions. */
   Recall: "Recall",
 }
 
@@ -3603,41 +2369,27 @@ union ClassificationModelPerformanceMetric {
 union MonitoringModelType {
   string,
 
-  /**
-   * A model trained for classification tasks.
-   */
+  /** A model trained for classification tasks. */
   Classification: "Classification",
 
-  /**
-   * A model trained for regressions tasks.
-   */
+  /** A model trained for regressions tasks. */
   Regression: "Regression",
 }
 
-/**
- * Enum to determine the job distribution type.
- */
+/** Enum to determine the job distribution type. */
 union DistributionType {
   string,
 
-  /**
-   * PyTorch
-   */
+  /** PyTorch */
   PyTorch: "PyTorch",
 
-  /**
-   * TensorFlow
-   */
+  /** TensorFlow */
   TensorFlow: "TensorFlow",
 
-  /**
-   * Mpi
-   */
+  /** Mpi */
   Mpi: "Mpi",
 
-  /**
-   * Ray
-   */
+  /** Ray */
   Ray: "Ray",
 }
 
@@ -3645,48 +2397,32 @@ union DistributionType {
 union JobLimitsType {
   string,
 
-  /**
-   * Command
-   */
+  /** Command */
   Command: "Command",
 
-  /**
-   * Sweep
-   */
+  /** Sweep */
   Sweep: "Sweep",
 }
 
-/**
- * Monitor compute type enum.
- */
+/** Monitor compute type enum. */
 union MonitorComputeType {
   string,
 
-  /**
-   * Serverless Spark compute.
-   */
+  /** Serverless Spark compute. */
   ServerlessSpark: "ServerlessSpark",
 }
 
-/**
- * Model task type enum.
- */
+/** Model task type enum. */
 union ModelTaskType {
   string,
 
-  /**
-   * Classification
-   */
+  /** Classification */
   Classification: "Classification",
 
-  /**
-   * Regression
-   */
+  /** Regression */
   Regression: "Regression",
 
-  /**
-   * QuestionAnswering
-   */
+  /** QuestionAnswering */
   QuestionAnswering: "QuestionAnswering",
 }
 
@@ -3694,14 +2430,10 @@ union ModelTaskType {
 union MonitoringNotificationMode {
   string,
 
-  /**
-   * Disabled notifications will not produce emails/metrics leveraged for alerting.
-   */
+  /** Disabled notifications will not produce emails/metrics leveraged for alerting. */
   Disabled: "Disabled",
 
-  /**
-   * Enabled notification will produce emails/metrics leveraged for alerting.
-   */
+  /** Enabled notification will produce emails/metrics leveraged for alerting. */
   Enabled: "Enabled",
 }
 
@@ -3709,83 +2441,53 @@ union MonitoringNotificationMode {
 union MonitoringSignalType {
   string,
 
-  /**
-   * Tracks model input data distribution change, comparing against training data or past production data.
-   */
+  /** Tracks model input data distribution change, comparing against training data or past production data. */
   DataDrift: "DataDrift",
 
-  /**
-   * Tracks prediction result data distribution change, comparing against validation/test label data or past production data.
-   */
+  /** Tracks prediction result data distribution change, comparing against validation/test label data or past production data. */
   PredictionDrift: "PredictionDrift",
 
-  /**
-   * Tracks model input data integrity.
-   */
+  /** Tracks model input data integrity. */
   DataQuality: "DataQuality",
 
-  /**
-   * Tracks feature importance change in production, comparing against feature importance at training time.
-   */
+  /** Tracks feature importance change in production, comparing against feature importance at training time. */
   FeatureAttributionDrift: "FeatureAttributionDrift",
 
-  /**
-   * Tracks a custom signal provided by users.
-   */
+  /** Tracks a custom signal provided by users. */
   Custom: "Custom",
 
-  /**
-   * Tracks model performance based on ground truth data.
-   */
+  /** Tracks model performance based on ground truth data. */
   ModelPerformance: "ModelPerformance",
 
-  /**
-   * Tracks the safety and quality of generated content.
-   */
+  /** Tracks the safety and quality of generated content. */
   GenerationSafetyQuality: "GenerationSafetyQuality",
 
-  /**
-   * Tracks the token usage of generative endpoints.
-   */
+  /** Tracks the token usage of generative endpoints. */
   GenerationTokenStatistics: "GenerationTokenStatistics",
 }
 
-/**
- * Monitoring input data type enum.
- */
+/** Monitoring input data type enum. */
 union MonitoringInputDataType {
   string,
 
-  /**
-   * An input data with a fixed window size.
-   */
+  /** An input data with a fixed window size. */
   Static: "Static",
 
-  /**
-   * An input data which trailing relatively to the monitor's current run.
-   */
+  /** An input data which trailing relatively to the monitor's current run. */
   Trailing: "Trailing",
 
-  /**
-   * An input data with tabular format which doesn't require preprocessing.
-   */
+  /** An input data with tabular format which doesn't require preprocessing. */
   Fixed: "Fixed",
 }
 
-/**
- * Enum to determine the type of data.
- */
+/** Enum to determine the type of data. */
 union DataImportSourceType {
   string,
 
-  /**
-   * database
-   */
+  /** database */
   database: "database",
 
-  /**
-   * file_system
-   */
+  /** file_system */
   file_system: "file_system",
 }
 
@@ -3793,140 +2495,90 @@ union DataImportSourceType {
 union FeatureAttributionMetric {
   string,
 
-  /**
-   * The Normalized Discounted Cumulative Gain metric.
-   */
+  /** The Normalized Discounted Cumulative Gain metric. */
   NormalizedDiscountedCumulativeGain: "NormalizedDiscountedCumulativeGain",
 }
 
-/**
- * Flag for generating lags for the numeric features.
- */
+/** Flag for generating lags for the numeric features. */
 union FeatureLags {
   string,
 
-  /**
-   * No feature lags generated.
-   */
+  /** No feature lags generated. */
   None: "None",
 
-  /**
-   * System auto-generates feature lags.
-   */
+  /** System auto-generates feature lags. */
   Auto: "Auto",
 }
 
-/**
- * The parameter defining how if AutoML should handle short time series.
- */
+/** The parameter defining how if AutoML should handle short time series. */
 union ShortSeriesHandlingConfiguration {
   string,
 
-  /**
-   * Represents no/null value.
-   */
+  /** Represents no/null value. */
   None: "None",
 
-  /**
-   * Short series will be padded if there are no long series, otherwise short series will be dropped.
-   */
+  /** Short series will be padded if there are no long series, otherwise short series will be dropped. */
   Auto: "Auto",
 
-  /**
-   * All the short series will be padded.
-   */
+  /** All the short series will be padded. */
   Pad: "Pad",
 
-  /**
-   * All the short series will be dropped.
-   */
+  /** All the short series will be dropped. */
   Drop: "Drop",
 }
 
-/**
- * Target aggregate function.
- */
+/** Target aggregate function. */
 union TargetAggregationFunction {
   string,
 
-  /**
-   * Represent no value set.
-   */
+  /** Represent no value set. */
   None: "None",
 
-  /**
-   * Sum
-   */
+  /** Sum */
   Sum: "Sum",
 
-  /**
-   * Max
-   */
+  /** Max */
   Max: "Max",
 
-  /**
-   * Min
-   */
+  /** Min */
   Min: "Min",
 
-  /**
-   * Mean
-   */
+  /** Mean */
   Mean: "Mean",
 }
 
-/**
- * Configure STL Decomposition of the time-series target column.
- */
+/** Configure STL Decomposition of the time-series target column. */
 union UseStl {
   string,
 
-  /**
-   * No stl decomposition.
-   */
+  /** No stl decomposition. */
   None: "None",
 
-  /**
-   * Season
-   */
+  /** Season */
   Season: "Season",
 
-  /**
-   * SeasonTrend
-   */
+  /** SeasonTrend */
   SeasonTrend: "SeasonTrend",
 }
 
-/**
- * Primary metrics for Forecasting task.
- */
+/** Primary metrics for Forecasting task. */
 union ForecastingPrimaryMetrics {
   string,
 
-  /**
-   * The Spearman's rank coefficient of correlation is a non-parametric measure of rank correlation.
-   */
+  /** The Spearman's rank coefficient of correlation is a non-parametric measure of rank correlation. */
   SpearmanCorrelation: "SpearmanCorrelation",
 
-  /**
-   * The Normalized Root Mean Squared Error (NRMSE) the RMSE facilitates the comparison between models with different scales.
-   */
+  /** The Normalized Root Mean Squared Error (NRMSE) the RMSE facilitates the comparison between models with different scales. */
   NormalizedRootMeanSquaredError: "NormalizedRootMeanSquaredError",
 
-  /**
-   * The R2 score is one of the performance evaluation measures for forecasting-based machine learning models.
-   */
+  /** The R2 score is one of the performance evaluation measures for forecasting-based machine learning models. */
   R2Score: "R2Score",
 
-  /**
-   * The Normalized Mean Absolute Error (NMAE) is a validation metric to compare the Mean Absolute Error (MAE) of (time) series with different scales.
-   */
+  /** The Normalized Mean Absolute Error (NMAE) is a validation metric to compare the Mean Absolute Error (MAE) of (time) series with different scales. */
   NormalizedMeanAbsoluteError: "NormalizedMeanAbsoluteError",
 }
 
-/**
- * Enum for all forecasting models supported by AutoML.
- */
+/** Enum for all forecasting models supported by AutoML. */
 union ForecastingModels {
   string,
 
@@ -3942,29 +2594,19 @@ union ForecastingModels {
    */
   Prophet: "Prophet",
 
-  /**
-   * The Naive forecasting model makes predictions by carrying forward the latest target value for each time-series in the training data.
-   */
+  /** The Naive forecasting model makes predictions by carrying forward the latest target value for each time-series in the training data. */
   Naive: "Naive",
 
-  /**
-   * The Seasonal Naive forecasting model makes predictions by carrying forward the latest season of target values for each time-series in the training data.
-   */
+  /** The Seasonal Naive forecasting model makes predictions by carrying forward the latest season of target values for each time-series in the training data. */
   SeasonalNaive: "SeasonalNaive",
 
-  /**
-   * The Average forecasting model makes predictions by carrying forward the average of the target values for each time-series in the training data.
-   */
+  /** The Average forecasting model makes predictions by carrying forward the average of the target values for each time-series in the training data. */
   Average: "Average",
 
-  /**
-   * The Seasonal Average forecasting model makes predictions by carrying forward the average value of the latest season of data for each time-series in the training data.
-   */
+  /** The Seasonal Average forecasting model makes predictions by carrying forward the average value of the latest season of data for each time-series in the training data. */
   SeasonalAverage: "SeasonalAverage",
 
-  /**
-   * Exponential smoothing is a time series forecasting method for univariate data that can be extended to support data with a systematic trend or seasonal component.
-   */
+  /** Exponential smoothing is a time series forecasting method for univariate data that can be extended to support data with a systematic trend or seasonal component. */
   ExponentialSmoothing: "ExponentialSmoothing",
 
   /**
@@ -3973,19 +2615,13 @@ union ForecastingModels {
    */
   Arimax: "Arimax",
 
-  /**
-   * TCNForecaster: Temporal Convolutional Networks Forecaster. //TODO: Ask forecasting team for brief intro.
-   */
+  /** TCNForecaster: Temporal Convolutional Networks Forecaster. //TODO: Ask forecasting team for brief intro. */
   TCNForecaster: "TCNForecaster",
 
-  /**
-   * Elastic net is a popular type of regularized linear regression that combines two popular penalties, specifically the L1 and L2 penalty functions.
-   */
+  /** Elastic net is a popular type of regularized linear regression that combines two popular penalties, specifically the L1 and L2 penalty functions. */
   ElasticNet: "ElasticNet",
 
-  /**
-   * The technique of transiting week learners into a strong learner is called Boosting. The gradient boosting algorithm process works on this theory of execution.
-   */
+  /** The technique of transiting week learners into a strong learner is called Boosting. The gradient boosting algorithm process works on this theory of execution. */
   GradientBoosting: "GradientBoosting",
 
   /**
@@ -4000,9 +2636,7 @@ union ForecastingModels {
    */
   KNN: "KNN",
 
-  /**
-   * Lasso model fit with Least Angle Regression a.k.a. Lars. It is a Linear Model trained with an L1 prior as regularizer.
-   */
+  /** Lasso model fit with Least Angle Regression a.k.a. Lars. It is a Linear Model trained with an L1 prior as regularizer. */
   LassoLars: "LassoLars",
 
   /**
@@ -4019,148 +2653,94 @@ union ForecastingModels {
    */
   RandomForest: "RandomForest",
 
-  /**
-   * Extreme Trees is an ensemble machine learning algorithm that combines the predictions from many decision trees. It is related to the widely used random forest algorithm.
-   */
+  /** Extreme Trees is an ensemble machine learning algorithm that combines the predictions from many decision trees. It is related to the widely used random forest algorithm. */
   ExtremeRandomTrees: "ExtremeRandomTrees",
 
-  /**
-   * LightGBM is a gradient boosting framework that uses tree based learning algorithms.
-   */
+  /** LightGBM is a gradient boosting framework that uses tree based learning algorithms. */
   LightGBM: "LightGBM",
 
-  /**
-   * XGBoostRegressor: Extreme Gradient Boosting Regressor is a supervised machine learning model using ensemble of base learners.
-   */
+  /** XGBoostRegressor: Extreme Gradient Boosting Regressor is a supervised machine learning model using ensemble of base learners. */
   XGBoostRegressor: "XGBoostRegressor",
 }
 
-/**
- * Generation safety quality metric enum.
- */
+/** Generation safety quality metric enum. */
 union GenerationSafetyQualityMetric {
   string,
 
-  /**
-   * AcceptableGroundednessScorePerInstance
-   */
+  /** AcceptableGroundednessScorePerInstance */
   AcceptableGroundednessScorePerInstance: "AcceptableGroundednessScorePerInstance",
 
-  /**
-   * AggregatedGroundednessPassRate
-   */
+  /** AggregatedGroundednessPassRate */
   AggregatedGroundednessPassRate: "AggregatedGroundednessPassRate",
 
-  /**
-   * AcceptableCoherenceScorePerInstance
-   */
+  /** AcceptableCoherenceScorePerInstance */
   AcceptableCoherenceScorePerInstance: "AcceptableCoherenceScorePerInstance",
 
-  /**
-   * AggregatedCoherencePassRate
-   */
+  /** AggregatedCoherencePassRate */
   AggregatedCoherencePassRate: "AggregatedCoherencePassRate",
 
-  /**
-   * AcceptableFluencyScorePerInstance
-   */
+  /** AcceptableFluencyScorePerInstance */
   AcceptableFluencyScorePerInstance: "AcceptableFluencyScorePerInstance",
 
-  /**
-   * AggregatedFluencyPassRate
-   */
+  /** AggregatedFluencyPassRate */
   AggregatedFluencyPassRate: "AggregatedFluencyPassRate",
 
-  /**
-   * AcceptableSimilarityScorePerInstance
-   */
+  /** AcceptableSimilarityScorePerInstance */
   AcceptableSimilarityScorePerInstance: "AcceptableSimilarityScorePerInstance",
 
-  /**
-   * AggregatedSimilarityPassRate
-   */
+  /** AggregatedSimilarityPassRate */
   AggregatedSimilarityPassRate: "AggregatedSimilarityPassRate",
 
-  /**
-   * AcceptableRelevanceScorePerInstance
-   */
+  /** AcceptableRelevanceScorePerInstance */
   AcceptableRelevanceScorePerInstance: "AcceptableRelevanceScorePerInstance",
 
-  /**
-   * AggregatedRelevancePassRate
-   */
+  /** AggregatedRelevancePassRate */
   AggregatedRelevancePassRate: "AggregatedRelevancePassRate",
 }
 
-/**
- * Generation token statistics metric enum.
- */
+/** Generation token statistics metric enum. */
 union GenerationTokenStatisticsMetric {
   string,
 
-  /**
-   * TotalTokenCount
-   */
+  /** TotalTokenCount */
   TotalTokenCount: "TotalTokenCount",
 
-  /**
-   * TotalTokenCountPerGroup
-   */
+  /** TotalTokenCountPerGroup */
   TotalTokenCountPerGroup: "TotalTokenCountPerGroup",
 }
 
-/**
- * Learning rate scheduler enum.
- */
+/** Learning rate scheduler enum. */
 union LearningRateScheduler {
   string,
 
-  /**
-   * No learning rate scheduler selected.
-   */
+  /** No learning rate scheduler selected. */
   None: "None",
 
-  /**
-   * Cosine Annealing With Warmup.
-   */
+  /** Cosine Annealing With Warmup. */
   WarmupCosine: "WarmupCosine",
 
-  /**
-   * Step learning rate scheduler.
-   */
+  /** Step learning rate scheduler. */
   Step: "Step",
 }
 
-/**
- * Stochastic optimizer for image models.
- */
+/** Stochastic optimizer for image models. */
 union StochasticOptimizer {
   string,
 
-  /**
-   * No optimizer selected.
-   */
+  /** No optimizer selected. */
   None: "None",
 
-  /**
-   * Stochastic Gradient Descent optimizer.
-   */
+  /** Stochastic Gradient Descent optimizer. */
   Sgd: "Sgd",
 
-  /**
-   * Adam is algorithm the optimizes stochastic objective functions based on adaptive estimates of moments
-   */
+  /** Adam is algorithm the optimizes stochastic objective functions based on adaptive estimates of moments */
   Adam: "Adam",
 
-  /**
-   * AdamW is a variant of the optimizer Adam that has an improved implementation of weight decay.
-   */
+  /** AdamW is a variant of the optimizer Adam that has an improved implementation of weight decay. */
   Adamw: "Adamw",
 }
 
-/**
- * Primary metrics for classification multilabel tasks.
- */
+/** Primary metrics for classification multilabel tasks. */
 union ClassificationMultilabelPrimaryMetrics {
   string,
 
@@ -4171,9 +2751,7 @@ union ClassificationMultilabelPrimaryMetrics {
    */
   AUCWeighted: "AUCWeighted",
 
-  /**
-   * Accuracy is the ratio of predictions that exactly match the true class labels.
-   */
+  /** Accuracy is the ratio of predictions that exactly match the true class labels. */
   Accuracy: "Accuracy",
 
   /**
@@ -4188,20 +2766,14 @@ union ClassificationMultilabelPrimaryMetrics {
    */
   AveragePrecisionScoreWeighted: "AveragePrecisionScoreWeighted",
 
-  /**
-   * The arithmetic mean of precision for each class, weighted by number of true instances in each class.
-   */
+  /** The arithmetic mean of precision for each class, weighted by number of true instances in each class. */
   PrecisionScoreWeighted: "PrecisionScoreWeighted",
 
-  /**
-   * Intersection Over Union. Intersection of predictions divided by union of predictions.
-   */
+  /** Intersection Over Union. Intersection of predictions divided by union of predictions. */
   IOU: "IOU",
 }
 
-/**
- * Primary metrics for InstanceSegmentation tasks.
- */
+/** Primary metrics for InstanceSegmentation tasks. */
 union InstanceSegmentationPrimaryMetrics {
   string,
 
@@ -4216,14 +2788,10 @@ union InstanceSegmentationPrimaryMetrics {
 union LogTrainingMetrics {
   string,
 
-  /**
-   * Enable compute and log training metrics.
-   */
+  /** Enable compute and log training metrics. */
   Enable: "Enable",
 
-  /**
-   * Disable compute and log training metrics.
-   */
+  /** Disable compute and log training metrics. */
   Disable: "Disable",
 }
 
@@ -4231,79 +2799,51 @@ union LogTrainingMetrics {
 union LogValidationLoss {
   string,
 
-  /**
-   * Enable compute and log validation metrics.
-   */
+  /** Enable compute and log validation metrics. */
   Enable: "Enable",
 
-  /**
-   * Disable compute and log validation metrics.
-   */
+  /** Disable compute and log validation metrics. */
   Disable: "Disable",
 }
 
-/**
- * Image model size.
- */
+/** Image model size. */
 union ModelSize {
   string,
 
-  /**
-   * No value selected.
-   */
+  /** No value selected. */
   None: "None",
 
-  /**
-   * Small size.
-   */
+  /** Small size. */
   Small: "Small",
 
-  /**
-   * Medium size.
-   */
+  /** Medium size. */
   Medium: "Medium",
 
-  /**
-   * Large size.
-   */
+  /** Large size. */
   Large: "Large",
 
-  /**
-   * Extra large size.
-   */
+  /** Extra large size. */
   ExtraLarge: "ExtraLarge",
 }
 
-/**
- * Metric computation method to use for validation metrics in image tasks.
- */
+/** Metric computation method to use for validation metrics in image tasks. */
 union ValidationMetricType {
   string,
 
-  /**
-   * No metric.
-   */
+  /** No metric. */
   None: "None",
 
-  /**
-   * Coco metric.
-   */
+  /** Coco metric. */
   Coco: "Coco",
 
-  /**
-   * Voc metric.
-   */
+  /** Voc metric. */
   Voc: "Voc",
 
-  /**
-   * CocoVoc metric.
-   */
+  /** CocoVoc metric. */
   CocoVoc: "CocoVoc",
 }
 
-/**
- * Primary metrics for Image ObjectDetection task.
- */
+/** Primary metrics for Image ObjectDetection task. */
 union ObjectDetectionPrimaryMetrics {
   string,
 
@@ -4314,96 +2854,62 @@ union ObjectDetectionPrimaryMetrics {
   MeanAveragePrecision: "MeanAveragePrecision",
 }
 
-/**
- * Annotation type of image data.
- */
+/** Annotation type of image data. */
 union ImageAnnotationType {
   string,
 
-  /**
-   * Classification
-   */
+  /** Classification */
   Classification: "Classification",
 
-  /**
-   * BoundingBox
-   */
+  /** BoundingBox */
   BoundingBox: "BoundingBox",
 
-  /**
-   * InstanceSegmentation
-   */
+  /** InstanceSegmentation */
   InstanceSegmentation: "InstanceSegmentation",
 }
 
-/**
- * Annotation type of text data.
- */
+/** Annotation type of text data. */
 union TextAnnotationType {
   string,
 
-  /**
-   * Classification
-   */
+  /** Classification */
   Classification: "Classification",
 
-  /**
-   * NamedEntityRecognition
-   */
+  /** NamedEntityRecognition */
   NamedEntityRecognition: "NamedEntityRecognition",
 }
 
-/**
- * Enum to determine OneLake artifact type.
- */
+/** Enum to determine OneLake artifact type. */
 union OneLakeArtifactType {
   string,
 
-  /**
-   * LakeHouse
-   */
+  /** LakeHouse */
   LakeHouse: "LakeHouse",
 }
 
-/**
- * Enum of learning rate schedulers that aligns with those supported by HF
- */
+/** Enum of learning rate schedulers that aligns with those supported by HF */
 union NlpLearningRateScheduler {
   string,
 
-  /**
-   * No learning rate schedule.
-   */
+  /** No learning rate schedule. */
   None: "None",
 
-  /**
-   * Linear warmup and decay.
-   */
+  /** Linear warmup and decay. */
   Linear: "Linear",
 
-  /**
-   * Linear warmup then cosine decay.
-   */
+  /** Linear warmup then cosine decay. */
   Cosine: "Cosine",
 
-  /**
-   * Linear warmup, cosine decay, then restart to initial LR.
-   */
+  /** Linear warmup, cosine decay, then restart to initial LR. */
   CosineWithRestarts: "CosineWithRestarts",
 
-  /**
-   * Increase linearly then polynomially decay.
-   */
+  /** Increase linearly then polynomially decay. */
   Polynomial: "Polynomial",
 
-  /**
-   * Constant learning rate.
-   */
+  /** Constant learning rate. */
   Constant: "Constant",
 
-  /**
-   * Linear warmup followed by constant value.
-   */
+  /** Linear warmup followed by constant value. */
   ConstantWithWarmup: "ConstantWithWarmup",
 }
 
@@ -4411,24 +2917,16 @@ union NlpLearningRateScheduler {
 union NumericalDataDriftMetric {
   string,
 
-  /**
-   * The Jensen Shannon Distance (JSD) metric.
-   */
+  /** The Jensen Shannon Distance (JSD) metric. */
   JensenShannonDistance: "JensenShannonDistance",
 
-  /**
-   * The Population Stability Index (PSI) metric.
-   */
+  /** The Population Stability Index (PSI) metric. */
   PopulationStabilityIndex: "PopulationStabilityIndex",
 
-  /**
-   * The Normalized Wasserstein Distance metric.
-   */
+  /** The Normalized Wasserstein Distance metric. */
   NormalizedWassersteinDistance: "NormalizedWassersteinDistance",
 
-  /**
-   * The Two Sample Kolmogorov-Smirnov Test (two-sample K–S) metric.
-   */
+  /** The Two Sample Kolmogorov-Smirnov Test (two-sample K–S) metric. */
   TwoSampleKolmogorovSmirnovTest: "TwoSampleKolmogorovSmirnovTest",
 }
 
@@ -4436,19 +2934,13 @@ union NumericalDataDriftMetric {
 union NumericalDataQualityMetric {
   string,
 
-  /**
-   * Calculates the rate of null values.
-   */
+  /** Calculates the rate of null values. */
   NullValueRate: "NullValueRate",
 
-  /**
-   * Calculates the rate of data type errors.
-   */
+  /** Calculates the rate of data type errors. */
   DataTypeErrorRate: "DataTypeErrorRate",
 
-  /**
-   * Calculates the rate values are out of bounds.
-   */
+  /** Calculates the rate values are out of bounds. */
   OutOfBoundsRate: "OutOfBoundsRate",
 }
 
@@ -4456,102 +2948,66 @@ union NumericalDataQualityMetric {
 union NumericalPredictionDriftMetric {
   string,
 
-  /**
-   * The Jensen Shannon Distance (JSD) metric.
-   */
+  /** The Jensen Shannon Distance (JSD) metric. */
   JensenShannonDistance: "JensenShannonDistance",
 
-  /**
-   * The Population Stability Index (PSI) metric.
-   */
+  /** The Population Stability Index (PSI) metric. */
   PopulationStabilityIndex: "PopulationStabilityIndex",
 
-  /**
-   * The Normalized Wasserstein Distance metric.
-   */
+  /** The Normalized Wasserstein Distance metric. */
   NormalizedWassersteinDistance: "NormalizedWassersteinDistance",
 
-  /**
-   * The Two Sample Kolmogorov-Smirnov Test (two-sample K–S) metric.
-   */
+  /** The Two Sample Kolmogorov-Smirnov Test (two-sample K–S) metric. */
   TwoSampleKolmogorovSmirnovTest: "TwoSampleKolmogorovSmirnovTest",
 }
 
-/**
- * Defines supported metric goals for hyperparameter tuning
- */
+/** Defines supported metric goals for hyperparameter tuning */
 union Goal {
   string,
 
-  /**
-   * Minimize
-   */
+  /** Minimize */
   Minimize: "Minimize",
 
-  /**
-   * Maximize
-   */
+  /** Maximize */
   Maximize: "Maximize",
 }
 
-/**
- * The specific type of random algorithm
- */
+/** The specific type of random algorithm */
 union RandomSamplingAlgorithmRule {
   string,
 
-  /**
-   * Random
-   */
+  /** Random */
   Random: "Random",
 
-  /**
-   * Sobol
-   */
+  /** Sobol */
   Sobol: "Sobol",
 }
 
-/**
- * Primary metrics for Regression task.
- */
+/** Primary metrics for Regression task. */
 union RegressionPrimaryMetrics {
   string,
 
-  /**
-   * The Spearman's rank coefficient of correlation is a nonparametric measure of rank correlation.
-   */
+  /** The Spearman's rank coefficient of correlation is a nonparametric measure of rank correlation. */
   SpearmanCorrelation: "SpearmanCorrelation",
 
-  /**
-   * The Normalized Root Mean Squared Error (NRMSE) the RMSE facilitates the comparison between models with different scales.
-   */
+  /** The Normalized Root Mean Squared Error (NRMSE) the RMSE facilitates the comparison between models with different scales. */
   NormalizedRootMeanSquaredError: "NormalizedRootMeanSquaredError",
 
-  /**
-   * The R2 score is one of the performance evaluation measures for forecasting-based machine learning models.
-   */
+  /** The R2 score is one of the performance evaluation measures for forecasting-based machine learning models. */
   R2Score: "R2Score",
 
-  /**
-   * The Normalized Mean Absolute Error (NMAE) is a validation metric to compare the Mean Absolute Error (MAE) of (time) series with different scales.
-   */
+  /** The Normalized Mean Absolute Error (NMAE) is a validation metric to compare the Mean Absolute Error (MAE) of (time) series with different scales. */
   NormalizedMeanAbsoluteError: "NormalizedMeanAbsoluteError",
 }
 
-/**
- * Enum for all Regression models supported by AutoML.
- */
+/** Enum for all Regression models supported by AutoML. */
 union RegressionModels {
   string,
 
-  /**
-   * Elastic net is a popular type of regularized linear regression that combines two popular penalties, specifically the L1 and L2 penalty functions.
-   */
+  /** Elastic net is a popular type of regularized linear regression that combines two popular penalties, specifically the L1 and L2 penalty functions. */
   ElasticNet: "ElasticNet",
 
-  /**
-   * The technique of transiting week learners into a strong learner is called Boosting. The gradient boosting algorithm process works on this theory of execution.
-   */
+  /** The technique of transiting week learners into a strong learner is called Boosting. The gradient boosting algorithm process works on this theory of execution. */
   GradientBoosting: "GradientBoosting",
 
   /**
@@ -4566,9 +3022,7 @@ union RegressionModels {
    */
   KNN: "KNN",
 
-  /**
-   * Lasso model fit with Least Angle Regression a.k.a. Lars. It is a Linear Model trained with an L1 prior as regularizer.
-   */
+  /** Lasso model fit with Least Angle Regression a.k.a. Lars. It is a Linear Model trained with an L1 prior as regularizer. */
   LassoLars: "LassoLars",
 
   /**
@@ -4585,19 +3039,13 @@ union RegressionModels {
    */
   RandomForest: "RandomForest",
 
-  /**
-   * Extreme Trees is an ensemble machine learning algorithm that combines the predictions from many decision trees. It is related to the widely used random forest algorithm.
-   */
+  /** Extreme Trees is an ensemble machine learning algorithm that combines the predictions from many decision trees. It is related to the widely used random forest algorithm. */
   ExtremeRandomTrees: "ExtremeRandomTrees",
 
-  /**
-   * LightGBM is a gradient boosting framework that uses tree based learning algorithms.
-   */
+  /** LightGBM is a gradient boosting framework that uses tree based learning algorithms. */
   LightGBM: "LightGBM",
 
-  /**
-   * XGBoostRegressor: Extreme Gradient Boosting Regressor is a supervised machine learning model using ensemble of base learners.
-   */
+  /** XGBoostRegressor: Extreme Gradient Boosting Regressor is a supervised machine learning model using ensemble of base learners. */
   XGBoostRegressor: "XGBoostRegressor",
 }
 
@@ -4605,19 +3053,13 @@ union RegressionModels {
 union RegressionModelPerformanceMetric {
   string,
 
-  /**
-   * The Mean Absolute Error (MAE) metric.
-   */
+  /** The Mean Absolute Error (MAE) metric. */
   MeanAbsoluteError: "MeanAbsoluteError",
 
-  /**
-   * The Root Mean Squared Error (RMSE) metric.
-   */
+  /** The Root Mean Squared Error (RMSE) metric. */
   RootMeanSquaredError: "RootMeanSquaredError",
 
-  /**
-   * The Mean Squared Error (MSE) metric.
-   */
+  /** The Mean Squared Error (MSE) metric. */
   MeanSquaredError: "MeanSquaredError",
 }
 
@@ -4625,530 +3067,340 @@ union RegressionModelPerformanceMetric {
 union SparkJobEntryType {
   string,
 
-  /**
-   * SparkJobPythonEntry
-   */
+  /** SparkJobPythonEntry */
   SparkJobPythonEntry: "SparkJobPythonEntry",
 
-  /**
-   * SparkJobScalaEntry
-   */
+  /** SparkJobScalaEntry */
   SparkJobScalaEntry: "SparkJobScalaEntry",
 }
 
-/**
- * The action enum for networking rule.
- */
+/** The action enum for networking rule. */
 union RuleAction {
   string,
 
-  /**
-   * Allow
-   */
+  /** Allow */
   Allow: "Allow",
 
-  /**
-   * Deny
-   */
+  /** Deny */
   Deny: "Deny",
 }
 
-/**
- * The List Usages operation response.
- */
+/** The List Usages operation response. */
 model ListUsagesResult is Azure.Core.Page<Usage>;
 
-/**
- * Describes AML Resource Usage.
- */
+/** Describes AML Resource Usage. */
 model Usage {
-  /**
-   * Specifies the resource ID.
-   */
+  /** Specifies the resource ID. */
   @visibility(Lifecycle.Read)
   id?: string;
 
-  /**
-   * Region of the AML workspace in the id.
-   */
+  /** Region of the AML workspace in the id. */
   @visibility(Lifecycle.Read)
   amlWorkspaceLocation?: string;
 
-  /**
-   * Specifies the resource type.
-   */
+  /** Specifies the resource type. */
   @visibility(Lifecycle.Read)
   type?: string;
 
-  /**
-   * An enum describing the unit of usage measurement.
-   */
+  /** An enum describing the unit of usage measurement. */
   @visibility(Lifecycle.Read)
   unit?: UsageUnit;
 
-  /**
-   * The current usage of the resource.
-   */
+  /** The current usage of the resource. */
   @visibility(Lifecycle.Read)
   currentValue?: int64;
 
-  /**
-   * The maximum permitted usage of the resource.
-   */
+  /** The maximum permitted usage of the resource. */
   @visibility(Lifecycle.Read)
   limit?: int64;
 
-  /**
-   * The name of the type of usage.
-   */
+  /** The name of the type of usage. */
   @visibility(Lifecycle.Read)
   name?: UsageName;
 }
 
-/**
- * The Usage Names.
- */
+/** The Usage Names. */
 model UsageName {
-  /**
-   * The name of the resource.
-   */
+  /** The name of the resource. */
   @visibility(Lifecycle.Read)
   value?: string;
 
-  /**
-   * The localized name of the resource.
-   */
+  /** The localized name of the resource. */
   @visibility(Lifecycle.Read)
   localizedValue?: string;
 }
 
-/**
- * The List Virtual Machine size operation response.
- */
+/** The List Virtual Machine size operation response. */
 model VirtualMachineSizeListResult {
-  /**
-   * The list of virtual machine sizes supported by AmlCompute.
-   */
+  /** The list of virtual machine sizes supported by AmlCompute. */
   @identifiers(#["name"])
   value?: VirtualMachineSize[];
 }
 
-/**
- * Describes the properties of a VM size.
- */
+/** Describes the properties of a VM size. */
 model VirtualMachineSize {
-  /**
-   * The name of the virtual machine size.
-   */
+  /** The name of the virtual machine size. */
   @visibility(Lifecycle.Read)
   name?: string;
 
-  /**
-   * The family name of the virtual machine size.
-   */
+  /** The family name of the virtual machine size. */
   @visibility(Lifecycle.Read)
   family?: string;
 
-  /**
-   * The number of vCPUs supported by the virtual machine size.
-   */
+  /** The number of vCPUs supported by the virtual machine size. */
   @visibility(Lifecycle.Read)
   vCPUs?: int32;
 
-  /**
-   * The number of gPUs supported by the virtual machine size.
-   */
+  /** The number of gPUs supported by the virtual machine size. */
   @visibility(Lifecycle.Read)
   gpus?: int32;
 
-  /**
-   * The OS VHD disk size, in MB, allowed by the virtual machine size.
-   */
+  /** The OS VHD disk size, in MB, allowed by the virtual machine size. */
   @visibility(Lifecycle.Read)
   osVhdSizeMB?: int32;
 
-  /**
-   * The resource volume size, in MB, allowed by the virtual machine size.
-   */
+  /** The resource volume size, in MB, allowed by the virtual machine size. */
   @visibility(Lifecycle.Read)
   maxResourceVolumeMB?: int32;
 
-  /**
-   * The amount of memory, in GB, supported by the virtual machine size.
-   */
+  /** The amount of memory, in GB, supported by the virtual machine size. */
   @visibility(Lifecycle.Read)
   memoryGB?: float64;
 
-  /**
-   * Specifies if the virtual machine size supports low priority VMs.
-   */
+  /** Specifies if the virtual machine size supports low priority VMs. */
   @visibility(Lifecycle.Read)
   lowPriorityCapable?: boolean;
 
-  /**
-   * Specifies if the virtual machine size supports premium IO.
-   */
+  /** Specifies if the virtual machine size supports premium IO. */
   @visibility(Lifecycle.Read)
   premiumIO?: boolean;
 
-  /**
-   * The estimated price information for using a VM.
-   */
+  /** The estimated price information for using a VM. */
   estimatedVMPrices?: EstimatedVMPrices;
 
-  /**
-   * Specifies the compute types supported by the virtual machine size.
-   */
+  /** Specifies the compute types supported by the virtual machine size. */
   supportedComputeTypes?: string[];
 }
 
-/**
- * The estimated price info for using a VM.
- */
+/** The estimated price info for using a VM. */
 model EstimatedVMPrices {
-  /**
-   * Three lettered code specifying the currency of the VM price. Example: USD
-   */
+  /** Three lettered code specifying the currency of the VM price. Example: USD */
   billingCurrency: BillingCurrency;
 
-  /**
-   * The unit of time measurement for the specified VM price. Example: OneHour
-   */
+  /** The unit of time measurement for the specified VM price. Example: OneHour */
   unitOfMeasure: UnitOfMeasure;
 
-  /**
-   * The list of estimated prices for using a VM of a particular OS type, tier, etc.
-   */
+  /** The list of estimated prices for using a VM of a particular OS type, tier, etc. */
   @identifiers(#[])
   values: EstimatedVMPrice[];
 }
 
-/**
- * The estimated price info for using a VM of a particular OS type, tier, etc.
- */
+/** The estimated price info for using a VM of a particular OS type, tier, etc. */
 model EstimatedVMPrice {
-  /**
-   * The price charged for using the VM.
-   */
+  /** The price charged for using the VM. */
   retailPrice: float64;
 
-  /**
-   * Operating system type used by the VM.
-   */
+  /** Operating system type used by the VM. */
   osType: VMPriceOSType;
 
-  /**
-   * The type of the VM.
-   */
+  /** The type of the VM. */
   vmTier: VMTier;
 }
 
-/**
- * Quota update parameters.
- */
+/** Quota update parameters. */
 model QuotaUpdateParameters {
-  /**
-   * The list for update quota.
-   */
+  /** The list for update quota. */
   value?: QuotaBaseProperties[];
 
-  /**
-   * Region of workspace quota to be updated.
-   */
+  /** Region of workspace quota to be updated. */
   location?: string;
 }
 
-/**
- * The properties for Quota update or retrieval.
- */
+/** The properties for Quota update or retrieval. */
 model QuotaBaseProperties {
-  /**
-   * Specifies the resource ID.
-   */
+  /** Specifies the resource ID. */
   id?: string;
 
-  /**
-   * Specifies the resource type.
-   */
+  /** Specifies the resource type. */
   type?: string;
 
-  /**
-   * The maximum permitted quota of the resource.
-   */
+  /** The maximum permitted quota of the resource. */
   limit?: int64;
 
-  /**
-   * An enum describing the unit of quota measurement.
-   */
+  /** An enum describing the unit of quota measurement. */
   unit?: QuotaUnit;
 }
 
-/**
- * The result of update workspace quota.
- */
+/** The result of update workspace quota. */
 model UpdateWorkspaceQuotasResult is Azure.Core.Page<UpdateWorkspaceQuotas>;
 
-/**
- * The properties for update Quota response.
- */
+/** The properties for update Quota response. */
 model UpdateWorkspaceQuotas {
-  /**
-   * Specifies the resource ID.
-   */
+  /** Specifies the resource ID. */
   @visibility(Lifecycle.Read)
   id?: string;
 
-  /**
-   * Specifies the resource type.
-   */
+  /** Specifies the resource type. */
   @visibility(Lifecycle.Read)
   type?: string;
 
-  /**
-   * The maximum permitted quota of the resource.
-   */
+  /** The maximum permitted quota of the resource. */
   limit?: int64;
 
-  /**
-   * An enum describing the unit of quota measurement.
-   */
+  /** An enum describing the unit of quota measurement. */
   @visibility(Lifecycle.Read)
   unit?: QuotaUnit;
 
-  /**
-   * Status of update workspace quota.
-   */
+  /** Status of update workspace quota. */
   status?: Status;
 }
 
-/**
- * The List WorkspaceQuotasByVMFamily operation response.
- */
+/** The List WorkspaceQuotasByVMFamily operation response. */
 model ListWorkspaceQuotas is Azure.Core.Page<ResourceQuota>;
 
-/**
- * The quota assigned to a resource.
- */
+/** The quota assigned to a resource. */
 model ResourceQuota {
-  /**
-   * Specifies the resource ID.
-   */
+  /** Specifies the resource ID. */
   @visibility(Lifecycle.Read)
   id?: string;
 
-  /**
-   * Region of the AML workspace in the id.
-   */
+  /** Region of the AML workspace in the id. */
   @visibility(Lifecycle.Read)
   amlWorkspaceLocation?: string;
 
-  /**
-   * Specifies the resource type.
-   */
+  /** Specifies the resource type. */
   @visibility(Lifecycle.Read)
   type?: string;
 
-  /**
-   * Name of the resource.
-   */
+  /** Name of the resource. */
   @visibility(Lifecycle.Read)
   name?: ResourceName;
 
-  /**
-   * The maximum permitted quota of the resource.
-   */
+  /** The maximum permitted quota of the resource. */
   @visibility(Lifecycle.Read)
   limit?: int64;
 
-  /**
-   * An enum describing the unit of quota measurement.
-   */
+  /** An enum describing the unit of quota measurement. */
   @visibility(Lifecycle.Read)
   unit?: QuotaUnit;
 }
 
-/**
- * The Resource Name.
- */
+/** The Resource Name. */
 model ResourceName {
-  /**
-   * The name of the resource.
-   */
+  /** The name of the resource. */
   @visibility(Lifecycle.Read)
   value?: string;
 
-  /**
-   * The localized name of the resource.
-   */
+  /** The localized name of the resource. */
   @visibility(Lifecycle.Read)
   localizedValue?: string;
 }
 
-/**
- * Paginated list of Machine Learning compute objects wrapped in ARM resource envelope.
- */
+/** Paginated list of Machine Learning compute objects wrapped in ARM resource envelope. */
 model PaginatedComputeResourcesList is Azure.Core.Page<ComputeResource>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ComputeResourceSchema {
-  /**
-   * Compute properties
-   */
+  /** Compute properties */
   properties?: Compute;
 }
 
-/**
- * Machine Learning compute object.
- */
+/** Machine Learning compute object. */
 @discriminator("computeType")
 model Compute {
-  /**
-   * The type of compute
-   */
+  /** The type of compute */
   computeType: ComputeType;
 
-  /**
-   * Location for the underlying compute
-   */
+  /** Location for the underlying compute */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   computeLocation?: string;
 
-  /**
-   * The provision state of the cluster. Valid values are Unknown, Updating, Provisioning, Succeeded, and Failed.
-   */
+  /** The provision state of the cluster. Valid values are Unknown, Updating, Provisioning, Succeeded, and Failed. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  /**
-   * The description of the Machine Learning compute.
-   */
+  /** The description of the Machine Learning compute. */
   description?: string;
 
-  /**
-   * The time at which the compute was created.
-   */
+  /** The time at which the compute was created. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdOn?: utcDateTime;
 
-  /**
-   * The time at which the compute was last modified.
-   */
+  /** The time at which the compute was last modified. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   modifiedOn?: utcDateTime;
 
-  /**
-   * ARM resource id of the underlying compute
-   */
+  /** ARM resource id of the underlying compute */
   resourceId?: string;
 
-  /**
-   * Errors during provisioning
-   */
+  /** Errors during provisioning */
   @visibility(Lifecycle.Read)
   @identifiers(#["/error/code"])
   provisioningErrors?: ErrorResponse[];
 
-  /**
-   * Indicating whether the compute was provisioned by user and brought from outside if true, or machine learning service provisioned it if false.
-   */
+  /** Indicating whether the compute was provisioned by user and brought from outside if true, or machine learning service provisioned it if false. */
   @visibility(Lifecycle.Read)
   isAttachedCompute?: boolean;
 
-  /**
-   * Opt-out of local authentication and ensure customers can use only MSI and AAD exclusively for authentication.
-   */
+  /** Opt-out of local authentication and ensure customers can use only MSI and AAD exclusively for authentication. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   disableLocalAuth?: boolean;
 }
 
-/**
- * AmlCompute update parameters.
- */
+/** AmlCompute update parameters. */
 model ClusterUpdateParameters {
-  /**
-   * The properties of the amlCompute.
-   */
+  /** The properties of the amlCompute. */
   properties?: ClusterUpdateProperties;
 }
 
-/**
- * The properties of a amlCompute that need to be updated.
- */
+/** The properties of a amlCompute that need to be updated. */
 model ClusterUpdateProperties {
-  /**
-   * Properties of ClusterUpdate
-   */
+  /** Properties of ClusterUpdate */
   properties?: ScaleSettingsInformation;
 }
 
-/**
- * Desired scale settings for the amlCompute.
- */
+/** Desired scale settings for the amlCompute. */
 model ScaleSettingsInformation {
-  /**
-   * scale settings for AML Compute
-   */
+  /** scale settings for AML Compute */
   scaleSettings?: ScaleSettings;
 }
 
-/**
- * scale settings for AML Compute
- */
+/** scale settings for AML Compute */
 model ScaleSettings {
-  /**
-   * Max number of nodes to use
-   */
+  /** Max number of nodes to use */
   maxNodeCount: int32;
 
-  /**
-   * Min number of nodes to use
-   */
+  /** Min number of nodes to use */
   minNodeCount?: int32;
 
-  /**
-   * Node Idle Time before scaling down amlCompute. This string needs to be in the RFC Format.
-   */
+  /** Node Idle Time before scaling down amlCompute. This string needs to be in the RFC Format. */
   nodeIdleTimeBeforeScaleDown?: duration;
 }
 
-/**
- * Specifies the custom service configuration
- */
+/** Specifies the custom service configuration */
 model CustomService {
   ...Record<unknown>;
 
-  /**
-   * Name of the Custom Service
-   */
+  /** Name of the Custom Service */
   name?: string;
 
-  /**
-   * Describes the Image Specifications
-   */
+  /** Describes the Image Specifications */
   image?: Image;
 
-  /**
-   * Environment Variable for the container
-   */
+  /** Environment Variable for the container */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   environmentVariables?: Record<EnvironmentVariable>;
 
-  /**
-   * Describes the docker settings for the image
-   */
+  /** Describes the docker settings for the image */
   docker?: Docker;
 
-  /**
-   * Configuring the endpoints for the container
-   */
+  /** Configuring the endpoints for the container */
   @identifiers(#["name"])
   endpoints?: Endpoint[];
 
-  /**
-   * Configuring the volumes for the container
-   */
+  /** Configuring the volumes for the container */
   @identifiers(#["source", "target"])
   volumes?: VolumeDefinition[];
 }
@@ -5157,14 +3409,10 @@ model CustomService {
 model Image {
   ...Record<unknown>;
 
-  /**
-   * Type of the image. Possible values are: docker - For docker images. azureml - For AzureML images
-   */
+  /** Type of the image. Possible values are: docker - For docker images. azureml - For AzureML images */
   type?: ImageType = ImageType.docker;
 
-  /**
-   * Image reference URL
-   */
+  /** Image reference URL */
   reference?: string;
 }
 
@@ -5172,14 +3420,10 @@ model Image {
 model EnvironmentVariable {
   ...Record<unknown>;
 
-  /**
-   * Type of the Environment Variable. Possible values are: local - For local variable
-   */
+  /** Type of the Environment Variable. Possible values are: local - For local variable */
   type?: EnvironmentVariableType = EnvironmentVariableType.local;
 
-  /**
-   * Value of the Environment variable
-   */
+  /** Value of the Environment variable */
   value?: string;
 }
 
@@ -5187,213 +3431,141 @@ model EnvironmentVariable {
 model Docker {
   ...Record<unknown>;
 
-  /**
-   * Indicate whether container shall run in privileged or non-privileged mode.
-   */
+  /** Indicate whether container shall run in privileged or non-privileged mode. */
   privileged?: boolean;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model Endpoint {
-  /**
-   * Protocol over which communication will happen over this endpoint
-   */
+  /** Protocol over which communication will happen over this endpoint */
   protocol?: Protocol = Protocol.tcp;
 
-  /**
-   * Name of the Endpoint
-   */
+  /** Name of the Endpoint */
   name?: string;
 
-  /**
-   * Application port inside the container.
-   */
+  /** Application port inside the container. */
   target?: int32;
 
-  /**
-   * Port over which the application is exposed from container.
-   */
+  /** Port over which the application is exposed from container. */
   published?: int32;
 
-  /**
-   * Host IP over which the application is exposed from the container
-   */
+  /** Host IP over which the application is exposed from the container */
   hostIp?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model VolumeDefinition {
-  /**
-   * Type of Volume Definition. Possible Values: bind,volume,tmpfs,npipe
-   */
+  /** Type of Volume Definition. Possible Values: bind,volume,tmpfs,npipe */
   type?: VolumeDefinitionType = VolumeDefinitionType.bind;
 
-  /**
-   * Indicate whether to mount volume as readOnly. Default value for this is false.
-   */
+  /** Indicate whether to mount volume as readOnly. Default value for this is false. */
   readOnly?: boolean;
 
-  /**
-   * Source of the mount. For bind mounts this is the host path.
-   */
+  /** Source of the mount. For bind mounts this is the host path. */
   source?: string;
 
-  /**
-   * Target of the mount. For bind mounts this is the path in the container.
-   */
+  /** Target of the mount. For bind mounts this is the path in the container. */
   target?: string;
 
-  /**
-   * Consistency of the volume
-   */
+  /** Consistency of the volume */
   consistency?: string;
 
-  /**
-   * Bind Options of the mount
-   */
+  /** Bind Options of the mount */
   bind?: BindOptions;
 
-  /**
-   * Volume Options of the mount
-   */
+  /** Volume Options of the mount */
   volume?: VolumeOptions;
 
-  /**
-   * tmpfs option of the mount
-   */
+  /** tmpfs option of the mount */
   tmpfs?: TmpfsOptions;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model BindOptions {
-  /**
-   * Type of Bind Option
-   */
+  /** Type of Bind Option */
   propagation?: string;
 
-  /**
-   * Indicate whether to create host path.
-   */
+  /** Indicate whether to create host path. */
   createHostPath?: boolean;
 
-  /**
-   * Mention the selinux options.
-   */
+  /** Mention the selinux options. */
   selinux?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model VolumeOptions {
-  /**
-   * Indicate whether volume is nocopy
-   */
+  /** Indicate whether volume is nocopy */
   nocopy?: boolean;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model TmpfsOptions {
-  /**
-   * Mention the Tmpfs size
-   */
+  /** Mention the Tmpfs size */
   size?: int32;
 }
 
-/**
- * Result of AmlCompute Nodes
- */
+/** Result of AmlCompute Nodes */
 model AmlComputeNodesInformation {
-  /**
-   * The collection of returned AmlCompute nodes details.
-   */
+  /** The collection of returned AmlCompute nodes details. */
   @visibility(Lifecycle.Read)
   @pageItems
   @identifiers(#["nodeId"])
   nodes?: AmlComputeNodeInformation[];
 
-  /**
-   * The continuation token.
-   */
+  /** The continuation token. */
   @visibility(Lifecycle.Read)
   @nextLink
   nextLink?: string;
 }
 
-/**
- * Compute node information related to a AmlCompute.
- */
+/** Compute node information related to a AmlCompute. */
 model AmlComputeNodeInformation {
-  /**
-   * ID of the compute node.
-   */
+  /** ID of the compute node. */
   @visibility(Lifecycle.Read)
   nodeId?: string;
 
-  /**
-   * Private IP address of the compute node.
-   */
+  /** Private IP address of the compute node. */
   @visibility(Lifecycle.Read)
   privateIpAddress?: string;
 
-  /**
-   * Public IP address of the compute node.
-   */
+  /** Public IP address of the compute node. */
   @visibility(Lifecycle.Read)
   publicIpAddress?: string;
 
-  /**
-   * SSH port number of the node.
-   */
+  /** SSH port number of the node. */
   @visibility(Lifecycle.Read)
   port?: int32;
 
-  /**
-   * State of the compute node. Values are idle, running, preparing, unusable, leaving and preempted.
-   */
+  /** State of the compute node. Values are idle, running, preparing, unusable, leaving and preempted. */
   @visibility(Lifecycle.Read)
   nodeState?: NodeState;
 
-  /**
-   * ID of the Experiment running on the node, if any else null.
-   */
+  /** ID of the Experiment running on the node, if any else null. */
   @visibility(Lifecycle.Read)
   runId?: string;
 }
 
-/**
- * Secrets related to a Machine Learning compute. Might differ for every type of compute.
- */
+/** Secrets related to a Machine Learning compute. Might differ for every type of compute. */
 @discriminator("computeType")
 model ComputeSecrets {
-  /**
-   * The type of compute
-   */
+  /** The type of compute */
   computeType: ComputeType;
 }
 
-/**
- * Stops compute instance after user defined period of inactivity.
- */
+/** Stops compute instance after user defined period of inactivity. */
 model IdleShutdownSetting {
-  /**
-   * Time is defined in ISO8601 format. Minimum is 15 min, maximum is 3 days.
-   */
+  /** Time is defined in ISO8601 format. Minimum is 15 min, maximum is 3 days. */
   idleTimeBeforeShutdown?: string;
 }
 
-/**
- * A paginated list of CodeContainer entities.
- */
+/** A paginated list of CodeContainer entities. */
 model CodeContainerResourceArmPaginatedResult
   is Azure.Core.Page<CodeContainerResource>;
 
-/**
- * Container for code asset versions.
- */
+/** Container for code asset versions. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model CodeContainer extends AssetContainer {
-  /**
-   * Provisioning state for the code container.
-   */
+  /** Provisioning state for the code container. */
   @visibility(Lifecycle.Read)
   provisioningState?: AssetProvisioningState;
 }
@@ -5401,64 +3573,44 @@ model CodeContainer extends AssetContainer {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AssetContainer extends ResourceBase {
-  /**
-   * Is the asset archived?
-   */
+  /** Is the asset archived? */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   isArchived?: boolean;
 
-  /**
-   * The latest version inside this container.
-   */
+  /** The latest version inside this container. */
   @visibility(Lifecycle.Read)
   latestVersion?: string;
 
-  /**
-   * The next auto incremental version
-   */
+  /** The next auto incremental version */
   @visibility(Lifecycle.Read)
   nextVersion?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ResourceBase {
-  /**
-   * The asset description text.
-   */
+  /** The asset description text. */
   description?: string;
 
-  /**
-   * The asset property dictionary.
-   */
+  /** The asset property dictionary. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   properties?: Record<string>;
 
-  /**
-   * Tag dictionary. Tags can be added, removed, and updated.
-   */
+  /** Tag dictionary. Tags can be added, removed, and updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 
-/**
- * A paginated list of CodeVersion entities.
- */
+/** A paginated list of CodeVersion entities. */
 model CodeVersionResourceArmPaginatedResult
   is Azure.Core.Page<CodeVersionResource>;
 
-/**
- * Code asset version details.
- */
+/** Code asset version details. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model CodeVersion extends AssetBase {
-  /**
-   * Uri where code is located
-   */
+  /** Uri where code is located */
   codeUri?: string;
 
-  /**
-   * Provisioning state for the code version.
-   */
+  /** Provisioning state for the code version. */
   @visibility(Lifecycle.Read)
   provisioningState?: AssetProvisioningState;
 }
@@ -5466,68 +3618,48 @@ model CodeVersion extends AssetBase {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AssetBase extends ResourceBase {
-  /**
-   * Specifies the lifecycle setting of managed data asset.
-   */
+  /** Specifies the lifecycle setting of managed data asset. */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   autoDeleteSetting?: AutoDeleteSetting;
 
-  /**
-   * If the name version are system generated (anonymous registration). For types where Stage is defined, when Stage is provided it will be used to populate IsAnonymous
-   */
+  /** If the name version are system generated (anonymous registration). For types where Stage is defined, when Stage is provided it will be used to populate IsAnonymous */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   isAnonymous?: boolean;
 
-  /**
-   * Is the asset archived? For types where Stage is defined, when Stage is provided it will be used to populate IsArchived
-   */
+  /** Is the asset archived? For types where Stage is defined, when Stage is provided it will be used to populate IsArchived */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   isArchived?: boolean;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AutoDeleteSetting {
-  /**
-   * When to check if an asset is expired
-   */
+  /** When to check if an asset is expired */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   condition?: AutoDeleteCondition;
 
-  /**
-   * Expiration condition value.
-   */
+  /** Expiration condition value. */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   value?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model PendingUploadRequestDto {
-  /**
-   * If PendingUploadId = null then random guid will be used.
-   */
+  /** If PendingUploadId = null then random guid will be used. */
   pendingUploadId?: string;
 
-  /**
-   * TemporaryBlobReference is the only supported type
-   */
+  /** TemporaryBlobReference is the only supported type */
   pendingUploadType?: PendingUploadType;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model PendingUploadResponseDto {
-  /**
-   * Container level read, write, list SAS
-   */
+  /** Container level read, write, list SAS */
   blobReferenceForConsumption?: BlobReferenceForConsumptionDto;
 
-  /**
-   * ID for this upload request
-   */
+  /** ID for this upload request */
   pendingUploadId?: string;
 
-  /**
-   * TemporaryBlobReference is the only supported type
-   */
+  /** TemporaryBlobReference is the only supported type */
   pendingUploadType?: PendingUploadType;
 }
 
@@ -5539,29 +3671,21 @@ model BlobReferenceForConsumptionDto {
    */
   blobUri?: url;
 
-  /**
-   * Credential info to access storage account
-   */
+  /** Credential info to access storage account */
   credential?: PendingUploadCredentialDto;
 
-  /**
-   * Arm ID of the storage account to use
-   */
+  /** Arm ID of the storage account to use */
   storageAccountArmId?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("credentialType")
 model PendingUploadCredentialDto {
-  /**
-   * [Required] Credential type used to authentication with storage.
-   */
+  /** [Required] Credential type used to authentication with storage. */
   credentialType: PendingUploadCredentialType;
 }
 
-/**
- * A paginated list of ComponentContainer entities.
- */
+/** A paginated list of ComponentContainer entities. */
 model ComponentContainerResourceArmPaginatedResult
   is Azure.Core.Page<ComponentContainerResource>;
 
@@ -5571,22 +3695,16 @@ model ComponentContainerResourceArmPaginatedResult
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ComponentContainer extends AssetContainer {
-  /**
-   * Provisioning state for the component container.
-   */
+  /** Provisioning state for the component container. */
   @visibility(Lifecycle.Read)
   provisioningState?: AssetProvisioningState;
 }
 
-/**
- * A paginated list of ComponentVersion entities.
- */
+/** A paginated list of ComponentVersion entities. */
 model ComponentVersionResourceArmPaginatedResult
   is Azure.Core.Page<ComponentVersionResource>;
 
-/**
- * Definition of a component version: defines resources that span component types.
- */
+/** Definition of a component version: defines resources that span component types. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ComponentVersion extends AssetBase {
   /**
@@ -5596,131 +3714,89 @@ model ComponentVersion extends AssetBase {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   componentSpec?: unknown;
 
-  /**
-   * Provisioning state for the component version.
-   */
+  /** Provisioning state for the component version. */
   @visibility(Lifecycle.Read)
   provisioningState?: AssetProvisioningState;
 
-  /**
-   * Stage in the component lifecycle
-   */
+  /** Stage in the component lifecycle */
   stage?: string;
 }
 
-/**
- * A paginated list of DataContainer entities.
- */
+/** A paginated list of DataContainer entities. */
 model DataContainerResourceArmPaginatedResult
   is Azure.Core.Page<DataContainerResource>;
 
-/**
- * Container for data asset versions.
- */
+/** Container for data asset versions. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model DataContainer extends AssetContainer {
-  /**
-   * [Required] Specifies the type of data.
-   */
+  /** [Required] Specifies the type of data. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   dataType: DataType;
 }
 
-/**
- * A paginated list of DataVersionBase entities.
- */
+/** A paginated list of DataVersionBase entities. */
 model DataVersionBaseResourceArmPaginatedResult
   is Azure.Core.Page<DataVersionBaseResource>;
 
-/**
- * Data version base definition
- */
+/** Data version base definition */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 @discriminator("dataType")
 model DataVersionBase extends AssetBase {
-  /**
-   * [Required] Specifies the type of data.
-   */
+  /** [Required] Specifies the type of data. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   dataType: DataType;
 
-  /**
-   * [Required] Uri of the data. Example: https://go.microsoft.com/fwlink/?linkid=2202330
-   */
+  /** [Required] Uri of the data. Example: https://go.microsoft.com/fwlink/?linkid=2202330 */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   dataUri: string;
 
-  /**
-   * Intellectual Property details. Used if data is an Intellectual Property.
-   */
+  /** Intellectual Property details. Used if data is an Intellectual Property. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   intellectualProperty?: IntellectualProperty;
 
-  /**
-   * Stage in the data lifecycle assigned to this data asset
-   */
+  /** Stage in the data lifecycle assigned to this data asset */
   stage?: string;
 }
 
-/**
- * Intellectual Property details for a resource.
- */
+/** Intellectual Property details for a resource. */
 model IntellectualProperty {
-  /**
-   * Protection level of the Intellectual Property.
-   */
+  /** Protection level of the Intellectual Property. */
   protectionLevel?: ProtectionLevel;
 
-  /**
-   * [Required] Publisher of the Intellectual Property. Must be the same as Registry publisher name.
-   */
+  /** [Required] Publisher of the Intellectual Property. Must be the same as Registry publisher name. */
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   publisher: string;
 }
 
-/**
- * A paginated list of EnvironmentContainer entities.
- */
+/** A paginated list of EnvironmentContainer entities. */
 model EnvironmentContainerResourceArmPaginatedResult
   is Azure.Core.Page<EnvironmentContainerResource>;
 
-/**
- * Container for environment specification versions.
- */
+/** Container for environment specification versions. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model EnvironmentContainer extends AssetContainer {
-  /**
-   * Provisioning state for the environment container.
-   */
+  /** Provisioning state for the environment container. */
   @visibility(Lifecycle.Read)
   provisioningState?: AssetProvisioningState;
 }
 
-/**
- * A paginated list of EnvironmentVersion entities.
- */
+/** A paginated list of EnvironmentVersion entities. */
 model EnvironmentVersionResourceArmPaginatedResult
   is Azure.Core.Page<EnvironmentVersionResource>;
 
-/**
- * Environment version details.
- */
+/** Environment version details. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model EnvironmentVersion extends AssetBase {
-  /**
-   * Defines if image needs to be rebuilt based on base image changes.
-   */
+  /** Defines if image needs to be rebuilt based on base image changes. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   autoRebuild?: AutoRebuildSetting;
 
-  /**
-   * Configuration settings for Docker build context.
-   */
+  /** Configuration settings for Docker build context. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   build?: BuildContext;
 
@@ -5745,39 +3821,27 @@ model EnvironmentVersion extends AssetBase {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   image?: string;
 
-  /**
-   * Defines configuration specific to inference.
-   */
+  /** Defines configuration specific to inference. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   inferenceConfig?: InferenceContainerProperties;
 
-  /**
-   * Intellectual Property details. Used if environment is an Intellectual Property.
-   */
+  /** Intellectual Property details. Used if environment is an Intellectual Property. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   intellectualProperty?: IntellectualProperty;
 
-  /**
-   * The OS type of the environment.
-   */
+  /** The OS type of the environment. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   osType?: OperatingSystemType;
 
-  /**
-   * Provisioning state for the environment version.
-   */
+  /** Provisioning state for the environment version. */
   @visibility(Lifecycle.Read)
   provisioningState?: AssetProvisioningState;
 
-  /**
-   * Stage in the environment lifecycle assigned to this environment
-   */
+  /** Stage in the environment lifecycle assigned to this environment */
   stage?: string;
 }
 
-/**
- * Configuration settings for Docker build context
- */
+/** Configuration settings for Docker build context */
 model BuildContext {
   /**
    * [Required] URI of the Docker build context used to build the image. Supports blob URIs on environment creation and may return blob or Git URIs.
@@ -5798,158 +3862,108 @@ model BuildContext {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model InferenceContainerProperties {
-  /**
-   * The route to check the liveness of the inference server container.
-   */
+  /** The route to check the liveness of the inference server container. */
   livenessRoute?: Route;
 
-  /**
-   * The route to check the readiness of the inference server container.
-   */
+  /** The route to check the readiness of the inference server container. */
   readinessRoute?: Route;
 
-  /**
-   * The port to send the scoring requests to, within the inference server container.
-   */
+  /** The port to send the scoring requests to, within the inference server container. */
   scoringRoute?: Route;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model Route {
-  /**
-   * [Required] The path for the route.
-   */
+  /** [Required] The path for the route. */
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   path: string;
 
-  /**
-   * [Required] The port for the route.
-   */
+  /** [Required] The port for the route. */
   port: int32;
 }
 
-/**
- * A paginated list of ModelContainer entities.
- */
+/** A paginated list of ModelContainer entities. */
 model ModelContainerResourceArmPaginatedResult
   is Azure.Core.Page<ModelContainerResource>;
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ModelContainer extends AssetContainer {
-  /**
-   * Provisioning state for the model container.
-   */
+  /** Provisioning state for the model container. */
   @visibility(Lifecycle.Read)
   provisioningState?: AssetProvisioningState;
 }
 
-/**
- * A paginated list of ModelVersion entities.
- */
+/** A paginated list of ModelVersion entities. */
 model ModelVersionResourceArmPaginatedResult
   is Azure.Core.Page<ModelVersionResource>;
 
-/**
- * Model asset version details.
- */
+/** Model asset version details. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ModelVersion extends AssetBase {
-  /**
-   * Mapping of model flavors to their properties.
-   */
+  /** Mapping of model flavors to their properties. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   flavors?: Record<FlavorData>;
 
-  /**
-   * Intellectual Property details. Used if model is an Intellectual Property.
-   */
+  /** Intellectual Property details. Used if model is an Intellectual Property. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   intellectualProperty?: IntellectualProperty;
 
-  /**
-   * Name of the training job which produced this model
-   */
+  /** Name of the training job which produced this model */
   jobName?: string;
 
-  /**
-   * The storage format for this entity. Used for NCD.
-   */
+  /** The storage format for this entity. Used for NCD. */
   modelType?: string;
 
-  /**
-   * The URI path to the model contents.
-   */
+  /** The URI path to the model contents. */
   modelUri?: string;
 
-  /**
-   * Provisioning state for the model version.
-   */
+  /** Provisioning state for the model version. */
   @visibility(Lifecycle.Read)
   provisioningState?: AssetProvisioningState;
 
-  /**
-   * Stage in the model lifecycle assigned to this model
-   */
+  /** Stage in the model lifecycle assigned to this model */
   stage?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model FlavorData {
-  /**
-   * Model flavor-specific data.
-   */
+  /** Model flavor-specific data. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   data?: Record<string>;
 }
 
-/**
- * Model package operation request properties.
- */
+/** Model package operation request properties. */
 model PackageRequest {
-  /**
-   * Base environment to start with.
-   */
+  /** Base environment to start with. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   baseEnvironmentSource?: BaseEnvironmentSource;
 
-  /**
-   * Collection of environment variables.
-   */
+  /** Collection of environment variables. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentVariables?: Record<string>;
 
-  /**
-   * [Required] Inferencing server configurations.
-   */
+  /** [Required] Inferencing server configurations. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   inferencingServer: InferencingServer;
 
-  /**
-   * Collection of inputs.
-   */
+  /** Collection of inputs. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @identifiers(#[])
   inputs?: ModelPackageInput[];
 
-  /**
-   * Model configuration including the mount mode.
-   */
+  /** Model configuration including the mount mode. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   modelConfiguration?: ModelConfiguration;
 
-  /**
-   * Tag dictionary. Tags can be added, removed, and updated.
-   */
+  /** Tag dictionary. Tags can be added, removed, and updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   tags?: Record<string>;
 
-  /**
-   * [Required] Arm ID of the target environment to be created by package operation.
-   */
+  /** [Required] Arm ID of the target environment to be created by package operation. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
@@ -5959,164 +3973,110 @@ model PackageRequest {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("baseEnvironmentSourceType")
 model BaseEnvironmentSource {
-  /**
-   * [Required] Base environment type.
-   */
+  /** [Required] Base environment type. */
   baseEnvironmentSourceType: BaseEnvironmentSourceType;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("serverType")
 model InferencingServer {
-  /**
-   * [Required] Inferencing server type for various targets.
-   */
+  /** [Required] Inferencing server type for various targets. */
   serverType: InferencingServerType;
 }
 
-/**
- * Model package input options.
- */
+/** Model package input options. */
 model ModelPackageInput {
-  /**
-   * [Required] Type of the input included in the target image.
-   */
+  /** [Required] Type of the input included in the target image. */
   inputType: PackageInputType;
 
-  /**
-   * Input delivery mode of the input.
-   */
+  /** Input delivery mode of the input. */
   mode?: PackageInputDeliveryMode;
 
-  /**
-   * Relative mount path of the input in the target image.
-   */
+  /** Relative mount path of the input in the target image. */
   mountPath?: string;
 
-  /**
-   * [Required] Location of the input.
-   */
+  /** [Required] Location of the input. */
   path: PackageInputPathBase;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("inputPathType")
 model PackageInputPathBase {
-  /**
-   * [Required] Input path type for package inputs.
-   */
+  /** [Required] Input path type for package inputs. */
   inputPathType: InputPathType;
 }
 
-/**
- * Model configuration options.
- */
+/** Model configuration options. */
 model ModelConfiguration {
-  /**
-   * Input delivery mode for the model.
-   */
+  /** Input delivery mode for the model. */
   mode?: PackageInputDeliveryMode;
 
-  /**
-   * Relative mounting path of the model in the target image.
-   */
+  /** Relative mounting path of the model in the target image. */
   mountPath?: string;
 }
 
-/**
- * Package response returned after async package operation completes successfully.
- */
+/** Package response returned after async package operation completes successfully. */
 model PackageResponse {
-  /**
-   * Base environment to start with.
-   */
+  /** Base environment to start with. */
   @visibility(Lifecycle.Read)
   baseEnvironmentSource?: BaseEnvironmentSource;
 
-  /**
-   * Build id of the image build operation.
-   */
+  /** Build id of the image build operation. */
   @visibility(Lifecycle.Read)
   buildId?: string;
 
-  /**
-   * Build state of the image build operation.
-   */
+  /** Build state of the image build operation. */
   @visibility(Lifecycle.Read)
   buildState?: PackageBuildState;
 
-  /**
-   * Collection of environment variables.
-   */
+  /** Collection of environment variables. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read)
   environmentVariables?: Record<string>;
 
-  /**
-   * Inferencing server configurations.
-   */
+  /** Inferencing server configurations. */
   @visibility(Lifecycle.Read)
   inferencingServer?: InferencingServer;
 
-  /**
-   * Collection of inputs.
-   */
+  /** Collection of inputs. */
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   inputs?: ModelPackageInput[];
 
-  /**
-   * Log url of the image build operation.
-   */
+  /** Log url of the image build operation. */
   @visibility(Lifecycle.Read)
   logUrl?: string;
 
-  /**
-   * Model configuration including the mount mode.
-   */
+  /** Model configuration including the mount mode. */
   @visibility(Lifecycle.Read)
   modelConfiguration?: ModelConfiguration;
 
-  /**
-   * Tag dictionary. Tags can be added, removed, and updated.
-   */
+  /** Tag dictionary. Tags can be added, removed, and updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read)
   tags?: Record<string>;
 
-  /**
-   * Asset ID of the target environment created by package operation.
-   */
+  /** Asset ID of the target environment created by package operation. */
   @visibility(Lifecycle.Read)
   targetEnvironmentId?: string;
 }
 
-/**
- * A paginated list of BatchEndpoint entities.
- */
+/** A paginated list of BatchEndpoint entities. */
 model BatchEndpointTrackedResourceArmPaginatedResult
   is Azure.Core.Page<BatchEndpointTrackedResource>;
 
-/**
- * Batch endpoint configuration.
- */
+/** Batch endpoint configuration. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model BatchEndpoint extends EndpointPropertiesBase {
-  /**
-   * Default values for Batch Endpoint.
-   */
+  /** Default values for Batch Endpoint. */
   defaults?: BatchEndpointDefaults;
 
-  /**
-   * Provisioning state for the endpoint.
-   */
+  /** Provisioning state for the endpoint. */
   @visibility(Lifecycle.Read)
   provisioningState?: EndpointProvisioningState;
 }
 
-/**
- * Batch endpoint default values
- */
+/** Batch endpoint default values */
 model BatchEndpointDefaults {
   /**
    * Name of the deployment that will be default for the endpoint.
@@ -6125,18 +4085,12 @@ model BatchEndpointDefaults {
   deploymentName?: string;
 }
 
-/**
- * Inference Endpoint base definition
- */
+/** Inference Endpoint base definition */
 model EndpointPropertiesBase {
-  /**
-   * [Required] Use 'Key' for key based authentication and 'AMLToken' for Azure Machine Learning token-based authentication. 'Key' doesn't expire but 'AMLToken' does.
-   */
+  /** [Required] Use 'Key' for key based authentication and 'AMLToken' for Azure Machine Learning token-based authentication. 'Key' doesn't expire but 'AMLToken' does. */
   authMode: EndpointAuthMode;
 
-  /**
-   * Description of the inference endpoint.
-   */
+  /** Description of the inference endpoint. */
   description?: string;
 
   /**
@@ -6146,100 +4100,66 @@ model EndpointPropertiesBase {
   @visibility(Lifecycle.Create)
   keys?: EndpointAuthKeys;
 
-  /**
-   * Property dictionary. Properties can be added, but not removed or altered.
-   */
+  /** Property dictionary. Properties can be added, but not removed or altered. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   properties?: Record<string>;
 
-  /**
-   * Endpoint URI.
-   */
+  /** Endpoint URI. */
   @visibility(Lifecycle.Read)
   scoringUri?: url;
 
-  /**
-   * Endpoint Swagger URI.
-   */
+  /** Endpoint Swagger URI. */
   @visibility(Lifecycle.Read)
   swaggerUri?: url;
 }
 
-/**
- * Keys for endpoint authentication.
- */
+/** Keys for endpoint authentication. */
 model EndpointAuthKeys {
-  /**
-   * The primary key.
-   */
+  /** The primary key. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   primaryKey?: string;
 
-  /**
-   * The secondary key.
-   */
+  /** The secondary key. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   secondaryKey?: string;
 }
 
-/**
- * Strictly used in update requests.
- */
+/** Strictly used in update requests. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model PartialMinimalTrackedResourceWithIdentity
   extends PartialMinimalTrackedResource {
-  /**
-   * Managed service identity (system assigned and/or user assigned identities)
-   */
+  /** Managed service identity (system assigned and/or user assigned identities) */
   identity?: PartialManagedServiceIdentity;
 }
 
-/**
- * Managed service identity (system assigned and/or user assigned identities)
- */
+/** Managed service identity (system assigned and/or user assigned identities) */
 model PartialManagedServiceIdentity {
-  /**
-   * Managed service identity (system assigned and/or user assigned identities)
-   */
+  /** Managed service identity (system assigned and/or user assigned identities) */
   type?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType;
 
-  /**
-   * The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.
-   */
+  /** The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   userAssignedIdentities?: Record<unknown>;
 }
 
-/**
- * Strictly used in update requests.
- */
+/** Strictly used in update requests. */
 model PartialMinimalTrackedResource {
-  /**
-   * Resource tags.
-   */
+  /** Resource tags. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 
-/**
- * A paginated list of BatchDeployment entities.
- */
+/** A paginated list of BatchDeployment entities. */
 model BatchDeploymentTrackedResourceArmPaginatedResult
   is Azure.Core.Page<BatchDeploymentTrackedResource>;
 
-/**
- * Batch inference settings per deployment.
- */
+/** Batch inference settings per deployment. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model BatchDeployment extends EndpointDeploymentPropertiesBase {
-  /**
-   * Compute target for batch inference operation.
-   */
+  /** Compute target for batch inference operation. */
   compute?: string;
 
-  /**
-   * Properties relevant to different deployment types.
-   */
+  /** Properties relevant to different deployment types. */
   deploymentConfiguration?: BatchDeploymentConfiguration;
 
   /**
@@ -6251,14 +4171,10 @@ model BatchDeployment extends EndpointDeploymentPropertiesBase {
    */
   errorThreshold?: int32 = -1;
 
-  /**
-   * Logging level for batch inference operation.
-   */
+  /** Logging level for batch inference operation. */
   loggingLevel?: BatchLoggingLevel;
 
-  /**
-   * Indicates maximum number of parallelism per instance.
-   */
+  /** Indicates maximum number of parallelism per instance. */
   maxConcurrencyPerInstance?: int32 = 1;
 
   /**
@@ -6268,24 +4184,16 @@ model BatchDeployment extends EndpointDeploymentPropertiesBase {
    */
   miniBatchSize?: int64 = 10;
 
-  /**
-   * Reference to the model asset for the endpoint deployment.
-   */
+  /** Reference to the model asset for the endpoint deployment. */
   `model`?: AssetReferenceBase;
 
-  /**
-   * Indicates how the output will be organized.
-   */
+  /** Indicates how the output will be organized. */
   outputAction?: BatchOutputAction;
 
-  /**
-   * Customized output file name for append_row output action.
-   */
+  /** Customized output file name for append_row output action. */
   outputFileName?: string = "predictions.csv";
 
-  /**
-   * Provisioning state for the endpoint deployment.
-   */
+  /** Provisioning state for the endpoint deployment. */
   @visibility(Lifecycle.Read)
   provisioningState?: DeploymentProvisioningState;
 
@@ -6302,25 +4210,17 @@ model BatchDeployment extends EndpointDeploymentPropertiesBase {
   retrySettings?: BatchRetrySettings;
 }
 
-/**
- * Properties relevant to different deployment types.
- */
+/** Properties relevant to different deployment types. */
 @discriminator("deploymentConfigurationType")
 model BatchDeploymentConfiguration {
-  /**
-   * [Required] The type of the deployment
-   */
+  /** [Required] The type of the deployment */
   deploymentConfigurationType: BatchDeploymentConfigurationType;
 }
 
-/**
- * Base definition for asset references.
- */
+/** Base definition for asset references. */
 @discriminator("referenceType")
 model AssetReferenceBase {
-  /**
-   * [Required] Specifies the type of asset reference.
-   */
+  /** [Required] Specifies the type of asset reference. */
   referenceType: ReferenceType;
 }
 
@@ -6330,21 +4230,15 @@ model DeploymentResourceConfiguration extends ResourceConfiguration {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ResourceConfiguration {
-  /**
-   * Optional number of instances or nodes used by the compute target.
-   */
+  /** Optional number of instances or nodes used by the compute target. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   instanceCount?: int32 = 1;
 
-  /**
-   * Optional type of VM used as supported by the compute target.
-   */
+  /** Optional type of VM used as supported by the compute target. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   instanceType?: string;
 
-  /**
-   * Locations where the job can run.
-   */
+  /** Locations where the job can run. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   locations?: string[];
 
@@ -6355,365 +4249,237 @@ model ResourceConfiguration {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   maxInstanceCount?: int32;
 
-  /**
-   * Additional properties bag.
-   */
+  /** Additional properties bag. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   properties?: Record<unknown>;
 }
 
-/**
- * Retry settings for a batch inference operation.
- */
+/** Retry settings for a batch inference operation. */
 model BatchRetrySettings {
-  /**
-   * Maximum retry count for a mini-batch
-   */
+  /** Maximum retry count for a mini-batch */
   maxRetries?: int32 = 3;
 
-  /**
-   * Invocation timeout for a mini-batch, in ISO 8601 format.
-   */
+  /** Invocation timeout for a mini-batch, in ISO 8601 format. */
   timeout?: duration;
 }
 
-/**
- * Base definition for endpoint deployment.
- */
+/** Base definition for endpoint deployment. */
 model EndpointDeploymentPropertiesBase {
-  /**
-   * Code configuration for the endpoint deployment.
-   */
+  /** Code configuration for the endpoint deployment. */
   codeConfiguration?: CodeConfiguration;
 
-  /**
-   * Description of the endpoint deployment.
-   */
+  /** Description of the endpoint deployment. */
   description?: string;
 
-  /**
-   * ARM resource ID of the environment specification for the endpoint deployment.
-   */
+  /** ARM resource ID of the environment specification for the endpoint deployment. */
   environmentId?: string;
 
-  /**
-   * Environment variables configuration for the deployment.
-   */
+  /** Environment variables configuration for the deployment. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   environmentVariables?: Record<string>;
 
-  /**
-   * Property dictionary. Properties can be added, but not removed or altered.
-   */
+  /** Property dictionary. Properties can be added, but not removed or altered. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   properties?: Record<string>;
 }
 
-/**
- * Configuration for a scoring code asset.
- */
+/** Configuration for a scoring code asset. */
 model CodeConfiguration {
-  /**
-   * ARM resource ID of the code asset.
-   */
+  /** ARM resource ID of the code asset. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   codeId?: string;
 
-  /**
-   * [Required] The script to execute on startup. eg. "score.py"
-   */
+  /** [Required] The script to execute on startup. eg. "score.py" */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   scoringScript: string;
 }
 
-/**
- * Strictly used in update requests.
- */
+/** Strictly used in update requests. */
 model PartialBatchDeploymentPartialMinimalTrackedResourceWithProperties {
-  /**
-   * Additional attributes of the entity.
-   */
+  /** Additional attributes of the entity. */
   properties?: PartialBatchDeployment;
 
-  /**
-   * Resource tags.
-   */
+  /** Resource tags. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 
-/**
- * Mutable batch inference settings per deployment.
- */
+/** Mutable batch inference settings per deployment. */
 model PartialBatchDeployment {
-  /**
-   * Description of the endpoint deployment.
-   */
+  /** Description of the endpoint deployment. */
   description?: string;
 }
 
-/**
- * A paginated list of Datastore entities.
- */
+/** A paginated list of Datastore entities. */
 model DatastoreResourceArmPaginatedResult is Azure.Core.Page<DatastoreResource>;
 
-/**
- * Base definition for datastore contents configuration.
- */
+/** Base definition for datastore contents configuration. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 @discriminator("datastoreType")
 model Datastore extends ResourceBase {
-  /**
-   * [Required] Account credentials.
-   */
+  /** [Required] Account credentials. */
   credentials: DatastoreCredentials;
 
-  /**
-   * [Required] Storage type backing the datastore.
-   */
+  /** [Required] Storage type backing the datastore. */
   datastoreType: DatastoreType;
 
-  /**
-   * Intellectual Property details.
-   */
+  /** Intellectual Property details. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   intellectualProperty?: IntellectualProperty;
 
-  /**
-   * Readonly property to indicate if datastore is the workspace default datastore
-   */
+  /** Readonly property to indicate if datastore is the workspace default datastore */
   @visibility(Lifecycle.Read)
   isDefault?: boolean;
 }
 
-/**
- * Base definition for datastore credentials.
- */
+/** Base definition for datastore credentials. */
 @discriminator("credentialsType")
 model DatastoreCredentials {
-  /**
-   * [Required] Credential type used to authentication with storage.
-   */
+  /** [Required] Credential type used to authentication with storage. */
   credentialsType: CredentialsType;
 }
 
-/**
- * Base definition for datastore secrets.
- */
+/** Base definition for datastore secrets. */
 @discriminator("secretsType")
 model DatastoreSecrets {
-  /**
-   * [Required] Credential type used to authentication with storage.
-   */
+  /** [Required] Credential type used to authentication with storage. */
   secretsType: SecretsType;
 }
 
-/**
- * A paginated list of FeaturesetContainer entities.
- */
+/** A paginated list of FeaturesetContainer entities. */
 model FeaturesetContainerResourceArmPaginatedResult
   is Azure.Core.Page<FeaturesetContainer>;
 
-/**
- * Dto object representing feature set
- */
+/** Dto object representing feature set */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model FeaturesetContainerProperties extends AssetContainer {
-  /**
-   * Provisioning state for the featureset container.
-   */
+  /** Provisioning state for the featureset container. */
   @visibility(Lifecycle.Read)
   provisioningState?: AssetProvisioningState;
 }
 
-/**
- * A paginated list of Feature entities.
- */
+/** A paginated list of Feature entities. */
 model FeatureResourceArmPaginatedResult is Azure.Core.Page<Feature>;
 
-/**
- * Dto object representing feature
- */
+/** Dto object representing feature */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model FeatureProperties extends ResourceBase {
-  /**
-   * Specifies type
-   */
+  /** Specifies type */
   dataType?: FeatureDataType;
 
-  /**
-   * Specifies name
-   */
+  /** Specifies name */
   featureName?: string;
 }
 
-/**
- * A paginated list of FeaturesetVersion entities.
- */
+/** A paginated list of FeaturesetVersion entities. */
 model FeaturesetVersionResourceArmPaginatedResult
   is Azure.Core.Page<FeaturesetVersion>;
 
-/**
- * Dto object representing feature set version
- */
+/** Dto object representing feature set version */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model FeaturesetVersionProperties extends AssetBase {
-  /**
-   * Specifies list of entities
-   */
+  /** Specifies list of entities */
   entities?: string[];
 
-  /**
-   * Specifies the materialization settings
-   */
+  /** Specifies the materialization settings */
   materializationSettings?: MaterializationSettings;
 
-  /**
-   * Provisioning state for the featureset version container.
-   */
+  /** Provisioning state for the featureset version container. */
   @visibility(Lifecycle.Read)
   provisioningState?: AssetProvisioningState;
 
-  /**
-   * Specifies the feature spec details
-   */
+  /** Specifies the feature spec details */
   specification?: FeaturesetSpecification;
 
-  /**
-   * Specifies the asset stage
-   */
+  /** Specifies the asset stage */
   stage?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model MaterializationSettings {
-  /**
-   * Specifies the notification details
-   */
+  /** Specifies the notification details */
   notification?: NotificationSetting;
 
-  /**
-   * Specifies the compute resource settings
-   */
+  /** Specifies the compute resource settings */
   resource?: MaterializationComputeResource;
 
-  /**
-   * Specifies the schedule details
-   */
+  /** Specifies the schedule details */
   schedule?: RecurrenceTrigger;
 
-  /**
-   * Specifies the spark compute settings
-   */
+  /** Specifies the spark compute settings */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   sparkConfiguration?: Record<string>;
 
-  /**
-   * Specifies the stores to which materialization should happen
-   */
+  /** Specifies the stores to which materialization should happen */
   storeType?: MaterializationStoreType;
 }
 
-/**
- * Configuration for notification.
- */
+/** Configuration for notification. */
 model NotificationSetting {
-  /**
-   * Send email notification to user on specified notification type
-   */
+  /** Send email notification to user on specified notification type */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   emailOn?: EmailNotificationEnableType[];
 
-  /**
-   * This is the email recipient list which has a limitation of 499 characters in total concat with comma separator
-   */
+  /** This is the email recipient list which has a limitation of 499 characters in total concat with comma separator */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   emails?: string[];
 
-  /**
-   * Send webhook callback to a service. Key is a user-provided name for the webhook.
-   */
+  /** Send webhook callback to a service. Key is a user-provided name for the webhook. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   webhooks?: Record<Webhook>;
 }
 
-/**
- * Webhook base
- */
+/** Webhook base */
 @discriminator("webhookType")
 model Webhook {
-  /**
-   * Send callback on a specified notification event
-   */
+  /** Send callback on a specified notification event */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   eventType?: string;
 
-  /**
-   * [Required] Specifies the type of service to send a callback
-   */
+  /** [Required] Specifies the type of service to send a callback */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   webhookType: WebhookType;
 }
 
-/**
- * Dto object representing compute resource
- */
+/** Dto object representing compute resource */
 model MaterializationComputeResource {
-  /**
-   * Specifies the instance type
-   */
+  /** Specifies the instance type */
   instanceType?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model RecurrenceTrigger extends TriggerBase {
-  /**
-   * [Required] The frequency to trigger schedule.
-   */
+  /** [Required] The frequency to trigger schedule. */
   frequency: RecurrenceFrequency;
 
-  /**
-   * [Required] Specifies schedule interval in conjunction with frequency
-   */
+  /** [Required] Specifies schedule interval in conjunction with frequency */
   interval: int32;
 
-  /**
-   * The recurrence schedule.
-   */
+  /** The recurrence schedule. */
   schedule?: RecurrenceSchedule;
 
-  /**
-   * [Required]
-   */
+  /** [Required] */
   triggerType: "Recurrence";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model RecurrenceSchedule {
-  /**
-   * [Required] List of hours for the schedule.
-   */
+  /** [Required] List of hours for the schedule. */
   hours: int32[];
 
-  /**
-   * [Required] List of minutes for the schedule.
-   */
+  /** [Required] List of minutes for the schedule. */
   minutes: int32[];
 
-  /**
-   * List of month days for the schedule
-   */
+  /** List of month days for the schedule */
   monthDays?: int32[];
 
-  /**
-   * List of days for the schedule.
-   */
+  /** List of days for the schedule. */
   weekDays?: WeekDay[];
 }
 
@@ -6727,9 +4493,7 @@ model TriggerBase {
    */
   endTime?: string;
 
-  /**
-   * Specifies start time of schedule in ISO 8601 format, but without a UTC offset.
-   */
+  /** Specifies start time of schedule in ISO 8601 format, but without a UTC offset. */
   startTime?: string;
 
   /**
@@ -6738,229 +4502,147 @@ model TriggerBase {
    */
   timeZone?: string = "UTC";
 
-  /**
-   * [Required]
-   */
+  /** [Required] */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   triggerType: TriggerType;
 }
 
-/**
- * Dto object representing specification
- */
+/** Dto object representing specification */
 model FeaturesetSpecification {
-  /**
-   * Specifies the spec path
-   */
+  /** Specifies the spec path */
   path?: string;
 }
 
-/**
- * Request payload for creating a backfill request for a given feature set version
- */
+/** Request payload for creating a backfill request for a given feature set version */
 model FeaturesetVersionBackfillRequest {
-  /**
-   * Specifies description
-   */
+  /** Specifies description */
   description?: string;
 
-  /**
-   * Specifies description
-   */
+  /** Specifies description */
   displayName?: string;
 
-  /**
-   * Specifies the backfill feature window to be materialized
-   */
+  /** Specifies the backfill feature window to be materialized */
   featureWindow?: FeatureWindow;
 
-  /**
-   * Specifies the compute resource settings
-   */
+  /** Specifies the compute resource settings */
   resource?: MaterializationComputeResource;
 
-  /**
-   * Specifies the spark compute settings
-   */
+  /** Specifies the spark compute settings */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   sparkConfiguration?: Record<string>;
 
-  /**
-   * Specifies the tags
-   */
+  /** Specifies the tags */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 
-/**
- * Specifies the feature window
- */
+/** Specifies the feature window */
 model FeatureWindow {
-  /**
-   * Specifies the feature window end time
-   */
+  /** Specifies the feature window end time */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   featureWindowEnd?: utcDateTime;
 
-  /**
-   * Specifies the feature window start time
-   */
+  /** Specifies the feature window start time */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   featureWindowStart?: utcDateTime;
 }
 
-/**
- * Dto object representing the feature set job
- */
+/** Dto object representing the feature set job */
 model FeaturesetJob {
-  /**
-   * Specifies the created date
-   */
+  /** Specifies the created date */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDate?: utcDateTime;
 
-  /**
-   * Specifies the display name
-   */
+  /** Specifies the display name */
   displayName?: string;
 
-  /**
-   * Specifies the duration
-   */
+  /** Specifies the duration */
   duration?: duration;
 
-  /**
-   * Specifies the experiment id
-   */
+  /** Specifies the experiment id */
   experimentId?: string;
 
-  /**
-   * Specifies the backfill feature window to be materialized
-   */
+  /** Specifies the backfill feature window to be materialized */
   featureWindow?: FeatureWindow;
 
-  /**
-   * Specifies the job id
-   */
+  /** Specifies the job id */
   jobId?: string;
 
-  /**
-   * Specifies the job status
-   */
+  /** Specifies the job status */
   status?: JobStatus;
 
-  /**
-   * Specifies the tags if any
-   */
+  /** Specifies the tags if any */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 
-  /**
-   * Specifies the feature store job type
-   */
+  /** Specifies the feature store job type */
   type?: FeaturestoreJobType;
 }
 
-/**
- * A paginated list of FeaturesetJob entities.
- */
+/** A paginated list of FeaturesetJob entities. */
 model FeaturesetJobArmPaginatedResult is Azure.Core.Page<FeaturesetJob>;
 
-/**
- * A paginated list of FeaturestoreEntityContainer entities.
- */
+/** A paginated list of FeaturestoreEntityContainer entities. */
 model FeaturestoreEntityContainerResourceArmPaginatedResult
   is Azure.Core.Page<FeaturestoreEntityContainer>;
 
-/**
- * Dto object representing feature entity
- */
+/** Dto object representing feature entity */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model FeaturestoreEntityContainerProperties extends AssetContainer {
-  /**
-   * Provisioning state for the featurestore entity container.
-   */
+  /** Provisioning state for the featurestore entity container. */
   @visibility(Lifecycle.Read)
   provisioningState?: AssetProvisioningState;
 }
 
-/**
- * A paginated list of FeaturestoreEntityVersion entities.
- */
+/** A paginated list of FeaturestoreEntityVersion entities. */
 model FeaturestoreEntityVersionResourceArmPaginatedResult
   is Azure.Core.Page<FeaturestoreEntityVersion>;
 
-/**
- * Dto object representing feature entity version
- */
+/** Dto object representing feature entity version */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model FeaturestoreEntityVersionProperties extends AssetBase {
-  /**
-   * Specifies index columns
-   */
+  /** Specifies index columns */
   @identifiers(#[])
   indexColumns?: IndexColumn[];
 
-  /**
-   * Provisioning state for the featurestore entity version.
-   */
+  /** Provisioning state for the featurestore entity version. */
   @visibility(Lifecycle.Read)
   provisioningState?: AssetProvisioningState;
 
-  /**
-   * Specifies the asset stage
-   */
+  /** Specifies the asset stage */
   stage?: string;
 }
 
-/**
- * Dto object representing index column
- */
+/** Dto object representing index column */
 model IndexColumn {
-  /**
-   * Specifies the column name
-   */
+  /** Specifies the column name */
   columnName?: string;
 
-  /**
-   * Specifies the data type
-   */
+  /** Specifies the data type */
   dataType?: FeatureDataType;
 }
 
-/**
- * A paginated list of JobBase entities.
- */
+/** A paginated list of JobBase entities. */
 model JobBaseResourceArmPaginatedResult is Azure.Core.Page<JobBaseResource>;
 
-/**
- * Base definition for a job.
- */
+/** Base definition for a job. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 @discriminator("jobType")
 model JobBase extends ResourceBase {
-  /**
-   * ARM resource ID of the component resource.
-   */
+  /** ARM resource ID of the component resource. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   componentId?: string;
 
-  /**
-   * ARM resource ID of the compute resource.
-   */
+  /** ARM resource ID of the compute resource. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   computeId?: string;
 
-  /**
-   * Display name of job.
-   */
+  /** Display name of job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   displayName?: string;
 
-  /**
-   * The name of the experiment the job belongs to. If not set, the job is placed in the "Default" experiment.
-   */
+  /** The name of the experiment the job belongs to. If not set, the job is placed in the "Default" experiment. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   experimentName?: string = "Default";
 
@@ -6971,27 +4653,19 @@ model JobBase extends ResourceBase {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   identity?: IdentityConfiguration;
 
-  /**
-   * Is the asset archived?
-   */
+  /** Is the asset archived? */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   isArchived?: boolean;
 
-  /**
-   * [Required] Specifies the type of job.
-   */
+  /** [Required] Specifies the type of job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   jobType: JobType;
 
-  /**
-   * Notification setting for the job
-   */
+  /** Notification setting for the job */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   notificationSetting?: NotificationSetting;
 
-  /**
-   * Configuration for secrets to be made available during runtime.
-   */
+  /** Configuration for secrets to be made available during runtime. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   secretsConfiguration?: Record<SecretConfiguration>;
@@ -7003,28 +4677,20 @@ model JobBase extends ResourceBase {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   services?: Record<JobService>;
 
-  /**
-   * Status of the job.
-   */
+  /** Status of the job. */
   @visibility(Lifecycle.Read)
   status?: JobStatus;
 }
 
-/**
- * Base definition for identity configuration.
- */
+/** Base definition for identity configuration. */
 @discriminator("identityType")
 model IdentityConfiguration {
-  /**
-   * [Required] Specifies the type of identity framework.
-   */
+  /** [Required] Specifies the type of identity framework. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   identityType: IdentityConfigurationType;
 }
 
-/**
- * Secret Configuration definition.
- */
+/** Secret Configuration definition. */
 model SecretConfiguration {
   /**
    * Secret Uri.
@@ -7033,32 +4699,22 @@ model SecretConfiguration {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   uri?: string;
 
-  /**
-   * Name of secret in workspace key vault.
-   */
+  /** Name of secret in workspace key vault. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   workspaceSecretName?: string;
 }
 
-/**
- * Job endpoint definition
- */
+/** Job endpoint definition */
 model JobService {
-  /**
-   * Url for endpoint.
-   */
+  /** Url for endpoint. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   endpoint?: string;
 
-  /**
-   * Any error in the service.
-   */
+  /** Any error in the service. */
   @visibility(Lifecycle.Read)
   errorMessage?: string;
 
-  /**
-   * Endpoint type.
-   */
+  /** Endpoint type. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   jobServiceType?: string;
 
@@ -7068,298 +4724,198 @@ model JobService {
    */
   nodes?: Nodes;
 
-  /**
-   * Port for endpoint set by user.
-   */
+  /** Port for endpoint set by user. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   port?: int32;
 
-  /**
-   * Additional properties to set on the endpoint.
-   */
+  /** Additional properties to set on the endpoint. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   properties?: Record<string>;
 
-  /**
-   * Status of endpoint.
-   */
+  /** Status of endpoint. */
   @visibility(Lifecycle.Read)
   status?: string;
 }
 
-/**
- * Abstract Nodes definition
- */
+/** Abstract Nodes definition */
 @discriminator("nodesValueType")
 model Nodes {
-  /**
-   * [Required] Type of the Nodes value
-   */
+  /** [Required] Type of the Nodes value */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   nodesValueType: NodesValueType;
 }
 
-/**
- * Azure Resource Manager resource envelope strictly used in update requests.
- */
+/** Azure Resource Manager resource envelope strictly used in update requests. */
 model PartialJobBasePartialResource {
-  /**
-   * Additional attributes of the entity.
-   */
+  /** Additional attributes of the entity. */
   properties?: PartialJobBase;
 }
 
-/**
- * Mutable base definition for a job.
- */
+/** Mutable base definition for a job. */
 model PartialJobBase {
-  /**
-   * Mutable notification setting for the job
-   */
+  /** Mutable notification setting for the job */
   notificationSetting?: PartialNotificationSetting;
 }
 
-/**
- * Mutable configuration for notification.
- */
+/** Mutable configuration for notification. */
 model PartialNotificationSetting {
-  /**
-   * Send webhook callback to a service. Key is a user-provided name for the webhook.
-   */
+  /** Send webhook callback to a service. Key is a user-provided name for the webhook. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   webhooks?: Record<Webhook>;
 }
 
-/**
- * A paginated list of LabelingJob entities.
- */
+/** A paginated list of LabelingJob entities. */
 model LabelingJobResourceArmPaginatedResult is Azure.Core.Page<LabelingJob>;
 
-/**
- * Labeling job definition
- */
+/** Labeling job definition */
 model LabelingJobProperties extends JobBase {
-  /**
-   * Created time of the job in UTC timezone.
-   */
+  /** Created time of the job in UTC timezone. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
-  /**
-   * Configuration of data used in the job.
-   */
+  /** Configuration of data used in the job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   dataConfiguration?: LabelingDataConfiguration;
 
-  /**
-   * Labeling instructions of the job.
-   */
+  /** Labeling instructions of the job. */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   jobInstructions?: LabelingJobInstructions;
 
-  /**
-   * Label categories of the job.
-   */
+  /** Label categories of the job. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   labelCategories?: Record<LabelCategory>;
 
-  /**
-   * Media type specific properties in the job.
-   */
+  /** Media type specific properties in the job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   labelingJobMediaProperties?: LabelingJobMediaProperties;
 
-  /**
-   * Configuration of MLAssist feature in the job.
-   */
+  /** Configuration of MLAssist feature in the job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   mlAssistConfiguration?: MLAssistConfiguration;
 
-  /**
-   * Progress metrics of the job.
-   */
+  /** Progress metrics of the job. */
   @visibility(Lifecycle.Read)
   progressMetrics?: ProgressMetrics;
 
-  /**
-   * Internal id of the job(Previously called project).
-   */
+  /** Internal id of the job(Previously called project). */
   #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read)
   @format("uuid")
   projectId?: string;
 
-  /**
-   * Specifies the labeling job provisioning state.
-   */
+  /** Specifies the labeling job provisioning state. */
   @visibility(Lifecycle.Read)
   provisioningState?: JobProvisioningState;
 
-  /**
-   * Status messages of the job.
-   */
+  /** Status messages of the job. */
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   statusMessages?: StatusMessage[];
 
-  /**
-   * [Required] Specifies the type of job.
-   */
+  /** [Required] Specifies the type of job. */
   jobType: "Labeling";
 }
 
-/**
- * Labeling data configuration definition
- */
+/** Labeling data configuration definition */
 model LabelingDataConfiguration {
-  /**
-   * Resource Id of the data asset to perform labeling.
-   */
+  /** Resource Id of the data asset to perform labeling. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   dataId?: string;
 
-  /**
-   * Indicates whether to enable incremental data refresh.
-   */
+  /** Indicates whether to enable incremental data refresh. */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   incrementalDataRefresh?: IncrementalDataRefresh;
 }
 
-/**
- * Instructions for labeling job
- */
+/** Instructions for labeling job */
 model LabelingJobInstructions {
-  /**
-   * The link to a page with detailed labeling instructions for labelers.
-   */
+  /** The link to a page with detailed labeling instructions for labelers. */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   uri?: string;
 }
 
-/**
- * Label category definition
- */
+/** Label category definition */
 model LabelCategory {
-  /**
-   * Dictionary of label classes in this category.
-   */
+  /** Dictionary of label classes in this category. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   classes?: Record<LabelClass>;
 
-  /**
-   * Display name of the label category.
-   */
+  /** Display name of the label category. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   displayName?: string;
 
-  /**
-   * Indicates whether it is allowed to select multiple classes in this category.
-   */
+  /** Indicates whether it is allowed to select multiple classes in this category. */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   multiSelect?: MultiSelect;
 }
 
-/**
- * Label class definition
- */
+/** Label class definition */
 model LabelClass {
-  /**
-   * Display name of the label class.
-   */
+  /** Display name of the label class. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   displayName?: string;
 
-  /**
-   * Dictionary of subclasses of the label class.
-   */
+  /** Dictionary of subclasses of the label class. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   subclasses?: Record<LabelClass>;
 }
 
-/**
- * Properties of a labeling job
- */
+/** Properties of a labeling job */
 @discriminator("mediaType")
 model LabelingJobMediaProperties {
-  /**
-   * [Required] Media type of the job.
-   */
+  /** [Required] Media type of the job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   mediaType: MediaType;
 }
 
-/**
- * Labeling MLAssist configuration definition
- */
+/** Labeling MLAssist configuration definition */
 @discriminator("mlAssist")
 model MLAssistConfiguration {
-  /**
-   * [Required] Indicates whether MLAssist feature is enabled.
-   */
+  /** [Required] Indicates whether MLAssist feature is enabled. */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   mlAssist: MLAssistConfigurationType;
 }
 
-/**
- * Progress metrics definition
- */
+/** Progress metrics definition */
 model ProgressMetrics {
-  /**
-   * The completed datapoint count.
-   */
+  /** The completed datapoint count. */
   @visibility(Lifecycle.Read)
   completedDatapointCount?: int64;
 
-  /**
-   * The time of last successful incremental data refresh in UTC.
-   */
+  /** The time of last successful incremental data refresh in UTC. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   incrementalDataLastRefreshDateTime?: utcDateTime;
 
-  /**
-   * The skipped datapoint count.
-   */
+  /** The skipped datapoint count. */
   @visibility(Lifecycle.Read)
   skippedDatapointCount?: int64;
 
-  /**
-   * The total datapoint count.
-   */
+  /** The total datapoint count. */
   @visibility(Lifecycle.Read)
   totalDatapointCount?: int64;
 }
 
-/**
- * Active message associated with project
- */
+/** Active message associated with project */
 model StatusMessage {
-  /**
-   * Service-defined message code.
-   */
+  /** Service-defined message code. */
   @visibility(Lifecycle.Read)
   code?: string;
 
-  /**
-   * Time in UTC at which the message was created.
-   */
+  /** Time in UTC at which the message was created. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
-  /**
-   * Severity level of message.
-   */
+  /** Severity level of message. */
   @visibility(Lifecycle.Read)
   level?: StatusMessageLevel;
 
-  /**
-   * A human-readable representation of the message code.
-   */
+  /** A human-readable representation of the message code. */
   @visibility(Lifecycle.Read)
   message?: string;
 }
@@ -7367,48 +4923,34 @@ model StatusMessage {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("format")
 model ExportSummary {
-  /**
-   * The time when the export was completed.
-   */
+  /** The time when the export was completed. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endDateTime?: utcDateTime;
 
-  /**
-   * The total number of labeled datapoints exported.
-   */
+  /** The total number of labeled datapoints exported. */
   @visibility(Lifecycle.Read)
   exportedRowCount?: int64;
 
-  /**
-   * [Required] The format of exported labels, also as the discriminator.
-   */
+  /** [Required] The format of exported labels, also as the discriminator. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   format: ExportFormatType;
 
-  /**
-   * Name and identifier of the job containing exported labels.
-   */
+  /** Name and identifier of the job containing exported labels. */
   @visibility(Lifecycle.Read)
   labelingJobId?: string;
 
-  /**
-   * The time when the export was requested.
-   */
+  /** The time when the export was requested. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDateTime?: utcDateTime;
 }
 
-/**
- * A paginated list of OnlineEndpoint entities.
- */
+/** A paginated list of OnlineEndpoint entities. */
 model OnlineEndpointTrackedResourceArmPaginatedResult
   is Azure.Core.Page<OnlineEndpointTrackedResource>;
 
-/**
- * Online endpoint configuration
- */
+/** Online endpoint configuration */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model OnlineEndpoint extends EndpointPropertiesBase {
   /**
@@ -7417,33 +4959,23 @@ model OnlineEndpoint extends EndpointPropertiesBase {
    */
   compute?: string;
 
-  /**
-   * Percentage of traffic to be mirrored to each deployment without using returned scoring. Traffic values need to sum to utmost 50.
-   */
+  /** Percentage of traffic to be mirrored to each deployment without using returned scoring. Traffic values need to sum to utmost 50. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   mirrorTraffic?: Record<int32>;
 
-  /**
-   * Provisioning state for the endpoint.
-   */
+  /** Provisioning state for the endpoint. */
   @visibility(Lifecycle.Read)
   provisioningState?: EndpointProvisioningState;
 
-  /**
-   * Set to "Enabled" for endpoints that should allow public access when Private Link is enabled.
-   */
+  /** Set to "Enabled" for endpoints that should allow public access when Private Link is enabled. */
   publicNetworkAccess?: PublicNetworkAccessType;
 
-  /**
-   * Percentage of traffic from endpoint to divert to each deployment. Traffic values need to sum to 100.
-   */
+  /** Percentage of traffic from endpoint to divert to each deployment. Traffic values need to sum to 100. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   traffic?: Record<int32>;
 }
 
-/**
- * A paginated list of OnlineDeployment entities.
- */
+/** A paginated list of OnlineDeployment entities. */
 model OnlineDeploymentTrackedResourceArmPaginatedResult
   is Azure.Core.Page<OnlineDeploymentTrackedResource>;
 
@@ -7451,61 +4983,39 @@ model OnlineDeploymentTrackedResourceArmPaginatedResult
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("endpointComputeType")
 model OnlineDeployment extends EndpointDeploymentPropertiesBase {
-  /**
-   * If true, enables Application Insights logging.
-   */
+  /** If true, enables Application Insights logging. */
   appInsightsEnabled?: boolean;
 
-  /**
-   * The mdc configuration, we disable mdc when it's null.
-   */
+  /** The mdc configuration, we disable mdc when it's null. */
   dataCollector?: DataCollector;
 
-  /**
-   * If Enabled, allow egress public network access. If Disabled, this will create secure egress. Default: Enabled.
-   */
+  /** If Enabled, allow egress public network access. If Disabled, this will create secure egress. Default: Enabled. */
   egressPublicNetworkAccess?: EgressPublicNetworkAccessType;
 
-  /**
-   * [Required] The compute type of the endpoint.
-   */
+  /** [Required] The compute type of the endpoint. */
   endpointComputeType: EndpointComputeType;
 
-  /**
-   * Compute instance type.
-   */
+  /** Compute instance type. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   instanceType?: string;
 
-  /**
-   * Liveness probe monitors the health of the container regularly.
-   */
+  /** Liveness probe monitors the health of the container regularly. */
   livenessProbe?: ProbeSettings;
 
-  /**
-   * The URI path to the model.
-   */
+  /** The URI path to the model. */
   `model`?: string;
 
-  /**
-   * The path to mount the model in custom container.
-   */
+  /** The path to mount the model in custom container. */
   modelMountPath?: string;
 
-  /**
-   * Provisioning state for the endpoint deployment.
-   */
+  /** Provisioning state for the endpoint deployment. */
   @visibility(Lifecycle.Read)
   provisioningState?: DeploymentProvisioningState;
 
-  /**
-   * Readiness probe validates if the container is ready to serve traffic. The properties and defaults are the same as liveness probe.
-   */
+  /** Readiness probe validates if the container is ready to serve traffic. The properties and defaults are the same as liveness probe. */
   readinessProbe?: ProbeSettings;
 
-  /**
-   * Request settings for the deployment.
-   */
+  /** Request settings for the deployment. */
   requestSettings?: OnlineRequestSettings;
 
   /**
@@ -7526,9 +5036,7 @@ model DataCollector {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   collections: Record<Collection>;
 
-  /**
-   * The request logging configuration for mdc, it includes advanced logging settings for all collections. It's optional.
-   */
+  /** The request logging configuration for mdc, it includes advanced logging settings for all collections. It's optional. */
   requestLogging?: RequestLogging;
 
   /**
@@ -7542,72 +5050,46 @@ model DataCollector {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model Collection {
-  /**
-   * The msi client id used to collect logging to blob storage. If it's null,backend will pick a registered endpoint identity to auth.
-   */
+  /** The msi client id used to collect logging to blob storage. If it's null,backend will pick a registered endpoint identity to auth. */
   clientId?: string;
 
-  /**
-   * Enable or disable data collection.
-   */
+  /** Enable or disable data collection. */
   dataCollectionMode?: DataCollectionMode;
 
-  /**
-   * The data asset arm resource id. Client side will ensure data asset is pointing to the blob storage, and backend will collect data to the blob storage.
-   */
+  /** The data asset arm resource id. Client side will ensure data asset is pointing to the blob storage, and backend will collect data to the blob storage. */
   dataId?: string;
 
-  /**
-   * The sampling rate for collection. Sampling rate 1.0 means we collect 100% of data by default.
-   */
+  /** The sampling rate for collection. Sampling rate 1.0 means we collect 100% of data by default. */
   samplingRate?: float64 = 1;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model RequestLogging {
-  /**
-   * For payload logging, we only collect payload by default. If customers also want to collect the specified headers, they can set them in captureHeaders so that backend will collect those headers along with payload.
-   */
+  /** For payload logging, we only collect payload by default. If customers also want to collect the specified headers, they can set them in captureHeaders so that backend will collect those headers along with payload. */
   captureHeaders?: string[];
 }
 
-/**
- * Deployment container liveness/readiness probe configuration.
- */
+/** Deployment container liveness/readiness probe configuration. */
 model ProbeSettings {
-  /**
-   * The number of failures to allow before returning an unhealthy status.
-   */
+  /** The number of failures to allow before returning an unhealthy status. */
   failureThreshold?: int32 = 30;
 
-  /**
-   * The delay before the first probe in ISO 8601 format.
-   */
+  /** The delay before the first probe in ISO 8601 format. */
   initialDelay?: duration;
 
-  /**
-   * The length of time between probes in ISO 8601 format.
-   */
+  /** The length of time between probes in ISO 8601 format. */
   period?: duration;
 
-  /**
-   * The number of successful probes before returning a healthy status.
-   */
+  /** The number of successful probes before returning a healthy status. */
   successThreshold?: int32 = 1;
 
-  /**
-   * The probe timeout in ISO 8601 format.
-   */
+  /** The probe timeout in ISO 8601 format. */
   timeout?: duration;
 }
 
-/**
- * Online deployment scoring requests configuration.
- */
+/** Online deployment scoring requests configuration. */
 model OnlineRequestSettings {
-  /**
-   * The number of maximum concurrent requests per node allowed per deployment. Defaults to 1.
-   */
+  /** The number of maximum concurrent requests per node allowed per deployment. Defaults to 1. */
   maxConcurrentRequestsPerInstance?: int32 = 1;
 
   /**
@@ -7623,227 +5105,147 @@ model OnlineRequestSettings {
   requestTimeout?: duration;
 }
 
-/**
- * Online deployment scaling configuration.
- */
+/** Online deployment scaling configuration. */
 @discriminator("scaleType")
 model OnlineScaleSettings {
-  /**
-   * [Required] Type of deployment scaling algorithm
-   */
+  /** [Required] Type of deployment scaling algorithm */
   scaleType: ScaleType;
 }
 
-/**
- * Strictly used in update requests.
- */
+/** Strictly used in update requests. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model PartialMinimalTrackedResourceWithSku
   extends PartialMinimalTrackedResource {
-  /**
-   * Sku details required for ARM contract for Autoscaling.
-   */
+  /** Sku details required for ARM contract for Autoscaling. */
   sku?: PartialSku;
 }
 
-/**
- * Common SKU definition.
- */
+/** Common SKU definition. */
 model PartialSku {
-  /**
-   * If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted.
-   */
+  /** If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted. */
   capacity?: int32;
 
-  /**
-   * If the service has different generations of hardware, for the same SKU, then that can be captured here.
-   */
+  /** If the service has different generations of hardware, for the same SKU, then that can be captured here. */
   family?: string;
 
-  /**
-   * The name of the SKU. Ex - P3. It is typically a letter+number code.
-   */
+  /** The name of the SKU. Ex - P3. It is typically a letter+number code. */
   name?: string;
 
-  /**
-   * The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code.
-   */
+  /** The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. */
   size?: string;
 
-  /**
-   * This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.
-   */
+  /** This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT. */
   tier?: Azure.ResourceManager.CommonTypes.SkuTier;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DeploymentLogsRequest {
-  /**
-   * The type of container to retrieve logs from.
-   */
+  /** The type of container to retrieve logs from. */
   containerType?: ContainerType;
 
-  /**
-   * The maximum number of lines to tail.
-   */
+  /** The maximum number of lines to tail. */
   tail?: int32;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DeploymentLogs {
-  /**
-   * The retrieved online deployment logs.
-   */
+  /** The retrieved online deployment logs. */
   content?: string;
 }
 
-/**
- * A paginated list of SkuResource entities.
- */
+/** A paginated list of SkuResource entities. */
 model SkuResourceArmPaginatedResult is Azure.Core.Page<SkuResource>;
 
-/**
- * Fulfills ARM Contract requirement to list all available SKUS for a resource.
- */
+/** Fulfills ARM Contract requirement to list all available SKUS for a resource. */
 model SkuResource {
-  /**
-   * Gets or sets the Sku Capacity.
-   */
+  /** Gets or sets the Sku Capacity. */
   capacity?: SkuCapacity;
 
-  /**
-   * The resource type name.
-   */
+  /** The resource type name. */
   @visibility(Lifecycle.Read)
   resourceType?: string;
 
-  /**
-   * Gets or sets the Sku.
-   */
+  /** Gets or sets the Sku. */
   sku?: SkuSetting;
 }
 
-/**
- * SKU capacity information
- */
+/** SKU capacity information */
 model SkuCapacity {
-  /**
-   * Gets or sets the default capacity.
-   */
+  /** Gets or sets the default capacity. */
   default?: int32;
 
-  /**
-   * Gets or sets the maximum.
-   */
+  /** Gets or sets the maximum. */
   maximum?: int32;
 
-  /**
-   * Gets or sets the minimum.
-   */
+  /** Gets or sets the minimum. */
   minimum?: int32;
 
-  /**
-   * Gets or sets the type of the scale.
-   */
+  /** Gets or sets the type of the scale. */
   scaleType?: SkuScaleType;
 }
 
-/**
- * SkuSetting fulfills the need for stripped down SKU info in ARM contract.
- */
+/** SkuSetting fulfills the need for stripped down SKU info in ARM contract. */
 model SkuSetting {
-  /**
-   * [Required] The name of the SKU. Ex - P3. It is typically a letter+number code.
-   */
+  /** [Required] The name of the SKU. Ex - P3. It is typically a letter+number code. */
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   name: string;
 
-  /**
-   * This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.
-   */
+  /** This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT. */
   tier?: Azure.ResourceManager.CommonTypes.SkuTier;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model RegenerateEndpointKeysRequest {
-  /**
-   * [Required] Specification for which type of key to generate. Primary or Secondary.
-   */
+  /** [Required] Specification for which type of key to generate. Primary or Secondary. */
   keyType: KeyType;
 
-  /**
-   * The value the key is set to.
-   */
+  /** The value the key is set to. */
   keyValue?: string;
 }
 
-/**
- * Service Token
- */
+/** Service Token */
 model EndpointAuthToken {
-  /**
-   * Access token for endpoint authentication.
-   */
+  /** Access token for endpoint authentication. */
   accessToken?: string;
 
-  /**
-   * Access token expiry time (UTC).
-   */
+  /** Access token expiry time (UTC). */
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiryTimeUtc?: utcDateTime;
 
-  /**
-   * Refresh access token after time (UTC).
-   */
+  /** Refresh access token after time (UTC). */
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   refreshAfterTimeUtc?: utcDateTime;
 
-  /**
-   * Access token type.
-   */
+  /** Access token type. */
   tokenType?: string;
 }
 
-/**
- * A paginated list of Schedule entities.
- */
+/** A paginated list of Schedule entities. */
 model ScheduleResourceArmPaginatedResult is Azure.Core.Page<Schedule>;
 
-/**
- * Base definition of a schedule
- */
+/** Base definition of a schedule */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ScheduleProperties extends ResourceBase {
-  /**
-   * [Required] Specifies the action of the schedule
-   */
+  /** [Required] Specifies the action of the schedule */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   action: ScheduleActionBase;
 
-  /**
-   * Display name of schedule.
-   */
+  /** Display name of schedule. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   displayName?: string;
 
-  /**
-   * Is the schedule enabled?
-   */
+  /** Is the schedule enabled? */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   isEnabled?: boolean = true;
 
-  /**
-   * Provisioning state for the schedule.
-   */
+  /** Provisioning state for the schedule. */
   @visibility(Lifecycle.Read)
   provisioningState?: ScheduleProvisioningStatus;
 
-  /**
-   * [Required] Specifies the trigger details
-   */
+  /** [Required] Specifies the trigger details */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   trigger: TriggerBase;
 }
@@ -7851,46 +5253,30 @@ model ScheduleProperties extends ResourceBase {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("actionType")
 model ScheduleActionBase {
-  /**
-   * [Required] Specifies the action type of the schedule
-   */
+  /** [Required] Specifies the action type of the schedule */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   actionType: ScheduleActionType;
 }
 
-/**
- * A paginated list of Registry entities.
- */
+/** A paginated list of Registry entities. */
 model RegistryTrackedResourceArmPaginatedResult is Azure.Core.Page<Registry>;
 
-/**
- * Details of the Registry
- */
+/** Details of the Registry */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RegistryProperties {
-  /**
-   * Discovery URL for the Registry
-   */
+  /** Discovery URL for the Registry */
   discoveryUrl?: string;
 
-  /**
-   * IntellectualPropertyPublisher for the registry
-   */
+  /** IntellectualPropertyPublisher for the registry */
   intellectualPropertyPublisher?: string;
 
-  /**
-   * ResourceId of the managed RG if the registry has system created resources
-   */
+  /** ResourceId of the managed RG if the registry has system created resources */
   managedResourceGroup?: ArmResourceId;
 
-  /**
-   * MLFlow Registry URI for the Registry
-   */
+  /** MLFlow Registry URI for the Registry */
   mlFlowRegistryUri?: string;
 
-  /**
-   * Private endpoint connections info used for pending connections in private link portal
-   */
+  /** Private endpoint connections info used for pending connections in private link portal */
   privateEndpointConnections?: RegistryPrivateEndpointConnection[];
 
   /**
@@ -7899,16 +5285,12 @@ model RegistryProperties {
    */
   publicNetworkAccess?: string;
 
-  /**
-   * Details of each region the registry is in
-   */
+  /** Details of each region the registry is in */
   @identifiers(#[])
   regionDetails?: RegistryRegionArmDetails[];
 }
 
-/**
- * ARM ResourceId of a resource
- */
+/** ARM ResourceId of a resource */
 model ArmResourceId {
   /**
    * Arm ResourceId is in the format "/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Storage/storageAccounts/{StorageAccountName}"
@@ -7917,9 +5299,7 @@ model ArmResourceId {
   resourceId?: string;
 }
 
-/**
- * Private endpoint connection definition.
- */
+/** Private endpoint connection definition. */
 model RegistryPrivateEndpointConnection {
   /**
    * This is the private endpoint connection name created on SRP
@@ -7927,173 +5307,111 @@ model RegistryPrivateEndpointConnection {
    */
   id?: string;
 
-  /**
-   * Same as workspace location.
-   */
+  /** Same as workspace location. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
 
-  /**
-   * Properties of the Private Endpoint Connection
-   */
+  /** Properties of the Private Endpoint Connection */
   properties?: RegistryPrivateEndpointConnectionProperties;
 }
 
-/**
- * Properties of the Private Endpoint Connection
- */
+/** Properties of the Private Endpoint Connection */
 model RegistryPrivateEndpointConnectionProperties {
-  /**
-   * The group ids
-   */
+  /** The group ids */
   groupIds?: string[];
 
-  /**
-   * The PE network resource that is linked to this PE connection.
-   */
+  /** The PE network resource that is linked to this PE connection. */
   privateEndpoint?: PrivateEndpointResource;
 
-  /**
-   * The connection state.
-   */
+  /** The connection state. */
   privateLinkServiceConnectionState?: RegistryPrivateLinkServiceConnectionState;
 
-  /**
-   * One of null, "Succeeded", "Provisioning", "Failed". While not approved, it's null.
-   */
+  /** One of null, "Succeeded", "Provisioning", "Failed". While not approved, it's null. */
   provisioningState?: string;
 }
 
-/**
- * The PE network resource that is linked to this PE connection.
- */
+/** The PE network resource that is linked to this PE connection. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model PrivateEndpointResource
   extends Azure.ResourceManager.CommonTypes.PrivateEndpoint {
-  /**
-   * The subnetId that the private endpoint is connected to.
-   */
+  /** The subnetId that the private endpoint is connected to. */
   subnetArmId?: string;
 }
 
-/**
- * The connection state.
- */
+/** The connection state. */
 model RegistryPrivateLinkServiceConnectionState {
-  /**
-   * Some RP chose "None". Other RPs use this for region expansion.
-   */
+  /** Some RP chose "None". Other RPs use this for region expansion. */
   actionsRequired?: string;
 
-  /**
-   * User-defined message that, per NRP doc, may be used for approval-related message.
-   */
+  /** User-defined message that, per NRP doc, may be used for approval-related message. */
   description?: string;
 
-  /**
-   * Connection status of the service consumer with the service provider
-   */
+  /** Connection status of the service consumer with the service provider */
   status?: EndpointServiceConnectionStatus;
 }
 
-/**
- * Details for each region the registry is in
- */
+/** Details for each region the registry is in */
 model RegistryRegionArmDetails {
-  /**
-   * List of ACR accounts
-   */
+  /** List of ACR accounts */
   @identifiers(#[])
   acrDetails?: AcrDetails[];
 
-  /**
-   * The location where the registry exists
-   */
+  /** The location where the registry exists */
   location?: string;
 
-  /**
-   * List of storage accounts
-   */
+  /** List of storage accounts */
   @identifiers(#[])
   storageAccountDetails?: StorageAccountDetails[];
 }
 
-/**
- * Details of ACR account to be used for the Registry
- */
+/** Details of ACR account to be used for the Registry */
 model AcrDetails {
-  /**
-   * Details of system created ACR account to be used for the Registry
-   */
+  /** Details of system created ACR account to be used for the Registry */
   systemCreatedAcrAccount?: SystemCreatedAcrAccount;
 
-  /**
-   * Details of user created ACR account to be used for the Registry. Not supported in most cases and will throw 400 error if provided.
-   */
+  /** Details of user created ACR account to be used for the Registry. Not supported in most cases and will throw 400 error if provided. */
   userCreatedAcrAccount?: UserCreatedAcrAccount;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SystemCreatedAcrAccount {
-  /**
-   * Name of the ACR account
-   */
+  /** Name of the ACR account */
   acrAccountName?: string;
 
-  /**
-   * SKU of the ACR account
-   */
+  /** SKU of the ACR account */
   acrAccountSku?: string;
 
-  /**
-   * This is populated once the ACR account is created.
-   */
+  /** This is populated once the ACR account is created. */
   armResourceId?: ArmResourceId;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model UserCreatedAcrAccount {
-  /**
-   * ARM ResourceId of a resource
-   */
+  /** ARM ResourceId of a resource */
   armResourceId?: ArmResourceId;
 }
 
-/**
- * Details of storage account to be used for the Registry
- */
+/** Details of storage account to be used for the Registry */
 model StorageAccountDetails {
-  /**
-   * Details of system created storage account to be used for the registry
-   */
+  /** Details of system created storage account to be used for the registry */
   systemCreatedStorageAccount?: SystemCreatedStorageAccount;
 
-  /**
-   * Details of user created storage account to be used for the registry.  Not supported in most cases and will throw 400 error if provided.
-   */
+  /** Details of user created storage account to be used for the registry.  Not supported in most cases and will throw 400 error if provided. */
   userCreatedStorageAccount?: UserCreatedStorageAccount;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SystemCreatedStorageAccount {
-  /**
-   * Public blob access allowed
-   */
+  /** Public blob access allowed */
   allowBlobPublicAccess?: boolean;
 
-  /**
-   * This is populated once the storage account is created.
-   */
+  /** This is populated once the storage account is created. */
   armResourceId?: ArmResourceId;
 
-  /**
-   * HNS enabled for storage account
-   */
+  /** HNS enabled for storage account */
   storageAccountHnsEnabled?: boolean;
 
-  /**
-   * Name of the storage account
-   */
+  /** Name of the storage account */
   storageAccountName?: string;
 
   /**
@@ -8112,102 +5430,64 @@ model SystemCreatedStorageAccount {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model UserCreatedStorageAccount {
-  /**
-   * ARM ResourceId of a resource
-   */
+  /** ARM ResourceId of a resource */
   armResourceId?: ArmResourceId;
 }
 
-/**
- * Strictly used in update requests.
- */
+/** Strictly used in update requests. */
 model PartialRegistryPartialTrackedResource {
-  /**
-   * Managed service identity (system assigned and/or user assigned identities)
-   */
+  /** Managed service identity (system assigned and/or user assigned identities) */
   identity?: RegistryPartialManagedServiceIdentity;
 
-  /**
-   * Sku details required for ARM contract for Autoscaling.
-   */
+  /** Sku details required for ARM contract for Autoscaling. */
   sku?: PartialSku;
 
-  /**
-   * Resource tags.
-   */
+  /** Resource tags. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 
-/**
- * Managed service identity (system assigned and/or user assigned identities)
- */
+/** Managed service identity (system assigned and/or user assigned identities) */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model RegistryPartialManagedServiceIdentity
   extends Azure.ResourceManager.CommonTypes.ManagedServiceIdentity {}
 
-/**
- * The List Aml user feature operation response.
- */
+/** The List Aml user feature operation response. */
 model ListAmlUserFeatureResult is Azure.Core.Page<AmlUserFeature>;
 
-/**
- * Features enabled for a workspace
- */
+/** Features enabled for a workspace */
 model AmlUserFeature {
-  /**
-   * Specifies the feature ID
-   */
+  /** Specifies the feature ID */
   id?: string;
 
-  /**
-   * Specifies the feature name
-   */
+  /** Specifies the feature name */
   displayName?: string;
 
-  /**
-   * Describes the feature for user experience
-   */
+  /** Describes the feature for user experience */
   description?: string;
 }
 
-/**
- * Azure Machine Learning team account REST API operation
- */
+/** Azure Machine Learning team account REST API operation */
 model AmlOperation {
-  /**
-   * Gets or sets display name of operation
-   */
+  /** Gets or sets display name of operation */
   display?: OperationDisplay;
 
-  /**
-   * Indicates whether the operation applies to data-plane
-   */
+  /** Indicates whether the operation applies to data-plane */
   isDataAction?: boolean;
 
-  /**
-   * Gets or sets operation name: {provider}/{resource}/{operation}
-   */
+  /** Gets or sets operation name: {provider}/{resource}/{operation} */
   name?: string;
 
-  /**
-   * The intended executor of the operation: user/system
-   */
+  /** The intended executor of the operation: user/system */
   origin?: string;
 }
 
-/**
- * Display name of operation
- */
+/** Display name of operation */
 model OperationDisplay {
-  /**
-   * Gets or sets the description for the operation.
-   */
+  /** Gets or sets the description for the operation. */
   description?: string;
 
-  /**
-   * Gets or sets the operation that users can perform.
-   */
+  /** Gets or sets the operation that users can perform. */
   operation?: string;
 
   /**
@@ -8216,24 +5496,16 @@ model OperationDisplay {
    */
   provider?: string;
 
-  /**
-   * Gets or sets the resource on which the operation is performed.
-   */
+  /** Gets or sets the resource on which the operation is performed. */
   resource?: string;
 }
 
-/**
- * The properties of a machine learning workspace.
- */
+/** The properties of a machine learning workspace. */
 model WorkspaceProperties {
-  /**
-   * The flag to indicate whether to allow public access when behind VNet.
-   */
+  /** The flag to indicate whether to allow public access when behind VNet. */
   allowPublicAccessWhenBehindVnet?: boolean;
 
-  /**
-   * ARM id of the application insights associated with this workspace.
-   */
+  /** ARM id of the application insights associated with this workspace. */
   applicationInsights?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -8241,19 +5513,13 @@ model WorkspaceProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   containerRegistries?: string[];
 
-  /**
-   * ARM id of the container registry associated with this workspace.
-   */
+  /** ARM id of the container registry associated with this workspace. */
   containerRegistry?: string;
 
-  /**
-   * The description of this workspace.
-   */
+  /** The description of this workspace. */
   description?: string;
 
-  /**
-   * Url for the discovery service to identify regional endpoints for machine learning experimentation services
-   */
+  /** Url for the discovery service to identify regional endpoints for machine learning experimentation services */
   discoveryUrl?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -8263,143 +5529,95 @@ model WorkspaceProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   existingWorkspaces?: string[];
 
-  /**
-   * Settings for feature store type workspace.
-   */
+  /** Settings for feature store type workspace. */
   featureStoreSettings?: FeatureStoreSettings;
 
-  /**
-   * The friendly name for this workspace. This name in mutable
-   */
+  /** The friendly name for this workspace. This name in mutable */
   friendlyName?: string;
 
-  /**
-   * The flag to signal HBI data in the workspace and reduce diagnostic data collected by the service
-   */
+  /** The flag to signal HBI data in the workspace and reduce diagnostic data collected by the service */
   hbiWorkspace?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   hubResourceId?: string;
 
-  /**
-   * The compute name for image build
-   */
+  /** The compute name for image build */
   imageBuildCompute?: string;
 
-  /**
-   * ARM id of the key vault associated with this workspace. This cannot be changed once the workspace has been created
-   */
+  /** ARM id of the key vault associated with this workspace. This cannot be changed once the workspace has been created */
   keyVault?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   keyVaults?: string[];
 
-  /**
-   * Managed Network settings for a machine learning workspace.
-   */
+  /** Managed Network settings for a machine learning workspace. */
   managedNetwork?: ManagedNetworkSettings;
 
-  /**
-   * The URI associated with this workspace that machine learning flow must point at to set up tracking.
-   */
+  /** The URI associated with this workspace that machine learning flow must point at to set up tracking. */
   @visibility(Lifecycle.Read)
   mlFlowTrackingUri?: string;
 
-  /**
-   * The notebook info of Azure ML workspace.
-   */
+  /** The notebook info of Azure ML workspace. */
   @visibility(Lifecycle.Read)
   notebookInfo?: NotebookResourceInfo;
 
-  /**
-   * The user assigned identity resource id that represents the workspace identity.
-   */
+  /** The user assigned identity resource id that represents the workspace identity. */
   primaryUserAssignedIdentity?: string;
 
-  /**
-   * The list of private endpoint connections in the workspace.
-   */
+  /** The list of private endpoint connections in the workspace. */
   @visibility(Lifecycle.Read)
   @identifiers(#["name"])
   privateEndpointConnections?: PrivateEndpointConnection[];
 
-  /**
-   * Count of private connections in the workspace
-   */
+  /** Count of private connections in the workspace */
   @visibility(Lifecycle.Read)
   privateLinkCount?: int32;
 
-  /**
-   * The current deployment state of workspace resource. The provisioningState is to indicate states for resource provisioning.
-   */
+  /** The current deployment state of workspace resource. The provisioningState is to indicate states for resource provisioning. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  /**
-   * Whether requests from Public Network are allowed.
-   */
+  /** Whether requests from Public Network are allowed. */
   publicNetworkAccess?: PublicNetworkAccessType;
 
-  /**
-   * The service managed resource settings.
-   */
+  /** The service managed resource settings. */
   serviceManagedResourcesSettings?: ServiceManagedResourcesSettings;
 
-  /**
-   * The name of the managed resource group created by workspace RP in customer subscription if the workspace is CMK workspace
-   */
+  /** The name of the managed resource group created by workspace RP in customer subscription if the workspace is CMK workspace */
   @visibility(Lifecycle.Read)
   serviceProvisionedResourceGroup?: string;
 
-  /**
-   * The list of shared private link resources in this workspace.
-   */
+  /** The list of shared private link resources in this workspace. */
   @identifiers(#["name"])
   sharedPrivateLinkResources?: SharedPrivateLinkResource[];
 
-  /**
-   * Retention time in days after workspace get soft deleted.
-   */
+  /** Retention time in days after workspace get soft deleted. */
   softDeleteRetentionInDays?: int32;
 
-  /**
-   * ARM id of the storage account associated with this workspace. This cannot be changed once the workspace has been created
-   */
+  /** ARM id of the storage account associated with this workspace. This cannot be changed once the workspace has been created */
   storageAccount?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   storageAccounts?: string[];
 
-  /**
-   * If the storage associated with the workspace has hierarchical namespace(HNS) enabled.
-   */
+  /** If the storage associated with the workspace has hierarchical namespace(HNS) enabled. */
   @visibility(Lifecycle.Read)
   storageHnsEnabled?: boolean;
 
-  /**
-   * The auth mode used for accessing the system datastores of the workspace.
-   */
+  /** The auth mode used for accessing the system datastores of the workspace. */
   systemDatastoresAuthMode?: string;
 
-  /**
-   * The tenant id associated with this workspace.
-   */
+  /** The tenant id associated with this workspace. */
   @visibility(Lifecycle.Read)
   tenantId?: string;
 
-  /**
-   * Enabling v1_legacy_mode may prevent you from using features provided by the v2 API.
-   */
+  /** Enabling v1_legacy_mode may prevent you from using features provided by the v2 API. */
   v1LegacyMode?: boolean;
 
-  /**
-   * WorkspaceHub's configuration object.
-   */
+  /** WorkspaceHub's configuration object. */
   workspaceHubConfig?: WorkspaceHubConfig;
 
-  /**
-   * The immutable id associated with this workspace.
-   */
+  /** The immutable id associated with this workspace. */
   @visibility(Lifecycle.Read)
   workspaceId?: string;
 }
@@ -8412,14 +5630,10 @@ model EncryptionProperty {
    */
   cosmosDbResourceId?: string;
 
-  /**
-   * Identity to be used with the keyVault
-   */
+  /** Identity to be used with the keyVault */
   identity?: IdentityForCmk;
 
-  /**
-   * KeyVault details to do the encryption
-   */
+  /** KeyVault details to do the encryption */
   keyVaultProperties: KeyVaultProperties;
 
   /**
@@ -8428,9 +5642,7 @@ model EncryptionProperty {
    */
   searchAccountResourceId?: string;
 
-  /**
-   * Indicates whether or not the encryption is enabled for the workspace.
-   */
+  /** Indicates whether or not the encryption is enabled for the workspace. */
   status: EncryptionStatus;
 
   /**
@@ -8440,19 +5652,13 @@ model EncryptionProperty {
   storageAccountResourceId?: string;
 }
 
-/**
- * Identity object used for encryption.
- */
+/** Identity object used for encryption. */
 model IdentityForCmk {
-  /**
-   * UserAssignedIdentity to be used to fetch the encryption key from keyVault
-   */
+  /** UserAssignedIdentity to be used to fetch the encryption key from keyVault */
   userAssignedIdentity?: string;
 }
 
-/**
- * Customer Key vault properties.
- */
+/** Customer Key vault properties. */
 model KeyVaultProperties {
   /**
    * Currently, we support only SystemAssigned MSI.
@@ -8460,16 +5666,12 @@ model KeyVaultProperties {
    */
   identityClientId?: string;
 
-  /**
-   * KeyVault key identifier to encrypt the data
-   */
+  /** KeyVault key identifier to encrypt the data */
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   keyIdentifier: string;
 
-  /**
-   * KeyVault Arm Id that contains the data encryption key
-   */
+  /** KeyVault Arm Id that contains the data encryption key */
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   keyVaultArmId: string;
@@ -8491,63 +5693,43 @@ model ComputeRuntimeDto {
   sparkRuntimeVersion?: string;
 }
 
-/**
- * Managed Network settings for a machine learning workspace.
- */
+/** Managed Network settings for a machine learning workspace. */
 model ManagedNetworkSettings {
-  /**
-   * Isolation mode for the managed network of a machine learning workspace.
-   */
+  /** Isolation mode for the managed network of a machine learning workspace. */
   isolationMode?: IsolationMode;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility(Lifecycle.Read)
   networkId?: string;
 
-  /**
-   * Dictionary of <OutboundRule>
-   */
+  /** Dictionary of <OutboundRule> */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   outboundRules?: Record<OutboundRule>;
 
-  /**
-   * Status of the Provisioning for the managed network of a machine learning workspace.
-   */
+  /** Status of the Provisioning for the managed network of a machine learning workspace. */
   status?: ManagedNetworkProvisionStatus;
 }
 
-/**
- * Outbound Rule for the managed network of a machine learning workspace.
- */
+/** Outbound Rule for the managed network of a machine learning workspace. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 @discriminator("type")
 model OutboundRule {
-  /**
-   * Category of a managed network Outbound Rule of a machine learning workspace.
-   */
+  /** Category of a managed network Outbound Rule of a machine learning workspace. */
   category?: RuleCategory;
 
-  /**
-   * Type of a managed network Outbound Rule of a machine learning workspace.
-   */
+  /** Type of a managed network Outbound Rule of a machine learning workspace. */
   status?: RuleStatus;
 
-  /**
-   * Type of a managed network Outbound Rule of a machine learning workspace.
-   */
+  /** Type of a managed network Outbound Rule of a machine learning workspace. */
   type: RuleType;
 }
 
-/**
- * Status of the Provisioning for the managed network of a machine learning workspace.
- */
+/** Status of the Provisioning for the managed network of a machine learning workspace. */
 model ManagedNetworkProvisionStatus {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   sparkReady?: boolean;
 
-  /**
-   * Status for the managed network of a machine learning workspace.
-   */
+  /** Status for the managed network of a machine learning workspace. */
   status?: ManagedNetworkStatus;
 }
 
@@ -8558,14 +5740,10 @@ model NotebookResourceInfo {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   isPrivateLinkEnabled?: boolean;
 
-  /**
-   * The error that occurs when preparing notebook.
-   */
+  /** The error that occurs when preparing notebook. */
   notebookPreparationError?: NotebookPreparationError;
 
-  /**
-   * the data plane resourceId that used to initialize notebook component
-   */
+  /** the data plane resourceId that used to initialize notebook component */
   resourceId?: string;
 }
 
@@ -8577,61 +5755,39 @@ model NotebookPreparationError {
   statusCode?: int32;
 }
 
-/**
- * Private endpoint connection properties.
- */
+/** Private endpoint connection properties. */
 model PrivateEndpointConnectionProperties {
-  /**
-   * The Private Endpoint resource.
-   */
+  /** The Private Endpoint resource. */
   privateEndpoint?: WorkspacePrivateEndpointResource;
 
-  /**
-   * The connection state.
-   */
+  /** The connection state. */
   privateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
 
-  /**
-   * The current provisioning state.
-   */
+  /** The current provisioning state. */
   @visibility(Lifecycle.Read)
   provisioningState?: PrivateEndpointConnectionProvisioningState;
 }
 
-/**
- * The Private Endpoint resource.
- */
+/** The Private Endpoint resource. */
 model WorkspacePrivateEndpointResource {
-  /**
-   * e.g. /subscriptions/{networkSubscriptionId}/resourceGroups/{rgName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}
-   */
+  /** e.g. /subscriptions/{networkSubscriptionId}/resourceGroups/{rgName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName} */
   @visibility(Lifecycle.Read)
   id?: string;
 
-  /**
-   * The subnetId that the private endpoint is connected to.
-   */
+  /** The subnetId that the private endpoint is connected to. */
   @visibility(Lifecycle.Read)
   subnetArmId?: string;
 }
 
-/**
- * A collection of information about the state of the connection between service consumer and provider.
- */
+/** A collection of information about the state of the connection between service consumer and provider. */
 model PrivateLinkServiceConnectionState {
-  /**
-   * Some RP chose "None". Other RPs use this for region expansion.
-   */
+  /** Some RP chose "None". Other RPs use this for region expansion. */
   actionsRequired?: string;
 
-  /**
-   * User-defined message that, per NRP doc, may be used for approval-related message.
-   */
+  /** User-defined message that, per NRP doc, may be used for approval-related message. */
   description?: string;
 
-  /**
-   * Connection status of the service consumer with the service provider
-   */
+  /** Connection status of the service consumer with the service provider */
   status?: EndpointServiceConnectionStatus;
 }
 
@@ -8649,45 +5805,29 @@ model CosmosDbSettings {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SharedPrivateLinkResource {
-  /**
-   * Unique name of the private link
-   */
+  /** Unique name of the private link */
   name?: string;
 
-  /**
-   * Properties of a shared private link resource.
-   */
+  /** Properties of a shared private link resource. */
   properties?: SharedPrivateLinkResourceProperty;
 }
 
-/**
- * Properties of a shared private link resource.
- */
+/** Properties of a shared private link resource. */
 model SharedPrivateLinkResourceProperty {
-  /**
-   * group id of the private link
-   */
+  /** group id of the private link */
   groupId?: string;
 
-  /**
-   * the resource id that private link links to
-   */
+  /** the resource id that private link links to */
   privateLinkResourceId?: string;
 
-  /**
-   * Request message
-   */
+  /** Request message */
   requestMessage?: string;
 
-  /**
-   * Connection status of the service consumer with the service provider
-   */
+  /** Connection status of the service consumer with the service provider */
   status?: EndpointServiceConnectionStatus;
 }
 
-/**
- * WorkspaceHub's configuration object.
- */
+/** WorkspaceHub's configuration object. */
 model WorkspaceHubConfig {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   additionalWorkspaceStorageAccounts?: string[];
@@ -8695,49 +5835,31 @@ model WorkspaceHubConfig {
   defaultWorkspaceResourceGroup?: string;
 }
 
-/**
- * The parameters for updating a machine learning workspace.
- */
+/** The parameters for updating a machine learning workspace. */
 model WorkspaceUpdateParameters {
-  /**
-   * Managed service identity (system assigned and/or user assigned identities)
-   */
+  /** Managed service identity (system assigned and/or user assigned identities) */
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
-  /**
-   * The properties that the machine learning workspace will be updated with.
-   */
+  /** The properties that the machine learning workspace will be updated with. */
   properties?: WorkspacePropertiesUpdateParameters;
 
-  /**
-   * Optional. This field is required to be implemented by the RP because AML is supporting more than one tier
-   */
+  /** Optional. This field is required to be implemented by the RP because AML is supporting more than one tier */
   sku?: Azure.ResourceManager.CommonTypes.Sku;
 
-  /**
-   * The resource tags for the machine learning workspace.
-   */
+  /** The resource tags for the machine learning workspace. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 
-/**
- * The parameters for updating a machine learning workspace.
- */
+/** The parameters for updating a machine learning workspace. */
 model WorkspacePropertiesUpdateParameters {
-  /**
-   * ARM id of the application insights associated with this workspace.
-   */
+  /** ARM id of the application insights associated with this workspace. */
   applicationInsights?: string;
 
-  /**
-   * ARM id of the container registry associated with this workspace.
-   */
+  /** ARM id of the container registry associated with this workspace. */
   containerRegistry?: string;
 
-  /**
-   * The description of this workspace.
-   */
+  /** The description of this workspace. */
   description?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -8745,49 +5867,31 @@ model WorkspacePropertiesUpdateParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   encryption?: EncryptionUpdateProperties;
 
-  /**
-   * Settings for feature store type workspace.
-   */
+  /** Settings for feature store type workspace. */
   featureStoreSettings?: FeatureStoreSettings;
 
-  /**
-   * The friendly name for this workspace. This name in mutable
-   */
+  /** The friendly name for this workspace. This name in mutable */
   friendlyName?: string;
 
-  /**
-   * The compute name for image build
-   */
+  /** The compute name for image build */
   imageBuildCompute?: string;
 
-  /**
-   * Managed Network settings for a machine learning workspace.
-   */
+  /** Managed Network settings for a machine learning workspace. */
   managedNetwork?: ManagedNetworkSettings;
 
-  /**
-   * The user assigned identity resource id that represents the workspace identity.
-   */
+  /** The user assigned identity resource id that represents the workspace identity. */
   primaryUserAssignedIdentity?: string;
 
-  /**
-   * Whether requests from Public Network are allowed.
-   */
+  /** Whether requests from Public Network are allowed. */
   publicNetworkAccess?: PublicNetworkAccessType;
 
-  /**
-   * The service managed resource settings.
-   */
+  /** The service managed resource settings. */
   serviceManagedResourcesSettings?: ServiceManagedResourcesSettings;
 
-  /**
-   * Retention time in days after workspace get soft deleted.
-   */
+  /** Retention time in days after workspace get soft deleted. */
   softDeleteRetentionInDays?: int32;
 
-  /**
-   * Enabling v1_legacy_mode may prevent you from using features provided by the v2 API.
-   */
+  /** Enabling v1_legacy_mode may prevent you from using features provided by the v2 API. */
   v1LegacyMode?: boolean;
 }
 
@@ -8813,42 +5917,30 @@ model WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("authType")
 model WorkspaceConnectionPropertiesV2 {
-  /**
-   * Authentication type of the connection target
-   */
+  /** Authentication type of the connection target */
   authType: ConnectionAuthType;
 
-  /**
-   * Category of the connection
-   */
+  /** Category of the connection */
   category?: ConnectionCategory;
 
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   expiryTime?: utcDateTime;
 
-  /**
-   * Any object
-   */
+  /** Any object */
   metadata?: unknown;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   target?: string;
 }
 
-/**
- * The properties that the machine learning workspace connection will be updated with.
- */
+/** The properties that the machine learning workspace connection will be updated with. */
 model WorkspaceConnectionUpdateParameter {
-  /**
-   * The properties that the machine learning workspace connection will be updated with.
-   */
+  /** The properties that the machine learning workspace connection will be updated with. */
   properties?: WorkspaceConnectionPropertiesV2;
 }
 
-/**
- * Parameters to diagnose a workspace
- */
+/** Parameters to diagnose a workspace */
 model DiagnoseWorkspaceParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   value?: DiagnoseRequestProperties;
@@ -8856,57 +5948,39 @@ model DiagnoseWorkspaceParameters {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DiagnoseRequestProperties {
-  /**
-   * Setting for diagnosing dependent application insights
-   */
+  /** Setting for diagnosing dependent application insights */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   applicationInsights?: Record<unknown>;
 
-  /**
-   * Setting for diagnosing dependent container registry
-   */
+  /** Setting for diagnosing dependent container registry */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   containerRegistry?: Record<unknown>;
 
-  /**
-   * Setting for diagnosing dns resolution
-   */
+  /** Setting for diagnosing dns resolution */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   dnsResolution?: Record<unknown>;
 
-  /**
-   * Setting for diagnosing dependent key vault
-   */
+  /** Setting for diagnosing dependent key vault */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   keyVault?: Record<unknown>;
 
-  /**
-   * Setting for diagnosing network security group
-   */
+  /** Setting for diagnosing network security group */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   nsg?: Record<unknown>;
 
-  /**
-   * Setting for diagnosing unclassified category of problems
-   */
+  /** Setting for diagnosing unclassified category of problems */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   others?: Record<unknown>;
 
-  /**
-   * Setting for diagnosing resource lock
-   */
+  /** Setting for diagnosing resource lock */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   resourceLock?: Record<unknown>;
 
-  /**
-   * Setting for diagnosing dependent storage account
-   */
+  /** Setting for diagnosing dependent storage account */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   storageAccount?: Record<unknown>;
 
-  /**
-   * Setting for diagnosing user defined routing
-   */
+  /** Setting for diagnosing user defined routing */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   udr?: Record<unknown>;
 }
@@ -8956,34 +6030,24 @@ model DiagnoseResponseResultValue {
   otherResults?: DiagnoseResult[];
 }
 
-/**
- * Result of Diagnose
- */
+/** Result of Diagnose */
 model DiagnoseResult {
-  /**
-   * Code for workspace setup error
-   */
+  /** Code for workspace setup error */
   @visibility(Lifecycle.Read)
   code?: string;
 
-  /**
-   * Level of workspace setup error
-   */
+  /** Level of workspace setup error */
   @visibility(Lifecycle.Read)
   level?: DiagnoseResultLevel;
 
-  /**
-   * Message of workspace setup error
-   */
+  /** Message of workspace setup error */
   @visibility(Lifecycle.Read)
   message?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ListWorkspaceKeysResult {
-  /**
-   * The access key of the workspace app insights
-   */
+  /** The access key of the workspace app insights */
   @visibility(Lifecycle.Read)
   appInsightsInstrumentationKey?: string;
 
@@ -8992,24 +6056,18 @@ model ListWorkspaceKeysResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   notebookAccessKeys?: ListNotebookKeysResult;
 
-  /**
-   * The arm Id key of the workspace storage
-   */
+  /** The arm Id key of the workspace storage */
   @visibility(Lifecycle.Read)
   userStorageArmId?: string;
 
-  /**
-   * The access key of the workspace storage
-   */
+  /** The access key of the workspace storage */
   @visibility(Lifecycle.Read)
   userStorageKey?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model RegistryListCredentialsResult {
-  /**
-   * The location of the workspace ACR
-   */
+  /** The location of the workspace ACR */
   @visibility(Lifecycle.Read)
   location?: string;
 
@@ -9017,9 +6075,7 @@ model RegistryListCredentialsResult {
   @identifiers(#["name"])
   passwords?: Password[];
 
-  /**
-   * The username of the workspace ACR
-   */
+  /** The username of the workspace ACR */
   @visibility(Lifecycle.Read)
   username?: string;
 }
@@ -9037,15 +6093,11 @@ model Password {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ListNotebookKeysResult {
-  /**
-   * The primary access key of the Notebook
-   */
+  /** The primary access key of the Notebook */
   @visibility(Lifecycle.Read)
   primaryAccessKey?: string;
 
-  /**
-   * The secondary access key of the Notebook
-   */
+  /** The secondary access key of the Notebook */
   @visibility(Lifecycle.Read)
   secondaryAccessKey?: string;
 }
@@ -9087,9 +6139,7 @@ model NotebookAccessTokenResult {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ListStorageAccountKeysResult {
-  /**
-   * The access key of the storage
-   */
+  /** The access key of the storage */
   @visibility(Lifecycle.Read)
   userStorageKey?: string;
 }
@@ -9102,9 +6152,7 @@ model ExternalFqdnResponse {
   value?: FqdnEndpointsPropertyBag[];
 }
 
-/**
- * Property bag for FQDN endpoints result
- */
+/** Property bag for FQDN endpoints result */
 model FqdnEndpointsPropertyBag {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   properties?: FqdnEndpoints;
@@ -9136,972 +6184,614 @@ model FqdnEndpointDetail {
   port?: int32;
 }
 
-/**
- * List of private endpoint connection associated with the specified workspace
- */
+/** List of private endpoint connection associated with the specified workspace */
 model PrivateEndpointConnectionListResult {
-  /**
-   * Array of private endpoint connections
-   */
+  /** Array of private endpoint connections */
   @pageItems
   value?: PrivateEndpointConnection[];
 }
 
-/**
- * A list of private link resources
- */
+/** A list of private link resources */
 model PrivateLinkResourceListResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @pageItems
   value?: PrivateLinkResource[];
 }
 
-/**
- * A private link resource
- */
+/** A private link resource */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model PrivateLinkResource extends Azure.ResourceManager.CommonTypes.Resource {
-  /**
-   * Managed service identity (system assigned and/or user assigned identities)
-   */
+  /** Managed service identity (system assigned and/or user assigned identities) */
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
-  /**
-   * Same as workspace location.
-   */
+  /** Same as workspace location. */
   location?: string;
 
-  /**
-   * Properties of a private link resource.
-   */
+  /** Properties of a private link resource. */
   properties?: PrivateLinkResourceProperties;
 
-  /**
-   * Optional. This field is required to be implemented by the RP because AML is supporting more than one tier
-   */
+  /** Optional. This field is required to be implemented by the RP because AML is supporting more than one tier */
   sku?: Azure.ResourceManager.CommonTypes.Sku;
 
-  /**
-   * Dictionary of <string>
-   */
+  /** Dictionary of <string> */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 
-/**
- * Properties of a private link resource.
- */
+/** Properties of a private link resource. */
 model PrivateLinkResourceProperties {
-  /**
-   * The private link resource group id.
-   */
+  /** The private link resource group id. */
   @visibility(Lifecycle.Read)
   groupId?: string;
 
-  /**
-   * The private link resource required member names.
-   */
+  /** The private link resource required member names. */
   @visibility(Lifecycle.Read)
   requiredMembers?: string[];
 
-  /**
-   * The private link resource Private link DNS zone name.
-   */
+  /** The private link resource Private link DNS zone name. */
   requiredZoneNames?: string[];
 }
 
-/**
- * Managed Network Provisioning options for managed network of a machine learning workspace.
- */
+/** Managed Network Provisioning options for managed network of a machine learning workspace. */
 model ManagedNetworkProvisionOptions {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   includeSpark?: boolean;
 }
 
-/**
- * Represents a resource ID. For example, for a subnet, it is the resource URL for the subnet.
- */
+/** Represents a resource ID. For example, for a subnet, it is the resource URL for the subnet. */
 model ResourceId {
-  /**
-   * The ID of the resource
-   */
+  /** The ID of the resource */
   id: string;
 }
 
-/**
- * A Machine Learning compute based on AKS.
- */
+/** A Machine Learning compute based on AKS. */
 model AKS extends Compute {
   ...AKSSchema;
 
-  /**
-   * The type of compute
-   */
+  /** The type of compute */
   computeType: "AKS";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AKSSchema {
-  /**
-   * AKS properties
-   */
+  /** AKS properties */
   properties?: AKSSchemaProperties;
 }
 
-/**
- * AKS properties
- */
+/** AKS properties */
 model AKSSchemaProperties {
-  /**
-   * Cluster full qualified domain name
-   */
+  /** Cluster full qualified domain name */
   clusterFqdn?: string;
 
-  /**
-   * System services
-   */
+  /** System services */
   @visibility(Lifecycle.Read)
   @identifiers(#["publicIpAddress"])
   systemServices?: SystemService[];
 
-  /**
-   * Number of agents
-   */
+  /** Number of agents */
   agentCount?: int32;
 
-  /**
-   * Agent virtual machine size
-   */
+  /** Agent virtual machine size */
   agentVmSize?: string;
 
-  /**
-   * Intended usage of the cluster
-   */
+  /** Intended usage of the cluster */
   clusterPurpose?: ClusterPurpose = ClusterPurpose.FastProd;
 
-  /**
-   * SSL configuration
-   */
+  /** SSL configuration */
   sslConfiguration?: SslConfiguration;
 
-  /**
-   * AKS networking configuration for vnet
-   */
+  /** AKS networking configuration for vnet */
   aksNetworkingConfiguration?: AksNetworkingConfiguration;
 
-  /**
-   * Load Balancer Type
-   */
+  /** Load Balancer Type */
   loadBalancerType?: LoadBalancerType = LoadBalancerType.PublicIp;
 
-  /**
-   * Load Balancer Subnet
-   */
+  /** Load Balancer Subnet */
   loadBalancerSubnet?: string;
 }
 
-/**
- * A system service running on a compute.
- */
+/** A system service running on a compute. */
 model SystemService {
-  /**
-   * The type of this system service.
-   */
+  /** The type of this system service. */
   @visibility(Lifecycle.Read)
   systemServiceType?: string;
 
-  /**
-   * Public IP address
-   */
+  /** Public IP address */
   @visibility(Lifecycle.Read)
   publicIpAddress?: string;
 
-  /**
-   * The version for this type.
-   */
+  /** The version for this type. */
   @visibility(Lifecycle.Read)
   version?: string;
 }
 
-/**
- * The ssl configuration for scoring
- */
+/** The ssl configuration for scoring */
 model SslConfiguration {
-  /**
-   * Enable or disable ssl for scoring
-   */
+  /** Enable or disable ssl for scoring */
   status?: SslConfigStatus;
 
-  /**
-   * Cert data
-   */
+  /** Cert data */
   cert?: string;
 
-  /**
-   * Key data
-   */
+  /** Key data */
   key?: string;
 
-  /**
-   * CNAME of the cert
-   */
+  /** CNAME of the cert */
   cname?: string;
 
-  /**
-   * Leaf domain label of public endpoint
-   */
+  /** Leaf domain label of public endpoint */
   leafDomainLabel?: string;
 
-  /**
-   * Indicates whether to overwrite existing domain label.
-   */
+  /** Indicates whether to overwrite existing domain label. */
   overwriteExistingDomain?: boolean;
 }
 
-/**
- * Advance configuration for AKS networking
- */
+/** Advance configuration for AKS networking */
 model AksNetworkingConfiguration {
-  /**
-   * Virtual network subnet resource ID the compute nodes belong to
-   */
+  /** Virtual network subnet resource ID the compute nodes belong to */
   subnetId?: string;
 
-  /**
-   * A CIDR notation IP range from which to assign service cluster IPs. It must not overlap with any Subnet IP ranges.
-   */
+  /** A CIDR notation IP range from which to assign service cluster IPs. It must not overlap with any Subnet IP ranges. */
   @pattern("^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/([0-9]|[1-2][0-9]|3[0-2]))?$")
   serviceCidr?: string;
 
-  /**
-   * An IP address assigned to the Kubernetes DNS service. It must be within the Kubernetes service address range specified in serviceCidr.
-   */
+  /** An IP address assigned to the Kubernetes DNS service. It must be within the Kubernetes service address range specified in serviceCidr. */
   @pattern("^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")
   dnsServiceIP?: string;
 
-  /**
-   * A CIDR notation IP range assigned to the Docker bridge network. It must not overlap with any Subnet IP ranges or the Kubernetes service address range.
-   */
+  /** A CIDR notation IP range assigned to the Docker bridge network. It must not overlap with any Subnet IP ranges or the Kubernetes service address range. */
   @pattern("^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/([0-9]|[1-2][0-9]|3[0-2]))?$")
   dockerBridgeCidr?: string;
 }
 
-/**
- * A Machine Learning compute based on Kubernetes Compute.
- */
+/** A Machine Learning compute based on Kubernetes Compute. */
 model Kubernetes extends Compute {
   ...KubernetesSchema;
 
-  /**
-   * The type of compute
-   */
+  /** The type of compute */
   computeType: "Kubernetes";
 }
 
-/**
- * Kubernetes Compute Schema
- */
+/** Kubernetes Compute Schema */
 model KubernetesSchema {
-  /**
-   * Properties of Kubernetes
-   */
+  /** Properties of Kubernetes */
   properties?: KubernetesProperties;
 }
 
-/**
- * Kubernetes properties
- */
+/** Kubernetes properties */
 model KubernetesProperties {
-  /**
-   * Relay connection string.
-   */
+  /** Relay connection string. */
   relayConnectionString?: string;
 
-  /**
-   * ServiceBus connection string.
-   */
+  /** ServiceBus connection string. */
   serviceBusConnectionString?: string;
 
-  /**
-   * Extension principal-id.
-   */
+  /** Extension principal-id. */
   extensionPrincipalId?: string;
 
-  /**
-   * Extension instance release train.
-   */
+  /** Extension instance release train. */
   extensionInstanceReleaseTrain?: string;
 
-  /**
-   * VC name.
-   */
+  /** VC name. */
   vcName?: string;
 
-  /**
-   * Compute namespace
-   */
+  /** Compute namespace */
   `namespace`?: string = "default";
 
-  /**
-   * Default instance type
-   */
+  /** Default instance type */
   defaultInstanceType?: string;
 
-  /**
-   * Instance Type Schema
-   */
+  /** Instance Type Schema */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   instanceTypes?: Record<InstanceTypeSchema>;
 }
 
-/**
- * Instance type schema.
- */
+/** Instance type schema. */
 model InstanceTypeSchema {
-  /**
-   * Node Selector
-   */
+  /** Node Selector */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   nodeSelector?: Record<string>;
 
-  /**
-   * Resource requests/limits for this instance type
-   */
+  /** Resource requests/limits for this instance type */
   resources?: InstanceTypeSchemaResources;
 }
 
-/**
- * Resource requests/limits for this instance type
- */
+/** Resource requests/limits for this instance type */
 model InstanceTypeSchemaResources {
-  /**
-   * Resource requests for this instance type
-   */
+  /** Resource requests for this instance type */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   requests?: Record<string>;
 
-  /**
-   * Resource limits for this instance type
-   */
+  /** Resource limits for this instance type */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   limits?: Record<string>;
 }
 
-/**
- * AML Compute properties
- */
+/** AML Compute properties */
 model AmlComputeProperties {
-  /**
-   * Compute OS Type
-   */
+  /** Compute OS Type */
   osType?: OsType = OsType.Linux;
 
-  /**
-   * Virtual Machine Size
-   */
+  /** Virtual Machine Size */
   vmSize?: string;
 
-  /**
-   * Virtual Machine priority
-   */
+  /** Virtual Machine priority */
   vmPriority?: VmPriority;
 
-  /**
-   * Virtual Machine image for AML Compute - windows only
-   */
+  /** Virtual Machine image for AML Compute - windows only */
   virtualMachineImage?: VirtualMachineImage;
 
-  /**
-   * Network is isolated or not
-   */
+  /** Network is isolated or not */
   isolatedNetwork?: boolean;
 
-  /**
-   * Scale settings for AML Compute
-   */
+  /** Scale settings for AML Compute */
   scaleSettings?: ScaleSettings;
 
-  /**
-   * Credentials for an administrator user account that will be created on each compute node.
-   */
+  /** Credentials for an administrator user account that will be created on each compute node. */
   userAccountCredentials?: UserAccountCredentials;
 
-  /**
-   * Virtual network subnet resource ID the compute nodes belong to.
-   */
+  /** Virtual network subnet resource ID the compute nodes belong to. */
   subnet?: ResourceId;
 
-  /**
-   * State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on all nodes of the cluster. Enabled - Indicates that the public ssh port is open on all nodes of the cluster. NotSpecified - Indicates that the public ssh port is closed on all nodes of the cluster if VNet is defined, else is open all public nodes. It can be default only during cluster creation time, after creation it will be either enabled or disabled.
-   */
+  /** State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on all nodes of the cluster. Enabled - Indicates that the public ssh port is open on all nodes of the cluster. NotSpecified - Indicates that the public ssh port is closed on all nodes of the cluster if VNet is defined, else is open all public nodes. It can be default only during cluster creation time, after creation it will be either enabled or disabled. */
   remoteLoginPortPublicAccess?: RemoteLoginPortPublicAccess = RemoteLoginPortPublicAccess.NotSpecified;
 
-  /**
-   * Allocation state of the compute. Possible values are: steady - Indicates that the compute is not resizing. There are no changes to the number of compute nodes in the compute in progress. A compute enters this state when it is created and when no operations are being performed on the compute to change the number of compute nodes. resizing - Indicates that the compute is resizing; that is, compute nodes are being added to or removed from the compute.
-   */
+  /** Allocation state of the compute. Possible values are: steady - Indicates that the compute is not resizing. There are no changes to the number of compute nodes in the compute in progress. A compute enters this state when it is created and when no operations are being performed on the compute to change the number of compute nodes. resizing - Indicates that the compute is resizing; that is, compute nodes are being added to or removed from the compute. */
   @visibility(Lifecycle.Read)
   allocationState?: AllocationState;
 
-  /**
-   * The time at which the compute entered its current allocation state.
-   */
+  /** The time at which the compute entered its current allocation state. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   allocationStateTransitionTime?: utcDateTime;
 
-  /**
-   * Collection of errors encountered by various compute nodes during node setup.
-   */
+  /** Collection of errors encountered by various compute nodes during node setup. */
   @visibility(Lifecycle.Read)
   @identifiers(#["/error/code"])
   errors?: ErrorResponse[];
 
-  /**
-   * The number of compute nodes currently assigned to the compute.
-   */
+  /** The number of compute nodes currently assigned to the compute. */
   @visibility(Lifecycle.Read)
   currentNodeCount?: int32;
 
-  /**
-   * The target number of compute nodes for the compute. If the allocationState is resizing, this property denotes the target node count for the ongoing resize operation. If the allocationState is steady, this property denotes the target node count for the previous resize operation.
-   */
+  /** The target number of compute nodes for the compute. If the allocationState is resizing, this property denotes the target node count for the ongoing resize operation. If the allocationState is steady, this property denotes the target node count for the previous resize operation. */
   @visibility(Lifecycle.Read)
   targetNodeCount?: int32;
 
-  /**
-   * Counts of various node states on the compute.
-   */
+  /** Counts of various node states on the compute. */
   @visibility(Lifecycle.Read)
   nodeStateCounts?: NodeStateCounts;
 
-  /**
-   * Enable or disable node public IP address provisioning. Possible values are: Possible values are: true - Indicates that the compute nodes will have public IPs provisioned. false - Indicates that the compute nodes will have a private endpoint and no public IPs.
-   */
+  /** Enable or disable node public IP address provisioning. Possible values are: Possible values are: true - Indicates that the compute nodes will have public IPs provisioned. false - Indicates that the compute nodes will have a private endpoint and no public IPs. */
   enableNodePublicIp?: boolean = true;
 
-  /**
-   * A property bag containing additional properties.
-   */
+  /** A property bag containing additional properties. */
   propertyBag?: unknown;
 }
 
-/**
- * Virtual Machine image for Windows AML Compute
- */
+/** Virtual Machine image for Windows AML Compute */
 model VirtualMachineImage {
-  /**
-   * Virtual Machine image path
-   */
+  /** Virtual Machine image path */
   id: string;
 }
 
-/**
- * Settings for user account that gets created on each on the nodes of a compute.
- */
+/** Settings for user account that gets created on each on the nodes of a compute. */
 model UserAccountCredentials {
-  /**
-   * Name of the administrator user account which can be used to SSH to nodes.
-   */
+  /** Name of the administrator user account which can be used to SSH to nodes. */
   adminUserName: string;
 
-  /**
-   * SSH public key of the administrator user account.
-   */
+  /** SSH public key of the administrator user account. */
   adminUserSshPublicKey?: string;
 
-  /**
-   * Password of the administrator user account.
-   */
+  /** Password of the administrator user account. */
   adminUserPassword?: string;
 }
 
-/**
- * Counts of various compute node states on the amlCompute.
- */
+/** Counts of various compute node states on the amlCompute. */
 model NodeStateCounts {
-  /**
-   * Number of compute nodes in idle state.
-   */
+  /** Number of compute nodes in idle state. */
   @visibility(Lifecycle.Read)
   idleNodeCount?: int32;
 
-  /**
-   * Number of compute nodes which are running jobs.
-   */
+  /** Number of compute nodes which are running jobs. */
   @visibility(Lifecycle.Read)
   runningNodeCount?: int32;
 
-  /**
-   * Number of compute nodes which are being prepared.
-   */
+  /** Number of compute nodes which are being prepared. */
   @visibility(Lifecycle.Read)
   preparingNodeCount?: int32;
 
-  /**
-   * Number of compute nodes which are in unusable state.
-   */
+  /** Number of compute nodes which are in unusable state. */
   @visibility(Lifecycle.Read)
   unusableNodeCount?: int32;
 
-  /**
-   * Number of compute nodes which are leaving the amlCompute.
-   */
+  /** Number of compute nodes which are leaving the amlCompute. */
   @visibility(Lifecycle.Read)
   leavingNodeCount?: int32;
 
-  /**
-   * Number of compute nodes which are in preempted state.
-   */
+  /** Number of compute nodes which are in preempted state. */
   @visibility(Lifecycle.Read)
   preemptedNodeCount?: int32;
 }
 
-/**
- * An Azure Machine Learning compute.
- */
+/** An Azure Machine Learning compute. */
 model AmlCompute extends Compute {
   ...AmlComputeSchema;
 
-  /**
-   * The type of compute
-   */
+  /** The type of compute */
   computeType: "AmlCompute";
 }
 
-/**
- * Properties(top level) of AmlCompute
- */
+/** Properties(top level) of AmlCompute */
 model AmlComputeSchema {
-  /**
-   * Properties of AmlCompute
-   */
+  /** Properties of AmlCompute */
   properties?: AmlComputeProperties;
 }
 
-/**
- * Compute Instance properties
- */
+/** Compute Instance properties */
 model ComputeInstanceProperties {
-  /**
-   * Virtual Machine Size
-   */
+  /** Virtual Machine Size */
   vmSize?: string;
 
-  /**
-   * Virtual network subnet resource ID the compute nodes belong to.
-   */
+  /** Virtual network subnet resource ID the compute nodes belong to. */
   subnet?: ResourceId;
 
-  /**
-   * Policy for sharing applications on this compute instance among users of parent workspace. If Personal, only the creator can access applications on this compute instance. When Shared, any workspace user can access applications on this instance depending on his/her assigned role.
-   */
+  /** Policy for sharing applications on this compute instance among users of parent workspace. If Personal, only the creator can access applications on this compute instance. When Shared, any workspace user can access applications on this instance depending on his/her assigned role. */
   applicationSharingPolicy?: ApplicationSharingPolicy = ApplicationSharingPolicy.Shared;
 
-  /**
-   * Specifies settings for autologger.
-   */
+  /** Specifies settings for autologger. */
   autologgerSettings?: ComputeInstanceAutologgerSettings;
 
-  /**
-   * Specifies policy and settings for SSH access.
-   */
+  /** Specifies policy and settings for SSH access. */
   sshSettings?: ComputeInstanceSshSettings;
 
-  /**
-   * List of Custom Services added to the compute.
-   */
+  /** List of Custom Services added to the compute. */
   @identifiers(#["name"])
   customServices?: CustomService[];
 
-  /**
-   * Returns metadata about the operating system image for this compute instance.
-   */
+  /** Returns metadata about the operating system image for this compute instance. */
   @visibility(Lifecycle.Read)
   osImageMetadata?: ImageMetadata;
 
-  /**
-   * Describes all connectivity endpoints available for this ComputeInstance.
-   */
+  /** Describes all connectivity endpoints available for this ComputeInstance. */
   @visibility(Lifecycle.Read)
   connectivityEndpoints?: ComputeInstanceConnectivityEndpoints;
 
-  /**
-   * Describes available applications and their endpoints on this ComputeInstance.
-   */
+  /** Describes available applications and their endpoints on this ComputeInstance. */
   @visibility(Lifecycle.Read)
   @identifiers(#["displayName"])
   applications?: ComputeInstanceApplication[];
 
-  /**
-   * Describes information on user who created this ComputeInstance.
-   */
+  /** Describes information on user who created this ComputeInstance. */
   @visibility(Lifecycle.Read)
   createdBy?: ComputeInstanceCreatedBy;
 
-  /**
-   * Collection of errors encountered on this ComputeInstance.
-   */
+  /** Collection of errors encountered on this ComputeInstance. */
   @visibility(Lifecycle.Read)
   @identifiers(#["/error/code"])
   errors?: ErrorResponse[];
 
-  /**
-   * The current state of this ComputeInstance.
-   */
+  /** The current state of this ComputeInstance. */
   @visibility(Lifecycle.Read)
   state?: ComputeInstanceState;
 
-  /**
-   * The Compute Instance Authorization type. Available values are personal (default).
-   */
+  /** The Compute Instance Authorization type. Available values are personal (default). */
   computeInstanceAuthorizationType?: ComputeInstanceAuthorizationType = ComputeInstanceAuthorizationType.personal;
 
-  /**
-   * Settings for a personal compute instance.
-   */
+  /** Settings for a personal compute instance. */
   personalComputeInstanceSettings?: PersonalComputeInstanceSettings;
 
-  /**
-   * Details of customized scripts to execute for setting up the cluster.
-   */
+  /** Details of customized scripts to execute for setting up the cluster. */
   setupScripts?: SetupScripts;
 
-  /**
-   * The last operation on ComputeInstance.
-   */
+  /** The last operation on ComputeInstance. */
   @visibility(Lifecycle.Read)
   lastOperation?: ComputeInstanceLastOperation;
 
-  /**
-   * The list of schedules to be applied on the computes.
-   */
+  /** The list of schedules to be applied on the computes. */
   schedules?: ComputeSchedules;
 
-  /**
-   * Stops compute instance after user defined period of inactivity. Time is defined in ISO8601 format. Minimum is 15 min, maximum is 3 days.
-   */
+  /** Stops compute instance after user defined period of inactivity. Time is defined in ISO8601 format. Minimum is 15 min, maximum is 3 days. */
   idleTimeBeforeShutdown?: string;
 
-  /**
-   * Enable or disable node public IP address provisioning. Possible values are: Possible values are: true - Indicates that the compute nodes will have public IPs provisioned. false - Indicates that the compute nodes will have a private endpoint and no public IPs.
-   */
+  /** Enable or disable node public IP address provisioning. Possible values are: Possible values are: true - Indicates that the compute nodes will have public IPs provisioned. false - Indicates that the compute nodes will have a private endpoint and no public IPs. */
   enableNodePublicIp?: boolean = true;
 
-  /**
-   * Describes informations of containers on this ComputeInstance.
-   */
+  /** Describes informations of containers on this ComputeInstance. */
   @visibility(Lifecycle.Read)
   @identifiers(#["name"])
   containers?: ComputeInstanceContainer[];
 
-  /**
-   * Describes informations of dataDisks on this ComputeInstance.
-   */
+  /** Describes informations of dataDisks on this ComputeInstance. */
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   dataDisks?: ComputeInstanceDataDisk[];
 
-  /**
-   * Describes informations of dataMounts on this ComputeInstance.
-   */
+  /** Describes informations of dataMounts on this ComputeInstance. */
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   dataMounts?: ComputeInstanceDataMount[];
 
-  /**
-   * ComputeInstance version.
-   */
+  /** ComputeInstance version. */
   @visibility(Lifecycle.Read)
   versions?: ComputeInstanceVersion;
 }
 
-/**
- * Specifies settings for autologger.
- */
+/** Specifies settings for autologger. */
 model ComputeInstanceAutologgerSettings {
-  /**
-   * Indicates whether mlflow autologger is enabled for notebooks.
-   */
+  /** Indicates whether mlflow autologger is enabled for notebooks. */
   mlflowAutologger?: MlflowAutologger;
 }
 
-/**
- * Specifies policy and settings for SSH access.
- */
+/** Specifies policy and settings for SSH access. */
 model ComputeInstanceSshSettings {
-  /**
-   * State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on this instance. Enabled - Indicates that the public ssh port is open and accessible according to the VNet/subnet policy if applicable.
-   */
+  /** State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on this instance. Enabled - Indicates that the public ssh port is open and accessible according to the VNet/subnet policy if applicable. */
   sshPublicAccess?: SshPublicAccess = SshPublicAccess.Disabled;
 
-  /**
-   * Describes the admin user name.
-   */
+  /** Describes the admin user name. */
   @visibility(Lifecycle.Read)
   adminUserName?: string;
 
-  /**
-   * Describes the port for connecting through SSH.
-   */
+  /** Describes the port for connecting through SSH. */
   @visibility(Lifecycle.Read)
   sshPort?: int32;
 
-  /**
-   * Specifies the SSH rsa public key file as a string. Use "ssh-keygen -t rsa -b 2048" to generate your SSH key pairs.
-   */
+  /** Specifies the SSH rsa public key file as a string. Use "ssh-keygen -t rsa -b 2048" to generate your SSH key pairs. */
   adminPublicKey?: string;
 }
 
-/**
- * Returns metadata about the operating system image for this compute instance.
- */
+/** Returns metadata about the operating system image for this compute instance. */
 model ImageMetadata {
-  /**
-   * Specifies the current operating system image version this compute instance is running on.
-   */
+  /** Specifies the current operating system image version this compute instance is running on. */
   currentImageVersion?: string;
 
-  /**
-   * Specifies the latest available operating system image version.
-   */
+  /** Specifies the latest available operating system image version. */
   latestImageVersion?: string;
 
-  /**
-   * Specifies whether this compute instance is running on the latest operating system image.
-   */
+  /** Specifies whether this compute instance is running on the latest operating system image. */
   isLatestOsImageVersion?: boolean;
 }
 
-/**
- * Defines all connectivity endpoints and properties for an ComputeInstance.
- */
+/** Defines all connectivity endpoints and properties for an ComputeInstance. */
 model ComputeInstanceConnectivityEndpoints {
-  /**
-   * Public IP Address of this ComputeInstance.
-   */
+  /** Public IP Address of this ComputeInstance. */
   @visibility(Lifecycle.Read)
   publicIpAddress?: string;
 
-  /**
-   * Private IP Address of this ComputeInstance (local to the VNET in which the compute instance is deployed).
-   */
+  /** Private IP Address of this ComputeInstance (local to the VNET in which the compute instance is deployed). */
   @visibility(Lifecycle.Read)
   privateIpAddress?: string;
 }
 
-/**
- * Defines an Aml Instance application and its connectivity endpoint URI.
- */
+/** Defines an Aml Instance application and its connectivity endpoint URI. */
 model ComputeInstanceApplication {
-  /**
-   * Name of the ComputeInstance application.
-   */
+  /** Name of the ComputeInstance application. */
   displayName?: string;
 
-  /**
-   * Application' endpoint URI.
-   */
+  /** Application' endpoint URI. */
   endpointUri?: string;
 }
 
-/**
- * Describes information on user who created this ComputeInstance.
- */
+/** Describes information on user who created this ComputeInstance. */
 model ComputeInstanceCreatedBy {
-  /**
-   * Name of the user.
-   */
+  /** Name of the user. */
   @visibility(Lifecycle.Read)
   userName?: string;
 
-  /**
-   * Uniquely identifies user' Azure Active Directory organization.
-   */
+  /** Uniquely identifies user' Azure Active Directory organization. */
   @visibility(Lifecycle.Read)
   userOrgId?: string;
 
-  /**
-   * Uniquely identifies the user within his/her organization.
-   */
+  /** Uniquely identifies the user within his/her organization. */
   @visibility(Lifecycle.Read)
   userId?: string;
 }
 
-/**
- * Settings for a personal compute instance.
- */
+/** Settings for a personal compute instance. */
 model PersonalComputeInstanceSettings {
-  /**
-   * A user explicitly assigned to a personal compute instance.
-   */
+  /** A user explicitly assigned to a personal compute instance. */
   assignedUser?: AssignedUser;
 }
 
-/**
- * A user that can be assigned to a compute instance.
- */
+/** A user that can be assigned to a compute instance. */
 model AssignedUser {
-  /**
-   * User’s AAD Object Id.
-   */
+  /** User’s AAD Object Id. */
   objectId: string;
 
-  /**
-   * User’s AAD Tenant Id.
-   */
+  /** User’s AAD Tenant Id. */
   tenantId: string;
 }
 
-/**
- * Details of customized scripts to execute for setting up the cluster.
- */
+/** Details of customized scripts to execute for setting up the cluster. */
 model SetupScripts {
-  /**
-   * Customized setup scripts
-   */
+  /** Customized setup scripts */
   scripts?: ScriptsToExecute;
 }
 
-/**
- * Customized setup scripts
- */
+/** Customized setup scripts */
 model ScriptsToExecute {
-  /**
-   * Script that's run every time the machine starts.
-   */
+  /** Script that's run every time the machine starts. */
   startupScript?: ScriptReference;
 
-  /**
-   * Script that's run only once during provision of the compute.
-   */
+  /** Script that's run only once during provision of the compute. */
   creationScript?: ScriptReference;
 }
 
-/**
- * Script reference
- */
+/** Script reference */
 model ScriptReference {
-  /**
-   * The storage source of the script: inline, workspace.
-   */
+  /** The storage source of the script: inline, workspace. */
   scriptSource?: string;
 
-  /**
-   * The location of scripts in the mounted volume.
-   */
+  /** The location of scripts in the mounted volume. */
   scriptData?: string;
 
-  /**
-   * Optional command line arguments passed to the script to run.
-   */
+  /** Optional command line arguments passed to the script to run. */
   scriptArguments?: string;
 
-  /**
-   * Optional time period passed to timeout command.
-   */
+  /** Optional time period passed to timeout command. */
   timeout?: string;
 }
 
-/**
- * The last operation on ComputeInstance.
- */
+/** The last operation on ComputeInstance. */
 model ComputeInstanceLastOperation {
-  /**
-   * Name of the last operation.
-   */
+  /** Name of the last operation. */
   operationName?: OperationName;
 
-  /**
-   * Time of the last operation.
-   */
+  /** Time of the last operation. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   operationTime?: utcDateTime;
 
-  /**
-   * Operation status.
-   */
+  /** Operation status. */
   operationStatus?: OperationStatus;
 
-  /**
-   * Trigger of operation.
-   */
+  /** Trigger of operation. */
   operationTrigger?: OperationTrigger;
 }
 
-/**
- * The list of schedules to be applied on the computes
- */
+/** The list of schedules to be applied on the computes */
 model ComputeSchedules {
-  /**
-   * The list of compute start stop schedules to be applied.
-   */
+  /** The list of compute start stop schedules to be applied. */
   computeStartStop?: ComputeStartStopSchedule[];
 }
 
-/**
- * Compute start stop schedule properties
- */
+/** Compute start stop schedule properties */
 model ComputeStartStopSchedule {
-  /**
-   * A system assigned id for the schedule.
-   */
+  /** A system assigned id for the schedule. */
   @visibility(Lifecycle.Read)
   id?: string;
 
-  /**
-   * The current deployment state of schedule.
-   */
+  /** The current deployment state of schedule. */
   @visibility(Lifecycle.Read)
   provisioningStatus?: ProvisioningStatus;
 
-  /**
-   * Is the schedule enabled or disabled?
-   */
+  /** Is the schedule enabled or disabled? */
   status?: ScheduleStatus;
 
-  /**
-   * [Required] The compute power action.
-   */
+  /** [Required] The compute power action. */
   action?: ComputePowerAction;
 
-  /**
-   * [Required] The schedule trigger type.
-   */
+  /** [Required] The schedule trigger type. */
   triggerType?: TriggerType;
 
-  /**
-   * Required if triggerType is Recurrence.
-   */
+  /** Required if triggerType is Recurrence. */
   recurrence?: Recurrence;
 
-  /**
-   * Required if triggerType is Cron.
-   */
+  /** Required if triggerType is Cron. */
   cron?: Cron;
 
-  /**
-   * [Deprecated] Not used any more.
-   */
+  /** [Deprecated] Not used any more. */
   schedule?: ScheduleBase;
 }
 
-/**
- * The workflow trigger recurrence for ComputeStartStop schedule type.
- */
+/** The workflow trigger recurrence for ComputeStartStop schedule type. */
 model Recurrence {
-  /**
-   * [Required] The frequency to trigger schedule.
-   */
+  /** [Required] The frequency to trigger schedule. */
   frequency?: RecurrenceFrequency;
 
-  /**
-   * [Required] Specifies schedule interval in conjunction with frequency
-   */
+  /** [Required] Specifies schedule interval in conjunction with frequency */
   interval?: int32;
 
-  /**
-   * The start time in yyyy-MM-ddTHH:mm:ss format.
-   */
+  /** The start time in yyyy-MM-ddTHH:mm:ss format. */
   startTime?: string;
 
   /**
@@ -10110,19 +6800,13 @@ model Recurrence {
    */
   timeZone?: string = "UTC";
 
-  /**
-   * [Required] The recurrence schedule.
-   */
+  /** [Required] The recurrence schedule. */
   schedule?: RecurrenceSchedule;
 }
 
-/**
- * The workflow trigger cron for ComputeStartStop schedule type.
- */
+/** The workflow trigger cron for ComputeStartStop schedule type. */
 model Cron {
-  /**
-   * The start time in yyyy-MM-ddTHH:mm:ss format.
-   */
+  /** The start time in yyyy-MM-ddTHH:mm:ss format. */
   startTime?: string;
 
   /**
@@ -10140,191 +6824,119 @@ model Cron {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ScheduleBase {
-  /**
-   * A system assigned id for the schedule.
-   */
+  /** A system assigned id for the schedule. */
   id?: string;
 
-  /**
-   * The current deployment state of schedule.
-   */
+  /** The current deployment state of schedule. */
   provisioningStatus?: ScheduleProvisioningState;
 
-  /**
-   * Is the schedule enabled or disabled?
-   */
+  /** Is the schedule enabled or disabled? */
   status?: ScheduleStatus;
 }
 
-/**
- * Defines an Aml Instance container.
- */
+/** Defines an Aml Instance container. */
 model ComputeInstanceContainer {
-  /**
-   * Name of the ComputeInstance container.
-   */
+  /** Name of the ComputeInstance container. */
   name?: string;
 
-  /**
-   * Auto save settings.
-   */
+  /** Auto save settings. */
   autosave?: Autosave;
 
-  /**
-   * Information of GPU.
-   */
+  /** Information of GPU. */
   gpu?: string;
 
-  /**
-   * network of this container.
-   */
+  /** network of this container. */
   network?: Network;
 
-  /**
-   * Environment information of this container.
-   */
+  /** Environment information of this container. */
   environment?: ComputeInstanceEnvironmentInfo;
 
-  /**
-   * services of this containers.
-   */
+  /** services of this containers. */
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   services?: unknown[];
 }
 
-/**
- * Environment information
- */
+/** Environment information */
 model ComputeInstanceEnvironmentInfo {
-  /**
-   * name of environment.
-   */
+  /** name of environment. */
   name?: string;
 
-  /**
-   * version of environment.
-   */
+  /** version of environment. */
   version?: string;
 }
 
-/**
- * Defines an Aml Instance DataDisk.
- */
+/** Defines an Aml Instance DataDisk. */
 model ComputeInstanceDataDisk {
-  /**
-   * Caching type of Data Disk.
-   */
+  /** Caching type of Data Disk. */
   caching?: Caching;
 
-  /**
-   * The initial disk size in gigabytes.
-   */
+  /** The initial disk size in gigabytes. */
   diskSizeGB?: int32;
 
-  /**
-   * The lun is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct lun.
-   */
+  /** The lun is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct lun. */
   lun?: int32;
 
-  /**
-   * type of this storage account.
-   */
+  /** type of this storage account. */
   storageAccountType?: StorageAccountType = StorageAccountType.Standard_LRS;
 }
 
-/**
- * Defines an Aml Instance DataMount.
- */
+/** Defines an Aml Instance DataMount. */
 model ComputeInstanceDataMount {
-  /**
-   * Source of the ComputeInstance data mount.
-   */
+  /** Source of the ComputeInstance data mount. */
   source?: string;
 
-  /**
-   * Data source type.
-   */
+  /** Data source type. */
   sourceType?: SourceType;
 
-  /**
-   * name of the ComputeInstance data mount.
-   */
+  /** name of the ComputeInstance data mount. */
   mountName?: string;
 
-  /**
-   * Mount Action.
-   */
+  /** Mount Action. */
   mountAction?: MountAction;
 
-  /**
-   * who this data mount created by.
-   */
+  /** who this data mount created by. */
   createdBy?: string;
 
-  /**
-   * Path of this data mount.
-   */
+  /** Path of this data mount. */
   mountPath?: string;
 
-  /**
-   * Mount state.
-   */
+  /** Mount state. */
   mountState?: MountState;
 
-  /**
-   * The time when the disk mounted.
-   */
+  /** The time when the disk mounted. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   mountedOn?: utcDateTime;
 
-  /**
-   * Error of this data mount.
-   */
+  /** Error of this data mount. */
   error?: string;
 }
 
-/**
- * Version of computeInstance.
- */
+/** Version of computeInstance. */
 model ComputeInstanceVersion {
-  /**
-   * Runtime of compute instance.
-   */
+  /** Runtime of compute instance. */
   runtime?: string;
 }
 
-/**
- * An Azure Machine Learning compute instance.
- */
+/** An Azure Machine Learning compute instance. */
 model ComputeInstance extends Compute {
   ...ComputeInstanceSchema;
 
-  /**
-   * The type of compute
-   */
+  /** The type of compute */
   computeType: "ComputeInstance";
 }
 
-/**
- * Properties(top level) of ComputeInstance
- */
+/** Properties(top level) of ComputeInstance */
 model ComputeInstanceSchema {
-  /**
-   * Properties of ComputeInstance
-   */
+  /** Properties of ComputeInstance */
   properties?: ComputeInstanceProperties;
 }
 
-/**
- * A Machine Learning compute based on Azure Virtual Machines.
- */
+/** A Machine Learning compute based on Azure Virtual Machines. */
 model VirtualMachine extends Compute {
   ...VirtualMachineSchema;
 
-  /**
-   * The type of compute
-   */
+  /** The type of compute */
   computeType: "VirtualMachine";
 }
 
@@ -10336,156 +6948,100 @@ model VirtualMachineSchema {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model VirtualMachineSchemaProperties {
-  /**
-   * Virtual Machine size
-   */
+  /** Virtual Machine size */
   virtualMachineSize?: string;
 
-  /**
-   * Port open for ssh connections.
-   */
+  /** Port open for ssh connections. */
   sshPort?: int32;
 
-  /**
-   * Notebook server port open for ssh connections.
-   */
+  /** Notebook server port open for ssh connections. */
   notebookServerPort?: int32;
 
-  /**
-   * Public IP address of the virtual machine.
-   */
+  /** Public IP address of the virtual machine. */
   address?: string;
 
-  /**
-   * Admin credentials for virtual machine
-   */
+  /** Admin credentials for virtual machine */
   administratorAccount?: VirtualMachineSshCredentials;
 
-  /**
-   * Indicates whether this compute will be used for running notebooks.
-   */
+  /** Indicates whether this compute will be used for running notebooks. */
   isNotebookInstanceCompute?: boolean;
 }
 
-/**
- * Admin credentials for virtual machine
- */
+/** Admin credentials for virtual machine */
 model VirtualMachineSshCredentials {
-  /**
-   * Username of admin account
-   */
+  /** Username of admin account */
   username?: string;
 
-  /**
-   * Password of admin account
-   */
+  /** Password of admin account */
   password?: string;
 
-  /**
-   * Public key data
-   */
+  /** Public key data */
   publicKeyData?: string;
 
-  /**
-   * Private key data
-   */
+  /** Private key data */
   privateKeyData?: string;
 }
 
-/**
- * HDInsight compute properties
- */
+/** HDInsight compute properties */
 model HDInsightProperties {
-  /**
-   * Port open for ssh connections on the master node of the cluster.
-   */
+  /** Port open for ssh connections on the master node of the cluster. */
   sshPort?: int32;
 
-  /**
-   * Public IP address of the master node of the cluster.
-   */
+  /** Public IP address of the master node of the cluster. */
   address?: string;
 
-  /**
-   * Admin credentials for master node of the cluster
-   */
+  /** Admin credentials for master node of the cluster */
   administratorAccount?: VirtualMachineSshCredentials;
 }
 
-/**
- * A HDInsight compute.
- */
+/** A HDInsight compute. */
 model HDInsight extends Compute {
   ...HDInsightSchema;
 
-  /**
-   * The type of compute
-   */
+  /** The type of compute */
   computeType: "HDInsight";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model HDInsightSchema {
-  /**
-   * HDInsight compute properties
-   */
+  /** HDInsight compute properties */
   properties?: HDInsightProperties;
 }
 
-/**
- * A DataFactory compute.
- */
+/** A DataFactory compute. */
 model DataFactory extends Compute {
-  /**
-   * The type of compute
-   */
+  /** The type of compute */
   computeType: "DataFactory";
 }
 
-/**
- * Properties of Databricks
- */
+/** Properties of Databricks */
 model DatabricksProperties {
-  /**
-   * Databricks access token
-   */
+  /** Databricks access token */
   databricksAccessToken?: string;
 
-  /**
-   * Workspace Url
-   */
+  /** Workspace Url */
   workspaceUrl?: string;
 }
 
-/**
- * A DataFactory compute.
- */
+/** A DataFactory compute. */
 model Databricks extends Compute {
   ...DatabricksSchema;
 
-  /**
-   * The type of compute
-   */
+  /** The type of compute */
   computeType: "Databricks";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DatabricksSchema {
-  /**
-   * Properties of Databricks
-   */
+  /** Properties of Databricks */
   properties?: DatabricksProperties;
 }
 
-/**
- * A DataLakeAnalytics compute.
- */
+/** A DataLakeAnalytics compute. */
 model DataLakeAnalytics extends Compute {
   ...DataLakeAnalyticsSchema;
 
-  /**
-   * The type of compute
-   */
+  /** The type of compute */
   computeType: "DataLakeAnalytics";
 }
 
@@ -10497,81 +7053,53 @@ model DataLakeAnalyticsSchema {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DataLakeAnalyticsSchemaProperties {
-  /**
-   * DataLake Store Account Name
-   */
+  /** DataLake Store Account Name */
   dataLakeStoreAccountName?: string;
 }
 
-/**
- * A SynapseSpark compute.
- */
+/** A SynapseSpark compute. */
 model SynapseSpark extends Compute {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   properties?: SynapseSparkProperties;
 
-  /**
-   * The type of compute
-   */
+  /** The type of compute */
   computeType: "SynapseSpark";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SynapseSparkProperties {
-  /**
-   * Auto scale properties.
-   */
+  /** Auto scale properties. */
   autoScaleProperties?: AutoScaleProperties;
 
-  /**
-   * Auto pause properties.
-   */
+  /** Auto pause properties. */
   autoPauseProperties?: AutoPauseProperties;
 
-  /**
-   * Spark version.
-   */
+  /** Spark version. */
   sparkVersion?: string;
 
-  /**
-   * The number of compute nodes currently assigned to the compute.
-   */
+  /** The number of compute nodes currently assigned to the compute. */
   nodeCount?: int32;
 
-  /**
-   * Node size.
-   */
+  /** Node size. */
   nodeSize?: string;
 
-  /**
-   * Node size family.
-   */
+  /** Node size family. */
   nodeSizeFamily?: string;
 
-  /**
-   * Azure subscription identifier.
-   */
+  /** Azure subscription identifier. */
   subscriptionId?: string;
 
-  /**
-   * Name of the resource group in which workspace is located.
-   */
+  /** Name of the resource group in which workspace is located. */
   resourceGroup?: string;
 
-  /**
-   * Name of Azure Machine Learning workspace.
-   */
+  /** Name of Azure Machine Learning workspace. */
   workspaceName?: string;
 
-  /**
-   * Pool name.
-   */
+  /** Pool name. */
   poolName?: string;
 }
 
-/**
- * Auto scale properties
- */
+/** Auto scale properties */
 model AutoScaleProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   minNodeCount?: int32;
@@ -10581,9 +7109,7 @@ model AutoScaleProperties {
   maxNodeCount?: int32;
 }
 
-/**
- * Auto pause properties
- */
+/** Auto pause properties */
 model AutoPauseProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   delayInMinutes?: int32;
@@ -10591,239 +7117,155 @@ model AutoPauseProperties {
   enabled?: boolean;
 }
 
-/**
- * Properties of AksComputeSecrets
- */
+/** Properties of AksComputeSecrets */
 model AksComputeSecretsProperties {
-  /**
-   * Content of kubeconfig file that can be used to connect to the Kubernetes cluster.
-   */
+  /** Content of kubeconfig file that can be used to connect to the Kubernetes cluster. */
   userKubeConfig?: string;
 
-  /**
-   * Content of kubeconfig file that can be used to connect to the Kubernetes cluster.
-   */
+  /** Content of kubeconfig file that can be used to connect to the Kubernetes cluster. */
   adminKubeConfig?: string;
 
-  /**
-   * Image registry pull secret.
-   */
+  /** Image registry pull secret. */
   imagePullSecretName?: string;
 }
 
-/**
- * Secrets related to a Machine Learning compute based on AKS.
- */
+/** Secrets related to a Machine Learning compute based on AKS. */
 model AksComputeSecrets extends ComputeSecrets {
   ...AksComputeSecretsProperties;
 
-  /**
-   * The type of compute
-   */
+  /** The type of compute */
   computeType: "AKS";
 }
 
-/**
- * Secrets related to a Machine Learning compute based on AKS.
- */
+/** Secrets related to a Machine Learning compute based on AKS. */
 model VirtualMachineSecrets extends ComputeSecrets {
   ...VirtualMachineSecretsSchema;
 
-  /**
-   * The type of compute
-   */
+  /** The type of compute */
   computeType: "VirtualMachine";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model VirtualMachineSecretsSchema {
-  /**
-   * Admin credentials for virtual machine.
-   */
+  /** Admin credentials for virtual machine. */
   administratorAccount?: VirtualMachineSshCredentials;
 }
 
-/**
- * Properties of Databricks Compute Secrets
- */
+/** Properties of Databricks Compute Secrets */
 model DatabricksComputeSecretsProperties {
-  /**
-   * access token for databricks account.
-   */
+  /** access token for databricks account. */
   databricksAccessToken?: string;
 }
 
-/**
- * Secrets related to a Machine Learning compute based on Databricks.
- */
+/** Secrets related to a Machine Learning compute based on Databricks. */
 model DatabricksComputeSecrets extends ComputeSecrets {
   ...DatabricksComputeSecretsProperties;
 
-  /**
-   * The type of compute
-   */
+  /** The type of compute */
   computeType: "Databricks";
 }
 
-/**
- * Account key datastore credentials configuration.
- */
+/** Account key datastore credentials configuration. */
 model AccountKeyDatastoreCredentials extends DatastoreCredentials {
-  /**
-   * [Required] Storage account secrets.
-   */
+  /** [Required] Storage account secrets. */
   @visibility(Lifecycle.Create, Lifecycle.Update)
   secrets: AccountKeyDatastoreSecrets;
 
-  /**
-   * [Required] Credential type used to authentication with storage.
-   */
+  /** [Required] Credential type used to authentication with storage. */
   credentialsType: "AccountKey";
 }
 
-/**
- * Datastore account key secrets.
- */
+/** Datastore account key secrets. */
 model AccountKeyDatastoreSecrets extends DatastoreSecrets {
-  /**
-   * Storage account key.
-   */
+  /** Storage account key. */
   key?: string;
 
-  /**
-   * [Required] Credential type used to authentication with storage.
-   */
+  /** [Required] Credential type used to authentication with storage. */
   secretsType: "AccountKey";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AllFeatures extends MonitoringFeatureFilterBase {
-  /**
-   * [Required] Specifies the feature filter to leverage when selecting features to calculate metrics over.
-   */
+  /** [Required] Specifies the feature filter to leverage when selecting features to calculate metrics over. */
   filterType: "AllFeatures";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("filterType")
 model MonitoringFeatureFilterBase {
-  /**
-   * [Required] Specifies the feature filter to leverage when selecting features to calculate metrics over.
-   */
+  /** [Required] Specifies the feature filter to leverage when selecting features to calculate metrics over. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   filterType: MonitoringFeatureFilterType;
 }
 
-/**
- * All nodes means the service will be running on all of the nodes of the job
- */
+/** All nodes means the service will be running on all of the nodes of the job */
 model AllNodes extends Nodes {
-  /**
-   * [Required] Type of the Nodes value
-   */
+  /** [Required] Type of the Nodes value */
   nodesValueType: "All";
 }
 
-/**
- * AML Token identity configuration.
- */
+/** AML Token identity configuration. */
 model AmlToken extends IdentityConfiguration {
-  /**
-   * [Required] Specifies the type of identity framework.
-   */
+  /** [Required] Specifies the type of identity framework. */
   identityType: "AMLToken";
 }
 
-/**
- * AML token compute identity definition.
- */
+/** AML token compute identity definition. */
 model AmlTokenComputeIdentity extends MonitorComputeIdentityBase {
-  /**
-   * [Required] Monitor compute identity type enum.
-   */
+  /** [Required] Monitor compute identity type enum. */
   computeIdentityType: "AmlToken";
 }
 
-/**
- * Monitor compute identity base definition.
- */
+/** Monitor compute identity base definition. */
 @discriminator("computeIdentityType")
 model MonitorComputeIdentityBase {
-  /**
-   * [Required] Monitor compute identity type enum.
-   */
+  /** [Required] Monitor compute identity type enum. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   computeIdentityType: MonitorComputeIdentityType;
 }
 
-/**
- * Asset input type.
- */
+/** Asset input type. */
 model AssetJobInput {
-  /**
-   * Input Asset Delivery Mode.
-   */
+  /** Input Asset Delivery Mode. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   mode?: InputDeliveryMode;
 
-  /**
-   * [Required] Input Asset URI.
-   */
+  /** [Required] Input Asset URI. */
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   uri: string;
 }
 
-/**
- * Asset output type.
- */
+/** Asset output type. */
 model AssetJobOutput {
-  /**
-   * Output Asset Name.
-   */
+  /** Output Asset Name. */
   assetName?: string;
 
-  /**
-   * Output Asset Version.
-   */
+  /** Output Asset Version. */
   assetVersion?: string;
 
-  /**
-   * Auto delete setting of output data asset.
-   */
+  /** Auto delete setting of output data asset. */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   autoDeleteSetting?: AutoDeleteSetting;
 
-  /**
-   * Output Asset Delivery Mode.
-   */
+  /** Output Asset Delivery Mode. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   mode?: OutputDeliveryMode;
 
-  /**
-   * Output Asset URI.
-   */
+  /** Output Asset URI. */
   uri?: string;
 }
 
-/**
- * Forecast horizon determined automatically by system.
- */
+/** Forecast horizon determined automatically by system. */
 model AutoForecastHorizon extends ForecastHorizon {
-  /**
-   * [Required] Set forecast horizon value selection mode.
-   */
+  /** [Required] Set forecast horizon value selection mode. */
   mode: "Auto";
 }
 
-/**
- * The desired maximum forecast horizon in units of time-series frequency.
- */
+/** The desired maximum forecast horizon in units of time-series frequency. */
 @discriminator("mode")
 model ForecastHorizon {
-  /**
-   * [Required] Set forecast horizon value selection mode.
-   */
+  /** [Required] Set forecast horizon value selection mode. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   mode: ForecastHorizonMode;
 }
@@ -10841,72 +7283,50 @@ model AutoMLJob extends JobBase {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentId?: string;
 
-  /**
-   * Environment variables included in the job.
-   */
+  /** Environment variables included in the job. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentVariables?: Record<string>;
 
-  /**
-   * Mapping of output data bindings used in the job.
-   */
+  /** Mapping of output data bindings used in the job. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   outputs?: Record<JobOutput>;
 
-  /**
-   * Queue settings for the job
-   */
+  /** Queue settings for the job */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   queueSettings?: QueueSettings;
 
-  /**
-   * Compute Resource configuration for the job.
-   */
+  /** Compute Resource configuration for the job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   resources?: JobResourceConfiguration;
 
-  /**
-   * [Required] This represents scenario which can be one of Tables/NLP/Image
-   */
+  /** [Required] This represents scenario which can be one of Tables/NLP/Image */
   taskDetails: AutoMLVertical;
 
-  /**
-   * [Required] Specifies the type of job.
-   */
+  /** [Required] Specifies the type of job. */
   jobType: "AutoML";
 }
 
-/**
- * Job output definition container information on where to find job output/logs.
- */
+/** Job output definition container information on where to find job output/logs. */
 @discriminator("jobOutputType")
 model JobOutput {
-  /**
-   * Description for the output.
-   */
+  /** Description for the output. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   description?: string;
 
-  /**
-   * [Required] Specifies the type of job.
-   */
+  /** [Required] Specifies the type of job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   jobOutputType: JobOutputType;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model QueueSettings {
-  /**
-   * Controls the compute job tier
-   */
+  /** Controls the compute job tier */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   jobTier?: JobTier;
 
-  /**
-   * Controls the priority of the job on a compute.
-   */
+  /** Controls the priority of the job on a compute. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   priority?: int32;
 }
@@ -10914,15 +7334,11 @@ model QueueSettings {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model JobResourceConfiguration extends ResourceConfiguration {
-  /**
-   * Extra arguments to pass to the Docker run command. This would override any parameters that have already been set by the system, or in this section. This parameter is only supported for Azure ML compute types.
-   */
+  /** Extra arguments to pass to the Docker run command. This would override any parameters that have already been set by the system, or in this section. This parameter is only supported for Azure ML compute types. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   dockerArgs?: string;
 
-  /**
-   * Size of the docker container's shared memory block. This should be in the format of (number)(unit) where number as to be greater than 0 and the unit can be one of b(bytes), k(kilobytes), m(megabytes), or g(gigabytes).
-   */
+  /** Size of the docker container's shared memory block. This should be in the format of (number)(unit) where number as to be greater than 0 and the unit can be one of b(bytes), k(kilobytes), m(megabytes), or g(gigabytes). */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @pattern("\\d+[bBkKmMgG]")
   shmSize?: string = "2g";
@@ -10934,9 +7350,7 @@ model JobResourceConfiguration extends ResourceConfiguration {
  */
 @discriminator("taskType")
 model AutoMLVertical {
-  /**
-   * Log verbosity for the job.
-   */
+  /** Log verbosity for the job. */
   logVerbosity?: LogVerbosity;
 
   /**
@@ -10945,15 +7359,11 @@ model AutoMLVertical {
    */
   targetColumnName?: string;
 
-  /**
-   * [Required] Task type for AutoMLJob.
-   */
+  /** [Required] Task type for AutoMLJob. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   taskType: TaskType;
 
-  /**
-   * [Required] Training data input.
-   */
+  /** [Required] Training data input. */
   trainingData: MLTableJobInput;
 }
 
@@ -10961,121 +7371,81 @@ model AutoMLVertical {
 model MLTableJobInput extends JobInput {
   ...AssetJobInput;
 
-  /**
-   * [Required] Specifies the type of job.
-   */
+  /** [Required] Specifies the type of job. */
   jobInputType: "mltable";
 }
 
-/**
- * Command job definition.
- */
+/** Command job definition. */
 @discriminator("jobInputType")
 model JobInput {
-  /**
-   * Description for the input.
-   */
+  /** Description for the input. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   description?: string;
 
-  /**
-   * [Required] Specifies the type of job.
-   */
+  /** [Required] Specifies the type of job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   jobInputType: JobInputType;
 }
 
-/**
- * N-Cross validations determined automatically.
- */
+/** N-Cross validations determined automatically. */
 model AutoNCrossValidations extends NCrossValidations {
-  /**
-   * [Required] Mode for determining N-Cross validations.
-   */
+  /** [Required] Mode for determining N-Cross validations. */
   mode: "Auto";
 }
 
-/**
- * N-Cross validations value.
- */
+/** N-Cross validations value. */
 @discriminator("mode")
 model NCrossValidations {
-  /**
-   * [Required] Mode for determining N-Cross validations.
-   */
+  /** [Required] Mode for determining N-Cross validations. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   mode: NCrossValidationsMode;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AutoSeasonality extends Seasonality {
-  /**
-   * [Required] Seasonality mode.
-   */
+  /** [Required] Seasonality mode. */
   mode: "Auto";
 }
 
-/**
- * Forecasting seasonality.
- */
+/** Forecasting seasonality. */
 @discriminator("mode")
 model Seasonality {
-  /**
-   * [Required] Seasonality mode.
-   */
+  /** [Required] Seasonality mode. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   mode: SeasonalityMode;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AutoTargetLags extends TargetLags {
-  /**
-   * [Required] Set target lags mode - Auto/Custom
-   */
+  /** [Required] Set target lags mode - Auto/Custom */
   mode: "Auto";
 }
 
-/**
- * The number of past periods to lag from the target column.
- */
+/** The number of past periods to lag from the target column. */
 @discriminator("mode")
 model TargetLags {
-  /**
-   * [Required] Set target lags mode - Auto/Custom
-   */
+  /** [Required] Set target lags mode - Auto/Custom */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   mode: TargetLagsMode;
 }
 
-/**
- * Target lags rolling window determined automatically.
- */
+/** Target lags rolling window determined automatically. */
 model AutoTargetRollingWindowSize extends TargetRollingWindowSize {
-  /**
-   * [Required] TargetRollingWindowSiz detection mode.
-   */
+  /** [Required] TargetRollingWindowSiz detection mode. */
   mode: "Auto";
 }
 
-/**
- * Forecasting target rolling window size.
- */
+/** Forecasting target rolling window size. */
 @discriminator("mode")
 model TargetRollingWindowSize {
-  /**
-   * [Required] TargetRollingWindowSiz detection mode.
-   */
+  /** [Required] TargetRollingWindowSiz detection mode. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   mode: TargetRollingWindowSizeMode;
 }
 
-/**
- * Settings for Autologger.
- */
+/** Settings for Autologger. */
 model AutologgerSettings {
-  /**
-   * [Required] Indicates whether mlflow autologger is enabled.
-   */
+  /** [Required] Indicates whether mlflow autologger is enabled. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   mlflowAutologger: MLFlowAutologgerState;
 }
@@ -11083,352 +7453,232 @@ model AutologgerSettings {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AzMonMonitoringAlertNotificationSettings
   extends MonitoringAlertNotificationSettingsBase {
-  /**
-   * [Required] Specifies the type of signal to monitor.
-   */
+  /** [Required] Specifies the type of signal to monitor. */
   alertNotificationType: "AzureMonitor";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("alertNotificationType")
 model MonitoringAlertNotificationSettingsBase {
-  /**
-   * [Required] Specifies the type of signal to monitor.
-   */
+  /** [Required] Specifies the type of signal to monitor. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   alertNotificationType: MonitoringAlertNotificationType;
 }
 
-/**
- * Azure Blob datastore configuration.
- */
+/** Azure Blob datastore configuration. */
 model AzureBlobDatastore extends Datastore {
   ...AzureDatastore;
 
-  /**
-   * Storage account name.
-   */
+  /** Storage account name. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   accountName?: string;
 
-  /**
-   * Storage account container name.
-   */
+  /** Storage account container name. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   containerName?: string;
 
-  /**
-   * Azure cloud endpoint for the storage account.
-   */
+  /** Azure cloud endpoint for the storage account. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   endpoint?: string;
 
-  /**
-   * Protocol used to communicate with the storage account.
-   */
+  /** Protocol used to communicate with the storage account. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   protocol?: string;
 
-  /**
-   * Indicates which identity to use to authenticate service data access to customer's storage.
-   */
+  /** Indicates which identity to use to authenticate service data access to customer's storage. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   serviceDataAccessAuthIdentity?: ServiceDataAccessAuthIdentity;
 
-  /**
-   * [Required] Storage type backing the datastore.
-   */
+  /** [Required] Storage type backing the datastore. */
   datastoreType: "AzureBlob";
 }
 
-/**
- * Base definition for Azure datastore contents configuration.
- */
+/** Base definition for Azure datastore contents configuration. */
 model AzureDatastore {
-  /**
-   * Azure Resource Group name
-   */
+  /** Azure Resource Group name */
   resourceGroup?: string;
 
-  /**
-   * Azure Subscription Id
-   */
+  /** Azure Subscription Id */
   subscriptionId?: string;
 }
 
-/**
- * Azure Data Lake Gen1 datastore configuration.
- */
+/** Azure Data Lake Gen1 datastore configuration. */
 model AzureDataLakeGen1Datastore extends Datastore {
   ...AzureDatastore;
 
-  /**
-   * Indicates which identity to use to authenticate service data access to customer's storage.
-   */
+  /** Indicates which identity to use to authenticate service data access to customer's storage. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   serviceDataAccessAuthIdentity?: ServiceDataAccessAuthIdentity;
 
-  /**
-   * [Required] Azure Data Lake store name.
-   */
+  /** [Required] Azure Data Lake store name. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   storeName: string;
 
-  /**
-   * [Required] Storage type backing the datastore.
-   */
+  /** [Required] Storage type backing the datastore. */
   datastoreType: "AzureDataLakeGen1";
 }
 
-/**
- * Azure Data Lake Gen2 datastore configuration.
- */
+/** Azure Data Lake Gen2 datastore configuration. */
 model AzureDataLakeGen2Datastore extends Datastore {
   ...AzureDatastore;
 
-  /**
-   * [Required] Storage account name.
-   */
+  /** [Required] Storage account name. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   accountName: string;
 
-  /**
-   * Azure cloud endpoint for the storage account.
-   */
+  /** Azure cloud endpoint for the storage account. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   endpoint?: string;
 
-  /**
-   * [Required] The name of the Data Lake Gen2 filesystem.
-   */
+  /** [Required] The name of the Data Lake Gen2 filesystem. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   filesystem: string;
 
-  /**
-   * Protocol used to communicate with the storage account.
-   */
+  /** Protocol used to communicate with the storage account. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   protocol?: string;
 
-  /**
-   * Indicates which identity to use to authenticate service data access to customer's storage.
-   */
+  /** Indicates which identity to use to authenticate service data access to customer's storage. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   serviceDataAccessAuthIdentity?: ServiceDataAccessAuthIdentity;
 
-  /**
-   * [Required] Storage type backing the datastore.
-   */
+  /** [Required] Storage type backing the datastore. */
   datastoreType: "AzureDataLakeGen2";
 }
 
-/**
- * Webhook details specific for Azure DevOps
- */
+/** Webhook details specific for Azure DevOps */
 model AzureDevOpsWebhook extends Webhook {
-  /**
-   * [Required] Specifies the type of service to send a callback
-   */
+  /** [Required] Specifies the type of service to send a callback */
   webhookType: "AzureDevOps";
 }
 
-/**
- * Azure File datastore configuration.
- */
+/** Azure File datastore configuration. */
 model AzureFileDatastore extends Datastore {
   ...AzureDatastore;
 
-  /**
-   * [Required] Storage account name.
-   */
+  /** [Required] Storage account name. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   accountName: string;
 
-  /**
-   * Azure cloud endpoint for the storage account.
-   */
+  /** Azure cloud endpoint for the storage account. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   endpoint?: string;
 
-  /**
-   * [Required] The name of the Azure file share that the datastore points to.
-   */
+  /** [Required] The name of the Azure file share that the datastore points to. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   fileShareName: string;
 
-  /**
-   * Protocol used to communicate with the storage account.
-   */
+  /** Protocol used to communicate with the storage account. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   protocol?: string;
 
-  /**
-   * Indicates which identity to use to authenticate service data access to customer's storage.
-   */
+  /** Indicates which identity to use to authenticate service data access to customer's storage. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   serviceDataAccessAuthIdentity?: ServiceDataAccessAuthIdentity;
 
-  /**
-   * [Required] Storage type backing the datastore.
-   */
+  /** [Required] Storage type backing the datastore. */
   datastoreType: "AzureFile";
 }
 
-/**
- * Azure ML batch inferencing server configurations.
- */
+/** Azure ML batch inferencing server configurations. */
 model AzureMLBatchInferencingServer extends InferencingServer {
-  /**
-   * Code configuration for AML batch inferencing server.
-   */
+  /** Code configuration for AML batch inferencing server. */
   codeConfiguration?: CodeConfiguration;
 
-  /**
-   * [Required] Inferencing server type for various targets.
-   */
+  /** [Required] Inferencing server type for various targets. */
   serverType: "AzureMLBatch";
 }
 
-/**
- * Azure ML online inferencing configurations.
- */
+/** Azure ML online inferencing configurations. */
 model AzureMLOnlineInferencingServer extends InferencingServer {
-  /**
-   * Code configuration for AML inferencing server.
-   */
+  /** Code configuration for AML inferencing server. */
   codeConfiguration?: CodeConfiguration;
 
-  /**
-   * [Required] Inferencing server type for various targets.
-   */
+  /** [Required] Inferencing server type for various targets. */
   serverType: "AzureMLOnline";
 }
 
-/**
- * Defines an early termination policy based on slack criteria, and a frequency and delay interval for evaluation
- */
+/** Defines an early termination policy based on slack criteria, and a frequency and delay interval for evaluation */
 model BanditPolicy extends EarlyTerminationPolicy {
-  /**
-   * Absolute distance allowed from the best performing run.
-   */
+  /** Absolute distance allowed from the best performing run. */
   slackAmount?: float32;
 
-  /**
-   * Ratio of the allowed distance from the best performing run.
-   */
+  /** Ratio of the allowed distance from the best performing run. */
   slackFactor?: float32;
 
-  /**
-   * [Required] Name of policy configuration
-   */
+  /** [Required] Name of policy configuration */
   policyType: "Bandit";
 }
 
-/**
- * Early termination policies enable canceling poor-performing runs before they complete
- */
+/** Early termination policies enable canceling poor-performing runs before they complete */
 @discriminator("policyType")
 model EarlyTerminationPolicy {
-  /**
-   * Number of intervals by which to delay the first evaluation.
-   */
+  /** Number of intervals by which to delay the first evaluation. */
   delayEvaluation?: int32;
 
-  /**
-   * Interval (number of runs) between policy evaluations.
-   */
+  /** Interval (number of runs) between policy evaluations. */
   evaluationInterval?: int32;
 
-  /**
-   * [Required] Name of policy configuration
-   */
+  /** [Required] Name of policy configuration */
   policyType: EarlyTerminationPolicyType;
 }
 
-/**
- * Base environment type.
- */
+/** Base environment type. */
 model BaseEnvironmentId extends BaseEnvironmentSource {
-  /**
-   * [Required] Resource id accepting ArmId or AzureMlId.
-   */
+  /** [Required] Resource id accepting ArmId or AzureMlId. */
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   resourceId: string;
 
-  /**
-   * [Required] Base environment type.
-   */
+  /** [Required] Base environment type. */
   baseEnvironmentSourceType: "EnvironmentAsset";
 }
 
-/**
- * Properties for a Batch Pipeline Component Deployment.
- */
+/** Properties for a Batch Pipeline Component Deployment. */
 model BatchPipelineComponentDeploymentConfiguration
   extends BatchDeploymentConfiguration {
-  /**
-   * The ARM id of the component to be run.
-   */
+  /** The ARM id of the component to be run. */
   componentId?: IdAssetReference;
 
-  /**
-   * The description which will be applied to the job.
-   */
+  /** The description which will be applied to the job. */
   description?: string;
 
-  /**
-   * Run-time settings for the pipeline job.
-   */
+  /** Run-time settings for the pipeline job. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   settings?: Record<string>;
 
-  /**
-   * The tags which will be applied to the job.
-   */
+  /** The tags which will be applied to the job. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 
-  /**
-   * [Required] The type of the deployment
-   */
+  /** [Required] The type of the deployment */
   deploymentConfigurationType: "PipelineComponent";
 }
 
-/**
- * Reference to an asset via its ARM resource ID.
- */
+/** Reference to an asset via its ARM resource ID. */
 model IdAssetReference extends AssetReferenceBase {
-  /**
-   * [Required] ARM resource ID of the asset.
-   */
+  /** [Required] ARM resource ID of the asset. */
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   assetId: string;
 
-  /**
-   * [Required] Specifies the type of asset reference.
-   */
+  /** [Required] Specifies the type of asset reference. */
   referenceType: "Id";
 }
 
-/**
- * Defines a Sampling Algorithm that generates values based on previous values
- */
+/** Defines a Sampling Algorithm that generates values based on previous values */
 model BayesianSamplingAlgorithm extends SamplingAlgorithm {
-  /**
-   * [Required] The algorithm used for generating hyperparameter values, along with configuration properties
-   */
+  /** [Required] The algorithm used for generating hyperparameter values, along with configuration properties */
   samplingAlgorithmType: "Bayesian";
 }
 
@@ -11438,47 +7688,35 @@ model BayesianSamplingAlgorithm extends SamplingAlgorithm {
  */
 @discriminator("samplingAlgorithmType")
 model SamplingAlgorithm {
-  /**
-   * [Required] The algorithm used for generating hyperparameter values, along with configuration properties
-   */
+  /** [Required] The algorithm used for generating hyperparameter values, along with configuration properties */
   samplingAlgorithmType: SamplingAlgorithmType;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CategoricalDataDriftMetricThreshold extends DataDriftMetricThresholdBase {
-  /**
-   * [Required] The categorical data drift metric to calculate.
-   */
+  /** [Required] The categorical data drift metric to calculate. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   metric: CategoricalDataDriftMetric;
 
-  /**
-   * [Required] Specifies the data type of the metric threshold.
-   */
+  /** [Required] Specifies the data type of the metric threshold. */
   dataType: "Categorical";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("dataType")
 model DataDriftMetricThresholdBase {
-  /**
-   * [Required] Specifies the data type of the metric threshold.
-   */
+  /** [Required] Specifies the data type of the metric threshold. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   dataType: MonitoringFeatureDataType;
 
-  /**
-   * The threshold value. If null, a default value will be set depending on the selected metric.
-   */
+  /** The threshold value. If null, a default value will be set depending on the selected metric. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   threshold?: MonitoringThreshold;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model MonitoringThreshold {
-  /**
-   * The threshold value. If null, the set default is dependent on the metric type.
-   */
+  /** The threshold value. If null, the set default is dependent on the metric type. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   value?: float64;
 }
@@ -11486,30 +7724,22 @@ model MonitoringThreshold {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CategoricalDataQualityMetricThreshold
   extends DataQualityMetricThresholdBase {
-  /**
-   * [Required] The categorical data quality metric to calculate.
-   */
+  /** [Required] The categorical data quality metric to calculate. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   metric: CategoricalDataQualityMetric;
 
-  /**
-   * [Required] Specifies the data type of the metric threshold.
-   */
+  /** [Required] Specifies the data type of the metric threshold. */
   dataType: "Categorical";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("dataType")
 model DataQualityMetricThresholdBase {
-  /**
-   * [Required] Specifies the data type of the metric threshold.
-   */
+  /** [Required] Specifies the data type of the metric threshold. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   dataType: MonitoringFeatureDataType;
 
-  /**
-   * The threshold value. If null, a default value will be set depending on the selected metric.
-   */
+  /** The threshold value. If null, a default value will be set depending on the selected metric. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   threshold?: MonitoringThreshold;
 }
@@ -11517,166 +7747,108 @@ model DataQualityMetricThresholdBase {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CategoricalPredictionDriftMetricThreshold
   extends PredictionDriftMetricThresholdBase {
-  /**
-   * [Required] The categorical prediction drift metric to calculate.
-   */
+  /** [Required] The categorical prediction drift metric to calculate. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   metric: CategoricalPredictionDriftMetric;
 
-  /**
-   * [Required] Specifies the data type of the metric threshold.
-   */
+  /** [Required] Specifies the data type of the metric threshold. */
   dataType: "Categorical";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("dataType")
 model PredictionDriftMetricThresholdBase {
-  /**
-   * [Required] Specifies the data type of the metric threshold.
-   */
+  /** [Required] Specifies the data type of the metric threshold. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   dataType: MonitoringFeatureDataType;
 
-  /**
-   * The threshold value. If null, a default value will be set depending on the selected metric.
-   */
+  /** The threshold value. If null, a default value will be set depending on the selected metric. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   threshold?: MonitoringThreshold;
 }
 
-/**
- * Certificate datastore credentials configuration.
- */
+/** Certificate datastore credentials configuration. */
 model CertificateDatastoreCredentials extends DatastoreCredentials {
-  /**
-   * Authority URL used for authentication.
-   */
+  /** Authority URL used for authentication. */
   authorityUrl?: string;
 
-  /**
-   * [Required] Service principal client ID.
-   */
+  /** [Required] Service principal client ID. */
   #suppress "@azure-tools/typespec-azure-core/no-format"
   @format("uuid")
   clientId: string;
 
-  /**
-   * Resource the service principal has access to.
-   */
+  /** Resource the service principal has access to. */
   resourceUrl?: string;
 
-  /**
-   * [Required] Service principal secrets.
-   */
+  /** [Required] Service principal secrets. */
   @visibility(Lifecycle.Create, Lifecycle.Update)
   secrets: CertificateDatastoreSecrets;
 
-  /**
-   * [Required] ID of the tenant to which the service principal belongs.
-   */
+  /** [Required] ID of the tenant to which the service principal belongs. */
   #suppress "@azure-tools/typespec-azure-core/no-format"
   @format("uuid")
   tenantId: string;
 
-  /**
-   * [Required] Thumbprint of the certificate used for authentication.
-   */
+  /** [Required] Thumbprint of the certificate used for authentication. */
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   thumbprint: string;
 
-  /**
-   * [Required] Credential type used to authentication with storage.
-   */
+  /** [Required] Credential type used to authentication with storage. */
   credentialsType: "Certificate";
 }
 
-/**
- * Datastore certificate secrets.
- */
+/** Datastore certificate secrets. */
 model CertificateDatastoreSecrets extends DatastoreSecrets {
-  /**
-   * Service principal certificate.
-   */
+  /** Service principal certificate. */
   certificate?: string;
 
-  /**
-   * [Required] Credential type used to authentication with storage.
-   */
+  /** [Required] Credential type used to authentication with storage. */
   secretsType: "Certificate";
 }
 
-/**
- * Classification task in AutoML Table vertical.
- */
+/** Classification task in AutoML Table vertical. */
 model Classification extends AutoMLVertical {
   ...TableVertical;
 
-  /**
-   * Positive label for binary metrics calculation.
-   */
+  /** Positive label for binary metrics calculation. */
   positiveLabel?: string;
 
-  /**
-   * Primary metric for the task.
-   */
+  /** Primary metric for the task. */
   primaryMetric?: ClassificationPrimaryMetrics;
 
-  /**
-   * Inputs for training phase for an AutoML Job.
-   */
+  /** Inputs for training phase for an AutoML Job. */
   trainingSettings?: ClassificationTrainingSettings;
 
-  /**
-   * [Required] Task type for AutoMLJob.
-   */
+  /** [Required] Task type for AutoMLJob. */
   taskType: "Classification";
 }
 
-/**
- * Classification Training related configuration.
- */
+/** Classification Training related configuration. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ClassificationTrainingSettings extends TrainingSettings {
-  /**
-   * Allowed models for classification task.
-   */
+  /** Allowed models for classification task. */
   allowedTrainingAlgorithms?: ClassificationModels[];
 
-  /**
-   * Blocked models for classification task.
-   */
+  /** Blocked models for classification task. */
   blockedTrainingAlgorithms?: ClassificationModels[];
 }
 
-/**
- * Training related configuration.
- */
+/** Training related configuration. */
 model TrainingSettings {
-  /**
-   * Enable recommendation of DNN models.
-   */
+  /** Enable recommendation of DNN models. */
   enableDnnTraining?: boolean;
 
-  /**
-   * Flag to turn on explainability on best model.
-   */
+  /** Flag to turn on explainability on best model. */
   enableModelExplainability?: boolean = true;
 
-  /**
-   * Flag for enabling onnx compatible models.
-   */
+  /** Flag for enabling onnx compatible models. */
   enableOnnxCompatibleModels?: boolean;
 
-  /**
-   * Enable stack ensemble run.
-   */
+  /** Enable stack ensemble run. */
   enableStackEnsemble?: boolean = true;
 
-  /**
-   * Enable voting ensemble run.
-   */
+  /** Enable voting ensemble run. */
   enableVoteEnsemble?: boolean = true;
 
   /**
@@ -11685,9 +7857,7 @@ model TrainingSettings {
    */
   ensembleModelDownloadTimeout?: duration;
 
-  /**
-   * Stack ensemble settings for stack ensemble run.
-   */
+  /** Stack ensemble settings for stack ensemble run. */
   stackEnsembleSettings?: StackEnsembleSettings;
 
   /**
@@ -11698,48 +7868,30 @@ model TrainingSettings {
   trainingMode?: TrainingMode;
 }
 
-/**
- * Advances setting to customize StackEnsemble run.
- */
+/** Advances setting to customize StackEnsemble run. */
 model StackEnsembleSettings {
-  /**
-   * Optional parameters to pass to the initializer of the meta-learner.
-   */
+  /** Optional parameters to pass to the initializer of the meta-learner. */
   stackMetaLearnerKWargs?: unknown;
 
-  /**
-   * Specifies the proportion of the training set (when choosing train and validation type of training) to be reserved for training the meta-learner. Default value is 0.2.
-   */
+  /** Specifies the proportion of the training set (when choosing train and validation type of training) to be reserved for training the meta-learner. Default value is 0.2. */
   stackMetaLearnerTrainPercentage?: float64 = 0.2;
 
-  /**
-   * The meta-learner is a model trained on the output of the individual heterogeneous models.
-   */
+  /** The meta-learner is a model trained on the output of the individual heterogeneous models. */
   stackMetaLearnerType?: StackMetaLearnerType;
 }
 
-/**
- * Abstract class for AutoML tasks that use table dataset as input - such as Classification/Regression/Forecasting.
- */
+/** Abstract class for AutoML tasks that use table dataset as input - such as Classification/Regression/Forecasting. */
 model TableVertical {
-  /**
-   * Columns to use for CVSplit data.
-   */
+  /** Columns to use for CVSplit data. */
   cvSplitColumnNames?: string[];
 
-  /**
-   * Featurization inputs needed for AutoML job.
-   */
+  /** Featurization inputs needed for AutoML job. */
   featurizationSettings?: TableVerticalFeaturizationSettings;
 
-  /**
-   * Model/training parameters that will remain constant throughout training.
-   */
+  /** Model/training parameters that will remain constant throughout training. */
   fixedParameters?: TableFixedParameters;
 
-  /**
-   * Execution constraints for AutoMLJob.
-   */
+  /** Execution constraints for AutoMLJob. */
   limitSettings?: TableVerticalLimitSettings;
 
   /**
@@ -11748,20 +7900,14 @@ model TableVertical {
    */
   nCrossValidations?: NCrossValidations;
 
-  /**
-   * Search space for sampling different combinations of models and their hyperparameters.
-   */
+  /** Search space for sampling different combinations of models and their hyperparameters. */
   @identifiers(#[])
   searchSpace?: TableParameterSubspace[];
 
-  /**
-   * Settings for model sweeping and hyperparameter tuning.
-   */
+  /** Settings for model sweeping and hyperparameter tuning. */
   sweepSettings?: TableSweepSettings;
 
-  /**
-   * Test data input.
-   */
+  /** Test data input. */
   testData?: MLTableJobInput;
 
   /**
@@ -11771,9 +7917,7 @@ model TableVertical {
    */
   testDataSize?: float64;
 
-  /**
-   * Validation data inputs.
-   */
+  /** Validation data inputs. */
   validationData?: MLTableJobInput;
 
   /**
@@ -11783,31 +7927,21 @@ model TableVertical {
    */
   validationDataSize?: float64;
 
-  /**
-   * The name of the sample weight column. Automated ML supports a weighted column as an input, causing rows in the data to be weighted up or down.
-   */
+  /** The name of the sample weight column. Automated ML supports a weighted column as an input, causing rows in the data to be weighted up or down. */
   weightColumnName?: string;
 }
 
-/**
- * Featurization Configuration.
- */
+/** Featurization Configuration. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model TableVerticalFeaturizationSettings extends FeaturizationSettings {
-  /**
-   * These transformers shall not be used in featurization.
-   */
+  /** These transformers shall not be used in featurization. */
   blockedTransformers?: BlockedTransformers[];
 
-  /**
-   * Dictionary of column name and its type (int, float, string, datetime etc).
-   */
+  /** Dictionary of column name and its type (int, float, string, datetime etc). */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   columnNameAndTypes?: Record<string>;
 
-  /**
-   * Determines whether to use Dnn based featurizers for data featurization.
-   */
+  /** Determines whether to use Dnn based featurizers for data featurization. */
   enableDnnFeaturization?: boolean;
 
   /**
@@ -11817,20 +7951,14 @@ model TableVerticalFeaturizationSettings extends FeaturizationSettings {
    */
   mode?: FeaturizationMode;
 
-  /**
-   * User can specify additional transformers to be used along with the columns to which it would be applied and parameters for the transformer constructor.
-   */
+  /** User can specify additional transformers to be used along with the columns to which it would be applied and parameters for the transformer constructor. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   transformerParams?: Record<ColumnTransformer[]>;
 }
 
-/**
- * Column transformer parameters.
- */
+/** Column transformer parameters. */
 model ColumnTransformer {
-  /**
-   * Fields to apply transformer logic on.
-   */
+  /** Fields to apply transformer logic on. */
   fields?: string[];
 
   /**
@@ -11840,480 +7968,308 @@ model ColumnTransformer {
   parameters?: unknown;
 }
 
-/**
- * Featurization Configuration.
- */
+/** Featurization Configuration. */
 model FeaturizationSettings {
-  /**
-   * Dataset language, useful for the text data.
-   */
+  /** Dataset language, useful for the text data. */
   datasetLanguage?: string;
 }
 
-/**
- * Fixed training parameters that won't be swept over during AutoML Table training.
- */
+/** Fixed training parameters that won't be swept over during AutoML Table training. */
 model TableFixedParameters {
-  /**
-   * Specify the boosting type, e.g gbdt for XGBoost.
-   */
+  /** Specify the boosting type, e.g gbdt for XGBoost. */
   booster?: string;
 
-  /**
-   * Specify the boosting type, e.g gbdt for LightGBM.
-   */
+  /** Specify the boosting type, e.g gbdt for LightGBM. */
   boostingType?: string;
 
-  /**
-   * Specify the grow policy, which controls the way new nodes are added to the tree.
-   */
+  /** Specify the grow policy, which controls the way new nodes are added to the tree. */
   growPolicy?: string;
 
-  /**
-   * The learning rate for the training procedure.
-   */
+  /** The learning rate for the training procedure. */
   learningRate?: float64;
 
-  /**
-   * Specify the Maximum number of discrete bins to bucket continuous features .
-   */
+  /** Specify the Maximum number of discrete bins to bucket continuous features . */
   maxBin?: int32;
 
-  /**
-   * Specify the max depth to limit the tree depth explicitly.
-   */
+  /** Specify the max depth to limit the tree depth explicitly. */
   maxDepth?: int32;
 
-  /**
-   * Specify the max leaves to limit the tree leaves explicitly.
-   */
+  /** Specify the max leaves to limit the tree leaves explicitly. */
   maxLeaves?: int32;
 
-  /**
-   * The minimum number of data per leaf.
-   */
+  /** The minimum number of data per leaf. */
   minDataInLeaf?: int32;
 
-  /**
-   * Minimum loss reduction required to make a further partition on a leaf node of the tree.
-   */
+  /** Minimum loss reduction required to make a further partition on a leaf node of the tree. */
   minSplitGain?: float64;
 
-  /**
-   * The name of the model to train.
-   */
+  /** The name of the model to train. */
   modelName?: string;
 
-  /**
-   * Specify the number of trees (or rounds) in an model.
-   */
+  /** Specify the number of trees (or rounds) in an model. */
   nEstimators?: int32;
 
-  /**
-   * Specify the number of leaves.
-   */
+  /** Specify the number of leaves. */
   numLeaves?: int32;
 
-  /**
-   * The name of the preprocessor to use.
-   */
+  /** The name of the preprocessor to use. */
   preprocessorName?: string;
 
-  /**
-   * L1 regularization term on weights.
-   */
+  /** L1 regularization term on weights. */
   regAlpha?: float64;
 
-  /**
-   * L2 regularization term on weights.
-   */
+  /** L2 regularization term on weights. */
   regLambda?: float64;
 
-  /**
-   * Subsample ratio of the training instance.
-   */
+  /** Subsample ratio of the training instance. */
   subsample?: float64;
 
-  /**
-   * Frequency of subsample.
-   */
+  /** Frequency of subsample. */
   subsampleFreq?: float64;
 
-  /**
-   * Specify the tree method.
-   */
+  /** Specify the tree method. */
   treeMethod?: string;
 
-  /**
-   * If true, center before scaling the data with StandardScalar.
-   */
+  /** If true, center before scaling the data with StandardScalar. */
   withMean?: boolean;
 
-  /**
-   * If true, scaling the data with Unit Variance with StandardScalar.
-   */
+  /** If true, scaling the data with Unit Variance with StandardScalar. */
   withStd?: boolean;
 }
 
-/**
- * Job execution constraints.
- */
+/** Job execution constraints. */
 model TableVerticalLimitSettings {
-  /**
-   * Enable early termination, determines whether or not if AutoMLJob will terminate early if there is no score improvement in last 20 iterations.
-   */
+  /** Enable early termination, determines whether or not if AutoMLJob will terminate early if there is no score improvement in last 20 iterations. */
   enableEarlyTermination?: boolean = true;
 
-  /**
-   * Exit score for the AutoML job.
-   */
+  /** Exit score for the AutoML job. */
   exitScore?: float64;
 
-  /**
-   * Maximum Concurrent iterations.
-   */
+  /** Maximum Concurrent iterations. */
   maxConcurrentTrials?: int32 = 1;
 
-  /**
-   * Max cores per iteration.
-   */
+  /** Max cores per iteration. */
   maxCoresPerTrial?: int32 = -1;
 
-  /**
-   * Maximum nodes to use for the experiment.
-   */
+  /** Maximum nodes to use for the experiment. */
   maxNodes?: int32 = 1;
 
-  /**
-   * Number of iterations.
-   */
+  /** Number of iterations. */
   maxTrials?: int32 = 1000;
 
-  /**
-   * Number of concurrent sweeping runs that user wants to trigger.
-   */
+  /** Number of concurrent sweeping runs that user wants to trigger. */
   sweepConcurrentTrials?: int32;
 
-  /**
-   * Number of sweeping runs that user wants to trigger.
-   */
+  /** Number of sweeping runs that user wants to trigger. */
   sweepTrials?: int32;
 
-  /**
-   * AutoML job timeout.
-   */
+  /** AutoML job timeout. */
   timeout?: duration;
 
-  /**
-   * Iteration timeout.
-   */
+  /** Iteration timeout. */
   trialTimeout?: duration;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model TableParameterSubspace {
-  /**
-   * Specify the boosting type, e.g gbdt for XGBoost.
-   */
+  /** Specify the boosting type, e.g gbdt for XGBoost. */
   booster?: string;
 
-  /**
-   * Specify the boosting type, e.g gbdt for LightGBM.
-   */
+  /** Specify the boosting type, e.g gbdt for LightGBM. */
   boostingType?: string;
 
-  /**
-   * Specify the grow policy, which controls the way new nodes are added to the tree.
-   */
+  /** Specify the grow policy, which controls the way new nodes are added to the tree. */
   growPolicy?: string;
 
-  /**
-   * The learning rate for the training procedure.
-   */
+  /** The learning rate for the training procedure. */
   learningRate?: string;
 
-  /**
-   * Specify the Maximum number of discrete bins to bucket continuous features .
-   */
+  /** Specify the Maximum number of discrete bins to bucket continuous features . */
   maxBin?: string;
 
-  /**
-   * Specify the max depth to limit the tree depth explicitly.
-   */
+  /** Specify the max depth to limit the tree depth explicitly. */
   maxDepth?: string;
 
-  /**
-   * Specify the max leaves to limit the tree leaves explicitly.
-   */
+  /** Specify the max leaves to limit the tree leaves explicitly. */
   maxLeaves?: string;
 
-  /**
-   * The minimum number of data per leaf.
-   */
+  /** The minimum number of data per leaf. */
   minDataInLeaf?: string;
 
-  /**
-   * Minimum loss reduction required to make a further partition on a leaf node of the tree.
-   */
+  /** Minimum loss reduction required to make a further partition on a leaf node of the tree. */
   minSplitGain?: string;
 
-  /**
-   * The name of the model to train.
-   */
+  /** The name of the model to train. */
   modelName?: string;
 
-  /**
-   * Specify the number of trees (or rounds) in an model.
-   */
+  /** Specify the number of trees (or rounds) in an model. */
   nEstimators?: string;
 
-  /**
-   * Specify the number of leaves.
-   */
+  /** Specify the number of leaves. */
   numLeaves?: string;
 
-  /**
-   * The name of the preprocessor to use.
-   */
+  /** The name of the preprocessor to use. */
   preprocessorName?: string;
 
-  /**
-   * L1 regularization term on weights.
-   */
+  /** L1 regularization term on weights. */
   regAlpha?: string;
 
-  /**
-   * L2 regularization term on weights.
-   */
+  /** L2 regularization term on weights. */
   regLambda?: string;
 
-  /**
-   * Subsample ratio of the training instance.
-   */
+  /** Subsample ratio of the training instance. */
   subsample?: string;
 
-  /**
-   * Frequency of subsample
-   */
+  /** Frequency of subsample */
   subsampleFreq?: string;
 
-  /**
-   * Specify the tree method.
-   */
+  /** Specify the tree method. */
   treeMethod?: string;
 
-  /**
-   * If true, center before scaling the data with StandardScalar.
-   */
+  /** If true, center before scaling the data with StandardScalar. */
   withMean?: string;
 
-  /**
-   * If true, scaling the data with Unit Variance with StandardScalar.
-   */
+  /** If true, scaling the data with Unit Variance with StandardScalar. */
   withStd?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model TableSweepSettings {
-  /**
-   * Type of early termination policy for the sweeping job.
-   */
+  /** Type of early termination policy for the sweeping job. */
   earlyTermination?: EarlyTerminationPolicy;
 
-  /**
-   * [Required] Type of sampling algorithm.
-   */
+  /** [Required] Type of sampling algorithm. */
   samplingAlgorithm: SamplingAlgorithmType;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ClassificationModelPerformanceMetricThreshold
   extends ModelPerformanceMetricThresholdBase {
-  /**
-   * [Required] The classification model performance to calculate.
-   */
+  /** [Required] The classification model performance to calculate. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   metric: ClassificationModelPerformanceMetric;
 
-  /**
-   * [Required] Specifies the data type of the metric threshold.
-   */
+  /** [Required] Specifies the data type of the metric threshold. */
   modelType: "Classification";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("modelType")
 model ModelPerformanceMetricThresholdBase {
-  /**
-   * [Required] Specifies the data type of the metric threshold.
-   */
+  /** [Required] Specifies the data type of the metric threshold. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   modelType: MonitoringModelType;
 
-  /**
-   * The threshold value. If null, a default value will be set depending on the selected metric.
-   */
+  /** The threshold value. If null, a default value will be set depending on the selected metric. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   threshold?: MonitoringThreshold;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CocoExportSummary extends ExportSummary {
-  /**
-   * The container name to which the labels will be exported.
-   */
+  /** The container name to which the labels will be exported. */
   @visibility(Lifecycle.Read)
   containerName?: string;
 
-  /**
-   * The output path where the labels will be exported.
-   */
+  /** The output path where the labels will be exported. */
   @visibility(Lifecycle.Read)
   snapshotPath?: string;
 
-  /**
-   * [Required] The format of exported labels, also as the discriminator.
-   */
+  /** [Required] The format of exported labels, also as the discriminator. */
   format: "Coco";
 }
 
-/**
- * Command job definition.
- */
+/** Command job definition. */
 model CommandJob extends JobBase {
-  /**
-   * Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null.
-   */
+  /** Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   autologgerSettings?: AutologgerSettings;
 
-  /**
-   * ARM resource ID of the code asset.
-   */
+  /** ARM resource ID of the code asset. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   codeId?: string;
 
-  /**
-   * [Required] The command to execute on startup of the job. eg. "python train.py"
-   */
+  /** [Required] The command to execute on startup of the job. eg. "python train.py" */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   command: string;
 
-  /**
-   * Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, Ray, or null.
-   */
+  /** Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, Ray, or null. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   distribution?: DistributionConfiguration;
 
-  /**
-   * [Required] The ARM resource ID of the Environment specification for the job.
-   */
+  /** [Required] The ARM resource ID of the Environment specification for the job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   environmentId: string;
 
-  /**
-   * Environment variables included in the job.
-   */
+  /** Environment variables included in the job. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentVariables?: Record<string>;
 
-  /**
-   * Mapping of input data bindings used in the job.
-   */
+  /** Mapping of input data bindings used in the job. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   inputs?: Record<JobInput>;
 
-  /**
-   * Command Job limit.
-   */
+  /** Command Job limit. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   limits?: CommandJobLimits;
 
-  /**
-   * Mapping of output data bindings used in the job.
-   */
+  /** Mapping of output data bindings used in the job. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   outputs?: Record<JobOutput>;
 
-  /**
-   * Input parameters.
-   */
+  /** Input parameters. */
   @visibility(Lifecycle.Read)
   parameters?: unknown;
 
-  /**
-   * Queue settings for the job
-   */
+  /** Queue settings for the job */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   queueSettings?: QueueSettings;
 
-  /**
-   * Compute Resource configuration for the job.
-   */
+  /** Compute Resource configuration for the job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   resources?: JobResourceConfiguration;
 
-  /**
-   * [Required] Specifies the type of job.
-   */
+  /** [Required] Specifies the type of job. */
   jobType: "Command";
 }
 
-/**
- * Base definition for job distribution configuration.
- */
+/** Base definition for job distribution configuration. */
 @discriminator("distributionType")
 model DistributionConfiguration {
-  /**
-   * [Required] Specifies the type of distribution framework.
-   */
+  /** [Required] Specifies the type of distribution framework. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   distributionType: DistributionType;
 }
 
-/**
- * Command Job limit class.
- */
+/** Command Job limit class. */
 model CommandJobLimits extends JobLimits {
-  /**
-   * [Required] JobLimit type.
-   */
+  /** [Required] JobLimit type. */
   jobLimitsType: "Command";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("jobLimitsType")
 model JobLimits {
-  /**
-   * [Required] JobLimit type.
-   */
+  /** [Required] JobLimit type. */
   jobLimitsType: JobLimitsType;
 
-  /**
-   * The max run duration in ISO 8601 format, after which the job will be cancelled. Only supports duration with precision as low as Seconds.
-   */
+  /** The max run duration in ISO 8601 format, after which the job will be cancelled. Only supports duration with precision as low as Seconds. */
   timeout?: duration;
 }
 
-/**
- * Resource requirements for each container instance within an online deployment.
- */
+/** Resource requirements for each container instance within an online deployment. */
 model ContainerResourceRequirements {
-  /**
-   * Container resource limit info:
-   */
+  /** Container resource limit info: */
   containerResourceLimits?: ContainerResourceSettings;
 
-  /**
-   * Container resource request info:
-   */
+  /** Container resource request info: */
   containerResourceRequests?: ContainerResourceSettings;
 }
 
@@ -12340,77 +8296,53 @@ model ContainerResourceSettings {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CreateMonitorAction extends ScheduleActionBase {
-  /**
-   * [Required] Defines the monitor.
-   */
+  /** [Required] Defines the monitor. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   monitorDefinition: MonitorDefinition;
 
-  /**
-   * [Required] Specifies the action type of the schedule
-   */
+  /** [Required] Specifies the action type of the schedule */
   actionType: "CreateMonitor";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model MonitorDefinition {
-  /**
-   * The monitor's notification settings.
-   */
+  /** The monitor's notification settings. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   alertNotificationSetting?: MonitoringAlertNotificationSettingsBase;
 
-  /**
-   * [Required] The ARM resource ID of the compute resource to run the monitoring job on.
-   */
+  /** [Required] The ARM resource ID of the compute resource to run the monitoring job on. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   computeConfiguration: MonitorComputeConfigurationBase;
 
-  /**
-   * The ARM resource ID of either the model or deployment targeted by this monitor.
-   */
+  /** The ARM resource ID of either the model or deployment targeted by this monitor. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   monitoringTarget?: MonitoringTarget;
 
-  /**
-   * [Required] The signals to monitor.
-   */
+  /** [Required] The signals to monitor. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   signals: Record<MonitoringSignalBase>;
 }
 
-/**
- * Monitor compute configuration base definition.
- */
+/** Monitor compute configuration base definition. */
 @discriminator("computeType")
 model MonitorComputeConfigurationBase {
-  /**
-   * [Required] Specifies the type of signal to monitor.
-   */
+  /** [Required] Specifies the type of signal to monitor. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   computeType: MonitorComputeType;
 }
 
-/**
- * Monitoring target definition.
- */
+/** Monitoring target definition. */
 model MonitoringTarget {
-  /**
-   * The ARM resource ID of either the deployment targeted by this monitor.
-   */
+  /** The ARM resource ID of either the deployment targeted by this monitor. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   deploymentId?: string;
 
-  /**
-   * The ARM resource ID of either the model targeted by this monitor.
-   */
+  /** The ARM resource ID of either the model targeted by this monitor. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   modelId?: string;
 
-  /**
-   * [Required] The machine learning task type of the model.
-   */
+  /** [Required] The machine learning task type of the model. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   taskType: ModelTaskType;
 }
@@ -12418,21 +8350,15 @@ model MonitoringTarget {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("signalType")
 model MonitoringSignalBase {
-  /**
-   * The current notification mode for this signal.
-   */
+  /** The current notification mode for this signal. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   mode?: MonitoringNotificationMode;
 
-  /**
-   * Property dictionary. Properties can be added, but not removed or altered.
-   */
+  /** Property dictionary. Properties can be added, but not removed or altered. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   properties?: Record<string>;
 
-  /**
-   * [Required] Specifies the type of signal to monitor.
-   */
+  /** [Required] Specifies the type of signal to monitor. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   signalType: MonitoringSignalType;
 }
@@ -12447,106 +8373,70 @@ model CronTrigger extends TriggerBase {
   @pattern("[a-zA-Z0-9_]")
   expression: string;
 
-  /**
-   * [Required]
-   */
+  /** [Required] */
   triggerType: "Cron";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CsvExportSummary extends ExportSummary {
-  /**
-   * The container name to which the labels will be exported.
-   */
+  /** The container name to which the labels will be exported. */
   @visibility(Lifecycle.Read)
   containerName?: string;
 
-  /**
-   * The output path where the labels will be exported.
-   */
+  /** The output path where the labels will be exported. */
   @visibility(Lifecycle.Read)
   snapshotPath?: string;
 
-  /**
-   * [Required] The format of exported labels, also as the discriminator.
-   */
+  /** [Required] The format of exported labels, also as the discriminator. */
   format: "CSV";
 }
 
-/**
- * The desired maximum forecast horizon in units of time-series frequency.
- */
+/** The desired maximum forecast horizon in units of time-series frequency. */
 model CustomForecastHorizon extends ForecastHorizon {
-  /**
-   * [Required] Forecast horizon value.
-   */
+  /** [Required] Forecast horizon value. */
   value: int32;
 
-  /**
-   * [Required] Set forecast horizon value selection mode.
-   */
+  /** [Required] Set forecast horizon value selection mode. */
   mode: "Custom";
 }
 
-/**
- * Custom inference server configurations.
- */
+/** Custom inference server configurations. */
 model CustomInferencingServer extends InferencingServer {
-  /**
-   * Inference configuration for custom inferencing.
-   */
+  /** Inference configuration for custom inferencing. */
   inferenceConfiguration?: OnlineInferenceConfiguration;
 
-  /**
-   * [Required] Inferencing server type for various targets.
-   */
+  /** [Required] Inferencing server type for various targets. */
   serverType: "Custom";
 }
 
-/**
- * Online inference configuration options.
- */
+/** Online inference configuration options. */
 model OnlineInferenceConfiguration {
-  /**
-   * Additional configurations
-   */
+  /** Additional configurations */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   configurations?: Record<string>;
 
-  /**
-   * Entry script or command to invoke.
-   */
+  /** Entry script or command to invoke. */
   entryScript?: string;
 
-  /**
-   * The route to check the liveness of the inference server container.
-   */
+  /** The route to check the liveness of the inference server container. */
   livenessRoute?: Route;
 
-  /**
-   * The route to check the readiness of the inference server container.
-   */
+  /** The route to check the readiness of the inference server container. */
   readinessRoute?: Route;
 
-  /**
-   * The port to send the scoring requests to, within the inference server container.
-   */
+  /** The port to send the scoring requests to, within the inference server container. */
   scoringRoute?: Route;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CustomMetricThreshold {
-  /**
-   * [Required] The user-defined metric to calculate.
-   */
+  /** [Required] The user-defined metric to calculate. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   metric: string;
 
-  /**
-   * The threshold value. If null, a default value will be set depending on the selected metric.
-   */
+  /** The threshold value. If null, a default value will be set depending on the selected metric. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   threshold?: MonitoringThreshold;
 }
@@ -12555,9 +8445,7 @@ model CustomMetricThreshold {
 model CustomModelJobInput extends JobInput {
   ...AssetJobInput;
 
-  /**
-   * [Required] Specifies the type of job.
-   */
+  /** [Required] Specifies the type of job. */
   jobInputType: "custom_model";
 }
 
@@ -12565,97 +8453,69 @@ model CustomModelJobInput extends JobInput {
 model CustomModelJobOutput extends JobOutput {
   ...AssetJobOutput;
 
-  /**
-   * [Required] Specifies the type of job.
-   */
+  /** [Required] Specifies the type of job. */
   jobOutputType: "custom_model";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CustomMonitoringSignal extends MonitoringSignalBase {
-  /**
-   * [Required] ARM resource ID of the component resource used to calculate the custom metrics.
-   */
+  /** [Required] ARM resource ID of the component resource used to calculate the custom metrics. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   componentId: string;
 
-  /**
-   * Monitoring assets to take as input. Key is the component input port name, value is the data asset.
-   */
+  /** Monitoring assets to take as input. Key is the component input port name, value is the data asset. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   inputAssets?: Record<MonitoringInputDataBase>;
 
-  /**
-   * Extra component parameters to take as input. Key is the component literal input port name, value is the parameter value.
-   */
+  /** Extra component parameters to take as input. Key is the component literal input port name, value is the parameter value. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   inputs?: Record<JobInput>;
 
-  /**
-   * [Required] A list of metrics to calculate and their associated thresholds.
-   */
+  /** [Required] A list of metrics to calculate and their associated thresholds. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @identifiers(#[])
   metricThresholds: CustomMetricThreshold[];
 
-  /**
-   * [Required] A list of metrics to calculate and their associated thresholds.
-   */
+  /** [Required] A list of metrics to calculate and their associated thresholds. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   workspaceConnection: MonitoringWorkspaceConnection;
 
-  /**
-   * [Required] Specifies the type of signal to monitor.
-   */
+  /** [Required] Specifies the type of signal to monitor. */
   signalType: "Custom";
 }
 
-/**
- * Monitoring input data base definition.
- */
+/** Monitoring input data base definition. */
 @discriminator("inputDataType")
 model MonitoringInputDataBase {
-  /**
-   * Mapping of column names to special uses.
-   */
+  /** Mapping of column names to special uses. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   columns?: Record<string>;
 
-  /**
-   * The context metadata of the data source.
-   */
+  /** The context metadata of the data source. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   dataContext?: string;
 
-  /**
-   * [Required] Specifies the type of signal to monitor.
-   */
+  /** [Required] Specifies the type of signal to monitor. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   inputDataType: MonitoringInputDataType;
 
-  /**
-   * [Required] Specifies the type of job.
-   */
+  /** [Required] Specifies the type of job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   jobInputType: JobInputType;
 
-  /**
-   * [Required] Input Asset URI.
-   */
+  /** [Required] Input Asset URI. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   uri: string;
 }
 
-/**
- * Monitoring workspace connection definition.
- */
+/** Monitoring workspace connection definition. */
 model MonitoringWorkspaceConnection {
   /**
    * The properties of a workspace service connection to store as environment variables in the submitted jobs.
@@ -12674,277 +8534,191 @@ model MonitoringWorkspaceConnection {
   secrets?: Record<string>;
 }
 
-/**
- * N-Cross validations are specified by user.
- */
+/** N-Cross validations are specified by user. */
 model CustomNCrossValidations extends NCrossValidations {
-  /**
-   * [Required] N-Cross validations value.
-   */
+  /** [Required] N-Cross validations value. */
   value: int32;
 
-  /**
-   * [Required] Mode for determining N-Cross validations.
-   */
+  /** [Required] Mode for determining N-Cross validations. */
   mode: "Custom";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CustomSeasonality extends Seasonality {
-  /**
-   * [Required] Seasonality value.
-   */
+  /** [Required] Seasonality value. */
   value: int32;
 
-  /**
-   * [Required] Seasonality mode.
-   */
+  /** [Required] Seasonality mode. */
   mode: "Custom";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CustomTargetLags extends TargetLags {
-  /**
-   * [Required] Set target lags values.
-   */
+  /** [Required] Set target lags values. */
   values: int32[];
 
-  /**
-   * [Required] Set target lags mode - Auto/Custom
-   */
+  /** [Required] Set target lags mode - Auto/Custom */
   mode: "Custom";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CustomTargetRollingWindowSize extends TargetRollingWindowSize {
-  /**
-   * [Required] TargetRollingWindowSize value.
-   */
+  /** [Required] TargetRollingWindowSize value. */
   value: int32;
 
-  /**
-   * [Required] TargetRollingWindowSiz detection mode.
-   */
+  /** [Required] TargetRollingWindowSiz detection mode. */
   mode: "Custom";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DataDriftMonitoringSignal extends MonitoringSignalBase {
-  /**
-   * The data segment used for scoping on a subset of the data population.
-   */
+  /** The data segment used for scoping on a subset of the data population. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   dataSegment?: MonitoringDataSegment;
 
-  /**
-   * A dictionary that maps feature names to their respective data types.
-   */
+  /** A dictionary that maps feature names to their respective data types. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   featureDataTypeOverride?: Record<MonitoringFeatureDataType>;
 
-  /**
-   * The feature filter which identifies which feature to calculate drift over.
-   */
+  /** The feature filter which identifies which feature to calculate drift over. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   features?: MonitoringFeatureFilterBase;
 
-  /**
-   * [Required] A list of metrics to calculate and their associated thresholds.
-   */
+  /** [Required] A list of metrics to calculate and their associated thresholds. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @identifiers(#[])
   metricThresholds: DataDriftMetricThresholdBase[];
 
-  /**
-   * [Required] The data which drift will be calculated for.
-   */
+  /** [Required] The data which drift will be calculated for. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   productionData: MonitoringInputDataBase;
 
-  /**
-   * [Required] The data to calculate drift against.
-   */
+  /** [Required] The data to calculate drift against. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   referenceData: MonitoringInputDataBase;
 
-  /**
-   * [Required] Specifies the type of signal to monitor.
-   */
+  /** [Required] Specifies the type of signal to monitor. */
   signalType: "DataDrift";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model MonitoringDataSegment {
-  /**
-   * The feature to segment the data on.
-   */
+  /** The feature to segment the data on. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   feature?: string;
 
-  /**
-   * Filters for only the specified values of the given segmented feature.
-   */
+  /** Filters for only the specified values of the given segmented feature. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   values?: string[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DataImport extends DataVersionBase {
-  /**
-   * Name of the asset for data import job to create
-   */
+  /** Name of the asset for data import job to create */
   assetName?: string;
 
-  /**
-   * Source data of the asset to import from
-   */
+  /** Source data of the asset to import from */
   source?: DataImportSource;
 
-  /**
-   * [Required] Specifies the type of data.
-   */
+  /** [Required] Specifies the type of data. */
   dataType: "uri_folder";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @discriminator("sourceType")
 model DataImportSource {
-  /**
-   * Workspace connection for data import source storage
-   */
+  /** Workspace connection for data import source storage */
   connection?: string;
 
-  /**
-   * [Required] Specifies the type of data.
-   */
+  /** [Required] Specifies the type of data. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   sourceType: DataImportSourceType;
 }
 
-/**
- * Reference to an asset via its path in a datastore.
- */
+/** Reference to an asset via its path in a datastore. */
 model DataPathAssetReference extends AssetReferenceBase {
-  /**
-   * ARM resource ID of the datastore where the asset is located.
-   */
+  /** ARM resource ID of the datastore where the asset is located. */
   datastoreId?: string;
 
-  /**
-   * The path of the file/directory in the datastore.
-   */
+  /** The path of the file/directory in the datastore. */
   path?: string;
 
-  /**
-   * [Required] Specifies the type of asset reference.
-   */
+  /** [Required] Specifies the type of asset reference. */
   referenceType: "DataPath";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DataQualityMonitoringSignal extends MonitoringSignalBase {
-  /**
-   * A dictionary that maps feature names to their respective data types.
-   */
+  /** A dictionary that maps feature names to their respective data types. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   featureDataTypeOverride?: Record<MonitoringFeatureDataType>;
 
-  /**
-   * The features to calculate drift over.
-   */
+  /** The features to calculate drift over. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   features?: MonitoringFeatureFilterBase;
 
-  /**
-   * [Required] A list of metrics to calculate and their associated thresholds.
-   */
+  /** [Required] A list of metrics to calculate and their associated thresholds. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @identifiers(#[])
   metricThresholds: DataQualityMetricThresholdBase[];
 
-  /**
-   * [Required] The data produced by the production service which drift will be calculated for.
-   */
+  /** [Required] The data produced by the production service which drift will be calculated for. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   productionData: MonitoringInputDataBase;
 
-  /**
-   * [Required] The data to calculate drift against.
-   */
+  /** [Required] The data to calculate drift against. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   referenceData: MonitoringInputDataBase;
 
-  /**
-   * [Required] Specifies the type of signal to monitor.
-   */
+  /** [Required] Specifies the type of signal to monitor. */
   signalType: "DataQuality";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DatabaseSource extends DataImportSource {
-  /**
-   * SQL Query statement for data import Database source
-   */
+  /** SQL Query statement for data import Database source */
   query?: string;
 
-  /**
-   * SQL StoredProcedure on data import Database source
-   */
+  /** SQL StoredProcedure on data import Database source */
   storedProcedure?: string;
 
-  /**
-   * SQL StoredProcedure parameters
-   */
+  /** SQL StoredProcedure parameters */
   @identifiers(#[])
   storedProcedureParams?: Record<string>[];
 
-  /**
-   * Name of the table on data import Database source
-   */
+  /** Name of the table on data import Database source */
   tableName?: string;
 
-  /**
-   * [Required] Specifies the type of data.
-   */
+  /** [Required] Specifies the type of data. */
   sourceType: "database";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DatasetExportSummary extends ExportSummary {
-  /**
-   * The unique name of the labeled data asset.
-   */
+  /** The unique name of the labeled data asset. */
   @visibility(Lifecycle.Read)
   labeledAssetName?: string;
 
-  /**
-   * [Required] The format of exported labels, also as the discriminator.
-   */
+  /** [Required] The format of exported labels, also as the discriminator. */
   format: "Dataset";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DefaultScaleSettings extends OnlineScaleSettings {
-  /**
-   * [Required] Type of deployment scaling algorithm
-   */
+  /** [Required] Type of deployment scaling algorithm */
   scaleType: "Default";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model EmailMonitoringAlertNotificationSettings
   extends MonitoringAlertNotificationSettingsBase {
-  /**
-   * Configuration for notification.
-   */
+  /** Configuration for notification. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   emailNotificationSetting?: NotificationSetting;
 
-  /**
-   * [Required] Specifies the type of signal to monitor.
-   */
+  /** [Required] Specifies the type of signal to monitor. */
   alertNotificationType: "Email";
 }
 
@@ -12957,121 +8731,83 @@ model EndpointScheduleAction extends ScheduleActionBase {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   endpointInvocationDefinition: unknown;
 
-  /**
-   * [Required] Specifies the action type of the schedule
-   */
+  /** [Required] Specifies the action type of the schedule */
   actionType: "InvokeBatchEndpoint";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model FeatureAttributionDriftMonitoringSignal extends MonitoringSignalBase {
-  /**
-   * [Required] A list of metrics to calculate and their associated thresholds.
-   */
+  /** [Required] A list of metrics to calculate and their associated thresholds. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   metricThreshold: FeatureAttributionMetricThreshold;
 
-  /**
-   * [Required] The data which drift will be calculated for.
-   */
+  /** [Required] The data which drift will be calculated for. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @identifiers(#[])
   productionData: MonitoringInputDataBase[];
 
-  /**
-   * [Required] The data to calculate drift against.
-   */
+  /** [Required] The data to calculate drift against. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   referenceData: MonitoringInputDataBase;
 
-  /**
-   * [Required] Specifies the type of signal to monitor.
-   */
+  /** [Required] Specifies the type of signal to monitor. */
   signalType: "FeatureAttributionDrift";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model FeatureAttributionMetricThreshold {
-  /**
-   * [Required] The feature attribution metric to calculate.
-   */
+  /** [Required] The feature attribution metric to calculate. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   metric: FeatureAttributionMetric;
 
-  /**
-   * The threshold value. If null, a default value will be set depending on the selected metric.
-   */
+  /** The threshold value. If null, a default value will be set depending on the selected metric. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   threshold?: MonitoringThreshold;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model FeatureSubset extends MonitoringFeatureFilterBase {
-  /**
-   * [Required] The list of features to include.
-   */
+  /** [Required] The list of features to include. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   features: string[];
 
-  /**
-   * [Required] Specifies the feature filter to leverage when selecting features to calculate metrics over.
-   */
+  /** [Required] Specifies the feature filter to leverage when selecting features to calculate metrics over. */
   filterType: "FeatureSubset";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model FileSystemSource extends DataImportSource {
-  /**
-   * Path on data import FileSystem source
-   */
+  /** Path on data import FileSystem source */
   path?: string;
 
-  /**
-   * [Required] Specifies the type of data.
-   */
+  /** [Required] Specifies the type of data. */
   sourceType: "file_system";
 }
 
-/**
- * Fixed input data definition.
- */
+/** Fixed input data definition. */
 model FixedInputData extends MonitoringInputDataBase {
-  /**
-   * [Required] Specifies the type of signal to monitor.
-   */
+  /** [Required] Specifies the type of signal to monitor. */
   inputDataType: "Fixed";
 }
 
-/**
- * Forecasting task in AutoML Table vertical.
- */
+/** Forecasting task in AutoML Table vertical. */
 model Forecasting extends AutoMLVertical {
   ...TableVertical;
 
-  /**
-   * Forecasting task specific inputs.
-   */
+  /** Forecasting task specific inputs. */
   forecastingSettings?: ForecastingSettings;
 
-  /**
-   * Primary metric for forecasting task.
-   */
+  /** Primary metric for forecasting task. */
   primaryMetric?: ForecastingPrimaryMetrics;
 
-  /**
-   * Inputs for training phase for an AutoML Job.
-   */
+  /** Inputs for training phase for an AutoML Job. */
   trainingSettings?: ForecastingTrainingSettings;
 
-  /**
-   * [Required] Task type for AutoMLJob.
-   */
+  /** [Required] Task type for AutoMLJob. */
   taskType: "Forecasting";
 }
 
-/**
- * Forecasting specific parameters.
- */
+/** Forecasting specific parameters. */
 model ForecastingSettings {
   /**
    * Country or region for holidays for forecasting tasks.
@@ -13086,9 +8822,7 @@ model ForecastingSettings {
    */
   cvStepSize?: int32;
 
-  /**
-   * Flag for generating lags for the numeric features with 'auto' or null.
-   */
+  /** Flag for generating lags for the numeric features with 'auto' or null. */
   featureLags?: FeatureLags;
 
   /**
@@ -13097,14 +8831,10 @@ model ForecastingSettings {
    */
   featuresUnknownAtForecastTime?: string[];
 
-  /**
-   * The desired maximum forecast horizon in units of time-series frequency.
-   */
+  /** The desired maximum forecast horizon in units of time-series frequency. */
   forecastHorizon?: ForecastHorizon;
 
-  /**
-   * When forecasting, this parameter represents the period with which the forecast is desired, for example daily, weekly, yearly, etc. The forecast frequency is dataset frequency by default.
-   */
+  /** When forecasting, this parameter represents the period with which the forecast is desired, for example daily, weekly, yearly, etc. The forecast frequency is dataset frequency by default. */
   frequency?: string;
 
   /**
@@ -13113,9 +8843,7 @@ model ForecastingSettings {
    */
   seasonality?: Seasonality;
 
-  /**
-   * The parameter defining how if AutoML should handle short time series.
-   */
+  /** The parameter defining how if AutoML should handle short time series. */
   shortSeriesHandlingConfig?: ShortSeriesHandlingConfiguration;
 
   /**
@@ -13124,19 +8852,13 @@ model ForecastingSettings {
    */
   targetAggregateFunction?: TargetAggregationFunction;
 
-  /**
-   * The number of past periods to lag from the target column.
-   */
+  /** The number of past periods to lag from the target column. */
   targetLags?: TargetLags;
 
-  /**
-   * The number of past periods used to create a rolling window average of the target column.
-   */
+  /** The number of past periods used to create a rolling window average of the target column. */
   targetRollingWindowSize?: TargetRollingWindowSize;
 
-  /**
-   * The name of the time column. This parameter is required when forecasting to specify the datetime column in the input data used for building the time series and inferring its frequency.
-   */
+  /** The name of the time column. This parameter is required when forecasting to specify the datetime column in the input data used for building the time series and inferring its frequency. */
   timeColumnName?: string;
 
   /**
@@ -13145,35 +8867,23 @@ model ForecastingSettings {
    */
   timeSeriesIdColumnNames?: string[];
 
-  /**
-   * Configure STL Decomposition of the time-series target column.
-   */
+  /** Configure STL Decomposition of the time-series target column. */
   useStl?: UseStl;
 }
 
-/**
- * Forecasting Training related configuration.
- */
+/** Forecasting Training related configuration. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ForecastingTrainingSettings extends TrainingSettings {
-  /**
-   * Allowed models for forecasting task.
-   */
+  /** Allowed models for forecasting task. */
   allowedTrainingAlgorithms?: ForecastingModels[];
 
-  /**
-   * Blocked models for forecasting task.
-   */
+  /** Blocked models for forecasting task. */
   blockedTrainingAlgorithms?: ForecastingModels[];
 }
 
-/**
- * Generation safety quality metric threshold definition.
- */
+/** Generation safety quality metric threshold definition. */
 model GenerationSafetyQualityMetricThreshold {
-  /**
-   * [Required] Gets or sets the feature attribution metric to calculate.
-   */
+  /** [Required] Gets or sets the feature attribution metric to calculate. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   metric: GenerationSafetyQualityMetric;
 
@@ -13185,49 +8895,33 @@ model GenerationSafetyQualityMetricThreshold {
   threshold?: MonitoringThreshold;
 }
 
-/**
- * Generation safety quality monitoring signal definition.
- */
+/** Generation safety quality monitoring signal definition. */
 model GenerationSafetyQualityMonitoringSignal extends MonitoringSignalBase {
-  /**
-   * [Required] Gets or sets the metrics to calculate and the corresponding thresholds.
-   */
+  /** [Required] Gets or sets the metrics to calculate and the corresponding thresholds. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @identifiers(#[])
   metricThresholds: GenerationSafetyQualityMetricThreshold[];
 
-  /**
-   * Gets or sets the target data for computing metrics.
-   */
+  /** Gets or sets the target data for computing metrics. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @identifiers(#[])
   productionData?: MonitoringInputDataBase[];
 
-  /**
-   * [Required] The sample rate of the target data, should be greater than 0 and at most 1.
-   */
+  /** [Required] The sample rate of the target data, should be greater than 0 and at most 1. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   samplingRate: float64;
 
-  /**
-   * Gets or sets the workspace connection ID used to connect to the content generation endpoint.
-   */
+  /** Gets or sets the workspace connection ID used to connect to the content generation endpoint. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   workspaceConnectionId?: string;
 
-  /**
-   * [Required] Specifies the type of signal to monitor.
-   */
+  /** [Required] Specifies the type of signal to monitor. */
   signalType: "GenerationSafetyQuality";
 }
 
-/**
- * Generation token statistics metric threshold definition.
- */
+/** Generation token statistics metric threshold definition. */
 model GenerationTokenStatisticsMetricThreshold {
-  /**
-   * [Required] Gets or sets the feature attribution metric to calculate.
-   */
+  /** [Required] Gets or sets the feature attribution metric to calculate. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   metric: GenerationTokenStatisticsMetric;
 
@@ -13239,70 +8933,48 @@ model GenerationTokenStatisticsMetricThreshold {
   threshold?: MonitoringThreshold;
 }
 
-/**
- * Generation token statistics signal definition.
- */
+/** Generation token statistics signal definition. */
 model GenerationTokenStatisticsSignal extends MonitoringSignalBase {
-  /**
-   * [Required] Gets or sets the metrics to calculate and the corresponding thresholds.
-   */
+  /** [Required] Gets or sets the metrics to calculate and the corresponding thresholds. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @identifiers(#[])
   metricThresholds: GenerationTokenStatisticsMetricThreshold[];
 
-  /**
-   * Gets or sets the target data for computing metrics.
-   */
+  /** Gets or sets the target data for computing metrics. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   productionData?: MonitoringInputDataBase;
 
-  /**
-   * [Required] The sample rate of the target data, should be greater than 0 and at most 1.
-   */
+  /** [Required] The sample rate of the target data, should be greater than 0 and at most 1. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   samplingRate: float64;
 
-  /**
-   * [Required] Specifies the type of signal to monitor.
-   */
+  /** [Required] Specifies the type of signal to monitor. */
   signalType: "GenerationTokenStatistics";
 }
 
-/**
- * Defines a Sampling Algorithm that exhaustively generates every value combination in the space
- */
+/** Defines a Sampling Algorithm that exhaustively generates every value combination in the space */
 model GridSamplingAlgorithm extends SamplingAlgorithm {
-  /**
-   * [Required] The algorithm used for generating hyperparameter values, along with configuration properties
-   */
+  /** [Required] The algorithm used for generating hyperparameter values, along with configuration properties */
   samplingAlgorithmType: "Grid";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model HdfsDatastore extends Datastore {
-  /**
-   * The TLS cert of the HDFS server. Needs to be a base64 encoded string. Required if "Https" protocol is selected.
-   */
+  /** The TLS cert of the HDFS server. Needs to be a base64 encoded string. Required if "Https" protocol is selected. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   hdfsServerCertificate?: string;
 
-  /**
-   * [Required] IP Address or DNS HostName.
-   */
+  /** [Required] IP Address or DNS HostName. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   nameNodeAddress: string;
 
-  /**
-   * Protocol used to communicate with the storage account (Https/Http).
-   */
+  /** Protocol used to communicate with the storage account (Https/Http). */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   protocol?: string = "http";
 
-  /**
-   * [Required] Storage type backing the datastore.
-   */
+  /** [Required] Storage type backing the datastore. */
   datastoreType: "Hdfs";
 }
 
@@ -13313,28 +8985,20 @@ model HdfsDatastore extends Datastore {
 model ImageClassification extends AutoMLVertical {
   ...ImageClassificationBase;
 
-  /**
-   * Primary metric to optimize for this task.
-   */
+  /** Primary metric to optimize for this task. */
   primaryMetric?: ClassificationPrimaryMetrics;
 
-  /**
-   * [Required] Task type for AutoMLJob.
-   */
+  /** [Required] Task type for AutoMLJob. */
   taskType: "ImageClassification";
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ImageClassificationBase extends ImageVertical {
-  /**
-   * Settings used for training the model.
-   */
+  /** Settings used for training the model. */
   modelSettings?: ImageModelSettingsClassification;
 
-  /**
-   * Search space for sampling different combinations of models and their hyperparameters.
-   */
+  /** Search space for sampling different combinations of models and their hyperparameters. */
   @identifiers(#[])
   searchSpace?: ImageModelDistributionSettingsClassification[];
 }
@@ -13346,19 +9010,13 @@ model ImageClassificationBase extends ImageVertical {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ImageModelSettingsClassification extends ImageModelSettings {
-  /**
-   * Image crop size that is input to the neural network for the training dataset. Must be a positive integer.
-   */
+  /** Image crop size that is input to the neural network for the training dataset. Must be a positive integer. */
   trainingCropSize?: int32;
 
-  /**
-   * Image crop size that is input to the neural network for the validation dataset. Must be a positive integer.
-   */
+  /** Image crop size that is input to the neural network for the validation dataset. Must be a positive integer. */
   validationCropSize?: int32;
 
-  /**
-   * Image size to which to resize before cropping for validation dataset. Must be a positive integer.
-   */
+  /** Image size to which to resize before cropping for validation dataset. Must be a positive integer. */
   validationResizeSize?: int32;
 
   /**
@@ -13374,54 +9032,34 @@ model ImageModelSettingsClassification extends ImageModelSettings {
  * https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
  */
 model ImageModelSettings {
-  /**
-   * Settings for advanced scenarios.
-   */
+  /** Settings for advanced scenarios. */
   advancedSettings?: string;
 
-  /**
-   * Enable AMSGrad when optimizer is 'adam' or 'adamw'.
-   */
+  /** Enable AMSGrad when optimizer is 'adam' or 'adamw'. */
   amsGradient?: boolean;
 
-  /**
-   * Settings for using Augmentations.
-   */
+  /** Settings for using Augmentations. */
   augmentations?: string;
 
-  /**
-   * Value of 'beta1' when optimizer is 'adam' or 'adamw'. Must be a float in the range [0, 1].
-   */
+  /** Value of 'beta1' when optimizer is 'adam' or 'adamw'. Must be a float in the range [0, 1]. */
   beta1?: float32;
 
-  /**
-   * Value of 'beta2' when optimizer is 'adam' or 'adamw'. Must be a float in the range [0, 1].
-   */
+  /** Value of 'beta2' when optimizer is 'adam' or 'adamw'. Must be a float in the range [0, 1]. */
   beta2?: float32;
 
-  /**
-   * Frequency to store model checkpoints. Must be a positive integer.
-   */
+  /** Frequency to store model checkpoints. Must be a positive integer. */
   checkpointFrequency?: int32;
 
-  /**
-   * The pretrained checkpoint model for incremental training.
-   */
+  /** The pretrained checkpoint model for incremental training. */
   checkpointModel?: MLFlowModelJobInput;
 
-  /**
-   * The id of a previous run that has a pretrained checkpoint for incremental training.
-   */
+  /** The id of a previous run that has a pretrained checkpoint for incremental training. */
   checkpointRunId?: string;
 
-  /**
-   * Whether to use distributed training.
-   */
+  /** Whether to use distributed training. */
   distributed?: boolean;
 
-  /**
-   * Enable early stopping logic during training.
-   */
+  /** Enable early stopping logic during training. */
   earlyStopping?: boolean;
 
   /**
@@ -13436,14 +9074,10 @@ model ImageModelSettings {
    */
   earlyStoppingPatience?: int32;
 
-  /**
-   * Enable normalization when exporting ONNX model.
-   */
+  /** Enable normalization when exporting ONNX model. */
   enableOnnxNormalization?: boolean;
 
-  /**
-   * Frequency to evaluate validation dataset to get metric scores. Must be a positive integer.
-   */
+  /** Frequency to evaluate validation dataset to get metric scores. Must be a positive integer. */
   evaluationFrequency?: int32;
 
   /**
@@ -13461,14 +9095,10 @@ model ImageModelSettings {
    */
   layersToFreeze?: int32;
 
-  /**
-   * Initial learning rate. Must be a float in the range [0, 1].
-   */
+  /** Initial learning rate. Must be a float in the range [0, 1]. */
   learningRate?: float32;
 
-  /**
-   * Type of learning rate scheduler. Must be 'warmup_cosine' or 'step'.
-   */
+  /** Type of learning rate scheduler. Must be 'warmup_cosine' or 'step'. */
   learningRateScheduler?: LearningRateScheduler;
 
   /**
@@ -13478,69 +9108,43 @@ model ImageModelSettings {
    */
   modelName?: string;
 
-  /**
-   * Value of momentum when optimizer is 'sgd'. Must be a float in the range [0, 1].
-   */
+  /** Value of momentum when optimizer is 'sgd'. Must be a float in the range [0, 1]. */
   momentum?: float32;
 
-  /**
-   * Enable nesterov when optimizer is 'sgd'.
-   */
+  /** Enable nesterov when optimizer is 'sgd'. */
   nesterov?: boolean;
 
-  /**
-   * Number of training epochs. Must be a positive integer.
-   */
+  /** Number of training epochs. Must be a positive integer. */
   numberOfEpochs?: int32;
 
-  /**
-   * Number of data loader workers. Must be a non-negative integer.
-   */
+  /** Number of data loader workers. Must be a non-negative integer. */
   numberOfWorkers?: int32;
 
-  /**
-   * Type of optimizer.
-   */
+  /** Type of optimizer. */
   optimizer?: StochasticOptimizer;
 
-  /**
-   * Random seed to be used when using deterministic training.
-   */
+  /** Random seed to be used when using deterministic training. */
   randomSeed?: int32;
 
-  /**
-   * Value of gamma when learning rate scheduler is 'step'. Must be a float in the range [0, 1].
-   */
+  /** Value of gamma when learning rate scheduler is 'step'. Must be a float in the range [0, 1]. */
   stepLRGamma?: float32;
 
-  /**
-   * Value of step size when learning rate scheduler is 'step'. Must be a positive integer.
-   */
+  /** Value of step size when learning rate scheduler is 'step'. Must be a positive integer. */
   stepLRStepSize?: int32;
 
-  /**
-   * Training batch size. Must be a positive integer.
-   */
+  /** Training batch size. Must be a positive integer. */
   trainingBatchSize?: int32;
 
-  /**
-   * Validation batch size. Must be a positive integer.
-   */
+  /** Validation batch size. Must be a positive integer. */
   validationBatchSize?: int32;
 
-  /**
-   * Value of cosine cycle when learning rate scheduler is 'warmup_cosine'. Must be a float in the range [0, 1].
-   */
+  /** Value of cosine cycle when learning rate scheduler is 'warmup_cosine'. Must be a float in the range [0, 1]. */
   warmupCosineLRCycles?: float32;
 
-  /**
-   * Value of warmup epochs when learning rate scheduler is 'warmup_cosine'. Must be a positive integer.
-   */
+  /** Value of warmup epochs when learning rate scheduler is 'warmup_cosine'. Must be a positive integer. */
   warmupCosineLRWarmupEpochs?: int32;
 
-  /**
-   * Value of weight decay when optimizer is 'sgd', 'adam', or 'adamw'. Must be a float in the range[0, 1].
-   */
+  /** Value of weight decay when optimizer is 'sgd', 'adam', or 'adamw'. Must be a float in the range[0, 1]. */
   weightDecay?: float32;
 }
 
@@ -13548,9 +9152,7 @@ model ImageModelSettings {
 model MLFlowModelJobInput extends JobInput {
   ...AssetJobInput;
 
-  /**
-   * [Required] Specifies the type of job.
-   */
+  /** [Required] Specifies the type of job. */
   jobInputType: "mlflow_model";
 }
 
@@ -13571,19 +9173,13 @@ model MLFlowModelJobInput extends JobInput {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ImageModelDistributionSettingsClassification
   extends ImageModelDistributionSettings {
-  /**
-   * Image crop size that is input to the neural network for the training dataset. Must be a positive integer.
-   */
+  /** Image crop size that is input to the neural network for the training dataset. Must be a positive integer. */
   trainingCropSize?: string;
 
-  /**
-   * Image crop size that is input to the neural network for the validation dataset. Must be a positive integer.
-   */
+  /** Image crop size that is input to the neural network for the validation dataset. Must be a positive integer. */
   validationCropSize?: string;
 
-  /**
-   * Image size to which to resize before cropping for validation dataset. Must be a positive integer.
-   */
+  /** Image size to which to resize before cropping for validation dataset. Must be a positive integer. */
   validationResizeSize?: string;
 
   /**
@@ -13610,34 +9206,22 @@ model ImageModelDistributionSettingsClassification
  * https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
  */
 model ImageModelDistributionSettings {
-  /**
-   * Enable AMSGrad when optimizer is 'adam' or 'adamw'.
-   */
+  /** Enable AMSGrad when optimizer is 'adam' or 'adamw'. */
   amsGradient?: string;
 
-  /**
-   * Settings for using Augmentations.
-   */
+  /** Settings for using Augmentations. */
   augmentations?: string;
 
-  /**
-   * Value of 'beta1' when optimizer is 'adam' or 'adamw'. Must be a float in the range [0, 1].
-   */
+  /** Value of 'beta1' when optimizer is 'adam' or 'adamw'. Must be a float in the range [0, 1]. */
   beta1?: string;
 
-  /**
-   * Value of 'beta2' when optimizer is 'adam' or 'adamw'. Must be a float in the range [0, 1].
-   */
+  /** Value of 'beta2' when optimizer is 'adam' or 'adamw'. Must be a float in the range [0, 1]. */
   beta2?: string;
 
-  /**
-   * Whether to use distributer training.
-   */
+  /** Whether to use distributer training. */
   distributed?: string;
 
-  /**
-   * Enable early stopping logic during training.
-   */
+  /** Enable early stopping logic during training. */
   earlyStopping?: string;
 
   /**
@@ -13652,14 +9236,10 @@ model ImageModelDistributionSettings {
    */
   earlyStoppingPatience?: string;
 
-  /**
-   * Enable normalization when exporting ONNX model.
-   */
+  /** Enable normalization when exporting ONNX model. */
   enableOnnxNormalization?: string;
 
-  /**
-   * Frequency to evaluate validation dataset to get metric scores. Must be a positive integer.
-   */
+  /** Frequency to evaluate validation dataset to get metric scores. Must be a positive integer. */
   evaluationFrequency?: string;
 
   /**
@@ -13677,14 +9257,10 @@ model ImageModelDistributionSettings {
    */
   layersToFreeze?: string;
 
-  /**
-   * Initial learning rate. Must be a float in the range [0, 1].
-   */
+  /** Initial learning rate. Must be a float in the range [0, 1]. */
   learningRate?: string;
 
-  /**
-   * Type of learning rate scheduler. Must be 'warmup_cosine' or 'step'.
-   */
+  /** Type of learning rate scheduler. Must be 'warmup_cosine' or 'step'. */
   learningRateScheduler?: string;
 
   /**
@@ -13694,69 +9270,43 @@ model ImageModelDistributionSettings {
    */
   modelName?: string;
 
-  /**
-   * Value of momentum when optimizer is 'sgd'. Must be a float in the range [0, 1].
-   */
+  /** Value of momentum when optimizer is 'sgd'. Must be a float in the range [0, 1]. */
   momentum?: string;
 
-  /**
-   * Enable nesterov when optimizer is 'sgd'.
-   */
+  /** Enable nesterov when optimizer is 'sgd'. */
   nesterov?: string;
 
-  /**
-   * Number of training epochs. Must be a positive integer.
-   */
+  /** Number of training epochs. Must be a positive integer. */
   numberOfEpochs?: string;
 
-  /**
-   * Number of data loader workers. Must be a non-negative integer.
-   */
+  /** Number of data loader workers. Must be a non-negative integer. */
   numberOfWorkers?: string;
 
-  /**
-   * Type of optimizer. Must be either 'sgd', 'adam', or 'adamw'.
-   */
+  /** Type of optimizer. Must be either 'sgd', 'adam', or 'adamw'. */
   optimizer?: string;
 
-  /**
-   * Random seed to be used when using deterministic training.
-   */
+  /** Random seed to be used when using deterministic training. */
   randomSeed?: string;
 
-  /**
-   * Value of gamma when learning rate scheduler is 'step'. Must be a float in the range [0, 1].
-   */
+  /** Value of gamma when learning rate scheduler is 'step'. Must be a float in the range [0, 1]. */
   stepLRGamma?: string;
 
-  /**
-   * Value of step size when learning rate scheduler is 'step'. Must be a positive integer.
-   */
+  /** Value of step size when learning rate scheduler is 'step'. Must be a positive integer. */
   stepLRStepSize?: string;
 
-  /**
-   * Training batch size. Must be a positive integer.
-   */
+  /** Training batch size. Must be a positive integer. */
   trainingBatchSize?: string;
 
-  /**
-   * Validation batch size. Must be a positive integer.
-   */
+  /** Validation batch size. Must be a positive integer. */
   validationBatchSize?: string;
 
-  /**
-   * Value of cosine cycle when learning rate scheduler is 'warmup_cosine'. Must be a float in the range [0, 1].
-   */
+  /** Value of cosine cycle when learning rate scheduler is 'warmup_cosine'. Must be a float in the range [0, 1]. */
   warmupCosineLRCycles?: string;
 
-  /**
-   * Value of warmup epochs when learning rate scheduler is 'warmup_cosine'. Must be a positive integer.
-   */
+  /** Value of warmup epochs when learning rate scheduler is 'warmup_cosine'. Must be a positive integer. */
   warmupCosineLRWarmupEpochs?: string;
 
-  /**
-   * Value of weight decay when optimizer is 'sgd', 'adam', or 'adamw'. Must be a float in the range[0, 1].
-   */
+  /** Value of weight decay when optimizer is 'sgd', 'adam', or 'adamw'. Must be a float in the range[0, 1]. */
   weightDecay?: string;
 }
 
@@ -13765,19 +9315,13 @@ model ImageModelDistributionSettings {
  * such as Image Classification / Image Classification Multilabel / Image Object Detection / Image Instance Segmentation.
  */
 model ImageVertical {
-  /**
-   * [Required] Limit settings for the AutoML job.
-   */
+  /** [Required] Limit settings for the AutoML job. */
   limitSettings: ImageLimitSettings;
 
-  /**
-   * Model sweeping and hyperparameter sweeping related settings.
-   */
+  /** Model sweeping and hyperparameter sweeping related settings. */
   sweepSettings?: ImageSweepSettings;
 
-  /**
-   * Validation data inputs.
-   */
+  /** Validation data inputs. */
   validationData?: MLTableJobInput;
 
   /**
@@ -13788,38 +9332,24 @@ model ImageVertical {
   validationDataSize?: float64;
 }
 
-/**
- * Limit settings for the AutoML job.
- */
+/** Limit settings for the AutoML job. */
 model ImageLimitSettings {
-  /**
-   * Maximum number of concurrent AutoML iterations.
-   */
+  /** Maximum number of concurrent AutoML iterations. */
   maxConcurrentTrials?: int32 = 1;
 
-  /**
-   * Maximum number of AutoML iterations.
-   */
+  /** Maximum number of AutoML iterations. */
   maxTrials?: int32 = 1;
 
-  /**
-   * AutoML job timeout.
-   */
+  /** AutoML job timeout. */
   timeout?: duration;
 }
 
-/**
- * Model sweeping and hyperparameter sweeping related settings.
- */
+/** Model sweeping and hyperparameter sweeping related settings. */
 model ImageSweepSettings {
-  /**
-   * Type of early termination policy.
-   */
+  /** Type of early termination policy. */
   earlyTermination?: EarlyTerminationPolicy;
 
-  /**
-   * [Required] Type of the hyperparameter sampling algorithms.
-   */
+  /** [Required] Type of the hyperparameter sampling algorithms. */
   samplingAlgorithm: SamplingAlgorithmType;
 }
 
@@ -13830,14 +9360,10 @@ model ImageSweepSettings {
 model ImageClassificationMultilabel extends AutoMLVertical {
   ...ImageClassificationBase;
 
-  /**
-   * Primary metric to optimize for this task.
-   */
+  /** Primary metric to optimize for this task. */
   primaryMetric?: ClassificationMultilabelPrimaryMetrics;
 
-  /**
-   * [Required] Task type for AutoMLJob.
-   */
+  /** [Required] Task type for AutoMLJob. */
   taskType: "ImageClassificationMultilabel";
 }
 
@@ -13848,28 +9374,20 @@ model ImageClassificationMultilabel extends AutoMLVertical {
 model ImageInstanceSegmentation extends AutoMLVertical {
   ...ImageObjectDetectionBase;
 
-  /**
-   * Primary metric to optimize for this task.
-   */
+  /** Primary metric to optimize for this task. */
   primaryMetric?: InstanceSegmentationPrimaryMetrics;
 
-  /**
-   * [Required] Task type for AutoMLJob.
-   */
+  /** [Required] Task type for AutoMLJob. */
   taskType: "ImageInstanceSegmentation";
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ImageObjectDetectionBase extends ImageVertical {
-  /**
-   * Settings used for training the model.
-   */
+  /** Settings used for training the model. */
   modelSettings?: ImageModelSettingsObjectDetection;
 
-  /**
-   * Search space for sampling different combinations of models and their hyperparameters.
-   */
+  /** Search space for sampling different combinations of models and their hyperparameters. */
   @identifiers(#[])
   searchSpace?: ImageModelDistributionSettingsObjectDetection[];
 }
@@ -13900,14 +9418,10 @@ model ImageModelSettingsObjectDetection extends ImageModelSettings {
    */
   imageSize?: int32;
 
-  /**
-   * Enable computing and logging training metrics.
-   */
+  /** Enable computing and logging training metrics. */
   logTrainingMetrics?: LogTrainingMetrics;
 
-  /**
-   * Enable computing and logging validation loss.
-   */
+  /** Enable computing and logging validation loss. */
   logValidationLoss?: LogValidationLoss;
 
   /**
@@ -13938,9 +9452,7 @@ model ImageModelSettingsObjectDetection extends ImageModelSettings {
    */
   multiScale?: boolean;
 
-  /**
-   * IOU threshold used during inference in NMS post processing. Must be a float in the range [0, 1].
-   */
+  /** IOU threshold used during inference in NMS post processing. Must be a float in the range [0, 1]. */
   nmsIouThreshold?: float32;
 
   /**
@@ -13963,14 +9475,10 @@ model ImageModelSettingsObjectDetection extends ImageModelSettings {
    */
   tilePredictionsNmsThreshold?: float32;
 
-  /**
-   * IOU threshold to use when computing validation metric. Must be float in the range [0, 1].
-   */
+  /** IOU threshold to use when computing validation metric. Must be float in the range [0, 1]. */
   validationIouThreshold?: float32;
 
-  /**
-   * Metric computation method to use for validation metrics.
-   */
+  /** Metric computation method to use for validation metrics. */
   validationMetricType?: ValidationMetricType;
 }
 
@@ -14038,9 +9546,7 @@ model ImageModelDistributionSettingsObjectDetection
    */
   multiScale?: string;
 
-  /**
-   * IOU threshold used during inference in NMS post processing. Must be float in the range [0, 1].
-   */
+  /** IOU threshold used during inference in NMS post processing. Must be float in the range [0, 1]. */
   nmsIouThreshold?: string;
 
   /**
@@ -14064,14 +9570,10 @@ model ImageModelDistributionSettingsObjectDetection
    */
   tilePredictionsNmsThreshold?: string;
 
-  /**
-   * IOU threshold to use when computing validation metric. Must be float in the range [0, 1].
-   */
+  /** IOU threshold to use when computing validation metric. Must be float in the range [0, 1]. */
   validationIouThreshold?: string;
 
-  /**
-   * Metric computation method to use for validation metrics. Must be 'none', 'coco', 'voc', or 'coco_voc'.
-   */
+  /** Metric computation method to use for validation metrics. Must be 'none', 'coco', 'voc', or 'coco_voc'. */
   validationMetricType?: string;
 }
 
@@ -14082,66 +9584,48 @@ model ImageModelDistributionSettingsObjectDetection
 model ImageObjectDetection extends AutoMLVertical {
   ...ImageObjectDetectionBase;
 
-  /**
-   * Primary metric to optimize for this task.
-   */
+  /** Primary metric to optimize for this task. */
   primaryMetric?: ObjectDetectionPrimaryMetrics;
 
-  /**
-   * [Required] Task type for AutoMLJob.
-   */
+  /** [Required] Task type for AutoMLJob. */
   taskType: "ImageObjectDetection";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ImportDataAction extends ScheduleActionBase {
-  /**
-   * [Required] Defines Schedule action definition details.
-   */
+  /** [Required] Defines Schedule action definition details. */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   dataImportDefinition: DataImport;
 
-  /**
-   * [Required] Specifies the action type of the schedule
-   */
+  /** [Required] Specifies the action type of the schedule */
   actionType: "ImportData";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model JobScheduleAction extends ScheduleActionBase {
-  /**
-   * [Required] Defines Schedule action definition details.
-   */
+  /** [Required] Defines Schedule action definition details. */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   jobDefinition: JobBase;
 
-  /**
-   * [Required] Specifies the action type of the schedule
-   */
+  /** [Required] Specifies the action type of the schedule */
   actionType: "CreateJob";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model KerberosCredentials {
-  /**
-   * [Required] IP Address or DNS HostName.
-   */
+  /** [Required] IP Address or DNS HostName. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   kerberosKdcAddress: string;
 
-  /**
-   * [Required] Kerberos Username
-   */
+  /** [Required] Kerberos Username */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   kerberosPrincipal: string;
 
-  /**
-   * [Required] Domain over which a Kerberos authentication server has the authority to authenticate a user, host or service.
-   */
+  /** [Required] Domain over which a Kerberos authentication server has the authority to authenticate a user, host or service. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
@@ -14152,28 +9636,20 @@ model KerberosCredentials {
 model KerberosKeytabCredentials extends DatastoreCredentials {
   ...KerberosCredentials;
 
-  /**
-   * [Required] Keytab secrets.
-   */
+  /** [Required] Keytab secrets. */
   @visibility(Lifecycle.Create, Lifecycle.Update)
   secrets: KerberosKeytabSecrets;
 
-  /**
-   * [Required] Credential type used to authentication with storage.
-   */
+  /** [Required] Credential type used to authentication with storage. */
   credentialsType: "KerberosKeytab";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model KerberosKeytabSecrets extends DatastoreSecrets {
-  /**
-   * Kerberos keytab secret.
-   */
+  /** Kerberos keytab secret. */
   kerberosKeytab?: string;
 
-  /**
-   * [Required] Credential type used to authentication with storage.
-   */
+  /** [Required] Credential type used to authentication with storage. */
   secretsType: "KerberosKeytab";
 }
 
@@ -14181,155 +9657,103 @@ model KerberosKeytabSecrets extends DatastoreSecrets {
 model KerberosPasswordCredentials extends DatastoreCredentials {
   ...KerberosCredentials;
 
-  /**
-   * [Required] Kerberos password secrets.
-   */
+  /** [Required] Kerberos password secrets. */
   @visibility(Lifecycle.Create, Lifecycle.Update)
   secrets: KerberosPasswordSecrets;
 
-  /**
-   * [Required] Credential type used to authentication with storage.
-   */
+  /** [Required] Credential type used to authentication with storage. */
   credentialsType: "KerberosPassword";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model KerberosPasswordSecrets extends DatastoreSecrets {
-  /**
-   * Kerberos password secret.
-   */
+  /** Kerberos password secret. */
   kerberosPassword?: string;
 
-  /**
-   * [Required] Credential type used to authentication with storage.
-   */
+  /** [Required] Credential type used to authentication with storage. */
   secretsType: "KerberosPassword";
 }
 
-/**
- * Properties specific to a KubernetesOnlineDeployment.
- */
+/** Properties specific to a KubernetesOnlineDeployment. */
 model KubernetesOnlineDeployment extends OnlineDeployment {
-  /**
-   * The resource requirements for the container (cpu and memory).
-   */
+  /** The resource requirements for the container (cpu and memory). */
   containerResourceRequirements?: ContainerResourceRequirements;
 
-  /**
-   * [Required] The compute type of the endpoint.
-   */
+  /** [Required] The compute type of the endpoint. */
   endpointComputeType: "Kubernetes";
 }
 
-/**
- * Properties of a labeling job for image data
- */
+/** Properties of a labeling job for image data */
 model LabelingJobImageProperties extends LabelingJobMediaProperties {
-  /**
-   * Annotation type of image labeling job.
-   */
+  /** Annotation type of image labeling job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   annotationType?: ImageAnnotationType;
 
-  /**
-   * [Required] Media type of the job.
-   */
+  /** [Required] Media type of the job. */
   mediaType: "Image";
 }
 
-/**
- * Properties of a labeling job for text data
- */
+/** Properties of a labeling job for text data */
 model LabelingJobTextProperties extends LabelingJobMediaProperties {
-  /**
-   * Annotation type of text labeling job.
-   */
+  /** Annotation type of text labeling job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   annotationType?: TextAnnotationType;
 
-  /**
-   * [Required] Media type of the job.
-   */
+  /** [Required] Media type of the job. */
   mediaType: "Text";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model LakeHouseArtifact extends OneLakeArtifact {
-  /**
-   * [Required] OneLake artifact type
-   */
+  /** [Required] OneLake artifact type */
   artifactType: "LakeHouse";
 }
 
-/**
- * OneLake artifact (data source) configuration.
- */
+/** OneLake artifact (data source) configuration. */
 @discriminator("artifactType")
 model OneLakeArtifact {
-  /**
-   * [Required] OneLake artifact name
-   */
+  /** [Required] OneLake artifact name */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   artifactName: string;
 
-  /**
-   * [Required] OneLake artifact type
-   */
+  /** [Required] OneLake artifact type */
   artifactType: OneLakeArtifactType;
 }
 
-/**
- * Literal input type.
- */
+/** Literal input type. */
 model LiteralJobInput extends JobInput {
-  /**
-   * [Required] Literal value for the input.
-   */
+  /** [Required] Literal value for the input. */
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   value: string;
 
-  /**
-   * [Required] Specifies the type of job.
-   */
+  /** [Required] Specifies the type of job. */
   jobInputType: "literal";
 }
 
-/**
- * Labeling MLAssist configuration definition when MLAssist is disabled
- */
+/** Labeling MLAssist configuration definition when MLAssist is disabled */
 model MLAssistConfigurationDisabled extends MLAssistConfiguration {
-  /**
-   * [Required] Indicates whether MLAssist feature is enabled.
-   */
+  /** [Required] Indicates whether MLAssist feature is enabled. */
   mlAssist: "Disabled";
 }
 
-/**
- * Labeling MLAssist configuration definition when MLAssist is enabled
- */
+/** Labeling MLAssist configuration definition when MLAssist is enabled */
 model MLAssistConfigurationEnabled extends MLAssistConfiguration {
-  /**
-   * [Required] AML compute binding used in inferencing.
-   */
+  /** [Required] AML compute binding used in inferencing. */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   inferencingComputeBinding: string;
 
-  /**
-   * [Required] AML compute binding used in training.
-   */
+  /** [Required] AML compute binding used in training. */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   trainingComputeBinding: string;
 
-  /**
-   * [Required] Indicates whether MLAssist feature is enabled.
-   */
+  /** [Required] Indicates whether MLAssist feature is enabled. */
   mlAssist: "Enabled";
 }
 
@@ -14337,25 +9761,17 @@ model MLAssistConfigurationEnabled extends MLAssistConfiguration {
 model MLFlowModelJobOutput extends JobOutput {
   ...AssetJobOutput;
 
-  /**
-   * [Required] Specifies the type of job.
-   */
+  /** [Required] Specifies the type of job. */
   jobOutputType: "mlflow_model";
 }
 
-/**
- * MLTable data definition
- */
+/** MLTable data definition */
 model MLTableData extends DataVersionBase {
-  /**
-   * Uris referenced in the MLTable definition (required for lineage)
-   */
+  /** Uris referenced in the MLTable definition (required for lineage) */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   referencedUris?: string[];
 
-  /**
-   * [Required] Specifies the type of data.
-   */
+  /** [Required] Specifies the type of data. */
   dataType: "mltable";
 }
 
@@ -14363,274 +9779,174 @@ model MLTableData extends DataVersionBase {
 model MLTableJobOutput extends JobOutput {
   ...AssetJobOutput;
 
-  /**
-   * [Required] Specifies the type of job.
-   */
+  /** [Required] Specifies the type of job. */
   jobOutputType: "mltable";
 }
 
-/**
- * Managed compute identity definition.
- */
+/** Managed compute identity definition. */
 model ManagedComputeIdentity extends MonitorComputeIdentityBase {
-  /**
-   * Managed service identity (system assigned and/or user assigned identities)
-   */
+  /** Managed service identity (system assigned and/or user assigned identities) */
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
-  /**
-   * [Required] Monitor compute identity type enum.
-   */
+  /** [Required] Monitor compute identity type enum. */
   computeIdentityType: "ManagedIdentity";
 }
 
-/**
- * Managed identity configuration.
- */
+/** Managed identity configuration. */
 model ManagedIdentity extends IdentityConfiguration {
-  /**
-   * Specifies a user-assigned identity by client ID. For system-assigned, do not set this field.
-   */
+  /** Specifies a user-assigned identity by client ID. For system-assigned, do not set this field. */
   #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @format("uuid")
   clientId?: string;
 
-  /**
-   * Specifies a user-assigned identity by object ID. For system-assigned, do not set this field.
-   */
+  /** Specifies a user-assigned identity by object ID. For system-assigned, do not set this field. */
   #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @format("uuid")
   objectId?: string;
 
-  /**
-   * Specifies a user-assigned identity by ARM resource ID. For system-assigned, do not set this field.
-   */
+  /** Specifies a user-assigned identity by ARM resource ID. For system-assigned, do not set this field. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   resourceId?: string;
 
-  /**
-   * [Required] Specifies the type of identity framework.
-   */
+  /** [Required] Specifies the type of identity framework. */
   identityType: "Managed";
 }
 
-/**
- * Properties specific to a ManagedOnlineDeployment.
- */
+/** Properties specific to a ManagedOnlineDeployment. */
 model ManagedOnlineDeployment extends OnlineDeployment {
-  /**
-   * [Required] The compute type of the endpoint.
-   */
+  /** [Required] The compute type of the endpoint. */
   endpointComputeType: "Managed";
 }
 
-/**
- * Defines an early termination policy based on running averages of the primary metric of all runs
- */
+/** Defines an early termination policy based on running averages of the primary metric of all runs */
 model MedianStoppingPolicy extends EarlyTerminationPolicy {
-  /**
-   * [Required] Name of policy configuration
-   */
+  /** [Required] Name of policy configuration */
   policyType: "MedianStopping";
 }
 
-/**
- * Model performance signal definition.
- */
+/** Model performance signal definition. */
 model ModelPerformanceSignal extends MonitoringSignalBase {
-  /**
-   * The data segment.
-   */
+  /** The data segment. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   dataSegment?: MonitoringDataSegment;
 
-  /**
-   * [Required] A list of metrics to calculate and their associated thresholds.
-   */
+  /** [Required] A list of metrics to calculate and their associated thresholds. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   metricThreshold: ModelPerformanceMetricThresholdBase;
 
-  /**
-   * [Required] The data produced by the production service which drift will be calculated for.
-   */
+  /** [Required] The data produced by the production service which drift will be calculated for. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @identifiers(#[])
   productionData: MonitoringInputDataBase[];
 
-  /**
-   * [Required] The data to calculate drift against.
-   */
+  /** [Required] The data to calculate drift against. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   referenceData: MonitoringInputDataBase;
 
-  /**
-   * [Required] Specifies the type of signal to monitor.
-   */
+  /** [Required] Specifies the type of signal to monitor. */
   signalType: "ModelPerformance";
 }
 
-/**
- * Monitor serverless spark compute definition.
- */
+/** Monitor serverless spark compute definition. */
 model MonitorServerlessSparkCompute extends MonitorComputeConfigurationBase {
-  /**
-   * [Required] The identity scheme leveraged to by the spark jobs running on serverless Spark.
-   */
+  /** [Required] The identity scheme leveraged to by the spark jobs running on serverless Spark. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   computeIdentity: MonitorComputeIdentityBase;
 
-  /**
-   * [Required] The instance type running the Spark job.
-   */
+  /** [Required] The instance type running the Spark job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   instanceType: string;
 
-  /**
-   * [Required] The Spark runtime version.
-   */
+  /** [Required] The Spark runtime version. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   runtimeVersion: string;
 
-  /**
-   * [Required] Specifies the type of signal to monitor.
-   */
+  /** [Required] Specifies the type of signal to monitor. */
   computeType: "ServerlessSpark";
 }
 
-/**
- * MPI distribution configuration.
- */
+/** MPI distribution configuration. */
 model Mpi extends DistributionConfiguration {
-  /**
-   * Number of processes per MPI node.
-   */
+  /** Number of processes per MPI node. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   processCountPerInstance?: int32;
 
-  /**
-   * [Required] Specifies the type of distribution framework.
-   */
+  /** [Required] Specifies the type of distribution framework. */
   distributionType: "Mpi";
 }
 
-/**
- * Fixed training parameters that won't be swept over during AutoML NLP training.
- */
+/** Fixed training parameters that won't be swept over during AutoML NLP training. */
 model NlpFixedParameters {
-  /**
-   * Number of steps to accumulate gradients over before running a backward pass.
-   */
+  /** Number of steps to accumulate gradients over before running a backward pass. */
   gradientAccumulationSteps?: int32;
 
-  /**
-   * The learning rate for the training procedure.
-   */
+  /** The learning rate for the training procedure. */
   learningRate?: float32;
 
-  /**
-   * The type of learning rate schedule to use during the training procedure.
-   */
+  /** The type of learning rate schedule to use during the training procedure. */
   learningRateScheduler?: NlpLearningRateScheduler;
 
-  /**
-   * The name of the model to train.
-   */
+  /** The name of the model to train. */
   modelName?: string;
 
-  /**
-   * Number of training epochs.
-   */
+  /** Number of training epochs. */
   numberOfEpochs?: int32;
 
-  /**
-   * The batch size for the training procedure.
-   */
+  /** The batch size for the training procedure. */
   trainingBatchSize?: int32;
 
-  /**
-   * The batch size to be used during evaluation.
-   */
+  /** The batch size to be used during evaluation. */
   validationBatchSize?: int32;
 
-  /**
-   * The warmup ratio, used alongside LrSchedulerType.
-   */
+  /** The warmup ratio, used alongside LrSchedulerType. */
   warmupRatio?: float32;
 
-  /**
-   * The weight decay for the training procedure.
-   */
+  /** The weight decay for the training procedure. */
   weightDecay?: float32;
 }
 
-/**
- * Stringified search spaces for each parameter. See below examples.
- */
+/** Stringified search spaces for each parameter. See below examples. */
 model NlpParameterSubspace {
-  /**
-   * Number of steps to accumulate gradients over before running a backward pass.
-   */
+  /** Number of steps to accumulate gradients over before running a backward pass. */
   gradientAccumulationSteps?: string;
 
-  /**
-   * The learning rate for the training procedure.
-   */
+  /** The learning rate for the training procedure. */
   learningRate?: string;
 
-  /**
-   * The type of learning rate schedule to use during the training procedure.
-   */
+  /** The type of learning rate schedule to use during the training procedure. */
   learningRateScheduler?: string;
 
-  /**
-   * The name of the model to train.
-   */
+  /** The name of the model to train. */
   modelName?: string;
 
-  /**
-   * Number of training epochs.
-   */
+  /** Number of training epochs. */
   numberOfEpochs?: string;
 
-  /**
-   * The batch size for the training procedure.
-   */
+  /** The batch size for the training procedure. */
   trainingBatchSize?: string;
 
-  /**
-   * The batch size to be used during evaluation.
-   */
+  /** The batch size to be used during evaluation. */
   validationBatchSize?: string;
 
-  /**
-   * The warmup ratio, used alongside LrSchedulerType.
-   */
+  /** The warmup ratio, used alongside LrSchedulerType. */
   warmupRatio?: string;
 
-  /**
-   * The weight decay for the training procedure.
-   */
+  /** The weight decay for the training procedure. */
   weightDecay?: string;
 }
 
-/**
- * Model sweeping and hyperparameter tuning related settings.
- */
+/** Model sweeping and hyperparameter tuning related settings. */
 model NlpSweepSettings {
-  /**
-   * Type of early termination policy for the sweeping job.
-   */
+  /** Type of early termination policy for the sweeping job. */
   earlyTermination?: EarlyTerminationPolicy;
 
-  /**
-   * [Required] Type of sampling algorithm.
-   */
+  /** [Required] Type of sampling algorithm. */
   samplingAlgorithm: SamplingAlgorithmType;
 }
 
@@ -14639,35 +9955,23 @@ model NlpSweepSettings {
  * NLP - Natural Language Processing.
  */
 model NlpVertical {
-  /**
-   * Featurization inputs needed for AutoML job.
-   */
+  /** Featurization inputs needed for AutoML job. */
   featurizationSettings?: NlpVerticalFeaturizationSettings;
 
-  /**
-   * Model/training parameters that will remain constant throughout training.
-   */
+  /** Model/training parameters that will remain constant throughout training. */
   fixedParameters?: NlpFixedParameters;
 
-  /**
-   * Execution constraints for AutoMLJob.
-   */
+  /** Execution constraints for AutoMLJob. */
   limitSettings?: NlpVerticalLimitSettings;
 
-  /**
-   * Search space for sampling different combinations of models and their hyperparameters.
-   */
+  /** Search space for sampling different combinations of models and their hyperparameters. */
   @identifiers(#[])
   searchSpace?: NlpParameterSubspace[];
 
-  /**
-   * Settings for model sweeping and hyperparameter tuning.
-   */
+  /** Settings for model sweeping and hyperparameter tuning. */
   sweepSettings?: NlpSweepSettings;
 
-  /**
-   * Validation data inputs.
-   */
+  /** Validation data inputs. */
   validationData?: MLTableJobInput;
 }
 
@@ -14675,880 +9979,576 @@ model NlpVertical {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model NlpVerticalFeaturizationSettings extends FeaturizationSettings {}
 
-/**
- * Job execution constraints.
- */
+/** Job execution constraints. */
 model NlpVerticalLimitSettings {
-  /**
-   * Maximum Concurrent AutoML iterations.
-   */
+  /** Maximum Concurrent AutoML iterations. */
   maxConcurrentTrials?: int32 = 1;
 
-  /**
-   * Maximum nodes to use for the experiment.
-   */
+  /** Maximum nodes to use for the experiment. */
   maxNodes?: int32 = 1;
 
-  /**
-   * Number of AutoML iterations.
-   */
+  /** Number of AutoML iterations. */
   maxTrials?: int32 = 1;
 
-  /**
-   * AutoML job timeout.
-   */
+  /** AutoML job timeout. */
   timeout?: duration;
 
-  /**
-   * Timeout for individual HD trials.
-   */
+  /** Timeout for individual HD trials. */
   trialTimeout?: duration;
 }
 
-/**
- * Empty/none datastore credentials.
- */
+/** Empty/none datastore credentials. */
 model NoneDatastoreCredentials extends DatastoreCredentials {
-  /**
-   * [Required] Credential type used to authentication with storage.
-   */
+  /** [Required] Credential type used to authentication with storage. */
   credentialsType: "None";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model NumericalDataDriftMetricThreshold extends DataDriftMetricThresholdBase {
-  /**
-   * [Required] The numerical data drift metric to calculate.
-   */
+  /** [Required] The numerical data drift metric to calculate. */
   metric: NumericalDataDriftMetric;
 
-  /**
-   * [Required] Specifies the data type of the metric threshold.
-   */
+  /** [Required] Specifies the data type of the metric threshold. */
   dataType: "Numerical";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model NumericalDataQualityMetricThreshold
   extends DataQualityMetricThresholdBase {
-  /**
-   * [Required] The numerical data quality metric to calculate.
-   */
+  /** [Required] The numerical data quality metric to calculate. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   metric: NumericalDataQualityMetric;
 
-  /**
-   * [Required] Specifies the data type of the metric threshold.
-   */
+  /** [Required] Specifies the data type of the metric threshold. */
   dataType: "Numerical";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model NumericalPredictionDriftMetricThreshold
   extends PredictionDriftMetricThresholdBase {
-  /**
-   * [Required] The numerical prediction drift metric to calculate.
-   */
+  /** [Required] The numerical prediction drift metric to calculate. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   metric: NumericalPredictionDriftMetric;
 
-  /**
-   * [Required] Specifies the data type of the metric threshold.
-   */
+  /** [Required] Specifies the data type of the metric threshold. */
   dataType: "Numerical";
 }
 
-/**
- * Optimization objective.
- */
+/** Optimization objective. */
 model Objective {
-  /**
-   * [Required] Defines supported metric goals for hyperparameter tuning
-   */
+  /** [Required] Defines supported metric goals for hyperparameter tuning */
   goal: Goal;
 
-  /**
-   * [Required] Name of the metric to optimize.
-   */
+  /** [Required] Name of the metric to optimize. */
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   primaryMetric: string;
 }
 
-/**
- * OneLake (Trident) datastore configuration.
- */
+/** OneLake (Trident) datastore configuration. */
 model OneLakeDatastore extends Datastore {
-  /**
-   * [Required] OneLake artifact backing the datastore.
-   */
+  /** [Required] OneLake artifact backing the datastore. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   artifact: OneLakeArtifact;
 
-  /**
-   * OneLake endpoint to use for the datastore.
-   */
+  /** OneLake endpoint to use for the datastore. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   endpoint?: string;
 
-  /**
-   * [Required] OneLake workspace name.
-   */
+  /** [Required] OneLake workspace name. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   oneLakeWorkspaceName: string;
 
-  /**
-   * Indicates which identity to use to authenticate service data access to customer's storage.
-   */
+  /** Indicates which identity to use to authenticate service data access to customer's storage. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   serviceDataAccessAuthIdentity?: ServiceDataAccessAuthIdentity;
 
-  /**
-   * [Required] Storage type backing the datastore.
-   */
+  /** [Required] Storage type backing the datastore. */
   datastoreType: "OneLake";
 }
 
-/**
- * Reference to an asset via its path in a job output.
- */
+/** Reference to an asset via its path in a job output. */
 model OutputPathAssetReference extends AssetReferenceBase {
-  /**
-   * ARM resource ID of the job.
-   */
+  /** ARM resource ID of the job. */
   jobId?: string;
 
-  /**
-   * The path of the file/directory in the job output.
-   */
+  /** The path of the file/directory in the job output. */
   path?: string;
 
-  /**
-   * [Required] Specifies the type of asset reference.
-   */
+  /** [Required] Specifies the type of asset reference. */
   referenceType: "OutputPath";
 }
 
-/**
- * Package input path specified with a resource id.
- */
+/** Package input path specified with a resource id. */
 model PackageInputPathId extends PackageInputPathBase {
-  /**
-   * Input resource id.
-   */
+  /** Input resource id. */
   resourceId?: string;
 
-  /**
-   * [Required] Input path type for package inputs.
-   */
+  /** [Required] Input path type for package inputs. */
   inputPathType: "PathId";
 }
 
-/**
- * Package input path specified as an url.
- */
+/** Package input path specified as an url. */
 model PackageInputPathUrl extends PackageInputPathBase {
-  /**
-   * Input path url.
-   */
+  /** Input path url. */
   url?: string;
 
-  /**
-   * [Required] Input path type for package inputs.
-   */
+  /** [Required] Input path type for package inputs. */
   inputPathType: "Url";
 }
 
-/**
- * Package input path specified with name and version.
- */
+/** Package input path specified with name and version. */
 model PackageInputPathVersion extends PackageInputPathBase {
-  /**
-   * Input resource name.
-   */
+  /** Input resource name. */
   resourceName?: string;
 
-  /**
-   * Input resource version.
-   */
+  /** Input resource version. */
   resourceVersion?: string;
 
-  /**
-   * [Required] Input path type for package inputs.
-   */
+  /** [Required] Input path type for package inputs. */
   inputPathType: "PathVersion";
 }
 
-/**
- * Pipeline Job definition: defines generic to MFE attributes.
- */
+/** Pipeline Job definition: defines generic to MFE attributes. */
 model PipelineJob extends JobBase {
-  /**
-   * Inputs for the pipeline job.
-   */
+  /** Inputs for the pipeline job. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   inputs?: Record<JobInput>;
 
-  /**
-   * Jobs construct the Pipeline Job.
-   */
+  /** Jobs construct the Pipeline Job. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   jobs?: Record<unknown>;
 
-  /**
-   * Outputs for the pipeline job
-   */
+  /** Outputs for the pipeline job */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   outputs?: Record<JobOutput>;
 
-  /**
-   * Pipeline settings, for things like ContinueRunOnStepFailure etc.
-   */
+  /** Pipeline settings, for things like ContinueRunOnStepFailure etc. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   settings?: unknown;
 
-  /**
-   * ARM resource ID of source job.
-   */
+  /** ARM resource ID of source job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   sourceJobId?: string;
 
-  /**
-   * [Required] Specifies the type of job.
-   */
+  /** [Required] Specifies the type of job. */
   jobType: "Pipeline";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model PredictionDriftMonitoringSignal extends MonitoringSignalBase {
-  /**
-   * [Required] A list of metrics to calculate and their associated thresholds.
-   */
+  /** [Required] A list of metrics to calculate and their associated thresholds. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @identifiers(#[])
   metricThresholds: PredictionDriftMetricThresholdBase[];
 
-  /**
-   * [Required] The type of the model monitored.
-   */
+  /** [Required] The type of the model monitored. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   modelType: MonitoringModelType;
 
-  /**
-   * [Required] The data which drift will be calculated for.
-   */
+  /** [Required] The data which drift will be calculated for. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   productionData: MonitoringInputDataBase;
 
-  /**
-   * [Required] The data to calculate drift against.
-   */
+  /** [Required] The data to calculate drift against. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   referenceData: MonitoringInputDataBase;
 
-  /**
-   * [Required] Specifies the type of signal to monitor.
-   */
+  /** [Required] Specifies the type of signal to monitor. */
   signalType: "PredictionDrift";
 }
 
-/**
- * PyTorch distribution configuration.
- */
+/** PyTorch distribution configuration. */
 model PyTorch extends DistributionConfiguration {
-  /**
-   * Number of processes per node.
-   */
+  /** Number of processes per node. */
   processCountPerInstance?: int32;
 
-  /**
-   * [Required] Specifies the type of distribution framework.
-   */
+  /** [Required] Specifies the type of distribution framework. */
   distributionType: "PyTorch";
 }
 
-/**
- * Defines a Sampling Algorithm that generates values randomly
- */
+/** Defines a Sampling Algorithm that generates values randomly */
 model RandomSamplingAlgorithm extends SamplingAlgorithm {
-  /**
-   * An optional positive number or e in string format to be used as base for log based random sampling
-   */
+  /** An optional positive number or e in string format to be used as base for log based random sampling */
   logbase?: string;
 
-  /**
-   * The specific type of random algorithm
-   */
+  /** The specific type of random algorithm */
   rule?: RandomSamplingAlgorithmRule;
 
-  /**
-   * An optional integer to use as the seed for random number generation
-   */
+  /** An optional integer to use as the seed for random number generation */
   seed?: int32;
 
-  /**
-   * [Required] The algorithm used for generating hyperparameter values, along with configuration properties
-   */
+  /** [Required] The algorithm used for generating hyperparameter values, along with configuration properties */
   samplingAlgorithmType: "Random";
 }
 
-/**
- * Ray distribution configuration.
- */
+/** Ray distribution configuration. */
 model Ray extends DistributionConfiguration {
-  /**
-   * The address of Ray head node.
-   */
+  /** The address of Ray head node. */
   address?: string;
 
-  /**
-   * The port to bind the dashboard server to.
-   */
+  /** The port to bind the dashboard server to. */
   dashboardPort?: int32;
 
-  /**
-   * Additional arguments passed to ray start in head node.
-   */
+  /** Additional arguments passed to ray start in head node. */
   headNodeAdditionalArgs?: string;
 
-  /**
-   * Provide this argument to start the Ray dashboard GUI.
-   */
+  /** Provide this argument to start the Ray dashboard GUI. */
   includeDashboard?: boolean;
 
-  /**
-   * The port of the head ray process.
-   */
+  /** The port of the head ray process. */
   port?: int32;
 
-  /**
-   * Additional arguments passed to ray start in worker node.
-   */
+  /** Additional arguments passed to ray start in worker node. */
   workerNodeAdditionalArgs?: string;
 
-  /**
-   * [Required] Specifies the type of distribution framework.
-   */
+  /** [Required] Specifies the type of distribution framework. */
   distributionType: "Ray";
 }
 
-/**
- * Regression task in AutoML Table vertical.
- */
+/** Regression task in AutoML Table vertical. */
 model Regression extends AutoMLVertical {
   ...TableVertical;
 
-  /**
-   * Primary metric for regression task.
-   */
+  /** Primary metric for regression task. */
   primaryMetric?: RegressionPrimaryMetrics;
 
-  /**
-   * Inputs for training phase for an AutoML Job.
-   */
+  /** Inputs for training phase for an AutoML Job. */
   trainingSettings?: RegressionTrainingSettings;
 
-  /**
-   * [Required] Task type for AutoMLJob.
-   */
+  /** [Required] Task type for AutoMLJob. */
   taskType: "Regression";
 }
 
-/**
- * Regression Training related configuration.
- */
+/** Regression Training related configuration. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model RegressionTrainingSettings extends TrainingSettings {
-  /**
-   * Allowed models for regression task.
-   */
+  /** Allowed models for regression task. */
   allowedTrainingAlgorithms?: RegressionModels[];
 
-  /**
-   * Blocked models for regression task.
-   */
+  /** Blocked models for regression task. */
   blockedTrainingAlgorithms?: RegressionModels[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model RegressionModelPerformanceMetricThreshold
   extends ModelPerformanceMetricThresholdBase {
-  /**
-   * [Required] The regression model performance metric to calculate.
-   */
+  /** [Required] The regression model performance metric to calculate. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   metric: RegressionModelPerformanceMetric;
 
-  /**
-   * [Required] Specifies the data type of the metric threshold.
-   */
+  /** [Required] Specifies the data type of the metric threshold. */
   modelType: "Regression";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SASCredentialDto extends PendingUploadCredentialDto {
-  /**
-   * Full SAS Uri, including the storage, container/blob path and SAS token
-   */
+  /** Full SAS Uri, including the storage, container/blob path and SAS token */
   sasUri?: url;
 
-  /**
-   * [Required] Credential type used to authentication with storage.
-   */
+  /** [Required] Credential type used to authentication with storage. */
   credentialType: "SAS";
 }
 
-/**
- * SAS datastore credentials configuration.
- */
+/** SAS datastore credentials configuration. */
 model SasDatastoreCredentials extends DatastoreCredentials {
-  /**
-   * [Required] Storage container secrets.
-   */
+  /** [Required] Storage container secrets. */
   @visibility(Lifecycle.Create, Lifecycle.Update)
   secrets: SasDatastoreSecrets;
 
-  /**
-   * [Required] Credential type used to authentication with storage.
-   */
+  /** [Required] Credential type used to authentication with storage. */
   credentialsType: "Sas";
 }
 
-/**
- * Datastore SAS secrets.
- */
+/** Datastore SAS secrets. */
 model SasDatastoreSecrets extends DatastoreSecrets {
-  /**
-   * Storage container SAS token.
-   */
+  /** Storage container SAS token. */
   sasToken?: string;
 
-  /**
-   * [Required] Credential type used to authentication with storage.
-   */
+  /** [Required] Credential type used to authentication with storage. */
   secretsType: "Sas";
 }
 
-/**
- * Service Principal datastore credentials configuration.
- */
+/** Service Principal datastore credentials configuration. */
 model ServicePrincipalDatastoreCredentials extends DatastoreCredentials {
-  /**
-   * Authority URL used for authentication.
-   */
+  /** Authority URL used for authentication. */
   authorityUrl?: string;
 
-  /**
-   * [Required] Service principal client ID.
-   */
+  /** [Required] Service principal client ID. */
   #suppress "@azure-tools/typespec-azure-core/no-format"
   @format("uuid")
   clientId: string;
 
-  /**
-   * Resource the service principal has access to.
-   */
+  /** Resource the service principal has access to. */
   resourceUrl?: string;
 
-  /**
-   * [Required] Service principal secrets.
-   */
+  /** [Required] Service principal secrets. */
   @visibility(Lifecycle.Create, Lifecycle.Update)
   secrets: ServicePrincipalDatastoreSecrets;
 
-  /**
-   * [Required] ID of the tenant to which the service principal belongs.
-   */
+  /** [Required] ID of the tenant to which the service principal belongs. */
   #suppress "@azure-tools/typespec-azure-core/no-format"
   @format("uuid")
   tenantId: string;
 
-  /**
-   * [Required] Credential type used to authentication with storage.
-   */
+  /** [Required] Credential type used to authentication with storage. */
   credentialsType: "ServicePrincipal";
 }
 
-/**
- * Datastore Service Principal secrets.
- */
+/** Datastore Service Principal secrets. */
 model ServicePrincipalDatastoreSecrets extends DatastoreSecrets {
-  /**
-   * Service principal secret.
-   */
+  /** Service principal secret. */
   clientSecret?: string;
 
-  /**
-   * [Required] Credential type used to authentication with storage.
-   */
+  /** [Required] Credential type used to authentication with storage. */
   secretsType: "ServicePrincipal";
 }
 
-/**
- * Spark job definition.
- */
+/** Spark job definition. */
 model SparkJob extends JobBase {
-  /**
-   * Archive files used in the job.
-   */
+  /** Archive files used in the job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   archives?: string[];
 
-  /**
-   * Arguments for the job.
-   */
+  /** Arguments for the job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   args?: string;
 
-  /**
-   * [Required] ARM resource ID of the code asset.
-   */
+  /** [Required] ARM resource ID of the code asset. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   codeId: string;
 
-  /**
-   * Spark configured properties.
-   */
+  /** Spark configured properties. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   conf?: Record<string>;
 
-  /**
-   * [Required] The entry to execute on startup of the job.
-   */
+  /** [Required] The entry to execute on startup of the job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   entry: SparkJobEntry;
 
-  /**
-   * The ARM resource ID of the Environment specification for the job.
-   */
+  /** The ARM resource ID of the Environment specification for the job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentId?: string;
 
-  /**
-   * Files used in the job.
-   */
+  /** Files used in the job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   files?: string[];
 
-  /**
-   * Mapping of input data bindings used in the job.
-   */
+  /** Mapping of input data bindings used in the job. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   inputs?: Record<JobInput>;
 
-  /**
-   * Jar files used in the job.
-   */
+  /** Jar files used in the job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   jars?: string[];
 
-  /**
-   * Mapping of output data bindings used in the job.
-   */
+  /** Mapping of output data bindings used in the job. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   outputs?: Record<JobOutput>;
 
-  /**
-   * Python files used in the job.
-   */
+  /** Python files used in the job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   pyFiles?: string[];
 
-  /**
-   * Queue settings for the job
-   */
+  /** Queue settings for the job */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   queueSettings?: QueueSettings;
 
-  /**
-   * Compute Resource configuration for the job.
-   */
+  /** Compute Resource configuration for the job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   resources?: SparkResourceConfiguration;
 
-  /**
-   * [Required] Specifies the type of job.
-   */
+  /** [Required] Specifies the type of job. */
   jobType: "Spark";
 }
 
-/**
- * Spark job entry point definition.
- */
+/** Spark job entry point definition. */
 @discriminator("sparkJobEntryType")
 model SparkJobEntry {
-  /**
-   * [Required] Type of the job's entry point.
-   */
+  /** [Required] Type of the job's entry point. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   sparkJobEntryType: SparkJobEntryType;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SparkResourceConfiguration {
-  /**
-   * Optional type of VM used as supported by the compute target.
-   */
+  /** Optional type of VM used as supported by the compute target. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   instanceType?: string;
 
-  /**
-   * Version of spark runtime used for the job.
-   */
+  /** Version of spark runtime used for the job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   runtimeVersion?: string = "3.1";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SparkJobPythonEntry extends SparkJobEntry {
-  /**
-   * [Required] Relative python file path for job entry point.
-   */
+  /** [Required] Relative python file path for job entry point. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   file: string;
 
-  /**
-   * [Required] Type of the job's entry point.
-   */
+  /** [Required] Type of the job's entry point. */
   sparkJobEntryType: "SparkJobPythonEntry";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SparkJobScalaEntry extends SparkJobEntry {
-  /**
-   * [Required] Scala class name used as entry point.
-   */
+  /** [Required] Scala class name used as entry point. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   className: string;
 
-  /**
-   * [Required] Type of the job's entry point.
-   */
+  /** [Required] Type of the job's entry point. */
   sparkJobEntryType: "SparkJobScalaEntry";
 }
 
-/**
- * Static input data definition.
- */
+/** Static input data definition. */
 model StaticInputData extends MonitoringInputDataBase {
-  /**
-   * The ARM resource ID of the component resource used to preprocess the data.
-   */
+  /** The ARM resource ID of the component resource used to preprocess the data. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   preprocessingComponentId?: string;
 
-  /**
-   * [Required] The end date of the data window.
-   */
+  /** [Required] The end date of the data window. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   windowEnd: utcDateTime;
 
-  /**
-   * [Required] The start date of the data window.
-   */
+  /** [Required] The start date of the data window. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   windowStart: utcDateTime;
 
-  /**
-   * [Required] Specifies the type of signal to monitor.
-   */
+  /** [Required] Specifies the type of signal to monitor. */
   inputDataType: "Static";
 }
 
-/**
- * Sweep job definition.
- */
+/** Sweep job definition. */
 model SweepJob extends JobBase {
-  /**
-   * Early termination policies enable canceling poor-performing runs before they complete
-   */
+  /** Early termination policies enable canceling poor-performing runs before they complete */
   earlyTermination?: EarlyTerminationPolicy;
 
-  /**
-   * Mapping of input data bindings used in the job.
-   */
+  /** Mapping of input data bindings used in the job. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   inputs?: Record<JobInput>;
 
-  /**
-   * Sweep Job limit.
-   */
+  /** Sweep Job limit. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   limits?: SweepJobLimits;
 
-  /**
-   * [Required] Optimization objective.
-   */
+  /** [Required] Optimization objective. */
   objective: Objective;
 
-  /**
-   * Mapping of output data bindings used in the job.
-   */
+  /** Mapping of output data bindings used in the job. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   outputs?: Record<JobOutput>;
 
-  /**
-   * Queue settings for the job
-   */
+  /** Queue settings for the job */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   queueSettings?: QueueSettings;
 
-  /**
-   * [Required] The hyperparameter sampling algorithm
-   */
+  /** [Required] The hyperparameter sampling algorithm */
   samplingAlgorithm: SamplingAlgorithm;
 
-  /**
-   * [Required] A dictionary containing each parameter and its distribution. The dictionary key is the name of the parameter
-   */
+  /** [Required] A dictionary containing each parameter and its distribution. The dictionary key is the name of the parameter */
   searchSpace: unknown;
 
-  /**
-   * [Required] Trial component definition.
-   */
+  /** [Required] Trial component definition. */
   trial: TrialComponent;
 
-  /**
-   * [Required] Specifies the type of job.
-   */
+  /** [Required] Specifies the type of job. */
   jobType: "Sweep";
 }
 
-/**
- * Sweep Job limit class.
- */
+/** Sweep Job limit class. */
 model SweepJobLimits extends JobLimits {
-  /**
-   * Sweep Job max concurrent trials.
-   */
+  /** Sweep Job max concurrent trials. */
   maxConcurrentTrials?: int32;
 
-  /**
-   * Sweep Job max total trials.
-   */
+  /** Sweep Job max total trials. */
   maxTotalTrials?: int32;
 
-  /**
-   * Sweep Job Trial timeout value.
-   */
+  /** Sweep Job Trial timeout value. */
   trialTimeout?: duration;
 
-  /**
-   * [Required] JobLimit type.
-   */
+  /** [Required] JobLimit type. */
   jobLimitsType: "Sweep";
 }
 
-/**
- * Trial component definition.
- */
+/** Trial component definition. */
 model TrialComponent {
-  /**
-   * ARM resource ID of the code asset.
-   */
+  /** ARM resource ID of the code asset. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   codeId?: string;
 
-  /**
-   * [Required] The command to execute on startup of the job. eg. "python train.py"
-   */
+  /** [Required] The command to execute on startup of the job. eg. "python train.py" */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   command: string;
 
-  /**
-   * Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null.
-   */
+  /** Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   distribution?: DistributionConfiguration;
 
-  /**
-   * [Required] The ARM resource ID of the Environment specification for the job.
-   */
+  /** [Required] The ARM resource ID of the Environment specification for the job. */
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   environmentId: string;
 
-  /**
-   * Environment variables included in the job.
-   */
+  /** Environment variables included in the job. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentVariables?: Record<string>;
 
-  /**
-   * Compute Resource configuration for the job.
-   */
+  /** Compute Resource configuration for the job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   resources?: JobResourceConfiguration;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model TargetUtilizationScaleSettings extends OnlineScaleSettings {
-  /**
-   * The maximum number of instances that the deployment can scale to. The quota will be reserved for max_instances.
-   */
+  /** The maximum number of instances that the deployment can scale to. The quota will be reserved for max_instances. */
   maxInstances?: int32 = 1;
 
-  /**
-   * The minimum number of instances to always be present.
-   */
+  /** The minimum number of instances to always be present. */
   minInstances?: int32 = 1;
 
-  /**
-   * The polling interval in ISO 8691 format. Only supports duration with precision as low as Seconds.
-   */
+  /** The polling interval in ISO 8691 format. Only supports duration with precision as low as Seconds. */
   pollingInterval?: duration;
 
-  /**
-   * Target CPU usage for the autoscaler.
-   */
+  /** Target CPU usage for the autoscaler. */
   targetUtilizationPercentage?: int32 = 70;
 
-  /**
-   * [Required] Type of deployment scaling algorithm
-   */
+  /** [Required] Type of deployment scaling algorithm */
   scaleType: "TargetUtilization";
 }
 
-/**
- * TensorFlow distribution configuration.
- */
+/** TensorFlow distribution configuration. */
 model TensorFlow extends DistributionConfiguration {
-  /**
-   * Number of parameter server tasks.
-   */
+  /** Number of parameter server tasks. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   parameterServerCount?: int32;
 
-  /**
-   * Number of workers. If not specified, will default to the instance count.
-   */
+  /** Number of workers. If not specified, will default to the instance count. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   workerCount?: int32;
 
-  /**
-   * [Required] Specifies the type of distribution framework.
-   */
+  /** [Required] Specifies the type of distribution framework. */
   distributionType: "TensorFlow";
 }
 
@@ -15559,14 +10559,10 @@ model TensorFlow extends DistributionConfiguration {
 model TextClassification extends AutoMLVertical {
   ...NlpVertical;
 
-  /**
-   * Primary metric for Text-Classification task.
-   */
+  /** Primary metric for Text-Classification task. */
   primaryMetric?: ClassificationPrimaryMetrics;
 
-  /**
-   * [Required] Task type for AutoMLJob.
-   */
+  /** [Required] Task type for AutoMLJob. */
   taskType: "TextClassification";
 }
 
@@ -15584,9 +10580,7 @@ model TextClassificationMultilabel extends AutoMLVertical {
   @visibility(Lifecycle.Read)
   primaryMetric?: ClassificationMultilabelPrimaryMetrics;
 
-  /**
-   * [Required] Task type for AutoMLJob.
-   */
+  /** [Required] Task type for AutoMLJob. */
   taskType: "TextClassificationMultilabel";
 }
 
@@ -15605,66 +10599,44 @@ model TextNer extends AutoMLVertical {
   @visibility(Lifecycle.Read)
   primaryMetric?: ClassificationPrimaryMetrics;
 
-  /**
-   * [Required] Task type for AutoMLJob.
-   */
+  /** [Required] Task type for AutoMLJob. */
   taskType: "TextNER";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model TopNFeaturesByAttribution extends MonitoringFeatureFilterBase {
-  /**
-   * The number of top features to include.
-   */
+  /** The number of top features to include. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   top?: int32 = 10;
 
-  /**
-   * [Required] Specifies the feature filter to leverage when selecting features to calculate metrics over.
-   */
+  /** [Required] Specifies the feature filter to leverage when selecting features to calculate metrics over. */
   filterType: "TopNByAttribution";
 }
 
-/**
- * Trailing input data definition.
- */
+/** Trailing input data definition. */
 model TrailingInputData extends MonitoringInputDataBase {
-  /**
-   * The ARM resource ID of the component resource used to preprocess the data.
-   */
+  /** The ARM resource ID of the component resource used to preprocess the data. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   preprocessingComponentId?: string;
 
-  /**
-   * [Required] The time offset between the end of the data window and the monitor's current run time.
-   */
+  /** [Required] The time offset between the end of the data window and the monitor's current run time. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   windowOffset: duration;
 
-  /**
-   * [Required] The size of the trailing data window.
-   */
+  /** [Required] The size of the trailing data window. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   windowSize: duration;
 
-  /**
-   * [Required] Specifies the type of signal to monitor.
-   */
+  /** [Required] Specifies the type of signal to monitor. */
   inputDataType: "Trailing";
 }
 
-/**
- * Triton inferencing server configurations.
- */
+/** Triton inferencing server configurations. */
 model TritonInferencingServer extends InferencingServer {
-  /**
-   * Inference configuration for Triton.
-   */
+  /** Inference configuration for Triton. */
   inferenceConfiguration?: OnlineInferenceConfiguration;
 
-  /**
-   * [Required] Inferencing server type for various targets.
-   */
+  /** [Required] Inferencing server type for various targets. */
   serverType: "Triton";
 }
 
@@ -15672,9 +10644,7 @@ model TritonInferencingServer extends InferencingServer {
 model TritonModelJobInput extends JobInput {
   ...AssetJobInput;
 
-  /**
-   * [Required] Specifies the type of job.
-   */
+  /** [Required] Specifies the type of job. */
   jobInputType: "triton_model";
 }
 
@@ -15682,34 +10652,22 @@ model TritonModelJobInput extends JobInput {
 model TritonModelJobOutput extends JobOutput {
   ...AssetJobOutput;
 
-  /**
-   * [Required] Specifies the type of job.
-   */
+  /** [Required] Specifies the type of job. */
   jobOutputType: "triton_model";
 }
 
-/**
- * Defines an early termination policy that cancels a given percentage of runs at each evaluation interval.
- */
+/** Defines an early termination policy that cancels a given percentage of runs at each evaluation interval. */
 model TruncationSelectionPolicy extends EarlyTerminationPolicy {
-  /**
-   * The percentage of runs to cancel at each evaluation interval.
-   */
+  /** The percentage of runs to cancel at each evaluation interval. */
   truncationPercentage?: int32;
 
-  /**
-   * [Required] Name of policy configuration
-   */
+  /** [Required] Name of policy configuration */
   policyType: "TruncationSelection";
 }
 
-/**
- * uri-file data version entity
- */
+/** uri-file data version entity */
 model UriFileDataVersion extends DataVersionBase {
-  /**
-   * [Required] Specifies the type of data.
-   */
+  /** [Required] Specifies the type of data. */
   dataType: "uri_file";
 }
 
@@ -15717,9 +10675,7 @@ model UriFileDataVersion extends DataVersionBase {
 model UriFileJobInput extends JobInput {
   ...AssetJobInput;
 
-  /**
-   * [Required] Specifies the type of job.
-   */
+  /** [Required] Specifies the type of job. */
   jobInputType: "uri_file";
 }
 
@@ -15727,19 +10683,13 @@ model UriFileJobInput extends JobInput {
 model UriFileJobOutput extends JobOutput {
   ...AssetJobOutput;
 
-  /**
-   * [Required] Specifies the type of job.
-   */
+  /** [Required] Specifies the type of job. */
   jobOutputType: "uri_file";
 }
 
-/**
- * uri-folder data version entity
- */
+/** uri-folder data version entity */
 model UriFolderDataVersion extends DataVersionBase {
-  /**
-   * [Required] Specifies the type of data.
-   */
+  /** [Required] Specifies the type of data. */
   dataType: "uri_folder";
 }
 
@@ -15747,9 +10697,7 @@ model UriFolderDataVersion extends DataVersionBase {
 model UriFolderJobInput extends JobInput {
   ...AssetJobInput;
 
-  /**
-   * [Required] Specifies the type of job.
-   */
+  /** [Required] Specifies the type of job. */
   jobInputType: "uri_folder";
 }
 
@@ -15757,19 +10705,13 @@ model UriFolderJobInput extends JobInput {
 model UriFolderJobOutput extends JobOutput {
   ...AssetJobOutput;
 
-  /**
-   * [Required] Specifies the type of job.
-   */
+  /** [Required] Specifies the type of job. */
   jobOutputType: "uri_folder";
 }
 
-/**
- * User identity configuration.
- */
+/** User identity configuration. */
 model UserIdentity extends IdentityConfiguration {
-  /**
-   * [Required] Specifies the type of identity framework.
-   */
+  /** [Required] Specifies the type of identity framework. */
   identityType: "UserIdentity";
 }
 
@@ -15779,9 +10721,7 @@ model AccessKeyAuthTypeWorkspaceConnectionProperties
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   credentials?: WorkspaceConnectionAccessKey;
 
-  /**
-   * Authentication type of the connection target
-   */
+  /** Authentication type of the connection target */
   authType: "AccessKey";
 }
 
@@ -15817,32 +10757,22 @@ model WorkspaceConnectionAccessKey {
  */
 model ApiKeyAuthWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
-  /**
-   * Api key object for workspace connection credential.
-   */
+  /** Api key object for workspace connection credential. */
   credentials?: WorkspaceConnectionApiKey;
 
-  /**
-   * Authentication type of the connection target
-   */
+  /** Authentication type of the connection target */
   authType: "ApiKey";
 }
 
-/**
- * Api key object for workspace connection credential.
- */
+/** Api key object for workspace connection credential. */
 model WorkspaceConnectionApiKey {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   key?: string;
 }
 
-/**
- * Custom Keys credential object
- */
+/** Custom Keys credential object */
 model CustomKeys {
-  /**
-   * Dictionary of <string>
-   */
+  /** Dictionary of <string> */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   keys?: Record<string>;
 }
@@ -15856,27 +10786,19 @@ model CustomKeys {
  */
 model CustomKeysWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
-  /**
-   * Custom Keys credential object
-   */
+  /** Custom Keys credential object */
   credentials?: CustomKeys;
 
-  /**
-   * Authentication type of the connection target
-   */
+  /** Authentication type of the connection target */
   authType: "CustomKeys";
 }
 
-/**
- * FQDN Outbound Rule for the managed network of a machine learning workspace.
- */
+/** FQDN Outbound Rule for the managed network of a machine learning workspace. */
 model FqdnOutboundRule extends OutboundRule {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   destination?: string;
 
-  /**
-   * Type of a managed network Outbound Rule of a machine learning workspace.
-   */
+  /** Type of a managed network Outbound Rule of a machine learning workspace. */
   type: "FQDN";
 }
 
@@ -15886,9 +10808,7 @@ model ManagedIdentityAuthTypeWorkspaceConnectionProperties
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   credentials?: WorkspaceConnectionManagedIdentity;
 
-  /**
-   * Authentication type of the connection target
-   */
+  /** Authentication type of the connection target */
   authType: "ManagedIdentity";
 }
 
@@ -15903,9 +10823,7 @@ model WorkspaceConnectionManagedIdentity {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model NoneAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
-  /**
-   * Authentication type of the connection target
-   */
+  /** Authentication type of the connection target */
   authType: "None";
 }
 
@@ -15915,9 +10833,7 @@ model PATAuthTypeWorkspaceConnectionProperties
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   credentials?: WorkspaceConnectionPersonalAccessToken;
 
-  /**
-   * Authentication type of the connection target
-   */
+  /** Authentication type of the connection target */
   authType: "PAT";
 }
 
@@ -15927,36 +10843,26 @@ model WorkspaceConnectionPersonalAccessToken {
   pat?: string;
 }
 
-/**
- * Private Endpoint destination for a Private Endpoint Outbound Rule for the managed network of a machine learning workspace.
- */
+/** Private Endpoint destination for a Private Endpoint Outbound Rule for the managed network of a machine learning workspace. */
 model PrivateEndpointDestination {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   serviceResourceId?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   sparkEnabled?: boolean;
 
-  /**
-   * Type of a managed network Outbound Rule of a machine learning workspace.
-   */
+  /** Type of a managed network Outbound Rule of a machine learning workspace. */
   sparkStatus?: RuleStatus;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   subresourceTarget?: string;
 }
 
-/**
- * Private Endpoint Outbound Rule for the managed network of a machine learning workspace.
- */
+/** Private Endpoint Outbound Rule for the managed network of a machine learning workspace. */
 model PrivateEndpointOutboundRule extends OutboundRule {
-  /**
-   * Private Endpoint destination for a Private Endpoint Outbound Rule for the managed network of a machine learning workspace.
-   */
+  /** Private Endpoint destination for a Private Endpoint Outbound Rule for the managed network of a machine learning workspace. */
   destination?: PrivateEndpointDestination;
 
-  /**
-   * Type of a managed network Outbound Rule of a machine learning workspace.
-   */
+  /** Type of a managed network Outbound Rule of a machine learning workspace. */
   type: "PrivateEndpoint";
 }
 
@@ -15966,9 +10872,7 @@ model SASAuthTypeWorkspaceConnectionProperties
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   credentials?: WorkspaceConnectionSharedAccessSignature;
 
-  /**
-   * Authentication type of the connection target
-   */
+  /** Authentication type of the connection target */
   authType: "SAS";
 }
 
@@ -15984,9 +10888,7 @@ model ServicePrincipalAuthTypeWorkspaceConnectionProperties
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   credentials?: WorkspaceConnectionServicePrincipal;
 
-  /**
-   * Authentication type of the connection target
-   */
+  /** Authentication type of the connection target */
   authType: "ServicePrincipal";
 }
 
@@ -16000,18 +10902,12 @@ model WorkspaceConnectionServicePrincipal {
   tenantId?: string;
 }
 
-/**
- * Service Tag destination for a Service Tag Outbound Rule for the managed network of a machine learning workspace.
- */
+/** Service Tag destination for a Service Tag Outbound Rule for the managed network of a machine learning workspace. */
 model ServiceTagDestination {
-  /**
-   * The action enum for networking rule.
-   */
+  /** The action enum for networking rule. */
   action?: RuleAction;
 
-  /**
-   * Optional, if provided, the ServiceTag property will be ignored.
-   */
+  /** Optional, if provided, the ServiceTag property will be ignored. */
   @visibility(Lifecycle.Read)
   addressPrefixes?: string[];
 
@@ -16023,18 +10919,12 @@ model ServiceTagDestination {
   serviceTag?: string;
 }
 
-/**
- * Service Tag Outbound Rule for the managed network of a machine learning workspace.
- */
+/** Service Tag Outbound Rule for the managed network of a machine learning workspace. */
 model ServiceTagOutboundRule extends OutboundRule {
-  /**
-   * Service Tag destination for a Service Tag Outbound Rule for the managed network of a machine learning workspace.
-   */
+  /** Service Tag destination for a Service Tag Outbound Rule for the managed network of a machine learning workspace. */
   destination?: ServiceTagDestination;
 
-  /**
-   * Type of a managed network Outbound Rule of a machine learning workspace.
-   */
+  /** Type of a managed network Outbound Rule of a machine learning workspace. */
   type: "ServiceTag";
 }
 
@@ -16044,9 +10934,7 @@ model UsernamePasswordAuthTypeWorkspaceConnectionProperties
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   credentials?: WorkspaceConnectionUsernamePassword;
 
-  /**
-   * Authentication type of the connection target
-   */
+  /** Authentication type of the connection target */
   authType: "UsernamePassword";
 }
 

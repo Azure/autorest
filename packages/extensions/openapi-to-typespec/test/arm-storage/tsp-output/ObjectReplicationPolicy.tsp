@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
-/**
- * The replication policy between two storage accounts. Multiple rules can be defined in one policy.
- */
+/** The replication policy between two storage accounts. Multiple rules can be defined in one policy. */
 @parentResource(StorageAccount)
 model ObjectReplicationPolicy
   is Azure.ResourceManager.ProxyResource<ObjectReplicationPolicyProperties> {
@@ -27,28 +25,20 @@ model ObjectReplicationPolicy
 
 @armResourceOperations
 interface ObjectReplicationPolicyOperationGroup {
-  /**
-   * Get the object replication policy of the storage account by policy ID.
-   */
+  /** Get the object replication policy of the storage account by policy ID. */
   get is ArmResourceRead<ObjectReplicationPolicy>;
 
-  /**
-   * Create or update the object replication policy of the storage account.
-   */
+  /** Create or update the object replication policy of the storage account. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ObjectReplicationPolicy,
     Response = ArmResourceUpdatedResponse<ObjectReplicationPolicy>
   >;
 
-  /**
-   * Deletes the object replication policy associated with the specified storage account.
-   */
+  /** Deletes the object replication policy associated with the specified storage account. */
   delete is ArmResourceDeleteSync<ObjectReplicationPolicy>;
 
-  /**
-   * List the object replication policies associated with the storage account.
-   */
+  /** List the object replication policies associated with the storage account. */
   list is ArmResourceListByParent<
     ObjectReplicationPolicy,
     Response = ArmResponse<ObjectReplicationPolicies>

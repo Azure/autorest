@@ -13,9 +13,7 @@ using TypeSpec.OpenAPI;
 
 
 namespace Azure.ResourceManager.MachineLearning;
-/**
-* Azure Resource Manager resource envelope.
-*/
+/** Azure Resource Manager resource envelope. */
 @parentResource(ModelContainerResource)
 model ModelVersionResource is Azure.ResourceManager.ProxyResource<ModelVersion, false> {
 ...ResourceNameParameter<Resource = ModelVersionResource,KeyName = "version",SegmentName = "versions",NamePattern = "">
@@ -31,78 +29,52 @@ alias ModelVersionResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<{.
 
 @armResourceOperations
 interface ModelVersionResources {
-/**
-* Get version.
-*/
+/** Get version. */
 get is ModelVersionResourceOps.Read<ModelVersionResource
         >;
 
 
-/**
-* Create or update version.
-*/
+/** Create or update version. */
 createOrUpdate is ModelVersionResourceOps.CreateOrUpdateAsync<ModelVersionResource
         >;
 
 
-/**
-* Delete version.
-*/
+/** Delete version. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
 delete is ModelVersionResourceOps.DeleteWithoutOkAsync<ModelVersionResource, Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
         >;
 
 
-/**
-* List versions.
-*/
-list is ModelVersionResourceOps.List<ModelVersionResource, Parameters = { /**
-* Continuation token for pagination.
-*/
+/** List versions. */
+list is ModelVersionResourceOps.List<ModelVersionResource, Parameters = { /** Continuation token for pagination. */
 @query("$skip")
 "$skip"?: string,
-/**
-* Ordering of list.
-*/
+/** Ordering of list. */
 @query("$orderBy")
 "$orderBy"?: string,
-/**
-* Maximum number of records to return.
-*/
+/** Maximum number of records to return. */
 @query("$top")
 "$top"?: int32,
-/**
-* Model description.
-*/
+/** Model description. */
 @query("description")
 "description"?: string,
-/**
-* Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
-*/
+/** Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2 */
 @query("tags")
 "tags"?: string,
-/**
-* Comma-separated list of property names (and optionally values). Example: prop1,prop2=value2
-*/
+/** Comma-separated list of property names (and optionally values). Example: prop1,prop2=value2 */
 @query("properties")
 "properties"?: string,
-/**
-* View type for including/excluding (for example) archived entities.
-*/
+/** View type for including/excluding (for example) archived entities. */
 @query("listViewType")
 "listViewType"?: ListViewType }, Response = ArmResponse<ModelVersionResourceArmPaginatedResult>
         >;
 
 
-/**
-* Model Version Package operation.
-*/
+/** Model Version Package operation. */
 package is ModelVersionResourceOps.ActionAsync<ModelVersionResource, PackageRequest, ArmResponse<PackageResponse>>;
 
 
-/**
-* Generate a storage location and credential for the client to upload a model asset to.
-*/
+/** Generate a storage location and credential for the client to upload a model asset to. */
 @action("startPendingUpload")
 createOrGetStartPendingUpload is ModelVersionResourceOps.ActionSync<ModelVersionResource, PendingUploadRequestDto, ArmResponse<PendingUploadResponseDto>>;
 
@@ -116,86 +88,56 @@ alias ModelVersionOps = Azure.ResourceManager.Legacy.LegacyOperations<{...ApiVer
 
 @armResourceOperations
 interface ModelVersions {
-/**
-* Get version.
-*/
+/** Get version. */
 get is ModelVersionOps.Read<ModelVersionResource
         >;
 
 
-/**
-* Create or update version.
-*/
+/** Create or update version. */
 createOrUpdate is ModelVersionOps.CreateOrUpdateSync<ModelVersionResource
         >;
 
 
-/**
-* Delete version.
-*/
+/** Delete version. */
 delete is ModelVersionOps.DeleteSync<ModelVersionResource
         >;
 
 
-/**
-* List model versions.
-*/
-list is ModelVersionOps.List<ModelVersionResource, Parameters = { /**
-* Continuation token for pagination.
-*/
+/** List model versions. */
+list is ModelVersionOps.List<ModelVersionResource, Parameters = { /** Continuation token for pagination. */
 @query("$skip")
 "$skip"?: string,
-/**
-* Ordering of list.
-*/
+/** Ordering of list. */
 @query("$orderBy")
 "$orderBy"?: string,
-/**
-* Maximum number of records to return.
-*/
+/** Maximum number of records to return. */
 @query("$top")
 "$top"?: int32,
-/**
-* Model description.
-*/
+/** Model description. */
 @query("description")
 "description"?: string,
-/**
-* Number of initial results to skip.
-*/
+/** Number of initial results to skip. */
 @query("offset")
 "offset"?: int32,
-/**
-* Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
-*/
+/** Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2 */
 @query("tags")
 "tags"?: string,
-/**
-* Comma-separated list of property names (and optionally values). Example: prop1,prop2=value2
-*/
+/** Comma-separated list of property names (and optionally values). Example: prop1,prop2=value2 */
 @query("properties")
 "properties"?: string,
-/**
-* Name of the feed.
-*/
+/** Name of the feed. */
 @query("feed")
 "feed"?: string,
-/**
-* View type for including/excluding (for example) archived entities.
-*/
+/** View type for including/excluding (for example) archived entities. */
 @query("listViewType")
 "listViewType"?: ListViewType,
-/**
-* Model stage
-*/
+/** Model stage */
 @query("stage")
 "stage"?: string }, Response = ArmResponse<ModelVersionResourceArmPaginatedResult>
         >;
 
 
-/**
-* Model Version Package operation.
-*/
+/** Model Version Package operation. */
 package is ModelVersionOps.ActionAsync<ModelVersionResource, PackageRequest, ArmResponse<PackageResponse>>;
 
 

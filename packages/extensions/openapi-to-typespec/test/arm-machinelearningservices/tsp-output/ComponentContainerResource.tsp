@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-/**
- * Azure Resource Manager resource envelope.
- */
+/** Azure Resource Manager resource envelope. */
 @parentResource(Registry)
 model ComponentContainerResource
   is Azure.ResourceManager.ProxyResource<ComponentContainer, false> {
@@ -51,34 +49,24 @@ alias ComponentContainerResourceOps = Azure.ResourceManager.Legacy.LegacyOperati
 
 @armResourceOperations
 interface ComponentContainerResources {
-  /**
-   * Get container.
-   */
+  /** Get container. */
   get is ComponentContainerResourceOps.Read<ComponentContainerResource>;
 
-  /**
-   * Create or update container.
-   */
+  /** Create or update container. */
   createOrUpdate is ComponentContainerResourceOps.CreateOrUpdateAsync<ComponentContainerResource>;
 
-  /**
-   * Delete container.
-   */
+  /** Delete container. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ComponentContainerResourceOps.DeleteWithoutOkAsync<
     ComponentContainerResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List containers.
-   */
+  /** List containers. */
   list is ComponentContainerResourceOps.List<
     ComponentContainerResource,
     Parameters = {
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
     },
@@ -110,36 +98,24 @@ alias ComponentContainerOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @armResourceOperations
 interface ComponentContainers {
-  /**
-   * Get container.
-   */
+  /** Get container. */
   get is ComponentContainerOps.Read<ComponentContainerResource>;
 
-  /**
-   * Create or update container.
-   */
+  /** Create or update container. */
   createOrUpdate is ComponentContainerOps.CreateOrUpdateSync<ComponentContainerResource>;
 
-  /**
-   * Delete container.
-   */
+  /** Delete container. */
   delete is ComponentContainerOps.DeleteSync<ComponentContainerResource>;
 
-  /**
-   * List component containers.
-   */
+  /** List component containers. */
   list is ComponentContainerOps.List<
     ComponentContainerResource,
     Parameters = {
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
 
-      /**
-       * View type for including/excluding (for example) archived entities.
-       */
+      /** View type for including/excluding (for example) archived entities. */
       @query("listViewType")
       listViewType?: ListViewType;
     },

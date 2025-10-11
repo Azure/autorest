@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.IntegrationSpaces;
-/**
- * An integration space.
- */
+/** An integration space. */
 model Space is Azure.ResourceManager.TrackedResource<SpaceResourceProperties> {
   ...ResourceNameParameter<
     Resource = Space,
@@ -24,83 +22,57 @@ model Space is Azure.ResourceManager.TrackedResource<SpaceResourceProperties> {
 
 @armResourceOperations
 interface Spaces {
-  /**
-   * Get a Space
-   */
+  /** Get a Space */
   get is ArmResourceRead<Space>;
 
-  /**
-   * Create a Space
-   */
+  /** Create a Space */
   createOrUpdate is ArmResourceCreateOrReplaceSync<Space>;
 
-  /**
-   * Update a Space
-   */
+  /** Update a Space */
   @patch(#{ implicitOptionality: false })
   patch is ArmCustomPatchSync<Space, PatchModel = SpaceUpdate>;
 
-  /**
-   * Delete a Space
-   */
+  /** Delete a Space */
   delete is ArmResourceDeleteSync<Space>;
 
-  /**
-   * List Space resources by resource group
-   */
+  /** List Space resources by resource group */
   listByResourceGroup is ArmResourceListByParent<
     Space,
     Parameters = {
-      /**
-       * The number of result items to return.
-       */
+      /** The number of result items to return. */
       @query("top")
       top?: int32;
 
-      /**
-       * The number of result items to skip.
-       */
+      /** The number of result items to skip. */
       @query("skip")
       skip?: int32;
 
-      /**
-       * The maximum number of result items per page.
-       */
+      /** The maximum number of result items per page. */
       @query("maxpagesize")
       maxpagesize?: int32;
 
-      /**
-       * Filter the result list using the given expression.
-       */
+      /** Filter the result list using the given expression. */
       @query("filter")
       filter?: string;
 
-      /**
-       * Select the specified fields to be included in the response.
-       */
+      /** Select the specified fields to be included in the response. */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "select", explode: true })
       select?: string[];
 
-      /**
-       * Expand the indicated resources into the response.
-       */
+      /** Expand the indicated resources into the response. */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "expand", explode: true })
       expand?: string[];
 
-      /**
-       * Expressions that specify the order of returned results.
-       */
+      /** Expressions that specify the order of returned results. */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "orderby", explode: true })
       orderby?: string[];
     }
   >;
 
-  /**
-   * List Space resources by subscription ID
-   */
+  /** List Space resources by subscription ID */
   listBySubscription is ArmListBySubscription<Space>;
 }
 

@@ -24,50 +24,36 @@ model StorageQueue is Azure.ResourceManager.ProxyResource<QueueProperties> {
 
 @armResourceOperations
 interface StorageQueues {
-  /**
-   * Gets the queue with the specified queue name, under the specified account if it exists.
-   */
+  /** Gets the queue with the specified queue name, under the specified account if it exists. */
   get is ArmResourceRead<StorageQueue>;
 
-  /**
-   * Creates a new queue with the specified queue name, under the specified account.
-   */
+  /** Creates a new queue with the specified queue name, under the specified account. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is ArmResourceCreateOrReplaceSync<
     StorageQueue,
     Response = ArmResourceUpdatedResponse<StorageQueue>
   >;
 
-  /**
-   * Creates a new queue with the specified queue name, under the specified account.
-   */
+  /** Creates a new queue with the specified queue name, under the specified account. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<StorageQueue, PatchModel = StorageQueue>;
 
-  /**
-   * Deletes the queue with the specified queue name, under the specified account if it exists.
-   */
+  /** Deletes the queue with the specified queue name, under the specified account if it exists. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteSync<
     StorageQueue,
     Response = ArmDeletedNoContentResponse
   >;
 
-  /**
-   * Gets a list of all the queues under the specified storage account
-   */
+  /** Gets a list of all the queues under the specified storage account */
   list is ArmResourceListByParent<
     StorageQueue,
     Parameters = {
-      /**
-       * Optional, a maximum number of queues that should be included in a list queue response
-       */
+      /** Optional, a maximum number of queues that should be included in a list queue response */
       @query("$maxpagesize")
       $maxpagesize?: string;
 
-      /**
-       * Optional, When specified, only the queues with a name starting with the given filter will be listed.
-       */
+      /** Optional, When specified, only the queues with a name starting with the given filter will be listed. */
       @query("$filter")
       $filter?: string;
     },

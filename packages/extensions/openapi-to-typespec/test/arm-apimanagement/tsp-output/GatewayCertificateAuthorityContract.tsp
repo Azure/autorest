@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * Gateway certificate authority details.
- */
+/** Gateway certificate authority details. */
 @parentResource(GatewayContract)
 model GatewayCertificateAuthorityContract
   is Azure.ResourceManager.ProxyResource<GatewayCertificateAuthorityContractProperties> {
@@ -27,66 +25,46 @@ model GatewayCertificateAuthorityContract
 
 @armResourceOperations
 interface GatewayCertificateAuthorityContracts {
-  /**
-   * Get assigned Gateway Certificate Authority details.
-   */
+  /** Get assigned Gateway Certificate Authority details. */
   get is ArmResourceRead<GatewayCertificateAuthorityContract>;
 
-  /**
-   * Checks if Certificate entity is assigned to Gateway entity as Certificate Authority.
-   */
+  /** Checks if Certificate entity is assigned to Gateway entity as Certificate Authority. */
   getEntityTag is ArmResourceCheckExistence<GatewayCertificateAuthorityContract>;
 
-  /**
-   * Assign Certificate entity to Gateway entity as Certificate Authority.
-   */
+  /** Assign Certificate entity to Gateway entity as Certificate Authority. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GatewayCertificateAuthorityContract,
     Parameters = {
-      /**
-       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
-       */
+      /** ETag of the Entity. Not required when creating an entity, but required when updating an entity. */
       @header
       `If-Match`?: string;
     }
   >;
 
-  /**
-   * Remove relationship between Certificate Authority and Gateway entity.
-   */
+  /** Remove relationship between Certificate Authority and Gateway entity. */
   delete is ArmResourceDeleteSync<
     GatewayCertificateAuthorityContract,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Lists the collection of Certificate Authorities for the specified Gateway entity.
-   */
+  /** Lists the collection of Certificate Authorities for the specified Gateway entity. */
   listByService is ArmResourceListByParent<
     GatewayCertificateAuthorityContract,
     Parameters = {
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | eq, ne |  |</br>
-       */
+      /** |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | eq, ne |  |</br> */
       @query("$filter")
       $filter?: string;
 
-      /**
-       * Number of records to return.
-       */
+      /** Number of records to return. */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      /**
-       * Number of records to skip.
-       */
+      /** Number of records to skip. */
       @query("$skip")
       $skip?: int32;
     }

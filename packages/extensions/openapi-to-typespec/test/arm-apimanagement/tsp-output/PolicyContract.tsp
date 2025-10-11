@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * Policy Contract details.
- */
+/** Policy Contract details. */
 @parentResource(OperationContract)
 model PolicyContract
   is Azure.ResourceManager.ProxyResource<PolicyContractProperties> {
@@ -64,56 +62,40 @@ alias PolicyContractOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @armResourceOperations
 interface PolicyContracts {
-  /**
-   * Get the policy configuration at the API Operation level.
-   */
+  /** Get the policy configuration at the API Operation level. */
   get is PolicyContractOps.Read<
     PolicyContract,
     Parameters = {
-      /**
-       * Policy Export Format.
-       */
+      /** Policy Export Format. */
       @query("format")
       format?: PolicyExportFormat = PolicyExportFormat.xml;
     }
   >;
 
-  /**
-   * Gets the entity state (Etag) version of the API operation policy specified by its identifier.
-   */
+  /** Gets the entity state (Etag) version of the API operation policy specified by its identifier. */
   getEntityTag is PolicyContractOps.CheckExistence<PolicyContract>;
 
-  /**
-   * Creates or updates policy configuration for the API Operation level.
-   */
+  /** Creates or updates policy configuration for the API Operation level. */
   createOrUpdate is PolicyContractOps.CreateOrUpdateSync<
     PolicyContract,
     Parameters = {
-      /**
-       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
-       */
+      /** ETag of the Entity. Not required when creating an entity, but required when updating an entity. */
       @header
       `If-Match`?: string;
     }
   >;
 
-  /**
-   * Deletes the policy configuration at the Api Operation.
-   */
+  /** Deletes the policy configuration at the Api Operation. */
   delete is PolicyContractOps.DeleteSync<
     PolicyContract,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Get the list of policy configuration at the API Operation level.
-   */
+  /** Get the list of policy configuration at the API Operation level. */
   listByOperation is PolicyContractOps.List<PolicyContract>;
 }
 alias ApiPolicyOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -148,56 +130,40 @@ alias ApiPolicyOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @armResourceOperations
 interface ApiPolicy {
-  /**
-   * Get the policy configuration at the API level.
-   */
+  /** Get the policy configuration at the API level. */
   get is ApiPolicyOps.Read<
     PolicyContract,
     Parameters = {
-      /**
-       * Policy Export Format.
-       */
+      /** Policy Export Format. */
       @query("format")
       format?: PolicyExportFormat = PolicyExportFormat.xml;
     }
   >;
 
-  /**
-   * Gets the entity state (Etag) version of the API policy specified by its identifier.
-   */
+  /** Gets the entity state (Etag) version of the API policy specified by its identifier. */
   getEntityTag is ApiPolicyOps.CheckExistence<PolicyContract>;
 
-  /**
-   * Creates or updates policy configuration for the API.
-   */
+  /** Creates or updates policy configuration for the API. */
   createOrUpdate is ApiPolicyOps.CreateOrUpdateSync<
     PolicyContract,
     Parameters = {
-      /**
-       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
-       */
+      /** ETag of the Entity. Not required when creating an entity, but required when updating an entity. */
       @header
       `If-Match`?: string;
     }
   >;
 
-  /**
-   * Deletes the policy configuration at the Api.
-   */
+  /** Deletes the policy configuration at the Api. */
   delete is ApiPolicyOps.DeleteSync<
     PolicyContract,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Get the policy configuration at the API level.
-   */
+  /** Get the policy configuration at the API level. */
   listByApi is ApiPolicyOps.List<PolicyContract>;
 }
 alias PolicyOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -225,56 +191,40 @@ alias PolicyOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @armResourceOperations
 interface Policy {
-  /**
-   * Get the Global policy definition of the Api Management service.
-   */
+  /** Get the Global policy definition of the Api Management service. */
   get is PolicyOps.Read<
     PolicyContract,
     Parameters = {
-      /**
-       * Policy Export Format.
-       */
+      /** Policy Export Format. */
       @query("format")
       format?: PolicyExportFormat = PolicyExportFormat.xml;
     }
   >;
 
-  /**
-   * Gets the entity state (Etag) version of the Global policy definition in the Api Management service.
-   */
+  /** Gets the entity state (Etag) version of the Global policy definition in the Api Management service. */
   getEntityTag is PolicyOps.CheckExistence<PolicyContract>;
 
-  /**
-   * Creates or updates the global policy configuration of the Api Management service.
-   */
+  /** Creates or updates the global policy configuration of the Api Management service. */
   createOrUpdate is PolicyOps.CreateOrUpdateSync<
     PolicyContract,
     Parameters = {
-      /**
-       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
-       */
+      /** ETag of the Entity. Not required when creating an entity, but required when updating an entity. */
       @header
       `If-Match`?: string;
     }
   >;
 
-  /**
-   * Deletes the global policy configuration of the Api Management Service.
-   */
+  /** Deletes the global policy configuration of the Api Management Service. */
   delete is PolicyOps.DeleteSync<
     PolicyContract,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Lists all the Global Policy definitions of the Api Management service.
-   */
+  /** Lists all the Global Policy definitions of the Api Management service. */
   listByService is PolicyOps.List<PolicyContract>;
 }
 alias ProductPolicyOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -308,56 +258,40 @@ alias ProductPolicyOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @armResourceOperations
 interface ProductPolicy {
-  /**
-   * Get the policy configuration at the Product level.
-   */
+  /** Get the policy configuration at the Product level. */
   get is ProductPolicyOps.Read<
     PolicyContract,
     Parameters = {
-      /**
-       * Policy Export Format.
-       */
+      /** Policy Export Format. */
       @query("format")
       format?: PolicyExportFormat = PolicyExportFormat.xml;
     }
   >;
 
-  /**
-   * Get the ETag of the policy configuration at the Product level.
-   */
+  /** Get the ETag of the policy configuration at the Product level. */
   getEntityTag is ProductPolicyOps.CheckExistence<PolicyContract>;
 
-  /**
-   * Creates or updates policy configuration for the Product.
-   */
+  /** Creates or updates policy configuration for the Product. */
   createOrUpdate is ProductPolicyOps.CreateOrUpdateSync<
     PolicyContract,
     Parameters = {
-      /**
-       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
-       */
+      /** ETag of the Entity. Not required when creating an entity, but required when updating an entity. */
       @header
       `If-Match`?: string;
     }
   >;
 
-  /**
-   * Deletes the policy configuration at the Product.
-   */
+  /** Deletes the policy configuration at the Product. */
   delete is ProductPolicyOps.DeleteSync<
     PolicyContract,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Get the policy configuration at the Product level.
-   */
+  /** Get the policy configuration at the Product level. */
   listByProduct is ProductPolicyOps.List<PolicyContract>;
 }
 

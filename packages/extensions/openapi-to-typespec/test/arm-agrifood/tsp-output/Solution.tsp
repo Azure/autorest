@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AgFoodPlatform;
-/**
- * Solution resource.
- */
+/** Solution resource. */
 @parentResource(DataManagerForAgriculture)
 model Solution is Azure.ResourceManager.ProxyResource<SolutionProperties> {
   ...ResourceNameParameter<
@@ -27,44 +25,30 @@ model Solution is Azure.ResourceManager.ProxyResource<SolutionProperties> {
 
 @armResourceOperations
 interface Solutions {
-  /**
-   * Get installed Solution details by Solution id.
-   */
+  /** Get installed Solution details by Solution id. */
   get is ArmResourceRead<Solution>;
 
-  /**
-   * Install Or Update Solution.
-   */
+  /** Install Or Update Solution. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<Solution>;
 
-  /**
-   * Uninstall Solution.
-   */
+  /** Uninstall Solution. */
   delete is ArmResourceDeleteSync<Solution>;
 
-  /**
-   * Get installed Solutions details.
-   */
+  /** Get installed Solutions details. */
   list is ArmResourceListByParent<
     Solution,
     Parameters = {
-      /**
-       * Installed Solution ids.
-       */
+      /** Installed Solution ids. */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "solutionIds", explode: true })
       solutionIds?: string[];
 
-      /**
-       * Ids of the resource.
-       */
+      /** Ids of the resource. */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "ids", explode: true })
       ids?: string[];
 
-      /**
-       * Names of the resource.
-       */
+      /** Names of the resource. */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "names", explode: true })
       names?: string[];
@@ -77,34 +61,24 @@ interface Solutions {
       @query(#{ name: "propertyFilters", explode: true })
       propertyFilters?: string[];
 
-      /**
-       * Statuses of the resource.
-       */
+      /** Statuses of the resource. */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "statuses", explode: true })
       statuses?: string[];
 
-      /**
-       * Minimum creation date of resource (inclusive).
-       */
+      /** Minimum creation date of resource (inclusive). */
       @query("minCreatedDateTime")
       minCreatedDateTime?: utcDateTime;
 
-      /**
-       * Maximum creation date of resource (inclusive).
-       */
+      /** Maximum creation date of resource (inclusive). */
       @query("maxCreatedDateTime")
       maxCreatedDateTime?: utcDateTime;
 
-      /**
-       * Minimum last modified date of resource (inclusive).
-       */
+      /** Minimum last modified date of resource (inclusive). */
       @query("minLastModifiedDateTime")
       minLastModifiedDateTime?: utcDateTime;
 
-      /**
-       * Maximum last modified date of resource (inclusive).
-       */
+      /** Maximum last modified date of resource (inclusive). */
       @query("maxLastModifiedDateTime")
       maxLastModifiedDateTime?: utcDateTime;
 
@@ -117,9 +91,7 @@ interface Solutions {
       @query("$maxPageSize")
       $maxPageSize?: int32 = 50;
 
-      /**
-       * Skip token for getting next set of results.
-       */
+      /** Skip token for getting next set of results. */
       @query("$skipToken")
       $skipToken?: string;
     },

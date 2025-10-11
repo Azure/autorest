@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-/**
- * Outbound Rule Basic Resource for the managed network of a machine learning workspace.
- */
+/** Outbound Rule Basic Resource for the managed network of a machine learning workspace. */
 @parentResource(Workspace)
 model OutboundRuleBasicResource
   is Azure.ResourceManager.ProxyResource<OutboundRule, false> {
@@ -27,14 +25,10 @@ model OutboundRuleBasicResource
 
 @armResourceOperations
 interface OutboundRuleBasicResources {
-  /**
-   * Gets an outbound rule from the managed network of a machine learning workspace.
-   */
+  /** Gets an outbound rule from the managed network of a machine learning workspace. */
   get is ArmResourceRead<OutboundRuleBasicResource>;
 
-  /**
-   * Creates or updates an outbound rule in the managed network of a machine learning workspace.
-   */
+  /** Creates or updates an outbound rule in the managed network of a machine learning workspace. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     OutboundRuleBasicResource,
@@ -43,18 +37,14 @@ interface OutboundRuleBasicResources {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /**
-   * Deletes an outbound rule from the managed network of a machine learning workspace.
-   */
+  /** Deletes an outbound rule from the managed network of a machine learning workspace. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     OutboundRuleBasicResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * Lists the managed network outbound rules for a machine learning workspace.
-   */
+  /** Lists the managed network outbound rules for a machine learning workspace. */
   list is ArmResourceListByParent<OutboundRuleBasicResource>;
 }
 

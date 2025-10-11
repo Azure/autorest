@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzurePlaywrightService;
-/**
- * A quota resource
- */
+/** A quota resource */
 @subscriptionResource
 model Quota is Azure.ResourceManager.ProxyResource<QuotaProperties> {
   ...ResourceNameParameter<
@@ -26,17 +24,13 @@ model Quota is Azure.ResourceManager.ProxyResource<QuotaProperties> {
 
 @armResourceOperations
 interface Quotas {
-  /**
-   * Get quota by name.
-   */
+  /** Get quota by name. */
   get is ArmResourceRead<
     Quota,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
-  /**
-   * List quotas for a given subscription Id.
-   */
+  /** List quotas for a given subscription Id. */
   listBySubscription is ArmResourceListByParent<
     Quota,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
