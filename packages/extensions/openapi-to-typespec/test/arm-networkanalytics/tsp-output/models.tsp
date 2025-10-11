@@ -394,7 +394,7 @@ model DataProductNetworkAcls {
   /**
    * IP rule with specific IP or IP range in CIDR format.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipRules: IPRules[];
 
   /**
@@ -524,7 +524,7 @@ model DataProductsCatalogProperties {
   /**
    * The data product publisher information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   publishers: PublisherInformation[];
 }
 
@@ -540,7 +540,7 @@ model PublisherInformation {
   /**
    * Data product information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dataProducts: DataProductInformation[];
 }
 
@@ -561,7 +561,7 @@ model DataProductInformation {
   /**
    * Version information of data product.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dataProductVersions: DataProductVersion[];
 }
 
@@ -869,7 +869,7 @@ model ListRoleAssignments {
   /**
    * list of role assignments
    */
-  @OpenAPI.extension("x-ms-identifiers", #["roleAssignmentId"])
+  @identifiers(#["roleAssignmentId"])
   roleAssignmentResponse: RoleAssignmentDetail[];
 }
 

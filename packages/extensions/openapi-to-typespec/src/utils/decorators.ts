@@ -159,16 +159,15 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
 
   if (!isParameter(element) && element.extensions?.["x-ms-identifiers"]?.length >= 0) {
     decorators.push({
-      name: "OpenAPI.extension",
+      name: "identifiers",
       arguments: [
-        { value: "x-ms-identifiers", options: { unwrap: false } },
         {
           value: `#[${element.extensions!["x-ms-identifiers"].map((v: any) => `"${v}"`).join(", ")}]`,
           options: { unwrap: true },
         },
       ],
-      //namespace: "TypeSpec.OpenAPI",
-      //module: "@typespec/openapi",
+      namespace: "Azure.ResourceManager",
+      module: "@azure-tools/typespec-azure-resource-manager",
     });
   }
 

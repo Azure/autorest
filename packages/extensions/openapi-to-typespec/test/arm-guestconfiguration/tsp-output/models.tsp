@@ -1,12 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.Core;
 using Azure.ResourceManager;
+using Azure.Core;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.GuestConfiguration;
@@ -253,7 +253,7 @@ model GuestConfigurationAssignmentProperties {
   /**
    * The list of VM Compliance data for VMSS
    */
-  @OpenAPI.extension("x-ms-identifiers", #["vmId"])
+  @identifiers(#["vmId"])
   vmssVMList?: VmssvmInfo[];
 }
 
@@ -311,13 +311,13 @@ model GuestConfigurationNavigation {
   /**
    * The configuration parameters for the guest configuration.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   configurationParameter?: ConfigurationParameter[];
 
   /**
    * The protected configuration parameters for the guest configuration.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   configurationProtectedParameter?: ConfigurationParameter[];
 
   /**
@@ -436,7 +436,7 @@ model AssignmentReport {
   /**
    * The list of resources for which guest configuration assignment compliance is checked.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resources?: AssignmentReportResource[];
 }
 
@@ -509,7 +509,7 @@ model AssignmentReportResource {
   /**
    * Compliance reason and reason code for a resource.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["phrase", "code"])
+  @identifiers(#["phrase", "code"])
   reasons?: AssignmentReportResourceComplianceReason[];
 
   /**
@@ -762,7 +762,7 @@ model AssignmentReportDetails {
   /**
    * The list of resources for which guest configuration assignment compliance is checked.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resources?: AssignmentReportResource[];
 }
 

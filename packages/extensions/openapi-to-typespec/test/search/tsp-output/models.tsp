@@ -1,8 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.ResourceManager;
 
 namespace Azure.Search;
 
@@ -860,14 +862,14 @@ model ErrorDetail {
    * The error details.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   details?: ErrorDetail[];
 
   /**
    * The error additional info.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   additionalInfo?: ErrorAdditionalInfo[];
 }
 

@@ -1,7 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -540,7 +540,7 @@ model DenyAssignmentProperties {
   /**
    * An array of permissions that are denied by the deny assignment.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   permissions?: DenyAssignmentPermission[];
 
   /**
@@ -646,7 +646,7 @@ model AuthorizationProviderResourceType {
   /**
    * The resource type operations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   operations?: ProviderOperation[];
 }
 
@@ -819,7 +819,7 @@ model RoleDefinitionProperties {
   /**
    * Role definition permissions.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   permissions?: Permission[];
 
   /**
@@ -1971,7 +1971,7 @@ model ApprovalSettings {
   /**
    * The approval stages of the request.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   approvalStages?: ApprovalStage[];
 }
 

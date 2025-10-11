@@ -1,12 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.Core;
 using Azure.ResourceManager;
+using Azure.Core;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Compute;
@@ -3507,7 +3507,7 @@ model ApiError {
   /**
    * The Api error details
    */
-  @OpenAPI.extension("x-ms-identifiers", #["message", "target"])
+  @identifiers(#["message", "target"])
   details?: ApiErrorBase[];
 
   /**
@@ -3619,7 +3619,7 @@ model VirtualMachineSizeListResult {
    * The list of virtual machine sizes.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value?: VirtualMachineSize[];
 }
 
@@ -4043,7 +4043,7 @@ model VirtualMachineScaleSetOSProfile {
   /**
    * Specifies set of certificates that should be installed onto the virtual machines in the scale set. To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
-  @OpenAPI.extension("x-ms-identifiers", #["sourceVault/id"])
+  @identifiers(#["sourceVault/id"])
   secrets?: VaultSecretGroup[];
 
   /**
@@ -4079,7 +4079,7 @@ model WindowsConfiguration {
   /**
    * Specifies additional base-64 encoded XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   additionalUnattendContent?: AdditionalUnattendContent[];
 
   /**
@@ -4170,7 +4170,7 @@ model WinRMConfiguration {
   /**
    * The list of Windows Remote Management listeners
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   listeners?: WinRMListener[];
 }
 
@@ -4226,7 +4226,7 @@ model SshConfiguration {
   /**
    * The list of SSH public keys used to authenticate with linux based VMs.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["path"])
+  @identifiers(#["path"])
   publicKeys?: SshPublicKey[];
 }
 
@@ -4292,7 +4292,7 @@ model VaultSecretGroup {
   /**
    * The list of key vault references in SourceVault which contain certificates.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["certificateUrl"])
+  @identifiers(#["certificateUrl"])
   vaultCertificates?: VaultCertificate[];
 }
 
@@ -4336,7 +4336,7 @@ model VirtualMachineScaleSetStorageProfile {
   /**
    * Specifies the parameters that are used to add data disks to the virtual machines in the scale set. For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name", "lun"])
+  @identifiers(#["name", "lun"])
   dataDisks?: VirtualMachineScaleSetDataDisk[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -4578,7 +4578,7 @@ model VirtualMachineScaleSetNetworkProfile {
   /**
    * The list of network configurations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   networkInterfaceConfigurations?: VirtualMachineScaleSetNetworkConfiguration[];
 
   /**
@@ -4649,7 +4649,7 @@ model VirtualMachineScaleSetNetworkConfigurationProperties {
   /**
    * Specifies the IP configurations of the network interface.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   ipConfigurations: VirtualMachineScaleSetIPConfiguration[];
 
   /**
@@ -4780,7 +4780,7 @@ model VirtualMachineScaleSetPublicIPAddressConfigurationProperties {
   /**
    * The list of IP tags associated with the public IP address.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipTags?: VirtualMachineScaleSetIpTag[];
 
   /**
@@ -5076,7 +5076,7 @@ model ApplicationProfile {
   /**
    * Specifies the gallery applications that should be made available to the VM/VMSS
    */
-  @OpenAPI.extension("x-ms-identifiers", #["packageReferenceId"])
+  @identifiers(#["packageReferenceId"])
   galleryApplications?: VMGalleryApplication[];
 }
 
@@ -5259,13 +5259,13 @@ model VirtualMachineExtensionInstanceView {
   /**
    * The resource status information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   substatuses?: InstanceViewStatus[];
 
   /**
    * The resource status information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   statuses?: InstanceViewStatus[];
 }
 
@@ -5655,7 +5655,7 @@ model VirtualMachineScaleSetUpdateOSProfile {
   /**
    * The List of certificates for addition to the VM.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["sourceVault/id"])
+  @identifiers(#["sourceVault/id"])
   secrets?: VaultSecretGroup[];
 }
 
@@ -5676,7 +5676,7 @@ model VirtualMachineScaleSetUpdateStorageProfile {
   /**
    * The data disks.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name", "lun"])
+  @identifiers(#["name", "lun"])
   dataDisks?: VirtualMachineScaleSetDataDisk[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -5735,7 +5735,7 @@ model VirtualMachineScaleSetUpdateNetworkProfile {
   /**
    * The list of network configurations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   networkInterfaceConfigurations?: VirtualMachineScaleSetUpdateNetworkConfiguration[];
 
   /**
@@ -5796,7 +5796,7 @@ model VirtualMachineScaleSetUpdateNetworkConfigurationProperties {
   /**
    * The virtual machine scale set IP Configuration.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   ipConfigurations?: VirtualMachineScaleSetUpdateIPConfiguration[];
 
   /**
@@ -5965,20 +5965,20 @@ model VirtualMachineScaleSetInstanceView {
    * The extensions information.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   extensions?: VirtualMachineScaleSetVMExtensionsSummary[];
 
   /**
    * The resource status information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   statuses?: InstanceViewStatus[];
 
   /**
    * The orchestration services information.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["serviceName"])
+  @identifiers(#["serviceName"])
   orchestrationServices?: OrchestrationServiceSummary[];
 }
 
@@ -5990,7 +5990,7 @@ model VirtualMachineScaleSetInstanceViewStatusesSummary {
    * The extensions information.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   statusesSummary?: VirtualMachineStatusCodeCount[];
 }
 
@@ -6025,7 +6025,7 @@ model VirtualMachineScaleSetVMExtensionsSummary {
    * The extensions information.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   statusesSummary?: VirtualMachineStatusCodeCount[];
 }
 
@@ -6657,13 +6657,13 @@ model VirtualMachineScaleSetVMInstanceView {
   /**
    * The disks information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   disks?: DiskInstanceView[];
 
   /**
    * The extensions information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name", "type"])
+  @identifiers(#["name", "type"])
   extensions?: VirtualMachineExtensionInstanceView[];
 
   /**
@@ -6680,7 +6680,7 @@ model VirtualMachineScaleSetVMInstanceView {
   /**
    * The resource status information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   statuses?: InstanceViewStatus[];
 
   /**
@@ -6727,13 +6727,13 @@ model VirtualMachineAgentInstanceView {
   /**
    * The virtual machine extension handler instance view.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   extensionHandlers?: VirtualMachineExtensionHandlerInstanceView[];
 
   /**
    * The resource status information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   statuses?: InstanceViewStatus[];
 }
 
@@ -6813,13 +6813,13 @@ model DiskInstanceView {
   /**
    * Specifies the encryption settings for the OS Disk. <br><br> Minimum api-version: 2015-06-15
    */
-  @OpenAPI.extension("x-ms-identifiers", #["diskEncryptionKey/sourceVault/id"])
+  @identifiers(#["diskEncryptionKey/sourceVault/id"])
   encryptionSettings?: DiskEncryptionSettings[];
 
   /**
    * The resource status information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   statuses?: InstanceViewStatus[];
 }
 
@@ -6924,7 +6924,7 @@ model StorageProfile {
   /**
    * Specifies the parameters that are used to add a data disk to a virtual machine. For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).
    */
-  @OpenAPI.extension("x-ms-identifiers", #["lun"])
+  @identifiers(#["lun"])
   dataDisks?: DataDisk[];
 
   /**
@@ -7131,7 +7131,7 @@ model OSProfile {
   /**
    * Specifies set of certificates that should be installed onto the virtual machine. To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
-  @OpenAPI.extension("x-ms-identifiers", #["sourceVault/id"])
+  @identifiers(#["sourceVault/id"])
   secrets?: VaultSecretGroup[];
 
   /**
@@ -7162,7 +7162,7 @@ model NetworkProfile {
   /**
    * Specifies the networking configurations that will be used to create the virtual machine networking resources.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   networkInterfaceConfigurations?: VirtualMachineNetworkInterfaceConfiguration[];
 }
 
@@ -7254,7 +7254,7 @@ model VirtualMachineNetworkInterfaceConfigurationProperties {
   /**
    * Specifies the IP configurations of the network interface.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   ipConfigurations: VirtualMachineNetworkInterfaceIPConfiguration[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -7378,7 +7378,7 @@ model VirtualMachinePublicIPAddressConfigurationProperties {
   /**
    * The list of IP tags associated with the public IP address.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipTags?: VirtualMachineIpTag[];
 
   /**
@@ -7434,7 +7434,7 @@ model VirtualMachineScaleSetVMNetworkProfileConfiguration {
   /**
    * The list of network configurations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   networkInterfaceConfigurations?: VirtualMachineScaleSetNetworkConfiguration[];
 }
 
@@ -7713,13 +7713,13 @@ model VirtualMachineInstanceView {
   /**
    * The virtual machine disk information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   disks?: DiskInstanceView[];
 
   /**
    * The extensions information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name", "type"])
+  @identifiers(#["name", "type"])
   extensions?: VirtualMachineExtensionInstanceView[];
 
   /**
@@ -7742,7 +7742,7 @@ model VirtualMachineInstanceView {
   /**
    * The resource status information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   statuses?: InstanceViewStatus[];
 
   /**
@@ -7769,7 +7769,7 @@ model VirtualMachinePatchStatus {
    * The enablement status of the specified patchMode
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   configurationStatuses?: InstanceViewStatus[];
 }
 
@@ -7948,7 +7948,7 @@ model VirtualMachineCaptureResult extends SubResource {
    * a list of resource items of the captured virtual machine
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resources?: unknown[];
 }
 
@@ -8023,7 +8023,7 @@ model VirtualMachineAssessPatchesResult {
    * The list of patches that have been detected as available for installation.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["patchId"])
+  @identifiers(#["patchId"])
   availablePatches?: VirtualMachineSoftwarePatchProperties[];
 
   /**
@@ -8243,7 +8243,7 @@ model VirtualMachineInstallPatchesResult {
    * The patches that were installed during the operation.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["patchId"])
+  @identifiers(#["patchId"])
   patches?: PatchInstallationDetail[];
 
   /**
@@ -8329,7 +8329,7 @@ model VirtualMachineImageProperties {
   /**
    * The list of data disk images information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["lun"])
+  @identifiers(#["lun"])
   dataDiskImages?: DataDiskImage[];
 
   /**
@@ -8348,7 +8348,7 @@ model VirtualMachineImageProperties {
   disallowed?: DisallowedConfiguration;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   features?: VirtualMachineImageFeature[];
 
   /**
@@ -8567,7 +8567,7 @@ model AvailabilitySetProperties {
    * The resource status information.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   statuses?: InstanceViewStatus[];
 }
 
@@ -8690,7 +8690,7 @@ model DedicatedHostGroupInstanceView {
   /**
    * List of instance view of the dedicated hosts under the dedicated host group.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   hosts?: DedicatedHostInstanceViewWithName[];
 }
 
@@ -8724,7 +8724,7 @@ model DedicatedHostInstanceView {
   /**
    * The resource status information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   statuses?: InstanceViewStatus[];
 }
 
@@ -8735,7 +8735,7 @@ model DedicatedHostAvailableCapacity {
   /**
    * The unutilized capacity of the dedicated host represented in terms of each VM size that is allowed to be deployed to the dedicated host.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   allocatableVMs?: DedicatedHostAllocatableVM[];
 }
 
@@ -8863,7 +8863,7 @@ model DedicatedHostSizeListResult {
    * The list of dedicated host sizes.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value?: string[];
 }
 
@@ -8948,7 +8948,7 @@ model ImageStorageProfile {
   /**
    * Specifies the parameters that are used to add a data disk to a virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).
    */
-  @OpenAPI.extension("x-ms-identifiers", #["lun"])
+  @identifiers(#["lun"])
   dataDisks?: ImageDataDisk[];
 
   /**
@@ -9200,7 +9200,7 @@ model RestorePointSourceVMStorageProfile {
   /**
    * Gets the data disks of the VM captured at the time of the restore point creation.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["lun"])
+  @identifiers(#["lun"])
   dataDisks?: RestorePointSourceVMDataDisk[];
 }
 
@@ -9343,7 +9343,7 @@ model RestorePointInstanceView {
   /**
    * The resource status information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   statuses?: InstanceViewStatus[];
 }
 
@@ -9441,7 +9441,7 @@ model CapacityReservationGroupInstanceView {
    * List of instance view of the capacity reservations under the capacity reservation group.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   capacityReservations?: CapacityReservationInstanceViewWithName[];
 }
 
@@ -9470,7 +9470,7 @@ model CapacityReservationInstanceView {
   /**
    * The resource status information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   statuses?: InstanceViewStatus[];
 }
 
@@ -9702,7 +9702,7 @@ model RunCommandDocument extends RunCommandDocumentBase {
   /**
    * The parameters used by the script.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name", "type"])
+  @identifiers(#["name", "type"])
   parameters?: RunCommandParameterDefinition[];
 }
 
@@ -9748,7 +9748,7 @@ model RunCommandInput {
   /**
    * The run command parameters.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   parameters?: RunCommandInputParameter[];
 }
 
@@ -9773,7 +9773,7 @@ model RunCommandResult {
    * Run command operation response.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value?: InstanceViewStatus[];
 }
 
@@ -9789,13 +9789,13 @@ model VirtualMachineRunCommandProperties {
   /**
    * The parameters used by the script.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   parameters?: RunCommandInputParameter[];
 
   /**
    * The parameters used by the script.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   protectedParameters?: RunCommandInputParameter[];
 
   /**
@@ -9941,7 +9941,7 @@ model VirtualMachineRunCommandInstanceView {
   /**
    * The resource status information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   statuses?: InstanceViewStatus[];
 }
 
@@ -10077,7 +10077,7 @@ model DiskProperties {
    * Details of the list of all VMs that have the disk attached. maxShares should be set to a value greater than one for disks to allow attaching them to multiple VMs.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["vmUri"])
+  @identifiers(#["vmUri"])
   shareInfo?: ShareInfoElement[];
 
   /**
@@ -10299,7 +10299,7 @@ model EncryptionSettingsCollection {
   /**
    * A collection of encryption settings, one for each disk volume.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["diskEncryptionKey/sourceVault/id"])
+  @identifiers(#["diskEncryptionKey/sourceVault/id"])
   encryptionSettings?: EncryptionSettingsElement[];
 
   /**
@@ -10783,7 +10783,7 @@ model EncryptionSetProperties {
    * A readonly collection of key vault keys previously used by this disk encryption set while a key rotation is in progress. It will be empty if there is no ongoing key rotation.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["sourceVault/id"])
+  @identifiers(#["sourceVault/id"])
   previousKeys?: KeyForDiskEncryptionSet[];
 
   /**
@@ -11317,7 +11317,7 @@ model ResourceSku {
    * A list of locations and availability zones in those locations where the SKU is available.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["location"])
+  @identifiers(#["location"])
   locationInfo?: ResourceSkuLocationInfo[];
 
   /**
@@ -11330,21 +11330,21 @@ model ResourceSku {
    * Metadata for retrieving price info.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   costs?: ResourceSkuCosts[];
 
   /**
    * A name value pair to describe the capability.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   capabilities?: ResourceSkuCapabilities[];
 
   /**
    * The restrictions because of which SKU cannot be used. This is empty if there are no restrictions.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   restrictions?: ResourceSkuRestrictions[];
 }
 
@@ -11397,7 +11397,7 @@ model ResourceSkuLocationInfo {
    * Details of capabilities available to a SKU in specific zones.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   zoneDetails?: ResourceSkuZoneDetails[];
 
   /**
@@ -11427,7 +11427,7 @@ model ResourceSkuZoneDetails {
    * A list of capabilities that are available for the SKU in the specified list of zones.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   capabilities?: ResourceSkuCapabilities[];
 }
 
@@ -11578,7 +11578,7 @@ model SharingProfile {
    * A list of sharing profile groups.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   groups?: SharingProfileGroup[];
 
   /**
@@ -11662,7 +11662,7 @@ model SharingStatus {
   /**
    * Summary of all regional sharing status.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["region"])
+  @identifiers(#["region"])
   summary?: RegionalSharingStatus[];
 }
 
@@ -11801,7 +11801,7 @@ model GalleryImageProperties {
   /**
    * A list of gallery image features.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   features?: GalleryImageFeature[];
 
   /**
@@ -11962,7 +11962,7 @@ model GalleryArtifactPublishingProfileBase {
   /**
    * The target regions where the Image Version is going to be replicated to. This property is updatable.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   targetRegions?: TargetRegion[];
 
   /**
@@ -12001,7 +12001,7 @@ model GalleryArtifactPublishingProfileBase {
   /**
    * The target extended locations where the Image Version is going to be replicated to. This property is updatable.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name", "extendedLocation/name"])
+  @identifiers(#["name", "extendedLocation/name"])
   targetExtendedLocations?: GalleryTargetExtendedLocation[];
 }
 
@@ -12047,7 +12047,7 @@ model EncryptionImages {
   /**
    * A list of encryption specifications for data disk images.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["lun"])
+  @identifiers(#["lun"])
   dataDiskImages?: DataDiskImageEncryption[];
 }
 
@@ -12156,7 +12156,7 @@ model GalleryImageVersionStorageProfile {
   /**
    * A list of data disk images.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["lun"])
+  @identifiers(#["lun"])
   dataDiskImages?: GalleryDataDiskImage[];
 }
 
@@ -12251,7 +12251,7 @@ model GalleryImageVersionSafetyProfile
    * A list of Policy Violations that have been reported for this Gallery Image Version.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   policyViolations?: PolicyViolation[];
 }
 
@@ -12294,7 +12294,7 @@ model ReplicationStatus {
    * This is a summary of replication status for each region.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["region"])
+  @identifiers(#["region"])
   summary?: RegionalReplicationStatus[];
 }
 
@@ -12377,7 +12377,7 @@ model GalleryApplicationProperties {
   /**
    * A list of custom actions that can be performed with all of the Gallery Application Versions within this Gallery Application.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   customActions?: GalleryApplicationCustomAction[];
 }
 
@@ -12403,7 +12403,7 @@ model GalleryApplicationCustomAction {
   /**
    * The parameters that this custom action uses
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   parameters?: GalleryApplicationCustomActionParameter[];
 }
 
@@ -12508,7 +12508,7 @@ model GalleryApplicationVersionPublishingProfile
   /**
    * A list of custom actions that can be performed with this Gallery Application Version.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   customActions?: GalleryApplicationCustomAction[];
 }
 
@@ -12616,7 +12616,7 @@ model SharingUpdate {
   /**
    * A list of sharing profile groups.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   groups?: SharingProfileGroup[];
 }
 
@@ -12712,7 +12712,7 @@ model SharedGalleryImageProperties {
   /**
    * A list of gallery image features.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   features?: GalleryImageFeature[];
 
   /**
@@ -12782,7 +12782,7 @@ model SharedGalleryImageVersionStorageProfile {
   /**
    * A list of data disk images.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["lun"])
+  @identifiers(#["lun"])
   dataDiskImages?: SharedGalleryDataDiskImage[];
 }
 
@@ -12901,7 +12901,7 @@ model CommunityGalleryImageProperties {
   /**
    * A list of gallery image features.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   features?: GalleryImageFeature[];
 
   /**
@@ -13052,7 +13052,7 @@ model RoleInstanceInstanceView {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   statuses?: ResourceInstanceViewStatus[];
 }
 
@@ -13204,7 +13204,7 @@ model CloudServiceRoleProfile {
   /**
    * List of roles for the cloud service.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   roles?: CloudServiceRoleProfileProperties[];
 }
 
@@ -13230,7 +13230,7 @@ model CloudServiceOsProfile {
   /**
    * Specifies set of certificates that should be installed onto the role instances.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["sourceVault/id"])
+  @identifiers(#["sourceVault/id"])
   secrets?: CloudServiceVaultSecretGroup[];
 }
 
@@ -13246,7 +13246,7 @@ model CloudServiceVaultSecretGroup {
   /**
    * The list of key vault references in SourceVault which contain certificates.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["certificateUrl"])
+  @identifiers(#["certificateUrl"])
   vaultCertificates?: CloudServiceVaultCertificate[];
 }
 
@@ -13309,7 +13309,7 @@ model LoadBalancerConfigurationProperties {
   /**
    * Specifies the frontend IP to be used for the load balancer. Only IPv4 frontend IP address is supported. Each load balancer configuration must have exactly one frontend IP configuration.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   frontendIpConfigurations: LoadBalancerFrontendIpConfiguration[];
 }
 
@@ -13355,7 +13355,7 @@ model CloudServiceExtensionProfile {
   /**
    * List of extensions for the cloud service.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   extensions?: Extension[];
 }
 
@@ -13518,7 +13518,7 @@ model CloudServiceInstanceView {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   statuses?: ResourceInstanceViewStatus[];
 }
 
@@ -13530,7 +13530,7 @@ model InstanceViewStatusesSummary {
    * The summary.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   statusesSummary?: StatusCodeCount[];
 }
 
@@ -13646,7 +13646,7 @@ model OSFamilyProperties {
    * List of OS versions belonging to this family.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["version"])
+  @identifiers(#["version"])
   versions?: OSVersionPropertiesBase[];
 }
 

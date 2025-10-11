@@ -1,12 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.Core;
 using Azure.ResourceManager;
+using Azure.Core;
 using Azure.ResourceManager.Foundations;
 
 namespace Azure.ResourceManager.Analysis;
@@ -349,7 +349,7 @@ model IPv4FirewallSettings {
   /**
    * An array of firewall rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["firewallRuleName"])
+  @identifiers(#["firewallRuleName"])
   firewallRules?: IPv4FirewallRule[];
 
   /**
@@ -475,14 +475,14 @@ model ErrorDetail {
    * The error details.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["message", "target"])
+  @identifiers(#["message", "target"])
   details?: ErrorDetail[];
 
   /**
    * The error additional info.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   additionalInfo?: ErrorAdditionalInfo[];
 }
 
@@ -542,7 +542,7 @@ model SkuEnumerationForNewResourceResult {
   /**
    * The collection of available SKUs for new resources.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value?: ResourceSku[];
 }
 
@@ -554,7 +554,7 @@ model SkuEnumerationForExistingResourceResult {
    * The collection of available SKUs for existing resources.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["sku/name"])
+  @identifiers(#["sku/name"])
   value?: SkuDetailsForExistingResource[];
 }
 
@@ -706,14 +706,14 @@ model OperationPropertiesServiceSpecification {
    * The metric specifications.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   metricSpecifications?: MetricSpecifications[];
 
   /**
    * The log specifications.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   logSpecifications?: LogSpecifications[];
 }
 
@@ -755,7 +755,7 @@ model MetricSpecifications {
    * The dimensions of metric.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   dimensions?: MetricDimensions[];
 }
 

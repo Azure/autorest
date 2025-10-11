@@ -278,7 +278,7 @@ model DataManagerForAgricultureExtensionProperties {
    * customParameters, PlatformParameters and Units supported.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   detailedInformation?: DetailedInformation[];
 }
 
