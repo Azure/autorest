@@ -2,6 +2,18 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.11.12",
+      "tag": "@autorest/openapi-to-typespec_v0.11.12",
+      "date": "Sat, 11 Oct 2025 07:48:12 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Upgrade to TypeSpec 1.5.0. Use @identifiers. "
+          }
+        ]
+      }
+    },
+    {
       "version": "0.11.11",
       "tag": "@autorest/openapi-to-typespec_v0.11.11",
       "date": "Tue, 23 Sep 2025 06:34:30 GMT",
