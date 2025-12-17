@@ -1,4 +1,5 @@
 // load modules from static linker filesystem.
+// test
 if (
   process.argv.indexOf("--no-static-loader") === -1 &&
   process.env["no-static-loader"] === undefined
