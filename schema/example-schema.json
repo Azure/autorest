@@ -69,7 +69,7 @@
         "type": "string",
         "description": "An example of the location header sent by the server, if applicable in the example.",
         "minLength": 10,
-        "pattern": "^(http|https)://.*"
+        "pattern": "^[a-zA-Z0-9]+://.*"
       },
       "azure-asyncoperation": {
         "type": "string",
