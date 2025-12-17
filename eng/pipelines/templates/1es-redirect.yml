@@ -28,8 +28,8 @@ extends:
       git:
         longpaths: true
       sourceAnalysisPool:
-        name: azsdk-pool-mms-win-2022-general
-        image: azsdk-pool-mms-win-2022-1espt
+        name: azsdk-pool
+        image: windows-2022
         os: windows
       psscriptanalyzer:
         compiled: true
