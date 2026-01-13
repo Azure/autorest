@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "enableInteractiveQueryRequest": {
+      "autoTerminationMinutes": 10
+    },
+    "factoryName": "exampleFactoryName",
+    "integrationRuntimeName": "exampleIntegrationRuntime",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "exampleIntegrationRuntime",
+        "type": "Microsoft.DataFactory/factories/integrationruntimes",
+        "etag": "0400f1a1-0000-0000-0000-5b2188640000",
+        "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/integrationruntimes/exampleIntegrationRuntime",
+        "properties": {
+          "type": "SelfHosted",
+          "description": "A selfhosted integration runtime"
+        }
+      },
+      "headers": {
+        "Date": "Wed, 13 Jun 2018 21:33:04 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-12345678abc/resourcegroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/integrationruntimes/exampleIntegrationRuntime/enableInteractiveQuery/operationresults/d711da6461c04b98b03ae734743a3f4e?api-version=2018-06-01",
+        "location": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-12345678abc/resourcegroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/integrationruntimes/exampleIntegrationRuntime/enableInteractiveQuery/operationresults/d711da6461c04b98b03ae734743a3f4e?api-version=2018-06-01",
+        "x-ms-correlation-request-id": "eb1c35f8-4b37-4d08-b5dd-d6a0ad8b182d",
+        "x-ms-ratelimit-remaining-subscription-writes": "1192",
+        "x-ms-request-id": "eb1c35f8-4b37-4d08-b5dd-d6a0ad8b182d"
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-12345678abc/resourcegroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/integrationruntimes/exampleIntegrationRuntime/enableInteractiveQuery/operationresults/d711da6461c04b98b03ae734743a3f4e?api-version=2018-06-01",
+        "location": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-12345678abc/resourcegroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/integrationruntimes/exampleIntegrationRuntime/enableInteractiveQuery/operationresults/d711da6461c04b98b03ae734743a3f4e?api-version=2018-06-01"
+      }
+    }
+  },
+  "operationId": "IntegrationRuntime_EnableInteractiveQuery",
+  "title": "IntegrationRuntime_EnableInteractiveQuery"
+}

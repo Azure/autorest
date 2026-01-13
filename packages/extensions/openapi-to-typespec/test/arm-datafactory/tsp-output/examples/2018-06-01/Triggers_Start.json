@@ -1,0 +1,14 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc",
+    "triggerName": "exampleTrigger"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "Triggers_Start",
+  "title": "Triggers_Start"
+}

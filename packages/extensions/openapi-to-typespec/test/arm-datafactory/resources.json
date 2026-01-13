@@ -1,0 +1,1420 @@
+{
+  "Resources": {
+    "Factory": [
+      {
+        "Name": "Factory",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}",
+          "Method": "GET",
+          "OperationID": "Factories_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a factory."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}",
+          "Method": "PUT",
+          "OperationID": "Factories_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a factory."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}",
+          "Method": "PATCH",
+          "OperationID": "Factories_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Updates a factory."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}",
+          "Method": "DELETE",
+          "OperationID": "Factories_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a factory."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories",
+            "Method": "GET",
+            "OperationID": "Factories_ListByResourceGroup",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListByResourceGroup",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists factories."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [
+          {
+            "Name": "_",
+            "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.DataFactory/factories",
+            "Method": "GET",
+            "OperationID": "Factories_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists factories under the specified subscription."
+          }
+        ],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [
+          {
+            "Name": "GetGitHubAccessToken",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getGitHubAccessToken",
+            "Method": "POST",
+            "OperationID": "Factories_GetGitHubAccessToken",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Get GitHub Access Token."
+          },
+          {
+            "Name": "GetDataPlaneAccess",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getDataPlaneAccess",
+            "Method": "POST",
+            "OperationID": "Factories_GetDataPlaneAccess",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Get Data Plane access."
+          },
+          {
+            "Name": "GetFeatureValueByFactory",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getFeatureValue",
+            "Method": "POST",
+            "OperationID": "ExposureControl_GetFeatureValueByFactory",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Get exposure control feature for specific factory."
+          },
+          {
+            "Name": "QueryFeatureValuesByFactory",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/queryFeaturesValue",
+            "Method": "POST",
+            "OperationID": "ExposureControl_QueryFeatureValuesByFactory",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Get list of exposure control features for specific factory."
+          },
+          {
+            "Name": "QueryByFactory",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/queryPipelineRuns",
+            "Method": "POST",
+            "OperationID": "PipelineRuns_QueryByFactory",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "QueryByFactory",
+              "ItemName": "value",
+              "NextLinkName": null
+            },
+            "Description": "Query pipeline runs in the factory based on input filter conditions."
+          },
+          {
+            "Name": "Get",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}",
+            "Method": "GET",
+            "OperationID": "PipelineRuns_Get",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Get a pipeline run by its run ID."
+          },
+          {
+            "Name": "Cancel",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/cancel",
+            "Method": "POST",
+            "OperationID": "PipelineRuns_Cancel",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Cancel a pipeline run by its run ID."
+          },
+          {
+            "Name": "QueryByPipelineRun",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/queryActivityruns",
+            "Method": "POST",
+            "OperationID": "ActivityRuns_QueryByPipelineRun",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "QueryByPipelineRun",
+              "ItemName": "value",
+              "NextLinkName": null
+            },
+            "Description": "Query activity runs based on input filter conditions."
+          },
+          {
+            "Name": "QueryByFactory",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/querytriggers",
+            "Method": "POST",
+            "OperationID": "Triggers_QueryByFactory",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "QueryByFactory",
+              "ItemName": "value",
+              "NextLinkName": null
+            },
+            "Description": "Query triggers."
+          },
+          {
+            "Name": "QueryByFactory",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/queryTriggerRuns",
+            "Method": "POST",
+            "OperationID": "TriggerRuns_QueryByFactory",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "QueryByFactory",
+              "ItemName": "value",
+              "NextLinkName": null
+            },
+            "Description": "Query trigger runs."
+          },
+          {
+            "Name": "Create",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/createDataFlowDebugSession",
+            "Method": "POST",
+            "OperationID": "DataFlowDebugSession_Create",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Creates a data flow debug session."
+          },
+          {
+            "Name": "QueryByFactory",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/queryDataFlowDebugSessions",
+            "Method": "POST",
+            "OperationID": "DataFlowDebugSession_QueryByFactory",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "QueryByFactory",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Query all active data flow debug sessions."
+          },
+          {
+            "Name": "AddDataFlow",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/addDataFlowToDebugSession",
+            "Method": "POST",
+            "OperationID": "DataFlowDebugSession_AddDataFlow",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Add a data flow into debug session."
+          },
+          {
+            "Name": "Delete",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/deleteDataFlowDebugSession",
+            "Method": "POST",
+            "OperationID": "DataFlowDebugSession_Delete",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Deletes a data flow debug session."
+          },
+          {
+            "Name": "ExecuteCommand",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/executeDataFlowDebugCommand",
+            "Method": "POST",
+            "OperationID": "DataFlowDebugSession_ExecuteCommand",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Execute a data flow debug command."
+          },
+          {
+            "Name": "Get",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/privateLinkResources",
+            "Method": "GET",
+            "OperationID": "privateLinkResources_Get",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "Get",
+              "ItemName": "value",
+              "NextLinkName": null
+            },
+            "Description": "Gets the private link resources"
+          }
+        ],
+        "Parents": [
+          "ResourceGroupResource"
+        ],
+        "SwaggerModelName": "Factory",
+        "ResourceType": "Microsoft.DataFactory/factories",
+        "ResourceKey": "factoryName",
+        "ResourceKeySegment": "factories",
+        "IsTrackedResource": true,
+        "IsTrackedResourceWithOptionalLocation": true,
+        "IsManagementGroupResource": false,
+        "ScopeType": "ResourceGroup",
+        "IsSingletonResource": false
+      }
+    ],
+    "IntegrationRuntimeResource": [
+      {
+        "Name": "IntegrationRuntimeResource",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}",
+          "Method": "GET",
+          "OperationID": "IntegrationRuntimes_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets an integration runtime."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}",
+          "Method": "PUT",
+          "OperationID": "IntegrationRuntimes_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates an integration runtime."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}",
+          "Method": "PATCH",
+          "OperationID": "IntegrationRuntimes_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Updates an integration runtime."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}",
+          "Method": "DELETE",
+          "OperationID": "IntegrationRuntimes_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes an integration runtime."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes",
+            "Method": "GET",
+            "OperationID": "IntegrationRuntimes_ListByFactory",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListByFactory",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists integration runtimes."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [
+          {
+            "Name": "GetStatus",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/getStatus",
+            "Method": "POST",
+            "OperationID": "IntegrationRuntimes_GetStatus",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Gets detailed status information for an integration runtime."
+          },
+          {
+            "Name": "ListOutboundNetworkDependenciesEndpoints",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/outboundNetworkDependenciesEndpoints",
+            "Method": "GET",
+            "OperationID": "IntegrationRuntimes_ListOutboundNetworkDependenciesEndpoints",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListOutboundNetworkDependenciesEndpoints",
+              "ItemName": "value",
+              "NextLinkName": null
+            },
+            "Description": "Gets the list of outbound network dependencies for a given Azure-SSIS integration runtime."
+          },
+          {
+            "Name": "GetConnectionInfo",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/getConnectionInfo",
+            "Method": "POST",
+            "OperationID": "IntegrationRuntimes_GetConnectionInfo",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Gets the on-premises integration runtime connection information for encrypting the on-premises data source credentials."
+          },
+          {
+            "Name": "RegenerateAuthKey",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/regenerateAuthKey",
+            "Method": "POST",
+            "OperationID": "IntegrationRuntimes_RegenerateAuthKey",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Regenerates the authentication key for an integration runtime."
+          },
+          {
+            "Name": "ListAuthKeys",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/listAuthKeys",
+            "Method": "POST",
+            "OperationID": "IntegrationRuntimes_ListAuthKeys",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Retrieves the authentication keys for an integration runtime."
+          },
+          {
+            "Name": "Start",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/start",
+            "Method": "POST",
+            "OperationID": "IntegrationRuntimes_Start",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Starts a ManagedReserved type integration runtime."
+          },
+          {
+            "Name": "Stop",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/stop",
+            "Method": "POST",
+            "OperationID": "IntegrationRuntimes_Stop",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Stops a ManagedReserved type integration runtime."
+          },
+          {
+            "Name": "SyncCredentials",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/syncCredentials",
+            "Method": "POST",
+            "OperationID": "IntegrationRuntimes_SyncCredentials",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Force the integration runtime to synchronize credentials across integration runtime nodes, and this will override the credentials across all worker nodes with those available on the dispatcher node. If you already have the latest credential backup file, you should manually import it (preferred) on any self-hosted integration runtime node than using this API directly."
+          },
+          {
+            "Name": "GetMonitoringData",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/monitoringData",
+            "Method": "POST",
+            "OperationID": "IntegrationRuntimes_GetMonitoringData",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Get the integration runtime monitoring data, which includes the monitor data for all the nodes under this integration runtime."
+          },
+          {
+            "Name": "Upgrade",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/upgrade",
+            "Method": "POST",
+            "OperationID": "IntegrationRuntimes_Upgrade",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Upgrade self-hosted integration runtime to latest version if availability."
+          },
+          {
+            "Name": "RemoveLinks",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/removeLinks",
+            "Method": "POST",
+            "OperationID": "IntegrationRuntimes_RemoveLinks",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Remove all linked integration runtimes under specific data factory in a self-hosted integration runtime."
+          },
+          {
+            "Name": "CreateLinkedIntegrationRuntime",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/linkedIntegrationRuntime",
+            "Method": "POST",
+            "OperationID": "IntegrationRuntimes_CreateLinkedIntegrationRuntime",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Create a linked integration runtime entry in a shared integration runtime."
+          },
+          {
+            "Name": "Refresh",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/refreshObjectMetadata",
+            "Method": "POST",
+            "OperationID": "IntegrationRuntimeObjectMetadata_Refresh",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Refresh a SSIS integration runtime object metadata."
+          },
+          {
+            "Name": "Get",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/getObjectMetadata",
+            "Method": "POST",
+            "OperationID": "IntegrationRuntimeObjectMetadata_Get",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "Get",
+              "ItemName": "value",
+              "NextLinkName": null
+            },
+            "Description": "Get a SSIS integration runtime object metadata by specified path. The return is pageable metadata list."
+          },
+          {
+            "Name": "Get",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}",
+            "Method": "GET",
+            "OperationID": "IntegrationRuntimeNodes_Get",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Gets a self-hosted integration runtime node."
+          },
+          {
+            "Name": "Delete",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}",
+            "Method": "DELETE",
+            "OperationID": "IntegrationRuntimeNodes_Delete",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Deletes a self-hosted integration runtime node."
+          },
+          {
+            "Name": "Update",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}",
+            "Method": "PATCH",
+            "OperationID": "IntegrationRuntimeNodes_Update",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Updates a self-hosted integration runtime node."
+          },
+          {
+            "Name": "GetIpAddress",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}/ipAddress",
+            "Method": "POST",
+            "OperationID": "IntegrationRuntimeNodes_GetIpAddress",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Get the IP address of self-hosted integration runtime node."
+          },
+          {
+            "Name": "EnableInteractiveQuery",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/enableInteractiveQuery",
+            "Method": "POST",
+            "OperationID": "IntegrationRuntime_EnableInteractiveQuery",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Enable interactive authoring of Managed Virtual Network integration runtime."
+          },
+          {
+            "Name": "DisableInteractiveQuery",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/disableInteractiveQuery",
+            "Method": "POST",
+            "OperationID": "IntegrationRuntime_DisableInteractiveQuery",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Disable interactive authoring of Managed Virtual Network integration runtime."
+          }
+        ],
+        "Parents": [
+          "Factory"
+        ],
+        "SwaggerModelName": "IntegrationRuntimeResource",
+        "ResourceType": "Microsoft.DataFactory/factories/integrationRuntimes",
+        "ResourceKey": "integrationRuntimeName",
+        "ResourceKeySegment": "integrationRuntimes",
+        "IsTrackedResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "ResourceGroup",
+        "IsSingletonResource": false
+      }
+    ],
+    "LinkedServiceResource": [
+      {
+        "Name": "LinkedServiceResource",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/linkedservices/{linkedServiceName}",
+          "Method": "GET",
+          "OperationID": "LinkedServices_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a linked service."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/linkedservices/{linkedServiceName}",
+          "Method": "PUT",
+          "OperationID": "LinkedServices_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a linked service."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/linkedservices/{linkedServiceName}",
+          "Method": "PUT",
+          "OperationID": "LinkedServices_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a linked service."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/linkedservices/{linkedServiceName}",
+          "Method": "DELETE",
+          "OperationID": "LinkedServices_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a linked service."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/linkedservices",
+            "Method": "GET",
+            "OperationID": "LinkedServices_ListByFactory",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListByFactory",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists linked services."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "Factory"
+        ],
+        "SwaggerModelName": "LinkedServiceResource",
+        "ResourceType": "Microsoft.DataFactory/factories/linkedservices",
+        "ResourceKey": "linkedServiceName",
+        "ResourceKeySegment": "linkedservices",
+        "IsTrackedResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "ResourceGroup",
+        "IsSingletonResource": false
+      }
+    ],
+    "DatasetResource": [
+      {
+        "Name": "DatasetResource",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/datasets/{datasetName}",
+          "Method": "GET",
+          "OperationID": "Datasets_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a dataset."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/datasets/{datasetName}",
+          "Method": "PUT",
+          "OperationID": "Datasets_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a dataset."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/datasets/{datasetName}",
+          "Method": "PUT",
+          "OperationID": "Datasets_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a dataset."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/datasets/{datasetName}",
+          "Method": "DELETE",
+          "OperationID": "Datasets_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a dataset."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/datasets",
+            "Method": "GET",
+            "OperationID": "Datasets_ListByFactory",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListByFactory",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists datasets."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "Factory"
+        ],
+        "SwaggerModelName": "DatasetResource",
+        "ResourceType": "Microsoft.DataFactory/factories/datasets",
+        "ResourceKey": "datasetName",
+        "ResourceKeySegment": "datasets",
+        "IsTrackedResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "ResourceGroup",
+        "IsSingletonResource": false
+      }
+    ],
+    "PipelineResource": [
+      {
+        "Name": "PipelineResource",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelines/{pipelineName}",
+          "Method": "GET",
+          "OperationID": "Pipelines_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a pipeline."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelines/{pipelineName}",
+          "Method": "PUT",
+          "OperationID": "Pipelines_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a pipeline."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelines/{pipelineName}",
+          "Method": "PUT",
+          "OperationID": "Pipelines_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a pipeline."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelines/{pipelineName}",
+          "Method": "DELETE",
+          "OperationID": "Pipelines_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a pipeline."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelines",
+            "Method": "GET",
+            "OperationID": "Pipelines_ListByFactory",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListByFactory",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists pipelines."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [
+          {
+            "Name": "CreateRun",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelines/{pipelineName}/createRun",
+            "Method": "POST",
+            "OperationID": "Pipelines_CreateRun",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Creates a run of a pipeline."
+          }
+        ],
+        "Parents": [
+          "Factory"
+        ],
+        "SwaggerModelName": "PipelineResource",
+        "ResourceType": "Microsoft.DataFactory/factories/pipelines",
+        "ResourceKey": "pipelineName",
+        "ResourceKeySegment": "pipelines",
+        "IsTrackedResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "ResourceGroup",
+        "IsSingletonResource": false
+      }
+    ],
+    "TriggerResource": [
+      {
+        "Name": "TriggerResource",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}",
+          "Method": "GET",
+          "OperationID": "Triggers_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a trigger."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}",
+          "Method": "PUT",
+          "OperationID": "Triggers_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a trigger."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}",
+          "Method": "PUT",
+          "OperationID": "Triggers_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a trigger."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}",
+          "Method": "DELETE",
+          "OperationID": "Triggers_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a trigger."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers",
+            "Method": "GET",
+            "OperationID": "Triggers_ListByFactory",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListByFactory",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists triggers."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [
+          {
+            "Name": "SubscribeToEvents",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/subscribeToEvents",
+            "Method": "POST",
+            "OperationID": "Triggers_SubscribeToEvents",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Subscribe event trigger to events."
+          },
+          {
+            "Name": "GetEventSubscriptionStatus",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/getEventSubscriptionStatus",
+            "Method": "POST",
+            "OperationID": "Triggers_GetEventSubscriptionStatus",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Get a trigger's event subscription status."
+          },
+          {
+            "Name": "UnsubscribeFromEvents",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/unsubscribeFromEvents",
+            "Method": "POST",
+            "OperationID": "Triggers_UnsubscribeFromEvents",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Unsubscribe event trigger from events."
+          },
+          {
+            "Name": "Start",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/start",
+            "Method": "POST",
+            "OperationID": "Triggers_Start",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Starts a trigger."
+          },
+          {
+            "Name": "Stop",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/stop",
+            "Method": "POST",
+            "OperationID": "Triggers_Stop",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Stops a trigger."
+          },
+          {
+            "Name": "Rerun",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/triggerRuns/{runId}/rerun",
+            "Method": "POST",
+            "OperationID": "TriggerRuns_Rerun",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Rerun single trigger instance by runId."
+          },
+          {
+            "Name": "Cancel",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/triggerRuns/{runId}/cancel",
+            "Method": "POST",
+            "OperationID": "TriggerRuns_Cancel",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Cancel a single trigger instance by runId."
+          }
+        ],
+        "Parents": [
+          "Factory"
+        ],
+        "SwaggerModelName": "TriggerResource",
+        "ResourceType": "Microsoft.DataFactory/factories/triggers",
+        "ResourceKey": "triggerName",
+        "ResourceKeySegment": "triggers",
+        "IsTrackedResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "ResourceGroup",
+        "IsSingletonResource": false
+      }
+    ],
+    "DataFlowResource": [
+      {
+        "Name": "DataFlowResource",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/dataflows/{dataFlowName}",
+          "Method": "GET",
+          "OperationID": "DataFlows_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a data flow."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/dataflows/{dataFlowName}",
+          "Method": "PUT",
+          "OperationID": "DataFlows_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a data flow."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/dataflows/{dataFlowName}",
+          "Method": "PUT",
+          "OperationID": "DataFlows_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a data flow."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/dataflows/{dataFlowName}",
+          "Method": "DELETE",
+          "OperationID": "DataFlows_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a data flow."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/dataflows",
+            "Method": "GET",
+            "OperationID": "DataFlows_ListByFactory",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListByFactory",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists data flows."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "Factory"
+        ],
+        "SwaggerModelName": "DataFlowResource",
+        "ResourceType": "Microsoft.DataFactory/factories/dataflows",
+        "ResourceKey": "dataFlowName",
+        "ResourceKeySegment": "dataflows",
+        "IsTrackedResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "ResourceGroup",
+        "IsSingletonResource": false
+      }
+    ],
+    "ManagedVirtualNetworkResource": [
+      {
+        "Name": "ManagedVirtualNetworkResource",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/managedVirtualNetworks/{managedVirtualNetworkName}",
+          "Method": "GET",
+          "OperationID": "ManagedVirtualNetworks_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a managed Virtual Network."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/managedVirtualNetworks/{managedVirtualNetworkName}",
+          "Method": "PUT",
+          "OperationID": "ManagedVirtualNetworks_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a managed Virtual Network."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/managedVirtualNetworks/{managedVirtualNetworkName}",
+          "Method": "PUT",
+          "OperationID": "ManagedVirtualNetworks_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a managed Virtual Network."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/managedVirtualNetworks",
+            "Method": "GET",
+            "OperationID": "ManagedVirtualNetworks_ListByFactory",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListByFactory",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists managed Virtual Networks."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "Factory"
+        ],
+        "SwaggerModelName": "ManagedVirtualNetworkResource",
+        "ResourceType": "Microsoft.DataFactory/factories/managedVirtualNetworks",
+        "ResourceKey": "managedVirtualNetworkName",
+        "ResourceKeySegment": "managedVirtualNetworks",
+        "IsTrackedResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "ResourceGroup",
+        "IsSingletonResource": false
+      }
+    ],
+    "ManagedPrivateEndpointResource": [
+      {
+        "Name": "ManagedPrivateEndpointResource",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/managedVirtualNetworks/{managedVirtualNetworkName}/managedPrivateEndpoints/{managedPrivateEndpointName}",
+          "Method": "GET",
+          "OperationID": "ManagedPrivateEndpoints_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a managed private endpoint."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/managedVirtualNetworks/{managedVirtualNetworkName}/managedPrivateEndpoints/{managedPrivateEndpointName}",
+          "Method": "PUT",
+          "OperationID": "ManagedPrivateEndpoints_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a managed private endpoint."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/managedVirtualNetworks/{managedVirtualNetworkName}/managedPrivateEndpoints/{managedPrivateEndpointName}",
+          "Method": "PUT",
+          "OperationID": "ManagedPrivateEndpoints_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a managed private endpoint."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/managedVirtualNetworks/{managedVirtualNetworkName}/managedPrivateEndpoints/{managedPrivateEndpointName}",
+          "Method": "DELETE",
+          "OperationID": "ManagedPrivateEndpoints_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a managed private endpoint."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/managedVirtualNetworks/{managedVirtualNetworkName}/managedPrivateEndpoints",
+            "Method": "GET",
+            "OperationID": "ManagedPrivateEndpoints_ListByFactory",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListByFactory",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists managed private endpoints."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "ManagedVirtualNetworkResource"
+        ],
+        "SwaggerModelName": "ManagedPrivateEndpointResource",
+        "ResourceType": "Microsoft.DataFactory/factories/managedVirtualNetworks/managedPrivateEndpoints",
+        "ResourceKey": "managedPrivateEndpointName",
+        "ResourceKeySegment": "managedPrivateEndpoints",
+        "IsTrackedResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "ResourceGroup",
+        "IsSingletonResource": false
+      }
+    ],
+    "CredentialResource": [
+      {
+        "Name": "CredentialResource",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/credentials/{credentialName}",
+          "Method": "GET",
+          "OperationID": "CredentialOperations_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a credential."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/credentials/{credentialName}",
+          "Method": "PUT",
+          "OperationID": "CredentialOperations_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a credential."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/credentials/{credentialName}",
+          "Method": "PUT",
+          "OperationID": "CredentialOperations_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a credential."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/credentials/{credentialName}",
+          "Method": "DELETE",
+          "OperationID": "CredentialOperations_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a credential."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/credentials",
+            "Method": "GET",
+            "OperationID": "CredentialOperations_ListByFactory",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListByFactory",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "List credentials."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "Factory"
+        ],
+        "SwaggerModelName": "CredentialResource",
+        "ResourceType": "Microsoft.DataFactory/factories/credentials",
+        "ResourceKey": "credentialName",
+        "ResourceKeySegment": "credentials",
+        "IsTrackedResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "ResourceGroup",
+        "IsSingletonResource": false
+      }
+    ],
+    "PrivateEndpointConnectionResource": [
+      {
+        "Name": "PrivateEndpointConnectionResource",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/privateEndpointConnections/{privateEndpointConnectionName}",
+          "Method": "GET",
+          "OperationID": "PrivateEndpointConnection_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a private endpoint connection"
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/privateEndpointConnections/{privateEndpointConnectionName}",
+          "Method": "PUT",
+          "OperationID": "PrivateEndpointConnection_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Approves or rejects a private endpoint connection"
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/privateEndpointConnections/{privateEndpointConnectionName}",
+          "Method": "PUT",
+          "OperationID": "PrivateEndpointConnection_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Approves or rejects a private endpoint connection"
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/privateEndpointConnections/{privateEndpointConnectionName}",
+          "Method": "DELETE",
+          "OperationID": "PrivateEndpointConnection_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a private endpoint connection"
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/privateEndPointConnections",
+            "Method": "GET",
+            "OperationID": "privateEndPointConnections_ListByFactory",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListByFactory",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists Private endpoint connections"
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "Factory"
+        ],
+        "SwaggerModelName": "PrivateEndpointConnectionResource",
+        "ResourceType": "Microsoft.DataFactory/factories/privateEndpointConnections",
+        "ResourceKey": "privateEndpointConnectionName",
+        "ResourceKeySegment": "privateEndpointConnections",
+        "IsTrackedResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "ResourceGroup",
+        "IsSingletonResource": false
+      }
+    ],
+    "GlobalParameterResource": [
+      {
+        "Name": "GlobalParameterResource",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/globalParameters/{globalParameterName}",
+          "Method": "GET",
+          "OperationID": "GlobalParameters_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a Global parameter"
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/globalParameters/{globalParameterName}",
+          "Method": "PUT",
+          "OperationID": "GlobalParameters_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a Global parameter"
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/globalParameters/{globalParameterName}",
+          "Method": "PUT",
+          "OperationID": "GlobalParameters_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a Global parameter"
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/globalParameters/{globalParameterName}",
+          "Method": "DELETE",
+          "OperationID": "GlobalParameters_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a Global parameter"
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/globalParameters",
+            "Method": "GET",
+            "OperationID": "GlobalParameters_ListByFactory",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListByFactory",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists Global parameters"
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "Factory"
+        ],
+        "SwaggerModelName": "GlobalParameterResource",
+        "ResourceType": "Microsoft.DataFactory/factories/globalParameters",
+        "ResourceKey": "globalParameterName",
+        "ResourceKeySegment": "globalParameters",
+        "IsTrackedResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "ResourceGroup",
+        "IsSingletonResource": false
+      }
+    ],
+    "ChangeDataCaptureResource": [
+      {
+        "Name": "ChangeDataCaptureResource",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs/{changeDataCaptureName}",
+          "Method": "GET",
+          "OperationID": "ChangeDataCapture_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a change data capture."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs/{changeDataCaptureName}",
+          "Method": "PUT",
+          "OperationID": "ChangeDataCapture_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a change data capture resource."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs/{changeDataCaptureName}",
+          "Method": "PUT",
+          "OperationID": "ChangeDataCapture_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a change data capture resource."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs/{changeDataCaptureName}",
+          "Method": "DELETE",
+          "OperationID": "ChangeDataCapture_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a change data capture."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs",
+            "Method": "GET",
+            "OperationID": "ChangeDataCapture_ListByFactory",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListByFactory",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists all resources of type change data capture."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [
+          {
+            "Name": "Start",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs/{changeDataCaptureName}/start",
+            "Method": "POST",
+            "OperationID": "ChangeDataCapture_Start",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Starts a change data capture."
+          },
+          {
+            "Name": "Stop",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs/{changeDataCaptureName}/stop",
+            "Method": "POST",
+            "OperationID": "ChangeDataCapture_Stop",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Stops a change data capture."
+          },
+          {
+            "Name": "Status",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs/{changeDataCaptureName}/status",
+            "Method": "GET",
+            "OperationID": "ChangeDataCapture_Status",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Gets the current status for the change data capture resource."
+          }
+        ],
+        "Parents": [
+          "Factory"
+        ],
+        "SwaggerModelName": "ChangeDataCaptureResource",
+        "ResourceType": "Microsoft.DataFactory/factories/adfcdcs",
+        "ResourceKey": "changeDataCaptureName",
+        "ResourceKeySegment": "adfcdcs",
+        "IsTrackedResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "ResourceGroup",
+        "IsSingletonResource": false
+      }
+    ]
+  },
+  "RenameMapping": {},
+  "OverrideOperationName": {}
+}

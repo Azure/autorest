@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "filterParameters": {
+      "parentTriggerName": "exampleTrigger"
+    },
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc",
+    "triggerName": "exampleTrigger"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "exampleRerunTrigger",
+            "type": "Microsoft.DataFactory/factories/triggers",
+            "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/triggers/exampleRerunTrigger",
+            "properties": {
+              "type": "RerunTumblingWindowTrigger",
+              "description": "Example description",
+              "typeProperties": {
+                "parentTrigger": "exampleTrigger",
+                "requestedEndTime": "2018-06-16T00:55:14.905167Z",
+                "requestedStartTime": "2018-06-16T00:39:14.905167Z",
+                "rerunConcurrency": 4
+              }
+            }
+          }
+        ]
+      },
+      "headers": {
+        "Date": "Sat, 16 Jun 2018 00:40:20 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "e474f8f8-b34f-4536-b059-ca740e6b44c3",
+        "x-ms-ratelimit-remaining-subscription-reads": "14986",
+        "x-ms-request-id": "e474f8f8-b34f-4536-b059-ca740e6b44c3"
+      }
+    }
+  },
+  "operationId": "Triggers_QueryByFactory",
+  "title": "Triggers_QueryByFactory"
+}

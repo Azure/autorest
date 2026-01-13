@@ -1,0 +1,17 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "integrationRuntimeName": "exampleIntegrationRuntime",
+    "linkedIntegrationRuntimeRequest": {
+      "factoryName": "exampleFactoryName-linked"
+    },
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "IntegrationRuntimes_RemoveLinks",
+  "title": "IntegrationRuntimes_Upgrade"
+}

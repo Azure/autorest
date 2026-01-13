@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "ifNoneMatch": null,
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "exampleIntegrationRuntime",
+            "type": "Microsoft.DataFactory/factories/integrationruntimes",
+            "etag": "0400f1a1-0000-0000-0000-5b2188640000",
+            "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/integrationruntimes/exampleIntegrationRuntime",
+            "properties": {
+              "type": "SelfHosted",
+              "description": "A selfhosted integration runtime"
+            }
+          }
+        ]
+      },
+      "headers": {
+        "Date": "Wed, 13 Jun 2018 21:33:05 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "f632df92-1140-4e19-9e19-0b1c8cbe393b",
+        "x-ms-ratelimit-remaining-subscription-reads": "14909",
+        "x-ms-request-id": "f632df92-1140-4e19-9e19-0b1c8cbe393b"
+      }
+    }
+  },
+  "operationId": "IntegrationRuntimes_ListByFactory",
+  "title": "IntegrationRuntimes_ListByFactory"
+}

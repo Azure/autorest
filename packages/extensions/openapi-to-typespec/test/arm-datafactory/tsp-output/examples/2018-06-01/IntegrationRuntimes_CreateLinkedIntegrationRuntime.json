@@ -1,0 +1,92 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "createLinkedIntegrationRuntimeRequest": {
+      "name": "bfa92911-9fb6-4fbe-8f23-beae87bc1c83",
+      "dataFactoryLocation": "West US",
+      "dataFactoryName": "e9955d6d-56ea-4be3-841c-52a12c1a9981",
+      "subscriptionId": "061774c7-4b5a-4159-a55b-365581830283"
+    },
+    "factoryName": "exampleFactoryName",
+    "integrationRuntimeName": "exampleIntegrationRuntime",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "exampleIntegrationRuntime",
+        "properties": {
+          "type": "SelfHosted",
+          "dataFactoryName": "exampleFactoryName",
+          "state": "Online",
+          "typeProperties": {
+            "autoUpdate": "On",
+            "autoUpdateETA": "2018-08-20T19:00:00Z",
+            "capabilities": {
+              "connectedToResourceManager": "True",
+              "credentialInSync": "True",
+              "httpsPortEnabled": "True",
+              "nodeEnabled": "True",
+              "serviceBusConnected": "True"
+            },
+            "createTime": "2018-08-17T03:43:25.7055573Z",
+            "latestVersion": "3.9.6774.1",
+            "links": [
+              {
+                "name": "bfa92911-9fb6-4fbe-8f23-beae87bc1c83",
+                "createTime": "2018-08-17T06:31:04.0617928Z",
+                "dataFactoryLocation": "West US",
+                "dataFactoryName": "e9955d6d-56ea-4be3-841c-52a12c1a9981",
+                "subscriptionId": "061774c7-4b5a-4159-a55b-365581830283"
+              }
+            ],
+            "localTimeZoneOffset": "PT8H",
+            "nodes": [
+              {
+                "capabilities": {
+                  "connectedToResourceManager": "True",
+                  "credentialInSync": "True",
+                  "httpsPortEnabled": "True",
+                  "nodeEnabled": "True",
+                  "serviceBusConnected": "True"
+                },
+                "hostServiceUri": "https://yanzhang-dt.fareast.corp.microsoft.com:8050/HostServiceRemote.svc/",
+                "isActiveDispatcher": true,
+                "lastConnectTime": "2018-08-17T06:30:46.6262976Z",
+                "lastStartTime": "2018-08-17T03:45:30.8499851Z",
+                "lastUpdateResult": "None",
+                "machineName": "YANZHANG-DT",
+                "maxConcurrentJobs": 20,
+                "nodeName": "Node_1",
+                "registerTime": "2018-08-17T03:44:55.8012825Z",
+                "status": "Online",
+                "version": "3.8.6743.6",
+                "versionStatus": "UpToDate"
+              }
+            ],
+            "pushedVersion": "3.9.6774.1",
+            "scheduledUpdateDate": "2018-08-20T00:00:00Z",
+            "serviceUrls": [
+              "wu.frontend.int.clouddatahub-int.net",
+              "*.servicebus.windows.net"
+            ],
+            "taskQueueId": "823da112-f2d9-426b-a0d8-5f361b94f72a",
+            "updateDelayOffset": "PT19H",
+            "version": "3.8.6743.6",
+            "versionStatus": "UpdateAvailable"
+          }
+        }
+      },
+      "headers": {
+        "Date": "Fri, 17 Aug 2018 06:31:03 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "f9a67067-62f3-43ce-b891-2ccb3de4a15f",
+        "x-ms-ratelimit-remaining-subscription-writes": "1199",
+        "x-ms-request-id": "f9a67067-62f3-43ce-b891-2ccb3de4a15f"
+      }
+    }
+  },
+  "operationId": "IntegrationRuntimes_CreateLinkedIntegrationRuntime",
+  "title": "IntegrationRuntimes_CreateLinkedIntegrationRuntime"
+}

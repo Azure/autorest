@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "filterParameters": {
+      "filters": [
+        {
+          "operand": "TriggerName",
+          "operator": "Equals",
+          "values": [
+            "exampleTrigger"
+          ]
+        }
+      ],
+      "lastUpdatedAfter": "2018-06-16T00:36:44.3345758Z",
+      "lastUpdatedBefore": "2018-06-16T00:49:48.3686473Z"
+    },
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "message": "",
+            "properties": {
+              "ScheduleTime": "6/16/2018 12:43:14 AM",
+              "TriggerTime": "6/16/2018 12:43:15 AM"
+            },
+            "status": "Succeeded",
+            "triggerName": "exampleTrigger",
+            "triggerRunId": "08586724970898148904457116912CU27",
+            "triggerRunTimestamp": "2018-06-16T00:43:15.660141Z",
+            "triggerType": "ScheduleTrigger",
+            "triggeredPipelines": {
+              "examplePipeline": "9f3ce8b3-37d7-43eb-96ac-a656c0476283"
+            }
+          }
+        ]
+      },
+      "headers": {
+        "Date": "Sat, 16 Jun 2018 00:46:22 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "fb328f3e-d21e-44f7-80d7-dad60c955b4d",
+        "x-ms-ratelimit-remaining-subscription-writes": "1199",
+        "x-ms-request-id": "fb328f3e-d21e-44f7-80d7-dad60c955b4d"
+      }
+    }
+  },
+  "operationId": "TriggerRuns_QueryByFactory",
+  "title": "TriggerRuns_QueryByFactory"
+}

@@ -1,0 +1,1036 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Microsoft.DataFactory/datafactories/providers/Microsoft.Insights/metricDefinitions/read",
+            "display": {
+              "description": "Gets the available metrics for datafactories",
+              "operation": "Read datafactories metric definitions",
+              "provider": "Microsoft.DataFactory",
+              "resource": "datafactories"
+            },
+            "origin": "system",
+            "properties": {
+              "serviceSpecification": {
+                "metricSpecifications": [
+                  {
+                    "name": "FailedRuns",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "P1D",
+                        "timeGrain": "PT1H"
+                      }
+                    ],
+                    "dimensions": [
+                      {
+                        "name": "pipelineName",
+                        "displayName": "Pipeline",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "activityName",
+                        "displayName": "Activity",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "windowEnd",
+                        "displayName": "Window End",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "windowStart",
+                        "displayName": "Window Start",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayName": "Failed Runs",
+                    "enableRegionalMdmAccount": "false",
+                    "sourceMdmAccount": "MicrosoftDataFactoryProdShoebox",
+                    "sourceMdmNamespace": "ADFMetricsV1",
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "SuccessfulRuns",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "P1D",
+                        "timeGrain": "PT1H"
+                      }
+                    ],
+                    "dimensions": [
+                      {
+                        "name": "pipelineName",
+                        "displayName": "Pipeline",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "activityName",
+                        "displayName": "Activity",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "windowEnd",
+                        "displayName": "Window End",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "windowStart",
+                        "displayName": "Window Start",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayName": "Successful Runs",
+                    "enableRegionalMdmAccount": "false",
+                    "sourceMdmAccount": "MicrosoftDataFactoryProdShoebox",
+                    "sourceMdmNamespace": "ADFMetricsV1",
+                    "unit": "Count"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/providers/Microsoft.Insights/diagnosticSettings/read",
+            "display": {
+              "description": "Gets the diagnostic setting for the resource",
+              "operation": "Read diagnostic setting",
+              "provider": "Microsoft.DataFactory",
+              "resource": "datafactories"
+            },
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/providers/Microsoft.Insights/diagnosticSettings/write",
+            "display": {
+              "description": "Creates or updates the diagnostic setting for the resource",
+              "operation": "Write diagnostic setting",
+              "provider": "Microsoft.DataFactory",
+              "resource": "datafactories"
+            },
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/providers/Microsoft.Insights/logDefinitions/read",
+            "display": {
+              "description": "Gets the available logs for factories",
+              "operation": "Read factories log definitions",
+              "provider": "Microsoft.DataFactory",
+              "resource": "The log definition of factories"
+            },
+            "origin": "system",
+            "properties": {
+              "serviceSpecification": {
+                "logSpecifications": [
+                  {
+                    "name": "ActivityRuns",
+                    "blobDuration": "PT1H",
+                    "displayName": "Pipeline activity runs log"
+                  },
+                  {
+                    "name": "PipelineRuns",
+                    "blobDuration": "PT1H",
+                    "displayName": "Pipeline runs log"
+                  },
+                  {
+                    "name": "TriggerRuns",
+                    "blobDuration": "PT1H",
+                    "displayName": "Trigger runs log"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/providers/Microsoft.Insights/diagnosticSettings/read",
+            "display": {
+              "description": "Gets the diagnostic setting for the resource",
+              "operation": "Read diagnostic setting",
+              "provider": "Microsoft.DataFactory",
+              "resource": "factories"
+            },
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/providers/Microsoft.Insights/diagnosticSettings/write",
+            "display": {
+              "description": "Creates or updates the diagnostic setting for the resource",
+              "operation": "Write diagnostic setting",
+              "provider": "Microsoft.DataFactory",
+              "resource": "factories"
+            },
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/providers/Microsoft.Insights/metricDefinitions/read",
+            "display": {
+              "description": "Gets the available metrics for factories",
+              "operation": "Read metric definitions",
+              "provider": "Microsoft.DataFactory",
+              "resource": "factories"
+            },
+            "origin": "system",
+            "properties": {
+              "serviceSpecification": {
+                "metricSpecifications": [
+                  {
+                    "name": "PipelineFailedRuns",
+                    "aggregationType": "Total",
+                    "dimensions": [
+                      {
+                        "name": "FailureType",
+                        "displayName": "Failure Type",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "Name",
+                        "displayName": "Pipeline",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayName": "Failed pipeline runs metrics",
+                    "enableRegionalMdmAccount": "false",
+                    "sourceMdmAccount": "MicrosoftDataFactoryProdShoebox",
+                    "sourceMdmNamespace": "ADFMetrics",
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "PipelineSucceededRuns",
+                    "aggregationType": "Total",
+                    "dimensions": [
+                      {
+                        "name": "FailureType",
+                        "displayName": "Failure Type",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "Name",
+                        "displayName": "Pipeline",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayName": "Succeeded pipeline runs metrics",
+                    "enableRegionalMdmAccount": "false",
+                    "sourceMdmAccount": "MicrosoftDataFactoryProdShoebox",
+                    "sourceMdmNamespace": "ADFMetrics",
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "ActivityFailedRuns",
+                    "aggregationType": "Total",
+                    "dimensions": [
+                      {
+                        "name": "ActivityType",
+                        "displayName": "Activity Type",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "PipelineName",
+                        "displayName": "Pipeline",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "FailureType",
+                        "displayName": "Failure Type",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "Name",
+                        "displayName": "Activity",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayName": "Failed activity runs metrics",
+                    "enableRegionalMdmAccount": "false",
+                    "sourceMdmAccount": "MicrosoftDataFactoryProdShoebox",
+                    "sourceMdmNamespace": "ADFMetrics",
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "ActivitySucceededRuns",
+                    "aggregationType": "Total",
+                    "dimensions": [
+                      {
+                        "name": "ActivityType",
+                        "displayName": "Activity Type",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "PipelineName",
+                        "displayName": "Pipeline",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "FailureType",
+                        "displayName": "Failure Type",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "Name",
+                        "displayName": "Activity",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayName": "Succeeded activity runs metrics",
+                    "enableRegionalMdmAccount": "false",
+                    "sourceMdmAccount": "MicrosoftDataFactoryProdShoebox",
+                    "sourceMdmNamespace": "ADFMetrics",
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "TriggerFailedRuns",
+                    "aggregationType": "Total",
+                    "dimensions": [
+                      {
+                        "name": "Name",
+                        "displayName": "Trigger",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "FailureType",
+                        "displayName": "Failure Type",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayName": "Failed trigger runs metrics",
+                    "enableRegionalMdmAccount": "false",
+                    "sourceMdmAccount": "MicrosoftDataFactoryProdShoebox",
+                    "sourceMdmNamespace": "ADFMetrics",
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "TriggerSucceededRuns",
+                    "aggregationType": "Total",
+                    "dimensions": [
+                      {
+                        "name": "Name",
+                        "displayName": "Trigger",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "FailureType",
+                        "displayName": "Failure Type",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayName": "Succeeded trigger runs metrics",
+                    "enableRegionalMdmAccount": "false",
+                    "sourceMdmAccount": "MicrosoftDataFactoryProdShoebox",
+                    "sourceMdmNamespace": "ADFMetrics",
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "IntegrationRuntimeCpuPercentage",
+                    "aggregationType": "Average",
+                    "dimensions": [
+                      {
+                        "name": "IntegrationRuntimeName",
+                        "displayName": "Integration Runtime",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "NodeName",
+                        "displayName": "Integration Runtime Node",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayName": "Integration runtime CPU utilization",
+                    "enableRegionalMdmAccount": "false",
+                    "sourceMdmAccount": "MicrosoftDataFactoryProdShoebox",
+                    "sourceMdmNamespace": "ADFMetrics",
+                    "unit": "Percent"
+                  },
+                  {
+                    "name": "IntegrationRuntimeAvailableMemory",
+                    "aggregationType": "Average",
+                    "dimensions": [
+                      {
+                        "name": "IntegrationRuntimeName",
+                        "displayName": "Integration Runtime",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "NodeName",
+                        "displayName": "Integration Runtime Node",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayName": "Integration runtime available memory",
+                    "enableRegionalMdmAccount": "false",
+                    "sourceMdmAccount": "MicrosoftDataFactoryProdShoebox",
+                    "sourceMdmNamespace": "ADFMetrics",
+                    "unit": "Bytes"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/register/action",
+            "display": {
+              "description": "Registers the subscription for the Data Factory Resource Provider.",
+              "operation": "Register Data Factory Resource Provider",
+              "provider": "Microsoft Data Factory",
+              "resource": "Data Factory Resource Provider"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/unregister/action",
+            "display": {
+              "description": "Unregisters the subscription for the Data Factory Resource Provider.",
+              "operation": "Unregister Data Factory Resource Provider",
+              "provider": "Microsoft Data Factory",
+              "resource": "Data Factory Resource Provider"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/read",
+            "display": {
+              "description": "Reads the Data Factory.",
+              "operation": "Read Data Factory",
+              "provider": "Microsoft Data Factory",
+              "resource": "Data Factory"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/write",
+            "display": {
+              "description": "Creates or Updates the Data Factory.",
+              "operation": "Create or Update Data Factory",
+              "provider": "Microsoft Data Factory",
+              "resource": "Data Factory"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/delete",
+            "display": {
+              "description": "Deletes the Data Factory.",
+              "operation": "Delete Data Factory",
+              "provider": "Microsoft Data Factory",
+              "resource": "Data Factory"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/linkedServices/read",
+            "display": {
+              "description": "Reads any Linked Service.",
+              "operation": "Read Linked Service",
+              "provider": "Microsoft Data Factory",
+              "resource": "Linked Service"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/linkedServices/delete",
+            "display": {
+              "description": "Deletes any Linked Service.",
+              "operation": "Delete Linked Service",
+              "provider": "Microsoft Data Factory",
+              "resource": "Linked Service"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/linkedServices/write",
+            "display": {
+              "description": "Creates or Updates any Linked Service.",
+              "operation": "Create or Update Linked Service",
+              "provider": "Microsoft Data Factory",
+              "resource": "Linked Service"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/datapipelines/read",
+            "display": {
+              "description": "Reads any Pipeline.",
+              "operation": "Read Pipeline",
+              "provider": "Microsoft Data Factory",
+              "resource": "Pipeline"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/datapipelines/delete",
+            "display": {
+              "description": "Deletes any Pipeline.",
+              "operation": "Delete Pipeline",
+              "provider": "Microsoft Data Factory",
+              "resource": "Pipeline"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/datapipelines/pause/action",
+            "display": {
+              "description": "Pauses any Pipeline.",
+              "operation": "Pause Pipeline",
+              "provider": "Microsoft Data Factory",
+              "resource": "Pipeline"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/datapipelines/resume/action",
+            "display": {
+              "description": "Resumes any Pipeline.",
+              "operation": "Resume Pipeline",
+              "provider": "Microsoft Data Factory",
+              "resource": "Pipeline"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/datapipelines/update/action",
+            "display": {
+              "description": "Updates any Pipeline.",
+              "operation": "Update Pipeline",
+              "provider": "Microsoft Data Factory",
+              "resource": "Pipeline"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/datapipelines/write",
+            "display": {
+              "description": "Creates or Updates any Pipeline.",
+              "operation": "Create or Update Pipeline",
+              "provider": "Microsoft Data Factory",
+              "resource": "Pipeline"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/datasets/read",
+            "display": {
+              "description": "Reads any Dataset.",
+              "operation": "Read Dataset",
+              "provider": "Microsoft Data Factory",
+              "resource": "Dataset"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/datasets/delete",
+            "display": {
+              "description": "Deletes any Dataset.",
+              "operation": "Delete Dataset",
+              "provider": "Microsoft Data Factory",
+              "resource": "Dataset"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/datasets/write",
+            "display": {
+              "description": "Creates or Updates any Dataset.",
+              "operation": "Create or Update Dataset",
+              "provider": "Microsoft Data Factory",
+              "resource": "Dataset"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/tables/read",
+            "display": {
+              "description": "Reads any Dataset.",
+              "operation": "Read Dataset",
+              "provider": "Microsoft Data Factory",
+              "resource": "Dataset"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/tables/delete",
+            "display": {
+              "description": "Deletes any Dataset.",
+              "operation": "Delete Dataset",
+              "provider": "Microsoft Data Factory",
+              "resource": "Dataset"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/tables/write",
+            "display": {
+              "description": "Creates or Updates any Dataset.",
+              "operation": "Create or Update Dataset",
+              "provider": "Microsoft Data Factory",
+              "resource": "Dataset"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/datasets/slices/read",
+            "display": {
+              "description": "Gets the Data Slices in the given period.",
+              "operation": "Read Data Slices",
+              "provider": "Microsoft Data Factory",
+              "resource": "Data Slice"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/datasets/slices/write",
+            "display": {
+              "description": "Update the Status of the Data Slice.",
+              "operation": "Update Data Slice Status",
+              "provider": "Microsoft Data Factory",
+              "resource": "Data Slice"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/datasets/sliceruns/read",
+            "display": {
+              "description": "Reads the Data Slice Run for the given dataset with the given start time.",
+              "operation": "Read Data Slice Run",
+              "provider": "Microsoft Data Factory",
+              "resource": "Data Slice"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/runs/loginfo/read",
+            "display": {
+              "description": "Reads a SAS URI to a blob container containing the logs.",
+              "operation": "Read Run Log Info",
+              "provider": "Microsoft Data Factory",
+              "resource": "Run Log"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/activitywindows/read",
+            "display": {
+              "description": "Reads Activity Windows in the Data Factory with specified parameters.",
+              "operation": "Read Activity Windows in any Data Factory",
+              "provider": "Microsoft Data Factory",
+              "resource": "Activity Windows"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/datapipelines/activitywindows/read",
+            "display": {
+              "description": "Reads Activity Windows for the Pipeline with specified parameters.",
+              "operation": "Read Activity Windows for any Pipeline",
+              "provider": "Microsoft Data Factory",
+              "resource": "Activity Windows"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/datapipelines/activities/activitywindows/read",
+            "display": {
+              "description": "Reads Activity Windows for the Pipeline Activity with specified parameters.",
+              "operation": "Read Activity Windows for any Pipeline Activity",
+              "provider": "Microsoft Data Factory",
+              "resource": "Activity Windows"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/datasets/activitywindows/read",
+            "display": {
+              "description": "Reads Activity Windows for the Dataset with specified parameters.",
+              "operation": "Read Activity Windows for any Dataset",
+              "provider": "Microsoft Data Factory",
+              "resource": "Activity Windows"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/gateways/read",
+            "display": {
+              "description": "Reads any Gateway.",
+              "operation": "Read Gateway",
+              "provider": "Microsoft Data Factory",
+              "resource": "Gateway"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/gateways/write",
+            "display": {
+              "description": "Creates or Updates any Gateway.",
+              "operation": "Create or Update Gateway",
+              "provider": "Microsoft Data Factory",
+              "resource": "Gateway"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/gateways/delete",
+            "display": {
+              "description": "Deletes any Gateway.",
+              "operation": "Delete Gateway",
+              "provider": "Microsoft Data Factory",
+              "resource": "Gateway"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/gateways/connectioninfo/action",
+            "display": {
+              "description": "Reads the Connection Info for any Gateway.",
+              "operation": "Read Gateway Connection Info",
+              "provider": "Microsoft Data Factory",
+              "resource": "Gateway"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/gateways/listauthkeys/action",
+            "display": {
+              "description": "Lists the Authentication Keys for any Gateway.",
+              "operation": "List Gateway Authentication Keys",
+              "provider": "Microsoft Data Factory",
+              "resource": "Gateway"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/datafactories/gateways/regenerateauthkey/action",
+            "display": {
+              "description": "Regenerates the Authentication Keys for any Gateway.",
+              "operation": "Regenerate Gateway Authentication Keys",
+              "provider": "Microsoft Data Factory",
+              "resource": "Gateway"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/read",
+            "display": {
+              "description": "Reads Data Factory.",
+              "operation": "Read Data Factory",
+              "provider": "Microsoft Data Factory",
+              "resource": "Data Factory"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/write",
+            "display": {
+              "description": "Create or Update Data Factory",
+              "operation": "Create or Update any Data Factory.",
+              "provider": "Microsoft Data Factory",
+              "resource": "Data Factory"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/delete",
+            "display": {
+              "description": "Deletes Data Factory.",
+              "operation": "Delete Data Factory",
+              "provider": "Microsoft Data Factory",
+              "resource": "Data Factory"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/linkedServices/read",
+            "display": {
+              "description": "Reads Linked Service.",
+              "operation": "Read Linked Service",
+              "provider": "Microsoft Data Factory",
+              "resource": "Linked Service"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/linkedServices/delete",
+            "display": {
+              "description": "Deletes Linked Service.",
+              "operation": "Delete Linked Service",
+              "provider": "Microsoft Data Factory",
+              "resource": "Linked Service"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/linkedServices/write",
+            "display": {
+              "description": "Create or Update Linked Service",
+              "operation": "Create or Update any Linked Service.",
+              "provider": "Microsoft Data Factory",
+              "resource": "Linked Service"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/pipelines/read",
+            "display": {
+              "description": "Reads Pipeline.",
+              "operation": "Read Pipeline",
+              "provider": "Microsoft Data Factory",
+              "resource": "Pipeline"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/pipelines/delete",
+            "display": {
+              "description": "Deletes Pipeline.",
+              "operation": "Delete Pipeline",
+              "provider": "Microsoft Data Factory",
+              "resource": "Pipeline"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/pipelines/write",
+            "display": {
+              "description": "Create or Update Pipeline",
+              "operation": "Create or Update any Pipeline.",
+              "provider": "Microsoft Data Factory",
+              "resource": "Pipeline"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/pipelines/createrun/action",
+            "display": {
+              "description": "Creates a run for the Pipeline.",
+              "operation": "Create Pipeline Run",
+              "provider": "Microsoft Data Factory",
+              "resource": "Pipeline"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/cancelpipelinerun/action",
+            "display": {
+              "description": "Cancels the pipeline run specified by the run ID.",
+              "operation": "Cancel any Pipeline Run",
+              "provider": "Microsoft Data Factory",
+              "resource": "Data Factory"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/pipelineruns/read",
+            "display": {
+              "description": "Reads the Pipeline Runs.",
+              "operation": "Read Pipeline Runs",
+              "provider": "Microsoft Data Factory",
+              "resource": "Data Factory"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/pipelineruns/activityruns/read",
+            "display": {
+              "description": "Reads the activity runs for the specified pipeline run ID.",
+              "operation": "Read Activity Runs",
+              "provider": "Microsoft Data Factory",
+              "resource": "Data Factory"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/datasets/read",
+            "display": {
+              "description": "Reads any Dataset.",
+              "operation": "Read Dataset",
+              "provider": "Microsoft Data Factory",
+              "resource": "Dataset"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/datasets/delete",
+            "display": {
+              "description": "Deletes any Dataset.",
+              "operation": "Delete Dataset",
+              "provider": "Microsoft Data Factory",
+              "resource": "Dataset"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/datasets/write",
+            "display": {
+              "description": "Creates or Updates any Dataset.",
+              "operation": "Create or Update Dataset",
+              "provider": "Microsoft Data Factory",
+              "resource": "Dataset"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/integrationruntimes/read",
+            "display": {
+              "description": "Reads any Integration Runtime.",
+              "operation": "Read Integration Runtime",
+              "provider": "Microsoft Data Factory",
+              "resource": "Integration Runtime"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/integrationruntimes/write",
+            "display": {
+              "description": "Creates or Updates any Integration Runtime.",
+              "operation": "Create or Update Integration Runtime",
+              "provider": "Microsoft Data Factory",
+              "resource": "Integration Runtime"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/integrationruntimes/delete",
+            "display": {
+              "description": "Deletes any Integration Runtime.",
+              "operation": "Delete Integration Runtime",
+              "provider": "Microsoft Data Factory",
+              "resource": "Integration Runtime"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/integrationruntimes/start/action",
+            "display": {
+              "description": "Starts any Integration Runtime.",
+              "operation": "Start Integration Runtime",
+              "provider": "Microsoft Data Factory",
+              "resource": "Integration Runtime"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/integrationruntimes/stop/action",
+            "display": {
+              "description": "Stops any Integration Runtime.",
+              "operation": "Stop Integration Runtime",
+              "provider": "Microsoft Data Factory",
+              "resource": "Integration Runtime"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/integrationruntimes/getconnectioninfo/read",
+            "display": {
+              "description": "Reads Integration Runtime Connection Info.",
+              "operation": "Read Integration Runtime Connection Info",
+              "provider": "Microsoft Data Factory",
+              "resource": "Integration Runtime"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/integrationruntimes/getstatus/read",
+            "display": {
+              "description": "Reads Integration Runtime Status.",
+              "operation": "Read Integration Runtime Status",
+              "provider": "Microsoft Data Factory",
+              "resource": "Integration Runtime"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/integrationruntimes/listauthkeys/read",
+            "display": {
+              "description": "Lists the Authentication Keys for any Integration Runtime.",
+              "operation": "List Integration Runtime Authentication Keys",
+              "provider": "Microsoft Data Factory",
+              "resource": "Integration Runtime"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/integrationruntimes/monitoringdata/read",
+            "display": {
+              "description": "Gets the Monitoring Data for any Integration Runtime.",
+              "operation": "Get Integration Runtime Monitoring Data",
+              "provider": "Microsoft Data Factory",
+              "resource": "Integration Runtime"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/integrationruntimes/nodes/delete",
+            "display": {
+              "description": "Deletes the Node for the specified Integration Runtime.",
+              "operation": "Delete Integration Runtime Node",
+              "provider": "Microsoft Data Factory",
+              "resource": "Integration Runtime"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/integrationruntimes/nodes/write",
+            "display": {
+              "description": "Updates a self-hosted Integration Runtime Node.",
+              "operation": "Update Integration Runtime Node",
+              "provider": "Microsoft Data Factory",
+              "resource": "Integration Runtime"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/integrationruntimes/nodes/ipAddress/action",
+            "display": {
+              "description": "Returns the IP Address for the specified node of the Integration Runtime.",
+              "operation": "Read Integration Runtime Node IP Address",
+              "provider": "Microsoft Data Factory",
+              "resource": "Integration Runtime"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/integrationruntimes/synccredentials/action",
+            "display": {
+              "description": "Syncs the Credentials for the specified Integration Runtime.",
+              "operation": "Sync Credentials for Integration Runtime",
+              "provider": "Microsoft Data Factory",
+              "resource": "Integration Runtime"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/integrationruntimes/upgrade/action",
+            "display": {
+              "description": "Upgrades the specified Integration Runtime.",
+              "operation": "Upgrade Integration Runtime",
+              "provider": "Microsoft Data Factory",
+              "resource": "Integration Runtime"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/integrationruntimes/regenerateauthkey/action",
+            "display": {
+              "description": "Regenerates the Authentication Keys for the specified Integration Runtime.",
+              "operation": "Regenerate Integration Runtime Authentication Keys",
+              "provider": "Microsoft Data Factory",
+              "resource": "Integration Runtime"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/triggers/read",
+            "display": {
+              "description": "Reads any Trigger.",
+              "operation": "Read Trigger",
+              "provider": "Microsoft Data Factory",
+              "resource": "Trigger"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/triggers/write",
+            "display": {
+              "description": "Creates or Updates any Trigger.",
+              "operation": "Create or Update Trigger",
+              "provider": "Microsoft Data Factory",
+              "resource": "Trigger"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/triggers/delete",
+            "display": {
+              "description": "Deletes any Trigger.",
+              "operation": "Delete Trigger",
+              "provider": "Microsoft Data Factory",
+              "resource": "Trigger"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/triggers/start/action",
+            "display": {
+              "description": "Starts any Trigger.",
+              "operation": "Start Trigger",
+              "provider": "Microsoft Data Factory",
+              "resource": "Trigger"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/triggers/stop/action",
+            "display": {
+              "description": "Stops any Trigger.",
+              "operation": "Stop Trigger",
+              "provider": "Microsoft Data Factory",
+              "resource": "Trigger"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/factories/triggers/triggerruns/read",
+            "display": {
+              "description": "Reads the Trigger Runs.",
+              "operation": "Read Trigger Runs",
+              "provider": "Microsoft Data Factory",
+              "resource": "Data Factory"
+            }
+          },
+          {
+            "name": "Microsoft.DataFactory/locations/configureFactoryRepo/action",
+            "display": {
+              "description": "Configures the repository for the factory.",
+              "operation": "Configure Factory Repository",
+              "provider": "Microsoft Data Factory",
+              "resource": "Data Factory"
+            }
+          }
+        ]
+      },
+      "headers": {
+        "Date": "Sat, 16 Jun 2018 00:46:33 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "522fceaa-5c3b-42ff-a518-843b2a53e0aa",
+        "x-ms-ratelimit-remaining-tenant-reads": "14999",
+        "x-ms-request-id": "522fceaa-5c3b-42ff-a518-843b2a53e0aa"
+      }
+    }
+  },
+  "operationId": "Operations_List",
+  "title": "Operations_List"
+}

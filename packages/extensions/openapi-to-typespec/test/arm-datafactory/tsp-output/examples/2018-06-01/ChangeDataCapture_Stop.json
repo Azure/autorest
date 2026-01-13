@@ -1,0 +1,14 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "changeDataCaptureName": "exampleChangeDataCapture",
+    "factoryName": "exampleFactoryName",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "ChangeDataCapture_Stop",
+  "title": "ChangeDataCapture_Stop"
+}

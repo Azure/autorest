@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "ifMatch": null,
+    "managedVirtualNetwork": {
+      "properties": {}
+    },
+    "managedVirtualNetworkName": "exampleManagedVirtualNetworkName",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "exampleManagedVirtualNetworkName",
+        "type": "Microsoft.DataFactory/factories/managedVirtualNetworks",
+        "etag": "000046c4-0000-0000-0000-5b2198bf0000",
+        "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/managedVirtualNetworks/exampleManagedVirtualNetworkName",
+        "properties": {
+          "alias": "exampleFactoryName",
+          "vNetId": "12345678-1234-1234-1234-12345678123"
+        }
+      },
+      "headers": {
+        "Date": "Wed, 13 Jun 2020 22:20:47 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "9e6639e9-bece-4c0c-85de-4cadc30a73a6",
+        "x-ms-ratelimit-remaining-subscription-writes": "1197",
+        "x-ms-request-id": "9e6639e9-bece-4c0c-85de-4cadc30a73a6"
+      }
+    }
+  },
+  "operationId": "ManagedVirtualNetworks_CreateOrUpdate",
+  "title": "ManagedVirtualNetworks_Create"
+}

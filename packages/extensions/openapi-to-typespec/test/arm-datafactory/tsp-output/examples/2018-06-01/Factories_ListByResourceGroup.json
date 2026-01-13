@@ -1,0 +1,80 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "exampleFactoryName-linked",
+            "type": "Microsoft.DataFactory/factories",
+            "eTag": "\"00008a02-0000-0000-0000-5b237f270000\"",
+            "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName-linked",
+            "identity": {
+              "type": "SystemAssigned",
+              "principalId": "10743799-44d2-42fe-8c4d-5bc5c51c0684",
+              "tenantId": "12345678-1234-1234-1234-123456789abc"
+            },
+            "location": "East US",
+            "properties": {
+              "createTime": "2018-06-15T08:56:07.1828318Z",
+              "provisioningState": "Succeeded",
+              "version": "2017-09-01-preview"
+            },
+            "tags": {}
+          },
+          {
+            "name": "FactoryToUpgrade",
+            "type": "Microsoft.DataFactory/factories",
+            "eTag": "\"00003d04-0000-0000-0000-5b28962f0000\"",
+            "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/factorytoupgrade",
+            "location": "East US",
+            "properties": {
+              "createTime": "2018-06-19T05:35:35.7133828Z",
+              "provisioningState": "Succeeded",
+              "version": "2018-06-01"
+            },
+            "tags": {}
+          },
+          {
+            "name": "exampleFactoryName",
+            "type": "Microsoft.DataFactory/factories",
+            "eTag": "\"00004004-0000-0000-0000-5b28979e0000\"",
+            "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName",
+            "location": "East US",
+            "properties": {
+              "createTime": "2018-06-19T05:41:50.0041314Z",
+              "provisioningState": "Succeeded",
+              "repoConfiguration": {
+                "type": "FactoryVSTSConfiguration",
+                "accountName": "ADF",
+                "collaborationBranch": "master",
+                "lastCommitId": "",
+                "projectName": "project",
+                "repositoryName": "repo",
+                "rootFolder": "/",
+                "tenantId": ""
+              },
+              "version": "2018-06-01"
+            },
+            "tags": {
+              "exampleTag": "exampleValue"
+            }
+          }
+        ]
+      },
+      "headers": {
+        "Date": "Tue, 19 Jun 2018 05:41:51 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "f9c976e7-4205-4cfc-833e-e5d50565fcef",
+        "x-ms-ratelimit-remaining-subscription-reads": "14993",
+        "x-ms-request-id": "f9c976e7-4205-4cfc-833e-e5d50565fcef"
+      }
+    }
+  },
+  "operationId": "Factories_ListByResourceGroup",
+  "title": "Factories_ListByResourceGroup"
+}

@@ -1,0 +1,534 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "getMetadataRequest": {
+      "metadataPath": "ssisFolders"
+    },
+    "integrationRuntimeName": "testactivityv2",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/integrationRuntimes/testactivityv2/getObjectMetadata?api-version=2018-06-01&%24skipToken=https%3a%2f%2fwcu.frontend.clouddatahub.net%2fsubscriptions%2f12345678-1234-1234-1234-12345678abc%2fdatafactories%2f6C8E7C90-FD45-4010-8B7C-B5227D0F0CB7%2fintegrationruntimes%2fTESTACTIVITYV2%2fgetSsisObjectMetadata%3f%24skipToken%3dc3Npc0ZvbGRlcnNAQDIwMTgtMTEtMjlUMDM6NTk6MzIuMDQ1Mzc1MiswMDowMEBAZm9sZGVyQEAwMDAwMDAwMDAwMDAwMDAwMTAx0%26api-version%3d1.0",
+        "value": [
+          {
+            "name": "TestFolder",
+            "type": "Folder",
+            "description": "",
+            "id": 1
+          },
+          {
+            "name": "EnvironmentFolder",
+            "type": "Folder",
+            "description": "",
+            "id": 2
+          },
+          {
+            "name": "ActivityTest",
+            "type": "Folder",
+            "description": "",
+            "id": 3
+          },
+          {
+            "name": "这是文件夹",
+            "type": "Folder",
+            "description": "",
+            "id": 4
+          },
+          {
+            "name": "1",
+            "type": "Folder",
+            "id": 5
+          },
+          {
+            "name": "2",
+            "type": "Folder",
+            "id": 6
+          },
+          {
+            "name": "3",
+            "type": "Folder",
+            "id": 7
+          },
+          {
+            "name": "4",
+            "type": "Folder",
+            "id": 8
+          },
+          {
+            "name": "5",
+            "type": "Folder",
+            "id": 9
+          },
+          {
+            "name": "6",
+            "type": "Folder",
+            "id": 10
+          },
+          {
+            "name": "7",
+            "type": "Folder",
+            "id": 11
+          },
+          {
+            "name": "8",
+            "type": "Folder",
+            "id": 12
+          },
+          {
+            "name": "9",
+            "type": "Folder",
+            "id": 13
+          },
+          {
+            "name": "10",
+            "type": "Folder",
+            "id": 14
+          },
+          {
+            "name": "11",
+            "type": "Folder",
+            "id": 15
+          },
+          {
+            "name": "12",
+            "type": "Folder",
+            "id": 16
+          },
+          {
+            "name": "13",
+            "type": "Folder",
+            "id": 17
+          },
+          {
+            "name": "14",
+            "type": "Folder",
+            "id": 18
+          },
+          {
+            "name": "15",
+            "type": "Folder",
+            "id": 19
+          },
+          {
+            "name": "16",
+            "type": "Folder",
+            "id": 20
+          },
+          {
+            "name": "17",
+            "type": "Folder",
+            "id": 21
+          },
+          {
+            "name": "18",
+            "type": "Folder",
+            "id": 22
+          },
+          {
+            "name": "19",
+            "type": "Folder",
+            "id": 23
+          },
+          {
+            "name": "20",
+            "type": "Folder",
+            "id": 24
+          },
+          {
+            "name": "21",
+            "type": "Folder",
+            "id": 25
+          },
+          {
+            "name": "22",
+            "type": "Folder",
+            "id": 26
+          },
+          {
+            "name": "23",
+            "type": "Folder",
+            "id": 27
+          },
+          {
+            "name": "24",
+            "type": "Folder",
+            "id": 28
+          },
+          {
+            "name": "25",
+            "type": "Folder",
+            "id": 29
+          },
+          {
+            "name": "26",
+            "type": "Folder",
+            "id": 30
+          },
+          {
+            "name": "27",
+            "type": "Folder",
+            "id": 31
+          },
+          {
+            "name": "28",
+            "type": "Folder",
+            "id": 32
+          },
+          {
+            "name": "29",
+            "type": "Folder",
+            "id": 33
+          },
+          {
+            "name": "30",
+            "type": "Folder",
+            "id": 34
+          },
+          {
+            "name": "31",
+            "type": "Folder",
+            "id": 35
+          },
+          {
+            "name": "32",
+            "type": "Folder",
+            "id": 36
+          },
+          {
+            "name": "33",
+            "type": "Folder",
+            "id": 37
+          },
+          {
+            "name": "34",
+            "type": "Folder",
+            "id": 38
+          },
+          {
+            "name": "35",
+            "type": "Folder",
+            "id": 39
+          },
+          {
+            "name": "36",
+            "type": "Folder",
+            "id": 40
+          },
+          {
+            "name": "37",
+            "type": "Folder",
+            "id": 41
+          },
+          {
+            "name": "38",
+            "type": "Folder",
+            "id": 42
+          },
+          {
+            "name": "39",
+            "type": "Folder",
+            "id": 43
+          },
+          {
+            "name": "40",
+            "type": "Folder",
+            "id": 44
+          },
+          {
+            "name": "41",
+            "type": "Folder",
+            "id": 45
+          },
+          {
+            "name": "42",
+            "type": "Folder",
+            "id": 46
+          },
+          {
+            "name": "43",
+            "type": "Folder",
+            "id": 47
+          },
+          {
+            "name": "44",
+            "type": "Folder",
+            "id": 48
+          },
+          {
+            "name": "45",
+            "type": "Folder",
+            "id": 49
+          },
+          {
+            "name": "46",
+            "type": "Folder",
+            "id": 50
+          },
+          {
+            "name": "47",
+            "type": "Folder",
+            "id": 51
+          },
+          {
+            "name": "48",
+            "type": "Folder",
+            "id": 52
+          },
+          {
+            "name": "49",
+            "type": "Folder",
+            "id": 53
+          },
+          {
+            "name": "50",
+            "type": "Folder",
+            "id": 54
+          },
+          {
+            "name": "51",
+            "type": "Folder",
+            "id": 55
+          },
+          {
+            "name": "52",
+            "type": "Folder",
+            "id": 56
+          },
+          {
+            "name": "53",
+            "type": "Folder",
+            "id": 57
+          },
+          {
+            "name": "54",
+            "type": "Folder",
+            "id": 58
+          },
+          {
+            "name": "55",
+            "type": "Folder",
+            "id": 59
+          },
+          {
+            "name": "56",
+            "type": "Folder",
+            "id": 60
+          },
+          {
+            "name": "57",
+            "type": "Folder",
+            "id": 61
+          },
+          {
+            "name": "58",
+            "type": "Folder",
+            "id": 62
+          },
+          {
+            "name": "59",
+            "type": "Folder",
+            "id": 63
+          },
+          {
+            "name": "60",
+            "type": "Folder",
+            "id": 64
+          },
+          {
+            "name": "61",
+            "type": "Folder",
+            "id": 65
+          },
+          {
+            "name": "62",
+            "type": "Folder",
+            "id": 66
+          },
+          {
+            "name": "63",
+            "type": "Folder",
+            "id": 67
+          },
+          {
+            "name": "64",
+            "type": "Folder",
+            "id": 68
+          },
+          {
+            "name": "65",
+            "type": "Folder",
+            "id": 69
+          },
+          {
+            "name": "66",
+            "type": "Folder",
+            "id": 70
+          },
+          {
+            "name": "67",
+            "type": "Folder",
+            "id": 71
+          },
+          {
+            "name": "68",
+            "type": "Folder",
+            "id": 72
+          },
+          {
+            "name": "69",
+            "type": "Folder",
+            "id": 73
+          },
+          {
+            "name": "70",
+            "type": "Folder",
+            "id": 74
+          },
+          {
+            "name": "71",
+            "type": "Folder",
+            "id": 75
+          },
+          {
+            "name": "72",
+            "type": "Folder",
+            "id": 76
+          },
+          {
+            "name": "73",
+            "type": "Folder",
+            "id": 77
+          },
+          {
+            "name": "74",
+            "type": "Folder",
+            "id": 78
+          },
+          {
+            "name": "75",
+            "type": "Folder",
+            "id": 79
+          },
+          {
+            "name": "76",
+            "type": "Folder",
+            "id": 80
+          },
+          {
+            "name": "77",
+            "type": "Folder",
+            "id": 81
+          },
+          {
+            "name": "78",
+            "type": "Folder",
+            "id": 82
+          },
+          {
+            "name": "79",
+            "type": "Folder",
+            "id": 83
+          },
+          {
+            "name": "80",
+            "type": "Folder",
+            "id": 84
+          },
+          {
+            "name": "81",
+            "type": "Folder",
+            "id": 85
+          },
+          {
+            "name": "82",
+            "type": "Folder",
+            "id": 86
+          },
+          {
+            "name": "83",
+            "type": "Folder",
+            "id": 87
+          },
+          {
+            "name": "84",
+            "type": "Folder",
+            "id": 88
+          },
+          {
+            "name": "85",
+            "type": "Folder",
+            "id": 89
+          },
+          {
+            "name": "86",
+            "type": "Folder",
+            "id": 90
+          },
+          {
+            "name": "87",
+            "type": "Folder",
+            "id": 91
+          },
+          {
+            "name": "88",
+            "type": "Folder",
+            "id": 92
+          },
+          {
+            "name": "89",
+            "type": "Folder",
+            "id": 93
+          },
+          {
+            "name": "90",
+            "type": "Folder",
+            "id": 94
+          },
+          {
+            "name": "91",
+            "type": "Folder",
+            "id": 95
+          },
+          {
+            "name": "92",
+            "type": "Folder",
+            "id": 96
+          },
+          {
+            "name": "93",
+            "type": "Folder",
+            "id": 97
+          },
+          {
+            "name": "94",
+            "type": "Folder",
+            "id": 98
+          },
+          {
+            "name": "95",
+            "type": "Folder",
+            "id": 99
+          },
+          {
+            "name": "96",
+            "type": "Folder",
+            "id": 100
+          }
+        ]
+      },
+      "headers": {
+        "Date": "Mon, 03 Dec 2018 06:24:54 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "0cbc67c4-60e7-4d49-97d9-e4bc4f9851cd",
+        "x-ms-ratelimit-remaining-subscription-writes": "1198",
+        "x-ms-request-id": "0cbc67c4-60e7-4d49-97d9-e4bc4f9851cd"
+      }
+    }
+  },
+  "operationId": "IntegrationRuntimeObjectMetadata_Get",
+  "title": "IntegrationRuntimeObjectMetadata_Get"
+}

@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "integrationRuntimeName": "exampleIntegrationRuntime",
+    "nodeName": "Node_1",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc",
+    "updateIntegrationRuntimeNodeRequest": {
+      "concurrentJobsLimit": 2
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "capabilities": {
+          "connectedToResourceManager": "True",
+          "credentialInSync": "True",
+          "httpsPortEnabled": "True",
+          "nodeEnabled": "True",
+          "serviceBusConnected": "True"
+        },
+        "concurrentJobsLimit": 2,
+        "hostServiceUri": "https://yanzhang-dt.fareast.corp.microsoft.com:8050/HostServiceRemote.svc/",
+        "isActiveDispatcher": true,
+        "lastConnectTime": "2018-06-14T15:00:35.7544322Z",
+        "lastStartTime": "2018-06-14T14:52:59.8933313Z",
+        "lastUpdateResult": "None",
+        "machineName": "YANZHANG-DT",
+        "maxConcurrentJobs": 56,
+        "nodeName": "Node_1",
+        "registerTime": "2018-06-14T14:51:44.9237069Z",
+        "status": "Online",
+        "version": "3.8.6730.2",
+        "versionStatus": "UpToDate"
+      },
+      "headers": {
+        "Date": "Thu, 14 Jun 2018 15:01:00 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "cf0d05fa-afbe-4fac-aa10-227885658c83",
+        "x-ms-ratelimit-remaining-subscription-writes": "1199",
+        "x-ms-request-id": "cf0d05fa-afbe-4fac-aa10-227885658c83"
+      }
+    }
+  },
+  "operationId": "IntegrationRuntimeNodes_Update",
+  "title": "IntegrationRuntimeNodes_Update"
+}

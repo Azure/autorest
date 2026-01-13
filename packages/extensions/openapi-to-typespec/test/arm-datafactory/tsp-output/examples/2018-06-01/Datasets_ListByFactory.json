@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "exampleDataset",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "etag": "0a0068d4-0000-0000-0000-5b245bd30000",
+            "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/datasets/exampleDataset",
+            "properties": {
+              "type": "AzureBlob",
+              "description": "Example description",
+              "linkedServiceName": {
+                "type": "LinkedServiceReference",
+                "referenceName": "exampleLinkedService"
+              },
+              "parameters": {
+                "MyFileName": {
+                  "type": "String"
+                },
+                "MyFolderPath": {
+                  "type": "String"
+                }
+              },
+              "typeProperties": {
+                "format": {
+                  "type": "TextFormat"
+                },
+                "fileName": {
+                  "type": "Expression",
+                  "value": "@dataset().MyFileName"
+                },
+                "folderPath": {
+                  "type": "Expression",
+                  "value": "@dataset().MyFolderPath"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "headers": {
+        "Date": "Sat, 16 Jun 2018 00:37:40 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "341c9ece-5062-448b-be98-3ccbf476ed5d",
+        "x-ms-ratelimit-remaining-subscription-reads": "14992",
+        "x-ms-request-id": "341c9ece-5062-448b-be98-3ccbf476ed5d"
+      }
+    }
+  },
+  "operationId": "Datasets_ListByFactory",
+  "title": "Datasets_ListByFactory"
+}

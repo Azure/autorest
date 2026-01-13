@@ -1,0 +1,80 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "filterParameters": {
+      "filters": [
+        {
+          "operand": "PipelineName",
+          "operator": "Equals",
+          "values": [
+            "examplePipeline"
+          ]
+        }
+      ],
+      "lastUpdatedAfter": "2018-06-16T00:36:44.3345758Z",
+      "lastUpdatedBefore": "2018-06-16T00:49:48.3686473Z"
+    },
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "annotations": [],
+            "durationInMs": 28105,
+            "invokedBy": {
+              "name": "Manual",
+              "id": "80a01654a9d34ad18b3fcac5d5d76b67"
+            },
+            "lastUpdated": "2018-06-16T00:38:12.7314495Z",
+            "message": "",
+            "parameters": {
+              "OutputBlobNameList": "[\"exampleoutput.csv\"]"
+            },
+            "pipelineName": "examplePipeline",
+            "runDimension": {
+              "JobId": "79c1cc52-265f-41a5-9553-be65e736fbd3"
+            },
+            "runEnd": "2018-06-16T00:38:12.7314495Z",
+            "runId": "2f7fdb90-5df1-4b8e-ac2f-064cfa58202b",
+            "runStart": "2018-06-16T00:37:44.6257014Z",
+            "status": "Succeeded"
+          },
+          {
+            "annotations": [],
+            "durationInMs": null,
+            "invokedBy": {
+              "name": "Manual",
+              "id": "7c5fd7ef7e8a464b98b931cf15fcac66"
+            },
+            "lastUpdated": "2018-06-16T00:39:51.216097Z",
+            "message": "",
+            "parameters": {
+              "OutputBlobNameList": "[\"exampleoutput.csv\"]"
+            },
+            "pipelineName": "examplePipeline",
+            "runDimension": {
+              "JobId": "84a3c493-0628-4b44-852f-ef5b3a11bdab"
+            },
+            "runEnd": null,
+            "runId": "16ac5348-ff82-4f95-a80d-638c1d47b721",
+            "runStart": "2018-06-16T00:39:49.2745128Z",
+            "status": "Cancelled"
+          }
+        ]
+      },
+      "headers": {
+        "Date": "Sat, 16 Jun 2018 00:40:01 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "2f955e10-c6df-45a7-97d4-81acdb8540cd",
+        "x-ms-ratelimit-remaining-subscription-reads": "14989",
+        "x-ms-request-id": "2f955e10-c6df-45a7-97d4-81acdb8540cd"
+      }
+    }
+  },
+  "operationId": "PipelineRuns_QueryByFactory",
+  "title": "PipelineRuns_QueryByFactory"
+}

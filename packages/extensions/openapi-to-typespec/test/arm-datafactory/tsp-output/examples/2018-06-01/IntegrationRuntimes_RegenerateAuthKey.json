@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "integrationRuntimeName": "exampleIntegrationRuntime",
+    "regenerateKeyParameters": {
+      "keyName": "authKey2"
+    },
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "authKey2": "**********"
+      },
+      "headers": {
+        "Date": "Thu, 14 Jun 2018 14:50:41 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "25af6d34-52c6-40a4-a882-16052af85c99",
+        "x-ms-ratelimit-remaining-subscription-writes": "1198",
+        "x-ms-request-id": "25af6d34-52c6-40a4-a882-16052af85c99"
+      }
+    }
+  },
+  "operationId": "IntegrationRuntimes_RegenerateAuthKey",
+  "title": "IntegrationRuntimes_RegenerateAuthKey"
+}

@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "parameters": {
+      "OutputBlobNameList": [
+        "exampleoutput.csv"
+      ]
+    },
+    "pipelineName": "examplePipeline",
+    "referencePipelineRunId": null,
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "runId": "2f7fdb90-5df1-4b8e-ac2f-064cfa58202b"
+      },
+      "headers": {
+        "Date": "Sat, 16 Jun 2018 00:37:48 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "5c2b442b-d360-43ec-9268-f923f88f31fd",
+        "x-ms-ratelimit-remaining-subscription-writes": "1190",
+        "x-ms-request-id": "5c2b442b-d360-43ec-9268-f923f88f31fd"
+      }
+    }
+  },
+  "operationId": "Pipelines_CreateRun",
+  "title": "Pipelines_CreateRun"
+}

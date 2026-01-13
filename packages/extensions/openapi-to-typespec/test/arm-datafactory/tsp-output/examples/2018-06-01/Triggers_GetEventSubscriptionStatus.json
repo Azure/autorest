@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc",
+    "triggerName": "exampleTrigger"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "Enabled",
+        "triggerName": "exampleTrigger"
+      }
+    }
+  },
+  "operationId": "Triggers_GetEventSubscriptionStatus",
+  "title": "Triggers_GetEventSubscriptionStatus"
+}

@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "ifNoneMatch": "1500544f-0000-0200-0000-5cbe09100000",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc",
+    "triggerName": "exampleTrigger"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "exampleTrigger",
+        "type": "Microsoft.DataFactory/factories/triggers",
+        "etag": "1500544f-0000-0200-0000-5cbe09100000",
+        "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/triggers/exampleTrigger",
+        "properties": {
+          "type": "ScheduleTrigger",
+          "pipelines": [
+            {
+              "parameters": {
+                "OutputBlobNameList": [
+                  "exampleoutput.csv"
+                ]
+              },
+              "pipelineReference": {
+                "type": "PipelineReference",
+                "referenceName": "examplePipeline"
+              }
+            }
+          ],
+          "runtimeState": "Stopped",
+          "typeProperties": {
+            "recurrence": {
+              "endTime": "2019-04-22T18:48:52.5281747Z",
+              "frequency": "Minute",
+              "interval": 4,
+              "startTime": "2019-04-22T18:32:52.527912Z",
+              "timeZone": "UTC"
+            }
+          }
+        }
+      },
+      "headers": {
+        "Date": "Mon, 22 Apr 2019 18:33:52 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "8ad1759f-24c1-46a5-aef5-edd267e18870",
+        "x-ms-ratelimit-remaining-subscription-reads": "11989",
+        "x-ms-request-id": "8ad1759f-24c1-46a5-aef5-edd267e18870"
+      }
+    },
+    "304": {}
+  },
+  "operationId": "Triggers_Get",
+  "title": "Triggers_Get"
+}

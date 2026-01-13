@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryRepoUpdate": {
+      "factoryResourceId": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName",
+      "repoConfiguration": {
+        "type": "FactoryVSTSConfiguration",
+        "accountName": "ADF",
+        "collaborationBranch": "master",
+        "lastCommitId": "",
+        "projectName": "project",
+        "repositoryName": "repo",
+        "rootFolder": "/",
+        "tenantId": ""
+      }
+    },
+    "locationId": "East US",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "exampleFactoryName",
+        "type": "Microsoft.DataFactory/factories",
+        "eTag": "\"00004004-0000-0000-0000-5b28979e0000\"",
+        "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName",
+        "location": "East US",
+        "properties": {
+          "createTime": "2018-06-19T05:41:50.0041314Z",
+          "provisioningState": "Succeeded",
+          "repoConfiguration": {
+            "type": "FactoryVSTSConfiguration",
+            "accountName": "ADF",
+            "collaborationBranch": "master",
+            "lastCommitId": "",
+            "projectName": "project",
+            "repositoryName": "repo",
+            "rootFolder": "/",
+            "tenantId": ""
+          },
+          "version": "2018-06-01"
+        },
+        "tags": {
+          "exampleTag": "exampleValue"
+        }
+      },
+      "headers": {
+        "Date": "Tue, 19 Jun 2018 05:41:50 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "c63640bd-3e5f-4ee0-bae1-cea74f761a7d",
+        "x-ms-ratelimit-remaining-subscription-writes": "1191",
+        "x-ms-request-id": "c63640bd-3e5f-4ee0-bae1-cea74f761a7d"
+      }
+    }
+  },
+  "operationId": "Factories_ConfigureFactoryRepo",
+  "title": "Factories_ConfigureFactoryRepo"
+}

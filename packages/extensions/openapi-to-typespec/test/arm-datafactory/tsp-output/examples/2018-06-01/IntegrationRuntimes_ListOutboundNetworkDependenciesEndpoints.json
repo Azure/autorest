@@ -1,0 +1,101 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "integrationRuntimeName": "exampleIntegrationRuntime",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "7ad7c73b-38b8-4df3-84ee-52ff91092f61"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "category": "Azure Data Factory (Management)",
+            "endpoints": [
+              {
+                "domainName": "wu.frontend.int.clouddatahub-int.net",
+                "endpointDetails": [
+                  {
+                    "port": 443
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "category": "Azure Storage (Management)",
+            "endpoints": [
+              {
+                "domainName": "*.blob.core.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 443
+                  }
+                ]
+              },
+              {
+                "domainName": "*.table.core.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 443
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "category": "Event Hub (Logging)",
+            "endpoints": [
+              {
+                "domainName": "*.servicebus.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 443
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "category": "Microsoft Logging service (Internal Use)",
+            "endpoints": [
+              {
+                "domainName": "gcs.prod.monitoring.core.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 443
+                  }
+                ]
+              },
+              {
+                "domainName": "prod.warmpath.msftcloudes.com",
+                "endpointDetails": [
+                  {
+                    "port": 443
+                  }
+                ]
+              },
+              {
+                "domainName": "azurewatsonanalysis-prod.core.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 443
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "headers": {
+        "Date": "Tue, 06 Jul 2021 04:28:10 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "1dabf122-e061-4703-ae9e-9edeeef40ee6",
+        "x-ms-request-id": "fd8e4223-7e9c-4f32-893f-06c14a8081be"
+      }
+    }
+  },
+  "operationId": "IntegrationRuntimes_ListOutboundNetworkDependenciesEndpoints",
+  "title": "IntegrationRuntimes_OutboundNetworkDependenciesEndpoints"
+}

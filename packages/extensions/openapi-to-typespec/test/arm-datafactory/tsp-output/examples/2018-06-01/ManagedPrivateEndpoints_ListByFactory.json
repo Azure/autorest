@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "ifNoneMatch": null,
+    "managedVirtualNetworkName": "exampleManagedVirtualNetworkName",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "exampleManagedPrivateEndpointName",
+            "type": "Microsoft.DataFactory/factories/managedVirtualNetworks/managedPrivateEndpoints",
+            "etag": "000046c4-0000-0000-0000-5b2198bf0000",
+            "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/managedVirtualNetworks/exampleManagedVirtualNetworkName/managedPrivateEndpoints/exampleManagedPrivateEndpointName",
+            "properties": {
+              "connectionState": {
+                "description": "",
+                "actionsRequired": "None",
+                "status": "Pending"
+              },
+              "fqdns": [],
+              "groupId": "blob",
+              "privateLinkResourceId": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.Storage/storageAccounts/exampleBlobStorage",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      },
+      "headers": {
+        "Date": "Wed, 13 Jun 2020 21:33:05 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "9e6639e9-bece-4c0c-85de-4cadc30a73a6",
+        "x-ms-ratelimit-remaining-subscription-reads": "14909",
+        "x-ms-request-id": "9e6639e9-bece-4c0c-85de-4cadc30a73a6"
+      }
+    }
+  },
+  "operationId": "ManagedPrivateEndpoints_ListByFactory",
+  "title": "ManagedPrivateEndpoints_ListByFactory"
+}

@@ -150,6 +150,7 @@ function addFixmes(typespecObject: TypespecObject): void {
 export function transformObjectProperty(propertySchema: Property, codeModel: CodeModel): TypespecObjectProperty {
   const name = propertySchema.serializedName;
   const doc = propertySchema.language.default.description;
+  const dfeType = getDfeType(propertySchema);
   if (isObjectSchema(propertySchema.schema)) {
     const dataTypes = getDataTypes(codeModel);
     let visited = dataTypes.get(propertySchema.schema) as TypespecObject;
@@ -163,10 +164,10 @@ export function transformObjectProperty(propertySchema: Property, codeModel: Cod
       name: name,
       doc: doc,
       isOptional: propertySchema.required !== true,
-      type: visited.name,
+      type: dfeType ?? visited.name,
       decorators: getPropertyDecorators(propertySchema),
       clientDecorators: getPropertyClientDecorators(propertySchema),
-      defaultValue: getDefaultValue(visited.name, propertySchema.schema),
+      defaultValue: getDefaultValue(dfeType ?? visited.name, propertySchema.schema),
       suppressions: getPropertySuppressions(propertySchema),
     };
   }
@@ -184,7 +185,7 @@ export function transformObjectProperty(propertySchema: Property, codeModel: Cod
       }
     }
   }
-  const type = getTypespecType(propertySchema.schema, codeModel);
+  const type = dfeType ?? getTypespecType(propertySchema.schema, codeModel);
   return {
     kind: "property",
     doc,
@@ -275,6 +276,23 @@ function getArmIdType(schema: Schema): string {
   } else {
     return "Azure.Core.armResourceIdentifier";
   }
+}
+
+function getDfeType(property: Property): string | undefined {
+  const format = property.extensions?.["x-ms-format"];
+  if (format === "dfe-string") return "Dfe<string>";
+  if (format === "dfe-bool") return "Dfe<boolean>";
+  if (format === "dfe-int") return "Dfe<int32>";
+  if (format === "dfe-double") return "Dfe<float64>";
+  if (format === "dfe-object") return "Dfe<unknown>";
+  if (format === "dfe-date-time") return "Dfe<utcDateTime>";
+  if (format === "dfe-duration") return "Dfe<duration>";
+  if (format === "dfe-uri") return "Dfe<url>";
+  if (format === "dfe-list-generic") return `Dfe<${property.extensions?.["x-ms-format-element-type"]}[]>`;
+  if (format === "dfe-list-string") return "Dfe<string[]>";
+  if (format === "dfe-key-value-pairs") return "Dfe<Record<string>>";
+  if (format === "dfe-key-object-value-pairs") return "Dfe<Record<unknown>>";
+  return undefined;
 }
 
 export function getTypespecType(schema: Schema, codeModel: CodeModel): string {
