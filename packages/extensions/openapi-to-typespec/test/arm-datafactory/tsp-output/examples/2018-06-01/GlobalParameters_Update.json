@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "default": {
+      "properties": {
+        "waitTime": {
+          "type": "Int",
+          "value": 5
+        }
+      }
+    },
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "globalParameterName": "default",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.DataFactory/factories/globalParameters",
+        "etag": "0a008ad4-0000-0000-0000-5b245c6e0000",
+        "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/globalParameters/default",
+        "properties": {
+          "waitTime": {
+            "type": "Int",
+            "value": 5
+          }
+        }
+      },
+      "headers": {
+        "Date": "Sat, 16 Jun 2018 00:40:14 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "373f1a49-685d-4c07-8857-0fcf1bcaffcb",
+        "x-ms-ratelimit-remaining-subscription-writes": "1186",
+        "x-ms-request-id": "373f1a49-685d-4c07-8857-0fcf1bcaffcb"
+      }
+    }
+  },
+  "operationId": "GlobalParameters_CreateOrUpdate",
+  "title": "GlobalParameters_Update"
+}

@@ -1,0 +1,14 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "resourceGroupName": "exampleResourceGroup",
+    "runId": "16ac5348-ff82-4f95-a80d-638c1d47b721",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "PipelineRuns_Cancel",
+  "title": "PipelineRuns_Cancel"
+}

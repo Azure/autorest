@@ -23,13 +23,48 @@ function generateModels(program: TypespecProgram) {
     "\n",
   );
 
+  const defContent = containsDfe(program)
+    ? `
+  union Dfe<T> {
+    T,
+    DataFactoryElement,
+  }
+
+  model DataFactoryElement {
+    kind: "Expression";
+    value: string;
+  }
+  `
+    : "";
+
   const enums = flattenEnums(models.enums).join("");
   const objects = models.objects.map(generateObject).join("\n\n");
-  return [imports, "\n", namespaces, "\n", getNamespaceStatement(program), "\n", enums, "\n", objects].join("\n");
+  return [
+    imports,
+    "\n",
+    namespaces,
+    "\n",
+    getNamespaceStatement(program),
+    `\n${defContent}`,
+    enums,
+    "\n",
+    objects,
+  ].join("\n");
 }
 
 function flattenEnums(enums: TypespecEnum[]) {
   return enums.reduce<string[]>((a, c) => {
     return [...a, ...generateEnums(c)];
   }, []);
+}
+
+function containsDfe(program: TypespecProgram): boolean {
+  for (const model of program.models.objects) {
+    for (const property of model.properties ?? []) {
+      if (property.type.includes("Dfe<")) {
+        return true;
+      }
+    }
+  }
+  return false;
 }

@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "ifMatch": null,
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc",
+    "trigger": {
+      "properties": {
+        "type": "ScheduleTrigger",
+        "pipelines": [
+          {
+            "parameters": {
+              "OutputBlobNameList": [
+                "exampleoutput.csv"
+              ]
+            },
+            "pipelineReference": {
+              "type": "PipelineReference",
+              "referenceName": "examplePipeline"
+            }
+          }
+        ],
+        "typeProperties": {
+          "recurrence": {
+            "endTime": "2018-06-16T00:55:13.8441801Z",
+            "frequency": "Minute",
+            "interval": 4,
+            "startTime": "2018-06-16T00:39:13.8441801Z",
+            "timeZone": "UTC"
+          }
+        }
+      }
+    },
+    "triggerName": "exampleTrigger"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "exampleTrigger",
+        "type": "Microsoft.DataFactory/factories/triggers",
+        "etag": "0a008ad4-0000-0000-0000-5b245c6e0000",
+        "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/triggers/exampleTrigger",
+        "properties": {
+          "type": "ScheduleTrigger",
+          "pipelines": [
+            {
+              "parameters": {
+                "OutputBlobNameList": [
+                  "exampleoutput.csv"
+                ]
+              },
+              "pipelineReference": {
+                "type": "PipelineReference",
+                "referenceName": "examplePipeline"
+              }
+            }
+          ],
+          "runtimeState": "Stopped",
+          "typeProperties": {
+            "recurrence": {
+              "endTime": "2018-06-16T00:55:13.8441801Z",
+              "frequency": "Minute",
+              "interval": 4,
+              "startTime": "2018-06-16T00:39:13.8441801Z",
+              "timeZone": "UTC"
+            }
+          }
+        }
+      },
+      "headers": {
+        "Date": "Sat, 16 Jun 2018 00:40:14 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "373f1a49-685d-4c07-8857-0fcf1bcaffcb",
+        "x-ms-ratelimit-remaining-subscription-writes": "1186",
+        "x-ms-request-id": "373f1a49-685d-4c07-8857-0fcf1bcaffcb"
+      }
+    }
+  },
+  "operationId": "Triggers_CreateOrUpdate",
+  "title": "Triggers_Create"
+}

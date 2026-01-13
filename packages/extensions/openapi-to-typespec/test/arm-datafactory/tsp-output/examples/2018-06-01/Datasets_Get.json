@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "datasetName": "exampleDataset",
+    "factoryName": "exampleFactoryName",
+    "ifNoneMatch": "15004c4f-0000-0200-0000-5cbe090e0000",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "exampleDataset",
+        "type": "Microsoft.DataFactory/factories/datasets",
+        "etag": "15004c4f-0000-0200-0000-5cbe090e0000",
+        "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/datasets/exampleDataset",
+        "properties": {
+          "type": "AzureBlob",
+          "description": "Example description",
+          "linkedServiceName": {
+            "type": "LinkedServiceReference",
+            "referenceName": "exampleLinkedService"
+          },
+          "parameters": {
+            "MyFileName": {
+              "type": "String"
+            },
+            "MyFolderPath": {
+              "type": "String"
+            }
+          },
+          "typeProperties": {
+            "format": {
+              "type": "TextFormat"
+            },
+            "fileName": {
+              "type": "Expression",
+              "value": "@dataset().MyFileName"
+            },
+            "folderPath": {
+              "type": "Expression",
+              "value": "@dataset().MyFolderPath"
+            }
+          }
+        }
+      },
+      "headers": {
+        "Date": "Mon, 22 Apr 2019 18:33:50 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "48983fb5-612a-44c6-8158-add7ffebb32b",
+        "x-ms-ratelimit-remaining-subscription-reads": "11993",
+        "x-ms-request-id": "48983fb5-612a-44c6-8158-add7ffebb32b"
+      }
+    },
+    "304": {}
+  },
+  "operationId": "Datasets_Get",
+  "title": "Datasets_Get"
+}

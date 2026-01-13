@@ -1,0 +1,15 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "privateEndpointConnectionName": "connection",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {},
+    "204": {}
+  },
+  "operationId": "PrivateEndpointConnection_Delete",
+  "title": "Delete a private endpoint connection for a datafactory."
+}

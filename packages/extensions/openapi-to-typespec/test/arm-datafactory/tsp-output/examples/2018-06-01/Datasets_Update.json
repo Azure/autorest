@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "dataset": {
+      "properties": {
+        "type": "AzureBlob",
+        "description": "Example description",
+        "linkedServiceName": {
+          "type": "LinkedServiceReference",
+          "referenceName": "exampleLinkedService"
+        },
+        "parameters": {
+          "MyFileName": {
+            "type": "String"
+          },
+          "MyFolderPath": {
+            "type": "String"
+          }
+        },
+        "typeProperties": {
+          "format": {
+            "type": "TextFormat"
+          },
+          "fileName": {
+            "type": "Expression",
+            "value": "@dataset().MyFileName"
+          },
+          "folderPath": {
+            "type": "Expression",
+            "value": "@dataset().MyFolderPath"
+          }
+        }
+      }
+    },
+    "datasetName": "exampleDataset",
+    "factoryName": "exampleFactoryName",
+    "ifMatch": null,
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "exampleDataset",
+        "type": "Microsoft.DataFactory/factories/datasets",
+        "etag": "0a0068d4-0000-0000-0000-5b245bd30000",
+        "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/datasets/exampleDataset",
+        "properties": {
+          "type": "AzureBlob",
+          "description": "Example description",
+          "linkedServiceName": {
+            "type": "LinkedServiceReference",
+            "referenceName": "exampleLinkedService"
+          },
+          "parameters": {
+            "MyFileName": {
+              "type": "String"
+            },
+            "MyFolderPath": {
+              "type": "String"
+            }
+          },
+          "typeProperties": {
+            "format": {
+              "type": "TextFormat"
+            },
+            "fileName": {
+              "type": "Expression",
+              "value": "@dataset().MyFileName"
+            },
+            "folderPath": {
+              "type": "Expression",
+              "value": "@dataset().MyFolderPath"
+            }
+          }
+        }
+      },
+      "headers": {
+        "Date": "Sat, 16 Jun 2018 00:37:39 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "e2e7f6be-e7ee-4aae-943f-6ff799e034f2",
+        "x-ms-ratelimit-remaining-subscription-writes": "1193",
+        "x-ms-request-id": "e2e7f6be-e7ee-4aae-943f-6ff799e034f2"
+      }
+    }
+  },
+  "operationId": "Datasets_CreateOrUpdate",
+  "title": "Datasets_Update"
+}

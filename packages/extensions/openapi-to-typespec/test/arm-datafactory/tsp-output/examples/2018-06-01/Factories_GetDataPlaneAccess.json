@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "policy": {
+      "accessResourcePath": "",
+      "expireTime": "2018-11-10T09:46:20.2659347Z",
+      "permissions": "r",
+      "profileName": "DefaultProfile",
+      "startTime": "2018-11-10T02:46:20.2659347Z"
+    },
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "accessToken": "**********",
+        "dataPlaneUrl": "https://rpeastus.svc.datafactory.azure.com:4433",
+        "policy": {
+          "accessResourcePath": "",
+          "expireTime": "2018-11-10T09:46:20.2659347Z",
+          "permissions": "r",
+          "profileName": "DefaultProfile",
+          "startTime": "2018-11-10T02:46:20.2659347Z"
+        }
+      },
+      "headers": {
+        "Date": "Wed, 07 Nov 2018 03:41:57 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "82bc20d2-4bec-496d-a1c8-3f7746fed307",
+        "x-ms-ratelimit-remaining-subscription-reads": "11996",
+        "x-ms-request-id": "82bc20d2-4bec-496d-a1c8-3f7746fed307"
+      }
+    }
+  },
+  "operationId": "Factories_GetDataPlaneAccess",
+  "title": "Factories_GetDataPlaneAccess"
+}

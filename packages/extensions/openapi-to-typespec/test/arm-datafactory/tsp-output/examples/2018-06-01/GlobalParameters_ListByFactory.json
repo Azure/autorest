@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "default",
+            "type": "Microsoft.DataFactory/factories/globalParameters",
+            "etag": "da00a1c3-0000-0400-0000-6241f3290000",
+            "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/globalParameters/default",
+            "properties": {
+              "copyPipelineTest": {
+                "type": "Object",
+                "value": {
+                  "mySinkDatasetFolderPath": "exampleOutput",
+                  "mySourceDatasetFolderPath": "exampleInput/",
+                  "testingEmptyContextParams": ""
+                }
+              },
+              "mySourceDatasetFolderPath": {
+                "type": "String",
+                "value": "input"
+              },
+              "url": {
+                "type": "String",
+                "value": "https://testuri.test"
+              },
+              "validADFOffice365Uris": {
+                "type": "Array",
+                "value": [
+                  "https://testuri.test",
+                  "https://testuri.test"
+                ]
+              },
+              "waitTime": {
+                "type": "Int",
+                "value": 5
+              }
+            }
+          }
+        ]
+      },
+      "headers": {
+        "Date": "Mon, 22 Apr 2019 18:33:52 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "8ad1759f-24c1-46a5-aef5-edd267e18870",
+        "x-ms-ratelimit-remaining-subscription-reads": "11989",
+        "x-ms-request-id": "8ad1759f-24c1-46a5-aef5-edd267e18870"
+      }
+    }
+  },
+  "operationId": "GlobalParameters_ListByFactory",
+  "title": "GlobalParameters_ListByFactory"
+}

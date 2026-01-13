@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "integrationRuntimeName": "exampleIntegrationRuntime",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "exampleIntegrationRuntime",
+        "nodes": [
+          {
+            "availableMemoryInMB": 16740,
+            "concurrentJobsLimit": 28,
+            "concurrentJobsRunning": 0,
+            "cpuUtilization": 15,
+            "nodeName": "Node_1",
+            "receivedBytes": 6.731423377990723,
+            "sentBytes": 2.647491693496704
+          }
+        ]
+      },
+      "headers": {
+        "Date": "Thu, 14 Jun 2018 15:27:44 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "39277952-edbe-4336-ae94-f6f42b50b5f7",
+        "x-ms-ratelimit-remaining-subscription-reads": "14999",
+        "x-ms-request-id": "39277952-edbe-4336-ae94-f6f42b50b5f7"
+      }
+    }
+  },
+  "operationId": "IntegrationRuntimes_GetMonitoringData",
+  "title": "IntegrationRuntimes_GetMonitoringData"
+}

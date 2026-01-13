@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "integrationRuntimeName": "testactivityv2",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "ca63c855b72d44959653ffcc6eb0b96c",
+        "error": null,
+        "properties": null,
+        "status": "Succeeded"
+      },
+      "headers": {
+        "Date": "Mon, 03 Dec 2018 06:24:53 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "20708242-215c-4101-9437-44590b27cdbf",
+        "x-ms-ratelimit-remaining-subscription-reads": "11999",
+        "x-ms-request-id": "20708242-215c-4101-9437-44590b27cdbf"
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-12345678abc/resourcegroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/integrationruntimes/exampleIntegrationRuntime/IntegrationRuntimesStart/operationresults/d711da6461c04b98b03ae734743a3f4e?api-version=2018-06-01",
+        "location": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-12345678abc/resourcegroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/integrationruntimes/exampleIntegrationRuntime/IntegrationRuntimesStart/operationresults/d711da6461c04b98b03ae734743a3f4e?api-version=2018-06-01"
+      }
+    }
+  },
+  "operationId": "IntegrationRuntimeObjectMetadata_Refresh",
+  "title": "IntegrationRuntimeObjectMetadata_Refresh"
+}

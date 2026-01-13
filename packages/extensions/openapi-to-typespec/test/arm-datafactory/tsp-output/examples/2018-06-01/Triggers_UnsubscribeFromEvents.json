@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc",
+    "triggerName": "exampleTrigger"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "Disabled",
+        "triggerName": "exampleTrigger"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/triggers/exampleTrigger/getEventSubscriptionStatus?api-version=2018-06-01"
+      }
+    }
+  },
+  "operationId": "Triggers_UnsubscribeFromEvents",
+  "title": "Triggers_UnsubscribeFromEvents"
+}

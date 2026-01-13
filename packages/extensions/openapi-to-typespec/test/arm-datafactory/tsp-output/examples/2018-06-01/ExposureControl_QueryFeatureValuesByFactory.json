@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "exposureControlBatchRequest": {
+      "exposureControlRequests": [
+        {
+          "featureName": "ADFIntegrationRuntimeSharingRbac",
+          "featureType": "Feature"
+        },
+        {
+          "featureName": "ADFSampleFeature",
+          "featureType": "Feature"
+        }
+      ]
+    },
+    "factoryName": "exampleFactoryName",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "exposureControlResponses": [
+          {
+            "featureName": "ADFIntegrationRuntimeSharingRbac",
+            "value": "False"
+          },
+          {
+            "featureName": "ADFSampleFeature",
+            "value": "True"
+          }
+        ]
+      },
+      "headers": {
+        "Date": "Sat, 22 Dec 2018 09:46:07 GMT",
+        "X-Content-Type-Options": "nosniff"
+      }
+    }
+  },
+  "operationId": "ExposureControl_QueryFeatureValuesByFactory",
+  "title": "ExposureControl_QueryFeatureValuesByFactory"
+}

@@ -1,0 +1,23 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "changeDataCaptureName": "exampleChangeDataCapture",
+    "factoryName": "exampleFactoryName",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": "Stopped",
+      "headers": {
+        "Date": "Thu, 18 May 2023 09:47:50 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "80d72d8e-ca08-4fbf-a018-f95566a34c45",
+        "x-ms-ratelimit-remaining-subscription-reads": "11986",
+        "x-ms-request-id": "80d72d8e-ca08-4fbf-a018-f95566a34c45"
+      }
+    }
+  },
+  "operationId": "ChangeDataCapture_Status",
+  "title": "ChangeDataCapture_Start"
+}

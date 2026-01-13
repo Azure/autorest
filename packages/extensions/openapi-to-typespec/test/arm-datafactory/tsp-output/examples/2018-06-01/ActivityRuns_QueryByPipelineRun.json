@@ -1,0 +1,112 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "filterParameters": {
+      "lastUpdatedAfter": "2018-06-16T00:36:44.3345758Z",
+      "lastUpdatedBefore": "2018-06-16T00:49:48.3686473Z"
+    },
+    "resourceGroupName": "exampleResourceGroup",
+    "runId": "2f7fdb90-5df1-4b8e-ac2f-064cfa58202b",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "activityName": "ExampleForeachActivity",
+            "activityRunEnd": "2018-06-16T00:38:11.5445431Z",
+            "activityRunId": "f30c5514-fb85-43ed-9fa4-768d42e58680",
+            "activityRunStart": "2018-06-16T00:37:49.4804925Z",
+            "activityType": "ForEach",
+            "durationInMs": 22064,
+            "error": {
+              "errorCode": "",
+              "failureType": "",
+              "message": "",
+              "target": "ExampleForeachActivity"
+            },
+            "input": {},
+            "linkedServiceName": "",
+            "output": {},
+            "pipelineName": "examplePipeline",
+            "pipelineRunId": "2f7fdb90-5df1-4b8e-ac2f-064cfa58202b",
+            "retryAttempt": null,
+            "status": "Succeeded",
+            "userProperties": {}
+          },
+          {
+            "activityName": "ExampleCopyActivity",
+            "activityRunEnd": "2018-06-16T00:38:07.4188923Z",
+            "activityRunId": "a96678c8-7167-4f00-b629-afccfbad4e51",
+            "activityRunStart": "2018-06-16T00:37:50.2460952Z",
+            "activityType": "Copy",
+            "durationInMs": 17172,
+            "error": {
+              "errorCode": "",
+              "failureType": "",
+              "message": "",
+              "target": "ExampleCopyActivity"
+            },
+            "input": {
+              "dataIntegrationUnits": 32,
+              "sink": {
+                "type": "BlobSink"
+              },
+              "source": {
+                "type": "BlobSource"
+              }
+            },
+            "linkedServiceName": "",
+            "output": {
+              "copyDuration": 6,
+              "dataRead": 142000,
+              "dataWritten": 142000,
+              "effectiveIntegrationRuntime": "DefaultIntegrationRuntime (East US)",
+              "errors": [],
+              "executionDetails": [
+                {
+                  "detailedDurations": {
+                    "queuingDuration": 4,
+                    "transferDuration": 2
+                  },
+                  "duration": 6,
+                  "sink": {
+                    "type": "AzureBlob"
+                  },
+                  "source": {
+                    "type": "AzureBlob"
+                  },
+                  "start": "2018-06-16T00:37:50.68834Z",
+                  "status": "Succeeded",
+                  "usedCloudDataMovementUnits": 4,
+                  "usedParallelCopies": 1
+                }
+              ],
+              "filesRead": 1,
+              "filesWritten": 1,
+              "throughput": 23.112,
+              "usedCloudDataMovementUnits": 4,
+              "usedParallelCopies": 1
+            },
+            "pipelineName": "examplePipeline",
+            "pipelineRunId": "2f7fdb90-5df1-4b8e-ac2f-064cfa58202b",
+            "retryAttempt": null,
+            "status": "Succeeded",
+            "userProperties": {}
+          }
+        ]
+      },
+      "headers": {
+        "Date": "Sat, 16 Jun 2018 00:40:13 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "5465cf41-2e71-4ce6-8db4-9de1b92ffda9",
+        "x-ms-ratelimit-remaining-subscription-writes": "1187",
+        "x-ms-request-id": "5465cf41-2e71-4ce6-8db4-9de1b92ffda9"
+      }
+    }
+  },
+  "operationId": "ActivityRuns_QueryByPipelineRun",
+  "title": "ActivityRuns_QueryByPipelineRun"
+}

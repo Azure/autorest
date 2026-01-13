@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "ifMatch": null,
+    "privateEndpointConnectionName": "connection",
+    "privateEndpointWrapper": {
+      "properties": {
+        "privateEndpoint": {
+          "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/privateEndpoints/myPrivateEndpoint"
+        },
+        "privateLinkServiceConnectionState": {
+          "description": "Approved by admin.",
+          "actionsRequired": "",
+          "status": "Approved"
+        }
+      }
+    },
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "exampleFactoryName",
+        "type": "Microsoft.DataFactory/factories/privateEndpointConnections",
+        "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/privateEndpoints/myPrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "Approved by admin.",
+            "actionsRequired": "",
+            "status": "Approved"
+          },
+          "provisioningState": "Succeeded"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "PrivateEndpointConnection_CreateOrUpdate",
+  "title": "Approves or rejects a private endpoint connection for a factory."
+}

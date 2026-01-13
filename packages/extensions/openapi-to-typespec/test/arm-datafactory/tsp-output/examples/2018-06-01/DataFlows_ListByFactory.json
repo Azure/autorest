@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "exampleDataFlow",
+            "type": "Microsoft.DataFactory/factories/dataflows",
+            "etag": "0a0068d4-0000-0000-0000-5b245bd30000",
+            "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/dataflows/exampleDataFlow",
+            "properties": {
+              "type": "MappingDataFlow",
+              "description": "Sample demo data flow to convert currencies showing usage of union, derive and conditional split transformation.",
+              "typeProperties": {
+                "script": "source(output(PreviousConversionRate as double,Country as string,DateTime1 as string,CurrentConversionRate as double),allowSchemaDrift: false,validateSchema: false) ~> USDCurrency\nsource(output(PreviousConversionRate as double,Country as string,DateTime1 as string,CurrentConversionRate as double),allowSchemaDrift: true,validateSchema: false) ~> CADSource\nUSDCurrency, CADSource union(byName: true)~> Union\nUnion derive(NewCurrencyRate = round(CurrentConversionRate*1.25)) ~> NewCurrencyColumn\nNewCurrencyColumn split(Country == 'USD',Country == 'CAD',disjoint: false) ~> ConditionalSplit1@(USD, CAD)\nConditionalSplit1@USD sink(saveMode:'overwrite' ) ~> USDSink\nConditionalSplit1@CAD sink(saveMode:'overwrite' ) ~> CADSink",
+                "sinks": [
+                  {
+                    "name": "USDSink",
+                    "dataset": {
+                      "type": "DatasetReference",
+                      "referenceName": "USDOutput"
+                    }
+                  },
+                  {
+                    "name": "CADSink",
+                    "dataset": {
+                      "type": "DatasetReference",
+                      "referenceName": "CADOutput"
+                    }
+                  }
+                ],
+                "sources": [
+                  {
+                    "name": "USDCurrency",
+                    "dataset": {
+                      "type": "DatasetReference",
+                      "referenceName": "CurrencyDatasetUSD"
+                    }
+                  },
+                  {
+                    "name": "CADSource",
+                    "dataset": {
+                      "type": "DatasetReference",
+                      "referenceName": "CurrencyDatasetCAD"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "headers": {
+        "Date": "Sat, 16 Jun 2018 00:37:40 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "341c9ece-5062-448b-be98-3ccbf476ed5d",
+        "x-ms-ratelimit-remaining-subscription-reads": "14992",
+        "x-ms-request-id": "341c9ece-5062-448b-be98-3ccbf476ed5d"
+      }
+    }
+  },
+  "operationId": "DataFlows_ListByFactory",
+  "title": "DataFlows_ListByFactory"
+}

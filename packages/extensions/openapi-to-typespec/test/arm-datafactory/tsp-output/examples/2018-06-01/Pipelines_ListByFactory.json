@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "examplePipeline",
+            "type": "Microsoft.DataFactory/factories/pipelines",
+            "etag": "0a006cd4-0000-0000-0000-5b245bd60000",
+            "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/pipelines/examplePipeline",
+            "properties": {
+              "description": "Example description",
+              "activities": [
+                {
+                  "name": "ExampleForeachActivity",
+                  "type": "ForEach",
+                  "typeProperties": {
+                    "activities": [
+                      {
+                        "name": "ExampleCopyActivity",
+                        "type": "Copy",
+                        "inputs": [
+                          {
+                            "type": "DatasetReference",
+                            "parameters": {
+                              "MyFileName": "examplecontainer.csv",
+                              "MyFolderPath": "examplecontainer"
+                            },
+                            "referenceName": "exampleDataset"
+                          }
+                        ],
+                        "outputs": [
+                          {
+                            "type": "DatasetReference",
+                            "parameters": {
+                              "MyFileName": {
+                                "type": "Expression",
+                                "value": "@item()"
+                              },
+                              "MyFolderPath": "examplecontainer"
+                            },
+                            "referenceName": "exampleDataset"
+                          }
+                        ],
+                        "typeProperties": {
+                          "dataIntegrationUnits": 32,
+                          "sink": {
+                            "type": "BlobSink"
+                          },
+                          "source": {
+                            "type": "BlobSource"
+                          }
+                        }
+                      }
+                    ],
+                    "isSequential": true,
+                    "items": {
+                      "type": "Expression",
+                      "value": "@pipeline().parameters.OutputBlobNameList"
+                    }
+                  }
+                }
+              ],
+              "parameters": {
+                "OutputBlobNameList": {
+                  "type": "Array"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "headers": {
+        "Date": "Sat, 16 Jun 2018 00:37:43 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "92292250-c10f-4c47-8eb6-b886b361add7",
+        "x-ms-ratelimit-remaining-subscription-reads": "14990",
+        "x-ms-request-id": "92292250-c10f-4c47-8eb6-b886b361add7"
+      }
+    }
+  },
+  "operationId": "Pipelines_ListByFactory",
+  "title": "Pipelines_ListByFactory"
+}

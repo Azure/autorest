@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factoryName": "exampleFactoryName",
+    "resourceGroupName": "exampleResourceGroup",
+    "runId": "2f7fdb90-5df1-4b8e-ac2f-064cfa58202b",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "annotations": [],
+        "durationInMs": 28105,
+        "invokedBy": {
+          "name": "Manual",
+          "id": "80a01654a9d34ad18b3fcac5d5d76b67"
+        },
+        "lastUpdated": "2018-06-16T00:38:12.7314495Z",
+        "message": "",
+        "parameters": {
+          "OutputBlobNameList": "[\"exampleoutput.csv\"]"
+        },
+        "pipelineName": "examplePipeline",
+        "runEnd": "2018-06-16T00:38:12.7314495Z",
+        "runId": "2f7fdb90-5df1-4b8e-ac2f-064cfa58202b",
+        "runStart": "2018-06-16T00:37:44.6257014Z",
+        "status": "Succeeded"
+      },
+      "headers": {
+        "Date": "Sat, 16 Jun 2018 00:40:02 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "6d9de9bd-a412-4a6f-8b9e-37d369323646",
+        "x-ms-ratelimit-remaining-subscription-reads": "14988",
+        "x-ms-request-id": "6d9de9bd-a412-4a6f-8b9e-37d369323646"
+      }
+    }
+  },
+  "operationId": "PipelineRuns_Get",
+  "title": "PipelineRuns_Get"
+}

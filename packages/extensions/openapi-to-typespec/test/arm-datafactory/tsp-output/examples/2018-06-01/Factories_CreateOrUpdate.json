@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01",
+    "factory": {
+      "location": "East US"
+    },
+    "factoryName": "exampleFactoryName",
+    "resourceGroupName": "exampleResourceGroup",
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "exampleFactoryName",
+        "type": "Microsoft.DataFactory/factories",
+        "eTag": "\"00003e04-0000-0000-0000-5b28979e0000\"",
+        "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName",
+        "location": "East US",
+        "properties": {
+          "createTime": "2018-06-19T05:41:50.0041314Z",
+          "provisioningState": "Succeeded",
+          "version": "2018-06-01"
+        },
+        "tags": {}
+      },
+      "headers": {
+        "Date": "Tue, 19 Jun 2018 05:41:50 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "657028b7-5e63-4d7c-b8e7-cb336ed92ff0",
+        "x-ms-ratelimit-remaining-subscription-writes": "1193",
+        "x-ms-request-id": "657028b7-5e63-4d7c-b8e7-cb336ed92ff0"
+      }
+    }
+  },
+  "operationId": "Factories_CreateOrUpdate",
+  "title": "Factories_CreateOrUpdate"
+}
