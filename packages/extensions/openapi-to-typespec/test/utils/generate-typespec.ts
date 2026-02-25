@@ -101,13 +101,7 @@ async function generate(root: string, path: string, debug = false, isFullCompati
     "--openapi-to-typespec.isTest",
     "--openapi-to-typespec.removeOperationId",
   ];
-  const spawn = spawnSync("node", args, { stdio: ["inherit", "inherit", "pipe"] });
-
-  // Write stderr to stdout to prevent rush from treating stderr output as a failure
-  // (e.g. the deprecation warning printed by autorest cli)
-  if (spawn.stderr?.length) {
-    process.stdout.write(spawn.stderr);
-  }
+  const spawn = spawnSync("node", args, { stdio: "inherit" });
 
   if (spawn.status !== 0) {
     throw new Error(
