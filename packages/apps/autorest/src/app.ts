@@ -58,6 +58,11 @@ function logBanner() {
     );
     console.log(`(C) 2018 ${chalk.bold("Microsoft Corporation.")}`);
     console.log(chalk.blue.bold.underline("https://aka.ms/autorest"));
+    console.warn(
+      chalk.yellow.bold(
+        "⚠️ AutoRest is deprecated and will be retired on July 1, 2026. Please migrate to TypeSpec: https://typespec.io — details: https://github.com/Azure/autorest/issues/5175",
+      ),
+    );
   }
 }
 
