@@ -63,9 +63,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-/**
- * ApiManagement Client
- */
+/** ApiManagement Client */
 @armProviderNamespace
 @service(#{ title: "ApiManagementClient" })
 @versioned(Versions)

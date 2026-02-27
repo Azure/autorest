@@ -24,9 +24,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-/**
- * AlertsManagement Client
- */
+/** AlertsManagement Client */
 @armProviderNamespace
 @service(#{ title: "AlertsManagementClient" })
 @versioned(Versions)

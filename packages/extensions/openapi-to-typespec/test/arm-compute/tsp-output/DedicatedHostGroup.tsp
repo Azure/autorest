@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * Specifies information about the dedicated host group that the dedicated hosts should be assigned to. Currently, a dedicated host can only be added to a dedicated host group at creation time. An existing dedicated host cannot be added to another dedicated host group.
- */
+/** Specifies information about the dedicated host group that the dedicated hosts should be assigned to. Currently, a dedicated host can only be added to a dedicated host group at creation time. An existing dedicated host cannot be added to another dedicated host group. */
 model DedicatedHostGroup
   is Azure.ResourceManager.TrackedResource<DedicatedHostGroupProperties> {
   ...ResourceNameParameter<
@@ -26,47 +24,33 @@ model DedicatedHostGroup
 
 @armResourceOperations
 interface DedicatedHostGroups {
-  /**
-   * Retrieves information about a dedicated host group.
-   */
+  /** Retrieves information about a dedicated host group. */
   get is ArmResourceRead<
     DedicatedHostGroup,
     Parameters = {
-      /**
-       * The expand expression to apply on the operation. 'InstanceView' will retrieve the list of instance views of the dedicated hosts under the dedicated host group. 'UserData' is not supported for dedicated host group.
-       */
+      /** The expand expression to apply on the operation. 'InstanceView' will retrieve the list of instance views of the dedicated hosts under the dedicated host group. 'UserData' is not supported for dedicated host group. */
       @query("$expand")
       $expand?: InstanceViewTypes;
     }
   >;
 
-  /**
-   * Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596)
-   */
+  /** Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596) */
   createOrUpdate is ArmResourceCreateOrReplaceSync<DedicatedHostGroup>;
 
-  /**
-   * Update an dedicated host group.
-   */
+  /** Update an dedicated host group. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     DedicatedHostGroup,
     PatchModel = DedicatedHostGroupUpdate
   >;
 
-  /**
-   * Delete a dedicated host group.
-   */
+  /** Delete a dedicated host group. */
   delete is ArmResourceDeleteSync<DedicatedHostGroup>;
 
-  /**
-   * Lists all of the dedicated host groups in the specified resource group. Use the nextLink property in the response to get the next page of dedicated host groups.
-   */
+  /** Lists all of the dedicated host groups in the specified resource group. Use the nextLink property in the response to get the next page of dedicated host groups. */
   listByResourceGroup is ArmResourceListByParent<DedicatedHostGroup>;
 
-  /**
-   * Lists all of the dedicated host groups in the subscription. Use the nextLink property in the response to get the next page of dedicated host groups.
-   */
+  /** Lists all of the dedicated host groups in the subscription. Use the nextLink property in the response to get the next page of dedicated host groups. */
   listBySubscription is ArmListBySubscription<DedicatedHostGroup>;
 }
 

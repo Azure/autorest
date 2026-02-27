@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-/**
- * Azure Resource Manager resource envelope.
- */
+/** Azure Resource Manager resource envelope. */
 @parentResource(CodeContainerResource)
 model CodeVersionResource
   is Azure.ResourceManager.ProxyResource<CodeVersion, false> {
@@ -57,55 +55,39 @@ alias CodeVersionResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @armResourceOperations
 interface CodeVersionResources {
-  /**
-   * Get version.
-   */
+  /** Get version. */
   get is CodeVersionResourceOps.Read<CodeVersionResource>;
 
-  /**
-   * Create or update version.
-   */
+  /** Create or update version. */
   createOrUpdate is CodeVersionResourceOps.CreateOrUpdateAsync<CodeVersionResource>;
 
-  /**
-   * Delete version.
-   */
+  /** Delete version. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is CodeVersionResourceOps.DeleteWithoutOkAsync<
     CodeVersionResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List versions.
-   */
+  /** List versions. */
   list is CodeVersionResourceOps.List<
     CodeVersionResource,
     Parameters = {
-      /**
-       * Ordering of list.
-       */
+      /** Ordering of list. */
       @query("$orderBy")
       $orderBy?: string;
 
-      /**
-       * Maximum number of records to return.
-       */
+      /** Maximum number of records to return. */
       @query("$top")
       $top?: int32;
 
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
     },
     Response = ArmResponse<CodeVersionResourceArmPaginatedResult>
   >;
 
-  /**
-   * Generate a storage location and credential for the client to upload a code asset to.
-   */
+  /** Generate a storage location and credential for the client to upload a code asset to. */
   @action("startPendingUpload")
   createOrGetStartPendingUpload is CodeVersionResourceOps.ActionSync<
     CodeVersionResource,
@@ -144,63 +126,43 @@ alias CodeVersionOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @armResourceOperations
 interface CodeVersions {
-  /**
-   * Get version.
-   */
+  /** Get version. */
   get is CodeVersionOps.Read<CodeVersionResource>;
 
-  /**
-   * Create or update version.
-   */
+  /** Create or update version. */
   createOrUpdate is CodeVersionOps.CreateOrUpdateSync<CodeVersionResource>;
 
-  /**
-   * Delete version.
-   */
+  /** Delete version. */
   delete is CodeVersionOps.DeleteSync<CodeVersionResource>;
 
-  /**
-   * List versions.
-   */
+  /** List versions. */
   list is CodeVersionOps.List<
     CodeVersionResource,
     Parameters = {
-      /**
-       * Ordering of list.
-       */
+      /** Ordering of list. */
       @query("$orderBy")
       $orderBy?: string;
 
-      /**
-       * Maximum number of records to return.
-       */
+      /** Maximum number of records to return. */
       @query("$top")
       $top?: int32;
 
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
 
-      /**
-       * If specified, return CodeVersion assets with specified content hash value, regardless of name
-       */
+      /** If specified, return CodeVersion assets with specified content hash value, regardless of name */
       @query("hash")
       hash?: string;
 
-      /**
-       * Hash algorithm version when listing by hash
-       */
+      /** Hash algorithm version when listing by hash */
       @query("hashVersion")
       hashVersion?: string;
     },
     Response = ArmResponse<CodeVersionResourceArmPaginatedResult>
   >;
 
-  /**
-   * Generate a storage location and credential for the client to upload a code asset to.
-   */
+  /** Generate a storage location and credential for the client to upload a code asset to. */
   @action("startPendingUpload")
   createOrGetStartPendingUpload is CodeVersionOps.ActionSync<
     CodeVersionResource,

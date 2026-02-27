@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * Email Template details.
- */
+/** Email Template details. */
 @parentResource(ApiManagementServiceResource)
 model EmailTemplateContract
   is Azure.ResourceManager.ProxyResource<EmailTemplateContractProperties> {
@@ -28,83 +26,59 @@ model EmailTemplateContract
 
 @armResourceOperations
 interface EmailTemplateContracts {
-  /**
-   * Gets the details of the email template specified by its identifier.
-   */
+  /** Gets the details of the email template specified by its identifier. */
   get is ArmResourceRead<EmailTemplateContract>;
 
-  /**
-   * Gets the entity state (Etag) version of the email template specified by its identifier.
-   */
+  /** Gets the entity state (Etag) version of the email template specified by its identifier. */
   getEntityTag is ArmResourceCheckExistence<EmailTemplateContract>;
 
-  /**
-   * Updates an Email Template.
-   */
+  /** Updates an Email Template. */
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     EmailTemplateContract,
     Request = EmailTemplateUpdateParameters,
     Parameters = {
-      /**
-       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
-       */
+      /** ETag of the Entity. Not required when creating an entity, but required when updating an entity. */
       @header
       `If-Match`?: string;
     }
   >;
 
-  /**
-   * Updates API Management email template
-   */
+  /** Updates API Management email template */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     EmailTemplateContract,
     PatchModel = EmailTemplateUpdateParameters,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Reset the Email Template to default template provided by the API Management service instance.
-   */
+  /** Reset the Email Template to default template provided by the API Management service instance. */
   delete is ArmResourceDeleteSync<
     EmailTemplateContract,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Gets all email templates
-   */
+  /** Gets all email templates */
   listByService is ArmResourceListByParent<
     EmailTemplateContract,
     Parameters = {
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-       */
+      /** |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br> */
       @query("$filter")
       $filter?: string;
 
-      /**
-       * Number of records to return.
-       */
+      /** Number of records to return. */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      /**
-       * Number of records to skip.
-       */
+      /** Number of records to skip. */
       @query("$skip")
       $skip?: int32;
     }

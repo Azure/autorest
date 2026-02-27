@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.IntegrationSpaces;
-/**
- * An integration application under space.
- */
+/** An integration application under space. */
 @parentResource(Space)
 model Application
   is Azure.ResourceManager.TrackedResource<ApplicationProperties> {
@@ -27,101 +25,71 @@ model Application
 
 @armResourceOperations
 interface Applications {
-  /**
-   * Get a Application
-   */
+  /** Get a Application */
   get is ArmResourceRead<Application>;
 
-  /**
-   * Create a Application
-   */
+  /** Create a Application */
   createOrUpdate is ArmResourceCreateOrReplaceSync<Application>;
 
-  /**
-   * Update a Application
-   */
+  /** Update a Application */
   @patch(#{ implicitOptionality: false })
   patch is ArmCustomPatchSync<Application, PatchModel = ApplicationUpdate>;
 
-  /**
-   * Delete a Application
-   */
+  /** Delete a Application */
   delete is ArmResourceDeleteSync<Application>;
 
-  /**
-   * List Application resources by Space
-   */
+  /** List Application resources by Space */
   listBySpace is ArmResourceListByParent<
     Application,
     Parameters = {
-      /**
-       * The number of result items to return.
-       */
+      /** The number of result items to return. */
       @query("top")
       top?: int32;
 
-      /**
-       * The number of result items to skip.
-       */
+      /** The number of result items to skip. */
       @query("skip")
       skip?: int32;
 
-      /**
-       * The maximum number of result items per page.
-       */
+      /** The maximum number of result items per page. */
       @query("maxpagesize")
       maxpagesize?: int32;
 
-      /**
-       * Filter the result list using the given expression.
-       */
+      /** Filter the result list using the given expression. */
       @query("filter")
       filter?: string;
 
-      /**
-       * Select the specified fields to be included in the response.
-       */
+      /** Select the specified fields to be included in the response. */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "select", explode: true })
       select?: string[];
 
-      /**
-       * Expand the indicated resources into the response.
-       */
+      /** Expand the indicated resources into the response. */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "expand", explode: true })
       expand?: string[];
 
-      /**
-       * Expressions that specify the order of returned results.
-       */
+      /** Expressions that specify the order of returned results. */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "orderby", explode: true })
       orderby?: string[];
     }
   >;
 
-  /**
-   * The delete business process development artifact action.
-   */
+  /** The delete business process development artifact action. */
   deleteBusinessProcessDevelopmentArtifact is ArmResourceActionSync<
     Application,
     GetOrDeleteBusinessProcessDevelopmentArtifactRequest,
     OkResponse
   >;
 
-  /**
-   * The get business process development artifact action.
-   */
+  /** The get business process development artifact action. */
   getBusinessProcessDevelopmentArtifact is ArmResourceActionSync<
     Application,
     GetOrDeleteBusinessProcessDevelopmentArtifactRequest,
     ArmResponse<SaveOrGetBusinessProcessDevelopmentArtifactResponse>
   >;
 
-  /**
-   * The list business process development artifacts action.
-   */
+  /** The list business process development artifacts action. */
   @list
   listBusinessProcessDevelopmentArtifacts is ArmResourceActionSync<
     Application,
@@ -129,18 +97,14 @@ interface Applications {
     ArmResponse<ListBusinessProcessDevelopmentArtifactsResponse>
   >;
 
-  /**
-   * The save business process development artifact action.
-   */
+  /** The save business process development artifact action. */
   saveBusinessProcessDevelopmentArtifact is ArmResourceActionSync<
     Application,
     SaveOrValidateBusinessProcessDevelopmentArtifactRequest,
     ArmResponse<SaveOrGetBusinessProcessDevelopmentArtifactResponse>
   >;
 
-  /**
-   * The validate business process development artifact action.
-   */
+  /** The validate business process development artifact action. */
   validateBusinessProcessDevelopmentArtifact is ArmResourceActionSync<
     Application,
     SaveOrValidateBusinessProcessDevelopmentArtifactRequest,

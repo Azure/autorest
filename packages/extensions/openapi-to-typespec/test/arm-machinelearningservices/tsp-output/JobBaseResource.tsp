@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-/**
- * Azure Resource Manager resource envelope.
- */
+/** Azure Resource Manager resource envelope. */
 @parentResource(Workspace)
 model JobBaseResource is Azure.ResourceManager.ProxyResource<JobBase, false> {
   ...ResourceNameParameter<
@@ -26,88 +24,62 @@ model JobBaseResource is Azure.ResourceManager.ProxyResource<JobBase, false> {
 
 @armResourceOperations
 interface JobBaseResources {
-  /**
-   * Gets a Job by name/id.
-   */
+  /** Gets a Job by name/id. */
   get is ArmResourceRead<JobBaseResource>;
 
-  /**
-   * Creates and executes a Job.
-   */
+  /** Creates and executes a Job. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<JobBaseResource>;
 
-  /**
-   * Updates a Job.
-   */
+  /** Updates a Job. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     JobBaseResource,
     PatchModel = PartialJobBasePartialResource
   >;
 
-  /**
-   * Deletes a Job (asynchronous).
-   */
+  /** Deletes a Job (asynchronous). */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     JobBaseResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * Lists Jobs in the workspace.
-   */
+  /** Lists Jobs in the workspace. */
   list is ArmResourceListByParent<
     JobBaseResource,
     Parameters = {
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
 
-      /**
-       * Type of job to be returned.
-       */
+      /** Type of job to be returned. */
       @query("jobType")
       jobType?: string;
 
-      /**
-       * Jobs returned will have this tag key.
-       */
+      /** Jobs returned will have this tag key. */
       @query("tag")
       tag?: string;
 
-      /**
-       * View type for including/excluding (for example) archived entities.
-       */
+      /** View type for including/excluding (for example) archived entities. */
       @query("listViewType")
       listViewType?: ListViewType;
 
-      /**
-       * Asset name the job's named output is registered with
-       */
+      /** Asset name the job's named output is registered with */
       @query("assetName")
       assetName?: string;
 
-      /**
-       * Indicator whether the job is scheduled job.
-       */
+      /** Indicator whether the job is scheduled job. */
       @query("scheduled")
       scheduled?: boolean;
 
-      /**
-       * The scheduled id for listing the job triggered from
-       */
+      /** The scheduled id for listing the job triggered from */
       @query("scheduleId")
       scheduleId?: string;
     },
     Response = ArmResponse<JobBaseResourceArmPaginatedResult>
   >;
 
-  /**
-   * Cancels a Job (asynchronous).
-   */
+  /** Cancels a Job (asynchronous). */
   cancel is ArmResourceActionAsync<JobBaseResource, void, OkResponse>;
 }
 

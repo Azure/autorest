@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * Diagnostic details.
- */
+/** Diagnostic details. */
 @parentResource(ApiContract)
 model DiagnosticContract
   is Azure.ResourceManager.ProxyResource<DiagnosticContractProperties> {
@@ -57,82 +55,58 @@ alias DiagnosticContractOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @armResourceOperations
 interface DiagnosticContracts {
-  /**
-   * Gets the details of the Diagnostic for an API specified by its identifier.
-   */
+  /** Gets the details of the Diagnostic for an API specified by its identifier. */
   get is DiagnosticContractOps.Read<DiagnosticContract>;
 
-  /**
-   * Gets the entity state (Etag) version of the Diagnostic for an API specified by its identifier.
-   */
+  /** Gets the entity state (Etag) version of the Diagnostic for an API specified by its identifier. */
   getEntityTag is DiagnosticContractOps.CheckExistence<DiagnosticContract>;
 
-  /**
-   * Creates a new Diagnostic for an API or updates an existing one.
-   */
+  /** Creates a new Diagnostic for an API or updates an existing one. */
   createOrUpdate is DiagnosticContractOps.CreateOrUpdateSync<
     DiagnosticContract,
     Parameters = {
-      /**
-       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
-       */
+      /** ETag of the Entity. Not required when creating an entity, but required when updating an entity. */
       @header
       `If-Match`?: string;
     }
   >;
 
-  /**
-   * Updates the details of the Diagnostic for an API specified by its identifier.
-   */
+  /** Updates the details of the Diagnostic for an API specified by its identifier. */
   @patch(#{ implicitOptionality: false })
   update is DiagnosticContractOps.CustomPatchSync<
     DiagnosticContract,
     PatchModel = DiagnosticContract,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Deletes the specified Diagnostic from an API.
-   */
+  /** Deletes the specified Diagnostic from an API. */
   delete is DiagnosticContractOps.DeleteSync<
     DiagnosticContract,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Lists all diagnostics of an API.
-   */
+  /** Lists all diagnostics of an API. */
   listByService is DiagnosticContractOps.List<
     DiagnosticContract,
     Parameters = {
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-       */
+      /** |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br> */
       @query("$filter")
       $filter?: string;
 
-      /**
-       * Number of records to return.
-       */
+      /** Number of records to return. */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      /**
-       * Number of records to skip.
-       */
+      /** Number of records to skip. */
       @query("$skip")
       $skip?: int32;
     }
@@ -164,82 +138,58 @@ alias DiagnosticOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @armResourceOperations
 interface Diagnostic {
-  /**
-   * Gets the details of the Diagnostic specified by its identifier.
-   */
+  /** Gets the details of the Diagnostic specified by its identifier. */
   get is DiagnosticOps.Read<DiagnosticContract>;
 
-  /**
-   * Gets the entity state (Etag) version of the Diagnostic specified by its identifier.
-   */
+  /** Gets the entity state (Etag) version of the Diagnostic specified by its identifier. */
   getEntityTag is DiagnosticOps.CheckExistence<DiagnosticContract>;
 
-  /**
-   * Creates a new Diagnostic or updates an existing one.
-   */
+  /** Creates a new Diagnostic or updates an existing one. */
   createOrUpdate is DiagnosticOps.CreateOrUpdateSync<
     DiagnosticContract,
     Parameters = {
-      /**
-       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
-       */
+      /** ETag of the Entity. Not required when creating an entity, but required when updating an entity. */
       @header
       `If-Match`?: string;
     }
   >;
 
-  /**
-   * Updates the details of the Diagnostic specified by its identifier.
-   */
+  /** Updates the details of the Diagnostic specified by its identifier. */
   @patch(#{ implicitOptionality: false })
   update is DiagnosticOps.CustomPatchSync<
     DiagnosticContract,
     PatchModel = DiagnosticContract,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Deletes the specified Diagnostic.
-   */
+  /** Deletes the specified Diagnostic. */
   delete is DiagnosticOps.DeleteSync<
     DiagnosticContract,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Lists all diagnostics of the API Management service instance.
-   */
+  /** Lists all diagnostics of the API Management service instance. */
   listByService is DiagnosticOps.List<
     DiagnosticContract,
     Parameters = {
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-       */
+      /** |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br> */
       @query("$filter")
       $filter?: string;
 
-      /**
-       * Number of records to return.
-       */
+      /** Number of records to return. */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      /**
-       * Number of records to skip.
-       */
+      /** Number of records to skip. */
       @query("$skip")
       $skip?: int32;
     }

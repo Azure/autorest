@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AgFoodPlatform;
-/**
- * DataManagerForAgriculture extension resource.
- */
+/** DataManagerForAgriculture extension resource. */
 @tenantResource
 model DataManagerForAgricultureExtension
   is Azure.ResourceManager.ProxyResource<DataManagerForAgricultureExtensionProperties> {
@@ -26,45 +24,33 @@ model DataManagerForAgricultureExtension
 
 @armResourceOperations
 interface DataManagerForAgricultureExtensions {
-  /**
-   * Get Data Manager For Agriculture extension.
-   */
+  /** Get Data Manager For Agriculture extension. */
   get is ArmResourceRead<
     DataManagerForAgricultureExtension,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
   >;
 
-  /**
-   * Get list of Data Manager For Agriculture extension.
-   */
+  /** Get list of Data Manager For Agriculture extension. */
   list is ArmResourceListByParent<
     DataManagerForAgricultureExtension,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
-      /**
-       * DataManagerForAgricultureExtension ids.
-       */
+      /** DataManagerForAgricultureExtension ids. */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "farmBeatsExtensionIds", explode: true })
       farmBeatsExtensionIds?: string[];
 
-      /**
-       * DataManagerForAgriculture extension names.
-       */
+      /** DataManagerForAgriculture extension names. */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "farmBeatsExtensionNames", explode: true })
       farmBeatsExtensionNames?: string[];
 
-      /**
-       * Extension categories.
-       */
+      /** Extension categories. */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "extensionCategories", explode: true })
       extensionCategories?: string[];
 
-      /**
-       * Publisher ids.
-       */
+      /** Publisher ids. */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "publisherIds", explode: true })
       publisherIds?: string[];

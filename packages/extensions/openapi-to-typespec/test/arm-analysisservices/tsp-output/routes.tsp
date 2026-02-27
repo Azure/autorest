@@ -13,9 +13,7 @@ namespace Azure.ResourceManager.Analysis;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface ServersOperationGroup {
-  /**
-   * Lists eligible SKUs for Analysis Services resource provider.
-   */
+  /** Lists eligible SKUs for Analysis Services resource provider. */
   @autoRoute
   @get
   @action("skus")
@@ -23,9 +21,7 @@ interface ServersOperationGroup {
     Response = SkuEnumerationForNewResourceResult,
     Scope = SubscriptionActionScope
   >;
-  /**
-   * Check the name availability in the target location.
-   */
+  /** Check the name availability in the target location. */
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<
     Request = CheckServerNameAvailabilityParameters,

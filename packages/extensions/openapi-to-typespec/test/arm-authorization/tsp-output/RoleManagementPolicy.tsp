@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.Authorization;
-/**
- * Role management policy
- */
+/** Role management policy */
 @extensionResource
 model RoleManagementPolicy
   is Azure.ResourceManager.ExtensionResource<RoleManagementPolicyProperties> {
@@ -26,14 +24,10 @@ model RoleManagementPolicy
 
 @armResourceOperations
 interface RoleManagementPolicies {
-  /**
-   * Get the specified role management policy for a resource scope
-   */
+  /** Get the specified role management policy for a resource scope */
   get is Extension.Read<Extension.ScopeParameter, RoleManagementPolicy>;
 
-  /**
-   * Update a role management policy
-   */
+  /** Update a role management policy */
   @patch(#{ implicitOptionality: false })
   update is Extension.CustomPatchSync<
     Extension.ScopeParameter,
@@ -41,9 +35,7 @@ interface RoleManagementPolicies {
     PatchModel = RoleManagementPolicy
   >;
 
-  /**
-   * Gets role management policies for a resource scope.
-   */
+  /** Gets role management policies for a resource scope. */
   listForScope is Extension.ListByTarget<
     Extension.ScopeParameter,
     RoleManagementPolicy

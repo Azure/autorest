@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * Create or update Restore Point collection parameters.
- */
+/** Create or update Restore Point collection parameters. */
 model RestorePointCollection
   is Azure.ResourceManager.TrackedResource<RestorePointCollectionProperties> {
   ...ResourceNameParameter<
@@ -25,51 +23,37 @@ model RestorePointCollection
 
 @armResourceOperations
 interface RestorePointCollections {
-  /**
-   * The operation to get the restore point collection.
-   */
+  /** The operation to get the restore point collection. */
   get is ArmResourceRead<
     RestorePointCollection,
     Parameters = {
-      /**
-       * The expand expression to apply on the operation. If expand=restorePoints, server will return all contained restore points in the restorePointCollection.
-       */
+      /** The expand expression to apply on the operation. If expand=restorePoints, server will return all contained restore points in the restorePointCollection. */
       @query("$expand")
       $expand?: RestorePointCollectionExpandOptions;
     }
   >;
 
-  /**
-   * The operation to create or update the restore point collection. Please refer to https://aka.ms/RestorePoints for more details. When updating a restore point collection, only tags may be modified.
-   */
+  /** The operation to create or update the restore point collection. Please refer to https://aka.ms/RestorePoints for more details. When updating a restore point collection, only tags may be modified. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<RestorePointCollection>;
 
-  /**
-   * The operation to update the restore point collection.
-   */
+  /** The operation to update the restore point collection. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     RestorePointCollection,
     PatchModel = RestorePointCollectionUpdate
   >;
 
-  /**
-   * The operation to delete the restore point collection. This operation will also delete all the contained restore points.
-   */
+  /** The operation to delete the restore point collection. This operation will also delete all the contained restore points. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     RestorePointCollection,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * Gets the list of restore point collections in a resource group.
-   */
+  /** Gets the list of restore point collections in a resource group. */
   list is ArmResourceListByParent<RestorePointCollection>;
 
-  /**
-   * Gets the list of restore point collections in the subscription. Use nextLink property in the response to get the next page of restore point collections. Do this till nextLink is not null to fetch all the restore point collections.
-   */
+  /** Gets the list of restore point collections in the subscription. Use nextLink property in the response to get the next page of restore point collections. Do this till nextLink is not null to fetch all the restore point collections. */
   listAll is ArmListBySubscription<RestorePointCollection>;
 }
 

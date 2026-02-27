@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Quota;
-/**
- * Resource usage.
- */
+/** Resource usage. */
 @extensionResource
 model CurrentUsagesBase
   is Azure.ResourceManager.ExtensionResource<UsagesProperties> {
@@ -26,14 +24,10 @@ model CurrentUsagesBase
 
 @armResourceOperations
 interface CurrentUsagesBases {
-  /**
-   * Get the current usage of a resource.
-   */
+  /** Get the current usage of a resource. */
   get is Extension.Read<Extension.ScopeParameter, CurrentUsagesBase>;
 
-  /**
-   * Get a list of current usage for all resources for the scope specified.
-   */
+  /** Get a list of current usage for all resources for the scope specified. */
   list is Extension.ListByTarget<
     Extension.ScopeParameter,
     CurrentUsagesBase,

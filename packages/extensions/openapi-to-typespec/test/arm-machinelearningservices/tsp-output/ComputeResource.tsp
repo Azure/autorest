@@ -12,9 +12,7 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 // FIXME: ComputeResource has no properties property
-/**
- * Machine Learning compute object wrapped into ARM resource envelope.
- */
+/** Machine Learning compute object wrapped into ARM resource envelope. */
 @parentResource(Workspace)
 model ComputeResource
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<{}> {
@@ -30,23 +28,17 @@ model ComputeResource
 
 @armResourceOperations
 interface ComputeResources {
-  /**
-   * Gets compute definition by its name. Any secrets (storage keys, service credentials, etc) are not returned - use 'keys' nested resource to get them.
-   */
+  /** Gets compute definition by its name. Any secrets (storage keys, service credentials, etc) are not returned - use 'keys' nested resource to get them. */
   get is ArmResourceRead<ComputeResource>;
 
-  /**
-   * Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation. If your intent is to create a new compute, do a GET first to verify that it does not exist yet.
-   */
+  /** Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation. If your intent is to create a new compute, do a GET first to verify that it does not exist yet. */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ComputeResource,
     LroHeaders = ArmLroLocationHeader<FinalResult = ComputeResource> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /**
-   * Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.
-   */
+  /** Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ComputeResource,
@@ -54,40 +46,30 @@ interface ComputeResources {
     Response = ArmResponse<ComputeResource>
   >;
 
-  /**
-   * Deletes specified Machine Learning compute.
-   */
+  /** Deletes specified Machine Learning compute. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     ComputeResource,
     Parameters = {
-      /**
-       * Delete the underlying compute if 'Delete', or detach the underlying compute from workspace if 'Detach'.
-       */
+      /** Delete the underlying compute if 'Delete', or detach the underlying compute from workspace if 'Detach'. */
       @query("underlyingResourceAction")
       underlyingResourceAction: UnderlyingResourceAction;
     },
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * Gets computes in specified workspace.
-   */
+  /** Gets computes in specified workspace. */
   list is ArmResourceListByParent<
     ComputeResource,
     Parameters = {
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
     },
     Response = ArmResponse<PaginatedComputeResourcesList>
   >;
 
-  /**
-   * Updates the custom services list. The list of custom services provided shall be overwritten
-   */
+  /** Updates the custom services list. The list of custom services provided shall be overwritten */
   @action("customServices")
   updateCustomServices is ArmResourceActionSync<
     ComputeResource,
@@ -95,9 +77,7 @@ interface ComputeResources {
     OkResponse
   >;
 
-  /**
-   * Get the details (e.g IP address, port etc) of all the compute nodes in the compute.
-   */
+  /** Get the details (e.g IP address, port etc) of all the compute nodes in the compute. */
   @list
   listNodes is ArmResourceActionSync<
     ComputeResource,
@@ -105,18 +85,14 @@ interface ComputeResources {
     ArmResponse<AmlComputeNodesInformation>
   >;
 
-  /**
-   * Gets secrets related to Machine Learning compute (storage keys, service credentials, etc).
-   */
+  /** Gets secrets related to Machine Learning compute (storage keys, service credentials, etc). */
   listKeys is ArmResourceActionSync<
     ComputeResource,
     void,
     ArmResponse<ComputeSecrets>
   >;
 
-  /**
-   * Posts a start action to a compute instance
-   */
+  /** Posts a start action to a compute instance */
   start is ArmResourceActionAsyncBase<
     ComputeResource,
     void,
@@ -124,9 +100,7 @@ interface ComputeResources {
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ComputeResource>
   >;
 
-  /**
-   * Posts a stop action to a compute instance
-   */
+  /** Posts a stop action to a compute instance */
   stop is ArmResourceActionAsyncBase<
     ComputeResource,
     void,
@@ -134,9 +108,7 @@ interface ComputeResources {
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ComputeResource>
   >;
 
-  /**
-   * Posts a restart action to a compute instance
-   */
+  /** Posts a restart action to a compute instance */
   restart is ArmResourceActionAsyncBase<
     ComputeResource,
     void,
@@ -144,9 +116,7 @@ interface ComputeResources {
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ComputeResource>
   >;
 
-  /**
-   * Updates the idle shutdown setting of a compute instance.
-   */
+  /** Updates the idle shutdown setting of a compute instance. */
   updateIdleShutdownSetting is ArmResourceActionSync<
     ComputeResource,
     IdleShutdownSetting,

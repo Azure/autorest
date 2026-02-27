@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.NetworkAnalytics;
-/**
- * The data type resource.
- */
+/** The data type resource. */
 @parentResource(DataProduct)
 model DataType is Azure.ResourceManager.ProxyResource<DataTypeProperties> {
   ...ResourceNameParameter<
@@ -26,40 +24,26 @@ model DataType is Azure.ResourceManager.ProxyResource<DataTypeProperties> {
 
 @armResourceOperations
 interface DataTypes {
-  /**
-   * Retrieve data type resource.
-   */
+  /** Retrieve data type resource. */
   get is ArmResourceRead<DataType>;
 
-  /**
-   * Create data type resource.
-   */
+  /** Create data type resource. */
   create is ArmResourceCreateOrReplaceAsync<DataType>;
 
-  /**
-   * Update data type resource.
-   */
+  /** Update data type resource. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<DataType, PatchModel = DataTypeUpdate>;
 
-  /**
-   * Delete data type resource.
-   */
+  /** Delete data type resource. */
   delete is ArmResourceDeleteWithoutOkAsync<DataType>;
 
-  /**
-   * List data type by parent resource.
-   */
+  /** List data type by parent resource. */
   listByDataProduct is ArmResourceListByParent<DataType>;
 
-  /**
-   * Delete data for data type.
-   */
+  /** Delete data for data type. */
   deleteData is ArmResourceActionAsync<DataType, unknown, NoContentResponse>;
 
-  /**
-   * Generate sas token for storage container.
-   */
+  /** Generate sas token for storage container. */
   generateStorageContainerSasToken is ArmResourceActionSync<
     DataType,
     ContainerSaS,

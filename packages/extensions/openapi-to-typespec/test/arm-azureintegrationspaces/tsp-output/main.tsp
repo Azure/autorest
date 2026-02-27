@@ -26,9 +26,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-/**
- * The azure integration spaces resource provider.
- */
+/** The azure integration spaces resource provider. */
 @armProviderNamespace
 @service(#{ title: "Azure Integration Spaces resource management API." })
 @versioned(Versions)

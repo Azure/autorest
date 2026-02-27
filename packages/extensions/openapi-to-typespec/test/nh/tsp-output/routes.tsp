@@ -7,56 +7,40 @@ using TypeSpec.Http;
 
 namespace NotificationHubsClient;
 
-/**
- * Deletes a notification hub.
- */
+/** Deletes a notification hub. */
 @route("/{hubName}")
 @delete
 op deleteNotificationHub is Azure.Core.Foundations.Operation<
   {
-    /**
-     * Notification Hub Name
-     */
+    /** Notification Hub Name */
     @path
     hubName: string;
 
-    /**
-     * API Version
-     */
+    /** API Version */
     @header
     `x-ms-version`: MSApiVersionType;
 
-    /**
-     * Authorization Header value
-     */
+    /** Authorization Header value */
     @header
     Authorization: string;
   },
   void
 >;
 
-/**
- * Retrieves information about a notification hub.
- */
+/** Retrieves information about a notification hub. */
 @route("/{hubName}")
 @get
 op getNotificationHub is Azure.Core.Foundations.Operation<
   {
-    /**
-     * Notification Hub Name
-     */
+    /** Notification Hub Name */
     @path
     hubName: string;
 
-    /**
-     * API Version
-     */
+    /** API Version */
     @header
     `x-ms-version`: MSApiVersionType;
 
-    /**
-     * Authorization Header value
-     */
+    /** Authorization Header value */
     @header
     Authorization: string;
   },
@@ -66,34 +50,24 @@ op getNotificationHub is Azure.Core.Foundations.Operation<
   }
 >;
 
-/**
- * Create or update a notification hub.
- */
+/** Create or update a notification hub. */
 @route("/{hubName}")
 @put
 op createOrUpdateNotificationHub is Azure.Core.Foundations.Operation<
   {
-    /**
-     * Notification Hub Name
-     */
+    /** Notification Hub Name */
     @path
     hubName: string;
 
-    /**
-     * API Version
-     */
+    /** API Version */
     @header
     `x-ms-version`: MSApiVersionType;
 
-    /**
-     * Authorization Header value
-     */
+    /** Authorization Header value */
     @header
     Authorization: string;
 
-    /**
-     * ETag as returned by creation, update, and retrieval, or * (overwrite).
-     */
+    /** ETag as returned by creation, update, and retrieval, or * (overwrite). */
     @header
     `If-Match`?: string;
 
@@ -106,34 +80,24 @@ op createOrUpdateNotificationHub is Azure.Core.Foundations.Operation<
   }
 >;
 
-/**
- * Retrieves all registrations with a specific tag.
- */
+/** Retrieves all registrations with a specific tag. */
 @route("/{hubName}/tags/{tag}/registrations")
 @get
 op getRegistrationsByTag is Azure.Core.Foundations.Operation<
   {
-    /**
-     * Notification Hub Name
-     */
+    /** Notification Hub Name */
     @path
     hubName: string;
 
-    /**
-     * API Version
-     */
+    /** API Version */
     @header
     `x-ms-version`: MSApiVersionType;
 
-    /**
-     * Authorization Header value
-     */
+    /** Authorization Header value */
     @header
     Authorization: string;
 
-    /**
-     * The path for the tag to query
-     */
+    /** The path for the tag to query */
     @path
     tag: string;
 
@@ -144,9 +108,7 @@ op getRegistrationsByTag is Azure.Core.Foundations.Operation<
     @query("ContinuationToken")
     ContinuationToken?: string;
 
-    /**
-     * OData top parameter
-     */
+    /** OData top parameter */
     @query("$top")
     $top?: string;
   },
@@ -156,56 +118,40 @@ op getRegistrationsByTag is Azure.Core.Foundations.Operation<
   }
 >;
 
-/**
- * Create a registration ID
- */
+/** Create a registration ID */
 @route("/{hubName}/registrationIDs")
 @post
 op createRegistrationId is Azure.Core.Foundations.Operation<
   {
-    /**
-     * Notification Hub Name
-     */
+    /** Notification Hub Name */
     @path
     hubName: string;
 
-    /**
-     * API Version
-     */
+    /** API Version */
     @header
     `x-ms-version`: MSApiVersionType;
 
-    /**
-     * Authorization Header value
-     */
+    /** Authorization Header value */
     @header
     Authorization: string;
   },
   void
 >;
 
-/**
- * Get registrations by the specified criteria
- */
+/** Get registrations by the specified criteria */
 @route("/{hubName}/registrations")
 @get
 op getRegistrations is Azure.Core.Foundations.Operation<
   {
-    /**
-     * Notification Hub Name
-     */
+    /** Notification Hub Name */
     @path
     hubName: string;
 
-    /**
-     * API Version
-     */
+    /** API Version */
     @header
     `x-ms-version`: MSApiVersionType;
 
-    /**
-     * Authorization Header value
-     */
+    /** Authorization Header value */
     @header
     Authorization: string;
 
@@ -216,15 +162,11 @@ op getRegistrations is Azure.Core.Foundations.Operation<
     @query("ContinuationToken")
     ContinuationToken?: string;
 
-    /**
-     * OData filter parameter
-     */
+    /** OData filter parameter */
     @query("$filter")
     $filter?: string;
 
-    /**
-     * OData top parameter
-     */
+    /** OData top parameter */
     @query("$top")
     $top?: string;
   },
@@ -234,28 +176,20 @@ op getRegistrations is Azure.Core.Foundations.Operation<
   }
 >;
 
-/**
- * Creates a registration
- */
+/** Creates a registration */
 @route("/{hubName}/registrations")
 @post
 op createRegistration is Azure.Core.Foundations.Operation<
   {
-    /**
-     * Notification Hub Name
-     */
+    /** Notification Hub Name */
     @path
     hubName: string;
 
-    /**
-     * API Version
-     */
+    /** API Version */
     @header
     `x-ms-version`: MSApiVersionType;
 
-    /**
-     * Authorization Header value
-     */
+    /** Authorization Header value */
     @header
     Authorization: string;
   },
@@ -265,74 +199,52 @@ op createRegistration is Azure.Core.Foundations.Operation<
   }
 >;
 
-/**
- * Deletes a registration
- */
+/** Deletes a registration */
 @route("/{hubName}/registrations/{registrationId}")
 @delete
 op deleteRegistration is Azure.Core.Foundations.Operation<
   {
-    /**
-     * Notification Hub Name
-     */
+    /** Notification Hub Name */
     @path
     hubName: string;
 
-    /**
-     * API Version
-     */
+    /** API Version */
     @header
     `x-ms-version`: MSApiVersionType;
 
-    /**
-     * Registration ID parameter
-     */
+    /** Registration ID parameter */
     @path
     registrationId: string;
 
-    /**
-     * ETag as returned by creation, update, and retrieval, or * (overwrite).
-     */
+    /** ETag as returned by creation, update, and retrieval, or * (overwrite). */
     @header
     `If-Match`?: string;
 
-    /**
-     * Authorization Header value
-     */
+    /** Authorization Header value */
     @header
     Authorization: string;
   },
   void
 >;
 
-/**
- * Get a registration by registration ID
- */
+/** Get a registration by registration ID */
 @route("/{hubName}/registrations/{registrationId}")
 @get
 op getRegistration is Azure.Core.Foundations.Operation<
   {
-    /**
-     * Notification Hub Name
-     */
+    /** Notification Hub Name */
     @path
     hubName: string;
 
-    /**
-     * API Version
-     */
+    /** API Version */
     @header
     `x-ms-version`: MSApiVersionType;
 
-    /**
-     * Registration ID parameter
-     */
+    /** Registration ID parameter */
     @path
     registrationId: string;
 
-    /**
-     * Authorization Header value
-     */
+    /** Authorization Header value */
     @header
     Authorization: string;
   },
@@ -342,34 +254,24 @@ op getRegistration is Azure.Core.Foundations.Operation<
   }
 >;
 
-/**
- * Create or update a registration
- */
+/** Create or update a registration */
 @route("/{hubName}/registrations/{registrationId}")
 @put
 op createOrUpdateRegistration is Azure.Core.Foundations.Operation<
   {
-    /**
-     * Notification Hub Name
-     */
+    /** Notification Hub Name */
     @path
     hubName: string;
 
-    /**
-     * API Version
-     */
+    /** API Version */
     @header
     `x-ms-version`: MSApiVersionType;
 
-    /**
-     * Registration ID parameter
-     */
+    /** Registration ID parameter */
     @path
     registrationId: string;
 
-    /**
-     * Authorization Header value
-     */
+    /** Authorization Header value */
     @header
     Authorization: string;
 
@@ -382,57 +284,41 @@ op createOrUpdateRegistration is Azure.Core.Foundations.Operation<
   }
 >;
 
-/**
- * Delete an installation by ID
- */
+/** Delete an installation by ID */
 @summary("Delete Installation")
 @route("/{hubName}/installations/{installationId}")
 @delete
 op deleteInstallation is Azure.Core.Foundations.Operation<
   {
-    /**
-     * Notification Hub Name
-     */
+    /** Notification Hub Name */
     @path
     hubName: string;
 
-    /**
-     * API Version
-     */
+    /** API Version */
     @header
     `x-ms-version`: MSApiVersionType;
 
-    /**
-     * Installation ID parameter
-     */
+    /** Installation ID parameter */
     @path
     installationId: string;
 
-    /**
-     * Authorization Header value
-     */
+    /** Authorization Header value */
     @header
     Authorization: string;
   },
   void
 >;
 
-/**
- * Get an Installation by Installation ID
- */
+/** Get an Installation by Installation ID */
 op getInstallation is Azure.Core.ResourceRead<
   InstallationModel,
   {
     parameters: {
-      /**
-       * API Version
-       */
+      /** API Version */
       @header
       `x-ms-version`: MSApiVersionType;
 
-      /**
-       * Authorization Header value
-       */
+      /** Authorization Header value */
       @header
       Authorization: string;
     };
@@ -447,155 +333,107 @@ op patchInstallation is Azure.Core.ResourceCreateOrUpdate<
   InstallationModel,
   {
     parameters: {
-      /**
-       * API Version
-       */
+      /** API Version */
       @header
       `x-ms-version`: MSApiVersionType;
 
-      /**
-       * Authorization Header value
-       */
+      /** Authorization Header value */
       @header
       Authorization: string;
     };
   }
 >;
 
-/**
- * Creates or overwrites an installation.
- */
+/** Creates or overwrites an installation. */
 op createOrUpdateInstallation is Azure.Core.ResourceCreateOrReplace<
   InstallationModel,
   {
     parameters: {
-      /**
-       * API Version
-       */
+      /** API Version */
       @header
       `x-ms-version`: MSApiVersionType;
 
-      /**
-       * Authorization Header value
-       */
+      /** Authorization Header value */
       @header
       Authorization: string;
     };
   }
 >;
 
-/**
- * Sends a notification to the specified targets.
- */
+/** Sends a notification to the specified targets. */
 @route("/{hubName}/messages")
 @post
 op sendMessage is Azure.Core.Foundations.Operation<
   {
-    /**
-     * Notification Hub Name
-     */
+    /** Notification Hub Name */
     @path
     hubName: string;
 
-    /**
-     * API Version
-     */
+    /** API Version */
     @header
     `x-ms-version`: MSApiVersionType;
 
-    /**
-     * Authorization Header value
-     */
+    /** Authorization Header value */
     @header
     Authorization: string;
 
-    /**
-     * Device handle for the PNS
-     */
+    /** Device handle for the PNS */
     @header
     `ServiceBusNotification-DeviceHandle`?: string;
 
-    /**
-     * Platform type for the notification
-     */
+    /** Platform type for the notification */
     @header
     `ServiceBusNotification-Format`: FormatParameterType;
 
-    /**
-     * Notification message tags for targeting
-     */
+    /** Notification message tags for targeting */
     @header
     `ServiceBusNotification-Tags`?: string;
 
-    /**
-     * Direct Send
-     */
+    /** Direct Send */
     @query("direct")
     direct?: boolean;
 
-    /**
-     * The apns-topic header
-     */
+    /** The apns-topic header */
     @header
     `apns-topic`?: string;
 
-    /**
-     * The apns-priority header
-     */
+    /** The apns-priority header */
     @header
     `apns-priority`?: string;
 
-    /**
-     * The apns-push-type header
-     */
+    /** The apns-push-type header */
     @header
     `apns-push-type`?: string;
 
-    /**
-     *  X-WNS-Cache-Policy header parameter
-     */
+    /** X-WNS-Cache-Policy header parameter */
     @header
     `X-WNS-Cache-Policy`?: string;
 
-    /**
-     * X-WNS-PRIORITY header parameter
-     */
+    /** X-WNS-PRIORITY header parameter */
     @header
     `X-WNS-PRIORITY`?: string;
 
-    /**
-     * X-WNS-RequestForStatus header parameter
-     */
+    /** X-WNS-RequestForStatus header parameter */
     @header
     `X-WNS-RequestForStatus`?: string;
 
-    /**
-     * X-WNS-Tag header parameter
-     */
+    /** X-WNS-Tag header parameter */
     @header
     `X-WNS-Tag`?: string;
 
-    /**
-     * X-WNS-TTL header parameter
-     */
+    /** X-WNS-TTL header parameter */
     @header
     `X-WNS-TTL`?: string;
 
-    /**
-     * X-WNS-Type header parameter
-     */
+    /** X-WNS-Type header parameter */
     @header
     `X-WNS-Type`?: string;
 
-    /**
-     * Upload file type
-     */
+    /** Upload file type */
     @header
     `content-type`: ContentType;
 
-    /**
-     * The notification message body
-     */
+    /** The notification message body */
     @bodyRoot
     body: string;
   },

@@ -22,9 +22,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-/**
- * Guest Configuration Client
- */
+/** Guest Configuration Client */
 @armProviderNamespace
 @service(#{ title: "GuestConfigurationClient" })
 @versioned(Versions)

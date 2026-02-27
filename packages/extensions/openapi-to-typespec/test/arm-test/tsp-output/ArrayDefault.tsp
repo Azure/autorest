@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Test;
-/**
- * A Test resource
- */
+/** A Test resource */
 @parentResource(Employee)
 model ArrayDefault
   is Azure.ResourceManager.TrackedResource<ArrayDefaultProperties> {
@@ -26,14 +24,10 @@ model ArrayDefault
 
 @armResourceOperations
 interface ArrayDefaults {
-  /**
-   * Get a Resource.
-   */
+  /** Get a Resource. */
   get is ArmResourceRead<ArrayDefault>;
 
-  /**
-   * List resources by resource group
-   */
+  /** List resources by resource group */
   listByResourceGroup is ArmResourceListByParent<ArrayDefault>;
 }
 

@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Quota;
-/**
- * The subscription quota allocation status.
- */
+/** The subscription quota allocation status. */
 model QuotaAllocationRequestStatus
   is Azure.ResourceManager.ProxyResource<QuotaAllocationRequestStatusProperties> {
   ...ResourceNameParameter<
@@ -25,17 +23,13 @@ model QuotaAllocationRequestStatus
 
 @armResourceOperations
 interface QuotaAllocationRequestStatuses {
-  /**
-   * Get the quota allocation request status for the subscriptionId by allocationId.
-   */
+  /** Get the quota allocation request status for the subscriptionId by allocationId. */
   get is Extension.Read<
     Extension.ManagementGroup,
     QuotaAllocationRequestStatus
   >;
 
-  /**
-   * Get all the quotaAllocationRequests for a resourceProvider/location. The filter paramter for location is required.
-   */
+  /** Get all the quotaAllocationRequests for a resourceProvider/location. The filter paramter for location is required. */
   list is Extension.ListByTarget<
     Extension.ManagementGroup,
     QuotaAllocationRequestStatus,

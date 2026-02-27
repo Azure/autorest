@@ -18,9 +18,7 @@ model Paths1Vtxb06DeploymentsDeploymentIdCompletionsPostRequestbodyContentApplic
    */
   prompt?: unknown;
 
-  /**
-   * The maximum number of tokens to generate. Has minimum of 0.
-   */
+  /** The maximum number of tokens to generate. Has minimum of 0. */
   max_tokens?: int32 = 16;
 
   /**
@@ -57,9 +55,7 @@ model Paths1Vtxb06DeploymentsDeploymentIdCompletionsPostRequestbodyContentApplic
    */
   logit_bias?: unknown;
 
-  /**
-   * The ID of the end-user, for use in tracking and rate-limiting.
-   */
+  /** The ID of the end-user, for use in tracking and rate-limiting. */
   user?: string;
 
   /**
@@ -82,19 +78,13 @@ model Paths1Vtxb06DeploymentsDeploymentIdCompletionsPostRequestbodyContentApplic
    */
   logprobs?: int32;
 
-  /**
-   * The name of the model to use
-   */
+  /** The name of the model to use */
   `model`?: string;
 
-  /**
-   * Echo back the prompt in addition to the completion
-   */
+  /** Echo back the prompt in addition to the completion */
   echo?: boolean;
 
-  /**
-   * A sequence which indicates the end of the current document.
-   */
+  /** A sequence which indicates the end of the current document. */
   stop?: unknown;
 
   completion_config?: string;
@@ -168,18 +158,12 @@ model Paths13PiqocDeploymentsDeploymentIdEmbeddingsPostRequestbodyContentApplica
    */
   input: unknown;
 
-  /**
-   * The ID of the end-user, for use in tracking and rate-limiting.
-   */
+  /** The ID of the end-user, for use in tracking and rate-limiting. */
   user?: string;
 
-  /**
-   * input type of embedding search to use
-   */
+  /** input type of embedding search to use */
   input_type?: string;
 
-  /**
-   * ID of the model to use
-   */
+  /** ID of the model to use */
   `model`?: string;
 }

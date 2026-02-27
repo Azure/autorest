@@ -21,9 +21,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-/**
- * Azure Playwright testing management service
- */
+/** Azure Playwright testing management service */
 @armProviderNamespace
 @service(#{ title: "Microsoft AzurePlaywrightService Management API" })
 @versioned(Versions)

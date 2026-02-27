@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.IntegrationSpaces;
-/**
- * A business process under application.
- */
+/** A business process under application. */
 @parentResource(Application)
 model BusinessProcess
   is Azure.ResourceManager.ProxyResource<BusinessProcessProperties> {
@@ -27,77 +25,53 @@ model BusinessProcess
 
 @armResourceOperations
 interface BusinessProcesses {
-  /**
-   * Get a BusinessProcess
-   */
+  /** Get a BusinessProcess */
   get is ArmResourceRead<BusinessProcess>;
 
-  /**
-   * Create a BusinessProcess
-   */
+  /** Create a BusinessProcess */
   createOrUpdate is ArmResourceCreateOrReplaceSync<BusinessProcess>;
 
-  /**
-   * Update a BusinessProcess
-   */
+  /** Update a BusinessProcess */
   @patch(#{ implicitOptionality: false })
   patch is ArmCustomPatchSync<
     BusinessProcess,
     PatchModel = BusinessProcessUpdate
   >;
 
-  /**
-   * Delete a BusinessProcess
-   */
+  /** Delete a BusinessProcess */
   delete is ArmResourceDeleteSync<BusinessProcess>;
 
-  /**
-   * List BusinessProcess resources by Application
-   */
+  /** List BusinessProcess resources by Application */
   listByApplication is ArmResourceListByParent<
     BusinessProcess,
     Parameters = {
-      /**
-       * The number of result items to return.
-       */
+      /** The number of result items to return. */
       @query("top")
       top?: int32;
 
-      /**
-       * The number of result items to skip.
-       */
+      /** The number of result items to skip. */
       @query("skip")
       skip?: int32;
 
-      /**
-       * The maximum number of result items per page.
-       */
+      /** The maximum number of result items per page. */
       @query("maxpagesize")
       maxpagesize?: int32;
 
-      /**
-       * Filter the result list using the given expression.
-       */
+      /** Filter the result list using the given expression. */
       @query("filter")
       filter?: string;
 
-      /**
-       * Select the specified fields to be included in the response.
-       */
+      /** Select the specified fields to be included in the response. */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "select", explode: true })
       select?: string[];
 
-      /**
-       * Expand the indicated resources into the response.
-       */
+      /** Expand the indicated resources into the response. */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "expand", explode: true })
       expand?: string[];
 
-      /**
-       * Expressions that specify the order of returned results.
-       */
+      /** Expressions that specify the order of returned results. */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "orderby", explode: true })
       orderby?: string[];

@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * Contract details.
- */
+/** Contract details. */
 @parentResource(ApiContract)
 model TagDescriptionContract
   is Azure.ResourceManager.ProxyResource<TagDescriptionContractProperties> {
@@ -27,67 +25,47 @@ model TagDescriptionContract
 
 @armResourceOperations
 interface TagDescriptionContracts {
-  /**
-   * Get Tag description in scope of API
-   */
+  /** Get Tag description in scope of API */
   get is ArmResourceRead<TagDescriptionContract>;
 
-  /**
-   * Gets the entity state version of the tag specified by its identifier.
-   */
+  /** Gets the entity state version of the tag specified by its identifier. */
   getEntityTag is ArmResourceCheckExistence<TagDescriptionContract>;
 
-  /**
-   * Create/Update tag description in scope of the Api.
-   */
+  /** Create/Update tag description in scope of the Api. */
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     TagDescriptionContract,
     Request = TagDescriptionCreateParameters,
     Parameters = {
-      /**
-       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
-       */
+      /** ETag of the Entity. Not required when creating an entity, but required when updating an entity. */
       @header
       `If-Match`?: string;
     }
   >;
 
-  /**
-   * Delete tag description for the Api.
-   */
+  /** Delete tag description for the Api. */
   delete is ArmResourceDeleteSync<
     TagDescriptionContract,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Lists all Tags descriptions in scope of API. Model similar to swagger - tagDescription is defined on API level but tag may be assigned to the Operations
-   */
+  /** Lists all Tags descriptions in scope of API. Model similar to swagger - tagDescription is defined on API level but tag may be assigned to the Operations */
   listByService is ArmResourceListByParent<
     TagDescriptionContract,
     Parameters = {
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-       */
+      /** |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br> */
       @query("$filter")
       $filter?: string;
 
-      /**
-       * Number of records to return.
-       */
+      /** Number of records to return. */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      /**
-       * Number of records to skip.
-       */
+      /** Number of records to skip. */
       @query("$skip")
       $skip?: int32;
     }

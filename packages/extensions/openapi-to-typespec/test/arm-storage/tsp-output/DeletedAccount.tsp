@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
-/**
- * Deleted storage account
- */
+/** Deleted storage account */
 @subscriptionResource
 model DeletedAccount
   is Azure.ResourceManager.ProxyResource<DeletedAccountProperties> {
@@ -26,9 +24,7 @@ model DeletedAccount
 
 @armResourceOperations
 interface DeletedAccounts {
-  /**
-   * Get properties of specified deleted account resource.
-   */
+  /** Get properties of specified deleted account resource. */
   get is ArmResourceRead<
     DeletedAccount,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters

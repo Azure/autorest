@@ -23,9 +23,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-/**
- * For test.
- */
+/** For test. */
 @armProviderNamespace
 @service(#{ title: "Azure Test resource management API." })
 @versioned(Versions)

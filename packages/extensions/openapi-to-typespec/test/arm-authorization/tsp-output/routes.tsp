@@ -13,9 +13,7 @@ namespace Azure.ResourceManager.Authorization;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface ClassicAdministratorsOperationGroup {
-  /**
-   * Gets service administrator, account administrator, and co-administrators for the subscription.
-   */
+  /** Gets service administrator, account administrator, and co-administrators for the subscription. */
   @autoRoute
   @get
   @action("classicAdministrators")
@@ -27,18 +25,14 @@ interface ClassicAdministratorsOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface GlobalAdministratorOperationGroup {
-  /**
-   * Elevates access for a Global Administrator.
-   */
+  /** Elevates access for a Global Administrator. */
   @autoRoute
   elevateAccess is ArmProviderActionSync<Response = void>;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface AzurePermissionsForResourceGroupOperationGroup {
-  /**
-   * Gets all permissions the caller has for a resource group.
-   */
+  /** Gets all permissions the caller has for a resource group. */
   @autoRoute
   @get
   @action("permissions")
@@ -50,9 +44,7 @@ interface AzurePermissionsForResourceGroupOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface AzurePermissionsForResourceOperationGroup {
-  /**
-   * Gets all permissions the caller has for a resource.
-   */
+  /** Gets all permissions the caller has for a resource. */
   @autoRoute
   @get
   @action("permissions")
@@ -60,30 +52,22 @@ interface AzurePermissionsForResourceOperationGroup {
     Response = PermissionGetResult,
     Scope = Extension.ResourceGroup,
     Parameters = {
-      /**
-       * The namespace of the resource provider.
-       */
+      /** The namespace of the resource provider. */
       @path
       @segment("providers")
       resourceProviderNamespace: string;
 
-      /**
-       * The parent resource identity.
-       */
+      /** The parent resource identity. */
       @path
       @segment("{resourceProviderNamespace}")
       parentResourcePath: string;
 
-      /**
-       * The resource type of the resource.
-       */
+      /** The resource type of the resource. */
       @path
       @segment("{parentResourcePath}")
       resourceType: string;
 
-      /**
-       * The name of the resource to get the permissions for.
-       */
+      /** The name of the resource to get the permissions for. */
       @path
       @segment("{resourceType}")
       resourceName: string;
@@ -93,9 +77,7 @@ interface AzurePermissionsForResourceOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface EligibleChildResourcesOperationGroup {
-  /**
-   * Get the child resources of a resource on which user has eligible access
-   */
+  /** Get the child resources of a resource on which user has eligible access */
   @autoRoute
   @get
   @action("eligibleChildResources")
@@ -103,9 +85,7 @@ interface EligibleChildResourcesOperationGroup {
     Response = ResourceListResult<EligibleChildResource>,
     Scope = ExtensionActionScope,
     Parameters = {
-      /**
-       * The filter to apply on the operation. Use $filter=resourceType+eq+'Subscription' to filter on only resource of type = 'Subscription'. Use $filter=resourceType+eq+'subscription'+or+resourceType+eq+'resourcegroup' to filter on resource of type = 'Subscription' or 'ResourceGroup'
-       */
+      /** The filter to apply on the operation. Use $filter=resourceType+eq+'Subscription' to filter on only resource of type = 'Subscription'. Use $filter=resourceType+eq+'subscription'+or+resourceType+eq+'resourcegroup' to filter on resource of type = 'Subscription' or 'ResourceGroup' */
       @query("$filter")
       $filter?: string;
     }

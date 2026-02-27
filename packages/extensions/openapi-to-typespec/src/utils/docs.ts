@@ -13,12 +13,20 @@ export function generateDocs({ doc }: WithDocs, defaultValue: string = ""): stri
   const wrapped = lineWrap(doc || defaultValue);
 
   for (let i = 0; i < wrapped.length; i++) {
-    if (wrapped[i].includes("@") || wrapped[i].includes("*/")) {
+    if (wrapped[i].includes("@")) {
+      wrapped[i] = wrapped[i].replace(/@/g, "\\@");
+    }
+
+    if (wrapped[i].includes("*/")) {
       if (wrapped.length === 1) {
         return `@doc("${wrapped[0].replace(/\\/g, "\\\\").replace(/"/g, '\\"')}")`;
       }
       return `@doc("""\n${wrapped.join("\n").replace(/\\/g, "\\\\").replace(/"/g, '\\"')}\n""")`;
     }
+  }
+
+  if (wrapped.length === 1) {
+    return `/** ${wrapped[0]} */`;
   }
 
   return `/**\n* ${wrapped.join("\n* ")}\n*/`;

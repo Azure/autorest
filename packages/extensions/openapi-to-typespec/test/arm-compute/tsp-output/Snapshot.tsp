@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * Snapshot resource.
- */
+/** Snapshot resource. */
 model Snapshot is Azure.ResourceManager.TrackedResource<SnapshotProperties> {
   ...ResourceNameParameter<
     Resource = Snapshot,
@@ -21,36 +19,26 @@ model Snapshot is Azure.ResourceManager.TrackedResource<SnapshotProperties> {
     NamePattern = ""
   >;
 
-  /**
-   * Unused. Always Null.
-   */
+  /** Unused. Always Null. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   managedBy?: string;
 
-  /**
-   * The snapshots sku name. Can be Standard_LRS, Premium_LRS, or Standard_ZRS. This is an optional parameter for incremental snapshot and the default behavior is the SKU will be set to the same sku as the previous snapshot
-   */
+  /** The snapshots sku name. Can be Standard_LRS, Premium_LRS, or Standard_ZRS. This is an optional parameter for incremental snapshot and the default behavior is the SKU will be set to the same sku as the previous snapshot */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: SnapshotSku;
 
-  /**
-   * The extended location where the snapshot will be created. Extended location cannot be changed.
-   */
+  /** The extended location where the snapshot will be created. Extended location cannot be changed. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   extendedLocation?: ExtendedLocation;
 }
 
 @armResourceOperations
 interface Snapshots {
-  /**
-   * Gets information about a snapshot.
-   */
+  /** Gets information about a snapshot. */
   get is ArmResourceRead<Snapshot>;
 
-  /**
-   * Creates or updates a snapshot.
-   */
+  /** Creates or updates a snapshot. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -63,9 +51,7 @@ interface Snapshots {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /**
-   * Updates (patches) a snapshot.
-   */
+  /** Updates (patches) a snapshot. */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -77,31 +63,23 @@ interface Snapshots {
     })
   >;
 
-  /**
-   * Deletes a snapshot.
-   */
+  /** Deletes a snapshot. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Snapshot,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * Lists snapshots under a resource group.
-   */
+  /** Lists snapshots under a resource group. */
   listByResourceGroup is ArmResourceListByParent<
     Snapshot,
     Response = ArmResponse<SnapshotList>
   >;
 
-  /**
-   * Lists snapshots under a subscription.
-   */
+  /** Lists snapshots under a subscription. */
   list is ArmListBySubscription<Snapshot, Response = ArmResponse<SnapshotList>>;
 
-  /**
-   * Grants access to a snapshot.
-   */
+  /** Grants access to a snapshot. */
   @action("beginGetAccess")
   grantAccess is ArmResourceActionAsync<
     Snapshot,
@@ -109,9 +87,7 @@ interface Snapshots {
     ArmResponse<AccessUri>
   >;
 
-  /**
-   * Revokes access to a snapshot.
-   */
+  /** Revokes access to a snapshot. */
   @action("endGetAccess")
   revokeAccess is ArmResourceActionAsync<Snapshot, void, OkResponse>;
 }

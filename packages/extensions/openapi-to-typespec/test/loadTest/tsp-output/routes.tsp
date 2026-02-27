@@ -8,9 +8,7 @@ using TypeSpec.Http;
 namespace Azure.LoadTesting;
 
 interface LoadTestAdministrationOperationGroup {
-  /**
-   * Create a new test or update an existing test.
-   */
+  /** Create a new test or update an existing test. */
   @summary("Create a new test or update an existing test.")
   @route("/tests/{testId}")
   @patch
@@ -26,18 +24,14 @@ interface LoadTestAdministrationOperationGroup {
       @path
       testId: string;
 
-      /**
-       * Load test model
-       */
+      /** Load test model */
       @bodyRoot
       body: Test;
     },
     Test
   >;
 
-  /**
-   * Delete a test by its name.
-   */
+  /** Delete a test by its name. */
   @summary("Delete a test by its name.")
   @route("/tests/{testId}")
   @delete
@@ -56,9 +50,7 @@ interface LoadTestAdministrationOperationGroup {
     void
   >;
 
-  /**
-   * Get load test details by test name
-   */
+  /** Get load test details by test name */
   @summary("Get load test details by test name")
   @route("/tests/{testId}")
   @get
@@ -118,9 +110,7 @@ interface LoadTestAdministrationOperationGroup {
       @query("lastModifiedEndTime")
       lastModifiedEndTime?: utcDateTime;
 
-      /**
-       * Number of results in response.
-       */
+      /** Number of results in response. */
       @query("maxpagesize")
       maxpagesize?: int32 = 50;
     },
@@ -151,30 +141,22 @@ interface LoadTestAdministrationOperationGroup {
       @path
       testId: string;
 
-      /**
-       * Unique name for test file with file extension like : App.jmx
-       */
+      /** Unique name for test file with file extension like : App.jmx */
       @path
       fileName: string;
 
-      /**
-       * File type
-       */
+      /** File type */
       @query("fileType")
       fileType?: FileType;
 
-      /**
-       * The file content as application/octet-stream.
-       */
+      /** The file content as application/octet-stream. */
       @bodyRoot
       body: bytes;
     },
     FileInfo
   >;
 
-  /**
-   * Get test file by the file name.
-   */
+  /** Get test file by the file name. */
   @summary("Get test file by the file name.")
   @route("/tests/{testId}/files/{fileName}")
   @get
@@ -190,18 +172,14 @@ interface LoadTestAdministrationOperationGroup {
       @path
       testId: string;
 
-      /**
-       * File name with file extension like app.jmx
-       */
+      /** File name with file extension like app.jmx */
       @path
       fileName: string;
     },
     FileInfo
   >;
 
-  /**
-   * Delete file by the file name for a test
-   */
+  /** Delete file by the file name for a test */
   @summary("Delete file by the file name for a test")
   @route("/tests/{testId}/files/{fileName}")
   @delete
@@ -217,18 +195,14 @@ interface LoadTestAdministrationOperationGroup {
       @path
       testId: string;
 
-      /**
-       * File name with file extension like app.jmx
-       */
+      /** File name with file extension like app.jmx */
       @path
       fileName: string;
     },
     void
   >;
 
-  /**
-   * Get all test files.
-   */
+  /** Get all test files. */
   @summary("Get all test files.")
   @route("/tests/{testId}/files")
   @get
@@ -247,9 +221,7 @@ interface LoadTestAdministrationOperationGroup {
     FileInfoList
   >;
 
-  /**
-   * Associate an app component (collection of azure resources) to a test
-   */
+  /** Associate an app component (collection of azure resources) to a test */
   @summary("Associate an app component (collection of azure resources) to a test")
   @route("/tests/{testId}/app-components")
   @patch
@@ -265,18 +237,14 @@ interface LoadTestAdministrationOperationGroup {
       @path
       testId: string;
 
-      /**
-       * App Component model.
-       */
+      /** App Component model. */
       @bodyRoot
       body: TestAppComponents;
     },
     TestAppComponents
   >;
 
-  /**
-   * Get associated app component (collection of azure resources) for the given test.
-   */
+  /** Get associated app component (collection of azure resources) for the given test. */
   @summary("Get associated app component (collection of azure resources) for the given test.")
   @route("/tests/{testId}/app-components")
   @get
@@ -295,9 +263,7 @@ interface LoadTestAdministrationOperationGroup {
     TestAppComponents
   >;
 
-  /**
-   * Configure server metrics for a test
-   */
+  /** Configure server metrics for a test */
   @summary("Configure server metrics for a test")
   @route("/tests/{testId}/server-metrics-config")
   @patch
@@ -313,18 +279,14 @@ interface LoadTestAdministrationOperationGroup {
       @path
       testId: string;
 
-      /**
-       * Server metric configuration model.
-       */
+      /** Server metric configuration model. */
       @bodyRoot
       body: TestServerMetricConfig;
     },
     TestServerMetricConfig
   >;
 
-  /**
-   * List server metrics configuration for the given test.
-   */
+  /** List server metrics configuration for the given test. */
   @summary("List server metrics configuration for the given test.")
   @route("/tests/{testId}/server-metrics-config")
   @get
@@ -345,9 +307,7 @@ interface LoadTestAdministrationOperationGroup {
 }
 
 interface LoadTestRunOperationGroup {
-  /**
-   * Create and start a new test run with the given name.
-   */
+  /** Create and start a new test run with the given name. */
   @summary("Create and start a new test run with the given name.")
   @route("/test-runs/{testRunId}")
   @patch
@@ -372,18 +332,14 @@ interface LoadTestRunOperationGroup {
       @query("oldTestRunId")
       oldTestRunId?: string;
 
-      /**
-       * Load test run model
-       */
+      /** Load test run model */
       @bodyRoot
       body: TestRun;
     },
     TestRun
   >;
 
-  /**
-   * Get test run details by name.
-   */
+  /** Get test run details by name. */
   @summary("Get test run details by name.")
   @route("/test-runs/{testRunId}")
   @get
@@ -402,9 +358,7 @@ interface LoadTestRunOperationGroup {
     TestRun
   >;
 
-  /**
-   * Delete a test run by its name.
-   */
+  /** Delete a test run by its name. */
   @summary("Delete a test run by its name.")
   @route("/test-runs/{testRunId}")
   @delete
@@ -423,9 +377,7 @@ interface LoadTestRunOperationGroup {
     void
   >;
 
-  /**
-   * Get test run file by file name.
-   */
+  /** Get test run file by file name. */
   @summary("Get test run file by file name.")
   @route("/test-runs/{testRunId}/files/{fileName}")
   @get
@@ -441,18 +393,14 @@ interface LoadTestRunOperationGroup {
       @path
       testRunId: string;
 
-      /**
-       * Test run file name with file extension
-       */
+      /** Test run file name with file extension */
       @path
       fileName: string;
     },
     FileInfo
   >;
 
-  /**
-   * Get all test runs with given filters
-   */
+  /** Get all test runs with given filters */
   @summary("Get all test runs with given filters")
   @route("/test-runs")
   @get
@@ -473,42 +421,30 @@ interface LoadTestRunOperationGroup {
       @query("search")
       search?: string;
 
-      /**
-       * Unique name of an existing load test.
-       */
+      /** Unique name of an existing load test. */
       @query("testId")
       testId?: string;
 
-      /**
-       * Start DateTime(ISO 8601 literal format) of test-run execution time filter range.
-       */
+      /** Start DateTime(ISO 8601 literal format) of test-run execution time filter range. */
       @query("executionFrom")
       executionFrom?: utcDateTime;
 
-      /**
-       * End DateTime(ISO 8601 literal format) of test-run execution time filter range.
-       */
+      /** End DateTime(ISO 8601 literal format) of test-run execution time filter range. */
       @query("executionTo")
       executionTo?: utcDateTime;
 
-      /**
-       * Comma separated list of test run status.
-       */
+      /** Comma separated list of test run status. */
       @query("status")
       status?: string;
 
-      /**
-       * Number of results in response.
-       */
+      /** Number of results in response. */
       @query("maxpagesize")
       maxpagesize?: int32 = 50;
     },
     TestRunsList
   >;
 
-  /**
-   * Stop test run by name.
-   */
+  /** Stop test run by name. */
   @summary("Stop test run by name.")
   @route("/test-runs/{testRunId}:stop")
   @post
@@ -527,9 +463,7 @@ interface LoadTestRunOperationGroup {
     TestRun
   >;
 
-  /**
-   * List the metric namespaces for a load test run.
-   */
+  /** List the metric namespaces for a load test run. */
   @summary("List the metric namespaces for a load test run.")
   @route("/test-runs/{testRunId}/metric-namespaces")
   @get
@@ -548,9 +482,7 @@ interface LoadTestRunOperationGroup {
     MetricNamespaceCollection
   >;
 
-  /**
-   * List the metric definitions for a load test run.
-   */
+  /** List the metric definitions for a load test run. */
   @summary("List the metric definitions for a load test run.")
   @route("/test-runs/{testRunId}/metric-definitions")
   @get
@@ -566,18 +498,14 @@ interface LoadTestRunOperationGroup {
       @path
       testRunId: string;
 
-      /**
-       * Metric namespace to query metric definitions for.
-       */
+      /** Metric namespace to query metric definitions for. */
       @query("metricNamespace")
       metricNamespace: string;
     },
     MetricDefinitionCollection
   >;
 
-  /**
-   * List the metric values for a load test run.
-   */
+  /** List the metric values for a load test run. */
   @summary("List the metric values for a load test run.")
   @route("/test-runs/{testRunId}/metrics")
   @post
@@ -593,27 +521,19 @@ interface LoadTestRunOperationGroup {
       @path
       testRunId: string;
 
-      /**
-       * The aggregation
-       */
+      /** The aggregation */
       @query("aggregation")
       aggregation?: string;
 
-      /**
-       * The interval (i.e. timegrain) of the query.
-       */
+      /** The interval (i.e. timegrain) of the query. */
       @query("interval")
       interval?: Interval;
 
-      /**
-       * Metric name
-       */
+      /** Metric name */
       @query("metricname")
       metricname: string;
 
-      /**
-       * Metric namespace to query metric definitions for.
-       */
+      /** Metric namespace to query metric definitions for. */
       @query("metricNamespace")
       metricNamespace: string;
 
@@ -624,38 +544,28 @@ interface LoadTestRunOperationGroup {
       @query("timespan")
       timespan: string;
 
-      /**
-       * Metric dimension filter
-       */
+      /** Metric dimension filter */
       @bodyRoot
       body?: MetricRequestPayload;
     },
     Metrics
   >;
 
-  /**
-   * List the dimension values for the given metric dimension name.
-   */
+  /** List the dimension values for the given metric dimension name. */
   @summary("List the dimension values for the given metric dimension name.")
   listMetricDimensionValues is Azure.Core.ResourceList<
     string,
     {
       parameters: {
-        /**
-         * The interval (i.e. timegrain) of the query.
-         */
+        /** The interval (i.e. timegrain) of the query. */
         @query("interval")
         interval?: Interval;
 
-        /**
-         * Metric name
-         */
+        /** Metric name */
         @query("metricname")
         metricname: string;
 
-        /**
-         * Metric namespace to query metric definitions for.
-         */
+        /** Metric namespace to query metric definitions for. */
         @query("metricNamespace")
         metricNamespace: string;
 
@@ -669,9 +579,7 @@ interface LoadTestRunOperationGroup {
     }
   >;
 
-  /**
-   * Associate an app component (collection of azure resources) to a test run
-   */
+  /** Associate an app component (collection of azure resources) to a test run */
   @summary("Associate an app component (collection of azure resources) to a test run")
   @route("/test-runs/{testRunId}/app-components")
   @patch
@@ -687,9 +595,7 @@ interface LoadTestRunOperationGroup {
       @path
       testRunId: string;
 
-      /**
-       * App Component model.
-       */
+      /** App Component model. */
       @bodyRoot
       body: TestRunAppComponents;
     },
@@ -721,9 +627,7 @@ interface LoadTestRunOperationGroup {
     TestRunAppComponents
   >;
 
-  /**
-   * Configure server metrics for a test run
-   */
+  /** Configure server metrics for a test run */
   @summary("Configure server metrics for a test run")
   @route("/test-runs/{testRunId}/server-metrics-config")
   @patch
@@ -739,18 +643,14 @@ interface LoadTestRunOperationGroup {
       @path
       testRunId: string;
 
-      /**
-       * Server metric configuration model.
-       */
+      /** Server metric configuration model. */
       @bodyRoot
       body: TestRunServerMetricConfig;
     },
     TestRunServerMetricConfig
   >;
 
-  /**
-   * List server metrics configuration for the given test run.
-   */
+  /** List server metrics configuration for the given test run. */
   @summary("List server metrics configuration for the given test run.")
   @route("/test-runs/{testRunId}/server-metrics-config")
   @get

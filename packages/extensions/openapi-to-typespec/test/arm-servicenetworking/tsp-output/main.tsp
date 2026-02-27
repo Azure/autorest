@@ -23,9 +23,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-/**
- * Traffic Controller Provider management API.
- */
+/** Traffic Controller Provider management API. */
 @armProviderNamespace
 @service(#{ title: "Traffic Controller Provider management API." })
 @versioned(Versions)

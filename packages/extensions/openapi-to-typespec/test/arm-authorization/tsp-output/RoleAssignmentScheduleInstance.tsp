@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.Authorization;
-/**
- * Information about current or upcoming role assignment schedule instance
- */
+/** Information about current or upcoming role assignment schedule instance */
 @extensionResource
 model RoleAssignmentScheduleInstance
   is Azure.ResourceManager.ExtensionResource<RoleAssignmentScheduleInstanceProperties> {
@@ -26,24 +24,18 @@ model RoleAssignmentScheduleInstance
 
 @armResourceOperations
 interface RoleAssignmentScheduleInstances {
-  /**
-   * Gets the specified role assignment schedule instance.
-   */
+  /** Gets the specified role assignment schedule instance. */
   get is Extension.Read<
     Extension.ScopeParameter,
     RoleAssignmentScheduleInstance
   >;
 
-  /**
-   * Gets role assignment schedule instances of a role assignment schedule.
-   */
+  /** Gets role assignment schedule instances of a role assignment schedule. */
   listForScope is Extension.ListByTarget<
     Extension.ScopeParameter,
     RoleAssignmentScheduleInstance,
     Parameters = {
-      /**
-       * The filter to apply on the operation. Use $filter=atScope() to return all role assignment schedules at or above the scope. Use $filter=principalId eq {id} to return all role assignment schedules at, above or below the scope for the specified principal.  Use $filter=assignedTo('{userId}') to return all role assignment schedule instances for the user. Use $filter=asTarget() to return all role assignment schedule instances created for the current user.
-       */
+      /** The filter to apply on the operation. Use $filter=atScope() to return all role assignment schedules at or above the scope. Use $filter=principalId eq {id} to return all role assignment schedules at, above or below the scope for the specified principal.  Use $filter=assignedTo('{userId}') to return all role assignment schedule instances for the user. Use $filter=asTarget() to return all role assignment schedule instances created for the current user. */
       @query("$filter")
       $filter?: string;
     }

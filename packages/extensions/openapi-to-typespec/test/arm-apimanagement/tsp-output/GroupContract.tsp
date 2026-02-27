@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * Contract details.
- */
+/** Contract details. */
 @parentResource(ApiManagementServiceResource)
 model GroupContract
   is Azure.ResourceManager.ProxyResource<GroupContractProperties> {
@@ -27,91 +25,65 @@ model GroupContract
 
 @armResourceOperations
 interface GroupContracts {
-  /**
-   * Gets the details of the group specified by its identifier.
-   */
+  /** Gets the details of the group specified by its identifier. */
   get is ArmResourceRead<GroupContract>;
 
-  /**
-   * Gets the entity state (Etag) version of the group specified by its identifier.
-   */
+  /** Gets the entity state (Etag) version of the group specified by its identifier. */
   getEntityTag is ArmResourceCheckExistence<GroupContract>;
 
-  /**
-   * Creates or Updates a group.
-   */
+  /** Creates or Updates a group. */
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     GroupContract,
     Request = GroupCreateParameters,
     Parameters = {
-      /**
-       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
-       */
+      /** ETag of the Entity. Not required when creating an entity, but required when updating an entity. */
       @header
       `If-Match`?: string;
     }
   >;
 
-  /**
-   * Updates the details of the group specified by its identifier.
-   */
+  /** Updates the details of the group specified by its identifier. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     GroupContract,
     PatchModel = GroupUpdateParameters,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Deletes specific group of the API Management service instance.
-   */
+  /** Deletes specific group of the API Management service instance. */
   delete is ArmResourceDeleteSync<
     GroupContract,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Lists a collection of groups defined within a service instance.
-   */
+  /** Lists a collection of groups defined within a service instance. */
   listByService is ArmResourceListByParent<
     GroupContract,
     Parameters = {
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| externalId | filter | eq |     |</br>
-       */
+      /** |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| externalId | filter | eq |     |</br> */
       @query("$filter")
       $filter?: string;
 
-      /**
-       * Number of records to return.
-       */
+      /** Number of records to return. */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      /**
-       * Number of records to skip.
-       */
+      /** Number of records to skip. */
       @query("$skip")
       $skip?: int32;
     }
   >;
 
-  /**
-   * Lists a collection of user entities associated with the group.
-   */
+  /** Lists a collection of user entities associated with the group. */
   @list
   @get
   @action("users")
@@ -120,30 +92,22 @@ interface GroupContracts {
     void,
     ArmResponse<ResourceListResult<ApiManagementGroupUserData>>,
     Parameters = {
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| firstName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| lastName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| email | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| registrationDate | filter | ge, le, eq, ne, gt, lt |     |</br>| note | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-       */
+      /** |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| firstName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| lastName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| email | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| registrationDate | filter | ge, le, eq, ne, gt, lt |     |</br>| note | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br> */
       @query("$filter")
       $filter?: string;
 
-      /**
-       * Number of records to return.
-       */
+      /** Number of records to return. */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      /**
-       * Number of records to skip.
-       */
+      /** Number of records to skip. */
       @query("$skip")
       $skip?: int32;
     }
   >;
 
-  /**
-   * Checks that user entity specified by identifier is associated with the group entity.
-   */
+  /** Checks that user entity specified by identifier is associated with the group entity. */
   @head
   @action("{userId}")
   checkEntityExists is ArmResourceActionSync<
@@ -151,9 +115,7 @@ interface GroupContracts {
     void,
     NoContentResponse,
     Parameters = {
-      /**
-       * User identifier. Must be unique in the current API Management service instance.
-       */
+      /** User identifier. Must be unique in the current API Management service instance. */
       @maxLength(80)
       @minLength(1)
       @path
@@ -161,9 +123,7 @@ interface GroupContracts {
     }
   >;
 
-  /**
-   * Add existing user to existing group
-   */
+  /** Add existing user to existing group */
   @put
   @action("{userId}")
   create is ArmResourceActionSync<
@@ -171,9 +131,7 @@ interface GroupContracts {
     void,
     ArmResponse<ApiManagementGroupUserData> | ArmResourceCreatedSyncResponse<ApiManagementGroupUserData>,
     Parameters = {
-      /**
-       * User identifier. Must be unique in the current API Management service instance.
-       */
+      /** User identifier. Must be unique in the current API Management service instance. */
       @maxLength(80)
       @minLength(1)
       @path
@@ -181,9 +139,7 @@ interface GroupContracts {
     }
   >;
 
-  /**
-   * Remove existing user from existing group.
-   */
+  /** Remove existing user from existing group. */
   @delete
   @action("{userId}")
   groupUserDelete is ArmResourceActionSync<
@@ -191,9 +147,7 @@ interface GroupContracts {
     void,
     OkResponse | NoContentResponse,
     Parameters = {
-      /**
-       * User identifier. Must be unique in the current API Management service instance.
-       */
+      /** User identifier. Must be unique in the current API Management service instance. */
       @maxLength(80)
       @minLength(1)
       @path

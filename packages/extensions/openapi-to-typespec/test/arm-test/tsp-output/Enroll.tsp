@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Test;
-/**
- * A Test resource
- */
+/** A Test resource */
 @singleton("default")
 @parentResource(Employee)
 model Enroll is Azure.ResourceManager.TrackedResource<EnrollProperties> {
@@ -27,9 +25,7 @@ model Enroll is Azure.ResourceManager.TrackedResource<EnrollProperties> {
 
 @armResourceOperations
 interface Enrolls {
-  /**
-   * Get a Enroll.
-   */
+  /** Get a Enroll. */
   get is ArmResourceRead<Enroll>;
 }
 

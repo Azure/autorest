@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-/**
- * Azure Resource Manager resource envelope.
- */
+/** Azure Resource Manager resource envelope. */
 @parentResource(Registry)
 model ModelContainerResource
   is Azure.ResourceManager.ProxyResource<ModelContainer, false> {
@@ -51,40 +49,28 @@ alias ModelContainerResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @armResourceOperations
 interface ModelContainerResources {
-  /**
-   * Get container.
-   */
+  /** Get container. */
   get is ModelContainerResourceOps.Read<ModelContainerResource>;
 
-  /**
-   * Create or update model container.
-   */
+  /** Create or update model container. */
   createOrUpdate is ModelContainerResourceOps.CreateOrUpdateAsync<ModelContainerResource>;
 
-  /**
-   * Delete container.
-   */
+  /** Delete container. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ModelContainerResourceOps.DeleteWithoutOkAsync<
     ModelContainerResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List model containers.
-   */
+  /** List model containers. */
   list is ModelContainerResourceOps.List<
     ModelContainerResource,
     Parameters = {
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
 
-      /**
-       * View type for including/excluding (for example) archived entities.
-       */
+      /** View type for including/excluding (for example) archived entities. */
       @query("listViewType")
       listViewType?: ListViewType;
     },
@@ -116,42 +102,28 @@ alias ModelContainerOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @armResourceOperations
 interface ModelContainers {
-  /**
-   * Get container.
-   */
+  /** Get container. */
   get is ModelContainerOps.Read<ModelContainerResource>;
 
-  /**
-   * Create or update container.
-   */
+  /** Create or update container. */
   createOrUpdate is ModelContainerOps.CreateOrUpdateSync<ModelContainerResource>;
 
-  /**
-   * Delete container.
-   */
+  /** Delete container. */
   delete is ModelContainerOps.DeleteSync<ModelContainerResource>;
 
-  /**
-   * List model containers.
-   */
+  /** List model containers. */
   list is ModelContainerOps.List<
     ModelContainerResource,
     Parameters = {
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
 
-      /**
-       * Maximum number of results to return.
-       */
+      /** Maximum number of results to return. */
       @query("count")
       count?: int32;
 
-      /**
-       * View type for including/excluding (for example) archived entities.
-       */
+      /** View type for including/excluding (for example) archived entities. */
       @query("listViewType")
       listViewType?: ListViewType;
     },

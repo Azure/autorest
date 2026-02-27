@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * Describes a cloud service OS version.
- */
+/** Describes a cloud service OS version. */
 @subscriptionResource
 model OSVersion is Azure.ResourceManager.ProxyResource<OSVersionProperties> {
   ...ResourceNameParameter<
@@ -22,9 +20,7 @@ model OSVersion is Azure.ResourceManager.ProxyResource<OSVersionProperties> {
     NamePattern = ""
   >;
 
-  /**
-   * Resource location.
-   */
+  /** Resource location. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   location?: string;
@@ -32,17 +28,13 @@ model OSVersion is Azure.ResourceManager.ProxyResource<OSVersionProperties> {
 
 @armResourceOperations
 interface OSVersions {
-  /**
-   * Gets properties of a guest operating system version that can be specified in the XML service configuration (.cscfg) for a cloud service.
-   */
+  /** Gets properties of a guest operating system version that can be specified in the XML service configuration (.cscfg) for a cloud service. */
   getOSVersion is ArmResourceRead<
     OSVersion,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
-  /**
-   * Gets a list of all guest operating system versions available to be specified in the XML service configuration (.cscfg) for a cloud service. Use nextLink property in the response to get the next page of OS versions. Do this till nextLink is null to fetch all the OS versions.
-   */
+  /** Gets a list of all guest operating system versions available to be specified in the XML service configuration (.cscfg) for a cloud service. Use nextLink property in the response to get the next page of OS versions. Do this till nextLink is null to fetch all the OS versions. */
   listOSVersions is ArmResourceListByParent<
     OSVersion,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters

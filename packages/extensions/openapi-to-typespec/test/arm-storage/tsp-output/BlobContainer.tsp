@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
-/**
- * Properties of the blob container, including Id, resource name, resource type, Etag.
- */
+/** Properties of the blob container, including Id, resource name, resource type, Etag. */
 @parentResource(BlobServiceProperties)
 model BlobContainer
   is Azure.ResourceManager.ProxyResource<ContainerProperties> {
@@ -28,75 +26,53 @@ model BlobContainer
 
 @armResourceOperations
 interface BlobContainers {
-  /**
-   * Gets properties of a specified container.
-   */
+  /** Gets properties of a specified container. */
   get is ArmResourceRead<BlobContainer>;
 
-  /**
-   * Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container.
-   */
+  /** Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container. */
   create is ArmResourceCreateOrReplaceSync<BlobContainer>;
 
-  /**
-   * Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn't already exist.
-   */
+  /** Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn't already exist. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<BlobContainer, PatchModel = BlobContainer>;
 
-  /**
-   * Deletes specified container under its account.
-   */
+  /** Deletes specified container under its account. */
   delete is ArmResourceDeleteSync<BlobContainer>;
 
-  /**
-   * Lists all containers and does not support a prefix like data plane. Also SRP today does not return continuation token.
-   */
+  /** Lists all containers and does not support a prefix like data plane. Also SRP today does not return continuation token. */
   list is ArmResourceListByParent<
     BlobContainer,
     Parameters = {
-      /**
-       * Optional. Specified maximum number of containers that can be included in the list.
-       */
+      /** Optional. Specified maximum number of containers that can be included in the list. */
       @query("$maxpagesize")
       $maxpagesize?: string;
 
-      /**
-       * Optional. When specified, only container names starting with the filter will be listed.
-       */
+      /** Optional. When specified, only container names starting with the filter will be listed. */
       @query("$filter")
       $filter?: string;
 
-      /**
-       * Optional, used to include the properties for soft deleted blob containers.
-       */
+      /** Optional, used to include the properties for soft deleted blob containers. */
       @query("$include")
       $include?: ListContainersInclude;
     },
     Response = ArmResponse<ListContainerItems>
   >;
 
-  /**
-   * Sets legal hold tags. Setting the same tag results in an idempotent operation. SetLegalHold follows an append pattern and does not clear out the existing tags that are not specified in the request.
-   */
+  /** Sets legal hold tags. Setting the same tag results in an idempotent operation. SetLegalHold follows an append pattern and does not clear out the existing tags that are not specified in the request. */
   setLegalHold is ArmResourceActionSync<
     BlobContainer,
     LegalHold,
     ArmResponse<LegalHold>
   >;
 
-  /**
-   * Clears legal hold tags. Clearing the same or non-existent tag results in an idempotent operation. ClearLegalHold clears out only the specified tags in the request.
-   */
+  /** Clears legal hold tags. Clearing the same or non-existent tag results in an idempotent operation. ClearLegalHold clears out only the specified tags in the request. */
   clearLegalHold is ArmResourceActionSync<
     BlobContainer,
     LegalHold,
     ArmResponse<LegalHold>
   >;
 
-  /**
-   * The Lease Container operation establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
-   */
+  /** The Lease Container operation establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite. */
   lease is ArmResourceActionSync<
     BlobContainer,
     LeaseContainerRequest,
@@ -104,9 +80,7 @@ interface BlobContainers {
     OptionalRequestBody = true
   >;
 
-  /**
-   * This operation migrates a blob container from container level WORM to object level immutability enabled container. Prerequisites require a container level immutability policy either in locked or unlocked state, Account level versioning must be enabled and there should be no Legal hold on the container.
-   */
+  /** This operation migrates a blob container from container level WORM to object level immutability enabled container. Prerequisites require a container level immutability policy either in locked or unlocked state, Account level versioning must be enabled and there should be no Legal hold on the container. */
   @action("migrate")
   objectLevelWorm is ArmResourceActionAsync<BlobContainer, void, OkResponse>;
 }

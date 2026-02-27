@@ -13,9 +13,7 @@ namespace Azure.ResourceManager.MachineLearning;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface UsagesOperationGroup {
-  /**
-   * Gets the current usage information as well as limits for AML resources for given subscription and location.
-   */
+  /** Gets the current usage information as well as limits for AML resources for given subscription and location. */
   @autoRoute
   @get
   @action("usages")
@@ -28,9 +26,7 @@ interface UsagesOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface VirtualMachineSizesOperationGroup {
-  /**
-   * Returns supported VM Sizes in a location
-   */
+  /** Returns supported VM Sizes in a location */
   @autoRoute
   @get
   @action("vmSizes")
@@ -43,9 +39,7 @@ interface VirtualMachineSizesOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface QuotasOperationGroup {
-  /**
-   * Update quota for each VM family in workspace.
-   */
+  /** Update quota for each VM family in workspace. */
   @autoRoute
   @action("updateQuotas")
   update is ArmProviderActionSync<
@@ -54,9 +48,7 @@ interface QuotasOperationGroup {
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
   >;
-  /**
-   * Gets the currently assigned Workspace Quotas based on VMFamily.
-   */
+  /** Gets the currently assigned Workspace Quotas based on VMFamily. */
   @autoRoute
   @get
   @action("quotas")

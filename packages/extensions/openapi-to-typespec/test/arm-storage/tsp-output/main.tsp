@@ -38,9 +38,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-/**
- * The Azure Storage Management API.
- */
+/** The Azure Storage Management API. */
 @armProviderNamespace
 @service(#{ title: "Azure Storage resource management API." })
 @versioned(Versions)

@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureSphere;
-/**
- * An deployment resource belonging to a device group resource.
- */
+/** An deployment resource belonging to a device group resource. */
 @parentResource(DeviceGroup)
 model Deployment is Azure.ResourceManager.ProxyResource<DeploymentProperties> {
   ...ResourceNameParameter<
@@ -26,51 +24,35 @@ model Deployment is Azure.ResourceManager.ProxyResource<DeploymentProperties> {
 
 @armResourceOperations
 interface Deployments {
-  /**
-   * Get a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
-   */
+  /** Get a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name. */
   get is ArmResourceRead<Deployment>;
 
-  /**
-   * Create a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
-   */
+  /** Create a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name. */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Deployment>;
 
-  /**
-   * Delete a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
-   */
+  /** Delete a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name. */
   delete is ArmResourceDeleteWithoutOkAsync<
     Deployment,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List Deployment resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
-   */
+  /** List Deployment resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name. */
   listByDeviceGroup is ArmResourceListByParent<
     Deployment,
     Parameters = {
-      /**
-       * Filter the result list using the given expression
-       */
+      /** Filter the result list using the given expression */
       @query("$filter")
       filter?: string;
 
-      /**
-       * The number of result items to return.
-       */
+      /** The number of result items to return. */
       @query("$top")
       top?: int32;
 
-      /**
-       * The number of result items to skip.
-       */
+      /** The number of result items to skip. */
       @query("$skip")
       skip?: int32;
 
-      /**
-       * The maximum number of result items per page.
-       */
+      /** The maximum number of result items per page. */
       @query("$maxpagesize")
       maxpagesize?: int32;
     }

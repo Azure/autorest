@@ -11,25 +11,19 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AgFoodPlatform;
-/**
- * The private endpoint connection resource.
- */
+/** The private endpoint connection resource. */
 model PrivateEndpointConnection is PrivateEndpointConnectionResource;
 alias PrivateEndpointOperations = PrivateEndpoints<PrivateEndpointConnection>;
 
 @armResourceOperations
 interface PrivateEndpointConnections {
-  /**
-   * Get Private endpoint connection object.
-   */
+  /** Get Private endpoint connection object. */
   get is PrivateEndpointOperations.Read<
     DataManagerForAgriculture,
     PrivateEndpointConnection
   >;
 
-  /**
-   * Approves or Rejects a Private endpoint connection request.
-   */
+  /** Approves or Rejects a Private endpoint connection request. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is PrivateEndpointOperations.CreateOrReplaceSync<
     DataManagerForAgriculture,
@@ -37,9 +31,7 @@ interface PrivateEndpointConnections {
     Response = ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection>
   >;
 
-  /**
-   * Delete Private endpoint connection request.
-   */
+  /** Delete Private endpoint connection request. */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is PrivateEndpointOperations.DeleteAsync<
@@ -49,9 +41,7 @@ interface PrivateEndpointConnections {
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * Get list of Private endpoint connections.
-   */
+  /** Get list of Private endpoint connections. */
   listByResource is PrivateEndpointOperations.ListByParent<
     DataManagerForAgriculture,
     PrivateEndpointConnection,

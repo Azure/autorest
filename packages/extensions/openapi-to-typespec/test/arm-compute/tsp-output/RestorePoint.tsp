@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * Restore Point details.
- */
+/** Restore Point details. */
 @parentResource(RestorePointCollection)
 model RestorePoint
   is Azure.ResourceManager.ProxyResource<RestorePointProperties> {
@@ -27,23 +25,17 @@ model RestorePoint
 
 @armResourceOperations
 interface RestorePoints {
-  /**
-   * The operation to get the restore point.
-   */
+  /** The operation to get the restore point. */
   get is ArmResourceRead<
     RestorePoint,
     Parameters = {
-      /**
-       * The expand expression to apply on the operation. 'InstanceView' retrieves information about the run-time state of a restore point.
-       */
+      /** The expand expression to apply on the operation. 'InstanceView' retrieves information about the run-time state of a restore point. */
       @query("$expand")
       $expand?: RestorePointExpandOptions;
     }
   >;
 
-  /**
-   * The operation to create the restore point. Updating properties of an existing restore point is not allowed
-   */
+  /** The operation to create the restore point. Updating properties of an existing restore point is not allowed */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is ArmResourceCreateOrReplaceAsync<
     RestorePoint,
@@ -53,9 +45,7 @@ interface RestorePoints {
     >
   >;
 
-  /**
-   * The operation to delete the restore point.
-   */
+  /** The operation to delete the restore point. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     RestorePoint,

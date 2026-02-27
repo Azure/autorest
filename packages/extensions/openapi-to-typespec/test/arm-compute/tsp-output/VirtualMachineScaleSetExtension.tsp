@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * Describes a Virtual Machine Scale Set Extension.
- */
+/** Describes a Virtual Machine Scale Set Extension. */
 @parentResource(VirtualMachineScaleSet)
 model VirtualMachineScaleSetExtension
   is Azure.ResourceManager.ProxyResource<VirtualMachineScaleSetExtensionProperties> {
@@ -27,32 +25,24 @@ model VirtualMachineScaleSetExtension
 
 @armResourceOperations
 interface VirtualMachineScaleSetExtensions {
-  /**
-   * The operation to get the extension.
-   */
+  /** The operation to get the extension. */
   get is ArmResourceRead<
     VirtualMachineScaleSetExtension,
     Parameters = {
-      /**
-       * The expand expression to apply on the operation.
-       */
+      /** The expand expression to apply on the operation. */
       @query("$expand")
       $expand?: string;
     }
   >;
 
-  /**
-   * The operation to create or update an extension.
-   */
+  /** The operation to create or update an extension. */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualMachineScaleSetExtension,
     LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineScaleSetExtension> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /**
-   * The operation to update an extension.
-   */
+  /** The operation to update an extension. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     VirtualMachineScaleSetExtension,
@@ -60,18 +50,14 @@ interface VirtualMachineScaleSetExtensions {
     Response = ArmResponse<VirtualMachineScaleSetExtension> | ArmResourceCreatedResponse<VirtualMachineScaleSetExtension>
   >;
 
-  /**
-   * The operation to delete the extension.
-   */
+  /** The operation to delete the extension. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachineScaleSetExtension,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * Gets a list of all extensions in a VM scale set.
-   */
+  /** Gets a list of all extensions in a VM scale set. */
   list is ArmResourceListByParent<VirtualMachineScaleSetExtension>;
 }
 

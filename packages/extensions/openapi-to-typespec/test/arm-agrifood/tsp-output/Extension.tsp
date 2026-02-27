@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AgFoodPlatform;
-/**
- * Extension resource.
- */
+/** Extension resource. */
 @parentResource(DataManagerForAgriculture)
 model Extension is Azure.ResourceManager.ProxyResource<ExtensionProperties> {
   ...ResourceNameParameter<
@@ -27,14 +25,10 @@ model Extension is Azure.ResourceManager.ProxyResource<ExtensionProperties> {
 
 @armResourceOperations
 interface Extensions {
-  /**
-   * Get installed extension details by extension id.
-   */
+  /** Get installed extension details by extension id. */
   get is ArmResourceRead<Extension>;
 
-  /**
-   * Install or Update extension. Additional Api Properties are merged patch and if the extension is updated to a new version then the obsolete entries will be auto deleted from Additional Api Properties.
-   */
+  /** Install or Update extension. Additional Api Properties are merged patch and if the extension is updated to a new version then the obsolete entries will be auto deleted from Additional Api Properties. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     Extension,
@@ -42,27 +36,19 @@ interface Extensions {
     Response = ArmResourceCreatedSyncResponse<Extension>
   >;
 
-  /**
-   * Uninstall extension.
-   */
+  /** Uninstall extension. */
   delete is ArmResourceDeleteSync<Extension>;
 
-  /**
-   * Get installed extensions details.
-   */
+  /** Get installed extensions details. */
   listByDataManagerForAgriculture is ArmResourceListByParent<
     Extension,
     Parameters = {
-      /**
-       * Installed extension ids.
-       */
+      /** Installed extension ids. */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "extensionIds", explode: true })
       extensionIds?: string[];
 
-      /**
-       * Installed extension categories.
-       */
+      /** Installed extension categories. */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "extensionCategories", explode: true })
       extensionCategories?: string[];
@@ -76,9 +62,7 @@ interface Extensions {
       @query("$maxPageSize")
       $maxPageSize?: int32 = 50;
 
-      /**
-       * Skip token for getting next set of results.
-       */
+      /** Skip token for getting next set of results. */
       @query("$skipToken")
       $skipToken?: string;
     },

@@ -35,9 +35,7 @@ op detectLastPoint is Azure.Core.Foundations.Operation<
   LastDetectResponse
 >;
 
-/**
- * Evaluate change point score of every series point
- */
+/** Evaluate change point score of every series point */
 @summary("Detect change point for the entire series")
 @route("/timeseries/changepoint/detect")
 @post
@@ -66,40 +64,30 @@ op getDetectionResult is Azure.Core.ResourceRead<DetectionResult>;
 @post
 op trainMultivariateModel is Azure.Core.Foundations.Operation<ModelInfo, void>;
 
-/**
- * List models of a subscription
- */
+/** List models of a subscription */
 @summary("List Multivariate Models")
 op listMultivariateModel is Azure.Core.ResourceList<
   ModelSnapshot,
   {
     parameters: {
-      /**
-       * $skip indicates how many models will be skipped.
-       */
+      /** $skip indicates how many models will be skipped. */
       @query("$skip")
       $skip?: int32;
 
-      /**
-       * $top indicates how many models will be fetched.
-       */
+      /** $top indicates how many models will be fetched. */
       @query("$top")
       $top?: int32 = 10;
     };
   }
 >;
 
-/**
- * Delete an existing multivariate model according to the modelId
- */
+/** Delete an existing multivariate model according to the modelId */
 @summary("Delete Multivariate Model")
 @route("/multivariate/models/{modelId}")
 @delete
 op deleteMultivariateModel is Azure.Core.Foundations.Operation<
   {
-    /**
-     * Model identifier
-     */
+    /** Model identifier */
     @format("uuid")
     @path
     modelId: string;
@@ -129,40 +117,30 @@ op getMultivariateModel is Azure.Core.ResourceRead<Model>;
 @post
 op detectAnomaly is Azure.Core.Foundations.Operation<
   {
-    /**
-     * Model identifier
-     */
+    /** Model identifier */
     @format("uuid")
     @path
     modelId: string;
 
-    /**
-     * Detect anomaly request
-     */
+    /** Detect anomaly request */
     @bodyRoot
     body: DetectionRequest;
   },
   void
 >;
 
-/**
- * Synchronized API for anomaly detection.
- */
+/** Synchronized API for anomaly detection. */
 @summary("Detect anomalies in the last a few points of the request body")
 @route("/multivariate/models/{modelId}/last/detect")
 @post
 op lastDetectAnomaly is Azure.Core.Foundations.Operation<
   {
-    /**
-     * Model identifier
-     */
+    /** Model identifier */
     @format("uuid")
     @path
     modelId: string;
 
-    /**
-     * Request for last detection
-     */
+    /** Request for last detection */
     @bodyRoot
     body: LastDetectionRequest;
   },

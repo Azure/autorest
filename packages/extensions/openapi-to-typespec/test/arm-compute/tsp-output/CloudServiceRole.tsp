@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * Describes a role of the cloud service.
- */
+/** Describes a role of the cloud service. */
 @parentResource(CloudService)
 model CloudServiceRole
   is Azure.ResourceManager.ProxyResource<CloudServiceRoleProperties> {
@@ -24,30 +22,22 @@ model CloudServiceRole
     NamePattern = ""
   >;
 
-  /**
-   * Resource location
-   */
+  /** Resource location */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   location?: string;
 
-  /**
-   * Describes the cloud service role sku.
-   */
+  /** Describes the cloud service role sku. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: CloudServiceRoleSku;
 }
 
 @armResourceOperations
 interface CloudServiceRoles {
-  /**
-   * Gets a role from a cloud service.
-   */
+  /** Gets a role from a cloud service. */
   get is ArmResourceRead<CloudServiceRole>;
 
-  /**
-   * Gets a list of all roles in a cloud service. Use nextLink property in the response to get the next page of roles. Do this till nextLink is null to fetch all the roles.
-   */
+  /** Gets a list of all roles in a cloud service. Use nextLink property in the response to get the next page of roles. Do this till nextLink is null to fetch all the roles. */
   list is ArmResourceListByParent<CloudServiceRole>;
 }
 

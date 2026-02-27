@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * disk encryption set resource.
- */
+/** disk encryption set resource. */
 model DiskEncryptionSet
   is Azure.ResourceManager.TrackedResource<EncryptionSetProperties> {
   ...ResourceNameParameter<
@@ -22,23 +20,17 @@ model DiskEncryptionSet
     NamePattern = ""
   >;
 
-  /**
-   * The managed identity for the disk encryption set. It should be given permission on the key vault before it can be used to encrypt disks.
-   */
+  /** The managed identity for the disk encryption set. It should be given permission on the key vault before it can be used to encrypt disks. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   identity?: EncryptionSetIdentity;
 }
 
 @armResourceOperations
 interface DiskEncryptionSets {
-  /**
-   * Gets information about a disk encryption set.
-   */
+  /** Gets information about a disk encryption set. */
   get is ArmResourceRead<DiskEncryptionSet>;
 
-  /**
-   * Creates or updates a disk encryption set
-   */
+  /** Creates or updates a disk encryption set */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -51,9 +43,7 @@ interface DiskEncryptionSets {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /**
-   * Updates (patches) a disk encryption set.
-   */
+  /** Updates (patches) a disk encryption set. */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -65,34 +55,26 @@ interface DiskEncryptionSets {
     })
   >;
 
-  /**
-   * Deletes a disk encryption set.
-   */
+  /** Deletes a disk encryption set. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     DiskEncryptionSet,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * Lists all the disk encryption sets under a resource group.
-   */
+  /** Lists all the disk encryption sets under a resource group. */
   listByResourceGroup is ArmResourceListByParent<
     DiskEncryptionSet,
     Response = ArmResponse<DiskEncryptionSetList>
   >;
 
-  /**
-   * Lists all the disk encryption sets under a subscription.
-   */
+  /** Lists all the disk encryption sets under a subscription. */
   list is ArmListBySubscription<
     DiskEncryptionSet,
     Response = ArmResponse<DiskEncryptionSetList>
   >;
 
-  /**
-   * Lists all resources that are encrypted with this disk encryption set.
-   */
+  /** Lists all resources that are encrypted with this disk encryption set. */
   @list
   @get
   @action("associatedResources")

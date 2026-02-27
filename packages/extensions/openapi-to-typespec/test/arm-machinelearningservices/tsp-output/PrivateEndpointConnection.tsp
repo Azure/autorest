@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-/**
- * The Private Endpoint Connection resource.
- */
+/** The Private Endpoint Connection resource. */
 @parentResource(Workspace)
 model PrivateEndpointConnection
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<PrivateEndpointConnectionProperties> {
@@ -29,9 +27,7 @@ model PrivateEndpointConnection
 
 @armResourceOperations
 interface PrivateEndpointConnections {
-  /**
-   * Called by end-users to get a PE connection.
-   */
+  /** Called by end-users to get a PE connection. */
   get is ArmResourceRead<PrivateEndpointConnection>;
 
   /**
@@ -44,14 +40,10 @@ interface PrivateEndpointConnections {
     Response = ArmResourceUpdatedResponse<PrivateEndpointConnection>
   >;
 
-  /**
-   * Called by end-users to delete a PE connection.
-   */
+  /** Called by end-users to delete a PE connection. */
   delete is ArmResourceDeleteSync<PrivateEndpointConnection>;
 
-  /**
-   * Called by end-users to get all PE connections.
-   */
+  /** Called by end-users to get all PE connections. */
   list is ArmResourceListByParent<
     PrivateEndpointConnection,
     Response = ArmResponse<PrivateEndpointConnectionListResult>

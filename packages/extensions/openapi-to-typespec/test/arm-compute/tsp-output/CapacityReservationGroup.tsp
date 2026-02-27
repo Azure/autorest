@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * Specifies information about the capacity reservation group that the capacity reservations should be assigned to. Currently, a capacity reservation can only be added to a capacity reservation group at creation time. An existing capacity reservation cannot be added or moved to another capacity reservation group.
- */
+/** Specifies information about the capacity reservation group that the capacity reservations should be assigned to. Currently, a capacity reservation can only be added to a capacity reservation group at creation time. An existing capacity reservation cannot be added or moved to another capacity reservation group. */
 model CapacityReservationGroup
   is Azure.ResourceManager.TrackedResource<CapacityReservationGroupProperties> {
   ...ResourceNameParameter<
@@ -26,62 +24,44 @@ model CapacityReservationGroup
 
 @armResourceOperations
 interface CapacityReservationGroups {
-  /**
-   * The operation that retrieves information about a capacity reservation group.
-   */
+  /** The operation that retrieves information about a capacity reservation group. */
   get is ArmResourceRead<
     CapacityReservationGroup,
     Parameters = {
-      /**
-       * The expand expression to apply on the operation. 'InstanceView' will retrieve the list of instance views of the capacity reservations under the capacity reservation group which is a snapshot of the runtime properties of a capacity reservation that is managed by the platform and can change outside of control plane operations.
-       */
+      /** The expand expression to apply on the operation. 'InstanceView' will retrieve the list of instance views of the capacity reservations under the capacity reservation group which is a snapshot of the runtime properties of a capacity reservation that is managed by the platform and can change outside of control plane operations. */
       @query("$expand")
       $expand?: CapacityReservationGroupInstanceViewTypes;
     }
   >;
 
-  /**
-   * The operation to create or update a capacity reservation group. When updating a capacity reservation group, only tags may be modified. Please refer to https://aka.ms/CapacityReservation for more details.
-   */
+  /** The operation to create or update a capacity reservation group. When updating a capacity reservation group, only tags may be modified. Please refer to https://aka.ms/CapacityReservation for more details. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<CapacityReservationGroup>;
 
-  /**
-   * The operation to update a capacity reservation group. When updating a capacity reservation group, only tags may be modified.
-   */
+  /** The operation to update a capacity reservation group. When updating a capacity reservation group, only tags may be modified. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     CapacityReservationGroup,
     PatchModel = CapacityReservationGroupUpdate
   >;
 
-  /**
-   * The operation to delete a capacity reservation group. This operation is allowed only if all the associated resources are disassociated from the reservation group and all capacity reservations under the reservation group have also been deleted. Please refer to https://aka.ms/CapacityReservation for more details.
-   */
+  /** The operation to delete a capacity reservation group. This operation is allowed only if all the associated resources are disassociated from the reservation group and all capacity reservations under the reservation group have also been deleted. Please refer to https://aka.ms/CapacityReservation for more details. */
   delete is ArmResourceDeleteSync<CapacityReservationGroup>;
 
-  /**
-   * Lists all of the capacity reservation groups in the specified resource group. Use the nextLink property in the response to get the next page of capacity reservation groups.
-   */
+  /** Lists all of the capacity reservation groups in the specified resource group. Use the nextLink property in the response to get the next page of capacity reservation groups. */
   listByResourceGroup is ArmResourceListByParent<
     CapacityReservationGroup,
     Parameters = {
-      /**
-       * The expand expression to apply on the operation. Based on the expand param(s) specified we return Virtual Machine or ScaleSet VM Instance or both resource Ids which are associated to capacity reservation group in the response.
-       */
+      /** The expand expression to apply on the operation. Based on the expand param(s) specified we return Virtual Machine or ScaleSet VM Instance or both resource Ids which are associated to capacity reservation group in the response. */
       @query("$expand")
       $expand?: ExpandTypesForGetCapacityReservationGroups;
     }
   >;
 
-  /**
-   * Lists all of the capacity reservation groups in the subscription. Use the nextLink property in the response to get the next page of capacity reservation groups.
-   */
+  /** Lists all of the capacity reservation groups in the subscription. Use the nextLink property in the response to get the next page of capacity reservation groups. */
   listBySubscription is ArmListBySubscription<
     CapacityReservationGroup,
     Parameters = {
-      /**
-       * The expand expression to apply on the operation. Based on the expand param(s) specified we return Virtual Machine or ScaleSet VM Instance or both resource Ids which are associated to capacity reservation group in the response.
-       */
+      /** The expand expression to apply on the operation. Based on the expand param(s) specified we return Virtual Machine or ScaleSet VM Instance or both resource Ids which are associated to capacity reservation group in the response. */
       @query("$expand")
       $expand?: ExpandTypesForGetCapacityReservationGroups;
     }

@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-/**
- * Azure Resource Manager resource envelope.
- */
+/** Azure Resource Manager resource envelope. */
 @parentResource(Registry)
 model EnvironmentContainerResource
   is Azure.ResourceManager.ProxyResource<EnvironmentContainer, false> {
@@ -51,40 +49,28 @@ alias EnvironmentContainerResourceOps = Azure.ResourceManager.Legacy.LegacyOpera
 
 @armResourceOperations
 interface EnvironmentContainerResources {
-  /**
-   * Get container.
-   */
+  /** Get container. */
   get is EnvironmentContainerResourceOps.Read<EnvironmentContainerResource>;
 
-  /**
-   * Create or update container.
-   */
+  /** Create or update container. */
   createOrUpdate is EnvironmentContainerResourceOps.CreateOrUpdateAsync<EnvironmentContainerResource>;
 
-  /**
-   * Delete container.
-   */
+  /** Delete container. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is EnvironmentContainerResourceOps.DeleteWithoutOkAsync<
     EnvironmentContainerResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List environment containers.
-   */
+  /** List environment containers. */
   list is EnvironmentContainerResourceOps.List<
     EnvironmentContainerResource,
     Parameters = {
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
 
-      /**
-       * View type for including/excluding (for example) archived entities.
-       */
+      /** View type for including/excluding (for example) archived entities. */
       @query("listViewType")
       listViewType?: ListViewType;
     },
@@ -116,36 +102,24 @@ alias EnvironmentContainerOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @armResourceOperations
 interface EnvironmentContainers {
-  /**
-   * Get container.
-   */
+  /** Get container. */
   get is EnvironmentContainerOps.Read<EnvironmentContainerResource>;
 
-  /**
-   * Create or update container.
-   */
+  /** Create or update container. */
   createOrUpdate is EnvironmentContainerOps.CreateOrUpdateSync<EnvironmentContainerResource>;
 
-  /**
-   * Delete container.
-   */
+  /** Delete container. */
   delete is EnvironmentContainerOps.DeleteSync<EnvironmentContainerResource>;
 
-  /**
-   * List environment containers.
-   */
+  /** List environment containers. */
   list is EnvironmentContainerOps.List<
     EnvironmentContainerResource,
     Parameters = {
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
 
-      /**
-       * View type for including/excluding (for example) archived entities.
-       */
+      /** View type for including/excluding (for example) archived entities. */
       @query("listViewType")
       listViewType?: ListViewType;
     },

@@ -8,9 +8,7 @@ using TypeSpec.Http;
 namespace AzureWebPubSubServiceRESTAPI;
 
 interface HealthApiOperationGroup {
-  /**
-   * Get service health status.
-   */
+  /** Get service health status. */
   @summary("Get service health status.")
   @route("/api/health")
   @head
@@ -18,9 +16,7 @@ interface HealthApiOperationGroup {
 }
 
 interface WebPubSubOperationGroup {
-  /**
-   * Add filtered connections to multiple groups.
-   */
+  /** Add filtered connections to multiple groups. */
   @summary("Add filtered connections to multiple groups.")
   @route("/api/hubs/{hub}/:addToGroups")
   @post
@@ -34,18 +30,14 @@ interface WebPubSubOperationGroup {
       @path
       hub: string;
 
-      /**
-       * Target groups and connection filter.
-       */
+      /** Target groups and connection filter. */
       @bodyRoot
       groupsToAdd: AddToGroupsRequest;
     },
     void
   >;
 
-  /**
-   * Close the connections in the hub.
-   */
+  /** Close the connections in the hub. */
   @summary("Close the connections in the hub.")
   @route("/api/hubs/{hub}/:closeConnections")
   @post
@@ -59,24 +51,18 @@ interface WebPubSubOperationGroup {
       @path
       hub: string;
 
-      /**
-       * Exclude these connectionIds when closing the connections in the hub.
-       */
+      /** Exclude these connectionIds when closing the connections in the hub. */
       @query(#{ name: "excluded", explode: true })
       excluded?: string[];
 
-      /**
-       * The reason closing the client connection.
-       */
+      /** The reason closing the client connection. */
       @query("reason")
       reason?: string;
     },
     void
   >;
 
-  /**
-   * Generate token for the client to connect Azure Web PubSub service.
-   */
+  /** Generate token for the client to connect Azure Web PubSub service. */
   @summary("Generate token for the client to connect Azure Web PubSub service.")
   @route("/api/hubs/{hub}/:generateToken")
   @post
@@ -90,28 +76,20 @@ interface WebPubSubOperationGroup {
       @path
       hub: string;
 
-      /**
-       * User Id.
-       */
+      /** User Id. */
       @query("userId")
       userId?: string;
 
-      /**
-       * Roles that the connection with the generated token will have.
-       */
+      /** Roles that the connection with the generated token will have. */
       @query(#{ name: "role", explode: true })
       role?: string[];
 
-      /**
-       * The expire time of the generated token.
-       */
+      /** The expire time of the generated token. */
       @minValue(1)
       @query("minutesToExpire")
       minutesToExpire?: int32 = 60;
 
-      /**
-       * Groups that the connection will join when it connects.
-       */
+      /** Groups that the connection will join when it connects. */
       @query(#{ name: "group", explode: true })
       group?: string[];
 
@@ -129,9 +107,7 @@ interface WebPubSubOperationGroup {
     }
   >;
 
-  /**
-   * Remove filtered connections from multiple groups.
-   */
+  /** Remove filtered connections from multiple groups. */
   @summary("Remove filtered connections from multiple groups.")
   @route("/api/hubs/{hub}/:removeFromGroups")
   @post
@@ -145,18 +121,14 @@ interface WebPubSubOperationGroup {
       @path
       hub: string;
 
-      /**
-       * Target groups and connection filter.
-       */
+      /** Target groups and connection filter. */
       @bodyRoot
       groupsToRemove: RemoveFromGroupsRequest;
     },
     void
   >;
 
-  /**
-   * Broadcast content inside request body to all the connected client connections.
-   */
+  /** Broadcast content inside request body to all the connected client connections. */
   @summary("Broadcast content inside request body to all the connected client connections.")
   @route("/api/hubs/{hub}/:send")
   @post
@@ -170,9 +142,7 @@ interface WebPubSubOperationGroup {
       @path
       hub: string;
 
-      /**
-       * Excluded connection Ids.
-       */
+      /** Excluded connection Ids. */
       @query(#{ name: "excluded", explode: true })
       excluded?: string[];
 
@@ -194,24 +164,18 @@ interface WebPubSubOperationGroup {
       @query("messageTtlSeconds")
       messageTtlSeconds?: int32;
 
-      /**
-       * Upload file type
-       */
+      /** Upload file type */
       @header
       `content-type`: ContentType;
 
-      /**
-       * The payload body.
-       */
+      /** The payload body. */
       @bodyRoot
       message: bytes;
     },
     void
   >;
 
-  /**
-   * Close the client connection.
-   */
+  /** Close the client connection. */
   @summary("Close the client connection.")
   @route("/api/hubs/{hub}/connections/{connectionId}")
   @delete
@@ -225,25 +189,19 @@ interface WebPubSubOperationGroup {
       @path
       hub: string;
 
-      /**
-       * Target connection Id.
-       */
+      /** Target connection Id. */
       @minLength(1)
       @path
       connectionId: string;
 
-      /**
-       * The reason closing the client connection.
-       */
+      /** The reason closing the client connection. */
       @query("reason")
       reason?: string;
     },
     void
   >;
 
-  /**
-   * Check if the connection with the given connectionId exists.
-   */
+  /** Check if the connection with the given connectionId exists. */
   @summary("Check if the connection with the given connectionId exists.")
   @route("/api/hubs/{hub}/connections/{connectionId}")
   @head
@@ -257,9 +215,7 @@ interface WebPubSubOperationGroup {
       @path
       hub: string;
 
-      /**
-       * The connection Id.
-       */
+      /** The connection Id. */
       @minLength(1)
       @path
       connectionId: string;
@@ -267,9 +223,7 @@ interface WebPubSubOperationGroup {
     void
   >;
 
-  /**
-   * Send content inside request body to the specific connection.
-   */
+  /** Send content inside request body to the specific connection. */
   @summary("Send content inside request body to the specific connection.")
   @route("/api/hubs/{hub}/connections/{connectionId}/:send")
   @post
@@ -283,9 +237,7 @@ interface WebPubSubOperationGroup {
       @path
       hub: string;
 
-      /**
-       * The connection Id.
-       */
+      /** The connection Id. */
       @minLength(1)
       @path
       connectionId: string;
@@ -301,24 +253,18 @@ interface WebPubSubOperationGroup {
       @query("messageTtlSeconds")
       messageTtlSeconds?: int32;
 
-      /**
-       * Upload file type
-       */
+      /** Upload file type */
       @header
       `content-type`: ContentType;
 
-      /**
-       * The payload body.
-       */
+      /** The payload body. */
       @bodyRoot
       message: bytes;
     },
     void
   >;
 
-  /**
-   * Remove a connection from all groups.
-   */
+  /** Remove a connection from all groups. */
   @summary("Remove a connection from all groups.")
   @route("/api/hubs/{hub}/connections/{connectionId}/groups")
   @delete
@@ -332,9 +278,7 @@ interface WebPubSubOperationGroup {
       @path
       hub: string;
 
-      /**
-       * Target connection Id.
-       */
+      /** Target connection Id. */
       @minLength(1)
       @path
       connectionId: string;
@@ -342,9 +286,7 @@ interface WebPubSubOperationGroup {
     void
   >;
 
-  /**
-   * Check if there are any client connections inside the given group
-   */
+  /** Check if there are any client connections inside the given group */
   @summary("Check if there are any client connections inside the given group")
   @route("/api/hubs/{hub}/groups/{group}")
   @head
@@ -358,9 +300,7 @@ interface WebPubSubOperationGroup {
       @path
       hub: string;
 
-      /**
-       * Target group name, which length should be greater than 0 and less than 1025.
-       */
+      /** Target group name, which length should be greater than 0 and less than 1025. */
       @maxLength(1024)
       @minLength(1)
       @pattern("^(?!\\s+$).+$")
@@ -370,9 +310,7 @@ interface WebPubSubOperationGroup {
     void
   >;
 
-  /**
-   * Close connections in the specific group.
-   */
+  /** Close connections in the specific group. */
   @summary("Close connections in the specific group.")
   @route("/api/hubs/{hub}/groups/{group}/:closeConnections")
   @post
@@ -386,33 +324,25 @@ interface WebPubSubOperationGroup {
       @path
       hub: string;
 
-      /**
-       * Target group name, which length should be greater than 0 and less than 1025.
-       */
+      /** Target group name, which length should be greater than 0 and less than 1025. */
       @maxLength(1024)
       @minLength(1)
       @pattern("^(?!\\s+$).+$")
       @path
       group: string;
 
-      /**
-       * Exclude these connectionIds when closing the connections in the group.
-       */
+      /** Exclude these connectionIds when closing the connections in the group. */
       @query(#{ name: "excluded", explode: true })
       excluded?: string[];
 
-      /**
-       * The reason closing the client connection.
-       */
+      /** The reason closing the client connection. */
       @query("reason")
       reason?: string;
     },
     void
   >;
 
-  /**
-   * Send content inside request body to a group of connections.
-   */
+  /** Send content inside request body to a group of connections. */
   @summary("Send content inside request body to a group of connections.")
   @route("/api/hubs/{hub}/groups/{group}/:send")
   @post
@@ -426,18 +356,14 @@ interface WebPubSubOperationGroup {
       @path
       hub: string;
 
-      /**
-       * Target group name, which length should be greater than 0 and less than 1025.
-       */
+      /** Target group name, which length should be greater than 0 and less than 1025. */
       @maxLength(1024)
       @minLength(1)
       @pattern("^(?!\\s+$).+$")
       @path
       group: string;
 
-      /**
-       * Excluded connection Ids
-       */
+      /** Excluded connection Ids */
       @query(#{ name: "excluded", explode: true })
       excluded?: string[];
 
@@ -459,24 +385,18 @@ interface WebPubSubOperationGroup {
       @query("messageTtlSeconds")
       messageTtlSeconds?: int32;
 
-      /**
-       * Upload file type
-       */
+      /** Upload file type */
       @header
       `content-type`: ContentType;
 
-      /**
-       * The payload body.
-       */
+      /** The payload body. */
       @bodyRoot
       message: bytes;
     },
     void
   >;
 
-  /**
-   * List connections in a group.
-   */
+  /** List connections in a group. */
   @summary("List connections in a group.")
   listConnectionsInGroup is Azure.Core.ResourceList<
     GroupMember,
@@ -513,9 +433,7 @@ interface WebPubSubOperationGroup {
     }
   >;
 
-  /**
-   * Remove a connection from the target group.
-   */
+  /** Remove a connection from the target group. */
   @summary("Remove a connection from the target group.")
   @route("/api/hubs/{hub}/groups/{group}/connections/{connectionId}")
   @delete
@@ -529,18 +447,14 @@ interface WebPubSubOperationGroup {
       @path
       hub: string;
 
-      /**
-       * Target group name, which length should be greater than 0 and less than 1025.
-       */
+      /** Target group name, which length should be greater than 0 and less than 1025. */
       @maxLength(1024)
       @minLength(1)
       @pattern("^(?!\\s+$).+$")
       @path
       group: string;
 
-      /**
-       * Target connection Id.
-       */
+      /** Target connection Id. */
       @minLength(1)
       @path
       connectionId: string;
@@ -548,9 +462,7 @@ interface WebPubSubOperationGroup {
     void
   >;
 
-  /**
-   * Add a connection to the target group.
-   */
+  /** Add a connection to the target group. */
   @summary("Add a connection to the target group.")
   @route("/api/hubs/{hub}/groups/{group}/connections/{connectionId}")
   @put
@@ -564,18 +476,14 @@ interface WebPubSubOperationGroup {
       @path
       hub: string;
 
-      /**
-       * Target group name, which length should be greater than 0 and less than 1025.
-       */
+      /** Target group name, which length should be greater than 0 and less than 1025. */
       @maxLength(1024)
       @minLength(1)
       @pattern("^(?!\\s+$).+$")
       @path
       group: string;
 
-      /**
-       * Target connection Id
-       */
+      /** Target connection Id */
       @minLength(1)
       @path
       connectionId: string;
@@ -583,9 +491,7 @@ interface WebPubSubOperationGroup {
     void
   >;
 
-  /**
-   * Revoke permission for the connection.
-   */
+  /** Revoke permission for the connection. */
   @summary("Revoke permission for the connection.")
   @route("/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}")
   @delete
@@ -599,15 +505,11 @@ interface WebPubSubOperationGroup {
       @path
       hub: string;
 
-      /**
-       * The permission: current supported actions are joinLeaveGroup and sendToGroup.
-       */
+      /** The permission: current supported actions are joinLeaveGroup and sendToGroup. */
       @path
       permission: WebPubSubPermission;
 
-      /**
-       * Target connection Id.
-       */
+      /** Target connection Id. */
       @minLength(1)
       @path
       connectionId: string;
@@ -623,9 +525,7 @@ interface WebPubSubOperationGroup {
     void
   >;
 
-  /**
-   * Check if a connection has permission to the specified action.
-   */
+  /** Check if a connection has permission to the specified action. */
   @summary("Check if a connection has permission to the specified action.")
   @route("/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}")
   @head
@@ -639,15 +539,11 @@ interface WebPubSubOperationGroup {
       @path
       hub: string;
 
-      /**
-       * The permission: current supported actions are joinLeaveGroup and sendToGroup.
-       */
+      /** The permission: current supported actions are joinLeaveGroup and sendToGroup. */
       @path
       permission: WebPubSubPermission;
 
-      /**
-       * Target connection Id.
-       */
+      /** Target connection Id. */
       @minLength(1)
       @path
       connectionId: string;
@@ -663,9 +559,7 @@ interface WebPubSubOperationGroup {
     void
   >;
 
-  /**
-   * Grant permission to the connection.
-   */
+  /** Grant permission to the connection. */
   @summary("Grant permission to the connection.")
   @route("/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}")
   @put
@@ -679,15 +573,11 @@ interface WebPubSubOperationGroup {
       @path
       hub: string;
 
-      /**
-       * The permission: current supported actions are joinLeaveGroup and sendToGroup.
-       */
+      /** The permission: current supported actions are joinLeaveGroup and sendToGroup. */
       @path
       permission: WebPubSubPermission;
 
-      /**
-       * Target connection Id.
-       */
+      /** Target connection Id. */
       @minLength(1)
       @path
       connectionId: string;
@@ -703,9 +593,7 @@ interface WebPubSubOperationGroup {
     void
   >;
 
-  /**
-   * Check if there are any client connections connected for the given user.
-   */
+  /** Check if there are any client connections connected for the given user. */
   @summary("Check if there are any client connections connected for the given user.")
   @route("/api/hubs/{hub}/users/{userId}")
   @head
@@ -719,9 +607,7 @@ interface WebPubSubOperationGroup {
       @path
       hub: string;
 
-      /**
-       * Target user Id.
-       */
+      /** Target user Id. */
       @minLength(1)
       @path
       userId: string;
@@ -729,9 +615,7 @@ interface WebPubSubOperationGroup {
     void
   >;
 
-  /**
-   * Close connections for the specific user.
-   */
+  /** Close connections for the specific user. */
   @summary("Close connections for the specific user.")
   @route("/api/hubs/{hub}/users/{userId}/:closeConnections")
   @post
@@ -745,31 +629,23 @@ interface WebPubSubOperationGroup {
       @path
       hub: string;
 
-      /**
-       * The user Id.
-       */
+      /** The user Id. */
       @minLength(1)
       @path
       userId: string;
 
-      /**
-       * Exclude these connectionIds when closing the connections for the user.
-       */
+      /** Exclude these connectionIds when closing the connections for the user. */
       @query(#{ name: "excluded", explode: true })
       excluded?: string[];
 
-      /**
-       * The reason closing the client connection.
-       */
+      /** The reason closing the client connection. */
       @query("reason")
       reason?: string;
     },
     void
   >;
 
-  /**
-   * Send content inside request body to the specific user.
-   */
+  /** Send content inside request body to the specific user. */
   @summary("Send content inside request body to the specific user.")
   @route("/api/hubs/{hub}/users/{userId}/:send")
   @post
@@ -783,9 +659,7 @@ interface WebPubSubOperationGroup {
       @path
       hub: string;
 
-      /**
-       * The user Id.
-       */
+      /** The user Id. */
       @minLength(1)
       @path
       userId: string;
@@ -808,24 +682,18 @@ interface WebPubSubOperationGroup {
       @query("messageTtlSeconds")
       messageTtlSeconds?: int32;
 
-      /**
-       * Upload file type
-       */
+      /** Upload file type */
       @header
       `content-type`: ContentType;
 
-      /**
-       * The payload body.
-       */
+      /** The payload body. */
       @bodyRoot
       message: bytes;
     },
     void
   >;
 
-  /**
-   * Remove a user from all groups.
-   */
+  /** Remove a user from all groups. */
   @summary("Remove a user from all groups.")
   @route("/api/hubs/{hub}/users/{userId}/groups")
   @delete
@@ -839,9 +707,7 @@ interface WebPubSubOperationGroup {
       @path
       hub: string;
 
-      /**
-       * Target user Id.
-       */
+      /** Target user Id. */
       @minLength(1)
       @path
       userId: string;
@@ -849,9 +715,7 @@ interface WebPubSubOperationGroup {
     void
   >;
 
-  /**
-   * Remove a user from the target group.
-   */
+  /** Remove a user from the target group. */
   @summary("Remove a user from the target group.")
   @route("/api/hubs/{hub}/users/{userId}/groups/{group}")
   @delete
@@ -865,18 +729,14 @@ interface WebPubSubOperationGroup {
       @path
       hub: string;
 
-      /**
-       * Target group name, which length should be greater than 0 and less than 1025.
-       */
+      /** Target group name, which length should be greater than 0 and less than 1025. */
       @maxLength(1024)
       @minLength(1)
       @pattern("^(?!\\s+$).+$")
       @path
       group: string;
 
-      /**
-       * Target user Id.
-       */
+      /** Target user Id. */
       @minLength(1)
       @path
       userId: string;
@@ -884,9 +744,7 @@ interface WebPubSubOperationGroup {
     void
   >;
 
-  /**
-   * Add a user to the target group.
-   */
+  /** Add a user to the target group. */
   @summary("Add a user to the target group.")
   @route("/api/hubs/{hub}/users/{userId}/groups/{group}")
   @put
@@ -900,18 +758,14 @@ interface WebPubSubOperationGroup {
       @path
       hub: string;
 
-      /**
-       * Target group name, which length should be greater than 0 and less than 1025.
-       */
+      /** Target group name, which length should be greater than 0 and less than 1025. */
       @maxLength(1024)
       @minLength(1)
       @pattern("^(?!\\s+$).+$")
       @path
       group: string;
 
-      /**
-       * Target user Id.
-       */
+      /** Target user Id. */
       @minLength(1)
       @path
       userId: string;

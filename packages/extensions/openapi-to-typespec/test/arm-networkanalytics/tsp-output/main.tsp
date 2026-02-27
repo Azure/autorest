@@ -22,9 +22,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-/**
- * // (missing-service-description) Add service description
- */
+/** // (missing-service-description) Add service description */
 @armProviderNamespace
 @service(#{ title: "Azure Network Analytics resource management API." })
 @versioned(Versions)

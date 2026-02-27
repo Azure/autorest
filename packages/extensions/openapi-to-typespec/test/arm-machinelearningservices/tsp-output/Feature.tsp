@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-/**
- * Azure Resource Manager resource envelope.
- */
+/** Azure Resource Manager resource envelope. */
 @parentResource(Workspace)
 model Feature is Azure.ResourceManager.ProxyResource<FeatureProperties, false> {
   ...ResourceNameParameter<
@@ -26,32 +24,22 @@ model Feature is Azure.ResourceManager.ProxyResource<FeatureProperties, false> {
 
 @armResourceOperations
 interface Features {
-  /**
-   * Get feature.
-   */
+  /** Get feature. */
   get is ArmResourceRead<Feature>;
 
-  /**
-   * List Features.
-   */
+  /** List Features. */
   list is ArmResourceListByParent<
     Feature,
     Parameters = {
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
 
-      /**
-       * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
-       */
+      /** Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2 */
       @query("tags")
       tags?: string;
 
-      /**
-       * Description of the featureset.
-       */
+      /** Description of the featureset. */
       @query("description")
       description?: string;
     },

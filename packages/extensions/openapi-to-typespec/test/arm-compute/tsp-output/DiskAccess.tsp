@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * disk access resource.
- */
+/** disk access resource. */
 model DiskAccess
   is Azure.ResourceManager.TrackedResource<DiskAccessProperties> {
   ...ResourceNameParameter<
@@ -22,23 +20,17 @@ model DiskAccess
     NamePattern = ""
   >;
 
-  /**
-   * The extended location where the disk access will be created. Extended location cannot be changed.
-   */
+  /** The extended location where the disk access will be created. Extended location cannot be changed. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   extendedLocation?: ExtendedLocation;
 }
 
 @armResourceOperations
 interface DiskAccesses {
-  /**
-   * Gets information about a disk access resource.
-   */
+  /** Gets information about a disk access resource. */
   get is ArmResourceRead<DiskAccess>;
 
-  /**
-   * Creates or updates a disk access resource
-   */
+  /** Creates or updates a disk access resource */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -51,9 +43,7 @@ interface DiskAccesses {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /**
-   * Updates (patches) a disk access resource.
-   */
+  /** Updates (patches) a disk access resource. */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -65,34 +55,26 @@ interface DiskAccesses {
     })
   >;
 
-  /**
-   * Deletes a disk access resource.
-   */
+  /** Deletes a disk access resource. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     DiskAccess,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * Lists all the disk access resources under a resource group.
-   */
+  /** Lists all the disk access resources under a resource group. */
   listByResourceGroup is ArmResourceListByParent<
     DiskAccess,
     Response = ArmResponse<DiskAccessList>
   >;
 
-  /**
-   * Lists all the disk access resources under a subscription.
-   */
+  /** Lists all the disk access resources under a subscription. */
   list is ArmListBySubscription<
     DiskAccess,
     Response = ArmResponse<DiskAccessList>
   >;
 
-  /**
-   * Gets the private link resources possible under disk access resource
-   */
+  /** Gets the private link resources possible under disk access resource */
   @list
   @get
   @action("privateLinkResources")

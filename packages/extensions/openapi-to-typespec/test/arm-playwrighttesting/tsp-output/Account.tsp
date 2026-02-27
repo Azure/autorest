@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzurePlaywrightService;
-/**
- * An account resource
- */
+/** An account resource */
 model Account is Azure.ResourceManager.TrackedResource<AccountProperties> {
   ...ResourceNameParameter<
     Resource = Account,
@@ -24,38 +22,26 @@ model Account is Azure.ResourceManager.TrackedResource<AccountProperties> {
 
 @armResourceOperations
 interface Accounts {
-  /**
-   * Get a Account
-   */
+  /** Get a Account */
   get is ArmResourceRead<Account>;
 
-  /**
-   * Create a Account
-   */
+  /** Create a Account */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Account>;
 
-  /**
-   * Update a Account
-   */
+  /** Update a Account */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Account, PatchModel = AccountUpdate>;
 
-  /**
-   * Delete a Account
-   */
+  /** Delete a Account */
   delete is ArmResourceDeleteWithoutOkAsync<
     Account,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List Account resources by resource group
-   */
+  /** List Account resources by resource group */
   listByResourceGroup is ArmResourceListByParent<Account>;
 
-  /**
-   * List Account resources by subscription ID
-   */
+  /** List Account resources by subscription ID */
   listBySubscription is ArmListBySubscription<Account>;
 }
 

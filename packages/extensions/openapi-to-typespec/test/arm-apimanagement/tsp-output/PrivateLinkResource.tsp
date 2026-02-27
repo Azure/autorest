@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * A private link resource
- */
+/** A private link resource */
 @parentResource(ApiManagementServiceResource)
 model PrivateLinkResource
   is Azure.ResourceManager.ProxyResource<PrivateLinkResourceProperties> {
@@ -27,14 +25,10 @@ model PrivateLinkResource
 
 @armResourceOperations
 interface PrivateLinkResources {
-  /**
-   * Gets the private link resources
-   */
+  /** Gets the private link resources */
   getPrivateLinkResource is ArmResourceRead<PrivateLinkResource>;
 
-  /**
-   * Gets the private link resources
-   */
+  /** Gets the private link resources */
   listPrivateLinkResources is ArmResourceListByParent<
     PrivateLinkResource,
     Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateLinkResourceListResultV5>

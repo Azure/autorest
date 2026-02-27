@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * Content type contract details.
- */
+/** Content type contract details. */
 @parentResource(ApiManagementServiceResource)
 model ContentTypeContract
   is Azure.ResourceManager.ProxyResource<ContentTypeContractProperties> {
@@ -27,43 +25,31 @@ model ContentTypeContract
 
 @armResourceOperations
 interface ContentTypeContracts {
-  /**
-   * Gets the details of the developer portal's content type. Content types describe content items' properties, validation rules, and constraints.
-   */
+  /** Gets the details of the developer portal's content type. Content types describe content items' properties, validation rules, and constraints. */
   get is ArmResourceRead<ContentTypeContract>;
 
-  /**
-   * Creates or updates the developer portal's content type. Content types describe content items' properties, validation rules, and constraints. Custom content types' identifiers need to start with the `c-` prefix. Built-in content types can't be modified.
-   */
+  /** Creates or updates the developer portal's content type. Content types describe content items' properties, validation rules, and constraints. Custom content types' identifiers need to start with the `c-` prefix. Built-in content types can't be modified. */
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     ContentTypeContract,
     Request = void,
     Parameters = {
-      /**
-       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
-       */
+      /** ETag of the Entity. Not required when creating an entity, but required when updating an entity. */
       @header
       `If-Match`?: string;
     }
   >;
 
-  /**
-   * Removes the specified developer portal's content type. Content types describe content items' properties, validation rules, and constraints. Built-in content types (with identifiers starting with the `c-` prefix) can't be removed.
-   */
+  /** Removes the specified developer portal's content type. Content types describe content items' properties, validation rules, and constraints. Built-in content types (with identifiers starting with the `c-` prefix) can't be removed. */
   delete is ArmResourceDeleteSync<
     ContentTypeContract,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Lists the developer portal's content types. Content types describe content items' properties, validation rules, and constraints.
-   */
+  /** Lists the developer portal's content types. Content types describe content items' properties, validation rules, and constraints. */
   listByService is ArmResourceListByParent<ContentTypeContract>;
 }
 

@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-/**
- * Azure Resource Manager resource envelope.
- */
+/** Azure Resource Manager resource envelope. */
 @parentResource(Workspace)
 model DatastoreResource
   is Azure.ResourceManager.ProxyResource<Datastore, false> {
@@ -27,84 +25,58 @@ model DatastoreResource
 
 @armResourceOperations
 interface DatastoreResources {
-  /**
-   * Get datastore.
-   */
+  /** Get datastore. */
   get is ArmResourceRead<DatastoreResource>;
 
-  /**
-   * Create or update datastore.
-   */
+  /** Create or update datastore. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DatastoreResource,
     Parameters = {
-      /**
-       * Flag to skip validation.
-       */
+      /** Flag to skip validation. */
       @query("skipValidation")
       skipValidation?: boolean;
     }
   >;
 
-  /**
-   * Delete datastore.
-   */
+  /** Delete datastore. */
   delete is ArmResourceDeleteSync<DatastoreResource>;
 
-  /**
-   * List datastores.
-   */
+  /** List datastores. */
   list is ArmResourceListByParent<
     DatastoreResource,
     Parameters = {
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
 
-      /**
-       * Maximum number of results to return.
-       */
+      /** Maximum number of results to return. */
       @query("count")
       count?: int32 = 30;
 
-      /**
-       * Filter down to the workspace default datastore.
-       */
+      /** Filter down to the workspace default datastore. */
       @query("isDefault")
       isDefault?: boolean;
 
-      /**
-       * Names of datastores to return.
-       */
+      /** Names of datastores to return. */
       @query("names")
       names?: string[];
 
-      /**
-       * Text to search for in the datastore names.
-       */
+      /** Text to search for in the datastore names. */
       @query("searchText")
       searchText?: string;
 
-      /**
-       * Order by property (createdtime | modifiedtime | name).
-       */
+      /** Order by property (createdtime | modifiedtime | name). */
       @query("orderBy")
       orderBy?: string;
 
-      /**
-       * Order by property in ascending order.
-       */
+      /** Order by property in ascending order. */
       @query("orderByAsc")
       orderByAsc?: boolean;
     },
     Response = ArmResponse<DatastoreResourceArmPaginatedResult>
   >;
 
-  /**
-   * Get datastore secrets.
-   */
+  /** Get datastore secrets. */
   listSecrets is ArmResourceActionSync<
     DatastoreResource,
     void,

@@ -10,9 +10,7 @@ using TypeSpec.OpenAPI;
 namespace AutoRestPagingTestService;
 
 interface PagingOperationGroup {
-  /**
-   * A paging operation that must return result of the default 'value' node.
-   */
+  /** A paging operation that must return result of the default 'value' node. */
   @operationId("Paging_getNoItemNamePages")
   @route("/paging/noitemname")
   @get
@@ -21,9 +19,7 @@ interface PagingOperationGroup {
     ProductResultValue
   >;
 
-  /**
-   * A paging operation that must ignore any kind of nextLink, and stop after page 1.
-   */
+  /** A paging operation that must ignore any kind of nextLink, and stop after page 1. */
   @operationId("Paging_getNullNextLinkNamePages")
   @route("/paging/nullnextlink")
   @get
@@ -32,9 +28,7 @@ interface PagingOperationGroup {
     ProductResult
   >;
 
-  /**
-   * A paging operation that finishes on the first call without a nextlink
-   */
+  /** A paging operation that finishes on the first call without a nextlink */
   @operationId("Paging_getSinglePages")
   @route("/paging/single")
   @get
@@ -52,9 +46,7 @@ interface PagingOperationGroup {
     ProductResultValue
   >;
 
-  /**
-   * A paging operation that includes a nextLink that has 10 pages
-   */
+  /** A paging operation that includes a nextLink that has 10 pages */
   @operationId("Paging_getMultiplePages")
   @route("/paging/multiple")
   @get
@@ -63,9 +55,7 @@ interface PagingOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Sets the maximum number of items to return in the response.
-       */
+      /** Sets the maximum number of items to return in the response. */
       @header
       maxresults?: int32;
 
@@ -89,9 +79,7 @@ interface PagingOperationGroup {
   @get
   getWithQueryParams is Azure.Core.Foundations.Operation<
     {
-      /**
-       * A required integer query parameter. Put in value '100' to pass test.
-       */
+      /** A required integer query parameter. Put in value '100' to pass test. */
       @query("requiredQueryParameter")
       requiredQueryParameter: int32;
 
@@ -115,26 +103,20 @@ interface PagingOperationGroup {
   @get
   duplicateParams is Azure.Core.Foundations.Operation<
     {
-      /**
-       * OData filter options. Pass in 'foo'
-       */
+      /** OData filter options. Pass in 'foo' */
       @query("$filter")
       $filter?: string;
     },
     ProductResult
   >;
 
-  /**
-   * Paging with max page size. We don't want to
-   */
+  /** Paging with max page size. We don't want to */
   @operationId("Paging_pageWithMaxPageSize")
   @route("/paging/maxPageSize")
   @get
   pageWithMaxPageSize is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Max page size query param. Don't send
-       */
+      /** Max page size query param. Don't send */
       @query("$maxpagesize")
       $maxpagesize?: "5";
     },
@@ -150,18 +132,14 @@ interface PagingOperationGroup {
   @get
   nextOperationWithQueryParams is Azure.Core.Foundations.Operation<
     {
-      /**
-       * A constant. Must be True
-       */
+      /** A constant. Must be True */
       @query("queryConstant")
       queryConstant: true;
     },
     ProductResult
   >;
 
-  /**
-   * A paging operation that includes a nextLink in odata format that has 10 pages
-   */
+  /** A paging operation that includes a nextLink in odata format that has 10 pages */
   @operationId("Paging_getOdataMultiplePages")
   @route("/paging/multiple/odata")
   @get
@@ -170,9 +148,7 @@ interface PagingOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Sets the maximum number of items to return in the response.
-       */
+      /** Sets the maximum number of items to return in the response. */
       @header
       maxresults?: int32;
 
@@ -186,9 +162,7 @@ interface PagingOperationGroup {
     OdataProductResult
   >;
 
-  /**
-   * A paging operation that includes a nextLink that has 10 pages
-   */
+  /** A paging operation that includes a nextLink that has 10 pages */
   @operationId("Paging_getMultiplePagesWithOffset")
   @route("/paging/multiple/withpath/{offset}")
   @get
@@ -197,15 +171,11 @@ interface PagingOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Sets the maximum number of items to return in the response.
-       */
+      /** Sets the maximum number of items to return in the response. */
       @header
       maxresults?: int32;
 
-      /**
-       * Offset of return value
-       */
+      /** Offset of return value */
       @path
       offset: int32;
 
@@ -244,17 +214,13 @@ interface PagingOperationGroup {
     ProductResult
   >;
 
-  /**
-   * A paging operation that receives a 400 on the first call
-   */
+  /** A paging operation that receives a 400 on the first call */
   @operationId("Paging_getSinglePagesFailure")
   @route("/paging/single/failure")
   @get
   getSinglePagesFailure is Azure.Core.Foundations.Operation<{}, ProductResult>;
 
-  /**
-   * A paging operation that receives a 400 on the second call
-   */
+  /** A paging operation that receives a 400 on the second call */
   @operationId("Paging_getMultiplePagesFailure")
   @route("/paging/multiple/failure")
   @get
@@ -263,9 +229,7 @@ interface PagingOperationGroup {
     ProductResult
   >;
 
-  /**
-   * A paging operation that receives an invalid nextLink
-   */
+  /** A paging operation that receives an invalid nextLink */
   @operationId("Paging_getMultiplePagesFailureUri")
   @route("/paging/multiple/failureuri")
   @get
@@ -274,23 +238,17 @@ interface PagingOperationGroup {
     ProductResult
   >;
 
-  /**
-   * A paging operation that doesn't return a full URL, just a fragment
-   */
+  /** A paging operation that doesn't return a full URL, just a fragment */
   @operationId("Paging_getMultiplePagesFragmentNextLink")
   @route("/paging/multiple/fragment/{tenant}")
   @get
   getMultiplePagesFragmentNextLink is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Sets the api version to use.
-       */
+      /** Sets the api version to use. */
       @query("api_version")
       api_version: string;
 
-      /**
-       * Sets the tenant to use.
-       */
+      /** Sets the tenant to use. */
       @path
       tenant: string;
     },
@@ -306,24 +264,18 @@ interface PagingOperationGroup {
   @get
   getMultiplePagesFragmentWithGroupingNextLink is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Sets the api version to use.
-       */
+      /** Sets the api version to use. */
       @query("api_version")
       api_version: string;
 
-      /**
-       * Sets the tenant to use.
-       */
+      /** Sets the tenant to use. */
       @path
       tenant: string;
     },
     OdataProductResult
   >;
 
-  /**
-   * A long-running paging operation that includes a nextLink that has 10 pages
-   */
+  /** A long-running paging operation that includes a nextLink that has 10 pages */
   @route("/paging/multiple/lro")
   @post
   getMultiplePagesLRO is Azure.Core.Foundations.Operation<
@@ -331,9 +283,7 @@ interface PagingOperationGroup {
       @header
       `client-request-id`?: string;
 
-      /**
-       * Sets the maximum number of items to return in the response.
-       */
+      /** Sets the maximum number of items to return in the response. */
       @header
       maxresults?: int32;
 
@@ -366,58 +316,42 @@ interface PagingOperationGroup {
   @get
   replaceApiVersion is Azure.Core.Foundations.Operation<{}, ProductResult>;
 
-  /**
-   * A paging operation that doesn't return a full URL, just a fragment
-   */
+  /** A paging operation that doesn't return a full URL, just a fragment */
   @operationId("Paging_nextFragment")
   @route("/paging/multiple/fragment/{tenant}/{nextLink}")
   @get
   nextFragment is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Sets the api version to use.
-       */
+      /** Sets the api version to use. */
       @query("api_version")
       api_version: string;
 
-      /**
-       * Sets the tenant to use.
-       */
+      /** Sets the tenant to use. */
       @path
       tenant: string;
 
-      /**
-       * Next link for list operation.
-       */
+      /** Next link for list operation. */
       @path
       nextLink: string;
     },
     OdataProductResult
   >;
 
-  /**
-   * A paging operation that doesn't return a full URL, just a fragment
-   */
+  /** A paging operation that doesn't return a full URL, just a fragment */
   @operationId("Paging_nextFragmentWithGrouping")
   @route("/paging/multiple/fragmentwithgrouping/{tenant}/{nextLink}")
   @get
   nextFragmentWithGrouping is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Sets the api version to use.
-       */
+      /** Sets the api version to use. */
       @query("api_version")
       api_version: string;
 
-      /**
-       * Sets the tenant to use.
-       */
+      /** Sets the tenant to use. */
       @path
       tenant: string;
 
-      /**
-       * Next link for list operation.
-       */
+      /** Next link for list operation. */
       @path
       nextLink: string;
     },

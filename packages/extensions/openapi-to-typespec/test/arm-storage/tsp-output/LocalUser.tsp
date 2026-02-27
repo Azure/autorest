@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
-/**
- * The local user associated with the storage accounts.
- */
+/** The local user associated with the storage accounts. */
 @parentResource(StorageAccount)
 model LocalUser is Azure.ResourceManager.ProxyResource<LocalUserProperties> {
   ...ResourceNameParameter<
@@ -26,45 +24,33 @@ model LocalUser is Azure.ResourceManager.ProxyResource<LocalUserProperties> {
 
 @armResourceOperations
 interface LocalUserOperationGroup {
-  /**
-   * Get the local user of the storage account by username.
-   */
+  /** Get the local user of the storage account by username. */
   get is ArmResourceRead<LocalUser>;
 
-  /**
-   * Create or update the properties of a local user associated with the storage account
-   */
+  /** Create or update the properties of a local user associated with the storage account */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     LocalUser,
     Response = ArmResourceUpdatedResponse<LocalUser>
   >;
 
-  /**
-   * Deletes the local user associated with the specified storage account.
-   */
+  /** Deletes the local user associated with the specified storage account. */
   delete is ArmResourceDeleteSync<LocalUser>;
 
-  /**
-   * List the local users associated with the storage account.
-   */
+  /** List the local users associated with the storage account. */
   list is ArmResourceListByParent<
     LocalUser,
     Response = ArmResponse<LocalUsers>
   >;
 
-  /**
-   * List SSH authorized keys and shared key of the local user.
-   */
+  /** List SSH authorized keys and shared key of the local user. */
   listKeys is ArmResourceActionSync<
     LocalUser,
     void,
     ArmResponse<LocalUserKeys>
   >;
 
-  /**
-   * Regenerate the local user SSH password.
-   */
+  /** Regenerate the local user SSH password. */
   regeneratePassword is ArmResourceActionSync<
     LocalUser,
     void,

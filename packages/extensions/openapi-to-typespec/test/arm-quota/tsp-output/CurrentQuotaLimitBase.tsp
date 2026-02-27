@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Quota;
-/**
- * Quota limit.
- */
+/** Quota limit. */
 @extensionResource
 model CurrentQuotaLimitBase
   is Azure.ResourceManager.ExtensionResource<QuotaProperties> {
@@ -26,9 +24,7 @@ model CurrentQuotaLimitBase
 
 @armResourceOperations
 interface CurrentQuotaLimitBases {
-  /**
-   * Get the quota limit of a resource. The response can be used to determine the remaining quota to calculate a new quota limit that can be submitted with a PUT request.
-   */
+  /** Get the quota limit of a resource. The response can be used to determine the remaining quota to calculate a new quota limit that can be submitted with a PUT request. */
   get is Extension.Read<Extension.ScopeParameter, CurrentQuotaLimitBase>;
 
   /**
@@ -55,9 +51,7 @@ interface CurrentQuotaLimitBases {
     PatchModel = CurrentQuotaLimitBase
   >;
 
-  /**
-   * Get a list of current quota limits of all resources for the specified scope. The response from this GET operation can be leveraged to submit requests to update a quota.
-   */
+  /** Get a list of current quota limits of all resources for the specified scope. The response from this GET operation can be leveraged to submit requests to update a quota. */
   list is Extension.ListByTarget<
     Extension.ScopeParameter,
     CurrentQuotaLimitBase,

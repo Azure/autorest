@@ -9,72 +9,48 @@ namespace AutoRestComplexTestService;
 union CmykColors {
   string,
 
-  /**
-   * cyan
-   */
+  /** cyan */
   cyan: "cyan",
 
-  /**
-   * Magenta
-   */
+  /** Magenta */
   Magenta: "Magenta",
 
-  /**
-   * YELLOW
-   */
+  /** YELLOW */
   YELLOW: "YELLOW",
 
-  /**
-   * blacK
-   */
+  /** blacK */
   blacK: "blacK",
 }
 
 union MyKind {
   string,
 
-  /**
-   * Kind1
-   */
+  /** Kind1 */
   Kind1: "Kind1",
 }
 
-/**
- * Colors possible
- */
+/** Colors possible */
 union GoblinSharkColor {
   string,
 
-  /**
-   * pink
-   */
+  /** pink */
   pink: "pink",
 
-  /**
-   * gray
-   */
+  /** gray */
   gray: "gray",
 
-  /**
-   * brown
-   */
+  /** brown */
   brown: "brown",
 
-  /**
-   * Uppercase RED
-   */
+  /** Uppercase RED */
   upperRed: "RED",
 
-  /**
-   * Lowercase RED
-   */
+  /** Lowercase RED */
   lowerRed: "red",
 }
 
 model Basic {
-  /**
-   * Basic Id
-   */
+  /** Basic Id */
   id?: int32;
 
   /**
@@ -157,9 +133,7 @@ model ArrayWrapper {
 }
 
 model DictionaryWrapper {
-  /**
-   * Dictionary of <string>
-   */
+  /** Dictionary of <string> */
   defaultProgram?: Record<string>;
 }
 
@@ -261,9 +235,7 @@ model Sawshark extends Shark {
 model Goblinshark extends Shark {
   jawsize?: int32;
 
-  /**
-   * Colors possible
-   */
+  /** Colors possible */
   color?: GoblinSharkColor = GoblinSharkColor.gray;
 
   fishtype: "goblin";

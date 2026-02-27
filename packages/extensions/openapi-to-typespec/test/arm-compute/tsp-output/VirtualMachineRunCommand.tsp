@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * Describes a Virtual Machine run command.
- */
+/** Describes a Virtual Machine run command. */
 @parentResource(VirtualMachine)
 model VirtualMachineRunCommand
   is Azure.ResourceManager.TrackedResource<VirtualMachineRunCommandProperties> {
@@ -49,15 +47,11 @@ alias VirtualMachineRunCommandOps = Azure.ResourceManager.Legacy.LegacyOperation
 
 @armResourceOperations
 interface VirtualMachineRunCommands {
-  /**
-   * The operation to get the run command.
-   */
+  /** The operation to get the run command. */
   getByVirtualMachine is VirtualMachineRunCommandOps.Read<
     VirtualMachineRunCommand,
     Parameters = {
-      /**
-       * The expand expression to apply on the operation.
-       */
+      /** The expand expression to apply on the operation. */
       @query("$expand")
       $expand?: string;
     },
@@ -67,9 +61,7 @@ interface VirtualMachineRunCommands {
     }>
   >;
 
-  /**
-   * The operation to create or update the run command.
-   */
+  /** The operation to create or update the run command. */
   createOrUpdate is VirtualMachineRunCommandOps.CreateOrUpdateAsync<
     VirtualMachineRunCommand,
     Response = ArmResourceUpdatedResponse<VirtualMachineRunCommand & {
@@ -85,9 +77,7 @@ interface VirtualMachineRunCommands {
     >
   >;
 
-  /**
-   * The operation to update the run command.
-   */
+  /** The operation to update the run command. */
   @patch(#{ implicitOptionality: false })
   update is VirtualMachineRunCommandOps.CustomPatchAsync<
     VirtualMachineRunCommand,
@@ -98,24 +88,18 @@ interface VirtualMachineRunCommands {
     }>
   >;
 
-  /**
-   * The operation to delete the run command.
-   */
+  /** The operation to delete the run command. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is VirtualMachineRunCommandOps.DeleteWithoutOkAsync<
     VirtualMachineRunCommand,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * The operation to get all run commands of a Virtual Machine.
-   */
+  /** The operation to get all run commands of a Virtual Machine. */
   listByVirtualMachine is VirtualMachineRunCommandOps.List<
     VirtualMachineRunCommand,
     Parameters = {
-      /**
-       * The expand expression to apply on the operation.
-       */
+      /** The expand expression to apply on the operation. */
       @query("$expand")
       $expand?: string;
     }
@@ -151,15 +135,11 @@ alias VirtualMachineScaleSetVMRunCommandOps = Azure.ResourceManager.Legacy.Legac
 
 @armResourceOperations
 interface VirtualMachineScaleSetVMRunCommands {
-  /**
-   * The operation to get the VMSS VM run command.
-   */
+  /** The operation to get the VMSS VM run command. */
   get is VirtualMachineScaleSetVMRunCommandOps.Read<
     VirtualMachineRunCommand,
     Parameters = {
-      /**
-       * The expand expression to apply on the operation.
-       */
+      /** The expand expression to apply on the operation. */
       @query("$expand")
       $expand?: string;
     },
@@ -169,9 +149,7 @@ interface VirtualMachineScaleSetVMRunCommands {
     }>
   >;
 
-  /**
-   * The operation to create or update the VMSS VM run command.
-   */
+  /** The operation to create or update the VMSS VM run command. */
   createOrUpdate is VirtualMachineScaleSetVMRunCommandOps.CreateOrUpdateAsync<
     VirtualMachineRunCommand,
     Response = ArmResourceUpdatedResponse<VirtualMachineRunCommand & {
@@ -187,9 +165,7 @@ interface VirtualMachineScaleSetVMRunCommands {
     >
   >;
 
-  /**
-   * The operation to update the VMSS VM run command.
-   */
+  /** The operation to update the VMSS VM run command. */
   @patch(#{ implicitOptionality: false })
   update is VirtualMachineScaleSetVMRunCommandOps.CustomPatchAsync<
     VirtualMachineRunCommand,
@@ -200,24 +176,18 @@ interface VirtualMachineScaleSetVMRunCommands {
     }>
   >;
 
-  /**
-   * The operation to delete the VMSS VM run command.
-   */
+  /** The operation to delete the VMSS VM run command. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is VirtualMachineScaleSetVMRunCommandOps.DeleteWithoutOkAsync<
     VirtualMachineRunCommand,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * The operation to get all run commands of an instance in Virtual Machine Scaleset.
-   */
+  /** The operation to get all run commands of an instance in Virtual Machine Scaleset. */
   list is VirtualMachineScaleSetVMRunCommandOps.List<
     VirtualMachineRunCommand,
     Parameters = {
-      /**
-       * The expand expression to apply on the operation.
-       */
+      /** The expand expression to apply on the operation. */
       @query("$expand")
       $expand?: string;
     }

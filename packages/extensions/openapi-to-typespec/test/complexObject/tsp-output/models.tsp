@@ -7,15 +7,11 @@ using TypeSpec.Http;
 namespace ComplexModelClient;
 
 model CatalogArray {
-  /**
-   * Array of products
-   */
+  /** Array of products */
   productArray?: Product[];
 }
 
-/**
- * The product documentation.
- */
+/** The product documentation. */
 model Product {
   /**
    * Unique identifier representing a specific product for a given latitude &
@@ -24,24 +20,16 @@ model Product {
    */
   product_id?: string;
 
-  /**
-   * Description of product.
-   */
+  /** Description of product. */
   description?: string;
 
-  /**
-   * Display name of product.
-   */
+  /** Display name of product. */
   display_name?: string;
 
-  /**
-   * Capacity of product. For example, 4 people.
-   */
+  /** Capacity of product. For example, 4 people. */
   capacity?: string = "100";
 
-  /**
-   * Image URL representing the product.
-   */
+  /** Image URL representing the product. */
   image?: string;
 }
 
@@ -52,35 +40,25 @@ model Error {
 }
 
 model CatalogDictionaryOfArray {
-  /**
-   * Dictionary of Array of product
-   */
+  /** Dictionary of Array of product */
   productDictionaryOfArray?: Record<Product[]>;
 }
 
 model CatalogDictionary {
-  /**
-   * Dictionary of products
-   */
+  /** Dictionary of products */
   productDictionary?: Record<Product>;
 }
 
 model CatalogArrayOfDictionary {
-  /**
-   * Array of dictionary of products
-   */
+  /** Array of dictionary of products */
   productArrayOfDictionary?: Record<Product>[];
 }
 
 model Attributes {
-  /**
-   * Determines whether the object is enabled.
-   */
+  /** Determines whether the object is enabled. */
   enabled?: boolean;
 
-  /**
-   * Not before date in seconds since 1970-01-01T00:00:00Z.
-   */
+  /** Not before date in seconds since 1970-01-01T00:00:00Z. */
   @encode("unixTimestamp", int32)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   nbf?: utcDateTime;

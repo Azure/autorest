@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.Authorization;
-/**
- * Role eligibility schedule
- */
+/** Role eligibility schedule */
 @extensionResource
 model RoleEligibilitySchedule
   is Azure.ResourceManager.ExtensionResource<RoleEligibilityScheduleProperties> {
@@ -26,21 +24,15 @@ model RoleEligibilitySchedule
 
 @armResourceOperations
 interface RoleEligibilitySchedules {
-  /**
-   * Get the specified role eligibility schedule for a resource scope
-   */
+  /** Get the specified role eligibility schedule for a resource scope */
   get is Extension.Read<Extension.ScopeParameter, RoleEligibilitySchedule>;
 
-  /**
-   * Gets role eligibility schedules for a resource scope.
-   */
+  /** Gets role eligibility schedules for a resource scope. */
   listForScope is Extension.ListByTarget<
     Extension.ScopeParameter,
     RoleEligibilitySchedule,
     Parameters = {
-      /**
-       * The filter to apply on the operation. Use $filter=atScope() to return all role eligibility schedules at or above the scope. Use $filter=principalId eq {id} to return all role eligibility schedules at, above or below the scope for the specified principal. Use $filter=assignedTo('{userId}') to return all role eligibility schedules for the user. Use $filter=asTarget() to return all role eligibility schedules created for the current user.
-       */
+      /** The filter to apply on the operation. Use $filter=atScope() to return all role eligibility schedules at or above the scope. Use $filter=principalId eq {id} to return all role eligibility schedules at, above or below the scope for the specified principal. Use $filter=assignedTo('{userId}') to return all role eligibility schedules for the user. Use $filter=asTarget() to return all role eligibility schedules created for the current user. */
       @query("$filter")
       $filter?: string;
     }

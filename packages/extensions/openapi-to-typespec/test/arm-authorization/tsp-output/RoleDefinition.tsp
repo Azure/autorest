@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.Authorization;
-/**
- * Role definition.
- */
+/** Role definition. */
 @extensionResource
 model RoleDefinition
   is Azure.ResourceManager.ExtensionResource<RoleDefinitionProperties> {
@@ -26,14 +24,10 @@ model RoleDefinition
 
 @armResourceOperations
 interface RoleDefinitions {
-  /**
-   * Get role definition by name (GUID).
-   */
+  /** Get role definition by name (GUID). */
   get is Extension.Read<Extension.ScopeParameter, RoleDefinition>;
 
-  /**
-   * Creates or updates a role definition.
-   */
+  /** Creates or updates a role definition. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is Extension.CreateOrReplaceSync<
     Extension.ScopeParameter,
@@ -41,25 +35,19 @@ interface RoleDefinitions {
     Response = ArmResourceCreatedSyncResponse<RoleDefinition>
   >;
 
-  /**
-   * Deletes a role definition.
-   */
+  /** Deletes a role definition. */
   delete is Extension.DeleteSync<
     Extension.ScopeParameter,
     RoleDefinition,
     Response = ArmResponse<RoleDefinition> | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * Get all role definitions that are applicable at scope and above.
-   */
+  /** Get all role definitions that are applicable at scope and above. */
   list is Extension.ListByTarget<
     Extension.ScopeParameter,
     RoleDefinition,
     Parameters = {
-      /**
-       * The filter to apply on the operation. Use atScopeAndBelow filter to search below the given scope as well.
-       */
+      /** The filter to apply on the operation. Use atScopeAndBelow filter to search below the given scope as well. */
       @query("$filter")
       $filter?: string;
     }

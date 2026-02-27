@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
-/**
- * The storage account blob inventory policy.
- */
+/** The storage account blob inventory policy. */
 @parentResource(StorageAccount)
 model BlobInventoryPolicy
   is Azure.ResourceManager.ProxyResource<BlobInventoryPolicyProperties> {
@@ -28,28 +26,20 @@ model BlobInventoryPolicy
 
 @armResourceOperations
 interface BlobInventoryPolicies {
-  /**
-   * Gets the blob inventory policy associated with the specified storage account.
-   */
+  /** Gets the blob inventory policy associated with the specified storage account. */
   get is ArmResourceRead<BlobInventoryPolicy>;
 
-  /**
-   * Sets the blob inventory policy to the specified storage account.
-   */
+  /** Sets the blob inventory policy to the specified storage account. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     BlobInventoryPolicy,
     Response = ArmResourceUpdatedResponse<BlobInventoryPolicy>
   >;
 
-  /**
-   * Deletes the blob inventory policy associated with the specified storage account.
-   */
+  /** Deletes the blob inventory policy associated with the specified storage account. */
   delete is ArmResourceDeleteSync<BlobInventoryPolicy>;
 
-  /**
-   * Gets the blob inventory policy associated with the specified storage account.
-   */
+  /** Gets the blob inventory policy associated with the specified storage account. */
   list is ArmResourceListByParent<
     BlobInventoryPolicy,
     Response = ArmResponse<ListBlobInventoryPolicy>

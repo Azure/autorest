@@ -11,9 +11,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 // FIXME: CommunityGallery has no properties property
-/**
- * Specifies information about the Community Gallery that you want to create or update.
- */
+/** Specifies information about the Community Gallery that you want to create or update. */
 @subscriptionResource
 model CommunityGallery is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
@@ -23,25 +21,19 @@ model CommunityGallery is Azure.ResourceManager.ProxyResource<{}> {
     NamePattern = ""
   >;
 
-  /**
-   * Resource location
-   */
+  /** Resource location */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   location?: string;
 
-  /**
-   * The identifier information of community gallery.
-   */
+  /** The identifier information of community gallery. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   identifier?: CommunityGalleryIdentifier;
 }
 
 @armResourceOperations
 interface CommunityGalleries {
-  /**
-   * Get a community gallery by gallery public name.
-   */
+  /** Get a community gallery by gallery public name. */
   get is ArmResourceRead<
     CommunityGallery,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters

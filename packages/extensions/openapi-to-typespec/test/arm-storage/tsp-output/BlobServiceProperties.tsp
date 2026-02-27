@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
-/**
- * The properties of a storage account’s Blob service.
- */
+/** The properties of a storage account’s Blob service. */
 @singleton("default")
 @parentResource(StorageAccount)
 model BlobServiceProperties
@@ -25,9 +23,7 @@ model BlobServiceProperties
     NamePattern = ""
   >;
 
-  /**
-   * Sku name and tier.
-   */
+  /** Sku name and tier. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   sku?: Sku;
@@ -35,23 +31,17 @@ model BlobServiceProperties
 
 @armResourceOperations
 interface BlobServices {
-  /**
-   * Gets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
-   */
+  /** Gets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. */
   getServiceProperties is ArmResourceRead<BlobServiceProperties>;
 
-  /**
-   * Sets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
-   */
+  /** Sets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   setServiceProperties is ArmResourceCreateOrReplaceSync<
     BlobServiceProperties,
     Response = ArmResourceUpdatedResponse<BlobServiceProperties>
   >;
 
-  /**
-   * List blob services of storage account. It returns a collection of one object named default.
-   */
+  /** List blob services of storage account. It returns a collection of one object named default. */
   list is ArmResourceListByParent<
     BlobServiceProperties,
     Response = ArmResponse<BlobServiceItems>

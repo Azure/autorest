@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * Certificate details.
- */
+/** Certificate details. */
 @parentResource(ApiManagementServiceResource)
 model CertificateContract
   is Azure.ResourceManager.ProxyResource<CertificateContractProperties> {
@@ -27,81 +25,57 @@ model CertificateContract
 
 @armResourceOperations
 interface CertificateContracts {
-  /**
-   * Gets the details of the certificate specified by its identifier.
-   */
+  /** Gets the details of the certificate specified by its identifier. */
   get is ArmResourceRead<CertificateContract>;
 
-  /**
-   * Gets the entity state (Etag) version of the certificate specified by its identifier.
-   */
+  /** Gets the entity state (Etag) version of the certificate specified by its identifier. */
   getEntityTag is ArmResourceCheckExistence<CertificateContract>;
 
-  /**
-   * Creates or updates the certificate being used for authentication with the backend.
-   */
+  /** Creates or updates the certificate being used for authentication with the backend. */
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     CertificateContract,
     Request = CertificateCreateOrUpdateParameters,
     Parameters = {
-      /**
-       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
-       */
+      /** ETag of the Entity. Not required when creating an entity, but required when updating an entity. */
       @header
       `If-Match`?: string;
     }
   >;
 
-  /**
-   * Deletes specific certificate.
-   */
+  /** Deletes specific certificate. */
   delete is ArmResourceDeleteSync<
     CertificateContract,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Lists a collection of all certificates in the specified service instance.
-   */
+  /** Lists a collection of all certificates in the specified service instance. */
   listByService is ArmResourceListByParent<
     CertificateContract,
     Parameters = {
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| subject | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| thumbprint | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| expirationDate | filter | ge, le, eq, ne, gt, lt |     |</br>
-       */
+      /** |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| subject | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| thumbprint | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| expirationDate | filter | ge, le, eq, ne, gt, lt |     |</br> */
       @query("$filter")
       $filter?: string;
 
-      /**
-       * Number of records to return.
-       */
+      /** Number of records to return. */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      /**
-       * Number of records to skip.
-       */
+      /** Number of records to skip. */
       @query("$skip")
       $skip?: int32;
 
-      /**
-       * When set to true, the response contains only certificates entities which failed refresh.
-       */
+      /** When set to true, the response contains only certificates entities which failed refresh. */
       @query("isKeyVaultRefreshFailed")
       isKeyVaultRefreshFailed?: boolean;
     }
   >;
 
-  /**
-   * From KeyVault, Refresh the certificate being used for authentication with the backend.
-   */
+  /** From KeyVault, Refresh the certificate being used for authentication with the backend. */
   refreshSecret is ArmResourceActionSync<
     CertificateContract,
     void,

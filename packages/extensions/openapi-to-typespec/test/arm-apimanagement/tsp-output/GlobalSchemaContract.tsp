@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * Global Schema Contract details.
- */
+/** Global Schema Contract details. */
 @parentResource(ApiManagementServiceResource)
 model GlobalSchemaContract
   is Azure.ResourceManager.ProxyResource<GlobalSchemaContractProperties> {
@@ -27,26 +25,18 @@ model GlobalSchemaContract
 
 @armResourceOperations
 interface GlobalSchemaContracts {
-  /**
-   * Gets the details of the Schema specified by its identifier.
-   */
+  /** Gets the details of the Schema specified by its identifier. */
   get is ArmResourceRead<GlobalSchemaContract>;
 
-  /**
-   * Gets the entity state (Etag) version of the Schema specified by its identifier.
-   */
+  /** Gets the entity state (Etag) version of the Schema specified by its identifier. */
   getEntityTag is ArmResourceCheckExistence<GlobalSchemaContract>;
 
-  /**
-   * Creates new or updates existing specified Schema of the API Management service instance.
-   */
+  /** Creates new or updates existing specified Schema of the API Management service instance. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     GlobalSchemaContract,
     Parameters = {
-      /**
-       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
-       */
+      /** ETag of the Entity. Not required when creating an entity, but required when updating an entity. */
       @header
       `If-Match`?: string;
     },
@@ -57,42 +47,30 @@ interface GlobalSchemaContracts {
     > | ArmAcceptedLroResponse
   >;
 
-  /**
-   * Deletes specific Schema.
-   */
+  /** Deletes specific Schema. */
   delete is ArmResourceDeleteSync<
     GlobalSchemaContract,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Lists a collection of schemas registered with service instance.
-   */
+  /** Lists a collection of schemas registered with service instance. */
   listByService is ArmResourceListByParent<
     GlobalSchemaContract,
     Parameters = {
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-       */
+      /** |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br> */
       @query("$filter")
       $filter?: string;
 
-      /**
-       * Number of records to return.
-       */
+      /** Number of records to return. */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      /**
-       * Number of records to skip.
-       */
+      /** Number of records to skip. */
       @query("$skip")
       $skip?: int32;
     }

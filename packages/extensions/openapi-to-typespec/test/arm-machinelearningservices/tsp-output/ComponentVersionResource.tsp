@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-/**
- * Azure Resource Manager resource envelope.
- */
+/** Azure Resource Manager resource envelope. */
 @parentResource(ComponentContainerResource)
 model ComponentVersionResource
   is Azure.ResourceManager.ProxyResource<ComponentVersion, false> {
@@ -57,52 +55,36 @@ alias ComponentVersionResourceOps = Azure.ResourceManager.Legacy.LegacyOperation
 
 @armResourceOperations
 interface ComponentVersionResources {
-  /**
-   * Get version.
-   */
+  /** Get version. */
   get is ComponentVersionResourceOps.Read<ComponentVersionResource>;
 
-  /**
-   * Create or update version.
-   */
+  /** Create or update version. */
   createOrUpdate is ComponentVersionResourceOps.CreateOrUpdateAsync<ComponentVersionResource>;
 
-  /**
-   * Delete version.
-   */
+  /** Delete version. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ComponentVersionResourceOps.DeleteWithoutOkAsync<
     ComponentVersionResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List versions.
-   */
+  /** List versions. */
   list is ComponentVersionResourceOps.List<
     ComponentVersionResource,
     Parameters = {
-      /**
-       * Ordering of list.
-       */
+      /** Ordering of list. */
       @query("$orderBy")
       $orderBy?: string;
 
-      /**
-       * Maximum number of records to return.
-       */
+      /** Maximum number of records to return. */
       @query("$top")
       $top?: int32;
 
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
 
-      /**
-       * Component stage.
-       */
+      /** Component stage. */
       @query("stage")
       stage?: string;
     },
@@ -140,54 +122,36 @@ alias ComponentVersionOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @armResourceOperations
 interface ComponentVersions {
-  /**
-   * Get version.
-   */
+  /** Get version. */
   get is ComponentVersionOps.Read<ComponentVersionResource>;
 
-  /**
-   * Create or update version.
-   */
+  /** Create or update version. */
   createOrUpdate is ComponentVersionOps.CreateOrUpdateSync<ComponentVersionResource>;
 
-  /**
-   * Delete version.
-   */
+  /** Delete version. */
   delete is ComponentVersionOps.DeleteSync<ComponentVersionResource>;
 
-  /**
-   * List component versions.
-   */
+  /** List component versions. */
   list is ComponentVersionOps.List<
     ComponentVersionResource,
     Parameters = {
-      /**
-       * Ordering of list.
-       */
+      /** Ordering of list. */
       @query("$orderBy")
       $orderBy?: string;
 
-      /**
-       * Maximum number of records to return.
-       */
+      /** Maximum number of records to return. */
       @query("$top")
       $top?: int32;
 
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
 
-      /**
-       * View type for including/excluding (for example) archived entities.
-       */
+      /** View type for including/excluding (for example) archived entities. */
       @query("listViewType")
       listViewType?: ListViewType;
 
-      /**
-       * Component stage.
-       */
+      /** Component stage. */
       @query("stage")
       stage?: string;
     },

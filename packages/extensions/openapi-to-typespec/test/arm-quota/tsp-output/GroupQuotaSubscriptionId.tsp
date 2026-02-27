@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Quota;
-/**
- * This represents a Azure subscriptionId that is associated with a GroupQuotasEntity.
- */
+/** This represents a Azure subscriptionId that is associated with a GroupQuotasEntity. */
 @parentResource(GroupQuotasEntity)
 model GroupQuotaSubscriptionId
   is Azure.ResourceManager.ProxyResource<GroupQuotaSubscriptionIdProperties> {
@@ -27,14 +25,10 @@ model GroupQuotaSubscriptionId
 
 @armResourceOperations
 interface GroupQuotaSubscriptionIds {
-  /**
-   * Returns the subscriptionIds along with its provisioning state for being associated with the GroupQuota. If the subscription is not a member of GroupQuota, it will return 404, else 200.
-   */
+  /** Returns the subscriptionIds along with its provisioning state for being associated with the GroupQuota. If the subscription is not a member of GroupQuota, it will return 404, else 200. */
   get is Extension.Read<Extension.ManagementGroup, GroupQuotaSubscriptionId>;
 
-  /**
-   * Adds a subscription to GroupQuotas. The subscriptions will be validated based on the additionalAttributes defined in the GroupQuota. The additionalAttributes works as filter for the subscriptions, which can be included in the GroupQuotas. The request's TenantId is validated against the subscription's TenantId.
-   */
+  /** Adds a subscription to GroupQuotas. The subscriptions will be validated based on the additionalAttributes defined in the GroupQuota. The additionalAttributes works as filter for the subscriptions, which can be included in the GroupQuotas. The request's TenantId is validated against the subscription's TenantId. */
   createOrUpdate is Azure.ResourceManager.Legacy.Extension.CreateOrReplaceAsync<
     Extension.ManagementGroup,
     GroupQuotaSubscriptionId,
@@ -46,9 +40,7 @@ interface GroupQuotaSubscriptionIds {
     >
   >;
 
-  /**
-   * Updates the GroupQuotas with the subscription to add to the subscriptions list. The subscriptions will be validated if additionalAttributes are defined in the GroupQuota. The request's TenantId is validated against the subscription's TenantId.
-   */
+  /** Updates the GroupQuotas with the subscription to add to the subscriptions list. The subscriptions will be validated if additionalAttributes are defined in the GroupQuota. The request's TenantId is validated against the subscription's TenantId. */
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.Extension.CustomPatchAsync<
     Extension.ManagementGroup,
@@ -56,17 +48,13 @@ interface GroupQuotaSubscriptionIds {
     PatchModel = void
   >;
 
-  /**
-   * Removes the subscription from GroupQuotas. The request's TenantId is validated against the subscription's TenantId.
-   */
+  /** Removes the subscription from GroupQuotas. The request's TenantId is validated against the subscription's TenantId. */
   delete is Extension.DeleteWithoutOkAsync<
     Extension.ManagementGroup,
     GroupQuotaSubscriptionId
   >;
 
-  /**
-   * Returns a list of the subscriptionIds associated with the GroupQuotas.
-   */
+  /** Returns a list of the subscriptionIds associated with the GroupQuotas. */
   list is Extension.ListByTarget<
     Extension.ManagementGroup,
     GroupQuotaSubscriptionId,

@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-/**
- * Azure Resource Manager resource envelope.
- */
+/** Azure Resource Manager resource envelope. */
 @parentResource(EnvironmentContainerResource)
 model EnvironmentVersionResource
   is Azure.ResourceManager.ProxyResource<EnvironmentVersion, false> {
@@ -57,58 +55,40 @@ alias EnvironmentVersionResourceOps = Azure.ResourceManager.Legacy.LegacyOperati
 
 @armResourceOperations
 interface EnvironmentVersionResources {
-  /**
-   * Get version.
-   */
+  /** Get version. */
   get is EnvironmentVersionResourceOps.Read<EnvironmentVersionResource>;
 
-  /**
-   * Create or update version.
-   */
+  /** Create or update version. */
   createOrUpdate is EnvironmentVersionResourceOps.CreateOrUpdateAsync<EnvironmentVersionResource>;
 
-  /**
-   * Delete version.
-   */
+  /** Delete version. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is EnvironmentVersionResourceOps.DeleteWithoutOkAsync<
     EnvironmentVersionResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List versions.
-   */
+  /** List versions. */
   list is EnvironmentVersionResourceOps.List<
     EnvironmentVersionResource,
     Parameters = {
-      /**
-       * Ordering of list.
-       */
+      /** Ordering of list. */
       @query("$orderBy")
       $orderBy?: string;
 
-      /**
-       * Maximum number of records to return.
-       */
+      /** Maximum number of records to return. */
       @query("$top")
       $top?: int32;
 
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
 
-      /**
-       * View type for including/excluding (for example) archived entities.
-       */
+      /** View type for including/excluding (for example) archived entities. */
       @query("listViewType")
       listViewType?: ListViewType;
 
-      /**
-       * Stage for including/excluding (for example) archived entities. Takes priority over listViewType
-       */
+      /** Stage for including/excluding (for example) archived entities. Takes priority over listViewType */
       @query("stage")
       stage?: string;
     },
@@ -146,54 +126,36 @@ alias EnvironmentVersionOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @armResourceOperations
 interface EnvironmentVersions {
-  /**
-   * Get version.
-   */
+  /** Get version. */
   get is EnvironmentVersionOps.Read<EnvironmentVersionResource>;
 
-  /**
-   * Creates or updates an EnvironmentVersion.
-   */
+  /** Creates or updates an EnvironmentVersion. */
   createOrUpdate is EnvironmentVersionOps.CreateOrUpdateSync<EnvironmentVersionResource>;
 
-  /**
-   * Delete version.
-   */
+  /** Delete version. */
   delete is EnvironmentVersionOps.DeleteSync<EnvironmentVersionResource>;
 
-  /**
-   * List versions.
-   */
+  /** List versions. */
   list is EnvironmentVersionOps.List<
     EnvironmentVersionResource,
     Parameters = {
-      /**
-       * Ordering of list.
-       */
+      /** Ordering of list. */
       @query("$orderBy")
       $orderBy?: string;
 
-      /**
-       * Maximum number of records to return.
-       */
+      /** Maximum number of records to return. */
       @query("$top")
       $top?: int32;
 
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
 
-      /**
-       * View type for including/excluding (for example) archived entities.
-       */
+      /** View type for including/excluding (for example) archived entities. */
       @query("listViewType")
       listViewType?: ListViewType;
 
-      /**
-       * Stage for including/excluding (for example) archived entities. Takes priority over listViewType
-       */
+      /** Stage for including/excluding (for example) archived entities. Takes priority over listViewType */
       @query("stage")
       stage?: string;
     },

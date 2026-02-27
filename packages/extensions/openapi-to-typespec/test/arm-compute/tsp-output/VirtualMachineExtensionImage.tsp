@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * Describes a Virtual Machine Extension Image.
- */
+/** Describes a Virtual Machine Extension Image. */
 @subscriptionResource
 model VirtualMachineExtensionImage
   is Azure.ResourceManager.TrackedResource<VirtualMachineExtensionImageProperties> {
@@ -26,17 +24,13 @@ model VirtualMachineExtensionImage
 
 @armResourceOperations
 interface VirtualMachineExtensionImages {
-  /**
-   * Gets a virtual machine extension image.
-   */
+  /** Gets a virtual machine extension image. */
   get is ArmResourceRead<
     VirtualMachineExtensionImage,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
-  /**
-   * Gets a list of virtual machine extension image types.
-   */
+  /** Gets a list of virtual machine extension image types. */
   listTypes is ArmResourceListByParent<
     VirtualMachineExtensionImage,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,

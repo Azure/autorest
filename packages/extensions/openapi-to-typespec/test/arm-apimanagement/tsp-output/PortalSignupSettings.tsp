@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * Sign-Up settings for a developer portal.
- */
+/** Sign-Up settings for a developer portal. */
 @singleton("signup")
 @parentResource(ApiManagementServiceResource)
 model PortalSignupSettings
@@ -28,43 +26,31 @@ model PortalSignupSettings
 
 @armResourceOperations
 interface SignUpSettings {
-  /**
-   * Get Sign Up Settings for the Portal
-   */
+  /** Get Sign Up Settings for the Portal */
   get is ArmResourceRead<PortalSignupSettings>;
 
-  /**
-   * Gets the entity state (Etag) version of the SignUpSettings.
-   */
+  /** Gets the entity state (Etag) version of the SignUpSettings. */
   getEntityTag is ArmResourceCheckExistence<PortalSignupSettings>;
 
-  /**
-   * Create or Update Sign-Up settings.
-   */
+  /** Create or Update Sign-Up settings. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PortalSignupSettings,
     Parameters = {
-      /**
-       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
-       */
+      /** ETag of the Entity. Not required when creating an entity, but required when updating an entity. */
       @header
       `If-Match`?: string;
     },
     Response = ArmResourceUpdatedResponse<PortalSignupSettings>
   >;
 
-  /**
-   * Update Sign-Up settings.
-   */
+  /** Update Sign-Up settings. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     PortalSignupSettings,
     PatchModel = PortalSignupSettings,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     },

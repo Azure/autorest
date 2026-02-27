@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * Delegation settings for a developer portal.
- */
+/** Delegation settings for a developer portal. */
 @singleton("delegation")
 @parentResource(ApiManagementServiceResource)
 model PortalDelegationSettings
@@ -28,52 +26,38 @@ model PortalDelegationSettings
 
 @armResourceOperations
 interface DelegationSettings {
-  /**
-   * Get Delegation Settings for the Portal.
-   */
+  /** Get Delegation Settings for the Portal. */
   get is ArmResourceRead<PortalDelegationSettings>;
 
-  /**
-   * Gets the entity state (Etag) version of the DelegationSettings.
-   */
+  /** Gets the entity state (Etag) version of the DelegationSettings. */
   getEntityTag is ArmResourceCheckExistence<PortalDelegationSettings>;
 
-  /**
-   * Create or Update Delegation settings.
-   */
+  /** Create or Update Delegation settings. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PortalDelegationSettings,
     Parameters = {
-      /**
-       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
-       */
+      /** ETag of the Entity. Not required when creating an entity, but required when updating an entity. */
       @header
       `If-Match`?: string;
     },
     Response = ArmResourceUpdatedResponse<PortalDelegationSettings>
   >;
 
-  /**
-   * Update Delegation settings.
-   */
+  /** Update Delegation settings. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     PortalDelegationSettings,
     PatchModel = PortalDelegationSettings,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     },
     Response = ArmNoContentResponse
   >;
 
-  /**
-   * Gets the secret validation key of the DelegationSettings.
-   */
+  /** Gets the secret validation key of the DelegationSettings. */
   listSecrets is ArmResourceActionSync<
     PortalDelegationSettings,
     void,

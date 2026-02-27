@@ -10,158 +10,100 @@ using Azure.ResourceManager.Foundations;
 
 namespace Azure.ResourceManager.AlertsManagement;
 
-/**
- * Field for a given condition.
- */
+/** Field for a given condition. */
 union Field {
   string,
 
-  /**
-   * Severity
-   */
+  /** Severity */
   Severity: "Severity",
 
-  /**
-   * MonitorService
-   */
+  /** MonitorService */
   MonitorService: "MonitorService",
 
-  /**
-   * MonitorCondition
-   */
+  /** MonitorCondition */
   MonitorCondition: "MonitorCondition",
 
-  /**
-   * SignalType
-   */
+  /** SignalType */
   SignalType: "SignalType",
 
-  /**
-   * TargetResourceType
-   */
+  /** TargetResourceType */
   TargetResourceType: "TargetResourceType",
 
-  /**
-   * TargetResource
-   */
+  /** TargetResource */
   TargetResource: "TargetResource",
 
-  /**
-   * TargetResourceGroup
-   */
+  /** TargetResourceGroup */
   TargetResourceGroup: "TargetResourceGroup",
 
-  /**
-   * AlertRuleId
-   */
+  /** AlertRuleId */
   AlertRuleId: "AlertRuleId",
 
-  /**
-   * AlertRuleName
-   */
+  /** AlertRuleName */
   AlertRuleName: "AlertRuleName",
 
-  /**
-   * Description
-   */
+  /** Description */
   Description: "Description",
 
-  /**
-   * AlertContext
-   */
+  /** AlertContext */
   AlertContext: "AlertContext",
 }
 
-/**
- * Operator for a given condition.
- */
+/** Operator for a given condition. */
 union Operator {
   string,
 
-  /**
-   * Equals
-   */
+  /** Equals */
   Equals: "Equals",
 
-  /**
-   * NotEquals
-   */
+  /** NotEquals */
   NotEquals: "NotEquals",
 
-  /**
-   * Contains
-   */
+  /** Contains */
   Contains: "Contains",
 
-  /**
-   * DoesNotContain
-   */
+  /** DoesNotContain */
   DoesNotContain: "DoesNotContain",
 }
 
-/**
- * Specifies when the recurrence should be applied.
- */
+/** Specifies when the recurrence should be applied. */
 union RecurrenceType {
   string,
 
-  /**
-   * Daily
-   */
+  /** Daily */
   Daily: "Daily",
 
-  /**
-   * Weekly
-   */
+  /** Weekly */
   Weekly: "Weekly",
 
-  /**
-   * Monthly
-   */
+  /** Monthly */
   Monthly: "Monthly",
 }
 
-/**
- * Action that should be applied.
- */
+/** Action that should be applied. */
 union ActionType {
   string,
 
-  /**
-   * AddActionGroups
-   */
+  /** AddActionGroups */
   AddActionGroups: "AddActionGroups",
 
-  /**
-   * RemoveAllActionGroups
-   */
+  /** RemoveAllActionGroups */
   RemoveAllActionGroups: "RemoveAllActionGroups",
 }
 
-/**
- * The type of identity that created the resource.
- */
+/** The type of identity that created the resource. */
 union CreatedByType {
   string,
 
-  /**
-   * User
-   */
+  /** User */
   User: "User",
 
-  /**
-   * Application
-   */
+  /** Application */
   Application: "Application",
 
-  /**
-   * ManagedIdentity
-   */
+  /** ManagedIdentity */
   ManagedIdentity: "ManagedIdentity",
 
-  /**
-   * Key
-   */
+  /** Key */
   Key: "Key",
 }
 
@@ -169,21 +111,15 @@ union CreatedByType {
 union Identifier {
   string,
 
-  /**
-   * MonitorServiceList
-   */
+  /** MonitorServiceList */
   MonitorServiceList: "MonitorServiceList",
 }
 
-/**
- * Identification of the information to be retrieved by API call
- */
+/** Identification of the information to be retrieved by API call */
 union MetadataIdentifier {
   string,
 
-  /**
-   * MonitorServiceList
-   */
+  /** MonitorServiceList */
   MonitorServiceList: "MonitorServiceList",
 }
 
@@ -191,74 +127,46 @@ union MetadataIdentifier {
 union MonitorService {
   string,
 
-  /**
-   * Application Insights
-   */
+  /** Application Insights */
   `Application Insights`: "Application Insights",
 
-  /**
-   * ActivityLog Administrative
-   */
+  /** ActivityLog Administrative */
   `ActivityLog Administrative`: "ActivityLog Administrative",
 
-  /**
-   * ActivityLog Security
-   */
+  /** ActivityLog Security */
   `ActivityLog Security`: "ActivityLog Security",
 
-  /**
-   * ActivityLog Recommendation
-   */
+  /** ActivityLog Recommendation */
   `ActivityLog Recommendation`: "ActivityLog Recommendation",
 
-  /**
-   * ActivityLog Policy
-   */
+  /** ActivityLog Policy */
   `ActivityLog Policy`: "ActivityLog Policy",
 
-  /**
-   * ActivityLog Autoscale
-   */
+  /** ActivityLog Autoscale */
   `ActivityLog Autoscale`: "ActivityLog Autoscale",
 
-  /**
-   * Log Analytics
-   */
+  /** Log Analytics */
   `Log Analytics`: "Log Analytics",
 
-  /**
-   * Nagios
-   */
+  /** Nagios */
   Nagios: "Nagios",
 
-  /**
-   * Platform
-   */
+  /** Platform */
   Platform: "Platform",
 
-  /**
-   * SCOM
-   */
+  /** SCOM */
   SCOM: "SCOM",
 
-  /**
-   * ServiceHealth
-   */
+  /** ServiceHealth */
   ServiceHealth: "ServiceHealth",
 
-  /**
-   * SmartDetector
-   */
+  /** SmartDetector */
   SmartDetector: "SmartDetector",
 
-  /**
-   * VM Insights
-   */
+  /** VM Insights */
   `VM Insights`: "VM Insights",
 
-  /**
-   * Zabbix
-   */
+  /** Zabbix */
   Zabbix: "Zabbix",
 }
 
@@ -266,14 +174,10 @@ union MonitorService {
 union MonitorCondition {
   string,
 
-  /**
-   * Fired
-   */
+  /** Fired */
   Fired: "Fired",
 
-  /**
-   * Resolved
-   */
+  /** Resolved */
   Resolved: "Resolved",
 }
 
@@ -281,29 +185,19 @@ union MonitorCondition {
 union Severity {
   string,
 
-  /**
-   * Sev0
-   */
+  /** Sev0 */
   Sev0: "Sev0",
 
-  /**
-   * Sev1
-   */
+  /** Sev1 */
   Sev1: "Sev1",
 
-  /**
-   * Sev2
-   */
+  /** Sev2 */
   Sev2: "Sev2",
 
-  /**
-   * Sev3
-   */
+  /** Sev3 */
   Sev3: "Sev3",
 
-  /**
-   * Sev4
-   */
+  /** Sev4 */
   Sev4: "Sev4",
 }
 
@@ -311,19 +205,13 @@ union Severity {
 union AlertState {
   string,
 
-  /**
-   * New
-   */
+  /** New */
   New: "New",
 
-  /**
-   * Acknowledged
-   */
+  /** Acknowledged */
   Acknowledged: "Acknowledged",
 
-  /**
-   * Closed
-   */
+  /** Closed */
   Closed: "Closed",
 }
 
@@ -331,54 +219,34 @@ union AlertState {
 union AlertsSortByFields {
   string,
 
-  /**
-   * name
-   */
+  /** name */
   name: "name",
 
-  /**
-   * severity
-   */
+  /** severity */
   severity: "severity",
 
-  /**
-   * alertState
-   */
+  /** alertState */
   alertState: "alertState",
 
-  /**
-   * monitorCondition
-   */
+  /** monitorCondition */
   monitorCondition: "monitorCondition",
 
-  /**
-   * targetResource
-   */
+  /** targetResource */
   targetResource: "targetResource",
 
-  /**
-   * targetResourceName
-   */
+  /** targetResourceName */
   targetResourceName: "targetResourceName",
 
-  /**
-   * targetResourceGroup
-   */
+  /** targetResourceGroup */
   targetResourceGroup: "targetResourceGroup",
 
-  /**
-   * targetResourceType
-   */
+  /** targetResourceType */
   targetResourceType: "targetResourceType",
 
-  /**
-   * startDateTime
-   */
+  /** startDateTime */
   startDateTime: "startDateTime",
 
-  /**
-   * lastModifiedDateTime
-   */
+  /** lastModifiedDateTime */
   lastModifiedDateTime: "lastModifiedDateTime",
 }
 
@@ -386,14 +254,10 @@ union AlertsSortByFields {
 union SortOrder {
   string,
 
-  /**
-   * asc
-   */
+  /** asc */
   asc: "asc",
 
-  /**
-   * desc
-   */
+  /** desc */
   desc: "desc",
 }
 
@@ -401,46 +265,30 @@ union SortOrder {
 union TimeRange {
   string,
 
-  /**
-   * 1h
-   */
+  /** 1h */
   `1h`: "1h",
 
-  /**
-   * 1d
-   */
+  /** 1d */
   `1d`: "1d",
 
-  /**
-   * 7d
-   */
+  /** 7d */
   `7d`: "7d",
 
-  /**
-   * 30d
-   */
+  /** 30d */
   `30d`: "30d",
 }
 
-/**
- * The type of signal the alert is based on, which could be metrics, logs or activity logs.
- */
+/** The type of signal the alert is based on, which could be metrics, logs or activity logs. */
 union SignalType {
   string,
 
-  /**
-   * Metric
-   */
+  /** Metric */
   Metric: "Metric",
 
-  /**
-   * Log
-   */
+  /** Log */
   Log: "Log",
 
-  /**
-   * Unknown
-   */
+  /** Unknown */
   Unknown: "Unknown",
 }
 
@@ -448,34 +296,22 @@ union SignalType {
 union AlertsSummaryGroupByFields {
   string,
 
-  /**
-   * severity
-   */
+  /** severity */
   severity: "severity",
 
-  /**
-   * alertState
-   */
+  /** alertState */
   alertState: "alertState",
 
-  /**
-   * monitorCondition
-   */
+  /** monitorCondition */
   monitorCondition: "monitorCondition",
 
-  /**
-   * monitorService
-   */
+  /** monitorService */
   monitorService: "monitorService",
 
-  /**
-   * signalType
-   */
+  /** signalType */
   signalType: "signalType",
 
-  /**
-   * alertRule
-   */
+  /** alertRule */
   alertRule: "alertRule",
 }
 
@@ -483,1084 +319,674 @@ union AlertsSummaryGroupByFields {
 union SmartGroupsSortByFields {
   string,
 
-  /**
-   * alertsCount
-   */
+  /** alertsCount */
   alertsCount: "alertsCount",
 
-  /**
-   * state
-   */
+  /** state */
   state: "state",
 
-  /**
-   * severity
-   */
+  /** severity */
   severity: "severity",
 
-  /**
-   * startDateTime
-   */
+  /** startDateTime */
   startDateTime: "startDateTime",
 
-  /**
-   * lastModifiedDateTime
-   */
+  /** lastModifiedDateTime */
   lastModifiedDateTime: "lastModifiedDateTime",
 }
 
-/**
- * Smart group state
- */
+/** Smart group state */
 union SmartGroupState {
   string,
 
-  /**
-   * New
-   */
+  /** New */
   New: "New",
 
-  /**
-   * Acknowledged
-   */
+  /** Acknowledged */
   Acknowledged: "Acknowledged",
 
-  /**
-   * Closed
-   */
+  /** Closed */
   Closed: "Closed",
 }
 
-/**
- * Days of week.
- */
+/** Days of week. */
 union DaysOfWeek {
   string,
 
-  /**
-   * Sunday
-   */
+  /** Sunday */
   Sunday: "Sunday",
 
-  /**
-   * Monday
-   */
+  /** Monday */
   Monday: "Monday",
 
-  /**
-   * Tuesday
-   */
+  /** Tuesday */
   Tuesday: "Tuesday",
 
-  /**
-   * Wednesday
-   */
+  /** Wednesday */
   Wednesday: "Wednesday",
 
-  /**
-   * Thursday
-   */
+  /** Thursday */
   Thursday: "Thursday",
 
-  /**
-   * Friday
-   */
+  /** Friday */
   Friday: "Friday",
 
-  /**
-   * Saturday
-   */
+  /** Saturday */
   Saturday: "Saturday",
 }
 
-/**
- * Reason for the modification
- */
+/** Reason for the modification */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum AlertModificationEvent {
-  /**
-   * AlertCreated
-   */
+  /** AlertCreated */
   AlertCreated,
 
-  /**
-   * StateChange
-   */
+  /** StateChange */
   StateChange,
 
-  /**
-   * MonitorConditionChange
-   */
+  /** MonitorConditionChange */
   MonitorConditionChange,
 
-  /**
-   * SeverityChange
-   */
+  /** SeverityChange */
   SeverityChange,
 
-  /**
-   * ActionRuleTriggered
-   */
+  /** ActionRuleTriggered */
   ActionRuleTriggered,
 
-  /**
-   * ActionRuleSuppressed
-   */
+  /** ActionRuleSuppressed */
   ActionRuleSuppressed,
 
-  /**
-   * ActionsTriggered
-   */
+  /** ActionsTriggered */
   ActionsTriggered,
 
-  /**
-   * ActionsSuppressed
-   */
+  /** ActionsSuppressed */
   ActionsSuppressed,
 
-  /**
-   * ActionsFailed
-   */
+  /** ActionsFailed */
   ActionsFailed,
 }
 
-/**
- * Reason for the modification
- */
+/** Reason for the modification */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum SmartGroupModificationEvent {
-  /**
-   * SmartGroupCreated
-   */
+  /** SmartGroupCreated */
   SmartGroupCreated,
 
-  /**
-   * StateChange
-   */
+  /** StateChange */
   StateChange,
 
-  /**
-   * AlertAdded
-   */
+  /** AlertAdded */
   AlertAdded,
 
-  /**
-   * AlertRemoved
-   */
+  /** AlertRemoved */
   AlertRemoved,
 }
 
-/**
- * List of alert processing rules.
- */
+/** List of alert processing rules. */
 model AlertProcessingRulesList is Azure.Core.Page<AlertProcessingRule>;
 
-/**
- * Alert processing rule properties defining scopes, conditions and scheduling logic for alert processing rule.
- */
+/** Alert processing rule properties defining scopes, conditions and scheduling logic for alert processing rule. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model AlertProcessingRuleProperties {
-  /**
-   * Scopes on which alert processing rule will apply.
-   */
+  /** Scopes on which alert processing rule will apply. */
   scopes: string[];
 
-  /**
-   * Conditions on which alerts will be filtered.
-   */
+  /** Conditions on which alerts will be filtered. */
   conditions?: Condition[];
 
-  /**
-   * Scheduling for alert processing rule.
-   */
+  /** Scheduling for alert processing rule. */
   schedule?: Schedule;
 
-  /**
-   * Actions to be applied.
-   */
+  /** Actions to be applied. */
   actions: Action[];
 
-  /**
-   * Description of alert processing rule.
-   */
+  /** Description of alert processing rule. */
   description?: string;
 
-  /**
-   * Indicates if the given alert processing rule is enabled or disabled.
-   */
+  /** Indicates if the given alert processing rule is enabled or disabled. */
   enabled?: boolean = true;
 }
 
-/**
- * Condition to trigger an alert processing rule.
- */
+/** Condition to trigger an alert processing rule. */
 model Condition {
-  /**
-   * Field for a given condition.
-   */
+  /** Field for a given condition. */
   field?: Field;
 
-  /**
-   * Operator for a given condition.
-   */
+  /** Operator for a given condition. */
   operator?: Operator;
 
-  /**
-   * List of values to match for a given condition.
-   */
+  /** List of values to match for a given condition. */
   values?: string[];
 }
 
-/**
- * Scheduling configuration for a given alert processing rule.
- */
+/** Scheduling configuration for a given alert processing rule. */
 model Schedule {
-  /**
-   * Scheduling effective from time. Date-Time in ISO-8601 format without timezone suffix.
-   */
+  /** Scheduling effective from time. Date-Time in ISO-8601 format without timezone suffix. */
   @pattern("^(?:(\\d{4}-\\d{2}-\\d{2})T(\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?))$")
   effectiveFrom?: string;
 
-  /**
-   * Scheduling effective until time. Date-Time in ISO-8601 format without timezone suffix.
-   */
+  /** Scheduling effective until time. Date-Time in ISO-8601 format without timezone suffix. */
   @pattern("^(?:(\\d{4}-\\d{2}-\\d{2})T(\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?))$")
   effectiveUntil?: string;
 
-  /**
-   * Scheduling time zone.
-   */
+  /** Scheduling time zone. */
   timeZone?: string;
 
-  /**
-   * List of recurrences.
-   */
+  /** List of recurrences. */
   recurrences?: Recurrence[];
 }
 
-/**
- * Recurrence object.
- */
+/** Recurrence object. */
 @discriminator("recurrenceType")
 model Recurrence {
-  /**
-   * Specifies when the recurrence should be applied.
-   */
+  /** Specifies when the recurrence should be applied. */
   recurrenceType: RecurrenceType;
 
-  /**
-   * Start time for recurrence.
-   */
+  /** Start time for recurrence. */
   startTime?: plainTime;
 
-  /**
-   * End time for recurrence.
-   */
+  /** End time for recurrence. */
   endTime?: plainTime;
 }
 
-/**
- * Action to be applied.
- */
+/** Action to be applied. */
 @discriminator("actionType")
 model Action {
-  /**
-   * Action that should be applied.
-   */
+  /** Action that should be applied. */
   actionType: ActionType;
 }
 
-/**
- * An azure managed resource object.
- */
+/** An azure managed resource object. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ManagedResource extends Resource {
-  /**
-   * Resource location
-   */
+  /** Resource location */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   location: string;
 
-  /**
-   * Resource tags
-   */
+  /** Resource tags */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 
-/**
- * An azure resource object
- */
+/** An azure resource object */
 model Resource {
-  /**
-   * Azure resource Id
-   */
+  /** Azure resource Id */
   @visibility(Lifecycle.Read)
   id?: string;
 
-  /**
-   * Azure resource type
-   */
+  /** Azure resource type */
   @visibility(Lifecycle.Read)
   type?: string;
 
-  /**
-   * Azure resource name
-   */
+  /** Azure resource name */
   @visibility(Lifecycle.Read)
   name?: string;
 }
 
-/**
- * An error response from the service.
- */
+/** An error response from the service. */
 @error
 model AlertProcessingRuleErrorResponse {
-  /**
-   * Details of error response.
-   */
+  /** Details of error response. */
   error?: AlertProcessingRuleErrorResponseBody;
 }
 
-/**
- * Details of error response.
- */
+/** Details of error response. */
 model AlertProcessingRuleErrorResponseBody {
-  /**
-   * Error code, intended to be consumed programmatically.
-   */
+  /** Error code, intended to be consumed programmatically. */
   code?: string;
 
-  /**
-   * Description of the error, intended for display in user interface.
-   */
+  /** Description of the error, intended for display in user interface. */
   message?: string;
 
-  /**
-   * Target of the particular error, for example name of the property.
-   */
+  /** Target of the particular error, for example name of the property. */
   target?: string;
 
-  /**
-   * A list of additional details about the error.
-   */
+  /** A list of additional details about the error. */
   details?: AlertProcessingRuleErrorResponseBody[];
 }
 
-/**
- * Data contract for patch.
- */
+/** Data contract for patch. */
 model PatchObject {
-  /**
-   * Properties supported by patch operation.
-   */
+  /** Properties supported by patch operation. */
   properties?: PatchProperties;
 
-  /**
-   * Tags to be updated.
-   */
+  /** Tags to be updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 
-/**
- * Alert processing rule properties supported by patch.
- */
+/** Alert processing rule properties supported by patch. */
 model PatchProperties {
-  /**
-   * Indicates if the given alert processing rule is enabled or disabled.
-   */
+  /** Indicates if the given alert processing rule is enabled or disabled. */
   enabled?: boolean;
 }
 
-/**
- * Operation provided by provider
- */
+/** Operation provided by provider */
 model Operation {
-  /**
-   * Name of the operation
-   */
+  /** Name of the operation */
   name?: string;
 
-  /**
-   * Properties of the operation
-   */
+  /** Properties of the operation */
   display?: OperationDisplay;
 
-  /**
-   * Origin of the operation
-   */
+  /** Origin of the operation */
   origin?: string;
 }
 
-/**
- * Properties of the operation
- */
+/** Properties of the operation */
 model OperationDisplay {
-  /**
-   * Provider name
-   */
+  /** Provider name */
   provider?: string;
 
-  /**
-   * Resource name
-   */
+  /** Resource name */
   resource?: string;
 
-  /**
-   * Operation name
-   */
+  /** Operation name */
   operation?: string;
 
-  /**
-   * Description of the operation
-   */
+  /** Description of the operation */
   description?: string;
 }
 
-/**
- * An error response from the service.
- */
+/** An error response from the service. */
 @error
 model AlertsManagementErrorResponse {
-  /**
-   * Details of error response.
-   */
+  /** Details of error response. */
   error?: AlertsManagementErrorResponseBody;
 }
 
-/**
- * Details of error response.
- */
+/** Details of error response. */
 model AlertsManagementErrorResponseBody {
-  /**
-   * Error code, intended to be consumed programmatically.
-   */
+  /** Error code, intended to be consumed programmatically. */
   code?: string;
 
-  /**
-   * Description of the error, intended for display in user interface.
-   */
+  /** Description of the error, intended for display in user interface. */
   message?: string;
 
-  /**
-   * Target of the particular error, for example name of the property.
-   */
+  /** Target of the particular error, for example name of the property. */
   target?: string;
 
-  /**
-   * A list of additional details about the error.
-   */
+  /** A list of additional details about the error. */
   details?: AlertsManagementErrorResponseBody[];
 }
 
-/**
- * alert meta data information.
- */
+/** alert meta data information. */
 model AlertsMetaData {
-  /**
-   * alert meta data property bag
-   */
+  /** alert meta data property bag */
   properties?: AlertsMetaDataProperties;
 }
 
-/**
- * alert meta data property bag
- */
+/** alert meta data property bag */
 @discriminator("metadataIdentifier")
 model AlertsMetaDataProperties {
-  /**
-   * Identification of the information to be retrieved by API call
-   */
+  /** Identification of the information to be retrieved by API call */
   metadataIdentifier: MetadataIdentifier;
 }
 
-/**
- * List the alerts.
- */
+/** List the alerts. */
 model AlertsList is Azure.Core.Page<Alert>;
 
-/**
- * Alert property bag
- */
+/** Alert property bag */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model AlertProperties {
-  /**
-   * This object contains consistent fields across different monitor services.
-   */
+  /** This object contains consistent fields across different monitor services. */
   essentials?: Essentials;
 
-  /**
-   * Information specific to the monitor service that gives more contextual details about the alert.
-   */
+  /** Information specific to the monitor service that gives more contextual details about the alert. */
   @visibility(Lifecycle.Read)
   context?: unknown;
 
-  /**
-   * Config which would be used for displaying the data in portal.
-   */
+  /** Config which would be used for displaying the data in portal. */
   @visibility(Lifecycle.Read)
   egressConfig?: unknown;
 }
 
-/**
- * This object contains consistent fields across different monitor services.
- */
+/** This object contains consistent fields across different monitor services. */
 model Essentials {
-  /**
-   * Severity of alert Sev0 being highest and Sev4 being lowest.
-   */
+  /** Severity of alert Sev0 being highest and Sev4 being lowest. */
   @visibility(Lifecycle.Read)
   severity?: Severity;
 
-  /**
-   * The type of signal the alert is based on, which could be metrics, logs or activity logs.
-   */
+  /** The type of signal the alert is based on, which could be metrics, logs or activity logs. */
   @visibility(Lifecycle.Read)
   signalType?: SignalType;
 
-  /**
-   * Alert object state, which can be modified by the user.
-   */
+  /** Alert object state, which can be modified by the user. */
   @visibility(Lifecycle.Read)
   alertState?: AlertState;
 
-  /**
-   * Condition of the rule at the monitor service. It represents whether the underlying conditions have crossed the defined alert rule thresholds.
-   */
+  /** Condition of the rule at the monitor service. It represents whether the underlying conditions have crossed the defined alert rule thresholds. */
   @visibility(Lifecycle.Read)
   monitorCondition?: MonitorCondition;
 
-  /**
-   * Target ARM resource, on which alert got created.
-   */
+  /** Target ARM resource, on which alert got created. */
   targetResource?: string;
 
-  /**
-   * Name of the target ARM resource name, on which alert got created.
-   */
+  /** Name of the target ARM resource name, on which alert got created. */
   targetResourceName?: string;
 
-  /**
-   * Resource group of target ARM resource, on which alert got created.
-   */
+  /** Resource group of target ARM resource, on which alert got created. */
   targetResourceGroup?: string;
 
-  /**
-   * Resource type of target ARM resource, on which alert got created.
-   */
+  /** Resource type of target ARM resource, on which alert got created. */
   targetResourceType?: string;
 
-  /**
-   * Monitor service on which the rule(monitor) is set.
-   */
+  /** Monitor service on which the rule(monitor) is set. */
   @visibility(Lifecycle.Read)
   monitorService?: MonitorService;
 
-  /**
-   * Rule(monitor) which fired alert instance. Depending on the monitor service,  this would be ARM id or name of the rule.
-   */
+  /** Rule(monitor) which fired alert instance. Depending on the monitor service,  this would be ARM id or name of the rule. */
   @visibility(Lifecycle.Read)
   alertRule?: string;
 
-  /**
-   * Unique Id created by monitor service for each alert instance. This could be used to track the issue at the monitor service, in case of Nagios, Zabbix, SCOM etc.
-   */
+  /** Unique Id created by monitor service for each alert instance. This could be used to track the issue at the monitor service, in case of Nagios, Zabbix, SCOM etc. */
   @visibility(Lifecycle.Read)
   sourceCreatedId?: string;
 
-  /**
-   * Unique Id of the smart group
-   */
+  /** Unique Id of the smart group */
   @visibility(Lifecycle.Read)
   smartGroupId?: string;
 
-  /**
-   * Verbose reason describing the reason why this alert instance is added to a smart group
-   */
+  /** Verbose reason describing the reason why this alert instance is added to a smart group */
   @visibility(Lifecycle.Read)
   smartGroupingReason?: string;
 
-  /**
-   * Creation time(ISO-8601 format) of alert instance.
-   */
+  /** Creation time(ISO-8601 format) of alert instance. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDateTime?: utcDateTime;
 
-  /**
-   * Last modification time(ISO-8601 format) of alert instance.
-   */
+  /** Last modification time(ISO-8601 format) of alert instance. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime?: utcDateTime;
 
-  /**
-   * Resolved time(ISO-8601 format) of alert instance. This will be updated when monitor service resolves the alert instance because the rule condition is no longer met.
-   */
+  /** Resolved time(ISO-8601 format) of alert instance. This will be updated when monitor service resolves the alert instance because the rule condition is no longer met. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   monitorConditionResolvedDateTime?: utcDateTime;
 
-  /**
-   * User who last modified the alert, in case of monitor service updates user would be 'system', otherwise name of the user.
-   */
+  /** User who last modified the alert, in case of monitor service updates user would be 'system', otherwise name of the user. */
   @visibility(Lifecycle.Read)
   lastModifiedUserName?: string;
 
-  /**
-   * Action status
-   */
+  /** Action status */
   actionStatus?: ActionStatus;
 
-  /**
-   * Alert description.
-   */
+  /** Alert description. */
   description?: string;
 }
 
-/**
- * Action status
- */
+/** Action status */
 model ActionStatus {
-  /**
-   * Value indicating whether alert is suppressed.
-   */
+  /** Value indicating whether alert is suppressed. */
   isSuppressed?: boolean;
 }
 
-/**
- * Alert Modification details
- */
+/** Alert Modification details */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model AlertModification extends Resource {
-  /**
-   * Properties of the alert modification item.
-   */
+  /** Properties of the alert modification item. */
   properties?: AlertModificationProperties;
 }
 
-/**
- * Properties of the alert modification item.
- */
+/** Properties of the alert modification item. */
 model AlertModificationProperties {
-  /**
-   * Unique Id of the alert for which the history is being retrieved
-   */
+  /** Unique Id of the alert for which the history is being retrieved */
   @visibility(Lifecycle.Read)
   alertId?: string;
 
-  /**
-   * Modification details
-   */
+  /** Modification details */
   modifications?: AlertModificationItem[];
 }
 
-/**
- * Alert modification item.
- */
+/** Alert modification item. */
 model AlertModificationItem {
-  /**
-   * Reason for the modification
-   */
+  /** Reason for the modification */
   modificationEvent?: AlertModificationEvent;
 
-  /**
-   * Old value
-   */
+  /** Old value */
   oldValue?: string;
 
-  /**
-   * New value
-   */
+  /** New value */
   newValue?: string;
 
-  /**
-   * Modified date and time
-   */
+  /** Modified date and time */
   modifiedAt?: string;
 
-  /**
-   * Modified user details (Principal client name)
-   */
+  /** Modified user details (Principal client name) */
   modifiedBy?: string;
 
-  /**
-   * Modification comments
-   */
+  /** Modification comments */
   comments?: string;
 
-  /**
-   * Description of the modification
-   */
+  /** Description of the modification */
   description?: string;
 }
 
-/**
- * Summary of alerts based on the input filters and 'groupby' parameters.
- */
+/** Summary of alerts based on the input filters and 'groupby' parameters. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model AlertsSummary extends Resource {
-  /**
-   * Group the result set.
-   */
+  /** Group the result set. */
   properties?: AlertsSummaryGroup;
 }
 
-/**
- * Group the result set.
- */
+/** Group the result set. */
 model AlertsSummaryGroup {
-  /**
-   * Total count of the result set.
-   */
+  /** Total count of the result set. */
   total?: int64;
 
-  /**
-   * Total count of the smart groups.
-   */
+  /** Total count of the smart groups. */
   smartGroupsCount?: int64;
 
-  /**
-   * Name of the field aggregated
-   */
+  /** Name of the field aggregated */
   groupedby?: string;
 
-  /**
-   * List of the items
-   */
+  /** List of the items */
   values?: AlertsSummaryGroupItem[];
 }
 
-/**
- * Alerts summary group item
- */
+/** Alerts summary group item */
 model AlertsSummaryGroupItem {
-  /**
-   * Value of the aggregated field
-   */
+  /** Value of the aggregated field */
   name?: string;
 
-  /**
-   * Count of the aggregated field
-   */
+  /** Count of the aggregated field */
   count?: int64;
 
-  /**
-   * Name of the field aggregated
-   */
+  /** Name of the field aggregated */
   groupedby?: string;
 
-  /**
-   * List of the items
-   */
+  /** List of the items */
   values?: AlertsSummaryGroupItem[];
 }
 
-/**
- * List the alerts.
- */
+/** List the alerts. */
 model SmartGroupsList is Azure.Core.Page<SmartGroup>;
 
-/**
- * Properties of smart group.
- */
+/** Properties of smart group. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model SmartGroupProperties {
-  /**
-   * Total number of alerts in smart group
-   */
+  /** Total number of alerts in smart group */
   alertsCount?: int64;
 
-  /**
-   * Smart group state
-   */
+  /** Smart group state */
   @visibility(Lifecycle.Read)
   smartGroupState?: SmartGroupState;
 
-  /**
-   * Severity of smart group is the highest(Sev0 >... > Sev4) severity of all the alerts in the group.
-   */
+  /** Severity of smart group is the highest(Sev0 >... > Sev4) severity of all the alerts in the group. */
   @visibility(Lifecycle.Read)
   severity?: Severity;
 
-  /**
-   * Creation time of smart group. Date-Time in ISO-8601 format.
-   */
+  /** Creation time of smart group. Date-Time in ISO-8601 format. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDateTime?: utcDateTime;
 
-  /**
-   * Last updated time of smart group. Date-Time in ISO-8601 format.
-   */
+  /** Last updated time of smart group. Date-Time in ISO-8601 format. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime?: utcDateTime;
 
-  /**
-   * Last modified by user name.
-   */
+  /** Last modified by user name. */
   @visibility(Lifecycle.Read)
   lastModifiedUserName?: string;
 
-  /**
-   * Summary of target resources in the smart group
-   */
+  /** Summary of target resources in the smart group */
   resources?: SmartGroupAggregatedProperty[];
 
-  /**
-   * Summary of target resource types in the smart group
-   */
+  /** Summary of target resource types in the smart group */
   resourceTypes?: SmartGroupAggregatedProperty[];
 
-  /**
-   * Summary of target resource groups in the smart group
-   */
+  /** Summary of target resource groups in the smart group */
   resourceGroups?: SmartGroupAggregatedProperty[];
 
-  /**
-   * Summary of monitorServices in the smart group
-   */
+  /** Summary of monitorServices in the smart group */
   monitorServices?: SmartGroupAggregatedProperty[];
 
-  /**
-   * Summary of monitorConditions in the smart group
-   */
+  /** Summary of monitorConditions in the smart group */
   monitorConditions?: SmartGroupAggregatedProperty[];
 
-  /**
-   * Summary of alertStates in the smart group
-   */
+  /** Summary of alertStates in the smart group */
   alertStates?: SmartGroupAggregatedProperty[];
 
-  /**
-   * Summary of alertSeverities in the smart group
-   */
+  /** Summary of alertSeverities in the smart group */
   alertSeverities?: SmartGroupAggregatedProperty[];
 
-  /**
-   * The URI to fetch the next page of alerts. Call ListNext() with this URI to fetch the next page alerts.
-   */
+  /** The URI to fetch the next page of alerts. Call ListNext() with this URI to fetch the next page alerts. */
   nextLink?: string;
 }
 
-/**
- * Aggregated property of each type
- */
+/** Aggregated property of each type */
 model SmartGroupAggregatedProperty {
-  /**
-   * Name of the type.
-   */
+  /** Name of the type. */
   name?: string;
 
-  /**
-   * Total number of items of type.
-   */
+  /** Total number of items of type. */
   count?: int64;
 }
 
-/**
- * An error response from the service.
- */
+/** An error response from the service. */
 @error
 model SmartGroupErrorResponse {
-  /**
-   * Details of error response.
-   */
+  /** Details of error response. */
   error?: SmartGroupErrorResponseBody;
 }
 
-/**
- * Details of error response.
- */
+/** Details of error response. */
 model SmartGroupErrorResponseBody {
-  /**
-   * Error code, intended to be consumed programmatically.
-   */
+  /** Error code, intended to be consumed programmatically. */
   code?: string;
 
-  /**
-   * Description of the error, intended for display in user interface.
-   */
+  /** Description of the error, intended for display in user interface. */
   message?: string;
 
-  /**
-   * Target of the particular error, for example name of the property.
-   */
+  /** Target of the particular error, for example name of the property. */
   target?: string;
 
-  /**
-   * A list of additional details about the error.
-   */
+  /** A list of additional details about the error. */
   details?: SmartGroupErrorResponseBody[];
 }
 
-/**
- * Alert Modification details
- */
+/** Alert Modification details */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model SmartGroupModification extends Resource {
-  /**
-   * Properties of the smartGroup modification item.
-   */
+  /** Properties of the smartGroup modification item. */
   properties?: SmartGroupModificationProperties;
 }
 
-/**
- * Properties of the smartGroup modification item.
- */
+/** Properties of the smartGroup modification item. */
 model SmartGroupModificationProperties {
-  /**
-   * Unique Id of the smartGroup for which the history is being retrieved
-   */
+  /** Unique Id of the smartGroup for which the history is being retrieved */
   @visibility(Lifecycle.Read)
   smartGroupId?: string;
 
-  /**
-   * Modification details
-   */
+  /** Modification details */
   modifications?: SmartGroupModificationItem[];
 
-  /**
-   * URL to fetch the next set of results.
-   */
+  /** URL to fetch the next set of results. */
   nextLink?: string;
 }
 
-/**
- * smartGroup modification item.
- */
+/** smartGroup modification item. */
 model SmartGroupModificationItem {
-  /**
-   * Reason for the modification
-   */
+  /** Reason for the modification */
   modificationEvent?: SmartGroupModificationEvent;
 
-  /**
-   * Old value
-   */
+  /** Old value */
   oldValue?: string;
 
-  /**
-   * New value
-   */
+  /** New value */
   newValue?: string;
 
-  /**
-   * Modified date and time
-   */
+  /** Modified date and time */
   modifiedAt?: string;
 
-  /**
-   * Modified user details (Principal client name)
-   */
+  /** Modified user details (Principal client name) */
   modifiedBy?: string;
 
-  /**
-   * Modification comments
-   */
+  /** Modification comments */
   comments?: string;
 
-  /**
-   * Description of the modification
-   */
+  /** Description of the modification */
   description?: string;
 }
 
-/**
- * Daily recurrence object.
- */
+/** Daily recurrence object. */
 model DailyRecurrence extends Recurrence {
-  /**
-   * Specifies when the recurrence should be applied.
-   */
+  /** Specifies when the recurrence should be applied. */
   recurrenceType: "Daily";
 }
 
-/**
- * Weekly recurrence object.
- */
+/** Weekly recurrence object. */
 model WeeklyRecurrence extends Recurrence {
-  /**
-   * Specifies the values for weekly recurrence pattern.
-   */
+  /** Specifies the values for weekly recurrence pattern. */
   daysOfWeek: DaysOfWeek[];
 
-  /**
-   * Specifies when the recurrence should be applied.
-   */
+  /** Specifies when the recurrence should be applied. */
   recurrenceType: "Weekly";
 }
 
-/**
- * Monthly recurrence object.
- */
+/** Monthly recurrence object. */
 model MonthlyRecurrence extends Recurrence {
-  /**
-   * Specifies the values for monthly recurrence pattern.
-   */
+  /** Specifies the values for monthly recurrence pattern. */
   daysOfMonth: int32[];
 
-  /**
-   * Specifies when the recurrence should be applied.
-   */
+  /** Specifies when the recurrence should be applied. */
   recurrenceType: "Monthly";
 }
 
-/**
- * Add action groups to alert processing rule.
- */
+/** Add action groups to alert processing rule. */
 model AddActionGroups extends Action {
-  /**
-   * List of action group Ids to add to alert processing rule.
-   */
+  /** List of action group Ids to add to alert processing rule. */
   actionGroupIds: string[];
 
-  /**
-   * Action that should be applied.
-   */
+  /** Action that should be applied. */
   actionType: "AddActionGroups";
 }
 
-/**
- * Indicates if all action groups should be removed.
- */
+/** Indicates if all action groups should be removed. */
 model RemoveAllActionGroups extends Action {
-  /**
-   * Action that should be applied.
-   */
+  /** Action that should be applied. */
   actionType: "RemoveAllActionGroups";
 }
 
-/**
- * Monitor service details
- */
+/** Monitor service details */
 model MonitorServiceList extends AlertsMetaDataProperties {
-  /**
-   * Array of operations
-   */
+  /** Array of operations */
   data: MonitorServiceDetails[];
 
-  /**
-   * Identification of the information to be retrieved by API call
-   */
+  /** Identification of the information to be retrieved by API call */
   metadataIdentifier: "MonitorServiceList";
 }
 
-/**
- * Details of a monitor service
- */
+/** Details of a monitor service */
 model MonitorServiceDetails {
-  /**
-   * Monitor service name
-   */
+  /** Monitor service name */
   name?: string;
 
-  /**
-   * Monitor service display name
-   */
+  /** Monitor service display name */
   displayName?: string;
 }

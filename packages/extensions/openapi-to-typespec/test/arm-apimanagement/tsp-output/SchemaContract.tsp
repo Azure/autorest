@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * API Schema Contract details.
- */
+/** API Schema Contract details. */
 @parentResource(ApiContract)
 model SchemaContract
   is Azure.ResourceManager.ProxyResource<SchemaContractProperties> {
@@ -27,26 +25,18 @@ model SchemaContract
 
 @armResourceOperations
 interface SchemaContracts {
-  /**
-   * Get the schema configuration at the API level.
-   */
+  /** Get the schema configuration at the API level. */
   get is ArmResourceRead<SchemaContract>;
 
-  /**
-   * Gets the entity state (Etag) version of the schema specified by its identifier.
-   */
+  /** Gets the entity state (Etag) version of the schema specified by its identifier. */
   getEntityTag is ArmResourceCheckExistence<SchemaContract>;
 
-  /**
-   * Creates or updates schema configuration for the API.
-   */
+  /** Creates or updates schema configuration for the API. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SchemaContract,
     Parameters = {
-      /**
-       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
-       */
+      /** ETag of the Entity. Not required when creating an entity, but required when updating an entity. */
       @header
       `If-Match`?: string;
     },
@@ -57,48 +47,34 @@ interface SchemaContracts {
     > | ArmAcceptedLroResponse
   >;
 
-  /**
-   * Deletes the schema configuration at the Api.
-   */
+  /** Deletes the schema configuration at the Api. */
   delete is ArmResourceDeleteSync<
     SchemaContract,
     Parameters = {
-      /**
-       * If true removes all references to the schema before deleting it.
-       */
+      /** If true removes all references to the schema before deleting it. */
       @query("force")
       force?: boolean;
 
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Get the schema configuration at the API level.
-   */
+  /** Get the schema configuration at the API level. */
   listByApi is ArmResourceListByParent<
     SchemaContract,
     Parameters = {
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| contentType | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-       */
+      /** |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| contentType | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br> */
       @query("$filter")
       $filter?: string;
 
-      /**
-       * Number of records to return.
-       */
+      /** Number of records to return. */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      /**
-       * Number of records to skip.
-       */
+      /** Number of records to skip. */
       @query("$skip")
       $skip?: int32;
     }

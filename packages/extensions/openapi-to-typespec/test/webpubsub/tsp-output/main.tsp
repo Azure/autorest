@@ -15,9 +15,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-/**
- * // (missing-service-description) Add service description
- */
+/** // (missing-service-description) Add service description */
 @service(#{ title: "Azure Web PubSub Service REST API" })
 @versioned(Versions)
 @server(

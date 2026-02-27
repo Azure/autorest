@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * Disk resource.
- */
+/** Disk resource. */
 model Disk is Azure.ResourceManager.TrackedResource<DiskProperties> {
   ...ResourceNameParameter<
     Resource = Disk,
@@ -21,45 +19,33 @@ model Disk is Azure.ResourceManager.TrackedResource<DiskProperties> {
     NamePattern = ""
   >;
 
-  /**
-   * A relative URI containing the ID of the VM that has the disk attached.
-   */
+  /** A relative URI containing the ID of the VM that has the disk attached. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   managedBy?: string;
 
-  /**
-   * List of relative URIs containing the IDs of the VMs that have the disk attached. maxShares should be set to a value greater than one for disks to allow attaching them to multiple VMs.
-   */
+  /** List of relative URIs containing the IDs of the VMs that have the disk attached. maxShares should be set to a value greater than one for disks to allow attaching them to multiple VMs. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   managedByExtended?: string[];
 
-  /**
-   * The disks sku name. Can be Standard_LRS, Premium_LRS, StandardSSD_LRS, UltraSSD_LRS, Premium_ZRS, StandardSSD_ZRS, or PremiumV2_LRS.
-   */
+  /** The disks sku name. Can be Standard_LRS, Premium_LRS, StandardSSD_LRS, UltraSSD_LRS, Premium_ZRS, StandardSSD_ZRS, or PremiumV2_LRS. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: DiskSku;
 
   ...Azure.ResourceManager.AvailabilityZonesProperty;
 
-  /**
-   * The extended location where the disk will be created. Extended location cannot be changed.
-   */
+  /** The extended location where the disk will be created. Extended location cannot be changed. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   extendedLocation?: ExtendedLocation;
 }
 
 @armResourceOperations
 interface Disks {
-  /**
-   * Gets information about a disk.
-   */
+  /** Gets information about a disk. */
   get is ArmResourceRead<Disk>;
 
-  /**
-   * Creates or updates a disk.
-   */
+  /** Creates or updates a disk. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -72,9 +58,7 @@ interface Disks {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /**
-   * Updates (patches) a disk.
-   */
+  /** Updates (patches) a disk. */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -86,31 +70,23 @@ interface Disks {
     })
   >;
 
-  /**
-   * Deletes a disk.
-   */
+  /** Deletes a disk. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Disk,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * Lists all the disks under a resource group.
-   */
+  /** Lists all the disks under a resource group. */
   listByResourceGroup is ArmResourceListByParent<
     Disk,
     Response = ArmResponse<DiskList>
   >;
 
-  /**
-   * Lists all the disks under a subscription.
-   */
+  /** Lists all the disks under a subscription. */
   list is ArmListBySubscription<Disk, Response = ArmResponse<DiskList>>;
 
-  /**
-   * Grants access to a disk.
-   */
+  /** Grants access to a disk. */
   @action("beginGetAccess")
   grantAccess is ArmResourceActionAsync<
     Disk,
@@ -118,9 +94,7 @@ interface Disks {
     ArmResponse<AccessUri>
   >;
 
-  /**
-   * Revokes access to a disk.
-   */
+  /** Revokes access to a disk. */
   @action("endGetAccess")
   revokeAccess is ArmResourceActionAsync<Disk, void, OkResponse>;
 }

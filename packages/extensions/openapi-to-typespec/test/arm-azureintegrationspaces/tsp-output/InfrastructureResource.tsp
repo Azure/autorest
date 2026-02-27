@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.IntegrationSpaces;
-/**
- * An infrastructure resource under Space.
- */
+/** An infrastructure resource under Space. */
 @parentResource(Space)
 model InfrastructureResource
   is Azure.ResourceManager.ProxyResource<InfrastructureResourceProperties> {
@@ -27,77 +25,53 @@ model InfrastructureResource
 
 @armResourceOperations
 interface InfrastructureResources {
-  /**
-   * Get a InfrastructureResource
-   */
+  /** Get a InfrastructureResource */
   get is ArmResourceRead<InfrastructureResource>;
 
-  /**
-   * Create a InfrastructureResource
-   */
+  /** Create a InfrastructureResource */
   createOrUpdate is ArmResourceCreateOrReplaceSync<InfrastructureResource>;
 
-  /**
-   * Update a InfrastructureResource
-   */
+  /** Update a InfrastructureResource */
   @patch(#{ implicitOptionality: false })
   patch is ArmCustomPatchSync<
     InfrastructureResource,
     PatchModel = InfrastructureResourceUpdate
   >;
 
-  /**
-   * Delete a InfrastructureResource
-   */
+  /** Delete a InfrastructureResource */
   delete is ArmResourceDeleteSync<InfrastructureResource>;
 
-  /**
-   * List InfrastructureResource resources by Space
-   */
+  /** List InfrastructureResource resources by Space */
   listBySpace is ArmResourceListByParent<
     InfrastructureResource,
     Parameters = {
-      /**
-       * The number of result items to return.
-       */
+      /** The number of result items to return. */
       @query("top")
       top?: int32;
 
-      /**
-       * The number of result items to skip.
-       */
+      /** The number of result items to skip. */
       @query("skip")
       skip?: int32;
 
-      /**
-       * The maximum number of result items per page.
-       */
+      /** The maximum number of result items per page. */
       @query("maxpagesize")
       maxpagesize?: int32;
 
-      /**
-       * Filter the result list using the given expression.
-       */
+      /** Filter the result list using the given expression. */
       @query("filter")
       filter?: string;
 
-      /**
-       * Select the specified fields to be included in the response.
-       */
+      /** Select the specified fields to be included in the response. */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "select", explode: true })
       select?: string[];
 
-      /**
-       * Expand the indicated resources into the response.
-       */
+      /** Expand the indicated resources into the response. */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "expand", explode: true })
       expand?: string[];
 
-      /**
-       * Expressions that specify the order of returned results.
-       */
+      /** Expressions that specify the order of returned results. */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
       @query(#{ name: "orderby", explode: true })
       orderby?: string[];

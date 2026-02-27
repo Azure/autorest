@@ -32,177 +32,109 @@ union ProjectKind {
   CustomEntityRecognition: "CustomEntityRecognition",
 }
 
-/**
- * Human-readable error code.
- */
+/** Human-readable error code. */
 union ErrorCode {
   string,
 
-  /**
-   * InvalidRequest
-   */
+  /** InvalidRequest */
   InvalidRequest: "InvalidRequest",
 
-  /**
-   * InvalidArgument
-   */
+  /** InvalidArgument */
   InvalidArgument: "InvalidArgument",
 
-  /**
-   * Unauthorized
-   */
+  /** Unauthorized */
   Unauthorized: "Unauthorized",
 
-  /**
-   * Forbidden
-   */
+  /** Forbidden */
   Forbidden: "Forbidden",
 
-  /**
-   * NotFound
-   */
+  /** NotFound */
   NotFound: "NotFound",
 
-  /**
-   * ProjectNotFound
-   */
+  /** ProjectNotFound */
   ProjectNotFound: "ProjectNotFound",
 
-  /**
-   * OperationNotFound
-   */
+  /** OperationNotFound */
   OperationNotFound: "OperationNotFound",
 
-  /**
-   * AzureCognitiveSearchNotFound
-   */
+  /** AzureCognitiveSearchNotFound */
   AzureCognitiveSearchNotFound: "AzureCognitiveSearchNotFound",
 
-  /**
-   * AzureCognitiveSearchIndexNotFound
-   */
+  /** AzureCognitiveSearchIndexNotFound */
   AzureCognitiveSearchIndexNotFound: "AzureCognitiveSearchIndexNotFound",
 
-  /**
-   * TooManyRequests
-   */
+  /** TooManyRequests */
   TooManyRequests: "TooManyRequests",
 
-  /**
-   * AzureCognitiveSearchThrottling
-   */
+  /** AzureCognitiveSearchThrottling */
   AzureCognitiveSearchThrottling: "AzureCognitiveSearchThrottling",
 
-  /**
-   * AzureCognitiveSearchIndexLimitReached
-   */
+  /** AzureCognitiveSearchIndexLimitReached */
   AzureCognitiveSearchIndexLimitReached: "AzureCognitiveSearchIndexLimitReached",
 
-  /**
-   * InternalServerError
-   */
+  /** InternalServerError */
   InternalServerError: "InternalServerError",
 
-  /**
-   * ServiceUnavailable
-   */
+  /** ServiceUnavailable */
   ServiceUnavailable: "ServiceUnavailable",
 
-  /**
-   * Timeout
-   */
+  /** Timeout */
   Timeout: "Timeout",
 
-  /**
-   * QuotaExceeded
-   */
+  /** QuotaExceeded */
   QuotaExceeded: "QuotaExceeded",
 
-  /**
-   * Conflict
-   */
+  /** Conflict */
   Conflict: "Conflict",
 
-  /**
-   * Warning
-   */
+  /** Warning */
   Warning: "Warning",
 }
 
-/**
- * Human-readable error code.
- */
+/** Human-readable error code. */
 union InnerErrorCode {
   string,
 
-  /**
-   * InvalidRequest
-   */
+  /** InvalidRequest */
   InvalidRequest: "InvalidRequest",
 
-  /**
-   * InvalidParameterValue
-   */
+  /** InvalidParameterValue */
   InvalidParameterValue: "InvalidParameterValue",
 
-  /**
-   * KnowledgeBaseNotFound
-   */
+  /** KnowledgeBaseNotFound */
   KnowledgeBaseNotFound: "KnowledgeBaseNotFound",
 
-  /**
-   * AzureCognitiveSearchNotFound
-   */
+  /** AzureCognitiveSearchNotFound */
   AzureCognitiveSearchNotFound: "AzureCognitiveSearchNotFound",
 
-  /**
-   * AzureCognitiveSearchThrottling
-   */
+  /** AzureCognitiveSearchThrottling */
   AzureCognitiveSearchThrottling: "AzureCognitiveSearchThrottling",
 
-  /**
-   * ExtractionFailure
-   */
+  /** ExtractionFailure */
   ExtractionFailure: "ExtractionFailure",
 
-  /**
-   * InvalidRequestBodyFormat
-   */
+  /** InvalidRequestBodyFormat */
   InvalidRequestBodyFormat: "InvalidRequestBodyFormat",
 
-  /**
-   * EmptyRequest
-   */
+  /** EmptyRequest */
   EmptyRequest: "EmptyRequest",
 
-  /**
-   * MissingInputDocuments
-   */
+  /** MissingInputDocuments */
   MissingInputDocuments: "MissingInputDocuments",
 
-  /**
-   * InvalidDocument
-   */
+  /** InvalidDocument */
   InvalidDocument: "InvalidDocument",
 
-  /**
-   * ModelVersionIncorrect
-   */
+  /** ModelVersionIncorrect */
   ModelVersionIncorrect: "ModelVersionIncorrect",
 
-  /**
-   * InvalidDocumentBatch
-   */
+  /** InvalidDocumentBatch */
   InvalidDocumentBatch: "InvalidDocumentBatch",
 
-  /**
-   * UnsupportedLanguageCode
-   */
+  /** UnsupportedLanguageCode */
   UnsupportedLanguageCode: "UnsupportedLanguageCode",
 
-  /**
-   * InvalidCountryHint
-   */
+  /** InvalidCountryHint */
   InvalidCountryHint: "InvalidCountryHint",
 }
 
@@ -237,115 +169,75 @@ union EvaluationKind {
    */
   Percentage: "percentage",
 
-  /**
-   * Split the data according to the chosen dataset for every example in the data.
-   */
+  /** Split the data according to the chosen dataset for every example in the data. */
   Manual: "manual",
 }
 
 union JobStatus {
   string,
 
-  /**
-   * notStarted
-   */
+  /** notStarted */
   NotStarted: "notStarted",
 
-  /**
-   * running
-   */
+  /** running */
   Running: "running",
 
-  /**
-   * succeeded
-   */
+  /** succeeded */
   Succeeded: "succeeded",
 
-  /**
-   * failed
-   */
+  /** failed */
   Failed: "failed",
 
-  /**
-   * cancelled
-   */
+  /** cancelled */
   Cancelled: "cancelled",
 
-  /**
-   * cancelling
-   */
+  /** cancelling */
   Cancelling: "cancelling",
 
-  /**
-   * partiallyCompleted
-   */
+  /** partiallyCompleted */
   PartiallyCompleted: "partiallyCompleted",
 }
 
-/**
- * Represents a list of retrieved projects' metadata.
- */
+/** Represents a list of retrieved projects' metadata. */
 model ProjectsMetadata is Azure.Core.Page<ProjectMetadata>;
 
-/**
- * Represents the metadata of a project.
- */
+/** Represents the metadata of a project. */
 @resource("authoring/analyze-text/projects")
 model ProjectMetadata {
-  /**
-   * Represents the project creation datetime.
-   */
+  /** Represents the project creation datetime. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime: utcDateTime;
 
-  /**
-   * Represents the project last modification datetime.
-   */
+  /** Represents the project last modification datetime. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime: utcDateTime;
 
-  /**
-   * Represents the project last training datetime.
-   */
+  /** Represents the project last training datetime. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastTrainedDateTime?: utcDateTime;
 
-  /**
-   * Represents the project last deployment datetime.
-   */
+  /** Represents the project last deployment datetime. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastDeployedDateTime?: utcDateTime;
 
-  /**
-   * The project kind.
-   */
+  /** The project kind. */
   projectKind: ProjectKind;
 
-  /**
-   * The storage container name.
-   */
+  /** The storage container name. */
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   storageInputContainerName: string;
 
-  /**
-   * The project settings.
-   */
+  /** The project settings. */
   settings?: unknown;
 
-  /**
-   * The new project name.
-   */
+  /** The new project name. */
   projectName: string;
 
-  /**
-   * Whether the project would be used for multiple languages or not.
-   */
+  /** Whether the project would be used for multiple languages or not. */
   multilingual?: boolean;
 
-  /**
-   * The project description.
-   */
+  /** The project description. */
   description?: string;
 
   /**
@@ -355,41 +247,27 @@ model ProjectMetadata {
   language: string;
 }
 
-/**
- * Error response.
- */
+/** Error response. */
 @error
 model ErrorResponse {
-  /**
-   * The error object.
-   */
+  /** The error object. */
   error: Error;
 }
 
-/**
- * The error object.
- */
+/** The error object. */
 model Error {
   ...Record<unknown>;
 
-  /**
-   * One of a server-defined set of error codes.
-   */
+  /** One of a server-defined set of error codes. */
   code: ErrorCode;
 
-  /**
-   * A human-readable representation of the error.
-   */
+  /** A human-readable representation of the error. */
   message: string;
 
-  /**
-   * The target of the error.
-   */
+  /** The target of the error. */
   target?: string;
 
-  /**
-   * An array of details about specific errors that led to this reported error.
-   */
+  /** An array of details about specific errors that led to this reported error. */
   details?: Error[];
 
   /**
@@ -405,24 +283,16 @@ model Error {
  * https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
  */
 model InnerErrorModel {
-  /**
-   * One of a server-defined set of error codes.
-   */
+  /** One of a server-defined set of error codes. */
   code: InnerErrorCode;
 
-  /**
-   * Error message.
-   */
+  /** Error message. */
   message: string;
 
-  /**
-   * Error details.
-   */
+  /** Error details. */
   details?: Record<string>;
 
-  /**
-   * Error target.
-   */
+  /** Error target. */
   target?: string;
 
   /**
@@ -432,38 +302,24 @@ model InnerErrorModel {
   innererror?: InnerErrorModel;
 }
 
-/**
- * Represents the options used to create or update a project.
- */
+/** Represents the options used to create or update a project. */
 model CreateProjectOptions {
-  /**
-   * The project kind.
-   */
+  /** The project kind. */
   projectKind: ProjectKind;
 
-  /**
-   * The storage container name.
-   */
+  /** The storage container name. */
   storageInputContainerName: string;
 
-  /**
-   * The project settings.
-   */
+  /** The project settings. */
   settings?: unknown;
 
-  /**
-   * The new project name.
-   */
+  /** The new project name. */
   projectName: string;
 
-  /**
-   * Whether the project would be used for multiple languages or not.
-   */
+  /** Whether the project would be used for multiple languages or not. */
   multilingual?: boolean;
 
-  /**
-   * The project description.
-   */
+  /** The project description. */
   description?: string;
 
   /**
@@ -473,13 +329,9 @@ model CreateProjectOptions {
   language: string;
 }
 
-/**
- * Represents an exported project.
- */
+/** Represents an exported project. */
 model ExportedProject {
-  /**
-   * The version of the exported file.
-   */
+  /** The version of the exported file. */
   projectFileVersion: string;
 
   /**
@@ -488,40 +340,26 @@ model ExportedProject {
    */
   stringIndexType: StringIndexTypeAutoGenerated;
 
-  /**
-   * Represents the project metadata.
-   */
+  /** Represents the project metadata. */
   metadata: CreateProjectOptions;
 
-  /**
-   * Represents the project assets.
-   */
+  /** Represents the project assets. */
   assets?: ExportedProjectAssets;
 }
 
-/**
- * Represents the assets of an exported project.
- */
+/** Represents the assets of an exported project. */
 @discriminator("projectKind")
 model ExportedProjectAssets {
-  /**
-   * The type of the project the assets belong to.
-   */
+  /** The type of the project the assets belong to. */
   projectKind: ProjectKind;
 }
 
-/**
- * Represents the options for starting a new training job.
- */
+/** Represents the options for starting a new training job. */
 model TrainingJobOptions {
-  /**
-   * Represents the output model label.
-   */
+  /** Represents the output model label. */
   modelLabel: string;
 
-  /**
-   * Represents training config version.
-   */
+  /** Represents training config version. */
   trainingConfigVersion: string;
 
   /**
@@ -532,9 +370,7 @@ model TrainingJobOptions {
   evaluationOptions?: EvaluationOptions;
 }
 
-/**
- * Represents the options used running the evaluation.
- */
+/** Represents the options used running the evaluation. */
 model EvaluationOptions {
   /**
    * Represents the evaluation kind. By default, the evaluation kind is set to
@@ -555,216 +391,138 @@ model EvaluationOptions {
   testingSplitPercentage?: int32;
 }
 
-/**
- * Represents a list of retrieved deployments.
- */
+/** Represents a list of retrieved deployments. */
 model ProjectDeployments is Azure.Core.Page<ProjectDeployment>;
 
-/**
- * Represents a project deployment.
- */
+/** Represents a project deployment. */
 @resource("authoring/analyze-text/projects/{projectName}/deployments")
 model ProjectDeployment {
-  /**
-   * Represents deployment name.
-   */
+  /** Represents deployment name. */
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   deploymentName: string;
 
-  /**
-   * Represents deployment modelId.
-   */
+  /** Represents deployment modelId. */
   modelId: string;
 
-  /**
-   * Represents deployment last trained time.
-   */
+  /** Represents deployment last trained time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastTrainedDateTime: utcDateTime;
 
-  /**
-   * Represents deployment last deployed time.
-   */
+  /** Represents deployment last deployed time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastDeployedDateTime: utcDateTime;
 
-  /**
-   * Represents deployment expiration date in the runtime.
-   */
+  /** Represents deployment expiration date in the runtime. */
   deploymentExpirationDate: plainDate;
 
-  /**
-   * Represents model training config version.
-   */
+  /** Represents model training config version. */
   modelTrainingConfigVersion: string;
 }
 
-/**
- * Represents the options for swapping two deployments together.
- */
+/** Represents the options for swapping two deployments together. */
 model SwapDeploymentsOptions {
-  /**
-   * Represents the first deployment name.
-   */
+  /** Represents the first deployment name. */
   firstDeploymentName: string;
 
-  /**
-   * Represents the second deployment name.
-   */
+  /** Represents the second deployment name. */
   secondDeploymentName: string;
 }
 
-/**
- * Represents the options for creating or updating a project deployment.
- */
+/** Represents the options for creating or updating a project deployment. */
 model CreateDeploymentOptions {
-  /**
-   * Represents the trained model label.
-   */
+  /** Represents the trained model label. */
   trainedModelLabel: string;
 }
 
-/**
- * Represents the state of a deployment job.
- */
+/** Represents the state of a deployment job. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DeploymentJobState extends JobState {}
 
-/**
- * Represents a job's state.
- */
+/** Represents a job's state. */
 model JobState {
-  /**
-   * The job ID.
-   */
+  /** The job ID. */
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   jobId: string;
 
-  /**
-   * The creation date time of the job.
-   */
+  /** The creation date time of the job. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime: utcDateTime;
 
-  /**
-   * The last date time the job was updated.
-   */
+  /** The last date time the job was updated. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdatedDateTime: utcDateTime;
 
-  /**
-   * The expiration date time of the job.
-   */
+  /** The expiration date time of the job. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expirationDateTime?: utcDateTime;
 
-  /**
-   * The job status.
-   */
+  /** The job status. */
   status: JobStatus;
 
-  /**
-   * The warnings that were encountered while executing the job.
-   */
+  /** The warnings that were encountered while executing the job. */
   warnings?: Warning[];
 
-  /**
-   * The errors encountered while executing the job.
-   */
+  /** The errors encountered while executing the job. */
   errors?: Error[];
 }
 
-/**
- * Represents a warning that was encountered while executing the request.
- */
+/** Represents a warning that was encountered while executing the request. */
 model Warning {
-  /**
-   * The warning code.
-   */
+  /** The warning code. */
   code: string;
 
-  /**
-   * The warning message.
-   */
+  /** The warning message. */
   message: string;
 }
 
-/**
- * Represents the state of an export job.
- */
+/** Represents the state of an export job. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ExportProjectJobState extends JobState {
-  /**
-   * The URL to use in order to download the exported project.
-   */
+  /** The URL to use in order to download the exported project. */
   resultUrl?: string;
 }
 
-/**
- * Represents the state of an import job.
- */
+/** Represents the state of an import job. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ImportProjectJobState extends JobState {}
 
-/**
- * Represents a list of retrieved trained models.
- */
+/** Represents a list of retrieved trained models. */
 model ProjectTrainedModels is Azure.Core.Page<ProjectTrainedModel>;
 
-/**
- * Represents a trained model.
- */
+/** Represents a trained model. */
 @resource("authoring/analyze-text/projects/{projectName}/models")
 model ProjectTrainedModel {
-  /**
-   * The trained model label.
-   */
+  /** The trained model label. */
   label: string;
 
-  /**
-   * The model ID.
-   */
+  /** The model ID. */
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   modelId: string;
 
-  /**
-   * The last trained date time of the model.
-   */
+  /** The last trained date time of the model. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastTrainedDateTime: utcDateTime;
 
-  /**
-   * The duration of the model's last training request in seconds.
-   */
+  /** The duration of the model's last training request in seconds. */
   lastTrainingDurationInSeconds: int32;
 
-  /**
-   * The model expiration date.
-   */
+  /** The model expiration date. */
   modelExpirationDate: plainDate;
 
-  /**
-   * The model training config version.
-   */
+  /** The model training config version. */
   modelTrainingConfigVersion: string;
 }
 
-/**
- * Represents a list of results for an evaluation operation.
- */
+/** Represents a list of results for an evaluation operation. */
 model EvaluationResults is Azure.Core.Page<DocumentEvaluationResult>;
 
-/**
- * Represents the evaluation result of a document.
- */
+/** Represents the evaluation result of a document. */
 @discriminator("projectKind")
 model DocumentEvaluationResult {
-  /**
-   * Represents the document path.
-   */
+  /** Represents the document path. */
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   location: string;
@@ -776,123 +534,79 @@ model DocumentEvaluationResult {
    */
   language: string;
 
-  /**
-   * Represents the project kind.
-   */
+  /** Represents the project kind. */
   projectKind: ProjectKind;
 }
 
-/**
- * Represents the summary for an evaluation operation.
- */
+/** Represents the summary for an evaluation operation. */
 @discriminator("projectKind")
 model EvaluationSummary {
-  /**
-   * Represents the project type that the evaluation ran on.
-   */
+  /** Represents the project type that the evaluation ran on. */
   projectKind: ProjectKind;
 
-  /**
-   * Represents the options used running the evaluation.
-   */
+  /** Represents the options used running the evaluation. */
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   evaluationOptions: EvaluationOptions;
 }
 
-/**
- * Represents a list of retrieved training jobs.
- */
+/** Represents a list of retrieved training jobs. */
 model TrainingJobs is Azure.Core.Page<TrainingJobState>;
 
-/**
- * Represents the state of a training job.
- */
+/** Represents the state of a training job. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model TrainingJobState extends JobState {
-  /**
-   * Represents training tasks detailed result.
-   */
+  /** Represents training tasks detailed result. */
   result: TrainingJobResult;
 }
 
-/**
- * Represents the output of a training job.
- */
+/** Represents the output of a training job. */
 model TrainingJobResult {
-  /**
-   * Represents trained model label.
-   */
+  /** Represents trained model label. */
   modelLabel: string;
 
-  /**
-   * Represents training config version.
-   */
+  /** Represents training config version. */
   trainingConfigVersion: string;
 
-  /**
-   * Represents model train status.
-   */
+  /** Represents model train status. */
   trainingStatus: SubTrainingJobState;
 
-  /**
-   * Represents model evaluation status.
-   */
+  /** Represents model evaluation status. */
   evaluationStatus?: SubTrainingJobState;
 
-  /**
-   * Represents the estimate end date time for training and evaluation.
-   */
+  /** Represents the estimate end date time for training and evaluation. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   estimatedEndDateTime?: utcDateTime;
 }
 
-/**
- * Represents the detailed state of a training sub-operation.
- */
+/** Represents the detailed state of a training sub-operation. */
 model SubTrainingJobState {
-  /**
-   * Represents progress percentage.
-   */
+  /** Represents progress percentage. */
   percentComplete: int32;
 
-  /**
-   * Represents the start date time.
-   */
+  /** Represents the start date time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDateTime?: utcDateTime;
 
-  /**
-   * Represents the end date time.
-   */
+  /** Represents the end date time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endDateTime?: utcDateTime;
 
-  /**
-   * Represents the status of the sub-operation.
-   */
+  /** Represents the status of the sub-operation. */
   status: JobStatus;
 }
 
-/**
- * Represents the state of a project deletion job.
- */
+/** Represents the state of a project deletion job. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ProjectDeletionJobState extends JobState {}
 
-/**
- * Represents a list of retrieved languages.
- */
+/** Represents a list of retrieved languages. */
 model SupportedLanguages is Azure.Core.Page<SupportedLanguage>;
 
-/**
- * Represents a supported language.
- */
+/** Represents a supported language. */
 @resource("authoring/analyze-text/projects/global/languages")
 model SupportedLanguage {
-  /**
-   * The language name.
-   */
+  /** The language name. */
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   languageName: string;
@@ -904,40 +618,26 @@ model SupportedLanguage {
   languageCode: string;
 }
 
-/**
- * Represents a list of training config versions.
- */
+/** Represents a list of training config versions. */
 model TrainingConfigVersions is Azure.Core.Page<TrainingConfigVersion>;
 
-/**
- * Represents a training config version.
- */
+/** Represents a training config version. */
 model TrainingConfigVersion {
-  /**
-   * Represents the version of the config.
-   */
+  /** Represents the version of the config. */
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   trainingConfigVersion: string;
 
-  /**
-   * Represents the training config version expiration date.
-   */
+  /** Represents the training config version expiration date. */
   modelExpirationDate: plainDate;
 }
 
-/**
- * Represents a cell in a confusion matrix.
- */
+/** Represents a cell in a confusion matrix. */
 model ConfusionMatrixCell {
-  /**
-   * Represents normalized value in percentages.
-   */
+  /** Represents normalized value in percentages. */
   normalizedValue: float32;
 
-  /**
-   * Represents raw value.
-   */
+  /** Represents raw value. */
   rawValue: float32;
 }
 
@@ -947,24 +647,16 @@ model ConfusionMatrixCell {
  */
 model CustomEntityRecognitionDocumentEvaluationResult
   extends DocumentEvaluationResult {
-  /**
-   * Represents the evaluation prediction for entity recognition.
-   */
+  /** Represents the evaluation prediction for entity recognition. */
   customEntityRecognitionResult: DocumentEntityRecognitionEvaluationResult;
 
-  /**
-   * Represents the project kind.
-   */
+  /** Represents the project kind. */
   projectKind: "CustomEntityRecognition";
 }
 
-/**
- * Represents the entity recognition evaluation result for a document.
- */
+/** Represents the entity recognition evaluation result for a document. */
 model DocumentEntityRecognitionEvaluationResult {
-  /**
-   * Represents the document labelled entities.
-   */
+  /** Represents the document labelled entities. */
   entities: DocumentEntityRegionEvaluationResult[];
 }
 
@@ -973,65 +665,41 @@ model DocumentEntityRecognitionEvaluationResult {
  * entities of a document region.
  */
 model DocumentEntityRegionEvaluationResult {
-  /**
-   * Represents the region's expected entity labels.
-   */
+  /** Represents the region's expected entity labels. */
   expectedEntities: DocumentEntityLabelEvaluationResult[];
 
-  /**
-   * Represents the region's predicted entity labels.
-   */
+  /** Represents the region's predicted entity labels. */
   predictedEntities: DocumentEntityLabelEvaluationResult[];
 
-  /**
-   * Represents the region offset.
-   */
+  /** Represents the region offset. */
   regionOffset: int32;
 
-  /**
-   * Represents the region length.
-   */
+  /** Represents the region length. */
   regionLength: int32;
 }
 
-/**
- * Represents an evaluation result entity label.
- */
+/** Represents an evaluation result entity label. */
 model DocumentEntityLabelEvaluationResult {
-  /**
-   * Represents the entity category.
-   */
+  /** Represents the entity category. */
   category: string;
 
-  /**
-   * Represents the entity offset index relative to the original text.
-   */
+  /** Represents the entity offset index relative to the original text. */
   offset: int32;
 
-  /**
-   * Represents the entity length.
-   */
+  /** Represents the entity length. */
   length: int32;
 }
 
-/**
- * Represents the evaluation summary for a custom entity recognition project.
- */
+/** Represents the evaluation summary for a custom entity recognition project. */
 model CustomEntityRecognitionEvaluationSummary extends EvaluationSummary {
-  /**
-   * Contains the data related to extraction evaluation.
-   */
+  /** Contains the data related to extraction evaluation. */
   customEntityRecognitionEvaluation: EntityRecognitionEvaluationSummary;
 
-  /**
-   * Represents the project type that the evaluation ran on.
-   */
+  /** Represents the project type that the evaluation ran on. */
   projectKind: "CustomEntityRecognition";
 }
 
-/**
- * Represents the evaluation summary for a custom entity recognition project.
- */
+/** Represents the evaluation summary for a custom entity recognition project. */
 model EntityRecognitionEvaluationSummary {
   /**
    * Represents the confusion matrix between two entities (the two entities can be
@@ -1040,79 +708,49 @@ model EntityRecognitionEvaluationSummary {
    */
   confusionMatrix: Record<Record<ConfusionMatrixCell>>;
 
-  /**
-   * Represents the entities evaluation
-   */
+  /** Represents the entities evaluation */
   entities: Record<EntityEvaluationSummary>;
 
-  /**
-   * Represents the micro F1
-   */
+  /** Represents the micro F1 */
   microF1: float32;
 
-  /**
-   * Represents the micro precision
-   */
+  /** Represents the micro precision */
   microPrecision: float32;
 
-  /**
-   * Represents the micro recall
-   */
+  /** Represents the micro recall */
   microRecall: float32;
 
-  /**
-   * Represents the macro F1
-   */
+  /** Represents the macro F1 */
   macroF1: float32;
 
-  /**
-   * Represents the macro precision
-   */
+  /** Represents the macro precision */
   macroPrecision: float32;
 
-  /**
-   * Represents the macro recall
-   */
+  /** Represents the macro recall */
   macroRecall: float32;
 }
 
-/**
- * Represents the evaluation summary for an entity.
- */
+/** Represents the evaluation summary for an entity. */
 model EntityEvaluationSummary {
-  /**
-   * Represents the model precision
-   */
+  /** Represents the model precision */
   f1: float64;
 
-  /**
-   * Represents the model recall
-   */
+  /** Represents the model recall */
   precision: float64;
 
-  /**
-   * Represents the model F1 score
-   */
+  /** Represents the model F1 score */
   recall: float64;
 
-  /**
-   * Represents the count of true positive
-   */
+  /** Represents the count of true positive */
   truePositiveCount: int32;
 
-  /**
-   * Represents the count of true negative
-   */
+  /** Represents the count of true negative */
   trueNegativeCount: int32;
 
-  /**
-   * Represents the count of false positive
-   */
+  /** Represents the count of false positive */
   falsePositiveCount: int32;
 
-  /**
-   * Represents the count of false negative
-   */
+  /** Represents the count of false negative */
   falseNegativeCount: int32;
 }
 
@@ -1122,14 +760,10 @@ model EntityEvaluationSummary {
  */
 model CustomMultiLabelClassificationDocumentEvaluationResult
   extends DocumentEvaluationResult {
-  /**
-   * Represents the evaluation prediction for multi label classification.
-   */
+  /** Represents the evaluation prediction for multi label classification. */
   customMultiLabelClassificationResult: DocumentMultiLabelClassificationEvaluationResult;
 
-  /**
-   * Represents the project kind.
-   */
+  /** Represents the project kind. */
   projectKind: "CustomMultiLabelClassification";
 }
 
@@ -1138,14 +772,10 @@ model CustomMultiLabelClassificationDocumentEvaluationResult
  * result from the evaluation operation.
  */
 model DocumentMultiLabelClassificationEvaluationResult {
-  /**
-   * Represents the document's expected classes.
-   */
+  /** Represents the document's expected classes. */
   expectedClasses: string[];
 
-  /**
-   * Represents the document's predicted classes.
-   */
+  /** Represents the document's predicted classes. */
   predictedClasses: string[];
 }
 
@@ -1155,54 +785,34 @@ model DocumentMultiLabelClassificationEvaluationResult {
  */
 model CustomMultiLabelClassificationEvaluationSummary
   extends EvaluationSummary {
-  /**
-   * Contains the data related to multi label classification evaluation.
-   */
+  /** Contains the data related to multi label classification evaluation. */
   customMultiLabelClassificationEvaluation: MultiLabelClassificationEvaluationSummary;
 
-  /**
-   * Represents the project type that the evaluation ran on.
-   */
+  /** Represents the project type that the evaluation ran on. */
   projectKind: "CustomMultiLabelClassification";
 }
 
-/**
- * Represents the evaluation summary for a multi-label classification project.
- */
+/** Represents the evaluation summary for a multi-label classification project. */
 model MultiLabelClassificationEvaluationSummary {
-  /**
-   * Represents the classes evaluation
-   */
+  /** Represents the classes evaluation */
   classes: Record<MultiLabelClassEvaluationSummary>;
 
-  /**
-   * Represents the micro F1
-   */
+  /** Represents the micro F1 */
   microF1: float32;
 
-  /**
-   * Represents the micro precision
-   */
+  /** Represents the micro precision */
   microPrecision: float32;
 
-  /**
-   * Represents the micro recall
-   */
+  /** Represents the micro recall */
   microRecall: float32;
 
-  /**
-   * Represents the macro F1
-   */
+  /** Represents the macro F1 */
   macroF1: float32;
 
-  /**
-   * Represents the macro precision
-   */
+  /** Represents the macro precision */
   macroPrecision: float32;
 
-  /**
-   * Represents the macro recall
-   */
+  /** Represents the macro recall */
   macroRecall: float32;
 }
 
@@ -1211,39 +821,25 @@ model MultiLabelClassificationEvaluationSummary {
  * project.
  */
 model MultiLabelClassEvaluationSummary {
-  /**
-   * Represents the model precision
-   */
+  /** Represents the model precision */
   f1: float64;
 
-  /**
-   * Represents the model recall
-   */
+  /** Represents the model recall */
   precision: float64;
 
-  /**
-   * Represents the model F1 score
-   */
+  /** Represents the model F1 score */
   recall: float64;
 
-  /**
-   * Represents the count of true positive
-   */
+  /** Represents the count of true positive */
   truePositiveCount: int32;
 
-  /**
-   * Represents the count of true negative
-   */
+  /** Represents the count of true negative */
   trueNegativeCount: int32;
 
-  /**
-   * Represents the count of false positive
-   */
+  /** Represents the count of false positive */
   falsePositiveCount: int32;
 
-  /**
-   * Represents the count of false negative
-   */
+  /** Represents the count of false negative */
   falseNegativeCount: int32;
 }
 
@@ -1253,14 +849,10 @@ model MultiLabelClassEvaluationSummary {
  */
 model CustomSingleLabelClassificationDocumentEvaluationResult
   extends DocumentEvaluationResult {
-  /**
-   * Represents the evaluation prediction for single label classification.
-   */
+  /** Represents the evaluation prediction for single label classification. */
   customSingleLabelClassificationResult: DocumentSingleLabelClassificationEvaluationResult;
 
-  /**
-   * Represents the project kind.
-   */
+  /** Represents the project kind. */
   projectKind: "CustomSingleLabelClassification";
 }
 
@@ -1269,14 +861,10 @@ model CustomSingleLabelClassificationDocumentEvaluationResult
  * from an evaluation operation.
  */
 model DocumentSingleLabelClassificationEvaluationResult {
-  /**
-   * Represents the document's expected class.
-   */
+  /** Represents the document's expected class. */
   expectedClass: string;
 
-  /**
-   * Represents the document's predicted class.
-   */
+  /** Represents the document's predicted class. */
   predictedClass: string;
 }
 
@@ -1286,14 +874,10 @@ model DocumentSingleLabelClassificationEvaluationResult {
  */
 model CustomSingleLabelClassificationEvaluationSummary
   extends EvaluationSummary {
-  /**
-   * Contains the data related to single label classification evaluation.
-   */
+  /** Contains the data related to single label classification evaluation. */
   customSingleLabelClassificationEvaluation: SingleLabelClassificationEvaluationSummary;
 
-  /**
-   * Represents the project type that the evaluation ran on.
-   */
+  /** Represents the project type that the evaluation ran on. */
   projectKind: "CustomSingleLabelClassification";
 }
 
@@ -1309,39 +893,25 @@ model SingleLabelClassificationEvaluationSummary {
    */
   confusionMatrix: Record<Record<ConfusionMatrixCell>>;
 
-  /**
-   * Represents the classes evaluation
-   */
+  /** Represents the classes evaluation */
   classes: Record<SingleLabelClassEvaluationSummary>;
 
-  /**
-   * Represents the micro F1
-   */
+  /** Represents the micro F1 */
   microF1: float32;
 
-  /**
-   * Represents the micro precision
-   */
+  /** Represents the micro precision */
   microPrecision: float32;
 
-  /**
-   * Represents the micro recall
-   */
+  /** Represents the micro recall */
   microRecall: float32;
 
-  /**
-   * Represents the macro F1
-   */
+  /** Represents the macro F1 */
   macroF1: float32;
 
-  /**
-   * Represents the macro precision
-   */
+  /** Represents the macro precision */
   macroPrecision: float32;
 
-  /**
-   * Represents the macro recall
-   */
+  /** Represents the macro recall */
   macroRecall: float32;
 }
 
@@ -1350,64 +920,40 @@ model SingleLabelClassificationEvaluationSummary {
  * project.
  */
 model SingleLabelClassEvaluationSummary {
-  /**
-   * Represents the model precision
-   */
+  /** Represents the model precision */
   f1: float64;
 
-  /**
-   * Represents the model recall
-   */
+  /** Represents the model recall */
   precision: float64;
 
-  /**
-   * Represents the model F1 score
-   */
+  /** Represents the model F1 score */
   recall: float64;
 
-  /**
-   * Represents the count of true positive
-   */
+  /** Represents the count of true positive */
   truePositiveCount: int32;
 
-  /**
-   * Represents the count of true negative
-   */
+  /** Represents the count of true negative */
   trueNegativeCount: int32;
 
-  /**
-   * Represents the count of false positive
-   */
+  /** Represents the count of false positive */
   falsePositiveCount: int32;
 
-  /**
-   * Represents the count of false negative
-   */
+  /** Represents the count of false negative */
   falseNegativeCount: int32;
 }
 
-/**
- * Represents a class of an exported project.
- */
+/** Represents a class of an exported project. */
 model ExportedClass {
-  /**
-   * The class category.
-   */
+  /** The class category. */
   category?: string;
 }
 
-/**
- * Represents an exported document for a custom entity recognition project.
- */
+/** Represents an exported document for a custom entity recognition project. */
 model ExportedCustomEntityRecognitionDocument {
-  /**
-   * The list of entity labels belonging to the document.
-   */
+  /** The list of entity labels belonging to the document. */
   entities?: ExportedDocumentRegion[];
 
-  /**
-   * The location of the document in the storage.
-   */
+  /** The location of the document in the storage. */
   location?: string;
 
   /**
@@ -1417,95 +963,59 @@ model ExportedCustomEntityRecognitionDocument {
    */
   language?: string;
 
-  /**
-   * The dataset for this document. Allowed values are 'Train' and 'Test'.
-   */
+  /** The dataset for this document. Allowed values are 'Train' and 'Test'. */
   dataset?: string;
 }
 
-/**
- * Represents a region in a document for entity labeling.
- */
+/** Represents a region in a document for entity labeling. */
 model ExportedDocumentRegion {
-  /**
-   * Start position for the region.
-   */
+  /** Start position for the region. */
   regionOffset?: int32;
 
-  /**
-   * Length for the region text.
-   */
+  /** Length for the region text. */
   regionLength?: int32;
 
-  /**
-   * The list of entity labels belonging to this region.
-   */
+  /** The list of entity labels belonging to this region. */
   labels?: ExportedDocumentEntityLabel[];
 }
 
-/**
- * Represents an entity label for a document.
- */
+/** Represents an entity label for a document. */
 model ExportedDocumentEntityLabel {
-  /**
-   * The entity category.
-   */
+  /** The entity category. */
   category?: string;
 
-  /**
-   * Start position for the entity text.
-   */
+  /** Start position for the entity text. */
   offset?: int32;
 
-  /**
-   * Length for the entity text.
-   */
+  /** Length for the entity text. */
   length?: int32;
 }
 
-/**
- * Represents the exported assets for a entity recognition project.
- */
+/** Represents the exported assets for a entity recognition project. */
 model ExportedCustomEntityRecognitionProjectAssets
   extends ExportedProjectAssets {
-  /**
-   * The list of entities belonging to the project.
-   */
+  /** The list of entities belonging to the project. */
   entities?: ExportedEntity[];
 
-  /**
-   * The list of documents belonging to the project.
-   */
+  /** The list of documents belonging to the project. */
   documents?: ExportedCustomEntityRecognitionDocument[];
 
-  /**
-   * The type of the project the assets belong to.
-   */
+  /** The type of the project the assets belong to. */
   projectKind: "CustomEntityRecognition";
 }
 
-/**
- * Represents an entity in an exported project.
- */
+/** Represents an entity in an exported project. */
 model ExportedEntity {
-  /**
-   * The entity category.
-   */
+  /** The entity category. */
   category?: string;
 }
 
-/**
- * Represents an exported document of a custom multi-label classification project.
- */
+/** Represents an exported document of a custom multi-label classification project. */
 model ExportedCustomMultiLabelClassificationDocument {
-  /**
-   * The document classes.
-   */
+  /** The document classes. */
   classes?: ExportedDocumentClass[];
 
-  /**
-   * The location of the document in the storage.
-   */
+  /** The location of the document in the storage. */
   location?: string;
 
   /**
@@ -1515,37 +1025,25 @@ model ExportedCustomMultiLabelClassificationDocument {
    */
   language?: string;
 
-  /**
-   * The dataset for this document. Allowed values are 'Train' and 'Test'.
-   */
+  /** The dataset for this document. Allowed values are 'Train' and 'Test'. */
   dataset?: string;
 }
 
-/**
- * Represents a classification label for a document.
- */
+/** Represents a classification label for a document. */
 model ExportedDocumentClass {
   category?: string;
 }
 
-/**
- * Represents the exported assets for a custom multi-label classification project.
- */
+/** Represents the exported assets for a custom multi-label classification project. */
 model ExportedCustomMultiLabelClassificationProjectAssets
   extends ExportedProjectAssets {
-  /**
-   * The list of classes in the project.
-   */
+  /** The list of classes in the project. */
   classes?: ExportedClass[];
 
-  /**
-   * The list of documents in the project.
-   */
+  /** The list of documents in the project. */
   documents?: ExportedCustomMultiLabelClassificationDocument[];
 
-  /**
-   * The type of the project the assets belong to.
-   */
+  /** The type of the project the assets belong to. */
   projectKind: "CustomMultiLabelClassification";
 }
 
@@ -1554,14 +1052,10 @@ model ExportedCustomMultiLabelClassificationProjectAssets
  * project.
  */
 model ExportedCustomSingleLabelClassificationDocument {
-  /**
-   * The class of the documents.
-   */
+  /** The class of the documents. */
   class?: ExportedDocumentClass;
 
-  /**
-   * The location of the document in the storage.
-   */
+  /** The location of the document in the storage. */
   location?: string;
 
   /**
@@ -1571,29 +1065,19 @@ model ExportedCustomSingleLabelClassificationDocument {
    */
   language?: string;
 
-  /**
-   * The dataset for this document. Allowed values are 'Train' and 'Test'.
-   */
+  /** The dataset for this document. Allowed values are 'Train' and 'Test'. */
   dataset?: string;
 }
 
-/**
- * Represents the exported assets for a single-label classification project.
- */
+/** Represents the exported assets for a single-label classification project. */
 model ExportedCustomSingleLabelClassificationProjectAssets
   extends ExportedProjectAssets {
-  /**
-   * The list of classes belonging to this project.
-   */
+  /** The list of classes belonging to this project. */
   classes?: ExportedClass[];
 
-  /**
-   * The list of documents belonging to this project.
-   */
+  /** The list of documents belonging to this project. */
   documents?: ExportedCustomSingleLabelClassificationDocument[];
 
-  /**
-   * The type of the project the assets belong to.
-   */
+  /** The type of the project the assets belong to. */
   projectKind: "CustomSingleLabelClassification";
 }

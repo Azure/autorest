@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-/**
- * Azure Resource Manager resource envelope.
- */
+/** Azure Resource Manager resource envelope. */
 @parentResource(Registry)
 model CodeContainerResource
   is Azure.ResourceManager.ProxyResource<CodeContainer, false> {
@@ -51,34 +49,24 @@ alias CodeContainerResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @armResourceOperations
 interface CodeContainerResources {
-  /**
-   * Get Code container.
-   */
+  /** Get Code container. */
   get is CodeContainerResourceOps.Read<CodeContainerResource>;
 
-  /**
-   * Create or update Code container.
-   */
+  /** Create or update Code container. */
   createOrUpdate is CodeContainerResourceOps.CreateOrUpdateAsync<CodeContainerResource>;
 
-  /**
-   * Delete Code container.
-   */
+  /** Delete Code container. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is CodeContainerResourceOps.DeleteWithoutOkAsync<
     CodeContainerResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List containers.
-   */
+  /** List containers. */
   list is CodeContainerResourceOps.List<
     CodeContainerResource,
     Parameters = {
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
     },
@@ -110,30 +98,20 @@ alias CodeContainerOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @armResourceOperations
 interface CodeContainers {
-  /**
-   * Get container.
-   */
+  /** Get container. */
   get is CodeContainerOps.Read<CodeContainerResource>;
 
-  /**
-   * Create or update container.
-   */
+  /** Create or update container. */
   createOrUpdate is CodeContainerOps.CreateOrUpdateSync<CodeContainerResource>;
 
-  /**
-   * Delete container.
-   */
+  /** Delete container. */
   delete is CodeContainerOps.DeleteSync<CodeContainerResource>;
 
-  /**
-   * List containers.
-   */
+  /** List containers. */
   list is CodeContainerOps.List<
     CodeContainerResource,
     Parameters = {
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query("$skip")
       $skip?: string;
     },

@@ -11,25 +11,19 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * The Private Endpoint Connection resource.
- */
+/** The Private Endpoint Connection resource. */
 model PrivateEndpointConnection is PrivateEndpointConnectionResource;
 alias PrivateEndpointOperations = PrivateEndpoints<PrivateEndpointConnection>;
 
 @armResourceOperations
 interface PrivateEndpointConnections {
-  /**
-   * Gets the details of the Private Endpoint Connection specified by its identifier.
-   */
+  /** Gets the details of the Private Endpoint Connection specified by its identifier. */
   getByName is PrivateEndpointOperations.Read<
     ApiManagementServiceResource,
     PrivateEndpointConnection
   >;
 
-  /**
-   * Creates a new Private Endpoint Connection or updates an existing one.
-   */
+  /** Creates a new Private Endpoint Connection or updates an existing one. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is PrivateEndpointOperations.CreateOrReplaceAsync<
     ApiManagementServiceResource,
@@ -40,9 +34,7 @@ interface PrivateEndpointConnections {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /**
-   * Deletes the specified Private Endpoint Connection.
-   */
+  /** Deletes the specified Private Endpoint Connection. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is PrivateEndpointOperations.DeleteAsync<
     ApiManagementServiceResource,
@@ -50,9 +42,7 @@ interface PrivateEndpointConnections {
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * Lists all private endpoint connections of the API Management service instance.
-   */
+  /** Lists all private endpoint connections of the API Management service instance. */
   listByService is PrivateEndpointOperations.ListByParent<
     ApiManagementServiceResource,
     PrivateEndpointConnection,

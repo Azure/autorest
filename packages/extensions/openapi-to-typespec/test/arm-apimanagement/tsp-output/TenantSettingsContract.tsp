@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * Tenant Settings.
- */
+/** Tenant Settings. */
 @parentResource(ApiManagementServiceResource)
 model TenantSettingsContract
   is Azure.ResourceManager.ProxyResource<TenantSettingsContractProperties> {
@@ -28,20 +26,14 @@ model TenantSettingsContract
 
 @armResourceOperations
 interface TenantSettingsContracts {
-  /**
-   * Get tenant settings.
-   */
+  /** Get tenant settings. */
   get is ArmResourceRead<TenantSettingsContract>;
 
-  /**
-   * Public settings.
-   */
+  /** Public settings. */
   listByService is ArmResourceListByParent<
     TenantSettingsContract,
     Parameters = {
-      /**
-       * Not used
-       */
+      /** Not used */
       @query("$filter")
       $filter?: string;
     }

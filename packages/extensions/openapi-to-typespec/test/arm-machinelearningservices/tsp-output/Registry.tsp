@@ -21,9 +21,7 @@ model Registry
   >;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 
-  /**
-   * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
-   */
+  /** Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   kind?: string;
 
@@ -32,53 +30,39 @@ model Registry
 
 @armResourceOperations
 interface Registries {
-  /**
-   * Get registry
-   */
+  /** Get registry */
   get is ArmResourceRead<Registry>;
 
-  /**
-   * Create or update registry
-   */
+  /** Create or update registry */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Registry>;
 
-  /**
-   * Update tags
-   */
+  /** Update tags */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     Registry,
     PatchModel = PartialRegistryPartialTrackedResource
   >;
 
-  /**
-   * Delete registry
-   */
+  /** Delete registry */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Registry,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List registries
-   */
+  /** List registries */
   list is ArmResourceListByParent<
     Registry,
     Response = ArmResponse<RegistryTrackedResourceArmPaginatedResult>
   >;
 
-  /**
-   * List registries by subscription
-   */
+  /** List registries by subscription */
   listBySubscription is ArmListBySubscription<
     Registry,
     Response = ArmResponse<RegistryTrackedResourceArmPaginatedResult>
   >;
 
-  /**
-   * Remove regions from registry
-   */
+  /** Remove regions from registry */
   removeRegions is ArmResourceActionAsync<
     Registry,
     Registry,

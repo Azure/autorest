@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * Backend details.
- */
+/** Backend details. */
 @parentResource(ApiManagementServiceResource)
 model BackendContract
   is Azure.ResourceManager.ProxyResource<BackendContractProperties> {
@@ -27,90 +25,64 @@ model BackendContract
 
 @armResourceOperations
 interface BackendContracts {
-  /**
-   * Gets the details of the backend specified by its identifier.
-   */
+  /** Gets the details of the backend specified by its identifier. */
   get is ArmResourceRead<BackendContract>;
 
-  /**
-   * Gets the entity state (Etag) version of the backend specified by its identifier.
-   */
+  /** Gets the entity state (Etag) version of the backend specified by its identifier. */
   getEntityTag is ArmResourceCheckExistence<BackendContract>;
 
-  /**
-   * Creates or Updates a backend.
-   */
+  /** Creates or Updates a backend. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     BackendContract,
     Parameters = {
-      /**
-       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
-       */
+      /** ETag of the Entity. Not required when creating an entity, but required when updating an entity. */
       @header
       `If-Match`?: string;
     }
   >;
 
-  /**
-   * Updates an existing backend.
-   */
+  /** Updates an existing backend. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     BackendContract,
     PatchModel = BackendUpdateParameters,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Deletes the specified backend.
-   */
+  /** Deletes the specified backend. */
   delete is ArmResourceDeleteSync<
     BackendContract,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Lists a collection of backends in the specified service instance.
-   */
+  /** Lists a collection of backends in the specified service instance. */
   listByService is ArmResourceListByParent<
     BackendContract,
     Parameters = {
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| title | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| url | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-       */
+      /** |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| title | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| url | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br> */
       @query("$filter")
       $filter?: string;
 
-      /**
-       * Number of records to return.
-       */
+      /** Number of records to return. */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      /**
-       * Number of records to skip.
-       */
+      /** Number of records to skip. */
       @query("$skip")
       $skip?: int32;
     }
   >;
 
-  /**
-   * Notifies the APIM proxy to create a new connection to the backend after the specified timeout. If no timeout was specified, timeout of 2 minutes is used.
-   */
+  /** Notifies the APIM proxy to create a new connection to the backend after the specified timeout. If no timeout was specified, timeout of 2 minutes is used. */
   reconnect is ArmResourceActionSync<
     BackendContract,
     BackendReconnectContract,

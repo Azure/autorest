@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.GuestConfiguration;
-/**
- * Guest configuration assignment is an association between a machine and guest configuration.
- */
+/** Guest configuration assignment is an association between a machine and guest configuration. */
 model GuestConfigurationAssignment
   is Azure.ResourceManager.ProxyResource<GuestConfigurationAssignmentProperties> {
   ...ResourceNameParameter<
@@ -22,9 +20,7 @@ model GuestConfigurationAssignment
     NamePattern = ""
   >;
 
-  /**
-   * Region where the VM is located.
-   */
+  /** Region where the VM is located. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   location?: string;
 }
@@ -64,44 +60,32 @@ alias GuestConfigurationAssignmentOps = Azure.ResourceManager.Legacy.ExtensionOp
 
 @armResourceOperations
 interface GuestConfigurationAssignments {
-  /**
-   * Get information about a guest configuration assignment
-   */
+  /** Get information about a guest configuration assignment */
   get is GuestConfigurationAssignmentOps.Read<GuestConfigurationAssignment>;
 
-  /**
-   * Creates an association between a VM and guest configuration
-   */
+  /** Creates an association between a VM and guest configuration */
   createOrUpdate is GuestConfigurationAssignmentOps.CreateOrUpdateSync<GuestConfigurationAssignment>;
 
-  /**
-   * Delete a guest configuration assignment
-   */
+  /** Delete a guest configuration assignment */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is GuestConfigurationAssignmentOps.DeleteSync<
     GuestConfigurationAssignment,
     Response = ArmDeletedResponse
   >;
 
-  /**
-   * List all guest configuration assignments for a virtual machine.
-   */
+  /** List all guest configuration assignments for a virtual machine. */
   list is GuestConfigurationAssignmentOps.List<
     GuestConfigurationAssignment,
     Response = ArmResponse<GuestConfigurationAssignmentList>
   >;
 
-  /**
-   * List all guest configuration assignments for a subscription.
-   */
+  /** List all guest configuration assignments for a subscription. */
   subscriptionList is GuestConfigurationAssignmentOps.ListBySubscription<
     GuestConfigurationAssignment,
     Response = ArmResponse<GuestConfigurationAssignmentList> | NoContentResponse
   >;
 
-  /**
-   * List all reports for the guest configuration assignment, latest report first.
-   */
+  /** List all reports for the guest configuration assignment, latest report first. */
   @list
   @get
   @action("reports")
@@ -111,9 +95,7 @@ interface GuestConfigurationAssignments {
     ArmResponse<GuestConfigurationAssignmentReportList>
   >;
 
-  /**
-   * Get a report for the guest configuration assignment, by reportId.
-   */
+  /** Get a report for the guest configuration assignment, by reportId. */
   @get
   @action("{reportId}")
   guestConfigurationAssignmentReportsGet is GuestConfigurationAssignmentOps.ActionSync<
@@ -121,9 +103,7 @@ interface GuestConfigurationAssignments {
     void,
     ArmResponse<GuestConfigurationAssignmentReport>,
     Parameters = {
-      /**
-       * The GUID for the guest configuration assignment report.
-       */
+      /** The GUID for the guest configuration assignment report. */
       @path
       reportId: string;
     }
@@ -163,36 +143,26 @@ alias GuestConfigurationHCRPAssignmentOps = Azure.ResourceManager.Legacy.Extensi
 
 @armResourceOperations
 interface GuestConfigurationHCRPAssignments {
-  /**
-   * Get information about a guest configuration assignment
-   */
+  /** Get information about a guest configuration assignment */
   get is GuestConfigurationHCRPAssignmentOps.Read<GuestConfigurationAssignment>;
 
-  /**
-   * Creates an association between a ARC machine and guest configuration
-   */
+  /** Creates an association between a ARC machine and guest configuration */
   createOrUpdate is GuestConfigurationHCRPAssignmentOps.CreateOrUpdateSync<GuestConfigurationAssignment>;
 
-  /**
-   * Delete a guest configuration assignment
-   */
+  /** Delete a guest configuration assignment */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is GuestConfigurationHCRPAssignmentOps.DeleteSync<
     GuestConfigurationAssignment,
     Response = ArmDeletedResponse
   >;
 
-  /**
-   * List all guest configuration assignments for an ARC machine.
-   */
+  /** List all guest configuration assignments for an ARC machine. */
   list is GuestConfigurationHCRPAssignmentOps.List<
     GuestConfigurationAssignment,
     Response = ArmResponse<GuestConfigurationAssignmentList>
   >;
 
-  /**
-   * List all reports for the guest configuration assignment, latest report first.
-   */
+  /** List all reports for the guest configuration assignment, latest report first. */
   @list
   @get
   @action("reports")
@@ -202,9 +172,7 @@ interface GuestConfigurationHCRPAssignments {
     ArmResponse<GuestConfigurationAssignmentReportList>
   >;
 
-  /**
-   * Get a report for the guest configuration assignment, by reportId.
-   */
+  /** Get a report for the guest configuration assignment, by reportId. */
   @get
   @action("{reportId}")
   guestConfigurationHCRPAssignmentReportsGet is GuestConfigurationHCRPAssignmentOps.ActionSync<
@@ -212,9 +180,7 @@ interface GuestConfigurationHCRPAssignments {
     void,
     ArmResponse<GuestConfigurationAssignmentReport>,
     Parameters = {
-      /**
-       * The GUID for the guest configuration assignment report.
-       */
+      /** The GUID for the guest configuration assignment report. */
       @path
       reportId: string;
     }
@@ -254,35 +220,25 @@ alias GuestConfigurationAssignmentsVMSSOps = Azure.ResourceManager.Legacy.Extens
 
 @armResourceOperations
 interface GuestConfigurationAssignmentsVMSS {
-  /**
-   * Get information about a guest configuration assignment for VMSS
-   */
+  /** Get information about a guest configuration assignment for VMSS */
   get is GuestConfigurationAssignmentsVMSSOps.Read<GuestConfigurationAssignment>;
 
-  /**
-   * Creates an association between a VMSS and guest configuration
-   */
+  /** Creates an association between a VMSS and guest configuration */
   createOrUpdate is GuestConfigurationAssignmentsVMSSOps.CreateOrUpdateSync<GuestConfigurationAssignment>;
 
-  /**
-   * Delete a guest configuration assignment for VMSS
-   */
+  /** Delete a guest configuration assignment for VMSS */
   delete is GuestConfigurationAssignmentsVMSSOps.DeleteSync<
     GuestConfigurationAssignment,
     Response = ArmResponse<GuestConfigurationAssignment> | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List all guest configuration assignments for VMSS.
-   */
+  /** List all guest configuration assignments for VMSS. */
   list is GuestConfigurationAssignmentsVMSSOps.List<
     GuestConfigurationAssignment,
     Response = ArmResponse<GuestConfigurationAssignmentList>
   >;
 
-  /**
-   * List all reports for the VMSS guest configuration assignment, latest report first.
-   */
+  /** List all reports for the VMSS guest configuration assignment, latest report first. */
   @list
   @get
   @action("reports")
@@ -292,9 +248,7 @@ interface GuestConfigurationAssignmentsVMSS {
     ArmResponse<GuestConfigurationAssignmentReportList>
   >;
 
-  /**
-   * Get a report for the VMSS guest configuration assignment, by reportId.
-   */
+  /** Get a report for the VMSS guest configuration assignment, by reportId. */
   @get
   @action("{id}")
   guestConfigurationAssignmentReportsVMSSGet is GuestConfigurationAssignmentsVMSSOps.ActionSync<
@@ -302,9 +256,7 @@ interface GuestConfigurationAssignmentsVMSS {
     void,
     ArmResponse<GuestConfigurationAssignmentReport>,
     Parameters = {
-      /**
-       * The GUID for the guest configuration assignment report.
-       */
+      /** The GUID for the guest configuration assignment report. */
       @path
       id: string;
     }
@@ -346,32 +298,22 @@ alias GuestConfigurationConnectedVMwarevSphereAssignmentOps = Azure.ResourceMana
 
 @armResourceOperations
 interface GuestConfigurationConnectedVMwarevSphereAssignments {
-  /**
-   * Get information about a guest configuration assignment
-   */
+  /** Get information about a guest configuration assignment */
   get is GuestConfigurationConnectedVMwarevSphereAssignmentOps.Read<GuestConfigurationAssignment>;
 
-  /**
-   * Creates an association between a Connected VM Sphere machine and guest configuration
-   */
+  /** Creates an association between a Connected VM Sphere machine and guest configuration */
   createOrUpdate is GuestConfigurationConnectedVMwarevSphereAssignmentOps.CreateOrUpdateSync<GuestConfigurationAssignment>;
 
-  /**
-   * Delete a guest configuration assignment
-   */
+  /** Delete a guest configuration assignment */
   delete is GuestConfigurationConnectedVMwarevSphereAssignmentOps.DeleteSync<GuestConfigurationAssignment>;
 
-  /**
-   * List all guest configuration assignments for an ARC machine.
-   */
+  /** List all guest configuration assignments for an ARC machine. */
   list is GuestConfigurationConnectedVMwarevSphereAssignmentOps.List<
     GuestConfigurationAssignment,
     Response = ArmResponse<GuestConfigurationAssignmentList>
   >;
 
-  /**
-   * List all reports for the guest configuration assignment, latest report first.
-   */
+  /** List all reports for the guest configuration assignment, latest report first. */
   @list
   @get
   @action("reports")
@@ -381,9 +323,7 @@ interface GuestConfigurationConnectedVMwarevSphereAssignments {
     ArmResponse<GuestConfigurationAssignmentReportList>
   >;
 
-  /**
-   * Get a report for the guest configuration assignment, by reportId.
-   */
+  /** Get a report for the guest configuration assignment, by reportId. */
   @get
   @action("{reportId}")
   guestConfigurationConnectedVMwarevSphereAssignmentsReportsGet is GuestConfigurationConnectedVMwarevSphereAssignmentOps.ActionSync<
@@ -391,9 +331,7 @@ interface GuestConfigurationConnectedVMwarevSphereAssignments {
     void,
     ArmResponse<GuestConfigurationAssignmentReport>,
     Parameters = {
-      /**
-       * The GUID for the guest configuration assignment report.
-       */
+      /** The GUID for the guest configuration assignment report. */
       @path
       reportId: string;
     }

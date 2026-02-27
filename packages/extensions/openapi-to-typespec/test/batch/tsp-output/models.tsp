@@ -8,18 +8,12 @@ using Azure.Core;
 
 namespace Azure.Batch;
 
-/**
- * The type of operating system (e.g. Windows or Linux) of the Image.
- */
+/** The type of operating system (e.g. Windows or Linux) of the Image. */
 enum OSType {
-  /**
-   * The Linux operating system.
-   */
+  /** The Linux operating system. */
   linux,
 
-  /**
-   * The Windows operating system.
-   */
+  /** The Windows operating system. */
   windows,
 }
 
@@ -41,13 +35,9 @@ enum VerificationType {
   unverified,
 }
 
-/**
- * The state of the Certificate.
- */
+/** The state of the Certificate. */
 enum CertificateState {
-  /**
-   * The Certificate is available for use in Pools.
-   */
+  /** The Certificate is available for use in Pools. */
   active,
 
   /**
@@ -69,28 +59,18 @@ enum CertificateState {
   deleteFailed: "deletefailed",
 }
 
-/**
- * The format of the Certificate data.
- */
+/** The format of the Certificate data. */
 enum CertificateFormat {
-  /**
-   * The Certificate is a PFX (PKCS#12) formatted Certificate or Certificate chain.
-   */
+  /** The Certificate is a PFX (PKCS#12) formatted Certificate or Certificate chain. */
   pfx,
 
-  /**
-   * The Certificate is a base64-encoded X.509 Certificate.
-   */
+  /** The Certificate is a base64-encoded X.509 Certificate. */
   cer,
 }
 
-/**
- * The state of the Job Schedule.
- */
+/** The state of the Job Schedule. */
 enum JobScheduleState {
-  /**
-   * The Job Schedule is active and will create Jobs as per its schedule.
-   */
+  /** The Job Schedule is active and will create Jobs as per its schedule. */
   active,
 
   /**
@@ -134,9 +114,7 @@ enum OnAllTasksComplete {
    */
   noAction: "noaction",
 
-  /**
-   * Terminate the Job. The Job's terminateReason is set to 'AllTasksComplete'.
-   */
+  /** Terminate the Job. The Job's terminateReason is set to 'AllTasksComplete'. */
   terminateJob: "terminatejob",
 }
 
@@ -161,9 +139,7 @@ enum OnTaskFailure {
   performExitOptionsJobAction: "performexitoptionsjobaction",
 }
 
-/**
- * The default is 'taskWorkingDirectory'.
- */
+/** The default is 'taskWorkingDirectory'. */
 enum ContainerWorkingDirectory {
   /**
    * Use the standard Batch service Task working directory, which will contain the
@@ -183,14 +159,10 @@ enum ContainerWorkingDirectory {
  * uploaded.
  */
 enum OutputFileUploadCondition {
-  /**
-   * Upload the file(s) only after the Task process exits with an exit code of 0.
-   */
+  /** Upload the file(s) only after the Task process exits with an exit code of 0. */
   taskSuccess: "tasksuccess",
 
-  /**
-   * Upload the file(s) only after the Task process exits with a nonzero exit code.
-   */
+  /** Upload the file(s) only after the Task process exits with a nonzero exit code. */
   taskFailure: "taskfailure",
 
   /**
@@ -208,9 +180,7 @@ enum OutputFileUploadCondition {
  * accessible by normal tasks but should be accessible by StartTasks.
  */
 enum AutoUserScope {
-  /**
-   * Specifies that the service should create a new user for the Task.
-   */
+  /** Specifies that the service should create a new user for the Task. */
   task,
 
   /**
@@ -220,13 +190,9 @@ enum AutoUserScope {
   pool,
 }
 
-/**
- * The elevation level of the user.
- */
+/** The elevation level of the user. */
 enum ElevationLevel {
-  /**
-   * The user is a standard user without elevated access.
-   */
+  /** The user is a standard user without elevated access. */
   nonAdmin: "nonadmin",
 
   /**
@@ -263,44 +229,28 @@ enum PoolLifetimeOption {
  * https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.
  */
 enum CachingType {
-  /**
-   * The caching mode for the disk is not enabled.
-   */
+  /** The caching mode for the disk is not enabled. */
   none,
 
-  /**
-   * The caching mode for the disk is read only.
-   */
+  /** The caching mode for the disk is read only. */
   readOnly: "readonly",
 
-  /**
-   * The caching mode for the disk is read and write.
-   */
+  /** The caching mode for the disk is read and write. */
   readWrite: "readwrite",
 }
 
-/**
- * The storage Account type for use in creating data disks.
- */
+/** The storage Account type for use in creating data disks. */
 enum StorageAccountType {
-  /**
-   * The data disk should use standard locally redundant storage.
-   */
+  /** The data disk should use standard locally redundant storage. */
   StandardLRS: "standard_lrs",
 
-  /**
-   * The data disk should use premium locally redundant storage.
-   */
+  /** The data disk should use premium locally redundant storage. */
   PremiumLRS: "premium_lrs",
 }
 
-/**
- * A disk to encrypt.
- */
+/** A disk to encrypt. */
 enum DiskEncryptionTarget {
-  /**
-   * The OS Disk on the compute node is encrypted.
-   */
+  /** The OS Disk on the compute node is encrypted. */
   OsDisk: "osdisk",
 
   /**
@@ -311,13 +261,9 @@ enum DiskEncryptionTarget {
   TemporaryDisk: "temporarydisk",
 }
 
-/**
- * The default value is regional.
- */
+/** The default value is regional. */
 enum NodePlacementPolicyType {
-  /**
-   * All nodes in the pool will be allocated in the same region.
-   */
+  /** All nodes in the pool will be allocated in the same region. */
   regional,
 
   /**
@@ -327,13 +273,9 @@ enum NodePlacementPolicyType {
   zonal,
 }
 
-/**
- * If not specified, the default is spread.
- */
+/** If not specified, the default is spread. */
 enum ComputeNodeFillType {
-  /**
-   * Tasks should be assigned evenly across all Compute Nodes in the Pool.
-   */
+  /** Tasks should be assigned evenly across all Compute Nodes in the Pool. */
   spread,
 
   /**
@@ -344,54 +286,34 @@ enum ComputeNodeFillType {
   pack,
 }
 
-/**
- * The scope of dynamic vnet assignment.
- */
+/** The scope of dynamic vnet assignment. */
 enum DynamicVNetAssignmentScope {
-  /**
-   * No dynamic VNet assignment is enabled.
-   */
+  /** No dynamic VNet assignment is enabled. */
   none,
 
-  /**
-   * Dynamic VNet assignment is done per-job.
-   */
+  /** Dynamic VNet assignment is done per-job. */
   job,
 }
 
-/**
- * The protocol of the endpoint.
- */
+/** The protocol of the endpoint. */
 enum InboundEndpointProtocol {
-  /**
-   * Use TCP for the endpoint.
-   */
+  /** Use TCP for the endpoint. */
   tcp,
 
-  /**
-   * Use UDP for the endpoint.
-   */
+  /** Use UDP for the endpoint. */
   udp,
 }
 
-/**
- * The action that should be taken for a specified IP address, subnet range or tag.
- */
+/** The action that should be taken for a specified IP address, subnet range or tag. */
 enum NetworkSecurityGroupRuleAccess {
-  /**
-   * Allow access.
-   */
+  /** Allow access. */
   allow,
 
-  /**
-   * Deny access.
-   */
+  /** Deny access. */
   deny,
 }
 
-/**
- * The provisioning type for Public IP Addresses for the Pool.
- */
+/** The provisioning type for Public IP Addresses for the Pool. */
 enum IPAddressProvisioningType {
   /**
    * A public IP will be created and managed by Batch. There may be multiple public
@@ -405,9 +327,7 @@ enum IPAddressProvisioningType {
    */
   userManaged: "usermanaged",
 
-  /**
-   * No public IP Address will be created.
-   */
+  /** No public IP Address will be created. */
   noPublicIPAddresses: "nopublicipaddresses",
 }
 
@@ -423,14 +343,10 @@ enum IPAddressProvisioningType {
  * Certificates are placed in that directory.
  */
 enum CertificateStoreLocation {
-  /**
-   * Certificates should be installed to the CurrentUser Certificate store.
-   */
+  /** Certificates should be installed to the CurrentUser Certificate store. */
   currentUser: "currentuser",
 
-  /**
-   * Certificates should be installed to the LocalMachine Certificate store.
-   */
+  /** Certificates should be installed to the LocalMachine Certificate store. */
   localMachine: "localmachine",
 }
 
@@ -477,13 +393,9 @@ enum LoginMode {
   interactive,
 }
 
-/**
- * The state of the Job.
- */
+/** The state of the Job. */
 enum JobState {
-  /**
-   * The Job is available to have Tasks scheduled.
-   */
+  /** The Job is available to have Tasks scheduled. */
   active,
 
   /**
@@ -525,24 +437,16 @@ enum JobState {
   deleting,
 }
 
-/**
- * The category of the error.
- */
+/** The category of the error. */
 enum ErrorCategory {
-  /**
-   * The error is due to a user issue, such as misconfiguration.
-   */
+  /** The error is due to a user issue, such as misconfiguration. */
   userError: "usererror",
 
-  /**
-   * The error is due to an internal server issue.
-   */
+  /** The error is due to an internal server issue. */
   serverError: "servererror",
 }
 
-/**
- * What to do with active Tasks associated with the Job.
- */
+/** What to do with active Tasks associated with the Job. */
 enum DisableJobOption {
   /**
    * Terminate running Tasks and requeue them. The Tasks will run again when the Job
@@ -556,19 +460,13 @@ enum DisableJobOption {
    */
   terminate,
 
-  /**
-   * Allow currently running Tasks to complete.
-   */
+  /** Allow currently running Tasks to complete. */
   wait,
 }
 
-/**
- * The current state of the Job Preparation Task on the Compute Node.
- */
+/** The current state of the Job Preparation Task on the Compute Node. */
 enum JobPreparationTaskState {
-  /**
-   * The Task is currently running (including retrying).
-   */
+  /** The Task is currently running (including retrying). */
   running,
 
   /**
@@ -579,13 +477,9 @@ enum JobPreparationTaskState {
   completed,
 }
 
-/**
- * The result of Task execution.
- */
+/** The result of Task execution. */
 enum TaskExecutionResult {
-  /**
-   * The Task ran successfully.
-   */
+  /** The Task ran successfully. */
   success,
 
   /**
@@ -596,13 +490,9 @@ enum TaskExecutionResult {
   failure,
 }
 
-/**
- * The current state of the Job Release Task on the Compute Node.
- */
+/** The current state of the Job Release Task on the Compute Node. */
 enum JobReleaseTaskState {
-  /**
-   * The Task is currently running (including retrying).
-   */
+  /** The Task is currently running (including retrying). */
   running,
 
   /**
@@ -613,13 +503,9 @@ enum JobReleaseTaskState {
   completed,
 }
 
-/**
- * The current state of the Pool.
- */
+/** The current state of the Pool. */
 enum PoolState {
-  /**
-   * The Pool is available to run Tasks subject to the availability of Compute Nodes.
-   */
+  /** The Pool is available to run Tasks subject to the availability of Compute Nodes. */
   active,
 
   /**
@@ -629,9 +515,7 @@ enum PoolState {
   deleting,
 }
 
-/**
- * Whether the Pool is resizing.
- */
+/** Whether the Pool is resizing. */
 enum AllocationState {
   /**
    * The Pool is not resizing. There are no changes to the number of Compute Nodes
@@ -660,9 +544,7 @@ enum AllocationState {
  * '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
  */
 enum PoolIdentityType {
-  /**
-   * Batch pool has user assigned identities with it.
-   */
+  /** Batch pool has user assigned identities with it. */
   UserAssigned,
 
   /**
@@ -672,9 +554,7 @@ enum PoolIdentityType {
   None,
 }
 
-/**
- * The default value is requeue.
- */
+/** The default value is requeue. */
 enum ComputeNodeDeallocationOption {
   /**
    * Terminate running Task processes and requeue the Tasks. The Tasks will run
@@ -712,9 +592,7 @@ enum ComputeNodeDeallocationOption {
  * code is 400 (Bad Request).
  */
 enum JobAction {
-  /**
-   * Take no action.
-   */
+  /** Take no action. */
   none,
 
   /**
@@ -742,15 +620,11 @@ enum DependencyAction {
    */
   satisfy,
 
-  /**
-   * Blocks tasks waiting on this task, preventing them from being scheduled.
-   */
+  /** Blocks tasks waiting on this task, preventing them from being scheduled. */
   block,
 }
 
-/**
- * The state of the Task.
- */
+/** The state of the Task. */
 enum TaskState {
   /**
    * The Task is queued and able to run, but is not currently assigned to a Compute
@@ -785,13 +659,9 @@ enum TaskState {
   completed,
 }
 
-/**
- * The status of the add Task request.
- */
+/** The status of the add Task request. */
 enum TaskAddStatus {
-  /**
-   * The Task was added successfully.
-   */
+  /** The Task was added successfully. */
   success,
 
   /**
@@ -807,9 +677,7 @@ enum TaskAddStatus {
   serverError: "servererror",
 }
 
-/**
- * The state of the subtask.
- */
+/** The state of the subtask. */
 enum SubtaskState {
   /**
    * The Task has been assigned to a Compute Node, but is waiting for a required Job
@@ -843,29 +711,19 @@ enum SubtaskState {
  * Compute Node becomes available.
  */
 enum ComputeNodeState {
-  /**
-   * The Compute Node is not currently running a Task.
-   */
+  /** The Compute Node is not currently running a Task. */
   idle,
 
-  /**
-   * The Compute Node is rebooting.
-   */
+  /** The Compute Node is rebooting. */
   rebooting,
 
-  /**
-   * The Compute Node is reimaging.
-   */
+  /** The Compute Node is reimaging. */
   reimaging,
 
-  /**
-   * The Compute Node is running one or more Tasks (other than a StartTask).
-   */
+  /** The Compute Node is running one or more Tasks (other than a StartTask). */
   running,
 
-  /**
-   * The Compute Node cannot be used for Task execution due to errors.
-   */
+  /** The Compute Node cannot be used for Task execution due to errors. */
   unusable,
 
   /**
@@ -874,9 +732,7 @@ enum ComputeNodeState {
    */
   creating,
 
-  /**
-   * The Batch service is starting on the underlying virtual machine.
-   */
+  /** The Batch service is starting on the underlying virtual machine. */
   starting,
 
   /**
@@ -917,13 +773,9 @@ enum ComputeNodeState {
   preempted,
 }
 
-/**
- * Whether the Compute Node is available for Task scheduling.
- */
+/** Whether the Compute Node is available for Task scheduling. */
 enum SchedulingState {
-  /**
-   * Tasks can be scheduled on the Compute Node.
-   */
+  /** Tasks can be scheduled on the Compute Node. */
   enabled,
 
   /**
@@ -934,13 +786,9 @@ enum SchedulingState {
   disabled,
 }
 
-/**
- * The state of the StartTask on the Compute Node.
- */
+/** The state of the StartTask on the Compute Node. */
 enum StartTaskState {
-  /**
-   * The StartTask is currently running.
-   */
+  /** The StartTask is currently running. */
   running,
 
   /**
@@ -951,9 +799,7 @@ enum StartTaskState {
   completed,
 }
 
-/**
- * The default value is requeue.
- */
+/** The default value is requeue. */
 enum ComputeNodeRebootOption {
   /**
    * Terminate running Task processes and requeue the Tasks. The Tasks will run
@@ -983,9 +829,7 @@ enum ComputeNodeRebootOption {
   retainedData: "retaineddata",
 }
 
-/**
- * The default value is requeue.
- */
+/** The default value is requeue. */
 enum ComputeNodeReimageOption {
   /**
    * Terminate running Task processes and requeue the Tasks. The Tasks will run
@@ -1015,9 +859,7 @@ enum ComputeNodeReimageOption {
   retainedData: "retaineddata",
 }
 
-/**
- * The default value is requeue.
- */
+/** The default value is requeue. */
 enum DisableComputeNodeSchedulingOption {
   /**
    * Terminate running Task processes and requeue the Tasks. The Tasks may run again
@@ -1040,69 +882,45 @@ enum DisableComputeNodeSchedulingOption {
   taskCompletion: "taskcompletion",
 }
 
-/**
- * Level code.
- */
+/** Level code. */
 enum StatusLevelTypes {
-  /**
-   * Error
-   */
+  /** Error */
   Error,
 
-  /**
-   * Info
-   */
+  /** Info */
   Info,
 
-  /**
-   * Warning
-   */
+  /** Warning */
   Warning,
 }
 
-/**
- * The result of listing the applications available in an Account.
- */
+/** The result of listing the applications available in an Account. */
 model ApplicationListResult {
-  /**
-   * The list of applications available in the Account.
-   */
+  /** The list of applications available in the Account. */
   @pageItems
   value?: Application[];
 
-  /**
-   * The URL to get the next set of results.
-   */
+  /** The URL to get the next set of results. */
   @nextLink
   `odata.nextLink`?: string;
 }
 
-/**
- * Contains information about an application in an Azure Batch Account.
- */
+/** Contains information about an application in an Azure Batch Account. */
 @resource("applications")
 model Application {
-  /**
-   * A string that uniquely identifies the application within the Account.
-   */
+  /** A string that uniquely identifies the application within the Account. */
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   id: string;
 
-  /**
-   * The display name for the application.
-   */
+  /** The display name for the application. */
   displayName: string;
 
-  /**
-   * The list of available versions of the application.
-   */
+  /** The list of available versions of the application. */
   versions: string[];
 }
 
-/**
- * An error response received from the Azure Batch service.
- */
+/** An error response received from the Azure Batch service. */
 @error
 model BatchError {
   /**
@@ -1111,85 +929,55 @@ model BatchError {
    */
   code?: string;
 
-  /**
-   * An error message received in an Azure Batch error response.
-   */
+  /** An error message received in an Azure Batch error response. */
   message?: ErrorMessage;
 
-  /**
-   * A collection of key-value pairs containing additional details about the error.
-   */
+  /** A collection of key-value pairs containing additional details about the error. */
   values?: BatchErrorDetail[];
 }
 
-/**
- * An error message received in an Azure Batch error response.
- */
+/** An error message received in an Azure Batch error response. */
 model ErrorMessage {
-  /**
-   * The language code of the error message
-   */
+  /** The language code of the error message */
   lang?: string;
 
-  /**
-   * The text of the message.
-   */
+  /** The text of the message. */
   value?: string;
 }
 
-/**
- * An item of additional information included in an Azure Batch error response.
- */
+/** An item of additional information included in an Azure Batch error response. */
 model BatchErrorDetail {
-  /**
-   * An identifier specifying the meaning of the Value property.
-   */
+  /** An identifier specifying the meaning of the Value property. */
   key?: string;
 
-  /**
-   * The additional information included with the error response.
-   */
+  /** The additional information included with the error response. */
   value?: string;
 }
 
-/**
- * The result of a listing the usage metrics for an Account.
- */
+/** The result of a listing the usage metrics for an Account. */
 model PoolListUsageMetricsResult {
-  /**
-   * The Pool usage metrics data.
-   */
+  /** The Pool usage metrics data. */
   @pageItems
   value?: PoolUsageMetrics[];
 
-  /**
-   * The URL to get the next set of results.
-   */
+  /** The URL to get the next set of results. */
   @nextLink
   `odata.nextLink`?: string;
 }
 
-/**
- * Usage metrics for a Pool across an aggregation interval.
- */
+/** Usage metrics for a Pool across an aggregation interval. */
 @resource("poolusagemetrics")
 model PoolUsageMetrics {
-  /**
-   * The ID of the Pool whose metrics are aggregated in this entry.
-   */
+  /** The ID of the Pool whose metrics are aggregated in this entry. */
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   poolId: string;
 
-  /**
-   * The start time of the aggregation interval covered by this entry.
-   */
+  /** The start time of the aggregation interval covered by this entry. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime: utcDateTime;
 
-  /**
-   * The end time of the aggregation interval covered by this entry.
-   */
+  /** The end time of the aggregation interval covered by this entry. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime: utcDateTime;
 
@@ -1200,25 +988,17 @@ model PoolUsageMetrics {
    */
   vmSize: string;
 
-  /**
-   * The total core hours used in the Pool during this aggregation interval.
-   */
+  /** The total core hours used in the Pool during this aggregation interval. */
   totalCoreHours: float64;
 }
 
-/**
- * The result of listing the supported Virtual Machine Images.
- */
+/** The result of listing the supported Virtual Machine Images. */
 model AccountListSupportedImagesResult {
-  /**
-   * The list of supported Virtual Machine Images.
-   */
+  /** The list of supported Virtual Machine Images. */
   @pageItems
   value?: ImageInformation[];
 
-  /**
-   * The URL to get the next set of results.
-   */
+  /** The URL to get the next set of results. */
   @nextLink
   `odata.nextLink`?: string;
 }
@@ -1229,9 +1009,7 @@ model AccountListSupportedImagesResult {
  */
 @resource("supportedimages")
 model ImageInformation {
-  /**
-   * The ID of the Compute Node agent SKU which the Image supports.
-   */
+  /** The ID of the Compute Node agent SKU which the Image supports. */
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   nodeAgentSKUId: string;
@@ -1243,9 +1021,7 @@ model ImageInformation {
    */
   imageReference: ImageReference;
 
-  /**
-   * The type of operating system (e.g. Windows or Linux) of the Image.
-   */
+  /** The type of operating system (e.g. Windows or Linux) of the Image. */
   osType: OSType;
 
   /**
@@ -1275,19 +1051,13 @@ model ImageInformation {
  * verified by Azure Batch, see the 'List Supported Images' operation.
  */
 model ImageReference {
-  /**
-   * For example, Canonical or MicrosoftWindowsServer.
-   */
+  /** For example, Canonical or MicrosoftWindowsServer. */
   publisher?: string;
 
-  /**
-   * For example, UbuntuServer or WindowsServer.
-   */
+  /** For example, UbuntuServer or WindowsServer. */
   offer?: string;
 
-  /**
-   * For example, 18.04-LTS or 2019-Datacenter.
-   */
+  /** For example, 18.04-LTS or 2019-Datacenter. */
   sku?: string;
 
   /**
@@ -1316,135 +1086,85 @@ model ImageReference {
   exactVersion?: string;
 }
 
-/**
- * The result of listing the Compute Node counts in the Account.
- */
+/** The result of listing the Compute Node counts in the Account. */
 model PoolNodeCountsListResult {
-  /**
-   * A list of Compute Node counts by Pool.
-   */
+  /** A list of Compute Node counts by Pool. */
   @pageItems
   value?: PoolNodeCounts[];
 
-  /**
-   * The URL to get the next set of results.
-   */
+  /** The URL to get the next set of results. */
   @nextLink
   `odata.nextLink`?: string;
 }
 
-/**
- * The number of Compute Nodes in each state for a Pool.
- */
+/** The number of Compute Nodes in each state for a Pool. */
 @resource("nodecounts")
 model PoolNodeCounts {
-  /**
-   * The ID of the Pool.
-   */
+  /** The ID of the Pool. */
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   poolId: string;
 
-  /**
-   * The number of Compute Nodes in each Compute Node state.
-   */
+  /** The number of Compute Nodes in each Compute Node state. */
   dedicated?: NodeCounts;
 
-  /**
-   * The number of Compute Nodes in each Compute Node state.
-   */
+  /** The number of Compute Nodes in each Compute Node state. */
   lowPriority?: NodeCounts;
 }
 
-/**
- * The number of Compute Nodes in each Compute Node state.
- */
+/** The number of Compute Nodes in each Compute Node state. */
 model NodeCounts {
-  /**
-   * The number of Compute Nodes in the creating state.
-   */
+  /** The number of Compute Nodes in the creating state. */
   creating: int32;
 
-  /**
-   * The number of Compute Nodes in the idle state.
-   */
+  /** The number of Compute Nodes in the idle state. */
   idle: int32;
 
-  /**
-   * The number of Compute Nodes in the offline state.
-   */
+  /** The number of Compute Nodes in the offline state. */
   offline: int32;
 
-  /**
-   * The number of Compute Nodes in the preempted state.
-   */
+  /** The number of Compute Nodes in the preempted state. */
   preempted: int32;
 
-  /**
-   * The count of Compute Nodes in the rebooting state.
-   */
+  /** The count of Compute Nodes in the rebooting state. */
   rebooting: int32;
 
-  /**
-   * The number of Compute Nodes in the reimaging state.
-   */
+  /** The number of Compute Nodes in the reimaging state. */
   reimaging: int32;
 
-  /**
-   * The number of Compute Nodes in the running state.
-   */
+  /** The number of Compute Nodes in the running state. */
   running: int32;
 
-  /**
-   * The number of Compute Nodes in the starting state.
-   */
+  /** The number of Compute Nodes in the starting state. */
   starting: int32;
 
-  /**
-   * The number of Compute Nodes in the startTaskFailed state.
-   */
+  /** The number of Compute Nodes in the startTaskFailed state. */
   startTaskFailed: int32;
 
-  /**
-   * The number of Compute Nodes in the leavingPool state.
-   */
+  /** The number of Compute Nodes in the leavingPool state. */
   leavingPool: int32;
 
-  /**
-   * The number of Compute Nodes in the unknown state.
-   */
+  /** The number of Compute Nodes in the unknown state. */
   `unknown`: int32;
 
-  /**
-   * The number of Compute Nodes in the unusable state.
-   */
+  /** The number of Compute Nodes in the unusable state. */
   unusable: int32;
 
-  /**
-   * The number of Compute Nodes in the waitingForStartTask state.
-   */
+  /** The number of Compute Nodes in the waitingForStartTask state. */
   waitingForStartTask: int32;
 
-  /**
-   * The total number of Compute Nodes.
-   */
+  /** The total number of Compute Nodes. */
   total: int32;
 }
 
-/**
- * Contains utilization and resource usage statistics for the lifetime of a Pool.
- */
+/** Contains utilization and resource usage statistics for the lifetime of a Pool. */
 model PoolStatistics {
-  /**
-   * The URL for the statistics.
-   */
+  /** The URL for the statistics. */
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   url: string;
 
-  /**
-   * The start time of the time range covered by the statistics.
-   */
+  /** The start time of the time range covered by the statistics. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime: utcDateTime;
 
@@ -1455,24 +1175,16 @@ model PoolStatistics {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdateTime: utcDateTime;
 
-  /**
-   * Statistics related to Pool usage information.
-   */
+  /** Statistics related to Pool usage information. */
   usageStats?: UsageStatistics;
 
-  /**
-   * Statistics related to resource consumption by Compute Nodes in a Pool.
-   */
+  /** Statistics related to resource consumption by Compute Nodes in a Pool. */
   resourceStats?: ResourceStatistics;
 }
 
-/**
- * Statistics related to Pool usage information.
- */
+/** Statistics related to Pool usage information. */
 model UsageStatistics {
-  /**
-   * The start time of the time range covered by the statistics.
-   */
+  /** The start time of the time range covered by the statistics. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime: utcDateTime;
 
@@ -1490,13 +1202,9 @@ model UsageStatistics {
   dedicatedCoreTime: duration;
 }
 
-/**
- * Statistics related to resource consumption by Compute Nodes in a Pool.
- */
+/** Statistics related to resource consumption by Compute Nodes in a Pool. */
 model ResourceStatistics {
-  /**
-   * The start time of the time range covered by the statistics.
-   */
+  /** The start time of the time range covered by the statistics. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime: utcDateTime;
 
@@ -1513,34 +1221,22 @@ model ResourceStatistics {
    */
   avgCPUPercentage: float64;
 
-  /**
-   * The average memory usage in GiB across all Compute Nodes in the Pool.
-   */
+  /** The average memory usage in GiB across all Compute Nodes in the Pool. */
   avgMemoryGiB: float64;
 
-  /**
-   * The peak memory usage in GiB across all Compute Nodes in the Pool.
-   */
+  /** The peak memory usage in GiB across all Compute Nodes in the Pool. */
   peakMemoryGiB: float64;
 
-  /**
-   * The average used disk space in GiB across all Compute Nodes in the Pool.
-   */
+  /** The average used disk space in GiB across all Compute Nodes in the Pool. */
   avgDiskGiB: float64;
 
-  /**
-   * The peak used disk space in GiB across all Compute Nodes in the Pool.
-   */
+  /** The peak used disk space in GiB across all Compute Nodes in the Pool. */
   peakDiskGiB: float64;
 
-  /**
-   * The total number of disk read operations across all Compute Nodes in the Pool.
-   */
+  /** The total number of disk read operations across all Compute Nodes in the Pool. */
   diskReadIOps: int64;
 
-  /**
-   * The total number of disk write operations across all Compute Nodes in the Pool.
-   */
+  /** The total number of disk write operations across all Compute Nodes in the Pool. */
   diskWriteIOps: int64;
 
   /**
@@ -1568,20 +1264,14 @@ model ResourceStatistics {
   networkWriteGiB: float64;
 }
 
-/**
- * Resource usage statistics for a Job.
- */
+/** Resource usage statistics for a Job. */
 model JobStatistics {
-  /**
-   * The URL of the statistics.
-   */
+  /** The URL of the statistics. */
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   url: string;
 
-  /**
-   * The start time of the time range covered by the statistics.
-   */
+  /** The start time of the time range covered by the statistics. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime: utcDateTime;
 
@@ -1612,29 +1302,19 @@ model JobStatistics {
    */
   wallClockTime: duration;
 
-  /**
-   * The total number of disk read operations made by all Tasks in the Job.
-   */
+  /** The total number of disk read operations made by all Tasks in the Job. */
   readIOps: int64;
 
-  /**
-   * The total number of disk write operations made by all Tasks in the Job.
-   */
+  /** The total number of disk write operations made by all Tasks in the Job. */
   writeIOps: int64;
 
-  /**
-   * The total amount of data in GiB read from disk by all Tasks in the Job.
-   */
+  /** The total amount of data in GiB read from disk by all Tasks in the Job. */
   readIOGiB: float64;
 
-  /**
-   * The total amount of data in GiB written to disk by all Tasks in the Job.
-   */
+  /** The total amount of data in GiB written to disk by all Tasks in the Job. */
   writeIOGiB: float64;
 
-  /**
-   * A Task completes successfully if it returns exit code 0.
-   */
+  /** A Task completes successfully if it returns exit code 0. */
   numSucceededTasks: int64;
 
   /**
@@ -1671,78 +1351,54 @@ model Certificate {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   thumbprint?: string;
 
-  /**
-   * The algorithm used to derive the thumbprint.
-   */
+  /** The algorithm used to derive the thumbprint. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   thumbprintAlgorithm?: string;
 
-  /**
-   * The URL of the Certificate.
-   */
+  /** The URL of the Certificate. */
   @visibility(Lifecycle.Read)
   url?: string;
 
-  /**
-   * The state of the Certificate.
-   */
+  /** The state of the Certificate. */
   @visibility(Lifecycle.Read)
   state?: CertificateState;
 
-  /**
-   * The time at which the Certificate entered its current state.
-   */
+  /** The time at which the Certificate entered its current state. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   stateTransitionTime?: utcDateTime;
 
-  /**
-   * This property is not set if the Certificate is in its initial active state.
-   */
+  /** This property is not set if the Certificate is in its initial active state. */
   @visibility(Lifecycle.Read)
   previousState?: CertificateState;
 
-  /**
-   * This property is not set if the Certificate is in its initial Active state.
-   */
+  /** This property is not set if the Certificate is in its initial Active state. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   previousStateTransitionTime?: utcDateTime;
 
-  /**
-   * The public part of the Certificate as a base-64 encoded .cer file.
-   */
+  /** The public part of the Certificate as a base-64 encoded .cer file. */
   @visibility(Lifecycle.Read)
   publicData?: string;
 
-  /**
-   * This property is set only if the Certificate is in the DeleteFailed state.
-   */
+  /** This property is set only if the Certificate is in the DeleteFailed state. */
   @visibility(Lifecycle.Read)
   deleteCertificateError?: DeleteCertificateError;
 
-  /**
-   * The base64-encoded contents of the Certificate. The maximum size is 10KB.
-   */
+  /** The base64-encoded contents of the Certificate. The maximum size is 10KB. */
   @visibility(Lifecycle.Create)
   data?: string;
 
-  /**
-   * The format of the Certificate data.
-   */
+  /** The format of the Certificate data. */
   @visibility(Lifecycle.Create)
   certificateFormat?: CertificateFormat;
 
-  /**
-   * This must be omitted if the Certificate format is cer.
-   */
+  /** This must be omitted if the Certificate format is cer. */
   @visibility(Lifecycle.Create)
   password?: string;
 }
 
-/**
- * An error encountered by the Batch service when deleting a Certificate.
- */
+/** An error encountered by the Batch service when deleting a Certificate. */
 model DeleteCertificateError {
   /**
    * An identifier for the Certificate deletion error. Codes are invariant and are
@@ -1764,34 +1420,22 @@ model DeleteCertificateError {
   values?: NameValuePair[];
 }
 
-/**
- * Represents a name-value pair.
- */
+/** Represents a name-value pair. */
 model NameValuePair {
-  /**
-   * The name in the name-value pair.
-   */
+  /** The name in the name-value pair. */
   name?: string;
 
-  /**
-   * The value in the name-value pair.
-   */
+  /** The value in the name-value pair. */
   value?: string;
 }
 
-/**
- * The result of listing the Certificates in the Account.
- */
+/** The result of listing the Certificates in the Account. */
 model CertificateListResult {
-  /**
-   * The list of Certificates.
-   */
+  /** The list of Certificates. */
   @pageItems
   value?: Certificate[];
 
-  /**
-   * The URL to get the next set of results.
-   */
+  /** The URL to get the next set of results. */
   @nextLink
   `odata.nextLink`?: string;
 }
@@ -1801,73 +1445,47 @@ model CertificateListResult {
  * a Task on a Compute Node.
  */
 model NodeFileListResult {
-  /**
-   * The list of files.
-   */
+  /** The list of files. */
   @pageItems
   value?: NodeFile[];
 
-  /**
-   * The URL to get the next set of results.
-   */
+  /** The URL to get the next set of results. */
   @nextLink
   `odata.nextLink`?: string;
 }
 
-/**
- * Information about a file or directory on a Compute Node.
- */
+/** Information about a file or directory on a Compute Node. */
 model NodeFile {
-  /**
-   * The file path.
-   */
+  /** The file path. */
   name?: string;
 
-  /**
-   * The URL of the file.
-   */
+  /** The URL of the file. */
   url?: string;
 
-  /**
-   * Whether the object represents a directory.
-   */
+  /** Whether the object represents a directory. */
   isDirectory?: boolean;
 
-  /**
-   * The properties of a file on a Compute Node.
-   */
+  /** The properties of a file on a Compute Node. */
   properties?: FileProperties;
 }
 
-/**
- * The properties of a file on a Compute Node.
- */
+/** The properties of a file on a Compute Node. */
 model FileProperties {
-  /**
-   * The creation time is not returned for files on Linux Compute Nodes.
-   */
+  /** The creation time is not returned for files on Linux Compute Nodes. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   creationTime?: utcDateTime;
 
-  /**
-   * The time at which the file was last modified.
-   */
+  /** The time at which the file was last modified. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModified: utcDateTime;
 
-  /**
-   * The length of the file.
-   */
+  /** The length of the file. */
   contentLength: int64;
 
-  /**
-   * The content type of the file.
-   */
+  /** The content type of the file. */
   contentType?: string;
 
-  /**
-   * The file mode is returned only for files on Linux Compute Nodes.
-   */
+  /** The file mode is returned only for files on Linux Compute Nodes. */
   fileMode?: string;
 }
 
@@ -1876,21 +1494,15 @@ model FileProperties {
  * specification used to create each Job.
  */
 model BatchJobSchedule {
-  /**
-   * A string that uniquely identifies the schedule within the Account.
-   */
+  /** A string that uniquely identifies the schedule within the Account. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   id?: string;
 
-  /**
-   * The display name for the schedule.
-   */
+  /** The display name for the schedule. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   displayName?: string;
 
-  /**
-   * The URL of the Job Schedule.
-   */
+  /** The URL of the Job Schedule. */
   @visibility(Lifecycle.Read)
   url?: string;
 
@@ -1912,35 +1524,25 @@ model BatchJobSchedule {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModified?: utcDateTime;
 
-  /**
-   * The creation time of the Job Schedule.
-   */
+  /** The creation time of the Job Schedule. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   creationTime?: utcDateTime;
 
-  /**
-   * The state of the Job Schedule.
-   */
+  /** The state of the Job Schedule. */
   @visibility(Lifecycle.Read)
   state?: JobScheduleState;
 
-  /**
-   * The time at which the Job Schedule entered the current state.
-   */
+  /** The time at which the Job Schedule entered the current state. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   stateTransitionTime?: utcDateTime;
 
-  /**
-   * This property is not present if the Job Schedule is in its initial active state.
-   */
+  /** This property is not present if the Job Schedule is in its initial active state. */
   @visibility(Lifecycle.Read)
   previousState?: JobScheduleState;
 
-  /**
-   * This property is not present if the Job Schedule is in its initial active state.
-   */
+  /** This property is not present if the Job Schedule is in its initial active state. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   previousStateTransitionTime?: utcDateTime;
@@ -1951,9 +1553,7 @@ model BatchJobSchedule {
    */
   schedule?: Schedule;
 
-  /**
-   * Specifies details of the Jobs to be created on a schedule.
-   */
+  /** Specifies details of the Jobs to be created on a schedule. */
   jobSpecification?: JobSpecification;
 
   /**
@@ -1969,9 +1569,7 @@ model BatchJobSchedule {
    */
   metadata?: MetadataItem[];
 
-  /**
-   * Resource usage statistics for a Job Schedule.
-   */
+  /** Resource usage statistics for a Job Schedule. */
   @visibility(Lifecycle.Read)
   stats?: JobScheduleStatistics;
 }
@@ -2028,9 +1626,7 @@ model Schedule {
   recurrenceInterval?: duration;
 }
 
-/**
- * Specifies details of the Jobs to be created on a schedule.
- */
+/** Specifies details of the Jobs to be created on a schedule. */
 model JobSpecification {
   /**
    * Priority values can range from -1000 to 1000, with -1000 being the lowest
@@ -2079,19 +1675,13 @@ model JobSpecification {
    */
   onAllTasksComplete?: OnAllTasksComplete;
 
-  /**
-   * The default is noaction.
-   */
+  /** The default is noaction. */
   onTaskFailure?: OnTaskFailure;
 
-  /**
-   * The network configuration for the Job.
-   */
+  /** The network configuration for the Job. */
   networkConfiguration?: JobNetworkConfiguration;
 
-  /**
-   * The execution constraints for a Job.
-   */
+  /** The execution constraints for a Job. */
   constraints?: JobConstraints;
 
   /**
@@ -2126,9 +1716,7 @@ model JobSpecification {
    */
   commonEnvironmentSettings?: EnvironmentSetting[];
 
-  /**
-   * Specifies how a Job should be assigned to a Pool.
-   */
+  /** Specifies how a Job should be assigned to a Pool. */
   poolInfo: PoolInformation;
 
   /**
@@ -2138,9 +1726,7 @@ model JobSpecification {
   metadata?: MetadataItem[];
 }
 
-/**
- * The network configuration for the Job.
- */
+/** The network configuration for the Job. */
 model JobNetworkConfiguration {
   /**
    * The virtual network must be in the same region and subscription as the Azure
@@ -2166,9 +1752,7 @@ model JobNetworkConfiguration {
   subnetId: string;
 }
 
-/**
- * The execution constraints for a Job.
- */
+/** The execution constraints for a Job. */
 model JobConstraints {
   /**
    * If the Job does not complete within the time limit, the Batch service
@@ -2268,14 +1852,10 @@ model JobManagerTask {
    */
   outputFiles?: OutputFile[];
 
-  /**
-   * A list of environment variable settings for the Job Manager Task.
-   */
+  /** A list of environment variable settings for the Job Manager Task. */
   environmentSettings?: EnvironmentSetting[];
 
-  /**
-   * Execution constraints to apply to a Task.
-   */
+  /** Execution constraints to apply to a Task. */
   constraints?: TaskConstraints;
 
   /**
@@ -2300,9 +1880,7 @@ model JobManagerTask {
    */
   killJobOnCompletion?: boolean;
 
-  /**
-   * If omitted, the Task runs as a non-administrative user unique to the Task.
-   */
+  /** If omitted, the Task runs as a non-administrative user unique to the Task. */
   userIdentity?: UserIdentity;
 
   /**
@@ -2335,15 +1913,11 @@ model JobManagerTask {
    */
   authenticationTokenSettings?: AuthenticationTokenSettings;
 
-  /**
-   * The default value is true.
-   */
+  /** The default value is true. */
   allowLowPriorityNode?: boolean;
 }
 
-/**
- * The container settings for a Task.
- */
+/** The container settings for a Task. */
 model TaskContainerSettings {
   /**
    * These additional options are supplied as arguments to the "docker create"
@@ -2358,34 +1932,22 @@ model TaskContainerSettings {
    */
   imageName: string;
 
-  /**
-   * This setting can be omitted if was already provided at Pool creation.
-   */
+  /** This setting can be omitted if was already provided at Pool creation. */
   registry?: ContainerRegistry;
 
-  /**
-   * The default is 'taskWorkingDirectory'.
-   */
+  /** The default is 'taskWorkingDirectory'. */
   workingDirectory?: ContainerWorkingDirectory;
 }
 
-/**
- * A private container registry.
- */
+/** A private container registry. */
 model ContainerRegistry {
-  /**
-   * The user name to log into the registry server.
-   */
+  /** The user name to log into the registry server. */
   username?: string;
 
-  /**
-   * The password to log into the registry server.
-   */
+  /** The password to log into the registry server. */
   password?: string;
 
-  /**
-   * If omitted, the default is "docker.io".
-   */
+  /** If omitted, the default is "docker.io". */
   registryServer?: string;
 
   /**
@@ -2400,15 +1962,11 @@ model ContainerRegistry {
  * a compute node will use.
  */
 model ComputeNodeIdentityReference {
-  /**
-   * The ARM resource id of the user assigned identity.
-   */
+  /** The ARM resource id of the user assigned identity. */
   resourceId?: string;
 }
 
-/**
- * A single file or multiple files to be downloaded to a Compute Node.
- */
+/** A single file or multiple files to be downloaded to a Compute Node. */
 model ResourceFile {
   /**
    * The autoStorageContainerName, storageContainerUrl and httpUrl properties are
@@ -2497,9 +2055,7 @@ model OutputFile {
    */
   filePattern: string;
 
-  /**
-   * The destination to which a file should be uploaded.
-   */
+  /** The destination to which a file should be uploaded. */
   destination: OutputFileDestination;
 
   /**
@@ -2509,19 +2065,13 @@ model OutputFile {
   uploadOptions: OutputFileUploadOptions;
 }
 
-/**
- * The destination to which a file should be uploaded.
- */
+/** The destination to which a file should be uploaded. */
 model OutputFileDestination {
-  /**
-   * Specifies a file upload destination within an Azure blob storage container.
-   */
+  /** Specifies a file upload destination within an Azure blob storage container. */
   container?: OutputFileBlobContainerDestination;
 }
 
-/**
- * Specifies a file upload destination within an Azure blob storage container.
- */
+/** Specifies a file upload destination within an Azure blob storage container. */
 model OutputFileBlobContainerDestination {
   /**
    * If filePattern refers to a specific file (i.e. contains no wildcards), then
@@ -2539,9 +2089,7 @@ model OutputFileBlobContainerDestination {
    */
   containerUrl: string;
 
-  /**
-   * The identity must have write access to the Azure Blob Storage container
-   */
+  /** The identity must have write access to the Azure Blob Storage container */
   identityReference?: ComputeNodeIdentityReference;
 
   /**
@@ -2552,18 +2100,12 @@ model OutputFileBlobContainerDestination {
   uploadHeaders?: HttpHeader[];
 }
 
-/**
- * An HTTP header name-value pair
- */
+/** An HTTP header name-value pair */
 model HttpHeader {
-  /**
-   * The case-insensitive name of the header to be used while uploading output files
-   */
+  /** The case-insensitive name of the header to be used while uploading output files */
   name: string;
 
-  /**
-   * The value of the header to be used while uploading output files
-   */
+  /** The value of the header to be used while uploading output files */
   value?: string;
 }
 
@@ -2572,34 +2114,22 @@ model HttpHeader {
  * to perform the upload.
  */
 model OutputFileUploadOptions {
-  /**
-   * The default is taskcompletion.
-   */
+  /** The default is taskcompletion. */
   uploadCondition: OutputFileUploadCondition;
 }
 
-/**
- * An environment variable to be set on a Task process.
- */
+/** An environment variable to be set on a Task process. */
 model EnvironmentSetting {
-  /**
-   * The name of the environment variable.
-   */
+  /** The name of the environment variable. */
   name: string;
 
-  /**
-   * The value of the environment variable.
-   */
+  /** The value of the environment variable. */
   value?: string;
 }
 
-/**
- * Execution constraints to apply to a Task.
- */
+/** Execution constraints to apply to a Task. */
 model TaskConstraints {
-  /**
-   * If this is not specified, there is no time limit on how long the Task may run.
-   */
+  /** If this is not specified, there is no time limit on how long the Task may run. */
   maxWallClockTime?: duration;
 
   /**
@@ -2621,9 +2151,7 @@ model TaskConstraints {
   maxTaskRetryCount?: int32;
 }
 
-/**
- * Specify either the userName or autoUser property, but not both.
- */
+/** Specify either the userName or autoUser property, but not both. */
 model UserIdentity {
   /**
    * The userName and autoUser properties are mutually exclusive; you must specify
@@ -2652,19 +2180,13 @@ model AutoUserSpecification {
    */
   scope?: AutoUserScope;
 
-  /**
-   * The default value is nonAdmin.
-   */
+  /** The default value is nonAdmin. */
   elevationLevel?: ElevationLevel;
 }
 
-/**
- * A reference to an Package to be deployed to Compute Nodes.
- */
+/** A reference to an Package to be deployed to Compute Nodes. */
 model ApplicationPackageReference {
-  /**
-   * The ID of the application to deploy.
-   */
+  /** The ID of the application to deploy. */
   applicationId: string;
 
   /**
@@ -2763,14 +2285,10 @@ model JobPreparationTask {
    */
   resourceFiles?: ResourceFile[];
 
-  /**
-   * A list of environment variable settings for the Job Preparation Task.
-   */
+  /** A list of environment variable settings for the Job Preparation Task. */
   environmentSettings?: EnvironmentSetting[];
 
-  /**
-   * Execution constraints to apply to a Task.
-   */
+  /** Execution constraints to apply to a Task. */
   constraints?: TaskConstraints;
 
   /**
@@ -2856,14 +2374,10 @@ model JobReleaseTask {
    */
   containerSettings?: TaskContainerSettings;
 
-  /**
-   * Files listed under this element are located in the Task's working directory.
-   */
+  /** Files listed under this element are located in the Task's working directory. */
   resourceFiles?: ResourceFile[];
 
-  /**
-   * A list of environment variable settings for the Job Release Task.
-   */
+  /** A list of environment variable settings for the Job Release Task. */
   environmentSettings?: EnvironmentSetting[];
 
   /**
@@ -2882,15 +2396,11 @@ model JobReleaseTask {
    */
   retentionTime?: duration;
 
-  /**
-   * If omitted, the Task runs as a non-administrative user unique to the Task.
-   */
+  /** If omitted, the Task runs as a non-administrative user unique to the Task. */
   userIdentity?: UserIdentity;
 }
 
-/**
- * Specifies how a Job should be assigned to a Pool.
- */
+/** Specifies how a Job should be assigned to a Pool. */
 model PoolInformation {
   /**
    * You must ensure that the Pool referenced by this property exists. If the Pool
@@ -2942,15 +2452,11 @@ model AutoPoolSpecification {
    */
   keepAlive?: boolean;
 
-  /**
-   * Specification for creating a new Pool.
-   */
+  /** Specification for creating a new Pool. */
   pool?: PoolSpecification;
 }
 
-/**
- * Specification for creating a new Pool.
- */
+/** Specification for creating a new Pool. */
 model PoolSpecification {
   /**
    * The display name need not be unique and can contain any Unicode characters up
@@ -2991,9 +2497,7 @@ model PoolSpecification {
    */
   taskSlotsPerNode?: int32;
 
-  /**
-   * If not specified, the default is spread.
-   */
+  /** If not specified, the default is spread. */
   taskSchedulingPolicy?: TaskSchedulingPolicy;
 
   /**
@@ -3050,9 +2554,7 @@ model PoolSpecification {
    */
   enableInterNodeCommunication?: boolean;
 
-  /**
-   * The network configuration for a Pool.
-   */
+  /** The network configuration for a Pool. */
   networkConfiguration?: NetworkConfiguration;
 
   /**
@@ -3099,9 +2601,7 @@ model PoolSpecification {
    */
   applicationLicenses?: string[];
 
-  /**
-   * The list of user Accounts to be created on each Compute Node in the Pool.
-   */
+  /** The list of user Accounts to be created on each Compute Node in the Pool. */
   userAccounts?: UserAccount[];
 
   /**
@@ -3110,9 +2610,7 @@ model PoolSpecification {
    */
   metadata?: MetadataItem[];
 
-  /**
-   * This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.
-   */
+  /** This supports Azure Files, NFS, CIFS/SMB, and Blobfuse. */
   mountConfiguration?: MountConfiguration[];
 }
 
@@ -3221,19 +2719,13 @@ model VirtualMachineConfiguration {
    */
   extensions?: VMExtension[];
 
-  /**
-   * Settings for the operating system disk of the compute node (VM).
-   */
+  /** Settings for the operating system disk of the compute node (VM). */
   osDisk?: OSDisk;
 }
 
-/**
- * Windows operating system settings to apply to the virtual machine.
- */
+/** Windows operating system settings to apply to the virtual machine. */
 model WindowsConfiguration {
-  /**
-   * If omitted, the default value is true.
-   */
+  /** If omitted, the default value is true. */
   enableAutomaticUpdates?: boolean;
 }
 
@@ -3257,24 +2749,16 @@ model DataDisk {
    */
   caching?: CachingType;
 
-  /**
-   * The initial disk size in gigabytes.
-   */
+  /** The initial disk size in gigabytes. */
   diskSizeGB: int32;
 
-  /**
-   * If omitted, the default is "standard_lrs".
-   */
+  /** If omitted, the default is "standard_lrs". */
   storageAccountType?: StorageAccountType;
 }
 
-/**
- * The configuration for container-enabled Pools.
- */
+/** The configuration for container-enabled Pools. */
 model ContainerConfiguration {
-  /**
-   * The container technology to be used.
-   */
+  /** The container technology to be used. */
   type: "dockerCompatible";
 
   /**
@@ -3318,28 +2802,18 @@ model NodePlacementConfiguration {
   policy?: NodePlacementPolicyType;
 }
 
-/**
- * The configuration for virtual machine extensions.
- */
+/** The configuration for virtual machine extensions. */
 model VMExtension {
-  /**
-   * The name of the virtual machine extension.
-   */
+  /** The name of the virtual machine extension. */
   name: string;
 
-  /**
-   * The name of the extension handler publisher.
-   */
+  /** The name of the extension handler publisher. */
   publisher: string;
 
-  /**
-   * The type of the extension.
-   */
+  /** The type of the extension. */
   type: string;
 
-  /**
-   * The version of script handler.
-   */
+  /** The version of script handler. */
   typeHandlerVersion?: string;
 
   /**
@@ -3349,9 +2823,7 @@ model VMExtension {
    */
   autoUpgradeMinorVersion?: boolean;
 
-  /**
-   * JSON formatted public settings for the extension.
-   */
+  /** JSON formatted public settings for the extension. */
   settings?: unknown;
 
   /**
@@ -3367,9 +2839,7 @@ model VMExtension {
   provisionAfterExtensions?: string[];
 }
 
-/**
- * Settings for the operating system disk of the compute node (VM).
- */
+/** Settings for the operating system disk of the compute node (VM). */
 model OSDisk {
   /**
    * Specifies the ephemeral Disk Settings for the operating system disk used by the
@@ -3395,19 +2865,13 @@ model DiffDiskSettings {
   placement?: "CacheDisk";
 }
 
-/**
- * Specifies how Tasks should be distributed across Compute Nodes.
- */
+/** Specifies how Tasks should be distributed across Compute Nodes. */
 model TaskSchedulingPolicy {
-  /**
-   * If not specified, the default is spread.
-   */
+  /** If not specified, the default is spread. */
   nodeFillType: ComputeNodeFillType;
 }
 
-/**
- * The network configuration for a Pool.
- */
+/** The network configuration for a Pool. */
 model NetworkConfiguration {
   /**
    * The virtual network must be in the same region and subscription as the Azure
@@ -3435,9 +2899,7 @@ model NetworkConfiguration {
    */
   subnetId?: string;
 
-  /**
-   * The scope of dynamic vnet assignment.
-   */
+  /** The scope of dynamic vnet assignment. */
   dynamicVNetAssignmentScope?: DynamicVNetAssignmentScope;
 
   /**
@@ -3453,9 +2915,7 @@ model NetworkConfiguration {
   publicIPAddressConfiguration?: PublicIPAddressConfiguration;
 }
 
-/**
- * The endpoint configuration for a Pool.
- */
+/** The endpoint configuration for a Pool. */
 model PoolEndpointConfiguration {
   /**
    * The maximum number of inbound NAT Pools per Batch Pool is 5. If the maximum
@@ -3480,9 +2940,7 @@ model InboundNATPool {
    */
   name: string;
 
-  /**
-   * The protocol of the endpoint.
-   */
+  /** The protocol of the endpoint. */
   protocol: InboundEndpointProtocol;
 
   /**
@@ -3519,9 +2977,7 @@ model InboundNATPool {
   networkSecurityGroupRules?: NetworkSecurityGroupRule[];
 }
 
-/**
- * A network security group rule to apply to an inbound endpoint.
- */
+/** A network security group rule to apply to an inbound endpoint. */
 model NetworkSecurityGroupRule {
   /**
    * Priorities within a Pool must be unique and are evaluated in order of priority.
@@ -3533,9 +2989,7 @@ model NetworkSecurityGroupRule {
    */
   priority: int32;
 
-  /**
-   * The action that should be taken for a specified IP address, subnet range or tag.
-   */
+  /** The action that should be taken for a specified IP address, subnet range or tag. */
   access: NetworkSecurityGroupRuleAccess;
 
   /**
@@ -3555,13 +3009,9 @@ model NetworkSecurityGroupRule {
   sourcePortRanges?: string[];
 }
 
-/**
- * The public IP Address configuration of the networking configuration of a Pool.
- */
+/** The public IP Address configuration of the networking configuration of a Pool. */
 model PublicIPAddressConfiguration {
-  /**
-   * The default value is BatchManaged.
-   */
+  /** The default value is BatchManaged. */
   provision?: IPAddressProvisioningType;
 
   /**
@@ -3613,19 +3063,13 @@ model StartTask {
    */
   containerSettings?: TaskContainerSettings;
 
-  /**
-   * Files listed under this element are located in the Task's working directory.
-   */
+  /** Files listed under this element are located in the Task's working directory. */
   resourceFiles?: ResourceFile[];
 
-  /**
-   * A list of environment variable settings for the StartTask.
-   */
+  /** A list of environment variable settings for the StartTask. */
   environmentSettings?: EnvironmentSetting[];
 
-  /**
-   * If omitted, the Task runs as a non-administrative user unique to the Task.
-   */
+  /** If omitted, the Task runs as a non-administrative user unique to the Task. */
   userIdentity?: UserIdentity;
 
   /**
@@ -3654,18 +3098,12 @@ model StartTask {
   waitForSuccess?: boolean;
 }
 
-/**
- * A reference to a Certificate to be installed on Compute Nodes in a Pool.
- */
+/** A reference to a Certificate to be installed on Compute Nodes in a Pool. */
 model CertificateReference {
-  /**
-   * The thumbprint of the Certificate.
-   */
+  /** The thumbprint of the Certificate. */
   thumbprint: string;
 
-  /**
-   * The algorithm with which the thumbprint is associated. This must be sha1.
-   */
+  /** The algorithm with which the thumbprint is associated. This must be sha1. */
   thumbprintAlgorithm: string;
 
   /**
@@ -3703,19 +3141,13 @@ model CertificateReference {
  * Compute Node.
  */
 model UserAccount {
-  /**
-   * The name of the user Account.
-   */
+  /** The name of the user Account. */
   name: string;
 
-  /**
-   * The password for the user Account.
-   */
+  /** The password for the user Account. */
   password: string;
 
-  /**
-   * The default value is nonAdmin.
-   */
+  /** The default value is nonAdmin. */
   elevationLevel?: ElevationLevel;
 
   /**
@@ -3731,9 +3163,7 @@ model UserAccount {
   windowsUserConfiguration?: WindowsUserConfiguration;
 }
 
-/**
- * Properties used to create a user Account on a Linux Compute Node.
- */
+/** Properties used to create a user Account on a Linux Compute Node. */
 model LinuxUserConfiguration {
   /**
    * The uid and gid properties must be specified together or not at all. If not
@@ -3759,9 +3189,7 @@ model LinuxUserConfiguration {
   sshPrivateKey?: string;
 }
 
-/**
- * Properties used to create a user Account on a Windows Compute Node.
- */
+/** Properties used to create a user Account on a Windows Compute Node. */
 model WindowsUserConfiguration {
   /**
    * The default value for VirtualMachineConfiguration Pools is 'batch' and for
@@ -3775,54 +3203,34 @@ model WindowsUserConfiguration {
  * for the use of user code.
  */
 model MetadataItem {
-  /**
-   * The name of the metadata item.
-   */
+  /** The name of the metadata item. */
   name: string;
 
-  /**
-   * The value of the metadata item.
-   */
+  /** The value of the metadata item. */
   value: string;
 }
 
-/**
- * The file system to mount on each node.
- */
+/** The file system to mount on each node. */
 model MountConfiguration {
-  /**
-   * This property is mutually exclusive with all other properties.
-   */
+  /** This property is mutually exclusive with all other properties. */
   azureBlobFileSystemConfiguration?: AzureBlobFileSystemConfiguration;
 
-  /**
-   * This property is mutually exclusive with all other properties.
-   */
+  /** This property is mutually exclusive with all other properties. */
   nfsMountConfiguration?: NFSMountConfiguration;
 
-  /**
-   * This property is mutually exclusive with all other properties.
-   */
+  /** This property is mutually exclusive with all other properties. */
   cifsMountConfiguration?: CifsMountConfiguration;
 
-  /**
-   * This property is mutually exclusive with all other properties.
-   */
+  /** This property is mutually exclusive with all other properties. */
   azureFileShareConfiguration?: AzureFileShareConfiguration;
 }
 
-/**
- * Information used to connect to an Azure Storage Container using Blobfuse.
- */
+/** Information used to connect to an Azure Storage Container using Blobfuse. */
 model AzureBlobFileSystemConfiguration {
-  /**
-   * The Azure Storage Account name.
-   */
+  /** The Azure Storage Account name. */
   accountName: string;
 
-  /**
-   * The Azure Blob Storage Container name.
-   */
+  /** The Azure Blob Storage Container name. */
   containerName: string;
 
   /**
@@ -3837,9 +3245,7 @@ model AzureBlobFileSystemConfiguration {
    */
   sasKey?: string;
 
-  /**
-   * These are 'net use' options in Windows and 'mount' options in Linux.
-   */
+  /** These are 'net use' options in Windows and 'mount' options in Linux. */
   blobfuseOptions?: string;
 
   /**
@@ -3855,13 +3261,9 @@ model AzureBlobFileSystemConfiguration {
   identityReference?: ComputeNodeIdentityReference;
 }
 
-/**
- * Information used to connect to an NFS file system.
- */
+/** Information used to connect to an NFS file system. */
 model NFSMountConfiguration {
-  /**
-   * The URI of the file system to mount.
-   */
+  /** The URI of the file system to mount. */
   source: string;
 
   /**
@@ -3870,24 +3272,16 @@ model NFSMountConfiguration {
    */
   relativeMountPath: string;
 
-  /**
-   * These are 'net use' options in Windows and 'mount' options in Linux.
-   */
+  /** These are 'net use' options in Windows and 'mount' options in Linux. */
   mountOptions?: string;
 }
 
-/**
- * Information used to connect to a CIFS file system.
- */
+/** Information used to connect to a CIFS file system. */
 model CifsMountConfiguration {
-  /**
-   * The user to use for authentication against the CIFS file system.
-   */
+  /** The user to use for authentication against the CIFS file system. */
   username: string;
 
-  /**
-   * The URI of the file system to mount.
-   */
+  /** The URI of the file system to mount. */
   source: string;
 
   /**
@@ -3896,34 +3290,22 @@ model CifsMountConfiguration {
    */
   relativeMountPath: string;
 
-  /**
-   * These are 'net use' options in Windows and 'mount' options in Linux.
-   */
+  /** These are 'net use' options in Windows and 'mount' options in Linux. */
   mountOptions?: string;
 
-  /**
-   * The password to use for authentication against the CIFS file system.
-   */
+  /** The password to use for authentication against the CIFS file system. */
   password: string;
 }
 
-/**
- * Information used to connect to an Azure Fileshare.
- */
+/** Information used to connect to an Azure Fileshare. */
 model AzureFileShareConfiguration {
-  /**
-   * The Azure Storage account name.
-   */
+  /** The Azure Storage account name. */
   accountName: string;
 
-  /**
-   * This is of the form 'https://{account}.file.core.windows.net/'.
-   */
+  /** This is of the form 'https://{account}.file.core.windows.net/'. */
   azureFileUrl: string;
 
-  /**
-   * The Azure Storage account key.
-   */
+  /** The Azure Storage account key. */
   accountKey: string;
 
   /**
@@ -3932,9 +3314,7 @@ model AzureFileShareConfiguration {
    */
   relativeMountPath: string;
 
-  /**
-   * These are 'net use' options in Windows and 'mount' options in Linux.
-   */
+  /** These are 'net use' options in Windows and 'mount' options in Linux. */
   mountOptions?: string;
 }
 
@@ -3957,40 +3337,26 @@ model JobScheduleExecutionInformation {
    */
   recentJob?: RecentJob;
 
-  /**
-   * This property is set only if the Job Schedule is in the completed state.
-   */
+  /** This property is set only if the Job Schedule is in the completed state. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 }
 
-/**
- * Information about the most recent Job to run under the Job Schedule.
- */
+/** Information about the most recent Job to run under the Job Schedule. */
 model RecentJob {
-  /**
-   * The ID of the Job.
-   */
+  /** The ID of the Job. */
   id?: string;
 
-  /**
-   * The URL of the Job.
-   */
+  /** The URL of the Job. */
   url?: string;
 }
 
-/**
- * Resource usage statistics for a Job Schedule.
- */
+/** Resource usage statistics for a Job Schedule. */
 model JobScheduleStatistics {
-  /**
-   * The URL of the statistics.
-   */
+  /** The URL of the statistics. */
   url: string;
 
-  /**
-   * The start time of the time range covered by the statistics.
-   */
+  /** The start time of the time range covered by the statistics. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime: utcDateTime;
 
@@ -4072,9 +3438,7 @@ model JobScheduleStatistics {
   waitTime: duration;
 }
 
-/**
- * The set of changes to be made to a Job Schedule.
- */
+/** The set of changes to be made to a Job Schedule. */
 model BatchJobScheduleUpdate {
   /**
    * All times are fixed respective to UTC and are not impacted by daylight saving
@@ -4089,32 +3453,22 @@ model BatchJobScheduleUpdate {
    */
   jobSpecification?: JobSpecification;
 
-  /**
-   * If you do not specify this element, existing metadata is left unchanged.
-   */
+  /** If you do not specify this element, existing metadata is left unchanged. */
   metadata?: MetadataItem[];
 }
 
-/**
- * The result of listing the Job Schedules in an Account.
- */
+/** The result of listing the Job Schedules in an Account. */
 model BatchJobScheduleListResult {
-  /**
-   * The list of Job Schedules.
-   */
+  /** The list of Job Schedules. */
   @pageItems
   value?: BatchJobSchedule[];
 
-  /**
-   * The URL to get the next set of results.
-   */
+  /** The URL to get the next set of results. */
   @nextLink
   `odata.nextLink`?: string;
 }
 
-/**
- * An Azure Batch Job.
- */
+/** An Azure Batch Job. */
 model BatchJob {
   /**
    * The ID is case-preserving and case-insensitive (that is, you may not have two
@@ -4123,9 +3477,7 @@ model BatchJob {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   id?: string;
 
-  /**
-   * The display name for the Job.
-   */
+  /** The display name for the Job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   displayName?: string;
 
@@ -4136,9 +3488,7 @@ model BatchJob {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   usesTaskDependencies?: boolean;
 
-  /**
-   * The URL of the Job.
-   */
+  /** The URL of the Job. */
   @visibility(Lifecycle.Read)
   url?: string;
 
@@ -4160,35 +3510,25 @@ model BatchJob {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModified?: utcDateTime;
 
-  /**
-   * The creation time of the Job.
-   */
+  /** The creation time of the Job. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   creationTime?: utcDateTime;
 
-  /**
-   * The state of the Job.
-   */
+  /** The state of the Job. */
   @visibility(Lifecycle.Read)
   state?: JobState;
 
-  /**
-   * The time at which the Job entered its current state.
-   */
+  /** The time at which the Job entered its current state. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   stateTransitionTime?: utcDateTime;
 
-  /**
-   * This property is not set if the Job is in its initial Active state.
-   */
+  /** This property is not set if the Job is in its initial Active state. */
   @visibility(Lifecycle.Read)
   previousState?: JobState;
 
-  /**
-   * This property is not set if the Job is in its initial Active state.
-   */
+  /** This property is not set if the Job is in its initial Active state. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   previousStateTransitionTime?: utcDateTime;
@@ -4215,9 +3555,7 @@ model BatchJob {
    */
   maxParallelTasks?: int32 = -1;
 
-  /**
-   * The execution constraints for a Job.
-   */
+  /** The execution constraints for a Job. */
   constraints?: JobConstraints;
 
   /**
@@ -4268,14 +3606,10 @@ model BatchJob {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   commonEnvironmentSettings?: EnvironmentSetting[];
 
-  /**
-   * Specifies how a Job should be assigned to a Pool.
-   */
+  /** Specifies how a Job should be assigned to a Pool. */
   poolInfo?: PoolInformation;
 
-  /**
-   * The default is noaction.
-   */
+  /** The default is noaction. */
   onAllTasksComplete?: OnAllTasksComplete;
 
   /**
@@ -4287,9 +3621,7 @@ model BatchJob {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   onTaskFailure?: OnTaskFailure;
 
-  /**
-   * The network configuration for the Job.
-   */
+  /** The network configuration for the Job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   networkConfiguration?: JobNetworkConfiguration;
 
@@ -4299,9 +3631,7 @@ model BatchJob {
    */
   metadata?: MetadataItem[];
 
-  /**
-   * Contains information about the execution of a Job in the Azure Batch service.
-   */
+  /** Contains information about the execution of a Job in the Azure Batch service. */
   @visibility(Lifecycle.Read)
   executionInfo?: JobExecutionInformation;
 
@@ -4315,19 +3645,13 @@ model BatchJob {
   stats?: JobStatistics;
 }
 
-/**
- * Contains information about the execution of a Job in the Azure Batch service.
- */
+/** Contains information about the execution of a Job in the Azure Batch service. */
 model JobExecutionInformation {
-  /**
-   * This is the time at which the Job was created.
-   */
+  /** This is the time at which the Job was created. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime: utcDateTime;
 
-  /**
-   * This property is set only if the Job is in the completed state.
-   */
+  /** This property is set only if the Job is in the completed state. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
@@ -4341,9 +3665,7 @@ model JobExecutionInformation {
    */
   poolId?: string;
 
-  /**
-   * This property is not set if there was no error starting the Job.
-   */
+  /** This property is not set if there was no error starting the Job. */
   schedulingError?: JobSchedulingError;
 
   /**
@@ -4362,13 +3684,9 @@ model JobExecutionInformation {
   terminateReason?: string;
 }
 
-/**
- * An error encountered by the Batch service when scheduling a Job.
- */
+/** An error encountered by the Batch service when scheduling a Job. */
 model JobSchedulingError {
-  /**
-   * The category of the error.
-   */
+  /** The category of the error. */
   category: ErrorCategory;
 
   /**
@@ -4383,15 +3701,11 @@ model JobSchedulingError {
    */
   message?: string;
 
-  /**
-   * A list of additional error details related to the scheduling error.
-   */
+  /** A list of additional error details related to the scheduling error. */
   details?: NameValuePair[];
 }
 
-/**
- * The set of changes to be made to a Job.
- */
+/** The set of changes to be made to a Job. */
 model BatchJobUpdate {
   /**
    * Priority values can range from -1000 to 1000, with -1000 being the lowest
@@ -4425,9 +3739,7 @@ model BatchJobUpdate {
    */
   onAllTasksComplete?: OnAllTasksComplete;
 
-  /**
-   * If omitted, the existing execution constraints are left unchanged.
-   */
+  /** If omitted, the existing execution constraints are left unchanged. */
   constraints?: JobConstraints;
 
   /**
@@ -4441,25 +3753,17 @@ model BatchJobUpdate {
    */
   poolInfo?: PoolInformation;
 
-  /**
-   * If omitted, the existing Job metadata is left unchanged.
-   */
+  /** If omitted, the existing Job metadata is left unchanged. */
   metadata?: MetadataItem[];
 }
 
-/**
- * Options when disabling a Job.
- */
+/** Options when disabling a Job. */
 model BatchJobDisableParameters {
-  /**
-   * What to do with active Tasks associated with the Job.
-   */
+  /** What to do with active Tasks associated with the Job. */
   disableTasks: DisableJobOption;
 }
 
-/**
- * Options when terminating a Job.
- */
+/** Options when terminating a Job. */
 model BatchJobTerminateParameters {
   /**
    * The text you want to appear as the Job's TerminateReason. The default is
@@ -4468,19 +3772,13 @@ model BatchJobTerminateParameters {
   terminateReason?: string;
 }
 
-/**
- * The result of listing the Jobs in an Account.
- */
+/** The result of listing the Jobs in an Account. */
 model BatchJobListResult {
-  /**
-   * The list of Jobs.
-   */
+  /** The list of Jobs. */
   @pageItems
   value?: BatchJob[];
 
-  /**
-   * The URL to get the next set of results.
-   */
+  /** The URL to get the next set of results. */
   @nextLink
   `odata.nextLink`?: string;
 }
@@ -4490,36 +3788,24 @@ model BatchJobListResult {
  * for a Job.
  */
 model BatchJobListPreparationAndReleaseTaskStatusResult {
-  /**
-   * A list of Job Preparation and Job Release Task execution information.
-   */
+  /** A list of Job Preparation and Job Release Task execution information. */
   @pageItems
   value?: JobPreparationAndReleaseTaskExecutionInformation[];
 
-  /**
-   * The URL to get the next set of results.
-   */
+  /** The URL to get the next set of results. */
   @nextLink
   `odata.nextLink`?: string;
 }
 
-/**
- * The status of the Job Preparation and Job Release Tasks on a Compute Node.
- */
+/** The status of the Job Preparation and Job Release Tasks on a Compute Node. */
 model JobPreparationAndReleaseTaskExecutionInformation {
-  /**
-   * The ID of the Pool containing the Compute Node to which this entry refers.
-   */
+  /** The ID of the Pool containing the Compute Node to which this entry refers. */
   poolId?: string;
 
-  /**
-   * The ID of the Compute Node to which this entry refers.
-   */
+  /** The ID of the Compute Node to which this entry refers. */
   nodeId?: string;
 
-  /**
-   * The URL of the Compute Node to which this entry refers.
-   */
+  /** The URL of the Compute Node to which this entry refers. */
   nodeUrl?: string;
 
   /**
@@ -4528,9 +3814,7 @@ model JobPreparationAndReleaseTaskExecutionInformation {
    */
   jobPreparationTaskExecutionInfo?: JobPreparationTaskExecutionInformation;
 
-  /**
-   * This property is set only if the Job Release Task has run on the Compute Node.
-   */
+  /** This property is set only if the Job Release Task has run on the Compute Node. */
   jobReleaseTaskExecutionInfo?: JobReleaseTaskExecutionInformation;
 }
 
@@ -4546,15 +3830,11 @@ model JobPreparationTaskExecutionInformation {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime: utcDateTime;
 
-  /**
-   * This property is set only if the Task is in the Completed state.
-   */
+  /** This property is set only if the Task is in the Completed state. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
-  /**
-   * The current state of the Job Preparation Task on the Compute Node.
-   */
+  /** The current state of the Job Preparation Task on the Compute Node. */
   state: JobPreparationTaskState;
 
   /**
@@ -4563,9 +3843,7 @@ model JobPreparationTaskExecutionInformation {
    */
   taskRootDirectory?: string;
 
-  /**
-   * The URL to the root directory of the Job Preparation Task on the Compute Node.
-   */
+  /** The URL to the root directory of the Job Preparation Task on the Compute Node. */
   taskRootDirectoryUrl?: string;
 
   /**
@@ -4578,9 +3856,7 @@ model JobPreparationTaskExecutionInformation {
    */
   exitCode?: int32;
 
-  /**
-   * This property is set only if the Task runs in a container context.
-   */
+  /** This property is set only if the Task runs in a container context. */
   containerInfo?: TaskContainerExecutionInformation;
 
   /**
@@ -4613,13 +3889,9 @@ model JobPreparationTaskExecutionInformation {
   result?: TaskExecutionResult;
 }
 
-/**
- * Contains information about the container which a Task is executing.
- */
+/** Contains information about the container which a Task is executing. */
 model TaskContainerExecutionInformation {
-  /**
-   * The ID of the container.
-   */
+  /** The ID of the container. */
   containerId?: string;
 
   /**
@@ -4635,13 +3907,9 @@ model TaskContainerExecutionInformation {
   error?: string;
 }
 
-/**
- * Information about a Task failure.
- */
+/** Information about a Task failure. */
 model TaskFailureInformation {
-  /**
-   * The category of the error.
-   */
+  /** The category of the error. */
   category: ErrorCategory;
 
   /**
@@ -4656,9 +3924,7 @@ model TaskFailureInformation {
    */
   message?: string;
 
-  /**
-   * A list of additional details related to the error.
-   */
+  /** A list of additional details related to the error. */
   details?: NameValuePair[];
 }
 
@@ -4674,15 +3940,11 @@ model JobReleaseTaskExecutionInformation {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime: utcDateTime;
 
-  /**
-   * This property is set only if the Task is in the Completed state.
-   */
+  /** This property is set only if the Task is in the Completed state. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
-  /**
-   * The current state of the Job Release Task on the Compute Node.
-   */
+  /** The current state of the Job Release Task on the Compute Node. */
   state: JobReleaseTaskState;
 
   /**
@@ -4691,9 +3953,7 @@ model JobReleaseTaskExecutionInformation {
    */
   taskRootDirectory?: string;
 
-  /**
-   * The URL to the root directory of the Job Release Task on the Compute Node.
-   */
+  /** The URL to the root directory of the Job Release Task on the Compute Node. */
   taskRootDirectoryUrl?: string;
 
   /**
@@ -4706,9 +3966,7 @@ model JobReleaseTaskExecutionInformation {
    */
   exitCode?: int32;
 
-  /**
-   * This property is set only if the Task runs in a container context.
-   */
+  /** This property is set only if the Task runs in a container context. */
   containerInfo?: TaskContainerExecutionInformation;
 
   /**
@@ -4724,40 +3982,26 @@ model JobReleaseTaskExecutionInformation {
   result?: TaskExecutionResult;
 }
 
-/**
- * The Task and TaskSlot counts for a Job.
- */
+/** The Task and TaskSlot counts for a Job. */
 model TaskCountsResult {
-  /**
-   * The Task counts for a Job.
-   */
+  /** The Task counts for a Job. */
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   taskCounts: TaskCounts;
 
-  /**
-   * The TaskSlot counts for a Job.
-   */
+  /** The TaskSlot counts for a Job. */
   taskSlotCounts: TaskSlotCounts;
 }
 
-/**
- * The Task counts for a Job.
- */
+/** The Task counts for a Job. */
 model TaskCounts {
-  /**
-   * The number of Tasks in the active state.
-   */
+  /** The number of Tasks in the active state. */
   active: int32;
 
-  /**
-   * The number of Tasks in the running or preparing state.
-   */
+  /** The number of Tasks in the running or preparing state. */
   running: int32;
 
-  /**
-   * The number of Tasks in the completed state.
-   */
+  /** The number of Tasks in the completed state. */
   completed: int32;
 
   /**
@@ -4773,39 +4017,25 @@ model TaskCounts {
   failed: int32;
 }
 
-/**
- * The TaskSlot counts for a Job.
- */
+/** The TaskSlot counts for a Job. */
 model TaskSlotCounts {
-  /**
-   * The number of TaskSlots for active Tasks.
-   */
+  /** The number of TaskSlots for active Tasks. */
   active: int32;
 
-  /**
-   * The number of TaskSlots for running Tasks.
-   */
+  /** The number of TaskSlots for running Tasks. */
   running: int32;
 
-  /**
-   * The number of TaskSlots for completed Tasks.
-   */
+  /** The number of TaskSlots for completed Tasks. */
   completed: int32;
 
-  /**
-   * The number of TaskSlots for succeeded Tasks.
-   */
+  /** The number of TaskSlots for succeeded Tasks. */
   succeeded: int32;
 
-  /**
-   * The number of TaskSlots for failed Tasks.
-   */
+  /** The number of TaskSlots for failed Tasks. */
   failed: int32;
 }
 
-/**
- * A Pool in the Azure Batch service.
- */
+/** A Pool in the Azure Batch service. */
 model BatchPool {
   /**
    * The ID can contain any combination of alphanumeric characters including hyphens
@@ -4823,9 +4053,7 @@ model BatchPool {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   displayName?: string;
 
-  /**
-   * The URL of the Pool.
-   */
+  /** The URL of the Pool. */
   @visibility(Lifecycle.Read)
   url?: string;
 
@@ -4847,35 +4075,25 @@ model BatchPool {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModified?: utcDateTime;
 
-  /**
-   * The creation time of the Pool.
-   */
+  /** The creation time of the Pool. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   creationTime?: utcDateTime;
 
-  /**
-   * The current state of the Pool.
-   */
+  /** The current state of the Pool. */
   @visibility(Lifecycle.Read)
   state?: PoolState;
 
-  /**
-   * The time at which the Pool entered its current state.
-   */
+  /** The time at which the Pool entered its current state. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   stateTransitionTime?: utcDateTime;
 
-  /**
-   * Whether the Pool is resizing.
-   */
+  /** Whether the Pool is resizing. */
   @visibility(Lifecycle.Read)
   allocationState?: AllocationState;
 
-  /**
-   * The time at which the Pool entered its current allocation state.
-   */
+  /** The time at which the Pool entered its current allocation state. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   allocationStateTransitionTime?: utcDateTime;
@@ -4918,9 +4136,7 @@ model BatchPool {
   @visibility(Lifecycle.Read)
   resizeErrors?: ResizeError[];
 
-  /**
-   * The number of dedicated Compute Nodes currently in the Pool.
-   */
+  /** The number of dedicated Compute Nodes currently in the Pool. */
   @visibility(Lifecycle.Read)
   currentDedicatedNodes?: int32;
 
@@ -4931,15 +4147,11 @@ model BatchPool {
   @visibility(Lifecycle.Read)
   currentLowPriorityNodes?: int32;
 
-  /**
-   * The desired number of dedicated Compute Nodes in the Pool.
-   */
+  /** The desired number of dedicated Compute Nodes in the Pool. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   targetDedicatedNodes?: int32;
 
-  /**
-   * The desired number of Spot/Low-priority Compute Nodes in the Pool.
-   */
+  /** The desired number of Spot/Low-priority Compute Nodes in the Pool. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   targetLowPriorityNodes?: int32;
 
@@ -4980,9 +4192,7 @@ model BatchPool {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   enableInterNodeCommunication?: boolean;
 
-  /**
-   * The network configuration for a Pool.
-   */
+  /** The network configuration for a Pool. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   networkConfiguration?: NetworkConfiguration;
 
@@ -5036,21 +4246,15 @@ model BatchPool {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   taskSlotsPerNode?: int32;
 
-  /**
-   * If not specified, the default is spread.
-   */
+  /** If not specified, the default is spread. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   taskSchedulingPolicy?: TaskSchedulingPolicy;
 
-  /**
-   * The list of user Accounts to be created on each Compute Node in the Pool.
-   */
+  /** The list of user Accounts to be created on each Compute Node in the Pool. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   userAccounts?: UserAccount[];
 
-  /**
-   * A list of name-value pairs associated with the Pool as metadata.
-   */
+  /** A list of name-value pairs associated with the Pool as metadata. */
   metadata?: MetadataItem[];
 
   /**
@@ -5062,9 +4266,7 @@ model BatchPool {
   @visibility(Lifecycle.Read)
   stats?: PoolStatistics;
 
-  /**
-   * This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.
-   */
+  /** This supports Azure Files, NFS, CIFS/SMB, and Blobfuse. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   mountConfiguration?: MountConfiguration[];
 
@@ -5077,9 +4279,7 @@ model BatchPool {
   identity?: BatchPoolIdentity;
 }
 
-/**
- * An error that occurred when resizing a Pool.
- */
+/** An error that occurred when resizing a Pool. */
 model ResizeError {
   /**
    * An identifier for the Pool resize error. Codes are invariant and are intended
@@ -5093,19 +4293,13 @@ model ResizeError {
    */
   message?: string;
 
-  /**
-   * A list of additional error details related to the Pool resize error.
-   */
+  /** A list of additional error details related to the Pool resize error. */
   values?: NameValuePair[];
 }
 
-/**
- * The results and errors from an execution of a Pool autoscale formula.
- */
+/** The results and errors from an execution of a Pool autoscale formula. */
 model AutoScaleRun {
-  /**
-   * The time at which the autoscale formula was last evaluated.
-   */
+  /** The time at which the autoscale formula was last evaluated. */
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
@@ -5117,15 +4311,11 @@ model AutoScaleRun {
    */
   results?: string;
 
-  /**
-   * An error that occurred when executing or evaluating a Pool autoscale formula.
-   */
+  /** An error that occurred when executing or evaluating a Pool autoscale formula. */
   error?: AutoScaleRunError;
 }
 
-/**
- * An error that occurred when executing or evaluating a Pool autoscale formula.
- */
+/** An error that occurred when executing or evaluating a Pool autoscale formula. */
 model AutoScaleRunError {
   /**
    * An identifier for the autoscale error. Codes are invariant and are intended to
@@ -5139,15 +4329,11 @@ model AutoScaleRunError {
    */
   message?: string;
 
-  /**
-   * A list of additional error details related to the autoscale error.
-   */
+  /** A list of additional error details related to the autoscale error. */
   values?: NameValuePair[];
 }
 
-/**
- * The identity of the Batch pool, if configured.
- */
+/** The identity of the Batch pool, if configured. */
 model BatchPoolIdentity {
   /**
    * The list of user identities associated with the Batch pool. The user identity
@@ -5164,48 +4350,32 @@ model BatchPoolIdentity {
   userAssignedIdentities?: UserAssignedIdentity[];
 }
 
-/**
- * The user assigned Identity
- */
+/** The user assigned Identity */
 model UserAssignedIdentity {
-  /**
-   * The ARM resource id of the user assigned identity
-   */
+  /** The ARM resource id of the user assigned identity */
   resourceId: string;
 
-  /**
-   * The client id of the user assigned identity.
-   */
+  /** The client id of the user assigned identity. */
   @visibility(Lifecycle.Read)
   clientId?: string;
 
-  /**
-   * The principal id of the user assigned identity.
-   */
+  /** The principal id of the user assigned identity. */
   @visibility(Lifecycle.Read)
   principalId?: string;
 }
 
-/**
- * The result of listing the Pools in an Account.
- */
+/** The result of listing the Pools in an Account. */
 model BatchPoolListResult {
-  /**
-   * The list of Pools.
-   */
+  /** The list of Pools. */
   @pageItems
   value?: BatchPool[];
 
-  /**
-   * The URL to get the next set of results.
-   */
+  /** The URL to get the next set of results. */
   @nextLink
   `odata.nextLink`?: string;
 }
 
-/**
- * The set of changes to be made to a Pool.
- */
+/** The set of changes to be made to a Pool. */
 model BatchPoolUpdate {
   /**
    * If this element is present, it overwrites any existing StartTask. If omitted,
@@ -5244,9 +4414,7 @@ model BatchPoolUpdate {
   metadata?: MetadataItem[];
 }
 
-/**
- * Options for enabling automatic scaling on a Pool.
- */
+/** Options for enabling automatic scaling on a Pool. */
 model BatchPoolEnableAutoScaleParameters {
   /**
    * The formula is checked for validity before it is applied to the Pool. If the
@@ -5270,9 +4438,7 @@ model BatchPoolEnableAutoScaleParameters {
   autoScaleEvaluationInterval?: duration;
 }
 
-/**
- * Options for evaluating an automatic scaling formula on a Pool.
- */
+/** Options for evaluating an automatic scaling formula on a Pool. */
 model BatchPoolEvaluateAutoScaleParameters {
   /**
    * The formula is validated and its results calculated, but it is not applied to
@@ -5284,18 +4450,12 @@ model BatchPoolEvaluateAutoScaleParameters {
   autoScaleFormula: string;
 }
 
-/**
- * Options for changing the size of a Pool.
- */
+/** Options for changing the size of a Pool. */
 model BatchPoolResizeParameters {
-  /**
-   * The desired number of dedicated Compute Nodes in the Pool.
-   */
+  /** The desired number of dedicated Compute Nodes in the Pool. */
   targetDedicatedNodes?: int32;
 
-  /**
-   * The desired number of Spot/Low-priority Compute Nodes in the Pool.
-   */
+  /** The desired number of Spot/Low-priority Compute Nodes in the Pool. */
   targetLowPriorityNodes?: int32;
 
   /**
@@ -5305,19 +4465,13 @@ model BatchPoolResizeParameters {
    */
   resizeTimeout?: duration;
 
-  /**
-   * The default value is requeue.
-   */
+  /** The default value is requeue. */
   nodeDeallocationOption?: ComputeNodeDeallocationOption;
 }
 
-/**
- * Options for removing Compute Nodes from a Pool.
- */
+/** Options for removing Compute Nodes from a Pool. */
 model NodeRemoveParameters {
-  /**
-   * A maximum of 100 nodes may be removed per request.
-   */
+  /** A maximum of 100 nodes may be removed per request. */
   nodeList: string[];
 
   /**
@@ -5327,9 +4481,7 @@ model NodeRemoveParameters {
    */
   resizeTimeout?: duration;
 
-  /**
-   * The default value is requeue.
-   */
+  /** The default value is requeue. */
   nodeDeallocationOption?: ComputeNodeDeallocationOption;
 }
 
@@ -5359,9 +4511,7 @@ model BatchTask {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   displayName?: string;
 
-  /**
-   * The URL of the Task.
-   */
+  /** The URL of the Task. */
   @visibility(Lifecycle.Read)
   url?: string;
 
@@ -5374,48 +4524,34 @@ model BatchTask {
   @visibility(Lifecycle.Read)
   eTag?: string;
 
-  /**
-   * The last modified time of the Task.
-   */
+  /** The last modified time of the Task. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModified?: utcDateTime;
 
-  /**
-   * The creation time of the Task.
-   */
+  /** The creation time of the Task. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   creationTime?: utcDateTime;
 
-  /**
-   * How the Batch service should respond when the Task completes.
-   */
+  /** How the Batch service should respond when the Task completes. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   exitConditions?: ExitConditions;
 
-  /**
-   * The state of the Task.
-   */
+  /** The state of the Task. */
   @visibility(Lifecycle.Read)
   state?: TaskState;
 
-  /**
-   * The time at which the Task entered its current state.
-   */
+  /** The time at which the Task entered its current state. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   stateTransitionTime?: utcDateTime;
 
-  /**
-   * This property is not set if the Task is in its initial Active state.
-   */
+  /** This property is not set if the Task is in its initial Active state. */
   @visibility(Lifecycle.Read)
   previousState?: TaskState;
 
-  /**
-   * This property is not set if the Task is in its initial Active state.
-   */
+  /** This property is not set if the Task is in its initial Active state. */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   previousStateTransitionTime?: utcDateTime;
@@ -5467,9 +4603,7 @@ model BatchTask {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   outputFiles?: OutputFile[];
 
-  /**
-   * A list of environment variable settings for the Task.
-   */
+  /** A list of environment variable settings for the Task. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentSettings?: EnvironmentSetting[];
 
@@ -5480,9 +4614,7 @@ model BatchTask {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   affinityInfo?: AffinityInformation;
 
-  /**
-   * Execution constraints to apply to a Task.
-   */
+  /** Execution constraints to apply to a Task. */
   constraints?: TaskConstraints;
 
   /**
@@ -5493,21 +4625,15 @@ model BatchTask {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   requiredSlots?: int32;
 
-  /**
-   * If omitted, the Task runs as a non-administrative user unique to the Task.
-   */
+  /** If omitted, the Task runs as a non-administrative user unique to the Task. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   userIdentity?: UserIdentity;
 
-  /**
-   * Information about the execution of a Task.
-   */
+  /** Information about the execution of a Task. */
   @visibility(Lifecycle.Read)
   executionInfo?: TaskExecutionInformation;
 
-  /**
-   * Information about the Compute Node on which a Task ran.
-   */
+  /** Information about the Compute Node on which a Task ran. */
   @visibility(Lifecycle.Read)
   nodeInfo?: ComputeNodeInformation;
 
@@ -5520,9 +4646,7 @@ model BatchTask {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   multiInstanceSettings?: MultiInstanceSettings;
 
-  /**
-   * Resource usage statistics for a Task.
-   */
+  /** Resource usage statistics for a Task. */
   @visibility(Lifecycle.Read)
   stats?: TaskStatistics;
 
@@ -5558,9 +4682,7 @@ model BatchTask {
   authenticationTokenSettings?: AuthenticationTokenSettings;
 }
 
-/**
- * Specifies how the Batch service should respond when the Task completes.
- */
+/** Specifies how the Batch service should respond when the Task completes. */
 model ExitConditions {
   /**
    * A list of individual Task exit codes and how the Batch service should respond
@@ -5574,9 +4696,7 @@ model ExitConditions {
    */
   exitCodeRanges?: ExitCodeRangeMapping[];
 
-  /**
-   * Specifies how the Batch service responds to a particular exit condition.
-   */
+  /** Specifies how the Batch service responds to a particular exit condition. */
   preProcessingError?: ExitOptions;
 
   /**
@@ -5602,20 +4722,14 @@ model ExitConditions {
  * code.
  */
 model ExitCodeMapping {
-  /**
-   * A process exit code.
-   */
+  /** A process exit code. */
   code: int32;
 
-  /**
-   * Specifies how the Batch service responds to a particular exit condition.
-   */
+  /** Specifies how the Batch service responds to a particular exit condition. */
   exitOptions: ExitOptions;
 }
 
-/**
- * Specifies how the Batch service responds to a particular exit condition.
- */
+/** Specifies how the Batch service responds to a particular exit condition. */
 model ExitOptions {
   /**
    * The default is none for exit code 0 and terminate for all other exit
@@ -5639,19 +4753,13 @@ model ExitOptions {
  * within that range.
  */
 model ExitCodeRangeMapping {
-  /**
-   * The first exit code in the range.
-   */
+  /** The first exit code in the range. */
   start: int32;
 
-  /**
-   * The last exit code in the range.
-   */
+  /** The last exit code in the range. */
   end: int32;
 
-  /**
-   * Specifies how the Batch service responds to a particular exit condition.
-   */
+  /** Specifies how the Batch service responds to a particular exit condition. */
   exitOptions: ExitOptions;
 }
 
@@ -5669,9 +4777,7 @@ model AffinityInformation {
   affinityId: string;
 }
 
-/**
- * Information about the execution of a Task.
- */
+/** Information about the execution of a Task. */
 model TaskExecutionInformation {
   /**
    * 'Running' corresponds to the running state, so if the Task specifies resource
@@ -5683,9 +4789,7 @@ model TaskExecutionInformation {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
-  /**
-   * This property is set only if the Task is in the Completed state.
-   */
+  /** This property is set only if the Task is in the Completed state. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
@@ -5700,9 +4804,7 @@ model TaskExecutionInformation {
    */
   exitCode?: int32;
 
-  /**
-   * This property is set only if the Task runs in a container context.
-   */
+  /** This property is set only if the Task runs in a container context. */
   containerInfo?: TaskContainerExecutionInformation;
 
   /**
@@ -5736,9 +4838,7 @@ model TaskExecutionInformation {
    */
   requeueCount: int32;
 
-  /**
-   * This property is set only if the requeueCount is nonzero.
-   */
+  /** This property is set only if the requeueCount is nonzero. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastRequeueTime?: utcDateTime;
 
@@ -5749,9 +4849,7 @@ model TaskExecutionInformation {
   result?: TaskExecutionResult;
 }
 
-/**
- * Information about the Compute Node on which a Task ran.
- */
+/** Information about the Compute Node on which a Task ran. */
 model ComputeNodeInformation {
   /**
    * An identifier for the Node on which the Task ran, which can be passed when
@@ -5759,29 +4857,19 @@ model ComputeNodeInformation {
    */
   affinityId?: string;
 
-  /**
-   * The URL of the Compute Node on which the Task ran.
-   */
+  /** The URL of the Compute Node on which the Task ran. */
   nodeUrl?: string;
 
-  /**
-   * The ID of the Pool on which the Task ran.
-   */
+  /** The ID of the Pool on which the Task ran. */
   poolId?: string;
 
-  /**
-   * The ID of the Compute Node on which the Task ran.
-   */
+  /** The ID of the Compute Node on which the Task ran. */
   nodeId?: string;
 
-  /**
-   * The root directory of the Task on the Compute Node.
-   */
+  /** The root directory of the Task on the Compute Node. */
   taskRootDirectory?: string;
 
-  /**
-   * The URL to the root directory of the Task on the Compute Node.
-   */
+  /** The URL to the root directory of the Task on the Compute Node. */
   taskRootDirectoryUrl?: string;
 }
 
@@ -5792,9 +4880,7 @@ model ComputeNodeInformation {
  * terminated and retried, up to its retry limit.
  */
 model MultiInstanceSettings {
-  /**
-   * If omitted, the default is 1.
-   */
+  /** If omitted, the default is 1. */
   numberOfInstances?: int32;
 
   /**
@@ -5818,18 +4904,12 @@ model MultiInstanceSettings {
   commonResourceFiles?: ResourceFile[];
 }
 
-/**
- * Resource usage statistics for a Task.
- */
+/** Resource usage statistics for a Task. */
 model TaskStatistics {
-  /**
-   * The URL of the statistics.
-   */
+  /** The URL of the statistics. */
   url: string;
 
-  /**
-   * The start time of the time range covered by the statistics.
-   */
+  /** The start time of the time range covered by the statistics. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime: utcDateTime;
 
@@ -5860,24 +4940,16 @@ model TaskStatistics {
    */
   wallClockTime: duration;
 
-  /**
-   * The total number of disk read operations made by the Task.
-   */
+  /** The total number of disk read operations made by the Task. */
   readIOps: int64;
 
-  /**
-   * The total number of disk write operations made by the Task.
-   */
+  /** The total number of disk write operations made by the Task. */
   writeIOps: int64;
 
-  /**
-   * The total gibibytes read from disk by the Task.
-   */
+  /** The total gibibytes read from disk by the Task. */
   readIOGiB: float64;
 
-  /**
-   * The total gibibytes written to disk by the Task.
-   */
+  /** The total gibibytes written to disk by the Task. */
   writeIOGiB: float64;
 
   /**
@@ -5915,37 +4987,25 @@ model TaskDependencies {
  * 9 and end 12, then it represents Tasks '9', '10', '11' and '12'.
  */
 model TaskIdRange {
-  /**
-   * The first Task ID in the range.
-   */
+  /** The first Task ID in the range. */
   start: int32;
 
-  /**
-   * The last Task ID in the range.
-   */
+  /** The last Task ID in the range. */
   end: int32;
 }
 
-/**
- * The result of listing the Tasks in a Job.
- */
+/** The result of listing the Tasks in a Job. */
 model BatchTaskListResult {
-  /**
-   * The list of Tasks.
-   */
+  /** The list of Tasks. */
   @pageItems
   value?: BatchTask[];
 
-  /**
-   * The URL to get the next set of results.
-   */
+  /** The URL to get the next set of results. */
   @nextLink
   `odata.nextLink`?: string;
 }
 
-/**
- * A collection of Azure Batch Tasks to add.
- */
+/** A collection of Azure Batch Tasks to add. */
 model BatchTaskCollection {
   /**
    * The total serialized size of this collection must be less than 1MB. If it is
@@ -5956,28 +5016,18 @@ model BatchTaskCollection {
   value: BatchTask[];
 }
 
-/**
- * The result of adding a collection of Tasks to a Job.
- */
+/** The result of adding a collection of Tasks to a Job. */
 model TaskAddCollectionResult {
-  /**
-   * The results of the add Task collection operation.
-   */
+  /** The results of the add Task collection operation. */
   value?: TaskAddResult[];
 }
 
-/**
- * Result for a single Task added as part of an add Task collection operation.
- */
+/** Result for a single Task added as part of an add Task collection operation. */
 model TaskAddResult {
-  /**
-   * The status of the add Task request.
-   */
+  /** The status of the add Task request. */
   status: TaskAddStatus;
 
-  /**
-   * The ID of the Task for which this is the result.
-   */
+  /** The ID of the Task for which this is the result. */
   taskId: string;
 
   /**
@@ -5988,45 +5038,29 @@ model TaskAddResult {
    */
   eTag?: string;
 
-  /**
-   * The last modified time of the Task.
-   */
+  /** The last modified time of the Task. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModified?: utcDateTime;
 
-  /**
-   * The URL of the Task, if the Task was successfully added.
-   */
+  /** The URL of the Task, if the Task was successfully added. */
   location?: string;
 
-  /**
-   * An error response received from the Azure Batch service.
-   */
+  /** An error response received from the Azure Batch service. */
   error?: BatchError;
 }
 
-/**
- * The result of listing the subtasks of a Task.
- */
+/** The result of listing the subtasks of a Task. */
 model BatchTaskListSubtasksResult {
-  /**
-   * The list of subtasks.
-   */
+  /** The list of subtasks. */
   value?: SubtaskInformation[];
 }
 
-/**
- * Information about an Azure Batch subtask.
- */
+/** Information about an Azure Batch subtask. */
 model SubtaskInformation {
-  /**
-   * The ID of the subtask.
-   */
+  /** The ID of the subtask. */
   id?: int32;
 
-  /**
-   * Information about the Compute Node on which a Task ran.
-   */
+  /** Information about the Compute Node on which a Task ran. */
   nodeInfo?: ComputeNodeInformation;
 
   /**
@@ -6037,9 +5071,7 @@ model SubtaskInformation {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
-  /**
-   * This property is set only if the subtask is in the Completed state.
-   */
+  /** This property is set only if the subtask is in the Completed state. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
@@ -6054,9 +5086,7 @@ model SubtaskInformation {
    */
   exitCode?: int32;
 
-  /**
-   * This property is set only if the Task runs in a container context.
-   */
+  /** This property is set only if the Task runs in a container context. */
   containerInfo?: TaskContainerExecutionInformation;
 
   /**
@@ -6065,25 +5095,17 @@ model SubtaskInformation {
    */
   failureInfo?: TaskFailureInformation;
 
-  /**
-   * The state of the subtask.
-   */
+  /** The state of the subtask. */
   state?: SubtaskState;
 
-  /**
-   * The time at which the subtask entered its current state.
-   */
+  /** The time at which the subtask entered its current state. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   stateTransitionTime?: utcDateTime;
 
-  /**
-   * This property is not set if the subtask is in its initial running state.
-   */
+  /** This property is not set if the subtask is in its initial running state. */
   previousState?: SubtaskState;
 
-  /**
-   * This property is not set if the subtask is in its initial running state.
-   */
+  /** This property is not set if the subtask is in its initial running state. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   previousStateTransitionTime?: utcDateTime;
 
@@ -6094,18 +5116,12 @@ model SubtaskInformation {
   result?: TaskExecutionResult;
 }
 
-/**
- * A user Account for RDP or SSH access on a Compute Node.
- */
+/** A user Account for RDP or SSH access on a Compute Node. */
 model ComputeNodeUser {
-  /**
-   * The user name of the Account.
-   */
+  /** The user name of the Account. */
   name: string;
 
-  /**
-   * The default value is false.
-   */
+  /** The default value is false. */
   isAdmin?: boolean;
 
   /**
@@ -6133,9 +5149,7 @@ model ComputeNodeUser {
   sshPublicKey?: string;
 }
 
-/**
- * The set of changes to be made to a user Account on a Compute Node.
- */
+/** The set of changes to be made to a user Account on a Compute Node. */
 model NodeUpdateUserParameters {
   /**
    * The password is required for Windows Compute Nodes (those created with
@@ -6163,9 +5177,7 @@ model NodeUpdateUserParameters {
   sshPublicKey?: string;
 }
 
-/**
- * A Compute Node in the Batch service.
- */
+/** A Compute Node in the Batch service. */
 model ComputeNode {
   /**
    * Every Compute Node that is added to a Pool is assigned a unique ID. Whenever a
@@ -6174,9 +5186,7 @@ model ComputeNode {
    */
   id?: string;
 
-  /**
-   * The URL of the Compute Node.
-   */
+  /** The URL of the Compute Node. */
   url?: string;
 
   /**
@@ -6186,20 +5196,14 @@ model ComputeNode {
    */
   state?: ComputeNodeState;
 
-  /**
-   * Whether the Compute Node is available for Task scheduling.
-   */
+  /** Whether the Compute Node is available for Task scheduling. */
   schedulingState?: SchedulingState;
 
-  /**
-   * The time at which the Compute Node entered its current state.
-   */
+  /** The time at which the Compute Node entered its current state. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   stateTransitionTime?: utcDateTime;
 
-  /**
-   * This property may not be present if the Compute Node state is unusable.
-   */
+  /** This property may not be present if the Compute Node state is unusable. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastBootTime?: utcDateTime;
 
@@ -6284,9 +5288,7 @@ model ComputeNode {
    */
   startTask?: StartTask;
 
-  /**
-   * Information about a StartTask running on a Compute Node.
-   */
+  /** Information about a StartTask running on a Compute Node. */
   startTaskInfo?: StartTaskInformation;
 
   /**
@@ -6300,9 +5302,7 @@ model ComputeNode {
    */
   certificateReferences?: CertificateReference[];
 
-  /**
-   * The list of errors that are currently being encountered by the Compute Node.
-   */
+  /** The list of errors that are currently being encountered by the Compute Node. */
   errors?: ComputeNodeError[];
 
   /**
@@ -6311,9 +5311,7 @@ model ComputeNode {
    */
   isDedicated?: boolean;
 
-  /**
-   * The endpoint configuration for the Compute Node.
-   */
+  /** The endpoint configuration for the Compute Node. */
   endpointConfiguration?: ComputeNodeEndpointConfiguration;
 
   /**
@@ -6322,54 +5320,34 @@ model ComputeNode {
    */
   nodeAgentInfo?: NodeAgentInformation;
 
-  /**
-   * Info about the current state of the virtual machine.
-   */
+  /** Info about the current state of the virtual machine. */
   virtualMachineInfo?: VirtualMachineInfo;
 }
 
-/**
- * Information about a Task running on a Compute Node.
- */
+/** Information about a Task running on a Compute Node. */
 model TaskInformation {
-  /**
-   * The URL of the Task.
-   */
+  /** The URL of the Task. */
   taskUrl?: string;
 
-  /**
-   * The ID of the Job to which the Task belongs.
-   */
+  /** The ID of the Job to which the Task belongs. */
   jobId?: string;
 
-  /**
-   * The ID of the Task.
-   */
+  /** The ID of the Task. */
   taskId?: string;
 
-  /**
-   * The ID of the subtask if the Task is a multi-instance Task.
-   */
+  /** The ID of the subtask if the Task is a multi-instance Task. */
   subtaskId?: int32;
 
-  /**
-   * The state of the Task.
-   */
+  /** The state of the Task. */
   taskState: TaskState;
 
-  /**
-   * Information about the execution of a Task.
-   */
+  /** Information about the execution of a Task. */
   executionInfo?: TaskExecutionInformation;
 }
 
-/**
- * Information about a StartTask running on a Compute Node.
- */
+/** Information about a StartTask running on a Compute Node. */
 model StartTaskInformation {
-  /**
-   * The state of the StartTask on the Compute Node.
-   */
+  /** The state of the StartTask on the Compute Node. */
   state: StartTaskState;
 
   /**
@@ -6398,9 +5376,7 @@ model StartTaskInformation {
    */
   exitCode?: int32;
 
-  /**
-   * This property is set only if the Task runs in a container context.
-   */
+  /** This property is set only if the Task runs in a container context. */
   containerInfo?: TaskContainerExecutionInformation;
 
   /**
@@ -6433,9 +5409,7 @@ model StartTaskInformation {
   result?: TaskExecutionResult;
 }
 
-/**
- * An error encountered by a Compute Node.
- */
+/** An error encountered by a Compute Node. */
 model ComputeNodeError {
   /**
    * An identifier for the Compute Node error. Codes are invariant and are intended
@@ -6449,54 +5423,34 @@ model ComputeNodeError {
    */
   message?: string;
 
-  /**
-   * The list of additional error details related to the Compute Node error.
-   */
+  /** The list of additional error details related to the Compute Node error. */
   errorDetails?: NameValuePair[];
 }
 
-/**
- * The endpoint configuration for the Compute Node.
- */
+/** The endpoint configuration for the Compute Node. */
 model ComputeNodeEndpointConfiguration {
-  /**
-   * The list of inbound endpoints that are accessible on the Compute Node.
-   */
+  /** The list of inbound endpoints that are accessible on the Compute Node. */
   inboundEndpoints: InboundEndpoint[];
 }
 
-/**
- * An inbound endpoint on a Compute Node.
- */
+/** An inbound endpoint on a Compute Node. */
 model InboundEndpoint {
-  /**
-   * The name of the endpoint.
-   */
+  /** The name of the endpoint. */
   name: string;
 
-  /**
-   * The protocol of the endpoint.
-   */
+  /** The protocol of the endpoint. */
   protocol: InboundEndpointProtocol;
 
-  /**
-   * The public IP address of the Compute Node.
-   */
+  /** The public IP address of the Compute Node. */
   publicIPAddress: string;
 
-  /**
-   * The public fully qualified domain name for the Compute Node.
-   */
+  /** The public fully qualified domain name for the Compute Node. */
   publicFQDN: string;
 
-  /**
-   * The public port number of the endpoint.
-   */
+  /** The public port number of the endpoint. */
   frontendPort: int32;
 
-  /**
-   * The backend port number of the endpoint.
-   */
+  /** The backend port number of the endpoint. */
   backendPort: int32;
 }
 
@@ -6520,9 +5474,7 @@ model NodeAgentInformation {
   lastUpdateTime: utcDateTime;
 }
 
-/**
- * Info about the current state of the virtual machine.
- */
+/** Info about the current state of the virtual machine. */
 model VirtualMachineInfo {
   /**
    * A reference to an Azure Virtual Machines Marketplace Image or a Shared Image
@@ -6532,56 +5484,36 @@ model VirtualMachineInfo {
   imageReference?: ImageReference;
 }
 
-/**
- * Options for rebooting a Compute Node.
- */
+/** Options for rebooting a Compute Node. */
 model NodeRebootParameters {
-  /**
-   * The default value is requeue.
-   */
+  /** The default value is requeue. */
   nodeRebootOption?: ComputeNodeRebootOption;
 }
 
-/**
- * Options for reimaging a Compute Node.
- */
+/** Options for reimaging a Compute Node. */
 model NodeReimageParameters {
-  /**
-   * The default value is requeue.
-   */
+  /** The default value is requeue. */
   nodeReimageOption?: ComputeNodeReimageOption;
 }
 
-/**
- * Options for disabling scheduling on a Compute Node.
- */
+/** Options for disabling scheduling on a Compute Node. */
 model NodeDisableSchedulingParameters {
-  /**
-   * The default value is requeue.
-   */
+  /** The default value is requeue. */
   nodeDisableSchedulingOption?: DisableComputeNodeSchedulingOption;
 }
 
-/**
- * The remote login settings for a Compute Node.
- */
+/** The remote login settings for a Compute Node. */
 model ComputeNodeGetRemoteLoginSettingsResult {
-  /**
-   * The IP address used for remote login to the Compute Node.
-   */
+  /** The IP address used for remote login to the Compute Node. */
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   remoteLoginIPAddress: string;
 
-  /**
-   * The port used for remote login to the Compute Node.
-   */
+  /** The port used for remote login to the Compute Node. */
   remoteLoginPort: int32;
 }
 
-/**
- * The Azure Batch service log files upload configuration for a Compute Node.
- */
+/** The Azure Batch service log files upload configuration for a Compute Node. */
 model UploadBatchServiceLogsConfiguration {
   /**
    * If a user assigned managed identity is not being used, the URL must include a
@@ -6610,15 +5542,11 @@ model UploadBatchServiceLogsConfiguration {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
-  /**
-   * The identity must have write access to the Azure Blob Storage container.
-   */
+  /** The identity must have write access to the Azure Blob Storage container. */
   identityReference?: ComputeNodeIdentityReference;
 }
 
-/**
- * The result of uploading Batch service log files from a specific Compute Node.
- */
+/** The result of uploading Batch service log files from a specific Compute Node. */
 @resource("pools/{poolId}/nodes/{nodeId}/uploadbatchservicelogs")
 model UploadBatchServiceLogsResult {
   /**
@@ -6629,112 +5557,70 @@ model UploadBatchServiceLogsResult {
   @key
   virtualDirectoryName: string;
 
-  /**
-   * The number of log files which will be uploaded.
-   */
+  /** The number of log files which will be uploaded. */
   numberOfFilesUploaded: int32;
 }
 
-/**
- * The result of listing the Compute Nodes in a Pool.
- */
+/** The result of listing the Compute Nodes in a Pool. */
 model ComputeNodeListResult {
-  /**
-   * The list of Compute Nodes.
-   */
+  /** The list of Compute Nodes. */
   @pageItems
   value?: ComputeNode[];
 
-  /**
-   * The URL to get the next set of results.
-   */
+  /** The URL to get the next set of results. */
   @nextLink
   `odata.nextLink`?: string;
 }
 
-/**
- * The configuration for virtual machine extension instance view.
- */
+/** The configuration for virtual machine extension instance view. */
 model NodeVMExtension {
-  /**
-   * The provisioning state of the virtual machine extension.
-   */
+  /** The provisioning state of the virtual machine extension. */
   provisioningState?: string;
 
-  /**
-   * The configuration for virtual machine extensions.
-   */
+  /** The configuration for virtual machine extensions. */
   vmExtension?: VMExtension;
 
-  /**
-   * The vm extension instance view.
-   */
+  /** The vm extension instance view. */
   instanceView?: VMExtensionInstanceView;
 }
 
-/**
- * The vm extension instance view.
- */
+/** The vm extension instance view. */
 model VMExtensionInstanceView {
-  /**
-   * The name of the vm extension instance view.
-   */
+  /** The name of the vm extension instance view. */
   name?: string;
 
-  /**
-   * The resource status information.
-   */
+  /** The resource status information. */
   statuses?: InstanceViewStatus[];
 
-  /**
-   * The resource status information.
-   */
+  /** The resource status information. */
   subStatuses?: InstanceViewStatus[];
 }
 
-/**
- * The instance view status.
- */
+/** The instance view status. */
 model InstanceViewStatus {
-  /**
-   * The status code.
-   */
+  /** The status code. */
   code?: string;
 
-  /**
-   * The localized label for the status.
-   */
+  /** The localized label for the status. */
   displayStatus?: string;
 
-  /**
-   * Level code.
-   */
+  /** Level code. */
   level?: StatusLevelTypes;
 
-  /**
-   * The detailed status message.
-   */
+  /** The detailed status message. */
   message?: string;
 
-  /**
-   * The time of the status.
-   */
+  /** The time of the status. */
   time?: string;
 }
 
-/**
- * The result of listing the Compute Node extensions in a Node.
- */
+/** The result of listing the Compute Node extensions in a Node. */
 model NodeVMExtensionList {
-  /**
-   * The list of Compute Node extensions.
-   */
+  /** The list of Compute Node extensions. */
   @pageItems
   value?: NodeVMExtension[];
 
-  /**
-   * The URL to get the next set of results.
-   */
+  /** The URL to get the next set of results. */
   @nextLink
   `odata.nextLink`?: string;
 }

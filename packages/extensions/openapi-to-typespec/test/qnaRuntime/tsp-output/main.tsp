@@ -15,9 +15,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-/**
- * An API for QnAMaker runtime
- */
+/** An API for QnAMaker runtime */
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Authorization">)
 @service(#{ title: "QnAMaker Runtime Client" })
 @server(

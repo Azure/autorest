@@ -8,16 +8,12 @@ using TypeSpec.Http;
 namespace Azure.Search;
 
 interface DocumentsOperationGroup {
-  /**
-   * Queries the number of documents in the index.
-   */
+  /** Queries the number of documents in the index. */
   @route("/docs/$count")
   @get
   count is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The tracking ID sent with the request to help with debugging.
-       */
+      /** The tracking ID sent with the request to help with debugging. */
       @format("uuid")
       @header
       `x-ms-client-request-id`?: string;
@@ -25,9 +21,7 @@ interface DocumentsOperationGroup {
     integer
   >;
 
-  /**
-   * Searches for documents in the index.
-   */
+  /** Searches for documents in the index. */
   @route("/docs")
   @get
   searchGet is Azure.Core.Foundations.Operation<
@@ -55,9 +49,7 @@ interface DocumentsOperationGroup {
       @query(#{ name: "facet", explode: true })
       Facets?: string[];
 
-      /**
-       * The OData $filter expression to apply to the search query.
-       */
+      /** The OData $filter expression to apply to the search query. */
       @query("$filter")
       $filter?: string;
 
@@ -187,9 +179,7 @@ interface DocumentsOperationGroup {
       @query("$top")
       $top?: int32;
 
-      /**
-       * The tracking ID sent with the request to help with debugging.
-       */
+      /** The tracking ID sent with the request to help with debugging. */
       @format("uuid")
       @header
       `x-ms-client-request-id`?: string;
@@ -272,60 +262,44 @@ interface DocumentsOperationGroup {
       @query("debug")
       debug?: QueryDebugMode;
 
-      /**
-       * The language of the query.
-       */
+      /** The language of the query. */
       @query("queryLanguage")
       queryLanguage?: QueryLanguage;
 
-      /**
-       * Improve search recall by spell-correcting individual search query terms.
-       */
+      /** Improve search recall by spell-correcting individual search query terms. */
       @query("speller")
       speller?: QuerySpellerType;
 
-      /**
-       * The list of field names used for semantic ranking.
-       */
+      /** The list of field names used for semantic ranking. */
       @query("semanticFields")
       semanticFields?: string[];
     },
     SearchDocumentsResult
   >;
 
-  /**
-   * Searches for documents in the index.
-   */
+  /** Searches for documents in the index. */
   @route("/docs/search.post.search")
   @post
   searchPost is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The tracking ID sent with the request to help with debugging.
-       */
+      /** The tracking ID sent with the request to help with debugging. */
       @format("uuid")
       @header
       `x-ms-client-request-id`?: string;
 
-      /**
-       * The definition of the Search request.
-       */
+      /** The definition of the Search request. */
       @bodyRoot
       searchRequest: SearchRequest;
     },
     SearchDocumentsResult
   >;
 
-  /**
-   * Retrieves a document from the index.
-   */
+  /** Retrieves a document from the index. */
   @route("/docs('{key}')")
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The key of the document to retrieve.
-       */
+      /** The key of the document to retrieve. */
       @path
       key: string;
 
@@ -336,9 +310,7 @@ interface DocumentsOperationGroup {
       @query("$select")
       SelectedFields?: string[];
 
-      /**
-       * The tracking ID sent with the request to help with debugging.
-       */
+      /** The tracking ID sent with the request to help with debugging. */
       @format("uuid")
       @header
       `x-ms-client-request-id`?: string;
@@ -346,9 +318,7 @@ interface DocumentsOperationGroup {
     LookupDocument
   >;
 
-  /**
-   * Suggests documents in the index that match the given partial query text.
-   */
+  /** Suggests documents in the index that match the given partial query text. */
   @route("/docs/search.suggest")
   @get
   suggestGet is Azure.Core.Foundations.Operation<
@@ -367,9 +337,7 @@ interface DocumentsOperationGroup {
       @query("suggesterName")
       suggesterName: string;
 
-      /**
-       * An OData expression that filters the documents considered for suggestions.
-       */
+      /** An OData expression that filters the documents considered for suggestions. */
       @query("$filter")
       $filter?: string;
 
@@ -439,9 +407,7 @@ interface DocumentsOperationGroup {
       @query("$top")
       $top?: int32;
 
-      /**
-       * The tracking ID sent with the request to help with debugging.
-       */
+      /** The tracking ID sent with the request to help with debugging. */
       @format("uuid")
       @header
       `x-ms-client-request-id`?: string;
@@ -449,46 +415,34 @@ interface DocumentsOperationGroup {
     SuggestDocumentsResult
   >;
 
-  /**
-   * Suggests documents in the index that match the given partial query text.
-   */
+  /** Suggests documents in the index that match the given partial query text. */
   @route("/docs/search.post.suggest")
   @post
   suggestPost is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The tracking ID sent with the request to help with debugging.
-       */
+      /** The tracking ID sent with the request to help with debugging. */
       @format("uuid")
       @header
       `x-ms-client-request-id`?: string;
 
-      /**
-       * The Suggest request.
-       */
+      /** The Suggest request. */
       @bodyRoot
       suggestRequest: SuggestRequest;
     },
     SuggestDocumentsResult
   >;
 
-  /**
-   * Sends a batch of document write actions to the index.
-   */
+  /** Sends a batch of document write actions to the index. */
   @route("/docs/search.index")
   @post
   index is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The tracking ID sent with the request to help with debugging.
-       */
+      /** The tracking ID sent with the request to help with debugging. */
       @format("uuid")
       @header
       `x-ms-client-request-id`?: string;
 
-      /**
-       * The batch of index actions.
-       */
+      /** The batch of index actions. */
       @bodyRoot
       batch: IndexBatch;
     },
@@ -503,16 +457,12 @@ interface DocumentsOperationGroup {
   @get
   autocompleteGet is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The tracking ID sent with the request to help with debugging.
-       */
+      /** The tracking ID sent with the request to help with debugging. */
       @format("uuid")
       @header
       `x-ms-client-request-id`?: string;
 
-      /**
-       * The incomplete term which should be auto-completed.
-       */
+      /** The incomplete term which should be auto-completed. */
       @query("search")
       SearchText: string;
 
@@ -596,16 +546,12 @@ interface DocumentsOperationGroup {
   @post
   autocompletePost is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The tracking ID sent with the request to help with debugging.
-       */
+      /** The tracking ID sent with the request to help with debugging. */
       @format("uuid")
       @header
       `x-ms-client-request-id`?: string;
 
-      /**
-       * The definition of the Autocomplete request.
-       */
+      /** The definition of the Autocomplete request. */
       @bodyRoot
       autocompleteRequest: AutocompleteRequest;
     },

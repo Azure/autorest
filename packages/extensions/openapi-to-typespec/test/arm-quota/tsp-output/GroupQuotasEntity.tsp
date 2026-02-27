@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Quota;
-/**
- * Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified.
- */
+/** Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified. */
 model GroupQuotasEntity
   is Azure.ResourceManager.ProxyResource<GroupQuotasEntityProperties> {
   ...ResourceNameParameter<
@@ -25,14 +23,10 @@ model GroupQuotasEntity
 
 @armResourceOperations
 interface GroupQuotasEntities {
-  /**
-   * Gets the GroupQuotas for the name passed. It will return the GroupQuotas properties only. The details on group quota can be access from the group quota APIs.
-   */
+  /** Gets the GroupQuotas for the name passed. It will return the GroupQuotas properties only. The details on group quota can be access from the group quota APIs. */
   get is Extension.Read<Extension.ManagementGroup, GroupQuotasEntity>;
 
-  /**
-   * Creates a new GroupQuota for the name passed. A RequestId will be returned by the Service. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked.
-   */
+  /** Creates a new GroupQuota for the name passed. A RequestId will be returned by the Service. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked. */
   createOrUpdate is Extension.CreateOrReplaceAsync<
     Extension.ManagementGroup,
     GroupQuotasEntity,
@@ -55,26 +49,20 @@ interface GroupQuotasEntities {
     OptionalRequestBody = true
   >;
 
-  /**
-   * Deletes the GroupQuotas for the name passed. All the remaining shareQuota in the GroupQuotas will be lost.
-   */
+  /** Deletes the GroupQuotas for the name passed. All the remaining shareQuota in the GroupQuotas will be lost. */
   delete is Extension.DeleteWithoutOkAsync<
     Extension.ManagementGroup,
     GroupQuotasEntity
   >;
 
-  /**
-   * Lists GroupQuotas for the scope passed. It will return the GroupQuotas QuotaEntity properties only.The details on group quota can be access from the group quota APIs.
-   */
+  /** Lists GroupQuotas for the scope passed. It will return the GroupQuotas QuotaEntity properties only.The details on group quota can be access from the group quota APIs. */
   list is Extension.ListByTarget<
     Extension.ManagementGroup,
     GroupQuotasEntity,
     Response = ArmResponse<GroupQuotaList>
   >;
 
-  /**
-   * Get API to check the status of a GroupQuota request by requestId.
-   */
+  /** Get API to check the status of a GroupQuota request by requestId. */
   @list
   @get
   @action("groupQuotaRequests")
@@ -84,9 +72,7 @@ interface GroupQuotasEntities {
     void,
     ArmResponse<SubmittedResourceRequestStatusList>,
     Parameters = {
-      /**
-       * The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.
-       */
+      /** The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API. */
       @pattern("^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$")
       @path
       resourceProviderName: string;

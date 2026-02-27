@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Test;
-/**
- * A Test resource
- */
+/** A Test resource */
 @parentResource(Employee)
 model DictProperty is Azure.ResourceManager.TrackedResource<Record<unknown>> {
   ...ResourceNameParameter<
@@ -25,14 +23,10 @@ model DictProperty is Azure.ResourceManager.TrackedResource<Record<unknown>> {
 
 @armResourceOperations
 interface DictProperties {
-  /**
-   * Get a Resource.
-   */
+  /** Get a Resource. */
   get is ArmResourceRead<DictProperty>;
 
-  /**
-   * List resources by resource group
-   */
+  /** List resources by resource group */
   listByResourceGroup is ArmResourceListByParent<DictProperty>;
 }
 

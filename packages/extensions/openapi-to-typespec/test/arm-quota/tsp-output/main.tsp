@@ -30,9 +30,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-/**
- * Microsoft Azure Quota Resource Provider. This Swagger is for Azure Group Quota using GroupQuota Entity.
- */
+/** Microsoft Azure Quota Resource Provider. This Swagger is for Azure Group Quota using GroupQuota Entity. */
 @armProviderNamespace
 @service(#{ title: "Azure Quota Extension API" })
 @versioned(Versions)

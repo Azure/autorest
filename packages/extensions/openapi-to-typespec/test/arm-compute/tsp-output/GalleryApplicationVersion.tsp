@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-/**
- * Specifies information about the gallery Application Version that you want to create or update.
- */
+/** Specifies information about the gallery Application Version that you want to create or update. */
 @parentResource(GalleryApplication)
 model GalleryApplicationVersion
   is Azure.ResourceManager.TrackedResource<GalleryApplicationVersionProperties> {
@@ -27,23 +25,17 @@ model GalleryApplicationVersion
 
 @armResourceOperations
 interface GalleryApplicationVersions {
-  /**
-   * Retrieves information about a gallery Application Version.
-   */
+  /** Retrieves information about a gallery Application Version. */
   get is ArmResourceRead<
     GalleryApplicationVersion,
     Parameters = {
-      /**
-       * The expand expression to apply on the operation.
-       */
+      /** The expand expression to apply on the operation. */
       @query("$expand")
       $expand?: ReplicationStatusTypes;
     }
   >;
 
-  /**
-   * Create or update a gallery Application Version.
-   */
+  /** Create or update a gallery Application Version. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -58,9 +50,7 @@ interface GalleryApplicationVersions {
     })
   >;
 
-  /**
-   * Update a gallery Application Version.
-   */
+  /** Update a gallery Application Version. */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     GalleryApplicationVersion,
@@ -68,18 +58,14 @@ interface GalleryApplicationVersions {
     Response = ArmResponse<GalleryApplicationVersion>
   >;
 
-  /**
-   * Delete a gallery Application Version.
-   */
+  /** Delete a gallery Application Version. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     GalleryApplicationVersion,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * List gallery Application Versions in a gallery Application Definition.
-   */
+  /** List gallery Application Versions in a gallery Application Definition. */
   listByGalleryApplication is ArmResourceListByParent<
     GalleryApplicationVersion,
     Response = ArmResponse<GalleryApplicationVersionList>

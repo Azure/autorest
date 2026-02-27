@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-/**
- * Subscription details.
- */
+/** Subscription details. */
 @parentResource(ApiManagementServiceResource)
 model SubscriptionContract
   is Azure.ResourceManager.ProxyResource<SubscriptionContractProperties> {
@@ -51,19 +49,13 @@ alias SubscriptionContractOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @armResourceOperations
 interface SubscriptionContracts {
-  /**
-   * Gets the specified Subscription entity.
-   */
+  /** Gets the specified Subscription entity. */
   get is SubscriptionContractOps.Read<SubscriptionContract>;
 
-  /**
-   * Gets the entity state (Etag) version of the apimanagement subscription specified by its identifier.
-   */
+  /** Gets the entity state (Etag) version of the apimanagement subscription specified by its identifier. */
   getEntityTag is SubscriptionContractOps.CheckExistence<SubscriptionContract>;
 
-  /**
-   * Creates or updates the subscription of specified user to the specified product.
-   */
+  /** Creates or updates the subscription of specified user to the specified product. */
   createOrUpdate is SubscriptionContractOps.CreateOrUpdateSync<
     SubscriptionContract,
     Request = SubscriptionCreateParameters,
@@ -76,23 +68,17 @@ interface SubscriptionContracts {
       @query("notify")
       notify?: boolean;
 
-      /**
-       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
-       */
+      /** ETag of the Entity. Not required when creating an entity, but required when updating an entity. */
       @header
       `If-Match`?: string;
 
-      /**
-       * Determines the type of application which send the create user request. Default is legacy publisher portal.
-       */
+      /** Determines the type of application which send the create user request. Default is legacy publisher portal. */
       @query("appType")
       appType?: AppType;
     }
   >;
 
-  /**
-   * Updates the details of a subscription specified by its identifier.
-   */
+  /** Updates the details of a subscription specified by its identifier. */
   @patch(#{ implicitOptionality: false })
   update is SubscriptionContractOps.CustomPatchSync<
     SubscriptionContract,
@@ -106,82 +92,60 @@ interface SubscriptionContracts {
       @query("notify")
       notify?: boolean;
 
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
 
-      /**
-       * Determines the type of application which send the create user request. Default is legacy publisher portal.
-       */
+      /** Determines the type of application which send the create user request. Default is legacy publisher portal. */
       @query("appType")
       appType?: AppType;
     }
   >;
 
-  /**
-   * Deletes the specified subscription.
-   */
+  /** Deletes the specified subscription. */
   delete is SubscriptionContractOps.DeleteSync<
     SubscriptionContract,
     Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
+      /** ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. */
       @header
       `If-Match`: string;
     }
   >;
 
-  /**
-   * Lists all subscriptions of the API Management service instance.
-   */
+  /** Lists all subscriptions of the API Management service instance. */
   list is SubscriptionContractOps.List<
     SubscriptionContract,
     Parameters = {
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| stateComment | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| ownerId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| scope | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| userId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| productId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq |     |</br>| user | expand |     |     |</br>
-       */
+      /** |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| stateComment | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| ownerId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| scope | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| userId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| productId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq |     |</br>| user | expand |     |     |</br> */
       @query("$filter")
       $filter?: string;
 
-      /**
-       * Number of records to return.
-       */
+      /** Number of records to return. */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      /**
-       * Number of records to skip.
-       */
+      /** Number of records to skip. */
       @query("$skip")
       $skip?: int32;
     }
   >;
 
-  /**
-   * Regenerates primary key of existing subscription of the API Management service instance.
-   */
+  /** Regenerates primary key of existing subscription of the API Management service instance. */
   regeneratePrimaryKey is SubscriptionContractOps.ActionSync<
     SubscriptionContract,
     void,
     NoContentResponse
   >;
 
-  /**
-   * Regenerates secondary key of existing subscription of the API Management service instance.
-   */
+  /** Regenerates secondary key of existing subscription of the API Management service instance. */
   regenerateSecondaryKey is SubscriptionContractOps.ActionSync<
     SubscriptionContract,
     void,
     NoContentResponse
   >;
 
-  /**
-   * Gets the specified Subscription keys.
-   */
+  /** Gets the specified Subscription keys. */
   listSecrets is SubscriptionContractOps.ActionSync<
     SubscriptionContract,
     void,
@@ -220,33 +184,23 @@ alias UserSubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @armResourceOperations
 interface UserSubscription {
-  /**
-   * Gets the specified Subscription entity associated with a particular user.
-   */
+  /** Gets the specified Subscription entity associated with a particular user. */
   get is UserSubscriptionOps.Read<SubscriptionContract>;
 
-  /**
-   * Lists the collection of subscriptions of the specified user.
-   */
+  /** Lists the collection of subscriptions of the specified user. */
   list is UserSubscriptionOps.List<
     SubscriptionContract,
     Parameters = {
-      /**
-       * | Field     |     Usage     |     Supported operators    | Supported functions               |</br>|-------------|------------------------|-----------------------------------|</br>|name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|stateComment | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|ownerId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|scope | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|userId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|productId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-       */
+      /** | Field     |     Usage     |     Supported operators    | Supported functions               |</br>|-------------|------------------------|-----------------------------------|</br>|name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|stateComment | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|ownerId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|scope | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|userId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|productId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br> */
       @query("$filter")
       $filter?: string;
 
-      /**
-       * Number of records to return.
-       */
+      /** Number of records to return. */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      /**
-       * Number of records to skip.
-       */
+      /** Number of records to skip. */
       @query("$skip")
       $skip?: int32;
     }

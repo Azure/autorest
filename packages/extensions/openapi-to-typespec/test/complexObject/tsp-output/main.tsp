@@ -15,9 +15,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-/**
- * Some cool documentation.
- */
+/** Some cool documentation. */
 @service(#{ title: "Complex Model Client" })
 @versioned(Versions)
 @server(

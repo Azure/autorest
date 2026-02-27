@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Test;
-/**
- * A Test resource
- */
+/** A Test resource */
 model Employee is Azure.ResourceManager.TrackedResource<EmployeeProperties> {
   ...ResourceNameParameter<
     Resource = Employee,
@@ -23,35 +21,23 @@ model Employee is Azure.ResourceManager.TrackedResource<EmployeeProperties> {
 
 @armResourceOperations
 interface Employees {
-  /**
-   * Get a Employee
-   */
+  /** Get a Employee */
   get is ArmResourceRead<Employee>;
 
-  /**
-   * Create a Employee
-   */
+  /** Create a Employee */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Employee>;
 
-  /**
-   * Update a Employee
-   */
+  /** Update a Employee */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Employee, PatchModel = EmployeeUpdate>;
 
-  /**
-   * Delete a Employee
-   */
+  /** Delete a Employee */
   delete is ArmResourceDeleteSync<Employee>;
 
-  /**
-   * List Employee resources by resource group
-   */
+  /** List Employee resources by resource group */
   listByResourceGroup is ArmResourceListByParent<Employee>;
 
-  /**
-   * List Employee resources by subscription ID
-   */
+  /** List Employee resources by subscription ID */
   listBySubscription is ArmListBySubscription<Employee>;
 }
 
