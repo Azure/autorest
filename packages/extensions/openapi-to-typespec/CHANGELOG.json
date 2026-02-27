@@ -2,6 +2,18 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.11.13",
+      "tag": "@autorest/openapi-to-typespec_v0.11.13",
+      "date": "Fri, 27 Feb 2026 14:38:32 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"autorest\" from `~3.7.2` to `3.8.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.11.12",
       "tag": "@autorest/openapi-to-typespec_v0.11.12",
       "date": "Sat, 11 Oct 2025 07:48:12 GMT",

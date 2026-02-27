@@ -1,6 +1,13 @@
 # Change Log - autorest
 
-This log was last generated on Tue, 20 May 2025 18:08:56 GMT and should not be manually modified.
+This log was last generated on Fri, 27 Feb 2026 14:38:31 GMT and should not be manually modified.
+
+## 3.8.0
+Fri, 27 Feb 2026 14:38:31 GMT
+
+### Minor changes
+
+- Add deprecation warning to CLI banner: AutoRest will be retired on July 1, 2026.
 
 ## 3.7.2
 Tue, 20 May 2025 18:08:56 GMT

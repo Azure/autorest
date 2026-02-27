@@ -492,7 +492,7 @@ importers:
         specifier: ^0.75.0
         version: 0.75.0(@typespec/compiler@1.5.0)
       autorest:
-        specifier: workspace:~3.7.2
+        specifier: workspace:~3.8.0
         version: link:../../apps/autorest
       chalk:
         specifier: ^4.1.0
@@ -1418,7 +1418,7 @@ importers:
         specifier: workspace:~3.10.8
         version: link:../../extensions/core
       autorest:
-        specifier: workspace:~3.7.2
+        specifier: workspace:~3.8.0
         version: link:../../apps/autorest
       source-map-support:
         specifier: ^0.5.19
@@ -1522,7 +1522,7 @@ importers:
   ../../packages/tools/compare:
     dependencies:
       autorest:
-        specifier: workspace:~3.7.2
+        specifier: workspace:~3.8.0
         version: link:../../apps/autorest
       chalk:
         specifier: ^4.1.0

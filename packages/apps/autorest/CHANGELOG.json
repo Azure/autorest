@@ -2,6 +2,18 @@
   "name": "autorest",
   "entries": [
     {
+      "version": "3.8.0",
+      "tag": "autorest_v3.8.0",
+      "date": "Fri, 27 Feb 2026 14:38:31 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add deprecation warning to CLI banner: AutoRest will be retired on July 1, 2026."
+          }
+        ]
+      }
+    },
+    {
       "version": "3.7.2",
       "tag": "autorest_v3.7.2",
       "date": "Tue, 20 May 2025 18:08:56 GMT",
