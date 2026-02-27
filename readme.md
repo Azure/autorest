@@ -1,4 +1,16 @@
-# <img align="center" src="./docs/images/logo.png"> AutoRest
+# ⚠️ Deprecation Notice
+
+**AutoRest is deprecated and will be retired on July 1, 2026.**
+
+AutoRest is no longer under active development. No new features, language generators, or plugins will be added.
+
+### ✅ Recommended replacement: TypeSpec
+
+The recommended successor to AutoRest is **[TypeSpec](https://typespec.io/)** — a modern, actively developed API description language and code generation platform.
+
+### 📌 Deprecation tracking issue for more details: https://github.com/Azure/autorest/issues/5175
+
+## AutoRest
 
 The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to _AutoRest_ is a spec that describes the REST API using the [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification) format.
 
@@ -75,10 +87,6 @@ The **AutoRest** tool generates client libraries for accessing RESTful web servi
 [datastore_chg]: packages/libs/datastore/CHANGELOG.md
 [oai2-to-oai3_chg]: packages/libs/oai2-to-oai3/CHANGELOG.md
 [jsonschema_chg]: packages/libs/jsonschema/CHANGELOG.md
-
-## Support Policy
-
-AutoRest is an open source tool -- if you need assistance, first check the documentation. If you find a bug or need some help, feel free to submit an [issue](https://github.com/Azure/autorest/issues)
 
 ## Getting Started using AutoRest ![image](./docs/images/normal.png)
 
