@@ -19,7 +19,7 @@ using TypeSpec.Versioning;
  * Client that can be used to query an index and upload, merge, or delete
  * documents.
  */
-@service(#{ title: "SearchClient" })
+@service(#{ title: "SearchIndexClient" })
 @versioned(Versions)
 @server(
   "{endpoint}/indexes('{indexName}')",
