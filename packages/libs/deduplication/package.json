@@ -36,7 +36,7 @@
   "readme": "https://github.com/Azure/autorest/tree/main/packages/libs/deduplication/readme.md",
   "devDependencies": {
     "@types/jest": "^29.5.14",
-    "@types/lodash": "~4.17.16",
+    "@types/lodash": "^4.17.24",
     "@types/node": "~22.15.19",
     "@typescript-eslint/eslint-plugin": "^8.32.1",
     "@typescript-eslint/parser": "^8.32.1",
@@ -56,6 +56,6 @@
     "@azure-tools/object-comparison": "~3.0.0",
     "@azure-tools/tasks": "~3.0.0",
     "compare-versions": "^6.1.1",
-    "lodash": "~4.17.20"
+    "lodash": "^4.18.1"
   }
 }

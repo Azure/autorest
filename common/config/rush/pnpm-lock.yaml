@@ -185,8 +185,8 @@ importers:
         specifier: ^29.5.14
         version: 29.5.14
       '@types/lodash':
-        specifier: ~4.17.16
-        version: 4.17.16
+        specifier: ^4.17.24
+        version: 4.17.24
       '@types/node':
         specifier: ~22.15.19
         version: 22.15.19
@@ -242,8 +242,8 @@ importers:
         specifier: ^29.3.1
         version: 29.7.0(@types/node@22.15.19)(ts-node@10.9.2)
       lodash:
-        specifier: ~4.17.20
-        version: 4.17.21
+        specifier: ^4.18.1
+        version: 4.18.1
       mkdirp:
         specifier: ~3.0.1
         version: 3.0.1
@@ -323,8 +323,8 @@ importers:
         specifier: ^29.5.14
         version: 29.5.14
       '@types/lodash':
-        specifier: ~4.17.16
-        version: 4.17.16
+        specifier: ^4.17.24
+        version: 4.17.24
       '@types/node':
         specifier: ~22.15.19
         version: 22.15.19
@@ -362,8 +362,8 @@ importers:
         specifier: ^29.3.1
         version: 29.7.0(@types/node@22.15.19)(ts-node@10.9.2)
       lodash:
-        specifier: ~4.17.20
-        version: 4.17.21
+        specifier: ^4.18.1
+        version: 4.18.1
       prettier:
         specifier: ~3.5.3
         version: 3.5.3
@@ -413,8 +413,8 @@ importers:
         specifier: ~2.1.0
         version: 2.1.0
       lodash:
-        specifier: ~4.17.20
-        version: 4.17.21
+        specifier: ^4.18.1
+        version: 4.18.1
       pluralize:
         specifier: ^8.0.0
         version: 8.0.0
@@ -441,8 +441,8 @@ importers:
         specifier: ^9.0.13
         version: 9.0.13
       '@types/lodash':
-        specifier: ~4.17.16
-        version: 4.17.16
+        specifier: ^4.17.24
+        version: 4.17.24
       '@types/node':
         specifier: ~22.15.19
         version: 22.15.19
@@ -752,8 +752,8 @@ importers:
         specifier: ^0.31.2
         version: 0.31.2
       lodash:
-        specifier: ~4.17.20
-        version: 4.17.21
+        specifier: ^4.18.1
+        version: 4.18.1
       untildify:
         specifier: ^4.0.0
         version: 4.0.0
@@ -768,8 +768,8 @@ importers:
         specifier: ^29.5.14
         version: 29.5.14
       '@types/lodash':
-        specifier: ~4.17.16
-        version: 4.17.16
+        specifier: ^4.17.24
+        version: 4.17.24
       '@types/node':
         specifier: ~22.15.19
         version: 22.15.19
@@ -834,8 +834,8 @@ importers:
         specifier: ~10.3.0
         version: 10.3.0
       lodash:
-        specifier: ~4.17.20
-        version: 4.17.21
+        specifier: ^4.18.1
+        version: 4.18.1
       source-map:
         specifier: ^0.8.0-beta.0
         version: 0.8.0-beta.0
@@ -844,8 +844,8 @@ importers:
         specifier: ^29.5.14
         version: 29.5.14
       '@types/lodash':
-        specifier: ~4.17.16
-        version: 4.17.16
+        specifier: ^4.17.24
+        version: 4.17.24
       '@types/node':
         specifier: ~22.15.19
         version: 22.15.19
@@ -904,15 +904,15 @@ importers:
         specifier: ^6.1.1
         version: 6.1.1
       lodash:
-        specifier: ~4.17.20
-        version: 4.17.21
+        specifier: ^4.18.1
+        version: 4.18.1
     devDependencies:
       '@types/jest':
         specifier: ^29.5.14
         version: 29.5.14
       '@types/lodash':
-        specifier: ~4.17.16
-        version: 4.17.16
+        specifier: ^4.17.24
+        version: 4.17.24
       '@types/node':
         specifier: ~22.15.19
         version: 22.15.19
@@ -1360,8 +1360,8 @@ importers:
         specifier: ~4.1.0
         version: 4.1.0
       lodash:
-        specifier: ~4.17.20
-        version: 4.17.21
+        specifier: ^4.18.1
+        version: 4.18.1
       yaml-ast-parser:
         specifier: 0.0.43
         version: 0.0.43
@@ -1373,8 +1373,8 @@ importers:
         specifier: ~4.0.0
         version: 4.0.9
       '@types/lodash':
-        specifier: ~4.17.16
-        version: 4.17.16
+        specifier: ^4.17.24
+        version: 4.17.24
       '@types/node':
         specifier: ~22.15.19
         version: 22.15.19
@@ -2985,8 +2985,8 @@ packages:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
 
-  /@types/lodash@4.17.16:
-    resolution: {integrity: sha512-HX7Em5NYQAXKW+1T+FiuG27NGwzJfCX3s1GjOa7ujxZa52kjJLOr4FUxT+giF6Tgxv1e+/czV/iTtBw27WTU9g==}
+  /@types/lodash@4.17.24:
+    resolution: {integrity: sha512-gIW7lQLZbue7lRSWEFql49QJJWThrTFFeIMJdp3eH4tKoxm1OvEPg02rm4wCCSHS0cL3/Fizimb35b7k8atwsQ==}
     dev: true
 
   /@types/node-fetch@2.6.12:
@@ -6319,8 +6319,8 @@ packages:
   /lodash.sortby@4.7.0:
     resolution: {integrity: sha512-HDWXG8isMntAyRF5vZ7xKuEvOhT4AhlRt/3czTSjvGUxjYCBVRQY48ViDHyfYz9VIoBkW4TMGQNapx+l3RUwdA==}
 
-  /lodash@4.17.21:
-    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+  /lodash@4.18.1:
+    resolution: {integrity: sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==}
 
   /lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
