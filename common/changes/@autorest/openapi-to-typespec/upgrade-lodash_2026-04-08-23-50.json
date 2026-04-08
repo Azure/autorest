@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/openapi-to-typespec",
+      "comment": "Upgrade lodash to ^4.18.1 and @types/lodash to ^4.17.24",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/openapi-to-typespec"
+}

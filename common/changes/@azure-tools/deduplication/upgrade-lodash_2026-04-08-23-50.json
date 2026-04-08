@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/deduplication",
+      "comment": "Upgrade lodash to ^4.18.1 and @types/lodash to ^4.17.24",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@azure-tools/deduplication"
+}
