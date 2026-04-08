@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/openapi-to-typespec",
+      "comment": "Float change-case-all, lodash, and prettier dependencies with ^ instead of ~; bump lodash to 4.18.1",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/openapi-to-typespec"
+}

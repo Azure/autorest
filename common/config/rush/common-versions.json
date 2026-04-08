@@ -30,12 +30,7 @@
    * This design avoids unnecessary churn in this file.
    */
   "allowedAlternativeVersions": {
-    /**
-     * For example, allow some projects to use an older TypeScript compiler
-     * (in addition to whatever "usual" version is being used by other projects in the repo):
-     */
-    // "typescript": [
-    //   "~2.4.0"
-    // ]
+    "lodash": ["^4.18.1"],
+    "prettier": ["^3.5.3"]
   }
 }
