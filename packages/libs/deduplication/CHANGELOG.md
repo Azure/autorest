@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/deduplication
 
-This log was last generated on Tue, 20 May 2025 18:08:56 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Apr 2026 14:30:53 GMT and should not be manually modified.
+
+## 3.2.5
+Thu, 09 Apr 2026 14:30:53 GMT
+
+### Patches
+
+- Upgrade lodash to ^4.18.1 and @types/lodash to ^4.17.24
 
 ## 3.2.4
 Tue, 20 May 2025 18:08:56 GMT

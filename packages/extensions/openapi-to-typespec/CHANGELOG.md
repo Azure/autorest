@@ -1,6 +1,13 @@
 # Change Log - @autorest/openapi-to-typespec
 
-This log was last generated on Fri, 27 Feb 2026 14:38:32 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Apr 2026 14:30:53 GMT and should not be manually modified.
+
+## 0.11.14
+Thu, 09 Apr 2026 14:30:53 GMT
+
+### Patches
+
+- Upgrade lodash to ^4.18.1 and @types/lodash to ^4.17.24
 
 ## 0.11.13
 Fri, 27 Feb 2026 14:38:32 GMT

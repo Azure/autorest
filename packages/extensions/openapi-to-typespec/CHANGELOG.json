@@ -2,6 +2,18 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.11.14",
+      "tag": "@autorest/openapi-to-typespec_v0.11.14",
+      "date": "Thu, 09 Apr 2026 14:30:53 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Upgrade lodash to ^4.18.1 and @types/lodash to ^4.17.24"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.11.13",
       "tag": "@autorest/openapi-to-typespec_v0.11.13",
       "date": "Fri, 27 Feb 2026 14:38:32 GMT",

@@ -2,6 +2,18 @@
   "name": "@azure-tools/yaml",
   "entries": [
     {
+      "version": "1.2.2",
+      "tag": "@azure-tools/yaml_v1.2.2",
+      "date": "Thu, 09 Apr 2026 14:30:53 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Upgrade lodash to ^4.18.1 and @types/lodash to ^4.17.24"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.2.1",
       "tag": "@azure-tools/yaml_v1.2.1",
       "date": "Tue, 20 May 2025 18:08:56 GMT",

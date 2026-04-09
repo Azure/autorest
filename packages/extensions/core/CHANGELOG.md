@@ -1,6 +1,13 @@
 # Change Log - @autorest/core
 
-This log was last generated on Mon, 16 Jun 2025 19:35:57 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Apr 2026 14:30:53 GMT and should not be manually modified.
+
+## 3.10.9
+Thu, 09 Apr 2026 14:30:53 GMT
+
+### Patches
+
+- Upgrade lodash to ^4.18.1 and @types/lodash to ^4.17.24
 
 ## 3.10.8
 Mon, 16 Jun 2025 19:35:57 GMT

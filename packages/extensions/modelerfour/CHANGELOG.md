@@ -1,6 +1,13 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Tue, 23 Sep 2025 15:37:07 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Apr 2026 14:30:53 GMT and should not be manually modified.
+
+## 4.27.3
+Thu, 09 Apr 2026 14:30:53 GMT
+
+### Patches
+
+- Upgrade lodash to ^4.18.1 and @types/lodash to ^4.17.24
 
 ## 4.27.2
 Tue, 23 Sep 2025 15:37:07 GMT
