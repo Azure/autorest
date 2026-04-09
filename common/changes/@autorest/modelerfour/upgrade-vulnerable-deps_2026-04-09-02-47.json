@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/modelerfour",
+      "comment": "Upgrade vulnerable transitive dependencies via pnpm overrides: minimatch, tar, serialize-javascript, form-data, picomatch, glob",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/modelerfour"
+}
