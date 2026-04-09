@@ -71,7 +71,7 @@
     "ajv-formats": "^3.0.1",
     "commonmark": "^0.31.2",
     "compare-versions": "^6.1.1",
-    "copy-webpack-plugin": "^13.0.0",
+    "copy-webpack-plugin": "^14.0.0",
     "cpy-cli": "~5.0.0",
     "eslint-plugin-jest": "~28.11.0",
     "eslint-plugin-node": "~11.1.0",
