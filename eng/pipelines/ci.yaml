@@ -78,8 +78,8 @@ extends:
         jobs:
           - template: /eng/pipelines/templates/regression-tests.yaml
             parameters:
-              name: node20
-              nodeVersion: 20.x
+              name: node24
+              nodeVersion: 24.x
           - template: /eng/pipelines/templates/regression-tests.yaml
             parameters:
               name: node22
