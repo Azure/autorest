@@ -146,7 +146,7 @@ async function main() {
     noExtraProps: true,
   };
   const program = TJS.getProgramFromFiles(
-    globSync(`${projectRoot}/src/model/**/*.ts`),
+    globSync(`${projectRoot}/src/model/**/*.ts`, { absolute: true }),
     { downlevelIteration: true },
     resolve(__dirname, ".."),
   );
