@@ -2,7 +2,7 @@
 
 const jsyaml = require("js-yaml");
 
-const g = require("glob");
+const { globSync } = require("tinyglobby");
 const TJS = require("typescript-json-schema");
 const tsm = require("ts-morph");
 const { writeFile } = require("fs/promises");
@@ -146,7 +146,7 @@ async function main() {
     noExtraProps: true,
   };
   const program = TJS.getProgramFromFiles(
-    g.sync(`${projectRoot}/src/model/**/*.ts`),
+    globSync(`${projectRoot}/src/model/**/*.ts`),
     { downlevelIteration: true },
     resolve(__dirname, ".."),
   );

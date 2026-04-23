@@ -45,7 +45,7 @@
     "eslint-plugin-unicorn": "~49.0.0",
     "eslint-plugin-import": "~2.31.0",
     "eslint": "^8.28.0",
-    "glob": "~7.1.4",
+    "tinyglobby": "^0.2.16",
     "rimraf": "^6.0.1",
     "ts-morph": "~13.0.3",
     "typescript-json-schema": "~0.65.1",
