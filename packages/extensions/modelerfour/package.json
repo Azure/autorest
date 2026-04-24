@@ -68,9 +68,9 @@
     "rimraf": "^6.0.1",
     "source-map-support": "^0.5.19",
     "ts-jest": "^29.3.4",
-    "ts-loader": "~9.5.2",
+    "ts-loader": "~9.5.7",
     "typescript": "~5.8.3",
-    "webpack-cli": "~6.0.1",
-    "webpack": "~5.99.8"
+    "webpack-cli": "~7.0.2",
+    "webpack": "~5.106.2"
   }
 }
