@@ -47,8 +47,7 @@
     "pacote": "~21.0.0",
     "rimraf": "^6.0.1",
     "semver": "^7.7.2",
-    "yarn": "1.22.17",
-    "npm": "~8.12.1"
+    "yarn": "1.22.17"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",

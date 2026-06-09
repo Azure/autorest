@@ -3,7 +3,8 @@ import { tmpdir } from "os";
 import { join, resolve } from "path";
 import { isFile, writeFile } from "@azure-tools/async-io";
 import { execute } from "./exec-cmd";
-import { DEFAULT_NPM_REGISTRY } from "./npm";
+
+const DEFAULT_NPM_REGISTRY = "https://registry.npmjs.org";
 import {
   ensurePackageJsonExists,
   InstallOptions,

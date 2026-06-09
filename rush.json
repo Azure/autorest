@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
-  "rushVersion": "5.153.2",
-  "pnpmVersion": "8.10.5",
+  "rushVersion": "5.175.1",
+  "pnpmVersion": "10.34.1",
   "nodeSupportedVersionRange": ">=12.0.0",
   // Disabling this during migration of other repos as it is causing issues.
   // This needs to be enabled again. https://github.com/Azure/autorest/issues/3807
