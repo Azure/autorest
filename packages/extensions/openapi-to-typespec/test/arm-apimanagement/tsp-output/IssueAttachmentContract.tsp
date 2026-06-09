@@ -95,12 +95,15 @@ interface IssueAttachmentContracts {
 
 @@maxLength(IssueAttachmentContract.name, 256);
 @@minLength(IssueAttachmentContract.name, 1);
-@@doc(IssueAttachmentContract.name,
+@@doc(
+  IssueAttachmentContract.name,
   "Attachment identifier within an Issue. Must be unique in the current Issue."
 );
-@@doc(IssueAttachmentContract.properties,
+@@doc(
+  IssueAttachmentContract.properties,
   "Properties of the Issue Attachment."
 );
-@@doc(IssueAttachmentContracts.createOrUpdate::parameters.resource,
+@@doc(
+  IssueAttachmentContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );

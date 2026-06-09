@@ -4,7 +4,8 @@ using Azure.ClientGenerator.Core;
 using Azure.ResourceManager.ApiManagement;
 
 @@clientName(ApiEntityBaseContract.type, "apiType");
-@@clientName(ApiEntityBaseContract.subscriptionRequired,
+@@clientName(
+  ApiEntityBaseContract.subscriptionRequired,
   "IsSubscriptionRequired"
 );
 
@@ -22,10 +23,12 @@ using Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(OperationUpdateContract.properties);
 
-@@clientName(ProductEntityBaseParameters.subscriptionRequired,
+@@clientName(
+  ProductEntityBaseParameters.subscriptionRequired,
   "IsSubscriptionRequired"
 );
-@@clientName(ProductEntityBaseParameters.approvalRequired,
+@@clientName(
+  ProductEntityBaseParameters.approvalRequired,
   "IsApprovalRequired"
 );
 
@@ -43,10 +46,12 @@ using Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(ApiVersionSetUpdateParameters.properties);
 
-@@clientName(AuthorizationServerContractBaseProperties.clientAuthenticationMethod,
+@@clientName(
+  AuthorizationServerContractBaseProperties.clientAuthenticationMethod,
   "clientAuthenticationMethods"
 );
-@@clientName(AuthorizationServerContractBaseProperties.supportState,
+@@clientName(
+  AuthorizationServerContractBaseProperties.supportState,
   "doesSupportState"
 );
 
@@ -69,7 +74,8 @@ using Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(CertificateCreateOrUpdateParameters.properties);
 
-@@clientName(ConnectivityCheckRequestProtocolConfiguration.HTTPConfiguration,
+@@clientName(
+  ConnectivityCheckRequestProtocolConfiguration.HTTPConfiguration,
   "httpConfiguration"
 );
 
@@ -93,10 +99,12 @@ using Azure.ResourceManager.ApiManagement;
 
 @@clientName(IdentityProviderBaseParameters.type, "identityProviderType");
 @@clientName(IdentityProviderBaseParameters.signinTenant, "signInTenant");
-@@clientName(IdentityProviderBaseParameters.signupPolicyName,
+@@clientName(
+  IdentityProviderBaseParameters.signupPolicyName,
   "signUpPolicyName"
 );
-@@clientName(IdentityProviderBaseParameters.signinPolicyName,
+@@clientName(
+  IdentityProviderBaseParameters.signinPolicyName,
   "signInPolicyName"
 );
 
@@ -133,7 +141,8 @@ using Azure.ResourceManager.ApiManagement;
 @@Legacy.flattenProperty(PortalSettingsContract.properties);
 
 @@clientName(PortalSettingsContractProperties.subscriptions, "IsSubscriptions");
-@@clientName(PortalSettingsContractProperties.userRegistration,
+@@clientName(
+  PortalSettingsContractProperties.userRegistration,
   "IsUserRegistration"
 );
 
@@ -203,7 +212,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(ApiReleaseContracts.get, "ApiRelease");
 @@clientLocation(ApiReleaseContracts.getEntityTag, "ApiRelease");
 @@clientLocation(ApiReleaseContracts.createOrUpdate, "ApiRelease");
-@@clientName(ApiReleaseContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  ApiReleaseContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(ApiReleaseContracts.update, "ApiRelease");
@@ -216,7 +226,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(OperationContracts.get, "ApiOperation");
 @@clientLocation(OperationContracts.getEntityTag, "ApiOperation");
 @@clientLocation(OperationContracts.createOrUpdate, "ApiOperation");
-@@clientName(OperationContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  OperationContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(OperationContracts.update, "ApiOperation");
@@ -251,11 +262,13 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(TagContractOperationGroup.get, Tag);
 @@clientLocation(TagContractOperationGroup.getEntityState, Tag);
 @@clientLocation(TagContractOperationGroup.createOrUpdate, Tag);
-@@clientName(TagContractOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  TagContractOperationGroup.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(TagContractOperationGroup.update, Tag);
-@@clientName(TagContractOperationGroup.update::parameters.properties,
+@@clientName(
+  TagContractOperationGroup.update::parameters.properties,
   "parameters"
 );
 @@clientLocation(TagContractOperationGroup.delete, Tag);
@@ -266,7 +279,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(ProductContracts.get, "Product");
 @@clientLocation(ProductContracts.getEntityTag, "Product");
 @@clientLocation(ProductContracts.createOrUpdate, "Product");
-@@clientName(ProductContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  ProductContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(ProductContracts.update, "Product");
@@ -281,10 +295,12 @@ using Azure.ResourceManager.ApiManagement;
 @@clientName(ProductContracts.productApiDelete, "Delete");
 @@clientLocation(ProductContracts.productGroupListByProduct, "ProductGroup");
 @@clientName(ProductContracts.productGroupListByProduct, "ListByProduct");
-@@clientLocation(ProductContracts.productGroupCheckEntityExists,
+@@clientLocation(
+  ProductContracts.productGroupCheckEntityExists,
   "ProductGroup"
 );
-@@clientName(ProductContracts.productGroupCheckEntityExists,
+@@clientName(
+  ProductContracts.productGroupCheckEntityExists,
   "CheckEntityExists"
 );
 @@clientLocation(ProductContracts.productGroupCreateOrUpdate, "ProductGroup");
@@ -307,7 +323,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(DiagnosticContracts.get, "ApiDiagnostic");
 @@clientLocation(DiagnosticContracts.getEntityTag, "ApiDiagnostic");
 @@clientLocation(DiagnosticContracts.createOrUpdate, "ApiDiagnostic");
-@@clientName(DiagnosticContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  DiagnosticContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(DiagnosticContracts.update, "ApiDiagnostic");
@@ -333,7 +350,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(IssueCommentContracts.get, "ApiIssueComment");
 @@clientLocation(IssueCommentContracts.getEntityTag, "ApiIssueComment");
 @@clientLocation(IssueCommentContracts.createOrUpdate, "ApiIssueComment");
-@@clientName(IssueCommentContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  IssueCommentContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(IssueCommentContracts.delete, "ApiIssueComment");
@@ -344,7 +362,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(IssueAttachmentContracts.get, "ApiIssueAttachment");
 @@clientLocation(IssueAttachmentContracts.getEntityTag, "ApiIssueAttachment");
 @@clientLocation(IssueAttachmentContracts.createOrUpdate, "ApiIssueAttachment");
-@@clientName(IssueAttachmentContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  IssueAttachmentContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(IssueAttachmentContracts.delete, "ApiIssueAttachment");
@@ -355,7 +374,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(TagDescriptionContracts.get, "ApiTagDescription");
 @@clientLocation(TagDescriptionContracts.getEntityTag, "ApiTagDescription");
 @@clientLocation(TagDescriptionContracts.createOrUpdate, "ApiTagDescription");
-@@clientName(TagDescriptionContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  TagDescriptionContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(TagDescriptionContracts.delete, "ApiTagDescription");
@@ -366,11 +386,13 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(ApiVersionSetContracts.get, "ApiVersionSet");
 @@clientLocation(ApiVersionSetContracts.getEntityTag, "ApiVersionSet");
 @@clientLocation(ApiVersionSetContracts.createOrUpdate, "ApiVersionSet");
-@@clientName(ApiVersionSetContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  ApiVersionSetContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(ApiVersionSetContracts.update, "ApiVersionSet");
-@@clientName(ApiVersionSetContracts.update::parameters.properties,
+@@clientName(
+  ApiVersionSetContracts.update::parameters.properties,
   "parameters"
 );
 @@clientLocation(ApiVersionSetContracts.delete, "ApiVersionSet");
@@ -379,24 +401,30 @@ using Azure.ResourceManager.ApiManagement;
 @@Legacy.flattenProperty(ApiVersionSetContract.properties);
 
 @@clientLocation(AuthorizationServerContracts.get, "AuthorizationServer");
-@@clientLocation(AuthorizationServerContracts.getEntityTag,
+@@clientLocation(
+  AuthorizationServerContracts.getEntityTag,
   "AuthorizationServer"
 );
-@@clientLocation(AuthorizationServerContracts.createOrUpdate,
+@@clientLocation(
+  AuthorizationServerContracts.createOrUpdate,
   "AuthorizationServer"
 );
-@@clientName(AuthorizationServerContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  AuthorizationServerContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(AuthorizationServerContracts.update, "AuthorizationServer");
-@@clientName(AuthorizationServerContracts.update::parameters.properties,
+@@clientName(
+  AuthorizationServerContracts.update::parameters.properties,
   "parameters"
 );
 @@clientLocation(AuthorizationServerContracts.delete, "AuthorizationServer");
-@@clientLocation(AuthorizationServerContracts.listByService,
+@@clientLocation(
+  AuthorizationServerContracts.listByService,
   "AuthorizationServer"
 );
-@@clientLocation(AuthorizationServerContracts.listSecrets,
+@@clientLocation(
+  AuthorizationServerContracts.listSecrets,
   "AuthorizationServer"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -405,7 +433,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(BackendContracts.get, "Backend");
 @@clientLocation(BackendContracts.getEntityTag, "Backend");
 @@clientLocation(BackendContracts.createOrUpdate, "Backend");
-@@clientName(BackendContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  BackendContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(BackendContracts.update, "Backend");
@@ -431,7 +460,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(CertificateContracts.get, "Certificate");
 @@clientLocation(CertificateContracts.getEntityTag, "Certificate");
 @@clientLocation(CertificateContracts.createOrUpdate, "Certificate");
-@@clientName(CertificateContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  CertificateContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(CertificateContracts.delete, "Certificate");
@@ -461,96 +491,122 @@ using Azure.ResourceManager.ApiManagement;
 @@Legacy.flattenProperty(DeletedServiceContract.properties);
 
 @@clientLocation(ApiManagementServiceResources.get, "ApiManagementService");
-@@clientLocation(ApiManagementServiceResources.createOrUpdate,
+@@clientLocation(
+  ApiManagementServiceResources.createOrUpdate,
   "ApiManagementService"
 );
-@@clientName(ApiManagementServiceResources.createOrUpdate::parameters.resource,
+@@clientName(
+  ApiManagementServiceResources.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(ApiManagementServiceResources.update, "ApiManagementService");
-@@clientName(ApiManagementServiceResources.update::parameters.properties,
+@@clientName(
+  ApiManagementServiceResources.update::parameters.properties,
   "parameters"
 );
 @@clientLocation(ApiManagementServiceResources.delete, "ApiManagementService");
-@@clientLocation(ApiManagementServiceResources.listByResourceGroup,
+@@clientLocation(
+  ApiManagementServiceResources.listByResourceGroup,
   "ApiManagementService"
 );
 @@clientLocation(ApiManagementServiceResources.list, "ApiManagementService");
 @@clientLocation(ApiManagementServiceResources.listByTags, "Api");
-@@clientLocation(ApiManagementServiceResources.performConnectivityCheckAsync,
+@@clientLocation(
+  ApiManagementServiceResources.performConnectivityCheckAsync,
   ""
 );
-@@clientName(ApiManagementServiceResources.performConnectivityCheckAsync::parameters.body,
+@@clientName(
+  ApiManagementServiceResources.performConnectivityCheckAsync::parameters.body,
   "connectivityCheckRequestParams"
 );
-@@clientLocation(ApiManagementServiceResources.listAvailableServiceSkus,
+@@clientLocation(
+  ApiManagementServiceResources.listAvailableServiceSkus,
   "ApiManagementServiceSkus"
 );
 @@clientLocation(ApiManagementServiceResources.restore, "ApiManagementService");
-@@clientName(ApiManagementServiceResources.restore::parameters.body,
+@@clientName(
+  ApiManagementServiceResources.restore::parameters.body,
   "parameters"
 );
 @@clientLocation(ApiManagementServiceResources.backup, "ApiManagementService");
-@@clientName(ApiManagementServiceResources.backup::parameters.body,
+@@clientName(
+  ApiManagementServiceResources.backup::parameters.body,
   "parameters"
 );
-@@clientLocation(ApiManagementServiceResources.getSsoToken,
+@@clientLocation(
+  ApiManagementServiceResources.getSsoToken,
   "ApiManagementService"
 );
-@@clientLocation(ApiManagementServiceResources.applyNetworkConfigurationUpdates,
+@@clientLocation(
+  ApiManagementServiceResources.applyNetworkConfigurationUpdates,
   "ApiManagementService"
 );
-@@clientName(ApiManagementServiceResources.applyNetworkConfigurationUpdates::parameters.body,
+@@clientName(
+  ApiManagementServiceResources.applyNetworkConfigurationUpdates::parameters.body,
   "parameters"
 );
 @@clientLocation(ApiManagementServiceResources.listByService, "NetworkStatus");
 @@clientLocation(ApiManagementServiceResources.listByLocation, "NetworkStatus");
-@@clientLocation(ApiManagementServiceResources.outboundNetworkDependenciesEndpointsListByService,
+@@clientLocation(
+  ApiManagementServiceResources.outboundNetworkDependenciesEndpointsListByService,
   "OutboundNetworkDependenciesEndpoints"
 );
-@@clientName(ApiManagementServiceResources.outboundNetworkDependenciesEndpointsListByService,
+@@clientName(
+  ApiManagementServiceResources.outboundNetworkDependenciesEndpointsListByService,
   "ListByService"
 );
-@@clientLocation(ApiManagementServiceResources.policyDescriptionListByService,
+@@clientLocation(
+  ApiManagementServiceResources.policyDescriptionListByService,
   "PolicyDescription"
 );
-@@clientName(ApiManagementServiceResources.policyDescriptionListByService,
+@@clientName(
+  ApiManagementServiceResources.policyDescriptionListByService,
   "ListByService"
 );
-@@clientLocation(ApiManagementServiceResources.portalSettingsListByService,
+@@clientLocation(
+  ApiManagementServiceResources.portalSettingsListByService,
   "PortalSettings"
 );
-@@clientName(ApiManagementServiceResources.portalSettingsListByService,
+@@clientName(
+  ApiManagementServiceResources.portalSettingsListByService,
   "ListByService"
 );
 @@clientLocation(ApiManagementServiceResources.productListByTags, "Product");
 @@clientName(ApiManagementServiceResources.productListByTags, "ListByTags");
-@@clientLocation(ApiManagementServiceResources.quotaByCounterKeysListByService,
+@@clientLocation(
+  ApiManagementServiceResources.quotaByCounterKeysListByService,
   "QuotaByCounterKeys"
 );
-@@clientName(ApiManagementServiceResources.quotaByCounterKeysListByService,
+@@clientName(
+  ApiManagementServiceResources.quotaByCounterKeysListByService,
   "ListByService"
 );
-@@clientLocation(ApiManagementServiceResources.quotaByCounterKeysUpdate,
+@@clientLocation(
+  ApiManagementServiceResources.quotaByCounterKeysUpdate,
   "QuotaByCounterKeys"
 );
 @@clientName(ApiManagementServiceResources.quotaByCounterKeysUpdate, "Update");
-@@clientName(ApiManagementServiceResources.quotaByCounterKeysUpdate::parameters.body,
+@@clientName(
+  ApiManagementServiceResources.quotaByCounterKeysUpdate::parameters.body,
   "parameters"
 );
-@@clientLocation(ApiManagementServiceResources.quotaByPeriodKeysGet,
+@@clientLocation(
+  ApiManagementServiceResources.quotaByPeriodKeysGet,
   "QuotaByPeriodKeys"
 );
 @@clientName(ApiManagementServiceResources.quotaByPeriodKeysGet, "Get");
-@@clientLocation(ApiManagementServiceResources.quotaByPeriodKeysUpdate,
+@@clientLocation(
+  ApiManagementServiceResources.quotaByPeriodKeysUpdate,
   "QuotaByPeriodKeys"
 );
 @@clientName(ApiManagementServiceResources.quotaByPeriodKeysUpdate, "Update");
-@@clientName(ApiManagementServiceResources.quotaByPeriodKeysUpdate::parameters.body,
+@@clientName(
+  ApiManagementServiceResources.quotaByPeriodKeysUpdate::parameters.body,
   "parameters"
 );
 @@clientLocation(ApiManagementServiceResources.regionListByService, "Region");
-@@clientName(ApiManagementServiceResources.regionListByService,
+@@clientName(
+  ApiManagementServiceResources.regionListByService,
   "ListByService"
 );
 @@clientLocation(ApiManagementServiceResources.listByApi, "Reports");
@@ -561,10 +617,12 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(ApiManagementServiceResources.listBySubscription, "Reports");
 @@clientLocation(ApiManagementServiceResources.listByTime, "Reports");
 @@clientLocation(ApiManagementServiceResources.listByRequest, "Reports");
-@@clientLocation(ApiManagementServiceResources.tagResourceListByService,
+@@clientLocation(
+  ApiManagementServiceResources.tagResourceListByService,
   "TagResource"
 );
-@@clientName(ApiManagementServiceResources.tagResourceListByService,
+@@clientName(
+  ApiManagementServiceResources.tagResourceListByService,
   "ListByService"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -573,11 +631,13 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(EmailTemplateContracts.get, "EmailTemplate");
 @@clientLocation(EmailTemplateContracts.getEntityTag, "EmailTemplate");
 @@clientLocation(EmailTemplateContracts.createOrUpdate, "EmailTemplate");
-@@clientName(EmailTemplateContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  EmailTemplateContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(EmailTemplateContracts.update, "EmailTemplate");
-@@clientName(EmailTemplateContracts.update::parameters.properties,
+@@clientName(
+  EmailTemplateContracts.update::parameters.properties,
   "parameters"
 );
 @@clientLocation(EmailTemplateContracts.delete, "EmailTemplate");
@@ -588,7 +648,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(GatewayContracts.get, "Gateway");
 @@clientLocation(GatewayContracts.getEntityTag, "Gateway");
 @@clientLocation(GatewayContracts.createOrUpdate, "Gateway");
-@@clientName(GatewayContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  GatewayContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(GatewayContracts.update, "Gateway");
@@ -606,7 +667,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientName(GatewayContracts.gatewayApiGetEntityTag, "GetEntityTag");
 @@clientLocation(GatewayContracts.gatewayApiCreateOrUpdate, "GatewayApi");
 @@clientName(GatewayContracts.gatewayApiCreateOrUpdate, "CreateOrUpdate");
-@@clientName(GatewayContracts.gatewayApiCreateOrUpdate::parameters.body,
+@@clientName(
+  GatewayContracts.gatewayApiCreateOrUpdate::parameters.body,
   "parameters"
 );
 @@clientLocation(GatewayContracts.gatewayApiDelete, "GatewayApi");
@@ -614,43 +676,55 @@ using Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(GatewayContract.properties);
 
-@@clientLocation(GatewayHostnameConfigurationContracts.get,
+@@clientLocation(
+  GatewayHostnameConfigurationContracts.get,
   "GatewayHostnameConfiguration"
 );
-@@clientLocation(GatewayHostnameConfigurationContracts.getEntityTag,
+@@clientLocation(
+  GatewayHostnameConfigurationContracts.getEntityTag,
   "GatewayHostnameConfiguration"
 );
-@@clientLocation(GatewayHostnameConfigurationContracts.createOrUpdate,
+@@clientLocation(
+  GatewayHostnameConfigurationContracts.createOrUpdate,
   "GatewayHostnameConfiguration"
 );
-@@clientName(GatewayHostnameConfigurationContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  GatewayHostnameConfigurationContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(GatewayHostnameConfigurationContracts.delete,
+@@clientLocation(
+  GatewayHostnameConfigurationContracts.delete,
   "GatewayHostnameConfiguration"
 );
-@@clientLocation(GatewayHostnameConfigurationContracts.listByService,
+@@clientLocation(
+  GatewayHostnameConfigurationContracts.listByService,
   "GatewayHostnameConfiguration"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(GatewayHostnameConfigurationContract.properties);
 
-@@clientLocation(GatewayCertificateAuthorityContracts.get,
+@@clientLocation(
+  GatewayCertificateAuthorityContracts.get,
   "GatewayCertificateAuthority"
 );
-@@clientLocation(GatewayCertificateAuthorityContracts.getEntityTag,
+@@clientLocation(
+  GatewayCertificateAuthorityContracts.getEntityTag,
   "GatewayCertificateAuthority"
 );
-@@clientLocation(GatewayCertificateAuthorityContracts.createOrUpdate,
+@@clientLocation(
+  GatewayCertificateAuthorityContracts.createOrUpdate,
   "GatewayCertificateAuthority"
 );
-@@clientName(GatewayCertificateAuthorityContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  GatewayCertificateAuthorityContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(GatewayCertificateAuthorityContracts.delete,
+@@clientLocation(
+  GatewayCertificateAuthorityContracts.delete,
   "GatewayCertificateAuthority"
 );
-@@clientLocation(GatewayCertificateAuthorityContracts.listByService,
+@@clientLocation(
+  GatewayCertificateAuthorityContracts.listByService,
   "GatewayCertificateAuthority"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -693,11 +767,13 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(IdentityProviderContracts.get, "IdentityProvider");
 @@clientLocation(IdentityProviderContracts.getEntityTag, "IdentityProvider");
 @@clientLocation(IdentityProviderContracts.createOrUpdate, "IdentityProvider");
-@@clientName(IdentityProviderContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  IdentityProviderContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(IdentityProviderContracts.update, "IdentityProvider");
-@@clientName(IdentityProviderContracts.update::parameters.properties,
+@@clientName(
+  IdentityProviderContracts.update::parameters.properties,
   "parameters"
 );
 @@clientLocation(IdentityProviderContracts.delete, "IdentityProvider");
@@ -720,7 +796,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(NamedValueContracts.get, "NamedValue");
 @@clientLocation(NamedValueContracts.getEntityTag, "NamedValue");
 @@clientLocation(NamedValueContracts.createOrUpdate, "NamedValue");
-@@clientName(NamedValueContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  NamedValueContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(NamedValueContracts.update, "NamedValue");
@@ -735,38 +812,49 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(NotificationContracts.get, "Notification");
 @@clientLocation(NotificationContracts.createOrUpdate, "Notification");
 @@clientLocation(NotificationContracts.listByService, "Notification");
-@@clientLocation(NotificationContracts.listByNotification,
+@@clientLocation(
+  NotificationContracts.listByNotification,
   "NotificationRecipientUser"
 );
-@@clientLocation(NotificationContracts.checkEntityExists,
+@@clientLocation(
+  NotificationContracts.checkEntityExists,
   "NotificationRecipientUser"
 );
-@@clientLocation(NotificationContracts.notificationRecipientUserCreateOrUpdate,
+@@clientLocation(
+  NotificationContracts.notificationRecipientUserCreateOrUpdate,
   "NotificationRecipientUser"
 );
-@@clientName(NotificationContracts.notificationRecipientUserCreateOrUpdate,
+@@clientName(
+  NotificationContracts.notificationRecipientUserCreateOrUpdate,
   "CreateOrUpdate"
 );
 @@clientLocation(NotificationContracts.delete, "NotificationRecipientUser");
-@@clientLocation(NotificationContracts.notificationRecipientEmailListByNotification,
+@@clientLocation(
+  NotificationContracts.notificationRecipientEmailListByNotification,
   "NotificationRecipientEmail"
 );
-@@clientName(NotificationContracts.notificationRecipientEmailListByNotification,
+@@clientName(
+  NotificationContracts.notificationRecipientEmailListByNotification,
   "ListByNotification"
 );
-@@clientLocation(NotificationContracts.notificationRecipientEmailCheckEntityExists,
+@@clientLocation(
+  NotificationContracts.notificationRecipientEmailCheckEntityExists,
   "NotificationRecipientEmail"
 );
-@@clientName(NotificationContracts.notificationRecipientEmailCheckEntityExists,
+@@clientName(
+  NotificationContracts.notificationRecipientEmailCheckEntityExists,
   "CheckEntityExists"
 );
-@@clientLocation(NotificationContracts.notificationRecipientEmailCreateOrUpdate,
+@@clientLocation(
+  NotificationContracts.notificationRecipientEmailCreateOrUpdate,
   "NotificationRecipientEmail"
 );
-@@clientName(NotificationContracts.notificationRecipientEmailCreateOrUpdate,
+@@clientName(
+  NotificationContracts.notificationRecipientEmailCreateOrUpdate,
   "CreateOrUpdate"
 );
-@@clientLocation(NotificationContracts.notificationRecipientEmailDelete,
+@@clientLocation(
+  NotificationContracts.notificationRecipientEmailDelete,
   "NotificationRecipientEmail"
 );
 @@clientName(NotificationContracts.notificationRecipientEmailDelete, "Delete");
@@ -774,28 +862,36 @@ using Azure.ResourceManager.ApiManagement;
 @@Legacy.flattenProperty(NotificationContract.properties);
 
 @@clientLocation(OpenidConnectProviderContracts.get, "OpenIdConnectProvider");
-@@clientLocation(OpenidConnectProviderContracts.getEntityTag,
+@@clientLocation(
+  OpenidConnectProviderContracts.getEntityTag,
   "OpenIdConnectProvider"
 );
-@@clientLocation(OpenidConnectProviderContracts.createOrUpdate,
+@@clientLocation(
+  OpenidConnectProviderContracts.createOrUpdate,
   "OpenIdConnectProvider"
 );
-@@clientName(OpenidConnectProviderContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  OpenidConnectProviderContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(OpenidConnectProviderContracts.update,
+@@clientLocation(
+  OpenidConnectProviderContracts.update,
   "OpenIdConnectProvider"
 );
-@@clientName(OpenidConnectProviderContracts.update::parameters.properties,
+@@clientName(
+  OpenidConnectProviderContracts.update::parameters.properties,
   "parameters"
 );
-@@clientLocation(OpenidConnectProviderContracts.delete,
+@@clientLocation(
+  OpenidConnectProviderContracts.delete,
   "OpenIdConnectProvider"
 );
-@@clientLocation(OpenidConnectProviderContracts.listByService,
+@@clientLocation(
+  OpenidConnectProviderContracts.listByService,
   "OpenIdConnectProvider"
 );
-@@clientLocation(OpenidConnectProviderContracts.listSecrets,
+@@clientLocation(
+  OpenidConnectProviderContracts.listSecrets,
   "OpenIdConnectProvider"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -804,11 +900,13 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(PortalRevisionContracts.get, "PortalRevision");
 @@clientLocation(PortalRevisionContracts.getEntityTag, "PortalRevision");
 @@clientLocation(PortalRevisionContracts.createOrUpdate, "PortalRevision");
-@@clientName(PortalRevisionContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  PortalRevisionContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(PortalRevisionContracts.update, "PortalRevision");
-@@clientName(PortalRevisionContracts.update::parameters.properties,
+@@clientName(
+  PortalRevisionContracts.update::parameters.properties,
   "parameters"
 );
 @@clientLocation(PortalRevisionContracts.listByService, "PortalRevision");
@@ -825,35 +923,43 @@ using Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(PortalSignupSettings.properties);
 
-@@clientName(DelegationSettings.createOrUpdate::parameters.resource,
+@@clientName(
+  DelegationSettings.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(DelegationSettings.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(PortalDelegationSettings.properties);
 
-@@clientLocation(PrivateEndpointConnections.getByName,
+@@clientLocation(
+  PrivateEndpointConnections.getByName,
   "PrivateEndpointConnection"
 );
-@@clientLocation(PrivateEndpointConnections.createOrUpdate,
+@@clientLocation(
+  PrivateEndpointConnections.createOrUpdate,
   "PrivateEndpointConnection"
 );
-@@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@clientName(
+  PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "privateEndpointConnectionRequest"
 );
-@@clientLocation(PrivateEndpointConnections.delete,
+@@clientLocation(
+  PrivateEndpointConnections.delete,
   "PrivateEndpointConnection"
 );
-@@clientLocation(PrivateEndpointConnections.listByService,
+@@clientLocation(
+  PrivateEndpointConnections.listByService,
   "PrivateEndpointConnection"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(PrivateEndpointConnection.properties);
 
-@@clientLocation(PrivateLinkResources.getPrivateLinkResource,
+@@clientLocation(
+  PrivateLinkResources.getPrivateLinkResource,
   "PrivateEndpointConnection"
 );
-@@clientLocation(PrivateLinkResources.listPrivateLinkResources,
+@@clientLocation(
+  PrivateLinkResources.listPrivateLinkResources,
   "PrivateEndpointConnection"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -862,7 +968,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(SubscriptionContracts.get, "Subscription");
 @@clientLocation(SubscriptionContracts.getEntityTag, "Subscription");
 @@clientLocation(SubscriptionContracts.createOrUpdate, "Subscription");
-@@clientName(SubscriptionContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  SubscriptionContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(SubscriptionContracts.update, "Subscription");
@@ -878,7 +985,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(GlobalSchemaContracts.get, "GlobalSchema");
 @@clientLocation(GlobalSchemaContracts.getEntityTag, "GlobalSchema");
 @@clientLocation(GlobalSchemaContracts.createOrUpdate, "GlobalSchema");
-@@clientName(GlobalSchemaContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  GlobalSchemaContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(GlobalSchemaContracts.delete, "GlobalSchema");
@@ -894,31 +1002,39 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(AccessInformationContracts.get, "TenantAccess");
 @@clientLocation(AccessInformationContracts.getEntityTag, "TenantAccess");
 @@clientLocation(AccessInformationContracts.create, "TenantAccess");
-@@clientName(AccessInformationContracts.create::parameters.resource,
+@@clientName(
+  AccessInformationContracts.create::parameters.resource,
   "parameters"
 );
 @@clientLocation(AccessInformationContracts.update, "TenantAccess");
-@@clientName(AccessInformationContracts.update::parameters.properties,
+@@clientName(
+  AccessInformationContracts.update::parameters.properties,
   "parameters"
 );
 @@clientLocation(AccessInformationContracts.listByService, "TenantAccess");
-@@clientLocation(AccessInformationContracts.regeneratePrimaryKey,
+@@clientLocation(
+  AccessInformationContracts.regeneratePrimaryKey,
   "TenantAccess"
 );
-@@clientLocation(AccessInformationContracts.regenerateSecondaryKey,
+@@clientLocation(
+  AccessInformationContracts.regenerateSecondaryKey,
   "TenantAccess"
 );
 @@clientLocation(AccessInformationContracts.listSecrets, "TenantAccess");
-@@clientLocation(AccessInformationContracts.tenantAccessGitRegeneratePrimaryKey,
+@@clientLocation(
+  AccessInformationContracts.tenantAccessGitRegeneratePrimaryKey,
   "TenantAccessGit"
 );
-@@clientName(AccessInformationContracts.tenantAccessGitRegeneratePrimaryKey,
+@@clientName(
+  AccessInformationContracts.tenantAccessGitRegeneratePrimaryKey,
   "RegeneratePrimaryKey"
 );
-@@clientLocation(AccessInformationContracts.tenantAccessGitRegenerateSecondaryKey,
+@@clientLocation(
+  AccessInformationContracts.tenantAccessGitRegenerateSecondaryKey,
   "TenantAccessGit"
 );
-@@clientName(AccessInformationContracts.tenantAccessGitRegenerateSecondaryKey,
+@@clientName(
+  AccessInformationContracts.tenantAccessGitRegenerateSecondaryKey,
   "RegenerateSecondaryKey"
 );
 @@clientLocation(AccessInformationContracts.deploy, "TenantConfiguration");
@@ -926,10 +1042,12 @@ using Azure.ResourceManager.ApiManagement;
 @@clientLocation(AccessInformationContracts.save, "TenantConfiguration");
 @@clientName(AccessInformationContracts.save::parameters.body, "parameters");
 @@clientLocation(AccessInformationContracts.validate, "TenantConfiguration");
-@@clientName(AccessInformationContracts.validate::parameters.body,
+@@clientName(
+  AccessInformationContracts.validate::parameters.body,
   "parameters"
 );
-@@clientLocation(AccessInformationContracts.getSyncState,
+@@clientLocation(
+  AccessInformationContracts.getSyncState,
   "TenantConfiguration"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -937,14 +1055,17 @@ using Azure.ResourceManager.ApiManagement;
 
 @@clientLocation(ApiExportOperationGroup.get, "ApiExport");
 
-@@clientLocation(DeletedServicesOperationGroup.listBySubscription,
+@@clientLocation(
+  DeletedServicesOperationGroup.listBySubscription,
   "DeletedServices"
 );
 
-@@clientLocation(ApiManagementServiceOperationGroup.checkNameAvailability,
+@@clientLocation(
+  ApiManagementServiceOperationGroup.checkNameAvailability,
   "ApiManagementService"
 );
-@@clientLocation(ApiManagementServiceOperationGroup.getDomainOwnershipIdentifier,
+@@clientLocation(
+  ApiManagementServiceOperationGroup.getDomainOwnershipIdentifier,
   "ApiManagementService"
 );
 

@@ -82,9 +82,11 @@ interface DataManagerForAgricultureExtensions {
   >;
 }
 
-@@doc(DataManagerForAgricultureExtension.name,
+@@doc(
+  DataManagerForAgricultureExtension.name,
   "dataManagerForAgricultureExtensionId to be queried."
 );
-@@doc(DataManagerForAgricultureExtension.properties,
+@@doc(
+  DataManagerForAgricultureExtension.properties,
   "DataManagerForAgricultureExtension properties."
 );

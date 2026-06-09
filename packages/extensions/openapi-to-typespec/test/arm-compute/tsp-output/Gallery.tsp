@@ -51,14 +51,17 @@ interface Galleries {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Gallery,
-    Response = ArmResourceUpdatedResponse<Gallery> | ArmResourceCreatedResponse<
-      Gallery,
-      ArmLroLocationHeader<FinalResult = Gallery> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: Gallery;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<Gallery>
+      | ArmResourceCreatedResponse<
+          Gallery,
+          ArmLroLocationHeader<FinalResult = Gallery> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: Gallery;
+        })
   >;
 
   /**
@@ -77,7 +80,10 @@ interface Galleries {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Gallery,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -105,15 +111,19 @@ interface Galleries {
 }
 
 @@doc(Gallery.name, "The name of the Shared Image Gallery.");
-@@doc(Gallery.properties,
+@@doc(
+  Gallery.properties,
   "Describes the properties of a Shared Image Gallery."
 );
-@@doc(Galleries.createOrUpdate::parameters.resource,
+@@doc(
+  Galleries.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update Shared Image Gallery operation."
 );
-@@doc(Galleries.update::parameters.properties,
+@@doc(
+  Galleries.update::parameters.properties,
   "Parameters supplied to the update Shared Image Gallery operation."
 );
-@@doc(Galleries.gallerySharingProfileUpdate::parameters.body,
+@@doc(
+  Galleries.gallerySharingProfileUpdate::parameters.body,
   "Parameters supplied to the update gallery sharing profile."
 );

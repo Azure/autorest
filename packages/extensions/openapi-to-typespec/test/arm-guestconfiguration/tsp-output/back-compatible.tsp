@@ -6,67 +6,88 @@ using Microsoft.GuestConfiguration;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(Operation.properties);
 
-@@clientName(GuestConfigurationAssignments.createOrUpdate::parameters.resource,
+@@clientName(
+  GuestConfigurationAssignments.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(GuestConfigurationAssignments.guestConfigurationAssignmentReportsList,
+@@clientLocation(
+  GuestConfigurationAssignments.guestConfigurationAssignmentReportsList,
   "GuestConfigurationAssignmentReports"
 );
-@@clientName(GuestConfigurationAssignments.guestConfigurationAssignmentReportsList,
+@@clientName(
+  GuestConfigurationAssignments.guestConfigurationAssignmentReportsList,
   "List"
 );
-@@clientLocation(GuestConfigurationAssignments.guestConfigurationAssignmentReportsGet,
+@@clientLocation(
+  GuestConfigurationAssignments.guestConfigurationAssignmentReportsGet,
   "GuestConfigurationAssignmentReports"
 );
-@@clientName(GuestConfigurationAssignments.guestConfigurationAssignmentReportsGet,
+@@clientName(
+  GuestConfigurationAssignments.guestConfigurationAssignmentReportsGet,
   "Get"
 );
-@@clientName(GuestConfigurationHCRPAssignments.createOrUpdate::parameters.resource,
+@@clientName(
+  GuestConfigurationHCRPAssignments.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsList,
+@@clientLocation(
+  GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsList,
   "GuestConfigurationHCRPAssignmentReports"
 );
-@@clientName(GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsList,
+@@clientName(
+  GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsList,
   "List"
 );
-@@clientLocation(GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsGet,
+@@clientLocation(
+  GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsGet,
   "GuestConfigurationHCRPAssignmentReports"
 );
-@@clientName(GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsGet,
+@@clientName(
+  GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsGet,
   "Get"
 );
-@@clientName(GuestConfigurationAssignmentsVMSS.createOrUpdate::parameters.resource,
+@@clientName(
+  GuestConfigurationAssignmentsVMSS.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSList,
+@@clientLocation(
+  GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSList,
   "GuestConfigurationAssignmentReportsVMSS"
 );
-@@clientName(GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSList,
+@@clientName(
+  GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSList,
   "List"
 );
-@@clientLocation(GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSGet,
+@@clientLocation(
+  GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSGet,
   "GuestConfigurationAssignmentReportsVMSS"
 );
-@@clientName(GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSGet,
+@@clientName(
+  GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSGet,
   "Get"
 );
-@@clientName(GuestConfigurationConnectedVMwarevSphereAssignments.createOrUpdate::parameters.resource,
+@@clientName(
+  GuestConfigurationConnectedVMwarevSphereAssignments.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsList,
+@@clientLocation(
+  GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsList,
   "GuestConfigurationConnectedVMwarevSphereAssignmentsReports"
 );
-@@clientName(GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsList,
+@@clientName(
+  GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsList,
   "List"
 );
-@@clientLocation(GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsGet,
+@@clientLocation(
+  GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsGet,
   "GuestConfigurationConnectedVMwarevSphereAssignmentsReports"
 );
-@@clientName(GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsGet,
+@@clientName(
+  GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsGet,
   "Get"
 );
 
-@@clientLocation(GuestConfigurationAssignmentsOperationGroup.rGList,
+@@clientLocation(
+  GuestConfigurationAssignmentsOperationGroup.rGList,
   GuestConfigurationAssignments
 );

@@ -7,15 +7,18 @@ using Microsoft.ServiceNetworking;
 @@Legacy.flattenProperty(AssociationUpdate.properties);
 
 @@clientLocation(TrafficControllers.get, "TrafficControllerInterface");
-@@clientLocation(TrafficControllers.createOrUpdate,
+@@clientLocation(
+  TrafficControllers.createOrUpdate,
   "TrafficControllerInterface"
 );
 @@clientLocation(TrafficControllers.update, "TrafficControllerInterface");
 @@clientLocation(TrafficControllers.delete, "TrafficControllerInterface");
-@@clientLocation(TrafficControllers.listByResourceGroup,
+@@clientLocation(
+  TrafficControllers.listByResourceGroup,
   "TrafficControllerInterface"
 );
-@@clientLocation(TrafficControllers.listBySubscription,
+@@clientLocation(
+  TrafficControllers.listBySubscription,
   "TrafficControllerInterface"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."

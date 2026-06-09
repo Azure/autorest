@@ -72,7 +72,10 @@ interface DedicatedHosts {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     DedicatedHost,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -105,9 +108,11 @@ interface DedicatedHosts {
 
 @@doc(DedicatedHost.name, "The name of the dedicated host.");
 @@doc(DedicatedHost.properties, "Properties of the dedicated host.");
-@@doc(DedicatedHosts.createOrUpdate::parameters.resource,
+@@doc(
+  DedicatedHosts.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Dedicated Host."
 );
-@@doc(DedicatedHosts.update::parameters.properties,
+@@doc(
+  DedicatedHosts.update::parameters.properties,
   "Parameters supplied to the Update Dedicated Host operation."
 );

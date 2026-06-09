@@ -6,10 +6,12 @@ using Azure.ResourceManager.AlertsManagement;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(PatchObject.properties);
 
-@@clientName(AlertProcessingRules.createOrUpdate::parameters.resource,
+@@clientName(
+  AlertProcessingRules.createOrUpdate::parameters.resource,
   "alertProcessingRule"
 );
-@@clientName(AlertProcessingRules.update::parameters.properties,
+@@clientName(
+  AlertProcessingRules.update::parameters.properties,
   "alertProcessingRulePatch"
 );
 

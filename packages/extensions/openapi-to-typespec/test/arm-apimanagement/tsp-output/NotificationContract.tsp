@@ -111,7 +111,9 @@ interface NotificationContracts {
   notificationRecipientUserCreateOrUpdate is ArmResourceActionSync<
     NotificationContract,
     void,
-    ArmResponse<RecipientUserContract> | ArmResourceCreatedSyncResponse<RecipientUserContract>,
+
+      | ArmResponse<RecipientUserContract>
+      | ArmResourceCreatedSyncResponse<RecipientUserContract>,
     Parameters = {
       /**
        * User identifier. Must be unique in the current API Management service instance.
@@ -181,7 +183,9 @@ interface NotificationContracts {
   notificationRecipientEmailCreateOrUpdate is ArmResourceActionSync<
     NotificationContract,
     void,
-    ArmResponse<RecipientEmailContract> | ArmResourceCreatedSyncResponse<RecipientEmailContract>,
+
+      | ArmResponse<RecipientEmailContract>
+      | ArmResourceCreatedSyncResponse<RecipientEmailContract>,
     Parameters = {
       /**
        * Email identifier.
@@ -211,6 +215,7 @@ interface NotificationContracts {
 }
 
 @@doc(NotificationContract.name, "Notification Name Identifier.");
-@@doc(NotificationContract.properties,
+@@doc(
+  NotificationContract.properties,
   "Notification entity contract properties."
 );

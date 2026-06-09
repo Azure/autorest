@@ -11,7 +11,8 @@ using Azure.Language.QnAMaker;
 
 @@clientName(KnowledgeBaseAnswerContext.previousUserQuery, "previousQuestion");
 
-@@clientName(ShortAnswerOptions.confidenceScoreThreshold,
+@@clientName(
+  ShortAnswerOptions.confidenceScoreThreshold,
   "confidenceThreshold"
 );
 @@clientName(ShortAnswerOptions.topAnswersWithSpan, "top");
@@ -27,9 +28,11 @@ using Azure.Language.QnAMaker;
 @@clientName(TextAnswer.confidenceScore, "confidence");
 @@clientName(TextAnswer.answerSpan, "shortAnswer");
 
-@@clientLocation(QuestionAnsweringOperationGroup.getAnswers,
+@@clientLocation(
+  QuestionAnsweringOperationGroup.getAnswers,
   "QuestionAnswering"
 );
-@@clientLocation(QuestionAnsweringOperationGroup.getAnswersFromText,
+@@clientLocation(
+  QuestionAnsweringOperationGroup.getAnswersFromText,
   "QuestionAnswering"
 );

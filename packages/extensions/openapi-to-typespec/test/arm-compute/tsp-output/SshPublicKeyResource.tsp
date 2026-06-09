@@ -71,9 +71,11 @@ interface SshPublicKeyResources {
 
 @@doc(SshPublicKeyResource.name, "The name of the SSH public key.");
 @@doc(SshPublicKeyResource.properties, "Properties of the SSH public key.");
-@@doc(SshPublicKeyResources.create::parameters.resource,
+@@doc(
+  SshPublicKeyResources.create::parameters.resource,
   "Parameters supplied to create the SSH public key."
 );
-@@doc(SshPublicKeyResources.update::parameters.properties,
+@@doc(
+  SshPublicKeyResources.update::parameters.properties,
   "Parameters supplied to update the SSH public key."
 );

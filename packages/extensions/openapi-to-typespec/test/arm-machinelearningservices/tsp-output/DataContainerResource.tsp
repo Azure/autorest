@@ -66,7 +66,10 @@ interface DataContainerResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is DataContainerResourceOps.DeleteWithoutOkAsync<
     DataContainerResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -153,12 +156,15 @@ interface DataContainers {
 }
 
 @@doc(DataContainerResource.name, "Container name.");
-@@doc(DataContainerResource.properties,
+@@doc(
+  DataContainerResource.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(DataContainerResources.createOrUpdate::parameters.resource,
+@@doc(
+  DataContainerResources.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );
-@@doc(DataContainers.createOrUpdate::parameters.resource,
+@@doc(
+  DataContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );

@@ -43,7 +43,10 @@ interface FeaturesetVersions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     FeaturesetVersion,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -149,12 +152,15 @@ interface FeaturesetVersions {
 }
 
 @@doc(FeaturesetVersion.name, "Version identifier. This is case-sensitive.");
-@@doc(FeaturesetVersion.properties,
+@@doc(
+  FeaturesetVersion.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(FeaturesetVersions.createOrUpdate::parameters.resource,
+@@doc(
+  FeaturesetVersions.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
-@@doc(FeaturesetVersions.backfill::parameters.body,
+@@doc(
+  FeaturesetVersions.backfill::parameters.body,
   "Feature set version backfill request entity."
 );

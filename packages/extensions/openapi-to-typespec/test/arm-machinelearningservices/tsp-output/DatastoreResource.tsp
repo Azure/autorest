@@ -113,9 +113,11 @@ interface DatastoreResources {
 }
 
 @@doc(DatastoreResource.name, "Datastore name.");
-@@doc(DatastoreResource.properties,
+@@doc(
+  DatastoreResource.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(DatastoreResources.createOrUpdate::parameters.resource,
+@@doc(
+  DatastoreResources.createOrUpdate::parameters.resource,
   "Datastore entity to create or update."
 );

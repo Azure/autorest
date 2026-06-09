@@ -48,14 +48,17 @@ interface GalleryApplicationVersions {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     GalleryApplicationVersion,
-    Response = ArmResourceUpdatedResponse<GalleryApplicationVersion> | ArmResourceCreatedResponse<
-      GalleryApplicationVersion,
-      ArmLroLocationHeader<FinalResult = GalleryApplicationVersion> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: GalleryApplicationVersion;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<GalleryApplicationVersion>
+      | ArmResourceCreatedResponse<
+          GalleryApplicationVersion,
+          ArmLroLocationHeader<FinalResult = GalleryApplicationVersion> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: GalleryApplicationVersion;
+        })
   >;
 
   /**
@@ -74,7 +77,10 @@ interface GalleryApplicationVersions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     GalleryApplicationVersion,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -86,15 +92,19 @@ interface GalleryApplicationVersions {
   >;
 }
 
-@@doc(GalleryApplicationVersion.name,
+@@doc(
+  GalleryApplicationVersion.name,
   "The name of the gallery Application Version to be retrieved."
 );
-@@doc(GalleryApplicationVersion.properties,
+@@doc(
+  GalleryApplicationVersion.properties,
   "Describes the properties of a gallery image version."
 );
-@@doc(GalleryApplicationVersions.createOrUpdate::parameters.resource,
+@@doc(
+  GalleryApplicationVersions.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update gallery Application Version operation."
 );
-@@doc(GalleryApplicationVersions.update::parameters.properties,
+@@doc(
+  GalleryApplicationVersions.update::parameters.properties,
   "Parameters supplied to the update gallery Application Version operation."
 );

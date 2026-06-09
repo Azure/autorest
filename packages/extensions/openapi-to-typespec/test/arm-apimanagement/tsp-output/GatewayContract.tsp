@@ -195,7 +195,9 @@ interface GatewayContracts {
   gatewayApiCreateOrUpdate is ArmResourceActionSync<
     GatewayContract,
     AssociationContract,
-    ArmResponse<GatewayApiData> | ArmResourceCreatedSyncResponse<GatewayApiData>,
+
+      | ArmResponse<GatewayApiData>
+      | ArmResourceCreatedSyncResponse<GatewayApiData>,
     Parameters = {
       /**
        * API identifier. Must be unique in the current API Management service instance.
@@ -231,7 +233,8 @@ interface GatewayContracts {
 
 @@maxLength(GatewayContract.name, 80);
 @@minLength(GatewayContract.name, 1);
-@@doc(GatewayContract.name,
+@@doc(
+  GatewayContract.name,
   "Gateway entity identifier. Must be unique in the current API Management service instance. Must not have value 'managed'"
 );
 @@doc(GatewayContract.properties, "Gateway details.");

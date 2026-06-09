@@ -95,12 +95,15 @@ interface GatewayHostnameConfigurationContracts {
 
 @@maxLength(GatewayHostnameConfigurationContract.name, 80);
 @@minLength(GatewayHostnameConfigurationContract.name, 1);
-@@doc(GatewayHostnameConfigurationContract.name,
+@@doc(
+  GatewayHostnameConfigurationContract.name,
   "Gateway hostname configuration identifier. Must be unique in the scope of parent Gateway entity."
 );
-@@doc(GatewayHostnameConfigurationContract.properties,
+@@doc(
+  GatewayHostnameConfigurationContract.properties,
   "Gateway hostname configuration details."
 );
-@@doc(GatewayHostnameConfigurationContracts.createOrUpdate::parameters.resource,
+@@doc(
+  GatewayHostnameConfigurationContracts.createOrUpdate::parameters.resource,
   ""
 );

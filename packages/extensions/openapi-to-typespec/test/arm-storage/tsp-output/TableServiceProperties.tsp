@@ -52,9 +52,11 @@ interface TableServices {
 }
 
 @@doc(TableServiceProperties.name, "");
-@@doc(TableServiceProperties.properties,
+@@doc(
+  TableServiceProperties.properties,
   "The properties of a storage account’s Table service."
 );
-@@doc(TableServices.setServiceProperties::parameters.resource,
+@@doc(
+  TableServices.setServiceProperties::parameters.resource,
   "The properties of a storage account’s Table service, only properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules can be specified."
 );

@@ -69,7 +69,10 @@ interface Images {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Image,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -85,9 +88,11 @@ interface Images {
 
 @@doc(Image.name, "The name of the image.");
 @@doc(Image.properties, "Describes the properties of an Image.");
-@@doc(Images.createOrUpdate::parameters.resource,
+@@doc(
+  Images.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Image operation."
 );
-@@doc(Images.update::parameters.properties,
+@@doc(
+  Images.update::parameters.properties,
   "Parameters supplied to the Update Image operation."
 );

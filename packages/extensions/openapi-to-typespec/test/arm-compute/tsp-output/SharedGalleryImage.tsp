@@ -66,9 +66,11 @@ interface SharedGalleryImages {
   >;
 }
 
-@@doc(SharedGalleryImage.name,
+@@doc(
+  SharedGalleryImage.name,
   "The name of the Shared Gallery Image Definition from which the Image Versions are to be listed."
 );
-@@doc(SharedGalleryImage.properties,
+@@doc(
+  SharedGalleryImage.properties,
   "Describes the properties of a gallery image definition."
 );

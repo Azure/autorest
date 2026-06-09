@@ -119,15 +119,19 @@ interface OpenidConnectProviderContracts {
 }
 
 @@maxLength(OpenidConnectProviderContract.name, 256);
-@@doc(OpenidConnectProviderContract.name,
+@@doc(
+  OpenidConnectProviderContract.name,
   "Identifier of the OpenID Connect Provider."
 );
-@@doc(OpenidConnectProviderContract.properties,
+@@doc(
+  OpenidConnectProviderContract.properties,
   "OpenId Connect Provider contract properties."
 );
-@@doc(OpenidConnectProviderContracts.createOrUpdate::parameters.resource,
+@@doc(
+  OpenidConnectProviderContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@doc(OpenidConnectProviderContracts.update::parameters.properties,
+@@doc(
+  OpenidConnectProviderContracts.update::parameters.properties,
   "Update parameters."
 );

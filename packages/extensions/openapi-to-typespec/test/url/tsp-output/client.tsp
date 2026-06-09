@@ -11,29 +11,35 @@ using AutoRestUrlTestService;
 @@clientLocation(pathsOperationGroup.getIntOneMillion, "paths");
 @@clientName(pathsOperationGroup.getIntOneMillion, "getIntOneMillion");
 @@clientLocation(pathsOperationGroup.getIntNegativeOneMillion, "paths");
-@@clientName(pathsOperationGroup.getIntNegativeOneMillion,
+@@clientName(
+  pathsOperationGroup.getIntNegativeOneMillion,
   "getIntNegativeOneMillion"
 );
 @@clientLocation(pathsOperationGroup.getTenBillion, "paths");
 @@clientName(pathsOperationGroup.getTenBillion, "getTenBillion");
 @@clientLocation(pathsOperationGroup.getNegativeTenBillion, "paths");
-@@clientName(pathsOperationGroup.getNegativeTenBillion,
+@@clientName(
+  pathsOperationGroup.getNegativeTenBillion,
   "getNegativeTenBillion"
 );
 @@clientLocation(pathsOperationGroup.floatScientificPositive, "paths");
-@@clientName(pathsOperationGroup.floatScientificPositive,
+@@clientName(
+  pathsOperationGroup.floatScientificPositive,
   "floatScientificPositive"
 );
 @@clientLocation(pathsOperationGroup.floatScientificNegative, "paths");
-@@clientName(pathsOperationGroup.floatScientificNegative,
+@@clientName(
+  pathsOperationGroup.floatScientificNegative,
   "floatScientificNegative"
 );
 @@clientLocation(pathsOperationGroup.doubleDecimalPositive, "paths");
-@@clientName(pathsOperationGroup.doubleDecimalPositive,
+@@clientName(
+  pathsOperationGroup.doubleDecimalPositive,
   "doubleDecimalPositive"
 );
 @@clientLocation(pathsOperationGroup.doubleDecimalNegative, "paths");
-@@clientName(pathsOperationGroup.doubleDecimalNegative,
+@@clientName(
+  pathsOperationGroup.doubleDecimalNegative,
   "doubleDecimalNegative"
 );
 @@clientLocation(pathsOperationGroup.stringUnicode, "paths");
@@ -75,7 +81,8 @@ using AutoRestUrlTestService;
 @@clientLocation(queriesOperationGroup.getIntOneMillion, "queries");
 @@clientName(queriesOperationGroup.getIntOneMillion, "getIntOneMillion");
 @@clientLocation(queriesOperationGroup.getIntNegativeOneMillion, "queries");
-@@clientName(queriesOperationGroup.getIntNegativeOneMillion,
+@@clientName(
+  queriesOperationGroup.getIntNegativeOneMillion,
   "getIntNegativeOneMillion"
 );
 @@clientLocation(queriesOperationGroup.getIntNull, "queries");
@@ -83,27 +90,32 @@ using AutoRestUrlTestService;
 @@clientLocation(queriesOperationGroup.getTenBillion, "queries");
 @@clientName(queriesOperationGroup.getTenBillion, "getTenBillion");
 @@clientLocation(queriesOperationGroup.getNegativeTenBillion, "queries");
-@@clientName(queriesOperationGroup.getNegativeTenBillion,
+@@clientName(
+  queriesOperationGroup.getNegativeTenBillion,
   "getNegativeTenBillion"
 );
 @@clientLocation(queriesOperationGroup.getLongNull, "queries");
 @@clientName(queriesOperationGroup.getLongNull, "getLongNull");
 @@clientLocation(queriesOperationGroup.floatScientificPositive, "queries");
-@@clientName(queriesOperationGroup.floatScientificPositive,
+@@clientName(
+  queriesOperationGroup.floatScientificPositive,
   "floatScientificPositive"
 );
 @@clientLocation(queriesOperationGroup.floatScientificNegative, "queries");
-@@clientName(queriesOperationGroup.floatScientificNegative,
+@@clientName(
+  queriesOperationGroup.floatScientificNegative,
   "floatScientificNegative"
 );
 @@clientLocation(queriesOperationGroup.floatNull, "queries");
 @@clientName(queriesOperationGroup.floatNull, "floatNull");
 @@clientLocation(queriesOperationGroup.doubleDecimalPositive, "queries");
-@@clientName(queriesOperationGroup.doubleDecimalPositive,
+@@clientName(
+  queriesOperationGroup.doubleDecimalPositive,
   "doubleDecimalPositive"
 );
 @@clientLocation(queriesOperationGroup.doubleDecimalNegative, "queries");
-@@clientName(queriesOperationGroup.doubleDecimalNegative,
+@@clientName(
+  queriesOperationGroup.doubleDecimalNegative,
   "doubleDecimalNegative"
 );
 @@clientLocation(queriesOperationGroup.doubleNull, "queries");
@@ -133,7 +145,8 @@ using AutoRestUrlTestService;
 @@clientLocation(queriesOperationGroup.arrayStringCsvValid, "queries");
 @@clientLocation(queriesOperationGroup.arrayStringCsvNull, "queries");
 @@clientLocation(queriesOperationGroup.arrayStringCsvEmpty, "queries");
-@@clientLocation(queriesOperationGroup.arrayStringNoCollectionFormatEmpty,
+@@clientLocation(
+  queriesOperationGroup.arrayStringNoCollectionFormatEmpty,
   "queries"
 );
 @@clientLocation(queriesOperationGroup.arrayStringSsvValid, "queries");
@@ -144,15 +157,19 @@ using AutoRestUrlTestService;
 @@clientName(pathItemsOperationGroup.getAllWithValues, "getAllWithValues");
 @@clientLocation(pathItemsOperationGroup.getGlobalQueryNull, "pathItems");
 @@clientName(pathItemsOperationGroup.getGlobalQueryNull, "getGlobalQueryNull");
-@@clientLocation(pathItemsOperationGroup.getGlobalAndLocalQueryNull,
+@@clientLocation(
+  pathItemsOperationGroup.getGlobalAndLocalQueryNull,
   "pathItems"
 );
-@@clientName(pathItemsOperationGroup.getGlobalAndLocalQueryNull,
+@@clientName(
+  pathItemsOperationGroup.getGlobalAndLocalQueryNull,
   "getGlobalAndLocalQueryNull"
 );
-@@clientLocation(pathItemsOperationGroup.getLocalPathItemQueryNull,
+@@clientLocation(
+  pathItemsOperationGroup.getLocalPathItemQueryNull,
   "pathItems"
 );
-@@clientName(pathItemsOperationGroup.getLocalPathItemQueryNull,
+@@clientName(
+  pathItemsOperationGroup.getLocalPathItemQueryNull,
   "getLocalPathItemQueryNull"
 );

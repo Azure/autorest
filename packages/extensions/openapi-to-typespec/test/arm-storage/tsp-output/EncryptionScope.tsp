@@ -74,13 +74,16 @@ interface EncryptionScopes {
 
 @@maxLength(EncryptionScope.name, 63);
 @@minLength(EncryptionScope.name, 3);
-@@doc(EncryptionScope.name,
+@@doc(
+  EncryptionScope.name,
   "The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number."
 );
 @@doc(EncryptionScope.properties, "Properties of the encryption scope.");
-@@doc(EncryptionScopes.put::parameters.resource,
+@@doc(
+  EncryptionScopes.put::parameters.resource,
   "Encryption scope properties to be used for the create or update."
 );
-@@doc(EncryptionScopes.patch::parameters.properties,
+@@doc(
+  EncryptionScopes.patch::parameters.properties,
   "Encryption scope properties to be used for the update."
 );

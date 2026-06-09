@@ -10,22 +10,28 @@ using Microsoft.Storage;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(StorageAccountCreateParameters.properties);
 
-@@clientName(StorageAccountPropertiesCreateParameters.networkAcls,
+@@clientName(
+  StorageAccountPropertiesCreateParameters.networkAcls,
   "networkRuleSet"
 );
-@@clientName(StorageAccountPropertiesCreateParameters.supportsHttpsTrafficOnly,
+@@clientName(
+  StorageAccountPropertiesCreateParameters.supportsHttpsTrafficOnly,
   "enableHttpsTrafficOnly"
 );
-@@clientName(StorageAccountPropertiesCreateParameters.isSftpEnabled,
+@@clientName(
+  StorageAccountPropertiesCreateParameters.isSftpEnabled,
   "IsSftpEnabled"
 );
-@@clientName(StorageAccountPropertiesCreateParameters.isLocalUserEnabled,
+@@clientName(
+  StorageAccountPropertiesCreateParameters.isLocalUserEnabled,
   "IsLocalUserEnabled"
 );
-@@clientName(StorageAccountPropertiesCreateParameters.isHnsEnabled,
+@@clientName(
+  StorageAccountPropertiesCreateParameters.isHnsEnabled,
   "IsHnsEnabled"
 );
-@@clientName(StorageAccountPropertiesCreateParameters.isNfsV3Enabled,
+@@clientName(
+  StorageAccountPropertiesCreateParameters.isNfsV3Enabled,
   "enableNfsV3"
 );
 
@@ -36,10 +42,12 @@ using Microsoft.Storage;
 @@clientName(KeyVaultProperties.keyversion, "keyVersion");
 @@clientName(KeyVaultProperties.keyvaulturi, "keyVaultUri");
 
-@@clientName(EncryptionIdentity.userAssignedIdentity,
+@@clientName(
+  EncryptionIdentity.userAssignedIdentity,
   "encryptionUserAssignedIdentity"
 );
-@@clientName(EncryptionIdentity.federatedIdentityClientId,
+@@clientName(
+  EncryptionIdentity.federatedIdentityClientId,
   "encryptionFederatedIdentityClientId"
 );
 
@@ -47,7 +55,8 @@ using Microsoft.Storage;
 
 @@clientName(IPRule.value, "IPAddressOrRange");
 
-@@clientName(StorageAccountProperties.supportsHttpsTrafficOnly,
+@@clientName(
+  StorageAccountProperties.supportsHttpsTrafficOnly,
   "enableHttpsTrafficOnly"
 );
 @@clientName(StorageAccountProperties.networkAcls, "networkRuleSet");
@@ -61,16 +70,20 @@ using Microsoft.Storage;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(StorageAccountUpdateParameters.properties);
 
-@@clientName(StorageAccountPropertiesUpdateParameters.supportsHttpsTrafficOnly,
+@@clientName(
+  StorageAccountPropertiesUpdateParameters.supportsHttpsTrafficOnly,
   "enableHttpsTrafficOnly"
 );
-@@clientName(StorageAccountPropertiesUpdateParameters.isSftpEnabled,
+@@clientName(
+  StorageAccountPropertiesUpdateParameters.isSftpEnabled,
   "IsSftpEnabled"
 );
-@@clientName(StorageAccountPropertiesUpdateParameters.isLocalUserEnabled,
+@@clientName(
+  StorageAccountPropertiesUpdateParameters.isLocalUserEnabled,
   "IsLocalUserEnabled"
 );
-@@clientName(StorageAccountPropertiesUpdateParameters.networkAcls,
+@@clientName(
+  StorageAccountPropertiesUpdateParameters.networkAcls,
   "networkRuleSet"
 );
 
@@ -132,31 +145,38 @@ using Microsoft.Storage;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(DeletedAccount.properties);
 
-@@clientName(ManagementPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagementPolicies.createOrUpdate::parameters.resource,
   "properties"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(ManagementPolicy.properties);
 
-@@clientName(BlobInventoryPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  BlobInventoryPolicies.createOrUpdate::parameters.resource,
   "properties"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(BlobInventoryPolicy.properties);
 
-@@clientLocation(ObjectReplicationPolicyOperationGroup.get,
+@@clientLocation(
+  ObjectReplicationPolicyOperationGroup.get,
   "ObjectReplicationPolicies"
 );
-@@clientLocation(ObjectReplicationPolicyOperationGroup.createOrUpdate,
+@@clientLocation(
+  ObjectReplicationPolicyOperationGroup.createOrUpdate,
   "ObjectReplicationPolicies"
 );
-@@clientName(ObjectReplicationPolicyOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  ObjectReplicationPolicyOperationGroup.createOrUpdate::parameters.resource,
   "properties"
 );
-@@clientLocation(ObjectReplicationPolicyOperationGroup.delete,
+@@clientLocation(
+  ObjectReplicationPolicyOperationGroup.delete,
   "ObjectReplicationPolicies"
 );
-@@clientLocation(ObjectReplicationPolicyOperationGroup.list,
+@@clientLocation(
+  ObjectReplicationPolicyOperationGroup.list,
   "ObjectReplicationPolicies"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -164,7 +184,8 @@ using Microsoft.Storage;
 
 @@clientLocation(LocalUserOperationGroup.get, "LocalUsers");
 @@clientLocation(LocalUserOperationGroup.createOrUpdate, "LocalUsers");
-@@clientName(LocalUserOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  LocalUserOperationGroup.createOrUpdate::parameters.resource,
   "properties"
 );
 @@clientLocation(LocalUserOperationGroup.delete, "LocalUsers");
@@ -179,7 +200,8 @@ using Microsoft.Storage;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(EncryptionScope.properties);
 
-@@clientName(BlobServices.setServiceProperties::parameters.resource,
+@@clientName(
+  BlobServices.setServiceProperties::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -194,22 +216,26 @@ using Microsoft.Storage;
 @@Legacy.flattenProperty(BlobContainer.properties);
 
 @@clientLocation(ImmutabilityPolicies.getImmutabilityPolicy, BlobContainers);
-@@clientLocation(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy,
+@@clientLocation(
+  ImmutabilityPolicies.createOrUpdateImmutabilityPolicy,
   BlobContainers
 );
-@@clientName(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
+@@clientName(
+  ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
   "parameters"
 );
 @@clientLocation(ImmutabilityPolicies.deleteImmutabilityPolicy, BlobContainers);
 @@clientLocation(ImmutabilityPolicies.lockImmutabilityPolicy, BlobContainers);
 @@clientLocation(ImmutabilityPolicies.extendImmutabilityPolicy, BlobContainers);
-@@clientName(ImmutabilityPolicies.extendImmutabilityPolicy::parameters.body,
+@@clientName(
+  ImmutabilityPolicies.extendImmutabilityPolicy::parameters.body,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(ImmutabilityPolicy.properties);
 
-@@clientName(FileServices.setServiceProperties::parameters.resource,
+@@clientName(
+  FileServices.setServiceProperties::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -222,7 +248,8 @@ using Microsoft.Storage;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(FileShare.properties);
 
-@@clientName(QueueServices.setServiceProperties::parameters.resource,
+@@clientName(
+  QueueServices.setServiceProperties::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -238,7 +265,8 @@ using Microsoft.Storage;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(StorageQueue.properties);
 
-@@clientName(TableServices.setServiceProperties::parameters.resource,
+@@clientName(
+  TableServices.setServiceProperties::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -256,7 +284,8 @@ using Microsoft.Storage;
 
 @@clientLocation(SkusOperationGroup.list, "Skus");
 
-@@clientLocation(StorageAccountsOperationGroup.checkNameAvailability,
+@@clientLocation(
+  StorageAccountsOperationGroup.checkNameAvailability,
   StorageAccounts
 );
 

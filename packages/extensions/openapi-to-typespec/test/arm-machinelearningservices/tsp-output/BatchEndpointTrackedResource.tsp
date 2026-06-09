@@ -59,7 +59,10 @@ interface BatchEndpointTrackedResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     BatchEndpointTrackedResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -95,12 +98,15 @@ interface BatchEndpointTrackedResources {
 }
 
 @@doc(BatchEndpointTrackedResource.name, "Name for the Batch Endpoint.");
-@@doc(BatchEndpointTrackedResource.properties,
+@@doc(
+  BatchEndpointTrackedResource.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(BatchEndpointTrackedResources.createOrUpdate::parameters.resource,
+@@doc(
+  BatchEndpointTrackedResources.createOrUpdate::parameters.resource,
   "Batch inference endpoint definition object."
 );
-@@doc(BatchEndpointTrackedResources.update::parameters.properties,
+@@doc(
+  BatchEndpointTrackedResources.update::parameters.properties,
   "Mutable batch inference endpoint definition object."
 );

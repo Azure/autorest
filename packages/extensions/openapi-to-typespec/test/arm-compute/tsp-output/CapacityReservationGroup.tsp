@@ -88,15 +88,19 @@ interface CapacityReservationGroups {
   >;
 }
 
-@@doc(CapacityReservationGroup.name,
+@@doc(
+  CapacityReservationGroup.name,
   "The name of the capacity reservation group."
 );
-@@doc(CapacityReservationGroup.properties,
+@@doc(
+  CapacityReservationGroup.properties,
   "capacity reservation group Properties."
 );
-@@doc(CapacityReservationGroups.createOrUpdate::parameters.resource,
+@@doc(
+  CapacityReservationGroups.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create capacity reservation Group."
 );
-@@doc(CapacityReservationGroups.update::parameters.properties,
+@@doc(
+  CapacityReservationGroups.update::parameters.properties,
   "Parameters supplied to the Update capacity reservation Group operation."
 );

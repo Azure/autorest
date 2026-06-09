@@ -32,59 +32,72 @@ using Microsoft.Quota;
 
 @@clientLocation(GroupQuotasEntities.get, "GroupQuotas");
 @@clientLocation(GroupQuotasEntities.createOrUpdate, "GroupQuotas");
-@@clientName(GroupQuotasEntities.createOrUpdate::parameters.resource,
+@@clientName(
+  GroupQuotasEntities.createOrUpdate::parameters.resource,
   "GroupQuotaPutRequestBody"
 );
 @@clientLocation(GroupQuotasEntities.update, "GroupQuotas");
-@@clientName(GroupQuotasEntities.update::parameters.properties,
+@@clientName(
+  GroupQuotasEntities.update::parameters.properties,
   " GroupQuotasPatchRequestBody"
 );
 @@clientLocation(GroupQuotasEntities.delete, "GroupQuotas");
 @@clientLocation(GroupQuotasEntities.list, "GroupQuotas");
-@@clientLocation(GroupQuotasEntities.groupQuotaLimitsRequestList,
+@@clientLocation(
+  GroupQuotasEntities.groupQuotaLimitsRequestList,
   "GroupQuotaLimitsRequest"
 );
 @@clientName(GroupQuotasEntities.groupQuotaLimitsRequestList, "List");
 
 @@clientLocation(GroupQuotaSubscriptionIds.get, "GroupQuotaSubscriptions");
-@@clientLocation(GroupQuotaSubscriptionIds.createOrUpdate,
+@@clientLocation(
+  GroupQuotaSubscriptionIds.createOrUpdate,
   "GroupQuotaSubscriptions"
 );
 @@clientLocation(GroupQuotaSubscriptionIds.update, "GroupQuotaSubscriptions");
 @@clientLocation(GroupQuotaSubscriptionIds.delete, "GroupQuotaSubscriptions");
 @@clientLocation(GroupQuotaSubscriptionIds.list, "GroupQuotaSubscriptions");
 
-@@clientLocation(GroupQuotaSubscriptionRequestStatuses.get,
+@@clientLocation(
+  GroupQuotaSubscriptionRequestStatuses.get,
   "GroupQuotaSubscriptionRequests"
 );
-@@clientLocation(GroupQuotaSubscriptionRequestStatuses.list,
+@@clientLocation(
+  GroupQuotaSubscriptionRequestStatuses.list,
   "GroupQuotaSubscriptionRequests"
 );
 
 @@clientLocation(GroupQuotaLimitLists.list, "GroupQuotaLimits");
 @@clientLocation(GroupQuotaLimitLists.update, "GroupQuotaLimitsRequest");
-@@clientName(GroupQuotaLimitLists.update::parameters.properties,
+@@clientName(
+  GroupQuotaLimitLists.update::parameters.properties,
   "groupQuotaRequest"
 );
 
-@@clientLocation(SubmittedResourceRequestStatuses.get,
+@@clientLocation(
+  SubmittedResourceRequestStatuses.get,
   "GroupQuotaLimitsRequest"
 );
 
-@@clientLocation(SubscriptionQuotaAllocationsLists.list,
+@@clientLocation(
+  SubscriptionQuotaAllocationsLists.list,
   "GroupQuotaSubscriptionAllocation"
 );
-@@clientLocation(SubscriptionQuotaAllocationsLists.update,
+@@clientLocation(
+  SubscriptionQuotaAllocationsLists.update,
   "GroupQuotaSubscriptionAllocationRequest"
 );
-@@clientName(SubscriptionQuotaAllocationsLists.update::parameters.properties,
+@@clientName(
+  SubscriptionQuotaAllocationsLists.update::parameters.properties,
   "allocateQuotaRequest"
 );
 
-@@clientLocation(QuotaAllocationRequestStatuses.get,
+@@clientLocation(
+  QuotaAllocationRequestStatuses.get,
   "GroupQuotaSubscriptionAllocationRequest"
 );
-@@clientLocation(QuotaAllocationRequestStatuses.list,
+@@clientLocation(
+  QuotaAllocationRequestStatuses.list,
   "GroupQuotaSubscriptionAllocationRequest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -95,11 +108,13 @@ using Microsoft.Quota;
 
 @@clientLocation(CurrentQuotaLimitBases.get, "Quota");
 @@clientLocation(CurrentQuotaLimitBases.createOrUpdate, "Quota");
-@@clientName(CurrentQuotaLimitBases.createOrUpdate::parameters.resource,
+@@clientName(
+  CurrentQuotaLimitBases.createOrUpdate::parameters.resource,
   "createQuotaRequest"
 );
 @@clientLocation(CurrentQuotaLimitBases.update, "Quota");
-@@clientName(CurrentQuotaLimitBases.update::parameters.properties,
+@@clientName(
+  CurrentQuotaLimitBases.update::parameters.properties,
   "createQuotaRequest"
 );
 @@clientLocation(CurrentQuotaLimitBases.list, "Quota");

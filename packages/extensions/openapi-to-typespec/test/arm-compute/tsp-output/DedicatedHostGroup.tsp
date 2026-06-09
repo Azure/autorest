@@ -72,9 +72,11 @@ interface DedicatedHostGroups {
 
 @@doc(DedicatedHostGroup.name, "The name of the dedicated host group.");
 @@doc(DedicatedHostGroup.properties, "Dedicated Host Group Properties.");
-@@doc(DedicatedHostGroups.createOrUpdate::parameters.resource,
+@@doc(
+  DedicatedHostGroups.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Dedicated Host Group."
 );
-@@doc(DedicatedHostGroups.update::parameters.properties,
+@@doc(
+  DedicatedHostGroups.update::parameters.properties,
   "Parameters supplied to the Update Dedicated Host Group operation."
 );

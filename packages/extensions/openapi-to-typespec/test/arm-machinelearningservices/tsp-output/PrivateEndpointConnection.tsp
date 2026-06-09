@@ -59,9 +59,11 @@ interface PrivateEndpointConnections {
 }
 
 @@doc(PrivateEndpointConnection.name, "NRP Private Endpoint Connection Name");
-@@doc(PrivateEndpointConnection.properties,
+@@doc(
+  PrivateEndpointConnection.properties,
   "Private endpoint connection properties."
 );
-@@doc(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@doc(
+  PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "PrivateEndpointConnection object"
 );

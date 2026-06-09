@@ -214,7 +214,8 @@ interface Issue {
 
 @@maxLength(IssueContract.name, 256);
 @@minLength(IssueContract.name, 1);
-@@doc(IssueContract.name,
+@@doc(
+  IssueContract.name,
   "Issue identifier. Must be unique in the current API Management service instance."
 );
 @@doc(IssueContract.properties, "Properties of the Issue.");

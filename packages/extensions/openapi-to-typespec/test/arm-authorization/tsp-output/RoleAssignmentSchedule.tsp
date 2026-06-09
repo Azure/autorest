@@ -47,9 +47,11 @@ interface RoleAssignmentSchedules {
   >;
 }
 
-@@doc(RoleAssignmentSchedule.name,
+@@doc(
+  RoleAssignmentSchedule.name,
   "The name (guid) of the role assignment schedule to get."
 );
-@@doc(RoleAssignmentSchedule.properties,
+@@doc(
+  RoleAssignmentSchedule.properties,
   "Role assignment schedule properties."
 );

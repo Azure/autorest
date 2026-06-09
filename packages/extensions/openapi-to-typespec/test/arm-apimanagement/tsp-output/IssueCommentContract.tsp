@@ -95,10 +95,12 @@ interface IssueCommentContracts {
 
 @@maxLength(IssueCommentContract.name, 256);
 @@minLength(IssueCommentContract.name, 1);
-@@doc(IssueCommentContract.name,
+@@doc(
+  IssueCommentContract.name,
   "Comment identifier within an Issue. Must be unique in the current Issue."
 );
 @@doc(IssueCommentContract.properties, "Properties of the Issue Comment.");
-@@doc(IssueCommentContracts.createOrUpdate::parameters.resource,
+@@doc(
+  IssueCommentContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );

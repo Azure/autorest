@@ -67,7 +67,10 @@ interface ComputeResources {
       @query("underlyingResourceAction")
       underlyingResourceAction: UnderlyingResourceAction;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -155,15 +158,19 @@ interface ComputeResources {
 }
 
 @@doc(ComputeResource.name, "Name of the Azure Machine Learning compute.");
-@@doc(ComputeResources.createOrUpdate::parameters.resource,
+@@doc(
+  ComputeResources.createOrUpdate::parameters.resource,
   "Payload with Machine Learning compute definition."
 );
-@@doc(ComputeResources.update::parameters.properties,
+@@doc(
+  ComputeResources.update::parameters.properties,
   "Additional parameters for cluster update."
 );
-@@doc(ComputeResources.updateCustomServices::parameters.body,
+@@doc(
+  ComputeResources.updateCustomServices::parameters.body,
   "New list of Custom Services."
 );
-@@doc(ComputeResources.updateIdleShutdownSetting::parameters.body,
+@@doc(
+  ComputeResources.updateIdleShutdownSetting::parameters.body,
   "The object for updating idle shutdown setting of specified ComputeInstance."
 );

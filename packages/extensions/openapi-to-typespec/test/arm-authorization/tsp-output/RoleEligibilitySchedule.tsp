@@ -47,9 +47,11 @@ interface RoleEligibilitySchedules {
   >;
 }
 
-@@doc(RoleEligibilitySchedule.name,
+@@doc(
+  RoleEligibilitySchedule.name,
   "The name (guid) of the role eligibility schedule to get."
 );
-@@doc(RoleEligibilitySchedule.properties,
+@@doc(
+  RoleEligibilitySchedule.properties,
   "role eligibility schedule properties."
 );

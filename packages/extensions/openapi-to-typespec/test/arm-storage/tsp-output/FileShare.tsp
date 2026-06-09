@@ -139,14 +139,17 @@ interface FileShares {
 
 @@maxLength(FileShare.name, 63);
 @@minLength(FileShare.name, 3);
-@@doc(FileShare.name,
+@@doc(
+  FileShare.name,
   "The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number."
 );
 @@doc(FileShare.properties, "Properties of the file share.");
-@@doc(FileShares.create::parameters.resource,
+@@doc(
+  FileShares.create::parameters.resource,
   "Properties of the file share to create."
 );
-@@doc(FileShares.update::parameters.properties,
+@@doc(
+  FileShares.update::parameters.properties,
   "Properties to update for the file share."
 );
 @@doc(FileShares.restore::parameters.body, "");

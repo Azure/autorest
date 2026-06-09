@@ -59,7 +59,10 @@ interface OnlineDeploymentTrackedResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     OnlineDeploymentTrackedResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -124,18 +127,23 @@ interface OnlineDeploymentTrackedResources {
   >;
 }
 
-@@doc(OnlineDeploymentTrackedResource.name,
+@@doc(
+  OnlineDeploymentTrackedResource.name,
   "Inference Endpoint Deployment name."
 );
-@@doc(OnlineDeploymentTrackedResource.properties,
+@@doc(
+  OnlineDeploymentTrackedResource.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(OnlineDeploymentTrackedResources.createOrUpdate::parameters.resource,
+@@doc(
+  OnlineDeploymentTrackedResources.createOrUpdate::parameters.resource,
   "Inference Endpoint entity to apply during operation."
 );
-@@doc(OnlineDeploymentTrackedResources.update::parameters.properties,
+@@doc(
+  OnlineDeploymentTrackedResources.update::parameters.properties,
   "Online Endpoint entity to apply during operation."
 );
-@@doc(OnlineDeploymentTrackedResources.getLogs::parameters.body,
+@@doc(
+  OnlineDeploymentTrackedResources.getLogs::parameters.body,
   "The request containing parameters for retrieving logs."
 );

@@ -59,12 +59,16 @@ interface RestorePoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     RestorePoint,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 }
 
 @@doc(RestorePoint.name, "The name of the restore point.");
 @@doc(RestorePoint.properties, "The restore point properties.");
-@@doc(RestorePoints.create::parameters.resource,
+@@doc(
+  RestorePoints.create::parameters.resource,
   "Parameters supplied to the Create restore point operation."
 );

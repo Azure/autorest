@@ -50,7 +50,10 @@ interface TrafficControllers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     TrafficController,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -65,6 +68,7 @@ interface TrafficControllers {
 }
 
 @@doc(TrafficController.name, "traffic controller name for path");
-@@doc(TrafficController.properties,
+@@doc(
+  TrafficController.properties,
   "The resource-specific properties for this resource."
 );

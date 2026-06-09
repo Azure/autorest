@@ -45,7 +45,10 @@ interface Accounts {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     Account,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -62,6 +65,7 @@ interface Accounts {
 @@maxLength(Account.name, 64);
 @@minLength(Account.name, 3);
 @@doc(Account.name, "Name of account");
-@@doc(Account.properties,
+@@doc(
+  Account.properties,
   "The resource-specific properties for this resource."
 );

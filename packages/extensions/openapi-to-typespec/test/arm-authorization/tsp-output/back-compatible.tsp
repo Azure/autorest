@@ -28,7 +28,8 @@ using Azure.ResourceManager.Authorization;
 @@clientName(ExpandedPropertiesScope.type, "scopeType");
 
 @@clientName(ExpandedPropertiesRoleDefinition.id, "roleDefinitionId");
-@@clientName(ExpandedPropertiesRoleDefinition.displayName,
+@@clientName(
+  ExpandedPropertiesRoleDefinition.displayName,
   "roleDefinitionDisplayName"
 );
 @@clientName(ExpandedPropertiesRoleDefinition.type, "roleType");
@@ -41,10 +42,12 @@ using Azure.ResourceManager.Authorization;
 @@Legacy.flattenProperty(RoleAssignmentScheduleRequestProperties.scheduleInfo);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(RoleAssignmentScheduleRequestPropertiesScheduleInfo.expiration
+@@Legacy.flattenProperty(
+  RoleAssignmentScheduleRequestPropertiesScheduleInfo.expiration
 );
 
-@@clientName(RoleAssignmentScheduleRequestPropertiesScheduleInfoExpiration.type,
+@@clientName(
+  RoleAssignmentScheduleRequestPropertiesScheduleInfoExpiration.type,
   "expirationType"
 );
 
@@ -52,10 +55,12 @@ using Azure.ResourceManager.Authorization;
 @@Legacy.flattenProperty(RoleEligibilityScheduleRequestProperties.scheduleInfo);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(RoleEligibilityScheduleRequestPropertiesScheduleInfo.expiration
+@@Legacy.flattenProperty(
+  RoleEligibilityScheduleRequestPropertiesScheduleInfo.expiration
 );
 
-@@clientName(RoleEligibilityScheduleRequestPropertiesScheduleInfoExpiration.type,
+@@clientName(
+  RoleEligibilityScheduleRequestPropertiesScheduleInfoExpiration.type,
   "expirationType"
 );
 
@@ -78,7 +83,8 @@ using Azure.ResourceManager.Authorization;
 @@clientName(PolicyAssignmentPropertiesScope.type, "scopeType");
 
 @@clientName(PolicyAssignmentPropertiesRoleDefinition.id, "roleDefinitionId");
-@@clientName(PolicyAssignmentPropertiesRoleDefinition.displayName,
+@@clientName(
+  PolicyAssignmentPropertiesRoleDefinition.displayName,
   "roleDefinitionDisplayName"
 );
 @@clientName(PolicyAssignmentPropertiesRoleDefinition.type, "roleType");
@@ -88,10 +94,12 @@ using Azure.ResourceManager.Authorization;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(DenyAssignment.properties);
 
-@@clientLocation(ProviderOperationsMetadataOperationGroup.get,
+@@clientLocation(
+  ProviderOperationsMetadataOperationGroup.get,
   "ProviderOperationsMetadata"
 );
-@@clientLocation(ProviderOperationsMetadataOperationGroup.list,
+@@clientLocation(
+  ProviderOperationsMetadataOperationGroup.list,
   "ProviderOperationsMetadata"
 );
 
@@ -99,7 +107,8 @@ using Azure.ResourceManager.Authorization;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(RoleAssignment.properties);
 
-@@clientName(RoleDefinitions.createOrUpdate::parameters.resource,
+@@clientName(
+  RoleDefinitions.createOrUpdate::parameters.resource,
   "roleDefinition"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -111,10 +120,12 @@ using Azure.ResourceManager.Authorization;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(RoleAssignmentScheduleInstance.properties);
 
-@@clientName(RoleAssignmentScheduleRequests.create::parameters.resource,
+@@clientName(
+  RoleAssignmentScheduleRequests.create::parameters.resource,
   "parameters"
 );
-@@clientName(RoleAssignmentScheduleRequests.validate::parameters.body,
+@@clientName(
+  RoleAssignmentScheduleRequests.validate::parameters.body,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -126,43 +137,52 @@ using Azure.ResourceManager.Authorization;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(RoleEligibilityScheduleInstance.properties);
 
-@@clientName(RoleEligibilityScheduleRequests.create::parameters.resource,
+@@clientName(
+  RoleEligibilityScheduleRequests.create::parameters.resource,
   "parameters"
 );
-@@clientName(RoleEligibilityScheduleRequests.validate::parameters.body,
+@@clientName(
+  RoleEligibilityScheduleRequests.validate::parameters.body,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(RoleEligibilityScheduleRequest.properties);
 
-@@clientName(RoleManagementPolicies.update::parameters.properties,
+@@clientName(
+  RoleManagementPolicies.update::parameters.properties,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(RoleManagementPolicy.properties);
 
-@@clientName(RoleManagementPolicyAssignments.create::parameters.resource,
+@@clientName(
+  RoleManagementPolicyAssignments.create::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(RoleManagementPolicyAssignment.properties);
 
-@@clientLocation(ClassicAdministratorsOperationGroup.list,
+@@clientLocation(
+  ClassicAdministratorsOperationGroup.list,
   "ClassicAdministrators"
 );
 
-@@clientLocation(GlobalAdministratorOperationGroup.elevateAccess,
+@@clientLocation(
+  GlobalAdministratorOperationGroup.elevateAccess,
   "GlobalAdministrator"
 );
 
-@@clientLocation(AzurePermissionsForResourceGroupOperationGroup.list,
+@@clientLocation(
+  AzurePermissionsForResourceGroupOperationGroup.list,
   "AzurePermissionsForResourceGroup"
 );
 
-@@clientLocation(AzurePermissionsForResourceOperationGroup.list,
+@@clientLocation(
+  AzurePermissionsForResourceOperationGroup.list,
   "AzurePermissionsForResource"
 );
 
-@@clientLocation(EligibleChildResourcesOperationGroup.get,
+@@clientLocation(
+  EligibleChildResourcesOperationGroup.get,
   "EligibleChildResources"
 );

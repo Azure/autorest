@@ -73,7 +73,10 @@ interface ComponentVersionResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ComponentVersionResourceOps.DeleteWithoutOkAsync<
     ComponentVersionResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -196,12 +199,15 @@ interface ComponentVersions {
 }
 
 @@doc(ComponentVersionResource.name, "Version identifier.");
-@@doc(ComponentVersionResource.properties,
+@@doc(
+  ComponentVersionResource.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(ComponentVersionResources.createOrUpdate::parameters.resource,
+@@doc(
+  ComponentVersionResources.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
-@@doc(ComponentVersions.createOrUpdate::parameters.resource,
+@@doc(
+  ComponentVersions.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );

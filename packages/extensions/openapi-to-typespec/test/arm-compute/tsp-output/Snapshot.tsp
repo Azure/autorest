@@ -55,10 +55,12 @@ interface Snapshots {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Snapshot,
-    Response = ArmResourceUpdatedResponse<Snapshot> | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: Snapshot;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<Snapshot>
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: Snapshot;
+        }),
     LroHeaders = ArmLroLocationHeader<FinalResult = Snapshot> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -71,10 +73,12 @@ interface Snapshots {
   update is ArmCustomPatchAsync<
     Snapshot,
     PatchModel = SnapshotUpdate,
-    Response = ArmResponse<Snapshot> | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: Snapshot;
-    })
+    Response =
+      | ArmResponse<Snapshot>
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: Snapshot;
+        })
   >;
 
   /**
@@ -83,7 +87,10 @@ interface Snapshots {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Snapshot,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -116,16 +123,20 @@ interface Snapshots {
   revokeAccess is ArmResourceActionAsync<Snapshot, void, OkResponse>;
 }
 
-@@doc(Snapshot.name,
+@@doc(
+  Snapshot.name,
   "The name of the snapshot that is being created. The name can't be changed after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The max name length is 80 characters."
 );
 @@doc(Snapshot.properties, "Snapshot resource properties.");
-@@doc(Snapshots.createOrUpdate::parameters.resource,
+@@doc(
+  Snapshots.createOrUpdate::parameters.resource,
   "Snapshot object supplied in the body of the Put disk operation."
 );
-@@doc(Snapshots.update::parameters.properties,
+@@doc(
+  Snapshots.update::parameters.properties,
   "Snapshot object supplied in the body of the Patch snapshot operation."
 );
-@@doc(Snapshots.grantAccess::parameters.body,
+@@doc(
+  Snapshots.grantAccess::parameters.body,
   "Access data object supplied in the body of the get snapshot access operation."
 );

@@ -59,7 +59,10 @@ interface BatchDeploymentTrackedResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     BatchDeploymentTrackedResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -90,15 +93,19 @@ interface BatchDeploymentTrackedResources {
   >;
 }
 
-@@doc(BatchDeploymentTrackedResource.name,
+@@doc(
+  BatchDeploymentTrackedResource.name,
   "The identifier for the Batch deployments."
 );
-@@doc(BatchDeploymentTrackedResource.properties,
+@@doc(
+  BatchDeploymentTrackedResource.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(BatchDeploymentTrackedResources.createOrUpdate::parameters.resource,
+@@doc(
+  BatchDeploymentTrackedResources.createOrUpdate::parameters.resource,
   "Batch inference deployment definition object."
 );
-@@doc(BatchDeploymentTrackedResources.update::parameters.properties,
+@@doc(
+  BatchDeploymentTrackedResources.update::parameters.properties,
   "Batch inference deployment definition object."
 );

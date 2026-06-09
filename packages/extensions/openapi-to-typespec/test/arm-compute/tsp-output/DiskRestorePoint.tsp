@@ -58,9 +58,11 @@ interface DiskRestorePoints {
 }
 
 @@doc(DiskRestorePoint.name, "The name of the disk restore point created.");
-@@doc(DiskRestorePoint.properties,
+@@doc(
+  DiskRestorePoint.properties,
   "Properties of an incremental disk restore point"
 );
-@@doc(DiskRestorePoints.grantAccess::parameters.body,
+@@doc(
+  DiskRestorePoints.grantAccess::parameters.body,
   "Access data object supplied in the body of the get disk access operation."
 );

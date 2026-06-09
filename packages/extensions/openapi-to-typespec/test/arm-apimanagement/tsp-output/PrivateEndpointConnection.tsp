@@ -35,7 +35,9 @@ interface PrivateEndpointConnections {
     ApiManagementServiceResource,
     PrivateEndpointConnection,
     Request = PrivateEndpointConnectionRequest,
-    Response = ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection> | ArmAcceptedLroResponse,
+    Response =
+      | ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection>
+      | ArmAcceptedLroResponse,
     LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -47,7 +49,10 @@ interface PrivateEndpointConnections {
   delete is PrivateEndpointOperations.DeleteAsync<
     ApiManagementServiceResource,
     PrivateEndpointConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

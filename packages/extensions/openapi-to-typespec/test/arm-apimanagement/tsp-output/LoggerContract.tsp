@@ -110,11 +110,13 @@ interface LoggerContracts {
 }
 
 @@maxLength(LoggerContract.name, 256);
-@@doc(LoggerContract.name,
+@@doc(
+  LoggerContract.name,
   "Logger identifier. Must be unique in the API Management service instance."
 );
 @@doc(LoggerContract.properties, "Logger entity contract properties.");
-@@doc(LoggerContracts.createOrUpdate::parameters.resource,
+@@doc(
+  LoggerContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
 @@doc(LoggerContracts.update::parameters.properties, "Update parameters.");

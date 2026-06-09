@@ -9,21 +9,24 @@ using AzureWebPubSubServiceRESTAPI;
 @@clientLocation(WebPubSubOperationGroup.addConnectionsToGroups, "WebPubSub");
 @@clientLocation(WebPubSubOperationGroup.closeAllConnections, "WebPubSub");
 @@clientLocation(WebPubSubOperationGroup.generateClientToken, "WebPubSub");
-@@clientLocation(WebPubSubOperationGroup.removeConnectionsFromGroups,
+@@clientLocation(
+  WebPubSubOperationGroup.removeConnectionsFromGroups,
   "WebPubSub"
 );
 @@clientLocation(WebPubSubOperationGroup.sendToAll, "WebPubSub");
 @@clientLocation(WebPubSubOperationGroup.closeConnection, "WebPubSub");
 @@clientLocation(WebPubSubOperationGroup.connectionExists, "WebPubSub");
 @@clientLocation(WebPubSubOperationGroup.sendToConnection, "WebPubSub");
-@@clientLocation(WebPubSubOperationGroup.removeConnectionFromAllGroups,
+@@clientLocation(
+  WebPubSubOperationGroup.removeConnectionFromAllGroups,
   "WebPubSub"
 );
 @@clientLocation(WebPubSubOperationGroup.groupExists, "WebPubSub");
 @@clientLocation(WebPubSubOperationGroup.closeGroupConnections, "WebPubSub");
 @@clientLocation(WebPubSubOperationGroup.sendToGroup, "WebPubSub");
 @@clientLocation(WebPubSubOperationGroup.listConnectionsInGroup, "WebPubSub");
-@@clientLocation(WebPubSubOperationGroup.removeConnectionFromGroup,
+@@clientLocation(
+  WebPubSubOperationGroup.removeConnectionFromGroup,
   "WebPubSub"
 );
 @@clientLocation(WebPubSubOperationGroup.addConnectionToGroup, "WebPubSub");

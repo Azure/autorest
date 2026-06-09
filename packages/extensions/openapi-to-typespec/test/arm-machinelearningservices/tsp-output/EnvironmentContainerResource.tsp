@@ -67,7 +67,10 @@ interface EnvironmentContainerResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is EnvironmentContainerResourceOps.DeleteWithoutOkAsync<
     EnvironmentContainerResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -153,15 +156,19 @@ interface EnvironmentContainers {
   >;
 }
 
-@@doc(EnvironmentContainerResource.name,
+@@doc(
+  EnvironmentContainerResource.name,
   "Container name. This is case-sensitive."
 );
-@@doc(EnvironmentContainerResource.properties,
+@@doc(
+  EnvironmentContainerResource.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(EnvironmentContainerResources.createOrUpdate::parameters.resource,
+@@doc(
+  EnvironmentContainerResources.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );
-@@doc(EnvironmentContainers.createOrUpdate::parameters.resource,
+@@doc(
+  EnvironmentContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );

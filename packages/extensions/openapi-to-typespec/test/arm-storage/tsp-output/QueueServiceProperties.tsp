@@ -52,9 +52,11 @@ interface QueueServices {
 }
 
 @@doc(QueueServiceProperties.name, "");
-@@doc(QueueServiceProperties.properties,
+@@doc(
+  QueueServiceProperties.properties,
   "The properties of a storage account’s Queue service."
 );
-@@doc(QueueServices.setServiceProperties::parameters.resource,
+@@doc(
+  QueueServices.setServiceProperties::parameters.resource,
   "The properties of a storage account’s Queue service, only properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules can be specified."
 );

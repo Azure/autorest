@@ -50,9 +50,11 @@ interface RoleEligibilityScheduleInstances {
   >;
 }
 
-@@doc(RoleEligibilityScheduleInstance.name,
+@@doc(
+  RoleEligibilityScheduleInstance.name,
   "The name (hash of schedule name + time) of the role eligibility schedule to get."
 );
-@@doc(RoleEligibilityScheduleInstance.properties,
+@@doc(
+  RoleEligibilityScheduleInstance.properties,
   "Role eligibility schedule instance properties."
 );

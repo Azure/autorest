@@ -68,6 +68,7 @@ interface RoleDefinitions {
 
 @@doc(RoleDefinition.name, "The ID of the role definition.");
 @@doc(RoleDefinition.properties, "Role definition properties.");
-@@doc(RoleDefinitions.createOrUpdate::parameters.resource,
+@@doc(
+  RoleDefinitions.createOrUpdate::parameters.resource,
   "The values for the role definition."
 );

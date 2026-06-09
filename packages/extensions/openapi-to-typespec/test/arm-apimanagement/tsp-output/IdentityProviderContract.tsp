@@ -102,12 +102,15 @@ interface IdentityProviderContracts {
 }
 
 @@doc(IdentityProviderContract.name, "Identity Provider Type identifier.");
-@@doc(IdentityProviderContract.properties,
+@@doc(
+  IdentityProviderContract.properties,
   "Identity Provider contract properties."
 );
-@@doc(IdentityProviderContracts.createOrUpdate::parameters.resource,
+@@doc(
+  IdentityProviderContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@doc(IdentityProviderContracts.update::parameters.properties,
+@@doc(
+  IdentityProviderContracts.update::parameters.properties,
   "Update parameters."
 );

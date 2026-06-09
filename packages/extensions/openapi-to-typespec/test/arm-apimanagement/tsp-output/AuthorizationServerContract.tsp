@@ -120,15 +120,19 @@ interface AuthorizationServerContracts {
 
 @@maxLength(AuthorizationServerContract.name, 80);
 @@minLength(AuthorizationServerContract.name, 1);
-@@doc(AuthorizationServerContract.name,
+@@doc(
+  AuthorizationServerContract.name,
   "Identifier of the authorization server."
 );
-@@doc(AuthorizationServerContract.properties,
+@@doc(
+  AuthorizationServerContract.properties,
   "Properties of the External OAuth authorization server Contract."
 );
-@@doc(AuthorizationServerContracts.createOrUpdate::parameters.resource,
+@@doc(
+  AuthorizationServerContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@doc(AuthorizationServerContracts.update::parameters.properties,
+@@doc(
+  AuthorizationServerContracts.update::parameters.properties,
   "OAuth2 Server settings Update parameters."
 );

@@ -93,9 +93,11 @@ interface AvailabilitySets {
 
 @@doc(AvailabilitySet.name, "The name of the availability set.");
 @@doc(AvailabilitySet.properties, "The instance view of a resource.");
-@@doc(AvailabilitySets.createOrUpdate::parameters.resource,
+@@doc(
+  AvailabilitySets.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Availability Set operation."
 );
-@@doc(AvailabilitySets.update::parameters.properties,
+@@doc(
+  AvailabilitySets.update::parameters.properties,
   "Parameters supplied to the Update Availability Set operation."
 );

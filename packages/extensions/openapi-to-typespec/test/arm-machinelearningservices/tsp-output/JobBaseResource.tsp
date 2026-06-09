@@ -51,7 +51,10 @@ interface JobBaseResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     JobBaseResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -111,15 +114,19 @@ interface JobBaseResources {
   cancel is ArmResourceActionAsync<JobBaseResource, void, OkResponse>;
 }
 
-@@doc(JobBaseResource.name,
+@@doc(
+  JobBaseResource.name,
   "The name and identifier for the Job. This is case-sensitive."
 );
-@@doc(JobBaseResource.properties,
+@@doc(
+  JobBaseResource.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(JobBaseResources.createOrUpdate::parameters.resource,
+@@doc(
+  JobBaseResources.createOrUpdate::parameters.resource,
   "Job definition object."
 );
-@@doc(JobBaseResources.update::parameters.properties,
+@@doc(
+  JobBaseResources.update::parameters.properties,
   "Job definition to apply during the operation."
 );

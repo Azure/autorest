@@ -73,7 +73,10 @@ interface CapacityReservations {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     CapacityReservation,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -83,12 +86,15 @@ interface CapacityReservations {
 }
 
 @@doc(CapacityReservation.name, "The name of the capacity reservation.");
-@@doc(CapacityReservation.properties,
+@@doc(
+  CapacityReservation.properties,
   "Properties of the Capacity reservation."
 );
-@@doc(CapacityReservations.createOrUpdate::parameters.resource,
+@@doc(
+  CapacityReservations.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create capacity reservation."
 );
-@@doc(CapacityReservations.update::parameters.properties,
+@@doc(
+  CapacityReservations.update::parameters.properties,
   "Parameters supplied to the Update capacity reservation operation."
 );

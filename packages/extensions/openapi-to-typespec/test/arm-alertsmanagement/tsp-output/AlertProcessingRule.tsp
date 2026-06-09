@@ -63,13 +63,16 @@ interface AlertProcessingRules {
   >;
 }
 
-@@doc(AlertProcessingRule.name,
+@@doc(
+  AlertProcessingRule.name,
   "The name of the alert processing rule that needs to be fetched."
 );
 @@doc(AlertProcessingRule.properties, "Alert processing rule properties.");
-@@doc(AlertProcessingRules.createOrUpdate::parameters.resource,
+@@doc(
+  AlertProcessingRules.createOrUpdate::parameters.resource,
   "Alert processing rule to be created/updated."
 );
-@@doc(AlertProcessingRules.update::parameters.properties,
+@@doc(
+  AlertProcessingRules.update::parameters.properties,
   "Parameters supplied to the operation."
 );

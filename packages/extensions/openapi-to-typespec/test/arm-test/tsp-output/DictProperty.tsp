@@ -37,6 +37,7 @@ interface DictProperties {
 }
 
 @@doc(DictProperty.name, "Name of resource");
-@@doc(DictProperty.properties,
+@@doc(
+  DictProperty.properties,
   "The resource-specific properties for this resource."
 );

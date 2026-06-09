@@ -43,6 +43,7 @@ interface DataProductsCatalogs {
 }
 
 @@doc(DataProductsCatalog.name, "");
-@@doc(DataProductsCatalog.properties,
+@@doc(
+  DataProductsCatalog.properties,
   "The resource-specific properties for this resource."
 );

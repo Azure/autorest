@@ -67,7 +67,10 @@ interface ComponentContainerResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ComponentContainerResourceOps.DeleteWithoutOkAsync<
     ComponentContainerResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -148,12 +151,15 @@ interface ComponentContainers {
 }
 
 @@doc(ComponentContainerResource.name, "Container name.");
-@@doc(ComponentContainerResource.properties,
+@@doc(
+  ComponentContainerResource.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(ComponentContainerResources.createOrUpdate::parameters.resource,
+@@doc(
+  ComponentContainerResources.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );
-@@doc(ComponentContainers.createOrUpdate::parameters.resource,
+@@doc(
+  ComponentContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );

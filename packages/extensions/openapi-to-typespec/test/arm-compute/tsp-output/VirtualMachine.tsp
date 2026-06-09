@@ -98,7 +98,10 @@ interface VirtualMachines {
       @query("forceDeletion")
       forceDeletion?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -321,24 +324,31 @@ interface VirtualMachines {
 }
 
 @@doc(VirtualMachine.name, "The name of the virtual machine.");
-@@doc(VirtualMachine.properties,
+@@doc(
+  VirtualMachine.properties,
   "Describes the properties of a Virtual Machine."
 );
-@@doc(VirtualMachines.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualMachines.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Virtual Machine operation."
 );
-@@doc(VirtualMachines.update::parameters.properties,
+@@doc(
+  VirtualMachines.update::parameters.properties,
   "Parameters supplied to the Update Virtual Machine operation."
 );
-@@doc(VirtualMachines.capture::parameters.body,
+@@doc(
+  VirtualMachines.capture::parameters.body,
   "Parameters supplied to the Capture Virtual Machine operation."
 );
-@@doc(VirtualMachines.reimage::parameters.body,
+@@doc(
+  VirtualMachines.reimage::parameters.body,
   "Parameters supplied to the Reimage Virtual Machine operation."
 );
-@@doc(VirtualMachines.installPatches::parameters.body,
+@@doc(
+  VirtualMachines.installPatches::parameters.body,
   "Input for InstallPatches as directly received by the API"
 );
-@@doc(VirtualMachines.runCommand::parameters.body,
+@@doc(
+  VirtualMachines.runCommand::parameters.body,
   "Parameters supplied to the Run command operation."
 );

@@ -88,10 +88,12 @@ interface VirtualMachineScaleSetVMS {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   update is ArmResourceCreateOrReplaceAsync<
     VirtualMachineScaleSetVM,
-    Response = ArmResourceUpdatedResponse<VirtualMachineScaleSetVM> | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: VirtualMachineScaleSetVM;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<VirtualMachineScaleSetVM>
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: VirtualMachineScaleSetVM;
+        }),
     LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineScaleSetVM> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -109,7 +111,10 @@ interface VirtualMachineScaleSetVMS {
       @query("forceDeletion")
       forceDeletion?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -269,15 +274,19 @@ interface VirtualMachineScaleSetVMS {
 }
 
 @@doc(VirtualMachineScaleSetVM.name, "The instance ID of the virtual machine.");
-@@doc(VirtualMachineScaleSetVM.properties,
+@@doc(
+  VirtualMachineScaleSetVM.properties,
   "Describes the properties of a virtual machine scale set virtual machine."
 );
-@@doc(VirtualMachineScaleSetVMS.update::parameters.resource,
+@@doc(
+  VirtualMachineScaleSetVMS.update::parameters.resource,
   "Parameters supplied to the Update Virtual Machine Scale Sets VM operation."
 );
-@@doc(VirtualMachineScaleSetVMS.reimage::parameters.body,
+@@doc(
+  VirtualMachineScaleSetVMS.reimage::parameters.body,
   "Parameters for the Reimaging Virtual machine in ScaleSet."
 );
-@@doc(VirtualMachineScaleSetVMS.runCommand::parameters.body,
+@@doc(
+  VirtualMachineScaleSetVMS.runCommand::parameters.body,
   "Parameters supplied to the Run command operation."
 );

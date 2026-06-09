@@ -47,6 +47,7 @@ interface SubscriptionQuotaAllocationsLists {
 @@minLength(SubscriptionQuotaAllocationsList.name, 1);
 @@doc(SubscriptionQuotaAllocationsList.name, "The name of the Azure region.");
 @@doc(SubscriptionQuotaAllocationsList.properties, "");
-@@doc(SubscriptionQuotaAllocationsLists.update::parameters.properties,
+@@doc(
+  SubscriptionQuotaAllocationsLists.update::parameters.properties,
   "Quota requests payload."
 );

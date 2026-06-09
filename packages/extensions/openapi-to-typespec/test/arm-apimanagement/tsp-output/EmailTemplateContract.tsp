@@ -112,12 +112,15 @@ interface EmailTemplateContracts {
 }
 
 @@doc(EmailTemplateContract.name, "Email Template Name Identifier.");
-@@doc(EmailTemplateContract.properties,
+@@doc(
+  EmailTemplateContract.properties,
   "Email Template entity contract properties."
 );
-@@doc(EmailTemplateContracts.createOrUpdate::parameters.resource,
+@@doc(
+  EmailTemplateContracts.createOrUpdate::parameters.resource,
   "Email Template update parameters."
 );
-@@doc(EmailTemplateContracts.update::parameters.properties,
+@@doc(
+  EmailTemplateContracts.update::parameters.properties,
   "Update parameters."
 );

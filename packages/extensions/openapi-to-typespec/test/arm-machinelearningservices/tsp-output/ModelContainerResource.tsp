@@ -67,7 +67,10 @@ interface ModelContainerResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ModelContainerResourceOps.DeleteWithoutOkAsync<
     ModelContainerResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -160,12 +163,15 @@ interface ModelContainers {
 }
 
 @@doc(ModelContainerResource.name, "Container name. This is case-sensitive.");
-@@doc(ModelContainerResource.properties,
+@@doc(
+  ModelContainerResource.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(ModelContainerResources.createOrUpdate::parameters.resource,
+@@doc(
+  ModelContainerResources.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );
-@@doc(ModelContainers.createOrUpdate::parameters.resource,
+@@doc(
+  ModelContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );
