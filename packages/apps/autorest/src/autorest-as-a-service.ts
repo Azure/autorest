@@ -33,7 +33,7 @@ const args: AutorestArgs = (<any>global).__args || {};
 
 const pathToYarnCli = inWebpack ? `${__dirname}/yarn/cli.js` : undefined;
 
-export const extensionManager: Promise<ExtensionManager> = ExtensionManager.Create(rootFolder, "yarn", pathToYarnCli);
+export const extensionManager: Promise<ExtensionManager> = ExtensionManager.Create(rootFolder, pathToYarnCli);
 export const oldCorePackage = "@microsoft.azure/autorest-core";
 export const newCorePackage = "@autorest/core";
 

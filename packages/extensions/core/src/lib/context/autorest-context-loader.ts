@@ -63,7 +63,6 @@ export class AutorestContextLoader {
   private static extensionManager: LazyPromise<ExtensionManager> = new LazyPromise<ExtensionManager>(() =>
     ExtensionManager.Create(
       join(process.env["AUTOREST_HOME"] || process.env["autorest.home"] || homedir(), ".autorest"),
-      "yarn",
       pathToYarnCli,
     ),
   );
