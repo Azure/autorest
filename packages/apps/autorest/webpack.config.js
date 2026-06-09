@@ -2,7 +2,7 @@
 
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
-const baseWebpackConfig = require("../../../common/config/webpack.base.config");
+const baseWebpackConfig = require("../../../eng/config/webpack.base.config");
 /**
  * @type {import("webpack").Configuration}
  */

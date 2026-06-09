@@ -46,8 +46,9 @@ jobs:
 
       - script: |
           npm install -g npm
-          npx @microsoft/rush update
-          npx @microsoft/rush rebuild
+          corepack enable
+          pnpm install --frozen-lockfile
+          pnpm run build
         displayName: Install and build
 
       - script: |

@@ -56,7 +56,7 @@ rules:
   "require-atomic-updates": off
 
   # Prettier config https://github.com/prettier/eslint-plugin-prettier#recommended-configuration
-  prettier/prettier: off # Don't run prettier in eslint we have rush check-format for that.
+  prettier/prettier: off # Don't run prettier in eslint we have pnpm format:check for that.
   arrow-body-style: off
   prefer-arrow-callback: off
 

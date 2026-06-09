@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/Azure/autorest.compare#readme",
   "dependencies": {
-    "autorest": "workspace:~3.8.0",
+    "autorest": "workspace:~",
     "chalk": "^4.1.0",
     "diff": "^5.1.0",
     "js-yaml": "~4.1.0",

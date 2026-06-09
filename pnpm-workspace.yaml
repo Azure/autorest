@@ -1,0 +1,6 @@
+packages:
+  - "packages/apps/*"
+  - "packages/extensions/*"
+  - "packages/libs/*"
+  - "packages/testing/*"
+  - "packages/tools/*"

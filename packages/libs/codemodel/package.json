@@ -52,7 +52,7 @@
     "typescript": "~5.8.3"
   },
   "dependencies": {
-    "@azure-tools/codegen": "workspace:~2.10.1",
+    "@azure-tools/codegen": "workspace:~",
     "js-yaml": "~4.1.0"
   },
   "publishConfig": {

@@ -5,10 +5,11 @@ steps:
       versionSpec: "22.x"
     displayName: "Install Node.js"
 
-  - script: |
-      npx @microsoft/rush install
+  - script: corepack enable
+    displayName: "Enable corepack"
+
+  - script: pnpm install --frozen-lockfile
     displayName: "Install dependencies"
 
-  - script: |
-      npx @microsoft/rush rebuild
+  - script: pnpm run build
     displayName: "Build"
