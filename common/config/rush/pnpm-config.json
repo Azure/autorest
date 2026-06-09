@@ -294,6 +294,5 @@
    * support every possible PNPM setting, but rather to promote a battle-tested installation
    * strategy that is known to provide a good experience for large teams with lots of projects.
    */
-  "unsupportedPackageJsonSettings": {
-  }
+  "unsupportedPackageJsonSettings": {}
 }
