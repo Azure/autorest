@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "comment": "Remove unused npm dependency; simplify to always use Yarn",
+      "type": "patch",
+      "packageName": "@azure-tools/extension"
+    }
+  ],
+  "packageName": "@azure-tools/extension",
+  "email": "tiguerin@microsoft.com"
+}
