@@ -37,7 +37,10 @@ extends:
             steps:
               - template: /eng/pipelines/templates/build.yaml
 
-              - script: pnpm chronus pack --pre-release-tag dev
+              - script: pnpm chronus version --prerelease
+                displayName: Bump version to prerelease targets
+
+              - script: pnpm chronus pack
                 displayName: Pack prerelease packages
 
               - script: |

@@ -22,7 +22,10 @@ extends:
 
               - script: |
                   commitId=$(git rev-parse --short HEAD)
-                  pnpm chronus pack --pre-release-tag "ci.$commitId"
+                  pnpm chronus version --prerelease "ci.$commitId" --ignore-policies
+                displayName: Bump versions for CI
+
+              - script: pnpm chronus pack
                 displayName: Pack packages
 
               - script: |
