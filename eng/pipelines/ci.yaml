@@ -43,11 +43,6 @@ extends:
               - script: node ./eng/scripts/check-for-changed-files.js
                 displayName: Check Git Status For Changed Files
 
-              - script: |
-                  commitId=$(git rev-parse --short HEAD)
-                  pnpm chronus version --prerelease "ci.$commitId" --ignore-policies
-                displayName: Bump versions for CI
-
               - script: pnpm chronus pack --pack-destination "$(Build.ArtifactStagingDirectory)/packages"
                 displayName: Pack packages
 

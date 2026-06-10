@@ -20,14 +20,12 @@ extends:
             steps:
               - template: /eng/pipelines/templates/build.yaml
 
-              - script: |
-                  commitId=$(git rev-parse --short HEAD)
-                  pnpm chronus version --prerelease "ci.$commitId" --ignore-policies
-                displayName: Bump versions for CI
+              - script: pnpm chronus version --prerelease
+                displayName: Bump version to prerelease targets
 
               - script: pnpm chronus pack
                 displayName: Pack packages
 
               - script: |
-                  pnpm chronus publish --registry https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-tools-feeds/npm/registry --npm-auth-token "$(azure-sdk-devops-npm-token)" --access public
+                  pnpm chronus publish --registry https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-tools-feeds/npm/registry --npm-auth-token "$(azure-sdk-devops-npm-token)" --access public --tag next
                 displayName: Publish packages
