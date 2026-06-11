@@ -53,12 +53,15 @@ interface RoleManagementPolicyAssignments {
   >;
 }
 
-@@doc(RoleManagementPolicyAssignment.name,
+@@doc(
+  RoleManagementPolicyAssignment.name,
   "The name of format {guid_guid} the role management policy assignment to get."
 );
-@@doc(RoleManagementPolicyAssignment.properties,
+@@doc(
+  RoleManagementPolicyAssignment.properties,
   "Role management policy properties."
 );
-@@doc(RoleManagementPolicyAssignments.create::parameters.resource,
+@@doc(
+  RoleManagementPolicyAssignments.create::parameters.resource,
   "Parameters for the role management policy assignment."
 );

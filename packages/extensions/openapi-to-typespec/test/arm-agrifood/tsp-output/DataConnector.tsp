@@ -72,6 +72,7 @@ interface DataConnectors {
 @@minLength(DataConnector.name, 1);
 @@doc(DataConnector.name, "Connector name.");
 @@doc(DataConnector.properties, "DataConnector Properties.");
-@@doc(DataConnectors.createOrUpdate::parameters.resource,
+@@doc(
+  DataConnectors.createOrUpdate::parameters.resource,
   "Body must be valid DataConnector request."
 );

@@ -73,6 +73,10 @@ export interface ProjectInfo {
 async function isAzureSDKPackage(fileName: string): Promise<boolean> {
   const f = await import(fileName);
 
+  if (f.private) {
+    return false;
+  }
+
   if (/^@autorest(-[a-z]+)?\//.test(f.name)) {
     return true;
   } else {
@@ -83,7 +87,7 @@ async function isAzureSDKPackage(fileName: string): Promise<boolean> {
 async function findAzSDKPackageJson(directory: string): Promise<[string, PackageJson]> {
   const files = await fs.readdir(directory);
 
-  if (files.includes("rush.json")) {
+  if (files.includes("pnpm-workspace.yaml")) {
     throw new Error("Reached monorepo root, but no matching Azure SDK package was found.");
   }
 
@@ -148,12 +152,12 @@ export async function resolveProject(workingDirectory: string): Promise<ProjectI
  */
 export async function resolveRoot(start?: string): Promise<string> {
   start ??= process.cwd();
-  if (await fs.pathExists(path.join(start, "rush.json"))) {
+  if (await fs.pathExists(path.join(start, "pnpm-workspace.yaml"))) {
     return start;
   } else {
     const nextPath = path.resolve(start, "..");
     if (nextPath === start) {
-      throw new Error("Reached filesystem root, but no rush.json was found.");
+      throw new Error("Reached filesystem root, but no pnpm-workspace.yaml was found.");
     } else {
       return resolveRoot(nextPath);
     }

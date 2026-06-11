@@ -41,7 +41,10 @@ interface Images {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     Image,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

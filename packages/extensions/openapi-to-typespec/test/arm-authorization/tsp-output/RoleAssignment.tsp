@@ -94,10 +94,12 @@ interface RoleAssignments {
   >;
 }
 
-@@doc(RoleAssignment.name,
+@@doc(
+  RoleAssignment.name,
   "The name of the role assignment. It can be any valid GUID."
 );
 @@doc(RoleAssignment.properties, "Role assignment properties.");
-@@doc(RoleAssignments.create::parameters.resource,
+@@doc(
+  RoleAssignments.create::parameters.resource,
   "Parameters for the role assignment."
 );

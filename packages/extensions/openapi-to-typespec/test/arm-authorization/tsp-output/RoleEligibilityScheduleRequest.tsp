@@ -80,15 +80,19 @@ interface RoleEligibilityScheduleRequests {
   >;
 }
 
-@@doc(RoleEligibilityScheduleRequest.name,
+@@doc(
+  RoleEligibilityScheduleRequest.name,
   "The name (guid) of the role eligibility schedule request to get."
 );
-@@doc(RoleEligibilityScheduleRequest.properties,
+@@doc(
+  RoleEligibilityScheduleRequest.properties,
   "Role eligibility schedule request properties."
 );
-@@doc(RoleEligibilityScheduleRequests.create::parameters.resource,
+@@doc(
+  RoleEligibilityScheduleRequests.create::parameters.resource,
   "Parameters for the role eligibility schedule request."
 );
-@@doc(RoleEligibilityScheduleRequests.validate::parameters.body,
+@@doc(
+  RoleEligibilityScheduleRequests.validate::parameters.body,
   "Parameters for the role eligibility schedule request."
 );

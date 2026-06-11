@@ -74,10 +74,12 @@ interface LocalUserOperationGroup {
 
 @@maxLength(LocalUser.name, 64);
 @@minLength(LocalUser.name, 3);
-@@doc(LocalUser.name,
+@@doc(
+  LocalUser.name,
   "The name of local user. The username must contain lowercase letters and numbers only. It must be unique only within the storage account."
 );
 @@doc(LocalUser.properties, "Storage account local user properties.");
-@@doc(LocalUserOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  LocalUserOperationGroup.createOrUpdate::parameters.resource,
   "The local user associated with a storage account."
 );

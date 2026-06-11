@@ -363,15 +363,19 @@ interface ProductPolicy {
 
 @@doc(PolicyContract.name, "The identifier of the Policy.");
 @@doc(PolicyContract.properties, "Properties of the Policy.");
-@@doc(PolicyContracts.createOrUpdate::parameters.resource,
+@@doc(
+  PolicyContracts.createOrUpdate::parameters.resource,
   "The policy contents to apply."
 );
-@@doc(ApiPolicy.createOrUpdate::parameters.resource,
+@@doc(
+  ApiPolicy.createOrUpdate::parameters.resource,
   "The policy contents to apply."
 );
-@@doc(Policy.createOrUpdate::parameters.resource,
+@@doc(
+  Policy.createOrUpdate::parameters.resource,
   "The policy contents to apply."
 );
-@@doc(ProductPolicy.createOrUpdate::parameters.resource,
+@@doc(
+  ProductPolicy.createOrUpdate::parameters.resource,
   "The policy contents to apply."
 );

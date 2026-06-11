@@ -47,7 +47,10 @@ interface Devices {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     Device,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -67,6 +70,7 @@ interface Devices {
 
 @@doc(Device.name, "Device name");
 @@doc(Device.properties, "The resource-specific properties for this resource.");
-@@doc(Devices.generateCapabilityImage::parameters.body,
+@@doc(
+  Devices.generateCapabilityImage::parameters.body,
   "Generate capability image request body."
 );

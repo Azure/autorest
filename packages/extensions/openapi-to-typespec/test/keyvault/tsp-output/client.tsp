@@ -55,7 +55,8 @@ using Azure.Keyvault;
 
 @@clientName(IssuerBundle.org_details, "organizationDetails");
 
-@@clientName(CertificateIssuerUpdateParameters.org_details,
+@@clientName(
+  CertificateIssuerUpdateParameters.org_details,
   "organizationDetails"
 );
 
@@ -63,7 +64,8 @@ using Azure.Keyvault;
 @@clientName(CertificateCreateParameters.attributes, "certificateAttributes");
 
 @@clientName(CertificateOperation.issuer, "issuerParameters");
-@@clientName(CertificateOperation.cancellation_requested,
+@@clientName(
+  CertificateOperation.cancellation_requested,
   "cancellationRequested"
 );
 @@clientName(CertificateOperation.status_details, "statusDetails");
@@ -77,7 +79,8 @@ using Azure.Keyvault;
 @@clientName(CertificateUpdateParameters.policy, "certificatePolicy");
 @@clientName(CertificateUpdateParameters.attributes, "certificateAttributes");
 
-@@clientName(CertificateOperationUpdateParameter.cancellation_requested,
+@@clientName(
+  CertificateOperationUpdateParameter.cancellation_requested,
   "cancellationRequested"
 );
 
@@ -146,11 +149,13 @@ using Azure.Keyvault;
 
 @@clientName(StorageRestoreParameters.value, "storageBundleBackup");
 
-@@clientName(StorageAccountCreateParameters.attributes,
+@@clientName(
+  StorageAccountCreateParameters.attributes,
   "storageAccountAttributes"
 );
 
-@@clientName(StorageAccountUpdateParameters.attributes,
+@@clientName(
+  StorageAccountUpdateParameters.attributes,
   "storageAccountAttributes"
 );
 
@@ -158,11 +163,13 @@ using Azure.Keyvault;
 
 @@clientName(SasDefinitionBundle.sid, "secretId");
 
-@@clientName(SasDefinitionCreateParameters.attributes,
+@@clientName(
+  SasDefinitionCreateParameters.attributes,
   "sasDefinitionAttributes"
 );
 
-@@clientName(SasDefinitionUpdateParameters.attributes,
+@@clientName(
+  SasDefinitionUpdateParameters.attributes,
   "sasDefinitionAttributes"
 );
 
@@ -175,7 +182,8 @@ using Azure.Keyvault;
 @@clientName(release, "release");
 
 @@clientLocation(RoleDefinitionsOperationGroup.delete, "RoleDefinitions");
-@@clientLocation(RoleDefinitionsOperationGroup.createOrUpdate,
+@@clientLocation(
+  RoleDefinitionsOperationGroup.createOrUpdate,
   "RoleDefinitions"
 );
 @@clientLocation(RoleDefinitionsOperationGroup.get, "RoleDefinitions");
@@ -186,14 +194,17 @@ using Azure.Keyvault;
 @@clientLocation(RoleAssignmentsOperationGroup.get, "RoleAssignments");
 @@clientLocation(RoleAssignmentsOperationGroup.listForScope, "RoleAssignments");
 
-@@clientLocation(HSMSecurityDomainOperationGroup.downloadPending,
+@@clientLocation(
+  HSMSecurityDomainOperationGroup.downloadPending,
   "HSMSecurityDomain"
 );
 @@clientLocation(HSMSecurityDomainOperationGroup.download, "HSMSecurityDomain");
-@@clientLocation(HSMSecurityDomainOperationGroup.transferKey,
+@@clientLocation(
+  HSMSecurityDomainOperationGroup.transferKey,
   "HSMSecurityDomain"
 );
 @@clientLocation(HSMSecurityDomainOperationGroup.upload, "HSMSecurityDomain");
-@@clientLocation(HSMSecurityDomainOperationGroup.uploadPending,
+@@clientLocation(
+  HSMSecurityDomainOperationGroup.uploadPending,
   "HSMSecurityDomain"
 );

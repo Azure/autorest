@@ -21,10 +21,9 @@ using Azure.Core;
  * A client for issuing REST requests to the Azure Batch service.
  */
 @useAuth(
-  AadOauth2Auth<["user_impersonation"]> | ApiKeyAuth<
-    ApiKeyLocation.header,
-    "Authorization"
-  >
+
+    | AadOauth2Auth<["user_impersonation"]>
+    | ApiKeyAuth<ApiKeyLocation.header, "Authorization">
 )
 @service(#{ title: "Azure Batch Service" })
 @versioned(Versions)

@@ -111,13 +111,16 @@ interface ApiVersionSetContracts {
 
 @@maxLength(ApiVersionSetContract.name, 80);
 @@minLength(ApiVersionSetContract.name, 1);
-@@doc(ApiVersionSetContract.name,
+@@doc(
+  ApiVersionSetContract.name,
   "Api Version Set identifier. Must be unique in the current API Management service instance."
 );
 @@doc(ApiVersionSetContract.properties, "API VersionSet contract properties.");
-@@doc(ApiVersionSetContracts.createOrUpdate::parameters.resource,
+@@doc(
+  ApiVersionSetContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@doc(ApiVersionSetContracts.update::parameters.properties,
+@@doc(
+  ApiVersionSetContracts.update::parameters.properties,
   "Update parameters."
 );

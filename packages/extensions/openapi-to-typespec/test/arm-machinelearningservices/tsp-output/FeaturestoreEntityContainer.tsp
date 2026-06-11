@@ -46,7 +46,10 @@ interface FeaturestoreEntityContainers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     FeaturestoreEntityContainer,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -95,12 +98,15 @@ interface FeaturestoreEntityContainers {
   >;
 }
 
-@@doc(FeaturestoreEntityContainer.name,
+@@doc(
+  FeaturestoreEntityContainer.name,
   "Container name. This is case-sensitive."
 );
-@@doc(FeaturestoreEntityContainer.properties,
+@@doc(
+  FeaturestoreEntityContainer.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(FeaturestoreEntityContainers.createOrUpdate::parameters.resource,
+@@doc(
+  FeaturestoreEntityContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );

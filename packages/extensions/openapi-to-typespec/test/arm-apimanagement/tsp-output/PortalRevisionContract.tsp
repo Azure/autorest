@@ -43,10 +43,12 @@ interface PortalRevisionContracts {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PortalRevisionContract,
-    Response = ArmResourceCreatedResponse<
-      PortalRevisionContract,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceCreatedResponse<
+          PortalRevisionContract,
+          ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -101,7 +103,8 @@ interface PortalRevisionContracts {
 
 @@maxLength(PortalRevisionContract.name, 256);
 @@minLength(PortalRevisionContract.name, 1);
-@@doc(PortalRevisionContract.name,
+@@doc(
+  PortalRevisionContract.name,
   "Portal revision identifier. Must be unique in the current API Management service instance."
 );
 @@doc(PortalRevisionContract.properties, "Properties of the portal revisions.");

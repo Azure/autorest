@@ -56,12 +56,15 @@ interface BlobInventoryPolicies {
   >;
 }
 
-@@doc(BlobInventoryPolicy.name,
+@@doc(
+  BlobInventoryPolicy.name,
   "The name of the storage account blob inventory policy. It should always be 'default'"
 );
-@@doc(BlobInventoryPolicy.properties,
+@@doc(
+  BlobInventoryPolicy.properties,
   "Returns the storage account blob inventory policy rules."
 );
-@@doc(BlobInventoryPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  BlobInventoryPolicies.createOrUpdate::parameters.resource,
   "The blob inventory policy set to a storage account."
 );

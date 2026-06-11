@@ -55,10 +55,12 @@ interface PrivateEndpointConnections {
   >;
 }
 
-@@doc(PrivateEndpointConnection.name,
+@@doc(
+  PrivateEndpointConnection.name,
   "The name of the private endpoint connection associated with the Azure resource"
 );
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
-@@doc(PrivateEndpointConnections.put::parameters.resource,
+@@doc(
+  PrivateEndpointConnections.put::parameters.resource,
   "The private endpoint connection properties."
 );

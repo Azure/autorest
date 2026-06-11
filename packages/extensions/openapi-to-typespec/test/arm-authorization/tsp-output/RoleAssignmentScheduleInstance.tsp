@@ -50,9 +50,11 @@ interface RoleAssignmentScheduleInstances {
   >;
 }
 
-@@doc(RoleAssignmentScheduleInstance.name,
+@@doc(
+  RoleAssignmentScheduleInstance.name,
   "The name (hash of schedule name + time) of the role assignment schedule to get."
 );
-@@doc(RoleAssignmentScheduleInstance.properties,
+@@doc(
+  RoleAssignmentScheduleInstance.properties,
   "Role assignment schedule instance properties."
 );

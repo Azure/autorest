@@ -88,6 +88,7 @@ interface Extensions {
 
 @@doc(Extension.name, "Id of extension resource.");
 @@doc(Extension.properties, "Extension resource properties.");
-@@doc(Extensions.createOrUpdate::parameters.resource,
+@@doc(
+  Extensions.createOrUpdate::parameters.resource,
   "Extension resource request body."
 );

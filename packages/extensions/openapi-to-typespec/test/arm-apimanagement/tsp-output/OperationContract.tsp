@@ -117,13 +117,16 @@ interface OperationContracts {
 
 @@maxLength(OperationContract.name, 80);
 @@minLength(OperationContract.name, 1);
-@@doc(OperationContract.name,
+@@doc(
+  OperationContract.name,
   "Operation identifier within an API. Must be unique in the current API Management service instance."
 );
 @@doc(OperationContract.properties, "Properties of the Operation Contract.");
-@@doc(OperationContracts.createOrUpdate::parameters.resource,
+@@doc(
+  OperationContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@doc(OperationContracts.update::parameters.properties,
+@@doc(
+  OperationContracts.update::parameters.properties,
   "API Operation Update parameters."
 );

@@ -112,12 +112,15 @@ interface ImmutabilityPolicies {
 }
 
 @@doc(ImmutabilityPolicy.name, "");
-@@doc(ImmutabilityPolicy.properties,
+@@doc(
+  ImmutabilityPolicy.properties,
   "The properties of an ImmutabilityPolicy of a blob container."
 );
-@@doc(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
+@@doc(
+  ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
   "The ImmutabilityPolicy Properties that will be created or updated to a blob container."
 );
-@@doc(ImmutabilityPolicies.extendImmutabilityPolicy::parameters.body,
+@@doc(
+  ImmutabilityPolicies.extendImmutabilityPolicy::parameters.body,
   "The ImmutabilityPolicy Properties that will be extended for a blob container."
 );

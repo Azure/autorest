@@ -105,11 +105,13 @@ interface CacheContracts {
 
 @@maxLength(CacheContract.name, 80);
 @@minLength(CacheContract.name, 1);
-@@doc(CacheContract.name,
+@@doc(
+  CacheContract.name,
   "Identifier of the Cache entity. Cache identifier (should be either 'default' or valid Azure region identifier)."
 );
 @@doc(CacheContract.properties, "Cache properties details.");
-@@doc(CacheContracts.createOrUpdate::parameters.resource,
+@@doc(
+  CacheContracts.createOrUpdate::parameters.resource,
   "Create or Update parameters."
 );
 @@doc(CacheContracts.update::parameters.properties, "Update parameters.");

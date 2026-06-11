@@ -254,13 +254,16 @@ interface UserSubscription {
 }
 
 @@maxLength(SubscriptionContract.name, 256);
-@@doc(SubscriptionContract.name,
+@@doc(
+  SubscriptionContract.name,
   "Subscription entity Identifier. The entity represents the association between a user and a product in API Management."
 );
 @@doc(SubscriptionContract.properties, "Subscription contract properties.");
-@@doc(SubscriptionContracts.createOrUpdate::parameters.resource,
+@@doc(
+  SubscriptionContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@doc(SubscriptionContracts.update::parameters.properties,
+@@doc(
+  SubscriptionContracts.update::parameters.properties,
   "Update parameters."
 );

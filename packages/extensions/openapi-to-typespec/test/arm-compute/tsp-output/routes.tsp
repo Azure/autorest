@@ -503,10 +503,12 @@ interface VirtualMachineRunCommandsOperationGroup {
     commandId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<RunCommandDocument & {
-    @header
-    contentType: "application/json" | "text/json";
-  }> | ErrorResponse;
+  ):
+    | ArmResponse<RunCommandDocument & {
+        @header
+        contentType: "application/json" | "text/json";
+      }>
+    | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"

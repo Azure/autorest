@@ -83,12 +83,15 @@ interface Certificates {
   >;
 }
 
-@@doc(Certificate.name,
+@@doc(
+  Certificate.name,
   "Serial number of the certificate. Use '.default' to get current active certificate."
 );
-@@doc(Certificate.properties,
+@@doc(
+  Certificate.properties,
   "The resource-specific properties for this resource."
 );
-@@doc(Certificates.retrieveProofOfPossessionNonce::parameters.body,
+@@doc(
+  Certificates.retrieveProofOfPossessionNonce::parameters.body,
   "Proof of possession nonce request body "
 );

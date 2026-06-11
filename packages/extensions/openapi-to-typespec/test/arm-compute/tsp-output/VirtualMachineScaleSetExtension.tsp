@@ -57,7 +57,9 @@ interface VirtualMachineScaleSetExtensions {
   update is ArmCustomPatchAsync<
     VirtualMachineScaleSetExtension,
     PatchModel = VirtualMachineScaleSetExtensionUpdate,
-    Response = ArmResponse<VirtualMachineScaleSetExtension> | ArmResourceCreatedResponse<VirtualMachineScaleSetExtension>
+    Response =
+      | ArmResponse<VirtualMachineScaleSetExtension>
+      | ArmResourceCreatedResponse<VirtualMachineScaleSetExtension>
   >;
 
   /**
@@ -66,7 +68,10 @@ interface VirtualMachineScaleSetExtensions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachineScaleSetExtension,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -75,15 +80,19 @@ interface VirtualMachineScaleSetExtensions {
   list is ArmResourceListByParent<VirtualMachineScaleSetExtension>;
 }
 
-@@doc(VirtualMachineScaleSetExtension.name,
+@@doc(
+  VirtualMachineScaleSetExtension.name,
   "The name of the VM scale set extension."
 );
-@@doc(VirtualMachineScaleSetExtension.properties,
+@@doc(
+  VirtualMachineScaleSetExtension.properties,
   "Describes the properties of a Virtual Machine Scale Set Extension."
 );
-@@doc(VirtualMachineScaleSetExtensions.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualMachineScaleSetExtensions.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create VM scale set Extension operation."
 );
-@@doc(VirtualMachineScaleSetExtensions.update::parameters.properties,
+@@doc(
+  VirtualMachineScaleSetExtensions.update::parameters.properties,
   "Parameters supplied to the Update VM scale set Extension operation."
 );

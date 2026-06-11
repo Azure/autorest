@@ -77,13 +77,16 @@ interface StorageQueues {
 
 @@maxLength(StorageQueue.name, 63);
 @@minLength(StorageQueue.name, 3);
-@@doc(StorageQueue.name,
+@@doc(
+  StorageQueue.name,
   "A queue name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of lowercase alphanumeric and dash(-) characters only, it should begin and end with an alphanumeric character and it cannot have two consecutive dash(-) characters."
 );
 @@doc(StorageQueue.properties, "Queue resource properties.");
-@@doc(StorageQueues.create::parameters.resource,
+@@doc(
+  StorageQueues.create::parameters.resource,
   "Queue properties and metadata to be created with"
 );
-@@doc(StorageQueues.update::parameters.properties,
+@@doc(
+  StorageQueues.update::parameters.properties,
   "Queue properties and metadata to be created with"
 );

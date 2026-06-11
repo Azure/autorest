@@ -96,12 +96,15 @@ interface TagDescriptionContracts {
 
 @@maxLength(TagDescriptionContract.name, 80);
 @@minLength(TagDescriptionContract.name, 1);
-@@doc(TagDescriptionContract.name,
+@@doc(
+  TagDescriptionContract.name,
   "Tag description identifier. Used when creating tagDescription for API/Tag association. Based on API and Tag names."
 );
-@@doc(TagDescriptionContract.properties,
+@@doc(
+  TagDescriptionContract.properties,
   "TagDescription entity contract properties."
 );
-@@doc(TagDescriptionContracts.createOrUpdate::parameters.resource,
+@@doc(
+  TagDescriptionContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );

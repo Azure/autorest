@@ -4,7 +4,8 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using AutoRestComplexTestService;
 
-@@clientName(DoubleWrapper.field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose,
+@@clientName(
+  DoubleWrapper.field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose,
   "field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose"
 );
 
@@ -108,40 +109,50 @@ using AutoRestComplexTestService;
 @@clientName(polymorphismOperationGroup.putValid, "putValid");
 @@clientLocation(polymorphismOperationGroup.getDotSyntax, "polymorphism");
 @@clientName(polymorphismOperationGroup.getDotSyntax, "getDotSyntax");
-@@clientLocation(polymorphismOperationGroup.getComposedWithDiscriminator,
+@@clientLocation(
+  polymorphismOperationGroup.getComposedWithDiscriminator,
   "polymorphism"
 );
-@@clientName(polymorphismOperationGroup.getComposedWithDiscriminator,
+@@clientName(
+  polymorphismOperationGroup.getComposedWithDiscriminator,
   "getComposedWithDiscriminator"
 );
-@@clientLocation(polymorphismOperationGroup.getComposedWithoutDiscriminator,
+@@clientLocation(
+  polymorphismOperationGroup.getComposedWithoutDiscriminator,
   "polymorphism"
 );
-@@clientName(polymorphismOperationGroup.getComposedWithoutDiscriminator,
+@@clientName(
+  polymorphismOperationGroup.getComposedWithoutDiscriminator,
   "getComposedWithoutDiscriminator"
 );
 @@clientLocation(polymorphismOperationGroup.getComplicated, "polymorphism");
 @@clientName(polymorphismOperationGroup.getComplicated, "getComplicated");
 @@clientLocation(polymorphismOperationGroup.putComplicated, "polymorphism");
 @@clientName(polymorphismOperationGroup.putComplicated, "putComplicated");
-@@clientLocation(polymorphismOperationGroup.putMissingDiscriminator,
+@@clientLocation(
+  polymorphismOperationGroup.putMissingDiscriminator,
   "polymorphism"
 );
-@@clientName(polymorphismOperationGroup.putMissingDiscriminator,
+@@clientName(
+  polymorphismOperationGroup.putMissingDiscriminator,
   "putMissingDiscriminator"
 );
-@@clientLocation(polymorphismOperationGroup.putValidMissingRequired,
+@@clientLocation(
+  polymorphismOperationGroup.putValidMissingRequired,
   "polymorphism"
 );
-@@clientName(polymorphismOperationGroup.putValidMissingRequired,
+@@clientName(
+  polymorphismOperationGroup.putValidMissingRequired,
   "putValidMissingRequired"
 );
 
-@@clientLocation(polymorphicrecursiveOperationGroup.getValid,
+@@clientLocation(
+  polymorphicrecursiveOperationGroup.getValid,
   "polymorphicrecursive"
 );
 @@clientName(polymorphicrecursiveOperationGroup.getValid, "getValid");
-@@clientLocation(polymorphicrecursiveOperationGroup.putValid,
+@@clientLocation(
+  polymorphicrecursiveOperationGroup.putValid,
   "polymorphicrecursive"
 );
 @@clientName(polymorphicrecursiveOperationGroup.putValid, "putValid");

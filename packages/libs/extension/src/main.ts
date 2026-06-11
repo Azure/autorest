@@ -28,8 +28,7 @@ import {
 import { Extension, Package } from "./extension";
 import { AsyncLock } from "./locks/async-lock";
 import { logger } from "./logger";
-import { Npm } from "./npm";
-import { PackageManager, PackageManagerLogEntry, PackageManagerProgress, PackageManagerType } from "./package-manager";
+import { PackageManager, PackageManagerLogEntry, PackageManagerProgress } from "./package-manager";
 import { Yarn } from "./yarn";
 
 export interface PackageInstallProgress extends PackageManagerProgress {
@@ -157,7 +156,6 @@ export class ExtensionManager {
 
   public static async Create(
     installationPath: string,
-    packageManagerType: PackageManagerType = "yarn",
     packageManagerPath: string | undefined = undefined,
   ): Promise<ExtensionManager> {
     if (!(await exists(installationPath))) {
@@ -167,7 +165,7 @@ export class ExtensionManager {
       throw new Exception(`Extension folder '${installationPath}' is not a valid directory`);
     }
     const lock = new SharedLock(installationPath);
-    const packageManager = packageManagerType === "yarn" ? new Yarn(packageManagerPath) : new Npm();
+    const packageManager = new Yarn(packageManagerPath);
     return new ExtensionManager(installationPath, lock, await lock.acquire(), packageManager);
   }
 

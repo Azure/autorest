@@ -111,13 +111,16 @@ interface ApiReleaseContracts {
 
 @@maxLength(ApiReleaseContract.name, 80);
 @@minLength(ApiReleaseContract.name, 1);
-@@doc(ApiReleaseContract.name,
+@@doc(
+  ApiReleaseContract.name,
   "Release identifier within an API. Must be unique in the current API Management service instance."
 );
 @@doc(ApiReleaseContract.properties, "ApiRelease entity contract properties.");
-@@doc(ApiReleaseContracts.createOrUpdate::parameters.resource,
+@@doc(
+  ApiReleaseContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@doc(ApiReleaseContracts.update::parameters.properties,
+@@doc(
+  ApiReleaseContracts.update::parameters.properties,
   "API Release Update parameters."
 );

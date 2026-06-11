@@ -5,11 +5,11 @@ steps:
       versionSpec: "22.x"
     displayName: "Install Node.js"
 
-  - script: |
-      npm install -g npm@6 # Seems to be an with npm 7 and publishing https://github.com/npm/cli/issues/2624.
-      npx @microsoft/rush install
+  - script: corepack enable
+    displayName: "Enable corepack"
+
+  - script: pnpm install --frozen-lockfile
     displayName: "Install dependencies"
 
-  - script: |
-      npx @microsoft/rush rebuild
+  - script: pnpm run build
     displayName: "Build"

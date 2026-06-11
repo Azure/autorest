@@ -57,7 +57,10 @@ interface Registries {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Registry,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -86,16 +89,20 @@ interface Registries {
   >;
 }
 
-@@doc(Registry.name,
+@@doc(
+  Registry.name,
   "Name of Azure Machine Learning registry. This is case-insensitive"
 );
 @@doc(Registry.properties, "[Required] Additional attributes of the entity.");
-@@doc(Registries.createOrUpdate::parameters.resource,
+@@doc(
+  Registries.createOrUpdate::parameters.resource,
   "Details required to create the registry."
 );
-@@doc(Registries.update::parameters.properties,
+@@doc(
+  Registries.update::parameters.properties,
   "Details required to create the registry."
 );
-@@doc(Registries.removeRegions::parameters.body,
+@@doc(
+  Registries.removeRegions::parameters.body,
   "Details required to create the registry."
 );

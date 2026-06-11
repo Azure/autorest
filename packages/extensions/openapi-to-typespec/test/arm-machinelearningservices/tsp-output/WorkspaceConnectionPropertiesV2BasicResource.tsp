@@ -89,13 +89,16 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   >;
 }
 
-@@doc(WorkspaceConnectionPropertiesV2BasicResource.name,
+@@doc(
+  WorkspaceConnectionPropertiesV2BasicResource.name,
   "Friendly name of the workspace connection"
 );
 @@doc(WorkspaceConnectionPropertiesV2BasicResource.properties, "");
-@@doc(WorkspaceConnectionPropertiesV2BasicResources.create::parameters.resource,
+@@doc(
+  WorkspaceConnectionPropertiesV2BasicResources.create::parameters.resource,
   "The object for creating or updating a new workspace connection"
 );
-@@doc(WorkspaceConnectionPropertiesV2BasicResources.update::parameters.properties,
+@@doc(
+  WorkspaceConnectionPropertiesV2BasicResources.update::parameters.properties,
   "Parameters for workspace connection update."
 );

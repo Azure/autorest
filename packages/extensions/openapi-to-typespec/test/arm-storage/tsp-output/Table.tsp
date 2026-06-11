@@ -70,13 +70,16 @@ interface Tables {
 
 @@maxLength(Table.name, 63);
 @@minLength(Table.name, 3);
-@@doc(Table.name,
+@@doc(
+  Table.name,
   "A table name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of only alphanumeric characters and it cannot begin with a numeric character."
 );
 @@doc(Table.properties, "Table resource properties.");
-@@doc(Tables.create::parameters.resource,
+@@doc(
+  Tables.create::parameters.resource,
   "The parameters to provide to create a table."
 );
-@@doc(Tables.update::parameters.properties,
+@@doc(
+  Tables.update::parameters.properties,
   "The parameters to provide to create a table."
 );

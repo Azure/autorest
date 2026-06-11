@@ -56,12 +56,15 @@ interface ObjectReplicationPolicyOperationGroup {
 }
 
 @@minLength(ObjectReplicationPolicy.name, 1);
-@@doc(ObjectReplicationPolicy.name,
+@@doc(
+  ObjectReplicationPolicy.name,
   "For the destination account, provide the value 'default'. Configure the policy on the destination account first. For the source account, provide the value of the policy ID that is returned when you download the policy that was defined on the destination account. The policy is downloaded as a JSON file."
 );
-@@doc(ObjectReplicationPolicy.properties,
+@@doc(
+  ObjectReplicationPolicy.properties,
   "Returns the Storage Account Object Replication Policy."
 );
-@@doc(ObjectReplicationPolicyOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  ObjectReplicationPolicyOperationGroup.createOrUpdate::parameters.resource,
   "The object replication policy set to a storage account. A unique policy ID will be created if absent."
 );

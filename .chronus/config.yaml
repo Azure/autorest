@@ -1,0 +1,36 @@
+baseBranch: main
+baseRemote: https://github.com/Azure/autorest
+changelog: ["@chronus/github/changelog", { repo: "Azure/autorest" }]
+
+ignore:
+  - "@autorest/test-public-packages"
+
+changeKinds:
+  breaking:
+    versionType: major
+    title: Breaking Changes
+    description: Changes that break existing features
+
+  feature:
+    versionType: minor
+    title: Features
+    description: New features added
+
+  fix:
+    versionType: patch
+    title: Bug Fixes
+    description: Fixes to existing features
+
+  deprecation:
+    versionType: minor
+    title: Deprecations
+    description: Deprecated features
+
+  internal:
+    versionType: none
+    title: Internal
+    description: Internal changes that are not user facing
+
+changedFiles:
+  - "!**/*.md"
+  - "!**/*.test.ts"

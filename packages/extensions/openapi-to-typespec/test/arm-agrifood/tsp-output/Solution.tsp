@@ -129,6 +129,7 @@ interface Solutions {
 
 @@doc(Solution.name, "SolutionId for Data Manager For Agriculture Resource.");
 @@doc(Solution.properties, "Solution resource properties.");
-@@doc(Solutions.createOrUpdate::parameters.resource,
+@@doc(
+  Solutions.createOrUpdate::parameters.resource,
   "Solution resource request body."
 );

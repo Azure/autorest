@@ -57,7 +57,10 @@ interface CloudServices {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     CloudService,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -185,22 +188,28 @@ interface CloudServices {
 
 @@doc(CloudService.name, "Name of the cloud service.");
 @@doc(CloudService.properties, "Cloud service properties");
-@@doc(CloudServices.createOrUpdate::parameters.resource,
+@@doc(
+  CloudServices.createOrUpdate::parameters.resource,
   "The cloud service object."
 );
 @@doc(CloudServices.update::parameters.properties, "The cloud service object.");
-@@doc(CloudServices.restart::parameters.body,
+@@doc(
+  CloudServices.restart::parameters.body,
   "List of cloud service role instance names."
 );
-@@doc(CloudServices.reimage::parameters.body,
+@@doc(
+  CloudServices.reimage::parameters.body,
   "List of cloud service role instance names."
 );
-@@doc(CloudServices.rebuild::parameters.body,
+@@doc(
+  CloudServices.rebuild::parameters.body,
   "List of cloud service role instance names."
 );
-@@doc(CloudServices.deleteInstances::parameters.body,
+@@doc(
+  CloudServices.deleteInstances::parameters.body,
   "List of cloud service role instance names."
 );
-@@doc(CloudServices.walkUpdateDomain::parameters.body,
+@@doc(
+  CloudServices.walkUpdateDomain::parameters.body,
   "The update domain object."
 );

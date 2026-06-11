@@ -59,9 +59,11 @@ interface CommunityGalleryImages {
   >;
 }
 
-@@doc(CommunityGalleryImage.name,
+@@doc(
+  CommunityGalleryImage.name,
   "The name of the community gallery image definition."
 );
-@@doc(CommunityGalleryImage.properties,
+@@doc(
+  CommunityGalleryImage.properties,
   "Describes the properties of a gallery image definition."
 );

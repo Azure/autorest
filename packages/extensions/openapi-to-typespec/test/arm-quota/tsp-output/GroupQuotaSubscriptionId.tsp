@@ -39,11 +39,13 @@ interface GroupQuotaSubscriptionIds {
     Extension.ManagementGroup,
     GroupQuotaSubscriptionId,
     Request = void,
-    Response = ArmResourceUpdatedResponse<GroupQuotaSubscriptionId> | ArmResourceCreatedResponse<
-      LROResponse,
-      ArmLroLocationHeader<FinalResult = GroupQuotaSubscriptionId> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResourceUpdatedResponse<GroupQuotaSubscriptionId>
+      | ArmResourceCreatedResponse<
+          LROResponse,
+          ArmLroLocationHeader<FinalResult = GroupQuotaSubscriptionId> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -76,7 +78,8 @@ interface GroupQuotaSubscriptionIds {
 
 #suppress "@azure-tools/typespec-azure-core/no-format"
 @@format(GroupQuotaSubscriptionId.name, "uuid");
-@@doc(GroupQuotaSubscriptionId.name,
+@@doc(
+  GroupQuotaSubscriptionId.name,
   "The ID of the target subscription. The value must be an UUID."
 );
 @@doc(GroupQuotaSubscriptionId.properties, "");

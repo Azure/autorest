@@ -64,10 +64,12 @@ interface Disks {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Disk,
-    Response = ArmResourceUpdatedResponse<Disk> | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: Disk;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<Disk>
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: Disk;
+        }),
     LroHeaders = ArmLroLocationHeader<FinalResult = Disk> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -80,10 +82,12 @@ interface Disks {
   update is ArmCustomPatchAsync<
     Disk,
     PatchModel = DiskUpdate,
-    Response = ArmResponse<Disk> | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: Disk;
-    })
+    Response =
+      | ArmResponse<Disk>
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: Disk;
+        })
   >;
 
   /**
@@ -92,7 +96,10 @@ interface Disks {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Disk,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -125,16 +132,20 @@ interface Disks {
   revokeAccess is ArmResourceActionAsync<Disk, void, OkResponse>;
 }
 
-@@doc(Disk.name,
+@@doc(
+  Disk.name,
   "The name of the managed disk that is being created. The name can't be changed after the disk is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters."
 );
 @@doc(Disk.properties, "Disk resource properties.");
-@@doc(Disks.createOrUpdate::parameters.resource,
+@@doc(
+  Disks.createOrUpdate::parameters.resource,
   "Disk object supplied in the body of the Put disk operation."
 );
-@@doc(Disks.update::parameters.properties,
+@@doc(
+  Disks.update::parameters.properties,
   "Disk object supplied in the body of the Patch disk operation."
 );
-@@doc(Disks.grantAccess::parameters.body,
+@@doc(
+  Disks.grantAccess::parameters.body,
   "Access data object supplied in the body of the get disk access operation."
 );

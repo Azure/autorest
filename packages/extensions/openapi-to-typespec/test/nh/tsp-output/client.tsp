@@ -4,78 +4,98 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using NotificationHubsClient;
 
-@@clientName(NotificationHubContentModel.NotificationHubDescription,
+@@clientName(
+  NotificationHubContentModel.NotificationHubDescription,
   "notificationHubDescription"
 );
 
 @@clientName(NotificationHubDescriptionModel.`xmlns:i`, "xmlnsI");
-@@clientName(NotificationHubDescriptionModel.RegistrationTtl,
+@@clientName(
+  NotificationHubDescriptionModel.RegistrationTtl,
   "registrationTtl"
 );
 @@clientName(NotificationHubDescriptionModel.Location, "location");
 @@clientName(NotificationHubDescriptionModel.ApnsCredential, "apnsCredential");
 @@clientName(NotificationHubDescriptionModel.GcmCredential, "gcmCredential");
 @@clientName(NotificationHubDescriptionModel.WnsCredential, "wnsCredential");
-@@clientName(NotificationHubDescriptionModel.AuthorizationRules,
+@@clientName(
+  NotificationHubDescriptionModel.AuthorizationRules,
   "authorizationRules"
 );
 
 @@clientName(PropertyBagModelItem.Name, "name");
 @@clientName(PropertyBagModelItem.Value, "value");
 
-@@clientName(NotificationHubDescriptionModelAuthorizationRulesItem.`i:type`,
+@@clientName(
+  NotificationHubDescriptionModelAuthorizationRulesItem.`i:type`,
   "iType"
 );
-@@clientName(NotificationHubDescriptionModelAuthorizationRulesItem.ClaimType,
+@@clientName(
+  NotificationHubDescriptionModelAuthorizationRulesItem.ClaimType,
   "claimType"
 );
-@@clientName(NotificationHubDescriptionModelAuthorizationRulesItem.ClaimValue,
+@@clientName(
+  NotificationHubDescriptionModelAuthorizationRulesItem.ClaimValue,
   "claimValue"
 );
-@@clientName(NotificationHubDescriptionModelAuthorizationRulesItem.Rights,
+@@clientName(
+  NotificationHubDescriptionModelAuthorizationRulesItem.Rights,
   "rights"
 );
-@@clientName(NotificationHubDescriptionModelAuthorizationRulesItem.CreatedTime,
+@@clientName(
+  NotificationHubDescriptionModelAuthorizationRulesItem.CreatedTime,
   "createdTime"
 );
-@@clientName(NotificationHubDescriptionModelAuthorizationRulesItem.ModifiedTime,
+@@clientName(
+  NotificationHubDescriptionModelAuthorizationRulesItem.ModifiedTime,
   "modifiedTime"
 );
-@@clientName(NotificationHubDescriptionModelAuthorizationRulesItem.KeyName,
+@@clientName(
+  NotificationHubDescriptionModelAuthorizationRulesItem.KeyName,
   "keyName"
 );
-@@clientName(NotificationHubDescriptionModelAuthorizationRulesItem.PrimaryKey,
+@@clientName(
+  NotificationHubDescriptionModelAuthorizationRulesItem.PrimaryKey,
   "primaryKey"
 );
-@@clientName(NotificationHubDescriptionModelAuthorizationRulesItem.SecondaryKey,
+@@clientName(
+  NotificationHubDescriptionModelAuthorizationRulesItem.SecondaryKey,
   "secondaryKey"
 );
 
 @@clientName(RegistrationEntryModel.`xmlns:m`, "xmlnsM");
 @@clientName(RegistrationEntryModel.`m:etag`, "mEtag");
 
-@@clientName(RegistrationContentModel.AppleRegistrationDescription,
+@@clientName(
+  RegistrationContentModel.AppleRegistrationDescription,
   "appleRegistrationDescription"
 );
-@@clientName(RegistrationContentModel.AppleTemplateRegistrationDescription,
+@@clientName(
+  RegistrationContentModel.AppleTemplateRegistrationDescription,
   "appleTemplateRegistrationDescription"
 );
-@@clientName(RegistrationContentModel.BaiduRegistrationDescription,
+@@clientName(
+  RegistrationContentModel.BaiduRegistrationDescription,
   "baiduRegistrationDescription"
 );
-@@clientName(RegistrationContentModel.BaiduTemplateRegistrationDescription,
+@@clientName(
+  RegistrationContentModel.BaiduTemplateRegistrationDescription,
   "baiduTemplateRegistrationDescription"
 );
-@@clientName(RegistrationContentModel.GcmRegistrationDescription,
+@@clientName(
+  RegistrationContentModel.GcmRegistrationDescription,
   "gcmRegistrationDescription"
 );
-@@clientName(RegistrationContentModel.GcmTemplateRegistrationDescription,
+@@clientName(
+  RegistrationContentModel.GcmTemplateRegistrationDescription,
   "gcmTemplateRegistrationDescription"
 );
-@@clientName(RegistrationContentModel.WindowsRegistrationDescription,
+@@clientName(
+  RegistrationContentModel.WindowsRegistrationDescription,
   "windowsRegistrationDescription"
 );
-@@clientName(RegistrationContentModel.WindowsTemplateRegistrationDescription,
+@@clientName(
+  RegistrationContentModel.WindowsTemplateRegistrationDescription,
   "windowsTemplateRegistrationDescription"
 );
 
@@ -86,7 +106,8 @@ using NotificationHubsClient;
 @@clientName(AppleTemplateRegistrationContentModel.`xmlns:i`, "xmlnsI");
 @@clientName(AppleTemplateRegistrationContentModel.Tags, "tags");
 @@clientName(AppleTemplateRegistrationContentModel.DeviceToken, "deviceToken");
-@@clientName(AppleTemplateRegistrationContentModel.BodyTemplate,
+@@clientName(
+  AppleTemplateRegistrationContentModel.BodyTemplate,
   "bodyTemplate"
 );
 @@clientName(AppleTemplateRegistrationContentModel.Expiry, "expiry");
@@ -99,22 +120,26 @@ using NotificationHubsClient;
 @@clientName(BaiduTemplateRegistrationContentModel.`xmlns:i`, "xmlnsI");
 @@clientName(BaiduTemplateRegistrationContentModel.Tags, "tags");
 @@clientName(BaiduTemplateRegistrationContentModel.BaiduUserId, "baiduUserId");
-@@clientName(BaiduTemplateRegistrationContentModel.BaiduChannelId,
+@@clientName(
+  BaiduTemplateRegistrationContentModel.BaiduChannelId,
   "baiduChannelId"
 );
-@@clientName(BaiduTemplateRegistrationContentModel.BodyTemplate,
+@@clientName(
+  BaiduTemplateRegistrationContentModel.BodyTemplate,
   "bodyTemplate"
 );
 
 @@clientName(GcmRegistrationContentModel.`xmlns:i`, "xmlnsI");
 @@clientName(GcmRegistrationContentModel.Tags, "tags");
-@@clientName(GcmRegistrationContentModel.GcmRegistrationId,
+@@clientName(
+  GcmRegistrationContentModel.GcmRegistrationId,
   "gcmRegistrationId"
 );
 
 @@clientName(GcmTemplateRegistrationContentModel.`xmlns:i`, "xmlnsI");
 @@clientName(GcmTemplateRegistrationContentModel.Tags, "tags");
-@@clientName(GcmTemplateRegistrationContentModel.GcmRegistrationId,
+@@clientName(
+  GcmTemplateRegistrationContentModel.GcmRegistrationId,
   "gcmRegistrationId"
 );
 @@clientName(GcmTemplateRegistrationContentModel.BodyTemplate, "bodyTemplate");
@@ -126,14 +151,17 @@ using NotificationHubsClient;
 @@clientName(WindowsTemplateRegistrationContentModel.`xmlns:i`, "xmlnsI");
 @@clientName(WindowsTemplateRegistrationContentModel.Tags, "tags");
 @@clientName(WindowsTemplateRegistrationContentModel.ChannelUri, "channelUri");
-@@clientName(WindowsTemplateRegistrationContentModel.BodyTemplate,
+@@clientName(
+  WindowsTemplateRegistrationContentModel.BodyTemplate,
   "bodyTemplate"
 );
 @@clientName(WindowsTemplateRegistrationContentModel.WnsHeaders, "wnsHeaders");
 
-@@clientName(WindowsTemplateRegistrationContentModelWnsHeadersItem.Header,
+@@clientName(
+  WindowsTemplateRegistrationContentModelWnsHeadersItem.Header,
   "header"
 );
-@@clientName(WindowsTemplateRegistrationContentModelWnsHeadersItem.Value,
+@@clientName(
+  WindowsTemplateRegistrationContentModelWnsHeadersItem.Value,
   "value"
 );

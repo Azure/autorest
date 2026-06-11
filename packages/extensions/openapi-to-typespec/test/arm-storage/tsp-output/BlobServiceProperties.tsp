@@ -59,9 +59,11 @@ interface BlobServices {
 }
 
 @@doc(BlobServiceProperties.name, "");
-@@doc(BlobServiceProperties.properties,
+@@doc(
+  BlobServiceProperties.properties,
   "The properties of a storage account’s Blob service."
 );
-@@doc(BlobServices.setServiceProperties::parameters.resource,
+@@doc(
+  BlobServices.setServiceProperties::parameters.resource,
   "The properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules."
 );

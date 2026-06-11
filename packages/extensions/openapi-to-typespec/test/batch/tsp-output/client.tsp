@@ -8,7 +8,8 @@ using Azure.Batch;
 
 @@clientName(PoolListUsageMetricsResult.`odata.nextLink`, "odataNextLink");
 
-@@clientName(AccountListSupportedImagesResult.`odata.nextLink`,
+@@clientName(
+  AccountListSupportedImagesResult.`odata.nextLink`,
   "odataNextLink"
 );
 
@@ -26,7 +27,8 @@ using Azure.Batch;
 
 @@clientName(BatchJobListResult.`odata.nextLink`, "odataNextLink");
 
-@@clientName(BatchJobListPreparationAndReleaseTaskStatusResult.`odata.nextLink`,
+@@clientName(
+  BatchJobListPreparationAndReleaseTaskStatusResult.`odata.nextLink`,
   "odataNextLink"
 );
 
@@ -120,18 +122,22 @@ using Azure.Batch;
 @@clientLocation(ComputeNodeOperationGroup.reimage, "ComputeNode");
 @@clientLocation(ComputeNodeOperationGroup.disableScheduling, "ComputeNode");
 @@clientLocation(ComputeNodeOperationGroup.enableScheduling, "ComputeNode");
-@@clientLocation(ComputeNodeOperationGroup.getRemoteLoginSettings,
+@@clientLocation(
+  ComputeNodeOperationGroup.getRemoteLoginSettings,
   "ComputeNode"
 );
 @@clientLocation(ComputeNodeOperationGroup.getRemoteDesktop, "ComputeNode");
-@@clientLocation(ComputeNodeOperationGroup.uploadBatchServiceLogs,
+@@clientLocation(
+  ComputeNodeOperationGroup.uploadBatchServiceLogs,
   "ComputeNode"
 );
 @@clientLocation(ComputeNodeOperationGroup.list, "ComputeNode");
 
-@@clientLocation(ComputeNodeExtensionOperationGroup.get,
+@@clientLocation(
+  ComputeNodeExtensionOperationGroup.get,
   "ComputeNodeExtension"
 );
-@@clientLocation(ComputeNodeExtensionOperationGroup.list,
+@@clientLocation(
+  ComputeNodeExtensionOperationGroup.list,
   "ComputeNodeExtension"
 );

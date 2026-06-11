@@ -49,7 +49,10 @@ interface Associations {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Association,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -59,6 +62,7 @@ interface Associations {
 }
 
 @@doc(Association.name, "Name of Association");
-@@doc(Association.properties,
+@@doc(
+  Association.properties,
   "The resource-specific properties for this resource."
 );

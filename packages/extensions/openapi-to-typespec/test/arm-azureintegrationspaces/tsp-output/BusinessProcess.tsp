@@ -106,6 +106,7 @@ interface BusinessProcesses {
 }
 
 @@doc(BusinessProcess.name, "The name of the business process");
-@@doc(BusinessProcess.properties,
+@@doc(
+  BusinessProcess.properties,
   "The resource-specific properties for this resource."
 );

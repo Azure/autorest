@@ -36,11 +36,13 @@ interface GroupQuotasEntities {
   createOrUpdate is Extension.CreateOrReplaceAsync<
     Extension.ManagementGroup,
     GroupQuotasEntity,
-    Response = ArmResourceUpdatedResponse<GroupQuotasEntity> | ArmResourceCreatedResponse<
-      LROResponse,
-      ArmLroLocationHeader<FinalResult = GroupQuotasEntity> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResourceUpdatedResponse<GroupQuotasEntity>
+      | ArmResourceCreatedResponse<
+          LROResponse,
+          ArmLroLocationHeader<FinalResult = GroupQuotasEntity> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -107,13 +109,16 @@ interface GroupQuotasEntities {
 
 @@maxLength(GroupQuotasEntity.name, 63);
 @@minLength(GroupQuotasEntity.name, 3);
-@@doc(GroupQuotasEntity.name,
+@@doc(
+  GroupQuotasEntity.name,
   "The GroupQuota name. The name should be unique for the provided context tenantId/MgId."
 );
 @@doc(GroupQuotasEntity.properties, "Properties");
-@@doc(GroupQuotasEntities.createOrUpdate::parameters.resource,
+@@doc(
+  GroupQuotasEntities.createOrUpdate::parameters.resource,
   "The GroupQuota body details for creation or update of a GroupQuota entity."
 );
-@@doc(GroupQuotasEntities.update::parameters.properties,
+@@doc(
+  GroupQuotasEntities.update::parameters.properties,
   "The  GroupQuotas Patch Request."
 );

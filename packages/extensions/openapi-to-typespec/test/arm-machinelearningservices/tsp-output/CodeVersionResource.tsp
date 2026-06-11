@@ -73,7 +73,10 @@ interface CodeVersionResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is CodeVersionResourceOps.DeleteWithoutOkAsync<
     CodeVersionResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -210,18 +213,23 @@ interface CodeVersions {
 }
 
 @@doc(CodeVersionResource.name, "Version identifier.");
-@@doc(CodeVersionResource.properties,
+@@doc(
+  CodeVersionResource.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(CodeVersionResources.createOrUpdate::parameters.resource,
+@@doc(
+  CodeVersionResources.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
-@@doc(CodeVersionResources.createOrGetStartPendingUpload::parameters.body,
+@@doc(
+  CodeVersionResources.createOrGetStartPendingUpload::parameters.body,
   "Pending upload request object"
 );
-@@doc(CodeVersions.createOrUpdate::parameters.resource,
+@@doc(
+  CodeVersions.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
-@@doc(CodeVersions.createOrGetStartPendingUpload::parameters.body,
+@@doc(
+  CodeVersions.createOrGetStartPendingUpload::parameters.body,
   "Pending upload request object"
 );

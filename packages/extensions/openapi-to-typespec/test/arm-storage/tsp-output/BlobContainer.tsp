@@ -113,20 +113,25 @@ interface BlobContainers {
 
 @@maxLength(BlobContainer.name, 63);
 @@minLength(BlobContainer.name, 3);
-@@doc(BlobContainer.name,
+@@doc(
+  BlobContainer.name,
   "The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number."
 );
 @@doc(BlobContainer.properties, "Properties of the blob container.");
-@@doc(BlobContainers.create::parameters.resource,
+@@doc(
+  BlobContainers.create::parameters.resource,
   "Properties of the blob container to create."
 );
-@@doc(BlobContainers.update::parameters.properties,
+@@doc(
+  BlobContainers.update::parameters.properties,
   "Properties to update for the blob container."
 );
-@@doc(BlobContainers.setLegalHold::parameters.body,
+@@doc(
+  BlobContainers.setLegalHold::parameters.body,
   "The LegalHold property that will be set to a blob container."
 );
-@@doc(BlobContainers.clearLegalHold::parameters.body,
+@@doc(
+  BlobContainers.clearLegalHold::parameters.body,
   "The LegalHold property that will be clear from a blob container."
 );
 @@doc(BlobContainers.lease::parameters.body, "Lease Container request body.");

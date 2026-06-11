@@ -6,7 +6,8 @@ using Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(ComputeOperationValue.display);
 
-@@clientName(VirtualMachineScaleSetDataDisk.diskIOPSReadWrite,
+@@clientName(
+  VirtualMachineScaleSetDataDisk.diskIOPSReadWrite,
   "diskIopsReadWrite"
 );
 
@@ -17,22 +18,26 @@ using Microsoft.Compute;
 @@Legacy.flattenProperty(VirtualMachineScaleSetIPConfiguration.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(VirtualMachineScaleSetPublicIPAddressConfiguration.properties
+@@Legacy.flattenProperty(
+  VirtualMachineScaleSetPublicIPAddressConfiguration.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(VirtualMachineScaleSetUpdate.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(VirtualMachineScaleSetUpdateNetworkConfiguration.properties
+@@Legacy.flattenProperty(
+  VirtualMachineScaleSetUpdateNetworkConfiguration.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(VirtualMachineScaleSetUpdateIPConfiguration.properties
+@@Legacy.flattenProperty(
+  VirtualMachineScaleSetUpdateIPConfiguration.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(VirtualMachineScaleSetUpdatePublicIPAddressConfiguration.properties
+@@Legacy.flattenProperty(
+  VirtualMachineScaleSetUpdatePublicIPAddressConfiguration.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -47,11 +52,13 @@ using Microsoft.Compute;
 @@Legacy.flattenProperty(NetworkInterfaceReference.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(VirtualMachineNetworkInterfaceConfiguration.properties
+@@Legacy.flattenProperty(
+  VirtualMachineNetworkInterfaceConfiguration.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(VirtualMachineNetworkInterfaceIPConfiguration.properties
+@@Legacy.flattenProperty(
+  VirtualMachineNetworkInterfaceIPConfiguration.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -148,84 +155,106 @@ using Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(Extension.properties);
 
-@@clientName(VirtualMachineScaleSets.createOrUpdate::parameters.resource,
+@@clientName(
+  VirtualMachineScaleSets.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(VirtualMachineScaleSets.update::parameters.properties,
+@@clientName(
+  VirtualMachineScaleSets.update::parameters.properties,
   "parameters"
 );
-@@clientName(VirtualMachineScaleSets.deallocate::parameters.body,
+@@clientName(
+  VirtualMachineScaleSets.deallocate::parameters.body,
   "vmInstanceIDs"
 );
-@@clientName(VirtualMachineScaleSets.deleteInstances::parameters.body,
+@@clientName(
+  VirtualMachineScaleSets.deleteInstances::parameters.body,
   "vmInstanceIDs"
 );
-@@clientName(VirtualMachineScaleSets.powerOff::parameters.body,
+@@clientName(
+  VirtualMachineScaleSets.powerOff::parameters.body,
   "vmInstanceIDs"
 );
 @@clientName(VirtualMachineScaleSets.restart::parameters.body, "vmInstanceIDs");
 @@clientName(VirtualMachineScaleSets.start::parameters.body, "vmInstanceIDs");
-@@clientName(VirtualMachineScaleSets.redeploy::parameters.body,
+@@clientName(
+  VirtualMachineScaleSets.redeploy::parameters.body,
   "vmInstanceIDs"
 );
-@@clientName(VirtualMachineScaleSets.performMaintenance::parameters.body,
+@@clientName(
+  VirtualMachineScaleSets.performMaintenance::parameters.body,
   "vmInstanceIDs"
 );
-@@clientName(VirtualMachineScaleSets.updateInstances::parameters.body,
+@@clientName(
+  VirtualMachineScaleSets.updateInstances::parameters.body,
   "vmInstanceIDs"
 );
-@@clientName(VirtualMachineScaleSets.reimage::parameters.body,
+@@clientName(
+  VirtualMachineScaleSets.reimage::parameters.body,
   "vmScaleSetReimageInput"
 );
-@@clientName(VirtualMachineScaleSets.reimageAll::parameters.body,
+@@clientName(
+  VirtualMachineScaleSets.reimageAll::parameters.body,
   "vmInstanceIDs"
 );
-@@clientName(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
+@@clientName(
+  VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
   "parameters"
 );
-@@clientName(VirtualMachineScaleSets.setOrchestrationServiceState::parameters.body,
+@@clientName(
+  VirtualMachineScaleSets.setOrchestrationServiceState::parameters.body,
   "parameters"
 );
-@@clientLocation(VirtualMachineScaleSets.cancel,
+@@clientLocation(
+  VirtualMachineScaleSets.cancel,
   "VirtualMachineScaleSetRollingUpgrades"
 );
-@@clientLocation(VirtualMachineScaleSets.startOSUpgrade,
+@@clientLocation(
+  VirtualMachineScaleSets.startOSUpgrade,
   "VirtualMachineScaleSetRollingUpgrades"
 );
-@@clientLocation(VirtualMachineScaleSets.startExtensionUpgrade,
+@@clientLocation(
+  VirtualMachineScaleSets.startExtensionUpgrade,
   "VirtualMachineScaleSetRollingUpgrades"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(VirtualMachineScaleSet.properties);
 
-@@clientName(VirtualMachineScaleSetExtensions.createOrUpdate::parameters.resource,
+@@clientName(
+  VirtualMachineScaleSetExtensions.createOrUpdate::parameters.resource,
   "extensionParameters"
 );
-@@clientName(VirtualMachineScaleSetExtensions.update::parameters.properties,
+@@clientName(
+  VirtualMachineScaleSetExtensions.update::parameters.properties,
   "extensionParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(VirtualMachineScaleSetExtension.properties);
 
-@@clientName(VirtualMachineExtensions.createOrUpdate::parameters.resource,
+@@clientName(
+  VirtualMachineExtensions.createOrUpdate::parameters.resource,
   "extensionParameters"
 );
-@@clientName(VirtualMachineExtensions.update::parameters.properties,
+@@clientName(
+  VirtualMachineExtensions.update::parameters.properties,
   "extensionParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(VirtualMachineExtension.properties);
 
-@@clientLocation(RollingUpgradeStatusInfos.getLatest,
+@@clientLocation(
+  RollingUpgradeStatusInfos.getLatest,
   "VirtualMachineScaleSetRollingUpgrades"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(RollingUpgradeStatusInfo.properties);
 
-@@clientName(VirtualMachineScaleSetVMExtensions.createOrUpdate::parameters.resource,
+@@clientName(
+  VirtualMachineScaleSetVMExtensions.createOrUpdate::parameters.resource,
   "extensionParameters"
 );
-@@clientName(VirtualMachineScaleSetVMExtensions.update::parameters.properties,
+@@clientName(
+  VirtualMachineScaleSetVMExtensions.update::parameters.properties,
   "extensionParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -233,49 +262,63 @@ using Microsoft.Compute;
 
 @@clientLocation(VirtualMachineScaleSetVMS.get, "VirtualMachineScaleSetVMs");
 @@clientLocation(VirtualMachineScaleSetVMS.update, "VirtualMachineScaleSetVMs");
-@@clientName(VirtualMachineScaleSetVMS.update::parameters.resource,
+@@clientName(
+  VirtualMachineScaleSetVMS.update::parameters.resource,
   "parameters"
 );
 @@clientLocation(VirtualMachineScaleSetVMS.delete, "VirtualMachineScaleSetVMs");
 @@clientLocation(VirtualMachineScaleSetVMS.list, "VirtualMachineScaleSetVMs");
-@@clientLocation(VirtualMachineScaleSetVMS.reimage,
+@@clientLocation(
+  VirtualMachineScaleSetVMS.reimage,
   "VirtualMachineScaleSetVMs"
 );
-@@clientName(VirtualMachineScaleSetVMS.reimage::parameters.body,
+@@clientName(
+  VirtualMachineScaleSetVMS.reimage::parameters.body,
   "vmScaleSetVMReimageInput"
 );
-@@clientLocation(VirtualMachineScaleSetVMS.reimageAll,
+@@clientLocation(
+  VirtualMachineScaleSetVMS.reimageAll,
   "VirtualMachineScaleSetVMs"
 );
-@@clientLocation(VirtualMachineScaleSetVMS.deallocate,
+@@clientLocation(
+  VirtualMachineScaleSetVMS.deallocate,
   "VirtualMachineScaleSetVMs"
 );
-@@clientLocation(VirtualMachineScaleSetVMS.getInstanceView,
+@@clientLocation(
+  VirtualMachineScaleSetVMS.getInstanceView,
   "VirtualMachineScaleSetVMs"
 );
-@@clientLocation(VirtualMachineScaleSetVMS.powerOff,
+@@clientLocation(
+  VirtualMachineScaleSetVMS.powerOff,
   "VirtualMachineScaleSetVMs"
 );
-@@clientLocation(VirtualMachineScaleSetVMS.restart,
+@@clientLocation(
+  VirtualMachineScaleSetVMS.restart,
   "VirtualMachineScaleSetVMs"
 );
 @@clientLocation(VirtualMachineScaleSetVMS.start, "VirtualMachineScaleSetVMs");
-@@clientLocation(VirtualMachineScaleSetVMS.redeploy,
+@@clientLocation(
+  VirtualMachineScaleSetVMS.redeploy,
   "VirtualMachineScaleSetVMs"
 );
-@@clientLocation(VirtualMachineScaleSetVMS.retrieveBootDiagnosticsData,
+@@clientLocation(
+  VirtualMachineScaleSetVMS.retrieveBootDiagnosticsData,
   "VirtualMachineScaleSetVMs"
 );
-@@clientLocation(VirtualMachineScaleSetVMS.performMaintenance,
+@@clientLocation(
+  VirtualMachineScaleSetVMS.performMaintenance,
   "VirtualMachineScaleSetVMs"
 );
-@@clientLocation(VirtualMachineScaleSetVMS.simulateEviction,
+@@clientLocation(
+  VirtualMachineScaleSetVMS.simulateEviction,
   "VirtualMachineScaleSetVMs"
 );
-@@clientLocation(VirtualMachineScaleSetVMS.runCommand,
+@@clientLocation(
+  VirtualMachineScaleSetVMS.runCommand,
   "VirtualMachineScaleSetVMs"
 );
-@@clientName(VirtualMachineScaleSetVMS.runCommand::parameters.body,
+@@clientName(
+  VirtualMachineScaleSetVMS.runCommand::parameters.body,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -285,7 +328,8 @@ using Microsoft.Compute;
 @@clientName(VirtualMachines.update::parameters.properties, "parameters");
 @@clientName(VirtualMachines.capture::parameters.body, "parameters");
 @@clientName(VirtualMachines.reimage::parameters.body, "parameters");
-@@clientName(VirtualMachines.installPatches::parameters.body,
+@@clientName(
+  VirtualMachines.installPatches::parameters.body,
   "installPatchesInput"
 );
 @@clientName(VirtualMachines.runCommand::parameters.body, "parameters");
@@ -295,23 +339,27 @@ using Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(VirtualMachineExtensionImage.properties);
 
-@@clientName(AvailabilitySets.createOrUpdate::parameters.resource,
+@@clientName(
+  AvailabilitySets.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(AvailabilitySets.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(AvailabilitySet.properties);
 
-@@clientName(ProximityPlacementGroups.createOrUpdate::parameters.resource,
+@@clientName(
+  ProximityPlacementGroups.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(ProximityPlacementGroups.update::parameters.properties,
+@@clientName(
+  ProximityPlacementGroups.update::parameters.properties,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(ProximityPlacementGroup.properties);
 
-@@clientName(DedicatedHostGroups.createOrUpdate::parameters.resource,
+@@clientName(
+  DedicatedHostGroups.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(DedicatedHostGroups.update::parameters.properties, "parameters");
@@ -340,10 +388,12 @@ using Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(Image.properties);
 
-@@clientName(RestorePointCollections.createOrUpdate::parameters.resource,
+@@clientName(
+  RestorePointCollections.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(RestorePointCollections.update::parameters.properties,
+@@clientName(
+  RestorePointCollections.update::parameters.properties,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -353,32 +403,39 @@ using Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(RestorePoint.properties);
 
-@@clientName(CapacityReservationGroups.createOrUpdate::parameters.resource,
+@@clientName(
+  CapacityReservationGroups.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(CapacityReservationGroups.update::parameters.properties,
+@@clientName(
+  CapacityReservationGroups.update::parameters.properties,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(CapacityReservationGroup.properties);
 
-@@clientName(CapacityReservations.createOrUpdate::parameters.resource,
+@@clientName(
+  CapacityReservations.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(CapacityReservations.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(CapacityReservation.properties);
 
-@@clientName(VirtualMachineRunCommands.createOrUpdate::parameters.resource,
+@@clientName(
+  VirtualMachineRunCommands.createOrUpdate::parameters.resource,
   "runCommand"
 );
-@@clientName(VirtualMachineRunCommands.update::parameters.properties,
+@@clientName(
+  VirtualMachineRunCommands.update::parameters.properties,
   "runCommand"
 );
-@@clientName(VirtualMachineScaleSetVMRunCommands.createOrUpdate::parameters.resource,
+@@clientName(
+  VirtualMachineScaleSetVMRunCommands.createOrUpdate::parameters.resource,
   "runCommand"
 );
-@@clientName(VirtualMachineScaleSetVMRunCommands.update::parameters.properties,
+@@clientName(
+  VirtualMachineScaleSetVMRunCommands.update::parameters.properties,
   "runCommand"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -395,28 +452,35 @@ using Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(DiskAccess.properties);
 
-@@clientLocation(PrivateEndpointConnections.getAPrivateEndpointConnection,
+@@clientLocation(
+  PrivateEndpointConnections.getAPrivateEndpointConnection,
   DiskAccesses
 );
-@@clientLocation(PrivateEndpointConnections.updateAPrivateEndpointConnection,
+@@clientLocation(
+  PrivateEndpointConnections.updateAPrivateEndpointConnection,
   DiskAccesses
 );
-@@clientName(PrivateEndpointConnections.updateAPrivateEndpointConnection::parameters.resource,
+@@clientName(
+  PrivateEndpointConnections.updateAPrivateEndpointConnection::parameters.resource,
   "privateEndpointConnection"
 );
-@@clientLocation(PrivateEndpointConnections.deleteAPrivateEndpointConnection,
+@@clientLocation(
+  PrivateEndpointConnections.deleteAPrivateEndpointConnection,
   DiskAccesses
 );
-@@clientLocation(PrivateEndpointConnections.listPrivateEndpointConnections,
+@@clientLocation(
+  PrivateEndpointConnections.listPrivateEndpointConnections,
   DiskAccesses
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(PrivateEndpointConnection.properties);
 
-@@clientName(DiskEncryptionSets.createOrUpdate::parameters.resource,
+@@clientName(
+  DiskEncryptionSets.createOrUpdate::parameters.resource,
   "diskEncryptionSet"
 );
-@@clientName(DiskEncryptionSets.update::parameters.properties,
+@@clientName(
+  DiskEncryptionSets.update::parameters.properties,
   "diskEncryptionSet"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -438,11 +502,13 @@ using Microsoft.Compute;
 
 @@clientName(Galleries.createOrUpdate::parameters.resource, "gallery");
 @@clientName(Galleries.update::parameters.properties, "gallery");
-@@clientLocation(Galleries.gallerySharingProfileUpdate,
+@@clientLocation(
+  Galleries.gallerySharingProfileUpdate,
   "GallerySharingProfile"
 );
 @@clientName(Galleries.gallerySharingProfileUpdate, "Update");
-@@clientName(Galleries.gallerySharingProfileUpdate::parameters.body,
+@@clientName(
+  Galleries.gallerySharingProfileUpdate::parameters.body,
   "sharingUpdate"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -453,28 +519,34 @@ using Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(GalleryImage.properties);
 
-@@clientName(GalleryImageVersions.createOrUpdate::parameters.resource,
+@@clientName(
+  GalleryImageVersions.createOrUpdate::parameters.resource,
   "galleryImageVersion"
 );
-@@clientName(GalleryImageVersions.update::parameters.properties,
+@@clientName(
+  GalleryImageVersions.update::parameters.properties,
   "galleryImageVersion"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(GalleryImageVersion.properties);
 
-@@clientName(GalleryApplications.createOrUpdate::parameters.resource,
+@@clientName(
+  GalleryApplications.createOrUpdate::parameters.resource,
   "galleryApplication"
 );
-@@clientName(GalleryApplications.update::parameters.properties,
+@@clientName(
+  GalleryApplications.update::parameters.properties,
   "galleryApplication"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(GalleryApplication.properties);
 
-@@clientName(GalleryApplicationVersions.createOrUpdate::parameters.resource,
+@@clientName(
+  GalleryApplicationVersions.createOrUpdate::parameters.resource,
   "galleryApplicationVersion"
 );
-@@clientName(GalleryApplicationVersions.update::parameters.properties,
+@@clientName(
+  GalleryApplicationVersions.update::parameters.properties,
   "galleryApplicationVersion"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -539,58 +611,74 @@ using Microsoft.Compute;
 
 @@clientLocation(VirtualMachineSizesOperationGroup.list, "VirtualMachineSizes");
 
-@@clientLocation(VirtualMachineScaleSetsOperationGroup.listByLocation,
+@@clientLocation(
+  VirtualMachineScaleSetsOperationGroup.listByLocation,
   VirtualMachineScaleSets
 );
 
 @@clientLocation(VirtualMachinesOperationGroup.listByLocation, VirtualMachines);
 
-@@clientLocation(VirtualMachineImagesOperationGroup.get,
+@@clientLocation(
+  VirtualMachineImagesOperationGroup.get,
   "VirtualMachineImages"
 );
-@@clientLocation(VirtualMachineImagesOperationGroup.list,
+@@clientLocation(
+  VirtualMachineImagesOperationGroup.list,
   "VirtualMachineImages"
 );
-@@clientLocation(VirtualMachineImagesOperationGroup.listOffers,
+@@clientLocation(
+  VirtualMachineImagesOperationGroup.listOffers,
   "VirtualMachineImages"
 );
-@@clientLocation(VirtualMachineImagesOperationGroup.listPublishers,
+@@clientLocation(
+  VirtualMachineImagesOperationGroup.listPublishers,
   "VirtualMachineImages"
 );
-@@clientLocation(VirtualMachineImagesOperationGroup.listSkus,
+@@clientLocation(
+  VirtualMachineImagesOperationGroup.listSkus,
   "VirtualMachineImages"
 );
-@@clientLocation(VirtualMachineImagesOperationGroup.listByEdgeZone,
+@@clientLocation(
+  VirtualMachineImagesOperationGroup.listByEdgeZone,
   "VirtualMachineImages"
 );
 
-@@clientLocation(VirtualMachineImagesEdgeZoneOperationGroup.get,
+@@clientLocation(
+  VirtualMachineImagesEdgeZoneOperationGroup.get,
   "VirtualMachineImagesEdgeZone"
 );
-@@clientLocation(VirtualMachineImagesEdgeZoneOperationGroup.list,
+@@clientLocation(
+  VirtualMachineImagesEdgeZoneOperationGroup.list,
   "VirtualMachineImagesEdgeZone"
 );
-@@clientLocation(VirtualMachineImagesEdgeZoneOperationGroup.listOffers,
+@@clientLocation(
+  VirtualMachineImagesEdgeZoneOperationGroup.listOffers,
   "VirtualMachineImagesEdgeZone"
 );
-@@clientLocation(VirtualMachineImagesEdgeZoneOperationGroup.listPublishers,
+@@clientLocation(
+  VirtualMachineImagesEdgeZoneOperationGroup.listPublishers,
   "VirtualMachineImagesEdgeZone"
 );
-@@clientLocation(VirtualMachineImagesEdgeZoneOperationGroup.listSkus,
+@@clientLocation(
+  VirtualMachineImagesEdgeZoneOperationGroup.listSkus,
   "VirtualMachineImagesEdgeZone"
 );
 
-@@clientLocation(LogAnalyticsOperationGroup.exportRequestRateByInterval,
+@@clientLocation(
+  LogAnalyticsOperationGroup.exportRequestRateByInterval,
   "LogAnalytics"
 );
-@@clientLocation(LogAnalyticsOperationGroup.exportThrottledRequests,
+@@clientLocation(
+  LogAnalyticsOperationGroup.exportThrottledRequests,
   "LogAnalytics"
 );
 
-@@clientLocation(VirtualMachineRunCommandsOperationGroup.list,
+@@clientLocation(
+  VirtualMachineRunCommandsOperationGroup.list,
   VirtualMachineRunCommands
 );
-@@clientLocation(VirtualMachineRunCommandsOperationGroup.get,
+@@clientLocation(
+  VirtualMachineRunCommandsOperationGroup.get,
   VirtualMachineRunCommands
 );
 

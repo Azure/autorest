@@ -285,10 +285,8 @@ jspm_packages/
 # Common toolchain intermediate files
 temp
 
-# Rush files
-common/temp/**
-package-deps.json
-common/config/rush/shrinkwrap.yaml
+# pnpm
+.chronus/artifacts
 
 # Code generation output for regression tests
 core/test/regression

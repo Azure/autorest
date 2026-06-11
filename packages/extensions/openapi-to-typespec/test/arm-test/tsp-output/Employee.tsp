@@ -56,6 +56,7 @@ interface Employees {
 }
 
 @@doc(Employee.name, "Name of employee");
-@@doc(Employee.properties,
+@@doc(
+  Employee.properties,
   "The resource-specific properties for this resource."
 );

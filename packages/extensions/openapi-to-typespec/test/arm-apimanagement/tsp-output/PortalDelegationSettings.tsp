@@ -82,12 +82,15 @@ interface DelegationSettings {
 }
 
 @@doc(PortalDelegationSettings.name, "");
-@@doc(PortalDelegationSettings.properties,
+@@doc(
+  PortalDelegationSettings.properties,
   "Delegation settings contract properties."
 );
-@@doc(DelegationSettings.createOrUpdate::parameters.resource,
+@@doc(
+  DelegationSettings.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@doc(DelegationSettings.update::parameters.properties,
+@@doc(
+  DelegationSettings.update::parameters.properties,
   "Update Delegation settings."
 );

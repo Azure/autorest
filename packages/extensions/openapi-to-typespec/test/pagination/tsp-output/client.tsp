@@ -11,7 +11,8 @@ using AutoRestPagingTestService;
 @@clientLocation(PagingOperationGroup.getNoItemNamePages, "Paging");
 @@clientName(PagingOperationGroup.getNoItemNamePages, "getNoItemNamePages");
 @@clientLocation(PagingOperationGroup.getNullNextLinkNamePages, "Paging");
-@@clientName(PagingOperationGroup.getNullNextLinkNamePages,
+@@clientName(
+  PagingOperationGroup.getNullNextLinkNamePages,
   "getNullNextLinkNamePages"
 );
 @@clientLocation(PagingOperationGroup.getSinglePages, "Paging");
@@ -27,47 +28,59 @@ using AutoRestPagingTestService;
 @@clientLocation(PagingOperationGroup.pageWithMaxPageSize, "Paging");
 @@clientName(PagingOperationGroup.pageWithMaxPageSize, "pageWithMaxPageSize");
 @@clientLocation(PagingOperationGroup.nextOperationWithQueryParams, "Paging");
-@@clientName(PagingOperationGroup.nextOperationWithQueryParams,
+@@clientName(
+  PagingOperationGroup.nextOperationWithQueryParams,
   "nextOperationWithQueryParams"
 );
 @@clientLocation(PagingOperationGroup.getOdataMultiplePages, "Paging");
-@@clientName(PagingOperationGroup.getOdataMultiplePages,
+@@clientName(
+  PagingOperationGroup.getOdataMultiplePages,
   "getOdataMultiplePages"
 );
 @@clientLocation(PagingOperationGroup.getMultiplePagesWithOffset, "Paging");
-@@clientName(PagingOperationGroup.getMultiplePagesWithOffset,
+@@clientName(
+  PagingOperationGroup.getMultiplePagesWithOffset,
   "getMultiplePagesWithOffset"
 );
 @@clientLocation(PagingOperationGroup.getMultiplePagesRetryFirst, "Paging");
-@@clientName(PagingOperationGroup.getMultiplePagesRetryFirst,
+@@clientName(
+  PagingOperationGroup.getMultiplePagesRetryFirst,
   "getMultiplePagesRetryFirst"
 );
 @@clientLocation(PagingOperationGroup.getMultiplePagesRetrySecond, "Paging");
-@@clientName(PagingOperationGroup.getMultiplePagesRetrySecond,
+@@clientName(
+  PagingOperationGroup.getMultiplePagesRetrySecond,
   "getMultiplePagesRetrySecond"
 );
 @@clientLocation(PagingOperationGroup.getSinglePagesFailure, "Paging");
-@@clientName(PagingOperationGroup.getSinglePagesFailure,
+@@clientName(
+  PagingOperationGroup.getSinglePagesFailure,
   "getSinglePagesFailure"
 );
 @@clientLocation(PagingOperationGroup.getMultiplePagesFailure, "Paging");
-@@clientName(PagingOperationGroup.getMultiplePagesFailure,
+@@clientName(
+  PagingOperationGroup.getMultiplePagesFailure,
   "getMultiplePagesFailure"
 );
 @@clientLocation(PagingOperationGroup.getMultiplePagesFailureUri, "Paging");
-@@clientName(PagingOperationGroup.getMultiplePagesFailureUri,
+@@clientName(
+  PagingOperationGroup.getMultiplePagesFailureUri,
   "getMultiplePagesFailureUri"
 );
-@@clientLocation(PagingOperationGroup.getMultiplePagesFragmentNextLink,
+@@clientLocation(
+  PagingOperationGroup.getMultiplePagesFragmentNextLink,
   "Paging"
 );
-@@clientName(PagingOperationGroup.getMultiplePagesFragmentNextLink,
+@@clientName(
+  PagingOperationGroup.getMultiplePagesFragmentNextLink,
   "getMultiplePagesFragmentNextLink"
 );
-@@clientLocation(PagingOperationGroup.getMultiplePagesFragmentWithGroupingNextLink,
+@@clientLocation(
+  PagingOperationGroup.getMultiplePagesFragmentWithGroupingNextLink,
   "Paging"
 );
-@@clientName(PagingOperationGroup.getMultiplePagesFragmentWithGroupingNextLink,
+@@clientName(
+  PagingOperationGroup.getMultiplePagesFragmentWithGroupingNextLink,
   "getMultiplePagesFragmentWithGroupingNextLink"
 );
 @@clientLocation(PagingOperationGroup.getMultiplePagesLRO, "Paging");
@@ -78,12 +91,15 @@ using AutoRestPagingTestService;
 @@clientLocation(PagingOperationGroup.nextFragment, "Paging");
 @@clientName(PagingOperationGroup.nextFragment, "nextFragment");
 @@clientLocation(PagingOperationGroup.nextFragmentWithGrouping, "Paging");
-@@clientName(PagingOperationGroup.nextFragmentWithGrouping,
+@@clientName(
+  PagingOperationGroup.nextFragmentWithGrouping,
   "nextFragmentWithGrouping"
 );
-@@clientLocation(PagingOperationGroup.getPagingModelWithItemNameWithXMSClientName,
+@@clientLocation(
+  PagingOperationGroup.getPagingModelWithItemNameWithXMSClientName,
   "Paging"
 );
-@@clientName(PagingOperationGroup.getPagingModelWithItemNameWithXMSClientName,
+@@clientName(
+  PagingOperationGroup.getPagingModelWithItemNameWithXMSClientName,
   "getPagingModelWithItemNameWithXMSClientName"
 );

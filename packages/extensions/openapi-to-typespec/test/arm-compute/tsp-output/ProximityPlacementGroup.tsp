@@ -74,15 +74,19 @@ interface ProximityPlacementGroups {
   listBySubscription is ArmListBySubscription<ProximityPlacementGroup>;
 }
 
-@@doc(ProximityPlacementGroup.name,
+@@doc(
+  ProximityPlacementGroup.name,
   "The name of the proximity placement group."
 );
-@@doc(ProximityPlacementGroup.properties,
+@@doc(
+  ProximityPlacementGroup.properties,
   "Describes the properties of a Proximity Placement Group."
 );
-@@doc(ProximityPlacementGroups.createOrUpdate::parameters.resource,
+@@doc(
+  ProximityPlacementGroups.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Proximity Placement Group operation."
 );
-@@doc(ProximityPlacementGroups.update::parameters.properties,
+@@doc(
+  ProximityPlacementGroups.update::parameters.properties,
   "Parameters supplied to the Update Proximity Placement Group operation."
 );

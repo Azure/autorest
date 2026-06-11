@@ -49,10 +49,12 @@ interface DataManagerForAgricultures {
   update is ArmCustomPatchAsync<
     DataManagerForAgriculture,
     PatchModel = DataManagerForAgricultureUpdateRequestModel,
-    Response = ArmResponse<DataManagerForAgriculture> | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: DataManagerForAgriculture;
-    })
+    Response =
+      | ArmResponse<DataManagerForAgriculture>
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: DataManagerForAgriculture;
+        })
   >;
 
   /**
@@ -111,15 +113,19 @@ interface DataManagerForAgricultures {
 
 @@maxLength(DataManagerForAgriculture.name, 63);
 @@minLength(DataManagerForAgriculture.name, 1);
-@@doc(DataManagerForAgriculture.name,
+@@doc(
+  DataManagerForAgriculture.name,
   "DataManagerForAgriculture resource name."
 );
-@@doc(DataManagerForAgriculture.properties,
+@@doc(
+  DataManagerForAgriculture.properties,
   "Data Manager For Agriculture ARM Resource properties."
 );
-@@doc(DataManagerForAgricultures.createOrUpdate::parameters.resource,
+@@doc(
+  DataManagerForAgricultures.createOrUpdate::parameters.resource,
   "Data Manager For Agriculture resource create or update request object."
 );
-@@doc(DataManagerForAgricultures.update::parameters.properties,
+@@doc(
+  DataManagerForAgricultures.update::parameters.properties,
   "Request object."
 );

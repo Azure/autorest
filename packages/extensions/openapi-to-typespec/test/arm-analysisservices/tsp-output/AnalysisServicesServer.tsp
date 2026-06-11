@@ -43,14 +43,17 @@ interface Servers {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   create is ArmResourceCreateOrReplaceAsync<
     AnalysisServicesServer,
-    Response = ArmResourceUpdatedResponse<AnalysisServicesServer> | ArmResourceCreatedResponse<
-      AnalysisServicesServer,
-      ArmLroLocationHeader<FinalResult = AnalysisServicesServer> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: AnalysisServicesServer;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<AnalysisServicesServer>
+      | ArmResourceCreatedResponse<
+          AnalysisServicesServer,
+          ArmLroLocationHeader<FinalResult = AnalysisServicesServer> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: AnalysisServicesServer;
+        })
   >;
 
   /**
@@ -61,10 +64,12 @@ interface Servers {
   update is ArmCustomPatchAsync<
     AnalysisServicesServer,
     PatchModel = AnalysisServicesServerUpdateParameters,
-    Response = ArmResponse<AnalysisServicesServer> | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: AnalysisServicesServer;
-    })
+    Response =
+      | ArmResponse<AnalysisServicesServer>
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: AnalysisServicesServer;
+        })
   >;
 
   /**
@@ -73,7 +78,10 @@ interface Servers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     AnalysisServicesServer,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -135,15 +143,19 @@ interface Servers {
 
 @@maxLength(AnalysisServicesServer.name, 63);
 @@minLength(AnalysisServicesServer.name, 3);
-@@doc(AnalysisServicesServer.name,
+@@doc(
+  AnalysisServicesServer.name,
   "The name of the Analysis Services server. It must be a minimum of 3 characters, and a maximum of 63."
 );
-@@doc(AnalysisServicesServer.properties,
+@@doc(
+  AnalysisServicesServer.properties,
   "Properties of the provision operation request."
 );
-@@doc(Servers.create::parameters.resource,
+@@doc(
+  Servers.create::parameters.resource,
   "Contains the information used to provision the Analysis Services server."
 );
-@@doc(Servers.update::parameters.properties,
+@@doc(
+  Servers.update::parameters.properties,
   "Request object that contains the updated information for the server."
 );

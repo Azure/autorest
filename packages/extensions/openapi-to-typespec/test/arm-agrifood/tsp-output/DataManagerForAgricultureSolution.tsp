@@ -68,9 +68,11 @@ interface DataManagerForAgricultureSolutions {
   >;
 }
 
-@@doc(DataManagerForAgricultureSolution.name,
+@@doc(
+  DataManagerForAgricultureSolution.name,
   "dataManagerForAgricultureSolutionId to be queried."
 );
-@@doc(DataManagerForAgricultureSolution.properties,
+@@doc(
+  DataManagerForAgricultureSolution.properties,
   "DataManagerForAgricultureSolution properties."
 );

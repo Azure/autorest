@@ -4,44 +4,57 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Azure.LoadTesting;
 
-@@clientLocation(LoadTestAdministrationOperationGroup.createOrUpdateTest,
+@@clientLocation(
+  LoadTestAdministrationOperationGroup.createOrUpdateTest,
   "LoadTestAdministration"
 );
-@@clientLocation(LoadTestAdministrationOperationGroup.deleteTest,
+@@clientLocation(
+  LoadTestAdministrationOperationGroup.deleteTest,
   "LoadTestAdministration"
 );
-@@clientLocation(LoadTestAdministrationOperationGroup.getTest,
+@@clientLocation(
+  LoadTestAdministrationOperationGroup.getTest,
   "LoadTestAdministration"
 );
-@@clientLocation(LoadTestAdministrationOperationGroup.listTests,
+@@clientLocation(
+  LoadTestAdministrationOperationGroup.listTests,
   "LoadTestAdministration"
 );
-@@clientLocation(LoadTestAdministrationOperationGroup.uploadTestFile,
+@@clientLocation(
+  LoadTestAdministrationOperationGroup.uploadTestFile,
   "LoadTestAdministration"
 );
-@@clientLocation(LoadTestAdministrationOperationGroup.getTestFile,
+@@clientLocation(
+  LoadTestAdministrationOperationGroup.getTestFile,
   "LoadTestAdministration"
 );
-@@clientLocation(LoadTestAdministrationOperationGroup.deleteTestFile,
+@@clientLocation(
+  LoadTestAdministrationOperationGroup.deleteTestFile,
   "LoadTestAdministration"
 );
-@@clientLocation(LoadTestAdministrationOperationGroup.listTestFiles,
+@@clientLocation(
+  LoadTestAdministrationOperationGroup.listTestFiles,
   "LoadTestAdministration"
 );
-@@clientLocation(LoadTestAdministrationOperationGroup.createOrUpdateAppComponents,
+@@clientLocation(
+  LoadTestAdministrationOperationGroup.createOrUpdateAppComponents,
   "LoadTestAdministration"
 );
-@@clientLocation(LoadTestAdministrationOperationGroup.getAppComponents,
+@@clientLocation(
+  LoadTestAdministrationOperationGroup.getAppComponents,
   "LoadTestAdministration"
 );
-@@clientLocation(LoadTestAdministrationOperationGroup.createOrUpdateServerMetricsConfig,
+@@clientLocation(
+  LoadTestAdministrationOperationGroup.createOrUpdateServerMetricsConfig,
   "LoadTestAdministration"
 );
-@@clientLocation(LoadTestAdministrationOperationGroup.getServerMetricsConfig,
+@@clientLocation(
+  LoadTestAdministrationOperationGroup.getServerMetricsConfig,
   "LoadTestAdministration"
 );
 
-@@clientLocation(LoadTestRunOperationGroup.createOrUpdateTestRun,
+@@clientLocation(
+  LoadTestRunOperationGroup.createOrUpdateTestRun,
   "LoadTestRun"
 );
 @@clientLocation(LoadTestRunOperationGroup.getTestRun, "LoadTestRun");
@@ -50,20 +63,25 @@ using Azure.LoadTesting;
 @@clientLocation(LoadTestRunOperationGroup.listTestRuns, "LoadTestRun");
 @@clientLocation(LoadTestRunOperationGroup.stopTestRun, "LoadTestRun");
 @@clientLocation(LoadTestRunOperationGroup.listMetricNamespaces, "LoadTestRun");
-@@clientLocation(LoadTestRunOperationGroup.listMetricDefinitions,
+@@clientLocation(
+  LoadTestRunOperationGroup.listMetricDefinitions,
   "LoadTestRun"
 );
 @@clientLocation(LoadTestRunOperationGroup.listMetrics, "LoadTestRun");
-@@clientLocation(LoadTestRunOperationGroup.listMetricDimensionValues,
+@@clientLocation(
+  LoadTestRunOperationGroup.listMetricDimensionValues,
   "LoadTestRun"
 );
-@@clientLocation(LoadTestRunOperationGroup.createOrUpdateAppComponents,
+@@clientLocation(
+  LoadTestRunOperationGroup.createOrUpdateAppComponents,
   "LoadTestRun"
 );
 @@clientLocation(LoadTestRunOperationGroup.getAppComponents, "LoadTestRun");
-@@clientLocation(LoadTestRunOperationGroup.createOrUpdateServerMetricsConfig,
+@@clientLocation(
+  LoadTestRunOperationGroup.createOrUpdateServerMetricsConfig,
   "LoadTestRun"
 );
-@@clientLocation(LoadTestRunOperationGroup.getServerMetricsConfig,
+@@clientLocation(
+  LoadTestRunOperationGroup.getServerMetricsConfig,
   "LoadTestRun"
 );

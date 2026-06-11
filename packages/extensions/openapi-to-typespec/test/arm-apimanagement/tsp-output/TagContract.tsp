@@ -393,13 +393,16 @@ interface TagContractOperationGroup {
 
 @@maxLength(TagContract.name, 80);
 @@minLength(TagContract.name, 1);
-@@doc(TagContract.name,
+@@doc(
+  TagContract.name,
   "Tag identifier. Must be unique in the current API Management service instance."
 );
 @@doc(TagContract.properties, "Tag entity contract properties.");
-@@doc(TagContractOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  TagContractOperationGroup.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@doc(TagContractOperationGroup.update::parameters.properties,
+@@doc(
+  TagContractOperationGroup.update::parameters.properties,
   "Update parameters."
 );

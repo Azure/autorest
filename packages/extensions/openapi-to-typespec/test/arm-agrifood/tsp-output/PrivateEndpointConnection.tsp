@@ -45,8 +45,11 @@ interface PrivateEndpointConnections {
   delete is PrivateEndpointOperations.DeleteAsync<
     DataManagerForAgriculture,
     PrivateEndpointConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -60,6 +63,7 @@ interface PrivateEndpointConnections {
 }
 
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
-@@doc(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@doc(
+  PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "Request object."
 );

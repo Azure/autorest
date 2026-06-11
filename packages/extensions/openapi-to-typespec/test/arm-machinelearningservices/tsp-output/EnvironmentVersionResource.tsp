@@ -73,7 +73,10 @@ interface EnvironmentVersionResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is EnvironmentVersionResourceOps.DeleteWithoutOkAsync<
     EnvironmentVersionResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -201,15 +204,19 @@ interface EnvironmentVersions {
   >;
 }
 
-@@doc(EnvironmentVersionResource.name,
+@@doc(
+  EnvironmentVersionResource.name,
   "Version identifier. This is case-sensitive."
 );
-@@doc(EnvironmentVersionResource.properties,
+@@doc(
+  EnvironmentVersionResource.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(EnvironmentVersionResources.createOrUpdate::parameters.resource,
+@@doc(
+  EnvironmentVersionResources.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
-@@doc(EnvironmentVersions.createOrUpdate::parameters.resource,
+@@doc(
+  EnvironmentVersions.createOrUpdate::parameters.resource,
   "Definition of EnvironmentVersion."
 );

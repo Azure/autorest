@@ -24,11 +24,11 @@ extends:
             steps:
               - template: /eng/pipelines/templates/build.yaml
 
-              - script: npx @microsoft/rush publish --publish --pack --include-all
+              - script: pnpm chronus pack
                 displayName: Pack packages
 
               - script: |
-                  NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" npx @microsoft/rush publish --publish --include-all --set-access-level public
+                  NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" pnpm chronus publish --access public
                 displayName: Publish packages
 
           - job: prerelease
@@ -37,11 +37,14 @@ extends:
             steps:
               - template: /eng/pipelines/templates/build.yaml
 
-              - script: node ./eng/bump-for-prerelease.js
+              - script: pnpm chronus version --prerelease
                 displayName: Bump version to prerelease targets
 
+              - script: pnpm chronus pack
+                displayName: Pack prerelease packages
+
               - script: |
-                  NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" npx @microsoft/rush publish --publish --include-all --set-access-level public --tag next
+                  NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" pnpm chronus publish --access public --tag next
                 displayName: Publish packages
       # - stage: Docker
       #   dependsOn: npm

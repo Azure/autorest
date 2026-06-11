@@ -45,7 +45,10 @@ interface Catalogs {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     Catalog,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -209,9 +212,11 @@ interface Catalogs {
 }
 
 @@doc(Catalog.name, "Name of catalog");
-@@doc(Catalog.properties,
+@@doc(
+  Catalog.properties,
   "The resource-specific properties for this resource."
 );
-@@doc(Catalogs.listDeviceGroups::parameters.body,
+@@doc(
+  Catalogs.listDeviceGroups::parameters.body,
   "List device groups for catalog."
 );

@@ -87,6 +87,7 @@ interface BusinessProcessVersions {
 }
 
 @@doc(BusinessProcessVersion.name, "The version of the business process");
-@@doc(BusinessProcessVersion.properties,
+@@doc(
+  BusinessProcessVersion.properties,
   "The resource-specific properties for this resource."
 );

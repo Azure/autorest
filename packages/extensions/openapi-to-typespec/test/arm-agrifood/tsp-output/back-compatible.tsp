@@ -3,7 +3,8 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.AgFoodPlatform;
 
-@@clientName(DataManagerForAgricultureExtensionListResponse.$skipToken,
+@@clientName(
+  DataManagerForAgricultureExtensionListResponse.$skipToken,
   "skipToken"
 );
 
@@ -13,40 +14,50 @@ using Microsoft.AgFoodPlatform;
 
 @@clientName(SolutionListResponse.$skipToken, "skipToken");
 
-@@clientName(DataManagerForAgricultureSolutionListResponse.$skipToken,
+@@clientName(
+  DataManagerForAgricultureSolutionListResponse.$skipToken,
   "skipToken"
 );
 
 @@clientName(DataConnectors.createOrUpdate::parameters.resource, "body");
 
-@@clientLocation(DataManagerForAgricultures.get,
+@@clientLocation(
+  DataManagerForAgricultures.get,
   "DataManagerForAgricultureResources"
 );
-@@clientLocation(DataManagerForAgricultures.createOrUpdate,
+@@clientLocation(
+  DataManagerForAgricultures.createOrUpdate,
   "DataManagerForAgricultureResources"
 );
-@@clientName(DataManagerForAgricultures.createOrUpdate::parameters.resource,
+@@clientName(
+  DataManagerForAgricultures.createOrUpdate::parameters.resource,
   "request"
 );
-@@clientLocation(DataManagerForAgricultures.update,
+@@clientLocation(
+  DataManagerForAgricultures.update,
   "DataManagerForAgricultureResources"
 );
-@@clientName(DataManagerForAgricultures.update::parameters.properties,
+@@clientName(
+  DataManagerForAgricultures.update::parameters.properties,
   "request"
 );
-@@clientLocation(DataManagerForAgricultures.delete,
+@@clientLocation(
+  DataManagerForAgricultures.delete,
   "DataManagerForAgricultureResources"
 );
-@@clientLocation(DataManagerForAgricultures.listByResourceGroup,
+@@clientLocation(
+  DataManagerForAgricultures.listByResourceGroup,
   "DataManagerForAgricultureResources"
 );
-@@clientLocation(DataManagerForAgricultures.listBySubscription,
+@@clientLocation(
+  DataManagerForAgricultures.listBySubscription,
   "DataManagerForAgricultureResources"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(DataManagerForAgriculture.properties);
 
-@@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@clientName(
+  PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "request"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -61,14 +72,17 @@ using Microsoft.AgFoodPlatform;
 
 @@clientName(Solutions.createOrUpdate::parameters.resource, "requestBody");
 
-@@clientLocation(DataManagerForAgricultureSolutions.get,
+@@clientLocation(
+  DataManagerForAgricultureSolutions.get,
   "SolutionsDiscoverability"
 );
-@@clientLocation(DataManagerForAgricultureSolutions.list,
+@@clientLocation(
+  DataManagerForAgricultureSolutions.list,
   "SolutionsDiscoverability"
 );
 
-@@clientLocation(CheckNameAvailabilityOperationGroup.checkNameAvailability,
+@@clientLocation(
+  CheckNameAvailabilityOperationGroup.checkNameAvailability,
   "CheckNameAvailability"
 );
 

@@ -1,0 +1,36 @@
+{
+  "name": "@autorest/monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "description": "AutoRest monorepo",
+  "homepage": "https://github.com/Azure/autorest",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Azure/autorest"
+  },
+  "license": "MIT",
+  "packageManager": "pnpm@10.34.1",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "build": "pnpm -r run build",
+    "rebuild": "pnpm run clean && pnpm run build",
+    "clean": "pnpm -r run clean",
+    "test:ci": "pnpm -r run test:ci",
+    "lint": "pnpm -r run lint",
+    "lint:fix": "pnpm -r run lint:fix",
+    "format": "prettier --write --config .prettierrc.yml --ignore-path .prettierignore \"**/*.{ts,js,cjs,mjs,json,yml,yaml,cadl,tsp,md}\"",
+    "format:check": "prettier --check --config .prettierrc.yml --ignore-path .prettierignore \"**/*.{ts,js,cjs,mjs,json,yml,yaml,cadl,tsp,md}\"",
+    "watch": "tsc --build tsconfig.ws.json --watch",
+    "regen-codemodel": "node ./packages/libs/codemodel/.scripts/generate-schema.js",
+    "change": "chronus",
+    "change:check": "chronus verify"
+  },
+  "devDependencies": {
+    "@chronus/chronus": "^1.3.1",
+    "@chronus/github": "^1.0.6",
+    "prettier": "~3.5.3",
+    "typescript": "~5.8.3"
+  }
+}

@@ -72,17 +72,19 @@ interface VirtualMachineRunCommands {
    */
   createOrUpdate is VirtualMachineRunCommandOps.CreateOrUpdateAsync<
     VirtualMachineRunCommand,
-    Response = ArmResourceUpdatedResponse<VirtualMachineRunCommand & {
-      @header
-      contentType: "application/json" | "text/json";
-    }> | ArmResourceCreatedResponse<
-      VirtualMachineRunCommand & {
-        @header
-        contentType: "application/json" | "text/json";
-      },
-      ArmLroLocationHeader<FinalResult = VirtualMachineRunCommand> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResourceUpdatedResponse<VirtualMachineRunCommand & {
+          @header
+          contentType: "application/json" | "text/json";
+        }>
+      | ArmResourceCreatedResponse<
+          VirtualMachineRunCommand & {
+            @header
+            contentType: "application/json" | "text/json";
+          },
+          ArmLroLocationHeader<FinalResult = VirtualMachineRunCommand> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -104,7 +106,10 @@ interface VirtualMachineRunCommands {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is VirtualMachineRunCommandOps.DeleteWithoutOkAsync<
     VirtualMachineRunCommand,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -174,17 +179,19 @@ interface VirtualMachineScaleSetVMRunCommands {
    */
   createOrUpdate is VirtualMachineScaleSetVMRunCommandOps.CreateOrUpdateAsync<
     VirtualMachineRunCommand,
-    Response = ArmResourceUpdatedResponse<VirtualMachineRunCommand & {
-      @header
-      contentType: "application/json" | "text/json";
-    }> | ArmResourceCreatedResponse<
-      VirtualMachineRunCommand & {
-        @header
-        contentType: "application/json" | "text/json";
-      },
-      ArmLroLocationHeader<FinalResult = VirtualMachineRunCommand> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResourceUpdatedResponse<VirtualMachineRunCommand & {
+          @header
+          contentType: "application/json" | "text/json";
+        }>
+      | ArmResourceCreatedResponse<
+          VirtualMachineRunCommand & {
+            @header
+            contentType: "application/json" | "text/json";
+          },
+          ArmLroLocationHeader<FinalResult = VirtualMachineRunCommand> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -206,7 +213,10 @@ interface VirtualMachineScaleSetVMRunCommands {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is VirtualMachineScaleSetVMRunCommandOps.DeleteWithoutOkAsync<
     VirtualMachineRunCommand,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -224,21 +234,27 @@ interface VirtualMachineScaleSetVMRunCommands {
   >;
 }
 
-@@doc(VirtualMachineRunCommand.name,
+@@doc(
+  VirtualMachineRunCommand.name,
   "The name of the virtual machine run command."
 );
-@@doc(VirtualMachineRunCommand.properties,
+@@doc(
+  VirtualMachineRunCommand.properties,
   "Describes the properties of a Virtual Machine run command."
 );
-@@doc(VirtualMachineRunCommands.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualMachineRunCommands.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Virtual Machine RunCommand operation."
 );
-@@doc(VirtualMachineRunCommands.update::parameters.properties,
+@@doc(
+  VirtualMachineRunCommands.update::parameters.properties,
   "Parameters supplied to the Update Virtual Machine RunCommand operation."
 );
-@@doc(VirtualMachineScaleSetVMRunCommands.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualMachineScaleSetVMRunCommands.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Virtual Machine RunCommand operation."
 );
-@@doc(VirtualMachineScaleSetVMRunCommands.update::parameters.properties,
+@@doc(
+  VirtualMachineScaleSetVMRunCommands.update::parameters.properties,
   "Parameters supplied to the Update Virtual Machine RunCommand operation."
 );

@@ -74,7 +74,8 @@ interface SignUpSettings {
 
 @@doc(PortalSignupSettings.name, "");
 @@doc(PortalSignupSettings.properties, "Sign-up settings contract properties.");
-@@doc(SignUpSettings.createOrUpdate::parameters.resource,
+@@doc(
+  SignUpSettings.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
 @@doc(SignUpSettings.update::parameters.properties, "Update Sign-Up settings.");

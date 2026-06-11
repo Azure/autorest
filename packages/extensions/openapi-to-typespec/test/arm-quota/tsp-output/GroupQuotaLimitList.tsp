@@ -48,6 +48,7 @@ interface GroupQuotaLimitLists {
 @@minLength(GroupQuotaLimitList.name, 1);
 @@doc(GroupQuotaLimitList.name, "The name of the Azure region.");
 @@doc(GroupQuotaLimitList.properties, "");
-@@doc(GroupQuotaLimitLists.update::parameters.properties,
+@@doc(
+  GroupQuotaLimitLists.update::parameters.properties,
   "The GroupQuotaRequest body details for specific resourceProvider/location/resources."
 );

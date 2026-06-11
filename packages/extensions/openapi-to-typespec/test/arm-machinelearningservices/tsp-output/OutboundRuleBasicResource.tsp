@@ -38,7 +38,9 @@ interface OutboundRuleBasicResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     OutboundRuleBasicResource,
-    Response = ArmResourceUpdatedResponse<OutboundRuleBasicResource> | ArmAcceptedLroResponse,
+    Response =
+      | ArmResourceUpdatedResponse<OutboundRuleBasicResource>
+      | ArmAcceptedLroResponse,
     LroHeaders = ArmLroLocationHeader<FinalResult = OutboundRuleBasicResource> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -49,7 +51,10 @@ interface OutboundRuleBasicResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     OutboundRuleBasicResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -58,12 +63,15 @@ interface OutboundRuleBasicResources {
   list is ArmResourceListByParent<OutboundRuleBasicResource>;
 }
 
-@@doc(OutboundRuleBasicResource.name,
+@@doc(
+  OutboundRuleBasicResource.name,
   "Name of the workspace managed network outbound rule"
 );
-@@doc(OutboundRuleBasicResource.properties,
+@@doc(
+  OutboundRuleBasicResource.properties,
   "Outbound Rule for the managed network of a machine learning workspace."
 );
-@@doc(OutboundRuleBasicResources.createOrUpdate::parameters.resource,
+@@doc(
+  OutboundRuleBasicResources.createOrUpdate::parameters.resource,
   "Outbound Rule to be created or updated in the managed network of a machine learning workspace."
 );

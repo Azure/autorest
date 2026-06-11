@@ -99,10 +99,12 @@ interface LabelingJobs {
 }
 
 @@doc(LabelingJob.name, "The name and identifier for the LabelingJob.");
-@@doc(LabelingJob.properties,
+@@doc(
+  LabelingJob.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(LabelingJobs.createOrUpdate::parameters.resource,
+@@doc(
+  LabelingJobs.createOrUpdate::parameters.resource,
   "LabelingJob definition object."
 );
 @@doc(LabelingJobs.exportLabels::parameters.body, "The export summary.");

@@ -51,11 +51,14 @@ interface NamedValueContracts {
       @header
       `If-Match`?: string;
     },
-    Response = ArmResourceUpdatedResponse<NamedValueContract> | ArmResourceCreatedResponse<
-      NamedValueContract,
-      ArmLroLocationHeader<FinalResult = NamedValueContract> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<NamedValueContract>
+      | ArmResourceCreatedResponse<
+          NamedValueContract,
+          ArmLroLocationHeader<FinalResult = NamedValueContract> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -143,7 +146,8 @@ interface NamedValueContracts {
 @@maxLength(NamedValueContract.name, 256);
 @@doc(NamedValueContract.name, "Identifier of the NamedValue.");
 @@doc(NamedValueContract.properties, "NamedValue entity contract properties.");
-@@doc(NamedValueContracts.createOrUpdate::parameters.resource,
+@@doc(
+  NamedValueContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
 @@doc(NamedValueContracts.update::parameters.properties, "Update parameters.");

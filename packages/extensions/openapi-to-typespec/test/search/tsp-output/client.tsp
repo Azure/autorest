@@ -9,18 +9,22 @@ using Azure.Search;
 @@clientName(SearchDocumentsResult.`@search.facets`, "facets");
 @@clientName(SearchDocumentsResult.`@search.answers`, "answers");
 @@clientName(SearchDocumentsResult.`@search.debug`, "debug");
-@@clientName(SearchDocumentsResult.`@search.nextPageParameters`,
+@@clientName(
+  SearchDocumentsResult.`@search.nextPageParameters`,
   "nextPageParameters"
 );
 @@clientName(SearchDocumentsResult.value, "results");
 @@clientName(SearchDocumentsResult.`@odata.nextLink`, "nextLink");
-@@clientName(SearchDocumentsResult.`@search.semanticPartialResponseReason`,
+@@clientName(
+  SearchDocumentsResult.`@search.semanticPartialResponseReason`,
   "semanticPartialResponseReason"
 );
-@@clientName(SearchDocumentsResult.`@search.semanticPartialResponseType`,
+@@clientName(
+  SearchDocumentsResult.`@search.semanticPartialResponseType`,
   "semanticPartialResponseType"
 );
-@@clientName(SearchDocumentsResult.`@search.semanticQueryRewritesResultType`,
+@@clientName(
+  SearchDocumentsResult.`@search.semanticQueryRewritesResultType`,
   "semanticQueryRewritesResultType"
 );
 

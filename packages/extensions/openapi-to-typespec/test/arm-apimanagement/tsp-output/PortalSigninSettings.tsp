@@ -74,7 +74,8 @@ interface SignInSettings {
 
 @@doc(PortalSigninSettings.name, "");
 @@doc(PortalSigninSettings.properties, "Sign-in settings contract properties.");
-@@doc(SignInSettings.createOrUpdate::parameters.resource,
+@@doc(
+  SignInSettings.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
 @@doc(SignInSettings.update::parameters.properties, "Update Sign-In settings.");

@@ -1,8 +1,8 @@
 // @ts-check
 
-const { run } = require("./helpers.js");
+const { spawnSync } = require("child_process");
 
-const proc = run("git", ["status", "--porcelain"], {
+const proc = spawnSync("git", ["status", "--porcelain"], {
   encoding: "utf-8",
   stdio: [null, "pipe", "pipe"],
 });

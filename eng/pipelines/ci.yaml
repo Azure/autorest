@@ -22,7 +22,7 @@ extends:
             steps:
               - template: /eng/pipelines/templates/build.yaml
 
-              - script: npx @microsoft/rush test:ci -v
+              - script: pnpm run test:ci
                 displayName: Test
 
               - task: PublishCodeCoverageResults@1
@@ -31,29 +31,24 @@ extends:
                   summaryFileLocation: $(Build.SourcesDirectory)/packages/**/coverage/cobertura-coverage.xml
                   reportDirectory: $(Build.SourcesDirectory)/packages/**/coverage
 
-              - script: npx @microsoft/rush check-format
+              - script: pnpm run format:check
                 displayName: Check formatting
 
-              - script: npx @microsoft/rush lint -v
+              - script: pnpm run lint
                 displayName: Lint
 
-              - script: npx @microsoft/rush regen-codemodel
+              - script: pnpm run regen-codemodel
                 displayName: Regen codemodel schema
 
               - script: node ./eng/scripts/check-for-changed-files.js
                 displayName: Check Git Status For Changed Files
 
-              - script: |
-                  commitId=$(git rev-parse --short HEAD)
-                  npx @microsoft/rush publish --apply --prerelease-name="ci.$commitId"
-                displayName: Bump versions
-
-              - script: npx @microsoft/rush publish --publish --pack --include-all
+              - script: pnpm chronus pack --pack-destination "$(Build.ArtifactStagingDirectory)/packages"
                 displayName: Pack packages
 
               - task: 1ES.PublishPipelineArtifact@1
                 inputs:
-                  targetPath: $(Build.SourcesDirectory)/common/temp/artifacts/packages
+                  targetPath: $(Build.ArtifactStagingDirectory)/packages
                   artifact: packages
                 displayName: Publish packages(.tgz) as pipeline artifacts
 

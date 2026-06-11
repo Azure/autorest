@@ -48,7 +48,10 @@ interface DeviceGroups {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     DeviceGroup,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -104,9 +107,11 @@ interface DeviceGroups {
 }
 
 @@doc(DeviceGroup.name, "Name of device group.");
-@@doc(DeviceGroup.properties,
+@@doc(
+  DeviceGroup.properties,
   "The resource-specific properties for this resource."
 );
-@@doc(DeviceGroups.claimDevices::parameters.body,
+@@doc(
+  DeviceGroups.claimDevices::parameters.body,
   "Bulk claim devices request body."
 );

@@ -50,11 +50,14 @@ interface SchemaContracts {
       @header
       `If-Match`?: string;
     },
-    Response = ArmResourceUpdatedResponse<SchemaContract> | ArmResourceCreatedResponse<
-      SchemaContract,
-      ArmLroLocationHeader<FinalResult = SchemaContract> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<SchemaContract>
+      | ArmResourceCreatedResponse<
+          SchemaContract,
+          ArmLroLocationHeader<FinalResult = SchemaContract> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -107,10 +110,12 @@ interface SchemaContracts {
 
 @@maxLength(SchemaContract.name, 80);
 @@minLength(SchemaContract.name, 1);
-@@doc(SchemaContract.name,
+@@doc(
+  SchemaContract.name,
   "Schema id identifier. Must be unique in the current API Management service instance."
 );
 @@doc(SchemaContract.properties, "Properties of the API Schema.");
-@@doc(SchemaContracts.createOrUpdate::parameters.resource,
+@@doc(
+  SchemaContracts.createOrUpdate::parameters.resource,
   "The schema contents to apply."
 );

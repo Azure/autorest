@@ -49,16 +49,20 @@ interface DeletedServiceContracts {
   purge is ArmResourceDeleteWithoutOkAsync<
     DeletedServiceContract,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      @bodyRoot
-      _: DeletedServiceContract;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          @bodyRoot
+          _: DeletedServiceContract;
+        })
+      | ArmDeletedNoContentResponse
   >;
 }
 
 @@maxLength(DeletedServiceContract.name, 50);
 @@minLength(DeletedServiceContract.name, 1);
 @@doc(DeletedServiceContract.name, "The name of the API Management service.");
-@@doc(DeletedServiceContract.properties,
+@@doc(
+  DeletedServiceContract.properties,
   "Deleted API Management Service details."
 );

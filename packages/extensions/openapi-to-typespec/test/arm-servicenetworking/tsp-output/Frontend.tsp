@@ -48,7 +48,10 @@ interface Frontends {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Frontend,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -58,6 +61,7 @@ interface Frontends {
 }
 
 @@doc(Frontend.name, "Frontends");
-@@doc(Frontend.properties,
+@@doc(
+  Frontend.properties,
   "The resource-specific properties for this resource."
 );

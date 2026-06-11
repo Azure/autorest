@@ -39,10 +39,12 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   updateAPrivateEndpointConnection is ArmResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: PrivateEndpointConnection;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<PrivateEndpointConnection>
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: PrivateEndpointConnection;
+        }),
     LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -53,7 +55,10 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   deleteAPrivateEndpointConnection is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -62,10 +67,12 @@ interface PrivateEndpointConnections {
   listPrivateEndpointConnections is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 
-@@doc(PrivateEndpointConnection.name,
+@@doc(
+  PrivateEndpointConnection.name,
   "The name of the private endpoint connection."
 );
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
-@@doc(PrivateEndpointConnections.updateAPrivateEndpointConnection::parameters.resource,
+@@doc(
+  PrivateEndpointConnections.updateAPrivateEndpointConnection::parameters.resource,
   "private endpoint connection object supplied in the body of the Put private endpoint connection operation."
 );

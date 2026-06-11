@@ -106,6 +106,7 @@ interface ApplicationResources {
 }
 
 @@doc(ApplicationResource.name, "The name of the application resource.");
-@@doc(ApplicationResource.properties,
+@@doc(
+  ApplicationResource.properties,
   "The resource-specific properties for this resource."
 );

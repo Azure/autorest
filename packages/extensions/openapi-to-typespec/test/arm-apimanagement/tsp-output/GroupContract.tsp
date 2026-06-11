@@ -169,7 +169,9 @@ interface GroupContracts {
   create is ArmResourceActionSync<
     GroupContract,
     void,
-    ArmResponse<ApiManagementGroupUserData> | ArmResourceCreatedSyncResponse<ApiManagementGroupUserData>,
+
+      | ArmResponse<ApiManagementGroupUserData>
+      | ArmResourceCreatedSyncResponse<ApiManagementGroupUserData>,
     Parameters = {
       /**
        * User identifier. Must be unique in the current API Management service instance.
@@ -204,7 +206,8 @@ interface GroupContracts {
 
 @@maxLength(GroupContract.name, 256);
 @@minLength(GroupContract.name, 1);
-@@doc(GroupContract.name,
+@@doc(
+  GroupContract.name,
   "Group identifier. Must be unique in the current API Management service instance."
 );
 @@doc(GroupContract.properties, "Group entity contract properties.");

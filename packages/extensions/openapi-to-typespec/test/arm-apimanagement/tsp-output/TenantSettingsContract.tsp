@@ -49,6 +49,7 @@ interface TenantSettingsContracts {
 }
 
 @@doc(TenantSettingsContract.name, "The identifier of the settings.");
-@@doc(TenantSettingsContract.properties,
+@@doc(
+  TenantSettingsContract.properties,
   "TenantSettings entity contract properties."
 );

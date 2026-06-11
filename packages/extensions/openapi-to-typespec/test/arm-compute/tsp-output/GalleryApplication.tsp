@@ -39,14 +39,17 @@ interface GalleryApplications {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     GalleryApplication,
-    Response = ArmResourceUpdatedResponse<GalleryApplication> | ArmResourceCreatedResponse<
-      GalleryApplication,
-      ArmLroLocationHeader<FinalResult = GalleryApplication> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: GalleryApplication;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<GalleryApplication>
+      | ArmResourceCreatedResponse<
+          GalleryApplication,
+          ArmLroLocationHeader<FinalResult = GalleryApplication> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: GalleryApplication;
+        })
   >;
 
   /**
@@ -65,7 +68,10 @@ interface GalleryApplications {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     GalleryApplication,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -77,15 +83,19 @@ interface GalleryApplications {
   >;
 }
 
-@@doc(GalleryApplication.name,
+@@doc(
+  GalleryApplication.name,
   "The name of the gallery Application Definition to be retrieved."
 );
-@@doc(GalleryApplication.properties,
+@@doc(
+  GalleryApplication.properties,
   "Describes the properties of a gallery Application Definition."
 );
-@@doc(GalleryApplications.createOrUpdate::parameters.resource,
+@@doc(
+  GalleryApplications.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update gallery Application operation."
 );
-@@doc(GalleryApplications.update::parameters.properties,
+@@doc(
+  GalleryApplications.update::parameters.properties,
   "Parameters supplied to the update gallery Application operation."
 );

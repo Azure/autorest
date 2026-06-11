@@ -72,7 +72,10 @@ interface DataVersionBaseResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is DataVersionBaseResourceOps.DeleteWithoutOkAsync<
     DataVersionBaseResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -219,15 +222,19 @@ interface DataVersions {
 }
 
 @@doc(DataVersionBaseResource.name, "Version identifier.");
-@@doc(DataVersionBaseResource.properties,
+@@doc(
+  DataVersionBaseResource.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(DataVersionBaseResources.createOrUpdate::parameters.resource,
+@@doc(
+  DataVersionBaseResources.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
-@@doc(DataVersionBaseResources.createOrGetStartPendingUpload::parameters.body,
+@@doc(
+  DataVersionBaseResources.createOrGetStartPendingUpload::parameters.body,
   "Pending upload request object"
 );
-@@doc(DataVersions.createOrUpdate::parameters.resource,
+@@doc(
+  DataVersions.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );

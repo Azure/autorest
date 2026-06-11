@@ -59,7 +59,10 @@ interface OnlineEndpointTrackedResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     OnlineEndpointTrackedResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -143,15 +146,19 @@ interface OnlineEndpointTrackedResources {
 }
 
 @@doc(OnlineEndpointTrackedResource.name, "Online Endpoint name.");
-@@doc(OnlineEndpointTrackedResource.properties,
+@@doc(
+  OnlineEndpointTrackedResource.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(OnlineEndpointTrackedResources.createOrUpdate::parameters.resource,
+@@doc(
+  OnlineEndpointTrackedResources.createOrUpdate::parameters.resource,
   "Online Endpoint entity to apply during operation."
 );
-@@doc(OnlineEndpointTrackedResources.update::parameters.properties,
+@@doc(
+  OnlineEndpointTrackedResources.update::parameters.properties,
   "Online Endpoint entity to apply during operation."
 );
-@@doc(OnlineEndpointTrackedResources.regenerateKeys::parameters.body,
+@@doc(
+  OnlineEndpointTrackedResources.regenerateKeys::parameters.body,
   "RegenerateKeys request ."
 );

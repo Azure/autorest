@@ -26,10 +26,9 @@ using Azure.Core;
  * href="https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>.
  */
 @useAuth(
-  AadOauth2Auth<["https://cognitiveservices.azure.com/.default"]> | ApiKeyAuth<
-    ApiKeyLocation.header,
-    "Ocp-Apim-Subscription-Key"
-  >
+
+    | AadOauth2Auth<["https://cognitiveservices.azure.com/.default"]>
+    | ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">
 )
 @service(#{ title: "QnA Maker" })
 @versioned(Versions)

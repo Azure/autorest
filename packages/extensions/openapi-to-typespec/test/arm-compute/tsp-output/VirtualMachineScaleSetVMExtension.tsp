@@ -73,7 +73,10 @@ interface VirtualMachineScaleSetVMExtensions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachineScaleSetVMExtension,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -92,15 +95,19 @@ interface VirtualMachineScaleSetVMExtensions {
   >;
 }
 
-@@doc(VirtualMachineScaleSetVMExtension.name,
+@@doc(
+  VirtualMachineScaleSetVMExtension.name,
   "The name of the virtual machine extension."
 );
-@@doc(VirtualMachineScaleSetVMExtension.properties,
+@@doc(
+  VirtualMachineScaleSetVMExtension.properties,
   "Describes the properties of a Virtual Machine Extension."
 );
-@@doc(VirtualMachineScaleSetVMExtensions.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualMachineScaleSetVMExtensions.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Virtual Machine Extension operation."
 );
-@@doc(VirtualMachineScaleSetVMExtensions.update::parameters.properties,
+@@doc(
+  VirtualMachineScaleSetVMExtensions.update::parameters.properties,
   "Parameters supplied to the Update Virtual Machine Extension operation."
 );

@@ -3,8 +3,6 @@ import { join } from "path";
 
 const { writeFile, access } = promises;
 
-export type PackageManagerType = "yarn" | "npm";
-
 export interface InstallOptions {
   force?: boolean;
 }

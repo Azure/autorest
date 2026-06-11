@@ -187,7 +187,9 @@ interface ProductContracts {
   productApiCreateOrUpdate is ArmResourceActionSync<
     ProductContract,
     void,
-    ArmResponse<ProductApiData> | ArmResourceCreatedSyncResponse<ProductApiData>,
+
+      | ArmResponse<ProductApiData>
+      | ArmResourceCreatedSyncResponse<ProductApiData>,
     Parameters = {
       /**
        * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
@@ -281,7 +283,9 @@ interface ProductContracts {
   productGroupCreateOrUpdate is ArmResourceActionSync<
     ProductContract,
     void,
-    ArmResponse<ProductGroupData> | ArmResourceCreatedSyncResponse<ProductGroupData>,
+
+      | ArmResponse<ProductGroupData>
+      | ArmResourceCreatedSyncResponse<ProductGroupData>,
     Parameters = {
       /**
        * Group identifier. Must be unique in the current API Management service instance.
@@ -348,11 +352,13 @@ interface ProductContracts {
 
 @@maxLength(ProductContract.name, 256);
 @@minLength(ProductContract.name, 1);
-@@doc(ProductContract.name,
+@@doc(
+  ProductContract.name,
   "Product identifier. Must be unique in the current API Management service instance."
 );
 @@doc(ProductContract.properties, "Product entity contract properties.");
-@@doc(ProductContracts.createOrUpdate::parameters.resource,
+@@doc(
+  ProductContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
 @@doc(ProductContracts.update::parameters.properties, "Update parameters.");
