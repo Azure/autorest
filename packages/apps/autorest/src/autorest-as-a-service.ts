@@ -105,12 +105,6 @@ export async function resolveEntrypoint(localPath: string, entrypoint: string): 
             entrypoint = pkg.main;
             break;
 
-          case "language-service":
-          case "language-service.js":
-          case "autorest-language-service":
-            entrypoint = pkg.bin["autorest-language-service"];
-            break;
-
           case "autorest":
           case "autorest-core":
           case "app.js":

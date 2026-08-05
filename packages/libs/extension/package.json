@@ -42,7 +42,6 @@
     "@azure-tools/async-io": "~3.0.0",
     "@azure-tools/tasks": "~3.0.0",
     "@azure/logger": "^1.2.0",
-    "command-exists": "~1.2.9",
     "npm-package-arg": "^12.0.2",
     "pacote": "~21.0.0",
     "rimraf": "^6.0.1",
@@ -51,7 +50,6 @@
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
-    "@types/command-exists": "~1.2.0",
     "@types/node": "~22.15.19",
     "@types/npm-package-arg": "^6.1.0",
     "@types/pacote": "11.1.8",
