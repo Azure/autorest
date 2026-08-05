@@ -6,6 +6,7 @@ settings:
 
 overrides:
   '@tootallnate/once': 2.0.1
+  get-uri: 4.0.0
 
 importers:
 
@@ -3614,9 +3615,9 @@ packages:
     resolution: {integrity: sha512-w9UMqWwJxHNOvoNzSJ2oPF5wvYcvP7jUvYzhp67yEhTi17ZDBBC1z9pTdGuzjD+EFIqLSYRweZjqfiPzQ06Ebg==}
     engines: {node: '>= 0.4'}
 
-  get-uri@3.0.2:
-    resolution: {integrity: sha512-+5s0SJbGoyiJTZZ2JTpFPLMPSch72KEqGOTvQsBqg0RBWvwhWUSYZFAtz3TPW0GXJuLBJPts1E241iHg+VRfhg==}
-    engines: {node: '>= 6'}
+  get-uri@4.0.0:
+    resolution: {integrity: sha512-r7ICkxG9Tmq09wSQGqBulOWJf4Kj/tqyeBQJ2fN/By4y/eaMHNfuscRBQl1my+WOC5D3PEszKzg7hfaZ2fDSkw==}
+    engines: {node: '>= 8'}
 
   glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
@@ -5647,7 +5648,7 @@ snapshots:
     dependencies:
       '@azure-tools/async-io': 3.0.254
       file-url: 3.0.0
-      get-uri: 3.0.2
+      get-uri: 4.0.0
       urijs: 1.19.11
     transitivePeerDependencies:
       - supports-color
@@ -8065,7 +8066,7 @@ snapshots:
       es-errors: 1.3.0
       get-intrinsic: 1.3.0
 
-  get-uri@3.0.2:
+  get-uri@4.0.0:
     dependencies:
       '@tootallnate/once': 2.0.1
       data-uri-to-buffer: 3.0.1
