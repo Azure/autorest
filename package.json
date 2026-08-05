@@ -13,6 +13,11 @@
   "engines": {
     "node": ">=22.0.0"
   },
+  "pnpm": {
+    "overrides": {
+      "js-yaml@^4.0.0": "4.3.0"
+    }
+  },
   "scripts": {
     "build": "pnpm -r run build",
     "rebuild": "pnpm run clean && pnpm run build",
