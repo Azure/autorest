@@ -561,8 +561,8 @@ importers:
         specifier: ~3.0.0
         version: 3.0.254
       js-yaml:
-        specifier: ~4.1.0
-        version: 4.1.1
+        specifier: ^4.3.0
+        version: 4.3.0
       semver:
         specifier: ^7.7.2
         version: 7.8.3
@@ -625,8 +625,8 @@ importers:
         specifier: workspace:~
         version: link:../codegen
       js-yaml:
-        specifier: ~4.1.0
-        version: 4.1.1
+        specifier: ^4.3.0
+        version: 4.3.0
     devDependencies:
       '@types/js-yaml':
         specifier: ~4.0.0
@@ -1060,8 +1060,8 @@ importers:
         specifier: workspace:~
         version: link:../codegen
       js-yaml:
-        specifier: ~4.1.0
-        version: 4.1.1
+        specifier: ^4.3.0
+        version: 4.3.0
       vscode-jsonrpc:
         specifier: ^3.5.0
         version: 3.6.2
@@ -1367,8 +1367,8 @@ importers:
   packages/libs/yaml:
     dependencies:
       js-yaml:
-        specifier: ~4.1.0
-        version: 4.1.1
+        specifier: ^4.3.0
+        version: 4.3.0
       lodash:
         specifier: ^4.18.1
         version: 4.18.1
@@ -1541,8 +1541,8 @@ importers:
         specifier: ^5.1.0
         version: 5.2.2
       js-yaml:
-        specifier: ~4.1.0
-        version: 4.1.1
+        specifier: ^4.3.0
+        version: 4.3.0
       source-map-support:
         specifier: ^0.5.19
         version: 0.5.21
@@ -4201,12 +4201,16 @@ packages:
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
-  js-yaml@3.14.2:
-    resolution: {integrity: sha512-PMSmkqxr106Xa156c2M265Z+FTrPl+oxd/rgOQy2tijQeK5TxQ43psO1ZCwhVOSdnn+RzkzlRz/eY4BgJBYVpg==}
+  js-yaml@3.15.0:
+    resolution: {integrity: sha512-ttBQIIQPDeLjpPOohtUdXuXUVoA2uIB6fEH9HyJ7234s5mBJ5wTx20njxplLZQgLaOfpmPQA7X2t5AX6tIPbog==}
     hasBin: true
 
   js-yaml@4.1.1:
     resolution: {integrity: sha512-qQKT4zQxXl8lLwBtHMWwaTcGfFOZviOJet3Oy/xmGk2gZH677CJM9EvtfdSkgWcATZhj/55JZ0rmy3myCT5lsA==}
+    hasBin: true
+
+  js-yaml@4.3.0:
+    resolution: {integrity: sha512-1td788aAnnZ5qs7V2QIRl1owjtYpbKt749Y3xauqQgwIIGF/xXWz1wMTEBx5O3LK3lXLVuqXPdPxj2BoFHaW9Q==}
     hasBin: true
 
   jsep@1.4.0:
@@ -6025,7 +6029,7 @@ snapshots:
       globals: 13.24.0
       ignore: 5.3.2
       import-fresh: 3.3.1
-      js-yaml: 4.1.1
+      js-yaml: 4.3.0
       minimatch: 3.1.5
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
@@ -6184,7 +6188,7 @@ snapshots:
       camelcase: 5.3.1
       find-up: 4.1.0
       get-package-type: 0.1.0
-      js-yaml: 3.14.2
+      js-yaml: 3.15.0
       resolve-from: 5.0.0
 
   '@istanbuljs/schema@0.1.6': {}
@@ -8913,12 +8917,16 @@ snapshots:
 
   js-tokens@4.0.0: {}
 
-  js-yaml@3.14.2:
+  js-yaml@3.15.0:
     dependencies:
       argparse: 1.0.10
       esprima: 4.0.1
 
   js-yaml@4.1.1:
+    dependencies:
+      argparse: 2.0.1
+
+  js-yaml@4.3.0:
     dependencies:
       argparse: 2.0.1
 
