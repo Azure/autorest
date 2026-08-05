@@ -561,7 +561,7 @@ importers:
         specifier: ~3.0.0
         version: 3.0.254
       js-yaml:
-        specifier: ~4.3.0
+        specifier: ^4.3.0
         version: 4.3.0
       semver:
         specifier: ^7.7.2
@@ -625,7 +625,7 @@ importers:
         specifier: workspace:~
         version: link:../codegen
       js-yaml:
-        specifier: ~4.3.0
+        specifier: ^4.3.0
         version: 4.3.0
     devDependencies:
       '@types/js-yaml':
@@ -1060,7 +1060,7 @@ importers:
         specifier: workspace:~
         version: link:../codegen
       js-yaml:
-        specifier: ~4.3.0
+        specifier: ^4.3.0
         version: 4.3.0
       vscode-jsonrpc:
         specifier: ^3.5.0
@@ -1367,7 +1367,7 @@ importers:
   packages/libs/yaml:
     dependencies:
       js-yaml:
-        specifier: ~4.3.0
+        specifier: ^4.3.0
         version: 4.3.0
       lodash:
         specifier: ^4.18.1
@@ -1541,7 +1541,7 @@ importers:
         specifier: ^5.1.0
         version: 5.2.2
       js-yaml:
-        specifier: ~4.3.0
+        specifier: ^4.3.0
         version: 4.3.0
       source-map-support:
         specifier: ^0.5.19
