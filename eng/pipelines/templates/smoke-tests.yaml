@@ -38,6 +38,8 @@ jobs:
           versionSpec: ${{ parameters.nodeVersion }}
         displayName: "Install Node.js"
 
+      - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
+
       - script: |
           # npm install -g autorest
           echo "Installing autorest from $AUTOREST_CLI_PKG"

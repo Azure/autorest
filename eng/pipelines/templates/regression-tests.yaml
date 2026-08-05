@@ -44,6 +44,8 @@ jobs:
           versionSpec: "3.11"
         displayName: "Use Python 3.11"
 
+      - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
+
       - script: npm install -g npm
         displayName: Install npm
 
