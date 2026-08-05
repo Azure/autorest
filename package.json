@@ -15,7 +15,7 @@
   },
   "pnpm": {
     "overrides": {
-      "js-yaml@^4.0.0": "4.3.0"
+      "js-yaml@^4.0.0": "^4.3.0"
     }
   },
   "scripts": {
