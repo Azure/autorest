@@ -496,7 +496,7 @@ importers:
         version: 3.0.254
       js-yaml:
         specifier: ^4.3.0
-        version: 4.3.0
+        version: 4.3.1
       semver:
         specifier: ^7.7.2
         version: 7.8.3
@@ -533,7 +533,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -560,7 +560,7 @@ importers:
         version: link:../codegen
       js-yaml:
         specifier: ^4.3.0
-        version: 4.3.0
+        version: 4.3.1
     devDependencies:
       '@types/js-yaml':
         specifier: ~4.0.0
@@ -588,7 +588,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -658,7 +658,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -740,7 +740,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -816,7 +816,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -883,7 +883,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -965,7 +965,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -989,7 +989,7 @@ importers:
         version: link:../codegen
       js-yaml:
         specifier: ^4.3.0
-        version: 4.3.0
+        version: 4.3.1
       vscode-jsonrpc:
         specifier: ^3.5.0
         version: 3.6.2
@@ -1020,7 +1020,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -1059,7 +1059,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -1101,7 +1101,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -1159,7 +1159,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -1214,7 +1214,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -1272,7 +1272,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -1293,7 +1293,7 @@ importers:
     dependencies:
       js-yaml:
         specifier: ^4.3.0
-        version: 4.3.0
+        version: 4.3.1
       lodash:
         specifier: ^4.18.1
         version: 4.18.1
@@ -1333,7 +1333,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -1385,7 +1385,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -1443,7 +1443,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -1467,7 +1467,7 @@ importers:
         version: 5.2.2
       js-yaml:
         specifier: ^4.3.0
-        version: 4.3.0
+        version: 4.3.1
       source-map-support:
         specifier: ^0.5.19
         version: 0.5.21
@@ -1516,7 +1516,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -4113,16 +4113,16 @@ packages:
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
-  js-yaml@3.15.0:
-    resolution: {integrity: sha512-ttBQIIQPDeLjpPOohtUdXuXUVoA2uIB6fEH9HyJ7234s5mBJ5wTx20njxplLZQgLaOfpmPQA7X2t5AX6tIPbog==}
+  js-yaml@3.15.1:
+    resolution: {integrity: sha512-S99WuO3HlhO3XN41EtYUNl9zzXjoJx7QvmipxsJVxtCBT0YHEFy+iOJhjSvrmV12nYhWpZaM8lPHkJm0yUMbag==}
     hasBin: true
 
   js-yaml@4.1.1:
     resolution: {integrity: sha512-qQKT4zQxXl8lLwBtHMWwaTcGfFOZviOJet3Oy/xmGk2gZH677CJM9EvtfdSkgWcATZhj/55JZ0rmy3myCT5lsA==}
     hasBin: true
 
-  js-yaml@4.3.0:
-    resolution: {integrity: sha512-1td788aAnnZ5qs7V2QIRl1owjtYpbKt749Y3xauqQgwIIGF/xXWz1wMTEBx5O3LK3lXLVuqXPdPxj2BoFHaW9Q==}
+  js-yaml@4.3.1:
+    resolution: {integrity: sha512-CY6crGq313MX8GkwvB7tzgp99vjQxY1++5y10/BKN/GUfHqWaOGQMNZkBvqSzsZKWk/ijwHlWzzkLulsGHhjWQ==}
     hasBin: true
 
   jsep@1.4.0:
@@ -5898,7 +5898,7 @@ snapshots:
       globals: 13.24.0
       ignore: 5.3.2
       import-fresh: 3.3.1
-      js-yaml: 4.3.0
+      js-yaml: 4.3.1
       minimatch: 3.1.5
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
@@ -6057,7 +6057,7 @@ snapshots:
       camelcase: 5.3.1
       find-up: 4.1.0
       get-package-type: 0.1.0
-      js-yaml: 3.15.0
+      js-yaml: 3.15.1
       resolve-from: 5.0.0
 
   '@istanbuljs/schema@0.1.6': {}
@@ -7760,15 +7760,6 @@ snapshots:
     optionalDependencies:
       '@types/eslint': 9.6.1
 
-  eslint-plugin-prettier@5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4):
-    dependencies:
-      eslint: 8.57.1
-      prettier: 3.8.4
-      prettier-linter-helpers: 1.0.1
-      synckit: 0.11.13
-    optionalDependencies:
-      '@types/eslint': 9.6.1
-
   eslint-plugin-unicorn@49.0.0(eslint@8.57.1):
     dependencies:
       '@babel/helper-validator-identifier': 7.29.7
@@ -8760,7 +8751,7 @@ snapshots:
 
   js-tokens@4.0.0: {}
 
-  js-yaml@3.15.0:
+  js-yaml@3.15.1:
     dependencies:
       argparse: 1.0.10
       esprima: 4.0.1
@@ -8769,7 +8760,7 @@ snapshots:
     dependencies:
       argparse: 2.0.1
 
-  js-yaml@4.3.0:
+  js-yaml@4.3.1:
     dependencies:
       argparse: 2.0.1
 
