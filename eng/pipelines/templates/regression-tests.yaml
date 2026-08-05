@@ -77,6 +77,10 @@ jobs:
 
       - script: autorest-compare --compare:./regression-tests/regression-compare.yaml --language:python
         displayName: Regression Test - @autorest/python
+        env:
+          autorest_registry: $(resolvedNpmRegistryUrl)
 
       - script: autorest-compare --compare:./regression-tests/regression-compare.yaml --language:typescript
         displayName: Regression Test - @autorest/typescript
+        env:
+          autorest_registry: $(resolvedNpmRegistryUrl)

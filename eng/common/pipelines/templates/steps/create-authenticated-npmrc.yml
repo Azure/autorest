@@ -30,6 +30,7 @@ steps:
 
       "registry=${{ parameters.registryUrl }}" | Out-File $npmrcPath
       Write-Host "##vso[task.setvariable variable=resolvedNpmrcPath]$npmrcPath"
+      Write-Host "##vso[task.setvariable variable=resolvedNpmRegistryUrl]${{ parameters.registryUrl }}"
     displayName: "Create .npmrc"
     condition: ${{ parameters.CustomCondition }}
 
