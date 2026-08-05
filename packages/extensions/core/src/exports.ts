@@ -16,4 +16,3 @@ export {
   IsOpenApiDocument,
 } from "./lib/autorest-core";
 export { DocumentFormat, DocumentExtension, DocumentPatterns, DocumentType } from "./lib/document-type";
-// export { GenerationResults } from "./language-service/language-service";
