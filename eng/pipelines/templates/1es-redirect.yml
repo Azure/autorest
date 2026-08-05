@@ -27,6 +27,7 @@ extends:
   parameters:
     settings:
       skipBuildTagsForGitHubPullRequests: true
+      networkIsolationPolicy: Permissive, CFSClean
     authenticatedContainerRegistries: ${{ parameters.authenticatedContainerRegistries }}
     sdl:
       git:
