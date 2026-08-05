@@ -4,6 +4,3 @@ packages:
   - "packages/libs/*"
   - "packages/testing/*"
   - "packages/tools/*"
-
-overrides:
-  tar: 7.5.18
