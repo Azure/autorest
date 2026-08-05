@@ -37,7 +37,6 @@
   "devDependencies": {
     "@autorest/test-utils": "workspace:~",
     "@types/jest": "^29.5.14",
-    "@types/js-yaml": "~4.0.0",
     "@types/node": "~22.15.19",
     "@typescript-eslint/eslint-plugin": "^8.32.1",
     "@typescript-eslint/parser": "^8.32.1",
