@@ -44,9 +44,12 @@ jobs:
           versionSpec: "3.11"
         displayName: "Use Python 3.11"
 
+      - script: npm install -g npm
+        displayName: Install npm
+
+      - template: /eng/pipelines/templates/install-pnpm.yml
+
       - script: |
-          npm install -g npm
-          corepack enable
           pnpm install --frozen-lockfile
           pnpm run build
         displayName: Install and build
