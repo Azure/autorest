@@ -32,5 +32,12 @@
     "@chronus/github": "^1.0.6",
     "prettier": "~3.5.3",
     "typescript": "~5.8.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "@tootallnate/once": "^2.0.1",
+      "get-uri": "^4.0.0",
+      "js-yaml@^4.0.0": "^4.3.0"
+    }
   }
 }
