@@ -34,11 +34,6 @@ jobs:
           versionSpec: ${{ parameters.nodeVersion }}
         displayName: "Install Node.js"
 
-      - task: UseNode@1
-        inputs:
-          versionSpec: ${{ parameters.nodeVersion }}
-        displayName: "Install Node.js"
-
       - task: UsePythonVersion@0
         inputs:
           versionSpec: "3.11"
