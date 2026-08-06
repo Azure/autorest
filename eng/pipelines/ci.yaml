@@ -27,11 +27,9 @@ extends:
                 env:
                   autorest_registry: $(resolvedNpmRegistryUrl)
 
-              - task: PublishCodeCoverageResults@1
+              - task: PublishCodeCoverageResults@2
                 inputs:
-                  codeCoverageTool: Cobertura
                   summaryFileLocation: $(Build.SourcesDirectory)/packages/**/coverage/cobertura-coverage.xml
-                  reportDirectory: $(Build.SourcesDirectory)/packages/**/coverage
 
               - script: pnpm run format:check
                 displayName: Check formatting
