@@ -34,7 +34,7 @@ jobs:
           versionSpec: ${{ parameters.nodeVersion }}
         displayName: "Install Node.js"
 
-      - task: NodeTool@0
+      - task: UseNode@1
         inputs:
           versionSpec: ${{ parameters.nodeVersion }}
         displayName: "Install Node.js"
