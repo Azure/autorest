@@ -5,8 +5,8 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  '@tootallnate/once': 2.0.1
-  get-uri: 4.0.0
+  '@tootallnate/once': ^2.0.1
+  get-uri: ^4.0.0
 
 importers:
 
