@@ -36,7 +36,7 @@
   "pnpm": {
     "overrides": {
       "@tootallnate/once": "^2.0.1",
-      "get-uri": "^4.0.0",
+      "get-uri": "^8.0.0",
       "js-yaml@^4.0.0": "^4.3.0"
     }
   }
