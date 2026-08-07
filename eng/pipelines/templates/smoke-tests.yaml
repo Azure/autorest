@@ -33,9 +33,9 @@ jobs:
           echo "##vso[task.setvariable variable=M4_PKG]$modelerfourPkg"
         displayName: Find packages path
 
-      - task: NodeTool@0
+      - task: UseNode@1
         inputs:
-          versionSpec: ${{ parameters.nodeVersion }}
+          version: ${{ parameters.nodeVersion }}
         displayName: "Install Node.js"
 
       - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml

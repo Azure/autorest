@@ -29,14 +29,9 @@ jobs:
           sed -i "s,--use:../packages/extensions/modelerfour,--use:$modelerfourPkg," ./regression-tests/regression-compare.yaml
         displayName: Find packages path
 
-      - task: NodeTool@0
+      - task: UseNode@1
         inputs:
-          versionSpec: ${{ parameters.nodeVersion }}
-        displayName: "Install Node.js"
-
-      - task: NodeTool@0
-        inputs:
-          versionSpec: ${{ parameters.nodeVersion }}
+          version: ${{ parameters.nodeVersion }}
         displayName: "Install Node.js"
 
       - task: UsePythonVersion@0
