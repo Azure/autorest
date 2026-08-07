@@ -35,7 +35,7 @@ jobs:
 
       - task: UseNode@1
         inputs:
-          versionSpec: ${{ parameters.nodeVersion }}
+          version: ${{ parameters.nodeVersion }}
         displayName: "Install Node.js"
 
       - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
