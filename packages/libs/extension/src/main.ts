@@ -213,7 +213,9 @@ export class ExtensionManager {
    * @returns List of semver versions
    */
   public async getPackageVersions(name: string): Promise<string[]> {
-    const packument = await pacote.packument(name);
+    const packument = await pacote.packument(name, {
+      registry: process.env.autorest_registry || "https://registry.npmjs.org",
+    });
     return Object.keys(packument.versions);
   }
 

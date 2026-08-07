@@ -5,8 +5,9 @@ steps:
       versionSpec: "22.x"
     displayName: "Install Node.js"
 
-  - script: corepack enable
-    displayName: "Enable corepack"
+  - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
+
+  - template: /eng/pipelines/templates/install-pnpm.yml
 
   - script: pnpm install --frozen-lockfile
     displayName: "Install dependencies"

@@ -24,6 +24,8 @@ extends:
 
               - script: pnpm run test:ci
                 displayName: Test
+                env:
+                  autorest_registry: $(resolvedNpmRegistryUrl)
 
               - task: PublishCodeCoverageResults@2
                 inputs:
