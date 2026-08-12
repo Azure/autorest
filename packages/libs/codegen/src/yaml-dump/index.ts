@@ -1,1 +1,1 @@
-export * from "./yaml-dump";
+export { dump } from "js-yaml";

@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { createSandbox, deserialize, ShadowedNodePath } from "@azure-tools/codegen";
-import { Schema, DEFAULT_SCHEMA } from "js-yaml";
+import { Schema, YAML11_SCHEMA as DEFAULT_SCHEMA } from "js-yaml";
 import { AutorestExtensionHost, WriteFileOptions } from "./extension-host";
 import { LogLevel } from "./extension-logger";
 import { Channel, Message, SourceLocation, LogSource } from "./types";
