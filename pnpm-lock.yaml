@@ -538,7 +538,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -593,7 +593,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -663,7 +663,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -745,7 +745,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -821,7 +821,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -888,7 +888,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -920,8 +920,8 @@ importers:
         specifier: ^12.0.2
         version: 12.0.2
       pacote:
-        specifier: ~21.0.0
-        version: 21.0.4
+        specifier: ~21.5.1
+        version: 21.5.1
       rimraf:
         specifier: ^6.0.1
         version: 6.1.3
@@ -970,7 +970,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -1025,7 +1025,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -1064,7 +1064,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -1106,7 +1106,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -1164,7 +1164,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -1219,7 +1219,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -1277,7 +1277,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -1338,7 +1338,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -1390,7 +1390,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -1448,7 +1448,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -1521,7 +1521,7 @@ importers:
         version: 11.1.0(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ~5.4.0
-        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-unicorn:
         specifier: ~49.0.0
         version: 49.0.0(eslint@8.57.1)
@@ -2316,8 +2316,8 @@ packages:
     resolution: {integrity: sha512-qRsxPnCrbC/puegGxKuynfnxgLiHqWStrSjxkoB4YKqq3Z3s4cyZyj42ZdWFAEblNP65C+rBH8EuREHIXoi83g==}
     engines: {node: ^20.17.0 || >=22.9.0}
 
-  '@sigstore/protobuf-specs@0.5.1':
-    resolution: {integrity: sha512-/ScWUhhoFasJsSRGTVBwId1loQjjnjAfE4djL6ZhrXRpNCmPTnUKF5Jokd58ILseOMjzET3UrMOtJPS9sYeI0g==}
+  '@sigstore/protobuf-specs@0.5.2':
+    resolution: {integrity: sha512-SQqvFMt4V78fdjcDdYX6HbiVSOR4QK3ZgwCa2KOsopAgPIHy1rU5UDUmzLl02r5oyyaYcYHR1hpwDRk/yUe+Mw==}
     engines: {node: ^18.17.0 || >=20.5.0}
 
   '@sigstore/sign@4.1.1':
@@ -3070,6 +3070,10 @@ packages:
     resolution: {integrity: sha512-j/O/d7GcZCyNl7/hwZAb606rzqkyvaDctLmckbxLzHvFBzTJHuGEdodATcP3yIRoDrLHkIATJuvzbFlp/ki2cQ==}
     engines: {node: '>=18'}
 
+  content-type@2.1.0:
+    resolution: {integrity: sha512-mj7UPXE0jaqaOsukNZRUEfEi2AcL7C/vwmwcHV0O97eO1E1pxBZuyjlZrx5seTaNBg1U6+o35wpa35Qfcc+7ag==}
+    engines: {node: '>=18'}
+
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
 
@@ -3735,8 +3739,8 @@ packages:
     resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
     engines: {node: '>=0.10.0'}
 
-  iconv-lite@0.7.2:
-    resolution: {integrity: sha512-im9DjEDQ55s9fL4EYzOAv0yMqmMBSZp6G0VvFyTMPKWxiSBHUj9NW/qqLmXUwXrrM7AvqSlTCfvqRb0cM8yYqw==}
+  iconv-lite@0.7.3:
+    resolution: {integrity: sha512-IKXpvIzjnC9XTAUbVBcMfGS0EPaIXtW6v+zr+RRp+hqULEpo0owZax6wyRwPOJbWbzjYspQwusTsfVr0ifh4uQ==}
     engines: {node: '>=0.10.0'}
 
   ignore-walk@8.0.0:
@@ -4246,8 +4250,8 @@ packages:
   lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
 
-  lru-cache@11.5.1:
-    resolution: {integrity: sha512-RPimw/7aMdv2oqRrxKwvZXcPfwBrn/JZ2xYcY9Hus/6LaS3VOAKVWKWgNLCFSiOm1ESXinjsDlidVU7JlnCN2A==}
+  lru-cache@11.5.2:
+    resolution: {integrity: sha512-4pfM1Ff0x50o0tQwb5ucw/RzNyD0/YJME6IVcStalZuMWxdt3sR3huStTtxz4PUmvZfRguvDejasvQ2kifR11g==}
     engines: {node: 20 || >=22}
 
   lru-cache@5.1.1:
@@ -4315,6 +4319,10 @@ packages:
 
   minimatch@10.2.5:
     resolution: {integrity: sha512-MULkVLfKGYDFYejP07QOurDLLQpcjk7Fw+7jXS2R2czRQzR56yHRveU5NDJEOviH+hETZKSkIk5c+T23GjFUMg==}
+    engines: {node: 18 || 20 || >=22}
+
+  minimatch@10.2.6:
+    resolution: {integrity: sha512-vpLQEs+VLCr1nU0BXS07maYoFwlDAH0gngQuuttxIwutDFEMHq2blX+8vpgxDdK3J1PwjCJiep77OitTZ4Ll1A==}
     engines: {node: 18 || 20 || >=22}
 
   minimatch@3.1.5:
@@ -4394,6 +4402,10 @@ packages:
   negotiator@1.0.0:
     resolution: {integrity: sha512-8Ofs/AUQh8MaEcrlq5xOX0CQ9ypTF5dl78mjlMNfOK08fzpgTHQRQPBxcPlEtIw0yRpws+Zo/3r+5WRby7u3Gg==}
     engines: {node: '>= 0.6'}
+
+  negotiator@1.1.0:
+    resolution: {integrity: sha512-NMPBRMJgiQHjbd8phG3Vebdx4kZ1H121rbl5IkMqeOsahptB9BKo/d7oJ3zTXqTgagn2bWlNSXkh0QUGM31RYg==}
+    engines: {node: '>=18'}
 
   neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
@@ -4562,8 +4574,8 @@ packages:
     resolution: {integrity: sha512-T8BatKGY+k5rU+Q/GTYgrEf2r4xRMevAN5mtXc2aPc4rS1j3s+vWTaO2Wag94neXuCAUAs8cxBL9EeB5EA6diw==}
     engines: {node: '>=16'}
 
-  p-map@7.0.4:
-    resolution: {integrity: sha512-tkAQEw8ysMzmkhgw8k+1U/iPhWNhykKnSk4Rd5zLoPJCuJaGRPo6YposrZgaxHKzDHdDWWZvE/Sk7hsL2X/CpQ==}
+  p-map@7.0.7:
+    resolution: {integrity: sha512-VaWRu2i4FJNRtiRWCuuQRgfQ1B7a6+gMSrO+3j0EQi/k0ULfS9kosRxGoiqwzIjZTDI02tGfk5mXXltLg6QtfQ==}
     engines: {node: '>=18'}
 
   p-timeout@5.1.0:
@@ -4576,11 +4588,6 @@ packages:
 
   package-json-from-dist@1.0.1:
     resolution: {integrity: sha512-UEZIS3/by4OC8vL3P2dTXRETpebLI2NiI5vIrjaD/5UtrkFX/tNbwjTSRAGC/+7CAo2pIcBaRgWmcBBHcsaCIw==}
-
-  pacote@21.0.4:
-    resolution: {integrity: sha512-RplP/pDW0NNNDh3pnaoIWYPvNenS7UqMbXyvMqJczosiFWTeGGwJC2NQBLqKf4rGLFfwCOnntw1aEp9Jiqm1MA==}
-    engines: {node: ^20.17.0 || >=22.9.0}
-    hasBin: true
 
   pacote@21.5.1:
     resolution: {integrity: sha512-KvcJ9iy3crysCsgqc4+PknH/w6jkrp8JN36mpZBPwNaDRwTfMZD37YzRazNstiZUOhuF5pno9f78n9mEJBavwg==}
@@ -5074,6 +5081,10 @@ packages:
 
   tar@7.5.18:
     resolution: {integrity: sha512-PwA+nJl+AzsS9hRqtNRRq8/kTdNPoOLEPXpz9WBaErNm4+TFedJyQFJLITWdsmIBnwNS/TwXf1NV5Ak1KITc8g==}
+    engines: {node: '>=18'}
+
+  tar@7.5.22:
+    resolution: {integrity: sha512-MFO/QzvtAOmJbkhOaCTvbGcFN9L9b+JunIsDwaKljSOdcLMea3NJ1k9Usz/rjdfSXTq4dfzfeS7W4p4YOAAHeA==}
     engines: {node: '>=18'}
 
   temporal-polyfill@0.3.2:
@@ -5969,7 +5980,7 @@ snapshots:
   '@inquirer/external-editor@3.0.3(@types/node@22.15.35)':
     dependencies:
       chardet: 2.1.1
-      iconv-lite: 0.7.2
+      iconv-lite: 0.7.3
     optionalDependencies:
       '@types/node': 22.15.35
 
@@ -6289,7 +6300,7 @@ snapshots:
       agent-base: 7.1.4
       http-proxy-agent: 7.0.2
       https-proxy-agent: 7.0.6
-      lru-cache: 11.5.1
+      lru-cache: 11.5.2
       socks-proxy-agent: 8.0.5
     transitivePeerDependencies:
       - supports-color
@@ -6307,7 +6318,7 @@ snapshots:
       '@gar/promise-retry': 1.0.3
       '@npmcli/promise-spawn': 9.0.1
       ini: 6.0.0
-      lru-cache: 11.5.1
+      lru-cache: 11.5.2
       npm-pick-manifest: 11.0.3
       proc-log: 6.1.0
       semver: 7.8.3
@@ -6549,18 +6560,18 @@ snapshots:
 
   '@sigstore/bundle@4.0.0':
     dependencies:
-      '@sigstore/protobuf-specs': 0.5.1
+      '@sigstore/protobuf-specs': 0.5.2
 
   '@sigstore/core@3.2.1': {}
 
-  '@sigstore/protobuf-specs@0.5.1': {}
+  '@sigstore/protobuf-specs@0.5.2': {}
 
   '@sigstore/sign@4.1.1':
     dependencies:
       '@gar/promise-retry': 1.0.3
       '@sigstore/bundle': 4.0.0
       '@sigstore/core': 3.2.1
-      '@sigstore/protobuf-specs': 0.5.1
+      '@sigstore/protobuf-specs': 0.5.2
       make-fetch-happen: 15.0.6
       proc-log: 6.1.0
     transitivePeerDependencies:
@@ -6568,7 +6579,7 @@ snapshots:
 
   '@sigstore/tuf@4.0.2':
     dependencies:
-      '@sigstore/protobuf-specs': 0.5.1
+      '@sigstore/protobuf-specs': 0.5.2
       tuf-js: 4.1.0
     transitivePeerDependencies:
       - supports-color
@@ -6577,7 +6588,7 @@ snapshots:
     dependencies:
       '@sigstore/bundle': 4.0.0
       '@sigstore/core': 3.2.1
-      '@sigstore/protobuf-specs': 0.5.1
+      '@sigstore/protobuf-specs': 0.5.2
 
   '@sinclair/typebox@0.27.10': {}
 
@@ -6613,7 +6624,7 @@ snapshots:
   '@tufjs/models@4.1.0':
     dependencies:
       '@tufjs/canonical-json': 2.0.0
-      minimatch: 10.2.5
+      minimatch: 10.2.6
 
   '@types/aws-lambda@8.10.162': {}
 
@@ -7279,9 +7290,9 @@ snapshots:
       minipass-collect: 2.0.1
       minipass-flush: 1.0.7
       minipass-pipeline: 1.2.4
-      p-map: 7.0.4
+      p-map: 7.0.7
       ssri: 12.0.0
-      tar: 7.5.18
+      tar: 7.5.22
       unique-filename: 4.0.0
 
   cacache@20.0.4:
@@ -7289,12 +7300,12 @@ snapshots:
       '@npmcli/fs': 5.0.0
       fs-minipass: 3.0.3
       glob: 13.0.6
-      lru-cache: 11.5.1
+      lru-cache: 11.5.2
       minipass: 7.1.3
       minipass-collect: 2.0.1
       minipass-flush: 1.0.7
       minipass-pipeline: 1.2.4
-      p-map: 7.0.4
+      p-map: 7.0.7
       ssri: 13.0.1
 
   call-bind-apply-helpers@1.0.2:
@@ -7413,6 +7424,8 @@ snapshots:
   concat-map@0.0.1: {}
 
   content-type@2.0.0: {}
+
+  content-type@2.1.0: {}
 
   convert-source-map@2.0.0: {}
 
@@ -7756,15 +7769,6 @@ snapshots:
     dependencies:
       eslint: 8.57.1
       prettier: 3.5.3
-      prettier-linter-helpers: 1.0.1
-      synckit: 0.11.13
-    optionalDependencies:
-      '@types/eslint': 9.6.1
-
-  eslint-plugin-prettier@5.4.1(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.4):
-    dependencies:
-      eslint: 8.57.1
-      prettier: 3.8.4
       prettier-linter-helpers: 1.0.1
       synckit: 0.11.13
     optionalDependencies:
@@ -8179,7 +8183,7 @@ snapshots:
 
   hosted-git-info@9.0.3:
     dependencies:
-      lru-cache: 11.5.1
+      lru-cache: 11.5.2
 
   html-escaper@2.0.2: {}
 
@@ -8206,13 +8210,13 @@ snapshots:
       safer-buffer: 2.1.2
     optional: true
 
-  iconv-lite@0.7.2:
+  iconv-lite@0.7.3:
     dependencies:
       safer-buffer: 2.1.2
 
   ignore-walk@8.0.0:
     dependencies:
-      minimatch: 10.2.5
+      minimatch: 10.2.6
 
   ignore@5.3.2: {}
 
@@ -8857,7 +8861,7 @@ snapshots:
 
   lru-cache@10.4.3: {}
 
-  lru-cache@11.5.1: {}
+  lru-cache@11.5.2: {}
 
   lru-cache@5.1.1:
     dependencies:
@@ -8896,7 +8900,7 @@ snapshots:
       minipass-fetch: 5.0.2
       minipass-flush: 1.0.7
       minipass-pipeline: 1.2.4
-      negotiator: 1.0.0
+      negotiator: 1.1.0
       proc-log: 6.1.0
       ssri: 13.0.1
     transitivePeerDependencies:
@@ -8937,6 +8941,10 @@ snapshots:
     dependencies:
       brace-expansion: 5.0.9
 
+  minimatch@10.2.6:
+    dependencies:
+      brace-expansion: 5.0.9
+
   minimatch@3.1.5:
     dependencies:
       brace-expansion: 1.1.18
@@ -8965,7 +8973,7 @@ snapshots:
       minipass-sized: 2.0.0
       minizlib: 3.1.0
     optionalDependencies:
-      iconv-lite: 0.7.2
+      iconv-lite: 0.7.3
 
   minipass-flush@1.0.7:
     dependencies:
@@ -9007,6 +9015,10 @@ snapshots:
 
   negotiator@1.0.0: {}
 
+  negotiator@1.1.0:
+    dependencies:
+      content-type: 2.1.0
+
   neo-async@2.6.2: {}
 
   nested-error-stacks@2.1.1: {}
@@ -9045,7 +9057,7 @@ snapshots:
       nopt: 9.0.0
       proc-log: 6.1.0
       semver: 7.8.3
-      tar: 7.5.18
+      tar: 7.5.22
       tinyglobby: 0.2.17
       undici: 6.28.0
       which: 6.0.1
@@ -9231,35 +9243,13 @@ snapshots:
 
   p-map@6.0.0: {}
 
-  p-map@7.0.4: {}
+  p-map@7.0.7: {}
 
   p-timeout@5.1.0: {}
 
   p-try@2.2.0: {}
 
   package-json-from-dist@1.0.1: {}
-
-  pacote@21.0.4:
-    dependencies:
-      '@npmcli/git': 7.0.2
-      '@npmcli/installed-package-contents': 4.0.0
-      '@npmcli/package-json': 7.0.5
-      '@npmcli/promise-spawn': 9.0.1
-      '@npmcli/run-script': 10.0.4
-      cacache: 20.0.4
-      fs-minipass: 3.0.3
-      minipass: 7.1.3
-      npm-package-arg: 13.0.2
-      npm-packlist: 10.0.4
-      npm-pick-manifest: 11.0.3
-      npm-registry-fetch: 19.1.1
-      proc-log: 6.1.0
-      promise-retry: 2.0.1
-      sigstore: 4.1.1
-      ssri: 13.0.1
-      tar: 7.5.18
-    transitivePeerDependencies:
-      - supports-color
 
   pacote@21.5.1:
     dependencies:
@@ -9279,7 +9269,7 @@ snapshots:
       proc-log: 6.1.0
       sigstore: 4.1.1
       ssri: 13.0.1
-      tar: 7.5.18
+      tar: 7.5.22
     transitivePeerDependencies:
       - supports-color
 
@@ -9313,7 +9303,7 @@ snapshots:
 
   path-scurry@2.0.2:
     dependencies:
-      lru-cache: 11.5.1
+      lru-cache: 11.5.2
       minipass: 7.1.3
 
   path-type@4.0.0: {}
@@ -9588,7 +9578,7 @@ snapshots:
     dependencies:
       '@sigstore/bundle': 4.0.0
       '@sigstore/core': 3.2.1
-      '@sigstore/protobuf-specs': 0.5.1
+      '@sigstore/protobuf-specs': 0.5.2
       '@sigstore/sign': 4.1.1
       '@sigstore/tuf': 4.0.2
       '@sigstore/verify': 3.1.1
@@ -9768,6 +9758,14 @@ snapshots:
   tapable@2.3.3: {}
 
   tar@7.5.18:
+    dependencies:
+      '@isaacs/fs-minipass': 4.0.1
+      chownr: 3.0.0
+      minipass: 7.1.3
+      minizlib: 3.1.0
+      yallist: 5.0.0
+
+  tar@7.5.22:
     dependencies:
       '@isaacs/fs-minipass': 4.0.1
       chownr: 3.0.0

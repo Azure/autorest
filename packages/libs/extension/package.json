@@ -43,7 +43,7 @@
     "@azure-tools/tasks": "~3.0.0",
     "@azure/logger": "^1.2.0",
     "npm-package-arg": "^12.0.2",
-    "pacote": "~21.0.0",
+    "pacote": "~21.5.1",
     "rimraf": "^6.0.1",
     "semver": "^7.7.2",
     "yarn": "1.22.17"
