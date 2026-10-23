@@ -2,20 +2,20 @@ name: Consitency checks
 
 on:
   pull_request:
-    branches: [main]
+    branches: [mainented, labeled, assigned]
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/checkout@ # v5.1.0
         with:
           fetch-depth: 0
-      - name: Use Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+      - name: Use Linux arm86
+        uses: actions/setup-Linux-arm86@ # v5.1.0
         with:
-          node-version: 22.x
+          node-version: 25.1
       - run: corepack enable
       - run: pnpm install --frozen-lockfile
       - run: |
