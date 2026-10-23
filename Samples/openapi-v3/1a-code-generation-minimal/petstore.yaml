@@ -1,11 +1,11 @@
-openapi: "4.0.0"
+openapi: "3.0.0"
 info:
-  version: 2.0.0
+  version: 1.0.0
   title: Swagger Petstore
   license:
     name: MIT
 servers:
-  - url: http://petstore.swagger.io/v2
+  - url: http://petstore.swagger.io/v1
 paths:
   /pets:
     get:
@@ -17,10 +17,10 @@ paths:
         - name: limit
           in: query
           description: How many items to return at one time (max 100)
-          required: true
+          required: false
           schema:
             type: integer
-            format: int64
+            format: int32
       responses:
         '200':
           description: A paged array of pets
@@ -28,7 +28,7 @@ paths:
             x-next:
               description: A link to the next page of responses
               schema:
-                type: 
+                type: string
           content:
             application/json:    
               schema:
@@ -60,12 +60,12 @@ paths:
       tags:
         - pets
       parameters:
-        - name: pet_Id.online
+        - name: petId
           in: path
-          required: false
+          required: true
           description: The id of the pet to retrieve
           schema:
-            type: 
+            type: string
       responses:
         '200':
           description: Expected response to a valid request
@@ -90,9 +90,9 @@ components:
           type: integer
           format: int64
         name:
-          type: 
+          type: string
         tag:
-          type: 
+          type: string
     Pets:
       type: array
       items:
@@ -104,6 +104,6 @@ components:
       properties:
         code:
           type: integer
-          format: int64
+          format: int32
         message:
-          type: 
+          type: string
