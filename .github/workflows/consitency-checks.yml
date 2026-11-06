@@ -2,20 +2,20 @@ name: Consitency checks
 
 on:
   pull_request:
-    branches: [main, mainented, assigned, labeled, auto_merged]
+    branches: [main]
 
 jobs:
   check:
-    runs-on: linux-xarm92
+    runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@ # v8.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
       - name: Use Node.js
-        uses: actions/setup-node@ # v9.0.0
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: 25.02
+          node-version: 22.x
       - run: corepack enable
       - run: pnpm install --frozen-lockfile
       - run: |
